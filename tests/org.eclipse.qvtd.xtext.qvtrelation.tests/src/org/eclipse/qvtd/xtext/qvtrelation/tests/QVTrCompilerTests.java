@@ -348,7 +348,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
@@ -373,7 +373,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.dispose();
 			myQVT2 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
@@ -399,7 +399,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT3.dispose();
 			myQVT3 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
 			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
@@ -608,7 +608,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2.dispose();
 			myQVT2 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
@@ -626,7 +626,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT3.dispose();
 			myQVT3 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
 			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
@@ -895,7 +895,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		URI ecoreURI = getModelsURI("ecore2pivotRoot/Families.ecore");
 		OCL ocl = OCL.newInstance(projectManager);
@@ -917,7 +917,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ocl.dispose();
 			ocl = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		//
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		MyQVT myQVT2 = createQVT("Ecore2PivotRoot", txURI1);
@@ -966,7 +966,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons_expected.qvtras"));
 		try {
 			myQVT2.loadEPackage(txClass, "Families.FamiliesPackage");
@@ -1109,7 +1109,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "doublylinkedlist.doublylinkedlistPackage");
@@ -1230,7 +1230,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1287,7 +1287,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1344,7 +1344,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("HierarchicalStateMachine2FlatStateMachine", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "FlatStateMachine.FlatStateMachinePackage");
@@ -1406,7 +1406,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("Iterated2Iterated", getModelsURI("Iterated2Iterated/Iterated2Iterated.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "iterated.iteratedPackage");
@@ -1461,7 +1461,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("MiToSiSimple", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
@@ -1529,7 +1529,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("MiToSiSimple", txFile.getURI());
 		try {
 			myQVT2.loadEPackage(txClass, "javammsi.javammsiPackage");
@@ -1580,7 +1580,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("partialPhilosophers/PartialPhilosophers.qvtr"));
 		try {
 			//	myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1610,7 +1610,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("Persons2Families", getModelsURI("persons2families/Persons2Families.qvtr"));
 		try {
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
@@ -1712,7 +1712,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("Persons2Names2Families", txFile.getURI());
 		try {
 			Map<String, Object> extensionToFactoryMap = myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap();
@@ -1830,7 +1830,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1869,7 +1869,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "SeqMM.SeqMMPackage");
@@ -1918,7 +1918,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
-		ThreadLocalExecutor.waitForGC();
+		ThreadLocalExecutor.resetEnvironmentFactory();
 		MyQVT myQVT2 = createQVT("TinyIsomorph", getModelsURI("tinyisomorph/TinyIsomorph.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "mma.mmaPackage");
