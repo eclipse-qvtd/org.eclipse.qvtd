@@ -197,7 +197,15 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
-		return thisCompleteClass.conformsTo(thatCompleteClass) || thisCompleteClass.conformsTo(thatCompleteClass.getBehavioralClass());
+		if (thisCompleteClass.conformsTo(thatCompleteClass)) {
+			return true;
+		}
+		org.eclipse.ocl.pivot.Class behavioralClass = thatCompleteClass.getBehavioralClass();
+		if (behavioralClass == null) {
+			return false;
+		}
+		// See Bug 577546 (and Bug 574431) This is a dodgy downcast case.
+		return thisCompleteClass.conformsTo(behavioralClass);
 	}
 
 	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
