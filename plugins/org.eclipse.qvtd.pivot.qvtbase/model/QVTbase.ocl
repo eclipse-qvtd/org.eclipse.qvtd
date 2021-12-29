@@ -25,7 +25,7 @@ conditionExpression.type = Boolean
 context Rule
 inv DomainNameIsUnique:
 	domain->isUnique(name)
-	
+
 inv AtLeastOneDomainIsCheckableOrEnforceable:
 	domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)
 
@@ -53,7 +53,7 @@ inv ExtendedTypedModelIsExtended:
 	_extends.modelParameter->forAll(etm |
 		self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)
 	)
-	
+
 inv ModelParameterIsUnique:
 	modelParameter->isUnique(name)
 
@@ -62,6 +62,6 @@ inv NoExtendsCycle:
 
 context TypedModel
 inv ExclusivePrimitiveThisTrace:
-	if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1 
+	if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1
 
 endpackage

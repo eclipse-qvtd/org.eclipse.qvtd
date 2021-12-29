@@ -17,10 +17,10 @@
       <ownedInvariants xmi:id="5OsGZ" isCallable="true" name="TypedModelIsTransformationModelParameter">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;oclContainer().oclIsKindOf(Transformation) and typedModel &lt;> null implies&#xA;&#x9;oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id=",1+xi" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType &_1;#XEMMs">
+      <ownedProperties xmi:id=",1+xi" isUnsettable="true" name="isCheckable" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="A checkable domain may be selected as the target of a transformation in check mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776.See Bug 549776."/>
       </ownedProperties>
-      <ownedProperties xmi:id="ZXmmB" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType &_1;#XEMMs">
+      <ownedProperties xmi:id="ZXmmB" isUnsettable="true" name="isEnforceable" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="An enforceable domain may be selected as the target of a transformation in check or enforce mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776."/>
       </ownedProperties>
       <ownedProperties xmi:id="jwI+E" isTransient="true" name="rule" opposite="#DtMdd" type="#zS2p0"/>
@@ -68,7 +68,7 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;overridden &lt;> null implies&#xA;&#x9;overridden.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedProperties xmi:id="DtMdd" isComposite="true" name="domain" opposite="#jwI+E" type="#vBkLs"/>
-      <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:PrimitiveType &_1;#XEMMs"/>
+      <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:BooleanType &_1;#XEMMs"/>
       <ownedProperties xmi:id="zgFwC" isRequired="false" name="overridden" opposite="#mSVz," type="#zS2p0"/>
       <ownedProperties xmi:id="mSVz," name="overrides" opposite="#zgFwC" type="#n3g5w"/>
       <ownedProperties xmi:id="Img5I" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#UVEee"
@@ -130,13 +130,13 @@
       <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp">
         <ownedComments body="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>
       </ownedProperties>
-      <ownedProperties xmi:id="z+SD0" defaultValueString="false" name="isPrimitive" type="pivot:PrimitiveType &_1;#XEMMs">
+      <ownedProperties xmi:id="z+SD0" defaultValueString="false" name="isPrimitive" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="The TypedModel is for a primitive domain. It may be added automatically."/>
       </ownedProperties>
-      <ownedProperties xmi:id="+ug1U" defaultValueString="false" name="isThis" type="pivot:PrimitiveType &_1;#XEMMs">
+      <ownedProperties xmi:id="+ug1U" defaultValueString="false" name="isThis" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="The TypedModel is for the transformation instance trace. It may be added automatically."/>
       </ownedProperties>
-      <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:PrimitiveType &_1;#XEMMs">
+      <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="The TypedModel is for the execution trace. It may be added automatically."/>
       </ownedProperties>
       <ownedProperties xmi:id="PgOqh" name="iterates" type="#,klFp">

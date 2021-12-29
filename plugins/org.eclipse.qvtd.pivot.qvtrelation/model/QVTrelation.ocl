@@ -12,13 +12,13 @@ inv IdentifiesIsAUsedPackageClass:
 	transformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
 
 inv NoSuperKeys:			-- see Bugzilla 512532 discussion
-	transformation <> null implies 
+	transformation <> null implies
 	let superClasses = identifies.superClasses->closure(superClasses) in
 	let otherKeys = transformation?.ownedKey?->excluding(self) in
 	otherKeys.identifies->excludesAll(superClasses)
 
 inv IdentifiesIsUnique:
-	transformation <> null implies 
+	transformation <> null implies
 	let otherKeys = transformation?.ownedKey?->excluding(self) in
 	otherKeys.identifies->excludes(identifies)
 
@@ -45,7 +45,7 @@ inv TransformationIsRelationalTransformation:
 
 --inv VariablesAreUnique:
 --	variable->isUnique(name)
-	
+
 context RelationCallExp
 inv MatchingArgumentCount:
 	self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()
@@ -56,7 +56,7 @@ inv WhereInvocationIsANonTopRelation:
 inv DataTypeInvocationIsANonTopRelation:
 	self.argument->exists(type.oclIsKindOf(pivot::DataType) and not type.oclIsKindOf(pivot::CollectionType))
 	implies not referredRelation.isTopLevel
-	
+
 context RelationDomain
 inv RelationDomainAssignmentsAreUnique:
 	defaultAssignment->isUnique(variable)

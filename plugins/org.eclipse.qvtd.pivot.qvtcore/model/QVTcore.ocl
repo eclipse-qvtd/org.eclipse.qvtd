@@ -57,7 +57,7 @@ inv CompatibleTypeForTotalValue:
 
 inv OppositePropertyIsImplicit:
 	getReferredTargetProperty().isImplicit
-	
+
 inv TargetPropetyIsSlotProperty:
 	slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)
 
