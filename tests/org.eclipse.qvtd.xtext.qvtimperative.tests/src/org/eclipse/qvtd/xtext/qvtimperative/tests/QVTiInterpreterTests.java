@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -173,6 +174,13 @@ public class QVTiInterpreterTests extends LoadTestCase
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
+		super.tearDown();
 	}
 
 	/*
@@ -303,6 +311,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 */
 	@Test
 	public void testQVTiInterpreter_Tree2TallTreeLazy() throws Exception {
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = false;	// Incur the Bug 578030 serialization check overheads for one QVTi test.
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		URI txURI = getModelsURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);

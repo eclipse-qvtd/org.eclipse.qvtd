@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -253,6 +254,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTrelationPivotStandaloneSetup.doSetup();
 		//		QVTimperativePivotStandaloneSetup.doSetup();
 		ConnectivityChecker.CONNECTIVITY.setState(true);
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
 	}
 
 	/* (non-Javadoc)
@@ -261,12 +263,14 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Override
 	@After
 	public void tearDown() throws Exception {
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
 		ConnectivityChecker.CONNECTIVITY.setState(false);
 		super.tearDown();
 	}
 
 	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
+		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = false;	// Incur the Bug 578030 serialization check overheads for one QVTr test.
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
