@@ -440,7 +440,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	/**
-	 * Rewrite asResource to replace ensure that each RelationalTransformation has a $trace$ TypedModel and each
+	 * Rewrite asResource to ensure that each RelationalTransformation has $primitove&, $this$, $trace$ TypedModel and each
 	 * Relation has a $trace$ SharedVariable..
 	 */
 	public static boolean rewriteMissingTraceArtefacts(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
@@ -465,6 +465,13 @@ public class QVTrelationUtil extends QVTtemplateUtil
 					}
 					modelParameters.add(0, helper.createPrimitiveTypedModel());
 				}
+				TypedModel thisTypedModel = QVTbaseUtil.basicGetThisTypedModel(modelParameters);
+				if (thisTypedModel == null) {
+					if (helper == null) {
+						helper = new QVTrelationHelper(environmentFactory);
+					}
+					modelParameters.add(1, helper.createThisTypedModel());
+				}
 			}
 			if (eObject instanceof Relation) {
 				VariableDeclaration traceClassVariable = null;
@@ -488,6 +495,6 @@ public class QVTrelationUtil extends QVTtemplateUtil
 				}
 			}
 		}
-		return helper != null;
+		return false; //helper != null;
 	}
 }

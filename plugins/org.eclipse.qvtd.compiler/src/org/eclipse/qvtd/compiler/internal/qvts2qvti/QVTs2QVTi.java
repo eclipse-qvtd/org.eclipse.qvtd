@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -208,16 +209,18 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Collections.sort(sortedImportedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : sortedImportedNamespaces) {
-			SymbolNameBuilder s = new SymbolNameBuilder();
-			s.appendString("mm_");
-			//			for (@NonNull String partialName : partialNames) {
-			//				s.appendString("_");
-			//				s.appendName(partialName);
-			//			}
-			s.appendName(importedNamespace.getName());
-			s.appendName("MM");
-			String name = model.reserveSymbolName(s, importedNamespace);
-			ownedImports.add(createImport(name, importedNamespace));	// FIXME BUG 530025 bad aliases
+			if (!(importedNamespace instanceof org.eclipse.ocl.pivot.Package) || !Orphanage.isTypeOrphanage((org.eclipse.ocl.pivot.Package)importedNamespace)) {
+				SymbolNameBuilder s = new SymbolNameBuilder();
+				s.appendString("mm_");
+				//			for (@NonNull String partialName : partialNames) {
+				//				s.appendString("_");
+				//				s.appendName(partialName);
+				//			}
+				s.appendName(importedNamespace.getName());
+				s.appendName("MM");
+				String name = model.reserveSymbolName(s, importedNamespace);
+				ownedImports.add(createImport(name, importedNamespace));	// FIXME BUG 530025 bad aliases
+			}
 		}
 	}
 
