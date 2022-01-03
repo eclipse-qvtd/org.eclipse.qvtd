@@ -175,6 +175,11 @@ public class QVTiInterpreterTests extends LoadTestCase
 		super.setUp();
 	}
 
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+
 	/*
 	 * Minimal 1 object to 1 object QVTi transformation
 	 */

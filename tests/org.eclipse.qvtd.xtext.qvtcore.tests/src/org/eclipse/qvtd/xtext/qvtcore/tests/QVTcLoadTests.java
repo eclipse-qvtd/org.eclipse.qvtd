@@ -39,6 +39,11 @@ public class QVTcLoadTests extends LoadTestCase
 		super.setUp();
 	}
 
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+
 	public void testQVTcLoad_expressions_qvtc() throws Exception {
 		doLoad_Concrete(getModelsURI("misc/expressions.qvtc"), NO_MESSAGES);
 	}
