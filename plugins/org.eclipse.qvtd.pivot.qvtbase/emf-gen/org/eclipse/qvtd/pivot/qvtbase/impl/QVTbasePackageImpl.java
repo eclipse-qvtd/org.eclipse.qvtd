@@ -1459,7 +1459,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->isUnique(name)\n\t\n"
+			   "body", "\n\tdomain->isUnique(name)\n\n"
 		   });
 		addAnnotation
 		  (getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map(),
@@ -1495,7 +1495,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\t_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)\n\t\n"
+			   "body", "\n\t_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)\n\n"
 		   });
 		addAnnotation
 		  (getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
@@ -1513,7 +1513,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tif isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1 \n\n"
+			   "body", "\n\tif isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1\n\n"
 		   });
 	}
 

@@ -38,6 +38,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -213,13 +214,13 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean symbol_3;
 			if (le) {
-				symbol_2 = true;
+				symbol_3 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -233,10 +234,10 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
 							final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty.getType();
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_0;
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull Type propertyType = oclAsType.getElementType();
+							final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, symbol_0);
+							final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTcoreTables.CLSSid_Type, oclAsType);
 							CAUGHT_propertyType = propertyType;
 						}
 						catch (Exception e) {
@@ -302,9 +303,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 							}
 						}
 						final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-						/*@Thrown*/ @NonNull Object symbol_1;
+						/*@Thrown*/ @NonNull Object symbol_2;
 						if (eq) {
-							symbol_1 = ValueUtil.TRUE_VALUE;
+							symbol_2 = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							final /*@NonInvalid*/ @NonNull Object name = valueType == null;
@@ -325,10 +326,10 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 							final /*@Thrown*/ @Nullable String name_1 = ((Nameable)CAUGHT_propertyType).getName();
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
 							final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
-							symbol_1 = symbol_0;
+							final /*@Thrown*/ @NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+							symbol_2 = symbol_1;
 						}
-						result = symbol_1;
+						result = symbol_2;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;
@@ -339,9 +340,9 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				symbol_3 = logDiagnostic;
 			}
-			return symbol_2;
+			return symbol_3;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -388,7 +389,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
@@ -558,7 +559,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
@@ -615,7 +616,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;

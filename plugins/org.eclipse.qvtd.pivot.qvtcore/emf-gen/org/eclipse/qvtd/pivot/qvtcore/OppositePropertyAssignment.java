@@ -93,7 +93,7 @@ public interface OppositePropertyAssignment extends NavigationAssignment {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='OppositePropertyIsImplicit'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tgetReferredTargetProperty().isImplicit\n\t\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tgetReferredTargetProperty().isImplicit\n\n'"
 	 * @generated
 	 */
 	boolean validateOppositePropertyIsImplicit(DiagnosticChain diagnostics, Map<Object, Object> context);

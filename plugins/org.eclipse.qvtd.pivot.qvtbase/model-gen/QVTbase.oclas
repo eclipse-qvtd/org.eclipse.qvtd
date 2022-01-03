@@ -53,7 +53,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="zS2p0" isAbstract="true" name="Rule" superClasses="&_0;#0kVqz">
       <ownedInvariants xmi:id="JBzn4" isCallable="true" name="DomainNameIsUnique">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;domain->isUnique(name)&#xA;&#x9;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;domain->isUnique(name)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="Uq5Kh" isCallable="true" name="AtLeastOneDomainIsCheckableOrEnforceable">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)&#xA;&#xA;"/>
@@ -99,7 +99,7 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type.oclIsKindOf(Transformation)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="TG1RG" isCallable="true" name="ExtendedTypedModelIsExtended">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends &lt;> null implies&#xA;&#x9;_extends.modelParameter->forAll(etm |&#xA;&#x9;&#x9;self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)&#xA;&#x9;)&#xA;&#x9;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends &lt;> null implies&#xA;&#x9;_extends.modelParameter->forAll(etm |&#xA;&#x9;&#x9;self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)&#xA;&#x9;)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="zwc,y" isCallable="true" name="ModelParameterIsUnique">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;modelParameter->isUnique(name)&#xA;&#xA;"/>
@@ -108,10 +108,10 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;_extends->closure(_extends)->excludes(self)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedOperations xmi:id="DU934" name="getFunction" type="#PGjqK">
-        <ownedParameters name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
+        <ownedParameters xmi:id="te2fe" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
       </ownedOperations>
       <ownedOperations xmi:id="rcEGq" name="getModelParameter" type="#WqJYx">
-        <ownedParameters name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
+        <ownedParameters xmi:id="1Erns" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
       </ownedOperations>
       <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" type="#AjDLV"/>
       <ownedProperties xmi:id="YTQDv" isComposite="true" name="modelParameter" opposite="#fPfk3" type="#SncSN"/>
@@ -125,7 +125,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="&_0;#0kVqz">
       <ownedInvariants xmi:id="U2pQC" isCallable="true" name="ExclusivePrimitiveThisTrace">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1 &#xA;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp">
         <ownedComments body="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>

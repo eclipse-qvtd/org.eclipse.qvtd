@@ -159,7 +159,7 @@ public interface Rule extends NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='DomainNameIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;isUnique(name)\n\t\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;isUnique(name)\n\n'"
 	 * @generated
 	 */
 	boolean validateDomainNameIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);

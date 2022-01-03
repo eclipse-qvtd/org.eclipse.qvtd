@@ -14,14 +14,14 @@
           type="#U6ALG"/>
       <ownedOperations xmi:id="Xv2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" name="objectsOfKind"
           type="#uiPkW">
-        <ownedParameters isTypeof="true" name="type" type="#d+Hh6"/>
+        <ownedParameters xmi:id="gfwE+" isTypeof="true" name="type" type="#d+Hh6"/>
         <ownedSignature>
           <ownedParameters xmi:id="d+Hh6" name="TT"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="997Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" name="objectsOfType"
           type="#UMaiV">
-        <ownedParameters isTypeof="true" name="type" type="#zB+MN"/>
+        <ownedParameters xmi:id="uTKVP" isTypeof="true" name="type" type="#zB+MN"/>
         <ownedSignature>
           <ownedParameters xmi:id="zB+MN" name="TT"/>
         </ownedSignature>

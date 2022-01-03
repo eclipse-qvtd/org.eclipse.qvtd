@@ -99,7 +99,7 @@ public interface RelationCallExp extends OCLExpression {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='DataTypeInvocationIsANonTopRelation'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tself.argument-&gt;exists(type.oclIsKindOf(pivot::DataType) and not type.oclIsKindOf(pivot::CollectionType))\n\timplies not referredRelation.isTopLevel\n\t\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tself.argument-&gt;exists(type.oclIsKindOf(pivot::DataType) and not type.oclIsKindOf(pivot::CollectionType))\n\timplies not referredRelation.isTopLevel\n\n'"
 	 * @generated
 	 */
 	boolean validateDataTypeInvocationIsANonTopRelation(DiagnosticChain diagnostics, Map<Object, Object> context);

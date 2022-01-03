@@ -1466,7 +1466,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tgetReferredTargetProperty().isImplicit\n\t\n"
+			   "body", "\n\tgetReferredTargetProperty().isImplicit\n\n"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),

@@ -44,6 +44,7 @@ import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.collection.CollectionIsEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
@@ -470,7 +471,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
@@ -585,13 +586,13 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean symbol_3;
 			if (le) {
-				symbol_2 = true;
+				symbol_3 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -603,10 +604,10 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_0;
 						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull Type requiredType = oclAsType.getElementType();
+						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, symbol_0);
+						final /*@Thrown*/ @NonNull Type requiredType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTimperativeTables.CLSSid_Type, oclAsType);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();
@@ -623,9 +624,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							safe_conformsTo_source = conformsTo_0;
 						}
 						final /*@Thrown*/ boolean eq = safe_conformsTo_source == Boolean.TRUE;
-						/*@Thrown*/ @NonNull Object symbol_1;
+						/*@Thrown*/ @NonNull Object symbol_2;
 						if (eq) {
-							symbol_1 = ValueUtil.TRUE_VALUE;
+							symbol_2 = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							final /*@NonInvalid*/ @NonNull Object name = actualType == null;
@@ -642,10 +643,10 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
 							final /*@Thrown*/ @Nullable String name_1 = requiredType.getName();
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
-							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
-							symbol_1 = symbol_0;
+							final /*@Thrown*/ @NonNull TupleValue symbol_1 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
+							symbol_2 = symbol_1;
 						}
-						result = symbol_1;
+						result = symbol_2;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;
@@ -656,9 +657,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				symbol_3 = logDiagnostic;
 			}
-			return symbol_2;
+			return symbol_3;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -704,7 +705,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_2;
@@ -833,14 +834,14 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_0;
+			/*@NonInvalid*/ boolean symbol_4;
 			if (le) {
-				symbol_0 = true;
+				symbol_4 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -871,7 +872,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-					final /*@Thrown*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_VariableExp;
+					final /*@Thrown*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, symbol_0);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
 					@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
 					/*@Thrown*/ @NonNull SetValue select_0;
@@ -887,7 +889,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						 */
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_NewStatement = idResolver.getClass(QVTimperativeTables.CLSSid_NewStatement, null);
 						final /*@NonInvalid*/ @Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
-						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_qvtimperative_c_c_NewStatement).booleanValue();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_qvtimperative_c_c_NewStatement;
+						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, symbol_1).booleanValue();
 						//
 						if (oclIsKindOf == ValueUtil.TRUE_VALUE) {
 							accumulator.add(_1);
@@ -914,7 +917,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CallExp = idResolver.getClass(QVTimperativeTables.CLSSid_CallExp, null);
 							final /*@NonInvalid*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, s);
-							final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_CallExp).booleanValue();
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_2 = (org.eclipse.ocl.pivot.Class)TYP_CallExp;
+							final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, symbol_2).booleanValue();
 							CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 						}
 						catch (Exception e) {
@@ -929,8 +933,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							try {
 								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CallExp_0 = idResolver.getClass(QVTimperativeTables.CLSSid_CallExp, null);
 								final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, s);
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_3 = (org.eclipse.ocl.pivot.Class)TYP_CallExp_0;
 								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull CallExp oclAsType = (@NonNull CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_CallExp_0);
+								final /*@Thrown*/ @NonNull CallExp oclAsType = (@NonNull CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, symbol_3);
 								final /*@Thrown*/ @Nullable OCLExpression ownedSource = oclAsType.getOwnedSource();
 								final /*@Thrown*/ boolean eq = s.equals(ownedSource);
 								CAUGHT_eq = eq;
@@ -966,9 +971,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
-				symbol_0 = logDiagnostic;
+				symbol_4 = logDiagnostic;
 			}
-			return symbol_0;
+			return symbol_4;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -997,7 +1002,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;

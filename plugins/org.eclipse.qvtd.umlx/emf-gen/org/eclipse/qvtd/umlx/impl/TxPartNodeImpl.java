@@ -264,14 +264,14 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_PART_NODE___VALIDATE_PART_IS_PROPERTY_OF_KEY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean symbol_2;
 			if (le) {
-				symbol_1 = true;
+				symbol_2 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -281,8 +281,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					final /*@NonInvalid*/ @NonNull TxKeyNode owningTxKeyNode = this.getOwningTxKeyNode();
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull EClass referredEClass = owningTxKeyNode.getReferredEClass();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_0;
 					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, TYP_ecore_c_c_EClass_0);
+					final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, symbol_0);
 					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
 					final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
@@ -296,12 +297,12 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-							final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
-							if (symbol_0 == null) {
+							final /*@NonInvalid*/ @Nullable EClass symbol_1 = (EClass)_1;
+							if (symbol_1 == null) {
 								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 							}
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+							final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_1.getESuperTypes();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 							return BOXED_eSuperTypes;
 						}
@@ -319,9 +320,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				symbol_2 = logDiagnostic;
 			}
-			return symbol_1;
+			return symbol_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

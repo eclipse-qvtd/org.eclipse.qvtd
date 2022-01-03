@@ -130,7 +130,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NoSuperKeys'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation &lt;&gt; null implies \n\tlet superClasses = identifies.superClasses-&gt;closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludesAll(superClasses)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation &lt;&gt; null implies\n\tlet superClasses = identifies.superClasses-&gt;closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludesAll(superClasses)\n\n'"
 	 * @generated
 	 */
 	boolean validateNoSuperKeys(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -139,7 +139,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='IdentifiesIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation &lt;&gt; null implies \n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludes(identifies)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation &lt;&gt; null implies\n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludes(identifies)\n\n'"
 	 * @generated
 	 */
 	boolean validateIdentifiesIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);

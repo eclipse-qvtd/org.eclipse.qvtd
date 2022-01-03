@@ -189,7 +189,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ExtendedTypedModelIsExtended'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\t_extends &lt;&gt; null implies\n\t_extends.modelParameter-&gt;forAll(etm |\n\t\tself.modelParameter-&gt;select(name = etm.name).usedPackage-&gt;includesAll(etm.usedPackage)\n\t)\n\t\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\t_extends &lt;&gt; null implies\n\t_extends.modelParameter-&gt;forAll(etm |\n\t\tself.modelParameter-&gt;select(name = etm.name).usedPackage-&gt;includesAll(etm.usedPackage)\n\t)\n\n'"
 	 * @generated
 	 */
 	boolean validateExtendedTypedModelIsExtended(DiagnosticChain diagnostics, Map<Object, Object> context);
