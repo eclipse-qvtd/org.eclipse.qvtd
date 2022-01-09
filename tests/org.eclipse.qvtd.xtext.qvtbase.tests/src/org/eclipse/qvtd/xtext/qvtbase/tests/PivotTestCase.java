@@ -38,6 +38,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -181,13 +182,45 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertNoValidationErrors(String string, Resource resource) {
-		for (EObject eObject : resource.getContents()) {
-			assertNoValidationErrors(string, eObject);
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull Resource resource) {
+		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
+		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
+		try {
+			for (EObject eObject : resource.getContents()) {
+				assertNoValidationErrorsInternal(string, ClassUtil.nonNullEMF(eObject));
+			}
+		}
+		finally {
+			if (savedExecutor != ThreadLocalExecutor.basicGetExecutor()) {
+				ThreadLocalExecutor.setExecutor(null);
+			}
+			else if (savedExecutor != null) {
+				if (savedInterpretedExecutor != savedExecutor.basicGetInterpretedExecutor()) {
+					savedExecutor.setInterpretedExecutor(null);
+				}
+			}
 		}
 	}
 
-	public static void assertNoValidationErrors(String string, EObject eObject) {
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull EObject eObject) {
+		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
+		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
+		try {
+			assertNoValidationErrorsInternal(string, eObject);
+		}
+		finally {
+			if (savedExecutor != ThreadLocalExecutor.basicGetExecutor()) {
+				ThreadLocalExecutor.setExecutor(null);
+			}
+			else if (savedExecutor != null) {
+				if (savedInterpretedExecutor != savedExecutor.basicGetInterpretedExecutor()) {
+					savedExecutor.setInterpretedExecutor(null);
+				}
+			}
+		}
+	}
+
+	protected static void assertNoValidationErrorsInternal(@NonNull String string, @NonNull EObject eObject) {
 		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
@@ -283,12 +316,26 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, Map<Object, Object> validationContext, String... messages) {
-		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-		for (EObject eObject : resource.getContents()) {
-			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);		// FIXME inline 1 call level
-			diagnostics.addAll(diagnostic.getChildren());
+		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
+		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
+		try {
+			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+			for (EObject eObject : resource.getContents()) {
+				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);		// FIXME inline 1 call level
+				diagnostics.addAll(diagnostic.getChildren());
+			}
+			return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
 		}
-		return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
+		finally {
+			if (savedExecutor != ThreadLocalExecutor.basicGetExecutor()) {
+				ThreadLocalExecutor.setExecutor(null);
+			}
+			else if (savedExecutor != null) {
+				if (savedInterpretedExecutor != savedExecutor.basicGetInterpretedExecutor()) {
+					savedExecutor.setInterpretedExecutor(null);
+				}
+			}
+		}
 	}
 
 	/**
