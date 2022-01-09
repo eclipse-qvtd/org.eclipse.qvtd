@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -123,9 +124,11 @@ public class EntryPointAnalysis
 		//  - identify all assigned PropertyCallExp and allocate a cacheIndex
 		//
 		List<@NonNull SetStatement> setStatements = new ArrayList<>();
-		Type oclElementType = entryPointsAnalysis.environmentFactory.getStandardLibrary().getOclElementType();
-		Type modelType = entryPointsAnalysis.environmentFactory.getStandardLibrary().getLibraryType("Model");
-		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
+		StandardLibraryInternal standardLibrary = entryPointsAnalysis.environmentFactory.getStandardLibrary();
+		Type classType = standardLibrary.getClassType();
+		Type oclElementType = standardLibrary.getOclElementType();
+		Type modelType = standardLibrary.getLibraryType("Model");
+		OperationId allInstancesOperationId = classType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
 		OperationId objectsOfTypeOperationId = modelType.getTypeId().getOperationId(1, "objectsOfType", IdManager.getParametersId(TypeId.T_1));
 		for (@NonNull Mapping iMapping : getMappings()) {
