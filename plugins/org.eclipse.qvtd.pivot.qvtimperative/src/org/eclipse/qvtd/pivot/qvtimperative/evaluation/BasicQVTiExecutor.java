@@ -96,8 +96,8 @@ import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
-import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
+import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -260,6 +260,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
+			return modelsManager.get(type);
+		}
+
+		@Override
+		public @Nullable Iterable<@NonNull ? extends Object> getInstances(org.eclipse.ocl.pivot.@NonNull Class type) {
 			return modelsManager.get(type);
 		}
 
