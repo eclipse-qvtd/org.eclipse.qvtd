@@ -179,6 +179,9 @@ public class UMLX2QVTr extends QVTrelationHelper
 			if (QVTbaseUtil.basicGetPrimitiveTypedModel(qvtrRelationalTransformation) == null) {
 				qvtrRelationalTransformation.getModelParameter().add(0, context.createPrimitiveTypedModel());
 			}
+			if (QVTbaseUtil.basicGetThisTypedModel(qvtrRelationalTransformation) == null) {
+				qvtrRelationalTransformation.getModelParameter().add(1, context.createThisTypedModel());
+			}
 			return qvtrRelationalTransformation;
 		}
 
