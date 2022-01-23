@@ -2255,6 +2255,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			   "body", "ownedMappingParameterBindings->isUnique(boundVariable)\n\n"
 		   });
 		addAnnotation
+		  (getMappingCall_BindingNames(),
+		   source,
+		   new String[] {
+			   "derivation", "ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)\n"
+		   });
+		addAnnotation
+		  (getMappingCall_ReferredNames(),
+		   source,
+		   new String[] {
+			   "derivation", "referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)\n"
+		   });
+		addAnnotation
 		  (getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
@@ -2301,6 +2313,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source,
 		   new String[] {
 			   "body", "\nnot resolvedProperty.isReadOnly\n\n"
+		   });
+		addAnnotation
+		  (getSetStatement_ResolvedProperty(),
+		   source,
+		   new String[] {
+			   "derivation", "if isOpposite then targetProperty.opposite else targetProperty endif\n\n"
 		   });
 		addAnnotation
 		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),

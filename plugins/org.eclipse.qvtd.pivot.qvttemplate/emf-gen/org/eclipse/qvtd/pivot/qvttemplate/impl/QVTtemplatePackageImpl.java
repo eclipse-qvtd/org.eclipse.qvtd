@@ -124,13 +124,13 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTtemplatePackage,
-			 new EValidator.Descriptor() {
-				 @Override
-				 public EValidator getEValidator() {
-					 return QVTtemplateValidator.INSTANCE;
-				 }
-			 });
+		(theQVTtemplatePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTtemplateValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTtemplatePackage.freeze();
@@ -632,10 +632,10 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -647,41 +647,41 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getCollectionTemplateExp_Member(),
-		   source,
-		   new String[] {
-			   "body", "listContainer"
-		   });
+		(getCollectionTemplateExp_Member(),
+			source,
+			new String[] {
+				"body", "listContainer"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp_Rest(),
-		   source,
-		   new String[] {
-			   "body", "matchingExp"
-		   });
+		(getCollectionTemplateExp_Rest(),
+			source,
+			new String[] {
+				"body", "matchingExp"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem_ReferredProperty(),
-		   source,
-		   new String[] {
-			   "body", "propertyItem"
-		   });
+		(getPropertyTemplateItem_ReferredProperty(),
+			source,
+			new String[] {
+				"body", "propertyItem"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem_Value(),
-		   source,
-		   new String[] {
-			   "body", "propertyItem"
-		   });
+		(getPropertyTemplateItem_Value(),
+			source,
+			new String[] {
+				"body", "propertyItem"
+		});
 		addAnnotation
-		  (getTemplateExp_BindsTo(),
-		   source,
-		   new String[] {
-			   "body", "templateExp"
-		   });
+		(getTemplateExp_BindsTo(),
+			source,
+			new String[] {
+				"body", "templateExp"
+		});
 		addAnnotation
-		  (getTemplateExp_Where(),
-		   source,
-		   new String[] {
-			   "body", "owner"
-		   });
+		(getTemplateExp_Where(),
+			source,
+			new String[] {
+				"body", "owner"
+		});
 	}
 
 	/**
@@ -693,65 +693,65 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "MemberTypeisCollectionElementType"
-		   });
+		(getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MemberTypeisCollectionElementType"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "RestTypeisCollectionType"
-		   });
+		(getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RestTypeisCollectionType"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "TypeisCollectionType"
-		   });
+		(getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TypeisCollectionType"
+		});
 		addAnnotation
-		  (getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "PartPropertyIsUnique"
-		   });
+		(getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PartPropertyIsUnique"
+		});
 		addAnnotation
-		  (getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "TypeisObjectType"
-		   });
+		(getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TypeisObjectType"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleClassForProperty"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleClassForProperty"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleTypeForObjectValue"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForObjectValue"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleTypeForCollectionElementValue"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForCollectionElementValue"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleTypeForCollectionValue"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForCollectionValue"
+		});
 		addAnnotation
-		  (getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "WhereIsBoolean"
-		   });
+		(getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "WhereIsBoolean"
+		});
 	}
 
 	/**
@@ -763,65 +763,71 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	protected void createPivotAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\tmember->forAll(type?.conformsTo(referredCollectionType.elementType))\n\n"
-		   });
+		(getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\tmember->forAll(type?.conformsTo(referredCollectionType.elementType))\n\n"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\trest <> null implies\n\t\trest.type = referredCollectionType\n\n"
-		   });
+		(getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\trest <> null implies\n\t\trest.type = referredCollectionType\n\n"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\ttype = referredCollectionType\n\n"
-		   });
+		(getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\ttype = referredCollectionType\n\n"
+		});
 		addAnnotation
-		  (getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\tpart->isUnique(resolvedProperty)\n\n"
-		   });
+		(getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\tpart->isUnique(resolvedProperty)\n\n"
+		});
 		addAnnotation
-		  (getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\ttype = referredClass\n\n"
-		   });
+		(getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\ttype = referredClass\n\n"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = objContainer.referredClass.name + \' must conform to \' + resolvedProperty.owningClass?.name,\n\tstatus : Boolean = \n\tobjContainer.referredClass.conformsTo(resolvedProperty.owningClass)\n\n\n}.status"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "Tuple {\n\tmessage : String = objContainer.referredClass.name + \' must conform to \' + resolvedProperty.owningClass?.name,\n\tstatus : Boolean = \n\tobjContainer.referredClass.conformsTo(resolvedProperty.owningClass)\n\n\n}.status"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tnot resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType?.conformsTo(valueType)\n\n\n}.status"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tnot resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType?.conformsTo(valueType)\n\n\n}.status"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand not value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand not value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = value.type.oclAsType(ocl::CollectionType).elementType.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type.oclAsType(ocl::CollectionType).elementType in\n--\t\tTuple {\n--\t\t\tmessage : String = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\t/*status : Boolean =*/ valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType)\n\n}.status"
-		   });
+		(getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "Tuple {\n\tmessage : String = value.type.oclAsType(ocl::CollectionType).elementType.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type.oclAsType(ocl::CollectionType).elementType in\n--\t\tTuple {\n--\t\t\tmessage : String = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\t/*status : Boolean =*/ valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType)\n\n}.status"
+		});
 		addAnnotation
-		  (getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "body", "\n\twhere <> null implies\n\t\twhere.type = Boolean\n\n"
-		   });
+		(getPropertyTemplateItem_ResolvedProperty(),
+			source,
+			new String[] {
+				"derivation", "\n\tif isOpposite then referredProperty.opposite else referredProperty endif\n\n"
+		});
+		addAnnotation
+		(getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"body", "\n\twhere <> null implies\n\t\twhere.type = Boolean\n\n"
+		});
 	}
 
 	/**
