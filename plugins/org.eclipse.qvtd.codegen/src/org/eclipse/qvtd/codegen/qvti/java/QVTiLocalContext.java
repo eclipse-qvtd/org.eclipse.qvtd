@@ -10,27 +10,25 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * A QVTiLocalContext maintains the Java-specific local context for generation of QVTi code.
  */
 public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerator>
 {
-	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @NonNull CGElement cgScope) {
-		super(globalContext, cgScope, true);
+	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @Nullable QVTiLocalContext outerContext, @NonNull CGNamedElement cgScope, @NonNull NamedElement asScope) {
+		super(globalContext, outerContext, cgScope, asScope, true);
 	}
 
 	@Override
@@ -43,11 +41,12 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 	public @NonNull CGVariable createQualifiedThisVariable() {
 		assert executorIsParameter;
 		assert asType instanceof Transformation;
-		String transformationName = getGlobalContext().getTransformationName();
-		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, analyzer.getTypeId(asType.getTypeId()), true);
-		transformationVariable.setValueName(transformationName);
+		NameResolution transformationName = getGlobalContext().getTransformationNameResolution();
+		CGVariable transformationVariable = analyzer.createCGParameter(transformationName.getResolvedName(), analyzer.getTypeId(asType.getTypeId()), true);
+		//	transformationVariable.setValueName(transformationName);
 		transformationVariable.setNonInvalid();
 		transformationVariable.setNonNull();
+		transformationName.addSecondaryElement(transformationVariable);
 		return transformationVariable;
 	}
 
@@ -55,6 +54,9 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 	public @Nullable CGValuedElement getBody() {
 		if (cgScope instanceof CGMapping) {
 			return ((CGMapping)cgScope).getOwnedBody();
+		}
+		else if (cgScope instanceof CGTransformation) {
+			return null;
 		}
 		return super.getBody();
 	}
@@ -64,8 +66,8 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 		return (QVTiGlobalContext) globalContext;
 	}
 
-	@Override
-	public @NonNull String getValueName(@NonNull CGValuedElement cgElement) {
+	/*	@Override
+	public @NonNull String getResolvedName(@NonNull CGValuedElement cgElement) {
 		String valueName = cgElement.getValueName();
 		if (valueName != null) {
 			return valueName;
@@ -80,13 +82,13 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 						Transformation asTransformation = ((TypedModel)asContainer).getTransformation();
 						if (asTransformation != null) {
 							int index = asTransformation.getModelParameter().indexOf(asContainer);
-							String name = QVTiGlobalContext.MODELS_NAME + "[" + index + "/*" + ((TypedModel)asContainer).getName() + "*/]";
+							String name = QVTiGlobalContext.MODELS_NAME + "[" + index + "/ *" + ((TypedModel)asContainer).getName() + "* /]";
 							return name;
 						}
 					}
 				}
 			}
 		}
-		return super.getValueName(cgElement);
-	}
+		return super.getResolvedName(cgElement);
+	} */
 }

@@ -194,7 +194,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 
 			String resultClassName = params.getLookupResultClassName();
-			String resultSymbol = getSymbolName(resultClassName + cgCall.hashCode(), "_lookupResult");
+			//	String resultSymbol = getResolvedName(resultClassName + cgCall.hashCode(), "_lookupResult");
+			String resultSymbol = "XXX_lookupResult";			// XXX
 
 			js.appendClassReference(null, resultClassName);
 			js.append("<");

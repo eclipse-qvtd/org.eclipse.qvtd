@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.generator.GlobalContext;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -114,9 +115,9 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		visitCGValuedElement(cgMappingCallBinding);
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
 		LocalContext localContext = globalContext.getLocalContext(cgMappingCallBinding);
-		if (localContext != null) {
-			cgMappingCallBinding.setValueName(localContext.getNameManagerContext().getSymbolName(cgMappingCallBinding, cgMappingCallBinding.getName()));
-		}
+		NameManager nameManager = localContext.getNameManager();
+		//	nameManager.queueValueName(cgMappingCallBinding, null, cgMappingCallBinding.getName());
+		nameManager.declareStandardName(cgMappingCallBinding);
 		return null;
 	}
 
@@ -151,7 +152,13 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
 		LocalContext localContext = globalContext.getLocalContext(cgRealizedVariable);
 		if (localContext != null) {
-			localContext.setNames(cgRealizedVariable, cgRealizedVariable);
+			//	localContext.setNames(cgRealizedVariable, cgRealizedVariable);
+			String nameHint = cgRealizedVariable.getName();
+			if (nameHint == null) {
+				nameHint = localContext.getNameManager().getNameHint(cgRealizedVariable);
+			}
+			//	localContext.getNameManager().queueValueName(cgRealizedVariable, null, nameHint);
+			localContext.getNameManager().declareStandardName(cgRealizedVariable);
 		}
 		return null;
 	}
