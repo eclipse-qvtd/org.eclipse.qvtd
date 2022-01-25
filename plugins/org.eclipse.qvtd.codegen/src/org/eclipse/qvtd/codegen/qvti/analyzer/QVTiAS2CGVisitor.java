@@ -488,7 +488,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	protected @NonNull CGValuedElement generatePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull PropertyCallExp element) {
+	protected @NonNull CGValuedElement generatePropertyCallExp(@Nullable CGValuedElement cgSource, @NonNull PropertyCallExp element) {
 		Property asProperty = ClassUtil.nonNullModel(element.getReferredProperty());
 		boolean isRequired = asProperty.isIsRequired();
 		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
