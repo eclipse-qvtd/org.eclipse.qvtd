@@ -14,12 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -29,17 +31,33 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerator>
 {
 	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @NonNull CGElement cgScope) {
-		super(globalContext, cgScope);
+		super(globalContext, cgScope, true);
 	}
 
 	@Override
-	public @Nullable CGValuedElement createExecutorVariable(@Nullable String contextName) {
-		return null;
+	public @Nullable CGValuedElement getBody() {
+		if (cgScope instanceof CGMapping) {
+			return ((CGMapping)cgScope).getOwnedBody();
+		}
+		return super.getBody();
+	}
+
+	@Override
+	public @NonNull CGVariable createExecutorVariable() {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
+	}
+
+	@Override
+	protected @NonNull CGTypeId getScopeTypeId() {
+		//	if (cgScope instanceof CGMapping) {
+		//		return analyzer.getTypeId(QVTiCGUtil.getAST((CGMapping)cgScope).eContainer()).getTypeId());
+		//	}
+		return super.getScopeTypeId();
 	}
 
 	@Override
