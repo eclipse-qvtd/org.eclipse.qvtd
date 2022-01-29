@@ -72,6 +72,9 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.internal.library.CompositionProperty;
+import org.eclipse.ocl.pivot.internal.library.ExplicitNavigationProperty;
+import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -655,6 +658,16 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			asInlineOperationCall.eAdapters().add(new InlinedBodyAdapter(callExp));
 		}
 		return cgInlineOperationCall;
+	}
+
+	@Deprecated
+	protected boolean isEcoreProperty(@NonNull LibraryProperty libraryProperty) {
+		return (libraryProperty instanceof ExplicitNavigationProperty)
+				|| (libraryProperty instanceof CompositionProperty)
+				|| (libraryProperty instanceof ImplicitNonCompositionProperty);		// FIXME surely this isn't Ecore
+		//		|| (libraryProperty instanceof StaticProperty)
+		//		|| (libraryProperty instanceof StereotypeProperty)
+		//		|| (libraryProperty instanceof ConstrainedProperty);
 	}
 
 	@Override
