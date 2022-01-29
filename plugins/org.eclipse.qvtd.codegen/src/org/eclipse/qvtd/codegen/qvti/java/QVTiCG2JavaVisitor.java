@@ -261,7 +261,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(" basicEvaluate(");
 			js.appendClassReference(true, Executor.class);
 			js.append(" ");
-			js.append(JavaConstants.EXECUTOR_NAME);
+			js.append(globalContext.getExecutorName());
 			js.append(", ");
 			js.appendClassReference(true, TypedElement.class);
 			js.append(" ");
@@ -777,7 +777,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
-		String evaluatorName = JavaConstants.EXECUTOR_NAME;
+		String evaluatorName = globalContext.getExecutorName();
 		String className = cgTransformation.getName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		//
@@ -868,7 +868,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("return new ");
 		js.appendClassReference(null, IncrementalInvocationManager.class);
 		js.append("(");
-		js.append(JavaConstants.EXECUTOR_NAME);
+		js.append(globalContext.getExecutorName());
 		js.append(");\n");
 		js.popIndentation();
 		js.append("}\n");
@@ -1178,7 +1178,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(", "); * /
 			js.append(asFunction.getImplementationClass());
 			js.append(".INSTANCE.evaluate(");
-			js.append(JavaConstants.EXECUTOR_NAME);
+			js.append(globalContext.getExecutorName());
 			js.append(", ");
 			js.appendValueName(resultType);
 			for (@NonNull CGParameter cgParameter : QVTiCGUtil.getParameters(cgFunction)) {

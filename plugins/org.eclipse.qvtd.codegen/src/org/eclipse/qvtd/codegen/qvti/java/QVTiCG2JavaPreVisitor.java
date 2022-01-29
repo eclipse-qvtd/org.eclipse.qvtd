@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -84,14 +85,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
-		localContext = context.getLocalContext(cgFunction);
-		try {
-			installIdResolverVariable(cgFunction);
-			return super.visitCGOperation(cgFunction);
-		}
-		finally {
-			localContext = null;
-		}
+		return visitCGOperation(cgFunction);
 	}
 
 	@Override
@@ -111,12 +105,12 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
-		localContext = context.getLocalContext(cgMapping);
+		JavaLocalContext<?> savedLocalContext = pushLocalContext(cgMapping);
 		try {
 			return visitCGNamedElement(cgMapping);
 		}
 		finally {
-			localContext = null;
+			popLocalContext(savedLocalContext);
 		}
 	}
 
@@ -162,15 +156,6 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
-		/*		CGExecutorShadowPart cgExecutorConstructorPart = cgRealizedVariablePart.getExecutorPart();
-		cgExecutorConstructorPart.accept(this);
-		TypeId javaPropertyTypeId = JavaConstants.PROPERTY_TYPE_ID;
-		cgExecutorConstructorPart.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
-		//		localContext.addLocalVariable(cgExecutorConstructorPart);
-		installIdResolverVariable(cgExecutorConstructorPart);
-		cgRealizedVariablePart.getOwns().add(cgExecutorConstructorPart);
-		cgRealizedVariablePart.getDependsOn().add(cgExecutorConstructorPart);
-		//		cgShadowPart.getDependsOn().add(cgShadowPart.getShadowExp()); */
 		return visitCGValuedElement(cgRealizedVariablePart);
 	}
 
