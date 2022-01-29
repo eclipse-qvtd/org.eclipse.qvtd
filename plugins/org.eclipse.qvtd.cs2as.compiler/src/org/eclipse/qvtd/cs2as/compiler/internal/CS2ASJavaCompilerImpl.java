@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.pivot.Parameter;
@@ -269,7 +268,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				js.append(" = new ");
 				js.appendClassReference(null, lookupSolver);
 				js.append("(");
-				js.append(JavaConstants.EXECUTOR_NAME);
+				js.append(globalContext.getExecutorName());
 				js.append(");\n");
 			}
 		}
