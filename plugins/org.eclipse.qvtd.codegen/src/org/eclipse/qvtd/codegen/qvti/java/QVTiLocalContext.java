@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -35,6 +34,24 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 	}
 
 	@Override
+	public @NonNull CGVariable createExecutorVariable() {
+		assert executorIsParameter;
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull CGVariable createQualifiedThisVariable() {
+		assert executorIsParameter;
+		assert asType instanceof Transformation;
+		String transformationName = getGlobalContext().getTransformationName();
+		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, analyzer.getTypeId(asType.getTypeId()), true);
+		transformationVariable.setValueName(transformationName);
+		transformationVariable.setNonInvalid();
+		transformationVariable.setNonNull();
+		return transformationVariable;
+	}
+
+	@Override
 	public @Nullable CGValuedElement getBody() {
 		if (cgScope instanceof CGMapping) {
 			return ((CGMapping)cgScope).getOwnedBody();
@@ -43,21 +60,8 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 	}
 
 	@Override
-	public @NonNull CGVariable createExecutorVariable() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
-	}
-
-	@Override
-	protected @NonNull CGTypeId getScopeTypeId() {
-		//	if (cgScope instanceof CGMapping) {
-		//		return analyzer.getTypeId(QVTiCGUtil.getAST((CGMapping)cgScope).eContainer()).getTypeId());
-		//	}
-		return super.getScopeTypeId();
 	}
 
 	@Override
