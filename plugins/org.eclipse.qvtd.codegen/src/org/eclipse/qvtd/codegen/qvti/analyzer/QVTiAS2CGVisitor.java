@@ -114,6 +114,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -435,23 +436,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return castCopy;
 	}
 
-	/*	protected @NonNull CGValuedElement generateMiddlePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
-		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
-		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
-		globalContext.addToMiddleProperty(asOppositeProperty);
-//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
-		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();
-//		CGExecutorProperty cgExecutorProperty = analyzer.getExecutorProperty(asProperty);
-//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
-//		cgPropertyCallExp = cgExecutorPropertyCallExp;
-//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
-		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
-		setAst(cgPropertyCallExp, asMiddlePropertyCallExp);
-		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
-		cgPropertyCallExp.setSource(cgSource);
-		return cgPropertyCallExp;
-	} */
-
 	@Override
 	protected @NonNull CGValuedElement generateOperationCallExp(@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		Operation pOperation = asOperationCallExp.getReferredOperation();
@@ -667,6 +651,29 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			asInlineOperationCall.eAdapters().add(new InlinedBodyAdapter(callExp));
 		}
 		return cgInlineOperationCall;
+	}
+
+	@Override
+	protected boolean isQualifiedThis(@NonNull VariableExp asVariableExp, @NonNull Parameter asParameter) {
+		assert asParameter == PivotUtil.getReferredVariable(asVariableExp);
+		assert isThis(asParameter);
+		Type currentType = PivotUtil.getContainingType(asVariableExp);
+		Mapping currentMapping = QVTimperativeUtil.basicGetContainingMapping(asVariableExp);
+		Operation currentOperation = QVTimperativeUtil.basicGetContainingOperation(asVariableExp);
+		Type referencedType = PivotUtil.getContainingType(asParameter);  // FIXME Mappings
+		return (currentType != referencedType) || (currentMapping != null) || (currentOperation != null);
+	}
+
+	/**
+	 * Return true if asParameter is a 'this' parameter.
+	 */
+	@Override
+	protected boolean isThis(@NonNull Parameter asParameter) {
+		EStructuralFeature eContainingFeature = asParameter.eContainingFeature();
+		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
+			return true;
+		}
+		return super.isThis(asParameter);
 	}
 
 	@Override
