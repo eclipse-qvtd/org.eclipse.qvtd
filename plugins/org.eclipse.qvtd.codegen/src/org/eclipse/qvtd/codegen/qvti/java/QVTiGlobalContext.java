@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
 import org.eclipse.ocl.pivot.Property;
@@ -40,11 +41,14 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	public static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
 	public static final @NonNull String OUTPUT_SPECULATION_SLOT_STATUS_NAME = "outputSpeculatingSlotStatus";
 	public static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
+	public static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
 	/**
 	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
 	 */
 	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
+
+	protected final @NonNull String transformationName ;
 
 	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
@@ -64,6 +68,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		nameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATE_NAME, null);
 		nameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATUS_NAME, null);
 		nameManager.reserveName(TRANSFORMATION_EXECUTION_NAME, null);
+		this.transformationName = nameManager.reserveName(TRANSFORMATION_NAME, null);
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
@@ -84,7 +89,16 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		return new QVTiLocalContext(this, cgScope);
 	}
 
+	@Override
+	public @Nullable QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
+		return (QVTiLocalContext)super.getLocalContext(cgElement);
+	}
+
 	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {
 		return oppositeProperty2oppositeCacheName;
+	}
+
+	public @NonNull String getTransformationName() {
+		return transformationName;
 	}
 }

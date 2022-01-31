@@ -780,7 +780,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = globalContext.getExecutorName();
 		String className = cgTransformation.getName();
+		String transformationName = ((QVTiGlobalContext)globalContext).getTransformationName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
+		//
+		js.append("protected final ");
+		js.appendIsRequired(true);
+		js.append(" " +  className + " " + transformationName + " = this;\n");
+		js.append("\n");
 		//
 		js.append("public " + className + "(final ");
 		js.appendClassReference(true, TransformationExecutor.class);
@@ -2757,7 +2763,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	@Deprecated
-	@Override
 	protected @NonNull String getThisName(@NonNull CGElement cgElement) {
 		CGElement cgScope = cgElement;
 		if (cgScope instanceof CGVariableExp) {
