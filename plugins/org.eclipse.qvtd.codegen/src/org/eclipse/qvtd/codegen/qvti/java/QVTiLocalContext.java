@@ -13,12 +13,13 @@ package org.eclipse.qvtd.codegen.qvti.java;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -29,8 +30,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerator>
 {
-	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @NonNull CGElement cgScope) {
-		super(globalContext, cgScope, true);
+	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @Nullable QVTiLocalContext outerContext, @NonNull CGNamedElement cgScope, @NonNull NamedElement asScope) {
+		super(globalContext, outerContext, cgScope, asScope, true);
 	}
 
 	@Override
