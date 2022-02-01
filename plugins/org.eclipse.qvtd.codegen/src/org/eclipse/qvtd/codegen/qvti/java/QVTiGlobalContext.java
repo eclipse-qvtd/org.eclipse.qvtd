@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
@@ -88,6 +89,11 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	@Override
 	public @NonNull QVTiLocalContext createLocalContext(@Nullable JavaLocalContext<@NonNull ?> outerContext, @NonNull CGNamedElement cgNamedElement, @NonNull NamedElement asNamedElement) {
 		return new QVTiLocalContext(this, (QVTiLocalContext) outerContext, cgNamedElement, asNamedElement);
+	}
+
+	@Override
+	protected @NonNull QVTiLocalContext createNestedContext(@NonNull CGElement cgScope) {
+		return new QVTiLocalContext(this, null, (CGNamedElement) cgScope, (NamedElement)((CGNamedElement)cgScope).getAst()); //, true);
 	}
 
 	@Override
