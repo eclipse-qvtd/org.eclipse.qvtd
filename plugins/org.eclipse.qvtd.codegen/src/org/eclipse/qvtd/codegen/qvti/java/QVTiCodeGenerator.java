@@ -110,6 +110,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected @NonNull CGPackage createCGPackage() {
 		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
 		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
+		pivot2CGVisitor.freeze();
 		CGPackage cgPackage = null;
 		for (org.eclipse.ocl.pivot.Package asPackage = transformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 			CGPackage cgPackage2 = createCGPackage(asPackage);

@@ -540,6 +540,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				return cgPropertyCallExp;
 			}
 		}
+		assert cgSource != null;
 		return super.generatePropertyCallExp(cgSource, element);
 	}
 
@@ -660,6 +661,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return cgInlineOperationCall;
 	}
 
+	@Override
 	@Deprecated
 	protected boolean isEcoreProperty(@NonNull LibraryProperty libraryProperty) {
 		return (libraryProperty instanceof ExplicitNavigationProperty)
@@ -935,7 +937,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		setAst(cgFunction, asFunction);
+		pushLocalContext(cgFunction, asFunction);
 		cgFunction.setRequired(asFunction.isIsRequired());
 		for (Parameter pParameter : asFunction.getOwnedParameters()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
@@ -1057,6 +1059,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		}
 		analyzer.addFunction(asFunction, cgFunction);
+		popLocalContext(cgFunction);
 		return cgFunction;
 	}
 
@@ -1104,8 +1107,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
 		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ analyzer.getCodeGenerator().getEntryPointsAnalysis(asTransformation);
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		setAst(cgTransformation, asTransformation);
-		pushCurrentClass(cgTransformation);
+		pushLocalContext(cgTransformation, asTransformation);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
 		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
 			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
@@ -1124,7 +1126,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}
-		popCurrentClass(cgTransformation);
+		popLocalContext(cgTransformation);
 		return cgTransformation;
 	}
 
@@ -1154,12 +1156,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitMapping(@NonNull Mapping pMapping) {
-		@SuppressWarnings("unused")String name = pMapping.getName();
+	public @Nullable CGNamedElement visitMapping(@NonNull Mapping asMapping) {
+		@SuppressWarnings("unused")String name = asMapping.getName();
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
-		setAst(cgMapping, pMapping);
-		analyzer.addMapping(pMapping, cgMapping);
-		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(pMapping, cgMapping);
+		pushLocalContext(cgMapping, asMapping);
+		analyzer.addMapping(asMapping, cgMapping);
+		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(asMapping, cgMapping);
 		bodyBuilder2.doBottoms();
 
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
@@ -1168,6 +1170,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgFreeVariables.clear();
 		cgFreeVariables.addAll(sortedVariables);
 		bodyBuilder = null;
+		popLocalContext(cgMapping);
 		return cgMapping;
 	}
 

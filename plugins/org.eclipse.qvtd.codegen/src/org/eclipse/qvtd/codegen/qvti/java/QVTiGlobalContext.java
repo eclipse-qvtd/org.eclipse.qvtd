@@ -90,7 +90,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	}
 
 	@Override
-	public @Nullable QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
+	public @NonNull QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
 		return (QVTiLocalContext)super.getLocalContext(cgElement);
 	}
 
