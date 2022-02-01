@@ -87,13 +87,8 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 
 	@Override
 	public @NonNull QVTiLocalContext createLocalContext(@Nullable JavaLocalContext<@NonNull ?> outerContext, @NonNull CGNamedElement cgNamedElement, @NonNull NamedElement asNamedElement) {
-		return new QVTiLocalContext(this, (QVTiLocalContext) outerContext, cgNamedElement, asNamedElement);
+		return new QVTiLocalContext(this, (QVTiLocalContext)outerContext, cgNamedElement, asNamedElement);
 	}
-
-	//	@Override
-	//	protected @NonNull QVTiLocalContext createNestedContext(@NonNull CGElement cgScope) {
-	//		return new QVTiLocalContext(this, null, (CGNamedElement) cgScope, (NamedElement)((CGNamedElement)cgScope).getAst()); //, true);
-	//	}
 
 	@Override
 	public @NonNull QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
