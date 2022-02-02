@@ -574,7 +574,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (instanceKey == null) {
 			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
 		}
-		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
+		return functionContext.getNameManager().getSymbolName(instanceKey, "instance");
 	}
 
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {

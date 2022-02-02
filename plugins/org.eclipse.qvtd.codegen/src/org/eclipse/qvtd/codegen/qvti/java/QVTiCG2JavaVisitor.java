@@ -2691,7 +2691,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (instanceKey == null) {
 			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
 		}
-		return functionContext.getNameManagerContext().getSymbolName(instanceKey, "instance");
+		return functionContext.getNameManager().getSymbolName(instanceKey, "instance");
 	}
 
 	protected @NonNull String getFunctionName(@NonNull CGFunction cgFunction) {

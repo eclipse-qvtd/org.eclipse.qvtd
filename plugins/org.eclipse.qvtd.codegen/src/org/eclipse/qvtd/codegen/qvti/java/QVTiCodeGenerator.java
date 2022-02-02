@@ -61,6 +61,29 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
+	public static class QVTiNameManager extends NameManager
+	{
+		public QVTiNameManager(@Nullable QVTiNameManager parent) {
+			super(parent);
+		}
+
+		@Override
+		public @NonNull NameManager createNestedNameManager() {
+			return new QVTiNameManager(this);
+		}
+
+		@Override
+		public @Nullable String getNameHint(@NonNull Object anObject) {
+			if (anObject instanceof CGValuedElement) {
+				anObject = ((CGValuedElement)anObject).getNamedValue();
+			}
+			if (anObject instanceof CGMappingLoop) {
+				return "loop";
+			}
+			return super.getNameHint(anObject);
+		}
+	}
+
 	protected final @NonNull ImperativeTransformation transformation;
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull QVTiGlobalContext globalContext;
@@ -69,7 +92,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	private/* @LazyNonNull*/ String javaSourceCode = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
-		super(environmentFactory);
+		super(environmentFactory, null);			// FIXME Pass a genmodel
 		QVTiCG2StringVisitor.FACTORY.getClass();
 		this.transformation = transformation;
 		this.cgAnalyzer = new QVTiAnalyzer(this);
@@ -200,19 +223,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	protected @NonNull NameManager createNameManager() {
-		return new NameManager() {
-			@Override
-			public @Nullable String getNameHint(@NonNull Object anObject) {
-				if (anObject instanceof CGValuedElement) {
-					anObject = ((CGValuedElement)anObject).getNamedValue();
-				}
-				if (anObject instanceof CGMappingLoop) {
-					return "loop";
-				}
-				return super.getNameHint(anObject);
-			}
-
-		};
+		return new QVTiNameManager(null);
 	}
 
 	@Override
