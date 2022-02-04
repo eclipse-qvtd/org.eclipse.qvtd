@@ -27,6 +27,8 @@ import org.eclipse.ocl.pivot.Property;
  */
 public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenerator>
 {
+	private static final @NonNull String CLASS_ID_2_CLASS_ID_ = "classIndex2classId_";
+	private static final @NonNull String CLASS_ID_2_ALL_CLASS_INDEXES_ = "classIndex2allClassIndexes_";
 	public static final @NonNull String CONSTRUCTOR_NAME = "constructor";
 	public static final @NonNull String CREATE_FROM_STRING_NAME = "createFromString";
 	public static final @NonNull String EMPTY_LIST_NAME = "emptyList";
@@ -39,6 +41,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	public static final @NonNull String MODELS_NAME = "models";
 	public static final @NonNull String NEEDS_SPECULATION_NAME = "needsSpeculation";
 	public static final @NonNull String OBJECT_MANAGER_NAME = "objectManager";
+	public static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	public static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
 	public static final @NonNull String OUTPUT_SPECULATION_SLOT_STATUS_NAME = "outputSpeculatingSlotStatus";
 	public static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
@@ -49,27 +52,29 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	 */
 	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
 
+	//	protected final @NonNull String oppositeIndex2propertyIdName;
 	protected final @NonNull String transformationName ;
 
 	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
-		nameManager.reserveName(JavaConstants.EVALUATION_CACHE_NAME, null);
-		nameManager.reserveName(CONSTRUCTOR_NAME, null);
-		nameManager.reserveName(CREATE_FROM_STRING_NAME, null);
-		nameManager.reserveName(EMPTY_LIST_NAME, null);
-		nameManager.reserveName(GET_SPECULATION_SLOT_STATE_NAME, null);
-		nameManager.reserveName(GET_SPECULATION_STATUS_NAME, null);
-		nameManager.reserveName(GET_TRANSFORMATION_EXECUTION_NAME, null);
-		nameManager.reserveName(INPUT_SPECULATION_SLOT_STATE_NAME, null);
-		nameManager.reserveName(INPUT_SPECULATION_SLOT_STATUS_NAME, null);
-		nameManager.reserveName(INVOCATION_HASH_CODE_NAME, null);
-		nameManager.reserveName(MODELS_NAME, null);
-		nameManager.reserveName(NEEDS_SPECULATION_NAME, null);
-		nameManager.reserveName(OBJECT_MANAGER_NAME, null);
-		nameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATE_NAME, null);
-		nameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATUS_NAME, null);
-		nameManager.reserveName(TRANSFORMATION_EXECUTION_NAME, null);
-		this.transformationName = nameManager.reserveName(TRANSFORMATION_NAME, null);
+		globalNameManager.reserveName(JavaConstants.EVALUATION_CACHE_NAME, null);
+		globalNameManager.reserveName(CONSTRUCTOR_NAME, null);
+		globalNameManager.reserveName(CREATE_FROM_STRING_NAME, null);
+		globalNameManager.reserveName(EMPTY_LIST_NAME, null);
+		globalNameManager.reserveName(GET_SPECULATION_SLOT_STATE_NAME, null);
+		globalNameManager.reserveName(GET_SPECULATION_STATUS_NAME, null);
+		globalNameManager.reserveName(GET_TRANSFORMATION_EXECUTION_NAME, null);
+		globalNameManager.reserveName(INPUT_SPECULATION_SLOT_STATE_NAME, null);
+		globalNameManager.reserveName(INPUT_SPECULATION_SLOT_STATUS_NAME, null);
+		globalNameManager.reserveName(INVOCATION_HASH_CODE_NAME, null);
+		globalNameManager.reserveName(MODELS_NAME, null);
+		globalNameManager.reserveName(NEEDS_SPECULATION_NAME, null);
+		globalNameManager.reserveName(OBJECT_MANAGER_NAME, null);
+		globalNameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATE_NAME, null);
+		globalNameManager.reserveName(OUTPUT_SPECULATION_SLOT_STATUS_NAME, null);
+		globalNameManager.reserveName(TRANSFORMATION_EXECUTION_NAME, null);
+		//	this.oppositeIndex2propertyIdName = globalNameManager.reserveName(OPPOSITE_INDEX_2_PROPERTY_ID_NAME, null);
+		this.transformationName = globalNameManager.reserveName(TRANSFORMATION_NAME, null);
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
@@ -78,7 +83,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
 		}
 		if (!oppositeProperty2oppositeCacheName.containsKey(pivotProperty)) {
-			oppositeProperty2oppositeCacheName.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()));
+			oppositeProperty2oppositeCacheName.put(pivotProperty, globalNameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()));
 		}
 		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
 		assert name != null;
@@ -90,9 +95,21 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		return new QVTiLocalContext(this, (QVTiLocalContext)outerContext, cgNamedElement, asNamedElement);
 	}
 
+	public @NonNull String getClassIndex2allClassIndexes(int typedModelNumber) {
+		return globalNameManager.getGlobalSymbolName(CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber);
+	}
+
+	public @NonNull String getClassIndex2classId(int typedModelNumber) {
+		return globalNameManager.getGlobalSymbolName(CLASS_ID_2_CLASS_ID_ + typedModelNumber);
+	}
+
 	@Override
 	public @NonNull QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
 		return (QVTiLocalContext)super.getLocalContext(cgElement);
+	}
+
+	public @NonNull String getOppositeIndex2propertyIdName() {
+		return globalNameManager.getGlobalSymbolName(OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
 	}
 
 	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {

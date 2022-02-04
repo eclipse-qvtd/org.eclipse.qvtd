@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -50,10 +50,12 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -61,17 +63,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
-	public static class QVTiNameManager extends NameManager
+	public static class QVTiNameManagerHelper extends NameManagerHelper
 	{
-		public QVTiNameManager(@Nullable QVTiNameManager parent) {
-			super(parent);
-		}
-
-		@Override
-		public @NonNull NameManager createNestedNameManager() {
-			return new QVTiNameManager(this);
-		}
-
 		@Override
 		public @Nullable String getNameHint(@NonNull Object anObject) {
 			if (anObject instanceof CGValuedElement) {
@@ -182,6 +175,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		String javaSourceCode2;
 		CGPackage cgPackage2 = createCGPackage();
 		cgPackage = cgPackage2;
+		reserveGlobalNames();
 		optimize(cgPackage2);
 		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
 		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
@@ -222,8 +216,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	protected @NonNull NameManager createNameManager() {
-		return new QVTiNameManager(null);
+	protected @NonNull NameManagerHelper createNameManagerHelper() {
+		return new QVTiNameManagerHelper();
 	}
 
 	@Override
@@ -284,6 +278,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	public @NonNull ImperativeTransformation getTransformation() {
 		return transformation;
+	}
+
+	protected void reserveGlobalNames() {
+		globalContext.getOppositeIndex2propertyIdName();
+		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(transformation);
+		int typedModelNumber = 0;
+		for (@SuppressWarnings("unused") @NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
+			globalContext.getClassIndex2allClassIndexes(typedModelNumber);
+			globalContext.getClassIndex2classId(typedModelNumber);
+			typedModelNumber++;
+		}
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {

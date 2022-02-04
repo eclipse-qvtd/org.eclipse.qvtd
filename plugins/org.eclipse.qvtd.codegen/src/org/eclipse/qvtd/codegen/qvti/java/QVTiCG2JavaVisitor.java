@@ -619,7 +619,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append("/*\n");
 				js.append(" * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex for TypedModel " + typedModelNumber + ".\n");
 				js.append(" */\n");
-				String classIndex2classIdName = nameManager.getGlobalSymbolName(null, "classIndex2classId_" + typedModelNumber);
+				String classIndex2classIdName = getGlobalContext().getClassIndex2classId(typedModelNumber);
 				js.append("private static final ");
 				js.appendClassReference(true, ClassId.class);
 				js.append(" ");
@@ -648,7 +648,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				//
 				//	Emit the classIndex2allClassIndexes array of arrays
 				//
-				String classIndex2allClassIndexes = nameManager.getGlobalSymbolName(null, "classIndex2allClassIndexes_" + typedModelNumber);
+				String classIndex2allClassIndexes = getGlobalContext().getClassIndex2allClassIndexes(typedModelNumber);
 				js.append("\n");
 				js.append("/*\n");
 				js.append(" * Mapping from each TypedModel " + typedModelNumber + " ClassIndex to all the ClassIndexes\n");
@@ -2418,7 +2418,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("/*\n");
 		js.append(" * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
 		js.append(" */\n");
-		String oppositeIndex2propertyIdName = nameManager.getGlobalSymbolName(null, "oppositeIndex2propertyId");
+		String oppositeIndex2propertyIdName = getGlobalContext().getOppositeIndex2propertyIdName();
 		js.append("private static final ");
 		js.appendClassReference(true, PropertyId.class);
 		js.append(" ");
@@ -2691,7 +2691,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (instanceKey == null) {
 			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
 		}
-		return functionContext.getNameManager().getSymbolName(instanceKey, "instance");
+		return functionContext.getNameManager().getValueName(instanceKey, "instance");
 	}
 
 	protected @NonNull String getFunctionName(@NonNull CGFunction cgFunction) {
