@@ -49,6 +49,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
+import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -63,17 +64,138 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
+	protected static class QVTiCGNameHelper extends NameManagerHelper.CGNameHelper implements QVTiCGModelVisitor<@Nullable String>
+	{			// FIXME Introduce AS-style indirection/delegation
+		public QVTiCGNameHelper(@NonNull NameManagerHelper context) {
+			super(context);
+		}
+
+		@Override
+		public @Nullable String visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGConnectionVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionVariable object) {
+			return visitCGGuardVariable(object);
+		}
+
+		@Override
+		public @Nullable String visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
+			return visitCGPropertyAssignment(object);
+		}
+
+		@Override
+		public @Nullable String visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
+			return visitCGPropertyAssignment(object);
+		}
+
+		@Override
+		public @Nullable String visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object) {
+			return visitCGRealizedVariable(object);
+		}
+
+		@Override
+		public @Nullable String visitCGFunction(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunction object) {
+			return visitCGOperation(object);
+		}
+
+		@Override
+		public @Nullable String visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+
+		@Override
+		public @Nullable String visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
+			return visitCGParameter(object);
+		}
+
+		@Override
+		public @Nullable String visitCGGuardVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGGuardVariable object) {
+			return visitCGParameter(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
+			return visitCGNamedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMappingCall(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCall object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMappingCallBinding(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCallBinding object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMappingExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMappingLoop(@NonNull CGMappingLoop object) {
+			return "loop";
+		}
+
+		@Override
+		public @Nullable String visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
+			return visitCGEcorePropertyAssignment(object);
+		}
+
+		@Override
+		public @Nullable String visitCGMiddlePropertyCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyCallExp object) {
+			return visitCGOppositePropertyCallExp(object);
+		}
+
+		@Override
+		public @Nullable String visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
+			return visitCGVariable(object);
+		}
+
+		@Override
+		public @Nullable String visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGSpeculateExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculateExp object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGSpeculatePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculatePart object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable String visitCGTransformation(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTransformation object) {
+			return visitCGClass(object);
+		}
+
+		@Override
+		public @Nullable String visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
+			return visitCGNamedElement(object);
+		}
+	}
+
 	public static class QVTiNameManagerHelper extends NameManagerHelper
 	{
 		@Override
-		public @Nullable String getNameHint(@NonNull Object anObject) {
-			if (anObject instanceof CGValuedElement) {
-				anObject = ((CGValuedElement)anObject).getNamedValue();
-			}
-			if (anObject instanceof CGMappingLoop) {
-				return "loop";
-			}
-			return super.getNameHint(anObject);
+		protected @NonNull CGNameHelper createCGNameHelper() {
+			return new QVTiCGNameHelper(this);
 		}
 	}
 
@@ -178,6 +300,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		reserveGlobalNames();
 		optimize(cgPackage2);
 		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
+		resolveValueNames(cgPackage);
 		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();

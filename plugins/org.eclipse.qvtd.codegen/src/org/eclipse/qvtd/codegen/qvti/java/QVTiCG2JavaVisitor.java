@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager.GlobalName;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
@@ -619,7 +620,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append("/*\n");
 				js.append(" * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex for TypedModel " + typedModelNumber + ".\n");
 				js.append(" */\n");
-				String classIndex2classIdName = getGlobalContext().getClassIndex2classId(typedModelNumber);
+				GlobalName classIndex2classIdName = getGlobalContext().getClassIndex2classId(typedModelNumber);
 				js.append("private static final ");
 				js.appendClassReference(true, ClassId.class);
 				js.append(" ");
@@ -648,7 +649,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				//
 				//	Emit the classIndex2allClassIndexes array of arrays
 				//
-				String classIndex2allClassIndexes = getGlobalContext().getClassIndex2allClassIndexes(typedModelNumber);
+				GlobalName classIndex2allClassIndexes = getGlobalContext().getClassIndex2allClassIndexes(typedModelNumber);
 				js.append("\n");
 				js.append("/*\n");
 				js.append(" * Mapping from each TypedModel " + typedModelNumber + " ClassIndex to all the ClassIndexes\n");
@@ -703,7 +704,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 				js.popIndentation();
 				js.append("};\n");
-				allInstancesAnalysis.setNames(new @NonNull String[]{ classIndex2classIdName, classIndex2allClassIndexes});
+				allInstancesAnalysis.setNames(new @NonNull String[]{ classIndex2classIdName.getName(), classIndex2allClassIndexes.getName()});
 				allInstancesAnalyses.add(allInstancesAnalysis);
 			}
 			else {
@@ -777,9 +778,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
-		String evaluatorName = globalContext.getExecutorName();
+		GlobalName evaluatorName = globalContext.getExecutorName();
 		String className = cgTransformation.getName();
-		String transformationName = ((QVTiGlobalContext)globalContext).getTransformationName();
+		GlobalName transformationName = ((QVTiGlobalContext)globalContext).getTransformationName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		//
 		js.append("protected final ");
@@ -2396,7 +2397,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	}
 
-	protected @Nullable String doOppositePropertyIds(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
+	protected @Nullable GlobalName doOppositePropertyIds(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
 		// This code is no longer used, and since it is not used it generates undefined references
 		// It appears to have 'worked' only because a duplicate incomplete TransformationAnalysis was in use.
 		Map<@NonNull Property, @NonNull Integer> opposites = entryPointsAnalysis.getCaches();
@@ -2418,7 +2419,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("/*\n");
 		js.append(" * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
 		js.append(" */\n");
-		String oppositeIndex2propertyIdName = getGlobalContext().getOppositeIndex2propertyIdName();
+		GlobalName oppositeIndex2propertyIdName = getGlobalContext().getOppositeIndex2propertyIdName();
 		js.append("private static final ");
 		js.appendClassReference(true, PropertyId.class);
 		js.append(" ");
@@ -2702,6 +2703,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return (QVTiGlobalContext) globalContext;
 	}
 
+	protected @NonNull String getITER_Name(@NonNull CGValuedElement object) {
+		return context.getITER_ValueNames().getValueName(object);
+	}
+
 	private @Nullable Mapping getInvocationWrapper(@NonNull CGValuedElement cgValue) {
 		Mapping mapping = null;
 		if (cgValue instanceof CGSequence) {
@@ -2862,7 +2867,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (!js.appendLocalStatements(initValue)) {
 			return false;
 		}
-		final String iteratorName = getSymbolName(null, "iterator");
+		final String iteratorName = getITER_Name(cgConnectionAssignment); // getSymbolName(null, "iterator");
 		TypeId concreteElementTypeId = cgConnectionAssignment.getConnectionVariable().getASTypeId();
 		assert concreteElementTypeId != null;
 		BoxedDescriptor concreteBoxedDescriptor = context.getBoxedDescriptor(concreteElementTypeId);
@@ -3360,7 +3365,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					if (!js.appendLocalStatements(cgInit)) {
 						return false;
 					}
-					final String iteratorName = getSymbolName(null, "iterator");
+					final String iteratorName = getITER_Name(cgMappingExp);
 					CollectionTypeId collectionTypeId = (CollectionTypeId)cgInit.getASTypeId();
 					assert collectionTypeId != null;
 					TypeId elementTypeId = collectionTypeId.getElementTypeId();

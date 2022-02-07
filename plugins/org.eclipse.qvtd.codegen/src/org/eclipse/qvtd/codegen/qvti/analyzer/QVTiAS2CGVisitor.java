@@ -579,7 +579,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//	nameManager.queueValueName(instanceKey, instanceName);
 		}
 		else {
-			nameManager.queueValueName(instanceKey, instanceName);
+			nameManager.queueValueName(instanceKey, null, instanceName);
 		}
 		return instanceName;
 	}

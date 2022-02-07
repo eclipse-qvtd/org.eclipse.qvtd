@@ -116,7 +116,7 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
 		LocalContext localContext = globalContext.getLocalContext(cgMappingCallBinding);
 		NameManager nameManager = localContext.getNameManager();
-		nameManager.queueValueName(cgMappingCallBinding, cgMappingCallBinding.getName());
+		nameManager.queueValueName(cgMappingCallBinding, null, cgMappingCallBinding.getName());
 		return null;
 	}
 
