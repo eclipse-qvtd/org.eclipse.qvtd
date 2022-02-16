@@ -116,7 +116,8 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
 		LocalContext localContext = globalContext.getLocalContext(cgMappingCallBinding);
 		NameManager nameManager = localContext.getNameManager();
-		nameManager.queueValueName(cgMappingCallBinding, null, cgMappingCallBinding.getName());
+		//	nameManager.queueValueName(cgMappingCallBinding, null, cgMappingCallBinding.getName());
+		nameManager.declareStandardName(cgMappingCallBinding);
 		return null;
 	}
 
@@ -151,7 +152,13 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
 		LocalContext localContext = globalContext.getLocalContext(cgRealizedVariable);
 		if (localContext != null) {
-			localContext.setNames(cgRealizedVariable, cgRealizedVariable);
+			//	localContext.setNames(cgRealizedVariable, cgRealizedVariable);
+			String nameHint = cgRealizedVariable.getName();
+			if (nameHint == null) {
+				nameHint = localContext.getNameManager().getNameHint(cgRealizedVariable);
+			}
+			//	localContext.getNameManager().queueValueName(cgRealizedVariable, null, nameHint);
+			localContext.getNameManager().declareStandardName(cgRealizedVariable);
 		}
 		return null;
 	}

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
@@ -59,8 +60,10 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	}
 
 	@Override
-	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
-		return visitCGValuedElement(object);
+	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment cgConnectionAssignment) {
+		NameResolution iteratorNameResolution = getNameManager().declareStandardName(cgConnectionAssignment);
+		iteratorNameResolution.addNameVariant(codeGenerator.getITER_NameVariant());
+		return visitCGValuedElement(cgConnectionAssignment);
 	}
 
 	@Override
@@ -85,7 +88,12 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
-		return visitCGOperation(cgFunction);
+		visitCGOperation(cgFunction);
+		JavaLocalContext<?> savedLocalContext = pushLocalContext(cgFunction);
+		NameResolution nameResolution = getNameManager().declareStandardName(cgFunction);
+		nameResolution.addNameVariant(getCodeGenerator().getINSTANCE_NameVariant());
+		popLocalContext(savedLocalContext);
+		return null;
 	}
 
 	@Override

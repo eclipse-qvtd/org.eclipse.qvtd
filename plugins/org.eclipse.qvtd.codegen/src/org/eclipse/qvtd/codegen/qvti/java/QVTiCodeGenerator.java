@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager.NameVariant;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -72,7 +74,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 		@Override
 		public @Nullable String visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object) {
-			return visitCGValuedElement(object);
+			return "CONNECTION_" + context.getNameableHint(object.getConnectionVariable());		// XXX
 		}
 
 		@Override
@@ -82,12 +84,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 		@Override
 		public @Nullable String visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
-			return visitCGPropertyAssignment(object);
+			return "XXX" + context.getNameableHint(object);		// XXX
 		}
 
 		@Override
 		public @Nullable String visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
-			return visitCGPropertyAssignment(object);
+			return "XXX" + context.getNameableHint(object);		// XXX
 		}
 
 		@Override
@@ -122,7 +124,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 		@Override
 		public @Nullable String visitCGMappingCall(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCall object) {
-			return visitCGValuedElement(object);
+			return context.getNameableHint(QVTiCGUtil.getAST(object).getReferredMapping());
 		}
 
 		@Override
@@ -167,7 +169,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 		@Override
 		public @Nullable String visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
-			return visitCGValuedElement(object);
+			return "XXX-SEQ"; //visitCGValuedElement(object);
 		}
 
 		@Override
@@ -205,6 +207,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
+	protected final @NonNull NameVariant INSTANCE_NameVariant;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -212,6 +215,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		this.transformation = transformation;
 		this.cgAnalyzer = new QVTiAnalyzer(this);
 		this.globalContext = new QVTiGlobalContext(this);
+		this.INSTANCE_NameVariant = globalNameManager.addNameVariantPrefix("INSTANCE_");
 	}
 
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
@@ -300,7 +304,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		reserveGlobalNames();
 		optimize(cgPackage2);
 		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
-		resolveValueNames(cgPackage);
+		resolveNames(cgPackage);
 		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();
@@ -380,6 +384,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return globalContext;
+	}
+
+	public @NonNull NameVariant getINSTANCE_NameVariant() {
+		return INSTANCE_NameVariant;
 	}
 
 	@Override
