@@ -91,7 +91,8 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		JavaLocalContext<?> savedLocalContext = pushLocalContext(cgFunction);
 		try {
 			NameResolution nameResolution = getNameManager().declareStandardName(cgFunction);
-			nameResolution.addNameVariant(getCodeGenerator().getINSTANCE_NameVariant());
+			nameResolution.addNameVariant(getCodeGenerator().getCACHED_RESULT_NameVariant());
+			nameResolution.addNameVariant(getCodeGenerator().getSELF_NameVariant());
 			visitCGOperation(cgFunction);
 			return null;
 		}

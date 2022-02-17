@@ -207,7 +207,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
-	protected final @NonNull NameVariant INSTANCE_NameVariant;
+	protected final @NonNull NameVariant CACHED_RESULT_NameVariant;
+	protected final @NonNull NameVariant SELF_NameVariant;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -215,7 +216,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		this.transformation = transformation;
 		this.cgAnalyzer = new QVTiAnalyzer(this);
 		this.globalContext = new QVTiGlobalContext(this);
-		this.INSTANCE_NameVariant = globalNameManager.addNameVariantPrefix("INSTANCE_");
+		this.CACHED_RESULT_NameVariant = globalNameManager.addNameVariantPreferred("cachedResult");
+		this.SELF_NameVariant = globalNameManager.addNameVariantPreferred("thisTransformer");
 	}
 
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
@@ -369,6 +371,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgAnalyzer;
 	}
 
+	public @NonNull NameVariant getCACHED_RESULT_NameVariant() {
+		return CACHED_RESULT_NameVariant;
+	}
+
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
@@ -383,10 +389,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return globalContext;
-	}
-
-	public @NonNull NameVariant getINSTANCE_NameVariant() {
-		return INSTANCE_NameVariant;
 	}
 
 	@Override
@@ -404,6 +406,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 		s.append(QVTbaseUtil.getName(transformation));
 		return s.toString();
+	}
+
+	public @NonNull NameVariant getSELF_NameVariant() {
+		return SELF_NameVariant;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {
