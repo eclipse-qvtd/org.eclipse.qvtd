@@ -369,7 +369,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		protected void doCachedInstanceEvaluate() {
 			js.append("public ");
 			js.appendClassReference(true, cgExecutorType);
-			js.append(" evaluate(");
+			js.append(" ");
+			js.append(globalContext.getEvaluateName());
+			js.append("(");
 			boolean isFirst = true;
 			for (@NonNull CGExecutorProperty cgProperty : cgProperties) {
 				if (!isFirst) {
@@ -384,7 +386,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendClassReference(true, cgExecutorType);
 			js.append(")");
 			js.append(qvtiGlobalContext.getEvaluationCacheName());
-			js.append(".getCachedEvaluationResult(this, caller, new ");
+			js.append(".");
+			js.append(globalContext.getGetCachedEvaluationResultName());
+			js.append("(this, caller, new ");
 			js.appendClassReference(false, Object.class);
 			js.append("[]{");
 			isFirst = true;
