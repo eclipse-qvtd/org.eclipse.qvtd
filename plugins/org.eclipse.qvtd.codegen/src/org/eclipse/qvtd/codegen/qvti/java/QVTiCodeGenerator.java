@@ -208,7 +208,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
 	protected final @NonNull NameVariant CACHED_RESULT_NameVariant;
-	protected final @NonNull NameVariant SELF_NameVariant;
+	protected final @NonNull NameVariant THIS_TRANSFORMER_NameVariant;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -217,7 +217,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		this.cgAnalyzer = new QVTiAnalyzer(this);
 		this.globalContext = new QVTiGlobalContext(this);
 		this.CACHED_RESULT_NameVariant = globalNameManager.addNameVariantPreferred("cachedResult");
-		this.SELF_NameVariant = globalNameManager.addNameVariantPreferred("thisTransformer");
+		this.THIS_TRANSFORMER_NameVariant = globalNameManager.addNameVariantPreferred("thisTransformer");
 	}
 
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
@@ -408,8 +408,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return s.toString();
 	}
 
-	public @NonNull NameVariant getSELF_NameVariant() {
-		return SELF_NameVariant;
+	public @NonNull NameVariant getTHIS_TRANSFORMER_NameVariant() {
+		return THIS_TRANSFORMER_NameVariant;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {

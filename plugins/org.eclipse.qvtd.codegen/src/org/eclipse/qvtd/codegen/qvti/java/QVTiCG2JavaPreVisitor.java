@@ -92,7 +92,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		try {
 			NameResolution nameResolution = getNameManager().declareStandardName(cgFunction);
 			nameResolution.addNameVariant(getCodeGenerator().getCACHED_RESULT_NameVariant());
-			nameResolution.addNameVariant(getCodeGenerator().getSELF_NameVariant());
+			nameResolution.addNameVariant(getCodeGenerator().getTHIS_TRANSFORMER_NameVariant());
 			visitCGOperation(cgFunction);
 			return null;
 		}

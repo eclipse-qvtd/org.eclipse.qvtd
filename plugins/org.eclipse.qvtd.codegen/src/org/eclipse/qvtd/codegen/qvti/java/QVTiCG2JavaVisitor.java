@@ -1176,8 +1176,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return true;
 	}
 
-	protected boolean doFunctionBody(@NonNull CGFunction cgFunction, @NonNull String cachedResultName) {
+	protected boolean doFunctionBody3(@NonNull CGFunction cgFunction) {
 		String functionName = getFunctionName(cgFunction);
+		String cachedResultName = getCachedResultName(cgFunction);
 		CGValuedElement cgBody = cgFunction.getBody();
 		ElementId elementId = cgFunction.getTypeId().getElementId();
 		// FIXME merge locals into AST as LetExps.
@@ -1256,11 +1257,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return true;
 	}
 
-	protected boolean doFunctionBody2(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp, @NonNull String cachedResultName) {
+	protected boolean doFunctionBody2(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
 		Function function = QVTiCGUtil.getAST(cgFunction);
 		ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(function);
 		EntryPointsAnalysis entryPointsAnalysis = context.getEntryPointsAnalysis(transformation);
 		String functionName = getFunctionName(cgFunction);
+		String cachedResultName = getCachedResultName(cgFunction);
 		js.append(" {\n");
 		js.pushIndentation(null);
 		if (isIncremental) {
@@ -1364,9 +1366,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return true;
 	}
 
-	protected void doFunctionConstructor(@NonNull CGFunction cgFunction, @NonNull String cachedResultName) {
+	protected void doFunctionConstructor(@NonNull CGFunction cgFunction) {
 		String functionName = getFunctionName(cgFunction);
-		String selfName = cgFunction.getVariantResolvedName(getCodeGenerator().getSELF_NameVariant());
+		String thisTransformerName = getThisTransformerName(cgFunction);
+		String cachedResultName = getCachedResultName(cgFunction);
 		CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
 		List<@NonNull CGParameter> cgParameters = ClassUtil.nullFree(cgFunction.getParameters());
 		CGValuedElement cgBody = cgFunction.getBody();
@@ -1388,7 +1391,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("\");\n");
 		}
 		js.appendThis(functionName);
-		js.append("." + selfName + " = (");
+		js.append("." + thisTransformerName + " = (");
 		js.appendClassReference(cgClass);
 		js.append(")boundValues[0];\n");
 		int i = 1;
@@ -1408,12 +1411,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendClassCast(cgParameter, castBody);
 			js.append(";\n");
 		}
-		doFunctionBody(cgFunction, cachedResultName);
+		doFunctionBody3(cgFunction);
 		js.popIndentation();
 		js.append("}\n");
 	}
 
-	protected void doFunctionConstructor(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp, @NonNull String cachedResultName) {
+	protected void doFunctionConstructor(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
 		//		List<@NonNull CGParameter> cgParameters = ClassUtil.nullFree(cgFunction.getParameters());
 		//		if (js.isUseNullAnnotations()) {
 		//			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
@@ -1440,7 +1443,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("boundValues[" + i++);
 			js.append("];\n");
 		} */
-		doFunctionBody2(cgFunction, cgShadowExp, cachedResultName);
+		doFunctionBody2(cgFunction, cgShadowExp);
 	}
 
 	protected void doFunctionConstructorConstants(/*@NonNull*/ List<@NonNull CGOperation> cgOperations) {
@@ -1489,7 +1492,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	} */
 
-	protected void doFunctionGetInstance(@NonNull CGFunction cgFunction, @NonNull String cachedResultName) {
+	protected void doFunctionGetInstance(@NonNull CGFunction cgFunction) {
+		String cachedResultName = getCachedResultName(cgFunction);
 		js.append("@Override\n");
 		js.append("public ");
 		js.appendIsRequired(false);
@@ -1504,7 +1508,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doFunctionIsEqual(@NonNull CGFunction cgFunction) {
 		String functionName = getFunctionName(cgFunction);
-		String selfName = cgFunction.getVariantResolvedName(getCodeGenerator().getSELF_NameVariant());
+		String thisTransformerName = getThisTransformerName(cgFunction);
 		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendClassReference(true, IdResolver.class);
@@ -1516,7 +1520,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.pushIndentation(null);
 		js.append("return ");
 		js.appendThis(functionName);
-		js.append("." + selfName + " == thoseValues[0]");
+		js.append("." + thisTransformerName + " == thoseValues[0]");
 		int index = 1;
 		for (@NonNull CGParameter cgParameter : ClassUtil.nullFree(cgFunction.getParameters())) {
 			js.append("\n\t&& ");
@@ -2669,6 +2673,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return (QVTiAnalyzer) super.getAnalyzer();
 	}
 
+	protected @NonNull String getCachedResultName(@NonNull CGFunction cgFunction) {
+		return cgFunction.getVariantResolvedName(getCodeGenerator().getCACHED_RESULT_NameVariant());
+	}
+
 	private EObject getContainer(EObject eObject) {
 		EObject eContainer = eObject.eContainer();
 		if (eContainer != null) {
@@ -2705,18 +2713,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	protected @NonNull String getFunctionCtorName(@NonNull CGFunction cgFunction) {
 		return JavaStream.convertToJavaIdentifier("FTOR_" + cgFunction.getName());
 	}
-
-	/*	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
-		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(qvtiGlobalContext.getLocalContext(cgFunction));
-		Object instanceKey = cgFunction.getBody();
-		if (instanceKey == null) {
-			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
-		}
-		//	return functionContext.getNameManager().declareStandardName((CGValuedElement) instanceKey, "instance");
-		return cgFunction.getVariantResolvedName(getCodeGenerator().getINSTANCE_NameVariant());
-		//	nameResolution.addNameVariant(getCodeGenerator().getINSTANCE_NameVariant());
-		//	return "XXX=instance";			// XXX
-	} */
 
 	protected @NonNull String getFunctionName(@NonNull CGFunction cgFunction) {
 		return JavaStream.convertToJavaIdentifier("FUN_" + cgFunction.getName());
@@ -2807,7 +2803,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return super.getResolvedName(cgElement);
 	}
 
-	@Deprecated
+	/*	@Deprecated
 	protected @NonNull String getThisName(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
@@ -2821,7 +2817,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 		assert false;
-		return "";		// "this" */
+		return "";		// "this" * /
+	} */
+
+	protected @NonNull String getThisTransformerName(@NonNull CGFunction cgFunction) {
+		return cgFunction.getVariantResolvedName(getCodeGenerator().getTHIS_TRANSFORMER_NameVariant());
 	}
 
 	private boolean isConnection(CGValuedElement source) {
@@ -3086,7 +3086,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendCommentWithOCL(null, cgFunction.getAst());
 				CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
 				String functionName = getFunctionName(cgFunction);
-				String cachedResultName = cgFunction.getVariantResolvedName(getCodeGenerator().getCACHED_RESULT_NameVariant());
+				String cachedResultName = getCachedResultName(cgFunction);
 				if (cgShadowExp != null) {
 					js.append("protected class ");
 					js.append(functionName);
@@ -3097,15 +3097,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendTypeDeclaration(cgFunction);
 					js.append(" " + cachedResultName + ";\n");
 					js.append("\n");
-					doFunctionConstructor(cgFunction, cgShadowExp, cachedResultName);
+					doFunctionConstructor(cgFunction, cgShadowExp);
 					js.append("\n");
-					doFunctionGetInstance(cgFunction, cachedResultName);
+					doFunctionGetInstance(cgFunction);
 					js.append("\n");
 					doFunctionIsEqual(cgShadowExp, cachedResultName);
 					js.popClassBody(false);
 				}
 				else if (useCache(cgFunction)) {
-					String selfName = cgFunction.getVariantResolvedName(getCodeGenerator().getSELF_NameVariant());
+					String thisTransformerName = getThisTransformerName(cgFunction);
 					CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
 					js.append("protected class ");
 					js.append(functionName);
@@ -3116,7 +3116,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendIsRequired(true);
 					js.append(" ");
 					js.appendClassReference(cgClass);
-					js.append(" " + selfName + ";\n");
+					js.append(" " + thisTransformerName + ";\n");
 					for (@NonNull CGParameter cgParameter : ClassUtil.nullFree(cgFunction.getParameters())) {
 						js.append("protected ");
 						//						js.appendDeclaration(cgParameter);
@@ -3138,9 +3138,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendTypeDeclaration(cgBody != null ? cgBody : cgFunction);
 					js.append(" " + cachedResultName + ";\n");
 					js.append("\n");
-					doFunctionConstructor(cgFunction, cachedResultName);
+					doFunctionConstructor(cgFunction);
 					js.append("\n");
-					doFunctionGetInstance(cgFunction, cachedResultName);
+					doFunctionGetInstance(cgFunction);
 					js.append("\n");
 					doFunctionIsEqual(cgFunction);
 					js.popClassBody(false);
@@ -3235,7 +3235,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")");
 		if (isIdentifiedInstance) {
 			js.append(")");
-			String cachedResultName = cgFunction.getVariantResolvedName(getCodeGenerator().getCACHED_RESULT_NameVariant());
+			String cachedResultName = getCachedResultName(cgFunction);
 			js.append(".");
 			js.append(cachedResultName);
 		}
