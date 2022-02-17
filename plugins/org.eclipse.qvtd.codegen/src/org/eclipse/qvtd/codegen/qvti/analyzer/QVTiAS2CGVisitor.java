@@ -1248,6 +1248,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (asInit == null) {
 			CGRealizedVariable CGRealizedVariable = getBodyBuilder().addRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = context.createExecutorType(ClassUtil.nonNullState(asNewStatement.getType()));
+			getNameManager().declareStandardName(cgExecutorType);
 			CGRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(codeGenerator.getAnalyzer().getTypeId(asNewStatement.getTypeId()));			// FIXME promote
 			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
@@ -1271,6 +1272,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		Property asProperty = element.getReferredProperty();
 		if (asProperty != null) {
 			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asProperty);
+			getNameManager().declareStandardName(cgExecutorProperty);
 			cgRealizedVariablePart.setExecutorProperty(cgExecutorProperty);
 			cgExecutorProperty.setTypeId(codeGenerator.getAnalyzer().getTypeId(asProperty.getTypeId()));			// FIXME promote
 		}
