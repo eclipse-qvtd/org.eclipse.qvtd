@@ -9,7 +9,7 @@
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>
     <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
-    <version>0.28.0-SNAPSHOT</version>
+    <version>0.28.1-SNAPSHOT</version>
   </parent>
   <build>
     <plugins>

@@ -47,7 +47,9 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -202,6 +204,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new NameManager() {
 			@Override
 			public @Nullable String getNameHint(@NonNull Object anObject) {
+				if (anObject instanceof CGSequence) {
+					getClass();		// XXX
+				}
+				if (anObject instanceof CGEcorePropertyAssignment) {
+					getClass();		// XXX
+				}
 				if (anObject instanceof CGValuedElement) {
 					anObject = ((CGValuedElement)anObject).getNamedValue();
 				}
