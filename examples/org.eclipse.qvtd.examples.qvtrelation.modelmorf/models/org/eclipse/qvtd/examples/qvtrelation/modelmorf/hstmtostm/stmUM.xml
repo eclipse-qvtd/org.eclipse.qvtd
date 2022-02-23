@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
+<!--
+    Copyright (c) 2022 Willink Transformations and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v2.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v20.html
+   
+    Contributors:
+        E.D.Willink - initial API and implementation
+ -->
+
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:stmMM_p="stmMM_p">
   <stmMM_p:State xmi:id="c597ec6833546657-212edce7232a5161" name="s7" outTrans="df30581b960321ef-b976f4aeaaf4c004 925e374ba158c409-8c670e08b79f8cc5 8b5e2d58f1dbb0c2-aa85cc6e8540777d e035efbe553692f8-4124f6d3d2b07e88 630accd75fe84243-24fbd35a58e92d65 ac30f85e88688b9-630dafa7fef4a1b7 1e1e19305e4bfce9-38728937feea8895"/>
   <stmMM_p:State xmi:id="a2d16df43a7f0624-3e6c6fc9774cdafb" name="s8" outTrans="69debe406ade59cb-ba069e49cf99195 786de056101c0456-9def8e91ba8f3ce7 98b235baa1f26bdb-cbc879c82198c50 18f63cd03e0ffdf2-ad594ee5dfc60310 9d5ea5a95630ddba-e11a4215c7d9cf28 8ae4d2cf1a1fb5d6-da441af4c9cb51dc" inTrans="1e1e19305e4bfce9-38728937feea8895"/>
