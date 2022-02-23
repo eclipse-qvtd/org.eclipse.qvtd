@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2021 Willink Transformations and others.
+ * Copyright (c) 2015, 2022 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -9,7 +9,7 @@
  *     E.D.Willink - initial API and implementation
  *******************************************************************************
  * This code is 100% auto-generated
- * from: E:\GIT\org.eclipse.qvtd\plugins..\..\plugins\org.eclipse.qvtd.xtext.qvtimperative\src-gen\org\eclipse\qvtd\xtext\qvtimperative\QVTimperative.xtextbin
+ * from: C:\Users\ed\ocl-6-17-0\git\org.eclipse.qvtd\plugins..\..\plugins\org.eclipse.qvtd.xtext.qvtimperative\src-gen\org\eclipse\qvtd\xtext\qvtimperative\QVTimperative.xtextbin
  * by: org.eclipse.ocl.examples.build.xtend.generateGrammar.xtend
  *
  * Do not edit it.
@@ -1345,9 +1345,9 @@ public class QVTimperativeGrammarResource extends AbstractGrammarResource
 					createKeyword("}")));
 			PR_MapLiteralPartCS.setAlternatives(
 				createGroup(
-					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS)),
+					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS)),
 					createKeyword("<-"),
-					createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS))));
+					createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS))));
 			PR_MapTypeCS.setAlternatives(
 				createGroup(
 					createAssignment("name", "=", createKeyword("Map")),

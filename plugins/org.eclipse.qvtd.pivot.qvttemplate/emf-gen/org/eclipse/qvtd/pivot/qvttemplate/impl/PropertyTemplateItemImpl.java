@@ -311,18 +311,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull Property referredProperty_0 = this.getReferredProperty();
 		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
-		/*@NonInvalid*/ @Nullable Property symbol_0;
+		/*@NonInvalid*/ @Nullable Property local_0;
 		if (isOpposite) {
 			final /*@NonInvalid*/ @Nullable Property opposite = referredProperty_0.getOpposite();
-			symbol_0 = opposite;
+			local_0 = opposite;
 		}
 		else {
-			symbol_0 = referredProperty_0;
+			local_0 = referredProperty_0;
 		}
-		if (symbol_0 == null) {
+		if (local_0 == null) {
 			throw new InvalidValueException("Null body for \'qvttemplate::PropertyTemplateItem::resolvedProperty\'");
 		}
-		return symbol_0;
+		return local_0;
 	}
 
 	/**
@@ -359,12 +359,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean local_2;
 			if (le) {
-				symbol_2 = true;
+				local_2 = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+				/*@Caught*/ @NonNull Object CAUGHT_local_1;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer = this.getObjContainer();
@@ -374,9 +374,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer.getReferredClass();
 					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, referredClass, owningClass).booleanValue();
-					/*@Thrown*/ @NonNull Object symbol_1;
+					/*@Thrown*/ @NonNull Object local_1;
 					if (status) {
-						symbol_1 = ValueUtil.TRUE_VALUE;
+						local_1 = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						final /*@NonInvalid*/ @Nullable String name = referredClass.getName();
@@ -392,18 +392,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							safe_name_source = name_1;
 						}
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_0, status);
-						symbol_1 = symbol_0;
+						final /*@Thrown*/ @NonNull TupleValue local_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_0, status);
+						local_1 = local_0;
 					}
-					CAUGHT_symbol_1 = symbol_1;
+					CAUGHT_local_1 = local_1;
 				}
 				catch (Exception e) {
-					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+					CAUGHT_local_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTtemplateTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_local_1, QVTtemplateTables.INT_0).booleanValue();
+				local_2 = logDiagnostic;
 			}
-			return symbol_2;
+			return local_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -451,12 +451,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean local_2;
 			if (le) {
-				symbol_2 = true;
+				local_2 = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+				/*@Caught*/ @NonNull Object CAUGHT_local_1;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_not;
 					try {
@@ -590,9 +590,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 					}
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object symbol_1;
+					/*@Thrown*/ @NonNull Object local_1;
 					if (eq) {
-						symbol_1 = ValueUtil.TRUE_VALUE;
+						local_1 = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						@SuppressWarnings("null")
@@ -624,18 +624,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source_0);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						symbol_1 = symbol_0;
+						final /*@Thrown*/ @NonNull TupleValue local_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						local_1 = local_0;
 					}
-					CAUGHT_symbol_1 = symbol_1;
+					CAUGHT_local_1 = local_1;
 				}
 				catch (Exception e) {
-					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+					CAUGHT_local_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTtemplateTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_local_1, QVTtemplateTables.INT_0).booleanValue();
+				local_2 = logDiagnostic;
 			}
-			return symbol_2;
+			return local_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -686,12 +686,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean local_2;
 			if (le) {
-				symbol_2 = true;
+				local_2 = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+				/*@Caught*/ @NonNull Object CAUGHT_local_1;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and;
 					try {
@@ -874,9 +874,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 					}
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object symbol_1;
+					/*@Thrown*/ @NonNull Object local_1;
 					if (eq) {
-						symbol_1 = ValueUtil.TRUE_VALUE;
+						local_1 = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
@@ -904,18 +904,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@Thrown*/ @Nullable String name_1 = elementType.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_1);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						symbol_1 = symbol_0;
+						final /*@Thrown*/ @NonNull TupleValue local_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						local_1 = local_0;
 					}
-					CAUGHT_symbol_1 = symbol_1;
+					CAUGHT_local_1 = local_1;
 				}
 				catch (Exception e) {
-					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+					CAUGHT_local_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTtemplateTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_local_1, QVTtemplateTables.INT_0).booleanValue();
+				local_2 = logDiagnostic;
 			}
-			return symbol_2;
+			return local_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -968,12 +968,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean local_2;
 			if (le) {
-				symbol_2 = true;
+				local_2 = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+				/*@Caught*/ @NonNull Object CAUGHT_local_1;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and;
 					try {
@@ -1131,9 +1131,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 					}
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object symbol_1;
+					/*@Thrown*/ @NonNull Object local_1;
 					if (eq) {
-						symbol_1 = ValueUtil.TRUE_VALUE;
+						local_1 = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_5 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
@@ -1156,18 +1156,18 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@Thrown*/ @Nullable String name_0 = elementType_0.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						symbol_1 = symbol_0;
+						final /*@Thrown*/ @NonNull TupleValue local_0 = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						local_1 = local_0;
 					}
-					CAUGHT_symbol_1 = symbol_1;
+					CAUGHT_local_1 = local_1;
 				}
 				catch (Exception e) {
-					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+					CAUGHT_local_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTtemplateTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_local_1, QVTtemplateTables.INT_0).booleanValue();
+				local_2 = logDiagnostic;
 			}
-			return symbol_2;
+			return local_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

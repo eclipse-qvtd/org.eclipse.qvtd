@@ -437,42 +437,42 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_3;
+			/*@NonInvalid*/ boolean local_3;
 			if (le) {
-				symbol_3 = true;
+				local_3 = true;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isPrimitive = this.isIsPrimitive();
-				/*@NonInvalid*/ @NonNull IntegerValue symbol_0;
+				/*@NonInvalid*/ @NonNull IntegerValue local_0;
 				if (isPrimitive) {
-					symbol_0 = QVTbaseTables.INT_1;
+					local_0 = QVTbaseTables.INT_1;
 				}
 				else {
-					symbol_0 = QVTbaseTables.INT_0;
+					local_0 = QVTbaseTables.INT_0;
 				}
 				final /*@NonInvalid*/ boolean isThis = this.isIsThis();
-				/*@NonInvalid*/ @NonNull IntegerValue symbol_1;
+				/*@NonInvalid*/ @NonNull IntegerValue local_1;
 				if (isThis) {
-					symbol_1 = QVTbaseTables.INT_1;
+					local_1 = QVTbaseTables.INT_1;
 				}
 				else {
-					symbol_1 = QVTbaseTables.INT_0;
+					local_1 = QVTbaseTables.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(symbol_0, symbol_1);
+				final /*@NonInvalid*/ @NonNull IntegerValue sum = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(local_0, local_1);
 				final /*@NonInvalid*/ boolean isTrace = this.isIsTrace();
-				/*@NonInvalid*/ @NonNull IntegerValue symbol_2;
+				/*@NonInvalid*/ @NonNull IntegerValue local_2;
 				if (isTrace) {
-					symbol_2 = QVTbaseTables.INT_1;
+					local_2 = QVTbaseTables.INT_1;
 				}
 				else {
-					symbol_2 = QVTbaseTables.INT_0;
+					local_2 = QVTbaseTables.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum, symbol_2);
+				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum, local_2);
 				final /*@NonInvalid*/ boolean result = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, sum_0, QVTbaseTables.INT_1).booleanValue();
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
-				symbol_3 = logDiagnostic;
+				local_3 = logDiagnostic;
 			}
-			return symbol_3;
+			return local_3;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

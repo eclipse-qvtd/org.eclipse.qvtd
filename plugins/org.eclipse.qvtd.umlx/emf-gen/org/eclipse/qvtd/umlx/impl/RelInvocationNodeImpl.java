@@ -255,9 +255,9 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_INVOCATION_NODE___VALIDATE_COMPATIBLE_EDGES__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean local_2;
 			if (le) {
-				symbol_2 = true;
+				local_2 = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -329,9 +329,9 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 				}
 				final /*@NonInvalid*/ @NonNull SetValue actualNodes = CollectionAsSetOperation.INSTANCE.evaluate(collect_0);
 				final /*@NonInvalid*/ boolean status = expectedNodes.equals(actualNodes);
-				/*@NonInvalid*/ @NonNull Object symbol_1;
+				/*@NonInvalid*/ @NonNull Object local_1;
 				if (status) {
-					symbol_1 = ValueUtil.TRUE_VALUE;
+					local_1 = ValueUtil.TRUE_VALUE;
 				}
 				else {
 					final /*@NonInvalid*/ @NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(expectedNodes);
@@ -339,13 +339,13 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 					final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(UMLXTables.STR_RelInvocationNode_c_c_CompatibleEdges_32, toString_0);
 					final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, UMLXTables.STR_quot);
 					final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, toString_0);
-					final /*@NonInvalid*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_1, status);
-					symbol_1 = symbol_0;
+					final /*@NonInvalid*/ @NonNull TupleValue local_0 = ValueUtil.createTupleOfEach(UMLXTables.TUPLid_, sum_1, status);
+					local_1 = local_0;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, symbol_1, UMLXTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, local_1, UMLXTables.INT_0).booleanValue();
+				local_2 = logDiagnostic;
 			}
-			return symbol_2;
+			return local_2;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

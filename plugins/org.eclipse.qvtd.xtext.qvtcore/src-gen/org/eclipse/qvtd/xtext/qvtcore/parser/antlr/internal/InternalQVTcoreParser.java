@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 /*******************************************************************************
- * Copyright (c) 2011, 2021 Willink Transformations and others.
+ * Copyright (c) 2011, 2022 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -21369,38 +21369,38 @@ public class InternalQVTcoreParser extends org.eclipse.ocl.xtext.base.utilities.
 
 
     // $ANTLR start "ruleMapLiteralPartCS"
-    // InternalQVTcore.g:7181:1: ruleMapLiteralPartCS returns [EObject current=null] : ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) ) ;
+    // InternalQVTcore.g:7181:1: ruleMapLiteralPartCS returns [EObject current=null] : ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) ) ;
     public final EObject ruleMapLiteralPartCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
-        EObject lv_ownedValue_0_0 = null;
+        EObject lv_ownedKey_0_0 = null;
 
-        EObject lv_ownedKey_2_0 = null;
+        EObject lv_ownedValue_2_0 = null;
 
 
          enterRule();
 
         try {
-            // InternalQVTcore.g:7184:28: ( ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) ) )
-            // InternalQVTcore.g:7185:1: ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) )
+            // InternalQVTcore.g:7184:28: ( ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) ) )
+            // InternalQVTcore.g:7185:1: ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) )
             {
-            // InternalQVTcore.g:7185:1: ( ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) ) )
-            // InternalQVTcore.g:7185:2: ( (lv_ownedValue_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedKey_2_0= ruleExpCS ) )
+            // InternalQVTcore.g:7185:1: ( ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) ) )
+            // InternalQVTcore.g:7185:2: ( (lv_ownedKey_0_0= ruleExpCS ) ) otherlv_1= '<-' ( (lv_ownedValue_2_0= ruleExpCS ) )
             {
-            // InternalQVTcore.g:7185:2: ( (lv_ownedValue_0_0= ruleExpCS ) )
-            // InternalQVTcore.g:7186:1: (lv_ownedValue_0_0= ruleExpCS )
+            // InternalQVTcore.g:7185:2: ( (lv_ownedKey_0_0= ruleExpCS ) )
+            // InternalQVTcore.g:7186:1: (lv_ownedKey_0_0= ruleExpCS )
             {
-            // InternalQVTcore.g:7186:1: (lv_ownedValue_0_0= ruleExpCS )
-            // InternalQVTcore.g:7187:3: lv_ownedValue_0_0= ruleExpCS
+            // InternalQVTcore.g:7186:1: (lv_ownedKey_0_0= ruleExpCS )
+            // InternalQVTcore.g:7187:3: lv_ownedKey_0_0= ruleExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_0_0());
+              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_111);
-            lv_ownedValue_0_0=ruleExpCS();
+            lv_ownedKey_0_0=ruleExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -21411,8 +21411,8 @@ public class InternalQVTcoreParser extends org.eclipse.ocl.xtext.base.utilities.
               	        }
                      		set(
                      			current,
-                     			"ownedValue",
-                      		lv_ownedValue_0_0,
+                     			"ownedKey",
+                      		lv_ownedKey_0_0,
                       		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
               	        afterParserOrEnumRuleCall();
 
@@ -21429,19 +21429,19 @@ public class InternalQVTcoreParser extends org.eclipse.ocl.xtext.base.utilities.
                   	newLeafNode(otherlv_1, grammarAccess.getMapLiteralPartCSAccess().getLessThanSignHyphenMinusKeyword_1());
 
             }
-            // InternalQVTcore.g:7207:1: ( (lv_ownedKey_2_0= ruleExpCS ) )
-            // InternalQVTcore.g:7208:1: (lv_ownedKey_2_0= ruleExpCS )
+            // InternalQVTcore.g:7207:1: ( (lv_ownedValue_2_0= ruleExpCS ) )
+            // InternalQVTcore.g:7208:1: (lv_ownedValue_2_0= ruleExpCS )
             {
-            // InternalQVTcore.g:7208:1: (lv_ownedKey_2_0= ruleExpCS )
-            // InternalQVTcore.g:7209:3: lv_ownedKey_2_0= ruleExpCS
+            // InternalQVTcore.g:7208:1: (lv_ownedValue_2_0= ruleExpCS )
+            // InternalQVTcore.g:7209:3: lv_ownedValue_2_0= ruleExpCS
             {
             if ( state.backtracking==0 ) {
 
-              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_2_0());
+              	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0());
 
             }
             pushFollow(FollowSets000.FOLLOW_2);
-            lv_ownedKey_2_0=ruleExpCS();
+            lv_ownedValue_2_0=ruleExpCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -21452,8 +21452,8 @@ public class InternalQVTcoreParser extends org.eclipse.ocl.xtext.base.utilities.
               	        }
                      		set(
                      			current,
-                     			"ownedKey",
-                      		lv_ownedKey_2_0,
+                     			"ownedValue",
+                      		lv_ownedValue_2_0,
                       		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
               	        afterParserOrEnumRuleCall();
 

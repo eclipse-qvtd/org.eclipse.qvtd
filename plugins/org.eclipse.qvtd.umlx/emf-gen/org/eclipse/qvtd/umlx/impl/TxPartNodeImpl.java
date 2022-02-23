@@ -269,9 +269,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.TX_PART_NODE___VALIDATE_PART_IS_PROPERTY_OF_KEY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean local_1;
 			if (le) {
-				symbol_1 = true;
+				local_1 = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -296,12 +296,12 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-							final /*@NonInvalid*/ @Nullable EClass symbol_0 = (EClass)_1;
-							if (symbol_0 == null) {
+							final /*@NonInvalid*/ @Nullable EClass local_0 = (EClass)_1;
+							if (local_0 == null) {
 								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 							}
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_0.getESuperTypes();
+							final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = local_0.getESuperTypes();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 							return BOXED_eSuperTypes;
 						}
@@ -319,9 +319,9 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				local_1 = logDiagnostic;
 			}
-			return symbol_1;
+			return local_1;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
