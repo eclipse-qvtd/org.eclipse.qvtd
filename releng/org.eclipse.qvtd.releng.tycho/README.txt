@@ -79,16 +79,16 @@ ssh genie.qvtd@projects-storage.eclipse.org rm -rf  /home/data/httpd/download.ec
 -- Updates maintenance -- https://download.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org pwd ; cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; pwd ; ls -la
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases/0.14.0
 
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/nightly/0.20.0
 
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/interim ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/interim ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/interim/0.20.0
 
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.20.0
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0
 
 
@@ -100,6 +100,6 @@ ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse
 ssh genie.qvtd@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
 ssh genie.qvtd@projects-storage.eclipse.org rm -rf /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases/zz*
 
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=0.14.0
 ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvtd/updates/releases ; mv 0.14.0 /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases
-ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.14.0
+ssh genie.qvtd@projects-storage.eclipse.org cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/updates/releases ; export JAVA_HOME=/shared/common/jdk1.8.0_x64-latest ; java -version ; /shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.14.0
