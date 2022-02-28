@@ -116,9 +116,6 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		LocalContext localContext = globalContext.getLocalContext(cgMappingCallBinding);
 		if (localContext != null) {
 			String name = cgMappingCallBinding.getName();
-			if ("root".equals(name)) {
-				getClass();		// XXX
-			}
 			cgMappingCallBinding.setValueName(localContext.getNameManagerContext().getSymbolName(cgMappingCallBinding, name));
 		}
 		return null;
