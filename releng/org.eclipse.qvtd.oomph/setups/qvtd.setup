@@ -56,7 +56,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2021-12"
+      defaultValue="2022-03"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
@@ -651,6 +651,14 @@
           value="master"/>
     </stream>
     <stream
+        name="0.28.1"
+        label="0.28.1 (2022-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.17.1"/>
+    </stream>
+    <stream
         name="0.28.0"
         label="0.28.0 (2021-12)">
       <setupTask
@@ -903,6 +911,14 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.28.1"
+        label="0.28.1 (2022-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.17.1"/>
     </stream>
     <stream
         name="0.28.0"
@@ -1181,6 +1197,14 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.28.1"
+        label="0.28.1 (2022-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.17.1"/>
     </stream>
     <stream
         name="0.28.0"
