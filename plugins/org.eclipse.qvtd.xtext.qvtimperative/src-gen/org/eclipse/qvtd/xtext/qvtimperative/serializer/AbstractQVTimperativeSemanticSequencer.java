@@ -580,12 +580,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	}
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AddStatementCS returns AddStatementCS
 	 *     ControlStatementCS returns AddStatementCS
 	 *
 	 * Constraint:
 	 *     ((observedProperties+=PathNameCS observedProperties+=PathNameCS*)? targetVariable=[ConnectionVariable|UnrestrictedName] ownedExpression=ExpCS)
+	 * </pre>
 	 */
 	protected void sequence_AddStatementCS(ISerializationContext context, AddStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -593,12 +595,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AppendParameterBindingCS returns AppendParameterBindingCS
 	 *     MappingParameterBindingCS returns AppendParameterBindingCS
 	 *
 	 * Constraint:
 	 *     (referredVariable=[AppendParameter|UnrestrictedName] value=[ConnectionVariable|UnrestrictedName])
+	 * </pre>
 	 */
 	protected void sequence_AppendParameterBindingCS(ISerializationContext context, AppendParameterBindingCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -615,12 +619,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AppendParameterCS returns AppendParameterCS
 	 *     MappingParameterCS returns AppendParameterCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_AppendParameterCS(ISerializationContext context, AppendParameterCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -637,12 +643,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BufferStatementCS returns BufferStatementCS
 	 *     GuardStatementCS returns BufferStatementCS
 	 *
 	 * Constraint:
 	 *     (isStrict?='strict'? (firstPass=LOWER lastPass=LOWER?)? name=UnrestrictedName ownedType=TypeExpCS? ownedExpression=ExpCS?)
+	 * </pre>
 	 */
 	protected void sequence_BufferStatementCS(ISerializationContext context, BufferStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -650,12 +658,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CheckStatementCS returns CheckStatementCS
 	 *     GuardStatementCS returns CheckStatementCS
 	 *
 	 * Constraint:
 	 *     ((observedProperties+=PathNameCS observedProperties+=PathNameCS*)? ownedCondition=ExpCS)
+	 * </pre>
 	 */
 	protected void sequence_CheckStatementCS(ISerializationContext context, CheckStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -663,6 +673,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DeclareStatementCS returns DeclareStatementCS
 	 *     GuardStatementCS returns DeclareStatementCS
@@ -675,6 +686,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedType=TypeExpCS?
 	 *         ownedExpression=ExpCS
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_DeclareStatementCS(ISerializationContext context, DeclareStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -682,11 +694,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
 	 *     (name=Identifier? (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)?)
+	 * </pre>
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -694,6 +708,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EntryPointCS returns EntryPointCS
 	 *
@@ -709,6 +724,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedStatements+=CommitStatementCS*
 	 *         ownedStatements+=ControlStatementCS*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_EntryPointCS(ISerializationContext context, EntryPointCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -716,12 +732,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardParameterBindingCS returns GuardParameterBindingCS
 	 *     MappingParameterBindingCS returns GuardParameterBindingCS
 	 *
 	 * Constraint:
 	 *     (isCheck?='check'? referredVariable=[GuardParameter|UnrestrictedName] value=[ConnectionVariable|UnrestrictedName])
+	 * </pre>
 	 */
 	protected void sequence_GuardParameterBindingCS(ISerializationContext context, GuardParameterBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -729,12 +747,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardParameterCS returns GuardParameterCS
 	 *     MappingParameterCS returns GuardParameterCS
 	 *
 	 * Constraint:
 	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS successProperty=[Property|UnrestrictedName]?)
+	 * </pre>
 	 */
 	protected void sequence_GuardParameterCS(ISerializationContext context, GuardParameterCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -742,11 +762,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ImportCS returns ImportCS
 	 *
 	 * Constraint:
 	 *     (name=Identifier? ownedPathName=URIPathNameCS isAll?='::'?)
+	 * </pre>
 	 */
 	protected void sequence_ImportCS(ISerializationContext context, ImportCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -754,12 +776,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LoopParameterBindingCS returns LoopParameterBindingCS
 	 *     MappingParameterBindingCS returns LoopParameterBindingCS
 	 *
 	 * Constraint:
 	 *     (isCheck?='check'? referredVariable=[GuardParameter|UnrestrictedName] value=[LoopVariable|UnrestrictedName])
+	 * </pre>
 	 */
 	protected void sequence_LoopParameterBindingCS(ISerializationContext context, LoopParameterBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -767,6 +791,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MappingCS returns MappingCS
 	 *
@@ -780,6 +805,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedStatements+=CommitStatementCS*
 	 *         ownedStatements+=ControlStatementCS*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_MappingCS(ISerializationContext context, MappingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -787,12 +813,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ControlStatementCS returns MappingCallCS
 	 *     MappingCallCS returns MappingCallCS
 	 *
 	 * Constraint:
 	 *     ((isInstall?='install' | isInvoke?='invoke')? ownedPathName=PathNameCS ownedBindings+=MappingParameterBindingCS*)
+	 * </pre>
 	 */
 	protected void sequence_MappingCallCS(ISerializationContext context, MappingCallCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -800,11 +828,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MappingIteratorCS returns VariableCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS?)
+	 * </pre>
 	 */
 	protected void sequence_MappingIteratorCS(ISerializationContext context, VariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -812,6 +842,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ControlStatementCS returns MappingLoopCS
 	 *     MappingLoopCS returns MappingLoopCS
@@ -823,6 +854,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedInExpression=ExpCS
 	 *         ownedMappingStatements+=ControlStatementCS+
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_MappingLoopCS(ISerializationContext context, MappingLoopCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -830,6 +862,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CommitStatementCS returns NewStatementCS
 	 *     NewStatementCS returns NewStatementCS
@@ -843,6 +876,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedType=TypeExpCS
 	 *         ownedExpression=ExpCS?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NewStatementCS(ISerializationContext context, NewStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -850,11 +884,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParamDeclarationCS returns ParamDeclarationCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_ParamDeclarationCS(ISerializationContext context, ParamDeclarationCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -871,6 +907,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QualifiedPackageCS returns QualifiedPackageCS
 	 *
@@ -882,6 +919,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         nsURI=URI?
 	 *         (ownedPackages+=QualifiedPackageCS | ownedClasses+=ClassCS | ownedClasses+=TransformationCS)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_QualifiedPackageCS(ISerializationContext context, QualifiedPackageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -889,6 +927,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QueryCS returns QueryCS
 	 *
@@ -900,6 +939,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedType=TypeExpCS
 	 *         (ownedExpression=ExpCS | implementation=[JavaClassCS|SINGLE_QUOTED_STRING])?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_QueryCS(ISerializationContext context, QueryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -907,11 +947,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ScopeNameCS returns PathNameCS
 	 *
 	 * Constraint:
 	 *     (ownedPathElements+=FirstPathElementCS ownedPathElements+=NextPathElementCS*)
+	 * </pre>
 	 */
 	protected void sequence_ScopeNameCS(ISerializationContext context, PathNameCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -919,6 +961,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CommitStatementCS returns SetStatementCS
 	 *     SetStatementCS returns SetStatementCS
@@ -932,6 +975,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         isPartial?='+='?
 	 *         ownedExpression=ExpCS
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_SetStatementCS(ISerializationContext context, SetStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -939,12 +983,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MappingParameterBindingCS returns SimpleParameterBindingCS
 	 *     SimpleParameterBindingCS returns SimpleParameterBindingCS
 	 *
 	 * Constraint:
 	 *     (isCheck?='check'? referredVariable=[SimpleParameter|UnrestrictedName] ownedValue=ExpCS)
+	 * </pre>
 	 */
 	protected void sequence_SimpleParameterBindingCS(ISerializationContext context, SimpleParameterBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -952,12 +998,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MappingParameterCS returns SimpleParameterCS
 	 *     SimpleParameterCS returns SimpleParameterCS
 	 *
 	 * Constraint:
 	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_SimpleParameterCS(ISerializationContext context, SimpleParameterCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -977,12 +1025,14 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardStatementCS returns SpeculateStatementCS
 	 *     SpeculateStatementCS returns SpeculateStatementCS
 	 *
 	 * Constraint:
 	 *     (ownedConditions+=ExpCS ownedConditions+=ExpCS*)
+	 * </pre>
 	 */
 	protected void sequence_SpeculateStatementCS(ISerializationContext context, SpeculateStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -990,11 +1040,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelCS returns TopLevelCS
 	 *
 	 * Constraint:
 	 *     (ownedImports+=ImportCS+ | (ownedImports+=ImportCS+ (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS)+))?
+	 * </pre>
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1002,6 +1054,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TransformationCS returns TransformationCS
 	 *
@@ -1013,6 +1066,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedDirections+=DirectionCS*
 	 *         (ownedMappings+=EntryPointCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

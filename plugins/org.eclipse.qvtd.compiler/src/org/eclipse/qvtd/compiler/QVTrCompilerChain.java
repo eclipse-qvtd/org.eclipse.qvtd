@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2019 Willink Transformations and others.
+ * Copyright (c) 2015, 2022 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -94,7 +94,9 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
 			ASResource qvtrResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
+			boolean wasUpdating = qvtrResource.setUpdating(true);
 			qvtrResource.setURI(getURI());
+			qvtrResource.setUpdating(wasUpdating);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
 			if (missingOperationCallSources != null) {

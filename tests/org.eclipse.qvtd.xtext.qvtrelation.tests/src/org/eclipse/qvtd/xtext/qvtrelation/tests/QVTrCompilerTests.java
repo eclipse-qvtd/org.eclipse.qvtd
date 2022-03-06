@@ -824,10 +824,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			ASResource asResource = (ASResource) pivotModel.eResource();
-			asResource.setURI(asURI2a);
 			asResource.setSaveable(true);
+			asResource.setURI(asURI2a);
 			assertNoResourceErrors("Ecore2AS failed", asResource);
-			asResource.save(XMIUtil.createSaveOptions());
+			asResource.save(XMIUtil.createSaveOptions(asResource));
 			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
 		}
 		finally {
@@ -911,10 +911,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			ASResource asResource = (ASResource) pivotModel.eResource();
-			asResource.setURI(asURI2a);
 			asResource.setSaveable(true);
+			asResource.setURI(asURI2a);
 			assertNoResourceErrors("Ecore2AS failed", asResource);
-			asResource.save(XMIUtil.createSaveOptions());
+			asResource.save(XMIUtil.createSaveOptions(asResource));
 			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
 		}
 		finally {

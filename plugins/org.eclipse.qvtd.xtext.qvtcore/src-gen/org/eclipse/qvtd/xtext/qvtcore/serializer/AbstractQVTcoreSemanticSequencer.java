@@ -547,6 +547,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	}
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BottomPatternCS returns BottomPatternCS
 	 *
@@ -565,6 +566,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         ) |
 	 *         ownedConstraints+=PredicateOrAssignmentCS+
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_BottomPatternCS(ISerializationContext context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -572,6 +574,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DirectionCS returns DirectionCS
 	 *
@@ -582,6 +585,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         imports+=[Package|UnrestrictedName]*
 	 *         (uses+=[TypedModel|UnrestrictedName] uses+=[TypedModel|UnrestrictedName]*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -589,6 +593,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardPatternCS returns GuardPatternCS
 	 *
@@ -598,6 +603,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         (ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*) |
 	 *         ownedPredicates+=PredicateCS+
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_GuardPatternCS(ISerializationContext context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -605,11 +611,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardVariableCS returns UnrealizedVariableCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_GuardVariableCS(ISerializationContext context, UnrealizedVariableCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -626,11 +634,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ImportCS returns ImportCS
 	 *
 	 * Constraint:
 	 *     (name=Identifier? ownedPathName=URIPathNameCS isAll?='::'?)
+	 * </pre>
 	 */
 	protected void sequence_ImportCS(ISerializationContext context, ImportCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -638,6 +648,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MappingCS returns MappingCS
 	 *
@@ -651,6 +662,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         ownedMiddle=UnnamedDomainCS?
 	 *         ownedComposedMappings+=MappingCS*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_MappingCS(ISerializationContext context, MappingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -658,6 +670,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedDomainCS returns DomainCS
 	 *
@@ -669,6 +682,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         ownedGuardPattern=GuardPatternCS
 	 *         ownedBottomPattern=BottomPatternCS
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NamedDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -676,11 +690,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParamDeclarationCS returns ParamDeclarationCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_ParamDeclarationCS(ISerializationContext context, ParamDeclarationCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -697,11 +713,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PredicateCS returns PredicateCS
 	 *
 	 * Constraint:
 	 *     ownedCondition=ExpCS
+	 * </pre>
 	 */
 	protected void sequence_PredicateCS(ISerializationContext context, PredicateCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -715,11 +733,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PredicateOrAssignmentCS returns PredicateOrAssignmentCS
 	 *
 	 * Constraint:
 	 *     (isDefault?='default'? ownedTarget=ExpCS (isPartial?='+='? ownedInitExpression=ExpCS)?)
+	 * </pre>
 	 */
 	protected void sequence_PredicateOrAssignmentCS(ISerializationContext context, PredicateOrAssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -727,6 +747,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QualifiedPackageCS returns QualifiedPackageCS
 	 *
@@ -738,6 +759,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         nsURI=URI?
 	 *         (ownedPackages+=QualifiedPackageCS | ownedClasses+=ClassCS | ownedClasses+=TransformationCS)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_QualifiedPackageCS(ISerializationContext context, QualifiedPackageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -745,6 +767,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QueryCS returns QueryCS
 	 *
@@ -757,6 +780,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *         ownedType=TypeExpCS
 	 *         (ownedExpression=ExpCS | implementation=[JavaClassCS|SINGLE_QUOTED_STRING])?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_QueryCS(ISerializationContext context, QueryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -764,11 +788,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RealizedVariableCS returns RealizedVariableCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 * </pre>
 	 */
 	protected void sequence_RealizedVariableCS(ISerializationContext context, RealizedVariableCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -785,11 +811,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ScopeNameCS returns PathNameCS
 	 *
 	 * Constraint:
 	 *     (ownedPathElements+=FirstPathElementCS ownedPathElements+=NextPathElementCS*)
+	 * </pre>
 	 */
 	protected void sequence_ScopeNameCS(ISerializationContext context, PathNameCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -797,6 +825,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelCS returns TopLevelCS
 	 *
@@ -808,6 +837,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 	 *             (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+
 	 *         )
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -815,11 +845,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TransformationCS returns TransformationCS
 	 *
 	 * Constraint:
 	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedDirections+=DirectionCS* ownedTargets+=TargetCS* ownedProperties+=StructuralFeatureCS*)
+	 * </pre>
 	 */
 	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -827,11 +859,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnnamedDomainCS returns DomainCS
 	 *
 	 * Constraint:
 	 *     (ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS)
+	 * </pre>
 	 */
 	protected void sequence_UnnamedDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -848,11 +882,13 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnrealizedVariableCS returns UnrealizedVariableCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS? ownedInitExpression=ExpCS?)
+	 * </pre>
 	 */
 	protected void sequence_UnrealizedVariableCS(ISerializationContext context, UnrealizedVariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

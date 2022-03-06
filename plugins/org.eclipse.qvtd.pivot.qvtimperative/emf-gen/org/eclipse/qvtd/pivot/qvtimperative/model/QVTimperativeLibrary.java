@@ -108,6 +108,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			Contents contents = new Contents("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary");
 			String asURI = STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 			oclstdlib = INSTANCE = new ReadOnly(asURI, contents.getModel());
+			oclstdlib.setSaveable(false);
 		}
 		return oclstdlib;
 	}
@@ -185,7 +186,6 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	{
 		protected ReadOnly(@NonNull String asURI, @NonNull Model libraryModel) {
 			super(asURI, libraryModel);
-			setSaveable(false);
 		}
 
 		/**

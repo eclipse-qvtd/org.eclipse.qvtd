@@ -463,6 +463,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	}
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AttributeCS returns AttributeCS
 	 *     StructuralFeatureCS returns AttributeCS
@@ -494,6 +495,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         ownedDefaultExpressions+=SpecificationCS?
 	 *         (ownedDefaultExpressions+=SpecificationCS? ownedDefaultExpressions+=SpecificationCS?)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_AttributeCS(ISerializationContext context, AttributeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -501,6 +503,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypedMultiplicityRefCS returns CollectionTypeCS
 	 *
@@ -510,6 +513,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         (ownedType=TypeExpWithoutMultiplicityCS ownedCollectionMultiplicity=MultiplicityCS?)?
 	 *         ownedMultiplicity=MultiplicityCS?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_CollectionTypeCS_TypedMultiplicityRefCS(ISerializationContext context, CollectionTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -517,11 +521,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CompoundTargetElementCS returns CompoundTargetElementCS
 	 *
 	 * Constraint:
 	 *     ownedTargetElements+=SimpleTargetElementCS+
+	 * </pre>
 	 */
 	protected void sequence_CompoundTargetElementCS(ISerializationContext context, CompoundTargetElementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -529,6 +535,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassCS returns DataTypeCS
 	 *     DataTypeCS returns DataTypeCS
@@ -541,6 +548,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         instanceClassName=SINGLE_QUOTED_STRING?
 	 *         isSerializable?='serializable'?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_DataTypeCS(ISerializationContext context, DataTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -548,6 +556,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassCS returns EnumerationCS
 	 *     EnumerationCS returns EnumerationCS
@@ -560,6 +569,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         isSerializable?='serializable'?
 	 *         ownedLiterals+=EnumerationLiteralCS*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_EnumerationCS(ISerializationContext context, EnumerationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -567,11 +577,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EnumerationLiteralCS returns EnumerationLiteralCS
 	 *
 	 * Constraint:
 	 *     ((name=UnrestrictedName | name=EnumerationLiteralName) value=SIGNED?)
+	 * </pre>
 	 */
 	protected void sequence_EnumerationLiteralCS(ISerializationContext context, EnumerationLiteralCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -579,11 +591,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypedMultiplicityRefCS returns MapTypeCS
 	 *
 	 * Constraint:
 	 *     (name='Map' (ownedKeyType=TypeExpCS ownedValueType=TypeExpCS)? ownedMultiplicity=MultiplicityCS?)
+	 * </pre>
 	 */
 	protected void sequence_MapTypeCS_TypedMultiplicityRefCS(ISerializationContext context, MapTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -591,6 +605,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OperationCS returns OperationCS
 	 *
@@ -612,6 +627,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         )*
 	 *         ownedBodyExpressions+=SpecificationCS*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_OperationCS(ISerializationContext context, OperationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -619,6 +635,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParameterCS returns ParameterCS
 	 *
@@ -628,6 +645,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         ownedType=TypedMultiplicityRefCS?
 	 *         (qualifiers+='ordered' | qualifiers+='!ordered' | qualifiers+='unique' | qualifiers+='!unique')*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParameterCS(ISerializationContext context, ParameterCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -635,11 +653,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypedMultiplicityRefCS returns PrimitiveTypeRefCS
 	 *
 	 * Constraint:
 	 *     (name=PrimitiveTypeIdentifier ownedMultiplicity=MultiplicityCS?)
+	 * </pre>
 	 */
 	protected void sequence_PrimitiveTypeCS_TypedMultiplicityRefCS(ISerializationContext context, PrimitiveTypeRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -647,6 +667,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ReferenceCS returns ReferenceCS
 	 *     StructuralFeatureCS returns ReferenceCS
@@ -681,6 +702,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         ownedDefaultExpressions+=SpecificationCS?
 	 *         (ownedDefaultExpressions+=SpecificationCS? ownedDefaultExpressions+=SpecificationCS?)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ReferenceCS(ISerializationContext context, ReferenceCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -688,6 +710,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleTargetElementCS returns SimpleTargetElementCS
 	 *
@@ -697,6 +720,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         typedModel=[TypedModel|UnrestrictedName]
 	 *         (iterates+=[TypedModel|UnrestrictedName] | (iterates+=[TypedModel|UnrestrictedName] iterates+=[TypedModel|UnrestrictedName]*))?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_SimpleTargetElementCS(ISerializationContext context, SimpleTargetElementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -704,11 +728,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SpecificationCS returns ExpSpecificationCS
 	 *
 	 * Constraint:
 	 *     (ownedExpression=ExpCS | exprString=UNQUOTED_STRING)
+	 * </pre>
 	 */
 	protected void sequence_SpecificationCS(ISerializationContext context, ExpSpecificationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -716,6 +742,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassCS returns StructuredClassCS
 	 *     StructuredClassCS returns StructuredClassCS
@@ -730,6 +757,7 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 	 *         isInterface?='interface'?
 	 *         (ownedOperations+=OperationCS | ownedProperties+=StructuralFeatureCS)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_StructuredClassCS(ISerializationContext context, StructuredClassCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -737,11 +765,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TargetCS returns TargetCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName (ownedTargetElements+=SimpleTargetElementCS | ownedTargetElements+=CompoundTargetElementCS)*)
+	 * </pre>
 	 */
 	protected void sequence_TargetCS(ISerializationContext context, TargetCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -749,11 +779,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypedMultiplicityRefCS returns TupleTypeCS
 	 *
 	 * Constraint:
 	 *     (name='Tuple' (ownedParts+=TuplePartCS ownedParts+=TuplePartCS*)? ownedMultiplicity=MultiplicityCS?)
+	 * </pre>
 	 */
 	protected void sequence_TupleTypeCS_TypedMultiplicityRefCS(ISerializationContext context, TupleTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -761,11 +793,13 @@ public abstract class AbstractQVTbaseSemanticSequencer extends EssentialOCLSeman
 
 
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypedMultiplicityRefCS returns TypedTypeRefCS
 	 *
 	 * Constraint:
 	 *     (ownedPathName=PathNameCS ownedBinding=TemplateBindingCS? ownedMultiplicity=MultiplicityCS?)
+	 * </pre>
 	 */
 	protected void sequence_TypedMultiplicityRefCS_TypedTypeRefCS(ISerializationContext context, TypedTypeRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

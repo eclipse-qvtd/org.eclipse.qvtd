@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2019 Willink Transformations and others.
+ * Copyright (c) 2012, 2022 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -63,15 +63,15 @@ public abstract class LoadTestCase extends XtextTestCase
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
-		Resource pivotResource = xtextResource.getASResource();
+		ASResource pivotResource = xtextResource.getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
 		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 		saveAsXMI(xtextResource, cstURI);
-		pivotResource.setURI(pivotURI);
 		assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
-		((ASResource)pivotResource).setSaveable(true);
+		pivotResource.setSaveable(true);
+		pivotResource.setURI(pivotURI);
 		pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		return pivotResource;
 	}

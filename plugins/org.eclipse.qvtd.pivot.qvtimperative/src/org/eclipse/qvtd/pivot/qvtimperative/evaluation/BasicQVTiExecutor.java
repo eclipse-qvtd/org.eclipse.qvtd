@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2021 Willink Transformations and others.
+ * Copyright (c) 2015, 2022 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -1101,10 +1101,10 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	public void saveTransformation(URI saveURI, Map<?,?> options) throws IOException {
 		XMLResource resource = (XMLResource) transformation.eResource();
 		//    	new AS2ID().assignIds(resource.getResourceSet());
+		((ASResource)resource).setSaveable(true);
 		if (saveURI != null) {
 			resource.setURI(saveURI);
 		}
-		((ASResource)resource).setSaveable(true);
 		resource.save(options);
 	}
 
