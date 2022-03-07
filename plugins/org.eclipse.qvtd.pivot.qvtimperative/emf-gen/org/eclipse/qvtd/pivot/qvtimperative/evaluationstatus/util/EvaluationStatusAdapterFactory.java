@@ -81,43 +81,43 @@ public class EvaluationStatusAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected EvaluationStatusSwitch<@Nullable Adapter> modelSwitch =
 			new EvaluationStatusSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseAssociationStatus(AssociationStatus object) {
-			return createAssociationStatusAdapter();
-		}
-		@Override
-		public Adapter caseAttributeStatus(AttributeStatus object) {
-			return createAttributeStatusAdapter();
-		}
-		@Override
-		public Adapter caseClassStatus(ClassStatus object) {
-			return createClassStatusAdapter();
-		}
-		@Override
-		public Adapter caseElementStatus(ElementStatus object) {
-			return createElementStatusAdapter();
-		}
-		@Override
-		public Adapter caseEvaluationElement(EvaluationElement object) {
-			return createEvaluationElementAdapter();
-		}
-		@Override
-		public Adapter caseMappingStatus(MappingStatus object) {
-			return createMappingStatusAdapter();
-		}
-		@Override
-		public Adapter casePropertyStatus(PropertyStatus object) {
-			return createPropertyStatusAdapter();
-		}
-		@Override
-		public Adapter caseTransformationStatus(TransformationStatus object) {
-			return createTransformationStatusAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseAssociationStatus(AssociationStatus object) {
+				return createAssociationStatusAdapter();
+			}
+			@Override
+			public Adapter caseAttributeStatus(AttributeStatus object) {
+				return createAttributeStatusAdapter();
+			}
+			@Override
+			public Adapter caseClassStatus(ClassStatus object) {
+				return createClassStatusAdapter();
+			}
+			@Override
+			public Adapter caseElementStatus(ElementStatus object) {
+				return createElementStatusAdapter();
+			}
+			@Override
+			public Adapter caseEvaluationElement(EvaluationElement object) {
+				return createEvaluationElementAdapter();
+			}
+			@Override
+			public Adapter caseMappingStatus(MappingStatus object) {
+				return createMappingStatusAdapter();
+			}
+			@Override
+			public Adapter casePropertyStatus(PropertyStatus object) {
+				return createPropertyStatusAdapter();
+			}
+			@Override
+			public Adapter caseTransformationStatus(TransformationStatus object) {
+				return createTransformationStatusAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
