@@ -8,43 +8,25 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.codegen.qvti.analyzer;
+package org.eclipse.qvtd.codegen.qvticgmodel.utilities;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelBoxingAnalysisVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
@@ -53,28 +35,18 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<@Nullable Object>
+public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingAnalysisVisitor
 {
-	public QVTiBoxingAnalyzer(@NonNull QVTiAnalyzer analyzer) {
+	public QVTiCGModelBoxingAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
 		super(analyzer);
 	}
 
 	@Override
-	protected CGValuedElement rewriteAsCast(@NonNull CGVariableExp cgChild) {
-		if (cgChild.eContainer() instanceof CGMappingCallBinding) {
+	protected CGValuedElement rewriteAsCast(@Nullable CGValuedElement/*CGVariableExp*/ cgChild) {
+		if ((cgChild != null) && (cgChild.eContainer() instanceof CGMappingCallBinding)) {
 			return cgChild;
 		}
 		return super.rewriteAsCast(cgChild);
-	}
-
-	@Override
-	public @Nullable Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
-		return visitCGGuardVariable(object);
 	}
 
 	@Override
@@ -86,7 +58,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		if (isRequired) {
 			rewriteAsGuarded(cgEcoreContainerAssignment.getOwnedSlotValue(), false, "value for " + cgEcoreContainerAssignment.getReferredProperty() + " assignment");
 		}
-		return visitCGPropertyAssignment(cgEcoreContainerAssignment);
+		return super.visitCGEcoreContainerAssignment(cgEcoreContainerAssignment);
 	}
 
 	@Override
@@ -101,13 +73,13 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 				rewriteAsGuarded(cgInit, false, "value for " + cgEcorePropertyAssignment.getReferredProperty() + " assignment");
 			}
 		}
-		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
+		return super.visitCGEcorePropertyAssignment(cgEcorePropertyAssignment);
 	}
 
 	@Override
 	public @Nullable Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgEcoreRealizedVariable) {
 		rewriteAsAssertNonNulled(cgEcoreRealizedVariable);
-		return visitCGRealizedVariable(cgEcoreRealizedVariable);
+		return super.visitCGEcoreRealizedVariable(cgEcoreRealizedVariable);
 	}
 
 	@Override
@@ -118,34 +90,17 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		return null;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
-		visitCGOperationCallExp(cgFunctionCallExp);
+		super.visitCGFunctionCallExp(cgFunctionCallExp);
+		/ *	int i = 0;
 		for (CGValuedElement cgArgument : cgFunctionCallExp.getArguments()) {
-			rewriteAsUnboxed(cgArgument);
-		}
+			if (i++ > 0) {			// Skip source
+				rewriteAsUnboxed(cgArgument);
+			}
+		} * /
 		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
-		return visitCGParameter(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
-		return visitCGParameter(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
-		return visitCGNamedElement(cgMapping);
-	}
-
-	@Override
-	public @Nullable Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
-		return visitCGValuedElement(cgMappingCall);
-	}
+	} */
 
 	@Override
 	public @Nullable Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
@@ -153,7 +108,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		MappingParameter boundVariable = mappingParameterBinding.getBoundVariable();
 		assert boundVariable != null;
 		if (mappingParameterBinding instanceof AppendParameterBinding) {
-			return visitCGValuedElement(cgMappingCallBinding);
+			return super.visitCGMappingCallBinding(cgMappingCallBinding);
 		}
 		else if (mappingParameterBinding instanceof GuardParameterBinding) {
 			//			if (cgMappingCallBinding.isRequired()) {
@@ -162,7 +117,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 			//			else {
 			//				rewriteAsUnboxed(cgMappingCallBinding.getValue());
 			//			}
-			return visitCGValuedElement(cgMappingCallBinding);
+			return super.visitCGMappingCallBinding(cgMappingCallBinding);
 		}
 		else if (mappingParameterBinding instanceof LoopParameterBinding) {
 			//			if (cgMappingCallBinding.isRequired()) {
@@ -171,7 +126,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 			//			else {
 			//				rewriteAsUnboxed(cgMappingCallBinding.getValue());
 			//			}
-			return visitCGValuedElement(cgMappingCallBinding);
+			return super.visitCGMappingCallBinding(cgMappingCallBinding);
 		}
 		else if (mappingParameterBinding instanceof SimpleParameterBinding) {
 			if (cgMappingCallBinding.isRequired()) {
@@ -180,7 +135,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 			else {
 				rewriteAsUnboxed(cgMappingCallBinding.getOwnedValue());
 			}
-			return visitCGValuedElement(cgMappingCallBinding);
+			return super.visitCGMappingCallBinding(cgMappingCallBinding);
 		}
 		else {
 			assert false;
@@ -189,68 +144,16 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public @Nullable Object visitCGMappingExp(@NonNull CGMappingExp object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
-		visitCGIterationCallExp(cgMappingLoop);
-		//		rewriteAsUnboxed(cgMappingLoop.getSource());
-		return null;
-	}
-
-	@Override
 	public @Nullable Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedSlotValue());
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedInitValue());
-		return visitCGPropertyAssignment(cgMiddlePropertyAssignment);
-	}
-
-	@Override
-	public @Nullable Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
-		return visitCGOppositePropertyCallExp(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return visitCGValuedElement(cgPropertyAssignment);
-	}
-
-	@Override
-	public @Nullable Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
-		return visitCGVariable(cgRealizedVariable);
+		return super.visitCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
 	}
 
 	@Override
 	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
 		rewriteAsUnboxed(cgRealizedVariablePart.getInit());
-		return visitCGValuedElement(cgRealizedVariablePart);
-	}
-
-	@Override
-	public @Nullable Object visitCGSequence(@NonNull CGSequence object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGSpeculateExp(@NonNull CGSpeculateExp object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGSpeculatePart(@NonNull CGSpeculatePart object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
-		return visitCGClass(cgTransformation);
-	}
-
-	@Override
-	public @Nullable Object visitCGTypedModel(@NonNull CGTypedModel object) {
-		return visitCGNamedElement(object);
+		return super.visitCGRealizedVariablePart(cgRealizedVariablePart);
 	}
 
 	@Override

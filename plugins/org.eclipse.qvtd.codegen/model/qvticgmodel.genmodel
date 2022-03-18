@@ -57,6 +57,7 @@
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCall/ownedMappingCallBindings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCall/referredMapping"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingCallBinding">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCallBinding/ownedValue"/>
@@ -70,11 +71,11 @@
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyAssignment"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyCallExp"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGPropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/executorProperty"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/referredProperty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/ownedInitValue"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/ownedSlotValue"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/owningMapping"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGPropertyAssignment/referredProperty"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGPropertyAssignment/asProperty"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariable/executorType"/>
@@ -85,7 +86,7 @@
     <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariablePart">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariablePart/owningRealizedVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariablePart/init"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariablePart/executorProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariablePart/referredProperty"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGSequence">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGSequence/ownedStatements"/>

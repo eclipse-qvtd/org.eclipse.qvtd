@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getOwnedMappingCallBindings <em>Owned Mapping Call Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall()
@@ -49,4 +50,29 @@ public interface CGMappingCall extends CGValuedElement {
 	 * @generated
 	 */
 	List<CGMappingCallBinding> getOwnedMappingCallBindings();
+
+	/**
+	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The this expression for the call when invoking a native or ecore implementation.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Referred Mapping</em>' reference.
+	 * @see #setReferredMapping(CGMapping)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall_ReferredMapping()
+	 * @model resolveProxies="false" required="true"
+	 * @generated
+	 */
+	CGMapping getReferredMapping();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getReferredMapping <em>Referred Mapping</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Mapping</em>' reference.
+	 * @see #getReferredMapping()
+	 * @generated
+	 */
+	void setReferredMapping(CGMapping value);
 } // CGMappingCall

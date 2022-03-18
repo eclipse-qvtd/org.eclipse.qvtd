@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingCS2ASCGModelVisitor<R, C>
-	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor<R, C>
+	extends org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractExtendingQVTiCGModelVisitor<R, C>
 	implements CS2ASCGModelVisitor<R>
 {
 	/**

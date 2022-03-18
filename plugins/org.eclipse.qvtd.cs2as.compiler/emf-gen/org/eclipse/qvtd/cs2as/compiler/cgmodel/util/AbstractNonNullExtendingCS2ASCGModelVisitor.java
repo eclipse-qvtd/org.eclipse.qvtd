@@ -31,7 +31,7 @@ import org.eclipse.jdt.annotation.NonNull;
  */
  @Deprecated
 public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
-	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNonNullExtendingCGModelVisitor<R, C>
+	extends org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	implements CS2ASCGModelVisitor<R>
 {
 	/**

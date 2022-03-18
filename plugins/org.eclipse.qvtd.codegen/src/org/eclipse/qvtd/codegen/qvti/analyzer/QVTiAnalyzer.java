@@ -16,10 +16,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -66,13 +63,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		cgTypedModels.put(pTypedModel, cgTypedModel);
 	}
 
-	public @NonNull CGVariableExp createCGVariableExp(@NonNull CGVariable cgVariable) {
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setTypeId(cgVariable.getTypeId());
-		cgVariableExp.setAst(cgVariable.getAst());
-		cgVariableExp.setReferredVariable(cgVariable);
-		cgVariableExp.setRequired(cgVariable.isRequired());
-		return cgVariableExp;
+	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping pMapping) {
+		return cgMappings.get(pMapping);
 	}
 
 	@Override
@@ -84,17 +76,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return cgFunctions.get(pFunction);
 	}
 
-	public @Nullable CGMapping getMapping(@NonNull Mapping pMapping) {
-		return cgMappings.get(pMapping);
-	}
-
 	@Override
-	public @NonNull CGTypeId getTypeId(@NonNull TypeId typeId) {
+	public @NonNull CGTypeId getCGTypeId(@NonNull TypeId typeId) {
 		if (typeId == originalThisTypeId) {
-			return super.getTypeId(runtimeThisTypeId);
+			return super.getCGTypeId(runtimeThisTypeId);
 		}
 		else {
-			return super.getTypeId(typeId);
+			return super.getCGTypeId(typeId);
 		}
 	}
 
