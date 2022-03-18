@@ -4,7 +4,7 @@ import ocl : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/';
 
 library qvtruntimelibrary : qvtrtlib = 'http://www.eclipse.org/qvt/2019/QVTruntimeLibrary'
 {
-	type PseudoOperations : Class {
+	type PseudoOperations /* : Class --FIXME Bug 579313  */ {
 		/**
 		 * The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated
 		 * as an Operation within QVTs.
@@ -65,9 +65,9 @@ library qvtruntimelibrary : qvtrtlib = 'http://www.eclipse.org/qvt/2019/QVTrunti
 		 */
 		static operation _'type'(V)(_'type' : V[?]) : ocl::TypeExp[1];
 	}
-	type Extent : Class {
+	type Extent /* : Class --FIXME Bug 579313  */ {
 		property elements : ocl::OrderedSet(ocl::OclElement) opposite extent : Extent[?];
 	}
-	type Model : TypedModel {}
-	type Transformation : Transformation {}
+	type Model /* : TypedModel --FIXME Bug 579313 */ {}
+	type Transformation /* : Transformation --FIXME Bug 579313 */ {}
 }

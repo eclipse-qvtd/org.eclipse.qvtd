@@ -2,11 +2,11 @@ import 'platform:/resource/org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.ocls
 
 library qvtruntimelibrary : qvtrtlib = 'http://www.eclipse.org/qvt/2019/QVTruntimeLibrary'
 {
-type Model : TypedModel {
+type Model /* : Class TypedModel --FIXME Bug 579313 */ {
 	operation allObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.runtime.library.model.AllObjectsOperation';
 	operation objectsOfKind(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation';
 	operation objectsOfType(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation';
 	operation rootObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.runtime.library.model.RootObjectsOperation';
 }
-type Transformation : Transformation {}
+type Transformation /* : Class Transformation --FIXME Bug 579313 */ {}
 }

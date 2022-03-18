@@ -207,9 +207,9 @@ public class QVTruntimeLibraryTests extends XtextTestCase
 		JavaClassScope.getAdapter(xtextResource, classLoader);
 		ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(null);
+		assertNoResourceErrors("Load failed", xtextResource);
 		CS2AS cs2as = xtextResource.findCS2AS();
 		assert cs2as != null;
-		assertNoResourceErrors("Load failed", xtextResource);
 		Resource fileResource = cs2as.getASResource();
 		assertNoResourceErrors("File Model", fileResource);
 		assertNoUnresolvedProxies("File Model", fileResource);
