@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
@@ -380,6 +381,14 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public @Nullable CGInvalid getInvalidValue() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isAssertedNonNull() {
 		return false;
@@ -410,6 +419,14 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public boolean isGlobal() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isNonInvalid() {
+		return true;
 	}
 
 	/**

@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface CS2ASCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor<R>
+public interface CS2ASCGModelVisitor<R> extends org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor<R>
 {
 	R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object);
 }

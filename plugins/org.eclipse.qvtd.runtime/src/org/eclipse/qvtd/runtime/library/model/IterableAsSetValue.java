@@ -84,6 +84,11 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	}
 
 	@Override
+	public <T1> @NonNull List<T1> asUnboxedObjects(@NonNull IdResolver idResolver) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @NonNull IntegerValue count(@Nullable Object value) {
 		throw new UnsupportedOperationException();
 	}

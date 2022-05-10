@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2020 Willink Transformations and others.
+ * Copyright (c) 2013, 2019 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -10,23 +10,20 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
-import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator.QVTiNameManagerHelper;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
- * A QVTiGlobalContext maintains the Java-specific global context for generation of QVTi code.
+ * QVTiGlobalNameManager supports the many QVTi-specifiic global names.
  */
-public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenerator>
+public class QVTiGlobalNameManager extends GlobalNameManager
 {
+	private static final @NonNull String CACHED_RESULT_NAME = "cachedResult";
 	private static final @NonNull String CLASS_ID_2_CLASS_ID_ = "classIndex2classId_";
 	private static final @NonNull String CLASS_ID_2_ALL_CLASS_INDEXES_ = "classIndex2allClassIndexes_";
 	private static final @NonNull String CONSTRUCTOR_NAME = "constructor";
@@ -44,14 +41,11 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	private static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATUS_NAME = "outputSpeculatingSlotStatus";
+	private static final @NonNull String THIS_TRANSFORMER_NAME = "thisTransformer";
 	private static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
 	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
-	/**
-	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
-	 */
-	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
-
+	protected final @NonNull NameResolution cachedResultName;
 	protected final @NonNull NameResolution classId2AllClassIndexes;
 	protected final @NonNull NameResolution classId2ClassId;
 	protected final @NonNull NameResolution createFromStringName;
@@ -69,11 +63,13 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	protected final @NonNull NameResolution oppositeIndex2PropertyIdName;
 	protected final @NonNull NameResolution outputSpeculationSlotStateName;
 	protected final @NonNull NameResolution outputSpeculationSlotStatusName;
+	protected final @NonNull NameResolution thisTransformerName;
 	protected final @NonNull NameResolution transformationExecutionName;
 	protected final @NonNull NameResolution transformationName ;
 
-	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
-		super(codeGenerator);
+	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
+		super(codeGenerator, helper);
+		this.cachedResultName = globalNameManager.declareGlobalName(null, CACHED_RESULT_NAME);
 		this.classId2AllClassIndexes = globalNameManager.declareGlobalName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
 		this.classId2ClassId = globalNameManager.declareGlobalName(null, CLASS_ID_2_CLASS_ID_);
 		this.constructorName = globalNameManager.declareGlobalName(null, CONSTRUCTOR_NAME);
@@ -91,26 +87,13 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		this.oppositeIndex2PropertyIdName = globalNameManager.declareGlobalName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
 		this.outputSpeculationSlotStateName = globalNameManager.declareGlobalName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
 		this.outputSpeculationSlotStatusName = globalNameManager.declareGlobalName(null, OUTPUT_SPECULATION_SLOT_STATUS_NAME);
+		this.thisTransformerName = globalNameManager.declareGlobalName(null, THIS_TRANSFORMER_NAME);
 		this.transformationExecutionName = globalNameManager.declareGlobalName(null, TRANSFORMATION_EXECUTION_NAME);
 		this.transformationName = globalNameManager.declareGlobalName(null, TRANSFORMATION_NAME);
 	}
 
-	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
-		assert !pivotProperty.isIsImplicit() && !pivotProperty.isIsComposite();
-		if (oppositeProperty2oppositeCacheName == null) {
-			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
-		}
-		if (!oppositeProperty2oppositeCacheName.containsKey(pivotProperty)) {
-			oppositeProperty2oppositeCacheName.put(pivotProperty, globalNameManager.declareGlobalName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()).getResolvedName());
-		}
-		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
-		assert name != null;
-		return name;
-	}
-
-	@Override
-	public @NonNull QVTiLocalContext createLocalContext(@Nullable JavaLocalContext<@NonNull ?> outerContext, @NonNull CGNamedElement cgNamedElement, @NonNull NamedElement asNamedElement) {
-		return new QVTiLocalContext(this, (QVTiLocalContext)outerContext, cgNamedElement, asNamedElement);
+	public @NonNull String getCachedResultName() {
+		return cachedResultName.getResolvedName();
 	}
 
 	public @NonNull String getClassIndex2allClassIndexes(int typedModelNumber) {
@@ -165,11 +148,6 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		return invocationHashCodeName.getResolvedName();
 	}
 
-	@Override
-	public @NonNull QVTiLocalContext getLocalContext( @NonNull CGNamedElement cgElement) {
-		return (QVTiLocalContext)super.getLocalContext(cgElement);
-	}
-
 	public @NonNull String getModelsName() {
 		return modelsName.getResolvedName();
 	}
@@ -198,8 +176,12 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		return globalNameManager.declareGlobalName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME).getResolvedName();
 	}
 
-	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {
-		return oppositeProperty2oppositeCacheName;
+	public @NonNull String getThisTransformerName() {
+		return thisTransformerName.getResolvedName();
+	}
+
+	public @NonNull NameResolution getThisTransformerNameResolution() {
+		return thisTransformerName;
 	}
 
 	public @NonNull NameResolution getTransformationNameResolution() {
@@ -208,5 +190,14 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 
 	public @NonNull String getTransformationExecutionName() {
 		return transformationExecutionName.getResolvedName();
+	}
+
+	public void reserveGlobalNames(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
+		int typedModelNumber = 0;
+		for (@SuppressWarnings("unused") @NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
+			getClassIndex2allClassIndexes(typedModelNumber);
+			getClassIndex2classId(typedModelNumber);
+			typedModelNumber++;
+		}
 	}
 }

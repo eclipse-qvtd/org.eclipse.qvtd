@@ -90,7 +90,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 		public Register() {
 			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,						Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,					Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-			new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, Inv.NEVER, Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,				null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGRealizedVariablePart.class, null,				Box.BOX  , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, null     , EQ_EQUIV);
 

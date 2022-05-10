@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2StringVisitor;
 
 /**
  * The <b>Resource Factory</b> associated with the package.
@@ -25,6 +25,6 @@ public class QVTiCGModelResourceFactory extends AbstractCGModelResourceFactory
 
 	@Override
 	public @NonNull CG2StringVisitor createToStringVisitor() {
-		return new QVTiCG2StringVisitor();
+		return new QVTiCGModelCG2StringVisitor();
 	}
 }
