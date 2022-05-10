@@ -23,7 +23,7 @@ package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractCS2ASCGModelVisitor<R, C>
-	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractCGModelVisitor<R, C>
+	extends org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelVisitor<R, C>
 	implements CS2ASCGModelVisitor<R>
 {
 	/**

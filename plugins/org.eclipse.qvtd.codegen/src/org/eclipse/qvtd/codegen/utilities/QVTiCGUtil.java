@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
@@ -51,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -89,6 +91,10 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState((MappingCall)cgMappingCall.getAst());
 	}
 
+	public static @NonNull MappingParameterBinding getAST(@NonNull CGMappingCallBinding cgMappingCallBinding) {
+		return ClassUtil.nonNullState((MappingParameterBinding)cgMappingCallBinding.getAst());
+	}
+
 	public static @NonNull SetStatement getAST(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		return ClassUtil.nonNullState((SetStatement)cgPropertyAssignment.getAst());
 	}
@@ -111,6 +117,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull VariableExp getAST(@NonNull CGVariableExp cgVariableExp) {
 		return ClassUtil.nonNullState((VariableExp)cgVariableExp.getAst());
+	}
+
+	public static @NonNull Property getAsProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		return ClassUtil.nonNullState(cgPropertyAssignment.getAsProperty());
 	}
 
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
@@ -199,14 +209,17 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
-
 	}
 
 	public static @NonNull Iterable<@NonNull CGParameter> getParameters(@NonNull CGFunction cgFunction) {
 		return ClassUtil.nullFree(cgFunction.getParameters());
 	}
 
-	public static @NonNull Property getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+	public static @NonNull CGMapping getReferredMapping(@NonNull CGMappingCall cgMappingCall) {
+		return ClassUtil.nonNullState(cgMappingCall.getReferredMapping());
+	}
+
+	public static @NonNull CGProperty getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		return ClassUtil.nonNullState(cgPropertyAssignment.getReferredProperty());
 	}
 

@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGSourcedCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -234,6 +235,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				CGMappingLoop cgMappingLoop = (CGMappingLoop)theEObject;
 				T result = caseCGMappingLoop(cgMappingLoop);
 				if (result == null) result = caseCGIterationCallExp(cgMappingLoop);
+				if (result == null) result = caseCGSourcedCallExp(cgMappingLoop);
 				if (result == null) result = caseCGCallExp(cgMappingLoop);
 				if (result == null) result = caseCGValuedElement(cgMappingLoop);
 				if (result == null) result = caseCGTypedElement(cgMappingLoop);
@@ -259,6 +261,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				T result = caseCGMiddlePropertyCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGOppositePropertyCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGNavigationCallExp(cgMiddlePropertyCallExp);
+				if (result == null) result = caseCGSourcedCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgMiddlePropertyCallExp);
@@ -811,6 +814,21 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGOperationCallExp(CGOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Sourced Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Sourced Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGSourcedCallExp(CGSourcedCallExp object) {
 		return null;
 	}
 

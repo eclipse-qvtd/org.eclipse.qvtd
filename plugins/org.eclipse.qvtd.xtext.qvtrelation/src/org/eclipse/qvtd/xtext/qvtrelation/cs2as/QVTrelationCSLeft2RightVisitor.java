@@ -28,6 +28,8 @@ import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.Invocations;
+import org.eclipse.ocl.pivot.utilities.Invocations.ResolvedInvocation;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.SingletonIterator;
@@ -53,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -94,7 +95,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		}
 
 		@Override
-		public @NonNull Iterator<NamedElement> iterator() {
+		public @NonNull Iterator<@NonNull NamedElement> iterator() {
 			return new SingletonIterator<NamedElement>(invocation);
 		}
 	}
@@ -142,7 +143,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 	}
 
 	@Override
-	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
+	protected @Nullable Invocations getInvocations(@NonNull Type asType, boolean hasExplicitSourceExp, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
 			Rule rule = NameUtil.getNameable(((Transformation)asType).getRule(), name);
 			if (rule != null) {
@@ -154,7 +155,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			}
 			return null;
 		}
-		return super.getInvocations(asType, asTypeValue, name, iteratorCount, expressionCount);
+		return super.getInvocations(asType, hasExplicitSourceExp, name, iteratorCount, expressionCount);
 	}
 
 	@Override
@@ -178,12 +179,15 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				context.setReferredOperation(operationCallExp, function);
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
+				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
+				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
+				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
-				Type owningClass = function.getOwningClass();
-				if (owningClass instanceof RelationalTransformation) {
-					VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, (RelationalTransformation) owningClass);
-					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
-				}
+				//	Type owningClass = function.getOwningClass();
+				//	if (owningClass instanceof RelationalTransformation) {
+				//		VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, (RelationalTransformation) owningClass);
+				//		operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
+				//	}
 				return operationCallExp;
 			}
 		}

@@ -15,22 +15,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager.NameVariant;
+import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
+import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
@@ -38,27 +44,31 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
+import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaNameVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaPreVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCGNameHelperVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelDependencyVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelReferencesVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -66,201 +76,90 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
 {
-	protected static class QVTiCGNameHelper extends NameManagerHelper.CGNameHelper implements QVTiCGModelVisitor<@NonNull String>
-	{			// FIXME Introduce AS-style indirection/delegation
-		public QVTiCGNameHelper(@NonNull NameManagerHelper context) {
-			super(context);
-		}
-
-		@Override
-		public @NonNull String visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object) {
-			return "CONNECTION_" + context.getNameableHint(object.getConnectionVariable());		// Never used
-		}
-
-		@Override
-		public @NonNull String visitCGConnectionVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionVariable object) {
-			return visitCGGuardVariable(object);
-		}
-
-		@Override
-		public @NonNull String visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
-			return "XXX" + context.getNameableHint(object);		// Never used
-		}
-
-		@Override
-		public @NonNull String visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
-			return "XXX" + context.getNameableHint(object);		// Never used
-		}
-
-		@Override
-		public @NonNull String visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object) {
-			return visitCGRealizedVariable(object);
-		}
-
-		@Override
-		public @NonNull String visitCGFunction(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunction object) {
-			return visitCGOperation(object);
-		}
-
-		@Override
-		public @NonNull String visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
-			return visitCGOperationCallExp(object);
-		}
-
-		@Override
-		public @NonNull String visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
-			return visitCGParameter(object);
-		}
-
-		@Override
-		public @NonNull String visitCGGuardVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGGuardVariable object) {
-			return visitCGParameter(object);
-		}
-
-		@Override
-		public @NonNull String visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
-			return visitCGNamedElement(object);
-		}
-
-		@Override
-		public @NonNull String visitCGMappingCall(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCall object) {
-			return context.getNameableHint(QVTiCGUtil.getAST(object).getReferredMapping());
-		}
-
-		@Override
-		public @NonNull String visitCGMappingCallBinding(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCallBinding object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
-		public @NonNull String visitCGMappingExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingExp object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
-		public @NonNull String visitCGMappingLoop(@NonNull CGMappingLoop object) {
-			return "loop";
-		}
-
-		@Override
-		public @NonNull String visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
-			return visitCGEcorePropertyAssignment(object);
-		}
-
-		@Override
-		public @NonNull String visitCGMiddlePropertyCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyCallExp object) {
-			return visitCGOppositePropertyCallExp(object);
-		}
-
-		@Override
-		public @NonNull String visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
-		public @NonNull String visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
-			return visitCGVariable(object);
-		}
-
-		@Override
-		public @NonNull String visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
-		public @NonNull String visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
-			return "XXX-SEQ"; // Never used
-		}
-
-		@Override
-		public @NonNull String visitCGSpeculateExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculateExp object) {
-			return "XXX-SPEC-"; // Never used
-		}
-
-		@Override
-		public @NonNull String visitCGSpeculatePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculatePart object) {
-			return "XXX-SPEC-" + object.getEStructuralFeature().getName(); // Never used
-		}
-
-		@Override
-		public @NonNull String visitCGTransformation(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTransformation object) {
-			return visitCGClass(object);
-		}
-
-		@Override
-		public @NonNull String visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
-			return visitCGNamedElement(object);
-		}
-	}
+	/**
+	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
+	 */
+	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
 
 	public static class QVTiNameManagerHelper extends NameManagerHelper
 	{
 		@Override
 		protected @NonNull CGNameHelper createCGNameHelper() {
-			return new QVTiCGNameHelper(this);
+			return new QVTiCGModelCGNameHelperVisitor(this);
 		}
 	}
 
-	protected final @NonNull ImperativeTransformation transformation;
+	protected final @NonNull ImperativeTransformation asTransformation;
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
-	protected final @NonNull QVTiGlobalContext globalContext;
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
-	protected final @NonNull NameVariant CACHED_RESULT_NameVariant;
-	protected final @NonNull NameVariant THIS_TRANSFORMER_NameVariant;
 
-	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
+	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
-		QVTiCG2StringVisitor.FACTORY.getClass();
-		this.transformation = transformation;
+		QVTiCGModelCG2StringVisitor.FACTORY.getClass();
+		this.asTransformation = asTransformation;
 		this.cgAnalyzer = new QVTiAnalyzer(this);
-		this.globalContext = new QVTiGlobalContext(this);
-		this.CACHED_RESULT_NameVariant = globalNameManager.addNameVariantPreferred("cachedResult");
-		this.THIS_TRANSFORMER_NameVariant = globalNameManager.addNameVariantPreferred("thisTransformer");
 	}
 
-	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
-		String pName = sPackage.getName();
+	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
+		assert !pivotProperty.isIsImplicit() && !pivotProperty.isIsComposite();
+		if (oppositeProperty2oppositeCacheName == null) {
+			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
+		}
+		if (!oppositeProperty2oppositeCacheName.containsKey(pivotProperty)) {
+			oppositeProperty2oppositeCacheName.put(pivotProperty, globalNameManager.declareGlobalName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()).getResolvedName());
+		}
+		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
+		assert name != null;
+		return name;
+	}
+
+	private void appendSegmentName(@NonNull StringBuilder s, CGPackage cgPackage) {
+		String pName = cgPackage.getName();
 		if (pName != null && pName.length() > 0) {
 			s.append(pName);
 			s.append('.');
 		}
 	}
 
-	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext gContext) {
-		return new QVTiAS2CGVisitor(analyzer, gContext);
+	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor() {
+		return new QVTiAS2CGVisitor(this);
 	}
 
 	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
-		return new QVTiAnalysisVisitor(cgAnalyzer);
+		return new QVTiCGModelAnalysisVisitor(cgAnalyzer);
 	}
 
 	@Override
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
-		return new QVTiBoxingAnalyzer(cgAnalyzer);
+		return new QVTiCGModelBoxingAnalysisVisitor(cgAnalyzer);
+	}
+
+	@Override
+	public @NonNull CG2JavaNameVisitor createCG2JavaNameVisitor() {
+		return new QVTiCGModelCG2JavaNameVisitor(this);
 	}
 
 	@Override
 	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
-		return new QVTiCG2JavaPreVisitor(getGlobalContext());
+		return new QVTiCGModelCG2JavaPreVisitor(this);
 	}
 
-	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<@NonNull CGValuedElement> sortedGlobals) {
-		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	protected @NonNull QVTiCGModelCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		return new QVTiCGModelCG2JavaVisitor(this, cgPackage, sortedGlobals);
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
-		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
-		pivot2CGVisitor.freeze();
+		QVTiAS2CGVisitor as2cgVisitor = createAS2CGVisitor();
+		CGTransformation cgTransformation = (CGTransformation)ClassUtil.nonNullState(asTransformation.accept(as2cgVisitor));
+		as2cgVisitor.freeze();
 		CGPackage cgPackage = null;
-		for (org.eclipse.ocl.pivot.Package asPackage = transformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
+		for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 			CGPackage cgPackage2 = createCGPackage(asPackage);
-			if (cgTransformation != null) {
+			if (cgTransformation.eContainer() == null) {
 				cgPackage2.getClasses().add(cgTransformation);
-				cgTransformation = null;
 			}
 			else {
 				cgPackage2.getPackages().add(cgPackage);
@@ -279,6 +178,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		assert cgPackage != null;
+		as2cgVisitor.pushNameManager(cgTransformation);
+		cgAnalyzer.analyzeExternalFeatures(as2cgVisitor);
+		as2cgVisitor.popNameManager();
 		return cgPackage;
 	}
 
@@ -287,7 +189,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		String name = asPackage.getName();
-		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + transformation.getName());
+		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + asTransformation.getName());
 
 		// Parent CG Package
 		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
@@ -300,18 +202,25 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull String createClassFileContent() {
-		reserveGlobalNames();
+		QVTiGlobalNameManager globalNameManager = getGlobalNameManager();
+		globalNameManager.getOppositeIndex2propertyIdName();
+		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(asTransformation);
+		globalNameManager.reserveGlobalNames(entryPointsAnalysis);
 		CGPackage cgPackage2 = createCGPackage();
 		cgPackage = cgPackage2;
 		optimize(cgPackage2);
-		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
-		resolveNames(cgPackage2);
-		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
+		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage);
+		QVTiCGModelCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();
 		Map<@NonNull String, @Nullable String> long2ShortImportNames = importNameManager.getLong2ShortImportNames();
 		String javaSourceCode = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
 		return javaSourceCode;
+	}
+
+	@Override
+	protected @NonNull GlobalNameManager createGlobalNameManager() {
+		return new QVTiGlobalNameManager(this, createNameManagerHelper());
 	}
 
 	@Override
@@ -321,8 +230,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull DependencyVisitor createDependencyVisitor() {
-		return new QVTiDependencyVisitor(cgAnalyzer, getGlobalContext(),
-			getGlobalPlace());
+		return new QVTiCGModelDependencyVisitor(this, getGlobalPlace());
 	}
 
 	@Override
@@ -344,7 +252,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	protected @NonNull NameManagerHelper createNameManagerHelper() {
+	public @NonNull NestedNameManager createNestedNameManager(@NonNull NameManager outerNameManager, @NonNull CGNamedElement cgScope) {
+		return new QVTiNestedNameManager(this, outerNameManager, cgScope);
+	}
+
+	@Override
+	protected @NonNull QVTiNameManagerHelper createNameManagerHelper() {
 		return new QVTiNameManagerHelper();
 	}
 
@@ -355,7 +268,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull ReferencesVisitor createReferencesVisitor() {
-		return QVTiReferencesVisitor.INSTANCE;
+		return QVTiCGModelReferencesVisitor.INSTANCE;
 	}
 
 	public @NonNull String generateClassFile() {
@@ -371,8 +284,35 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgAnalyzer;
 	}
 
-	public @NonNull NameVariant getCACHED_RESULT_NameVariant() {
-		return CACHED_RESULT_NameVariant;
+	@Override
+	public @NonNull OperationCallingConvention getCallingConvention( @NonNull Operation asOperation, boolean isFinal) {
+		if (asOperation instanceof Function) {
+			return FunctionOperationCallingConvention.INSTANCE;
+		}
+		return super.getCallingConvention(asOperation, isFinal);
+	}
+
+	@Override
+	public @NonNull PropertyCallingConvention getCallingConvention(@NonNull Property asProperty) {
+		//	Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
+		Property asOppositeProperty2 = asProperty.getOpposite();
+		if ((asOppositeProperty2 != null) && !asProperty.isIsComposite()) {
+			LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
+			if (libraryProperty instanceof ImplicitNonCompositionProperty) {
+				EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
+				assert eStructuralFeature == null;
+				/*	if (eStructuralFeature != null) {
+					try {
+						getGenModelHelper().getGetAccessor(eStructuralFeature);
+						return EcoreOppositePropertyCallingConvention.INSTANCE;
+					} catch (GenModelException e) {
+						addProblem(e);		// FIXME drop through to better default
+					}
+				} */
+				return MiddlePropertyCallingConvention.INSTANCE;
+			}
+		}
+		return super.getCallingConvention(asProperty);
 	}
 
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
@@ -387,8 +327,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull QVTiGlobalContext getGlobalContext() {
-		return globalContext;
+	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
+		return (QVTiGlobalNameManager)globalNameManager;
+	}
+
+	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {
+		return oppositeProperty2oppositeCacheName;
 	}
 
 	@Override
@@ -404,27 +348,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			cgPackage = cgPackage.getPackages().get(0);
 			appendSegmentName(s, cgPackage);
 		}
-		s.append(QVTbaseUtil.getName(transformation));
+		s.append(QVTbaseUtil.getName(asTransformation));
 		return s.toString();
 	}
 
-	public @NonNull NameVariant getTHIS_TRANSFORMER_NameVariant() {
-		return THIS_TRANSFORMER_NameVariant;
-	}
-
 	public @NonNull ImperativeTransformation getTransformation() {
-		return transformation;
-	}
-
-	protected void reserveGlobalNames() {
-		globalContext.getOppositeIndex2propertyIdName();
-		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(transformation);
-		int typedModelNumber = 0;
-		for (@SuppressWarnings("unused") @NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
-			globalContext.getClassIndex2allClassIndexes(typedModelNumber);
-			globalContext.getClassIndex2classId(typedModelNumber);
-			typedModelNumber++;
-		}
+		return asTransformation;
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {

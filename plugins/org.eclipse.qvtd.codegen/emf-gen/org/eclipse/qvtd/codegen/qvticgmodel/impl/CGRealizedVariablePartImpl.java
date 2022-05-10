@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
@@ -51,7 +51,7 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl#getOwningRealizedVariable <em>Owning Realized Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl#getInit <em>Init</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl#getExecutorProperty <em>Executor Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariablePartImpl#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,14 +78,15 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	protected CGValuedElement init;
 
 	/**
-	 * The cached value of the '{@link #getExecutorProperty() <em>Executor Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExecutorProperty()
+	 * @see #getReferredProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGExecutorProperty executorProperty;
+	protected CGProperty referredProperty;
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,8 +201,8 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public CGExecutorProperty getExecutorProperty() {
-		return executorProperty;
+	public CGProperty getReferredProperty() {
+		return referredProperty;
 	}
 
 	/**
@@ -210,11 +211,11 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public void setExecutorProperty(CGExecutorProperty newExecutorProperty) {
-		CGExecutorProperty oldExecutorProperty = executorProperty;
-		executorProperty = newExecutorProperty;
+	public void setReferredProperty(CGProperty newReferredProperty) {
+		CGProperty oldReferredProperty = referredProperty;
+		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, oldExecutorProperty, executorProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -276,7 +277,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getInit();
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
-				return getExecutorProperty();
+				return getReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -296,7 +297,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 				setInit((CGValuedElement)newValue);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
-				setExecutorProperty((CGExecutorProperty)newValue);
+				setReferredProperty((CGProperty)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -317,7 +318,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 				setInit((CGValuedElement)null);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
-				setExecutorProperty((CGExecutorProperty)null);
+				setReferredProperty((CGProperty)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -336,7 +337,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return init != null;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
-				return executorProperty != null;
+				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -360,6 +361,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable EClassifier getEcoreClassifier() {
 		return null;
 	}
@@ -368,6 +370,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isBoxed() {
 		return true;
 	}
@@ -376,6 +379,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
 	}
@@ -384,6 +388,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isConstant() {
 		return false;
 	}
@@ -392,6 +397,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isEcore() {
 		return false;
 	}
@@ -400,6 +406,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtil.isEquivalent(this, (CGRealizedVariablePart)thatValue) : null;
 	}
@@ -408,6 +415,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isGlobal() {
 		return false;
 	}
@@ -416,6 +424,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
@@ -424,6 +433,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUncommonable() {
 		return true;
 	}

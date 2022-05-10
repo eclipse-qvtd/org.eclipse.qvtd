@@ -23,6 +23,9 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.ocl.pivot.utilities.Invocations;
+import org.eclipse.ocl.pivot.utilities.Invocations.ResolvedInvocation;
+import org.eclipse.ocl.pivot.utilities.Invocations.UnresolvedInvocations;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -112,13 +115,13 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 	}
 
 	@Override
-	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
+	protected @Nullable Invocations getInvocations(@NonNull Type asType, boolean hasExplicitSourceExp, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
 			Operation function = NameUtil.getNameable(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
-			Iterable<@NonNull ? extends Operation> nonStaticOperations = metamodelManager.getAllOperations(asType, FeatureFilter.SELECT_NON_STATIC, name);
+			Iterable<@NonNull Operation> nonStaticOperations = metamodelManager.getAllOperations(asType, FeatureFilter.SELECT_NON_STATIC, name);
 			List<NamedElement> invocations = getInvocationsInternal(null, nonStaticOperations, iteratorCount, expressionCount);
 			//			if (asTypeValue != null) {
 			//				Iterable<? extends Operation> staticOperations = metamodelManager.getAllOperations(asTypeValue, FeatureFilter.SELECT_STATIC, name);
@@ -127,7 +130,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 			return invocations != null ? new UnresolvedInvocations(asType, invocations) : null;
 			//			return null;
 		}
-		return super.getInvocations(asType, asTypeValue, name, iteratorCount, expressionCount);
+		return super.getInvocations(asType, hasExplicitSourceExp, name, iteratorCount, expressionCount);
 	}
 
 	@Override

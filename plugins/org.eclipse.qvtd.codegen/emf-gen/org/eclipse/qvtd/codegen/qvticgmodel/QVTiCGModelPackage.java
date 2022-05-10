@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -300,26 +300,26 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGPropertyAssignment_OwningMapping();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty <em>As Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Referred Property</em>'.
+	 * @return the meta object for the attribute '<em>As Property</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty()
+	 * @see #getCGPropertyAssignment()
+	 * @generated
+	 */
+	EAttribute getCGPropertyAssignment_AsProperty();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Property</em>'.
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty()
 	 * @see #getCGPropertyAssignment()
 	 * @generated
 	 */
-	EAttribute getCGPropertyAssignment_ReferredProperty();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Executor Property</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty()
-	 * @see #getCGPropertyAssignment()
-	 * @generated
-	 */
-	EReference getCGPropertyAssignment_ExecutorProperty();
+	EReference getCGPropertyAssignment_ReferredProperty();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}'.
@@ -516,6 +516,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGMappingCall_OwnedMappingCallBindings();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getReferredMapping <em>Referred Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Mapping</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getReferredMapping()
+	 * @see #getCGMappingCall()
+	 * @generated
+	 */
+	EReference getCGMappingCall_ReferredMapping();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding <em>CG Mapping Call Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -674,15 +685,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGRealizedVariablePart_Init();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getExecutorProperty <em>Executor Property</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getReferredProperty <em>Referred Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Executor Property</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getExecutorProperty()
+	 * @return the meta object for the reference '<em>Referred Property</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart#getReferredProperty()
 	 * @see #getCGRealizedVariablePart()
 	 * @generated
 	 */
-	EReference getCGRealizedVariablePart_ExecutorProperty();
+	EReference getCGRealizedVariablePart_ReferredProperty();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence <em>CG Sequence</em>}'.
@@ -995,6 +1006,14 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_PROPERTY_ASSIGNMENT = eINSTANCE.getCGPropertyAssignment();
 
 		/**
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = eINSTANCE.getCGPropertyAssignment_ReferredProperty();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Mapping</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1003,20 +1022,12 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING = eINSTANCE.getCGPropertyAssignment_OwningMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Property</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>As Property</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = eINSTANCE.getCGPropertyAssignment_ReferredProperty();
-
-		/**
-		 * The meta object literal for the '<em><b>Executor Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = eINSTANCE.getCGPropertyAssignment_ExecutorProperty();
+		EAttribute CG_PROPERTY_ASSIGNMENT__AS_PROPERTY = eINSTANCE.getCGPropertyAssignment_AsProperty();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Init Value</b></em>' containment reference feature.
@@ -1171,6 +1182,14 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS = eINSTANCE.getCGMappingCall_OwnedMappingCallBindings();
 
 		/**
+		 * The meta object literal for the '<em><b>Referred Mapping</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_MAPPING_CALL__REFERRED_MAPPING = eINSTANCE.getCGMappingCall_ReferredMapping();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl <em>CG Mapping Call Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1305,12 +1324,12 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_REALIZED_VARIABLE_PART__INIT = eINSTANCE.getCGRealizedVariablePart_Init();
 
 		/**
-		 * The meta object literal for the '<em><b>Executor Property</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_REALIZED_VARIABLE_PART__EXECUTOR_PROPERTY = eINSTANCE.getCGRealizedVariablePart_ExecutorProperty();
+		EReference CG_REALIZED_VARIABLE_PART__REFERRED_PROPERTY = eINSTANCE.getCGRealizedVariablePart_ReferredProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.

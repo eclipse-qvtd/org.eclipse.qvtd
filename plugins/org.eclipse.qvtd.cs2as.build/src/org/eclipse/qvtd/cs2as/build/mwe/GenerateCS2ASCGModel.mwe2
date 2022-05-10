@@ -36,8 +36,8 @@ Workflow {
     component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
 		genModelFile = "model/cs2ascgmodel.genmodel"
-    	superProjectName = "org.eclipse.ocl.examples.codegen"
-    	superGenModelFile = "model/cgmodel.genmodel"
+    	superProjectName = "org.eclipse.qvtd.codegen"
+    	superGenModelFile = "model/qvticgmodel.genmodel"
     	baseProjectName = "org.eclipse.ocl.examples.codegen"
     	baseGenModelFile = "model/cgmodel.genmodel"
     }

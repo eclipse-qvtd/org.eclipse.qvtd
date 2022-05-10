@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
@@ -39,11 +39,11 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getExecutorProperty <em>Executor Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwnedInitValue <em>Owned Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwnedSlotValue <em>Owned Slot Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwningMapping <em>Owning Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getAsProperty <em>As Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,14 +59,14 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public static final int CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The cached value of the '{@link #getExecutorProperty() <em>Executor Property</em>}' reference.
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExecutorProperty()
+	 * @see #getReferredProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGExecutorProperty executorProperty;
+	protected CGProperty referredProperty;
 
 	/**
 	 * The cached value of the '{@link #getOwnedInitValue() <em>Owned Init Value</em>}' containment reference.
@@ -89,24 +89,24 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	protected CGValuedElement ownedSlotValue;
 
 	/**
-	 * The default value of the '{@link #getReferredProperty() <em>Referred Property</em>}' attribute.
+	 * The default value of the '{@link #getAsProperty() <em>As Property</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredProperty()
+	 * @see #getAsProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Property REFERRED_PROPERTY_EDEFAULT = null;
+	protected static final Property AS_PROPERTY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' attribute.
+	 * The cached value of the '{@link #getAsProperty() <em>As Property</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredProperty()
+	 * @see #getAsProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Property referredProperty = REFERRED_PROPERTY_EDEFAULT;
+	protected Property asProperty = AS_PROPERTY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,6 +125,29 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	@Override
 	protected EClass eStaticClass() {
 		return QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGProperty getReferredProperty() {
+		return referredProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferredProperty(CGProperty newReferredProperty) {
+		CGProperty oldReferredProperty = referredProperty;
+		referredProperty = newReferredProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -176,8 +199,8 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 */
 	@Override
-	public Property getReferredProperty() {
-		return referredProperty;
+	public Property getAsProperty() {
+		return asProperty;
 	}
 
 	/**
@@ -186,34 +209,11 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 */
 	@Override
-	public void setReferredProperty(Property newReferredProperty) {
-		Property oldReferredProperty = referredProperty;
-		referredProperty = newReferredProperty;
+	public void setAsProperty(Property newAsProperty) {
+		Property oldAsProperty = asProperty;
+		asProperty = newAsProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4, oldReferredProperty, referredProperty));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CGExecutorProperty getExecutorProperty() {
-		return executorProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setExecutorProperty(CGExecutorProperty newExecutorProperty) {
-		CGExecutorProperty oldExecutorProperty = executorProperty;
-		executorProperty = newExecutorProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, oldExecutorProperty, executorProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4, oldAsProperty, asProperty));
 	}
 
 	/**
@@ -316,8 +316,8 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (referredProperty: ");
-		result.append(referredProperty);
+		result.append(" (asProperty: ");
+		result.append(asProperty);
 		result.append(')');
 		return result.toString();
 	}
@@ -379,7 +379,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
-				return getExecutorProperty();
+				return getReferredProperty();
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedInitValue();
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
@@ -387,7 +387,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwningMapping();
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
-				return getReferredProperty();
+				return getAsProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -401,7 +401,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
-				setExecutorProperty((CGExecutorProperty)newValue);
+				setReferredProperty((CGProperty)newValue);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedInitValue((CGValuedElement)newValue);
@@ -413,7 +413,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 				setOwningMapping((CGMapping)newValue);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
-				setReferredProperty((Property)newValue);
+				setAsProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -428,7 +428,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
-				setExecutorProperty((CGExecutorProperty)null);
+				setReferredProperty((CGProperty)null);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedInitValue((CGValuedElement)null);
@@ -440,7 +440,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 				setOwningMapping((CGMapping)null);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
-				setReferredProperty(REFERRED_PROPERTY_EDEFAULT);
+				setAsProperty(AS_PROPERTY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -455,7 +455,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
-				return executorProperty != null;
+				return referredProperty != null;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedInitValue != null;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
@@ -463,7 +463,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwningMapping() != null;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
-				return REFERRED_PROPERTY_EDEFAULT == null ? referredProperty != null : !REFERRED_PROPERTY_EDEFAULT.equals(referredProperty);
+				return AS_PROPERTY_EDEFAULT == null ? asProperty != null : !AS_PROPERTY_EDEFAULT.equals(asProperty);
 		}
 		return super.eIsSet(featureID);
 	}
