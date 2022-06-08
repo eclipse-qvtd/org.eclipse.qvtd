@@ -133,4 +133,5 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	public boolean isNull() {
 		return false;
 	}
+
 } //CGFunctionImpl

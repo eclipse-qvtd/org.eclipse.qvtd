@@ -23,7 +23,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
@@ -91,14 +90,17 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		return null;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		super.visitCGFunctionCallExp(cgFunctionCallExp);
+		/ *	int i = 0;
 		for (CGValuedElement cgArgument : cgFunctionCallExp.getArguments()) {
-			rewriteAsUnboxed(cgArgument);
-		}
+			if (i++ > 0) {			// Skip source
+				rewriteAsUnboxed(cgArgument);
+			}
+		} * /
 		return null;
-	}
+	} */
 
 	@Override
 	public @Nullable Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {

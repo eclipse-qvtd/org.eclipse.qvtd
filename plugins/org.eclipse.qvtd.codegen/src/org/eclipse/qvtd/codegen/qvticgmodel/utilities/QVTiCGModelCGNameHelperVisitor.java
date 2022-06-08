@@ -13,6 +13,8 @@ package org.eclipse.qvtd.codegen.qvticgmodel.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCGNameHelperVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
@@ -36,6 +38,16 @@ public class QVTiCGModelCGNameHelperVisitor extends AbstractQVTiCGModelCGNameHel
 	@Override
 	public @NonNull String visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
 		return NameResolution.NOT_NEEDED; // "XXX" + context.getNameableHint(object);		// Never used
+	}
+
+	@Override
+	public @NonNull String visitCGFunction(@NonNull CGFunction cgFunction) {
+		return "FUN_" + context.getNameableHint(QVTiCGUtil.getAST(cgFunction));
+	}
+
+	@Override
+	public @NonNull String visitCGMapping(@NonNull CGMapping cgMapping) {
+		return "MAP_" + context.getNameableHint(QVTiCGUtil.getAST(cgMapping));		// XXX not yet used since CGMapping is not a CGValuedElement
 	}
 
 	@Override

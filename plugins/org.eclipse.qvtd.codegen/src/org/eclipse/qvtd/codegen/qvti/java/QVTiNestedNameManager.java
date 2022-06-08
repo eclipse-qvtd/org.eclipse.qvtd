@@ -46,13 +46,20 @@ public class QVTiNestedNameManager extends NestedNameManager
 		//	assert outerContext == null;
 		//	assert asScope instanceof Transformation;
 		NameResolution executorNameResolution = globalNameManager.getExecutorNameResolution();
-		CGVariable executorVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
-		executorVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID));
+		//	Variable asExecutorVariable = PivotFactory.eINSTANCE.createVariable();
+		//	asExecutorVariable.setName(executorNameResolution.getResolvedName());
+		//	asVariable.setType(asType);
+		//	asExecutorVariable.setIsRequired(true);
+		//	asVariable.setOwnedInit(asInitExpression);
+		//	PivotUtil.createVariable(executorNameResolution.getResolvedName(), JavaConstants.EXECUTOR_TYPE_ID, null);
+		CGVariable cgExecutorVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+		//	cgExecutorVariable.setAst(asExecutorVariable);			// XXX misguided
+		cgExecutorVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID));
 		//	executorVariable.setInit(executorInit);
-		executorVariable.setNonInvalid();
-		executorVariable.setNonNull();
-		executorNameResolution.addCGElement(executorVariable);			// XXX share via creatExecutor(init)
-		return executorVariable;			// XXX who owns the variable ??
+		cgExecutorVariable.setNonInvalid();
+		cgExecutorVariable.setNonNull();
+		executorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
+		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
 
 	@Override
