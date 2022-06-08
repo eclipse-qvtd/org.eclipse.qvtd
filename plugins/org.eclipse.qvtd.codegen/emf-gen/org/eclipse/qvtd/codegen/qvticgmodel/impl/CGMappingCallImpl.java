@@ -184,11 +184,11 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingCallBindings().clear();
-			getOwnedMappingCallBindings().addAll((Collection<? extends CGMappingCallBinding>)newValue);
-			return;
+				getOwnedMappingCallBindings().addAll((Collection<? extends CGMappingCallBinding>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setReferredMapping((CGMapping)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -203,10 +203,10 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingCallBindings().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setReferredMapping((CGMapping)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

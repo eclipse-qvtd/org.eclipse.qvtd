@@ -560,4 +560,12 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isGlobal() {
+		return true;
+	}
+
 } //CGMappingImpl

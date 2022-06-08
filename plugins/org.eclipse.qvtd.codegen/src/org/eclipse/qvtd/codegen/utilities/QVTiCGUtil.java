@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
@@ -125,6 +126,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
 		return ClassUtil.nonNullState(cgMappingLoop.getBody());
+	}
+
+	public static @NonNull CGClass getContainingCGClass(@NonNull CGFunction cgFunction) {
+		return ClassUtil.nonNullState(cgFunction.getContainingClass());
 	}
 
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {

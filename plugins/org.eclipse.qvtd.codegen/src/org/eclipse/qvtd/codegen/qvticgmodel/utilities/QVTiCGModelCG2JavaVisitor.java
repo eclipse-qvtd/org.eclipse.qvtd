@@ -50,7 +50,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGShadowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -63,11 +62,9 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -121,6 +118,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -608,7 +606,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				return;
 			}
 			if (eObject instanceof CGFunction) {
-				js.appendThis(getFunctionName((CGFunction)eObject));		// + ".this"
+				js.appendThis(((CGFunction)eObject).getResolvedName());		// + ".this"
 				return;
 			}
 			if (eObject instanceof CGClass) {
@@ -1172,8 +1170,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		for (@NonNull CGOperation cgOperation : cgOperations) {
 			if (cgOperation instanceof CGFunction) {
 				CGFunction cgFunction = (CGFunction)cgOperation;
-				if (useClass(cgFunction) || useCache(cgFunction)) {
-					String functionName = getFunctionName(cgFunction);
+				Function asFunction = QVTiCGUtil.getAST(cgFunction);
+				if (!asFunction.isIsTransient()) {
+					String functionName = cgFunction.getResolvedName();
 					js.append("protected final ");
 					js.appendClassReference(true, AbstractComputationConstructor.class);
 					js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
@@ -2349,10 +2348,10 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		return JavaStream.convertToJavaIdentifier("FTOR_" + cgFunction.getName());
 	}
 
-	@Deprecated
+	/*	@Deprecated
 	public @NonNull String getFunctionName(@NonNull CGFunction cgFunction) {
 		return JavaStream.convertToJavaIdentifier("FUN_" + cgFunction.getName());
-	}
+	} */
 
 	protected @NonNull QVTiGlobalNameManager getGlobalNameManager() {
 		return getCodeGenerator().getGlobalNameManager();
@@ -2500,13 +2499,15 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		}
 	}
 
-	@Deprecated
+	/*	@Deprecated
 	public boolean useCache(@NonNull CGFunction cgFunction) {
 		Element ast = cgFunction.getAst();
-		return !(ast instanceof Operation) || !((Operation)ast).isIsTransient();
-	}
+		assert ast instanceof Operation;
+		//	return !(ast instanceof Operation) || !((Operation)ast).isIsTransient();
+		return !((ast instanceof Operation) && ((Operation)ast).isIsTransient());
+	} */
 
-	@Deprecated
+	/*	@Deprecated
 	protected @Nullable CGShadowExp useClassToCreateObject(@NonNull CGFunction cgFunction) {
 		CGValuedElement cgBody = cgFunction.getBody();
 		while (cgBody instanceof CGLetExp) {
@@ -2517,14 +2518,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				return (CGShadowExp)cgBody;		// FIXME replace with clearer strategy
 		}
 		return null;
-	}
+	} */
 
-	@Deprecated
-	public boolean useClass(@NonNull CGFunction cgFunction) {
-		return true;
-	}
-
-	@Deprecated
+	@Deprecated		// migrate to a MappingCallingConvention
 	protected boolean useClass(@NonNull CGMapping cgMapping) {
 		if (alwaysUseClasses) {
 			return true;
@@ -3509,7 +3505,8 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append("\n");
 		}
 		List<@NonNull CGMapping> cgMappings = ClassUtil.nullFree(cgTransformation.getOwnedMappings());
-		List<CGOperation> cgOperations = cgTransformation.getOperations();
+		List<@NonNull CGOperation> cgOperations = new ArrayList<>(CGUtil.getOperationsList(cgTransformation));
+		Collections.sort(cgOperations, NameUtil.NAMEABLE_COMPARATOR);
 		doMappingConstructorConstants(cgMappings);
 		doFunctionConstructorConstants(ClassUtil.nullFree(cgOperations));
 		doInstanceCaches(cgTransformation);
@@ -3528,7 +3525,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		doRun(cgTransformation, allInstancesAnalyses);
 		//			break;
 		//		}
-		for (@NonNull CGClass cgClass : CGUtil.getClasses(cgTransformation)) {
+		List<@NonNull CGClass> cgClasses = new ArrayList<>(CGUtil.getClassesList(cgTransformation));
+		Collections.sort(cgClasses, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull CGClass cgClass : cgClasses) {
 			if (!isEmpty(cgClass)) {
 				//	if (!(cgClass instanceof CGCachedOperation)) {
 				js.append("\n");

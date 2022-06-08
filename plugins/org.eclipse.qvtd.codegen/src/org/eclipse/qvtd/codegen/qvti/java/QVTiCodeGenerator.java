@@ -44,8 +44,14 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.LanguageExpression;
+import org.eclipse.ocl.pivot.LetExp;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -172,13 +178,13 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			for (int i = segments.length; --i >= 0; ) {
 				String segment = segments[i];
 				CGPackage cgPackage2 = CGModelFactory.eINSTANCE.createCGPackage();
-				cgPackage2.setName(segment);
+				globalNameManager.declareGlobalName(cgPackage2, segment);
 				cgPackage2.getPackages().add(cgPackage);
 				cgPackage = cgPackage2;
 			}
 		}
 		assert cgPackage != null;
-		as2cgVisitor.pushNameManager(cgTransformation);
+		as2cgVisitor.pushClassNameManager(cgTransformation);
 		cgAnalyzer.analyzeExternalFeatures(as2cgVisitor);
 		as2cgVisitor.popNameManager();
 		return cgPackage;
@@ -189,7 +195,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		String name = asPackage.getName();
-		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + asTransformation.getName());
+		globalNameManager.declareGlobalName(cgPackage, (name != null) && (name.length() > 0)? name : "_" + asTransformation.getName());
 
 		// Parent CG Package
 		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
@@ -209,7 +215,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		CGPackage cgPackage2 = createCGPackage();
 		cgPackage = cgPackage2;
 		optimize(cgPackage2);
-		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage);
+		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage2);
 		QVTiCGModelCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();
@@ -287,7 +293,27 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull OperationCallingConvention getCallingConvention( @NonNull Operation asOperation, boolean isFinal) {
 		if (asOperation instanceof Function) {
-			return FunctionOperationCallingConvention.INSTANCE;
+			Function asFunction = (Function)asOperation;
+			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
+			if (asOperation.getImplementationClass() != null) {
+				assert asBodyExpression == null;
+				return ExternalFunctionOperationCallingConvention.INSTANCE;
+			}
+			else if (asBodyExpression != null) {
+				ShadowExp asShadowExp = getShadowExp(asFunction);
+				if (asShadowExp != null) {
+					return ShadowFunctionOperationCallingConvention.INSTANCE;
+				}
+				else if (asFunction.isIsTransient()) {
+					return TransientFunctionOperationCallingConvention.INSTANCE;
+				}
+				else {
+					return InternalFunctionOperationCallingConvention.INSTANCE;
+				}
+			}
+			else {
+				return EmptyFunctionOperationCallingConvention.INSTANCE;
+			}
 		}
 		return super.getCallingConvention(asOperation, isFinal);
 	}
@@ -350,6 +376,21 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 		s.append(QVTbaseUtil.getName(asTransformation));
 		return s.toString();
+	}
+
+	public @Nullable ShadowExp getShadowExp(@NonNull Function asFunction) {
+		LanguageExpression asBodyExpression = asFunction.getBodyExpression();
+		if (asBodyExpression != null) {
+			OCLExpression asElement = ((ExpressionInOCL)asBodyExpression).getOwnedBody();
+			while (asElement instanceof LetExp) {				// Redundant since now using Function AS context
+				asElement = ((LetExp)asElement).getOwnedIn();
+			}
+			if (asElement instanceof ShadowExp) {			// QVTr Key
+				if (!(asElement.getType() instanceof DataType))
+					return (ShadowExp)asElement;		// FIXME replace with clearer strategy
+			}
+		}
+		return null;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,9 +27,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
 import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
@@ -59,21 +58,17 @@ import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.library.CompositionProperty;
 import org.eclipse.ocl.pivot.internal.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
-import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -86,7 +81,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -119,7 +113,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -444,7 +437,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (cgMapping == null) {
 			cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 			cgMapping.setAst(asMapping);
-			cgMapping.setName(asMapping.getName());
+			globalNameManager.declareGlobalName(cgMapping, asMapping.getName());
 			analyzer.addMapping(asMapping, cgMapping);
 		}
 		return cgMapping;
@@ -452,20 +445,23 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @NonNull CGOperation generateOperationDeclaration(@Nullable Type asSourceType, @NonNull Operation asOperation, boolean requireFinal) {
-		if (asOperation instanceof Function) {			// XXX ??? eliminate override
+		if (!requireFinal && (asOperation instanceof Function)) {			// XXX ??? eliminate override
 			Function asFunction = (Function)asOperation;
 			CGFunction cgFunction = (CGFunction)analyzer.basicGetCGOperation(asFunction);
 			if (cgFunction == null) {
-				FunctionOperationCallingConvention callingConvention = FunctionOperationCallingConvention.INSTANCE;
+				CGClass cgClass = analyzer.getCGClass(PivotUtil.getOwningClass(asOperation));
+				pushClassNameManager(cgClass);
+				FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)context.getCallingConvention(asFunction, true);
 				cgFunction = callingConvention.createCGOperation(analyzer, asSourceType, asFunction);
 				//	getNameManager().declarePreferredName(cgFunction);
 				assert cgFunction.getAst() != null;
 				assert cgFunction.getCallingConvention() == callingConvention;
 				//	analyzer.addCGOperation(cgFunction);
 				//	analyzer.installOperation(asOperation, cgFunction, callingConvention);
-				pushNameManager(cgFunction);
+				pushNestedNameManager(cgFunction);
 				callingConvention.createCGParameters(this, cgFunction, (ExpressionInOCL)asFunction.getBodyExpression());
 				getAnalyzer().addFunction(asFunction, cgFunction);
+				popNameManager();
 				popNameManager();
 			}
 			return cgFunction;
@@ -523,7 +519,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				return cgPropertyCallExp;
 			}
 		}
-		assert cgSource != null;
+		assert (cgSource == null) == asProperty.isIsStatic();
 		return super.generatePropertyCallExp(cgSource, element);
 	}
 
@@ -947,10 +943,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = (CGFunction)generateOperationDeclaration(null, asFunction, true);
-		OperationCallingConvention callingConvention = cgFunction.getCallingConvention();
-		pushNameManager(cgFunction);
+		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
+		pushNestedNameManager(cgFunction);
+		callingConvention.createCGBody(this, cgFunction);
 		//	cgFunction.setRequired(asFunction.isIsRequired());
-		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
+		/*		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
 		//	callingConvention.createCGParameters(this, cgFunction, null);
 		String implementationClass = asFunction.getImplementationClass();
 		if (query != null) {
@@ -963,12 +960,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : query.getOwnedParameters()) {
 			//					getParameter(parameterVariable);
 			//				}
-			cgFunction.setBody(doVisit(CGValuedElement.class, query)); //.getOwnedBody()));
+			//	cgFunction.setBody(doVisit(CGValuedElement.class, query)); //.getOwnedBody()));
+			callingConvention.createCGBody(this, cgFunction);
 			//			} catch (ParserException e) {
 			// TODO Auto-generated catch block
 			//				e.printStackTrace();
 			//			}
-		} else if (implementationClass != null) {
+		}
+		else if (implementationClass != null) {
 			ClassNotFoundException cnfe = null;
 			Class<?> functionClass = null;
 			for (@NonNull ClassLoader classLoader : metamodelManager.getImplementationManager().getClassLoaders()) {
@@ -993,19 +992,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				libraryOperation = (LibraryOperation)implementationField.get(null);
 				assert libraryOperation != null;
 			}
-			catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new IllegalStateException(e);
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new IllegalStateException(e);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new IllegalStateException(e);
-			} catch (IllegalAccessException e) {
+			catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new IllegalStateException(e);
@@ -1033,7 +1020,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				//	CGValuedElement cgArgument = doVisit(CGValuedElement.class, asParameterExp);
 				//	CGFunctionCallExp.getArguments().add(cgArgument);
 			}
-			CGFunctionCallExp CGFunctionCallExp = (CGFunctionCallExp)callingConvention.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+			//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+			CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)callingConvention.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 			//	cgLibraryOperationCallExp.setAst(asOperationCallExp);
 			//	cgLibraryOperationCallExp.setTypeId(analyzer.getCGTypeId(asOperationCallExp.getTypeId()));
 			//	for (@NonNull Parameter asParameter : ClassUtil.nullFree(asFunction.getOwnedParameters())) {
@@ -1047,14 +1035,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//		cgNativeOperationCallExp.getArguments().add(cgArgument);
 			//	}
 			//	CGFunctionCallExp.setLibraryOperation(libraryOperation);
-			CGFunctionCallExp.setReferredOperation(cgFunction);
-			cgFunction.setBody(CGFunctionCallExp); //.getOwnedBody()));
-			String instanceName = getFunctionInstanceName(cgFunction);
-			CGFunctionCallExp.setName(instanceName);
+			//	cgFunctionCallExp.setReferredOperation(cgFunction);
+			cgFunction.setBody(cgFunctionCallExp); //.getOwnedBody()));				// XXX is this line used (by testQVTrCompiler_ATL2QVTr_CG) - it seems like an infinite recursion
+			//	callingConvention.createCGBody(this, cgFunction, query);
+			//	String instanceName = getFunctionInstanceName(cgFunction);				// XXX redundant ??
+			//	cgFunctionCallExp.setName(instanceName);								// XXX redundant ??
 			//				final CGTypeId resultType = cgFunction.getTypeId();
 			//	Function asFunction = QVTiCGUtil.getAST(cgFunction);
 			//	TypeDescriptor functionTypeDescriptor = analyzer.getTypeDescriptor(cgFunction).getEcoreDescriptor(analyzer, null);
-			//	js.append("/* " + localContext.getIdResolverVariable(cgFunction) + "*/");
+			//	js.append("/ * " + localContext.getIdResolverVariable(cgFunction) + "* /");
 
 			//	functionTypeDescriptor.appendBox(js, localContext, cgFunction, cgFunction);
 			/*	js.appendClassReference(null, ValueUtil.class);
@@ -1076,11 +1065,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					js.append("." + instanceName + " = ");
 					js.appendValueName(cgFunction);
 					js.append(";\n");
-			 */
+		 * /
 			//	}
 
 		}
-		//	analyzer.addFunction(asFunction, cgFunction);
+		//	analyzer.addFunction(asFunction, cgFunction); */
 		popNameManager();
 		return cgFunction;
 	}
@@ -1132,9 +1121,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ analyzer.getCodeGenerator().getEntryPointsAnalysis(asTransformation);
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		cgTransformation.setAst(asTransformation);
-		cgTransformation.setName(asTransformation.getName());
+		globalNameManager.declareGlobalName(cgTransformation, asTransformation.getName());
 		analyzer.setCGRootClass(cgTransformation);
-		pushNameManager(cgTransformation);
+		pushClassNameManager(cgTransformation);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
 		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
 			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
@@ -1185,7 +1174,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping asMapping) {
 		CGMapping cgMapping = generateMappingDeclaration(asMapping);
-		pushNameManager(cgMapping);
+		pushNestedNameManager(cgMapping);
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(asMapping, cgMapping);
 		bodyBuilder2.doBottoms();
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
@@ -1221,7 +1210,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingLoop.setAst(asMappingLoop);
 		OCLExpression asSource = asMappingLoop.getOwnedExpression();
 		cgMappingLoop.setSource(doVisit(CGValuedElement.class, asSource));
-		NestedNameManager nameManager = pushNameManager(cgMappingLoop);
+		NestedNameManager nameManager = pushNestedNameManager(cgMappingLoop);
 		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
 		if (asIterators.size() > 0) {
 			LoopVariable asIterator = asIterators.get(0);
@@ -1497,7 +1486,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		cgTypedModel.setAst(asTypedModel);
-		cgTypedModel.setName(asTypedModel.getName());
+		globalNameManager.declareGlobalName(cgTypedModel, asTypedModel.getName());
 		getAnalyzer().addTypedModel(asTypedModel, cgTypedModel);
 		return cgTypedModel;
 	}
