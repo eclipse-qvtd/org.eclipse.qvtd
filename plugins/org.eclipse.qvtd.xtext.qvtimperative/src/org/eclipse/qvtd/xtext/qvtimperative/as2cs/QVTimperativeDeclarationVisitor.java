@@ -100,6 +100,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
@@ -422,6 +424,12 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		csQuery.setIsTransient(asFunction.isIsTransient());
+		String implementationClass = asFunction.getImplementationClass();
+		if (implementationClass != null) {
+			JavaClassCS csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();		// FIXME Bug 548500
+			csJavaClass.setName(implementationClass);
+			csQuery.setImplementation(csJavaClass);
+		}
 		return csQuery;
 	}
 
