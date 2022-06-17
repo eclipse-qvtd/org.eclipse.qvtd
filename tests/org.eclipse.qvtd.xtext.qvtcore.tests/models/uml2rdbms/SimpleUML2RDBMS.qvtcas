@@ -1102,7 +1102,7 @@
                         referredVariable="#JSblN"/>
                   </ownedBody>
                   <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="JSblN" name="1_" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#32e7N"
-                      isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#//@ownedPackages.0/@ownedClasses.29/@ownedOperations.12/@ownedIterators.0"/>
+                      isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#14SMK"/>
                 </ownedSource>
               </value>
               <slotExpression xsi:type="pivot:VariableExp" name="fa" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#27BWs" referredVariable="#3RfwX"/>
@@ -1192,7 +1192,7 @@
                       referredVariable="#nz0sU"/>
                 </ownedBody>
                 <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="nz0sU" name="1_" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#32e7N"
-                    isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#//@ownedPackages.0/@ownedClasses.29/@ownedOperations.12/@ownedIterators.0"/>
+                    isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#14SMK"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:VariableExp" name="a2c" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#SQcpc" referredVariable="#LLu96"/>
             </conditionExpression>
