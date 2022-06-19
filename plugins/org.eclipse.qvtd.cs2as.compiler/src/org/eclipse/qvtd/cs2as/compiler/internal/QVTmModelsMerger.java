@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -297,9 +298,10 @@ public class QVTmModelsMerger {
 		opCallExp.setOwnedSource(source);
 
 		// We set the argument
-		TypeExp arg = PivotFactory.eINSTANCE.createTypeExp();
-		arg.setType(envF.getStandardLibrary().getClassType());
-		arg.setReferredType(refiningType);
+		TypeExp arg = new PivotHelper(envF).createTypeExp(refiningType);
+		//	TypeExp arg = PivotFactory.eINSTANCE.createTypeExp();
+		//	arg.setType(envF.getStandardLibrary().getClassType());
+		//	arg.setReferredType(refiningType);
 		opCallExp.getOwnedArguments().add(arg);
 
 		return createNotOperation(envF, opCallExp);

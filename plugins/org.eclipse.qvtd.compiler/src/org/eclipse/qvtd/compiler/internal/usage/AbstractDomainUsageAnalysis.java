@@ -784,7 +784,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 	public @NonNull DomainUsage visitTypeExp(@NonNull TypeExp object) {
 		Type referredType = object.getReferredType();
 		DomainUsage usage;
-		if (referredType instanceof TemplateParameter) {
+		if (referredType instanceof TemplateParameter) {			// XXX Never happens
 			usage = getTypeUsage(referredType);
 		}
 		else {
