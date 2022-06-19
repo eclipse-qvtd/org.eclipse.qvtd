@@ -334,8 +334,9 @@ public class OCL2QVTm {
 			asTypeOpCallExp.setReferredOperation(getOclAnyOclAsTypeOp());
 			asTypeOpCallExp.setType(shadowExp.getType());
 
-			TypeExp argTypeExp = createTypeExp(shadowExp.getType());
-			argTypeExp.setType(getOclMetaClass());
+			TypeExp argTypeExp = new PivotHelper(envFact).createTypeExp(shadowExp.getType());
+			//	TypeExp argTypeExp = createTypeExp(shadowExp.getType());
+			//	argTypeExp.setType(getOclMetaClass());
 
 			asTypeOpCallExp.getOwnedArguments().add(argTypeExp);
 
@@ -516,7 +517,8 @@ public class OCL2QVTm {
 				asTypeOpCallExp.setType(castType);
 				asTypeOpCallExp.setIsSafe(astPropCallExp.isIsSafe());
 
-				TypeExp argTypeExp = createTypeExp(castType);
+				TypeExp argTypeExp = new PivotHelper(envFact).createTypeExp(castType);
+				//	TypeExp argTypeExp = createTypeExp(castType);
 				asTypeOpCallExp.getOwnedArguments().add(argTypeExp);
 
 				if (result.contains(exp)) { // if exp is the initial oclExp, the new asTypeOpCallExp will be the new result
@@ -688,12 +690,12 @@ public class OCL2QVTm {
 	}
 
 	// TODO promote to PivotUtil
-	private TypeExp createTypeExp(Type type) {
+	/* private TypeExp createTypeExp(Type type) {
 		TypeExp argTypeExp = PivotFactory.eINSTANCE.createTypeExp();
 		argTypeExp.setReferredType(type);
 		argTypeExp.setType(getOclMetaClass());
 		return argTypeExp;
-	}
+	} */
 
 	// To workaround limitation of Bug 495327: Any mapping related to a non-final ast() operation
 	// will include an additional guard to ensure that only strictly instance of (oclTypeOf) the source type
@@ -707,7 +709,8 @@ public class OCL2QVTm {
 			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			PivotHelper helper = new PivotHelper(envFact);
 			VariableExp sourceExp = helper.createVariableExp(leftVar);
-			TypeExp argTypeExp = createTypeExp(leftVar.getType());
+			TypeExp argTypeExp = new PivotHelper(envFact).createTypeExp(leftVar.getType());
+			//	TypeExp argTypeExp = createTypeExp(leftVar.getType());
 			predicate.setConditionExpression(helper.createOperationCallExp(sourceExp, getOclAnyOclIsTypeOfOp(), Collections.singletonList(argTypeExp)));
 
 			guard.getPredicate().add(predicate);
