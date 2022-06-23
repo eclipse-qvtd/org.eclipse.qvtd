@@ -31,9 +31,9 @@ public class QVTiCGModelAnalysisVisitor extends AbstractQVTiCGModelAnalysisVisit
 
 	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
-		Function pFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
-		if (pFunction != null) {
-			CGFunction cgFunction = ((QVTiAnalyzer)context).getFunction(pFunction);
+		Function asFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
+		if (asFunction != null) {
+			CGFunction cgFunction = ((QVTiAnalyzer)context).getCGFunction(asFunction);
 			cgFunctionCallExp.setFunction(cgFunction);
 		}
 		return visitCGOperationCallExp(cgFunctionCallExp);

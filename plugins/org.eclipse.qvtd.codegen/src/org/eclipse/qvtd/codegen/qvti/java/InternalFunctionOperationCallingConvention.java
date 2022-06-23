@@ -84,25 +84,21 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull CGOperation createCGOperation(
-			@NonNull AS2CGVisitor as2cgVisitor, @Nullable Type asSourceType,
-			@NonNull Operation asOperation) {
-		// TODO Auto-generated method stub
+	public @NonNull CGOperation createCGOperation(@NonNull AS2CGVisitor as2cgVisitor, @Nullable Type asSourceType, @NonNull Operation asOperation) {
 		return super.createCGOperation(as2cgVisitor, asSourceType, asOperation);
 	}
 
 	@Override
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
+		assert cgSource != null;
 		QVTiAS2CGVisitor qvtias2cgVisitor = (QVTiAS2CGVisitor)as2cgVisitor;
-		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
+		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		assert codeGenerator.getShadowExp(asFunction) == null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(as2cgVisitor, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
-		assert !useClassToCreateObject;
-		assert cgSource != null;
 		cgFunctionCallExp.getArguments().add(cgSource);
 		initCallArguments(as2cgVisitor, cgFunctionCallExp);
 		return cgFunctionCallExp;
@@ -115,7 +111,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		assert codeGenerator.getShadowExp(asFunction) == null;
-		QVTiNestedNameManager nameManager = (QVTiNestedNameManager)qvtias2cgVisitor.getNameManager();
+		QVTiNestedNameManager nameManager = qvtias2cgVisitor.getNameManager();
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgFunction);
 		cgParameters.add(nameManager.getThisTransformerParameter());			// Include "this" as part of the uniqueness Tuple.
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asFunction)) {
@@ -125,32 +121,25 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor,
-			@NonNull JavaStream js,
-			@NonNull CGOperationCallExp cgOperationCallExp) {
-		// TODO Auto-generated method stub
+	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
 		return super.generateJavaCall(cg2javaVisitor, js, cgOperationCallExp);
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(
-			@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js,
-			@NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
 		return super.generateJavaDeclaration(cg2javaVisitor, js, cgOperation);
 	}
 
 	@Override
-	public void rewriteWithBoxingAndGuards(
-			@NonNull BoxingAnalyzer boxingAnalyzer,
-			@NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
+	public void rewriteWithBoxingAndGuards(@NonNull BoxingAnalyzer boxingAnalyzer, @NonNull CGOperation cgOperation) {
 		super.rewriteWithBoxingAndGuards(boxingAnalyzer, cgOperation);
+		CGValuedElement cgBody = CGUtil.getBody(cgOperation);
+		boxingAnalyzer.rewriteAsBoxed(cgBody);
 	}
 
 	@Override
 	public void rewriteWithBoxingAndGuards(@NonNull BoxingAnalyzer boxingAnalyzer,@NonNull CGOperationCallExp cgOperationCallExp) {
-		for (CGValuedElement cgArgument : cgOperationCallExp.getArguments()) {
+		for (@NonNull CGValuedElement cgArgument : CGUtil.getArguments(cgOperationCallExp)) {
 			boxingAnalyzer.rewriteAsBoxed(cgArgument);
 		}
 	}
