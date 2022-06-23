@@ -36,6 +36,8 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
+import org.eclipse.ocl.examples.codegen.java.types.AbstractDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
@@ -363,7 +365,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 		js.append("public ");
 		js.append(functionName);
-		js.append("(/*Nullable*/ Object ");
+		js.append("(/*@Nullable*/ Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) {\n");
 		js.pushIndentation(null);
@@ -378,29 +380,68 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		//	js.append(")boundValues[0];\n");
 		int i = 0;
 		for (@NonNull CGParameter cgParameter : cgParameters) {
-			String valueName = qvticg2javaVisitor.getResolvedName(cgParameter);
-			js.appendThis(functionName);
-			js.append(".");
-			js.append(valueName);
-			js.append(" = ");
 			int finalI = i++;
-			if (cgParameter.getNameResolution() == thisTransformerNameResolution) {
+			if (cgParameter.getNameResolution() == thisTransformerNameResolution) {			// XXX Is this irregularity really necessary
+				String valueName = qvticg2javaVisitor.getResolvedName(cgParameter);
+				js.appendThis(functionName);
+				js.append(".");
+				js.append(valueName);
+				js.append(" = ");
 				js.append("(");
 				js.appendIsRequired(true);
 				js.append(" ");
 				js.append(cgClass.getName());
 				js.append(")boundValues[" + finalI + "]");
+				js.append(";\n");
 			}
 			else {
-				SubStream castBody = new SubStream() {
+				SubStream castBody1 = new SubStream() {
 					@Override
 					public void append() {
 						js.append("boundValues[" + finalI + "]");
 					}
 				};
-				js.appendClassCast(cgParameter, castBody);
+				String valueName = qvticg2javaVisitor.getResolvedName(cgParameter);
+				///	js.appendTypeDeclaration(cgParameter);
+				//	TypeRepresentation boxedTypeRepresentation = js.getBoxedTypeRepresentation();
+				//	boxedTypeRepresentation.appendTypeDeclaration(cgParameter);			// FIXME this doesn't enforce boxed if cgElement is primitive
+				Boolean isRequired = codeGenerator.isRequired(cgParameter);
+				js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
+				js.append(" ");
+				//	boxedTypeRepresentation.appendClassReference(isRequired, cgParameter);
+				assert cgParameter != null;
+				assert !cgParameter.getNamedValue().isCaught();
+				ElementId elementId = cgParameter.getTypeId().getElementId();
+				TypeDescriptor boxedTypeDescriptor = codeGenerator.getBoxedDescriptor(elementId);
+				if ((cgParameter instanceof CGParameter) && (cgParameter.eContainer() instanceof CGOperation) && (boxedTypeDescriptor instanceof EObjectDescriptor)) {		// FIXME eliminate reclassing
+					Class<?> originalJavaClass = ((EObjectDescriptor)boxedTypeDescriptor).getOriginalJavaClass();
+					js.appendClassReference(isRequired, originalJavaClass);
+				}
+				else {
+					boxedTypeDescriptor.append(js, isRequired);
+				}
+				js.append(" ");
+				js.append(valueName);
+				js.append(" = ");
+				//	js.appendClassCast(cgParameter, castBody1);
+				boxedTypeDescriptor.appendCast(js, isRequired, null, castBody1);
+				js.append(";\n");
+				SubStream castBody2 = new SubStream() {
+					@Override
+					public void append() {
+						js.append(valueName);
+					}
+				};
+				js.appendThis(functionName);			//  XXX Not needed. This is precisely "this"
+				js.append(".");
+				js.append(valueName);
+				js.append(" = ");
+				//	js.appendClassCast(cgParameter, castBody2);
+				assert cgParameter != null;
+				AbstractDescriptor declaredTypeDescriptor = (AbstractDescriptor) codeGenerator.getTypeDescriptor(cgParameter);
+				declaredTypeDescriptor.appendCast(js, isRequired, declaredTypeDescriptor.getNonPrimitiveJavaClass(), castBody2);
+				js.append(";\n");
 			}
-			js.append(";\n");
 		}
 		doFunctionBody3(qvticg2javaVisitor, js, cgFunction);
 		js.popIndentation();
@@ -607,7 +648,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		assert asShadowExp == null;		// ShadowFunctionOperationCallingConvention overload
 		if (!asFunction.isIsTransient()) {
 			NameResolution thisTransformerNameResolution = codeGenerator.getGlobalNameManager().getThisTransformerNameResolution();
-			String thisTransformerName = thisTransformerNameResolution.getResolvedName();
+			//	String thisTransformerName = thisTransformerNameResolution.getResolvedName();
 			CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
 			js.append("protected class ");
 			js.append(functionName);

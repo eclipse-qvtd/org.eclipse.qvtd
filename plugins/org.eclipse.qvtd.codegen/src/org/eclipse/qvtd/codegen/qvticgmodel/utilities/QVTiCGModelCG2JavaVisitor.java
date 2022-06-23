@@ -2427,7 +2427,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 					if (asContainer instanceof TypedModel) {
 						Transformation asTransformation = ((TypedModel)asContainer).getTransformation();
 						if (asTransformation != null) {
-							int index = asTransformation.getModelParameter().indexOf(asContainer);
+							int index = asTransformation.getModelParameter().indexOf(asContainer);			// XXX is this irregularity still necessary here ?
 							String name = getGlobalNameManager().getModelsName() + "[" + index + "/*" + ((TypedModel)asContainer).getName() + "*/]";
 							return name;
 						}

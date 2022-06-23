@@ -75,6 +75,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.java.FunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiNestedNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -438,7 +439,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 			cgMapping.setAst(asMapping);
 			globalNameManager.declareGlobalName(cgMapping, asMapping.getName());
-			analyzer.addMapping(asMapping, cgMapping);
+			analyzer.addCGMapping(cgMapping);
 		}
 		return cgMapping;
 	}
@@ -447,7 +448,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @NonNull CGOperation generateOperationDeclaration(@Nullable Type asSourceType, @NonNull Operation asOperation, boolean requireFinal) {
 		if (!requireFinal && (asOperation instanceof Function)) {			// XXX ??? eliminate override
 			Function asFunction = (Function)asOperation;
-			CGFunction cgFunction = (CGFunction)analyzer.basicGetCGOperation(asFunction);
+			QVTiAnalyzer analyzer = getAnalyzer();
+			CGFunction cgFunction = analyzer.basicGetCGFunction(asFunction);
 			if (cgFunction == null) {
 				CGClass cgClass = analyzer.getCGClass(PivotUtil.getOwningClass(asOperation));
 				pushClassNameManager(cgClass);
@@ -460,9 +462,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				//	analyzer.installOperation(asOperation, cgFunction, callingConvention);
 				pushNestedNameManager(cgFunction);
 				callingConvention.createCGParameters(this, cgFunction, (ExpressionInOCL)asFunction.getBodyExpression());
-				getAnalyzer().addFunction(asFunction, cgFunction);
-				popNameManager();
-				popNameManager();
+				analyzer.addCGFunction(cgFunction);
+				popNestedNameManager();
+				popClassNameManager();
 			}
 			return cgFunction;
 		}
@@ -573,7 +575,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
 			cgFunctionParameter.setAst(asFunctionParameter);
-			cgFunctionParameter.setTypeId(analyzer.getCGTypeId(asFunctionParameter.getTypeId()));
+			//	cgFunctionParameter.setTypeId(analyzer.getCGTypeId(asFunctionParameter.getTypeId()));
 			//	nameManager.declarePreferredName(cgFunctionParameter);
 			cgFunctionParameter.setTypeId(analyzer.getCGTypeId(asFunctionParameter.getTypeId()));
 			if (asFunctionParameter.isIsRequired()) {
@@ -610,6 +612,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	//	public @NonNull QVTiLocalContext getLocalContext() {
 	//		return (QVTiLocalContext)super.getLocalContext();
 	//	}
+
+	@Override
+	public @NonNull QVTiNestedNameManager getNameManager() {
+		return (QVTiNestedNameManager)super.getNameManager();
+	}
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
 		QVTiAnalyzer analyzer = getAnalyzer();
@@ -1070,7 +1077,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		}
 		//	analyzer.addFunction(asFunction, cgFunction); */
-		popNameManager();
+		popNestedNameManager();
 		return cgFunction;
 	}
 
@@ -1142,7 +1149,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}
-		popNameManager();
+		popClassNameManager();
 		return cgTransformation;
 	}
 
@@ -1183,7 +1190,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgFreeVariables.clear();
 		cgFreeVariables.addAll(sortedVariables);
 		bodyBuilder = null;
-		popNameManager();
+		popNestedNameManager();
 		return cgMapping;
 	}
 
@@ -1238,7 +1245,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgMappingStatements.add(cgMappingStatement);
 		}
 		cgMappingLoop.setBody(cgSequence);
-		popNameManager();
+		popNestedNameManager();
 		return cgMappingLoop;
 	}
 
@@ -1487,7 +1494,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		cgTypedModel.setAst(asTypedModel);
 		globalNameManager.declareGlobalName(cgTypedModel, asTypedModel.getName());
-		getAnalyzer().addTypedModel(asTypedModel, cgTypedModel);
+		getAnalyzer().addCGTypedModel(cgTypedModel);
 		return cgTypedModel;
 	}
 
