@@ -186,7 +186,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		assert cgPackage != null;
 		as2cgVisitor.pushClassNameManager(cgTransformation);
 		cgAnalyzer.analyzeExternalFeatures(as2cgVisitor);
-		as2cgVisitor.popNameManager();
+		as2cgVisitor.popClassNameManager();
 		return cgPackage;
 	}
 

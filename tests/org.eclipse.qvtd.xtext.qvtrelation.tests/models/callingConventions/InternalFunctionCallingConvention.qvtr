@@ -1,0 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2022 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation
+ *******************************************************************************/
+import myMM : 'Called.ecore'::called; 
+
+package org::eclipse::qvtd::xtext::qvtrelation::tests::callingConventions {
+	transformation InternalFunctionCallingConvention(from:myMM, to:myMM)
+	{
+		query internalSum(firstValue : ecore::EInt[1], secondValue : ecore::EInt[1]) : ecore::EInt[1] {
+			firstValue + secondValue
+		}
+
+		top relation Values2Values {
+			value : ecore::EInt[1];
+			domain from fromValues : Values{ integer = value };
+			enforce domain to toValues : Values{ integer = internalSum(value, 1) };
+		}
+	}
+}

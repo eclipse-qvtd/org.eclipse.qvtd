@@ -16,13 +16,17 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -31,9 +35,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiAnalyzer extends CodeGenAnalyzer
 {
-	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> cgFunctions = new HashMap<>();
-	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> cgMappings = new HashMap<>();
-	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> cgTypedModels = new HashMap<>();
+	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> asFunction2cgFunctions = new HashMap<>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> asMapping2cgMapping = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
 	private final @Nullable TypeId originalThisTypeId;
 	private final @NonNull TypeId runtimeThisTypeId;
 
@@ -51,20 +55,38 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	public void addFunction(@NonNull Function pFunction, @NonNull CGFunction cgFunction) {
-		cgFunctions.put(pFunction, cgFunction);
+	public void addCGFunction(@NonNull CGFunction cgFunction) {
+		asFunction2cgFunctions.put(QVTiCGUtil.getAST(cgFunction), cgFunction);
 	}
 
-	public void addMapping(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping) {
-		cgMappings.put(pMapping, cgMapping);
+	public void addCGMapping(@NonNull CGMapping cgMapping) {
+		asMapping2cgMapping.put(QVTiCGUtil.getAST(cgMapping), cgMapping);
 	}
 
-	public void addTypedModel(@NonNull TypedModel pTypedModel, @NonNull CGTypedModel cgTypedModel) {
-		cgTypedModels.put(pTypedModel, cgTypedModel);
+	@Override
+	public void addCGOperation(@NonNull CGOperation cgOperation) {
+		super.addCGOperation(cgOperation);
+		if (cgOperation instanceof CGFunction) {
+			addCGFunction((CGFunction)cgOperation);
+		}
 	}
 
-	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping pMapping) {
-		return cgMappings.get(pMapping);
+	public void addCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
+		asTypedModel2cgTypedModel.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+	}
+
+	@Override
+	public void addVirtualCGOperation(@NonNull Operation asOperation, @NonNull CGCachedOperation cgOperation) {
+		super.addVirtualCGOperation(asOperation, cgOperation);
+		// XXX virtual functions
+	}
+
+	public @Nullable CGFunction basicGetCGFunction(@NonNull Function asFunction) {
+		return asFunction2cgFunctions.get(asFunction);
+	}
+
+	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
+		return asMapping2cgMapping.get(asMapping);
 	}
 
 	@Override
@@ -72,8 +94,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return (QVTiCodeGenerator) super.getCodeGenerator();
 	}
 
-	public @Nullable CGFunction getFunction(@NonNull Function pFunction) {
-		return cgFunctions.get(pFunction);
+	public @Nullable CGFunction getCGFunction(@NonNull Function asFunction) {
+		return asFunction2cgFunctions.get(asFunction);
 	}
 
 	@Override
@@ -86,7 +108,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel pTypedModel) {
-		return cgTypedModels.get(pTypedModel);
+	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
+		return asTypedModel2cgTypedModel.get(asTypedModel);
 	}
 }
