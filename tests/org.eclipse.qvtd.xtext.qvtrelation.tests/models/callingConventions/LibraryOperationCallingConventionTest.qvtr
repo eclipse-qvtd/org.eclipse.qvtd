@@ -11,7 +11,7 @@
 import myMM : 'Called.ecore'::called; 
 
 package org::eclipse::qvtd::xtext::qvtrelation::tests::callingConventions {
-	transformation InternalFunctionCallingConvention(from:myMM, to:myMM)
+	transformation LibraryOperationCallingConventionTest(from:myMM, to:myMM)
 	{
 		query internalSum(firstValue : ecore::EInt[1], secondValue : ecore::EInt[1]) : ecore::EInt[1] {
 			firstValue + secondValue
@@ -20,7 +20,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::callingConventions {
 		top relation Values2Values {
 			value : ecore::EInt[1];
 			domain from fromValues : Values{ integer = value };
-			enforce domain to toValues : Values{ integer = internalSum(value, 1) };
+			enforce domain to toValues : Values{ integer = value + 1 };
 		}
 	}
 }
