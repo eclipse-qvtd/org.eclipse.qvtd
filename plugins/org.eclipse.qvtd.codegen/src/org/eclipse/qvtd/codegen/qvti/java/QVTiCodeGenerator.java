@@ -161,26 +161,28 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		QVTiAS2CGVisitor as2cgVisitor = createAS2CGVisitor();
 		CGTransformation cgTransformation = (CGTransformation)ClassUtil.nonNullState(asTransformation.accept(as2cgVisitor));
 		as2cgVisitor.freeze();
-		CGPackage cgPackage = null;
-		for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
-			CGPackage cgPackage2 = createCGPackage(asPackage);
-			if (cgTransformation.eContainer() == null) {
-				cgPackage2.getClasses().add(cgTransformation);
-			}
-			else {
-				cgPackage2.getPackages().add(cgPackage);
-			}
-			cgPackage = cgPackage2;
+		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
+		org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
+		CGPackage cgPackage2 = createCGPackage(asPackage);
+		//	if (cgTransformation.eContainer() == null) {
+		cgPackage2.getClasses().add(cgTransformation);
+		//	}
+		//	else {
+		//		cgPackage2.getPackages().add(cgPackage);
+		//	}
+		CGPackage cgPackage = cgPackage2;
+		while (cgPackage.getContainingPackage() != null) {
+			cgPackage = cgPackage.getContainingPackage();
 		}
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
 			String[] segments = packagePrefix.split("\\.");
 			for (int i = segments.length; --i >= 0; ) {
 				String segment = segments[i];
-				CGPackage cgPackage2 = CGModelFactory.eINSTANCE.createCGPackage();
-				globalNameManager.declareGlobalName(cgPackage2, segment);
-				cgPackage2.getPackages().add(cgPackage);
-				cgPackage = cgPackage2;
+				CGPackage cgPackage3 = CGModelFactory.eINSTANCE.createCGPackage();
+				globalNameManager.declareGlobalName(cgPackage3, segment);
+				cgPackage3.getPackages().add(cgPackage);
+				cgPackage = cgPackage3;
 			}
 		}
 		assert cgPackage != null;

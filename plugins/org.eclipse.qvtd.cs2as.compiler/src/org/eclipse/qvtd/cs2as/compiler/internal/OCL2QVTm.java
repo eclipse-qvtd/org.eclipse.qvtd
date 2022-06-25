@@ -60,6 +60,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -495,7 +496,9 @@ public class OCL2QVTm {
 			} else if(isAstOpCallExp().test(x)) {
 				OperationCallExp exp = (OperationCallExp) x;
 				PropertyCallExp astPropCallExp = PivotFactory.eINSTANCE.createPropertyCallExp();
-				astPropCallExp.setOwnedSource(exp.getOwnedSource());
+				OCLExpression ownedSource = exp.getOwnedSource();
+				PivotUtilInternal.resetContainer(ownedSource);
+				astPropCallExp.setOwnedSource(ownedSource);
 				astPropCallExp.setReferredProperty(getTraceabilityProperty(astPropCallExp.getOwnedSource().getType()));
 				astPropCallExp.setType(astPropCallExp.getReferredProperty().getType());
 				// Copying remaining changeable OpCallExp properties (excepting ownedArguments and referredOperation)
