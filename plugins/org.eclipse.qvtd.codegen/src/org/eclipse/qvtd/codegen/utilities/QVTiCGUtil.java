@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -47,6 +49,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -204,8 +207,16 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
 	}
 
+	public static @NonNull List<@NonNull CGValuedElement> getOwnedStatementsList(@NonNull CGSequence cgSequence) {
+		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
+	}
+
 	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {
 		return ClassUtil.nullFree(cgTransformation.getOwnedTypedModels());
+	}
+
+	public static @NonNull Function getOwningFunction(@NonNull FunctionParameter asFunctionParameter) {
+		return (Function)ClassUtil.nonNullState(asFunctionParameter.getOwningOperation());
 	}
 
 	public static @NonNull CGMapping getOwningMapping(@NonNull CGRealizedVariable cgRealizedVariable) {

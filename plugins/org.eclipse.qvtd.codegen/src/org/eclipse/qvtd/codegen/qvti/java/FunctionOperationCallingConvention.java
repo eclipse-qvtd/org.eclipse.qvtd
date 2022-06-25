@@ -19,9 +19,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
 import org.eclipse.ocl.examples.codegen.calling.AbstractOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -38,13 +35,12 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.AbstractDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -68,9 +64,6 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
  */
 public abstract class FunctionOperationCallingConvention extends AbstractOperationCallingConvention	// cf ConstrainedOperationCallingConvention
 {
-	@Override
-	public abstract @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @Nullable Type asSourceType, @NonNull Operation asOperation);
-
 	protected boolean doFunctionBody(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
 		CGValuedElement body = qvticg2javaVisitor.getExpression(cgFunction.getBody());
 		ElementId elementId = cgFunction.getTypeId().getElementId();

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -100,7 +101,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGMapping> getOwnedMappings() {
 		if (ownedMappings == null) {
-			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5);
+			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
 		}
 		return ownedMappings;
 	}

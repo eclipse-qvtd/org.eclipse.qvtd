@@ -74,6 +74,7 @@ public class QVTtemplateTables extends AbstractTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_ = TypeId.COLLECTION;
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BooleanType = QVTtemplateTables.PACKid_$metamodel$.getClassId("BooleanType", 0);
@@ -82,16 +83,18 @@ public class QVTtemplateTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTtemplateTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ObjectTemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("ObjectTemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclComparable = QVTtemplateTables.PACKid_$metamodel$.getClassId("OclComparable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclType = QVTtemplateTables.PACKid_$metamodel$.getClassId("OclType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTtemplateTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyTemplateItem = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("PropertyTemplateItem", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTtemplateTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTtemplateTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
 	public static final /*@NonInvalid*/ @NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_OCLExpression, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_PropertyTemplateItem = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_PropertyTemplateItem, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTtemplateTables.PARTid_, QVTtemplateTables.PARTid__0);

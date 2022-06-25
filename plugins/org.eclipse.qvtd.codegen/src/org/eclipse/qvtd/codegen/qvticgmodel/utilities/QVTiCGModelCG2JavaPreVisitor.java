@@ -40,36 +40,23 @@ public class QVTiCGModelCG2JavaPreVisitor extends AbstractQVTiCGModelCG2JavaPreV
 
 	@Override
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
-		pushNameManager(cgFunction);
-		try {
-			super.visitCGFunction(cgFunction);
-			return null;
-		}
-		finally {
-			popNameManager();
-		}
+		super.visitCGFunction(cgFunction);
+		wrapLetVariables(cgFunction);
+		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
-		pushNameManager(cgMapping);
-		try {
-			return super.visitCGMapping(cgMapping);
-		}
-		finally {
-			popNameManager();
-		}
+		super.visitCGMapping(cgMapping);
+		wrapLetVariables(cgMapping);
+		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
-		pushNameManager(cgMappingLoop);
-		try {
-			return super.visitCGMappingLoop(cgMappingLoop);
-		}
-		finally {
-			popNameManager();
-		}
+		super.visitCGMappingLoop(cgMappingLoop);
+		wrapLetVariables(cgMappingLoop);
+		return null;
 	}
 
 	@Override

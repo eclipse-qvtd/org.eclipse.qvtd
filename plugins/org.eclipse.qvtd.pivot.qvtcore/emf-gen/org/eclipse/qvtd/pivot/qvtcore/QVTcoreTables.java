@@ -83,6 +83,7 @@ public class QVTcoreTables extends AbstractTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_ = TypeId.COLLECTION;
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTcore", null, QVTcorePackage.eINSTANCE);
@@ -93,6 +94,7 @@ public class QVTcoreTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTcoreTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTcoreTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CoreDomain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("CoreDomain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CorePattern = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("CorePattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTcoreTables.PACKid_$metamodel$.getClassId("DataType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnforcementOperation = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("EnforcementOperation", 0);
@@ -100,6 +102,8 @@ public class QVTcoreTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("GuardVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Mapping", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTcoreTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclComparable = QVTcoreTables.PACKid_$metamodel$.getClassId("OclComparable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclType = QVTcoreTables.PACKid_$metamodel$.getClassId("OclType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp = QVTcoreTables.PACKid_$metamodel$.getClassId("OperationCallExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OppositePropertyAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("OppositePropertyAssignment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTcoreTables.PACKid_$metamodel$.getClassId("Property", 0);
@@ -111,8 +115,6 @@ public class QVTcoreTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTcoreTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_EnforcementMode = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getEnumerationId("EnforcementMode");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(0, "message", TypeId.STRING);
 	public static final /*@NonInvalid*/ @NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32 = "OppositePropertyAssignment::CompatibleTypeForPartialValue: ";
 	public static final /*@NonInvalid*/ @NonNull String STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32 = "OppositePropertyAssignment::CompatibleTypeForTotalValue: ";
 	public static final /*@NonInvalid*/ @NonNull String STR_PropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32 = "PropertyAssignment::CompatibleTypeForPartialValue: ";
@@ -120,13 +122,15 @@ public class QVTcoreTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull String STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32 = "VariableAssignment::CompatibleTypeForValue: ";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTcoreTables.CLSSid_Domain, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Assignment = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_Assignment, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EnforcementOperation = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_EnforcementOperation, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Mapping = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_Mapping, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RealizedVariable = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_RealizedVariable, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_VariableDeclaration = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_VariableDeclaration, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTcoreTables.PARTid__0, QVTcoreTables.PARTid_);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTcoreTables.PARTid_, QVTcoreTables.PARTid__0);
 
 	/**
 	 *	The type parameters for templated types and operations.

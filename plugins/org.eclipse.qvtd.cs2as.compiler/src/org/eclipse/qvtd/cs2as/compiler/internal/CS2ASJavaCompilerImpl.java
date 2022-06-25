@@ -19,12 +19,13 @@ import javax.tools.JavaFileObject;
 import org.apache.commons.logging.Log;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.ids.ElementId;
@@ -95,23 +97,23 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		@Override
-		protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor() {
-			return new CS2ASAS2CGVisitor(this);
+		public @NonNull AS2CGVisitor createAS2CGVisitor(@NonNull CodeGenAnalyzer codeGenAnalyzer) {
+			return new CS2ASAS2CGVisitor((QVTiAnalyzer)codeGenAnalyzer);
 		}
 
 		@Override
 		public @NonNull AnalysisVisitor createAnalysisVisitor() {
-			return new CS2ASAnalysisVisitor(cgAnalyzer);
+			return new CS2ASAnalysisVisitor(getAnalyzer());
 		}
 
 		@Override
 		public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
-			return new CS2ASBoxingAnalyser(cgAnalyzer);
+			return new CS2ASBoxingAnalyser(getAnalyzer());
 		}
 
 		@Override
 		public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
-			return new CS2ASFieldingAnalyser(cgAnalyzer);
+			return new CS2ASFieldingAnalyser(getAnalyzer());
 		}
 
 		@Override
@@ -327,8 +329,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	protected static class CS2ASAS2CGVisitor extends QVTiAS2CGVisitor {
 
-		public CS2ASAS2CGVisitor(@NonNull QVTiCodeGenerator codeGenerator) {
-			super(codeGenerator);
+		public CS2ASAS2CGVisitor(@NonNull QVTiAnalyzer analyzer) {
+			super(analyzer);
 		}
 	}
 

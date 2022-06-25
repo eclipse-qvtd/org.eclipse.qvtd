@@ -11,9 +11,13 @@
 package org.eclipse.qvtd.codegen.qvti.java;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager;
-import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
+import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator.QVTiNameManagerHelper;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -69,39 +73,61 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
 		super(codeGenerator, helper);
-		this.cachedResultName = globalNameManager.declareGlobalName(null, CACHED_RESULT_NAME);
-		this.classId2AllClassIndexes = globalNameManager.declareGlobalName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
-		this.classId2ClassId = globalNameManager.declareGlobalName(null, CLASS_ID_2_CLASS_ID_);
-		this.constructorName = globalNameManager.declareGlobalName(null, CONSTRUCTOR_NAME);
-		this.createFromStringName = globalNameManager.declareGlobalName(null, CREATE_FROM_STRING_NAME);
-		this.emptyListName = globalNameManager.declareGlobalName(null, EMPTY_LIST_NAME);
-		this.getSpeculationSlotStateName = globalNameManager.declareGlobalName(null, GET_SPECULATION_SLOT_STATE_NAME);
-		this.getSpeculationStatusName = globalNameManager.declareGlobalName(null, GET_SPECULATION_STATUS_NAME);
-		this.getTransformationExecutionName = globalNameManager.declareGlobalName(null, GET_TRANSFORMATION_EXECUTION_NAME);
-		this.inputSpeculationSlotStateName = globalNameManager.declareGlobalName(null, INPUT_SPECULATION_SLOT_STATE_NAME);
-		this.inputSpeculationSlotStatusName = globalNameManager.declareGlobalName(null, INPUT_SPECULATION_SLOT_STATUS_NAME);
-		this.invocationHashCodeName = globalNameManager.declareGlobalName(null, INVOCATION_HASH_CODE_NAME);
-		this.modelsName = globalNameManager.declareGlobalName(null, MODELS_NAME);
-		this.needsSpeculationName = globalNameManager.declareGlobalName(null, NEEDS_SPECULATION_NAME);
-		this.objectManagerName = globalNameManager.declareGlobalName(null, OBJECT_MANAGER_NAME);
-		this.oppositeIndex2PropertyIdName = globalNameManager.declareGlobalName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
-		this.outputSpeculationSlotStateName = globalNameManager.declareGlobalName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
-		this.outputSpeculationSlotStatusName = globalNameManager.declareGlobalName(null, OUTPUT_SPECULATION_SLOT_STATUS_NAME);
-		this.thisTransformerName = globalNameManager.declareGlobalName(null, THIS_TRANSFORMER_NAME);
-		this.transformationExecutionName = globalNameManager.declareGlobalName(null, TRANSFORMATION_EXECUTION_NAME);
-		this.transformationName = globalNameManager.declareGlobalName(null, TRANSFORMATION_NAME);
+		this.cachedResultName = globalNameManager.declareEagerName(null, CACHED_RESULT_NAME);
+		this.classId2AllClassIndexes = globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
+		this.classId2ClassId = globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
+		this.constructorName = globalNameManager.declareEagerName(null, CONSTRUCTOR_NAME);
+		this.createFromStringName = globalNameManager.declareEagerName(null, CREATE_FROM_STRING_NAME);
+		this.emptyListName = globalNameManager.declareEagerName(null, EMPTY_LIST_NAME);
+		this.getSpeculationSlotStateName = globalNameManager.declareEagerName(null, GET_SPECULATION_SLOT_STATE_NAME);
+		this.getSpeculationStatusName = globalNameManager.declareEagerName(null, GET_SPECULATION_STATUS_NAME);
+		this.getTransformationExecutionName = globalNameManager.declareEagerName(null, GET_TRANSFORMATION_EXECUTION_NAME);
+		this.inputSpeculationSlotStateName = globalNameManager.declareEagerName(null, INPUT_SPECULATION_SLOT_STATE_NAME);
+		this.inputSpeculationSlotStatusName = globalNameManager.declareEagerName(null, INPUT_SPECULATION_SLOT_STATUS_NAME);
+		this.invocationHashCodeName = globalNameManager.declareEagerName(null, INVOCATION_HASH_CODE_NAME);
+		this.modelsName = globalNameManager.declareEagerName(null, MODELS_NAME);
+		this.needsSpeculationName = globalNameManager.declareEagerName(null, NEEDS_SPECULATION_NAME);
+		this.objectManagerName = globalNameManager.declareEagerName(null, OBJECT_MANAGER_NAME);
+		this.oppositeIndex2PropertyIdName = globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
+		this.outputSpeculationSlotStateName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
+		this.outputSpeculationSlotStatusName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATUS_NAME);
+		this.thisTransformerName = globalNameManager.declareEagerName(null, THIS_TRANSFORMER_NAME);
+		this.transformationExecutionName = globalNameManager.declareEagerName(null, TRANSFORMATION_EXECUTION_NAME);
+		this.transformationName = globalNameManager.declareEagerName(null, TRANSFORMATION_NAME);
 	}
 
+	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+		QVTiExecutableNameManager mappingNameManager = getCodeGenerator().createMappingNameManager(transformationNameManager, cgMapping);
+		assert basicGetChildNameManager(cgMapping) == mappingNameManager;
+		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
+		//	addNameManager(cgScope, nestedNameManager.getParent());
+		return mappingNameManager;
+	}
+
+	// reuse createLoopNameManager
+	public @NonNull ExecutableNameManager createExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+		ExecutableNameManager mappingLoopNameManager = getCodeGenerator().createExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+		assert basicGetChildNameManager(cgMappingLoop) == mappingLoopNameManager;
+		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
+		//	addNameManager(cgScope, nestedNameManager.getParent());
+		return mappingLoopNameManager;
+	}
+
+	@Deprecated
 	public @NonNull String getCachedResultName() {
 		return cachedResultName.getResolvedName();
 	}
 
+	public @NonNull NameResolution getCachedResultNameResolution() {
+		return cachedResultName;
+	}
+
 	public @NonNull String getClassIndex2allClassIndexes(int typedModelNumber) {
-		return globalNameManager.declareGlobalName(null, CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber).getResolvedName();
+		return globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber).getResolvedName();
 	}
 
 	public @NonNull String getClassIndex2classId(int typedModelNumber) {
-		return globalNameManager.declareGlobalName(null, CLASS_ID_2_CLASS_ID_ + typedModelNumber).getResolvedName();
+		return globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_ + typedModelNumber).getResolvedName();
 	}
 
 	public @NonNull NameResolution getClassId2ClassId() {
@@ -110,6 +136,11 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public @NonNull NameResolution getClassId2AllClassIndexes() {
 		return classId2AllClassIndexes;
+	}
+
+	@Override
+	public @NonNull QVTiCodeGenerator getCodeGenerator() {
+		return (QVTiCodeGenerator)super.getCodeGenerator();
 	}
 
 	public @NonNull String getConstructorName() {
@@ -173,7 +204,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	}
 
 	public @NonNull String getOppositeIndex2propertyIdName() {
-		return globalNameManager.declareGlobalName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME).getResolvedName();
+		return globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME).getResolvedName();
 	}
 
 	public @NonNull String getThisTransformerName() {

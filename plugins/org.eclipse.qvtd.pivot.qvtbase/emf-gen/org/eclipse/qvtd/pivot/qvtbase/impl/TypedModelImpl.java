@@ -435,8 +435,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
@@ -458,7 +458,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				else {
 					IF_isThis = QVTbaseTables.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(IF_isPrimitive, IF_isThis);
+				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(IF_isPrimitive, IF_isThis);
 				final /*@NonInvalid*/ boolean isTrace = this.isIsTrace();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isTrace;
 				if (isTrace) {
@@ -467,9 +467,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				else {
 					IF_isTrace = QVTbaseTables.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum, IF_isTrace);
-				final /*@NonInvalid*/ boolean result = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, sum_0, QVTbaseTables.INT_1).booleanValue();
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ @NonNull IntegerValue sum = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum_0, IF_isTrace);
+				final /*@NonInvalid*/ boolean le_0 = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, sum, QVTbaseTables.INT_1).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, le_0, QVTbaseTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

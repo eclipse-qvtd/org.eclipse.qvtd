@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.qvti.java;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.ExecutorOppositePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
@@ -26,8 +25,10 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
@@ -42,8 +43,9 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 	public static final @NonNull MiddlePropertyCallingConvention INSTANCE = new MiddlePropertyCallingConvention();
 
 	@Override
-	public @NonNull CGValuedElement createCGNavigationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGProperty cgProperty,
+	public @NonNull CGValuedElement createCGNavigationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGProperty cgProperty,
 			@NonNull LibraryProperty libraryProperty, @Nullable CGValuedElement cgSource, @NonNull NavigationCallExp asNavigationCallExp) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		/*		CodeGenerator codeGenerator = as2cgVisitor.getCodeGenerator();
 		OppositePropertyCallExp asOppositePropertyCallExp = (OppositePropertyCallExp)asNavigationCallExp;
 		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
@@ -76,16 +78,16 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 		cgPropertyCallExp.setReferredProperty(cgProperty);
 		cgPropertyCallExp.setAsProperty(asProperty);
 		cgPropertyCallExp.setAst(asOppositePropertyCallExp);
-		cgPropertyCallExp.setTypeId(as2cgVisitor.getAnalyzer().getCGTypeId(asOppositePropertyCallExp.getTypeId()));
+		cgPropertyCallExp.setTypeId(qvtiAnalyzer.getCGTypeId(asOppositePropertyCallExp.getTypeId()));
 		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
 	}
 
 	@Override
-	public @NonNull CGProperty createCGProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull Property asProperty) {
+	public @NonNull CGProperty createCGProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull TypedElement asTypedElement) {
 		// TODO Auto-generated method stub
-		return super.createCGProperty(analyzer, asProperty);		// XXX
+		return super.createCGProperty(analyzer, asTypedElement);		// XXX
 	}
 
 	@Override

@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.codegen.qvticgmodel.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
-import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;

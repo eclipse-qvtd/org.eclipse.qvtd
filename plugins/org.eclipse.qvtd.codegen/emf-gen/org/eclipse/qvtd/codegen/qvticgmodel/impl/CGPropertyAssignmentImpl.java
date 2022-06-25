@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.pivot.Property;
@@ -185,7 +184,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -365,7 +364,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				return eInternalContainer().eInverseRemove(this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
+				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

@@ -46,7 +46,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -310,18 +309,15 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 * if isOpposite then referredProperty.opposite else referredProperty endif
 		 */
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Property referredProperty_0 = this.getReferredProperty();
+		final /*@NonInvalid*/ @NonNull Property referredProperty = this.getReferredProperty();
 		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
 		/*@NonInvalid*/ @Nullable Property IF_isOpposite;
 		if (isOpposite) {
-			final /*@NonInvalid*/ @Nullable Property opposite = referredProperty_0.getOpposite();
+			final /*@NonInvalid*/ @Nullable Property opposite = referredProperty.getOpposite();
 			IF_isOpposite = opposite;
 		}
 		else {
-			IF_isOpposite = referredProperty_0;
-		}
-		if (IF_isOpposite == null) {
-			throw new InvalidValueException("Null body for \'qvttemplate::PropertyTemplateItem::resolvedProperty\'");
+			IF_isOpposite = referredProperty;
 		}
 		return IF_isOpposite;
 	}
@@ -358,50 +354,64 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_IF_status;
+				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer = this.getObjContainer();
 					@SuppressWarnings("null")
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer.getReferredClass();
+					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty.getOwningClass();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer.getReferredClass();
-					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, referredClass, owningClass).booleanValue();
-					/*@Thrown*/ @NonNull Object IF_status;
-					if (status) {
-						IF_status = ValueUtil.TRUE_VALUE;
-					}
-					else {
-						final /*@NonInvalid*/ @Nullable String name = referredClass.getName();
-						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
-						final /*@NonInvalid*/ @NonNull Object name_0 = owningClass == null;
-						/*@Thrown*/ @Nullable String safe_name_source;
-						if (name_0 == Boolean.TRUE) {
-							safe_name_source = null;
+					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, referredClass, owningClass).booleanValue();
+					CAUGHT_conformsTo = conformsTo;
+				}
+				catch (Exception THROWN_CAUGHT_conformsTo) {
+					CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
+				}
+				/*@Caught*/ @NonNull Object IF_IF_CAUGHT_conformsTo;
+				if (CAUGHT_conformsTo == Boolean.TRUE) {
+					IF_IF_CAUGHT_conformsTo = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_sum;
+					try {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer_0 = this.getObjContainer();
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = objContainer_0.getReferredClass();
+						final /*@NonInvalid*/ @Nullable String name = referredClass_0.getName();
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass_0 = resolvedProperty_0.getOwningClass();
+						final /*@NonInvalid*/ boolean IsEQ2_ = owningClass_0 == null;
+						/*@Thrown*/ @Nullable String IF_IsEQ2_;
+						if (IsEQ2_) {
+							IF_IsEQ2_ = null;
 						}
 						else {
-							assert owningClass != null;
-							final /*@Thrown*/ @Nullable String name_1 = owningClass.getName();
-							safe_name_source = name_1;
+							assert owningClass_0 != null;
+							final /*@Thrown*/ @Nullable String name_0 = owningClass_0.getName();
+							IF_IsEQ2_ = name_0;
 						}
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_0, status);
-						IF_status = TUP_;
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, IF_IsEQ2_);
+						CAUGHT_sum = sum;
 					}
-					CAUGHT_IF_status = IF_status;
+					catch (Exception THROWN_CAUGHT_sum) {
+						CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
+					}
+					final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, CAUGHT_sum, CAUGHT_conformsTo);
+					IF_IF_CAUGHT_conformsTo = TUP_;
 				}
-				catch (Exception e) {
-					CAUGHT_IF_status = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_status, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IF_CAUGHT_conformsTo, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -450,28 +460,28 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_IF_eq;
+				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
+					final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_not;
 					try {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
-						catch (Exception e) {
-							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_oclIsKindOf) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
 						}
 						if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_oclIsKindOf;
@@ -490,76 +500,73 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						CAUGHT_not = not;
 					}
-					catch (Exception e) {
-						CAUGHT_not = ValueUtil.createInvalidValue(e);
+					catch (Exception THROWN_CAUGHT_not) {
+						CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
 					}
-					final /*@Thrown*/ @Nullable Boolean status;
+					final /*@Thrown*/ @Nullable Boolean implies;
 					if (CAUGHT_not == ValueUtil.FALSE_VALUE) {
-						status = ValueUtil.TRUE_VALUE;
+						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
 						/*@Caught*/ @Nullable Object CAUGHT_or;
 						try {
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type propertyType = resolvedProperty_0.getType();
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-							final /*@NonInvalid*/ @Nullable Type valueType = value.getType();
-							/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
-							try {
-								final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
-								/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-								if (conformsTo == Boolean.TRUE) {
-									safe_conformsTo_source = null;
-								}
-								else {
-									if (valueType == null) {
+							final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
+							/*@Caught*/ @Nullable Object IF_IsEQ2_;
+							if (IsEQ2_) {
+								IF_IsEQ2_ = null;
+							}
+							else {
+								/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+								try {
+									if (type_0 == null) {
 										throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 									}
-									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
-									safe_conformsTo_source = conformsTo_0;
+									final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_0, type).booleanValue();
+									CAUGHT_conformsTo = conformsTo;
 								}
-								CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
-							}
-							catch (Exception e) {
-								CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+								catch (Exception THROWN_CAUGHT_conformsTo) {
+									CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
+								}
+								IF_IsEQ2_ = CAUGHT_conformsTo;
 							}
 							final /*@Thrown*/ @Nullable Boolean or;
-							if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							if (IF_IsEQ2_ == ValueUtil.TRUE_VALUE) {
 								or = ValueUtil.TRUE_VALUE;
 							}
 							else {
-								/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
-								try {
-									final /*@NonInvalid*/ @NonNull Object conformsTo_1 = propertyType == null;
-									/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
-									if (conformsTo_1 == Boolean.TRUE) {
-										safe_conformsTo_source_0 = null;
-									}
-									else {
-										if (propertyType == null) {
+								final /*@NonInvalid*/ boolean IsEQ2__0 = type == null;
+								/*@Caught*/ @Nullable Object IF_IsEQ2__0;
+								if (IsEQ2__0) {
+									IF_IsEQ2__0 = null;
+								}
+								else {
+									/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+									try {
+										if (type == null) {
 											throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 										}
-										final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
-										safe_conformsTo_source_0 = conformsTo_2;
+										final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+										CAUGHT_conformsTo_0 = conformsTo_0;
 									}
-									CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
+									catch (Exception THROWN_CAUGHT_conformsTo_0) {
+										CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo_0);
+									}
+									IF_IsEQ2__0 = CAUGHT_conformsTo_0;
 								}
-								catch (Exception e) {
-									CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
-								}
-								if (CAUGHT_safe_conformsTo_source_0 == ValueUtil.TRUE_VALUE) {
+								if (IF_IsEQ2__0 == ValueUtil.TRUE_VALUE) {
 									or = ValueUtil.TRUE_VALUE;
 								}
 								else {
-									if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+									if (IF_IsEQ2_ instanceof InvalidValueException) {
+										throw (InvalidValueException)IF_IsEQ2_;
 									}
-									if (CAUGHT_safe_conformsTo_source_0 instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_safe_conformsTo_source_0;
+									if (IF_IsEQ2__0 instanceof InvalidValueException) {
+										throw (InvalidValueException)IF_IsEQ2__0;
 									}
-									if ((CAUGHT_safe_conformsTo_source == null) || (CAUGHT_safe_conformsTo_source_0 == null)) {
+									if ((IF_IsEQ2_ == null) || (IF_IsEQ2__0 == null)) {
 										or = null;
 									}
 									else {
@@ -569,11 +576,11 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							}
 							CAUGHT_or = or;
 						}
-						catch (Exception e) {
-							CAUGHT_or = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_or) {
+							CAUGHT_or = ValueUtil.createInvalidValue(THROWN_CAUGHT_or);
 						}
 						if (CAUGHT_or == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							if (CAUGHT_not instanceof InvalidValueException) {
@@ -583,57 +590,75 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								throw (InvalidValueException)CAUGHT_or;
 							}
 							if ((CAUGHT_not == null) || (CAUGHT_or == null)) {
-								status = null;
+								implies = null;
 							}
 							else {
-								status = ValueUtil.FALSE_VALUE;
+								implies = ValueUtil.FALSE_VALUE;
 							}
 						}
 					}
-					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object IF_eq;
-					if (eq) {
-						IF_eq = ValueUtil.TRUE_VALUE;
+					CAUGHT_implies = implies;
+				}
+				catch (Exception THROWN_CAUGHT_implies) {
+					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+				try {
+					if (CAUGHT_implies instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_implies;
 					}
-					else {
+					final /*@Thrown*/ @Nullable Boolean THROWN_implies = (Boolean)CAUGHT_implies;
+					final /*@Thrown*/ boolean IsEQ_ = THROWN_implies == Boolean.TRUE;
+					CAUGHT_IsEQ_ = IsEQ_;
+				}
+				catch (Exception THROWN_CAUGHT_IsEQ_) {
+					CAUGHT_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IsEQ_);
+				}
+				/*@Caught*/ @NonNull Object IF_CAUGHT_IsEQ_;
+				if (CAUGHT_IsEQ_ == Boolean.TRUE) {
+					IF_CAUGHT_IsEQ_ = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_sum;
+					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
-						final /*@NonInvalid*/ @NonNull Object name = type_0 == null;
-						/*@Thrown*/ @Nullable String safe_name_source;
-						if (name == Boolean.TRUE) {
-							safe_name_source = null;
-						}
-						else {
-							assert type_0 != null;
-							final /*@Thrown*/ @Nullable String name_0 = type_0.getName();
-							safe_name_source = name_0;
-						}
-						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(safe_name_source, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_1.getType();
-						final /*@NonInvalid*/ @NonNull Object name_1 = type_1 == null;
-						/*@Thrown*/ @Nullable String safe_name_source_0;
-						if (name_1 == Boolean.TRUE) {
-							safe_name_source_0 = null;
+						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
+						final /*@NonInvalid*/ boolean IsEQ2__1 = type_1 == null;
+						/*@Thrown*/ @Nullable String IF_IsEQ2__1;
+						if (IsEQ2__1) {
+							IF_IsEQ2__1 = null;
 						}
 						else {
 							assert type_1 != null;
-							final /*@Thrown*/ @Nullable String name_2 = type_1.getName();
-							safe_name_source_0 = name_2;
+							final /*@Thrown*/ @Nullable String name = type_1.getName();
+							IF_IsEQ2__1 = name;
 						}
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source_0);
-						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						IF_eq = TUP_;
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(IF_IsEQ2__1, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type_2 = resolvedProperty_0.getType();
+						final /*@NonInvalid*/ boolean IsEQ2__2 = type_2 == null;
+						/*@Thrown*/ @Nullable String IF_IsEQ2__2;
+						if (IsEQ2__2) {
+							IF_IsEQ2__2 = null;
+						}
+						else {
+							assert type_2 != null;
+							final /*@Thrown*/ @Nullable String name_0 = type_2.getName();
+							IF_IsEQ2__2 = name_0;
+						}
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, IF_IsEQ2__2);
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
+						CAUGHT_sum = sum;
 					}
-					CAUGHT_IF_eq = IF_eq;
+					catch (Exception THROWN_CAUGHT_sum) {
+						CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
+					}
+					final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, CAUGHT_sum, CAUGHT_implies);
+					IF_CAUGHT_IsEQ_ = TUP_;
 				}
-				catch (Exception e) {
-					CAUGHT_IF_eq = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_eq, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_CAUGHT_IsEQ_, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -685,28 +710,28 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_IF_eq;
+				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and;
 					try {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0).booleanValue();
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
-						catch (Exception e) {
-							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_oclIsKindOf) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
 						}
 						final /*@Thrown*/ @Nullable Boolean and;
 						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
@@ -717,15 +742,15 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							try {
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
 								try {
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 									@SuppressWarnings("null")
 									final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 									final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-									final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_1).booleanValue();
+									final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_0).booleanValue();
 									CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 								}
-								catch (Exception e) {
-									CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(e);
+								catch (Exception THROWN_CAUGHT_oclIsKindOf_0) {
+									CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf_0);
 								}
 								if (CAUGHT_oclIsKindOf_0 instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_oclIsKindOf_0;
@@ -744,8 +769,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								}
 								CAUGHT_not = not;
 							}
-							catch (Exception e) {
-								CAUGHT_not = ValueUtil.createInvalidValue(e);
+							catch (Exception THROWN_CAUGHT_not) {
+								CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
 							}
 							if (CAUGHT_not == ValueUtil.FALSE_VALUE) {
 								and = ValueUtil.FALSE_VALUE;
@@ -767,82 +792,86 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						CAUGHT_and = and;
 					}
-					catch (Exception e) {
-						CAUGHT_and = ValueUtil.createInvalidValue(e);
+					catch (Exception THROWN_CAUGHT_and) {
+						CAUGHT_and = ValueUtil.createInvalidValue(THROWN_CAUGHT_and);
 					}
-					final /*@Thrown*/ @Nullable Boolean status;
+					final /*@Thrown*/ @Nullable Boolean implies;
 					if (CAUGHT_and == ValueUtil.FALSE_VALUE) {
-						status = ValueUtil.TRUE_VALUE;
+						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
+						/*@Caught*/ @NonNull Object CAUGHT_elementType;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
+							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_1);
+							if (oclAsType == null) {
+								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+							}
+							final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
+							CAUGHT_elementType = elementType;
+						}
+						catch (Exception THROWN_CAUGHT_elementType) {
+							CAUGHT_elementType = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType);
+						}
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
 						/*@Caught*/ @Nullable Object CAUGHT_or;
 						try {
-							/*@Caught*/ @NonNull Object CAUGHT_propertyType;
-							try {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
-								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_2);
-								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
-								CAUGHT_propertyType = propertyType;
+							final /*@NonInvalid*/ boolean IsEQ2_ = type_2 == null;
+							/*@Caught*/ @Nullable Object IF_IsEQ2_;
+							if (IsEQ2_) {
+								IF_IsEQ2_ = null;
 							}
-							catch (Exception e) {
-								CAUGHT_propertyType = ValueUtil.createInvalidValue(e);
-							}
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-							final /*@NonInvalid*/ @Nullable Type valueType = value_0.getType();
-							/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
-							try {
-								final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
-								/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-								if (conformsTo == Boolean.TRUE) {
-									safe_conformsTo_source = null;
-								}
-								else {
-									if (valueType == null) {
+							else {
+								/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+								try {
+									if (type_2 == null) {
 										throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 									}
-									if (CAUGHT_propertyType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_propertyType;
+									if (CAUGHT_elementType instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_elementType;
 									}
-									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
-									safe_conformsTo_source = conformsTo_0;
+									final /*@Thrown*/ @NonNull Type THROWN_elementType = (@NonNull Type)CAUGHT_elementType;
+									final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_2, THROWN_elementType).booleanValue();
+									CAUGHT_conformsTo = conformsTo;
 								}
-								CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
-							}
-							catch (Exception e) {
-								CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+								catch (Exception THROWN_CAUGHT_conformsTo) {
+									CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
+								}
+								IF_IsEQ2_ = CAUGHT_conformsTo;
 							}
 							final /*@Thrown*/ @Nullable Boolean or;
-							if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
+							if (IF_IsEQ2_ == ValueUtil.TRUE_VALUE) {
 								or = ValueUtil.TRUE_VALUE;
 							}
 							else {
-								/*@Caught*/ @NonNull Object CAUGHT_conformsTo_1;
+								/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
 								try {
-									if (CAUGHT_propertyType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_propertyType;
+									if (CAUGHT_elementType instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_elementType;
 									}
-									final /*@Thrown*/ boolean conformsTo_1 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
-									CAUGHT_conformsTo_1 = conformsTo_1;
+									final /*@Thrown*/ @NonNull Type THROWN_elementType_0 = (@NonNull Type)CAUGHT_elementType;
+									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_elementType_0, type_2).booleanValue();
+									CAUGHT_conformsTo_0 = conformsTo_0;
 								}
-								catch (Exception e) {
-									CAUGHT_conformsTo_1 = ValueUtil.createInvalidValue(e);
+								catch (Exception THROWN_CAUGHT_conformsTo_0) {
+									CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo_0);
 								}
-								if (CAUGHT_conformsTo_1 == ValueUtil.TRUE_VALUE) {
+								if (CAUGHT_conformsTo_0 == ValueUtil.TRUE_VALUE) {
 									or = ValueUtil.TRUE_VALUE;
 								}
 								else {
-									if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+									if (IF_IsEQ2_ instanceof InvalidValueException) {
+										throw (InvalidValueException)IF_IsEQ2_;
 									}
-									if (CAUGHT_conformsTo_1 instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_conformsTo_1;
+									if (CAUGHT_conformsTo_0 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_conformsTo_0;
 									}
-									if (CAUGHT_safe_conformsTo_source == null) {
+									if (IF_IsEQ2_ == null) {
 										or = null;
 									}
 									else {
@@ -852,11 +881,11 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							}
 							CAUGHT_or = or;
 						}
-						catch (Exception e) {
-							CAUGHT_or = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_or) {
+							CAUGHT_or = ValueUtil.createInvalidValue(THROWN_CAUGHT_or);
 						}
 						if (CAUGHT_or == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							if (CAUGHT_and instanceof InvalidValueException) {
@@ -866,52 +895,72 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								throw (InvalidValueException)CAUGHT_or;
 							}
 							if ((CAUGHT_and == null) || (CAUGHT_or == null)) {
-								status = null;
+								implies = null;
 							}
 							else {
-								status = ValueUtil.FALSE_VALUE;
+								implies = ValueUtil.FALSE_VALUE;
 							}
 						}
 					}
-					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object IF_eq;
-					if (eq) {
-						IF_eq = ValueUtil.TRUE_VALUE;
+					CAUGHT_implies = implies;
+				}
+				catch (Exception THROWN_CAUGHT_implies) {
+					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+				try {
+					if (CAUGHT_implies instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_implies;
 					}
-					else {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+					final /*@Thrown*/ @Nullable Boolean THROWN_implies = (Boolean)CAUGHT_implies;
+					final /*@Thrown*/ boolean IsEQ_ = THROWN_implies == Boolean.TRUE;
+					CAUGHT_IsEQ_ = IsEQ_;
+				}
+				catch (Exception THROWN_CAUGHT_IsEQ_) {
+					CAUGHT_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IsEQ_);
+				}
+				/*@Caught*/ @NonNull Object IF_CAUGHT_IsEQ_;
+				if (CAUGHT_IsEQ_ == Boolean.TRUE) {
+					IF_CAUGHT_IsEQ_ = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_sum;
+					try {
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_2 = value_1.getType();
-						final /*@NonInvalid*/ @NonNull Object name = type_2 == null;
-						/*@Thrown*/ @Nullable String safe_name_source;
-						if (name == Boolean.TRUE) {
-							safe_name_source = null;
+						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
+						final /*@NonInvalid*/ boolean IsEQ2__0 = type_3 == null;
+						/*@Thrown*/ @Nullable String IF_IsEQ2__0;
+						if (IsEQ2__0) {
+							IF_IsEQ2__0 = null;
 						}
 						else {
-							assert type_2 != null;
-							final /*@Thrown*/ @Nullable String name_0 = type_2.getName();
-							safe_name_source = name_0;
+							assert type_3 != null;
+							final /*@Thrown*/ @Nullable String name = type_3.getName();
+							IF_IsEQ2__0 = name;
 						}
-						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(safe_name_source, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(IF_IsEQ2__0, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type_3 = resolvedProperty_1.getType();
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_3);
-						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
-						final /*@Thrown*/ @Nullable String name_1 = elementType.getName();
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_1);
-						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						IF_eq = TUP_;
+						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_1.getType();
+						final /*@Thrown*/ @Nullable CollectionType oclAsType_0 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_2);
+						if (oclAsType_0 == null) {
+							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+						}
+						final /*@Thrown*/ @NonNull Type elementType_0 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
+						final /*@Thrown*/ @Nullable String name_0 = elementType_0.getName();
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_0);
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
+						CAUGHT_sum = sum;
 					}
-					CAUGHT_IF_eq = IF_eq;
+					catch (Exception THROWN_CAUGHT_sum) {
+						CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
+					}
+					final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, CAUGHT_sum, CAUGHT_implies);
+					IF_CAUGHT_IsEQ_ = TUP_;
 				}
-				catch (Exception e) {
-					CAUGHT_IF_eq = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_eq, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_CAUGHT_IsEQ_, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -965,28 +1014,28 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_IF_eq;
+				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_and;
 					try {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0).booleanValue();
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
-						catch (Exception e) {
-							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_oclIsKindOf) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
 						}
 						final /*@Thrown*/ @Nullable Boolean and;
 						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
@@ -995,15 +1044,15 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						else {
 							/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
 							try {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 								final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-								final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_1).booleanValue();
+								final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_0).booleanValue();
 								CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 							}
-							catch (Exception e) {
-								CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(e);
+							catch (Exception THROWN_CAUGHT_oclIsKindOf_0) {
+								CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf_0);
 							}
 							if (CAUGHT_oclIsKindOf_0 == ValueUtil.FALSE_VALUE) {
 								and = ValueUtil.FALSE_VALUE;
@@ -1020,57 +1069,63 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						CAUGHT_and = and;
 					}
-					catch (Exception e) {
-						CAUGHT_and = ValueUtil.createInvalidValue(e);
+					catch (Exception THROWN_CAUGHT_and) {
+						CAUGHT_and = ValueUtil.createInvalidValue(THROWN_CAUGHT_and);
 					}
-					final /*@Thrown*/ @Nullable Boolean status;
+					final /*@Thrown*/ @Nullable Boolean implies;
 					if (CAUGHT_and == ValueUtil.FALSE_VALUE) {
-						status = ValueUtil.TRUE_VALUE;
+						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
+						/*@Caught*/ @NonNull Object CAUGHT_elementType;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
+							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_1);
+							if (oclAsType == null) {
+								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+							}
+							final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
+							CAUGHT_elementType = elementType;
+						}
+						catch (Exception THROWN_CAUGHT_elementType) {
+							CAUGHT_elementType = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType);
+						}
+						/*@Caught*/ @NonNull Object CAUGHT_elementType_0;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
+							final /*@Thrown*/ @Nullable CollectionType oclAsType_0 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_2, TYP_CollectionType_2);
+							if (oclAsType_0 == null) {
+								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+							}
+							final /*@Thrown*/ @NonNull Type elementType_0 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
+							CAUGHT_elementType_0 = elementType_0;
+						}
+						catch (Exception THROWN_CAUGHT_elementType_0) {
+							CAUGHT_elementType_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType_0);
+						}
 						/*@Caught*/ @Nullable Object CAUGHT_or;
 						try {
-							/*@Caught*/ @NonNull Object CAUGHT_propertyType;
-							try {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
-								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_2);
-								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
-								CAUGHT_propertyType = propertyType;
-							}
-							catch (Exception e) {
-								CAUGHT_propertyType = ValueUtil.createInvalidValue(e);
-							}
-							/*@Caught*/ @NonNull Object CAUGHT_valueType;
-							try {
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
-								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-								final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_2, TYP_CollectionType_3);
-								final /*@Thrown*/ @NonNull Type valueType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
-								CAUGHT_valueType = valueType;
-							}
-							catch (Exception e) {
-								CAUGHT_valueType = ValueUtil.createInvalidValue(e);
-							}
 							/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 							try {
-								if (CAUGHT_valueType instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_valueType;
+								if (CAUGHT_elementType_0 instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_elementType_0;
 								}
-								if (CAUGHT_propertyType instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_propertyType;
+								final /*@Thrown*/ @NonNull Type THROWN_elementType = (@NonNull Type)CAUGHT_elementType_0;
+								if (CAUGHT_elementType instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_elementType;
 								}
-								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_valueType, CAUGHT_propertyType).booleanValue();
+								final /*@Thrown*/ @NonNull Type THROWN_elementType_0 = (@NonNull Type)CAUGHT_elementType;
+								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_elementType, THROWN_elementType_0).booleanValue();
 								CAUGHT_conformsTo = conformsTo;
 							}
-							catch (Exception e) {
-								CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							catch (Exception THROWN_CAUGHT_conformsTo) {
+								CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
 							}
 							final /*@Thrown*/ @Nullable Boolean or;
 							if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {
@@ -1079,17 +1134,19 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							else {
 								/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
 								try {
-									if (CAUGHT_propertyType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_propertyType;
+									if (CAUGHT_elementType instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_elementType;
 									}
-									if (CAUGHT_valueType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_valueType;
+									final /*@Thrown*/ @NonNull Type THROWN_elementType_1 = (@NonNull Type)CAUGHT_elementType;
+									if (CAUGHT_elementType_0 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_elementType_0;
 									}
-									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, CAUGHT_valueType).booleanValue();
+									final /*@Thrown*/ @NonNull Type THROWN_elementType_2 = (@NonNull Type)CAUGHT_elementType_0;
+									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_elementType_1, THROWN_elementType_2).booleanValue();
 									CAUGHT_conformsTo_0 = conformsTo_0;
 								}
-								catch (Exception e) {
-									CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+								catch (Exception THROWN_CAUGHT_conformsTo_0) {
+									CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo_0);
 								}
 								if (CAUGHT_conformsTo_0 == ValueUtil.TRUE_VALUE) {
 									or = ValueUtil.TRUE_VALUE;
@@ -1106,11 +1163,11 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							}
 							CAUGHT_or = or;
 						}
-						catch (Exception e) {
-							CAUGHT_or = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_or) {
+							CAUGHT_or = ValueUtil.createInvalidValue(THROWN_CAUGHT_or);
 						}
 						if (CAUGHT_or == ValueUtil.TRUE_VALUE) {
-							status = ValueUtil.TRUE_VALUE;
+							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							if (CAUGHT_and instanceof InvalidValueException) {
@@ -1120,46 +1177,68 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								throw (InvalidValueException)CAUGHT_or;
 							}
 							if ((CAUGHT_and == null) || (CAUGHT_or == null)) {
-								status = null;
+								implies = null;
 							}
 							else {
-								status = ValueUtil.FALSE_VALUE;
+								implies = ValueUtil.FALSE_VALUE;
 							}
 						}
 					}
-					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-					/*@Thrown*/ @NonNull Object IF_eq;
-					if (eq) {
-						IF_eq = ValueUtil.TRUE_VALUE;
+					CAUGHT_implies = implies;
+				}
+				catch (Exception THROWN_CAUGHT_implies) {
+					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+				try {
+					if (CAUGHT_implies instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_implies;
 					}
-					else {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_5 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
+					final /*@Thrown*/ @Nullable Boolean THROWN_implies = (Boolean)CAUGHT_implies;
+					final /*@Thrown*/ boolean IsEQ_ = THROWN_implies == Boolean.TRUE;
+					CAUGHT_IsEQ_ = IsEQ_;
+				}
+				catch (Exception THROWN_CAUGHT_IsEQ_) {
+					CAUGHT_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IsEQ_);
+				}
+				/*@Caught*/ @NonNull Object IF_CAUGHT_IsEQ_;
+				if (CAUGHT_IsEQ_ == Boolean.TRUE) {
+					IF_CAUGHT_IsEQ_ = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_sum;
+					try {
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull CollectionType oclAsType_1 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_5);
-						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_1);
-						final /*@Thrown*/ @Nullable String name = elementType.getName();
-						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
+						final /*@Thrown*/ @Nullable CollectionType oclAsType_1 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_3);
+						if (oclAsType_1 == null) {
+							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+						}
+						final /*@Thrown*/ @NonNull Type elementType_1 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_1);
+						final /*@Thrown*/ @Nullable String name = elementType_1.getName();
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
 						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_1.getType();
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull CollectionType oclAsType_2 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_5);
-						final /*@Thrown*/ @NonNull Type elementType_0 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_2);
-						final /*@Thrown*/ @Nullable String name_0 = elementType_0.getName();
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
-						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
-						IF_eq = TUP_;
+						final /*@Thrown*/ @Nullable CollectionType oclAsType_2 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_3);
+						if (oclAsType_2 == null) {
+							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
+						}
+						final /*@Thrown*/ @NonNull Type elementType_2 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_2);
+						final /*@Thrown*/ @Nullable String name_0 = elementType_2.getName();
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_0);
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
+						CAUGHT_sum = sum;
 					}
-					CAUGHT_IF_eq = IF_eq;
+					catch (Exception THROWN_CAUGHT_sum) {
+						CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
+					}
+					final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, CAUGHT_sum, CAUGHT_implies);
+					IF_CAUGHT_IsEQ_ = TUP_;
 				}
-				catch (Exception e) {
-					CAUGHT_IF_eq = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_eq, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_CAUGHT_IsEQ_, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

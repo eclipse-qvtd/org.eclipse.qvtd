@@ -198,8 +198,8 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
@@ -207,16 +207,16 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			else {
 				final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
 				final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
-				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
-				/*@NonInvalid*/ boolean result;
+				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
+				@NonNull Iterator<Object> ITER__1 = BOXED_defaultAssignment.iterator();
+				/*@NonInvalid*/ boolean isUnique;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
+					if (!ITER__1.hasNext()) {
+						isUnique = true;
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull RelationDomainAssignment _1 = (@NonNull RelationDomainAssignment)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull RelationDomainAssignment _1 = (@NonNull RelationDomainAssignment)ITER__1.next();
 					/**
 					 * variable
 					 */
@@ -224,14 +224,14 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 					final /*@NonInvalid*/ @NonNull VariableDeclaration variable = _1.getVariable();
 					//
 					if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
-						result = false;
+						isUnique = false;
 						break;			// Abort after second find
 					}
 					else {
 						accumulator.add(variable);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

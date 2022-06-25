@@ -177,8 +177,8 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
@@ -188,12 +188,12 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
 				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedVariables.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
+				@NonNull Iterator<Object> ITER__1 = BOXED_ownedVariables.iterator();
+				/*@NonInvalid*/ @Nullable Boolean forAll;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
+					if (!ITER__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+							forAll = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -201,7 +201,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull VariableDeclaration _1 = (@NonNull VariableDeclaration)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull VariableDeclaration _1 = (@NonNull VariableDeclaration)ITER__1.next();
 					/**
 					 * oclIsKindOf(GuardVariable)
 					 */
@@ -209,7 +209,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_GuardVariable).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
+						forAll = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf) {				// Normal successful body evaluation result
@@ -219,7 +219,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

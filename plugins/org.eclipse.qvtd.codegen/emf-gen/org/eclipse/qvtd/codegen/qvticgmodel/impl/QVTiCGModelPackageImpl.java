@@ -1026,13 +1026,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgGuardVariableEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 1);
 
 		cgMappingEClass = createEClass(9);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4);
-		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5);
-		createEAttribute(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 6);
 
 		cgMappingCallEClass = createEClass(10);
 		createEReference(cgMappingCallEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
@@ -1130,7 +1130,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgFunctionCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOperationCallExp());
 		cgFunctionParameterEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
 		cgGuardVariableEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
-		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
+		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingCallEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingCallBindingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());

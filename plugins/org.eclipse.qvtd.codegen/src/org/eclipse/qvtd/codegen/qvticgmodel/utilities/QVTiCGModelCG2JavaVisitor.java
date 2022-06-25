@@ -380,7 +380,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(")");
 			js.append(globalNameManager.getEvaluationCacheName());
 			js.append(".");
-			js.append(globalNameManager.getGetCachedEvaluationResultName());
+			js.append(globalNameManager.getGetResultName());
 			js.append("(this, caller, new ");
 			js.appendClassReference(false, Object.class);
 			js.append("[]{");
@@ -2870,58 +2870,52 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 
 	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
-		try {
-			pushNameManager(cgMapping);
-			List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
-			//
-			js.appendCommentWithOCL(null, cgMapping.getAst());
-			String mappingName = getMappingName(cgMapping);
-			if (useClass(cgMapping) /*&& (cgFreeVariables.size() > 0)*/) {
-				js.append("protected class ");
-				js.append(mappingName);
-				js.append(" extends ");
-				js.appendClassReference(null, isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
-				js.pushClassBody(mappingName);
-				boolean needsNewLine = doMappingFields(cgMapping);
-				if (needsNewLine) {
-					js.append("\n");
-				}
-				doMappingConstructor(cgMapping);
-				if (isIncremental) {
-					js.append("\n");
-					doMappingDestroy(cgMapping);
-				}
+		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
+		//
+		js.appendCommentWithOCL(null, cgMapping.getAst());
+		String mappingName = getMappingName(cgMapping);
+		if (useClass(cgMapping) /*&& (cgFreeVariables.size() > 0)*/) {
+			js.append("protected class ");
+			js.append(mappingName);
+			js.append(" extends ");
+			js.appendClassReference(null, isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
+			js.pushClassBody(mappingName);
+			boolean needsNewLine = doMappingFields(cgMapping);
+			if (needsNewLine) {
 				js.append("\n");
-				js.append("@Override\n");
-				js.append("public boolean execute() ");
-				doMappingBody(cgMapping, null);
-				if (isIncremental) {
-					js.append("\n");
-					doMappingGetBoundValue(cgMapping);
-					js.append("\n");
-					doMappingGetBoundValues(cgMapping);
-				}
+			}
+			doMappingConstructor(cgMapping);
+			if (isIncremental) {
 				js.append("\n");
-				doIsEqual(cgFreeVariables);
-				js.popClassBody(false);
+				doMappingDestroy(cgMapping);
 			}
-			else {
-				js.append("protected boolean " + mappingName + "(");
-				boolean isFirst = true;
-				for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
-					if (!isFirst) {
-						js.append(", ");
-					}
-					doMappingConnectionVariable(cgFreeVariable);
-					isFirst = false;
-				}
-				js.append(") ");
-
-				doMappingBody(cgMapping, cgFreeVariables);
+			js.append("\n");
+			js.append("@Override\n");
+			js.append("public boolean execute() ");
+			doMappingBody(cgMapping, null);
+			if (isIncremental) {
+				js.append("\n");
+				doMappingGetBoundValue(cgMapping);
+				js.append("\n");
+				doMappingGetBoundValues(cgMapping);
 			}
+			js.append("\n");
+			doIsEqual(cgFreeVariables);
+			js.popClassBody(false);
 		}
-		finally {
-			popNameManager();
+		else {
+			js.append("protected boolean " + mappingName + "(");
+			boolean isFirst = true;
+			for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+				if (!isFirst) {
+					js.append(", ");
+				}
+				doMappingConnectionVariable(cgFreeVariable);
+				isFirst = false;
+			}
+			js.append(") ");
+
+			doMappingBody(cgMapping, cgFreeVariables);
 		}
 		return true;
 	}
@@ -3085,74 +3079,69 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		if (!js.appendLocalStatements(source)) {
 			return false;
 		}
-		try {
-			pushNameManager(cgMappingLoop);
-			Mapping thisInvocationWrapper = null;
-			if (invocationWrapper == null) {
-				invocationWrapper = thisInvocationWrapper = getInvocationWrapper(body);
-				if (thisInvocationWrapper != null) {
-					doInvocationWrapperPrefix(thisInvocationWrapper);
-				}
+		Mapping thisInvocationWrapper = null;
+		if (invocationWrapper == null) {
+			invocationWrapper = thisInvocationWrapper = getInvocationWrapper(body);
+			if (thisInvocationWrapper != null) {
+				doInvocationWrapperPrefix(thisInvocationWrapper);
 			}
-			js.append("for (");
-			js.appendClassReference(Boolean.TRUE, iterator);
-			js.append(" ");
+		}
+		js.append("for (");
+		js.appendClassReference(Boolean.TRUE, iterator);
+		js.append(" ");
+		js.appendValueName(iterator);
+		js.append(" : ");
+		if (isConnection(source)) {
+			js.appendValueName(source);
+			js.append(".typedIterable(");
+			js.appendClassReference(null, iterator);
+			js.append(".class)");
+		}
+		else if (source.isBoxed()) {
+			js.appendClassReference(null, ValueUtil.class);
+			js.append(".typedIterable(");
+			js.appendClassReference(null, iterator);
+			js.append(".class, ");
+			js.appendValueName(source);
+			js.append(")");
+		}
+		else {
+			js.appendValueName(source);
+		}
+		js.append(") {\n");
+		js.pushIndentation(null);
+		if (!iterator.isNonNull()) {
+			js.append("if (");
 			js.appendValueName(iterator);
-			js.append(" : ");
-			if (isConnection(source)) {
-				js.appendValueName(source);
-				js.append(".typedIterable(");
-				js.appendClassReference(null, iterator);
-				js.append(".class)");
-			}
-			else if (source.isBoxed()) {
-				js.appendClassReference(null, ValueUtil.class);
-				js.append(".typedIterable(");
-				js.appendClassReference(null, iterator);
-				js.append(".class, ");
-				js.appendValueName(source);
-				js.append(")");
-			}
-			else {
-				js.appendValueName(source);
-			}
-			js.append(") {\n");
+			js.append(" != null) {\n");
 			js.pushIndentation(null);
-			if (!iterator.isNonNull()) {
-				js.append("if (");
-				js.appendValueName(iterator);
-				js.append(" != null) {\n");
-				js.pushIndentation(null);
-			}
-			body.accept(this);
-			if (!iterator.isNonNull()) {
-				js.popIndentation();
-				js.append("}\n");
-			}
+		}
+		body.accept(this);
+		if (!iterator.isNonNull()) {
 			js.popIndentation();
 			js.append("}\n");
-			boolean needsFlush = false;
-			for (EObject eObject : new TreeIterable(body, false)) {
-				if (eObject instanceof CGMappingCall) {
-					CGMappingCall cgMappingCall = (CGMappingCall)eObject;
-					//	MappingCall asMappingCall = QVTiCGUtil.getAST(cgMappingCall);
-					//	Mapping pReferredMapping = QVTimperativeUtil.getReferredMapping(asMappingCall);
-					CGMapping cgReferredMapping = QVTiCGUtil.getReferredMapping(cgMappingCall);
-					if (useClass(cgReferredMapping)) {
-						needsFlush = true;
-						break;
-					}
+		}
+		js.popIndentation();
+		js.append("}\n");
+		boolean needsFlush = false;
+		for (EObject eObject : new TreeIterable(body, false)) {
+			if (eObject instanceof CGMappingCall) {
+				CGMappingCall cgMappingCall = (CGMappingCall)eObject;
+				//	MappingCall asMappingCall = QVTiCGUtil.getAST(cgMappingCall);
+				//	Mapping pReferredMapping = QVTimperativeUtil.getReferredMapping(asMappingCall);
+				CGMapping cgReferredMapping = QVTiCGUtil.getReferredMapping(cgMappingCall);
+				if (useClass(cgReferredMapping)) {
+					needsFlush = true;
+					break;
 				}
 			}
-			if (thisInvocationWrapper != null) {
-				doInvocationWrapperSuffix(thisInvocationWrapper);
-				invocationWrapper = null;
-			}
-			if (needsFlush) {
-				js.append("//invocationManager.flush();\n");
-			}
-		} finally {
-			popNameManager();
+		}
+		if (thisInvocationWrapper != null) {
+			doInvocationWrapperSuffix(thisInvocationWrapper);
+			invocationWrapper = null;
+		}
+		if (needsFlush) {
+			js.append("//invocationManager.flush();\n");
 		}
 		return true;
 	}
@@ -3240,12 +3229,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		if (!js.appendLocalStatements(initValue)) {
 			return false;
 		}
-		js.appendReferenceTo(cgProperty);
-		js.append(".initValue(");
-		js.appendValueName(slotValue);
-		js.append(", ");
-		js.appendValueName(initValue);
-		js.append(");\n");
+		cgProperty.getCallingConvention().generateJavaAssign(this, js, slotValue, cgProperty, initValue);
 		return true;
 	}
 

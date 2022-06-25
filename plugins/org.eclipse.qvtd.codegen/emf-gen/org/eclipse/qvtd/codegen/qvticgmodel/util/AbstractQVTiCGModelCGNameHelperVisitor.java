@@ -20,7 +20,7 @@
 package	org.eclipse.qvtd.codegen.qvticgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.cgmodel.utilities.CGModelCGNameHelperVisitor;
 
 /**
@@ -85,7 +85,7 @@ public abstract class AbstractQVTiCGModelCGNameHelperVisitor
 
 	@Override
 	public @NonNull String visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
-		return visitCGNamedElement(object);
+		return visitCGValuedElement(object);
 	}
 
 	@Override

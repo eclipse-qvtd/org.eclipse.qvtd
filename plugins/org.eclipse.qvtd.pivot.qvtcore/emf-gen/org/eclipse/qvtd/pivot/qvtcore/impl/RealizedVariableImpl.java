@@ -108,14 +108,14 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_not;
 				try {
 					/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 					try {
@@ -124,30 +124,30 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 						CAUGHT_oclIsKindOf = oclIsKindOf;
 					}
-					catch (Exception e) {
-						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+					catch (Exception THROWN_CAUGHT_oclIsKindOf) {
+						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
 					}
 					if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
 						throw (InvalidValueException)CAUGHT_oclIsKindOf;
 					}
-					final /*@Thrown*/ @Nullable Boolean result;
+					final /*@Thrown*/ @Nullable Boolean not;
 					if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
-						result = ValueUtil.TRUE_VALUE;
+						not = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.FALSE_VALUE;
+							not = ValueUtil.FALSE_VALUE;
 						}
 						else {
-							result = null;
+							not = null;
 						}
 					}
-					CAUGHT_result = result;
+					CAUGHT_not = not;
 				}
-				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				catch (Exception THROWN_CAUGHT_not) {
+					CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_not, QVTcoreTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

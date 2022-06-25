@@ -118,7 +118,9 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 */
 	@Override
 	public Area getArea() {
-		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTcore!CorePattern!getArea()
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

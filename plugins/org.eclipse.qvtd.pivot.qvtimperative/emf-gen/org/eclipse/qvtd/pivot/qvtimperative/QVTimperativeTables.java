@@ -84,11 +84,17 @@ public class QVTimperativeTables extends AbstractTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_ = TypeId.COLLECTION;
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL__0 = TypeId.UNIQUE_COLLECTION;
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_ = TypeId.ORDERED_SET;
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_ = TypeId.SEQUENCE;
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_ = TypeId.SET;
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/QVTimperative", null, QVTimperativePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_PRIMid_String = TypeId.BAG.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_TMPLid_ = TypeId.BAG.getSpecializedId(IdManager.getTemplateParameterId(1), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AddStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AddStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AppendParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AppendParameterBinding", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BooleanType = QVTimperativeTables.PACKid_$metamodel$.getClassId("BooleanType", 0);
@@ -114,7 +120,9 @@ public class QVTimperativeTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatementPart = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatementPart", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTimperativeTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclComparable = QVTimperativeTables.PACKid_$metamodel$.getClassId("OclComparable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTimperativeTables.PACKid_$metamodel$.getClassId("OclElement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclType = QVTimperativeTables.PACKid_$metamodel$.getClassId("OclType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTimperativeTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SetStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SetStatement", 0);
@@ -128,10 +136,16 @@ public class QVTimperativeTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EIntegerObject = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EIntegerObject", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_PRIMid_String = TypeId.ORDERED_SET.getSpecializedId(TypeId.STRING, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
-	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_TMPLid_ = TypeId.ORDERED_SET.getSpecializedId(IdManager.getTemplateParameterId(1), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_TMPLid__0 = TypeId.ORDERED_SET.getSpecializedId(IdManager.getTemplateParameterId(0), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_TMPLid_ = TypeId.SEQUENCE.getSpecializedId(IdManager.getTemplateParameterId(1), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_TMPLid__0 = TypeId.SEQUENCE.getSpecializedId(IdManager.getTemplateParameterId(1), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_PRIMid_OclSelf = TypeId.SET.getSpecializedId(TypeId.OCL_SELF, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_TMPLid_ = TypeId.SET.getSpecializedId(IdManager.getTemplateParameterId(0), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_TMPLid__0 = TypeId.SET.getSpecializedId(IdManager.getTemplateParameterId(1), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_TMPLid__1 = TypeId.SET.getSpecializedId(IdManager.getTemplateParameterId(0), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull String STR_ = "";
 	public static final /*@NonInvalid*/ @NonNull String STR_MappingCall_c_c_MatchingCallBindings_c_32 = "MappingCall::MatchingCallBindings: ";
 	public static final /*@NonInvalid*/ @NonNull String STR_SetStatement_c_c_CompatibleClassForProperty_c_32 = "SetStatement::CompatibleClassForProperty: ";
@@ -143,6 +157,8 @@ public class QVTimperativeTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull String STR__32_l_g_32 = " <> ";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
 	public static final /*@NonInvalid*/ @NonNull String STR__59 = ";";
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_AddStatement = TypeId.BAG.getSpecializedId(QVTimperativeTables.CLSSid_AddStatement, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_AppendParameterBinding = TypeId.BAG.getSpecializedId(QVTimperativeTables.CLSSid_AppendParameterBinding, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_GuardParameterBinding = TypeId.BAG.getSpecializedId(QVTimperativeTables.CLSSid_GuardParameterBinding, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);

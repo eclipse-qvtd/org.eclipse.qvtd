@@ -196,6 +196,8 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 			case 9: {
 				CGMapping cgMapping = (CGMapping)theEObject;
 				T result = caseCGMapping(cgMapping);
+				if (result == null) result = caseCGValuedElement(cgMapping);
+				if (result == null) result = caseCGTypedElement(cgMapping);
 				if (result == null) result = caseCGNamedElement(cgMapping);
 				if (result == null) result = caseCGElement(cgMapping);
 				if (result == null) result = defaultCase(theEObject);

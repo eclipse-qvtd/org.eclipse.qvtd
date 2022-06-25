@@ -12,7 +12,7 @@ package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
 
 /**
@@ -23,10 +23,10 @@ import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractCS2ASCGAnalysisVisitor
-	extends QVTiCGModelAnalysisVisitor
-	implements CS2ASCGModelVisitor<@Nullable Object>
+extends QVTiCGModelAnalysisVisitor
+implements CS2ASCGModelVisitor<@Nullable Object>
 {
-	protected AbstractCS2ASCGAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
+	protected AbstractCS2ASCGAnalysisVisitor(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
 	}
 
