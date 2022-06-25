@@ -69,6 +69,7 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.library.CompositionProperty;
 import org.eclipse.ocl.pivot.internal.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -1440,7 +1441,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		for (@NonNull OCLExpression asExpression : ClassUtil.nullFree(asSpeculateStatement.getOwnedExpressions())) {
 			CGEcorePropertyCallExp cgArgument = doVisit(CGEcorePropertyCallExp.class, asExpression);
 			CGSpeculatePart cgSpeculatePart = QVTiCGModelFactory.eINSTANCE.createCGSpeculatePart();
-			cgSpeculatePart.setObjectExp(cgArgument.getSource());
+			CGValuedElement cgSource = cgArgument.getSource();
+			PivotUtilInternal.resetContainer(cgSource);
+			cgSpeculatePart.setObjectExp(cgSource);
 			cgSpeculatePart.setEStructuralFeature(cgArgument.getEStructuralFeature());
 			cgSpeculateExp.getParts().add(cgSpeculatePart);
 		}
