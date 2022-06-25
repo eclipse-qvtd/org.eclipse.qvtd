@@ -78,7 +78,12 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 			propertyAssignment.setTargetProperty(targetProperty);
 			navigationAssignment = propertyAssignment;
 		}
-		navigationAssignment.setSlotExpression(target.getOwnedSource());
+		// Rescue the LHS source mis-parse
+		assert target.eContainer() == null;
+		OCLExpression targetSource = target.getOwnedSource();
+		assert targetSource != null;
+		PivotUtilInternal.resetContainer(targetSource);
+		navigationAssignment.setSlotExpression(targetSource);
 		navigationAssignment.setIsDefault(csConstraint.isIsDefault());
 		navigationAssignment.setIsPartial(csConstraint.isIsPartial());
 		return navigationAssignment;
