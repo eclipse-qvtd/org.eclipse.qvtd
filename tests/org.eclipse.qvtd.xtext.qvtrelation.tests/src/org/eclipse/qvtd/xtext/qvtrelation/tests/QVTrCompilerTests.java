@@ -651,9 +651,11 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTrCompiler_InternalFunctionCallingConvention_CG() throws Exception {
+	public void testQVTrCompiler_ExternalFunctionCallingConventionTest_CG() throws Exception {
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("InternalFunctionCallingConvention", getModelsURI("callingConventions/InternalFunctionCallingConvention.qvtr"));
+		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.xtext.qvtrelation.tests");
+		MyQVT myQVT1 = createQVT("ExternalFunctionCallingConventionTest", getModelsURI("callingConventions/ExternalFunctionCallingConventionTest.qvtr"));
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
 			ProjectManager projectMap = myQVT1.getProjectManager();
@@ -661,16 +663,18 @@ public class QVTrCompilerTests extends LoadTestCase
 			TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
 			typedModelsConfigurations.add(new TypedModelsConfiguration("to"));
 			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
+			//			QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
+			//			testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.xtext.qvtrelation.tests");
 		}
 		finally {
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();
-		MyQVT myQVT2 = createQVT("InternalFunctionCallingConvention", getModelsURI("InternalFunctionCallingConvention/InternalFunctionCallingConvention.qvtr"));
+		MyQVT myQVT2 = createQVT("ExternalFunctionCallingConventionTest", getModelsURI("ExternalFunctionCallingConventionTest/ExternalFunctionCallingConventionTest.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "called.calledPackage");
-			myQVT2.loadEPackage(txClass, "trace_InternalFunctionCallingConvention.trace_InternalFunctionCallingConventionPackage");
+			myQVT2.loadEPackage(txClass, "trace_ExternalFunctionCallingConventionTest.trace_ExternalFunctionCallingConventionTestPackage");
 			//
 			myQVT2.createGeneratedExecutor(txClass);
 			myQVT2.addInputURI("from", getModelsURI("callingConventions/samples/testcase1-in.xmi"));
@@ -686,9 +690,9 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Test
-	public void testQVTrCompiler_LibraryOperationCallingConvention_CG() throws Exception {
+	public void testQVTrCompiler_InternalFunctionCallingConventionTest_CG() throws Exception {
 		Class<? extends Transformer> txClass;
-		MyQVT myQVT1 = createQVT("LibraryOperationCallingConvention", getModelsURI("callingConventions/LibraryOperationCallingConvention.qvtr"));
+		MyQVT myQVT1 = createQVT("InternalFunctionCallingConventionTest", getModelsURI("callingConventions/InternalFunctionCallingConventionTest.qvtr"));
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
 			ProjectManager projectMap = myQVT1.getProjectManager();
@@ -702,10 +706,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();
-		MyQVT myQVT2 = createQVT("LibraryOperationCallingConvention", getModelsURI("LibraryOperationCallingConvention/LibraryOperationCallingConvention.qvtr"));
+		MyQVT myQVT2 = createQVT("InternalFunctionCallingConventionTest", getModelsURI("InternalFunctionCallingConventionTest/InternalFunctionCallingConventionTest.qvtr"));
 		try {
 			myQVT2.loadEPackage(txClass, "called.calledPackage");
-			myQVT2.loadEPackage(txClass, "trace_LibraryOperationCallingConvention.trace_LibraryOperationCallingConventionPackage");
+			myQVT2.loadEPackage(txClass, "trace_InternalFunctionCallingConventionTest.trace_InternalFunctionCallingConventionTestPackage");
 			//
 			myQVT2.createGeneratedExecutor(txClass);
 			myQVT2.addInputURI("from", getModelsURI("callingConventions/samples/testcase1-in.xmi"));
@@ -719,6 +723,76 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2 = null;
 		}
 	}
+
+	@Test
+	public void testQVTrCompiler_LibraryOperationCallingConventionTest_CG() throws Exception {
+		Class<? extends Transformer> txClass;
+		MyQVT myQVT1 = createQVT("LibraryOperationCallingConventionTest", getModelsURI("callingConventions/LibraryOperationCallingConventionTest.qvtr"));
+		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
+		try {
+			ProjectManager projectMap = myQVT1.getProjectManager();
+			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+			TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("to"));
+			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
+		}
+		finally {
+			myQVT1.dispose();
+			myQVT1 = null;
+		}
+		ThreadLocalExecutor.resetEnvironmentFactory();
+		MyQVT myQVT2 = createQVT("LibraryOperationCallingConventionTest", getModelsURI("LibraryOperationCallingConventionTest/LibraryOperationCallingConventionTest.qvtr"));
+		try {
+			myQVT2.loadEPackage(txClass, "called.calledPackage");
+			myQVT2.loadEPackage(txClass, "trace_LibraryOperationCallingConventionTest.trace_LibraryOperationCallingConventionTestPackage");
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("from", getModelsURI("callingConventions/samples/testcase1-in.xmi"));
+			myQVT2.executeTransformation();
+			myQVT2.addOutputURI("to", getTestURI("testcase1-out_CG.called"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("testcase1-out_CG.called"), getModelsURI("callingConventions/samples/testcase1-out.xmi"), null);
+		}
+		finally {
+			myQVT2.dispose();
+			myQVT2 = null;
+		}
+	}
+
+	/*	@Test  -- FIXME native support not yet merged
+	public void testQVTrCompiler_NativeOperationCallingConventionTest_CG() throws Exception {
+		Class<? extends Transformer> txClass;
+		MyQVT myQVT1 = createQVT("NativeOperationCallingConventionTest", getModelsURI("callingConventions/NativeOperationCallingConventionTest.qvtr"));
+		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
+		try {
+			ProjectManager projectMap = myQVT1.getProjectManager();
+			projectMap.configure(myQVT1.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+			TypedModelsConfigurations typedModelsConfigurations = new TypedModelsConfigurations();
+			typedModelsConfigurations.add(new TypedModelsConfiguration("to"));
+			txClass = myQVT1.buildTransformation(typedModelsConfigurations, false);
+		}
+		finally {
+			myQVT1.dispose();
+			myQVT1 = null;
+		}
+		ThreadLocalExecutor.resetEnvironmentFactory();
+		MyQVT myQVT2 = createQVT("NativeOperationCallingConventionTest", getModelsURI("NativeOperationCallingConventionTest/NativeOperationCallingConventionTest.qvtr"));
+		try {
+			myQVT2.loadEPackage(txClass, "called.calledPackage");
+			myQVT2.loadEPackage(txClass, "trace_NativeOperationCallingConventionTest.trace_NativeOperationCallingConventionTestPackage");
+			//
+			myQVT2.createGeneratedExecutor(txClass);
+			myQVT2.addInputURI("from", getModelsURI("callingConventions/samples/testcase1-in.xmi"));
+			myQVT2.executeTransformation();
+			myQVT2.addOutputURI("to", getTestURI("testcase1-out_CG.called"));
+			myQVT2.saveModels(null);
+			myQVT2.checkOutput(getTestURI("testcase1-out_CG.called"), getModelsURI("callingConventions/samples/testcase1-out.xmi"), null);
+		}
+		finally {
+			myQVT2.dispose();
+			myQVT2 = null;
+		}
+	} */
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot() throws Exception {

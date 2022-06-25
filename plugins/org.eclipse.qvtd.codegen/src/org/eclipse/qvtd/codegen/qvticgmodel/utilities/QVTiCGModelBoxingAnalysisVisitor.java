@@ -45,6 +45,9 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		if ((cgChild != null) && (cgChild.eContainer() instanceof CGMappingCallBinding)) {
 			return cgChild;
 		}
+		if ((cgChild != null) && (cgChild.getAst() == null)) {		// XXX
+			return cgChild;
+		}
 		return super.rewriteAsCast(cgChild);
 	}
 

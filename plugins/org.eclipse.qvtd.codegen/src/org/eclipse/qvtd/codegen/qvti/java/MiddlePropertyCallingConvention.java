@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
@@ -83,9 +84,9 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 	}
 
 	@Override
-	public @NonNull CGProperty createCGProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull Property asProperty) {
+	public @NonNull CGProperty createCGProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull TypedElement asTypedElement) {
 		// TODO Auto-generated method stub
-		return super.createCGProperty(analyzer, asProperty);		// XXX
+		return super.createCGProperty(analyzer, asTypedElement);		// XXX
 	}
 
 	@Override
