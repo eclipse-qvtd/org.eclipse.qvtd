@@ -17,13 +17,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.CachePropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -86,7 +82,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		analyzer.installOperation(asOperation, cgFunction, this);
 
-		CGClass cgNestedClass = analyzer.createNestedCGClass(asOperation);
+		/*XXX	CGClass cgNestedClass = analyzer.createNestedCGClass(as2cgVisitor, asOperation);
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
 			PropertyCallingConvention propertyCallingConventon = CachePropertyCallingConvention.INSTANCE;
 			CGProperty cgProperty = propertyCallingConventon.createCGProperty(analyzer, asParameter);
@@ -98,7 +94,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 			cgNestedClass.getProperties().add(cgProperty);
 			as2cgVisitor.pushNestedNameManager(cgProperty);
 			as2cgVisitor.popNestedNameManager();
-		}
+		} */
 		return cgFunction;
 	}
 
