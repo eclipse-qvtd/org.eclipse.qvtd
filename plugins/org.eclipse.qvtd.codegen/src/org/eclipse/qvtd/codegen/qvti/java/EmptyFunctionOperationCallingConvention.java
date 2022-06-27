@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -50,11 +49,12 @@ public class EmptyFunctionOperationCallingConvention extends FunctionOperationCa
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @Nullable Type asSourceType, @NonNull Operation asOperation) {
+	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() == null;
 		assert asOperation.getBodyExpression() == null;
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		analyzer.installOperation(asOperation, cgFunction, this);
+		initOperation(analyzer, cgFunction, asOperation);
+		analyzer.addCGOperation(cgFunction);
 		return cgFunction;
 	}
 
@@ -84,7 +84,7 @@ public class EmptyFunctionOperationCallingConvention extends FunctionOperationCa
 		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
 		assert !useClassToCreateObject;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
-		cgParameters.add(((QVTiNestedNameManager)qvtias2cgVisitor.getNameManager()).getThisTransformerParameter());
+		cgParameters.add(qvtias2cgVisitor.getNameManager().getThisTransformerParameter());
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
 			CGParameter cgParameter = as2cgVisitor.doVisit(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);

@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -77,10 +76,11 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @Nullable Type asSourceType, @NonNull Operation asOperation) {
+	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() == null;
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		analyzer.installOperation(asOperation, cgFunction, this);
+		initOperation(analyzer, cgFunction, asOperation);
+		analyzer.addCGOperation(cgFunction);
 		return cgFunction;
 	}
 
