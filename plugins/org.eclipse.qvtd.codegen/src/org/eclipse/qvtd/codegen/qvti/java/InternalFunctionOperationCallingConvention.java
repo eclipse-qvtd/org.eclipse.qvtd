@@ -17,9 +17,15 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.CachePropertyCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.ConstructorOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -29,7 +35,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -75,31 +80,60 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull AS2CGVisitor as2cgVisitor, @Nullable Type asSourceType, @NonNull Operation asOperation) {
+	public @NonNull CGFunction createCGOperation(@NonNull AS2CGVisitor as2cgVisitor, @NonNull Operation asOperation) {
 		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
 		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
 		assert asOperation.getImplementationClass() == null;
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		analyzer.installOperation(asOperation, cgFunction, this);
+		initOperation(analyzer, cgFunction, asOperation);
+		analyzer.addCGOperation(cgFunction);
 
-		/*XXX	CGClass cgNestedClass = analyzer.createNestedCGClass(as2cgVisitor, asOperation);
-		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
-			PropertyCallingConvention propertyCallingConventon = CachePropertyCallingConvention.INSTANCE;
-			CGProperty cgProperty = propertyCallingConventon.createCGProperty(analyzer, asParameter);
-			cgProperty.setAst(asParameter);
-			cgProperty.setTypeId(analyzer.getCGTypeId(asParameter.getTypeId()));
-			cgProperty.setRequired(asParameter.isIsRequired());
-			cgProperty.setCallingConvention(propertyCallingConventon);		// XXX
-			//	analyzer.addCGProperty(cgProperty);
-			cgNestedClass.getProperties().add(cgProperty);
-			as2cgVisitor.pushNestedNameManager(cgProperty);
-			as2cgVisitor.popNestedNameManager();
-		} */
+		//	as2cgVisitor.generateClassDeclaration(asOperation, CacheClassCallingConvention.INSTANCE);
+		//	CacheClassCallingConvention.INSTANCE.createCGClass(null)
+		CGClass cgNestedClass = analyzer.createNestedCGClass(as2cgVisitor, asOperation, CacheClassCallingConvention.INSTANCE);
+		createCGProperties(as2cgVisitor, cgNestedClass, asOperation);
+		createCGConstructor(as2cgVisitor, cgNestedClass, asOperation);
 		return cgFunction;
 	}
 
+	protected void createCGConstructor(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgClass, @NonNull Operation asOperation) {
+		Iterable<@NonNull Parameter> asParameters = PivotUtil.getOwnedParameters(asOperation);
+
+		ConstructorOperationCallingConvention callingConvention = ConstructorOperationCallingConvention.INSTANCE;
+		CGOperation cgConstructor = callingConvention.createCGOperation(as2cgVisitor, asOperation);
+		callingConvention.createCGParameters(as2cgVisitor, cgConstructor, null);
+		//	List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgClass);
+		//	for (@NonNull Parameter asParameter : asParameters) {
+		//		CGProperty cgProperty = createCGProperty(as2cgVisitor, asParameter);
+		//		cgProperties.add(cgProperty);
+		//	}
+	}
+
+	protected void createCGProperties(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgClass, @NonNull Operation asOperation) {
+		Iterable<@NonNull Parameter> asParameters = PivotUtil.getOwnedParameters(asOperation);
+		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgClass);
+		for (@NonNull Parameter asParameter : asParameters) {
+			CGProperty cgProperty = createCGProperty(as2cgVisitor, asParameter);
+			cgProperties.add(cgProperty);
+		}
+	}
+
+	protected @NonNull CGProperty createCGProperty(@NonNull AS2CGVisitor as2cgVisitor, @NonNull Parameter asParameter) {
+		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
+		PropertyCallingConvention propertyCallingConventon = CachePropertyCallingConvention.INSTANCE;
+		CGProperty cgProperty = propertyCallingConventon.createCGProperty(analyzer, asParameter);
+		cgProperty.setAst(asParameter);
+		cgProperty.setTypeId(analyzer.getCGTypeId(asParameter.getTypeId()));
+		cgProperty.setRequired(asParameter.isIsRequired());
+		cgProperty.setCallingConvention(propertyCallingConventon);
+		//	analyzer.addCGProperty(cgProperty);
+		as2cgVisitor.pushNestedNameManager(cgProperty);
+		as2cgVisitor.popNestedNameManager();
+		return cgProperty;
+	}
+
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @Nullable Type asSourceType, @NonNull Operation asOperation) {
+	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		throw new UnsupportedOperationException();
 	}
 

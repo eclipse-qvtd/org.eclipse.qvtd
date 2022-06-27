@@ -455,7 +455,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)context.getCallingConvention(asFunction, true);
 				CGClass cgClass = generateClassDeclaration(PivotUtil.getOwningClass(asOperation), callingConvention.getClassCallingConvention());
 				pushClassNameManager(cgClass);
-				cgFunction = callingConvention.createCGOperation(this, asSourceType, asFunction);
+				cgFunction = callingConvention.createCGOperation(this, asFunction);
 				assert cgFunction.getAst() != null;
 				assert cgFunction.getCallingConvention() == callingConvention;
 				pushNestedNameManager(cgFunction);
