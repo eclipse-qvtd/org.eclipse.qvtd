@@ -452,9 +452,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			QVTiAnalyzer analyzer = getAnalyzer();
 			CGFunction cgFunction = analyzer.basicGetCGFunction(asFunction);
 			if (cgFunction == null) {
-				CGClass cgClass = analyzer.getCGClass(PivotUtil.getOwningClass(asOperation));
-				pushClassNameManager(cgClass);
 				FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)context.getCallingConvention(asFunction, true);
+				CGClass cgClass = generateClassDeclaration(PivotUtil.getOwningClass(asOperation), callingConvention.getClassCallingConvention());
+				pushClassNameManager(cgClass);
 				cgFunction = callingConvention.createCGOperation(this, asSourceType, asFunction);
 				assert cgFunction.getAst() != null;
 				assert cgFunction.getCallingConvention() == callingConvention;
@@ -1131,7 +1131,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		cgTransformation.setAst(asTransformation);
 		globalNameManager.declareGlobalName(cgTransformation, asTransformation.getName());
-		analyzer.setCGRootClass(cgTransformation);
+		analyzer.setCGRootClass(cgTransformation);			// set TransformationCallingConvention
 		pushClassNameManager(cgTransformation);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
 		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
