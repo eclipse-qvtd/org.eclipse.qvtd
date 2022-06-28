@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -28,6 +29,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
@@ -65,8 +67,9 @@ public class QVTiNestedNameManager extends NestedNameManager
 	@Override
 	public @NonNull CGVariable createQualifiedThisVariable() {
 		assert asType instanceof Transformation;
-		NameResolution transformationName = ((QVTiCodeGenerator)getCodeGenerator()).getGlobalNameManager().getTransformationNameResolution();
-		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, analyzer.getCGTypeId(asType.getTypeId()), true);
+		NameResolution transformationName = getGlobalNameManager().getTransformationNameResolution();
+		CGTypeId cgTypeId = analyzer.getCGTypeId(asType.getTypeId());
+		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, cgTypeId, true);
 		//	transformationVariable.setValueName(transformationName);
 		transformationVariable.setNonInvalid();
 		transformationVariable.setNonNull();
@@ -76,8 +79,11 @@ public class QVTiNestedNameManager extends NestedNameManager
 
 	protected @NonNull CGParameter createThisTransformerParameter() {
 		assert !isStatic;
-		NameResolution thisTransformerName = ((QVTiCodeGenerator)codeGenerator).getGlobalNameManager().getThisTransformerNameResolution();
-		CGParameter thisTransformerParameter = analyzer.createCGParameter(thisTransformerName, analyzer.getCGTypeId(asType.getTypeId()), true);
+		QVTiCodeGenerator qvtiCodeGenerator = (QVTiCodeGenerator)codeGenerator;
+		ImperativeTransformation asTransformation = qvtiCodeGenerator.getTransformation();
+		NameResolution thisTransformerName = getGlobalNameManager().getThisTransformerNameResolution();
+		CGTypeId cgTypeId = analyzer.getCGTypeId(asTransformation.getTypeId());
+		CGParameter thisTransformerParameter = analyzer.createCGParameter(thisTransformerName, cgTypeId, true);
 		//	thisTransformerParameter.setIsThis(true);
 		thisTransformerParameter.setNonInvalid();
 		thisTransformerParameter.setNonNull();
@@ -138,6 +144,11 @@ public class QVTiNestedNameManager extends NestedNameManager
 			return ((NestedNameManager)parent).getExecutorVariable();
 		}
 		return super.getExecutorVariable();
+	}
+
+	@Override
+	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
+		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
 	public @NonNull CGParameter getThisTransformerParameter() {

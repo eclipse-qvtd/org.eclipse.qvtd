@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -201,6 +203,10 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull Iterable<@NonNull CGValuedElement> getOwnedStatements(@NonNull CGSequence cgSequence) {
+		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
+	}
+
+	public static @NonNull List<@NonNull CGValuedElement> getOwnedStatementsList(@NonNull CGSequence cgSequence) {
 		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
 	}
 
