@@ -446,7 +446,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @NonNull CGOperation generateOperationDeclaration(@Nullable Type asSourceType, @NonNull Operation asOperation, boolean requireFinal) {
+	public @NonNull CGOperation generateOperationDeclaration(@NonNull Operation asOperation, boolean requireFinal) {
 		if (!requireFinal && (asOperation instanceof Function)) {			// XXX ??? eliminate override
 			Function asFunction = (Function)asOperation;
 			QVTiAnalyzer analyzer = getAnalyzer();
@@ -466,7 +466,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			}
 			return cgFunction;
 		}
-		return super.generateOperationDeclaration(asSourceType, asOperation, requireFinal);
+		return super.generateOperationDeclaration(asOperation, requireFinal);
 	}
 
 	@Override
@@ -951,7 +951,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
-		CGFunction cgFunction = (CGFunction)generateOperationDeclaration(null, asFunction, true);
+		CGFunction cgFunction = (CGFunction)generateOperationDeclaration(asFunction, true);
 		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
 		pushNestedNameManager(cgFunction);
 		callingConvention.createCGBody(this, cgFunction);
@@ -1147,7 +1147,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				cgMapping.setUseClass(true);
 			}
 		}
-		for (Operation asOperation : asTransformation.getOwnedOperations()) {
+		for (Operation asOperation : asTransformation.getOwnedOperations()) {			// Why omit properties / nested classes ?
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}

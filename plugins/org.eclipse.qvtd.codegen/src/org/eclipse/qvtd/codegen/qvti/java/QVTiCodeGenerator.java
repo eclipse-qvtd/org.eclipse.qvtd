@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -42,12 +43,14 @@ import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
+import org.eclipse.ocl.examples.codegen.java.JavaLanguageSupport;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.LetExp;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
@@ -55,10 +58,12 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CacheProperty;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
@@ -100,6 +105,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
+	private/* @LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -217,6 +223,13 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		CGPackage cgPackage2 = createCGPackage();
 		cgPackage = cgPackage2;
 		optimize(cgPackage2);
+
+		JavaLanguageSupport javaLanguageSupport = (JavaLanguageSupport)environmentFactory.getLanguageSupport("java");	// XXX Unify all calls
+		assert javaLanguageSupport != null;
+		Model nativeModel = javaLanguageSupport.basicGetNativeModel();
+		if (nativeModel != null) {
+			metamodelManager.installRoot(nativeModel);
+		}
 		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage2);
 		QVTiCGModelCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
@@ -322,10 +335,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull PropertyCallingConvention getCallingConvention(@NonNull Property asProperty) {
+		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
 		//	Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
 		Property asOppositeProperty2 = asProperty.getOpposite();
 		if ((asOppositeProperty2 != null) && !asProperty.isIsComposite()) {
-			LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
 			if (libraryProperty instanceof ImplicitNonCompositionProperty) {
 				EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
 				assert eStructuralFeature == null;
@@ -339,6 +352,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				} */
 				return MiddlePropertyCallingConvention.INSTANCE;
 			}
+		}
+		if (libraryProperty instanceof CacheProperty) {
+			return ImmutableCachePropertyCallingConvention.INSTANCE;
 		}
 		return super.getCallingConvention(asProperty);
 	}
@@ -357,6 +373,15 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
 		return (QVTiGlobalNameManager)globalNameManager;
+	}
+
+	public @NonNull LanguageSupport getLanguageSupport() {
+		JavaLanguageSupport javaLanguageSupport2 = javaLanguageSupport;
+		if (javaLanguageSupport2 == null) {
+			javaLanguageSupport = javaLanguageSupport2 = (JavaLanguageSupport)environmentFactory.getLanguageSupport("java");
+			assert javaLanguageSupport2 != null;
+		}
+		return javaLanguageSupport2;
 	}
 
 	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {

@@ -380,7 +380,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(")");
 			js.append(globalNameManager.getEvaluationCacheName());
 			js.append(".");
-			js.append(globalNameManager.getGetCachedEvaluationResultName());
+			js.append(globalNameManager.getGetResultName());
 			js.append("(this, caller, new ");
 			js.appendClassReference(false, Object.class);
 			js.append("[]{");
@@ -3240,12 +3240,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		if (!js.appendLocalStatements(initValue)) {
 			return false;
 		}
-		js.appendReferenceTo(cgProperty);
-		js.append(".initValue(");
-		js.appendValueName(slotValue);
-		js.append(", ");
-		js.appendValueName(initValue);
-		js.append(");\n");
+		cgProperty.getCallingConvention().generateJavaAssign(this, js, slotValue, cgProperty, initValue);
 		return true;
 	}
 

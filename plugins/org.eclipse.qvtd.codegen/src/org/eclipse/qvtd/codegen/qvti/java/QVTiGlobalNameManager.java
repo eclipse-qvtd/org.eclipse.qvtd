@@ -92,8 +92,13 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.transformationName = globalNameManager.declareGlobalName(null, TRANSFORMATION_NAME);
 	}
 
+	@Deprecated
 	public @NonNull String getCachedResultName() {
 		return cachedResultName.getResolvedName();
+	}
+
+	public @NonNull NameResolution getCachedResultNameResolution() {
+		return cachedResultName;
 	}
 
 	public @NonNull String getClassIndex2allClassIndexes(int typedModelNumber) {
