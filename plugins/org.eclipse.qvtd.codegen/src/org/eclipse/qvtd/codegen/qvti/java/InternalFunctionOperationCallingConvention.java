@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,7 +25,13 @@ import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIndexExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
@@ -31,11 +39,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.CompleteInheritance;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
@@ -46,13 +56,19 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractProperty;
+import org.eclipse.ocl.pivot.library.LibraryConstants;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -200,32 +216,80 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//
 		CGClass cgCacheClass = analyzer.createNestedCGClass(as2cgVisitor, asCacheClass, CacheClassCallingConvention.INSTANCE);
 		as2cgVisitor.pushClassNameManager(cgCacheClass);
-		createCacheProperties(as2cgVisitor, cgCacheClass, asFunction);
-		createCacheOperations(as2cgVisitor, cgCacheClass, asFunction);
+		createCacheProperties(as2cgVisitor, cgCacheClass, cgFunction);
+		createCacheOperations(as2cgVisitor, cgCacheClass, cgFunction);
 		CGClass cgSuperClass = as2cgVisitor.generateClassDeclaration(asSuperClass, getClassCallingConvention());
 		cgCacheClass.getSuperTypes().add(cgSuperClass);
 		as2cgVisitor.popClassNameManager();
 	}
 
 
-	protected void createCacheOperations(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgCacheClass, @NonNull Function asFunction) {
-		installCacheConstructor(as2cgVisitor, cgCacheClass, asFunction);
+	protected void createCacheOperations(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgCacheClass, @NonNull CGFunction cgFunction) {
+		Function asFunction = QVTiCGUtil.getAST(cgFunction);
+		installCacheConstructor(as2cgVisitor, cgCacheClass, cgFunction);
 		installCacheGetResultOperation(as2cgVisitor, cgCacheClass, asFunction);
 		installCacheIsEqualOperation(as2cgVisitor, cgCacheClass, asFunction);
 	}
 
-	protected void createCacheProperties(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgCacheClass, @NonNull Operation asOperation) {
+	protected void createCacheProperties(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgCacheClass, @NonNull CGFunction cgFunction) {
+		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		List<@NonNull Property> asCacheProperties = PivotUtilInternal.getOwnedPropertiesList(asCacheClass);
 		List<@NonNull CGProperty> cgCacheProperties = CGUtil.getPropertiesList(cgCacheClass);
 		Property asCacheProperty = installCacheTransformerProperty(as2cgVisitor, asCacheProperties);
 		installCGCacheProperty(as2cgVisitor, cgCacheProperties, asCacheProperty, ImmutableCachePropertyCallingConvention.INSTANCE);
-		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
-			asCacheProperty = installCacheParameterProperty(as2cgVisitor, asCacheProperties, asParameter);
-			installCGCacheProperty(as2cgVisitor, cgCacheProperties, asCacheProperty, ImmutableCachePropertyCallingConvention.INSTANCE);
+		for (@NonNull CGParameter cgParameter : CGUtil.getParameters(cgFunction)) {
+			Element asParameter = cgParameter.getAst();
+			if (asParameter instanceof Parameter) {
+				asCacheProperty = installCacheParameterProperty(as2cgVisitor, asCacheProperties, (Parameter)asParameter);
+				CGProperty cgCacheProperty = installCGCacheProperty(as2cgVisitor, cgCacheProperties, asCacheProperty, ImmutableCachePropertyCallingConvention.INSTANCE);
+				boolean savedInhibitNameResolution = NameResolution.inhibitNameResolution;
+				NameResolution.inhibitNameResolution = false;			// XXX do we still need this debug design enforcement
+				NameResolution nameResolution = cgCacheProperty.getNameResolution();
+				nameResolution.addCGElement(cgParameter);
+				NameResolution.inhibitNameResolution = savedInhibitNameResolution;
+			}
 		}
-		asCacheProperty = installCacheResultProperty(as2cgVisitor, asCacheProperties, asOperation);
+		asCacheProperty = installCacheResultProperty(as2cgVisitor, asCacheProperties, asFunction);
 		installCGCacheProperty(as2cgVisitor, cgCacheProperties, asCacheProperty, ImmutableCachePropertyCallingConvention.INSTANCE);
+	}
+
+	// XXX promote ???
+	protected @NonNull CGValuedElement createCGLibraryOperationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @NonNull CGValuedElement... cgSourceAndArguments) {
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		LibraryOperation libraryOperation = (LibraryOperation)as2cgVisitor.getEnvironmentFactory().getMetamodelManager().getImplementation(asOperation);
+		CGLibraryOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
+		cgOperationCallExp.setLibraryOperation(libraryOperation);
+		//	initCallExp(as2cgVisitor, cgOperationCallExp, asOperationCallExp, cgOperation, isRequired);
+		//	Operation asOperation = PivotUtil.getReferredOperation(asOperationCallExp);
+		//	boolean isRequired2 = asOperation.isIsRequired();
+		//	Boolean ecoreIsRequired = as2cgVisitor.getCodeGenerator().isNonNull(asOperationCallExp);
+		//	if (ecoreIsRequired != null) {
+		//		isRequired2 = ecoreIsRequired;
+		//	}
+		//	assert isRequired == isRequired2;
+		//	cgOperationCallExp.setAsOperation(asOperation);
+		//	cgOperationCallExp.setAst(asOperationCallExp);
+		TypeId asTypeId = asOperation.getTypeId();
+		cgOperationCallExp.setTypeId(as2cgVisitor.getAnalyzer().getCGTypeId(asTypeId));
+		cgOperationCallExp.setReferredOperation(cgOperation);
+		cgOperationCallExp.setAsOperation(asOperation);
+		cgOperationCallExp.setInvalidating(asOperation.isIsInvalidating());
+		cgOperationCallExp.setValidating(asOperation.isIsValidating());
+		cgOperationCallExp.setRequired(asOperation.isIsRequired());
+		List<@NonNull CGValuedElement> cgArguments = CGUtil.getArgumentsList(cgOperationCallExp);
+		for (@NonNull CGValuedElement cgArgument : cgSourceAndArguments) {
+			cgArguments.add(cgArgument);
+		}
+		return cgOperationCallExp;
+	}
+
+	protected @NonNull CGCastExp createIndexedParameter(@NonNull CodeGenAnalyzer analyzer, @NonNull CGParameter cgParameter, int index, @NonNull Type asElementType) {
+		CGVariableExp cgBoundValuesVariable = analyzer.createCGVariableExp(cgParameter);
+		CGIndexExp cgBoundValuesElement = analyzer.createCGIndexExp(cgBoundValuesVariable, index);
+		CGExecutorType cgCastType = analyzer.createExecutorType(asElementType);
+		CGCastExp cgCastExp = analyzer.createCGCastExp(cgCastType, cgBoundValuesElement);
+		return cgCastExp;
 	}
 
 	@Override
@@ -280,11 +344,12 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	protected @NonNull CGOperation installCacheConstructor(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGClass cgCacheClass,
-			@NonNull Operation asOperation) {
+			@NonNull CGFunction cgOuterFunction) {
 		QVTiAS2CGVisitor qvtias2cgVisitor = (QVTiAS2CGVisitor)as2cgVisitor;
 		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
 		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+		Function asOuterFunction = QVTiCGUtil.getAST(cgOuterFunction);
 		//
 		NameResolution ctorNameResolution = cgCacheClass.getNameResolution();
 		String ctorName = ctorNameResolution.getResolvedName();
@@ -296,48 +361,76 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//		boolean isRequired = cgCacheProperty.isRequired();
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(ctorName, asCacheType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asConstructor = PivotUtil.createOperation(ctorName, asCacheType, /*CacheOperation.class*/null, null); //asExpression);
 		//		asCacheOperation.setIsRequired(isRequired);
+		Type boundValuesType = codeGenerator.getLanguageSupport().getNativeClass(Object[].class);
+		Parameter boundValuesParameter = PivotUtil.createParameter("boundValues", boundValuesType, true);
+		asConstructor.getOwnedParameters().add(boundValuesParameter);
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
-		asCacheOperations.add(asCacheOperation);
+		asCacheOperations.add(asConstructor);
 		//
 		QVTiNestedNameManager nameManager = qvtias2cgVisitor.getNameManager();
 		ConstructorOperationCallingConvention callingConvention = ConstructorOperationCallingConvention.INSTANCE;
+
+
 		CGParameter thisTransformerParameter = nameManager.getThisTransformerParameter();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
 		//
-		CGOperation cgConstructor = callingConvention.createCGOperation(as2cgVisitor, asOperation);
-		cgConstructor.setAst(asCacheOperation);
+		CGOperation cgConstructor = callingConvention.createCGOperation(as2cgVisitor, asConstructor);
+		callingConvention.createCGParameters(as2cgVisitor, cgConstructor, null);
+		cgConstructor.setAst(asConstructor);
 		//	cgCacheOperation.setTypeId(cgTypeId);
 		//	cgCacheOperation.setRequired(isRequired);
 		cgConstructor.setCallingConvention(callingConvention);
 		//	analyzer.addCGOperation(cgCacheOperation);
-		ctorNameResolution.addCGElement(cgConstructor);
-		callingConvention.createCGParameters(as2cgVisitor, cgConstructor, null);
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
-		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
+		List<@NonNull CGParameter> cgOuterParameters = CGUtil.getParametersList(cgOuterFunction);
+		List<@NonNull CGParameter> cgConstructorParameters = CGUtil.getParametersList(cgConstructor);
 		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
-		int iMax = cgParameters.size();
-		assert iMax == cgProperties.size()-1;	// XXX
+		CGParameter cgConstructorParameter = cgConstructorParameters.get(0);
+		int iMax = cgProperties.size()-1;
+		Map<@NonNull Parameter, @NonNull CGFinalVariable> asOuterParameter2cgLetVariable = new HashMap<>();
+		@NonNull CGFinalVariable[] cgLetVariables = new @NonNull CGFinalVariable[iMax];
+		//	assert iMax == cgProperties.size()-1;	// XXX
 		for (int i = 0; i < iMax; i++) {
-			CGParameter cgParameter = cgParameters.get(i);
-			CGProperty cgProperty = cgProperties.get(i);
-			Element asProperty = cgProperty.getAst();
+			CGParameter cgOuterParameter = cgOuterParameters.get(i);
+			CGProperty cgCacheProperty = cgProperties.get(i);
+			Property asCacheProperty = CGUtil.getAST(cgCacheProperty);
+			CGCastExp cgCastInitExp = createIndexedParameter(analyzer, cgConstructorParameter, i, PivotUtil.getType(asCacheProperty));
+
+			CGFinalVariable cgLetVariable = cgLetVariables[i] = nameManager.createCGVariable(cgCastInitExp);
+			Element asOuterParameter = cgOuterParameter.getAst();
+			if (asOuterParameter instanceof Parameter) {
+				asOuterParameter2cgLetVariable.put((Parameter)asOuterParameter, cgLetVariable);
+			}
+			boolean savedInhibitNameResolution = NameResolution.inhibitNameResolution;
+			NameResolution.inhibitNameResolution = false;			// XXX do we still need this debug design enforcement
+			NameResolution nameResolution = cgCacheProperty.getNameResolution();
+			//	nameResolution.addCGElement(cgOuterParameter);
+			nameResolution.addCGElement(cgLetVariable);				// Re-use cache property name for let variable.
+			NameResolution.inhibitNameResolution = savedInhibitNameResolution;
 			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-			cgPropertyAssignment.setAst(asProperty);
+			cgPropertyAssignment.setAst(asCacheProperty);
 			cgPropertyAssignment.setTypeId(cgTypeId);
 			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
-			cgPropertyAssignment.setReferredProperty(cgProperty);
-			cgPropertyAssignment.setOwnedInitValue(analyzer.createCGVariableExp(cgParameter));
+			cgPropertyAssignment.setReferredProperty(cgCacheProperty);
+			cgPropertyAssignment.setOwnedInitValue(analyzer.createCGVariableExp(cgLetVariable));
 			//	cgPropertyAssignment.setAsProperty(asProperty);
 			cgStatements.add(cgPropertyAssignment);
 		}
-		LanguageExpression asExpression = asOperation.getBodyExpression();
-		assert asExpression != null;
-		CGValuedElement asValue = as2cgVisitor.doVisit(CGValuedElement.class, asExpression);
+		LanguageExpression asExpression = asOuterFunction.getBodyExpression();
+		assert asExpression != null;			// Map asParameters
+		for (@NonNull Variable asParameterVariable : ClassUtil.nullFree(((ExpressionInOCL)asExpression).getOwnedParameters())) {
+			Parameter asOuterParameter = asParameterVariable.getRepresentedParameter();
+			CGFinalVariable cgLetVariable = asOuterParameter2cgLetVariable.get(asOuterParameter);
+			assert cgLetVariable != null;
+			nameManager.addVariable(asParameterVariable, cgLetVariable);
+		}
+
+		CGValuedElement cgInitValue = as2cgVisitor.doVisit(CGValuedElement.class, asExpression);
 		CGProperty cgProperty = cgProperties.get(iMax);
 		Element asProperty = cgProperty.getAst();
 		CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
@@ -345,10 +438,15 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgPropertyAssignment.setTypeId(cgTypeId);
 		cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
 		cgPropertyAssignment.setReferredProperty(cgProperty);
-		cgPropertyAssignment.setOwnedInitValue(asValue);
+		cgPropertyAssignment.setOwnedInitValue(cgInitValue);
 		//	cgPropertyAssignment.setAsProperty(asProperty);
 		cgStatements.add(cgPropertyAssignment);
-		cgConstructor.setBody(cgSequence);
+		CGValuedElement cgIn = cgSequence;
+		for (int i = iMax; --i >= 0; ) {
+			cgIn = analyzer.createCGLetExp(cgLetVariables[i], cgIn);
+		}
+		cgConstructor.setBody(cgIn);
+		ctorNameResolution.addCGElement(cgConstructor);
 		//
 		List<@NonNull CGOperation> cgCacheOperations = CGUtil.getOperationsList(cgCacheClass);
 		cgCacheOperations.add(cgConstructor);
@@ -416,8 +514,8 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		//
-		NameResolution getResultNameResolution = globalNameManager.getGetResultNameResolution();
-		String getResultName = getResultNameResolution.getResolvedName();
+		NameResolution isEqualNameResolution = globalNameManager.getIsEqualNameResolution();
+		String isEqualName = isEqualNameResolution.getResolvedName();
 		//	String cachedResultName = globalNameManager.getCachedResultNameResolution().getResolvedName();
 		//	CGProperty cgCacheProperty = getCGCacheProperty(cgCacheClass, cachedResultName);
 		//	Property asCacheProperty = CGUtil.getAST(cgCacheProperty);
@@ -426,13 +524,31 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	boolean isRequired = cgCacheProperty.isRequired();
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(getResultName, asReturnType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asCacheOperation = PivotUtil.createOperation(isEqualName, asReturnType, /*CacheOperation.class*/null, null); //asExpression);
 		asCacheOperation.setIsRequired(true);
+		String idResolverName = globalNameManager.getIdResolverName();
+		IdResolver idResolver = codeGenerator.getEnvironmentFactory().getIdResolver();
+		//	Type idResolverType = idResolver.getType(JavaConstants.ID_RESOLVER_TYPE_ID);
+		//	TypeId idResolverTypeId = JavaConstants.ID_RESOLVER_TYPE_ID;
+		//	JavaConstants.getJavaTypeId(IdResolver.class);
+		//	Type idResolverType = idResolver.getType(JavaConstants.ID_RESOLVER_TYPE_ID);
+
+		Type idResolverType = codeGenerator.getLanguageSupport().getNativeClass(IdResolver.class);
+		idResolverType.getTypeId();
+		Parameter idResolverParameter = PivotUtil.createParameter(idResolverName, idResolverType, true);
+		asCacheOperation.getOwnedParameters().add(idResolverParameter);
+		//
+		Type boundValuesType = codeGenerator.getLanguageSupport().getNativeClass(Object[].class);
+		Parameter boundValuesParameter = PivotUtil.createParameter("boundValues", boundValuesType, true);
+		asCacheOperation.getOwnedParameters().add(boundValuesParameter);
+		//
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
 		//
 		NestedNameManager nameManager = as2cgVisitor.getNameManager();
 		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
+
+		CGVariable idResolverVariable = nameManager.getIdResolverVariable();
 		/*	CGTypeId cgTypeId = cgCacheProperty.getTypeId();
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
@@ -450,8 +566,64 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgCacheOperation.setRequired(true);
 		cgCacheOperation.setCallingConvention(callingConvention);
 		//	analyzer.addCGOperation(cgCacheOperation);
-		cgCacheOperation.setBody(analyzer.getCGBoolean(true));
-		getResultNameResolution.addCGElement(cgCacheOperation);
+
+		callingConvention.createCGParameters(qvtias2cgVisitor, cgCacheOperation, null);
+
+
+		EnvironmentFactoryInternal environmentFactory = codeGenerator.getEnvironmentFactory();
+		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
+		CompleteInheritance booleanType = standardLibrary.getBooleanType().getInheritance(standardLibrary);
+		//	CompleteInheritance selfType = standardLibrary.getOclSelfType().getInheritance(standardLibrary);
+		Operation asAnd2Operation = booleanType.lookupLocalOperation(standardLibrary, LibraryConstants.AND2, booleanType);
+		assert asAnd2Operation != null;
+		CGOperation cgAnd2Operation = as2cgVisitor.generateOperationDeclaration(asAnd2Operation, false);
+		//	org.eclipse.ocl.pivot.Class bodyType = environmentFactory.getIdResolver().getClass(bodyTypeId, null);
+		//	LibraryFeature implementation = booleanType.lookupImplementation(standardLibrary, asAnd2Operation);
+		//		return new SortingValue(executor, (CollectionTypeId)accumulatorTypeId, (LibraryBinaryOperation) implementation);
+		//	}
+
+
+
+		CGValuedElement cgAnd = null;
+		//	List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
+		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgCacheOperation);
+		CGParameter cgParameter = cgParameters.get(1);
+		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
+		int iMax = cgProperties.size()-1;
+		for (int i = 0; i < iMax; i++) {
+			CGProperty cgCacheProperty = cgProperties.get(i);
+			Property asCacheProperty = CGUtil.getAST(cgCacheProperty);
+
+			CGParameter cgThisParameter = nameManager.getThisParameter();
+			CGPropertyCallExp cgPropertyCallExp = new CachePropertyCallExpImpl();
+			cgPropertyCallExp.setSource(analyzer.createCGVariableExp(cgThisParameter));
+			cgPropertyCallExp.setAsProperty(asCacheProperty);
+			cgPropertyCallExp.setReferredProperty(cgCacheProperty);
+			cgPropertyCallExp.setTypeId(cgCacheProperty.getTypeId());
+			cgPropertyCallExp.setRequired(cgCacheProperty.isRequired());
+			//	CGPropertyCallExp cgPropertyCallExp2 = new CachePropertyCallExpImpl();
+			//	cgPropertyCallExp2.setSource(analyzer.createCGVariableExp(cgThisParameter));
+			//	cgPropertyCallExp2.setAsProperty(asCacheProperty);
+			//	cgPropertyCallExp2.setReferredProperty(cgCacheProperty);
+			//	cgPropertyCallExp2.setTypeId(cgCacheProperty.getTypeId());
+			//	cgPropertyCallExp2.setRequired(cgCacheProperty.isRequired());
+			CGCastExp cgCastExp = createIndexedParameter(analyzer, cgParameter, i, PivotUtil.getType(asCacheProperty));
+			//			CGVariableExp cgBoundValuesVariable = analyzer.createCGVariableExp(cgParameter);
+			//			CGIndexExp cgBoundValuesElement = analyzer.createCGIndexExp(cgBoundValuesVariable, i);
+			//			CGExecutorType cgCastType = analyzer.createExecutorType(PivotUtil.getType(asCacheProperty));
+			//			CGCastExp cgCastExp = analyzer.createCGCastExp(cgCastType, cgBoundValuesElement);
+			CGValuedElement cgIsEqual = analyzer.createCGIsEqual(cgPropertyCallExp, cgCastExp);
+			if (cgAnd == null) {
+				cgAnd = cgIsEqual;
+			}
+			else {
+				cgAnd = createCGLibraryOperationCallExp(as2cgVisitor, cgAnd2Operation, cgAnd, cgIsEqual);
+			}
+		}
+
+
+		cgCacheOperation.setBody(cgAnd);
+		isEqualNameResolution.addCGElement(cgCacheOperation);
 		//
 		List<@NonNull CGOperation> cgCacheOperations = CGUtil.getOperationsList(cgCacheClass);
 		cgCacheOperations.add(cgCacheOperation);

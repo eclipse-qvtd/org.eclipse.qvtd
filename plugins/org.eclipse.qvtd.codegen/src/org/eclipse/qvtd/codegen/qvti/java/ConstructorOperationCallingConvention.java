@@ -137,13 +137,13 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		assert bodyExpression == null;
 		Operation asOperation = CGUtil.getAST(cgOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOperation);
-		cgParameters.add(nameManager.getThisTransformerParameter());
-		if (!asOperation.isIsStatic()) {
-			//XXX			CGParameter cgParameter = nameManager.getSelfParameter();
-			//			cgParameter.setTypeId(context.getTypeId(JavaConstants.getJavaTypeId(Object.class)));
-			//			cgParameter.setRequired(contextVariable.isIsRequired());
-			//			cgParameters.add(cgParameter);
-		}
+		//	cgParameters.add(nameManager.getThisTransformerParameter());
+		//	if (!asOperation.isIsStatic()) {
+		//XXX			CGParameter cgParameter = nameManager.getSelfParameter();
+		//			cgParameter.setTypeId(context.getTypeId(JavaConstants.getJavaTypeId(Object.class)));
+		//			cgParameter.setRequired(contextVariable.isIsRequired());
+		//			cgParameters.add(cgParameter);
+		//	}
 		for (@NonNull Parameter parameterVariable : ClassUtil.nullFree(asOperation.getOwnedParameters())) {
 			CGParameter cgParameter = nameManager.getParameter(parameterVariable, (String)null);
 			cgParameters.add(cgParameter);

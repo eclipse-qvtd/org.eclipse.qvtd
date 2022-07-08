@@ -10,20 +10,28 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 /**
  *  CachedOperationCallingConvention defines the support for the call of a Complete OCL-defined operation.
@@ -81,6 +89,17 @@ public class CacheOperationCallingConvention extends AbstractCachedOperationCall
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void createCGParameters(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
+		NestedNameManager nameManager = as2cgVisitor.getNameManager();
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		List<CGParameter> cgParameters = cgOperation.getParameters();
+		for (@NonNull Parameter parameterVariable : ClassUtil.nullFree(asOperation.getOwnedParameters())) {
+			CGParameter cgParameter = nameManager.getParameter(parameterVariable, (String)null);
+			cgParameters.add(cgParameter);
+		}
 	}
 
 	@Override

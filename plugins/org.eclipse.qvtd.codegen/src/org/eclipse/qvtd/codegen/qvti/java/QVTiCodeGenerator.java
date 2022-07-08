@@ -58,7 +58,6 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
@@ -105,7 +104,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
-	private/* @LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -373,15 +371,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
 		return (QVTiGlobalNameManager)globalNameManager;
-	}
-
-	public @NonNull LanguageSupport getLanguageSupport() {
-		JavaLanguageSupport javaLanguageSupport2 = javaLanguageSupport;
-		if (javaLanguageSupport2 == null) {
-			javaLanguageSupport = javaLanguageSupport2 = (JavaLanguageSupport)environmentFactory.getLanguageSupport("java");
-			assert javaLanguageSupport2 != null;
-		}
-		return javaLanguageSupport2;
 	}
 
 	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {
