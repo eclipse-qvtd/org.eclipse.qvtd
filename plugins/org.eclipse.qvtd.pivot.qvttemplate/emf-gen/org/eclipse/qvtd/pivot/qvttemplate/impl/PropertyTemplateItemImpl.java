@@ -467,7 +467,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_CollectionType;
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, symbol_0).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -703,7 +703,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_0;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_CollectionType_0;
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, symbol_0).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -723,7 +723,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 									@SuppressWarnings("null")
 									final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 									final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_1;
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_CollectionType_1;
 									final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, symbol_1).booleanValue();
 									CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 								}
@@ -786,7 +786,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
 								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_2 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_2;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_2 = TYP_CollectionType_2;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, symbol_2);
 								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
@@ -901,7 +901,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
 						final /*@NonInvalid*/ @Nullable Type type_3 = resolvedProperty_1.getType();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_3 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_3;
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_3 = TYP_CollectionType_3;
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, symbol_3);
 						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
@@ -987,7 +987,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_0;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_CollectionType_0;
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, symbol_0).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -1005,7 +1005,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 								final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_1;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_CollectionType_1;
 								final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, symbol_1).booleanValue();
 								CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 							}
@@ -1043,7 +1043,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
 								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_2 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_2;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_2 = TYP_CollectionType_2;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, symbol_2);
 								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
@@ -1058,7 +1058,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
 								final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_3 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_3;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_3 = TYP_CollectionType_3;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_2, symbol_3);
 								final /*@Thrown*/ @NonNull Type valueType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
@@ -1143,7 +1143,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					}
 					else {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_5 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_5 = (org.eclipse.ocl.pivot.Class)TYP_CollectionType_5;
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_5 = TYP_CollectionType_5;
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();

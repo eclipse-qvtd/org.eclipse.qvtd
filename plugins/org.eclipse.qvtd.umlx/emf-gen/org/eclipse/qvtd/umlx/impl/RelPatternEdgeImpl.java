@@ -452,7 +452,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClassifier;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClassifier;
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -597,7 +597,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EAttribute = idResolver.getClass(UMLXTables.CLSSid_EAttribute, null);
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EAttribute;
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EAttribute;
 									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, symbol_0).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
@@ -816,7 +816,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EReference = idResolver.getClass(UMLXTables.CLSSid_EReference, null);
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EReference;
+									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EReference;
 									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, symbol_0).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
@@ -889,7 +889,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_0;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_0;
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_1);
 							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
@@ -1012,7 +1012,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass;
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass;
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
 							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
@@ -1231,7 +1231,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_0;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass_0;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
 								CAUGHT_sourceEClass = sourceEClass;
@@ -1245,7 +1245,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_1;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_1;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, symbol_1);
 								CAUGHT_targetEClass = targetEClass;
@@ -1531,7 +1531,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_0;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass_0;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
 								CAUGHT_sourceEClass = sourceEClass;
@@ -1545,7 +1545,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_1;
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_1;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, symbol_1);
 								CAUGHT_targetEClass = targetEClass;

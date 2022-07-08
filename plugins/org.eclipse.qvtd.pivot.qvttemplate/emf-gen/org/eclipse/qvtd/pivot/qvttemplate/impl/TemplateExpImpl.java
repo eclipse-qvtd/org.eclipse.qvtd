@@ -241,12 +241,12 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 					else {
 						/*@Caught*/ @NonNull Object CAUGHT_eq;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
+							final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 							if (where == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = where.getType();
-							final /*@NonInvalid*/ @NonNull BooleanType symbol_0 = (BooleanType)TYP_Boolean;
+							final /*@NonInvalid*/ @NonNull BooleanType symbol_0 = TYP_Boolean;
 							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == symbol_0.getTypeId()) : false;
 							CAUGHT_eq = eq;
 						}

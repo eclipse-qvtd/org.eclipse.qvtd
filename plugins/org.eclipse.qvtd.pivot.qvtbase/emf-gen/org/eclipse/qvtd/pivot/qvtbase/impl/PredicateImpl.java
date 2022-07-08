@@ -222,11 +222,11 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 				symbol_1 = true;
 			}
 			else {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
+				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression conditionExpression = this.getConditionExpression();
 				final /*@NonInvalid*/ @Nullable Type type = conditionExpression.getType();
-				final /*@NonInvalid*/ @NonNull BooleanType symbol_0 = (BooleanType)TYP_Boolean;
+				final /*@NonInvalid*/ @NonNull BooleanType symbol_0 = TYP_Boolean;
 				final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == symbol_0.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
 				symbol_1 = logDiagnostic;

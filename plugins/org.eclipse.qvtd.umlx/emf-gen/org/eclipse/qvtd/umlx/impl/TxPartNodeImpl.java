@@ -281,7 +281,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					final /*@NonInvalid*/ @NonNull TxKeyNode owningTxKeyNode = this.getOwningTxKeyNode();
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull EClass referredEClass = owningTxKeyNode.getReferredEClass();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = (org.eclipse.ocl.pivot.Class)TYP_ecore_c_c_EClass_0;
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass_0;
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, symbol_0);
 					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
