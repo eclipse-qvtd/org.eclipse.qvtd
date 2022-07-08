@@ -71,6 +71,7 @@
       <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:BooleanType &_1;#XEMMs"/>
       <ownedProperties xmi:id="zgFwC" isRequired="false" name="overridden" opposite="#mSVz," type="#zS2p0"/>
       <ownedProperties xmi:id="mSVz," name="overrides" opposite="#zgFwC" type="#n3g5w"/>
+      <ownedProperties xmi:id="J3nSf" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class &_0;#2i39P"/>
       <ownedProperties xmi:id="Img5I" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#UVEee"
           type="#AjDLV"/>
     </ownedClasses>
@@ -166,6 +167,9 @@
     <ownedClasses xmi:id="as9eG" name="Parameter">
       <ownedProperties xmi:id="5F8CN" isImplicit="true" isRequired="false" name="Transformation" opposite="#iWDDR" type="#AjDLV"/>
       <ownedProperties xmi:id="PNCQp" isImplicit="true" isRequired="false" name="TypedModel" opposite="#ggm9N" type="#WqJYx"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="2i39P" name="ParameterVariable">
+      <ownedProperties xmi:id="YSoi+" isImplicit="true" isRequired="false" name="Rule" opposite="#J3nSf" type="#zS2p0"/>
     </ownedClasses>
     <ownedClasses xmi:id="t4j6T" name="Variable">
       <ownedProperties xmi:id="YwYCh" isImplicit="true" name="Pattern" opposite="#056L0" type="#pJjNZ"/>

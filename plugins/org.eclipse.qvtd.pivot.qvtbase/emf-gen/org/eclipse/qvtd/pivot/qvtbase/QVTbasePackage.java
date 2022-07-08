@@ -369,6 +369,17 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Transformation();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOwnedContext <em>Owned Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Context</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOwnedContext()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_OwnedContext();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1031,6 +1042,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE__TRANSFORMATION = eINSTANCE.getRule_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Context</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__OWNED_CONTEXT = eINSTANCE.getRule_OwnedContext();
 
 		/**
 		 * The meta object literal for the '<em><b>Overridden</b></em>' reference feature.

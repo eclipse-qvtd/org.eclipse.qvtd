@@ -301,6 +301,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
 		private final @NonNull Class _Package_1 = createClass("Package");
 		private final @NonNull Class _Parameter = createClass("Parameter");
+		private final @NonNull Class _ParameterVariable = createClass("ParameterVariable");
 		private final @NonNull Class _Variable_1 = createClass("Variable");
 
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
@@ -383,6 +384,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Parameter);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _ParameterVariable);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Variable_1);
@@ -631,6 +635,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel);
 		private final @NonNull Property pr_Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
 		private final @NonNull Property pr_Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
+		private final @NonNull Property pr_ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
 		private final @NonNull Property pr_Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern);
 
 		private final @NonNull Property pr_CompoundTargetElement_ownedTargetElements = createProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, _OrderedSet_SimpleTargetElement_NullFree);
@@ -647,6 +652,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Rule_isAbstract = createProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, _Boolean);
 		private final @NonNull Property pr_Rule_overridden = createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, _Rule);
 		private final @NonNull Property pr_Rule_overrides = createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, _OrderedSet_Rule_NullFree);
+		private final @NonNull Property pr_Rule_ownedContext = createProperty(QVTbasePackage.Literals.RULE__OWNED_CONTEXT, _ParameterVariable);
 		private final @NonNull Property pr_Rule_transformation = createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, _Transformation);
 		private final @NonNull Property pr_SimpleTargetElement_iterates = createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, _Set_TypedModel_NullFree);
 		private final @NonNull Property pr_SimpleTargetElement_kind = createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, _TargetElementKind);
@@ -715,6 +721,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_ownedContext);
+
+			ownedProperties = _ParameterVariable.getOwnedProperties();
+			ownedProperties.add(property = pr_ParameterVariable_Rule_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Rule_ownedContext);
 
 			ownedProperties = _Variable_1.getOwnedProperties();
 			ownedProperties.add(property = pr_Variable_Pattern_bindsTo);
@@ -786,6 +799,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_Rule_overrides);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Rule_overridden);
+			ownedProperties.add(property = pr_Rule_ownedContext);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_ParameterVariable_Rule_ownedContext);
 			ownedProperties.add(property = pr_Rule_transformation);
 			property.setIsRequired(false);
 			property.setIsTransient(true);

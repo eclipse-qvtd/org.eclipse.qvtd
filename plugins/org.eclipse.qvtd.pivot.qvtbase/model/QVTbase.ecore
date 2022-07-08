@@ -236,6 +236,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-transformation"
         name="transformation" eType="#T-qvtbase-Transformation" transient="true" resolveProxies="false"
         eOpposite="#F-qvtbase-Transformation-rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-ownedContext"
+        name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ParameterVariable"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-SimpleTargetElement" name="SimpleTargetElement"
       eSuperTypes="#T-qvtbase-TargetElement">

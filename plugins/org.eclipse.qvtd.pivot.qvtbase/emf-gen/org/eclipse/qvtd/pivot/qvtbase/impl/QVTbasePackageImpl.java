@@ -517,6 +517,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getRule_OwnedContext() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getRule_Overridden() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(2);
 	}
@@ -957,6 +967,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
@@ -1128,6 +1139,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getRule_Overridden(), this.getRule(), this.getRule_Overrides(), "overridden", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overrides(), this.getRule(), this.getRule_Overridden(), "overrides", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_OwnedContext(), thePivotPackage.getParameterVariable(), null, "ownedContext", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDomainNameIsUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);

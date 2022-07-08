@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -74,6 +75,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOwnedContext <em>Owned Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -86,7 +88,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RULE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int RULE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -146,6 +148,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @ordered
 	 */
 	protected EList<Rule> overrides;
+
+	/**
+	 * The cached value of the '{@link #getOwnedContext() <em>Owned Context</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected ParameterVariable ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -256,6 +268,51 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, newTransformation, newTransformation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ParameterVariable getOwnedContext() {
+		return ownedContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedContext(ParameterVariable newOwnedContext, NotificationChain msgs) {
+		ParameterVariable oldOwnedContext = ownedContext;
+		ownedContext = newOwnedContext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldOwnedContext, newOwnedContext);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedContext(ParameterVariable newOwnedContext) {
+		if (newOwnedContext != ownedContext) {
+			NotificationChain msgs = null;
+			if (ownedContext != null)
+				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5), null, msgs);
+			if (newOwnedContext != null)
+				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5), null, msgs);
+			msgs = basicSetOwnedContext(newOwnedContext, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, newOwnedContext, newOwnedContext));
 	}
 
 	/**
@@ -860,6 +917,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return ((InternalEList<?>)getOverrides()).basicRemove(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return basicSetTransformation(null, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -897,6 +956,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return getOverrides();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getTransformation();
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				return getOwnedContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -927,6 +988,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)newValue);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				setOwnedContext((ParameterVariable)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -954,6 +1018,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)null);
 				return;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				setOwnedContext((ParameterVariable)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -976,6 +1043,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return overrides != null && !overrides.isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getTransformation() != null;
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
+				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
 	}
