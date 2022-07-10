@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
@@ -56,6 +57,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedMappings <em>Owned Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedContextType <em>Owned Context Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TransformationCSImpl#getOwnedProperties <em>Owned Properties</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,7 +70,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5;
+	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 6;
 	/**
 	 * The cached value of the '{@link #getOwnedDirections() <em>Owned Directions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -106,6 +108,16 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @ordered
 	 */
 	protected TypedRefCS ownedContextType;
+
+	/**
+	 * The cached value of the '{@link #getOwnedProperties() <em>Owned Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StructuralFeatureCS> ownedProperties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -229,6 +241,19 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	 * @generated
 	 */
 	@Override
+	public EList<StructuralFeatureCS> getOwnedProperties() {
+		if (ownedProperties == null) {
+			ownedProperties = new EObjectContainmentEList<StructuralFeatureCS>(StructuralFeatureCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5);
+		}
+		return ownedProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
@@ -239,6 +264,8 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return basicSetOwnedContextType(null, msgs);
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5:
+				return ((InternalEList<?>)getOwnedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -261,6 +288,8 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				return getOwnedQueries();
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return getOwnedContextType();
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5:
+				return getOwnedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +318,10 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				setOwnedContextType((TypedRefCS)newValue);
 				return;
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5:
+				getOwnedProperties().clear();
+				getOwnedProperties().addAll((Collection<? extends StructuralFeatureCS>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -313,6 +346,9 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				setOwnedContextType((TypedRefCS)null);
 				return;
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5:
+				getOwnedProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -335,6 +371,8 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 				return ownedQueries != null && !ownedQueries.isEmpty();
 			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return ownedContextType != null;
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5:
+				return ownedProperties != null && !ownedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

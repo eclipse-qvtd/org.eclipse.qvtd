@@ -195,5 +195,8 @@
         eType="#//QueryCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContextType" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedRefCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperties" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuralFeatureCS"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

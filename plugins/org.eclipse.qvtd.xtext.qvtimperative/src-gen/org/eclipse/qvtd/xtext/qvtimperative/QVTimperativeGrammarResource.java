@@ -553,7 +553,8 @@ public class QVTimperativeGrammarResource extends AbstractGrammarResource
 						createAssignment("ownedMappings", "+=", createAlternatives(
 							createRuleCall(PR_EntryPointCS),
 							createRuleCall(PR_MappingCS))),
-						createAssignment("ownedQueries", "+=", createRuleCall(PR_QueryCS)))),
+						createAssignment("ownedQueries", "+=", createRuleCall(PR_QueryCS)),
+						createAssignment("ownedProperties", "+=", createRuleCall(_QVTbase.PR_StructuralFeatureCS)))),
 					createKeyword("}")));
 			PR_UnrestrictedName.setAlternatives(
 				createAlternatives(

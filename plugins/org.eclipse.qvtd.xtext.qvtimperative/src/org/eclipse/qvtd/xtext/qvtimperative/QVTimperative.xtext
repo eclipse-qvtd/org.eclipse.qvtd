@@ -130,7 +130,7 @@ SpeculateStatementCS: 'speculate' ownedConditions+=ExpCS (',' ownedConditions+=E
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
-	'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS)* '}';
+	'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 
 QVTimperativeUnrestrictedName:
 	'add'

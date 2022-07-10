@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
@@ -33,6 +34,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedMappings <em>Owned Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedContextType <em>Owned Context Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS#getOwnedProperties <em>Owned Properties</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS()
@@ -128,5 +130,21 @@ public interface TransformationCS extends AbstractTransformationCS {
 	 * @generated
 	 */
 	void setOwnedContextType(TypedRefCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.StructuralFeatureCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Properties</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTransformationCS_OwnedProperties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StructuralFeatureCS> getOwnedProperties();
 
 } // TransformationCS

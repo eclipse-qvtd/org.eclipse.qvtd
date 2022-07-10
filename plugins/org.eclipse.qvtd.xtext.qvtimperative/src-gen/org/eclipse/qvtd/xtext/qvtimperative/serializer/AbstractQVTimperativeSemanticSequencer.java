@@ -1064,7 +1064,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         name=UnreservedName
 	 *         ownedContextType=TypeExpCS?
 	 *         ownedDirections+=DirectionCS*
-	 *         (ownedMappings+=EntryPointCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	 *         (ownedMappings+=EntryPointCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)*
 	 *     )
 	 * </pre>
 	 */

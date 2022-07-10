@@ -483,6 +483,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTransformationCSAccess().getOwnedDirectionsAssignment_5_0(), "rule__TransformationCS__OwnedDirectionsAssignment_5_0");
 					put(grammarAccess.getTransformationCSAccess().getOwnedMappingsAssignment_6_0(), "rule__TransformationCS__OwnedMappingsAssignment_6_0");
 					put(grammarAccess.getTransformationCSAccess().getOwnedQueriesAssignment_6_1(), "rule__TransformationCS__OwnedQueriesAssignment_6_1");
+					put(grammarAccess.getTransformationCSAccess().getOwnedPropertiesAssignment_6_2(), "rule__TransformationCS__OwnedPropertiesAssignment_6_2");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_0_0(), "rule__AttributeCS__QualifiersAssignment_0_0_0");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_0_1(), "rule__AttributeCS__QualifiersAssignment_0_0_1");
 					put(grammarAccess.getAttributeCSAccess().getQualifiersAssignment_0_1_0(), "rule__AttributeCS__QualifiersAssignment_0_1_0");
