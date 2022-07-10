@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LoopExp;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
@@ -94,7 +96,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		return scheduleManager;
 	}
 
-	protected @NonNull ImperativeTransformation getTransformation(@NonNull ImperativeModel iModel, @NonNull Transformation asTransformation) {
+	protected @NonNull ImperativeTransformation getTransformation(@NonNull ImperativeModel iModel, @NonNull Transformation asTransformation, @NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement) {
 		org.eclipse.ocl.pivot.Package asParentPackage = ClassUtil.nonNullState(asTransformation.getOwningPackage());
 		org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
 		List<org.eclipse.ocl.pivot.@NonNull Class> iClasses = QVTimperativeUtil.Internal.getOwnedClassesList(iParentPackage);
@@ -102,6 +104,11 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		org.eclipse.ocl.pivot.Class iTransformation = NameUtil.getNameable(iClasses, name);
 		if ((iTransformation == null) || !(iTransformation instanceof ImperativeTransformation)) {
 			iTransformation = createTransformation(name);
+			asElement2iElement.put(asTransformation, iTransformation);
+			Parameter asContextParameter = asTransformation.getOwnedContext();
+			if (asContextParameter != null) {
+				asElement2iElement.put(asContextParameter, QVTbaseUtil.getContextVariable(standardLibrary, (Transformation)iTransformation));
+			}
 			iClasses.add(iTransformation);
 			Transformation2TracePackage transformation2TracePackage = scheduleManager.getTransformation2TracePackage(asTransformation);
 			org.eclipse.ocl.pivot.Class transformationTraceClass = transformation2TracePackage.getTransformationTraceClass();
@@ -112,6 +119,13 @@ public class QVTs2QVTi extends QVTimperativeHelper
 				qvtiTypedModel.setIsPrimitive(qvtmTypedModel.isIsPrimitive());
 				qvtiTypedModel.setIsThis(qvtmTypedModel.isIsThis());
 				qvtiTypedModel.setIsTrace(qvtmTypedModel.isIsTrace());
+				asElement2iElement.put(qvtiTypedModel, qvtiTypedModel);
+			}
+			for (@NonNull Property asProperty : PivotUtil.getOwnedProperties(asTransformation)) {
+				Property iProperty = PivotUtil.createProperty(PivotUtil.getName(asProperty), PivotUtil.getType(asProperty));
+				iProperty.setIsRequired(asProperty.isIsRequired());
+				iTransformation.getOwnedProperties().add(iProperty);
+				asElement2iElement.put(asProperty, iProperty);
 			}
 		}
 		return (ImperativeTransformation) iTransformation;
@@ -227,9 +241,10 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	public @NonNull Model transform(@NonNull ImperativeModel model, @NonNull RootRegion rootRegion) {
 		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
 		Transformation asTransformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
-		ImperativeTransformation iTransformation = getTransformation(model, asTransformation);
+		@NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement = new HashMap<>();
+		ImperativeTransformation iTransformation = getTransformation(model, asTransformation, asElement2iElement);
 		Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2qvtiTypedModel = getTypedModels(iTransformation, asTransformation);
-		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(this, symbolNameReservation, asTypedModel2qvtiTypedModel);
+		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(this, symbolNameReservation, asTypedModel2qvtiTypedModel, asElement2iElement);
 		rootRegion.accept(visitor);
 		return model;
 	}

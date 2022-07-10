@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,8 @@ import java.util.Stack;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,6 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -77,6 +81,11 @@ import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTc/QVTu/QVTm chain.
+ * <br>
+ * For the upper levels a visitXXX supports an override to provide a non-uniform conversion.
+ * For the lower levels, in particular an ExpressionInOCL, and EcoreUtil copier is used.
+ * <br>
+ * FIXME Some simplification/regularity could be provided by making the EcoreUtil shallow copy the default visit.
  */
 public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 {
@@ -96,9 +105,6 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 
 		@Override
 		public EObject get(Object oIn) {
-			if (oIn instanceof Transformation) {
-				return (EObject) oIn;
-			}
 			EObject eOut = super.get(oIn);
 			if (eOut == null) {
 				eOut = context.equivalentTarget((Element)oIn);
@@ -237,6 +243,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			fOut.setIsTransient(fIn.isIsTransient());
 			fOut.setIsTypeof(fIn.isIsTypeof());
 			fOut.setImplementationClass(fIn.getImplementationClass());
+			//	fOut.setBodyExpression(create(fIn.getBodyExpression())); -- copied during reference pass
 			createAll(fIn.getOwnedParameters(), fOut.getOwnedParameters());
 			createAll(fIn.getOwnedComments(), fOut.getOwnedComments());
 			context.popScope();
@@ -552,6 +559,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		}
 
 		protected <T extends Element> void updateAllReferences(/*@NonNull*/ List<T> sources, /*@NonNull*/ List<T> targets) {
+			targets.clear();
 			for (@SuppressWarnings("null")@NonNull T source : sources) {
 				targets.add(context.equivalentTarget(source));
 			}
@@ -608,7 +616,9 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		public @Nullable Element visitFunction(@NonNull Function fOut) {
 			context.pushScope(fOut);
 			Function fIn = context.equivalentSource(fOut);
-			fOut.setBodyExpression(copy(fIn.getBodyExpression()));
+			LanguageExpression xIn = fIn.getBodyExpression();
+			LanguageExpression xOut = copy(xIn);
+			fOut.setBodyExpression(xOut);
 			fOut.setType(fIn.getType());
 			//			fOut.setTypeValue(fIn.getTypeValue());
 			updateAllChildren(fOut.getOwnedParameters());
@@ -730,6 +740,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			TypedModel tmIn = context.equivalentSource(tmOut);
 			updateAllReferences(tmIn.getDependsOn(), tmOut.getDependsOn());
 			updateAllReferences(tmIn.getIterates(), tmOut.getIterates());
+			updateAllReferences(tmIn.getUsedPackage(), tmOut.getUsedPackage());
 			return null;
 		}
 
@@ -740,20 +751,11 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			vOut.setIsImplicit(vIn.isIsImplicit());
 			vOut.setIsRequired(vIn.isIsRequired());
 			Type tIn = vIn.getType();
-			Type tVar;
-			if (vOut.eContainer() instanceof Transformation) {
-				tVar = tIn;
-			}
-			else if (tIn != null) {
-				tVar = context.equivalentTarget(tIn);
-			}
-			else {
-				tVar = null;
-			}
-			vOut.setType(tVar);
+			Type tOut = tIn != null ? context.equivalentTarget(tIn) : null;
+			vOut.setType(tOut);
 			Type tvIn = vIn.getTypeValue();
 			vOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
-			vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tVar));
+			vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tOut));
 			return vIn;
 		}
 
@@ -832,6 +834,46 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		}
 		assert !targets.contains(target);
 		targets.add(target);
+	}
+
+
+	//
+	//	Debug code to confirm that the output references refer to output elements, not inputs.
+	//
+	protected boolean assertOutputIsSelfSufficient(@NonNull Resource targetResource, @NonNull Resource sourceResource) {
+		assert targetResource != sourceResource;
+		Map<EObject, Collection<Setting>> crossReferenceMap = EcoreUtil.CrossReferencer.find(targetResource.getContents());
+		for (Map.Entry<EObject, Collection<Setting>> entry : crossReferenceMap.entrySet()) {
+			Collection<Setting> settings = entry.getValue();
+			EObject eTarget = entry.getKey();
+			Resource eTargetResource = eTarget.eResource();
+			if (eTargetResource == sourceResource) {
+				for (Setting setting : settings) {
+					EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
+					EObject eSource = setting.getEObject();
+					QVTruntimeUtil.errPrintln("source resource for " + eSource.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eSource)) + "::" + eStructuralFeature.getName() + " : " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)));
+				}
+			}
+			else if (eTargetResource != targetResource) {
+				//	QVTruntimeUtil.errPrintln("Wrong2 resource for target " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+			}
+		}
+		return true;
+	}
+
+	//
+	//	Debug code to confirm that every output object is traceable to some input object.
+	//
+	protected boolean assertOutputIsTraceable(@NonNull Resource target) {
+		for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
+			EObject eTarget = tit.next();
+			EObject eSource = target2source.get(eTarget);
+			EObject eCopied = debugCopy2source.get(eTarget);
+			if ((eSource == null) && (eCopied == null)) {
+				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+			}
+		}
+		return true;
 	}
 
 	protected @Nullable Element basicEquivalentSource(@Nullable Element target) {
@@ -925,17 +967,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 				transform(mIn, target.getContents());
 			}
 		}
-		//
-		//	Debug code to confirm that every output object is traceable to some input object.
-		//
-		for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
-			EObject eTarget = tit.next();
-			EObject eSource = target2source.get(eTarget);
-			EObject eCopied = debugCopy2source.get(eTarget);
-			if ((eSource == null) && (eCopied == null)) {
-				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
-			}
-		}
+		assert assertOutputIsSelfSufficient(target, source);
+		assert assertOutputIsTraceable(target);
 
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);

@@ -411,14 +411,16 @@ public class QVTbaseUtil extends PivotUtil
 		throw new IllegalStateException();
 	}
 
+	@Deprecated /* @deprecated distinct owningTransformation/typeTransformation no longer appropriate */
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
+		assert owningTransformation == typeTransformation;
+		return getContextVariable(standardLibrary, owningTransformation);
+	}
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
-		return getContextVariable(standardLibrary, transformation, transformation);
-	}
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
-		Parameter ownedContext = owningTransformation.getOwnedContext();
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
+		Parameter ownedContext = asTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
 			//        	if (transformationType == null) {	// FIXME BUG 487123
@@ -426,13 +428,13 @@ public class QVTbaseUtil extends PivotUtil
 			//        	}
 			ownedContext = PivotFactory.eINSTANCE.createParameter();
 			ownedContext.setName(QVTbaseUtil.THIS_NAME);
-			ownedContext.setType(typeTransformation);		// FIXME promote API
+			ownedContext.setType(asTransformation);		// FIXME promote API
 			//			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
-			owningTransformation.setOwnedContext(ownedContext);
+			asTransformation.setOwnedContext(ownedContext);
 		}
 		else {
-			ownedContext.setTypeValue(typeTransformation);		// FIXME BUG 484723 find a better solution for the transient declaration
+			ownedContext.setTypeValue(asTransformation);		// FIXME BUG 484723 find a better solution for the transient declaration
 		}
 		return ownedContext;
 	}

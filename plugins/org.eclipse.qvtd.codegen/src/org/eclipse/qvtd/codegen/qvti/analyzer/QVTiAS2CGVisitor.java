@@ -509,18 +509,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		boolean isRequired = asProperty.isIsRequired();
 		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
 		boolean isThis = false;
-		if (asSourceClass instanceof Transformation) {
-			ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getTransformation();
-			org.eclipse.ocl.pivot.Class compileTimeContextClass = QVTimperativeUtil.getCompileTimeContextClass(iTransformation);
-			if (iTransformation != compileTimeContextClass) {
-				org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
-				if (runtimeContextClass != compileTimeContextClass) {
-					Property iProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), asProperty.getName());
-					assert iProperty != null;
-					asProperty = iProperty;
-					isThis = true;
-				}
-			}
+		if (asSourceClass instanceof ImperativeTransformation) {
+			ImperativeTransformation iTransformation = (ImperativeTransformation)asSourceClass;
+			org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
+			Property iProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), asProperty.getName());
+			assert iProperty != null;
+			asProperty = iProperty;
+			isThis = true;
+			//	}
 		}
 		if (isThis) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();

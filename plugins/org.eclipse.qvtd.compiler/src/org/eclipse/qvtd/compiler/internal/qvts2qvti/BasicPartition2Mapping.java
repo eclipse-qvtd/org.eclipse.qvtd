@@ -682,8 +682,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	@NonNull VariableExp createContextVariableExp() {
 		StandardLibrary standardLibrary = getStandardLibrary();
 		Transformation iTransformation = visitor.getImperativeTransformation();
-		Transformation asTransformation = visitor.getOriginalTransformation();
-		VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, iTransformation, asTransformation);
+		VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, iTransformation);
 		return helper.createVariableExp(contextVariable);
 	}
 

@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
@@ -2758,9 +2759,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Deprecated
 	@Override
 	protected @NonNull String getThisName(@NonNull CGElement cgElement) {
+		CGElement cgScope = cgElement;
+		if (cgScope instanceof CGVariableExp) {
+			cgScope = ((CGVariableExp)cgScope).getReferredVariable();
+		}
+		if (cgScope instanceof CGVariable) {
+			TypedElement asTypedElement = (TypedElement) ((CGVariable)cgScope).getAst();
+			Type asType = asTypedElement.getType();
+			if (asType instanceof org.eclipse.ocl.pivot.Class) {
+				return ClassUtil.nonNullState(asType.getName());		// + ".this"
+			}
+		}
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
-				return getMappingName((CGMapping)eObject);		// + ".this"
+				CGMapping cgMapping = (CGMapping)eObject;
+				Mapping asMapping = QVTiCGUtil.getAST(cgMapping);
+				return getMappingName(cgMapping);		// + ".this"
 			}
 			if (eObject instanceof CGFunction) {
 				return getFunctionName((CGFunction)eObject);		// + ".this"

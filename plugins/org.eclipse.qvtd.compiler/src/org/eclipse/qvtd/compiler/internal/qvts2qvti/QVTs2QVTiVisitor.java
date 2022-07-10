@@ -11,16 +11,21 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -82,6 +87,31 @@ import com.google.common.collect.Lists;
  */
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	@SuppressWarnings("serial")
+	protected class OperationCopier extends EcoreUtil.Copier
+	{
+		public <T extends EObject> @NonNull T copyContainmentAndReferences(@NonNull T eIn) {
+			@SuppressWarnings("unchecked") T eOut = (@NonNull T)copy(eIn);
+			copyReferences();
+			return eOut;
+		}
+
+		@Override
+		public @Nullable EObject get(Object key) {
+			if (key instanceof Element) {
+				Element iElement = asElement2iElement.get(key);
+				if (iElement != null) {
+					return iElement;
+				}
+				//	if (key instanceof Parameter) {		// XXX
+				//		getClass();
+				//	}
+				//	return (Element)key;
+			}
+			return super.get(key);
+		}
+	}
+
 	public static class EarliestPartitionComparator implements Comparator<@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis>>
 	{
 		public static final @NonNull EarliestPartitionComparator INSTANCE = new EarliestPartitionComparator();
@@ -108,6 +138,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	protected final @NonNull ImperativeTransformation iTransformation;
 	protected final @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel;
+	protected final @NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement;
 	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull TypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull TypedModel> enforceableTypedModels = new ArrayList<>();
@@ -120,8 +151,11 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	private /*@LazyNonNull*/ TypedModel iMiddleTypedModel = null;
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Function> classDatum2keyFunction = new HashMap<>();
+	private @NonNull OperationCopier operationCopier = new OperationCopier();
 
-	public QVTs2QVTiVisitor(@NonNull QVTs2QVTi qvts2qvti, @NonNull SymbolNameReservation symbolNameReservation, @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel) {
+	public QVTs2QVTiVisitor(@NonNull QVTs2QVTi qvts2qvti, @NonNull SymbolNameReservation symbolNameReservation,
+			@NonNull Map<@NonNull TypedModel, @NonNull TypedModel> asTypedModel2iTypedModel,
+			@NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement) {
 		super(null);
 		this.scheduleManager = qvts2qvti.getScheduleManager();
 		this.qvts2qvti = qvts2qvti;
@@ -131,6 +165,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		this.symbolNameReservation = symbolNameReservation;
 		this.iTransformation = QVTimperativeUtil.getContainingTransformation(asTypedModel2iTypedModel.values().iterator().next());
 		this.asTypedModel2iTypedModel = asTypedModel2iTypedModel;
+		this.asElement2iElement = asElement2iElement;
 		for (@NonNull TypedModel iTypedModel : asTypedModel2iTypedModel.values()) {
 			if (iTypedModel.isIsTrace()) {
 				iMiddleTypedModel = iTypedModel;
@@ -193,8 +228,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		if (iOperation == null) {
 			Transformation containingTransformation = QVTbaseUtil.basicGetContainingTransformation(pOperation);
 			if (containingTransformation == asTransformation) {
-				iOperation = EcoreUtil.copy(pOperation);
-				assert iOperation != null;
+				iOperation = operationCopier.copyContainmentAndReferences(pOperation);
 				qvtmOperation2qvtiOperation.put(pOperation, iOperation);
 				iTransformation.getOwnedOperations().add(iOperation);
 			}
@@ -258,7 +292,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			QVTbaseUtil.getContextVariable(getStandardLibrary(), iTransformation, asTransformation);
+			QVTbaseUtil.getContextVariable(getStandardLibrary(), iTransformation);
 			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
 			iTransformation.getOwnedOperations().add(asFunction);
 			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
@@ -295,7 +329,36 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 		partition2mapping.synthesizeLocalStatements();
 		partition2partition2mapping.put(partition, partition2mapping);
-		iTransformation.getRule().add(partition2mapping.getMapping());
+		Mapping mapping = partition2mapping.getMapping();
+		//
+		//	Remap source references to target
+		//
+		for (Entry<EObject, Collection<Setting>> entry : EcoreUtil.CrossReferencer.find(Collections.singleton(mapping)).entrySet()) {
+			EObject asTarget = entry.getKey();
+			Element iTarget = asElement2iElement.get(asTarget);
+			if (iTarget != null) {
+				for (Setting setting : entry.getValue()) {
+					EObject iSource = setting.getEObject();
+					EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
+					Object valueOrValues = iSource.eGet(eStructuralFeature);
+					if (eStructuralFeature.isMany()) {
+						@SuppressWarnings("unchecked")
+						EList<Object> values = (EList<Object>)valueOrValues;
+						for (int i = 0; i < values.size(); i++) {
+							if (values.get(i) == asTarget) {
+								values.set(i, iTarget);
+							}
+						}
+					}
+					else {
+						if (valueOrValues == asTarget) {
+							iSource.eSet(eStructuralFeature, iTarget);
+						}
+					}
+				}
+			}
+		}
+		iTransformation.getRule().add(mapping);
 		visitPartition(partition);
 		//		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCalledRegions()) {
 		//			if (region2region2mapping.get(childRegion) == null) {
