@@ -25,12 +25,15 @@ package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.ids.BooleanLiteralId;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IntegerLiteralId;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.ids.UnlimitedNaturalLiteralId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -75,10 +78,15 @@ public class QVTrelationTables extends AbstractTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
+	public static final /*@NonInvalid*/ @NonNull BooleanLiteralId BOOLid_false = TypeId.FALSE_VALUE;
+	public static final /*@NonInvalid*/ @NonNull BooleanLiteralId BOOLid_true = TypeId.TRUE_VALUE;
+	public static final /*@NonInvalid*/ @NonNull IntegerLiteralId INTid_0 = TypeId.ZERO_VALUE;
+	public static final /*@NonInvalid*/ @NonNull IntegerLiteralId INTid_1 = TypeId.ONE_VALUE;
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTrelation", null, QVTrelationPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull UnlimitedNaturalLiteralId UNLid__a = TypeId.UNLIMITED_VALUE;
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTrelationTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTrelationTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTrelationTables.PACKid_$metamodel$.getClassId("DataType", 0);
@@ -107,30 +115,30 @@ public class QVTrelationTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTrelationTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTrelationTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Property);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_Domain);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_DomainPattern = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_DomainPattern);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_OCLExpression);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OclElement = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_OclElement);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Pattern = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_Pattern);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Relation = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_Relation);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelationCallExp = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_RelationCallExp);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_TypedModel);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_Variable);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(QVTrelationTables.CLSSid_Package);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelationDomain = TypeId.SEQUENCE.getSpecializedId(QVTrelationTables.CLSSid_RelationDomain);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Variable = TypeId.SEQUENCE.getSpecializedId(QVTrelationTables.CLSSid_Variable);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Key = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Key);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Package);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Pattern = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Pattern);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Property = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Property);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationCallExp = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_RelationCallExp);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationDomainAssignment = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_RelationDomainAssignment);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationImplementation = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_RelationImplementation);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Rule = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Rule);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Variable);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Class, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Property, QVTrelationTables.BOOLid_false, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Domain, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_DomainPattern = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_DomainPattern, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_OCLExpression, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_1, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OclElement = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_OclElement, QVTrelationTables.BOOLid_false, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Pattern = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Pattern, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Relation = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Relation, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelationCallExp = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_RelationCallExp, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TypedModel = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_TypedModel, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Variable, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Package, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelationDomain = TypeId.SEQUENCE.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_RelationDomain, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Variable = TypeId.SEQUENCE.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Variable, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Class, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Key = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Key, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Package, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Pattern = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Pattern, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Property = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Property, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationCallExp = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_RelationCallExp, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationDomainAssignment = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_RelationDomainAssignment, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationImplementation = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_RelationImplementation, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Rule = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Rule, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedCollectionTypeId(QVTrelationTables.CLSSid_Variable, QVTrelationTables.BOOLid_true, QVTrelationTables.INTid_0, QVTrelationTables.UNLid__a);
 
 	/**
 	 *	The type parameters for templated types and operations.

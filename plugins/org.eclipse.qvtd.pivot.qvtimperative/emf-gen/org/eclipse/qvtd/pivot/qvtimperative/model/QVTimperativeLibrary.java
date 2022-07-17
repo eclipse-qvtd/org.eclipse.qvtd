@@ -324,12 +324,14 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			Class type;
 
 			ownedClasses = qvtruntimelibrary.getOwnedClasses();
-			ownedClasses.add(type = _Model);
+			type = _Model;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Transformation);
+			ownedClasses.add(type);
+			type = _Transformation;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type);
 		}
 
 		private void installCollectionTypes() {
@@ -338,36 +340,45 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			CollectionType type;
 
 			ownedClasses = orphanage.getOwnedClasses();
-			ownedClasses.add(type = _Collection_OclElement);
+			type = _Collection_OclElement;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Collection_Model_objectsOfKind_TT);
+			ownedClasses.add(type);
+			type = _Collection_Model_objectsOfKind_TT;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Collection_Model_objectsOfType_TT);
+			ownedClasses.add(type);
+			type = _Collection_Model_objectsOfType_TT;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Set_OclElement_NullFree);
+			ownedClasses.add(type);
+			type = _Set_OclElement_NullFree;
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_OclElement);
-			ownedClasses.add(type = _Set_Model_objectsOfKind_TT_NullFree);
+			ownedClasses.add(type);
+			type = _Set_Model_objectsOfKind_TT_NullFree;
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Model_objectsOfKind_TT);
-			ownedClasses.add(type = _Set_Model_objectsOfType_TT_NullFree);
+			ownedClasses.add(type);
+			type = _Set_Model_objectsOfType_TT_NullFree;
 			type.setIsNullFree(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Model_objectsOfType_TT);
-			ownedClasses.add(type = _UniqueCollection_OclElement);
+			ownedClasses.add(type);
+			type = _UniqueCollection_OclElement;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_OclElement);
-			ownedClasses.add(type = _UniqueCollection_Model_objectsOfKind_TT);
+			ownedClasses.add(type);
+			type = _UniqueCollection_Model_objectsOfKind_TT;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Model_objectsOfKind_TT);
-			ownedClasses.add(type = _UniqueCollection_Model_objectsOfType_TT);
+			ownedClasses.add(type);
+			type = _UniqueCollection_Model_objectsOfType_TT;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Model_objectsOfType_TT);
+			ownedClasses.add(type);
 		}
 
 		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_NullFree, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
