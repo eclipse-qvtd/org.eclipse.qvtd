@@ -48,11 +48,11 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -318,7 +318,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 
 		@Override
 		public @Nullable Element visitPackage(@NonNull Package pIn) {
-			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
+			if (Orphanage.isOrphanage(pIn)) {
 				return null;
 			}
 			Package pOut = context.createPackage(pIn);

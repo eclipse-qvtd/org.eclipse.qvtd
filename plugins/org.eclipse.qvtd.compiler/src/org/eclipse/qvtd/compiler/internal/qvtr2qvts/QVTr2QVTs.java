@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -267,7 +266,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @Nullable Element visitPackage(org.eclipse.ocl.pivot.@NonNull Package pIn) {
-			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
+			if (Orphanage.isOrphanage(pIn)) {
 				return null;
 			}
 			org.eclipse.ocl.pivot.Package pOut = context.createPackage(pIn);
