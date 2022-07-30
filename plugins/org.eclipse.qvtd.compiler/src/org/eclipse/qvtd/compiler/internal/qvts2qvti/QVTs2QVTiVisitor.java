@@ -103,10 +103,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 				if (iElement != null) {
 					return iElement;
 				}
-				//	if (key instanceof Parameter) {		// XXX
-				//		getClass();
-				//	}
-				//	return (Element)key;
 			}
 			return super.get(key);
 		}

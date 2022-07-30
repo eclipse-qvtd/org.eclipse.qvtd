@@ -77,27 +77,29 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 			}
 		}
 
-		public @NonNull Resource ocl2qvtm(@NonNull URI oclURI) throws IOException {
+		public @NonNull ASResource ocl2qvtm(@NonNull URI oclURI) throws IOException {
 			OCL2QVTm ocl2qvtm = new OCL2QVTm(environmentFactory, traceabilityPropName);
-			Resource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI, getURI());
-			saveResource(pResource);
+			ASResource pResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI, getURI());
+			//	saveResource(pResource);
 			return pResource;
 		}
 
 		protected @NonNull Resource execute() throws IOException {
-			Resource mModel = ocl2qvtm(oclASUri);
+			ASResource mResource = ocl2qvtm(oclASUri);
 			if (!extendedASUris.isEmpty()) {
-				List<Resource> qvtmModels = new ArrayList<Resource>();
-				for (URI extendedQVTpModel : extendedASUris) {
-					qvtmModels.add(ocl2qvtm(extendedQVTpModel));
+				List<@NonNull Resource> qvtmResources = new ArrayList<>();
+				for (URI extendedASUri : extendedASUris) {
+					qvtmResources.add(ocl2qvtm(extendedASUri));
 				}
-				QVTmModelsMerger.merge(environmentFactory , mModel, qvtmModels);
-				saveResource(mModel);
-				for(Resource qvtmModel : qvtmModels) {	// unload unnecessary qvtmModels
-					qvtmModel.unload();
+				QVTmModelsMerger.merge(environmentFactory , mResource, qvtmResources);
+				assert mResource.basicGetLUSSIDs() == null;
+				//	mResource.resetLUSSIDs();
+				saveResource(mResource);
+				for (Resource qvtmResource : qvtmResources) {	// unload unnecessary qvtmModels
+					qvtmResource.unload();
 				}
 			}
-			return mModel;
+			return mResource;
 		}
 
 		private @NonNull String getTraceabilityPropertyName() {

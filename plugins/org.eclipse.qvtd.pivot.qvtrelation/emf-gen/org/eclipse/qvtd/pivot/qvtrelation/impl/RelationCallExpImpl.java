@@ -223,9 +223,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
@@ -253,9 +253,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 * oclAsType(RelationDomain)
 						 */
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_qvtrelation_c_c_RelationDomain_0;
 						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull RelationDomain oclAsType = (@NonNull RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, symbol_0);
+						final /*@Thrown*/ @NonNull RelationDomain oclAsType = (@NonNull RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain_0);
 						//
 						accumulator.add(oclAsType);
 					}
@@ -287,9 +286,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -335,9 +334,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_2 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
@@ -369,8 +368,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_1, asOrderedSet, ACC_closure_1);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure = (@NonNull OrderedSetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_qvtbase_c_c_Pattern;
-						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, symbol_0);
+						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_qvtbase_c_c_Pattern);
 						final /*@Thrown*/ @Nullable Pattern pattern = (@Nullable Pattern)OrderedCollectionFirstOperation.INSTANCE.evaluate(selectByKind);
 						CAUGHT_pattern = pattern;
 					}
@@ -407,8 +405,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_0_0, asOrderedSet_0, ACC_closure_0_0);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure_0 = (@NonNull OrderedSetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_qvtrelation_c_c_Relation_0;
-						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, symbol_1);
+						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_qvtrelation_c_c_Relation_0);
 						final /*@Thrown*/ @Nullable Relation relation = (@Nullable Relation)OrderedCollectionFirstOperation.INSTANCE.evaluate(selectByKind_0);
 						CAUGHT_relation = relation;
 					}
@@ -474,9 +471,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					CAUGHT_implies = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_2;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -512,9 +509,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_2 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -553,8 +550,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTrelationTables.CLSSid_DataType, null);
 									final /*@NonInvalid*/ @Nullable Type type = _1.getType();
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_DataType;
-									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, symbol_0).booleanValue();
+									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
 								catch (Exception e) {
@@ -571,8 +567,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 										try {
 											final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
 											final /*@NonInvalid*/ @Nullable Type type_0 = _1.getType();
-											final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_CollectionType;
-											final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, symbol_1).booleanValue();
+											final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();
 											CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 										}
 										catch (Exception e) {
@@ -687,9 +682,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_2;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

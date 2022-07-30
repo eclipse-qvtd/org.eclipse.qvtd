@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -59,8 +60,8 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	protected CGValuedElement rewriteAsCast(@Nullable CGValuedElement/*CGVariableExp*/ cgChild) {
-		if ((cgChild != null) && (cgChild.eContainer() instanceof CGMappingCallBinding)) {
+	protected CGValuedElement rewriteAsCast(@NonNull CGVariableExp cgChild) {
+		if (cgChild.eContainer() instanceof CGMappingCallBinding) {
 			return cgChild;
 		}
 		return super.rewriteAsCast(cgChild);

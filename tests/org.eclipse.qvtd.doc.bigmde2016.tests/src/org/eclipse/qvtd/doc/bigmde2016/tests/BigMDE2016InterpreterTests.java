@@ -22,7 +22,6 @@ import org.junit.Test;
  */
 public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 {
-	@Override
 	@Test
 	public void testQVTcCompiler_Families2Persons() throws Exception {
 		PrintAndLog logger = new PrintAndLog("results/" + getName());

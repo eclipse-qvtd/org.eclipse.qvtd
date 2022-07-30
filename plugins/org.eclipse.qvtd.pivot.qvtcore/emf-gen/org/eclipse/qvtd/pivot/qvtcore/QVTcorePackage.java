@@ -474,6 +474,17 @@ public interface QVTcorePackage extends EPackage {
 	EReference getNavigationAssignment_SlotExpression();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment#getTargetProperty <em>Target Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment#getTargetProperty()
+	 * @see #getNavigationAssignment()
+	 * @generated
+	 */
+	EReference getNavigationAssignment_TargetProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment <em>Opposite Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -482,17 +493,6 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getOppositePropertyAssignment();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#getTargetProperty <em>Target Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Property</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#getTargetProperty()
-	 * @see #getOppositePropertyAssignment()
-	 * @generated
-	 */
-	EReference getOppositePropertyAssignment_TargetProperty();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#getReferredTargetProperty() <em>Get Referred Target Property</em>}' operation.
@@ -553,17 +553,6 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPropertyAssignment();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getTargetProperty <em>Target Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Property</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getTargetProperty()
-	 * @see #getPropertyAssignment()
-	 * @generated
-	 */
-	EReference getPropertyAssignment_TargetProperty();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getReferredTargetProperty() <em>Get Referred Target Property</em>}' operation.
@@ -1049,6 +1038,14 @@ public interface QVTcorePackage extends EPackage {
 		EReference NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION = eINSTANCE.getNavigationAssignment_SlotExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Target Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGATION_ASSIGNMENT__TARGET_PROPERTY = eINSTANCE.getNavigationAssignment_TargetProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.OppositePropertyAssignmentImpl <em>Opposite Property Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1057,14 +1054,6 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass OPPOSITE_PROPERTY_ASSIGNMENT = eINSTANCE.getOppositePropertyAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Target Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY = eINSTANCE.getOppositePropertyAssignment_TargetProperty();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Referred Target Property</b></em>' operation.
@@ -1115,14 +1104,6 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROPERTY_ASSIGNMENT = eINSTANCE.getPropertyAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Target Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY_ASSIGNMENT__TARGET_PROPERTY = eINSTANCE.getPropertyAssignment_TargetProperty();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Referred Target Property</b></em>' operation.

@@ -1813,16 +1813,19 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedKey=ExpCS (ambiguity) ownedValue=ExpCS
+
+	 * </pre>
 	 */
 	protected void emit_MapLiteralPartCS_LessThanSignHyphenMinusKeyword_1_1_or_WithKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '|?'?
 	 *
@@ -1842,73 +1845,91 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_0_0_1_or_WithKeyword_0_1_0_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_1_2_0_1_or_WithKeyword_0_1_1_2_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_2_1_0_1_or_WithKeyword_0_1_2_1_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_0_0_1_or_WithKeyword_2_0_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_1_2_0_1_or_WithKeyword_2_1_2_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_2_1_0_1_or_WithKeyword_2_2_1_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ','?
 	 *

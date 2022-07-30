@@ -82,9 +82,10 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		Model outModel = QVTrelationUtil.getModel(outResource);
 		outModel.setName(inURI.lastSegment());
 		outModel.setExternalURI(inURI.toString());
-		((ASResource)inResource).setSaveable(true);
+		//	assertSameModel(inResource, outResource); -- no xmi:ids
+		//	((ASResource)inResource).setSaveable(true);
 		((ASResource)outResource).setSaveable(true);
-		inResource.save(DefaultCompilerOptions.defaultSavingOptions);
+		//	inResource.save(DefaultCompilerOptions.defaultSavingOptions);			-- saved during loadTransformation
 		outResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertSameModel(inResource, outResource);
 	}

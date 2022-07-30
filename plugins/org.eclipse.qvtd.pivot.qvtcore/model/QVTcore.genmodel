@@ -91,9 +91,9 @@
     </genClasses>
     <genClasses image="false" ecoreClass="QVTcore.ecore#T-qvtcore-NavigationAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-NavigationAssignment-slotExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-NavigationAssignment-targetProperty"/>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-OppositePropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-OppositePropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/getReferredTargetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForPartialValue">
         <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForPartialValue/diagnostics"/>
@@ -113,7 +113,6 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-PropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-PropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/getReferredTargetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForPartialValue">
         <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForPartialValue/diagnostics"/>

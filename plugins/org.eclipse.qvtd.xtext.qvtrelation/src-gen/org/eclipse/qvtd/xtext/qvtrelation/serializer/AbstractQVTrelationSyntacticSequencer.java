@@ -94,6 +94,11 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (QVTrelationGrammarAccess) access;
+		init0();
+		init1();
+	}
+
+	private void init0() {
 		match_AttributeCS_CommaKeyword_5_1_1_q = new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getCommaKeyword_5_1_1());
 		match_AttributeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_____DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4___or___InitialKeyword_6_0_1_0_0_UnrestrictedNameParserRuleCall_6_0_1_0_1_q_ColonKeyword_6_0_1_0_2_SemicolonKeyword_6_0_1_0_4____a_RightCurlyBracketKeyword_6_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_6_0_0()), new AlternativeAlias(true, true, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_1_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_1_4())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0()), new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2()), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_0_4()))), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_6_0_2())), new TokenAlias(false, false, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_1()));
 		match_AttributeCS_UnrestrictedNameParserRuleCall_6_0_1_0_1_q = new TokenAlias(false, true, grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1());
@@ -154,6 +159,9 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 		match_StructuredClassCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_RightCurlyBracketKeyword_7_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_7_0_0()), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_7_0_2())), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getSemicolonKeyword_7_1()));
 		match_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2()));
 		match_TargetCS_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getTargetCSAccess().getSemicolonKeyword_5());
+	}
+
+	private void init1() {
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
 
@@ -1862,16 +1870,19 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedKey=ExpCS (ambiguity) ownedValue=ExpCS
+
+	 * </pre>
 	 */
 	protected void emit_MapLiteralPartCS_LessThanSignHyphenMinusKeyword_1_1_or_WithKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('dependsOn' '{' '}')?
 	 *
@@ -1927,73 +1938,91 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_0_0_1_or_WithKeyword_0_1_0_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_1_2_0_1_or_WithKeyword_0_1_1_2_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingArgCS_LessThanSignHyphenMinusKeyword_0_1_2_1_0_1_or_WithKeyword_0_1_2_1_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_0_0_1_or_WithKeyword_2_0_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_1_2_0_1_or_WithKeyword_2_1_2_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
-	 *     'with' | '<-'
+	 *     'with' | '&lt;-'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     ownedNameExpression=NavigatingArgExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
 	 *     ownedType=TypeExpCS (ambiguity) ownedCoIterator=CoIteratorVariableCS
+
+	 * </pre>
 	 */
 	protected void emit_NavigatingCommaArgCS_LessThanSignHyphenMinusKeyword_2_2_1_0_1_or_WithKeyword_2_2_1_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *

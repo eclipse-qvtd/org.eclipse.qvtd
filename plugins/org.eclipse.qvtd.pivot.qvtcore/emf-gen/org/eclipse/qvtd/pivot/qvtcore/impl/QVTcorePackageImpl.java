@@ -620,8 +620,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getOppositePropertyAssignment() {
-		return oppositePropertyAssignmentEClass;
+	public EReference getNavigationAssignment_TargetProperty() {
+		return (EReference)navigationAssignmentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -630,8 +630,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOppositePropertyAssignment_TargetProperty() {
-		return (EReference)oppositePropertyAssignmentEClass.getEStructuralFeatures().get(0);
+	public EClass getOppositePropertyAssignment() {
+		return oppositePropertyAssignmentEClass;
 	}
 
 	/**
@@ -692,16 +692,6 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	@Override
 	public EClass getPropertyAssignment() {
 		return propertyAssignmentEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getPropertyAssignment_TargetProperty() {
-		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -914,9 +904,9 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		navigationAssignmentEClass = createEClass(11);
 		createEReference(navigationAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEReference(navigationAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 
 		oppositePropertyAssignmentEClass = createEClass(12);
-		createEReference(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
@@ -924,7 +914,6 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 4);
 
 		propertyAssignmentEClass = createEClass(13);
-		createEReference(propertyAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
 		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
@@ -1102,9 +1091,9 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEClass(navigationAssignmentEClass, NavigationAssignment.class, "NavigationAssignment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNavigationAssignment_SlotExpression(), thePivotPackage.getOCLExpression(), null, "slotExpression", null, 1, 1, NavigationAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNavigationAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, NavigationAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(oppositePropertyAssignmentEClass, OppositePropertyAssignment.class, "OppositePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOppositePropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, OppositePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getOppositePropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1145,7 +1134,6 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyAssignmentEClass, PropertyAssignment.class, "PropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, PropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getPropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1263,13 +1251,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 			   "body", "slotAssignment"
 		   });
 		addAnnotation
-		  (getOppositePropertyAssignment_TargetProperty(),
-		   source,
-		   new String[] {
-			   "body", "assignment"
-		   });
-		addAnnotation
-		  (getPropertyAssignment_TargetProperty(),
+		  (getNavigationAssignment_TargetProperty(),
 		   source,
 		   new String[] {
 			   "body", "assignment"

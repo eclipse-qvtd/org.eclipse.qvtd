@@ -225,9 +225,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -246,8 +246,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = where.getType();
-							final /*@NonInvalid*/ @NonNull BooleanType symbol_0 = TYP_Boolean;
-							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == symbol_0.getTypeId()) : false;
+							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 							CAUGHT_eq = eq;
 						}
 						catch (Exception e) {
@@ -269,9 +268,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

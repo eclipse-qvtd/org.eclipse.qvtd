@@ -106,17 +106,17 @@ public abstract class StatementImpl extends NamedElementImpl implements Statemen
 			 * if s = '' then n else s + ';' + n endif
 			 */
 			final /*@NonInvalid*/ boolean eq = s.equals(QVTimperativeTables.STR_);
-			/*@NonInvalid*/ @NonNull String symbol_0;
+			/*@NonInvalid*/ @NonNull String IF_eq;
 			if (eq) {
-				symbol_0 = n;
+				IF_eq = n;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
 				final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
-				symbol_0 = sum_0;
+				IF_eq = sum_0;
 			}
 			//
-			s = symbol_0;
+			s = IF_eq;
 		}
 		final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
 		final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);

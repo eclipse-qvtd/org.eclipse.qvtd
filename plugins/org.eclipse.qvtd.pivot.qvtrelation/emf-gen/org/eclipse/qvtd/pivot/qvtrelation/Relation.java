@@ -183,7 +183,7 @@ public interface Relation extends Rule {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='VariablesAreUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tvariable-&gt;isUnique(name)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='Tuple {\n\tmessage : String = let namesBag = variable-&gt;collect(name) in\n\tlet namesSet= namesBag-&gt;asSet() in\n\tlet multiNames = namesSet-&gt;select(n | namesBag-&gt;count(n) &gt; 1)-&gt;sortedBy(n | n) in\n\t\'Relation::VariablesAreUnique: Multiple definitions of \' + multiNames-&gt;iterate(b ; acc = \'\' |\n\t\tlet s = if b &lt;&gt; null then \'\"\' + b + \'\"\' else \'null\' endif in\n\t\tif acc &lt;&gt; \'\' then acc + \',\' + s else s endif) + \' in \"\' + transformation.name + \'::\' + name + \'\"\',\n\tstatus : Boolean = \n\tvariable-&gt;isUnique(name)\n\n\n}.status'"
 	 * @generated
 	 */
 	boolean validateVariablesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);

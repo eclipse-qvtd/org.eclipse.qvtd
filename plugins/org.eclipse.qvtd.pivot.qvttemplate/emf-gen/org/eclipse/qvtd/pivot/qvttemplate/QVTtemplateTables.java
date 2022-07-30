@@ -220,7 +220,6 @@ public class QVTtemplateTables extends AbstractTables
 			Fragments.init();
 		}
 
-
 		static {
 			Init.initEnd();
 		}

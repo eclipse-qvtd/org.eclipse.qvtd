@@ -23,45 +23,12 @@ import org.eclipse.ocl.pivot.Property;
  * A representation of the model object '<em><b>Property Assignment</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getTargetProperty <em>Target Property</em>}</li>
- * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getPropertyAssignment()
  * @model
  * @generated
  */
 public interface PropertyAssignment extends NavigationAssignment {
-	/**
-	 * Returns the value of the '<em><b>Target Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Target Property</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Property</em>' reference.
-	 * @see #setTargetProperty(Property)
-	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getPropertyAssignment_TargetProperty()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='assignment'"
-	 * @generated
-	 */
-	Property getTargetProperty();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#getTargetProperty <em>Target Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Property</em>' reference.
-	 * @see #getTargetProperty()
-	 * @generated
-	 */
-	void setTargetProperty(Property value);
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

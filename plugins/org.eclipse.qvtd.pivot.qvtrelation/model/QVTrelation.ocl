@@ -43,7 +43,12 @@ inv TopRelationOverriddenByTopRelation:
 inv TransformationIsRelationalTransformation:
 	transformation.oclIsKindOf(RelationalTransformation)
 
-inv VariablesAreUnique:
+inv VariablesAreUnique(let namesBag = variable->collect(name) in
+	let namesSet= namesBag->asSet() in
+	let multiNames = namesSet->select(n | namesBag->count(n) > 1)->sortedBy(n | n) in
+	'Relation::VariablesAreUnique: Multiple definitions of ' + multiNames->iterate(b ; acc = '' |
+		let s = if b <> null then '"' + b + '"' else 'null' endif in
+		if acc <> '' then acc + ',' + s else s endif) + ' in "' + transformation.name + '::' + name + '"'):
 	variable->isUnique(name)
 
 context RelationCallExp

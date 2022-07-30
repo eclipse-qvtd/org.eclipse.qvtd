@@ -360,7 +360,6 @@ public class QVTcoreTables extends AbstractTables
 			Fragments.init();
 		}
 
-
 		static {
 			Init.initEnd();
 		}
@@ -443,10 +442,7 @@ public class QVTcoreTables extends AbstractTables
 		public static final @NonNull ExecutorProperty _Mapping__specification = new EcoreExecutorProperty(QVTcorePackage.Literals.MAPPING__SPECIFICATION, Types._Mapping, 3);
 
 		public static final @NonNull ExecutorProperty _NavigationAssignment__slotExpression = new EcoreExecutorProperty(QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, Types._NavigationAssignment, 0);
-
-		public static final @NonNull ExecutorProperty _OppositePropertyAssignment__targetProperty = new EcoreExecutorProperty(QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY, Types._OppositePropertyAssignment, 0);
-
-		public static final @NonNull ExecutorProperty _PropertyAssignment__targetProperty = new EcoreExecutorProperty(QVTcorePackage.Literals.PROPERTY_ASSIGNMENT__TARGET_PROPERTY, Types._PropertyAssignment, 0);
+		public static final @NonNull ExecutorProperty _NavigationAssignment__targetProperty = new EcoreExecutorProperty(QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__TARGET_PROPERTY, Types._NavigationAssignment, 1);
 
 		public static final @NonNull ExecutorProperty _RealizedVariable__BottomPattern__realizedVariable = new ExecutorPropertyWithImplementation("BottomPattern", Types._RealizedVariable, 0, new EcoreLibraryOppositeProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE));
 
@@ -1703,6 +1699,7 @@ public class QVTcoreTables extends AbstractTables
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
+			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
 			QVTcoreTables.Properties._Assignment__value
 		};
 
@@ -1717,7 +1714,7 @@ public class QVTcoreTables extends AbstractTables
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
-			QVTcoreTables.Properties._OppositePropertyAssignment__targetProperty,
+			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
 			QVTcoreTables.Properties._Assignment__value
 		};
 
@@ -1732,7 +1729,7 @@ public class QVTcoreTables extends AbstractTables
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
-			QVTcoreTables.Properties._PropertyAssignment__targetProperty,
+			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
 			QVTcoreTables.Properties._Assignment__value
 		};
 

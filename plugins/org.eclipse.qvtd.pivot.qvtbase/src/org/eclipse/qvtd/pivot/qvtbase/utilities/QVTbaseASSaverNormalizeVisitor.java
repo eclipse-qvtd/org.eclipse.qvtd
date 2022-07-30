@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -12,7 +12,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseASSaverNormalizeVisito
 
 public class QVTbaseASSaverNormalizeVisitor extends AbstractQVTbaseASSaverNormalizeVisitor
 {
-	public QVTbaseASSaverNormalizeVisitor(@NonNull ASSaver context) {
+	public QVTbaseASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
 		super(context);
 	}
 

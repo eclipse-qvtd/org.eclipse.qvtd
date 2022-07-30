@@ -211,7 +211,7 @@
         <details key="originalName" value="VariablesAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;variable->isUnique(name)&#xA;&#xA;"/>
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = let namesBag = variable->collect(name) in&#xA;&#x9;let namesSet= namesBag->asSet() in&#xA;&#x9;let multiNames = namesSet->select(n | namesBag->count(n) > 1)->sortedBy(n | n) in&#xA;&#x9;'Relation::VariablesAreUnique: Multiple definitions of ' + multiNames->iterate(b ; acc = '' |&#xA;&#x9;&#x9;let s = if b &lt;> null then '&quot;' + b + '&quot;' else 'null' endif in&#xA;&#x9;&#x9;if acc &lt;> '' then acc + ',' + s else s endif) + ' in &quot;' + transformation.name + '::' + name + '&quot;',&#xA;&#x9;status : Boolean = &#xA;&#x9;variable->isUnique(name)&#xA;&#xA;&#xA;}.status"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

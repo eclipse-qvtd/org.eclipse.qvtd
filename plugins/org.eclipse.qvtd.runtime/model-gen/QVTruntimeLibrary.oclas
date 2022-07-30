@@ -10,7 +10,7 @@
   <ownedPackages xsi:type="pivot:Library" xmi:id="MwsHK" URI="http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" name="qvtruntimelibrary"
       nsPrefix="qvtrtlib">
     <ownedClasses xmi:id="rfSJ6" name="Extent" superClasses="&_1;#zfDWR">
-      <ownedProperties xmi:id="O3UlS" name="elements" type="#n83Xq"/>
+      <ownedProperties xmi:id="O3UlS" name="elements" opposite="#qK4aJ" type="#n83Xq"/>
     </ownedClasses>
     <ownedClasses xmi:id="qeoBC" name="Model" superClasses="&_1;#zfDWR"/>
     <ownedClasses xmi:id="LEev+" name="PseudoOperations" superClasses="&_1;#zfDWR">

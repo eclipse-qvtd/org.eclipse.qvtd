@@ -22,7 +22,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.utilities.PivotASSaverNormalizeVisitor;
 
 /**
@@ -41,7 +41,7 @@ public abstract class AbstractQVTbaseASSaverNormalizeVisitor
 	 *
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTbaseASSaverNormalizeVisitor(@NonNull ASSaver context) {
+	protected AbstractQVTbaseASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
 		super(context);
 	}
 

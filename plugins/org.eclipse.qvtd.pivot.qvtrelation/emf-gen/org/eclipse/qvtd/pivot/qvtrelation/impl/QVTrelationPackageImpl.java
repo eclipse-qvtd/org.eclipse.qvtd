@@ -1450,7 +1450,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tvariable->isUnique(name)\n\n"
+			   "body", "Tuple {\n\tmessage : String = let namesBag = variable->collect(name) in\n\tlet namesSet= namesBag->asSet() in\n\tlet multiNames = namesSet->select(n | namesBag->count(n) > 1)->sortedBy(n | n) in\n\t\'Relation::VariablesAreUnique: Multiple definitions of \' + multiNames->iterate(b ; acc = \'\' |\n\t\tlet s = if b <> null then \'\"\' + b + \'\"\' else \'null\' endif in\n\t\tif acc <> \'\' then acc + \',\' + s else s endif) + \' in \"\' + transformation.name + \'::\' + name + \'\"\',\n\tstatus : Boolean = \n\tvariable->isUnique(name)\n\n\n}.status"
 		   });
 		addAnnotation
 		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),

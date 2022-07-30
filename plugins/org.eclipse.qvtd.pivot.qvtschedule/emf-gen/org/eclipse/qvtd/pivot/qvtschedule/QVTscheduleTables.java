@@ -1031,7 +1031,6 @@ public class QVTscheduleTables extends AbstractTables
 			Fragments.init();
 		}
 
-
 		static {
 			Init.initEnd();
 		}

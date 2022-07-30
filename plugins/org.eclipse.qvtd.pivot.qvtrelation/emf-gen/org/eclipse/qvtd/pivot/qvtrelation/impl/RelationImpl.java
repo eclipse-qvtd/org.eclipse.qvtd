@@ -28,25 +28,36 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
+import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
+import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionCountOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableGreaterThanOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
+import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -340,9 +351,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -367,8 +378,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 					 * oclIsKindOf(RelationDomain)
 					 */
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_qvtrelation_c_c_RelationDomain;
-					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, symbol_0).booleanValue();
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
 						result = ValueUtil.FALSE_VALUE;
@@ -382,9 +392,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 					}
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -418,9 +428,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -439,9 +449,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 								/*@Caught*/ @NonNull Object CAUGHT_isTopLevel;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_qvtrelation_c_c_Relation;
 									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull Relation oclAsType = (@NonNull Relation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, overridden, symbol_0);
+									final /*@Thrown*/ @NonNull Relation oclAsType = (@NonNull Relation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, overridden, TYP_qvtrelation_c_c_Relation);
 									final /*@Thrown*/ boolean isTopLevel = oclAsType.isIsTopLevel();
 									CAUGHT_isTopLevel = isTopLevel;
 								}
@@ -527,9 +536,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -563,26 +572,25 @@ public class RelationImpl extends RuleImpl implements Relation {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationalTransformation = idResolver.getClass(QVTrelationTables.CLSSid_RelationalTransformation, null);
 					final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_qvtrelation_c_c_RelationalTransformation;
-					final /*@Thrown*/ boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, transformation, symbol_0).booleanValue();
+					final /*@Thrown*/ boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, transformation, TYP_qvtrelation_c_c_RelationalTransformation).booleanValue();
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -606,31 +614,62 @@ public class RelationImpl extends RuleImpl implements Relation {
 			 *     if severity <= 0
 			 *     then true
 			 *     else
-			 *       let result : Boolean[1] = variable->isUnique(name)
+			 *       let
+			 *         result : OclAny[1] = let
+			 *           status : Boolean[1] = variable->isUnique(name)
+			 *         in
+			 *           if status = true
+			 *           then true
+			 *           else
+			 *             Tuple{
+			 *               message = let
+			 *                 namesBag : Bag(String[*|?]) = variable->collect(name)
+			 *               in
+			 *                 let namesSet : Set(String[*|?]) = namesBag->asSet()
+			 *                 in
+			 *                   let
+			 *                     multiNames : OrderedSet(String) = namesSet->select(n |
+			 *                       namesBag->count(n) > 1)
+			 *                     ->sortedBy(n | n)
+			 *                   in 'Relation::VariablesAreUnique: Multiple definitions of ' +
+			 *                     multiNames->iterate(b; acc : String[1] = '' |
+			 *                       let
+			 *                         s : String[1] = if (b <> null)
+			 *                         then '"' + b + '"'
+			 *                         else 'null'
+			 *                         endif
+			 *                       in
+			 *                         if (acc <> '')
+			 *                         then acc + ',' + s
+			 *                         else s
+			 *                         endif) + ' in "' + transformation.name + '::' + name + '"', status = status
+			 *             }
+			 *           endif
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION___VALIDATE_VARIABLES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_0;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_0 = true;
+				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @NonNull Object CAUGHT_IF_status;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Variable> variable = this.getVariable();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_Variable);
 					@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
-					/*@Thrown*/ boolean result;
+					/*@Thrown*/ boolean status;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
-							result = true;
+							status = true;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -641,22 +680,136 @@ public class RelationImpl extends RuleImpl implements Relation {
 						final /*@NonInvalid*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-							result = false;
+							status = false;
 							break;			// Abort after second find
 						}
 						else {
 							accumulator.add(name);
 						}
 					}
-					CAUGHT_result = result;
+					/*@Thrown*/ @NonNull Object IF_status;
+					if (status) {
+						IF_status = ValueUtil.TRUE_VALUE;
+					}
+					else {
+						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_PRIMid_String);
+						@NonNull Iterator<Object> ITERATOR__1_0 = BOXED_variable.iterator();
+						/*@Thrown*/ @NonNull BagValue namesBag;
+						while (true) {
+							if (!ITERATOR__1_0.hasNext()) {
+								namesBag = accumulator_0;
+								break;
+							}
+							@SuppressWarnings("null")
+							/*@NonInvalid*/ @NonNull Variable _1_0 = (@NonNull Variable)ITERATOR__1_0.next();
+							/**
+							 * name
+							 */
+							final /*@NonInvalid*/ @Nullable String name_0 = _1_0.getName();
+							//
+							accumulator_0.add(name_0);
+						}
+						final /*@Thrown*/ @NonNull SetValue namesSet = CollectionAsSetOperation.INSTANCE.evaluate(namesBag);
+						/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_PRIMid_String);
+						@Nullable Iterator<Object> ITERATOR_n = namesSet.iterator();
+						/*@Thrown*/ @NonNull SetValue select;
+						while (true) {
+							if (!ITERATOR_n.hasNext()) {
+								select = accumulator_1;
+								break;
+							}
+							/*@NonInvalid*/ @Nullable String n = (@Nullable String)ITERATOR_n.next();
+							/**
+							 * namesBag->count(n) > 1
+							 */
+							final /*@Thrown*/ @NonNull IntegerValue count = CollectionCountOperation.INSTANCE.evaluate(namesBag, n);
+							final /*@Thrown*/ boolean gt = OclComparableGreaterThanOperation.INSTANCE.evaluate(executor, count, QVTrelationTables.INT_1).booleanValue();
+							//
+							if (gt == ValueUtil.TRUE_VALUE) {
+								accumulator_1.add(n);
+							}
+						}
+						final org.eclipse.ocl.pivot.@NonNull Class TYPE_multiNames_0 = executor.getStaticTypeOfValue(null, select);
+						final @NonNull LibraryIterationExtension IMPL_multiNames_0 = (LibraryIterationExtension)TYPE_multiNames_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
+						final @NonNull Object ACC_multiNames_0 = IMPL_multiNames_0.createAccumulatorValue(executor, QVTrelationTables.ORD_PRIMid_String, TypeId.STRING);
+						/**
+						 * Implementation of the iterator body.
+						 */
+						final @NonNull AbstractBinaryOperation BODY_multiNames_0 = new AbstractBinaryOperation() {
+							/**
+							 * n
+							 */
+							@Override
+							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object select, final /*@NonInvalid*/ @Nullable Object n_0) {
+								final /*@NonInvalid*/ @Nullable String CAST_null = (String)n_0;
+								return CAST_null;
+							}
+						};
+						final @NonNull ExecutorSingleIterationManager MGR_multiNames_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_PRIMid_String, BODY_multiNames_0, select, ACC_multiNames_0);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull OrderedSetValue multiNames = (@NonNull OrderedSetValue)IMPL_multiNames_0.evaluateIteration(MGR_multiNames_0);
+						/*@NonInvalid*/ @NonNull String acc = QVTrelationTables.STR_;
+						@NonNull Iterator<Object> ITERATOR_b = multiNames.iterator();
+						/*@Thrown*/ @Nullable String iterate;
+						while (true) {
+							if (!ITERATOR_b.hasNext()) {
+								iterate = acc;
+								break;
+							}
+							@SuppressWarnings("null")
+							/*@NonInvalid*/ @NonNull String b = (@NonNull String)ITERATOR_b.next();
+							/**
+							 *
+							 * let s : String[1] = if b <> null then '"' + b + '"' else 'null' endif
+							 * in if acc <> '' then acc + ',' + s else s endif
+							 */
+							final /*@NonInvalid*/ boolean ne = true;
+							/*@NonInvalid*/ @NonNull String s;
+							if (ne) {
+								final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTrelationTables.STR__34, b);
+								final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTrelationTables.STR__34);
+								s = sum_0;
+							}
+							else {
+								s = QVTrelationTables.STR_null;
+							}
+							final /*@NonInvalid*/ boolean ne_0 = !acc.equals(QVTrelationTables.STR_);
+							/*@NonInvalid*/ @NonNull String IF_ne_0;
+							if (ne_0) {
+								final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(acc, QVTrelationTables.STR__44);
+								final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, s);
+								IF_ne_0 = sum_2;
+							}
+							else {
+								IF_ne_0 = s;
+							}
+							//
+							acc = IF_ne_0;
+						}
+						final /*@Thrown*/ @NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(QVTrelationTables.STR_Relation_c_c_VariablesAreUnique_c_32_Multiple_32_definitions_32_of_32, iterate);
+						final /*@Thrown*/ @NonNull String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, QVTrelationTables.STR__32_in_32_34);
+						final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
+						if (transformation == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name_1 = transformation.getName();
+						final /*@Thrown*/ @NonNull String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, name_1);
+						final /*@Thrown*/ @NonNull String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, QVTrelationTables.STR__c_c);
+						final /*@NonInvalid*/ @Nullable String name_2 = this.getName();
+						final /*@Thrown*/ @NonNull String sum_7 = StringConcatOperation.INSTANCE.evaluate(sum_6, name_2);
+						final /*@Thrown*/ @NonNull String sum_8 = StringConcatOperation.INSTANCE.evaluate(sum_7, QVTrelationTables.STR__34);
+						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTrelationTables.TUPLid_, sum_8, status);
+						IF_status = TUP_;
+					}
+					CAUGHT_IF_status = IF_status;
 				}
 				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+					CAUGHT_IF_status = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
-				symbol_0 = logDiagnostic;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_status, QVTrelationTables.INT_0).booleanValue();
+				IF_le = logDiagnostic;
 			}
-			return symbol_0;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

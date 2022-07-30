@@ -8,7 +8,7 @@
   <ownedPackages xmi:id="6+ray" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
     <ownedClasses xmi:id="Phhr+" name="BaseModel" superClasses="&_0;#aKB,e"/>
     <ownedClasses xmi:id="32OJ," name="CompoundTargetElement" superClasses="#imhVK">
-      <ownedProperties xmi:id="gsp,1" isComposite="true" name="ownedTargetElements" type="#2q+J3"/>
+      <ownedProperties xmi:id="gsp,1" isComposite="true" name="ownedTargetElements" opposite="#Ddfbo" type="#2q+J3"/>
     </ownedClasses>
     <ownedClasses xmi:id="7pR2u" isAbstract="true" name="Domain" superClasses="&_0;#0kVqz &_0;#dXAFV">
       <ownedInvariants xmi:id="G93EB" isCallable="true" name="NameIsTypedModelName">
@@ -24,7 +24,7 @@
         <ownedComments body="An enforceable domain may be selected as the target of a transformation in check or enforce mode. An enforceable domain is always checkable. A not-checkable domain cannot be selected as the target of a transformation. See Bug 549776."/>
       </ownedProperties>
       <ownedProperties xmi:id="jwI+E" isTransient="true" name="rule" opposite="#DtMdd" type="#zS2p0"/>
-      <ownedProperties xmi:id="GoV0K" isRequired="false" name="typedModel" type="#WqJYx"/>
+      <ownedProperties xmi:id="GoV0K" isRequired="false" name="typedModel" opposite="#TPm6," type="#WqJYx"/>
     </ownedClasses>
     <ownedClasses xmi:id="PGjqK" name="Function" superClasses="&_0;#Yz,F1">
       <ownedInvariants xmi:id="S1Iog" isCallable="true" name="ParametersAreFunctionParameter">
@@ -34,21 +34,21 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type?.conformsTo(type)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedProperties xmi:id="r1ilM" isDerived="true" isRequired="false" isResolveProxies="false" isTransient="true" isVolatile="true"
-          name="queryExpression" type="pivot:Class &_0;#BFtK4"/>
+          name="queryExpression" opposite="#N9fOm" type="pivot:Class &_0;#BFtK4"/>
     </ownedClasses>
     <ownedClasses xmi:id="RNSrx" name="FunctionBody" superClasses="&_0;#sFfJa">
       <ownedComments body="FunctionBody refines ExpressionInOCL to avoid the inconvenience of a timely setType() by deriving the type from the bodyExpression. See Bug 481664."/>
     </ownedClasses>
     <ownedClasses xmi:id="owsj9" name="FunctionParameter" superClasses="&_0;#as9eG"/>
     <ownedClasses xmi:id="H0dko" name="Pattern" superClasses="&_0;#t5rpa">
-      <ownedProperties xmi:id="056L0" name="bindsTo" type="#+iD8q"/>
+      <ownedProperties xmi:id="056L0" name="bindsTo" opposite="#YwYCh" type="#+iD8q"/>
       <ownedProperties xmi:id="6cYSq" isComposite="true" name="predicate" opposite="#eKpfP" type="#XYdvW"/>
     </ownedClasses>
     <ownedClasses xmi:id="uMSmb" name="Predicate" superClasses="&_0;#t5rpa">
       <ownedInvariants xmi:id="xFRwU" isCallable="true" name="ConditionIsBoolean">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="h0xFs" isComposite="true" name="conditionExpression" type="pivot:Class &_0;#BFtK4"/>
+      <ownedProperties xmi:id="h0xFs" isComposite="true" name="conditionExpression" opposite="#R0cad" type="pivot:Class &_0;#BFtK4"/>
       <ownedProperties xmi:id="eKpfP" isTransient="true" name="pattern" opposite="#6cYSq" type="#H0dko"/>
     </ownedClasses>
     <ownedClasses xmi:id="zS2p0" isAbstract="true" name="Rule" superClasses="&_0;#0kVqz">
@@ -71,20 +71,20 @@
       <ownedProperties xmi:id="r3ogk" defaultValueString="false" name="isAbstract" type="pivot:BooleanType &_1;#XEMMs"/>
       <ownedProperties xmi:id="zgFwC" isRequired="false" name="overridden" opposite="#mSVz," type="#zS2p0"/>
       <ownedProperties xmi:id="mSVz," name="overrides" opposite="#zgFwC" type="#n3g5w"/>
-      <ownedProperties xmi:id="J3nSf" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class &_0;#2i39P"/>
+      <ownedProperties xmi:id="J3nSf" isComposite="true" isRequired="false" name="ownedContext" opposite="#YSoi+" type="pivot:Class &_0;#2i39P"/>
       <ownedProperties xmi:id="Img5I" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation" opposite="#UVEee"
           type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="QE4nl" name="SimpleTargetElement" superClasses="#imhVK">
-      <ownedProperties xmi:id="hyhhA" name="iterates" type="#,klFp">
+      <ownedProperties xmi:id="hyhhA" name="iterates" opposite="#erDs5" type="#,klFp">
         <ownedComments body="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
       </ownedProperties>
       <ownedProperties xmi:id="8DFP6" name="kind" type="#WvMNq"/>
-      <ownedProperties xmi:id="HpHGA" name="typedModel" type="#WqJYx"/>
+      <ownedProperties xmi:id="HpHGA" name="typedModel" opposite="#opMs2" type="#WqJYx"/>
       <ownedProperties xmi:id="Ddfbo" isImplicit="true" isRequired="false" name="CompoundTargetElement" opposite="#gsp,1" type="#32OJ,"/>
     </ownedClasses>
     <ownedClasses xmi:id="Id7YJ" name="Target" superClasses="&_0;#0kVqz">
-      <ownedProperties xmi:id="tJIaS" isComposite="true" name="ownedTargetElements" type="#lT4bW"/>
+      <ownedProperties xmi:id="tJIaS" isComposite="true" name="ownedTargetElements" opposite="#e8z6e" type="#lT4bW"/>
       <ownedProperties xmi:id="FOe8p" isTransient="true" name="owningTransformation" opposite="#1DMp8" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="imhVK" isAbstract="true" name="TargetElement" superClasses="&_0;#t5rpa">
@@ -114,10 +114,10 @@
       <ownedOperations xmi:id="rcEGq" name="getModelParameter" type="#WqJYx">
         <ownedParameters xmi:id="1Erns" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
       </ownedOperations>
-      <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" type="#AjDLV"/>
+      <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
       <ownedProperties xmi:id="YTQDv" isComposite="true" name="modelParameter" opposite="#fPfk3" type="#SncSN"/>
-      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class &_0;#as9eG"/>
-      <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" type="#5bIlO"/>
+      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" opposite="#5F8CN" type="pivot:Class &_0;#as9eG"/>
+      <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" opposite="#UougY" type="#5bIlO"/>
       <ownedProperties xmi:id="1DMp8" isComposite="true" name="ownedTargets" opposite="#FOe8p" type="#hM1KC">
         <ownedComments body="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>
       </ownedProperties>
@@ -128,7 +128,7 @@
       <ownedInvariants xmi:id="U2pQC" isCallable="true" name="ExclusivePrimitiveThisTrace">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp">
+      <ownedProperties xmi:id="cy5DZ" name="dependsOn" opposite="#,4oQK" type="#,klFp">
         <ownedComments body="The set of typed models that need to be checked/enforced before this TypedModel can be checked/enforced."/>
       </ownedProperties>
       <ownedProperties xmi:id="z+SD0" defaultValueString="false" name="isPrimitive" type="pivot:BooleanType &_1;#XEMMs">
@@ -140,12 +140,12 @@
       <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:BooleanType &_1;#XEMMs">
         <ownedComments body="The TypedModel is for the execution trace. It may be added automatically."/>
       </ownedProperties>
-      <ownedProperties xmi:id="PgOqh" name="iterates" type="#,klFp">
+      <ownedProperties xmi:id="PgOqh" name="iterates" opposite="#kRVcF" type="#,klFp">
         <ownedComments body="The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration."/>
       </ownedProperties>
-      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class &_0;#as9eG"/>
+      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" opposite="#PNCQp" type="pivot:Class &_0;#as9eG"/>
       <ownedProperties xmi:id="fPfk3" isTransient="true" name="transformation" opposite="#YTQDv" type="#AjDLV"/>
-      <ownedProperties xmi:id="fK4wq" name="usedPackage" type="#4WjM+"/>
+      <ownedProperties xmi:id="fK4wq" name="usedPackage" opposite="#xb2NR" type="#4WjM+"/>
       <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#GoV0K" type="#9+o+H"/>
       <ownedProperties xmi:id="erDs5" isImplicit="true" name="SimpleTargetElement" opposite="#hyhhA" type="#KmD9S"/>
       <ownedProperties xmi:id="opMs2" isImplicit="true" name="SimpleTargetElement" opposite="#HpHGA" type="#KmD9S"/>

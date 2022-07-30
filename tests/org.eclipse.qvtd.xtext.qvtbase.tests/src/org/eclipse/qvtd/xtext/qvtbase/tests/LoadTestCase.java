@@ -11,12 +11,12 @@
 package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.IOException;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -27,8 +27,8 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -72,16 +72,17 @@ public abstract class LoadTestCase extends XtextTestCase
 		assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
 		pivotResource.setSaveable(true);
 		pivotResource.setURI(pivotURI);
-		pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
+		pivotResource.save(XMIUtil.createSaveOptions(pivotResource));
+		assertNoResourceErrors("Save", pivotResource);
 		return pivotResource;
 	}
 
 	protected void saveAsXMI(@NonNull Resource resource, @NonNull URI xmiURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
-		Resource xmiResource = resourceSet.createResource(xmiURI);
+		XMLResource xmiResource = (XMLResource) resourceSet.createResource(xmiURI);
 		xmiResource.getContents().addAll(resource.getContents());
-		xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
+		xmiResource.save(XMIUtil.createSaveOptions(xmiResource));
 		assertNoResourceErrors("Save failed", xmiResource);
 		resource.getContents().addAll(xmiResource.getContents());
 	}

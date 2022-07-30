@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -88,6 +89,8 @@ public class PivotTestCase extends TestCase
 		//	TEST_START.setState(true);
 		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
 		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
+		DefaultCompilerOptions.defaultSavingOptions.put(AS2ID.DEBUG_LUSSID_COLLISIONS, Boolean.TRUE);
+		DefaultCompilerOptions.defaultSavingOptions.put(AS2ID.DEBUG_XMIID_COLLISIONS, Boolean.TRUE);
 	}
 
 	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {

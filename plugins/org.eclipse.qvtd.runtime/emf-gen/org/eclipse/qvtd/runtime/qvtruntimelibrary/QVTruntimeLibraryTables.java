@@ -149,7 +149,6 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Fragments.init();
 		}
 
-
 		static {
 			Init.initEnd();
 		}

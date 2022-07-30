@@ -421,9 +421,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_ECLASS__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -452,8 +452,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EClassifier = idResolver.getClass(UMLXTables.CLSSid_EClassifier, null);
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClassifier;
-							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0).booleanValue();
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClassifier).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
 						catch (Exception e) {
@@ -480,9 +479,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -514,9 +513,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_SOURCE_IS_CLASS_NODE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_0;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_0 = true;
+				IF_le = true;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -535,9 +534,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					}
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
-				symbol_0 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_0;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -576,9 +575,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EATTRIBUTE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_1;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_1 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -597,8 +596,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EAttribute = idResolver.getClass(UMLXTables.CLSSid_EAttribute, null);
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EAttribute;
-									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, symbol_0).booleanValue();
+									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, TYP_ecore_c_c_EAttribute).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
 								catch (Exception e) {
@@ -706,9 +704,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_1 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_1;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -740,9 +738,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_MULTIPLICITY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_0;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_0 = true;
+				IF_le = true;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
@@ -752,9 +750,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ boolean isMany = source.isIsMany();
 				final /*@NonInvalid*/ boolean result = eq == isMany;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
-				symbol_0 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_0;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -795,9 +793,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_EREFERENCE_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_3;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_3 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -816,8 +814,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ecore_c_c_EReference = idResolver.getClass(UMLXTables.CLSSid_EReference, null);
-									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EReference;
-									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, symbol_0).booleanValue();
+									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredEStructuralFeature, TYP_ecore_c_c_EReference).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
 								catch (Exception e) {
@@ -889,9 +886,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = target_0.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_0;
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_1);
+							final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
 							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, sourceEClass);
 							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
 							final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
@@ -905,12 +901,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								 */
 								@Override
 								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-									final /*@NonInvalid*/ @Nullable EClass symbol_2 = (EClass)_1;
-									if (symbol_2 == null) {
+									final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
+									if (CAST_null == null) {
 										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 									}
 									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_2.getESuperTypes();
+									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
 									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 									return BOXED_eSuperTypes;
 								}
@@ -953,9 +949,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_3 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_3;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -992,9 +988,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_PROPERTY_SOURCE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_2 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -1012,9 +1008,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 							final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass;
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
+							final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass);
 							final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 							final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
 							final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
@@ -1028,12 +1023,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								 */
 								@Override
 								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-									final /*@NonInvalid*/ @Nullable EClass symbol_1 = (EClass)_1;
-									if (symbol_1 == null) {
+									final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
+									if (CAST_null == null) {
 										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 									}
 									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_1.getESuperTypes();
+									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
 									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 									return BOXED_eSuperTypes;
 								}
@@ -1067,9 +1062,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_2;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -1101,9 +1096,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_SOURCE_INDEX__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_0;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_0 = true;
+				IF_le = true;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature = this.getReferredEStructuralFeature();
@@ -1113,9 +1108,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 				final /*@NonInvalid*/ boolean eq = BOXED_sourceIndex.equals(UMLXTables.INT_0);
 				final /*@NonInvalid*/ boolean result = ne == eq;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
-				symbol_0 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_0;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -1155,9 +1150,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_REST_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_2;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_2 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -1231,9 +1226,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass_0;
 								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
+								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
 								CAUGHT_sourceEClass = sourceEClass;
 							}
 							catch (Exception e) {
@@ -1245,9 +1239,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_1;
 								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, symbol_1);
+								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
 								CAUGHT_targetEClass = targetEClass;
 							}
 							catch (Exception e) {
@@ -1408,9 +1401,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_2 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_2;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
@@ -1455,9 +1448,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXPackage.Literals.REL_PATTERN_EDGE___VALIDATE_COMPATIBLE_MEMBER_PROPERTY_TARGET__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-			/*@NonInvalid*/ boolean symbol_4;
+			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				symbol_4 = true;
+				IF_le = true;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
@@ -1531,9 +1524,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode source = this.getSource();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = source.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_0 = TYP_ecore_c_c_EClass_0;
 								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, symbol_0);
+								final /*@Thrown*/ @NonNull EClass sourceEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier, TYP_ecore_c_c_EClass_0);
 								CAUGHT_sourceEClass = sourceEClass;
 							}
 							catch (Exception e) {
@@ -1545,9 +1537,8 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull RelPatternNode target_0 = this.getTarget();
 								final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier_0 = target_0.getReferredEClassifier();
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class symbol_1 = TYP_ecore_c_c_EClass_1;
 								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, symbol_1);
+								final /*@Thrown*/ @NonNull EClass targetEClass = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClassifier_0, TYP_ecore_c_c_EClass_1);
 								CAUGHT_targetEClass = targetEClass;
 							}
 							catch (Exception e) {
@@ -1571,12 +1562,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									 */
 									@Override
 									public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-										final /*@NonInvalid*/ @Nullable EClass symbol_2 = (EClass)_1;
-										if (symbol_2 == null) {
+										final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
+										if (CAST_null == null) {
 											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 										}
 										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = symbol_2.getESuperTypes();
+										final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
 										final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes);
 										return BOXED_eSuperTypes;
 									}
@@ -1616,12 +1607,12 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 										 */
 										@Override
 										public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet_0, final /*@NonInvalid*/ @Nullable Object _1_0) {
-											final /*@NonInvalid*/ @Nullable EClass symbol_3 = (EClass)_1_0;
-											if (symbol_3 == null) {
+											final /*@NonInvalid*/ @Nullable EClass CAST_null_0 = (EClass)_1_0;
+											if (CAST_null_0 == null) {
 												throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
 											}
 											@SuppressWarnings("null")
-											final /*@Thrown*/ @NonNull List<EClass> eSuperTypes_0 = symbol_3.getESuperTypes();
+											final /*@Thrown*/ @NonNull List<EClass> eSuperTypes_0 = CAST_null_0.getESuperTypes();
 											final /*@Thrown*/ @NonNull OrderedSetValue BOXED_eSuperTypes_0 = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_EClass, eSuperTypes_0);
 											return BOXED_eSuperTypes_0;
 										}
@@ -1680,9 +1671,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-				symbol_4 = logDiagnostic;
+				IF_le = logDiagnostic;
 			}
-			return symbol_4;
+			return IF_le;
 		}
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);

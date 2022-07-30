@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompletePackage;
@@ -71,8 +72,7 @@ public class QVTmModelsMerger {
 	 * @param extendedQVTmModels a list of the QVTm models to merge
 	 * @return a clone of the first QVTm model of the provided list, having merged the remaining QVTm models of that list
 	 */
-	public static void merge(EnvironmentFactory envF, Resource targetQVTmModel, List<Resource> extendedQVTmModels) {
-
+	public static void merge(@NonNull EnvironmentFactory envF, @NonNull Resource targetQVTmModel, @NonNull List<@NonNull Resource> extendedQVTmModels) {
 		CoreModel qvtmModel = getCoreModel(targetQVTmModel);
 		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtmModel);
 		for (Resource extendedQVTmModel : extendedQVTmModels) {

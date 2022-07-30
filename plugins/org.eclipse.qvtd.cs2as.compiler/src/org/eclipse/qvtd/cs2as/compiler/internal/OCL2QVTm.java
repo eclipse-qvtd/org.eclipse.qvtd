@@ -60,6 +60,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -94,8 +95,7 @@ public class OCL2QVTm {
 		this.traceabilityPropName = traceabilityPropName;
 	}
 
-	public @NonNull Resource run(@NonNull ResourceSet resourceSet, @NonNull URI oclDocURI, @NonNull URI outputURI) {
-
+	public @NonNull ASResource run(@NonNull ResourceSet resourceSet, @NonNull URI oclDocURI, @NonNull URI outputURI) {
 		if (!"oclas".equals(oclDocURI.fileExtension())) {
 			throw new IllegalArgumentException(oclDocURI.toString() + " is not an .oclas URI");
 		}
@@ -107,7 +107,7 @@ public class OCL2QVTm {
 
 			// We create the output resource
 			//			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtm.qvtcas");
-			Resource outputResource = resourceSet.createResource(outputURI);
+			ASResource outputResource = (ASResource)resourceSet.createResource(outputURI);
 			outputResource.getContents().add(outputModel);
 			return outputResource;
 

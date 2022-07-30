@@ -828,6 +828,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			asResource.setURI(asURI2a);
 			assertNoResourceErrors("Ecore2AS failed", asResource);
 			asResource.save(XMIUtil.createSaveOptions(asResource));
+			assertNoResourceErrors("Save", asResource);
 			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
 		}
 		finally {
@@ -915,6 +916,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			asResource.setURI(asURI2a);
 			assertNoResourceErrors("Ecore2AS failed", asResource);
 			asResource.save(XMIUtil.createSaveOptions(asResource));
+			assertNoResourceErrors("Save", asResource);
 			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
 		}
 		finally {
