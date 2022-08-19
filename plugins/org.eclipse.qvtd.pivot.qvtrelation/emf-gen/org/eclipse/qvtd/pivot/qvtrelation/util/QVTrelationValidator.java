@@ -143,12 +143,20 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final int RELATION__VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION = 11;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Variables Are Unique' of 'Relation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RELATION__VALIDATE_VARIABLES_ARE_UNIQUE = 12;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Argument Count' of 'Relation Call Exp'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 12;
+	public static final int RELATION_CALL_EXP__VALIDATE_MATCHING_ARGUMENT_COUNT = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Where Invocation Is ANon Top Relation' of 'Relation Call Exp'.
@@ -156,7 +164,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_CALL_EXP__VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION = 13;
+	public static final int RELATION_CALL_EXP__VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Data Type Invocation Is ANon Top Relation' of 'Relation Call Exp'.
@@ -164,7 +172,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_CALL_EXP__VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION = 14;
+	public static final int RELATION_CALL_EXP__VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Relation Domain Assignments Are Unique' of 'Relation Domain'.
@@ -172,7 +180,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 15;
+	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Relation Domain Assignment'.
@@ -180,7 +188,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 16;
+	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Context Type Is This Transformation' of 'Relational Transformation'.
@@ -188,7 +196,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION = 17;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rules Are Relations' of 'Relational Transformation'.
@@ -196,7 +204,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 18;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Initializer' of 'Shared Variable'.
@@ -204,7 +212,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 19;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Nullity For Initializer' of 'Shared Variable'.
@@ -212,7 +220,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 20;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 21;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -220,7 +228,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 20;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 21;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -443,6 +451,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateRelation_validateDomainsAreRelationDomains(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateTopRelationOverriddenByTopRelation(relation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelation_validateTransformationIsRelationalTransformation(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelation_validateVariablesAreUnique(relation, diagnostics, context);
 		return result;
 	}
 
@@ -474,6 +483,16 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	public boolean validateRelation_validateTransformationIsRelationalTransformation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relation.validateTransformationIsRelationalTransformation(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateVariablesAreUnique constraint of '<em>Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelation_validateVariablesAreUnique(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relation.validateVariablesAreUnique(diagnostics, context);
 	}
 
 	/**

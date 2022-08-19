@@ -78,6 +78,10 @@
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/diagnostics"/>
         <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Relation/validateVariablesAreUnique">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateVariablesAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateVariablesAreUnique/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationCallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationCallExp-argument"/>

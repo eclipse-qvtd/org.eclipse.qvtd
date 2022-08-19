@@ -43,8 +43,8 @@ inv TopRelationOverriddenByTopRelation:
 inv TransformationIsRelationalTransformation:
 	transformation.oclIsKindOf(RelationalTransformation)
 
---inv VariablesAreUnique:
---	variable->isUnique(name)
+inv VariablesAreUnique:
+	variable->isUnique(name)
 
 context RelationCallExp
 inv MatchingArgumentCount:

@@ -179,4 +179,13 @@ public interface Relation extends Rule {
 	 */
 	boolean validateTransformationIsRelationalTransformation(DiagnosticChain diagnostics, Map<Object, Object> context);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='VariablesAreUnique'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tvariable-&gt;isUnique(name)\n\n'"
+	 * @generated
+	 */
+	boolean validateVariablesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+
 } // Relation

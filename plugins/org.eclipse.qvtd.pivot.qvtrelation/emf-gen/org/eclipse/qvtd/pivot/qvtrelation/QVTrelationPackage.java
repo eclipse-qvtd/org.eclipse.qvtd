@@ -336,6 +336,16 @@ public interface QVTrelationPackage extends EPackage {
 	EOperation getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#validateVariablesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Variables Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Variables Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#validateVariablesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp <em>Relation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -875,6 +885,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Variables Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___VALIDATE_VARIABLES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl <em>Relation Call Exp</em>}' class.

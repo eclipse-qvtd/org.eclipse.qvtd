@@ -461,6 +461,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map() {
+		return relationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationCallExp() {
 		return relationCallExpEClass;
 	}
@@ -811,6 +821,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 0);
 		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
 		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
+		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 3);
 
 		relationCallExpEClass = createEClass(3);
 		createEReference(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0);
@@ -1005,6 +1016,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTransformationIsRelationalTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateVariablesAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1291,6 +1311,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 			   "originalName", "TransformationIsRelationalTransformation"
 		   });
 		addAnnotation
+		  (getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "VariablesAreUnique"
+		   });
+		addAnnotation
 		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
@@ -1419,6 +1445,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source,
 		   new String[] {
 			   "body", "\n\ttransformation.oclIsKindOf(RelationalTransformation)\n\n"
+		   });
+		addAnnotation
+		  (getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tvariable->isUnique(name)\n\n"
 		   });
 		addAnnotation
 		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
