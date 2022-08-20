@@ -457,14 +457,14 @@ transformation Persons2Names2Families(
 	top relation FtoP1_Father2Male {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
-				father = m : FamilyMember
+				father = m1 : FamilyMember
 			}
 	  	};
 	  	enforce domain persons pr:Persons::PersonRegister {
-	  		persons = m:Persons::Male
+	  		persons = m2:Persons::Male
 	    };
 	    where {
-	    	FtoP2_FamilyNames2PersonName(f, m, m);
+	    	FtoP2_FamilyNames2PersonName(f, m1, m2);
 	    }
 	}
 	
@@ -475,14 +475,14 @@ transformation Persons2Names2Families(
 	top relation FtoP1_Mother2Female {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
-				mother = m : FamilyMember
+				mother = m1 : FamilyMember
 			}
 	  	}; 	
 	  	enforce domain persons pr:Persons::PersonRegister {
-	  		persons = m:Persons::Female
+	  		persons = m2:Persons::Female
 	    };
 	    where {
-	    	FtoP2_FamilyNames2PersonName(f, m, m);
+	    	FtoP2_FamilyNames2PersonName(f, m1, m2);
 	    }
 	}
 	
@@ -492,14 +492,14 @@ transformation Persons2Names2Families(
 	top relation FtoP1_Son2Male {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
-				sons = m : FamilyMember
+				sons = m1 : FamilyMember
 			}
 	  	};
 	  	enforce domain persons pr:Persons::PersonRegister {
-	  		persons = m:Persons::Male
+	  		persons = m2:Persons::Male
 	    };    
 	    where {
-	    	FtoP2_FamilyNames2PersonName(f, m, m);
+	    	FtoP2_FamilyNames2PersonName(f, m1, m2);
 	    }
 	}
 	
@@ -509,14 +509,14 @@ transformation Persons2Names2Families(
 	top relation FtoP1_Daughter2Female {
 		domain familiesRight fr : FamilyRegister {
 			families = f : Family {
-				daughters = m : FamilyMember
+				daughters = m1 : FamilyMember
 			}
 	  	};  	
 	  	enforce domain persons pr:Persons::PersonRegister{
-	  		persons = m:Persons::Female
+	  		persons = m2:Persons::Female
 	    };
 	    where {
-	    	FtoP2_FamilyNames2PersonName(f, m, m);
+	    	FtoP2_FamilyNames2PersonName(f, m1, m2);
 	    }
 	}
 		
@@ -531,7 +531,7 @@ transformation Persons2Names2Families(
 		domain familiesRight f : Family {
 			name = surname
 	  	},
-		m : FamilyMember {
+		m1 : FamilyMember {
 			name = personname
 	  	}
 	 	default_values {
@@ -540,7 +540,7 @@ transformation Persons2Names2Families(
 			personname = fullname.substring(index+2, fullname.size());
 		};
 	  	
-	  	enforce domain persons m : Person {
+	  	enforce domain persons m2 : Person {
 	  		name = fullname
 	    }
 	    default_values {

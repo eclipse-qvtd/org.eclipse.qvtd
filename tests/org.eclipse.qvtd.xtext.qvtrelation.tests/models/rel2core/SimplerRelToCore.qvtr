@@ -1736,11 +1736,11 @@ relation RRelImplToMBottomEnforcementOperation
 
    domain relations r:Relation {
          operationalImpl = ri:RelationImplementation {
-            inDirectionOf = tm:TypedModel{},
+            inDirectionOf = tm1:TypedModel{},
             impl = op:Operation{}
          }
       },
-      rd:RelationDomain {typedModel = tm:TypedModel{}};
+      rd:RelationDomain {typedModel = tm2:TypedModel{}};
    enforce domain core mb:BottomPattern {
       enforcementOperation = eoSet:Set(EnforcementOperation) {
          eoc:EnforcementOperation {

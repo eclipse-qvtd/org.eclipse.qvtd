@@ -23,7 +23,7 @@ transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 		acon, acopn:String;
 
 		domain uml1 
-		cc:Class
+		cc1:Class
 		{
 			inheritsFrom = ac:Class 
 			{
@@ -41,7 +41,7 @@ transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 		};
 
 		enforce domain uml2 
-		cc:Class 
+		cc2:Class 
 		{
 			_'operation' = cco:Operation 
 			{

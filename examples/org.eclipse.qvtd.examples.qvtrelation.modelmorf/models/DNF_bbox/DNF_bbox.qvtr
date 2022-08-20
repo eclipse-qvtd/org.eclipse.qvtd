@@ -33,8 +33,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e2s:Sequence(Expr)
 					{
-						b:Expr{parent = e2},
-						c:Expr{parent = e2}
+						b1:Expr{parent = e2},
+						c1:Expr{parent = e2}
 						++ emptySequence   -- To ensures that OR only has two operands.
 					},
 					parent = e1
@@ -54,8 +54,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e4s:Sequence(Expr)
 					{
-						a:Expr{parent = e4},
-						b:Expr{parent = e4}
+						a3:Expr{parent = e4},
+						b3:Expr{parent = e4}
 						++ emptySequence
 					},
 					parent = e3
@@ -65,7 +65,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 					expr = e5s:Sequence(Expr)
 					{
 						a_c:Expr{parent = e5},
-						c:Expr{parent = e5}
+						c3:Expr{parent = e5}
 						++ emptySequence
 					},
 					parent = e3
@@ -96,8 +96,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e2s:Sequence(Expr)
 					{
-						b:Expr{parent = e2},
-						c:Expr{parent = e2}
+						b1:Expr{parent = e2},
+						c1:Expr{parent = e2}
 						++ emptySequence   -- To ensures that OR only has two operands.
 					},
 					parent = e2
@@ -118,8 +118,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e4s:Sequence(Expr)
 					{
-						b:Expr{parent = e4},
-						a:Expr{parent = e4}
+						b3:Expr{parent = e4},
+						a3:Expr{parent = e4}
 						++ emptySequence
 					},
 					parent = e3
@@ -128,7 +128,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e5s:Sequence(Expr)
 					{
-						c:Expr{parent = e5},
+						c3:Expr{parent = e5},
 						a_c:Expr{parent = e5}
 						++ emptySequence
 					},
@@ -165,8 +165,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e2s:Sequence(Expr)
 					{
-						a:Expr{parent = e2},
-						b:Expr{parent = e2}
+						a1:Expr{parent = e2},
+						b1:Expr{parent = e2}
 						++ emptySequence   -- To ensures that OR only has two operands.
 					},
 					parent = e1
@@ -186,7 +186,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e4s:Sequence(Expr)
 					{
-						a:Expr{parent = e4}
+						a3:Expr{parent = e4}
 						++ emptySequence
 					},
 					parent = e3
@@ -195,7 +195,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e5s:Sequence(Expr)
 					{
-						b:Expr{parent = e5}
+						b3:Expr{parent = e5}
 						++ emptySequence
 					},
 					parent = e3
@@ -221,8 +221,8 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e2s:Sequence(Expr)
 					{
-						a:Expr{parent = e2},
-						b:Expr{parent = e2}
+						a1:Expr{parent = e2},
+						b1:Expr{parent = e2}
 						++ emptySequence   -- To ensure that AND only has two operands.
 					},
 					parent = e1
@@ -242,7 +242,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e4s:Sequence(Expr)
 					{
-						a:Expr{parent = e4}
+						a3:Expr{parent = e4}
 						++ emptySequence
 					},
 					parent = e3
@@ -251,7 +251,7 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 				{
 					expr = e5s:Sequence(Expr)
 					{
-						b:Expr{parent = e5}
+						b3:Expr{parent = e5}
 						++ emptySequence
 					},
 					parent = e3
