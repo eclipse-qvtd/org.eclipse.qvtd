@@ -40,8 +40,8 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		super(analyzer);
 	}
 
-	@Override
-	protected CGValuedElement rewriteAsCast(@Nullable CGValuedElement/*CGVariableExp*/ cgChild) {
+	/*	@Override
+	protected CGValuedElement rewriteAsCast(@Nullable CGValuedElement/ *CGVariableExp* / cgChild) {
 		if ((cgChild != null) && (cgChild.eContainer() instanceof CGMappingCallBinding)) {
 			return cgChild;
 		}
@@ -49,7 +49,7 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 			return cgChild;
 		}
 		return super.rewriteAsCast(cgChild);
-	}
+	} */
 
 	@Override
 	public @Nullable Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
