@@ -54,7 +54,6 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -248,16 +247,16 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
-		/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_CLSSid_MappingParameter);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
+		/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_CLSSid_MappingParameter);
+		@NonNull Iterator<Object> ITER__1 = BOXED_ownedMappingParameterBindings.iterator();
 		/*@NonInvalid*/ @NonNull SequenceValue collect_0;
 		while (true) {
-			if (!ITERATOR__1.hasNext()) {
+			if (!ITER__1.hasNext()) {
 				collect_0 = accumulator;
 				break;
 			}
 			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITERATOR__1.next();
+			/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITER__1.next();
 			/**
 			 * boundVariable
 			 */
@@ -266,43 +265,43 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			//
 			accumulator.add(boundVariable);
 		}
-		/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_PRIMid_String);
-		@NonNull Iterator<Object> ITERATOR__1_0 = collect_0.iterator();
+		/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_PRIMid_String);
+		@NonNull Iterator<Object> ITER__1_0 = collect_0.iterator();
 		/*@Thrown*/ @NonNull SequenceValue collect;
 		while (true) {
-			if (!ITERATOR__1_0.hasNext()) {
+			if (!ITER__1_0.hasNext()) {
 				collect = accumulator_0;
 				break;
 			}
 			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameter _1_0 = (@NonNull MappingParameter)ITERATOR__1_0.next();
+			/*@NonInvalid*/ @NonNull MappingParameter _1_0 = (@NonNull MappingParameter)ITER__1_0.next();
 			/**
 			 * name
 			 */
-			final /*@NonInvalid*/ @Nullable String name = _1_0.getName();
+			final /*@NonInvalid*/ @Nullable String name_0 = _1_0.getName();
 			//
-			accumulator_0.add(name);
+			accumulator_0.add(name_0);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
-		final @NonNull LibraryIterationExtension IMPL_sortedBy_0 = (LibraryIterationExtension)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
-		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
+		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy = executor.getStaticTypeOfValue(null, asSet);
+		final @NonNull LibraryIterationExtension IMPL_sortedBy = (LibraryIterationExtension)TYPE_sortedBy.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
+		final @NonNull Object ACC_sortedBy = IMPL_sortedBy.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**
 		 * Implementation of the iterator body.
 		 */
-		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
+		final @NonNull AbstractBinaryOperation BODY_sortedBy = new AbstractBinaryOperation() {
 			/**
 			 * n
 			 */
 			@Override
 			public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asSet, final /*@NonInvalid*/ @Nullable Object n) {
-				final /*@NonInvalid*/ @Nullable String CAST_null = (String)n;
-				return CAST_null;
+				final /*@NonInvalid*/ @Nullable String CAST_n = (String)n;
+				return CAST_n;
 			}
 		};
-		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
+		final @NonNull ExecutorSingleIterationManager MGR_sortedBy = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy, asSet, ACC_sortedBy);
 		@SuppressWarnings("null")
-		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
+		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy.evaluateIteration(MGR_sortedBy);
 		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
 		return (EList<String>)ECORE_sortedBy;
 	}
@@ -321,47 +320,47 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = executor.getStandardLibrary();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
+		final /*@NonInvalid*/ @NonNull Mapping referredMapping_0 = this.getReferredMapping();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
+		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping_0.getOwnedMappingParameters();
 		final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
-		/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+		/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
+		@NonNull Iterator<Object> ITER__1 = BOXED_ownedMappingParameters.iterator();
 		/*@Thrown*/ @NonNull BagValue collect;
 		while (true) {
-			if (!ITERATOR__1.hasNext()) {
+			if (!ITER__1.hasNext()) {
 				collect = accumulator;
 				break;
 			}
 			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
+			/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITER__1.next();
 			/**
 			 * name
 			 */
-			final /*@NonInvalid*/ @Nullable String name = _1.getName();
+			final /*@NonInvalid*/ @Nullable String name_0 = _1.getName();
 			//
-			accumulator.add(name);
+			accumulator.add(name_0);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
-		final @NonNull LibraryIterationExtension IMPL_sortedBy_0 = (LibraryIterationExtension)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
-		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
+		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy = executor.getStaticTypeOfValue(null, asSet);
+		final @NonNull LibraryIterationExtension IMPL_sortedBy = (LibraryIterationExtension)TYPE_sortedBy.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
+		final @NonNull Object ACC_sortedBy = IMPL_sortedBy.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**
 		 * Implementation of the iterator body.
 		 */
-		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
+		final @NonNull AbstractBinaryOperation BODY_sortedBy = new AbstractBinaryOperation() {
 			/**
 			 * n
 			 */
 			@Override
 			public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asSet, final /*@NonInvalid*/ @Nullable Object n) {
-				final /*@NonInvalid*/ @Nullable String CAST_null = (String)n;
-				return CAST_null;
+				final /*@NonInvalid*/ @Nullable String CAST_n = (String)n;
+				return CAST_n;
 			}
 		};
-		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
+		final @NonNull ExecutorSingleIterationManager MGR_sortedBy = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy, asSet, ACC_sortedBy);
 		@SuppressWarnings("null")
-		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
+		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy.evaluateIteration(MGR_sortedBy);
 		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
 		return (EList<String>)ECORE_sortedBy;
 	}
@@ -399,46 +398,46 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_IF_status;
-				try {
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<String> bindingNames = this.getBindingNames();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<String> referredNames = this.getReferredNames();
-					final /*@NonInvalid*/ boolean status = referredNames.equals(bindingNames);
-					/*@Thrown*/ @NonNull Object IF_status;
-					if (status) {
-						IF_status = ValueUtil.TRUE_VALUE;
-					}
-					else {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ @NonNull List<String> bindingNames = this.getBindingNames();
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ @NonNull List<String> referredNames = this.getReferredNames();
+				final /*@NonInvalid*/ boolean IsEQ_ = referredNames.equals(bindingNames);
+				/*@Caught*/ @NonNull Object IF_IF_IsEQ_;
+				if (IsEQ_ == Boolean.TRUE) {
+					IF_IF_IsEQ_ = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_sum;
+					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
 						final /*@NonInvalid*/ @Nullable String name = referredMapping.getName();
-						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings_c_32, name);
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32);
+						final /*@Thrown*/ @NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings_c_32, name);
+						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_3, QVTimperativeTables.STR__32);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String joinNames = this.joinNames((EList<String>)bindingNames);
-						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, joinNames);
-						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__32_l_g_32);
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, joinNames);
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__32_l_g_32);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String joinNames_0 = this.joinNames((EList<String>)referredNames);
-						final /*@Thrown*/ @NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(sum_2, joinNames_0);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_3, status);
-						IF_status = TUP_;
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, joinNames_0);
+						CAUGHT_sum = sum;
 					}
-					CAUGHT_IF_status = IF_status;
+					catch (Exception THROWN_CAUGHT_sum) {
+						CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
+					}
+					final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, CAUGHT_sum, IsEQ_);
+					IF_IF_IsEQ_ = TUP_;
 				}
-				catch (Exception e) {
-					CAUGHT_IF_status = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_IF_status, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IF_IsEQ_, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -471,14 +470,14 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_not;
 				try {
 					final /*@NonInvalid*/ boolean isInstall = this.isIsInstall();
 					final /*@NonInvalid*/ @Nullable Boolean and;
@@ -494,24 +493,24 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 							and = ValueUtil.TRUE_VALUE;
 						}
 					}
-					final /*@Thrown*/ @Nullable Boolean result;
+					final /*@Thrown*/ @Nullable Boolean not;
 					if (and == ValueUtil.FALSE_VALUE) {
-						result = ValueUtil.TRUE_VALUE;
+						not = ValueUtil.TRUE_VALUE;
 					}
 					else {
 						if (and == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.FALSE_VALUE;
+							not = ValueUtil.FALSE_VALUE;
 						}
 						else {
-							result = null;
+							not = null;
 						}
 					}
-					CAUGHT_result = result;
+					CAUGHT_not = not;
 				}
-				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				catch (Exception THROWN_CAUGHT_not) {
+					CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_not, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -546,8 +545,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
@@ -556,16 +555,16 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
 				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
-				/*@NonInvalid*/ boolean result;
+				/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
+				@NonNull Iterator<Object> ITER__1 = BOXED_ownedMappingParameterBindings.iterator();
+				/*@NonInvalid*/ boolean isUnique;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
+					if (!ITER__1.hasNext()) {
+						isUnique = true;
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITER__1.next();
 					/**
 					 * boundVariable
 					 */
@@ -573,14 +572,14 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 					final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
 					//
 					if (accumulator.includes(boundVariable) == ValueUtil.TRUE_VALUE) {
-						result = false;
+						isUnique = false;
 						break;			// Abort after second find
 					}
 					else {
 						accumulator.add(boundVariable);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

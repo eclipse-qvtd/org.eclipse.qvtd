@@ -304,39 +304,39 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
-				try {
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
-					final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
-					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-					if (conformsTo == Boolean.TRUE) {
-						safe_conformsTo_source = null;
-					}
-					else {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
+				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
+				/*@Caught*/ @Nullable Object IF_IsEQ2_;
+				if (IsEQ2_) {
+					IF_IsEQ2_ = null;
+				}
+				else {
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					try {
 						if (type == null) {
 							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 						}
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable = this.getTargetVariable();
 						final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable.getType();
-						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						safe_conformsTo_source = conformsTo_0;
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						CAUGHT_conformsTo = conformsTo;
 					}
-					CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+					catch (Exception THROWN_CAUGHT_conformsTo) {
+						CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
+					}
+					IF_IsEQ2_ = CAUGHT_conformsTo;
 				}
-				catch (Exception e) {
-					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

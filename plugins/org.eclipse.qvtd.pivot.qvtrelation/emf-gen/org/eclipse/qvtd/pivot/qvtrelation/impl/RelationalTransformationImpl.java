@@ -145,50 +145,50 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
-					final /*@NonInvalid*/ boolean ne = ownedContext != null;
-					final /*@Thrown*/ @Nullable Boolean result;
-					if (!ne) {
-						result = ValueUtil.TRUE_VALUE;
+					final /*@NonInvalid*/ boolean IsEQ_ = ownedContext != null;
+					final /*@Thrown*/ @Nullable Boolean implies;
+					if (!IsEQ_) {
+						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @NonNull Object CAUGHT_eq;
+						/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
 						try {
 							if (ownedContext == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
-							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;
-							CAUGHT_eq = eq;
+							final /*@Thrown*/ boolean IsEQ__0 = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;
+							CAUGHT_IsEQ_ = IsEQ__0;
 						}
-						catch (Exception e) {
-							CAUGHT_eq = ValueUtil.createInvalidValue(e);
+						catch (Exception THROWN_CAUGHT_IsEQ_) {
+							CAUGHT_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IsEQ_);
 						}
-						if (CAUGHT_eq == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+						if (CAUGHT_IsEQ_ == ValueUtil.TRUE_VALUE) {
+							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							if (CAUGHT_eq instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_eq;
+							if (CAUGHT_IsEQ_ instanceof InvalidValueException) {
+								throw (InvalidValueException)CAUGHT_IsEQ_;
 							}
-							result = ValueUtil.FALSE_VALUE;
+							implies = ValueUtil.FALSE_VALUE;
 						}
 					}
-					CAUGHT_result = result;
+					CAUGHT_implies = implies;
 				}
-				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				catch (Exception THROWN_CAUGHT_implies) {
+					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -223,22 +223,22 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule_0, rule);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
+				@NonNull Iterator<Object> ITER__1 = BOXED_rule.iterator();
+				/*@NonInvalid*/ @Nullable Boolean forAll;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
+					if (!ITER__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+							forAll = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -246,15 +246,15 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITER__1.next();
 					/**
 					 * oclIsKindOf(Relation)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation_0 = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
-					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_Relation_0).booleanValue();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation_1 = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_Relation_1).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
+						forAll = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf) {				// Normal successful body evaluation result
@@ -264,7 +264,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

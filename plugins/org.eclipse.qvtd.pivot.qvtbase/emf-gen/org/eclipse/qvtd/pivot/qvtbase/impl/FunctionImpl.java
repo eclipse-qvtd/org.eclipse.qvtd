@@ -129,8 +129,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
@@ -139,12 +139,12 @@ public class FunctionImpl extends OperationImpl implements Function {
 				final /*@NonInvalid*/ @NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
 				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
+				@NonNull Iterator<Object> ITER__1 = BOXED_ownedParameters.iterator();
+				/*@NonInvalid*/ @Nullable Boolean forAll;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
+					if (!ITER__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+							forAll = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -152,7 +152,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Parameter _1 = (@NonNull Parameter)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Parameter _1 = (@NonNull Parameter)ITER__1.next();
 					/**
 					 * oclIsKindOf(FunctionParameter)
 					 */
@@ -160,7 +160,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtbase_c_c_FunctionParameter).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
+						forAll = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf) {				// Normal successful body evaluation result
@@ -170,7 +170,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTbaseTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -204,74 +204,78 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					final /*@NonInvalid*/ @Nullable OCLExpression queryExpression = this.getQueryExpression();
-					final /*@NonInvalid*/ boolean ne = queryExpression != null;
-					final /*@Thrown*/ @Nullable Boolean result;
-					if (!ne) {
-						result = ValueUtil.TRUE_VALUE;
+					final /*@NonInvalid*/ boolean IsEQ_ = queryExpression != null;
+					final /*@Thrown*/ @Nullable Boolean implies;
+					if (!IsEQ_) {
+						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
+						/*@Caught*/ @Nullable Object CAUGHT_type;
 						try {
 							if (queryExpression == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
-							/*@Caught*/ @Nullable Object CAUGHT_type;
+							CAUGHT_type = type;
+						}
+						catch (Exception THROWN_CAUGHT_type) {
+							CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
+						}
+						if (CAUGHT_type instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_type;
+						}
+						final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
+						final /*@NonInvalid*/ boolean IsEQ2_ = THROWN_type == null;
+						/*@Caught*/ @Nullable Object IF_IsEQ2_;
+						if (IsEQ2_) {
+							IF_IsEQ2_ = null;
+						}
+						else {
+							/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 							try {
-								CAUGHT_type = type;
-							}
-							catch (Exception e) {
-								CAUGHT_type = ValueUtil.createInvalidValue(e);
-							}
-							final /*@NonInvalid*/ @NonNull Object conformsTo = CAUGHT_type == null;
-							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
-							if (conformsTo == Boolean.TRUE) {
-								safe_conformsTo_source = null;
-							}
-							else {
-								if (type == null) {
+								if (THROWN_type == null) {
 									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 								}
 								final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-								safe_conformsTo_source = conformsTo_0;
+								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_type, type_0).booleanValue();
+								CAUGHT_conformsTo = conformsTo;
 							}
-							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+							catch (Exception THROWN_CAUGHT_conformsTo) {
+								CAUGHT_conformsTo = ValueUtil.createInvalidValue(THROWN_CAUGHT_conformsTo);
+							}
+							IF_IsEQ2_ = CAUGHT_conformsTo;
 						}
-						catch (Exception e) {
-							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
-						}
-						if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+						if (IF_IsEQ2_ == ValueUtil.TRUE_VALUE) {
+							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_safe_conformsTo_source;
+							if (IF_IsEQ2_ instanceof InvalidValueException) {
+								throw (InvalidValueException)IF_IsEQ2_;
 							}
-							if (CAUGHT_safe_conformsTo_source == null) {
-								result = null;
+							if (IF_IsEQ2_ == null) {
+								implies = null;
 							}
 							else {
-								result = ValueUtil.FALSE_VALUE;
+								implies = ValueUtil.FALSE_VALUE;
 							}
 						}
 					}
-					CAUGHT_result = result;
+					CAUGHT_implies = implies;
 				}
-				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				catch (Exception THROWN_CAUGHT_implies) {
+					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTbaseTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

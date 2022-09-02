@@ -180,22 +180,22 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_ALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_ALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule_0, rule);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
+				@NonNull Iterator<Object> ITER__1 = BOXED_rule.iterator();
+				/*@NonInvalid*/ @Nullable Boolean forAll;
 				while (true) {
-					if (!ITERATOR__1.hasNext()) {
+					if (!ITER__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+							forAll = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							throw (InvalidValueException)accumulator;
@@ -203,7 +203,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITER__1.next();
 					/**
 					 * oclIsKindOf(Mapping)
 					 */
@@ -211,7 +211,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
+						forAll = ValueUtil.FALSE_VALUE;
 						break;														// Stop immediately
 					}
 					else if (oclIsKindOf) {				// Normal successful body evaluation result
@@ -221,7 +221,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -258,68 +258,68 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_UNIQUE_TARGET_NAMES__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_UNIQUE_TARGET_NAMES__DIAGNOSTICCHAIN_MAP);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
 				IF_le = true;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_EntryPoint = idResolver.getClass(QVTimperativeTables.CLSSid_EntryPoint, null);
 					final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-					final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule_0, rule);
 					final /*@NonInvalid*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_rule, TYP_qvtimperative_c_c_EntryPoint);
-					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
-					@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
+					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					@NonNull Iterator<Object> ITER__1 = selectByKind.iterator();
 					/*@NonInvalid*/ @NonNull SetValue select;
 					while (true) {
-						if (!ITERATOR__1.hasNext()) {
+						if (!ITER__1.hasNext()) {
 							select = accumulator;
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull EntryPoint _1 = (@NonNull EntryPoint)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull EntryPoint _1 = (@NonNull EntryPoint)ITER__1.next();
 						/**
 						 * targetName <> null
 						 */
 						final /*@NonInvalid*/ @Nullable String targetName = _1.getTargetName();
-						final /*@NonInvalid*/ boolean ne = targetName != null;
+						final /*@NonInvalid*/ boolean IsEQ_ = targetName != null;
 						//
-						if (ne) {
+						if (IsEQ_) {
 							accumulator.add(_1);
 						}
 					}
-					/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
-					@NonNull Iterator<Object> ITERATOR__1_0 = select.iterator();
-					/*@Thrown*/ boolean result;
+					/*@NonInvalid*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					@NonNull Iterator<Object> ITER__1_0 = select.iterator();
+					/*@Thrown*/ boolean isUnique;
 					while (true) {
-						if (!ITERATOR__1_0.hasNext()) {
-							result = true;
+						if (!ITER__1_0.hasNext()) {
+							isUnique = true;
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull EntryPoint _1_0 = (@NonNull EntryPoint)ITERATOR__1_0.next();
+						/*@NonInvalid*/ @NonNull EntryPoint _1_0 = (@NonNull EntryPoint)ITER__1_0.next();
 						/**
 						 * targetName
 						 */
 						final /*@NonInvalid*/ @Nullable String targetName_0 = _1_0.getTargetName();
 						//
 						if (accumulator_0.includes(targetName_0) == ValueUtil.TRUE_VALUE) {
-							result = false;
+							isUnique = false;
 							break;			// Abort after second find
 						}
 						else {
 							accumulator_0.add(targetName_0);
 						}
 					}
-					CAUGHT_result = result;
+					CAUGHT_isUnique = isUnique;
 				}
-				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				catch (Exception THROWN_CAUGHT_isUnique) {
+					CAUGHT_isUnique = ValueUtil.createInvalidValue(THROWN_CAUGHT_isUnique);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
