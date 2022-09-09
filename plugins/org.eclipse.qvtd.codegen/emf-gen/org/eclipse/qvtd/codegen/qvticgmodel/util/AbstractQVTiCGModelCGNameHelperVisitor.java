@@ -20,8 +20,8 @@
 package	org.eclipse.qvtd.codegen.qvticgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.cgmodel.utilities.CGModelCGNameHelperVisitor;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 
 /**
  * An AbstractQVTiCGModelCGNameHelperVisitor provides a default implementation for each
@@ -31,8 +31,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.utilities.CGModelCGNameHelperVis
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTiCGModelCGNameHelperVisitor
-	extends CGModelCGNameHelperVisitor
-	implements QVTiCGModelVisitor<@NonNull String>
+extends CGModelCGNameHelperVisitor
+implements QVTiCGModelVisitor<@NonNull String>
 {
 	protected AbstractQVTiCGModelCGNameHelperVisitor(@NonNull NameManagerHelper context) {
 		super(context);

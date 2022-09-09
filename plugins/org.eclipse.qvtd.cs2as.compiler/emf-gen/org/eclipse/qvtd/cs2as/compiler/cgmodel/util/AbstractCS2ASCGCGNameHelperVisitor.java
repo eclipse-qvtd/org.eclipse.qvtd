@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCGNameHelperVisitor;
 
 /**
@@ -22,8 +22,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCGNameHelperVis
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractCS2ASCGCGNameHelperVisitor
-	extends QVTiCGModelCGNameHelperVisitor
-	implements CS2ASCGModelVisitor<@NonNull String>
+extends QVTiCGModelCGNameHelperVisitor
+implements CS2ASCGModelVisitor<@NonNull String>
 {
 	protected AbstractCS2ASCGCGNameHelperVisitor(@NonNull NameManagerHelper context) {
 		super(context);

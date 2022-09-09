@@ -15,10 +15,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
@@ -30,15 +28,17 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -55,7 +55,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	public static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
 
 	@Override
-	public void createCGBody(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOuterOperation) {
+	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOuterOperation) {
 		CGFunction cgOuterFunction = (CGFunction)cgOuterOperation;
 		Function asOuterFunction = QVTiCGUtil.getAST(cgOuterFunction);
 		String implementationClass = asOuterFunction.getImplementationClass();
@@ -63,13 +63,14 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		assert asOuterFunction.getQueryExpression() == null;
 		//	LibraryOperation libraryOperation = loadImplementation(as2cgVisitor, implementationClass);
 		//	LibraryOperation libraryOperation2 = (LibraryOperation)asFunction.getImplementation();
-		LibraryOperation libraryOperation = (LibraryOperation) as2cgVisitor.getMetamodelManager().getImplementation(asOuterFunction);
+		PivotMetamodelManager metamodelManager = analyzer.getMetamodelManager();
+		LibraryOperation libraryOperation = (LibraryOperation) metamodelManager.getImplementation(asOuterFunction);
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asOuterFunction);
-		VariableDeclaration asThis = QVTbaseUtil.getContextVariable(as2cgVisitor.getEnvironmentFactory().getStandardLibrary(), asTransformation);
+		VariableDeclaration asThis = QVTbaseUtil.getContextVariable(metamodelManager.getEnvironmentFactory().getStandardLibrary(), asTransformation);
 		//	VariableExp zzasThisExp = PivotUtil.createVariableExp(asThis);
 		//	CGValuedElement cgSource = as2cgVisitor.doVisit(CGValuedElement.class, asThisExp);
 
-		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 
 
 
@@ -103,9 +104,9 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 
 		//	PivotHelper helper = new PivotHelper(as2cgVisitor.getEnvironmentFactory());
 
-		CGOperation cgInnerOperation = createCGInnerOperation(as2cgVisitor, libraryOperation, asOuterFunction);
+		CGOperation cgInnerOperation = createCGInnerOperation(qvtiAnalyzer, libraryOperation, asOuterFunction);
 
-		CGLibraryOperationCallExp cgOperationCallExp = createCGInnerOperationCallExp(as2cgVisitor, cgInnerOperation, libraryOperation, asOuterFunction);//, cgFunction, asFunction)
+		CGLibraryOperationCallExp cgOperationCallExp = createCGInnerOperationCallExp(qvtiAnalyzer, cgInnerOperation, libraryOperation, asOuterFunction);//, cgFunction, asFunction)
 
 		//	innerCallingConvention.createCGOperationCallExp(as2cgVisitor, cgFunction, libraryOperation, null, null);
 		//	CGLibraryOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
@@ -261,8 +262,8 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	analyzer.addFunction(asFunction, cgFunction); */
 	}
 
-	private @NonNull CGOperation createCGInnerOperation(@NonNull AS2CGVisitor as2cgVisitor, LibraryOperation libraryOperation, @NonNull Operation asOuterOperation) {
-		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
+	private @NonNull CGOperation createCGInnerOperation(@NonNull CodeGenAnalyzer analyzer, LibraryOperation libraryOperation, @NonNull Operation asOuterOperation) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		Method jMethod = libraryOperation.getEvaluateMethod(asOuterOperation);
 		CGLibraryOperation cgInnerOperation = CGModelFactory.eINSTANCE.createCGLibraryOperation();
 		//	analyzer.installOperation(asOperation, cgOperation, this);
@@ -273,7 +274,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgInnerOperation.setTypeId(analyzer.getCGTypeId(asOuterOperation.getTypeId()));
 		cgInnerOperation.setRequired(asOuterOperation.isIsRequired());
 		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.INSTANCE);
-		NestedNameManager nameManager = as2cgVisitor.pushNestedNameManager(cgInnerOperation);
+		FeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
 		//		analyzer.addCGOperation(cgOperation);
 		//	createCGParameters(as2cgVisitor, gOperation, null;
 		ExpressionInOCL expressionInOCL	= null;
@@ -282,7 +283,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		List<CGParameter> cgParameters = cgInnerOperation.getParameters();
 		//	LibraryOperation libraryOperation = (LibraryOperation)as2cgVisitor.getMetamodelManager().getImplementation(asOperation);
 		//	Method jMethod = libraryOperation.getEvaluateMethod(asOperation);
-		cgInnerOperation.setRequired(as2cgVisitor.getCodeGenerator().getIsNonNull(jMethod) == Boolean.TRUE);
+		cgInnerOperation.setRequired(qvtiAnalyzer.getCodeGenerator().getIsNonNull(jMethod) == Boolean.TRUE);
 		//	List<@NonNull Parameter> asParameters = PivotUtil.getOwnedParameters(asOuterOperation);
 		//	int i = asOuterOperation.isIsStatic() ? 0 : -1;
 		//	if (Modifier.isStatic(jMethod.getModifiers())) {
@@ -295,12 +296,11 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 			cgParameters.add(cgParameter);
 		}
 		//	assert i == asParameters.size();
-		as2cgVisitor.popNestedNameManager();
 		return cgInnerOperation;
 	}
 
-	private @NonNull CGLibraryOperationCallExp createCGInnerOperationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOuterOperation, @NonNull LibraryOperation libraryOperation, @NonNull Operation asOuterOperation) {
-		CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
+	private @NonNull CGLibraryOperationCallExp createCGInnerOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOuterOperation, @NonNull LibraryOperation libraryOperation, @NonNull Operation asOuterOperation) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		//	Operation asOperation = ClassUtil.nonNullState(asOperationCallExp.getReferredOperation());
 		//	System.out.println("createCGOperationCallExp: to " + asOperation);
 		//	assert (cgSource == null) == asOperation.isIsStatic();
@@ -316,7 +316,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	cgOperationCallExp.setValidating(asOperation.isIsValidating());
 		cgOperationCallExp.setRequired(isRequired);
 
-		NestedNameManager nameManager = as2cgVisitor.getNameManager();
+		QVTiFeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgOuterOperation, asOuterOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOuterOperation);
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		int i = 0;
@@ -349,33 +349,33 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
+	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
-		QVTiAS2CGVisitor qvtias2cgVisitor = (QVTiAS2CGVisitor)as2cgVisitor;
-		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		assert codeGenerator.getShadowExp(asFunction) == null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
-		initCallExp(as2cgVisitor, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
+		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
 		assert cgSource != null;
 		cgFunctionCallExp.getArguments().add(cgSource);
-		initCallArguments(as2cgVisitor, cgFunctionCallExp);
+		initCallArguments(qvtiAnalyzer, cgFunctionCallExp);
 		return cgFunctionCallExp;
 	}
 
 	@Override
-	public void createCGParameters(@NonNull AS2CGVisitor as2cgVisitor, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAS2CGVisitor qvtias2cgVisitor = (QVTiAS2CGVisitor)as2cgVisitor;
-		QVTiCodeGenerator codeGenerator = qvtias2cgVisitor.getCodeGenerator();
+	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(qvtias2cgVisitor.getNameManager().getThisTransformerParameter());
+		cgParameters.add(qvtiAnalyzer.getOperationNameManager(cgOperation, asFunction).getThisTransformerParameter());
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
-			CGParameter cgParameter = as2cgVisitor.doVisit(CGParameter.class, asParameter);
+			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
 		}
 	}

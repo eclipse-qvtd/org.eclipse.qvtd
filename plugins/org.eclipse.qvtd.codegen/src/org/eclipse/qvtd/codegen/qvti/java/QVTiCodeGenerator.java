@@ -20,22 +20,23 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.GlobalNameManager;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManagerHelper;
-import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
@@ -44,6 +45,10 @@ import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaLanguageSupport;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
+import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
+import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
@@ -64,6 +69,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CacheProperty;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
@@ -101,7 +107,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected final @NonNull ImperativeTransformation asTransformation;
-	protected final @NonNull QVTiAnalyzer cgAnalyzer;
+	//	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
@@ -111,7 +117,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		super(environmentFactory, null);			// FIXME Pass a genmodel
 		QVTiCGModelCG2StringVisitor.FACTORY.getClass();
 		this.asTransformation = asTransformation;
-		this.cgAnalyzer = new QVTiAnalyzer(this);
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
@@ -135,8 +140,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 	}
 
-	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor() {
-		return new QVTiAS2CGVisitor(this);
+	@Override
+	public @NonNull AS2CGVisitor createAS2CGVisitor(@NonNull CodeGenAnalyzer codeGenAnalyzer) {
+		return new QVTiAS2CGVisitor((QVTiAnalyzer)codeGenAnalyzer);
 	}
 
 	@Override
@@ -164,9 +170,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		QVTiAS2CGVisitor as2cgVisitor = createAS2CGVisitor();
-		CGTransformation cgTransformation = (CGTransformation)ClassUtil.nonNullState(asTransformation.accept(as2cgVisitor));
-		as2cgVisitor.freeze();
+		CGTransformation cgTransformation = cgAnalyzer.createCGElement(CGTransformation.class, asTransformation);
 		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 		org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
 		CGPackage cgPackage2 = createCGPackage(asPackage);
@@ -192,9 +196,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		assert cgPackage != null;
-		as2cgVisitor.pushClassNameManager(cgTransformation);
-		cgAnalyzer.analyzeExternalFeatures(as2cgVisitor);
-		as2cgVisitor.popClassNameManager();
+		cgAnalyzer.analyzeExternalFeatures();
 		return cgPackage;
 	}
 
@@ -240,6 +242,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
+	protected @NonNull QVTiAnalyzer createCodeGenAnalyzer() {
+		return new QVTiAnalyzer(this);
+	}
+
+	@Override
 	protected @NonNull GlobalNameManager createGlobalNameManager() {
 		return new QVTiGlobalNameManager(this, createNameManagerHelper());
 	}
@@ -256,7 +263,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
-		return new QVTiFieldingAnalyzer(cgAnalyzer);
+		return new QVTiFieldingAnalyzer(getAnalyzer());
 	}
 
 	@Override
@@ -273,8 +280,30 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull NestedNameManager createNestedNameManager(@NonNull NameManager outerNameManager, @NonNull CGNamedElement cgScope) {
-		return new QVTiNestedNameManager(this, outerNameManager, cgScope);
+	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGConstraint cgConstraint) {
+		// TODO Auto-generated method stub
+		return super.createFeatureNameManager(classNameManager, cgConstraint);
+	}
+
+	@Override
+	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull FeatureNameManager outerNameManager,
+			@NonNull CGIterationCallExp cgIterationCallExp) {
+		// TODO Auto-generated method stub
+		return super.createFeatureNameManager(classNameManager, outerNameManager, cgIterationCallExp);
+	}
+
+	@Override
+	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
+		if (cgOperation instanceof CGFunction) {
+			return new QVTiFeatureNameManager(classNameManager, cgOperation);
+		}
+		return super.createFeatureNameManager(classNameManager, cgOperation);
+	}
+
+	@Override
+	public @NonNull FeatureNameManager createFeatureNameManager( @NonNull ClassNameManager classNameManager, @NonNull CGProperty cgProperty) {
+		// TODO Auto-generated method stub
+		return super.createFeatureNameManager(classNameManager, cgProperty);
 	}
 
 	@Override
@@ -302,7 +331,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull QVTiAnalyzer getAnalyzer() {
-		return cgAnalyzer;
+		return (QVTiAnalyzer)cgAnalyzer;
 	}
 
 	@Override
@@ -375,6 +404,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return (QVTiGlobalNameManager)globalNameManager;
 	}
 
+	@Override
 	public @NonNull LanguageSupport getLanguageSupport() {
 		JavaLanguageSupport javaLanguageSupport2 = javaLanguageSupport;
 		if (javaLanguageSupport2 == null) {

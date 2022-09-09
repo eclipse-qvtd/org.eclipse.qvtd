@@ -12,35 +12,37 @@ package org.eclipse.qvtd.codegen.qvti.java;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
-import org.eclipse.ocl.examples.codegen.analyzer.NameResolution;
-import org.eclipse.ocl.examples.codegen.analyzer.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
+import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
  * QVTiNestedNameManager provides QVTi-specific overrides for nested contexts.
  */
-public class QVTiNestedNameManager extends NestedNameManager
+public class QVTiFeatureNameManager extends FeatureNameManager
 {
 	private /*@LazyNonNull*/ CGParameter thisTransformerParameter = null;	// A local orphan parameter spelled "thisTransformer"
 
-	protected QVTiNestedNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
-		super(codeGenerator, parent, cgScope);
+	//	protected QVTiFeatureNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
+	//		super(codeGenerator, parent, cgScope);
+	//	}
+
+	protected QVTiFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
+		super(classNameManager, cgOperation);
 	}
 
 	@Override
@@ -66,9 +68,10 @@ public class QVTiNestedNameManager extends NestedNameManager
 
 	@Override
 	public @NonNull CGVariable createQualifiedThisVariable() {
-		assert asType instanceof Transformation;
+		Class asClass = classNameManager.getASClass();
+		assert asClass instanceof Transformation;
 		NameResolution transformationName = getGlobalNameManager().getTransformationNameResolution();
-		CGTypeId cgTypeId = analyzer.getCGTypeId(asType.getTypeId());
+		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
 		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, cgTypeId, true);
 		//	transformationVariable.setValueName(transformationName);
 		transformationVariable.setNonInvalid();
@@ -140,9 +143,9 @@ public class QVTiNestedNameManager extends NestedNameManager
 
 	@Override
 	public @NonNull CGVariable getExecutorVariable() {
-		if ((asScope instanceof Function) || (asScope instanceof Mapping)) {
-			return ((NestedNameManager)parent).getExecutorVariable();
-		}
+		//	if ((asScope instanceof Function) || (asScope instanceof Mapping)) {
+		//		return ((NestedNameManager)parent).getExecutorVariable();
+		//	}
 		return super.getExecutorVariable();
 	}
 
