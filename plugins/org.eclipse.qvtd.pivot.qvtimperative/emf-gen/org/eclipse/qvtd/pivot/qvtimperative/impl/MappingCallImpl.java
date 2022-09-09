@@ -278,9 +278,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			/**
 			 * name
 			 */
-			final /*@NonInvalid*/ @Nullable String name_0 = _1_0.getName();
+			final /*@NonInvalid*/ @Nullable String name = _1_0.getName();
 			//
-			accumulator_0.add(name_0);
+			accumulator_0.add(name);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
 		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy = executor.getStaticTypeOfValue(null, asSet);
@@ -320,9 +320,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = executor.getStandardLibrary();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Mapping referredMapping_0 = this.getReferredMapping();
+		final /*@NonInvalid*/ @NonNull Mapping referredMapping = this.getReferredMapping();
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping_0.getOwnedMappingParameters();
+		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
 		final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 		/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
 		@NonNull Iterator<Object> ITER__1 = BOXED_ownedMappingParameters.iterator();
@@ -337,9 +337,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			/**
 			 * name
 			 */
-			final /*@NonInvalid*/ @Nullable String name_0 = _1.getName();
+			final /*@NonInvalid*/ @Nullable String name = _1.getName();
 			//
-			accumulator.add(name_0);
+			accumulator.add(name);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
 		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy = executor.getStaticTypeOfValue(null, asSet);

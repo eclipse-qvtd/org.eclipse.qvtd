@@ -514,7 +514,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								throw (InvalidValueException)CAUGHT_excluding;
 							}
 							final /*@Thrown*/ @NonNull SetValue THROWN_excluding = (@NonNull SetValue)CAUGHT_excluding;
-							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class_0);
+							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
 							@NonNull Iterator<Object> ITER__1_0 = THROWN_excluding.iterator();
 							/*@Thrown*/ @NonNull BagValue collect;
 							while (true) {
@@ -640,7 +640,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								throw (InvalidValueException)CAUGHT_excluding;
 							}
 							final /*@Thrown*/ @NonNull SetValue THROWN_excluding = (@NonNull SetValue)CAUGHT_excluding;
-							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class_0);
+							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
 							@NonNull Iterator<Object> ITER__1 = THROWN_excluding.iterator();
 							/*@Thrown*/ @NonNull BagValue collect;
 							while (true) {

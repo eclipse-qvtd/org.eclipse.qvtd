@@ -252,8 +252,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						/**
 						 * oclAsType(RelationDomain)
 						 */
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
-						final /*@Thrown*/ @Nullable RelationDomain oclAsType = (@Nullable RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain_0);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
+						final /*@Thrown*/ @Nullable RelationDomain oclAsType = (@Nullable RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain);
 						//
 						accumulator.add(oclAsType);
 					}
@@ -374,7 +374,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				}
 				/*@Caught*/ @Nullable Object CAUGHT_first_0;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation_0 = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
 					if (CAUGHT_first instanceof InvalidValueException) {
 						throw (InvalidValueException)CAUGHT_first;
 					}
@@ -403,7 +403,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_0, asOrderedSet_0, ACC_closure_0);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull OrderedSetValue closure_0 = (@NonNull OrderedSetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-					final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_qvtrelation_c_c_Relation_0);
+					final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_qvtrelation_c_c_Relation);
 					final /*@Thrown*/ @Nullable Relation first_0 = (@Nullable Relation)OrderedCollectionFirstOperation.INSTANCE.evaluate(selectByKind_0);
 					CAUGHT_first_0 = first_0;
 				}

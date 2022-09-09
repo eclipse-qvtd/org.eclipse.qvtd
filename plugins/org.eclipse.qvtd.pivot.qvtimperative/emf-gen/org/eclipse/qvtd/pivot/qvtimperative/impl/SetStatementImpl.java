@@ -614,11 +614,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				if (isPartial) {
 					/*@Caught*/ @NonNull Object CAUGHT_elementType;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
-						final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
+						final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
 						if (oclAsType == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
 						}
