@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -41,7 +42,15 @@ public class QVTiFeatureNameManager extends FeatureNameManager
 	//		super(codeGenerator, parent, cgScope);
 	//	}
 
-	protected QVTiFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
+	public QVTiFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+		super(transformationNameManager, transformationNameManager, cgMapping);
+	}
+
+	public QVTiFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull FeatureNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+		super(transformationNameManager, parentNameManager, cgMappingLoop);
+	}
+
+	public QVTiFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
 		super(classNameManager, cgOperation);
 	}
 

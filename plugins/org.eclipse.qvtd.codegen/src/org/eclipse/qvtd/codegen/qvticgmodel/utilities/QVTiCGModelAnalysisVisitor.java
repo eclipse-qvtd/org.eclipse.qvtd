@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.codegen.qvticgmodel.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -25,15 +24,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 
 public class QVTiCGModelAnalysisVisitor extends AbstractQVTiCGModelAnalysisVisitor
 {
-	public QVTiCGModelAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
+	public QVTiCGModelAnalysisVisitor(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
+	}
+
+	protected @NonNull QVTiAnalyzer getAnalyzer() {
+		return (QVTiAnalyzer) context;
 	}
 
 	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Function asFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
 		if (asFunction != null) {
-			CGFunction cgFunction = ((QVTiAnalyzer)context).getCGFunction(asFunction);
+			CGFunction cgFunction = getAnalyzer().getCGFunction(asFunction);
 			cgFunctionCallExp.setFunction(cgFunction);
 		}
 		return visitCGOperationCallExp(cgFunctionCallExp);

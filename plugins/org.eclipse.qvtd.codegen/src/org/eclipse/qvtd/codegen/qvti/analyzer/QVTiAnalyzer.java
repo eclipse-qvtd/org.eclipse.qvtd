@@ -13,8 +13,10 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -27,12 +29,14 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsKindOfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -43,9 +47,12 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -61,10 +68,12 @@ import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiFeatureNameManager;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -73,11 +82,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
@@ -85,13 +96,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -276,7 +293,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 			List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
-				CGNamedElement cgElement = createCGElement(CGNamedElement.class, asStatement);
+				CGNamedElement cgElement = createCGStatement(CGNamedElement.class, asStatement);
 				if (cgElement != null) {	// FIXME some statements do a more complex appendSubTree
 					cgMappingStatements.add((CGValuedElement) cgElement);
 				}
@@ -291,8 +308,24 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> asFunction2cgFunctions = new HashMap<>();
+	/**
+	 * Mapping from each AS Function to its corresponding CGFunction.
+	 */
+	//	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> asFunction2cgFunctions = new HashMap<>();
+
+	/**
+	 * Mapping from each AS Mapping to its corresponding CGMapping.
+	 */
 	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> asMapping2cgMapping = new HashMap<>();
+
+	/**
+	 * Mapping from each AS MappingLoop to its corresponding CGMappingLoop.
+	 */
+	private final @NonNull Map<@NonNull MappingLoop, @NonNull CGMappingLoop> asMappingLoop2cgMappingLoop = new HashMap<>();
+
+	/**
+	 * Mapping from each AS TypedModel to its corresponding CGTypedModel.
+	 */
 	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
 	private final @Nullable TypeId originalThisTypeId;
 	private final @NonNull TypeId runtimeThisTypeId;
@@ -313,21 +346,21 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	public void addCGFunction(@NonNull CGFunction cgFunction) {
-		asFunction2cgFunctions.put(QVTiCGUtil.getAST(cgFunction), cgFunction);
-	}
+	//	public void addCGFunction(@NonNull CGFunction cgFunction) {
+	//		asFunction2cgFunctions.put(QVTiCGUtil.getAST(cgFunction), cgFunction);
+	//	}
 
 	public void addCGMapping(@NonNull CGMapping cgMapping) {
 		asMapping2cgMapping.put(QVTiCGUtil.getAST(cgMapping), cgMapping);
 	}
 
-	@Override
-	public void addCGOperation(@NonNull CGOperation cgOperation) {
-		super.addCGOperation(cgOperation);
-		if (cgOperation instanceof CGFunction) {
-			addCGFunction((CGFunction)cgOperation);
-		}
-	}
+	//	@Override
+	//	public void addCGOperation(@NonNull CGOperation cgOperation) {
+	//		super.addCGOperation(cgOperation);
+	//		if (cgOperation instanceof CGFunction) {
+	//			addCGFunction((CGFunction)cgOperation);
+	//		}
+	//	}
 
 	public void addCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
 		asTypedModel2cgTypedModel.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
@@ -339,15 +372,60 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		// XXX virtual functions
 	}
 
-	public @Nullable CGFunction basicGetCGFunction(@NonNull Function asFunction) {
-		return asFunction2cgFunctions.get(asFunction);
-	}
+	//	public @Nullable CGFunction basicGetCGFunction(@NonNull Function asFunction) {
+	//		return asFunction2cgFunctions.get(asFunction);
+	//	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
 		return asMapping2cgMapping.get(asMapping);
 	}
 
-	public void generateMappingBody(@NonNull CGMapping cgMapping) {
+	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
+		Iterable<@NonNull Mapping> iMappings = QVTimperativeUtil.getOwnedMappings(iTransformation);
+		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
+		for (@NonNull Mapping iMapping : iMappings) {
+			if (iMapping.isIsStrict()) {
+				useClassMappings.add(iMapping);
+			}
+			else if (QVTimperativeUtil.isObserver(iMapping)) {	// ?? redundant
+				useClassMappings.add(iMapping);
+			}
+			for (@NonNull Statement iStatement : QVTimperativeUtil.getOwnedStatements(iMapping)) {
+				if (iStatement instanceof SpeculateStatement) {
+					useClassMappings.add(iMapping);
+				}
+			}
+		}
+		if (useClassMappings.size() > 0) {
+			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
+				useClassMappings.add(iEntryPoint);
+			}
+		}
+		return useClassMappings;
+	}
+
+	public @Nullable <T extends CGElement> T createCGStatement(@NonNull Class<T> requiredClass, @Nullable Statement asElement) {
+		if (asElement == null) {
+			throw new NullPointerException("null source for mapping to " + requiredClass.getName());
+		}
+		CGNamedElement cgElement = asElement.accept(as2cgVisitor);
+		//	if (cgElement == null) {
+		//		throw new NullPointerException("null result of mapping to " + requiredClass.getName());
+		//	}
+		if (cgElement != null) {
+			Class<? extends CGNamedElement> actualClass = cgElement.getClass();
+			if (!requiredClass.isAssignableFrom(actualClass)) {
+				throw new ClassCastException("cannot cast " + actualClass.getName() + " result of mapping to " + requiredClass.getName());
+			}
+			@SuppressWarnings("unchecked") T cgElement2 = (T) cgElement;
+			return cgElement2;
+		}
+		return null;
+	}
+
+	public @NonNull CGMapping generateMapping(@NonNull Mapping asMapping) {
+		CGMapping cgMapping = generateMappingDeclaration(asMapping);
+		getMappingNameManager(cgMapping, asMapping);
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(cgMapping);
 		bodyBuilder2.doBottoms();
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
@@ -356,6 +434,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		cgFreeVariables.clear();
 		cgFreeVariables.addAll(sortedVariables);
 		bodyBuilder = null;
+		return cgMapping;
 	}
 
 	public @NonNull CGMapping generateMappingDeclaration(@NonNull Mapping asMapping) {
@@ -368,6 +447,43 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			addCGMapping(cgMapping);
 		}
 		return cgMapping;
+	}
+
+	public @NonNull CGMappingLoop generateMappingLoop(@NonNull MappingLoop asMappingLoop) {
+		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
+		cgMappingLoop.setAst(asMappingLoop);
+		asMappingLoop2cgMappingLoop.put(asMappingLoop, cgMappingLoop);
+		getMappingLoopNameManager(cgMappingLoop, asMappingLoop);		// eager to allow useXXX downstream
+		OCLExpression asSource = asMappingLoop.getOwnedExpression();
+		cgMappingLoop.setSource(createCGElement(CGValuedElement.class, asSource));
+		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
+		if (asIterators.size() > 0) {
+			LoopVariable asIterator = asIterators.get(0);
+			if (asIterator != null) {
+				CGIterator cgIterator = useFeatureNameManager(asIterator).getIterator(asIterator);
+				cgIterator.setTypeId(getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
+				cgIterator.setRequired(asIterator.isIsRequired());
+				if (asIterator.isIsRequired()) {
+					cgIterator.setNonNull();
+				}
+				cgMappingLoop.getIterators().add(cgIterator);
+			}
+		}
+		//		cgIterator.setNonInvalid();
+		//		cgIterator.setNonNull();
+		CollectionType collectionType = getStandardLibrary().getCollectionType();
+		Iteration forAllIteration = (Iteration)NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
+		assert forAllIteration != null;
+		cgMappingLoop.setAsIteration(forAllIteration);
+		cgMappingLoop.setReferredIteration(generateIterationDeclaration(/*asSource.getType(),*/ forAllIteration));
+		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
+		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
+			CGValuedElement cgMappingStatement = createCGElement(CGValuedElement.class, asMappingStatement);
+			cgMappingStatements.add(cgMappingStatement);
+		}
+		cgMappingLoop.setBody(cgSequence);
+		return cgMappingLoop;
 	}
 
 	/*	@Override
@@ -527,6 +643,34 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
+	public @NonNull CGTransformation generateTransformation(@NonNull ImperativeTransformation asTransformation) {
+		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ getCodeGenerator().getEntryPointsAnalysis(asTransformation);
+		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
+		cgTransformation.setAst(asTransformation);
+		getClassNameManager(cgTransformation, asTransformation);
+		globalNameManager.declareGlobalName(cgTransformation, PivotUtil.getName(asTransformation));
+		setCGRootClass(cgTransformation);			// set TransformationCallingConvention	// XXX cgRootClass
+		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
+		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
+			CGTypedModel cgTypedModel = createCGElement(CGTypedModel.class, asTypedModel);
+			cgTypedModel.setModelIndex(cgTypedModels.size());
+			cgTypedModels.add(cgTypedModel);
+		}
+		Set<@NonNull Mapping> useClasses = computeUseClasses(asTransformation);
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			CGMapping cgMapping = createCGElement(CGMapping.class, asMapping);
+			cgTransformation.getOwnedMappings().add(cgMapping);
+			if (useClasses.contains(asMapping)) {
+				cgMapping.setUseClass(true);
+			}
+		}
+		for (Operation asOperation : asTransformation.getOwnedOperations()) {			// Why omit properties / nested classes ?
+			CGOperation cgOperation = createCGElement(CGOperation.class, asOperation);
+			cgTransformation.getOperations().add(cgOperation);
+		}
+		return cgTransformation;
+	}
+
 	public @NonNull PredicateTreeBuilder getBodyBuilder() {
 		assert bodyBuilder != null;
 		return bodyBuilder;
@@ -538,8 +682,17 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @Nullable CGFunction getCGFunction(@NonNull Function asFunction) {
-		return asFunction2cgFunctions.get(asFunction);
+		//	return asFunction2cgFunctions.get(asFunction);
+		return (CGFunction)getCGOperation(asFunction);
 	}
+
+	//	public @NonNull CGMapping getCGMapping(@NonNull Mapping asMapping) {
+	//		return ClassUtil.nonNullState(asMapping2cgMapping.get(asMapping));
+	//	}
+
+	//	public @NonNull CGMappingLoop getCGMappingLoop(@NonNull MappingLoop asMappingLoop) {
+	//		return ClassUtil.nonNullState(asMappingLoop2cgMappingLoop.get(asMappingLoop));
+	//	}
 
 	@Override
 	public @NonNull CGTypeId getCGTypeId(@NonNull TypeId typeId) {
@@ -565,6 +718,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return null;
 	}
 
+	//	public @NonNull QVTiFeatureNameManager getFunctionNameManager(@NonNull CGFunction cgFunction, @NonNull Function asFunction) {
+	//		return (QVTiFeatureNameManager)super.zzgetOperationNameManager(cgFunction, asFunction);
+	//	}
+
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		Function asFunction = QVTiCGUtil.getOwningFunction(asFunctionParameter);
 		FeatureNameManager operationNameManager = getOperationNameManager(null, asFunction);
@@ -581,6 +738,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			operationNameManager.addVariable(asFunctionParameter, cgFunctionParameter);
 		}
 		return cgFunctionParameter;
+	}
+
+	@Override
+	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
+		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull VariableDeclaration asVariable) {
@@ -603,6 +765,46 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 		nameManager.addVariable(asVariable, cgGuardVariable);
 		return cgGuardVariable;
+	}
+
+	/**
+	 * Create or use the MappingLoopNameManager for asMappingLoop exploiting an optionally already known cgMapping.
+	 */
+	public @NonNull FeatureNameManager getMappingLoopNameManager(@NonNull CGMappingLoop cgMappingLoop, @NonNull MappingLoop asMappingLoop) {
+		//	if (cgMappingLoop == null) {
+		//		cgMappingLoop = asMappingLoop2cgMappingLoop.get(asMappingLoop);
+		//		if (cgMappingLoop == null) {
+		//			cgMappingLoop = generateMappingLoopDeclaration(asMappingLoop);
+		//		}
+		//	}
+		assert cgMappingLoop.getAst() == asMappingLoop;
+		FeatureNameManager mappingLoopNameManager = (FeatureNameManager) globalNameManager.basicGetNestedNameManager(cgMappingLoop);
+		if (mappingLoopNameManager == null) {			//
+			FeatureNameManager parentNameManager = useFeatureNameManager((Element)asMappingLoop.eContainer());
+			ClassNameManager traansformationNameManager = parentNameManager.getClassNameManager();
+			mappingLoopNameManager = getGlobalNameManager().createFeatureNameManager(traansformationNameManager, parentNameManager, cgMappingLoop);
+		}
+		return mappingLoopNameManager;
+	}
+
+	/**
+	 * Create or use the MappingNameManager for asMapping exploiting an optionally already known cgMapping.
+	 */
+	public @NonNull QVTiFeatureNameManager getMappingNameManager(@Nullable CGMapping cgMapping, @NonNull Mapping asMapping) {
+		if (cgMapping == null) {
+			cgMapping = asMapping2cgMapping.get(asMapping);
+			if (cgMapping == null) {
+				cgMapping = generateMappingDeclaration(asMapping);
+			}
+		}
+		assert cgMapping.getAst() == asMapping;
+		QVTiFeatureNameManager mappingNameManager = (QVTiFeatureNameManager)globalNameManager.basicGetNestedNameManager(cgMapping);
+		if (mappingNameManager == null) {			//
+			Transformation asTransformation = QVTbaseUtil.getOwningTransformation(asMapping);
+			ClassNameManager transformationNameManager = getClassNameManager(null, asTransformation);
+			mappingNameManager = getGlobalNameManager().createFeatureNameManager(transformationNameManager, cgMapping);
+		}
+		return mappingNameManager;
 	}
 
 	@Override
@@ -673,5 +875,30 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		//		|| (libraryProperty instanceof StaticProperty)
 		//		|| (libraryProperty instanceof StereotypeProperty)
 		//		|| (libraryProperty instanceof ConstrainedProperty);
+	}
+
+	@Override
+	protected @Nullable FeatureNameManager useFeatureNameManagerInternal(@NonNull EObject eObject) {
+		FeatureNameManager featureNameManager = super.useFeatureNameManagerInternal(eObject);
+		if (featureNameManager == null) {
+			if (eObject instanceof Mapping) {
+				//	CGMapping cgMapping = getCGMapping((Mapping)eObject);
+				//	return useMappingNameManager(cgMapping);
+				CGMapping cgMapping = ClassUtil.nonNullState(asMapping2cgMapping.get(eObject));
+				return (FeatureNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMapping));
+			}
+			if (eObject instanceof MappingLoop) {
+				//	CGMappingLoop cgMappingLoop = getCGMappingLoop((MappingLoop)eObject);
+				//	return useMappingLoopNameManager(cgMappingLoop);
+				CGMappingLoop cgMappingLoop = ClassUtil.nonNullState(asMappingLoop2cgMappingLoop.get(eObject));
+				return (FeatureNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMappingLoop));
+			}
+		}
+		return featureNameManager;
+	}
+
+	public @NonNull FeatureNameManager useMappingNameManager(@NonNull CGMapping cgMapping) {
+		FeatureNameManager featureNameManager = (FeatureNameManager)globalNameManager.basicGetNestedNameManager(cgMapping);
+		return ClassUtil.nonNullState(featureNameManager);
 	}
 }

@@ -11,9 +11,13 @@
 package org.eclipse.qvtd.codegen.qvti.java;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
+import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator.QVTiNameManagerHelper;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -92,6 +96,22 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.transformationName = globalNameManager.declareGlobalName(null, TRANSFORMATION_NAME);
 	}
 
+	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+		QVTiFeatureNameManager mappingNameManager = getCodeGenerator().createFeatureNameManager(transformationNameManager, cgMapping);
+		addElement2NameManager(cgMapping, mappingNameManager);
+		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
+		//	addNameManager(cgScope, nestedNameManager.getParent());
+		return mappingNameManager;
+	}
+
+	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull FeatureNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+		FeatureNameManager mappingLoopNameManager = getCodeGenerator().createFeatureNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+		addElement2NameManager(cgMappingLoop, mappingLoopNameManager);
+		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
+		//	addNameManager(cgScope, nestedNameManager.getParent());
+		return mappingLoopNameManager;
+	}
+
 	@Deprecated
 	public @NonNull String getCachedResultName() {
 		return cachedResultName.getResolvedName();
@@ -115,6 +135,11 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public @NonNull NameResolution getClassId2AllClassIndexes() {
 		return classId2AllClassIndexes;
+	}
+
+	@Override
+	public @NonNull QVTiCodeGenerator getCodeGenerator() {
+		return (QVTiCodeGenerator)super.getCodeGenerator();
 	}
 
 	public @NonNull String getConstructorName() {

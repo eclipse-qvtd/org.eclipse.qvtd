@@ -31,12 +31,9 @@ import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingCon
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
@@ -69,7 +66,8 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CacheProperty;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
@@ -107,7 +105,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected final @NonNull ImperativeTransformation asTransformation;
-	//	protected final @NonNull QVTiAnalyzer cgAnalyzer;
+	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
 	private/* @LazyNonNull*/ CGPackage cgPackage;
 	private/* @LazyNonNull*/ String javaSourceCode = null;
@@ -117,6 +115,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		super(environmentFactory, null);			// FIXME Pass a genmodel
 		QVTiCGModelCG2StringVisitor.FACTORY.getClass();
 		this.asTransformation = asTransformation;
+		this.analyzer = createCodeGenAnalyzer();
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
@@ -147,12 +146,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
-		return new QVTiCGModelAnalysisVisitor(cgAnalyzer);
+		return new QVTiCGModelAnalysisVisitor(analyzer);
 	}
 
 	@Override
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
-		return new QVTiCGModelBoxingAnalysisVisitor(cgAnalyzer);
+		return new QVTiCGModelBoxingAnalysisVisitor(analyzer);
 	}
 
 	@Override
@@ -170,7 +169,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		CGTransformation cgTransformation = cgAnalyzer.createCGElement(CGTransformation.class, asTransformation);
+		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
 		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 		org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
 		CGPackage cgPackage2 = createCGPackage(asPackage);
@@ -196,7 +195,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		assert cgPackage != null;
-		cgAnalyzer.analyzeExternalFeatures();
+		analyzer.analyzeExternalFeatures();
 		return cgPackage;
 	}
 
@@ -246,6 +245,38 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiAnalyzer(this);
 	}
 
+	//	@Override
+	//	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGConstraint cgConstraint) {
+	//		// TODO Auto-generated method stub
+	//		return super.createFeatureNameManager(classNameManager, cgConstraint);
+	//	}
+
+	//	@Override
+	//	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull FeatureNameManager outerNameManager,
+	//			@NonNull CGIterationCallExp cgIterationCallExp) {
+	//		// TODO Auto-generated method stub
+	//		return super.createFeatureNameManager(classNameManager, outerNameManager, cgIterationCallExp);
+	//	}
+
+	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+		return new QVTiFeatureNameManager(transformationNameManager, cgMapping);
+	}
+
+	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull FeatureNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+		return new QVTiFeatureNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+	}
+
+	@Override
+	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
+		return new QVTiFeatureNameManager(classNameManager, cgOperation);
+	}
+
+	//	@Override
+	//	public @NonNull FeatureNameManager createFeatureNameManager( @NonNull ClassNameManager classNameManager, @NonNull CGProperty cgProperty) {
+	//		// TODO Auto-generated method stub
+	//		return super.createFeatureNameManager(classNameManager, cgProperty);
+	//	}
+
 	@Override
 	protected @NonNull GlobalNameManager createGlobalNameManager() {
 		return new QVTiGlobalNameManager(this, createNameManagerHelper());
@@ -263,7 +294,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
-		return new QVTiFieldingAnalyzer(getAnalyzer());
+		return new QVTiFieldingAnalyzer(analyzer);
 	}
 
 	@Override
@@ -277,33 +308,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				reserveImportName(org.eclipse.qvtd.runtime.internal.evaluation.RuntimeModelsManager.Model.class);
 			}
 		};
-	}
-
-	@Override
-	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGConstraint cgConstraint) {
-		// TODO Auto-generated method stub
-		return super.createFeatureNameManager(classNameManager, cgConstraint);
-	}
-
-	@Override
-	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull FeatureNameManager outerNameManager,
-			@NonNull CGIterationCallExp cgIterationCallExp) {
-		// TODO Auto-generated method stub
-		return super.createFeatureNameManager(classNameManager, outerNameManager, cgIterationCallExp);
-	}
-
-	@Override
-	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
-		if (cgOperation instanceof CGFunction) {
-			return new QVTiFeatureNameManager(classNameManager, cgOperation);
-		}
-		return super.createFeatureNameManager(classNameManager, cgOperation);
-	}
-
-	@Override
-	public @NonNull FeatureNameManager createFeatureNameManager( @NonNull ClassNameManager classNameManager, @NonNull CGProperty cgProperty) {
-		// TODO Auto-generated method stub
-		return super.createFeatureNameManager(classNameManager, cgProperty);
 	}
 
 	@Override
@@ -331,7 +335,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull QVTiAnalyzer getAnalyzer() {
-		return (QVTiAnalyzer)cgAnalyzer;
+		assert analyzer != null;			// Detects bad construction order
+		return analyzer;
 	}
 
 	@Override

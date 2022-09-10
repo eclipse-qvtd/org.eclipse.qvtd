@@ -13,10 +13,7 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -29,21 +26,16 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsKindOfExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
@@ -62,13 +54,10 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
@@ -174,45 +163,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		this.qvtiAnalyzer = analyzer;
 	}
 
-	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
-		Iterable<@NonNull Mapping> iMappings = QVTimperativeUtil.getOwnedMappings(iTransformation);
-		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
-		for (@NonNull Mapping iMapping : iMappings) {
-			if (iMapping.isIsStrict()) {
-				useClassMappings.add(iMapping);
-			}
-			else if (QVTimperativeUtil.isObserver(iMapping)) {	// ?? redundant
-				useClassMappings.add(iMapping);
-			}
-			for (@NonNull Statement iStatement : QVTimperativeUtil.getOwnedStatements(iMapping)) {
-				if (iStatement instanceof SpeculateStatement) {
-					useClassMappings.add(iMapping);
-				}
-			}
-		}
-		if (useClassMappings.size() > 0) {
-			for (@NonNull EntryPoint iEntryPoint : QVTimperativeUtil.computeEntryPoints(iTransformation)) {
-				useClassMappings.add(iEntryPoint);
-			}
-		}
-		return useClassMappings;
-	}
-
-	/*	protected <T extends EObject> @NonNull T createCopy(@NonNull T aPrototype) {
-		Copier copier = new EcoreUtil.Copier();
-		EObject aCopy = copier.copy(aPrototype);
-		assert aCopy != null;
-		copier.copyReferences();
-		@SuppressWarnings("unchecked") T castCopy = (T) aCopy;
-		return castCopy;
-	} */
-
-	@Override
-	public @NonNull QVTiAnalyzer getAnalyzer() {
-		return qvtiAnalyzer;
-	}
-
-	//	@Override
 	public @NonNull QVTiCodeGenerator getCodeGenerator() {
 		return (QVTiCodeGenerator)codeGenerator;
 	}
@@ -505,8 +455,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitEntryPoint(@NonNull EntryPoint pEntryPoint) {
-		return visitMapping(pEntryPoint);
+	public @Nullable CGNamedElement visitEntryPoint(@NonNull EntryPoint asEntryPoint) {
+		return qvtiAnalyzer.generateMapping(asEntryPoint);
 	}
 
 	@Override
@@ -684,30 +634,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
-		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ getCodeGenerator().getEntryPointsAnalysis(asTransformation);
-		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		cgTransformation.setAst(asTransformation);
-		globalNameManager.declareGlobalName(cgTransformation, asTransformation.getName());
-		qvtiAnalyzer.setCGRootClass(cgTransformation);			// set TransformationCallingConvention	// XXX cgRootClass
-		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
-		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
-			CGTypedModel cgTypedModel = qvtiAnalyzer.createCGElement(CGTypedModel.class, asTypedModel);
-			cgTypedModel.setModelIndex(cgTypedModels.size());
-			cgTypedModels.add(cgTypedModel);
-		}
-		Set<@NonNull Mapping> useClasses = computeUseClasses(asTransformation);
-		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-			CGMapping cgMapping = qvtiAnalyzer.createCGElement(CGMapping.class, asMapping);
-			cgTransformation.getOwnedMappings().add(cgMapping);
-			if (useClasses.contains(asMapping)) {
-				cgMapping.setUseClass(true);
-			}
-		}
-		for (Operation asOperation : asTransformation.getOwnedOperations()) {			// Why omit properties / nested classes ?
-			CGOperation cgOperation = qvtiAnalyzer.createCGElement(CGOperation.class, asOperation);
-			cgTransformation.getOperations().add(cgOperation);
-		}
-		return cgTransformation;
+		return qvtiAnalyzer.generateTransformation(asTransformation);
 	}
 
 	@Override
@@ -737,9 +664,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping asMapping) {
-		CGMapping cgMapping = qvtiAnalyzer.generateMappingDeclaration(asMapping);
-		qvtiAnalyzer.generateMappingBody(cgMapping);
-		return cgMapping;
+		return qvtiAnalyzer.generateMapping(asMapping);
 	}
 
 	@Override
@@ -761,38 +686,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public CGNamedElement visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
-		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
-		cgMappingLoop.setAst(asMappingLoop);
-		OCLExpression asSource = asMappingLoop.getOwnedExpression();
-		cgMappingLoop.setSource(qvtiAnalyzer.createCGElement(CGValuedElement.class, asSource));
-		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
-		if (asIterators.size() > 0) {
-			LoopVariable asIterator = asIterators.get(0);
-			if (asIterator != null) {
-				CGIterator cgIterator = qvtiAnalyzer.useFeatureNameManager(asIterator).getIterator(asIterator);
-				cgIterator.setTypeId(qvtiAnalyzer.getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
-				cgIterator.setRequired(asIterator.isIsRequired());
-				if (asIterator.isIsRequired()) {
-					cgIterator.setNonNull();
-				}
-				cgMappingLoop.getIterators().add(cgIterator);
-			}
-		}
-		//		cgIterator.setNonInvalid();
-		//		cgIterator.setNonNull();
-		CollectionType collectionType = qvtiAnalyzer.getStandardLibrary().getCollectionType();
-		Iteration forAllIteration = (Iteration)NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
-		assert forAllIteration != null;
-		cgMappingLoop.setAsIteration(forAllIteration);
-		cgMappingLoop.setReferredIteration(qvtiAnalyzer.generateIterationDeclaration(/*asSource.getType(),*/ forAllIteration));
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
-		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
-			CGValuedElement cgMappingStatement = qvtiAnalyzer.createCGElement(CGValuedElement.class, asMappingStatement);
-			cgMappingStatements.add(cgMappingStatement);
-		}
-		cgMappingLoop.setBody(cgSequence);
-		return cgMappingLoop;
+		return qvtiAnalyzer.generateMappingLoop(asMappingLoop);
 	}
 
 	@Override
