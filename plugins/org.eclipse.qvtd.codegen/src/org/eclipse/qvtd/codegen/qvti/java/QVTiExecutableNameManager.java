@@ -13,19 +13,20 @@ package org.eclipse.qvtd.codegen.qvti.java;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
-import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
+import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -34,24 +35,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 /**
  * QVTiNestedNameManager provides QVTi-specific overrides for nested contexts.
  */
-public class QVTiFeatureNameManager extends FeatureNameManager
+public class QVTiExecutableNameManager extends ExecutableNameManager
 {
 	private /*@LazyNonNull*/ CGParameter thisTransformerParameter = null;	// A local orphan parameter spelled "thisTransformer"
 
-	//	protected QVTiFeatureNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
+	//	protected QVTiExecutableNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
 	//		super(codeGenerator, parent, cgScope);
 	//	}
 
-	public QVTiFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
-		super(transformationNameManager, transformationNameManager, cgMapping);
-	}
+	//	public QVTiExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+	//		super(transformationNameManager, transformationNameManager, cgMapping);
+	//	}
 
-	public QVTiFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull FeatureNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
-		super(transformationNameManager, parentNameManager, cgMappingLoop);
-	}
+	//	public QVTiExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+	//		super(transformationNameManager, parentNameManager, cgMappingLoop);
+	//	}
 
-	public QVTiFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
-		super(classNameManager, cgOperation);
+	public QVTiExecutableNameManager(@NonNull ClassNameManager classNameManager, @NonNull NestedNameManager parentNameManager, @NonNull CGNamedElement cgScope) {
+		super(classNameManager, parentNameManager, cgScope);
 	}
 
 	@Override
@@ -103,6 +104,11 @@ public class QVTiFeatureNameManager extends FeatureNameManager
 	}
 
 	@Override
+	public @NonNull QVTiAnalyzer getAnalyzer() {
+		return (QVTiAnalyzer)super.getAnalyzer();
+	}
+
+	@Override
 	public @Nullable CGValuedElement getBody() {
 		if (cgScope instanceof CGMapping) {
 			return ((CGMapping)cgScope).getOwnedBody();
@@ -150,13 +156,13 @@ public class QVTiFeatureNameManager extends FeatureNameManager
 		return false;//super.isThis(asParameter);
 	} */
 
-	@Override
-	public @NonNull CGVariable getExecutorVariable() {
-		//	if ((asScope instanceof Function) || (asScope instanceof Mapping)) {
-		//		return ((NestedNameManager)parent).getExecutorVariable();
-		//	}
-		return super.getExecutorVariable();
-	}
+	//	@Override
+	//	public @NonNull CGVariable getExecutorVariable() {
+	//	if ((asScope instanceof Function) || (asScope instanceof Mapping)) {
+	//		return ((NestedNameManager)parent).getExecutorVariable();
+	//	}
+	//		return super.getExecutorVariable();
+	//	}
 
 	@Override
 	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {

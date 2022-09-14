@@ -11,13 +11,10 @@
 package org.eclipse.qvtd.codegen.qvticgmodel.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCG2JavaNameVisitor;
 
 public class QVTiCGModelCG2JavaNameVisitor extends AbstractQVTiCGModelCG2JavaNameVisitor
@@ -32,31 +29,8 @@ public class QVTiCGModelCG2JavaNameVisitor extends AbstractQVTiCGModelCG2JavaNam
 
 	@Override
 	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment cgConnectionAssignment) {
-		NestedNameManager nameManager = getNameManager();
+		NestedNameManager nameManager = globalNameManager.useSelfExecutableNameManager(cgConnectionAssignment);
 		nameManager.addNameVariant(cgConnectionAssignment, context.getITER_NameVariant());
 		return super.visitCGConnectionAssignment(cgConnectionAssignment);
-	}
-
-	@Override
-	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
-		pushNameManager(cgMapping);
-		try {
-			return super.visitCGMapping(cgMapping);
-		}
-		finally {
-			popNameManager();
-		}
-	}
-
-	@Override
-	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
-		//	globalNameManager.addNameManager(cgMappingLoop.getSource(), getNameManager());	// source must be declared in outer namespace
-		//	pushNameManager(cgMappingLoop);
-		//	try {
-		return super.visitCGMappingLoop(cgMappingLoop);
-		//	}
-		//	finally {
-		//		popNameManager();
-		//	}
 	}
 }

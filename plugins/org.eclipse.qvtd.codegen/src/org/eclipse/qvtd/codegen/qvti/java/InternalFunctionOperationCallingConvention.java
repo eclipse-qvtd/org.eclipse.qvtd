@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
@@ -170,16 +171,16 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
+		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
-		CGFunction cgFunction = (CGFunction)cgOperation;
+		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		assert codeGenerator.getShadowExp(asFunction) == null;
-		QVTiFeatureNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgOperation, asFunction);
 		//
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgFunction);
-		cgParameters.add(operationNameManager.getThisTransformerParameter());			// Include "this" as part of the uniqueness Tuple.
+		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());			// Include "this" as part of the uniqueness Tuple.
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asFunction)) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
@@ -293,7 +294,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
 		//
-		QVTiFeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asOperation);
+		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asOperation);
 		ConstructorOperationCallingConvention callingConvention = ConstructorOperationCallingConvention.INSTANCE;
 		CGParameter thisTransformerParameter = nameManager.getThisTransformerParameter();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
@@ -305,7 +306,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgConstructor.setCallingConvention(callingConvention);
 		//	analyzer.addCGOperation(cgCacheOperation);
 		ctorNameResolution.addCGElement(cgConstructor);
-		callingConvention.createCGParameters(qvtiAnalyzer, cgConstructor, null);
+		callingConvention.createCGParameters(nameManager, null);
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
@@ -369,7 +370,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
 		//
-		QVTiFeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
+		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
 		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
 		CGTypeId cgTypeId = cgCacheProperty.getTypeId();
 

@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -75,16 +76,16 @@ public class EmptyFunctionOperationCallingConvention extends FunctionOperationCa
 	}
 
 	@Override
-	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
+		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
-		CGFunction cgFunction = (CGFunction)cgOperation;
+		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
 		assert !useClassToCreateObject;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
-		QVTiFeatureNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgOperation, asFunction);
-		cgParameters.add(operationNameManager.getThisTransformerParameter());
+		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);

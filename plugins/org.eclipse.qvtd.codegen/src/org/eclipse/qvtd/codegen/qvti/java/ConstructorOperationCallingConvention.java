@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractOperationCallingConvention;
@@ -32,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -133,12 +133,14 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 	}
 
 	@Override
-	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiFeatureNameManager nameManager = (QVTiFeatureNameManager)analyzer.getNameManager();
+	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
+		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		assert bodyExpression == null;
 		Operation asOperation = CGUtil.getAST(cgOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOperation);
-		cgParameters.add(nameManager.getThisTransformerParameter());
+		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		if (!asOperation.isIsStatic()) {
 			//XXX			CGParameter cgParameter = nameManager.getSelfParameter();
 			//			cgParameter.setTypeId(context.getTypeId(JavaConstants.getJavaTypeId(Object.class)));
@@ -146,7 +148,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 			//			cgParameters.add(cgParameter);
 		}
 		for (@NonNull Parameter parameterVariable : ClassUtil.nullFree(asOperation.getOwnedParameters())) {
-			CGParameter cgParameter = nameManager.getParameter(parameterVariable, (String)null);
+			CGParameter cgParameter = qvtiOperationNameManager.getParameter(parameterVariable, (String)null);
 			cgParameters.add(cgParameter);
 		}
 	}

@@ -12,10 +12,8 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -48,12 +46,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
-import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LanguageExpression;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -68,11 +67,10 @@ import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiFeatureNameManager;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
@@ -184,8 +182,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 					appendNonNullPredicate(cgRawVariable);
 				}
 				if (needsTypeCheck) {
-					FeatureNameManager featureNameManager = useFeatureNameManager(asVariable);
-					CGExecutorType cgType = featureNameManager.getCGExecutorType(targetType);
+					ExecutableNameManager executableNameManager = useExecutableNameManager(asVariable);
+					CGExecutorType cgType = executableNameManager.getCGExecutorType(targetType);
 					appendIsKindOfPredicate(cgRawVariable, cgType);
 					CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
 					cgCastExp.setSource(createCGVariableExp(cgRawVariable));
@@ -197,7 +195,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 					cgInit = createCGVariableExp(cgRawVariable);
 				}
 			}
-			CGFinalVariable cgVariable = useFeatureNameManager(asVariable).createCGVariable(asVariable);
+			CGFinalVariable cgVariable = useExecutableNameManager(asVariable).createCGVariable(asVariable);
 			cgVariable.setInit(cgInit);
 			CGLetExp cgLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
 			cgLetExp.setAst(asVariable);
@@ -316,17 +314,17 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	/**
 	 * Mapping from each AS Mapping to its corresponding CGMapping.
 	 */
-	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> asMapping2cgMapping = new HashMap<>();
+	//	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> asMapping2cgMapping = new HashMap<>();
 
 	/**
 	 * Mapping from each AS MappingLoop to its corresponding CGMappingLoop.
 	 */
-	private final @NonNull Map<@NonNull MappingLoop, @NonNull CGMappingLoop> asMappingLoop2cgMappingLoop = new HashMap<>();
+	//	private final @NonNull Map<@NonNull MappingLoop, @NonNull CGMappingLoop> asMappingLoop2cgMappingLoop = new HashMap<>();
 
 	/**
 	 * Mapping from each AS TypedModel to its corresponding CGTypedModel.
 	 */
-	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
+	//	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
 	private final @Nullable TypeId originalThisTypeId;
 	private final @NonNull TypeId runtimeThisTypeId;
 
@@ -351,7 +349,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	}
 
 	public void addCGMapping(@NonNull CGMapping cgMapping) {
-		asMapping2cgMapping.put(QVTiCGUtil.getAST(cgMapping), cgMapping);
+		asElement2cgElement.put(QVTiCGUtil.getAST(cgMapping), cgMapping);
 	}
 
 	//	@Override
@@ -363,7 +361,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	}
 
 	public void addCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
-		asTypedModel2cgTypedModel.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+		asElement2cgElement.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
 	}
 
 	@Override
@@ -377,7 +375,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
-		return asMapping2cgMapping.get(asMapping);
+		return (CGMapping)asElement2cgElement.get(asMapping);
 	}
 
 	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
@@ -443,7 +441,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		if (cgMapping == null) {
 			cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 			cgMapping.setAst(asMapping);
-			globalNameManager.declareGlobalName(cgMapping, asMapping.getName());		// XXX lazy
+			//	globalNameManager.declareGlobalName(cgMapping, asMapping.getName());		// XXX lazy
 			addCGMapping(cgMapping);
 		}
 		return cgMapping;
@@ -452,7 +450,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public @NonNull CGMappingLoop generateMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
 		cgMappingLoop.setAst(asMappingLoop);
-		asMappingLoop2cgMappingLoop.put(asMappingLoop, cgMappingLoop);
+		asElement2cgElement.put(asMappingLoop, cgMappingLoop);
 		getMappingLoopNameManager(cgMappingLoop, asMappingLoop);		// eager to allow useXXX downstream
 		OCLExpression asSource = asMappingLoop.getOwnedExpression();
 		cgMappingLoop.setSource(createCGElement(CGValuedElement.class, asSource));
@@ -460,7 +458,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		if (asIterators.size() > 0) {
 			LoopVariable asIterator = asIterators.get(0);
 			if (asIterator != null) {
-				CGIterator cgIterator = useFeatureNameManager(asIterator).getIterator(asIterator);
+				CGIterator cgIterator = useExecutableNameManager(asIterator).getIterator(asIterator);
 				cgIterator.setTypeId(getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
 				cgIterator.setRequired(asIterator.isIsRequired());
 				if (asIterator.isIsRequired()) {
@@ -569,7 +567,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			cgPropertyAssignment.setAst(asSetStatement);
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
 			assert asVariable != null;
-			CGVariable cgVariable = useFeatureNameManager(asVariable).getCGVariable(asVariable);
+			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
 			cgPropertyAssignment.setAsProperty(asProperty);
@@ -629,7 +627,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			cgPropertyAssignment.setAst(asSetStatement);
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
 			assert asVariable != null;
-			CGVariable cgVariable = useFeatureNameManager(asVariable).getCGVariable(asVariable);
+			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			cgPropertyAssignment.setAsProperty(asTargetProperty);
 			//		cgPredicate.setName(asPredicate.getName());
@@ -648,7 +646,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		cgTransformation.setAst(asTransformation);
 		getClassNameManager(cgTransformation, asTransformation);
-		globalNameManager.declareGlobalName(cgTransformation, PivotUtil.getName(asTransformation));
+		//	globalNameManager.declareGlobalName(cgTransformation, PivotUtil.getName(asTransformation));
 		setCGRootClass(cgTransformation);			// set TransformationCallingConvention	// XXX cgRootClass
 		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
 		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
@@ -718,13 +716,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return null;
 	}
 
-	//	public @NonNull QVTiFeatureNameManager getFunctionNameManager(@NonNull CGFunction cgFunction, @NonNull Function asFunction) {
-	//		return (QVTiFeatureNameManager)super.zzgetOperationNameManager(cgFunction, asFunction);
+	//	public @NonNull QVTiExecutableNameManager getFunctionNameManager(@NonNull CGFunction cgFunction, @NonNull Function asFunction) {
+	//		return (QVTiExecutableNameManager)super.zzgetOperationNameManager(cgFunction, asFunction);
 	//	}
 
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		Function asFunction = QVTiCGUtil.getOwningFunction(asFunctionParameter);
-		FeatureNameManager operationNameManager = getOperationNameManager(null, asFunction);
+		ExecutableNameManager operationNameManager = getOperationNameManager(null, asFunction);
 		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
@@ -746,7 +744,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull VariableDeclaration asVariable) {
-		FeatureNameManager nameManager = useFeatureNameManager(asVariable);
+		ExecutableNameManager nameManager = useExecutableNameManager(asVariable);
 		CGGuardVariable cgGuardVariable = (CGGuardVariable)nameManager.basicGetParameter(asVariable);
 		assert cgGuardVariable == null;
 		boolean isConnectionVariable = asVariable instanceof ConnectionVariable;
@@ -770,7 +768,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	/**
 	 * Create or use the MappingLoopNameManager for asMappingLoop exploiting an optionally already known cgMapping.
 	 */
-	public @NonNull FeatureNameManager getMappingLoopNameManager(@NonNull CGMappingLoop cgMappingLoop, @NonNull MappingLoop asMappingLoop) {
+	public @NonNull ExecutableNameManager getMappingLoopNameManager(@NonNull CGMappingLoop cgMappingLoop, @NonNull MappingLoop asMappingLoop) {
 		//	if (cgMappingLoop == null) {
 		//		cgMappingLoop = asMappingLoop2cgMappingLoop.get(asMappingLoop);
 		//		if (cgMappingLoop == null) {
@@ -778,11 +776,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		//		}
 		//	}
 		assert cgMappingLoop.getAst() == asMappingLoop;
-		FeatureNameManager mappingLoopNameManager = (FeatureNameManager) globalNameManager.basicGetNestedNameManager(cgMappingLoop);
+		ExecutableNameManager mappingLoopNameManager = (ExecutableNameManager) globalNameManager.basicGetChildNameManager(cgMappingLoop);
 		if (mappingLoopNameManager == null) {			//
-			FeatureNameManager parentNameManager = useFeatureNameManager((Element)asMappingLoop.eContainer());
+			ExecutableNameManager parentNameManager = useExecutableNameManager((NamedElement)asMappingLoop.eContainer());
 			ClassNameManager traansformationNameManager = parentNameManager.getClassNameManager();
-			mappingLoopNameManager = getGlobalNameManager().createFeatureNameManager(traansformationNameManager, parentNameManager, cgMappingLoop);
+			mappingLoopNameManager = getGlobalNameManager().createExecutableNameManager(traansformationNameManager, parentNameManager, cgMappingLoop);
 		}
 		return mappingLoopNameManager;
 	}
@@ -790,30 +788,30 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	/**
 	 * Create or use the MappingNameManager for asMapping exploiting an optionally already known cgMapping.
 	 */
-	public @NonNull QVTiFeatureNameManager getMappingNameManager(@Nullable CGMapping cgMapping, @NonNull Mapping asMapping) {
+	public @NonNull QVTiExecutableNameManager getMappingNameManager(@Nullable CGMapping cgMapping, @NonNull Mapping asMapping) {
 		if (cgMapping == null) {
-			cgMapping = asMapping2cgMapping.get(asMapping);
+			cgMapping = (CGMapping)asElement2cgElement.get(asMapping);
 			if (cgMapping == null) {
 				cgMapping = generateMappingDeclaration(asMapping);
 			}
 		}
 		assert cgMapping.getAst() == asMapping;
-		QVTiFeatureNameManager mappingNameManager = (QVTiFeatureNameManager)globalNameManager.basicGetNestedNameManager(cgMapping);
+		QVTiExecutableNameManager mappingNameManager = (QVTiExecutableNameManager)globalNameManager.basicGetChildNameManager(cgMapping);
 		if (mappingNameManager == null) {			//
 			Transformation asTransformation = QVTbaseUtil.getOwningTransformation(asMapping);
 			ClassNameManager transformationNameManager = getClassNameManager(null, asTransformation);
-			mappingNameManager = getGlobalNameManager().createFeatureNameManager(transformationNameManager, cgMapping);
+			mappingNameManager = getGlobalNameManager().createMappingNameManager(transformationNameManager, cgMapping);
 		}
 		return mappingNameManager;
 	}
 
 	@Override
-	public @NonNull QVTiFeatureNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
-		return (QVTiFeatureNameManager)super.getOperationNameManager(cgOperation, asOperation);
+	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
+		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation);
 	}
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
-		FeatureNameManager nameManager = useFeatureNameManager(asNewStatement);
+		ExecutableNameManager nameManager = useExecutableNameManager(asNewStatement);
 		CGVariable cgVariable2 = nameManager.basicGetVariable(asNewStatement);
 		CGRealizedVariable cgVariable = (CGRealizedVariable) cgVariable2;
 		if (cgVariable == null) {
@@ -838,7 +836,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
-		return asTypedModel2cgTypedModel.get(asTypedModel);
+		return (CGTypedModel)asElement2cgElement.get(asTypedModel);
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {
@@ -877,28 +875,28 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		//		|| (libraryProperty instanceof ConstrainedProperty);
 	}
 
-	@Override
-	protected @Nullable FeatureNameManager useFeatureNameManagerInternal(@NonNull EObject eObject) {
-		FeatureNameManager featureNameManager = super.useFeatureNameManagerInternal(eObject);
-		if (featureNameManager == null) {
+	/*	@Override
+	protected @Nullable ExecutableNameManager useExecutableNameManagerInternal(@NonNull EObject eObject) {
+		ExecutableNameManager executableNameManager = super.useExecutableNameManagerInternal(eObject);
+		if (executableNameManager == null) {
 			if (eObject instanceof Mapping) {
 				//	CGMapping cgMapping = getCGMapping((Mapping)eObject);
 				//	return useMappingNameManager(cgMapping);
 				CGMapping cgMapping = ClassUtil.nonNullState(asMapping2cgMapping.get(eObject));
-				return (FeatureNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMapping));
+				return (ExecutableNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMapping));
 			}
 			if (eObject instanceof MappingLoop) {
 				//	CGMappingLoop cgMappingLoop = getCGMappingLoop((MappingLoop)eObject);
 				//	return useMappingLoopNameManager(cgMappingLoop);
 				CGMappingLoop cgMappingLoop = ClassUtil.nonNullState(asMappingLoop2cgMappingLoop.get(eObject));
-				return (FeatureNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMappingLoop));
+				return (ExecutableNameManager)ClassUtil.nonNullState(globalNameManager.basicGetNestedNameManager(cgMappingLoop));
 			}
 		}
-		return featureNameManager;
-	}
+		return executableNameManager;
+	} */
 
-	public @NonNull FeatureNameManager useMappingNameManager(@NonNull CGMapping cgMapping) {
-		FeatureNameManager featureNameManager = (FeatureNameManager)globalNameManager.basicGetNestedNameManager(cgMapping);
-		return ClassUtil.nonNullState(featureNameManager);
-	}
+	//	public @NonNull ExecutableNameManager useMappingNameManager(@NonNull CGMapping cgMapping) {
+	//		ExecutableNameManager executableNameManager = (ExecutableNameManager)globalNameManager.basicGetChildNameManager(cgMapping);
+	//		return ClassUtil.nonNullState(executableNameManager);
+	//	}
 }

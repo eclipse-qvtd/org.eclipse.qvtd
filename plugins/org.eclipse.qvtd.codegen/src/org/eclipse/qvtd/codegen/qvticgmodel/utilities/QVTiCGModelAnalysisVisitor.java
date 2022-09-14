@@ -55,8 +55,7 @@ public class QVTiCGModelAnalysisVisitor extends AbstractQVTiCGModelAnalysisVisit
 	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		visitCGVariable(cgRealizedVariable);
-		GlobalNameManager globalNameManager = context.getGlobalNameManager();
-		NestedNameManager localNameManager = globalNameManager.findNestedNameManager(cgRealizedVariable);
+		NestedNameManager localNameManager = context.getGlobalNameManager().useSelfNestedNameManager(cgRealizedVariable);
 		String nameHint = cgRealizedVariable.getName();
 		if (nameHint == null) {
 			nameHint = localNameManager.getNameHint(cgRealizedVariable);

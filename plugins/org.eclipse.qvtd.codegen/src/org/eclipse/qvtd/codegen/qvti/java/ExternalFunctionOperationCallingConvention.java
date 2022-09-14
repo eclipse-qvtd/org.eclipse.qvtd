@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
-import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
@@ -274,7 +274,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgInnerOperation.setTypeId(analyzer.getCGTypeId(asOuterOperation.getTypeId()));
 		cgInnerOperation.setRequired(asOuterOperation.isIsRequired());
 		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.INSTANCE);
-		FeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
+		ExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
 		//		analyzer.addCGOperation(cgOperation);
 		//	createCGParameters(as2cgVisitor, gOperation, null;
 		ExpressionInOCL expressionInOCL	= null;
@@ -316,13 +316,13 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	cgOperationCallExp.setValidating(asOperation.isIsValidating());
 		cgOperationCallExp.setRequired(isRequired);
 
-		QVTiFeatureNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgOuterOperation, asOuterOperation);
+		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgOuterOperation, asOuterOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOuterOperation);
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		int i = 0;
 		for (@NonNull CGParameter cgParameter : cgParameters) {
 			if (i == 0) {
-				CGVariable executorVariable = nameManager.getExecutorVariable();
+				CGVariable executorVariable = analyzer.getExecutorVariable(nameManager);
 				cgArguments.add(analyzer.createCGVariableExp(executorVariable));
 			}
 			else if (i == 1) {
@@ -365,15 +365,16 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
+		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
-		CGFunction cgFunction = (CGFunction)cgOperation;
+		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(qvtiAnalyzer.getOperationNameManager(cgOperation, asFunction).getThisTransformerParameter());
+		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);

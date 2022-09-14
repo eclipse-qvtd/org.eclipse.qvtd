@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -221,7 +221,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (asVariable == null) {
 			return null;
 		}
-		CGVariable cgVariable = qvtiAnalyzer.useFeatureNameManager(asVariable).getCGVariable(asVariable);
+		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		OCLExpression asInitValue = asAddStatement.getOwnedExpression();
 		assert cgVariable instanceof CGConnectionVariable;
 		CGValuedElement initValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asInitValue);
@@ -250,7 +250,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
 		ConnectionVariable asVariable = asAppendParameterBinding.getValue();
 		assert asVariable != null;
-		CGVariable cgVariable = qvtiAnalyzer.useFeatureNameManager(asVariable).getCGVariable(asVariable);
+		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		cgVariableExp.setAst(asVariable);
 		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
@@ -268,7 +268,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitBufferStatement(@NonNull BufferStatement asVariable) {
-		FeatureNameManager nameManager = qvtiAnalyzer.useFeatureNameManager(asVariable);
+		ExecutableNameManager nameManager = qvtiAnalyzer.useExecutableNameManager(asVariable);
 		OCLExpression asInit = asVariable.getOwnedExpression();
 		CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();		// ?? FIXME Use ConnectionVariable
 		cgAccumulator.setAst(asVariable);
@@ -393,8 +393,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgUncastVariableExp1.setRequired(cgUncastVariable.isRequired());
 			cgIsKindOfExp.setSource(cgUncastVariableExp1);
 
-			FeatureNameManager featureNameManager = qvtiAnalyzer.useFeatureNameManager(asVariable);
-			CGExecutorType cgExecutorType = featureNameManager.getCGExecutorType(PivotUtil.getType(asVariable));
+			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asVariable);
+			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asVariable));
 			cgIsKindOfExp.setExecutorType(cgExecutorType);
 			cgPredicate.setCondition(cgIsKindOfExp);
 			cgOuterLetExp.setIn(cgPredicate);
@@ -412,7 +412,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			assert asTypeId != null;
 			cgCastExp.setTypeId(qvtiAnalyzer.getCGTypeId(asTypeId));
 
-			CGFinalVariable cgCastVariable = qvtiAnalyzer.useFeatureNameManager(asVariable).createCGVariable(asVariable);
+			CGFinalVariable cgCastVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).createCGVariable(asVariable);
 			cgCastVariable.setInit(cgCastExp);
 
 			CGLetExp cgCastLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
@@ -616,7 +616,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
 		ConnectionVariable asVariable = asGuardParameterBinding.getValue();
 		assert asVariable != null;
-		CGVariable cgVariable = qvtiAnalyzer.useFeatureNameManager(asVariable).getCGVariable(asVariable);
+		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		cgVariableExp.setAst(asVariable);
 		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
@@ -647,7 +647,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
 		LoopVariable asVariable = asLoopParameterBinding.getValue();
 		assert asVariable != null;
-		CGVariable cgVariable = qvtiAnalyzer.useFeatureNameManager(asVariable).getCGVariable(asVariable);
+		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		cgVariableExp.setAst(ClassUtil.nonNullModel(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
@@ -709,8 +709,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
 			CGRealizedVariable CGRealizedVariable = qvtiAnalyzer.getBodyBuilder().addRealizedVariable(asNewStatement);
-			FeatureNameManager featureNameManager = qvtiAnalyzer.useFeatureNameManager(asNewStatement);
-			CGExecutorType cgExecutorType = featureNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
+			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asNewStatement);
+			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
 			//	getNameManager().declareStandardName(cgExecutorType);
 			CGRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
@@ -855,7 +855,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		cgTypedModel.setAst(asTypedModel);
-		globalNameManager.declareGlobalName(cgTypedModel, asTypedModel.getName());
+		globalNameManager.declareEagerName(cgTypedModel, asTypedModel.getName());
 		qvtiAnalyzer.addCGTypedModel(cgTypedModel);
 		return cgTypedModel;
 	}

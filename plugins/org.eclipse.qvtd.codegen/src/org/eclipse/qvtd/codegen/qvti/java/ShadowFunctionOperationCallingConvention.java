@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -101,12 +102,12 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 	}
 
 	@Override
-	public void createCGParameters(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
+	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)operationNameManager.getAnalyzer();
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = qvtiAnalyzer.getCodeGenerator().getShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		assert useClassToCreateObject;
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {

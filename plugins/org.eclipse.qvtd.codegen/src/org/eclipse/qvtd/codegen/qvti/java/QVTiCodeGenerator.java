@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaLanguageSupport;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
-import org.eclipse.ocl.examples.codegen.naming.FeatureNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
@@ -124,7 +124,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
 		}
 		if (!oppositeProperty2oppositeCacheName.containsKey(pivotProperty)) {
-			oppositeProperty2oppositeCacheName.put(pivotProperty, globalNameManager.declareGlobalName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()).getResolvedName());
+			oppositeProperty2oppositeCacheName.put(pivotProperty, globalNameManager.declareEagerName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()).getResolvedName());
 		}
 		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
 		assert name != null;
@@ -189,7 +189,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			for (int i = segments.length; --i >= 0; ) {
 				String segment = segments[i];
 				CGPackage cgPackage3 = CGModelFactory.eINSTANCE.createCGPackage();
-				globalNameManager.declareGlobalName(cgPackage3, segment);
+				globalNameManager.declareEagerName(cgPackage3, segment);
 				cgPackage3.getPackages().add(cgPackage);
 				cgPackage = cgPackage3;
 			}
@@ -204,7 +204,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		String name = asPackage.getName();
-		globalNameManager.declareGlobalName(cgPackage, (name != null) && (name.length() > 0)? name : "_" + asTransformation.getName());
+		globalNameManager.declareEagerName(cgPackage, (name != null) && (name.length() > 0)? name : "_" + asTransformation.getName());
 
 		// Parent CG Package
 		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
@@ -245,37 +245,18 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiAnalyzer(this);
 	}
 
-	//	@Override
-	//	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGConstraint cgConstraint) {
-	//		// TODO Auto-generated method stub
-	//		return super.createFeatureNameManager(classNameManager, cgConstraint);
-	//	}
-
-	//	@Override
-	//	public @NonNull FeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull FeatureNameManager outerNameManager,
-	//			@NonNull CGIterationCallExp cgIterationCallExp) {
-	//		// TODO Auto-generated method stub
-	//		return super.createFeatureNameManager(classNameManager, outerNameManager, cgIterationCallExp);
-	//	}
-
-	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
-		return new QVTiFeatureNameManager(transformationNameManager, cgMapping);
+	public @NonNull QVTiExecutableNameManager createExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
+		return new QVTiExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
 	}
 
-	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull FeatureNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
-		return new QVTiFeatureNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
+		return new QVTiExecutableNameManager(transformationNameManager, transformationNameManager, cgMapping);
 	}
 
 	@Override
-	public @NonNull QVTiFeatureNameManager createFeatureNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
-		return new QVTiFeatureNameManager(classNameManager, cgOperation);
+	public @NonNull QVTiExecutableNameManager createOperationNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
+		return new QVTiExecutableNameManager(classNameManager, classNameManager, cgOperation);
 	}
-
-	//	@Override
-	//	public @NonNull FeatureNameManager createFeatureNameManager( @NonNull ClassNameManager classNameManager, @NonNull CGProperty cgProperty) {
-	//		// TODO Auto-generated method stub
-	//		return super.createFeatureNameManager(classNameManager, cgProperty);
-	//	}
 
 	@Override
 	protected @NonNull GlobalNameManager createGlobalNameManager() {
