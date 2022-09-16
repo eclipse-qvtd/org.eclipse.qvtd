@@ -634,7 +634,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
-		return qvtiAnalyzer.generateTransformation(asTransformation);
+		//		return qvtiAnalyzer.generateTransformation(asTransformation);
+		return visitClass(asTransformation);
 	}
 
 	@Override

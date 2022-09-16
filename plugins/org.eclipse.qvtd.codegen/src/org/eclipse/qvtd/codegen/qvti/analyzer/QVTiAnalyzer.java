@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
@@ -378,6 +379,19 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return (CGMapping)asElement2cgElement.get(asMapping);
 	}
 
+	@Override
+	protected void checkNameManager(@NonNull CGNamedElement cgElement, @NonNull NamedElement asElement) {
+		if (cgElement instanceof CGMappingExp) {		// FIXME CGMappingExp has same AST as ancestral CGMapping
+			//	assert cgElement.getAst() == asElement;
+			//	CGMapping cgMapping = (CGMapping)cgElement.eContainer();
+			//	assert cgMapping.getAst() == asElement;
+			//	checkNameManager(cgMapping, asElement);
+		}
+		else {
+			super.checkNameManager(cgElement, asElement);
+		}
+	}
+
 	private @NonNull Set<@NonNull Mapping> computeUseClasses(@NonNull ImperativeTransformation iTransformation) {
 		Iterable<@NonNull Mapping> iMappings = QVTimperativeUtil.getOwnedMappings(iTransformation);
 		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
@@ -421,6 +435,50 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return null;
 	}
 
+	@Override
+	public @NonNull CGClass generateClass(@Nullable CGClass cgClass, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		if (!(asClass instanceof ImperativeTransformation)) {
+			return super.generateClass(cgClass, asClass);
+		}
+		if (cgClass == null) {
+			cgClass = basicGetCGClass(asClass);
+			if (cgClass == null) {
+				cgClass = generateClassDeclaration(asClass, null);
+			}
+		}
+		//	getClassNameManager(cgClass, asClass);			// Nominally redundant here but needed downstream
+		ImperativeTransformation asTransformation = (ImperativeTransformation)asClass;
+		CGTransformation cgTransformation = (CGTransformation)cgClass;
+		super.generateClass(cgTransformation, asTransformation);
+		//	globalNameManager.declareGlobalName(cgTransformation, PivotUtil.getName(asTransformation));
+		//	setCGRootClass(cgTransformation);			// set TransformationCallingConvention	// XXX cgRootClass
+		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
+		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
+			CGTypedModel cgTypedModel = createCGElement(CGTypedModel.class, asTypedModel);
+			cgTypedModel.setModelIndex(cgTypedModels.size());
+			cgTypedModels.add(cgTypedModel);
+		}
+		Set<@NonNull Mapping> useClasses = computeUseClasses(asTransformation);
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			CGMapping cgMapping = createCGElement(CGMapping.class, asMapping);
+			cgTransformation.getOwnedMappings().add(cgMapping);
+			if (useClasses.contains(asMapping)) {
+				cgMapping.setUseClass(true);
+			}
+		}
+		//	for (Operation asOperation : asTransformation.getOwnedOperations()) {			// Why omit properties / nested classes ?
+		//		CGOperation cgOperation = createCGElement(CGOperation.class, asOperation);
+		//		cgTransformation.getOperations().add(cgOperation);
+		//	}
+		return cgTransformation;
+	}
+
+	//	@Override
+	//	public @NonNull CGClass generateClassDeclaration(org.eclipse.ocl.pivot.@NonNull Class asClass, @Nullable ClassCallingConvention callingConvention) {
+	// TODO Auto-generated method stub
+	//		return super.generateClassDeclaration(asClass, callingConvention);
+	//	}
+
 	public @NonNull CGMapping generateMapping(@NonNull Mapping asMapping) {
 		CGMapping cgMapping = generateMappingDeclaration(asMapping);
 		getMappingNameManager(cgMapping, asMapping);
@@ -441,7 +499,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		if (cgMapping == null) {
 			cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 			cgMapping.setAst(asMapping);
-			//	globalNameManager.declareGlobalName(cgMapping, asMapping.getName());		// XXX lazy
 			addCGMapping(cgMapping);
 		}
 		return cgMapping;
@@ -641,34 +698,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		}
 	}
 
-	public @NonNull CGTransformation generateTransformation(@NonNull ImperativeTransformation asTransformation) {
-		/*QVTiTransformationAnalysis entryPointsAnalysis =*/ getCodeGenerator().getEntryPointsAnalysis(asTransformation);
-		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		cgTransformation.setAst(asTransformation);
-		getClassNameManager(cgTransformation, asTransformation);
-		//	globalNameManager.declareGlobalName(cgTransformation, PivotUtil.getName(asTransformation));
-		setCGRootClass(cgTransformation);			// set TransformationCallingConvention	// XXX cgRootClass
-		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
-		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
-			CGTypedModel cgTypedModel = createCGElement(CGTypedModel.class, asTypedModel);
-			cgTypedModel.setModelIndex(cgTypedModels.size());
-			cgTypedModels.add(cgTypedModel);
-		}
-		Set<@NonNull Mapping> useClasses = computeUseClasses(asTransformation);
-		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
-			CGMapping cgMapping = createCGElement(CGMapping.class, asMapping);
-			cgTransformation.getOwnedMappings().add(cgMapping);
-			if (useClasses.contains(asMapping)) {
-				cgMapping.setUseClass(true);
-			}
-		}
-		for (Operation asOperation : asTransformation.getOwnedOperations()) {			// Why omit properties / nested classes ?
-			CGOperation cgOperation = createCGElement(CGOperation.class, asOperation);
-			cgTransformation.getOperations().add(cgOperation);
-		}
-		return cgTransformation;
-	}
-
 	public @NonNull PredicateTreeBuilder getBodyBuilder() {
 		assert bodyBuilder != null;
 		return bodyBuilder;
@@ -701,6 +730,37 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			return super.getCGTypeId(typeId);
 		}
 	}
+
+	/**
+	 * Create or use the ClassNameManager for asClass exploiting an optionally already known cgClass.
+	 *
+	@Override			// XXX Avoiding bad inherited assert
+	public @NonNull ClassNameManager getClassNameManager(@Nullable CGClass cgClass, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		if (!(cgClass instanceof CGTransformation)) {
+			return super.getClassNameManager(cgClass, asClass);
+		}
+		//	if (cgClass == null) {
+		//		cgClass = (CGClass)asElement2cgElement.get(asClass);
+		//		if (cgClass == null) {
+		//			cgClass = generateClassDeclaration(asClass, null);
+		//		}
+		//	}
+		//	assert environmentFactory.getCompleteModel().getCompleteClass(asClass).getPrimaryClass() == cgClass.getAst();
+		ClassNameManager classNameManager = (ClassNameManager)globalNameManager.basicGetChildNameManager(cgClass);
+		if (classNameManager == null) {
+			EObject eContainer = asClass.eContainer();
+			ClassableNameManager classableNameManager = null;
+			if (eContainer instanceof org.eclipse.ocl.pivot.Package) {
+				classableNameManager = getPackageNameManager(null, (org.eclipse.ocl.pivot.Package)eContainer);
+			}
+			else if (eContainer instanceof org.eclipse.ocl.pivot.Package) {
+				classableNameManager = getClassNameManager(null, (org.eclipse.ocl.pivot.Class)eContainer);
+			}
+			assert classableNameManager != null;
+			classNameManager = globalNameManager.createClassNameManager(classableNameManager, cgClass);
+		}
+		return classNameManager;
+	} */
 
 	public @Nullable EClassifier getEClassifier(@Nullable Type type) {
 		if (type == null) {

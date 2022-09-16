@@ -98,7 +98,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		@Override
 		public @NonNull AS2CGVisitor createAS2CGVisitor(@NonNull CodeGenAnalyzer codeGenAnalyzer) {
-			return new CS2ASAS2CGVisitor(getAnalyzer());
+			return new CS2ASAS2CGVisitor((QVTiAnalyzer)codeGenAnalyzer);
 		}
 
 		@Override

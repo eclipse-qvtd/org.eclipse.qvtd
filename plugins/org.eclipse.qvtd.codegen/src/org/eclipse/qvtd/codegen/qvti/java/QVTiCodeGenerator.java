@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
@@ -65,6 +67,7 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CacheProperty;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
@@ -80,6 +83,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelDependencyVisit
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelReferencesVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -170,16 +174,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull CGPackage createCGPackage() {
 		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
+		// ?? rescue package prefix wrapping
 		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
-		org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
-		CGPackage cgPackage2 = createCGPackage(asPackage);
+		//	org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
+		//	CGPackage cgPackage2 = createCGPackage(asPackage);
 		//	if (cgTransformation.eContainer() == null) {
-		cgPackage2.getClasses().add(cgTransformation);
+		//	cgPackage2.getClasses().add(cgTransformation);
 		//	}
 		//	else {
 		//		cgPackage2.getPackages().add(cgPackage);
 		//	}
-		CGPackage cgPackage = cgPackage2;
+		/*	CGPackage cgPackage = cgPackage2;
 		while (cgPackage.getContainingPackage() != null) {
 			cgPackage = cgPackage.getContainingPackage();
 		}
@@ -195,6 +200,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		assert cgPackage != null;
+		analyzer.analyzeExternalFeatures();
+		return cgPackage; */
+		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
 		analyzer.analyzeExternalFeatures();
 		return cgPackage;
 	}
@@ -321,7 +329,15 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull OperationCallingConvention getCallingConvention( @NonNull Operation asOperation, boolean isFinal) {
+	public @NonNull ClassCallingConvention getCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		if (asClass instanceof Transformation) {
+			return TransformationCallingConvention.INSTANCE;
+		}
+		return super.getCallingConvention(asClass);
+	}
+
+	@Override
+	public @NonNull OperationCallingConvention getCallingConvention(@NonNull Operation asOperation, boolean isFinal) {
 		if (asOperation instanceof Function) {
 			Function asFunction = (Function)asOperation;
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
