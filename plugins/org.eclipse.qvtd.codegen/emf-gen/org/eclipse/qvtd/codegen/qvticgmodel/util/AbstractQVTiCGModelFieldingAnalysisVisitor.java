@@ -86,7 +86,7 @@ public abstract class AbstractQVTiCGModelFieldingAnalysisVisitor
 
 	@Override
 	public @NonNull ReturnState visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
-		return visitCGNamedElement(object);
+		return visitCGValuedElement(object);
 	}
 
 	@Override

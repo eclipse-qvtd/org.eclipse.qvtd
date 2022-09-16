@@ -47,7 +47,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="#//CGTypedModel" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGMapping" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGNamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGMapping" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAssignments" upperBound="-1"
         eType="#//CGPropertyAssignment" containment="true" resolveProxies="false"
         eOpposite="#//CGPropertyAssignment/owningMapping"/>

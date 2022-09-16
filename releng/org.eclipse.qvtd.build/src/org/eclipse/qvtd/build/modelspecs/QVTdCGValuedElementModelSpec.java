@@ -89,7 +89,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 	public static class Register {
 		public Register() {
-			new QVTdCGValuedElementModelSpec(CGTypedModel.class, null,							null     , null     , null     , null     , null     , Glo.TRUE , Inl.FALSE, null    , null     , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , Rew.UNSUP, null    );
+			new QVTdCGValuedElementModelSpec(CGTypedModel.class, null,							null     , null     , null     , null     , null     , Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , Rew.UNSUP, null    );
 
 			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,						Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,					Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
@@ -106,7 +106,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 			new QVTdCGValuedElementModelSpec(CGFunction.class, null,							Box.BOX  , null     , null     , Nul.ECORE, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-			new QVTdCGValuedElementModelSpec(CGMapping.class, null,								Box.ALL  , null     , null     , null     , null     , Glo.TRUE , Inl.FALSE, null     , Ct.TRUE , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGMapping.class, null,								Box.ALL  , null     , null     , null     , null     , null     , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
 			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,							Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
 			new QVTdCGValuedElementModelSpec(CGSequence.class, null,							null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.SELF );
 

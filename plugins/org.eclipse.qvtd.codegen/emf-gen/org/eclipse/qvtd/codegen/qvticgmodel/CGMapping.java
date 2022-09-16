@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
@@ -37,7 +36,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * @model
  * @generated
  */
-public interface CGMapping extends CGNamedElement {
+public interface CGMapping extends CGValuedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Assignments</b></em>' containment reference list.

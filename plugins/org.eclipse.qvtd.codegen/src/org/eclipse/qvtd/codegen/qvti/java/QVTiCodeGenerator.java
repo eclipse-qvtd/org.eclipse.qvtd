@@ -174,7 +174,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull CGPackage createCGPackage() {
 		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
-		// ?? rescue package prefix wrapping
+		// FIXME rescue package prefix wrapping
 		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 		//	org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
 		//	CGPackage cgPackage2 = createCGPackage(asPackage);

@@ -86,7 +86,7 @@ public abstract class AbstractExtendingQVTiCGModelVisitor<R, C>
 
 	@Override
 	public R visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
-		return visitCGNamedElement(object);
+		return visitCGValuedElement(object);
 	}
 
 	@Override
