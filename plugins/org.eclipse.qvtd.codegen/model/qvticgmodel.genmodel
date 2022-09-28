@@ -47,7 +47,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGGuardVariable/typedModel"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMapping">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/ownedAssignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/ownedBody"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/ownedConnectionAssignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/ownedGuardVariables"/>
@@ -74,7 +73,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/referredProperty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/ownedInitValue"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/ownedSlotValue"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/owningMapping"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGPropertyAssignment/asProperty"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariable">

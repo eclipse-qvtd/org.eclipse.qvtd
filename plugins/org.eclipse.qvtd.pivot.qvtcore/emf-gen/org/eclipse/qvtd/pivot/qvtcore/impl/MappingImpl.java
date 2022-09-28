@@ -365,6 +365,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -372,8 +373,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ @Nullable Mapping context_0 = this.getContext();
-				final /*@NonInvalid*/ boolean IsEQ_ = context_0 != null;
+				final /*@NonInvalid*/ @Nullable Mapping context_1 = this.getContext();
+				final /*@NonInvalid*/ boolean IsEQ_ = context_1 != null;
 				final /*@NonInvalid*/ @Nullable Boolean implies;
 				if (!IsEQ_) {
 					implies = ValueUtil.TRUE_VALUE;
@@ -421,6 +422,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -535,15 +537,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				if (guardPattern != null)
 					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 0), null, msgs);
-				return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
+			return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				if (bottomPattern != null)
 					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 1), null, msgs);
-				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
+			return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetContext((Mapping)otherEnd, msgs);
+			return basicSetContext((Mapping)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocal()).basicAdd(otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
@@ -627,25 +629,25 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
-				getLocal().addAll((Collection<? extends Mapping>)newValue);
-				return;
+			getLocal().addAll((Collection<? extends Mapping>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
-				getRefinement().addAll((Collection<? extends Mapping>)newValue);
-				return;
+			getRefinement().addAll((Collection<? extends Mapping>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
-				getSpecification().addAll((Collection<? extends Mapping>)newValue);
-				return;
+			getSpecification().addAll((Collection<? extends Mapping>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -660,22 +662,22 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)null);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)null);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)null);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

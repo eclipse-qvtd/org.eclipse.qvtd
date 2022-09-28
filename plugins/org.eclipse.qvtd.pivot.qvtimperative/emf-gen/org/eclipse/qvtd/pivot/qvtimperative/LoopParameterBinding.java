@@ -53,6 +53,7 @@ public interface LoopParameterBinding extends MappingParameterBinding {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getLoopParameterBinding_Value()
 	 * @generated
 	 */
+	@Override
 	LoopVariable getValue();
 
 	/**

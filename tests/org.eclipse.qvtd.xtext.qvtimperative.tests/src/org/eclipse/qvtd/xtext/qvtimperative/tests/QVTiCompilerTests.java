@@ -175,7 +175,6 @@ public class QVTiCompilerTests extends LoadTestCase
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setIsIncremental(isIncremental);
 			options.setUseNullAnnotations(true);
-			//			options.setPackagePrefix("cg_qvtimperative_tests");
 			cg.generateClassFile();
 			TestFile srcPath = testProject.getOutputFolder(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");

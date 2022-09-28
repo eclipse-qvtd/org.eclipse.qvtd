@@ -317,8 +317,8 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ boolean IsEQ_ = ownedExpression != null;
+					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression_0 = this.getOwnedExpression();
+					final /*@NonInvalid*/ boolean IsEQ_ = ownedExpression_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -327,10 +327,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
-							if (ownedExpression == null) {
+							if (ownedExpression_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
-							final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
+							final /*@Thrown*/ @Nullable Type type = ownedExpression_0.getType();
 							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
 							if (oclAsType == null) {
 								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -399,7 +399,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
-			final /*@NonInvalid*/ boolean IsEQ_ = s.equals(QVTimperativeTables.STR_);
+			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeTables.STR_);
 			/*@NonInvalid*/ @NonNull String IF_IsEQ_;
 			if (IsEQ_) {
 				IF_IsEQ_ = n;

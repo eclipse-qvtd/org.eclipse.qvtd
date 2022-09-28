@@ -88,7 +88,7 @@ import com.google.common.collect.Lists;
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
 	@SuppressWarnings("serial")
-	protected class OperationCopier extends EcoreUtil.Copier
+	protected class OperationCopier extends EcoreUtil.Copier			// XXX Share RereferencingCopier
 	{
 		public <T extends EObject> @NonNull T copyContainmentAndReferences(@NonNull T eIn) {
 			@SuppressWarnings("unchecked") T eOut = (@NonNull T)copy(eIn);
@@ -288,7 +288,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			QVTbaseUtil.getContextVariable(getStandardLibrary(), iTransformation);
+			QVTbaseUtil.getContextVariable(iTransformation);
 			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
 			iTransformation.getOwnedOperations().add(asFunction);
 			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
@@ -355,6 +355,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			}
 		}
 		iTransformation.getRule().add(mapping);
+		//	mapping.setOwnedContext(PivotUtil.createParameterVariable(QVTbaseUtil.getOwnedContext(iTransformation)));
 		visitPartition(partition);
 		//		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCalledRegions()) {
 		//			if (region2region2mapping.get(childRegion) == null) {

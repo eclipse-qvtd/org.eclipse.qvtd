@@ -278,8 +278,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		//
 		this.cMiddleVariable = (traceClass != null) ? relationAnalysis.traceIsRealized() ? addCoreRealizedVariable("trace", traceClass) : addCoreGuardVariable("trace", traceClass) : null;
 
-		this.rThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), QVTbaseUtil.getContainingTransformation(rEnforcedDomain));
-		this.cThisVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), cTransformation);
+		this.rThisVariable = QVTbaseUtil.getContextVariable(QVTbaseUtil.getContainingTransformation(rEnforcedDomain));
+		this.cThisVariable = QVTbaseUtil.getContextVariable(cTransformation);
 		ThisVariable2Variable thisVariableAnalysis = new ThisVariable2Variable(this, rThisVariable, cThisVariable);
 		addVariableAnalysis(thisVariableAnalysis);
 	}

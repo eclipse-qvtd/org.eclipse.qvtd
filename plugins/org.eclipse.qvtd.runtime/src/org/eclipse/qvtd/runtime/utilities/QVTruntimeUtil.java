@@ -10,17 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.utilities;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 
-public class QVTruntimeUtil
+@Deprecated /* @deprecated moved to NameUtil */
+public class QVTruntimeUtil extends NameUtil
 {
-	public static @Nullable String contextLine = null;
-
-	public static void errPrintln(@Nullable String string) {
-		if (contextLine != null) {
-			System.err.println(contextLine);
-			contextLine = null;
-		}
-		System.err.println(String.valueOf(string));
-	}
 }

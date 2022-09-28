@@ -259,6 +259,7 @@ public abstract class AbstractPartialRegionClassAnalysis<PRA extends PartialRegi
 	/**
 	 * Return true if this ClassAnalyis is for an override hierarchy dispatcher.
 	 */
+	@Deprecated /* @deprecated not used */
 	public boolean isDispatcher() {
 		Boolean isDispatcher2 = isDispatcher;
 		if (isDispatcher2 == null) {

@@ -74,4 +74,11 @@ public abstract class AbstractComputation implements Computation
 	public @NonNull String getName() {
 		return toString().replace("@",  "\n@");
 	}
+
+	//	protected abstract boolean isEqual(@Nullable Object @NonNull [] thoseValues);
+
+	//	@Override
+	//	public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
+	//		return isEqual(thoseValues);
+	//	}
 }

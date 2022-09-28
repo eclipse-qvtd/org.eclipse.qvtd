@@ -231,13 +231,13 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<OCLExpression> argument = this.getArgument();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
+					final /*@NonInvalid*/ @NonNull List<OCLExpression> argument_0 = this.getArgument();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument_0);
 					final /*@NonInvalid*/ @NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
+					final /*@NonInvalid*/ @NonNull Relation referredRelation_0 = this.getReferredRelation();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<Domain> domain = referredRelation.getDomain();
+					final /*@NonInvalid*/ @NonNull List<Domain> domain = referredRelation_0.getDomain();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
 					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_RelationDomain);
 					@NonNull Iterator<Object> ITER__1 = BOXED_domain.iterator();
@@ -254,6 +254,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 */
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
 						final /*@Thrown*/ @Nullable RelationDomain oclAsType = (@Nullable RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain);
+						if (oclAsType == null) {
+							throw new InvalidValueException("Null body for \'OrderedSet(T).collect(V)(OrderedSet.T[?] | Lambda T() : V[?]) : Sequence(collect.V)\'");
+						}
 						//
 						accumulator.add(oclAsType);
 					}
@@ -278,7 +281,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						}
 					}
 					final /*@Thrown*/ @NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(collect);
-					final /*@Thrown*/ boolean IsEQ_ = size.equals(size_0);
+					final /*@Thrown*/ boolean IsEQ_ = idResolver.oclEquals(size, size_0);
 					CAUGHT_IsEQ_ = IsEQ_;
 				}
 				catch (Exception THROWN_CAUGHT_IsEQ_) {
@@ -392,12 +395,12 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 * e.oclContainer()
 						 */
 						@Override
-						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet_0, final /*@NonInvalid*/ @Nullable Object e_0) {
-							if (e_0 == null) {
+						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet_0, final /*@NonInvalid*/ @Nullable Object e) {
+							if (e == null) {
 								throw new InvalidValueException("Null \'\'OclElement\'\' rather than \'\'OclVoid\'\' value required");
 							}
-							final /*@Thrown*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, e_0);
-							return oclContainer_0;
+							final /*@Thrown*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, e);
+							return oclContainer;
 						}
 					};
 					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_0, asOrderedSet_0, ACC_closure_0);
@@ -426,7 +429,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 							throw (InvalidValueException)CAUGHT_first;
 						}
 						final /*@Thrown*/ @Nullable Pattern THROWN_first_1 = (@Nullable Pattern)CAUGHT_first;
-						final /*@Thrown*/ boolean IsEQ_ = (where != null) ? where.equals(THROWN_first_1) : (THROWN_first_1 == null);
+						final /*@Thrown*/ boolean IsEQ_ = (where != null) ? idResolver.oclEquals(where, THROWN_first_1) : (THROWN_first_1 == null);
 						CAUGHT_IsEQ_ = IsEQ_;
 					}
 					catch (Exception THROWN_CAUGHT_IsEQ_) {
@@ -438,8 +441,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
-						final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
+						final /*@NonInvalid*/ @NonNull Relation referredRelation_0 = this.getReferredRelation();
+						final /*@NonInvalid*/ boolean isTopLevel = referredRelation_0.isIsTopLevel();
 						final /*@NonInvalid*/ @Nullable Boolean not;
 						if (!isTopLevel) {
 							not = ValueUtil.TRUE_VALUE;
@@ -521,8 +524,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					/*@Caught*/ @Nullable Object CAUGHT_exists;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull List<OCLExpression> argument = this.getArgument();
-						final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
+						final /*@NonInvalid*/ @NonNull List<OCLExpression> argument_0 = this.getArgument();
+						final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument_0);
 						/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
 						@NonNull Iterator<Object> ITER__1 = BOXED_argument.iterator();
 						/*@Thrown*/ @Nullable Boolean exists;
@@ -578,19 +581,19 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 										if (CAUGHT_oclIsKindOf_0 instanceof InvalidValueException) {
 											throw (InvalidValueException)CAUGHT_oclIsKindOf_0;
 										}
-										final /*@Thrown*/ @Nullable Boolean not;
+										final /*@Thrown*/ @Nullable Boolean not_0;
 										if (CAUGHT_oclIsKindOf_0 == ValueUtil.FALSE_VALUE) {
-											not = ValueUtil.TRUE_VALUE;
+											not_0 = ValueUtil.TRUE_VALUE;
 										}
 										else {
 											if (CAUGHT_oclIsKindOf_0 == ValueUtil.TRUE_VALUE) {
-												not = ValueUtil.FALSE_VALUE;
+												not_0 = ValueUtil.FALSE_VALUE;
 											}
 											else {
-												not = null;
+												not_0 = null;
 											}
 										}
-										CAUGHT_not = not;
+										CAUGHT_not = not_0;
 									}
 									catch (Exception THROWN_CAUGHT_not) {
 										CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
@@ -649,28 +652,28 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Relation referredRelation = this.getReferredRelation();
-						final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
-						final /*@NonInvalid*/ @Nullable Boolean not_0;
+						final /*@NonInvalid*/ @NonNull Relation referredRelation_0 = this.getReferredRelation();
+						final /*@NonInvalid*/ boolean isTopLevel = referredRelation_0.isIsTopLevel();
+						final /*@NonInvalid*/ @Nullable Boolean not;
 						if (!isTopLevel) {
-							not_0 = ValueUtil.TRUE_VALUE;
+							not = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							if (isTopLevel) {
-								not_0 = ValueUtil.FALSE_VALUE;
+								not = ValueUtil.FALSE_VALUE;
 							}
 							else {
-								not_0 = null;
+								not = null;
 							}
 						}
-						if (not_0 == ValueUtil.TRUE_VALUE) {
+						if (not == ValueUtil.TRUE_VALUE) {
 							implies = ValueUtil.TRUE_VALUE;
 						}
 						else {
 							if (CAUGHT_exists instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_exists;
 							}
-							if ((CAUGHT_exists == null) || (not_0 == null)) {
+							if ((CAUGHT_exists == null) || (not == null)) {
 								implies = null;
 							}
 							else {

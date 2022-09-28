@@ -19,13 +19,13 @@ def : unqualified_env_B() : lookup::LookupEnvironment[1] =
 def : unqualified_env_C() : lookup::LookupEnvironment[1] =
 	_unqualified_env_C(null)
 
-def : _unqualified_env_A1(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_A1(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_A1()
-def : _unqualified_env_A2(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_A2(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_A2()
-def : _unqualified_env_B(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_B(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_B()
-def : _unqualified_env_C(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_C(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_C()
 
 def : parentEnv_A1() : lookup::LookupEnvironment[1] =
@@ -37,10 +37,10 @@ def : parentEnv_B() : lookup::LookupEnvironment[1] =
 def : parentEnv_C() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_C(self) endif
 	
-def : _qualified_env_B(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _qualified_env_B(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment {}
 	
-def : _qualified_env_C(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _qualified_env_C(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment {}
 	
 -- End of domain specific default functionality
@@ -58,11 +58,11 @@ package _target
 
 	
 context TRoot
-def : _unqualified_env_A1(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_A1(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_A1()
 		.addElements(ownedA)
 		
-def : _unqualified_env_A2(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_A2(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_A2()
 		.addElements(ownedA)
 	
@@ -81,7 +81,7 @@ def : _qualified_env_B() : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment{}
 	in env
 		.addElements(ownsB)
-def : _unqualified_env_B(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_B(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	if ownsB->includes(child)
 	then parentEnv_B().nestedEnv()
 		.addElements(ownsB->select(x | self.ownsB->indexOf(x) < self.ownsB->indexOf(child)))
@@ -105,7 +105,7 @@ def : _qualified_env_C() : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment{}
 	in env
 		.addElements(ownsC)
-def : _unqualified_env_C(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_C(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	if ownsC->includes(child)
 	then parentEnv_C().nestedEnv()
 		.addElements(ownsC->select(x | self.ownsC->indexOf(x) < self.ownsC->indexOf(child)))

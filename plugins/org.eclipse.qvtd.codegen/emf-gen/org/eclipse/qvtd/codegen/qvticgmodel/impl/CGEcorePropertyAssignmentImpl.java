@@ -92,7 +92,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 		EStructuralFeature oldEStructuralFeature = eStructuralFeature;
 		eStructuralFeature = newEStructuralFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5, oldEStructuralFeature, eStructuralFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4, oldEStructuralFeature, eStructuralFeature));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				return getEStructuralFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setEStructuralFeature((EStructuralFeature)newValue);
 				return;
 		}
@@ -132,7 +132,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setEStructuralFeature((EStructuralFeature)null);
 				return;
 		}
@@ -147,7 +147,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				return eStructuralFeature != null;
 		}
 		return super.eIsSet(featureID);

@@ -11,9 +11,9 @@ def : unqualified_env_Class() : lookup::LookupEnvironment[1] =
 def : unqualified_env_Package() : lookup::LookupEnvironment[1] =
 	_unqualified_env_Package(null)
 
-def : _unqualified_env_Class(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Class(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Class()
-def : _unqualified_env_Package(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Package(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Package()
 
 def : parentEnv_Class() : lookup::LookupEnvironment[1] =
@@ -22,9 +22,9 @@ def : parentEnv_Package() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Package(self) endif
 
 
-def : _qualified_env_Class(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+def : _qualified_env_Class(qualifier : OclElement[?]) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
-def : _qualified_env_Package(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+def : _qualified_env_Package(qualifier : OclElement[?]) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
 -- End of domain specific default functionality
 endpackage 
@@ -43,7 +43,7 @@ package as
 
 	
 context Root
-def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Package(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
@@ -77,11 +77,11 @@ def : _qualified_env_Class() : lookup::LookupEnvironment =
 def : lookupQualifiedClass(aPathElementCS : cs::PathElementCS) : Class[?] =
    _lookupQualifiedClass(aPathElementCS.name)
    
-def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Package(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
-def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Class(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Class().nestedEnv()
 		.addElements(ownedClasses)
 		

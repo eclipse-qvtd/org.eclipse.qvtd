@@ -13,6 +13,7 @@ package org.eclipse.qvtd.runtime.evaluation;
 /**
  * AbstractDispatcher is the base class for the dispatcher for an override hierarchy.
  */
+@Deprecated /* @deprecated not used */
 public interface AbstractDispatch extends AbstractTrace
 {
 }

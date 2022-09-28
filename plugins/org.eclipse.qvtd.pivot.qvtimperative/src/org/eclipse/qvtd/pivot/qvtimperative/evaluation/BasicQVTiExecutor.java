@@ -38,12 +38,12 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
-import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
@@ -54,6 +54,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.library.AbstractOperation;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -65,6 +66,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -435,12 +437,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(transformation);
 		//		add(ownedContext, modelsManager.getTransformationInstance(transformation));
 		add(ownedContext, getTransformationExecution());
 		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
 			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace()) {
-				ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
+				ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, typedModel);
 				add(ownedContext, modelsManager.getTypedModelInstance(typedModel));
 			}
 		}
@@ -642,16 +644,16 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		//		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, (TypedElement)operationCallExp);
 		//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
-		List<Parameter> parameters = referredFunction.getOwnedParameters();
-		if (!parameters.isEmpty()) {
-			for (int i = 0; i < parameters.size(); i++) {
-				Object value = boxedSourceAndArgumentValues[i+1];
-				nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(parameters.get(i)), value);
-			}
-		}
 		try {
-			OCLExpression bodyExpression = referredFunction.getQueryExpression();
-			assert bodyExpression != null;
+			FunctionBody functionBody = QVTbaseUtil.getFunctionBody(referredFunction);
+			List<@NonNull Variable> parameterVariables = PivotUtilInternal.getOwnedParametersList(functionBody);
+			if (!parameterVariables.isEmpty()) {
+				for (int i = 0; i < parameterVariables.size(); i++) {
+					Object value = boxedSourceAndArgumentValues[i+1];
+					nestedEvaluationEnvironment.add(parameterVariables.get(i), value);
+				}
+			}
+			OCLExpression bodyExpression = PivotUtil.getOwnedBody(functionBody);
 			Object result = evaluate(bodyExpression);
 			assert !(result instanceof NullValue);
 			return result;

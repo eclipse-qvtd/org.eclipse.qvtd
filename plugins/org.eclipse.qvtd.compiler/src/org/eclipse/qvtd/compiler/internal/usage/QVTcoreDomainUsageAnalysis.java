@@ -293,7 +293,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		//			visit(typedModel);
 		//		}
 		//		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
-		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
+		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(object);
 		setUsage(ownedContext, getRootAnalysis().getThisUsage());
 		//
 		//	Ensure all operations are analyzed even if not used.

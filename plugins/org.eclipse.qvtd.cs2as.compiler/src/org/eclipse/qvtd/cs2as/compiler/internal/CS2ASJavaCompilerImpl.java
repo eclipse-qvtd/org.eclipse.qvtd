@@ -51,26 +51,26 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator.QVTiNameManagerHelper;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGAnalysisVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGBoxingAnalysisVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGCG2JavaNameVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGCG2JavaPreVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGCG2JavaVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGCGNameHelperVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGDependencyVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGFieldingAnalysisVisitor;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGReferencesVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASAnalysisVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASBoxingAnalysisVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCG2JavaNameVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCG2JavaPreVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCG2JavaVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGNameHelperVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASDependencyVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASFieldingAnalysisVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASReferencesVisitor;
 import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -92,7 +92,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		@Override
-		protected @NonNull QVTiCGModelCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
 			return new CS2ASCG2JavaVisitor(this, cgPackage, sortedGlobals);
 		}
 
@@ -151,7 +151,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASCG2JavaVisitor extends AbstractCS2ASCGCG2JavaVisitor
+	protected static class CS2ASCG2JavaVisitor extends AbstractCS2ASCG2JavaVisitor
 	{
 		private static final String LOOKUP_SOLVER_FIELD_NAME = "lookupSolver";
 
@@ -334,14 +334,14 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASAnalysisVisitor extends AbstractCS2ASCGAnalysisVisitor
+	protected static class CS2ASAnalysisVisitor extends AbstractCS2ASAnalysisVisitor
 	{
 		public CS2ASAnalysisVisitor(@NonNull QVTiAnalyzer analyzer) {
 			super(analyzer);
 		}
 	}
 
-	protected static class CS2ASBoxingAnalyser extends AbstractCS2ASCGBoxingAnalysisVisitor
+	protected static class CS2ASBoxingAnalyser extends AbstractCS2ASBoxingAnalysisVisitor
 	{
 		public CS2ASBoxingAnalyser(@NonNull QVTiAnalyzer analyzer) {
 			super(analyzer);
@@ -365,7 +365,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	protected static class CS2ASFieldingAnalyser extends QVTiFieldingAnalyzer
 	{
-		protected static class CS2ASFieldingAnalysisVisitor extends AbstractCS2ASCGFieldingAnalysisVisitor
+		protected static class CS2ASFieldingAnalysisVisitor extends AbstractCS2ASFieldingAnalysisVisitor
 		{
 			public CS2ASFieldingAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context, @NonNull ReturnState requiredReturn) {
 				super(context, requiredReturn);
@@ -382,21 +382,21 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASCG2JavaNameVisitor extends AbstractCS2ASCGCG2JavaNameVisitor
+	protected static class CS2ASCG2JavaNameVisitor extends AbstractCS2ASCG2JavaNameVisitor
 	{
 		public CS2ASCG2JavaNameVisitor(@NonNull CS2ASJavaCodeGenerator codeGenerator) {
 			super(codeGenerator);
 		}
 	}
 
-	protected static class CS2ASCG2JavaPreVisitor extends AbstractCS2ASCGCG2JavaPreVisitor
+	protected static class CS2ASCG2JavaPreVisitor extends AbstractCS2ASCG2JavaPreVisitor
 	{
 		public CS2ASCG2JavaPreVisitor(@NonNull CS2ASJavaCodeGenerator codeGenerator) {
 			super(codeGenerator);
 		}
 	}
 
-	protected static class CS2ASReferencesVisitor extends AbstractCS2ASCGReferencesVisitor
+	protected static class CS2ASReferencesVisitor extends AbstractCS2ASReferencesVisitor
 	{
 		protected static final @NonNull CS2ASReferencesVisitor INSTANCE = new CS2ASReferencesVisitor(new Object());
 
@@ -405,7 +405,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASDependencyVisitor extends AbstractCS2ASCGDependencyVisitor
+	protected static class CS2ASDependencyVisitor extends AbstractCS2ASDependencyVisitor
 	{
 		public CS2ASDependencyVisitor(@NonNull CS2ASJavaCodeGenerator codeGenerator, @NonNull GlobalPlace globalPlace) {
 			super(codeGenerator, globalPlace);
@@ -420,7 +420,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASCGCGNameHelperVisitor extends AbstractCS2ASCGCGNameHelperVisitor
+	protected static class CS2ASCGCGNameHelperVisitor extends AbstractCS2ASCGNameHelperVisitor
 	{
 		public CS2ASCGCGNameHelperVisitor(@NonNull NameManagerHelper context) {
 			super(context);

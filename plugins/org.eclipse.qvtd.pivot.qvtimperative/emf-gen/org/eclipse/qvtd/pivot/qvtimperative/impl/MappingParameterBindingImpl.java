@@ -222,15 +222,15 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull MappingCall owningMappingCall = this.getOwningMappingCall();
+				final /*@NonInvalid*/ @NonNull MappingCall owningMappingCall_0 = this.getOwningMappingCall();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull Mapping referredMapping = owningMappingCall.getReferredMapping();
+				final /*@NonInvalid*/ @NonNull Mapping referredMapping = owningMappingCall_0.getReferredMapping();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
 				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-				final /*@NonInvalid*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable).booleanValue();
+				final /*@NonInvalid*/ @NonNull MappingParameter boundVariable_0 = this.getBoundVariable();
+				final /*@NonInvalid*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable_0).booleanValue();
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, includes, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}

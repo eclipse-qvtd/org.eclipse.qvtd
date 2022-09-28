@@ -45,6 +45,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.RealLiteralExp;
 import org.eclipse.ocl.pivot.ShadowExp;
@@ -263,7 +264,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		MapLiteralNode mapLiteralNode = context.createMapLiteralNode(utility, nodeName, mapLiteralExp, partNodes);
 		for (int i = 0; i < mapParts.length; i++) {
 			MapLiteralPart mapPart = mapParts[i];
-			Utility partUtility = utility; //getRequiredUtility(mapPart);
+			@NonNull Utility partUtility = utility; //getRequiredUtility(mapPart);
 			context.createMapPartEdge(partUtility, partNodes[i], mapPart, mapLiteralNode);
 		}
 		return mapLiteralNode;
@@ -1423,12 +1424,16 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (ownedSource instanceof VariableExp) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-			VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(scheduleManager.getStandardLibrary(), transformation);
-			if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
+			VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(transformation);
+			VariableDeclaration thatVariable = ((VariableExp)ownedSource).getReferredVariable();
+			if (thatVariable instanceof ParameterVariable) {
+				thatVariable = ((ParameterVariable)thatVariable).getRepresentedParameter();
+			}
+			if (thatVariable == thisVariable) {
 				ownedSource = null;
 			}
 		}
-		Node sourceNode = ownedSource !=  null ? synthesize(ownedSource) : null;
+		Node sourceNode = ownedSource != null ? synthesize(ownedSource) : null;
 		Node operationNode = doOperationCallExp(operationCallExp, sourceNode);
 		boolean isSafe = operationCallExp.isIsSafe();
 		if (isSafe && (sourceNode != null) && (operationNode != null)) {

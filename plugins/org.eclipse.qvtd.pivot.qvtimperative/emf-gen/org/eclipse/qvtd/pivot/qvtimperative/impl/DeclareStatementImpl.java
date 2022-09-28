@@ -262,13 +262,13 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+					final /*@NonInvalid*/ boolean isCheck_0 = this.isIsCheck();
 					final /*@NonInvalid*/ @Nullable Boolean not;
-					if (!isCheck) {
+					if (!isCheck_0) {
 						not = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						if (isCheck) {
+						if (isCheck_0) {
 							not = ValueUtil.FALSE_VALUE;
 						}
 						else {
@@ -281,8 +281,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-						final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+						final /*@NonInvalid*/ @Nullable Type type = ownedExpression_0.getType();
 						final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 						/*@Caught*/ @Nullable Object IF_IsEQ2_;
 						if (IsEQ2_) {

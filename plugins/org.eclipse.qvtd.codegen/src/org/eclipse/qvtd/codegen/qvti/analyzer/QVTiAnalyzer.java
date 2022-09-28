@@ -12,8 +12,10 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -24,7 +26,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
@@ -70,9 +72,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
+import org.eclipse.qvtd.codegen.qvti.calling.RuleCacheClassCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiExecutableNameManager;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -80,11 +83,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -106,14 +111,95 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
+import com.google.common.collect.Lists;
+
 public class QVTiAnalyzer extends CodeGenAnalyzer
 {
+	/**
+	 * CreationCache describes the AS class and instance that cache distinct creations of a trace class.
+	 *
+	 * ?? is it actually necessary to distingusish different typed models ??
+	 */
+	public static class CreationCache extends AbstractCache
+	{
+		private @NonNull TypedModel asTypedModel;
+		private @NonNull CGExecutorType cgExecutorType;
+		private @NonNull List<@NonNull NewStatementPart> sortedASParts;
+		private @NonNull List<@NonNull Property> asProperties;
+
+		protected CreationCache(@NonNull TypedModel asTypedModel, @NonNull CGExecutorType cgExecutorType, @NonNull Iterable<@NonNull NewStatementPart> asParts, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+			super(asCacheInstance, asEntryClass);
+			this.asTypedModel = asTypedModel;
+			this.cgExecutorType = cgExecutorType;
+			List<@NonNull NewStatementPart> sortedASParts = Lists.newArrayList(asParts);
+			Collections.sort(sortedASParts, NameUtil.NAMEABLE_COMPARATOR);
+			this.sortedASParts = sortedASParts;
+			List<@NonNull Property> asProperties = new ArrayList<>();
+			for (NewStatementPart asPart : sortedASParts) {
+				asProperties.add(QVTimperativeUtil.getReferredProperty(asPart));
+			}
+			this.asProperties = asProperties;
+		}
+
+		public @NonNull CGExecutorType getExecutorType() {
+			return cgExecutorType;
+		}
+
+		public @NonNull List<@NonNull Property> getProperties() {
+			return asProperties;
+		}
+
+		public @NonNull List<@NonNull NewStatementPart> getSortedASParts() {
+			return sortedASParts;
+		}
+
+		public @NonNull TypedModel getTypedModel() {
+			return asTypedModel;
+		}
+	}
+
+	/**
+	 * A CachedInstance identifies the characteristics of a shared mapping invocation.
+	 *
+	public class CachedInstanceData
+	{
+		private org.eclipse.ocl.pivot.@NonNull Class asClass;
+		private @NonNull CGTypedModel cgTypedModel;
+		//	private @NonNull CGExecutorType cgExecutorType;
+		//	private @NonNull List<@NonNull CGProperty> cgProperties;
+		private int modelIndex;
+
+		//	protected CachedInstance(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull CGExecutorType cgExecutorType,
+		//			@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
+		//		this.asClass = asClass;
+		//		this.cgExecutorType = cgExecutorType;
+		//		this.cgProperties = cgProperties;
+		//	}
+
+		public CachedInstanceData(@NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			this.asTypedModel = asTypedModel;
+			this.asClass = asClass;
+			this.cgTypedModel = getCGTypedModel(asTypedModel);
+			this.modelIndex = cgTypedModel.getModelIndex();
+		}
+
+		public void check(@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
+			// TODO Auto-generated method stub
+			//		List<@NonNull CGExecutorProperty> oldProperties = cachedInstances.put(cgType, cgProperties);
+			//		if (oldProperties != null) {
+			//			assert oldProperties.equals(cgProperties);
+			//		}
+
+		}
+	} */
+
 	/**
 	 * PredicateTreeBuilder supports building a CGMapping.body as a nest of if/let expressions top-down,
 	 * continually appending to the 'leaf' which is the then-expression of an if, or the in-expression of a let.
@@ -330,10 +416,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	private final @NonNull TypeId runtimeThisTypeId;
 
 	private @Nullable PredicateTreeBuilder bodyBuilder;
+	//	private @NonNull Map<@NonNull Operation, org.eclipse.ocl.pivot.@NonNull Property> asOperation2asConstructorClass = new HashMap<>();
+
+	/**
+	 * The Trace instance class for each Trace meta class.
+	 */
+	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache>> asTypedModel2asClass2creationCache = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
-		ImperativeTransformation iTransformation = codeGenerator.getTransformation();
+		ImperativeTransformation iTransformation = codeGenerator.getContextClass();
 		Type contextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 		if (contextClass != iTransformation) {
 			originalThisTypeId = iTransformation.getTypeId();
@@ -362,21 +454,26 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	}
 
 	public void addCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
-		asElement2cgElement.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+		CGNamedElement old = asElement2cgElement.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+		assert old == null;
 	}
 
-	@Override
-	public void addVirtualCGOperation(@NonNull Operation asOperation, @NonNull CGCachedOperation cgOperation) {
-		super.addVirtualCGOperation(asOperation, cgOperation);
-		// XXX virtual functions
+	public @NonNull CreationCache addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+		CGRealizedVariable cgRealizedVariable = getCGRealizedVariable(asNewStatement);
+		CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
+		Iterable<@NonNull NewStatementPart> asParts = QVTimperativeUtil.getOwnedParts(asNewStatement);
+		TypedModel asTypedModel = QVTimperativeUtil.getReferredTypedModel(asNewStatement);
+		CreationCache creationCache = new CreationCache(asTypedModel, cgExecutorType, asParts, asCacheInstance, (org.eclipse.ocl.pivot.Class)asNewStatement.getType());
+		addCacheInstanceInternal(creationCache);
+		return creationCache;
 	}
-
-	//	public @Nullable CGFunction basicGetCGFunction(@NonNull Function asFunction) {
-	//		return asFunction2cgFunctions.get(asFunction);
-	//	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
 		return (CGMapping)asElement2cgElement.get(asMapping);
+	}
+
+	public @Nullable CGTypedModel basicGetCGTypedModel(@NonNull TypedModel asTypedModel) {
+		return (CGTypedModel)asElement2cgElement.get(asTypedModel);
 	}
 
 	@Override
@@ -386,6 +483,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			//	CGMapping cgMapping = (CGMapping)cgElement.eContainer();
 			//	assert cgMapping.getAst() == asElement;
 			//	checkNameManager(cgMapping, asElement);
+		}
+		else if ((cgElement instanceof CGVariableExp) && (cgElement.eContainer() instanceof CGMappingCallBinding)) {
+			// The referred variable is in the target domain and CGVariableExp cannot be folded since it might need an unbox wrapper.
+		}
+		else if (cgElement instanceof CGPropertyAssignment) {
+			// The referred property is in the class not operation.
 		}
 		else {
 			super.checkNameManager(cgElement, asElement);
@@ -481,7 +584,23 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGMapping generateMapping(@NonNull Mapping asMapping) {
 		CGMapping cgMapping = generateMappingDeclaration(asMapping);
-		getMappingNameManager(cgMapping, asMapping);
+		QVTiExecutableNameManager mappingNameManager = getMappingNameManager(cgMapping, asMapping);
+		//
+		//	Allocate Transformation and TypedModel context variables now to allow lazy assertion to be stronger.
+		//
+		Transformation asTransformation = QVTbaseUtil.getOwningTransformation(asMapping);
+		VariableDeclaration asContextVariable = QVTbaseUtil.getOwnedContext(asTransformation);
+		/*CGVariable cgThisVariable =*/ mappingNameManager.lazyGetCGVariable(asContextVariable);			// 'contained' by QVTiExecutableNameManager
+		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				VariableDeclaration asContextVariable2 = asTypedModel.getOwnedContext();
+				if (asContextVariable2 != null) {
+					CGVariable cgTypedModelVariable = mappingNameManager.lazyGetCGVariable(asContextVariable2);	// 'contained' by QVTiExecutableNameManager
+					CGTypedModel cgTypedModel = getCGTypedModel(asTypedModel);
+					globalNameManager.getNameResolution(cgTypedModel).addCGElement(cgTypedModelVariable);
+				}
+			}
+		}
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(cgMapping);
 		bodyBuilder2.doBottoms();
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
@@ -505,12 +624,15 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @NonNull CGMappingLoop generateMappingLoop(@NonNull MappingLoop asMappingLoop) {
+		ExecutableNameManager parentNameManager = useExecutableNameManager((NamedElement)asMappingLoop.eContainer());
+		OCLExpression asSource = asMappingLoop.getOwnedExpression();
+		CGValuedElement cgSource = createCGElement(CGValuedElement.class, asSource);
+		globalNameManager.addSelfNameManager(cgSource, parentNameManager);										// Source always evaluated in parent context
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
 		cgMappingLoop.setAst(asMappingLoop);
 		asElement2cgElement.put(asMappingLoop, cgMappingLoop);
 		getMappingLoopNameManager(cgMappingLoop, asMappingLoop);		// eager to allow useXXX downstream
-		OCLExpression asSource = asMappingLoop.getOwnedExpression();
-		cgMappingLoop.setSource(createCGElement(CGValuedElement.class, asSource));
+		cgMappingLoop.setSource(cgSource);
 		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
 		if (asIterators.size() > 0) {
 			LoopVariable asIterator = asIterators.get(0);
@@ -627,7 +749,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
+			CGProperty cgProperty = generatePropertyDeclaration(asProperty, null);
 			cgPropertyAssignment.setAsProperty(asProperty);
+			cgPropertyAssignment.setReferredProperty(cgProperty);
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
 			//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
@@ -686,14 +810,14 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			assert asVariable != null;
 			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
+			CGProperty cgTargetProperty = generatePropertyDeclaration(asTargetProperty, null);
 			cgPropertyAssignment.setAsProperty(asTargetProperty);
+			cgPropertyAssignment.setReferredProperty(cgTargetProperty);
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
 			//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 			cgPropertyAssignment.setOwnedInitValue(createCGElement(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 			//	CGExecutorProperty cgExecutorProperty = qvtiAnalyzer.createExecutorProperty(asTargetProperty);
-			CGProperty cgTargetProperty = generatePropertyDeclaration(asTargetProperty, null);
-			cgPropertyAssignment.setReferredProperty(cgTargetProperty);
 			return cgPropertyAssignment;
 		}
 	}
@@ -723,12 +847,24 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	@Override
 	public @NonNull CGTypeId getCGTypeId(@NonNull TypeId typeId) {
-		if (typeId == originalThisTypeId) {
-			return super.getCGTypeId(runtimeThisTypeId);
-		}
-		else {
-			return super.getCGTypeId(typeId);
-		}
+		//	if (typeId == originalThisTypeId) {		// XXX
+		//		return super.getCGTypeId(runtimeThisTypeId);
+		//	}
+		//	else {
+		return super.getCGTypeId(typeId);
+		//	}
+	}
+
+	public @NonNull CGTypedModel getCGTypedModel(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nonNullState(basicGetCGTypedModel(asTypedModel));
+	}
+
+	public @NonNull CGRealizedVariable getCGRealizedVariable(@NonNull NewStatement asNewStatement) {
+		return (CGRealizedVariable)ClassUtil.nonNullState(asElement2cgElement.get(asNewStatement));
+	}
+
+	public @NonNull CGRealizedVariablePart getCGRealizedVariablePart(@NonNull NewStatementPart asNewStatementPart) {
+		return (CGRealizedVariablePart)ClassUtil.nonNullState(asElement2cgElement.get(asNewStatementPart));
 	}
 
 	/**
@@ -762,6 +898,29 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return classNameManager;
 	} */
 
+	public @NonNull CreationCache getCreationCache(org.eclipse.ocl.pivot.Class asCacheClass) {
+		CreationCache creationCache = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
+		assert creationCache != null;
+		return creationCache;
+	}
+
+	public @NonNull CreationCache getCreationCache(@NonNull NewStatement asNewStatement) {
+		TypedModel asTypedModel = QVTimperativeUtil.getReferredTypedModel(asNewStatement);
+		org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)QVTimperativeUtil.getType(asNewStatement);
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
+		if (asClass2creationCache == null) {
+			asClass2creationCache = new HashMap<>();
+			asTypedModel2asClass2creationCache.put(asTypedModel, asClass2creationCache);
+		}
+		CreationCache creationCache = asClass2creationCache.get(asClass);
+		if (creationCache == null) {
+			ClassNameManager classNameManager = getClassNameManager(null, asClass);
+			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
+			asClass2creationCache.put(asClass, creationCache);
+		}
+		return creationCache;
+	}
+
 	public @Nullable EClassifier getEClassifier(@Nullable Type type) {
 		if (type == null) {
 			return null;
@@ -783,7 +942,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		Function asFunction = QVTiCGUtil.getOwningFunction(asFunctionParameter);
 		ExecutableNameManager operationNameManager = getOperationNameManager(null, asFunction);
-		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetParameter(asFunctionParameter);
+		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetCGParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
 			cgFunctionParameter.setAst(asFunctionParameter);
@@ -805,7 +964,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull VariableDeclaration asVariable) {
 		ExecutableNameManager nameManager = useExecutableNameManager(asVariable);
-		CGGuardVariable cgGuardVariable = (CGGuardVariable)nameManager.basicGetParameter(asVariable);
+		CGGuardVariable cgGuardVariable = (CGGuardVariable)nameManager.basicGetCGParameter(asVariable);
 		assert cgGuardVariable == null;
 		boolean isConnectionVariable = asVariable instanceof ConnectionVariable;
 		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);	// FIXME obsolete ??
@@ -872,7 +1031,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
 		ExecutableNameManager nameManager = useExecutableNameManager(asNewStatement);
-		CGVariable cgVariable2 = nameManager.basicGetVariable(asNewStatement);
+		CGVariable cgVariable2 = nameManager.basicGetCGVariable(asNewStatement);
 		CGRealizedVariable cgVariable = (CGRealizedVariable) cgVariable2;
 		if (cgVariable == null) {
 			EClassifier eClassifier = getEClassifier(asNewStatement.getType());
@@ -884,8 +1043,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			if (cgVariable == null) {
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
-			cgVariable.setAst(asNewStatement);
-			cgVariable.setTypeId(getCGTypeId(asNewStatement.getTypeId()));
+			initAst(cgVariable, asNewStatement, true);
+			//	cgVariable.setAst(asNewStatement);
+			//	cgVariable.setTypeId(getCGTypeId(asNewStatement.getTypeId()));
 			//	nameManager.declarePreferredName(cgVariable);
 			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(getTypedModel(asTypedModel));
@@ -895,8 +1055,23 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return cgVariable;
 	}
 
-	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
-		return (CGTypedModel)asElement2cgElement.get(asTypedModel);
+	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(@NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
+		assert asClass2creationCache != null;
+		CreationCache creationCache = asClass2creationCache.get(asClass);
+		assert creationCache != null;
+		org.eclipse.ocl.pivot.Class asCacheClass = creationCache.getASCacheClass();
+		return asCacheClass;
+	}
+
+	public @NonNull TypedModel getTypedModel(org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		CreationCache creationCache = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);		// XXX basicGet ??
+		assert creationCache != null;
+		return creationCache.getTypedModel();
+	}
+
+	public @NonNull CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
+		return (CGTypedModel)ClassUtil.nonNullState(asElement2cgElement.get(asTypedModel));
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {

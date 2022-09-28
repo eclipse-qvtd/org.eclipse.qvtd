@@ -123,7 +123,11 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 			Function asFunction = PivotUtil.getPivot(Function.class, csElement);
 			if (asFunction != null) {
 				ExpCS csExpression = csElement.getOwnedExpression();
-				OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
+				OCLExpression oclExpression = null;
+				if (csExpression != null) {
+					asFunction.getFunctionBody();
+					oclExpression = context.visitLeft2Right(OCLExpression.class, csExpression);
+				}
 				asFunction.setQueryExpression(oclExpression);
 			}
 			return null;

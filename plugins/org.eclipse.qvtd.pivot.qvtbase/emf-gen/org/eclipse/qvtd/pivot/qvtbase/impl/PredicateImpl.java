@@ -224,8 +224,8 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 			else {
 				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull OCLExpression conditionExpression = this.getConditionExpression();
-				final /*@NonInvalid*/ @Nullable Type type = conditionExpression.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression conditionExpression_0 = this.getConditionExpression();
+				final /*@NonInvalid*/ @Nullable Type type = conditionExpression_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTbaseTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;

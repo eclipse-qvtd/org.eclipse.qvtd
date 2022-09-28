@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
@@ -58,7 +59,6 @@ import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -353,7 +353,7 @@ public class PivotTestCase extends TestCase
 				EValidator.Registry.INSTANCE.remove(ePackage);
 			}
 			else {
-				QVTruntimeUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
+				NameUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
 			}
 		}
 	}
@@ -445,7 +445,7 @@ public class PivotTestCase extends TestCase
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
 		if (!TEST_START.isActive()) {
-			QVTruntimeUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
+			NameUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
 		}
 		super.setUp();
 		if (DEBUG_ID) {
@@ -480,7 +480,7 @@ public class PivotTestCase extends TestCase
 		//	long time = System.nanoTime() - startTime;
 		ThreadLocalExecutor.reset();
 		super.tearDown();
-		QVTruntimeUtil.contextLine = null;
+		NameUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//

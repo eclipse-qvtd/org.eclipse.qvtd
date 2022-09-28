@@ -442,26 +442,26 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ boolean isPrimitive = this.isIsPrimitive();
+				final /*@NonInvalid*/ boolean isPrimitive_0 = this.isIsPrimitive();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isPrimitive;
-				if (isPrimitive) {
+				if (isPrimitive_0) {
 					IF_isPrimitive = QVTbaseTables.INT_1;
 				}
 				else {
 					IF_isPrimitive = QVTbaseTables.INT_0;
 				}
-				final /*@NonInvalid*/ boolean isThis = this.isIsThis();
+				final /*@NonInvalid*/ boolean isThis_0 = this.isIsThis();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isThis;
-				if (isThis) {
+				if (isThis_0) {
 					IF_isThis = QVTbaseTables.INT_1;
 				}
 				else {
 					IF_isThis = QVTbaseTables.INT_0;
 				}
 				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(IF_isPrimitive, IF_isThis);
-				final /*@NonInvalid*/ boolean isTrace = this.isIsTrace();
+				final /*@NonInvalid*/ boolean isTrace_0 = this.isIsTrace();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isTrace;
-				if (isTrace) {
+				if (isTrace_0) {
 					IF_isTrace = QVTbaseTables.INT_1;
 				}
 				else {

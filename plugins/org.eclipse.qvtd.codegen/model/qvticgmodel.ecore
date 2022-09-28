@@ -48,9 +48,6 @@
         eType="#//CGTypedModel" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMapping" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAssignments" upperBound="-1"
-        eType="#//CGPropertyAssignment" containment="true" resolveProxies="false"
-        eOpposite="#//CGPropertyAssignment/owningMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBody" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
@@ -110,8 +107,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedSlotValue" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
-        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedAssignments"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="asProperty" lowerBound="1"
         eType="ecore:EDataType ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//Property"/>
   </eClassifiers>
@@ -171,7 +166,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypedModels" upperBound="-1"
         eType="#//CGTypedModel" containment="true" resolveProxies="false" eOpposite="#//CGTypedModel/owningTransformation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGTypedModel" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGNamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGTypedModel" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningTransformation" lowerBound="1"
         eType="#//CGTransformation" resolveProxies="false" eOpposite="#//CGTransformation/ownedTypedModels"/>

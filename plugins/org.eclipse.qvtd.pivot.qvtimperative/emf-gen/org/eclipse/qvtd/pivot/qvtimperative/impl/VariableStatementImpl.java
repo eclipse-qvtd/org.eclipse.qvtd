@@ -109,7 +109,7 @@ public abstract class VariableStatementImpl extends VariableDeclarationImpl impl
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
-			final /*@NonInvalid*/ boolean IsEQ_ = s.equals(QVTimperativeTables.STR_);
+			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeTables.STR_);
 			/*@NonInvalid*/ @NonNull String IF_IsEQ_;
 			if (IsEQ_) {
 				IF_IsEQ_ = n;

@@ -101,7 +101,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGMapping> getOwnedMappings() {
 		if (ownedMappings == null) {
-			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
+			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4);
 		}
 		return ownedMappings;
 	}
@@ -114,7 +114,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGTypedModel> getOwnedTypedModels() {
 		if (ownedTypedModels == null) {
-			ownedTypedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
+			ownedTypedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedTypedModels;
 	}

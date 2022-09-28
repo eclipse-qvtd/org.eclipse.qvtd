@@ -132,8 +132,8 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 		Transformation cTransformation = getCoreTransformation();
 		List<@NonNull Relation> rRelations = Lists.newArrayList(QVTrelationUtil.getOwnedRelations(rTransformation));
 		Collections.sort(rRelations, new RelationComparator());
-		VariableDeclaration cThis = QVTbaseUtil.getContextVariable(standardLibrary, cTransformation);
-		VariableDeclaration rThis = QVTbaseUtil.getContextVariable(standardLibrary, rTransformation);
+		VariableDeclaration cThis = QVTbaseUtil.getContextVariable(cTransformation);
+		VariableDeclaration rThis = QVTbaseUtil.getContextVariable(rTransformation);
 		//			putGlobalTrace(cThis, rThis);
 		qvtr2qvtc.addTrace(rThis, cThis);
 		//		UniqueArrayList<@NonNull TypedModel> rEnforceableTypedModels = new UniqueArrayList<>();		// FIXME not used

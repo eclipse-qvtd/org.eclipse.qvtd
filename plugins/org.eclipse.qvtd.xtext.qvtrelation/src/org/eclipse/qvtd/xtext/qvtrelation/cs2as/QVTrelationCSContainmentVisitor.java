@@ -405,9 +405,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitModelDeclCS(@NonNull ModelDeclCS csElement) {
-		@SuppressWarnings("unused")
-		TypedModel pivotElement = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
-		return new ModelDeclContentContinuation(context, csElement);
+		TypedModel asTypedModel = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
+		ModelDeclContentContinuation continuation = new ModelDeclContentContinuation(context, csElement);
+	//	QVTbaseUtil.getContextParameter(standardLibrary, asTypedModel);
+		return continuation;
 	}
 
 	@Override
@@ -640,7 +641,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
-		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		QVTbaseUtil.getContextVariable(asTransformation);
 		return null;
 	}
 

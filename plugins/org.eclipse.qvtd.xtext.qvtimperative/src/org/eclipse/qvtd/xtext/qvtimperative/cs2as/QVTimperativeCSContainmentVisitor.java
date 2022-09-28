@@ -210,7 +210,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		TypedModel asTypedModel = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
 		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
-		QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
+	//	QVTbaseUtil.getContextParameter(standardLibrary, asTypedModel);
 		return continuation;
 	}
 
@@ -380,7 +380,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		ImperativeTransformation asTransformation = refreshNamedElement(ImperativeTransformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
-		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		QVTbaseUtil.getContextVariable(asTransformation);
 		context.refreshPivotList(Mapping.class, asTransformation.getRule(), csElement.getOwnedMappings());
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());

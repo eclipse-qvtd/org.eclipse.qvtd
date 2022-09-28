@@ -12,10 +12,10 @@ transformation hsv2hsl {
 	-- hsl imports HSLTree{strict};   -- The model has to strictly conform to the HSLTree mm, without strict the model can have classes that match the name but not completely conform to the mm  
 	middle imports HSV2HSL;
 
-	query hsl2rgb(color : HSLTree::HSL) : HSV2HSL::RGB;
-	query hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB;
-	query rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL;
-	query rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV;
+	query hsl2rgb(color : HSLTree::HSL) : HSV2HSL::RGB { HSV2HSL::RGB{value=color}}
+	query hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB { HSV2HSL::RGB{value=color}}
+	query rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL { HSLTree::HSL{value=color}}
+	query rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV { HSVTree::HSV{value=color}}
 
 	entry __root__ input hsv output hsl {
 		append nodes : HSVTree::HSVNode;

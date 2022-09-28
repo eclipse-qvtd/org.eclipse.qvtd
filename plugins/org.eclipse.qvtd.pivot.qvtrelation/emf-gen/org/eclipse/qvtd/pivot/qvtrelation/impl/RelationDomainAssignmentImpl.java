@@ -277,8 +277,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull OCLExpression valueExp = this.getValueExp();
-				final /*@NonInvalid*/ @Nullable Type type = valueExp.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression valueExp_0 = this.getValueExp();
+				final /*@NonInvalid*/ @Nullable Type type = valueExp_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
@@ -291,8 +291,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 						}
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull VariableDeclaration variable = this.getVariable();
-						final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
+						final /*@NonInvalid*/ @NonNull VariableDeclaration variable_0 = this.getVariable();
+						final /*@NonInvalid*/ @Nullable Type type_0 = variable_0.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}

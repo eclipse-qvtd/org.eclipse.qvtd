@@ -17,6 +17,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,14 +29,18 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheProperty;
+import org.eclipse.ocl.examples.codegen.calling.CachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
@@ -48,46 +53,56 @@ import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
+import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
-import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ExternalOperationOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ImplementedOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CacheProperty;
+import org.eclipse.qvtd.codegen.qvti.calling.TransientFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiCGNameHelperVisitor;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaNameVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaPreVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2StringVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCGNameHelperVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelDependencyVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -104,20 +119,26 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	{
 		@Override
 		protected @NonNull CGNameHelper createCGNameHelper() {
-			return new QVTiCGModelCGNameHelperVisitor(this);
+			return new QVTiCGNameHelperVisitor(this);
 		}
 	}
 
 	protected final @NonNull ImperativeTransformation asTransformation;
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
-	private/* @LazyNonNull*/ CGPackage cgPackage;
-	private/* @LazyNonNull*/ String javaSourceCode = null;
-	private/* @LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
+	private /*@LazyNonNull*/ CGPackage cgPackage;
+	private /*@LazyNonNull*/ String javaSourceCode = null;
+	private /*@LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
+
+	/**
+	 * Optional additional qualified path for each class.
+	 */
+	private /*@LazyNonNull*/ Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull String> class2extraPrefix = null;
+	private /*@LazyNonNull*/ Map<@NonNull String, @NonNull String> qualifiedClassName2requalifiedClassName = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
-		QVTiCGModelCG2StringVisitor.FACTORY.getClass();
+		QVTiCG2StringVisitor.FACTORY.getClass();
 		this.asTransformation = asTransformation;
 		this.analyzer = createCodeGenAnalyzer();
 	}
@@ -135,6 +156,20 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return name;
 	}
 
+	private void addRequalification(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull String extraPrefix) {
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull String> class2extraPrefix2 = class2extraPrefix;
+		if (class2extraPrefix2 == null) {
+			class2extraPrefix2 = class2extraPrefix = new HashMap<>();
+		}
+		class2extraPrefix2.put(asClass, extraPrefix);
+		String qualifiedName = AbstractLanguageSupport.getQualifiedName(asClass);
+		Map<@NonNull String, @NonNull String> qualifiedClassName2requalifiedClassName2 = qualifiedClassName2requalifiedClassName;
+		if (qualifiedClassName2requalifiedClassName2 == null) {
+			qualifiedClassName2requalifiedClassName2 = qualifiedClassName2requalifiedClassName = new HashMap<>();
+		}
+		qualifiedClassName2requalifiedClassName2.put(qualifiedName, extraPrefix + "." + qualifiedName);
+	}
+
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage cgPackage) {
 		String pName = cgPackage.getName();
 		if (pName != null && pName.length() > 0) {
@@ -150,60 +185,43 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
-		return new QVTiCGModelAnalysisVisitor(analyzer);
+		return new QVTiAnalysisVisitor(analyzer);
 	}
 
 	@Override
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
-		return new QVTiCGModelBoxingAnalysisVisitor(analyzer);
+		return new QVTiBoxingAnalyzer(analyzer);
 	}
 
 	@Override
 	public @NonNull CG2JavaNameVisitor createCG2JavaNameVisitor() {
-		return new QVTiCGModelCG2JavaNameVisitor(this);
+		return new QVTiCG2JavaNameVisitor(this);
 	}
 
 	@Override
 	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
-		return new QVTiCGModelCG2JavaPreVisitor(this);
+		return new QVTiCG2JavaPreVisitor(this);
 	}
 
-	protected @NonNull QVTiCGModelCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		return new QVTiCGModelCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
+		analyzer.setRootClass(asTransformation);				// Identify the host for synthesized nested classes
 		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
-		// FIXME rescue package prefix wrapping
-		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
-		//	org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
-		//	CGPackage cgPackage2 = createCGPackage(asPackage);
-		//	if (cgTransformation.eContainer() == null) {
-		//	cgPackage2.getClasses().add(cgTransformation);
-		//	}
-		//	else {
-		//		cgPackage2.getPackages().add(cgPackage);
-		//	}
-		/*	CGPackage cgPackage = cgPackage2;
-		while (cgPackage.getContainingPackage() != null) {
-			cgPackage = cgPackage.getContainingPackage();
-		}
+		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
+		assert cgPackage != null;
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
-			String[] segments = packagePrefix.split("\\.");
-			for (int i = segments.length; --i >= 0; ) {
-				String segment = segments[i];
-				CGPackage cgPackage3 = CGModelFactory.eINSTANCE.createCGPackage();
-				globalNameManager.declareEagerName(cgPackage3, segment);
-				cgPackage3.getPackages().add(cgPackage);
-				cgPackage = cgPackage3;
+			addRequalification(asTransformation, packagePrefix);
+			org.eclipse.ocl.pivot.Package asCachePackage = AbstractLanguageSupport.basicGetCachePackage(asTransformation);
+			if (asCachePackage != null) {
+				for (org.eclipse.ocl.pivot.Class asCacheClass : PivotUtil.getOwnedClasses(asCachePackage))
+					addRequalification(asCacheClass, packagePrefix);
 			}
 		}
-		assert cgPackage != null;
-		analyzer.analyzeExternalFeatures();
-		return cgPackage; */
-		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
-		analyzer.analyzeExternalFeatures();
+		analyzer.analyzeExternalFeatures(cgTransformation);
 		return cgPackage;
 	}
 
@@ -226,7 +244,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull String createClassFileContent() {
 		QVTiGlobalNameManager globalNameManager = getGlobalNameManager();
-		globalNameManager.getOppositeIndex2propertyIdName();
+		globalNameManager.getOppositeIndex2PropertyIdName();
 		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(asTransformation);
 		globalNameManager.reserveGlobalNames(entryPointsAnalysis);
 		CGPackage cgPackage2 = createCGPackage();
@@ -240,7 +258,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			metamodelManager.installRoot(nativeModel);
 		}
 		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage2);
-		QVTiCGModelCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
+		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();
 		Map<@NonNull String, @Nullable String> long2ShortImportNames = importNameManager.getLong2ShortImportNames();
@@ -278,7 +296,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull DependencyVisitor createDependencyVisitor() {
-		return new QVTiCGModelDependencyVisitor(this, getGlobalPlace());
+		return new QVTiDependencyVisitor(this, getGlobalPlace());
 	}
 
 	@Override
@@ -311,7 +329,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull ReferencesVisitor createReferencesVisitor() {
-		return QVTiCGModelReferencesVisitor.INSTANCE;
+		return QVTiReferencesVisitor.INSTANCE;
 	}
 
 	public @NonNull String generateClassFile() {
@@ -337,31 +355,43 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull OperationCallingConvention getCallingConvention(@NonNull Operation asOperation, boolean isFinal) {
+	protected @NonNull OperationCallingConvention getCallingConventionInternal(@NonNull Operation asOperation, boolean maybeVirtual) {
 		if (asOperation instanceof Function) {
 			Function asFunction = (Function)asOperation;
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
 			if (asOperation.getImplementationClass() != null) {
 				assert asBodyExpression == null;
-				return ExternalFunctionOperationCallingConvention.INSTANCE;
+				return ImplementedOperationCallingConvention.INSTANCE;
 			}
 			else if (asBodyExpression != null) {
-				ShadowExp asShadowExp = getShadowExp(asFunction);
+				ShadowExp asShadowExp = QVTimperativeUtil.basicGetShadowExp(asFunction);
 				if (asShadowExp != null) {
-					return ShadowFunctionOperationCallingConvention.INSTANCE;
-				}
-				else if (asFunction.isIsTransient()) {
-					return TransientFunctionOperationCallingConvention.INSTANCE;
+					Type type = asShadowExp.getType();
+					if (type instanceof DataType) {
+						return ShadowDataTypeOperationCallingConvention.INSTANCE;
+					}
+					else {
+						return ShadowClassOperationCallingConvention.INSTANCE;
+					}
 				}
 				else {
-					return InternalFunctionOperationCallingConvention.INSTANCE;
+					if (asFunction.isIsTransient()) {
+						return TransientFunctionOperationCallingConvention.INSTANCE;
+					}
+					else {
+						return InternalFunctionOperationCallingConvention.INSTANCE;
+					}
 				}
 			}
 			else {
 				return EmptyFunctionOperationCallingConvention.INSTANCE;
 			}
 		}
-		return super.getCallingConvention(asOperation, isFinal);
+		OperationCallingConvention callingConvention = super.getCallingConventionInternal(asOperation, maybeVirtual);
+		if (callingConvention == CachedOperationCallingConvention.INSTANCE) {
+			return ExternalOperationOperationCallingConvention.INSTANCE;		// XXX promote to OCL
+		}
+		return callingConvention;
 	}
 
 	@Override
@@ -388,6 +418,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			return ImmutableCachePropertyCallingConvention.INSTANCE;
 		}
 		return super.getCallingConvention(asProperty);
+	}
+
+	@Override
+	public @NonNull ImperativeTransformation getContextClass() {
+		return asTransformation;
 	}
 
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
@@ -426,55 +461,90 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String getQualifiedName() {
-		StringBuilder s =  new StringBuilder();
-		CGPackage cgPackage = this.cgPackage;
-		appendSegmentName(s, cgPackage);
-		while (cgPackage.getPackages().size() > 0) {
-			cgPackage = cgPackage.getPackages().get(0);
-			appendSegmentName(s, cgPackage);
-		}
-		s.append(QVTbaseUtil.getName(asTransformation));
-		return s.toString();
+		return getRequalifiedClassName(asTransformation);
 	}
 
-	public @Nullable ShadowExp getShadowExp(@NonNull Function asFunction) {
-		LanguageExpression asBodyExpression = asFunction.getBodyExpression();
-		if (asBodyExpression != null) {
-			OCLExpression asElement = ((ExpressionInOCL)asBodyExpression).getOwnedBody();
-			while (asElement instanceof LetExp) {				// Redundant since now using Function AS context
-				asElement = ((LetExp)asElement).getOwnedIn();
-			}
-			if (asElement instanceof ShadowExp) {			// QVTr Key
-				if (!(asElement.getType() instanceof DataType))
-					return (ShadowExp)asElement;		// FIXME replace with clearer strategy
+	@Override
+	public @NonNull String getRequalifiedClassName(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		String qualifiedName = super.getRequalifiedClassName(asClass);
+		if (class2extraPrefix != null) {
+			String extraPrefix = class2extraPrefix.get(asClass);
+			if (extraPrefix != null) {
+				return extraPrefix + "." + qualifiedName;
 			}
 		}
-		return null;
+		return qualifiedName;
 	}
 
+	@Override
+	public @NonNull String getRequalifiedClassName(@NonNull String qualifiedClassName) {
+		if (qualifiedClassName2requalifiedClassName != null) {
+			String requalifiedClassName = qualifiedClassName2requalifiedClassName.get(qualifiedClassName);
+			if (requalifiedClassName != null) {
+				return requalifiedClassName;
+			}
+		}
+		return qualifiedClassName;
+	}
+
+	@Deprecated
 	public @NonNull ImperativeTransformation getTransformation() {
-		return asTransformation;
+		return getContextClass();
+	}
+
+	@Override
+	protected void propagateChildNameResolution(@NonNull CGElement cgElement, @NonNull CGElement cgChild, @NonNull EReference eContainmentFeature, @Nullable NameResolution parentNameResolution) {
+		if (false && eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {				// XXX
+			CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)cgElement;
+			NameResolution nameResolution = cgPropertyAssignment.basicGetNameResolution();
+			if (nameResolution == null) {
+				CGProperty cgProperty = QVTiCGUtil.getReferredProperty(cgPropertyAssignment);
+				nameResolution = cgProperty.basicGetNameResolution();
+				if (nameResolution == null) {		// Never happens
+					NestedNameManager nestedNameManager = globalNameManager.useSelfNestedNameManager(cgProperty);
+					nameResolution = nestedNameManager.getNameResolution(cgProperty);
+				}
+				//	nameResolution.addCGElement(cgPropertyAssignment);
+				//	nameResolution.addCGElement((CGValuedElement)cgChild);
+			}
+			propagateNameResolution(cgChild, nameResolution);
+		}
+		else {
+			super.propagateChildNameResolution(cgElement, cgChild, eContainmentFeature, parentNameResolution);
+		}
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
-		File saveFile = new File(savePath);
-		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveFile);
-		return saveFile;
+		File saveRoot = new File(savePath);
+		CGClass cgTransformation = analyzer.getCGClass(asTransformation);
+		//	saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveRoot);
+		saveSourceFile(cgTransformation, saveRoot);
+		return saveRoot;
 	}
 
-	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File parentFolder) throws IOException {
-		File folder = new File(parentFolder, cgPackage.getName());
+	public void saveSourceFile(@NonNull CGClass cgClass, @NonNull File saveRoot) throws IOException {
+		String javaCodeSource = generateClassFile();
+		org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
+		String qualifiedName = getRequalifiedClassName(asClass);
+		File folder = saveRoot;
+		@NonNull String[] segments = qualifiedName.split("\\.");
+		for (int i = 0; i < segments.length-1; i++) {			// Only generating one file so no point caching FILEs
+			folder = new File(folder, segments[i]);
+		}
+		folder.mkdirs();
+		Writer writer = new FileWriter(new File(folder, segments[segments.length-1] + ".java"));
+		writer.append(javaCodeSource);
+		writer.close();
+	}
+
+	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File saveRoot) throws IOException {
 		for (CGPackage cgChildPackage : cgPackage.getPackages()) {
 			if (cgChildPackage != null) {
-				saveSourceFiles(cgChildPackage, folder);
+				saveSourceFiles(cgChildPackage, saveRoot);
 			}
 		}
-		for (CGClass cgClass : cgPackage.getClasses()) {
-			folder.mkdirs();
-			String javaCodeSource = generateClassFile();
-			Writer writer = new FileWriter(new File(folder, cgClass.getName() + ".java"));
-			writer.append(javaCodeSource);
-			writer.close();
+		for (CGClass cgClass : CGUtil.getClasses(cgPackage)) {
+			saveSourceFile(cgClass, saveRoot);
 		}
 	}
 }

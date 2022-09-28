@@ -76,4 +76,6 @@ public interface Function extends Operation {
 	 */
 	boolean validateReturnTypeIsQueryType(DiagnosticChain diagnostics, Map<Object, Object> context);
 
+	FunctionBody getFunctionBody();		// XXX
+
 } // Function

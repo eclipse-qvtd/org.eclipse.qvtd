@@ -573,6 +573,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
+		String packagePrefix = options.basicGetOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY);
+		/*	if (packagePrefix != null) {
+			org.eclipse.ocl.pivot.Package asLeafPackage = null;
+			org.eclipse.ocl.pivot.Package asRootPackage = null;
+			Model asModel = PivotUtil.getContainingModel(asTransformation);
+			assert asModel != null;
+			String[] segments = packagePrefix.split("\\.");
+			for (int i = segments.length; --i >= 0; ) {
+				org.eclipse.ocl.pivot.Package asPackage = PivotFactory.eINSTANCE.createPackage();
+				asPackage.setName(segments[i]);
+				if (asRootPackage == null) {
+					asRootPackage = asPackage;
+				}
+				asLeafPackage = asPackage;
+			}
+			if (asLeafPackage != null) {
+				for (org.eclipse.ocl.pivot.Package asPackage : new ArrayList<>(asModel.getOwnedPackages())) {
+					PivotUtilInternal.resetContainer(asPackage);
+					asLeafPackage.getOwnedPackages().add(asPackage);
+				}
+				asModel.getOwnedPackages().add(asRootPackage);
+			}
+		} */
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();

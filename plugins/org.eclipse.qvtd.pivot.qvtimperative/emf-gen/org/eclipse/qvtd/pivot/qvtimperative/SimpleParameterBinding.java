@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.OCLExpression;
 
@@ -54,6 +55,7 @@ public interface SimpleParameterBinding extends MappingParameterBinding {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSimpleParameterBinding_Value()
 	 * @generated
 	 */
+	@Override
 	OCLExpression getValue();
 
 	/**

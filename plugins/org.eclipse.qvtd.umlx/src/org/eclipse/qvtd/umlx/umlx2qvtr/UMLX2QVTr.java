@@ -174,7 +174,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			}
 			//
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
-			QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), qvtrRelationalTransformation);
+			QVTbaseUtil.getContextVariable(qvtrRelationalTransformation);
 			qvtrRelationalTransformation.getModelParameter().add(context.createTraceTypedModel());
 			if (QVTbaseUtil.basicGetPrimitiveTypedModel(qvtrRelationalTransformation) == null) {
 				qvtrRelationalTransformation.getModelParameter().add(0, context.createPrimitiveTypedModel());
@@ -404,6 +404,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 		Function asFunction = getQVTrElement(Function.class, txQueryNode);
 		List<String> lines = txQueryNode.getInitExpressionLines();
 		if (lines.size() > 0) {
+			asFunction.getFunctionBody();
 			OCLExpression qvtrExpression = parseContextualExpression(asFunction, lines);
 			asFunction.setQueryExpression(qvtrExpression);
 		}

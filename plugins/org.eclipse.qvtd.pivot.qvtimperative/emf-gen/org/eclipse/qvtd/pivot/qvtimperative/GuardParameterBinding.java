@@ -51,6 +51,7 @@ public interface GuardParameterBinding extends MappingParameterBinding {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardParameterBinding_Value()
 	 * @generated
 	 */
+	@Override
 	ConnectionVariable getValue();
 
 	/**

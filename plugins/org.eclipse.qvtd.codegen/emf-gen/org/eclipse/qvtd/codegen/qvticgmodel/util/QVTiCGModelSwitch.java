@@ -345,6 +345,8 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 			case 23: {
 				CGTypedModel cgTypedModel = (CGTypedModel)theEObject;
 				T result = caseCGTypedModel(cgTypedModel);
+				if (result == null) result = caseCGValuedElement(cgTypedModel);
+				if (result == null) result = caseCGTypedElement(cgTypedModel);
 				if (result == null) result = caseCGNamedElement(cgTypedModel);
 				if (result == null) result = caseCGElement(cgTypedModel);
 				if (result == null) result = defaultCase(theEObject);

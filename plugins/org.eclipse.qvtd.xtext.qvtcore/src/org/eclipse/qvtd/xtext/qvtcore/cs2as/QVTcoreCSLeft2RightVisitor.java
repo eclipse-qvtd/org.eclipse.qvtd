@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSUtil;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSLeft2RightVisitor;
@@ -144,8 +145,8 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 				context.setReferredOperation(operationCallExp, function);
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
-				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
+				//	Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
+				VariableDeclaration contextVariable = QVTbaseCSUtil.getContextVariable(csRoundBracketedClause);
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
@@ -157,11 +158,11 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 	@Override
 	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
 		if (element instanceof Transformation) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable((Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (TypedModel) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, (TypedModel)element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);

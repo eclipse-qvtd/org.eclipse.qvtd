@@ -207,8 +207,8 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part = this.getPart();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
+				final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part_0 = this.getPart();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part_0);
 				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
 				@NonNull Iterator<Object> ITER__1 = BOXED_part.iterator();
 				/*@NonInvalid*/ boolean isUnique;
@@ -266,6 +266,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -275,8 +276,8 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			else {
 				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = this.getReferredClass();
-				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == referredClass.getTypeId()) : false;
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = this.getReferredClass();
+				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == referredClass_0.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}

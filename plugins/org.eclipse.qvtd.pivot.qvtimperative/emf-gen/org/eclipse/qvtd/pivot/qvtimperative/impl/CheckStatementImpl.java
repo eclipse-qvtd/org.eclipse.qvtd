@@ -180,8 +180,8 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 			else {
 				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable Type type = ownedExpression_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;

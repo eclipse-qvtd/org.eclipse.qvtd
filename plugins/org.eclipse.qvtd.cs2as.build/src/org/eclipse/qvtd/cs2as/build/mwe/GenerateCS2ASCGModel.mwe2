@@ -15,6 +15,7 @@ module org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.qvtd.cs2as.build.modelspecs.*
+import org.eclipse.qvtd.cs2as.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
@@ -33,7 +34,7 @@ Workflow {
     	genModel = "/${projectName}/model/cs2ascgmodel.genmodel"
     }
 
-    component = GenerateCGVisitors { resourceSet = resourceSet
+    component = GenerateCS2ASCGVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
 		genModelFile = "model/cs2ascgmodel.genmodel"
     	superProjectName = "org.eclipse.qvtd.codegen"

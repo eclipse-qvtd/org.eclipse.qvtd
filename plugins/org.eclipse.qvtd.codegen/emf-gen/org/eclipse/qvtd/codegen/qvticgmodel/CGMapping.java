@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedBody <em>Owned Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
@@ -37,24 +36,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * @generated
  */
 public interface CGMapping extends CGValuedElement {
-
-	/**
-	 * Returns the value of the '<em><b>Owned Assignments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Assignments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Assignments</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwnedAssignments()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping
-	 * @model opposite="owningMapping" containment="true"
-	 * @generated
-	 */
-	List<CGPropertyAssignment> getOwnedAssignments();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Body</b></em>' containment reference.

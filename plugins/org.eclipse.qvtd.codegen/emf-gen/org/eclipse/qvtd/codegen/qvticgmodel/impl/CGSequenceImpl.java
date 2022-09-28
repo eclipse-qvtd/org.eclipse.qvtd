@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 import java.util.Collection;
 import java.util.List;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -26,12 +27,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
+import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
+import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
+import org.eclipse.qvtd.codegen.qvti.cse.SequencePlaces;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
@@ -187,6 +192,15 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable AbstractPlace getPlace(@NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place) {
+		return SequencePlaces.createSequencePlaces(element2place, this);
 	}
 
 	/**

@@ -37,7 +37,9 @@ import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -46,7 +48,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.codegen.qvti.java.FunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.PredicateTreeBuilder;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -106,6 +108,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<@Nullable CGNamedElement>
 {
@@ -242,22 +247,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitAppendParameterBinding(@NonNull AppendParameterBinding asAppendParameterBinding) {
-		VariableDeclaration asBoundVariable = asAppendParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asAppendParameterBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asAppendParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		ConnectionVariable asVariable = asAppendParameterBinding.getValue();
-		assert asVariable != null;
+		ConnectionVariable asVariable = QVTimperativeUtil.getValue(asAppendParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(asVariable);
-		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asAppendParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asAppendParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asAppendParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -461,11 +459,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
-		CGFunction cgFunction = (CGFunction)qvtiAnalyzer.generateOperationDeclaration(asFunction, null, true);
-		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
+		return super.visitOperation(asFunction);
+		/*	CGFunction cgFunction = (CGFunction)qvtiAnalyzer.generateOperationDeclaration(asFunction, null, true);
+		AbstractOperationCallingConvention callingConvention = (AbstractOperationCallingConvention)cgFunction.getCallingConvention();
 		callingConvention.createCGBody(qvtiAnalyzer, cgFunction);
 		//	cgFunction.setRequired(asFunction.isIsRequired());
-		/*		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
+		/ *		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
 		//	callingConvention.createCGParameters(this, cgFunction, null);
 		String implementationClass = asFunction.getImplementationClass();
 		if (query != null) {
@@ -588,7 +587,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		}
 		//	qvtiAnalyzer.addFunction(asFunction, cgFunction); */
-		return cgFunction;
+		//	return cgFunction;
 	}
 
 	@Override
@@ -608,22 +607,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitGuardParameterBinding(@NonNull GuardParameterBinding asGuardParameterBinding) {
-		VariableDeclaration asBoundVariable = asGuardParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asGuardParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		ConnectionVariable asVariable = asGuardParameterBinding.getValue();
-		assert asVariable != null;
+		ConnectionVariable asVariable = QVTimperativeUtil.getValue(asGuardParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(asVariable);
-		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asGuardParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asGuardParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asGuardParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -634,27 +626,20 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
-		//		return qvtiAnalyzer.generateTransformation(asTransformation);
 		return visitClass(asTransformation);
 	}
 
 	@Override
 	public @Nullable CGNamedElement visitLoopParameterBinding(@NonNull LoopParameterBinding asLoopParameterBinding) {
-		VariableDeclaration asBoundVariable = asLoopParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asLoopParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		LoopVariable asVariable = asLoopParameterBinding.getValue();
-		assert asVariable != null;
+		LoopVariable asVariable = QVTimperativeUtil.getValue(asLoopParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(ClassUtil.nonNullModel(asVariable));
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asLoopParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asLoopParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asLoopParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -707,23 +692,28 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitNewStatement(@NonNull NewStatement asNewStatement) {
+		PredicateTreeBuilder bodyBuilder = qvtiAnalyzer.getBodyBuilder();
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
-			CGRealizedVariable CGRealizedVariable = qvtiAnalyzer.getBodyBuilder().addRealizedVariable(asNewStatement);
+			CGRealizedVariable cgRealizedVariable = bodyBuilder.addRealizedVariable(asNewStatement);
 			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asNewStatement);
-			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
-			//	getNameManager().declareStandardName(cgExecutorType);
-			CGRealizedVariable.setExecutorType(cgExecutorType);
-			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
-			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
-			Collections.sort(asParts, NameUtil.NAMEABLE_COMPARATOR);
-			List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(CGRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
-			for (@NonNull NewStatementPart asPart : asParts) {
-				cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
+			Type asType = PivotUtil.getType(asNewStatement);
+			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(asType);
+			cgRealizedVariable.setExecutorType(cgExecutorType);
+			assert cgExecutorType.getTypeId() == qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId());			// FIXME promote
+			Iterable<@NonNull NewStatementPart> asParts = QVTimperativeUtil.getOwnedParts(asNewStatement);
+			if (Iterables.size(asParts) > 0) {
+				qvtiAnalyzer.getCreationCache(asNewStatement);
+				List<@NonNull NewStatementPart> sortedASParts = Lists.newArrayList(asParts);
+				Collections.sort(sortedASParts, NameUtil.NAMEABLE_COMPARATOR);
+				List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(cgRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
+				for (@NonNull NewStatementPart asPart : sortedASParts) {
+					cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
+				}
 			}
 		}
 		else {
-			qvtiAnalyzer.getBodyBuilder().appendCheckedLetVariable(asNewStatement, asInit);
+			bodyBuilder.appendCheckedLetVariable(asNewStatement, asInit);
 		}
 		return null;
 	}
@@ -731,7 +721,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitNewStatementPart(@NonNull NewStatementPart element) {
 		CGRealizedVariablePart cgRealizedVariablePart = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariablePart();
-		cgRealizedVariablePart.setAst(element);
+		//	cgRealizedVariablePart.setAst(element);
+		qvtiAnalyzer.initAst(cgRealizedVariablePart, element, TypeId.OCL_VOID, true);
 		cgRealizedVariablePart.setInit(qvtiAnalyzer.createCGElement(CGValuedElement.class, element.getOwnedExpression()));
 		Property asProperty = element.getReferredProperty();
 		if (asProperty != null) {
@@ -748,6 +739,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public CGNamedElement visitObservableStatement(@NonNull ObservableStatement object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitParameter(@NonNull Parameter object) {
+		return visiting(object);		// ParameterVariable rather than Parameter shuld used
 	}
 
 	@Override
@@ -782,15 +778,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitSimpleParameterBinding(@NonNull SimpleParameterBinding asSimpleParameterBinding) {
-		VariableDeclaration asBoundVariable = asSimpleParameterBinding.getBoundVariable();
+		OCLExpression asExpression = QVTimperativeUtil.getValue(asSimpleParameterBinding);
+		CGValuedElement cgElement = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
+		qvtiAnalyzer.initAst(cgElement, asSimpleParameterBinding.getValue(), asExpression, false);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asSimpleParameterBinding);
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asSimpleParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		cgMappingCallBinding.setOwnedValue(qvtiAnalyzer.createCGElement(CGValuedElement.class, asSimpleParameterBinding.getValue()));
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		cgMappingCallBinding.setOwnedValue(cgElement);
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asSimpleParameterBinding, asBoundVariable, true);
 		return cgMappingCallBinding;
 	}
 
@@ -856,14 +851,16 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		cgTypedModel.setAst(asTypedModel);
-		globalNameManager.declareEagerName(cgTypedModel, asTypedModel.getName());
+		// The name of a CGTypedModel is not used. Run-time models are kept in an array whose index is discovered by
+		// search within a private namespace wrt the AS TypedModel name.
+		// XXX globalNameManager.declareEagerName(cgTypedModel, "TM_" + asTypedModel.getName());		// Lazy and use regular hint
 		qvtiAnalyzer.addCGTypedModel(cgTypedModel);
 		return cgTypedModel;
 	}
 
 	@Override
 	public @Nullable CGNamedElement visitVariable(@NonNull Variable object) {
-		return visiting(object);		// Really should not be happening.
+		return visiting(object);		// Really should not be happening
 		/*		CGVariable cgVariable = getVariable(asVariable);
 		CGValuedElement initValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asVariable.getOwnedExpression());
 		cgVariable.setInit(initValue);
@@ -874,7 +871,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitVariableDeclaration(@NonNull VariableDeclaration object) {
-		return visiting(object);		// Really should not be happening.
+		return visiting(object);		// Really should not be happening
 	}
 
 	@Override

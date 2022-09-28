@@ -60,6 +60,22 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 		return new QVTimperativeFlowAnalysis(this, contextExpression);
 	}
 
+	@Override
+	public org.eclipse.ocl.pivot.@NonNull Class getPrimaryClass(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> partialClasses) {
+		for (org.eclipse.ocl.pivot.@NonNull Class partialClass : partialClasses) {
+			if (partialClass instanceof ImperativeTransformation) {
+				return partialClass;
+			}
+			if (partialClass.getESObject() != null) {
+				return partialClass;
+			}
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Class partialClass : partialClasses) {
+			return partialClass;
+		}
+		throw new IllegalStateException();
+	}
+
 	public boolean keepDebug() {
 		return false;
 	}

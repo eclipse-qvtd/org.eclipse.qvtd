@@ -660,6 +660,10 @@ public class MappingAnalysis extends RuleAnalysis
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
 		Node node = region.getNode(variableDeclaration);
 		if (node == null) {
+			//	if (variableDeclaration instanceof ParameterVariable) {
+			//		getClass();		// XXX
+			//		variableDeclaration = ((ParameterVariable)variableDeclaration).getRepresentedParameter();
+			//	}
 			if (variableDeclaration instanceof Variable) {
 				Variable variable = (Variable) variableDeclaration;
 				OCLExpression ownedInit = variable.getOwnedInit();

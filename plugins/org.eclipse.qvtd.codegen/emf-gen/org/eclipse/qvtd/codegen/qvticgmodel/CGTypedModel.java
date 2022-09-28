@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
  * @model
  * @generated
  */
-public interface CGTypedModel extends CGNamedElement {
+public interface CGTypedModel extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Model Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
