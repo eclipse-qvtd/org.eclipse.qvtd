@@ -579,7 +579,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append("-1/*null*/");
 		}
 		else {
-			js.append(cgTypedModel.getModelIndex() + "/*" + cgTypedModel.getName() + "*/");
+			js.append(cgTypedModel.getModelIndex() + "/*" + CGUtil.getAST(cgTypedModel).getName() + "*/");
 		}
 	}
 
@@ -685,7 +685,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				js.append("/*\n");
 				js.append(" * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex for TypedModel " + typedModelNumber + ".\n");
 				js.append(" */\n");
-				String classIndex2classIdName = globalNameManager.getClassIndex2classId(typedModelNumber);
+				String classIndex2classIdName = globalNameManager.getClassIndex2ClassId(typedModelNumber).getResolvedName();
 				js.append("private static final ");
 				js.appendClassReference(true, ClassId.class);
 				js.append(" ");
@@ -714,7 +714,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				//
 				//	Emit the classIndex2allClassIndexes array of arrays
 				//
-				String classIndex2allClassIndexes = globalNameManager.getClassIndex2allClassIndexes(typedModelNumber);
+				String classIndex2allClassIndexes = globalNameManager.getClassIndex2AllClassIndexes(typedModelNumber).getResolvedName();
 				js.append("\n");
 				js.append("/*\n");
 				js.append(" * Mapping from each TypedModel " + typedModelNumber + " ClassIndex to all the ClassIndexes\n");
@@ -878,7 +878,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append("initModel(");
 			js.appendIntegerString(modelNumber);
 			js.append(", ");
-			String name = cgTypedModel.getName();
+			String name = CGUtil.getAST(cgTypedModel).getName();
 			js.appendString(name != null ? name : "");
 			js.append(")");
 			if (allInstancesAnalyses != null) {
@@ -2072,7 +2072,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		js.append("/*\n");
 		js.append(" * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
 		js.append(" */\n");
-		String oppositeIndex2propertyIdName = getGlobalNameManager().getOppositeIndex2propertyIdName();
+		String oppositeIndex2propertyIdName = getGlobalNameManager().getOppositeIndex2PropertyIdName();
 		js.append("private static final ");
 		js.appendClassReference(true, PropertyId.class);
 		js.append(" ");

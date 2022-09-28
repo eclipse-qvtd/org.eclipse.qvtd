@@ -226,7 +226,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull String createClassFileContent() {
 		QVTiGlobalNameManager globalNameManager = getGlobalNameManager();
-		globalNameManager.getOppositeIndex2propertyIdName();
+		globalNameManager.getOppositeIndex2PropertyIdName();
 		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(asTransformation);
 		globalNameManager.reserveGlobalNames(entryPointsAnalysis);
 		CGPackage cgPackage2 = createCGPackage();

@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
@@ -80,6 +81,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
@@ -386,6 +388,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			//	CGMapping cgMapping = (CGMapping)cgElement.eContainer();
 			//	assert cgMapping.getAst() == asElement;
 			//	checkNameManager(cgMapping, asElement);
+		}
+		else if ((cgElement instanceof CGVariableExp) && (cgElement.eContainer() instanceof CGMappingCallBinding)) {
+			// The referred variable is in the target domain and CGVariableExp cannot be folded since it might need an unbox wrapper.
 		}
 		else {
 			super.checkNameManager(cgElement, asElement);

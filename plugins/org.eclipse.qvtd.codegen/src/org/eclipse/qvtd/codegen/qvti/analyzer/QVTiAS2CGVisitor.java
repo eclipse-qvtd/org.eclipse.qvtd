@@ -650,7 +650,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert asVariable != null;
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(ClassUtil.nonNullModel(asVariable));
+		cgVariableExp.setAst(ClassUtil.nonNullModel(asVariable));		// Something to provide AS TypeId
 		cgVariableExp.setReferredVariable(cgVariable);
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
@@ -856,7 +856,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		cgTypedModel.setAst(asTypedModel);
-		globalNameManager.declareEagerName(cgTypedModel, asTypedModel.getName());
+		// The name of a CGTypedModel is not used. Run-time models are kept in an array whose index is discovered by
+		// search within a private namespace wrt the AS TypedModel name.
+		// XXX globalNameManager.declareEagerName(cgTypedModel, "TM_" + asTypedModel.getName());		// Lazy and use regular hint
 		qvtiAnalyzer.addCGTypedModel(cgTypedModel);
 		return cgTypedModel;
 	}

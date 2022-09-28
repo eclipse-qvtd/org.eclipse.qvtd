@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.codegen.qvti.java;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
@@ -21,6 +22,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * QVTiGlobalNameManager supports the many QVTi-specifiic global names.
@@ -50,8 +53,8 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
 	protected final @NonNull NameResolution cachedResultName;
-	protected final @NonNull NameResolution classId2AllClassIndexes;
-	protected final @NonNull NameResolution classId2ClassId;
+	protected @NonNull NameResolution @Nullable [] classId2AllClassIndexes;
+	protected @NonNull NameResolution @Nullable [] classId2ClassId;
 	protected final @NonNull NameResolution createFromStringName;
 	protected final @NonNull NameResolution constructorName;
 	protected final @NonNull NameResolution emptyListName;
@@ -74,8 +77,8 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
 		super(codeGenerator, helper);
 		this.cachedResultName = globalNameManager.declareEagerName(null, CACHED_RESULT_NAME);
-		this.classId2AllClassIndexes = globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
-		this.classId2ClassId = globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
+		this.classId2AllClassIndexes = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
+		this.classId2ClassId = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
 		this.constructorName = globalNameManager.declareEagerName(null, CONSTRUCTOR_NAME);
 		this.createFromStringName = globalNameManager.declareEagerName(null, CREATE_FROM_STRING_NAME);
 		this.emptyListName = globalNameManager.declareEagerName(null, EMPTY_LIST_NAME);
@@ -122,20 +125,14 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return cachedResultName;
 	}
 
-	public @NonNull String getClassIndex2allClassIndexes(int typedModelNumber) {
-		return globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber).getResolvedName();
+	public @NonNull NameResolution getClassIndex2AllClassIndexes(int typedModelNumber) {
+		assert classId2AllClassIndexes != null;
+		return classId2AllClassIndexes[typedModelNumber]; //globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber).getResolvedName();
 	}
 
-	public @NonNull String getClassIndex2classId(int typedModelNumber) {
-		return globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_ + typedModelNumber).getResolvedName();
-	}
-
-	public @NonNull NameResolution getClassId2ClassId() {
-		return classId2ClassId;
-	}
-
-	public @NonNull NameResolution getClassId2AllClassIndexes() {
-		return classId2AllClassIndexes;
+	public @NonNull NameResolution getClassIndex2ClassId(int typedModelNumber) {
+		assert classId2ClassId != null;
+		return classId2ClassId[typedModelNumber]; //globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_ + typedModelNumber).getResolvedName();
 	}
 
 	@Override
@@ -203,10 +200,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return outputSpeculationSlotStatusName.getResolvedName();
 	}
 
-	public @NonNull String getOppositeIndex2propertyIdName() {
-		return globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME).getResolvedName();
-	}
-
 	public @NonNull String getThisTransformerName() {
 		return thisTransformerName.getResolvedName();
 	}
@@ -225,9 +218,13 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public void reserveGlobalNames(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
 		int typedModelNumber = 0;
-		for (@SuppressWarnings("unused") @NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation())) {
-			getClassIndex2allClassIndexes(typedModelNumber);
-			getClassIndex2classId(typedModelNumber);
+		Iterable<@NonNull TypedModel> modelParameters = QVTimperativeUtil.getModelParameters(entryPointsAnalysis.getTransformation());
+		int maxTypedModelNumber = Iterables.size(modelParameters);
+		NameResolution[] classId2AllClassIndexes2 = this.classId2AllClassIndexes = new @NonNull NameResolution[maxTypedModelNumber]; //globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
+		NameResolution[] classId2ClassId2 = this.classId2ClassId = new @NonNull NameResolution[maxTypedModelNumber]; //globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
+		for (@SuppressWarnings("unused") @NonNull TypedModel typedModel : modelParameters) {
+			classId2AllClassIndexes2[typedModelNumber] = globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_ + typedModelNumber);
+			classId2ClassId2[typedModelNumber] = globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_ + typedModelNumber);
 			typedModelNumber++;
 		}
 	}
