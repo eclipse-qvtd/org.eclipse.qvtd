@@ -650,7 +650,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert asVariable != null;
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(ClassUtil.nonNullModel(asVariable));		// Something to provide AS TypeId
+		cgVariableExp.setAst(asLoopParameterBinding);		// Something to provide AS TypeId
 		cgVariableExp.setReferredVariable(cgVariable);
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
