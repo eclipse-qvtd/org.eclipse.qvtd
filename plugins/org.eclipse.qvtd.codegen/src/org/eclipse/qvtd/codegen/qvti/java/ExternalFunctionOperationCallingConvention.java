@@ -342,10 +342,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 
 		//	CGClass cgClass = analyzer.createNestedCGClass(asOperation, "FTOR" + asOperation.getName());
 
-		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		initOperation(analyzer, cgFunction, asOperation);
-		analyzer.addCGOperation(cgFunction);
-		return cgFunction;
+		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
 
 	@Override

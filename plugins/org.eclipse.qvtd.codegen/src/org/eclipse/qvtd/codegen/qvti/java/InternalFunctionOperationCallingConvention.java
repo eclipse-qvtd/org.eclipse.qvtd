@@ -142,16 +142,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
 		assert asOperation.getImplementationClass() == null;
-		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		initOperation(analyzer, cgFunction, asOperation);
-		analyzer.addCGOperation(cgFunction);
-
-		//	as2cgVisitor.generateClassDeclaration(asOperation, CacheClassCallingConvention.INSTANCE);
-		//	CacheClassCallingConvention.INSTANCE.createCGClass(null)
-		//	CGClass cgCacheClass = analyzer.createNestedCGClass(as2cgVisitor, asOperation, CacheClassCallingConvention.INSTANCE);
-		//	createCGProperties(as2cgVisitor, cgCacheClass, asOperation);
-		//	createCGConstructor(as2cgVisitor, cgCacheClass, asOperation);
-		return cgFunction;
+		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
 
 	@Override
@@ -246,14 +237,12 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 			@NonNull Operation asCacheOperation, @NonNull OperationCallingConvention callingConvention) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		//
-		TypeId asTypeId = asCacheOperation.getTypeId();
 		LanguageExpression asExpression = asCacheOperation.getBodyExpression();
 		//
 		CGOperation cgCacheOperation = callingConvention.createCGOperation(qvtiAnalyzer, asCacheOperation);
-		cgCacheOperation.setAst(asCacheOperation);
-		cgCacheOperation.setTypeId(analyzer.getCGTypeId(asTypeId));
 		cgCacheOperation.setRequired(asCacheOperation.isIsRequired());
 		cgCacheOperation.setCallingConvention(callingConvention);
+		analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 		//	analyzer.addCGOperation(cgCacheOperation);
 		cgCacheOperation.setBody(qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression));
 		cgCacheOperations.add(cgCacheOperation);

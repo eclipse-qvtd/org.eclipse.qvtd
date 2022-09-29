@@ -64,8 +64,6 @@ public class CacheOperationCallingConvention extends AbstractCachedOperationCall
 
 		//	CGOperation cgOperation2 = analyzer.basicGetFinalCGOperation(asOperation);
 		//	assert cgOperation2 == cgOperation;
-		initOperation(analyzer, cgOperation, asOperation);
-		//	analyzer.addCGOperation(cgOperation);
 		return cgOperation;
 
 

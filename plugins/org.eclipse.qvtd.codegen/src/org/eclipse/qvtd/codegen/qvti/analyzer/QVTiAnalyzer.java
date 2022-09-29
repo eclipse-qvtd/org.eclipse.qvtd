@@ -510,12 +510,15 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @NonNull CGMappingLoop generateMappingLoop(@NonNull MappingLoop asMappingLoop) {
+		ExecutableNameManager parentNameManager = useExecutableNameManager((NamedElement)asMappingLoop.eContainer());
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
 		cgMappingLoop.setAst(asMappingLoop);
 		asElement2cgElement.put(asMappingLoop, cgMappingLoop);
 		getMappingLoopNameManager(cgMappingLoop, asMappingLoop);		// eager to allow useXXX downstream
 		OCLExpression asSource = asMappingLoop.getOwnedExpression();
-		cgMappingLoop.setSource(createCGElement(CGValuedElement.class, asSource));
+		CGValuedElement cgSource = createCGElement(CGValuedElement.class, asSource);
+		globalNameManager.addSelfNameManager(cgSource, parentNameManager);										// Source always evaluated in parent context
+		cgMappingLoop.setSource(cgSource);
 		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
 		if (asIterators.size() > 0) {
 			LoopVariable asIterator = asIterators.get(0);

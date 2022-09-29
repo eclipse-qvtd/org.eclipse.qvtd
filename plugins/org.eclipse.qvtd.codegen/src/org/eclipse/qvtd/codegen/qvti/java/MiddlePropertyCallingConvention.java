@@ -77,9 +77,7 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 		//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
 		cgPropertyCallExp.setReferredProperty(cgProperty);
 		cgPropertyCallExp.setAsProperty(asProperty);
-		cgPropertyCallExp.setAst(asOppositePropertyCallExp);
-		cgPropertyCallExp.setTypeId(qvtiAnalyzer.getCGTypeId(asOppositePropertyCallExp.getTypeId()));
-		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
+		analyzer.initAst(cgPropertyCallExp, asOppositePropertyCallExp, true);
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
 	}

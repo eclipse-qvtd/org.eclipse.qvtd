@@ -55,7 +55,7 @@ public class QVTiCGModelCG2JavaPreVisitor extends AbstractQVTiCGModelCG2JavaPreV
 	@Override
 	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		super.visitCGMappingLoop(cgMappingLoop);
-		wrapLetVariables(cgMappingLoop);
+		//	wrapLetVariables(cgMappingLoop);
 		return null;
 	}
 
