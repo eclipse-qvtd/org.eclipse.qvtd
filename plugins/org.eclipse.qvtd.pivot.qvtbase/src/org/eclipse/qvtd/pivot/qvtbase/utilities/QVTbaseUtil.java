@@ -535,6 +535,10 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
 	}
 
+	public static @NonNull Parameter getOwnedContext(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nonNullState(asTypedModel.getOwnedContext());
+	}
+
 	public static @NonNull Iterable<@NonNull Domain> getOwnedDomains(@NonNull Rule asRule) {
 		return ClassUtil.nullFree(asRule.getDomain());
 	}

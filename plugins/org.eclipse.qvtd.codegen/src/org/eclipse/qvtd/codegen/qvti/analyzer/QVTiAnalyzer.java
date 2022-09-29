@@ -381,6 +381,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return (CGMapping)asElement2cgElement.get(asMapping);
 	}
 
+	public @Nullable CGTypedModel basicGetCGTypedModel(@NonNull TypedModel asTypedModel) {
+		return (CGTypedModel)asElement2cgElement.get(asTypedModel);
+	}
+
 	@Override
 	protected void checkNameManager(@NonNull CGNamedElement cgElement, @NonNull NamedElement asElement) {
 		if (cgElement instanceof CGMappingExp) {		// FIXME CGMappingExp has same AST as ancestral CGMapping
@@ -511,13 +515,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGMappingLoop generateMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		ExecutableNameManager parentNameManager = useExecutableNameManager((NamedElement)asMappingLoop.eContainer());
+		OCLExpression asSource = asMappingLoop.getOwnedExpression();
+		CGValuedElement cgSource = createCGElement(CGValuedElement.class, asSource);
+		globalNameManager.addSelfNameManager(cgSource, parentNameManager);										// Source always evaluated in parent context
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
 		cgMappingLoop.setAst(asMappingLoop);
 		asElement2cgElement.put(asMappingLoop, cgMappingLoop);
 		getMappingLoopNameManager(cgMappingLoop, asMappingLoop);		// eager to allow useXXX downstream
-		OCLExpression asSource = asMappingLoop.getOwnedExpression();
-		CGValuedElement cgSource = createCGElement(CGValuedElement.class, asSource);
-		globalNameManager.addSelfNameManager(cgSource, parentNameManager);										// Source always evaluated in parent context
 		cgMappingLoop.setSource(cgSource);
 		List<LoopVariable> asIterators = asMappingLoop.getOwnedIterators();
 		if (asIterators.size() > 0) {
@@ -737,6 +741,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		else {
 			return super.getCGTypeId(typeId);
 		}
+	}
+
+	public @NonNull CGTypedModel getCGTypedModel(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nonNullState(basicGetCGTypedModel(asTypedModel));
 	}
 
 	/**

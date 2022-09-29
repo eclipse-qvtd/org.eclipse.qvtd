@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -28,8 +29,10 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 
 /**
@@ -121,14 +124,29 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 
 	@Override
 	public @NonNull CGVariable getCGVariable(@NonNull VariableDeclaration asVariable) {
-		if (asVariable.eContainingFeature() == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-			/*	if (isQualifiedThis(asVariableExp, asParameter)) {
-				cgVariable = nameManager.getQualifiedThisVariable();
-			}
-			else {
-				cgVariable = nameManager.getThisParameter();
-			} */
+		CGVariable cgVariable = codeGenerator.getAnalyzer().basicGetCGVariable(asVariable);
+		if (cgVariable != null) {
+			return cgVariable;
+		}
+		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
+		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
 			return getQualifiedThisVariable();
+		}
+		else if (eContainingFeature == QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT) {
+		//	TypedModel asTypedModel = (TypedModel)asVariable.eContainer();
+		//	CGTypedModel cgTypedModel = getAnalyzer().getCGTypedModel(asTypedModel);
+		//	ClassNameManager classNameManager = getClassNameManager();
+			cgVariable = createCGVariable(asVariable);
+			cgVariable.setAst(asVariable);
+			//	cgVariable.setTypeId(cgInit.getTypeId());
+			//	cgVariable.setInit(cgInit);
+			//			nameResolution.addCGElement(cgVariable);
+			//	return cgVariable;
+			if (asVariable.isIsRequired()) {
+				cgVariable.setNonInvalid();
+				cgVariable.setNonNull();
+			}
+			return cgVariable;
 		}
 		return super.getCGVariable(asVariable);
 	}
