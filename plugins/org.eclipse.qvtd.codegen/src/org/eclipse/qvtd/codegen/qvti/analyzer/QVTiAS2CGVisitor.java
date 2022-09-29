@@ -242,22 +242,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitAppendParameterBinding(@NonNull AppendParameterBinding asAppendParameterBinding) {
-		VariableDeclaration asBoundVariable = asAppendParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asAppendParameterBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asAppendParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		ConnectionVariable asVariable = asAppendParameterBinding.getValue();
-		assert asVariable != null;
+		ConnectionVariable asVariable = QVTimperativeUtil.getValue(asAppendParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(asVariable);
-		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asAppendParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asAppendParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asAppendParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -608,22 +601,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitGuardParameterBinding(@NonNull GuardParameterBinding asGuardParameterBinding) {
-		VariableDeclaration asBoundVariable = asGuardParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asGuardParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		ConnectionVariable asVariable = asGuardParameterBinding.getValue();
-		assert asVariable != null;
+		ConnectionVariable asVariable = QVTimperativeUtil.getValue(asGuardParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(asVariable);
-		cgVariableExp.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asGuardParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asGuardParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asGuardParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -640,21 +626,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitLoopParameterBinding(@NonNull LoopParameterBinding asLoopParameterBinding) {
-		VariableDeclaration asBoundVariable = asLoopParameterBinding.getBoundVariable();
-		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asLoopParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		LoopVariable asVariable = asLoopParameterBinding.getValue();
-		assert asVariable != null;
+		LoopVariable asVariable = QVTimperativeUtil.getValue(asLoopParameterBinding);
 		CGVariable cgVariable = qvtiAnalyzer.useExecutableNameManager(asVariable).getCGVariable(asVariable);
-		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		cgVariableExp.setAst(asLoopParameterBinding);		// Something to provide AS TypeId
-		cgVariableExp.setReferredVariable(cgVariable);
+		CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
+		qvtiAnalyzer.initAst(cgVariableExp, asLoopParameterBinding, asVariable, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asLoopParameterBinding);
+		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asLoopParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 
@@ -782,15 +762,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitSimpleParameterBinding(@NonNull SimpleParameterBinding asSimpleParameterBinding) {
-		VariableDeclaration asBoundVariable = asSimpleParameterBinding.getBoundVariable();
+		OCLExpression asExpression = QVTimperativeUtil.getValue(asSimpleParameterBinding);
+		CGValuedElement cgElement = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
+		qvtiAnalyzer.initAst(cgElement, asSimpleParameterBinding, asExpression, true);
+		//
+		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asSimpleParameterBinding);
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
-		//		setPivot(cgMappingCallBinding, asMappingCallBinding);
-		//	cgMappingCallBinding.setName(asBoundVariable.getName());
-		cgMappingCallBinding.setAst(asSimpleParameterBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		cgMappingCallBinding.setOwnedValue(qvtiAnalyzer.createCGElement(CGValuedElement.class, asSimpleParameterBinding.getValue()));
-		cgMappingCallBinding.setTypeId(qvtiAnalyzer.getCGTypeId(asBoundVariable.getTypeId()));
-		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+		cgMappingCallBinding.setOwnedValue(cgElement);
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asSimpleParameterBinding, asBoundVariable, false);
 		return cgMappingCallBinding;
 	}
 

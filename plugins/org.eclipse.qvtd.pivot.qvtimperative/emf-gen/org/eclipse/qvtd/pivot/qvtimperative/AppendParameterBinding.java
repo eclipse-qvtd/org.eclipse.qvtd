@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Append Parameter Binding</b></em>'.
@@ -50,6 +49,7 @@ public interface AppendParameterBinding extends MappingParameterBinding {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAppendParameterBinding_Value()
 	 * @generated
 	 */
+	@Override
 	ConnectionVariable getValue();
 
 	/**
@@ -61,5 +61,6 @@ public interface AppendParameterBinding extends MappingParameterBinding {
 	 * @generated
 	 */
 	void setValue(ConnectionVariable value);
+
 
 } // AppendParameterBinding

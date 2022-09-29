@@ -15,8 +15,10 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.TypedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,5 +98,9 @@ public interface MappingParameterBinding extends Element {
 	 * @generated
 	 */
 	boolean validateParameterIsMappingParameter(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+//	default @NonNull TypeId getTypeId() { return getValue().getTypeId(); }
+
+	TypedElement getValue();
 
 } // MappingParameterBinding

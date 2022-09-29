@@ -2484,12 +2484,10 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		if (boundVariable instanceof ConnectionVariable) {
 			return null;
 		}
-		CGValuedElement value = cgMappingCallBinding.getOwnedValue();
+		//	CGValuedElement value = cgMappingCallBinding.getOwnedValue();
 		TypeDescriptor argumentTypeDescriptor = context.getTypeDescriptor(cgMappingCallBinding);
-		TypeId pivotTypeId = value.getASTypeId();
-		if (pivotTypeId instanceof CollectionTypeId) {
-			pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
-		}
+		TypedElement value = mappingParameterBinding.getValue();
+		TypeId pivotTypeId = value.getTypeId();
 		TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(ClassUtil.nonNullState(pivotTypeId));
 		if (argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
 			return null;

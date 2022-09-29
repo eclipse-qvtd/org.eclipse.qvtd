@@ -20,7 +20,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCG2JavaPreVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
@@ -49,13 +48,6 @@ public class QVTiCGModelCG2JavaPreVisitor extends AbstractQVTiCGModelCG2JavaPreV
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		super.visitCGMapping(cgMapping);
 		wrapLetVariables(cgMapping);
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
-		super.visitCGMappingLoop(cgMappingLoop);
-		//	wrapLetVariables(cgMappingLoop);
 		return null;
 	}
 

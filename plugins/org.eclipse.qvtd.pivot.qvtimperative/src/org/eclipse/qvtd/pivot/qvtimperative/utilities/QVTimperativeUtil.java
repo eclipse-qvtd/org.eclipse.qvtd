@@ -40,10 +40,15 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -53,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -144,6 +150,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			}
 		}
 		return mappings;
+	}
+
+	public static @NonNull MappingParameter getBoundVariable(@NonNull MappingParameterBinding asMappingParameterBinding) {
+		return ClassUtil.nonNullState(asMappingParameterBinding.getBoundVariable());
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getClassType(@NonNull TypedElement typedElement) {
@@ -316,6 +326,26 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull VariableDeclaration getTargetVariable(@NonNull SetStatement asSetStatement) {
 		return ClassUtil.nonNullState(asSetStatement.getTargetVariable());
+	}
+
+	public static @NonNull ConnectionVariable getValue(@NonNull AppendParameterBinding asAppendParameterBinding) {
+		return ClassUtil.nonNullState(asAppendParameterBinding.getValue());
+	}
+
+	public static @NonNull ConnectionVariable getValue(@NonNull GuardParameterBinding asGuardParameterBinding) {
+		return ClassUtil.nonNullState(asGuardParameterBinding.getValue());
+	}
+
+	public static @NonNull LoopVariable getValue(@NonNull LoopParameterBinding asLoopParameterBinding) {
+		return ClassUtil.nonNullState(asLoopParameterBinding.getValue());
+	}
+
+	public static @NonNull TypedElement getValue(@NonNull MappingParameterBinding asMappingParameterBinding) {
+		return ClassUtil.nonNullState(asMappingParameterBinding.getValue());
+	}
+
+	public static @NonNull OCLExpression getValue(@NonNull SimpleParameterBinding asSimpleParameterBinding) {
+		return ClassUtil.nonNullState(asSimpleParameterBinding.getValue());
 	}
 
 	public static boolean isObserver(@NonNull Mapping asMapping) {
