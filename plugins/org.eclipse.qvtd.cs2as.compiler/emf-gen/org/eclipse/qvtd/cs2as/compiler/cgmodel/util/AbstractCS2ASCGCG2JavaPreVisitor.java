@@ -12,7 +12,7 @@ package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaPreVisitor;
 
 /**
@@ -23,10 +23,10 @@ import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaPreVisit
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractCS2ASCGCG2JavaPreVisitor
-	extends QVTiCGModelCG2JavaPreVisitor
-	implements CS2ASCGModelVisitor<@Nullable Object>
+extends QVTiCGModelCG2JavaPreVisitor
+implements CS2ASCGModelVisitor<@Nullable Object>
 {
-	protected AbstractCS2ASCGCG2JavaPreVisitor(@NonNull JavaCodeGenerator codeGenerator) {
+	protected AbstractCS2ASCGCG2JavaPreVisitor(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
 	}
 

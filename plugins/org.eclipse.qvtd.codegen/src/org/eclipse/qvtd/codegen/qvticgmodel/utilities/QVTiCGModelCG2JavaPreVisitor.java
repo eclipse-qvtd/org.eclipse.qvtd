@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
-import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -28,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 
 public class QVTiCGModelCG2JavaPreVisitor extends AbstractQVTiCGModelCG2JavaPreVisitor
 {
-	public QVTiCGModelCG2JavaPreVisitor(@NonNull JavaCodeGenerator codeGenerator) {
+	public QVTiCGModelCG2JavaPreVisitor(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
 	}
 
@@ -40,7 +39,7 @@ public class QVTiCGModelCG2JavaPreVisitor extends AbstractQVTiCGModelCG2JavaPreV
 	@Override
 	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
 		super.visitCGFunction(cgFunction);
-		wrapLetVariables(cgFunction);
+		//	wrapLetVariables(cgFunction);
 		return null;
 	}
 
