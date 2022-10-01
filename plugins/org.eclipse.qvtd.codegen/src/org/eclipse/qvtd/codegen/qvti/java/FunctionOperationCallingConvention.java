@@ -37,16 +37,20 @@ import org.eclipse.ocl.examples.codegen.java.types.AbstractDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -151,6 +155,25 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			if (!js.appendLocalStatements(cgInit)) {
 				return false;
 			}
+
+			List<CGParameter> cgParameters = cgFunction.getParameters();
+			assert cgParameters.size() == 1;
+			for (@NonNull CGParameter cgParameter : cgParameters) {
+				js.appendDeclaration(cgParameter);
+				js.append(" = ");
+				assert !(cgParameter instanceof CGConnectionVariable);
+				SubStream castBody = new SubStream() {
+					@Override
+					public void append() {
+						js.append("boundValues[" + 0 + "]");
+					}
+				};
+				js.appendClassCast(cgParameter, castBody);
+				js.append(";\n");
+			}
+
+
+
 			qvticg2javaVisitor.doEcoreCreateDataType(cgShadowExp, (EDataType)eClassifier, cgInit);
 		}
 		else if (eClassifier instanceof EClass) {
@@ -475,9 +498,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		String cachedResultName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getCachedResultName();
 		js.append("@Override\n");
 		js.append("public ");
-		js.appendIsRequired(false);
-		js.append(" Object");
-		//		js.appendTypeDeclaration(ClassUtil.nonNullState(cgFunction.getBody()));
+		//	js.appendIsRequired(false);
+		//	js.append(" Object");
+		js.appendTypeDeclaration(ClassUtil.nonNullState(cgFunction.getBody()));
 		js.append(" getResult() {\n");
 		js.pushIndentation(null);
 		js.append("return " + cachedResultName + ";\n");
@@ -533,19 +556,26 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 				js.append("\n\t&& ");
 			}
 			js.append("idResolver.oclEquals(");	// FIXME oclEquals / ==
-			js.append(instanceName);
-			js.append(".");
-			Property asProperty = ClassUtil.nonNullState(((ShadowPart)cgShadowPart.getAst()).getReferredProperty());
-			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(qvticg2javaVisitor.getESObject(asProperty));
-			String getAccessor;
-			if (eStructuralFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-				getAccessor = "eContainer";
+			Type type = ((TypedElement)cgShadowExp.getAst()).getType();
+			if (type instanceof DataType) {
+				js.append(instanceName);
 			}
 			else {
-				getAccessor = qvticg2javaVisitor.getGenModelHelper().getGetAccessor(eStructuralFeature);
+				js.append(instanceName);
+				js.append(".");
+				Property asProperty = ClassUtil.nonNullState(((ShadowPart)cgShadowPart.getAst()).getReferredProperty());
+				EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(qvticg2javaVisitor.getESObject(asProperty));
+				String getAccessor;
+				if (eStructuralFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
+					getAccessor = "eContainer";
+				}
+				else {
+					getAccessor = qvticg2javaVisitor.getGenModelHelper().getGetAccessor(eStructuralFeature);
+				}
+				js.append(getAccessor);
+				js.append("()");
 			}
-			js.append(getAccessor);
-			js.append("(), thoseValues[" + index++ + "])");
+			js.append(", thoseValues[" + index++ + "])");
 		}
 		js.append(";\n");
 		js.popIndentation();

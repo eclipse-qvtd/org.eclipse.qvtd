@@ -30,10 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
@@ -76,13 +73,13 @@ public class QVTiCGUtil extends CGUtil
 			cgBody = ((CGLetExp)cgBody).getIn();
 		}
 		if (cgBody instanceof CGShadowExp) {			// QVTr Key
-			Type type = ((TypedElement)cgBody.getAst()).getType();
-			if (type instanceof DataType) {
-				return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
-			}
-			else {
-				return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
-			}
+			//		Type type = ((TypedElement)cgBody.getAst()).getType();
+			//		if (type instanceof DataType) {
+			return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
+			//		}
+			//		else {
+			//			return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
+			//		}
 		}
 		return null;
 	}
