@@ -555,13 +555,12 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
 		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
-		QVTiCodeGenerator codeGenerator = qvticg2javaVisitor.getCodeGenerator();
 		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)cgOperationCallExp;
 		CGFunction cgFunction = (CGFunction)QVTiCGUtil.getOperation(cgFunctionCallExp);
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		//	Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		//	CGFunction cgFunction = ClassUtil.nonNullState(cgFunctionCallExp.getFunction());
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		boolean useCache = !asFunction.isIsTransient();
 		boolean isIdentifiedInstance = useCache;
 		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
@@ -635,10 +634,10 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		//
 		js.appendCommentWithOCL(null, cgFunction.getAst());
-		ShadowExp asShadowExp = codeGenerator.getShadowExp(asFunction);
+		ShadowExp asShadowExp = QVTimperativeUtil.basicGetShadowExp(asFunction);
+		assert asShadowExp == null;		// ShadowFunctionOperationCallingConvention overload
 		String functionName = cgFunction.getResolvedName();
 		String cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultName();
-		assert asShadowExp == null;		// ShadowFunctionOperationCallingConvention overload
 		if (!asFunction.isIsTransient()) {
 			NameResolution thisTransformerNameResolution = codeGenerator.getGlobalNameManager().getThisTransformerNameResolution();
 			//	String thisTransformerName = thisTransformerNameResolution.getResolvedName();

@@ -51,14 +51,12 @@ import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
-import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -88,6 +86,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -346,15 +345,23 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				return ExternalFunctionOperationCallingConvention.INSTANCE;
 			}
 			else if (asBodyExpression != null) {
-				ShadowExp asShadowExp = getShadowExp(asFunction);
+				ShadowExp asShadowExp = QVTimperativeUtil.basicGetShadowExp(asFunction);
 				if (asShadowExp != null) {
-					return ShadowFunctionOperationCallingConvention.INSTANCE;
-				}
-				else if (asFunction.isIsTransient()) {
-					return TransientFunctionOperationCallingConvention.INSTANCE;
+					Type type = asShadowExp.getType();
+					if (type instanceof DataType) {
+						return ShadowDataTypeOperationCallingConvention.INSTANCE;
+					}
+					else {
+						return ShadowClassOperationCallingConvention.INSTANCE;
+					}
 				}
 				else {
-					return InternalFunctionOperationCallingConvention.INSTANCE;
+					if (asFunction.isIsTransient()) {
+						return TransientFunctionOperationCallingConvention.INSTANCE;
+					}
+					else {
+						return InternalFunctionOperationCallingConvention.INSTANCE;
+					}
 				}
 			}
 			else {
@@ -435,21 +442,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 		s.append(QVTbaseUtil.getName(asTransformation));
 		return s.toString();
-	}
-
-	public @Nullable ShadowExp getShadowExp(@NonNull Function asFunction) {
-		LanguageExpression asBodyExpression = asFunction.getBodyExpression();
-		if (asBodyExpression != null) {
-			OCLExpression asElement = ((ExpressionInOCL)asBodyExpression).getOwnedBody();
-			while (asElement instanceof LetExp) {				// Redundant since now using Function AS context
-				asElement = ((LetExp)asElement).getOwnedIn();
-			}
-			if (asElement instanceof ShadowExp) {			// QVTr Key
-				if (!(asElement.getType() instanceof DataType))
-					return (ShadowExp)asElement;		// FIXME replace with clearer strategy
-			}
-		}
-		return null;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {

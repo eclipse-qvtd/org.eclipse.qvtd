@@ -64,6 +64,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 
 /**
@@ -151,9 +152,8 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		assert cgSource != null;
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		CGFunction cgFunction = (CGFunction)cgOperation;
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert codeGenerator.getShadowExp(asFunction) == null;
+		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
 		cgFunctionCallExp.getArguments().add(cgSource);
@@ -168,7 +168,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert codeGenerator.getShadowExp(asFunction) == null;
+		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		//
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgFunction);
 		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());			// Include "this" as part of the uniqueness Tuple.

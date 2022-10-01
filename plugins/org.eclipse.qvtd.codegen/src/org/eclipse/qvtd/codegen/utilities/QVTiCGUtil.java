@@ -24,12 +24,16 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGShadowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
@@ -66,6 +70,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
 public class QVTiCGUtil extends CGUtil
 {
+	public static @Nullable CGShadowExp basicGetCGShadowExp(@NonNull CGFunction cgFunction) {
+		CGValuedElement cgBody = cgFunction.getBody();
+		while (cgBody instanceof CGLetExp) {
+			cgBody = ((CGLetExp)cgBody).getIn();
+		}
+		if (cgBody instanceof CGShadowExp) {			// QVTr Key
+			Type type = ((TypedElement)cgBody.getAst()).getType();
+			if (type instanceof DataType) {
+				return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
+			}
+			else {
+				return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
+			}
+		}
+		return null;
+	}
+
 	public static @Nullable CGMapping basicGetContainingCGMapping(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {

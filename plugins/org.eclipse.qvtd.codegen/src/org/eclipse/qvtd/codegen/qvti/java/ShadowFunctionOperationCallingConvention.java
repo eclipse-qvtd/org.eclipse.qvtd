@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGShadowExp;
@@ -25,13 +24,11 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -40,15 +37,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 
 /**
  *  ShadowFunctionOperationCallingConvention defines the support for the call of a QVTi function to create a keyed shaow object.
  */
-public class ShadowFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
+public abstract class ShadowFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
 {
-	public static final @NonNull ShadowFunctionOperationCallingConvention INSTANCE = new ShadowFunctionOperationCallingConvention();
-
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
 		CGFunction cgFunction = (CGFunction)cgOperation;
@@ -88,7 +84,7 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		assert useClassToCreateObject;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
@@ -104,7 +100,7 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = qvtiAnalyzer.getCodeGenerator().getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		assert useClassToCreateObject;
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
@@ -121,10 +117,10 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		//
 		js.appendCommentWithOCL(null, cgFunction.getAst());
-		CGShadowExp cgShadowExp = getCGShadowExp(cgFunction);
+		CGShadowExp cgShadowExp = QVTiCGUtil.basicGetCGShadowExp(cgFunction);
+		assert cgShadowExp != null;
 		String functionName = cgFunction.getResolvedName();
 		String cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultName();
-		assert cgShadowExp != null;
 		js.append("protected class ");
 		js.append(functionName);
 		js.append(" extends ");
@@ -141,17 +137,5 @@ public class ShadowFunctionOperationCallingConvention extends FunctionOperationC
 		doFunctionIsEqual(qvticg2javaVisitor, js, cgShadowExp, cachedResultName);
 		js.popClassBody(false);
 		return true;
-	}
-
-	private @Nullable CGShadowExp getCGShadowExp(@NonNull CGFunction cgFunction) {
-		CGValuedElement cgBody = cgFunction.getBody();
-		while (cgBody instanceof CGLetExp) {
-			cgBody = ((CGLetExp)cgBody).getIn();
-		}
-		if (cgBody instanceof CGShadowExp) {			// QVTr Key
-			if (!(((TypedElement)cgBody.getAst()).getType() instanceof DataType))
-				return (CGShadowExp) cgBody;		// FIXME replace with clearer strategy
-		}
-		return null;
 	}
 }

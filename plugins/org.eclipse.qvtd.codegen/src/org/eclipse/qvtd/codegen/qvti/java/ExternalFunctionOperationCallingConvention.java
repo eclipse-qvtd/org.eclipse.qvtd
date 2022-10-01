@@ -46,6 +46,7 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  *  ExternalFunctionOperationCallingConvention defines the support for the call of a QVTi function implemented by a Java class.
@@ -349,10 +350,9 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert codeGenerator.getShadowExp(asFunction) == null;
+		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
 		assert cgSource != null;
@@ -365,10 +365,9 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		assert !useClassToCreateObject;
 		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());

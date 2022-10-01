@@ -31,6 +31,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  *  InternalFunctionOperationCallingConvention defines the uncached support for the call of a transient QVTi function implemented by an OCL expression.
@@ -75,10 +76,9 @@ public class TransientFunctionOperationCallingConvention extends FunctionOperati
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
 		assert !useClassToCreateObject;
@@ -92,10 +92,9 @@ public class TransientFunctionOperationCallingConvention extends FunctionOperati
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
-		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)qvtiOperationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = codeGenerator.getShadowExp(asFunction) != null;
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		assert !useClassToCreateObject;
 		List<CGParameter> cgParameters = cgFunction.getParameters();
 		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
