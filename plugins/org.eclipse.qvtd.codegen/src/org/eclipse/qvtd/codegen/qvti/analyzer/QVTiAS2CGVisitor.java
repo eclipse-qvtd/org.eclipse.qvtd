@@ -46,7 +46,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.codegen.qvti.java.FunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -455,8 +454,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = (CGFunction)qvtiAnalyzer.generateOperationDeclaration(asFunction, null, true);
-		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
-		callingConvention.createCGBody(qvtiAnalyzer, cgFunction);
+		//XXX		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
+		//XXX		callingConvention.createCGBody(qvtiAnalyzer, cgFunction);
 		//	cgFunction.setRequired(asFunction.isIsRequired());
 		/*		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
 		//	callingConvention.createCGParameters(this, cgFunction, null);

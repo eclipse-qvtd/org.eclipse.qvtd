@@ -396,6 +396,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		else if ((cgElement instanceof CGVariableExp) && (cgElement.eContainer() instanceof CGMappingCallBinding)) {
 			// The referred variable is in the target domain and CGVariableExp cannot be folded since it might need an unbox wrapper.
 		}
+		else if (cgElement instanceof CGPropertyAssignment) {
+			// The referred property is in the class not operation.
+		}
 		else {
 			super.checkNameManager(cgElement, asElement);
 		}

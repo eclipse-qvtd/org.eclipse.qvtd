@@ -161,7 +161,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		return cgFunctionCallExp;
 	}
 
-	@Override
+	@Override		// FIXME XXX Replace with clone and evolved code in ShadowDataTypeOperationCallingConvention
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
