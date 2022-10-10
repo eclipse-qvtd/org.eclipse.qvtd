@@ -134,10 +134,6 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 
 	@Override
 	public @NonNull CGVariable getCGVariable(@NonNull VariableDeclaration asVariable) {
-		CGVariable cgVariable = codeGenerator.getAnalyzer().basicGetCGVariable(asVariable);
-		if (cgVariable != null) {
-			return cgVariable;
-		}
 		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
 		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
 			return getQualifiedThisVariable();
@@ -146,7 +142,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 			//	TypedModel asTypedModel = (TypedModel)asVariable.eContainer();
 			//	CGTypedModel cgTypedModel = getAnalyzer().getCGTypedModel(asTypedModel);
 			//	ClassNameManager classNameManager = getClassNameManager();
-			cgVariable = createCGVariable(asVariable);
+			CGVariable cgVariable = createCGVariable(asVariable);
 			cgVariable.setAst(asVariable);
 			//	cgVariable.setTypeId(cgInit.getTypeId());
 			//	cgVariable.setInit(cgInit);

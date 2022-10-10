@@ -293,7 +293,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgParameters.add(nameManager.getExecutorParameter());
 		cgParameters.add(nameManager.getTypeIdParameter());
 		for (Parameter asParameter : PivotUtil.getOwnedParameters(asOuterOperation)) {
-			CGParameter cgParameter = nameManager.getParameter(asParameter, (String)null);
+			CGParameter cgParameter = nameManager.getCGParameter(asParameter, (String)null);
 			cgParameters.add(cgParameter);
 		}
 		//	assert i == asParameters.size();

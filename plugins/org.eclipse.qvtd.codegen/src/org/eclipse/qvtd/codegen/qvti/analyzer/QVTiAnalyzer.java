@@ -802,7 +802,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		Function asFunction = QVTiCGUtil.getOwningFunction(asFunctionParameter);
 		ExecutableNameManager operationNameManager = getOperationNameManager(null, asFunction);
-		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetParameter(asFunctionParameter);
+		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetCGParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
 			cgFunctionParameter.setAst(asFunctionParameter);
@@ -824,7 +824,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull VariableDeclaration asVariable) {
 		ExecutableNameManager nameManager = useExecutableNameManager(asVariable);
-		CGGuardVariable cgGuardVariable = (CGGuardVariable)nameManager.basicGetParameter(asVariable);
+		CGGuardVariable cgGuardVariable = (CGGuardVariable)nameManager.basicGetCGParameter(asVariable);
 		assert cgGuardVariable == null;
 		boolean isConnectionVariable = asVariable instanceof ConnectionVariable;
 		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);	// FIXME obsolete ??
@@ -891,7 +891,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
 		ExecutableNameManager nameManager = useExecutableNameManager(asNewStatement);
-		CGVariable cgVariable2 = nameManager.basicGetVariable(asNewStatement);
+		CGVariable cgVariable2 = nameManager.basicGetCGVariable(asNewStatement);
 		CGRealizedVariable cgVariable = (CGRealizedVariable) cgVariable2;
 		if (cgVariable == null) {
 			EClassifier eClassifier = getEClassifier(asNewStatement.getType());

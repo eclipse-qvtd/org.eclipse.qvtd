@@ -144,7 +144,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 			//			cgParameters.add(cgParameter);
 		}
 		for (@NonNull Parameter parameterVariable : ClassUtil.nullFree(asOperation.getOwnedParameters())) {
-			CGParameter cgParameter = qvtiOperationNameManager.getParameter(parameterVariable, (String)null);
+			CGParameter cgParameter = qvtiOperationNameManager.getCGParameter(parameterVariable, (String)null);
 			cgParameters.add(cgParameter);
 		}
 	}
