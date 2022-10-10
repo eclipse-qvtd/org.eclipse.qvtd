@@ -14,19 +14,30 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIndexExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
+import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelBoxingAnalysisVisitor;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
@@ -59,6 +70,45 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		}
 		return super.rewriteAsCast(cgChild);
 	}
+
+	/**
+	 * Insert a CGCastExp around cgChild if required.
+	 */
+	protected CGValuedElement rewriteAsCast2(@NonNull Type asRequiredType, @NonNull CGValuedElement cgElement) {
+		//		CGVariable cgVariable = cgChild.getReferredVariable();
+		Element asElement = cgElement.getAst();
+		if ((asElement instanceof TypedElement) && !(asElement instanceof CGIndexExp)) {
+			Type asActualType = PivotUtil.getType((TypedElement)asElement);
+			if (asActualType.conformsTo(codeGenerator.getEnvironmentFactory().getStandardLibrary(), asRequiredType)) {
+				return cgElement;
+			}
+		}
+		//	Type asActualType = PivotUtil.getType(asElement);
+		//	if (asActualType.conformsTo(codeGenerator.getEnvironmentFactory().getStandardLibrary(), asRequiredType)) {
+		//		return cgElement;
+		//	}
+		//	CGTypeId cgRequiredTypeId = asRequiredType.getTypeId();
+		//	CGTypeId cgActualTypeId = cgElement.getTypeId();
+		//	if (cgRequiredTypeId == cgActualTypeId) {		// FIXME conforms
+		//		return cgElement;
+		//	}
+		//	TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgElement);
+		//	if (typeDescriptor.getJavaClass() == Object.class) {
+		//		return cgElement;
+		//	}
+		//	Type asType = asChild.getType();
+		CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
+		globalNameManager.wrap(cgCastExp, cgElement);
+		cgCastExp.setAst(asElement);
+		//	if (asType != null) {
+		ExecutableNameManager executableNameManager = context.useExecutableNameManager(asElement);
+		CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(asRequiredType);
+		cgCastExp.setExecutorType(cgExecutorType);
+		//	}
+		cgCastExp.setTypeId(codeGenerator.getAnalyzer().getCGTypeId(asRequiredType.getTypeId()));
+		return cgCastExp;
+	}
+
 
 	@Override
 	public @Nullable Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
@@ -159,6 +209,16 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedSlotValue());
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedInitValue());
 		return super.visitCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
+	}
+
+	@Override
+	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		CGProperty cgProperty = QVTiCGUtil.getReferredProperty(cgPropertyAssignment);
+		//	CGTypeId cgRequiredTypeId = CGUtil.getTypeId(cgProperty);
+		Type asRequiredType = PivotUtil.getType(CGUtil.getAST(cgProperty));
+		CGValuedElement cgInitValue = QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment);
+		rewriteAsCast2(asRequiredType, cgInitValue);
+		return super.visitCGPropertyAssignment(cgPropertyAssignment);
 	}
 
 	@Override

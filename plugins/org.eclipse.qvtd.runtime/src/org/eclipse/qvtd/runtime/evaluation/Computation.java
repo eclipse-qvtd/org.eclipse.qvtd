@@ -29,7 +29,7 @@ public interface Computation extends Execution
 	/**
 	 * Return true if this is a computation from thoseValues.
 	 */
-	boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues);
+	boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues);		// XXX lose idResolver
 
 	public interface Constructor
 	{

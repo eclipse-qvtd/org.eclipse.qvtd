@@ -136,7 +136,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		assert bodyExpression == null;
 		Operation asOperation = CGUtil.getAST(cgOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOperation);
-		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
+		//	cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		if (!asOperation.isIsStatic()) {
 			//XXX			CGParameter cgParameter = nameManager.getSelfParameter();
 			//			cgParameter.setTypeId(context.getTypeId(JavaConstants.getJavaTypeId(Object.class)));

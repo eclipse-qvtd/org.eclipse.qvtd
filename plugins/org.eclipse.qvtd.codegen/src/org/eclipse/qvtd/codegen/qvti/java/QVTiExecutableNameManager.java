@@ -29,10 +29,8 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 
 /**
@@ -41,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 public class QVTiExecutableNameManager extends ExecutableNameManager
 {
 	private /*@LazyNonNull*/ CGParameter thisTransformerParameter = null;	// A local orphan parameter spelled "thisTransformer"
+	private /*@LazyNonNull*/ CGParameter idResolverParameter = null;		// A local orphan parameter spelled "idResolver"
 
 	//	protected QVTiExecutableNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
 	//		super(codeGenerator, parent, cgScope);
@@ -77,6 +76,17 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		cgExecutorVariable.setNonNull();
 		executorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
 		return cgExecutorVariable;			// XXX who owns the variable ??
+	}
+
+	protected @NonNull CGParameter createIdResolverParameter() {
+		assert !isStatic;
+		NameResolution idResolverNameResolution = getGlobalNameManager().getIdResolverNameResolution();
+		CGTypeId cgTypeId = analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID);
+		CGParameter idResolverParameter = analyzer.createCGParameter(idResolverNameResolution, cgTypeId, true);
+		//	thisTransformerParameter.setIsThis(true);
+		idResolverParameter.setNonInvalid();
+		idResolverParameter.setNonNull();
+		return idResolverParameter;
 	}
 
 	@Override
@@ -133,9 +143,9 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 			return getQualifiedThisVariable();
 		}
 		else if (eContainingFeature == QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT) {
-		//	TypedModel asTypedModel = (TypedModel)asVariable.eContainer();
-		//	CGTypedModel cgTypedModel = getAnalyzer().getCGTypedModel(asTypedModel);
-		//	ClassNameManager classNameManager = getClassNameManager();
+			//	TypedModel asTypedModel = (TypedModel)asVariable.eContainer();
+			//	CGTypedModel cgTypedModel = getAnalyzer().getCGTypedModel(asTypedModel);
+			//	ClassNameManager classNameManager = getClassNameManager();
 			cgVariable = createCGVariable(asVariable);
 			cgVariable.setAst(asVariable);
 			//	cgVariable.setTypeId(cgInit.getTypeId());
@@ -185,6 +195,15 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	@Override
 	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
 		return (QVTiGlobalNameManager)super.getGlobalNameManager();
+	}
+
+	public @NonNull CGParameter getIdResolverParameter() {
+		assert !isStatic;
+		CGParameter idResolverParameter2 = idResolverParameter;
+		if (idResolverParameter2 == null) {
+			idResolverParameter = idResolverParameter2 = createIdResolverParameter();
+		}
+		return idResolverParameter2;
 	}
 
 	public @NonNull CGParameter getThisTransformerParameter() {

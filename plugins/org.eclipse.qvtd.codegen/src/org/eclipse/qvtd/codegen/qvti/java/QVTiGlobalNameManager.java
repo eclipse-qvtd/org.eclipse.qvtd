@@ -30,6 +30,7 @@ import com.google.common.collect.Iterables;
  */
 public class QVTiGlobalNameManager extends GlobalNameManager
 {
+	private static final @NonNull String BOUND_VALUES_NAME = "boundValues";
 	private static final @NonNull String CACHED_RESULT_NAME = "cachedResult";
 	private static final @NonNull String CLASS_ID_2_CLASS_ID_ = "classIndex2classId_";
 	private static final @NonNull String CLASS_ID_2_ALL_CLASS_INDEXES_ = "classIndex2allClassIndexes_";
@@ -52,6 +53,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
 	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
+	protected final @NonNull NameResolution boundValuesName;
 	protected final @NonNull NameResolution cachedResultName;
 	protected @NonNull NameResolution @Nullable [] classId2AllClassIndexes;
 	protected @NonNull NameResolution @Nullable [] classId2ClassId;
@@ -76,6 +78,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
 		super(codeGenerator, helper);
+		this.boundValuesName = globalNameManager.declareEagerName(null, BOUND_VALUES_NAME);
 		this.cachedResultName = globalNameManager.declareEagerName(null, CACHED_RESULT_NAME);
 		this.classId2AllClassIndexes = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
 		this.classId2ClassId = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
@@ -114,6 +117,10 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
 		//	addNameManager(cgScope, nestedNameManager.getParent());
 		return mappingLoopNameManager;
+	}
+
+	public @NonNull NameResolution getBoundValuesNameResolution() {
+		return boundValuesName;
 	}
 
 	@Deprecated

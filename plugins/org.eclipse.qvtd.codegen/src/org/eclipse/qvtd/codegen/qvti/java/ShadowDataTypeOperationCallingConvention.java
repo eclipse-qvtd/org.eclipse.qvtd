@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIndexExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -49,7 +50,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractProperty;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
-import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention.CachePropertyCallExpImpl;
@@ -98,6 +98,16 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		public @Nullable Object evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 			throw new UnsupportedOperationException();
 		}
+	}
+
+	protected @NonNull Parameter createBoundValuesParameter(@NonNull QVTiCodeGenerator codeGenerator) {
+		NameResolution boundValuesResolution = codeGenerator.getGlobalNameManager().getBoundValuesNameResolution();
+		String boundValuesName = boundValuesResolution.getResolvedName();
+		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
+		assert jLanguageSupport != null;
+		org.eclipse.ocl.pivot.Class boundValueType = jLanguageSupport.getNativeClass(Object[].class);
+		Parameter asConstructorParameter = PivotUtil.createParameter(boundValuesName, boundValueType, true);
+		return asConstructorParameter;
 	}
 
 	@Override
@@ -168,8 +178,8 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		EnvironmentFactory environmentFactory = codeGenerator.getEnvironmentFactory();
-		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
-		PivotHelper helper = new PivotHelper(environmentFactory);
+		//	QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+		//	PivotHelper helper = new PivotHelper(environmentFactory);
 		//
 		NameResolution ctorNameResolution = cgCacheClass.getNameResolution();
 		String ctorName = ctorNameResolution.getResolvedName();
@@ -182,18 +192,8 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		Operation asCacheOperation = PivotUtil.createOperation(ctorName, asCacheType, /*CacheOperation.class*/null, null); //asExpression);
-
-		//	QVTiExecutableNameManager cacheNameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
-		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
-		assert jLanguageSupport != null;
-		org.eclipse.ocl.pivot.Class boundValueType = jLanguageSupport.getNativeClass(Object[].class);
-
-		//	for (@NonNull Parameter asParameter : asOperation.getOwnedParameters()) {
-		//	Parameter asConstructorParameter = helper.createParameter(asParameter);
-		Parameter asConstructorParameter = PivotUtil.createParameter("boundValues", boundValueType, true);
-		asCacheOperation.getOwnedParameters().add(asConstructorParameter);
-		//	}
-
+		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
+		asCacheOperation.getOwnedParameters().add(asBoundValuesParameter);
 		//		asCacheOperation.setIsRequired(isRequired);
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
@@ -214,15 +214,16 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		callingConvention.createCGParameters(nameManager, null);
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
 		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
-		int iMax = cgParameters.size();
-		assert iMax == cgProperties.size()-1;	// XXX not cachedResult
-		for (int i = 0; i < iMax; i++) {
-			CGParameter cgParameter = cgParameters.get(i);
-			CGProperty cgProperty = cgProperties.get(i);
+		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
+		//
+		//	Assign thisTransformer
+		/*
+		{
+			CGParameter cgParameter = cgParameters.get(0);
+			CGProperty cgProperty = cgProperties.get(0);
 			Element asProperty = cgProperty.getAst();
 			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			cgPropertyAssignment.setAst(asProperty);
@@ -232,21 +233,45 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 			cgPropertyAssignment.setOwnedInitValue(analyzer.createCGVariableExp(cgParameter));
 			//	cgPropertyAssignment.setAsProperty(asProperty);
 			cgStatements.add(cgPropertyAssignment);
+		} */
+		//
+		//	Unpack and assign boundValues
+		//
+		CGParameter cgParameter = cgParameters.get(0);
+		for (int i = 0; i < cgProperties.size()-1; i++) {	// XXX not cachedResult
+			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgParameter);
+			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
+			cgIndexExp.setAst(cgParameter.getAst());
+			CGProperty cgProperty = cgProperties.get(i);
+			Element asProperty = cgProperty.getAst();
+			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			cgPropertyAssignment.setAst(asProperty);
+			cgPropertyAssignment.setTypeId(cgTypeId);
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
+			cgPropertyAssignment.setReferredProperty(cgProperty);
+			cgPropertyAssignment.setOwnedInitValue(cgIndexExp);
+			//	cgPropertyAssignment.setAsProperty(asProperty);
+			cgStatements.add(cgPropertyAssignment);
 		}
-		LanguageExpression asExpression = asOperation.getBodyExpression();
-		assert asExpression != null;
-		CGValuedElement asValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
-		CGProperty cgProperty = cgProperties.get(iMax);
-		Element asProperty = cgProperty.getAst();
-		CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-		cgPropertyAssignment.setAst(asProperty);
-		cgPropertyAssignment.setTypeId(cgTypeId);
-		cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
-		cgPropertyAssignment.setReferredProperty(cgProperty);
-		cgPropertyAssignment.setOwnedInitValue(asValue);
-		//	cgPropertyAssignment.setAsProperty(asProperty);
-		cgStatements.add(cgPropertyAssignment);
-		cgConstructor.setBody(cgSequence);
+		//
+		//	Assign cachedResult
+		//
+		{
+			LanguageExpression asExpression = asOperation.getBodyExpression();
+			assert asExpression != null;
+			CGValuedElement asValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
+			CGProperty cgProperty = cgProperties.get(cgProperties.size()-1);
+			Element asProperty = cgProperty.getAst();
+			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			cgPropertyAssignment.setAst(asProperty);
+			cgPropertyAssignment.setTypeId(cgTypeId);
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
+			cgPropertyAssignment.setReferredProperty(cgProperty);
+			cgPropertyAssignment.setOwnedInitValue(asValue);
+			//	cgPropertyAssignment.setAsProperty(asProperty);
+			cgStatements.add(cgPropertyAssignment);
+			cgConstructor.setBody(cgSequence);
+		}
 		//
 		List<@NonNull CGOperation> cgCacheOperations = CGUtil.getOperationsList(cgCacheClass);
 		cgCacheOperations.add(cgConstructor);
@@ -323,8 +348,10 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		Operation asCacheOperation = PivotUtil.createOperation(isEqualName, asReturnType, /*CacheOperation.class*/null, null); //asExpression);
 		asCacheOperation.setIsRequired(true);
+		List<@NonNull Parameter> asCacheParameters = PivotUtilInternal.getOwnedParametersList(asCacheOperation);
 
-		asCacheOperation.getOwnedParameters();
+		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
+		asCacheParameters.add(asBoundValuesParameter);
 
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
@@ -347,13 +374,20 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		cgCacheOperation.setBody(analyzer.createCGBoolean(true));
 		isEqualNameResolution.addCGElement(cgCacheOperation);
 
-		cgCacheOperation.getParameters();
+		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
+		List<CGParameter> cgCacheParameters = cgCacheOperation.getParameters();
+		cgCacheParameters.add(operationNameManager.getIdResolverParameter());
+		//	callingConvention.createCGParameters(nameManager, null);
+		for (@NonNull Parameter asParameterVariable : asCacheParameters) {
+			CGParameter cgParameter = operationNameManager.getParameter(asParameterVariable, (String)null);
+			cgCacheParameters.add(cgParameter);
+		}
 		//
 		List<@NonNull CGOperation> cgCacheOperations = CGUtil.getOperationsList(cgCacheClass);
 		cgCacheOperations.add(cgCacheOperation);
 		//
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgCacheOperation, asCacheOperation);	// Needed to support downstream useOperationNameManager()
-		operationNameManager.getIdResolverVariable();
+		//	ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgCacheOperation, asCacheOperation);	// Needed to support downstream useOperationNameManager()
+		//	operationNameManager.getIdResolverVariable();
 		//	globalNameManager.createNestedNameManager(nameManager, cgCacheOperation);
 		return cgCacheOperation;
 
