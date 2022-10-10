@@ -313,24 +313,21 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		EnvironmentFactory environmentFactory = codeGenerator.getEnvironmentFactory();
 		PivotHelper helper = new PivotHelper(environmentFactory);
+		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
+		//
+		//	Create AS declaration for isEqual
 		//
 		NameResolution isEqualNameResolution = globalNameManager.getIsEqualNameResolution();
 		String isEqualName = isEqualNameResolution.getResolvedName();
-		//	String cachedResultName = globalNameManager.getCachedResultNameResolution().getResolvedName();
-		//	CGProperty cgCacheProperty = getCGCacheProperty(cgCacheClass, cachedResultName);
-		//	Property asCacheProperty = CGUtil.getAST(cgCacheProperty);
-		//	Type asCacheType = PivotUtil.getType(asCacheProperty);
 		Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
-		//	boolean isRequired = cgCacheProperty.isRequired();
-		//
-		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(isEqualName, asReturnType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asCacheOperation = PivotUtil.createOperation(isEqualName, asReturnType, null, null);
 		asCacheOperation.setIsRequired(true);
-		List<@NonNull Parameter> asCacheParameters = PivotUtilInternal.getOwnedParametersList(asCacheOperation);
-		asCacheParameters.add(createBoundValuesParameter(codeGenerator));
-
+		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
+		asCacheOperation.getOwnedParameters().add(asBoundValuesParameter);
 		asCacheClass.getOwnedOperations().add(asCacheOperation);
-
+		//
+		//	Create AS body for isEqual
+		//
 		OCLExpression asBody = null;
 		ExpressionInOCL asExpressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		ParameterVariable asThisVariable = PivotFactory.eINSTANCE.createParameterVariable();
@@ -350,7 +347,6 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 				asCacheThisVariable.setName(PivotConstants.SELF_NAME);
 				asCacheThisVariable.setType(asCacheClass);
 				asCacheThisVariable.setIsRequired(true);
-				//	asExpressionInOCL.setOwnedContext(asCacheThisVariable);
 				asCacheParameterVariable = asCacheThisVariable;
 			}
 			else {
@@ -367,7 +363,7 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 			OCLExpression asThisVariableExp = helper.createVariableExp(asThisVariable);
 			OCLExpression asCacheParameterVariableExp = helper.createVariableExp(asCacheParameterVariable);
 			OCLExpression asCachePropertyCallExp = helper.createPropertyCallExp(asThisVariableExp, asCacheProperty);
-			OCLExpression asEquals = helper.createOperationCallExp(asCacheParameterVariableExp, "=", asCachePropertyCallExp);	// XXX oclEquals
+			OCLExpression asEquals = helper.createOperationCallExp(asCacheParameterVariableExp, "=", asCachePropertyCallExp);
 			asBody = asBody != null ? helper.createOperationCallExp(asBody, LibraryConstants.AND2, asEquals) : asEquals;
 		}
 		assert asBody != null;
@@ -378,77 +374,31 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		asExpressionInOCL.setOwnedBody(asBody);
 		asExpressionInOCL.setType(asBody.getType());
 		asCacheOperation.setBodyExpression(asExpressionInOCL);
-
-
 		//
-		/*	CGTypeId cgTypeId = cgCacheProperty.getTypeId();
-
-		CGParameter cgThisParameter = nameManager.getThisParameter();
-		CGVariableExp cgThis = analyzer.createCGVariableExp(cgThisParameter);
-		CGPropertyCallExp cgPropertyCallExp = new CachePropertyCallExpImpl();
-		cgPropertyCallExp.setSource(cgThis);
-		cgPropertyCallExp.setAsProperty(asCacheProperty);
-		cgPropertyCallExp.setReferredProperty(cgCacheProperty);
-		cgPropertyCallExp.setTypeId(cgTypeId);
-		cgPropertyCallExp.setRequired(isRequired); */
+		//	Create CG declaration for isEqual
 		//
-
-
-
 		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
 		CGOperation cgCacheOperation = callingConvention.createCGOperation(qvtiAnalyzer, asCacheOperation);
 		analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 		cgCacheOperation.setCallingConvention(callingConvention);
-		//		cgCacheOperation.setBody(analyzer.createCGBoolean(true));
-		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgCacheOperation, asCacheOperation);
-		//	callingConvention.createCGParameters(operationNameManager, asExpressionInOCL);
 		isEqualNameResolution.addCGElement(cgCacheOperation);
-
+		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgCacheOperation, asCacheOperation);
 		List<@NonNull CGParameter> cgCacheParameters = CGUtil.getParametersList(cgCacheOperation);
 		cgCacheParameters.add(operationNameManager.getIdResolverParameter());
-		//	callingConvention.createCGParameters(nameManager, null);
-		for (@NonNull Parameter asParameterVariable : asCacheParameters) {				// XXX always just one
-			CGParameter cgParameter = operationNameManager.getCGParameter(asParameterVariable, (String)null);
-			cgCacheParameters.add(cgParameter);
-		}
-
-		//	CGParameter cgThisParameter = operationNameManager.getThisParameter();
-		//	List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgCacheOperation);
-		//	List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
-		//	CGValuedElement cgResult = null;
+		CGParameter cgCacheBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
+		cgCacheParameters.add(cgCacheBoundValuesParameter);
 		//
-		//	Unpack boundValues
+		//	Create CG body for isEqual unpacking boundValues to regular parameter variables
 		//
-		//	StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		//	CompleteInheritance booleanInheritance = standardLibrary.getBooleanType().getInheritance(standardLibrary);
-		//	Operation asAnd2Operation = booleanInheritance.lookupLocalOperation(standardLibrary, LibraryConstants.AND2, booleanInheritance);
-		//	assert asAnd2Operation != null;
-		//	CGOperation cgAnd2Operation = qvtiAnalyzer.generateOperation(asAnd2Operation);			// XX AND2 has an OCL body
-		//	List<@NonNull CGProperty> cgCacheProperties = CGUtil.getPropertiesList(cgCacheClass);
 		Stack<@NonNull CGFinalVariable> cgLetVariables = new Stack<>();
-		CGParameter cgCacheBoundValuesParameter = cgCacheParameters.get(1);	// XXX not idResolver
-		//	VariableDeclaration asCacheParameter = CGUtil.getAST(cgCacheBoundValuesParameter);
 		for (int i = 0; i < asCacheProperties.size()-1; i++) {		// not cachedResult
-			//	Property asCacheProperty = asCacheProperties.get(i);
 			ParameterVariable asParameterVariable = (ParameterVariable)asCacheParameterVariables.get(i);
-			//	Parameter asParameter = asParameterVariable.getRepresentedParameter();
 			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoundValuesParameter);
 			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
 			cgIndexExp.setAst(asParameterVariable);
 			CGFinalVariable cgParameterVariable = operationNameManager.createCGVariable(cgIndexExp);
 			operationNameManager.addVariable(asParameterVariable, cgParameterVariable);
 			cgLetVariables.push(cgParameterVariable);
-			//	CGLetExp cgLetExp = analyzer.createCGLetExp(cgVariable, cgIndexExp);
-			//	CGProperty cgProperty = cgProperties.get(i);
-			//	CGVariableExp cgThisExp = qvtiAnalyzer.createCGVariableExp(cgThisParameter);
-			//	CGValuedElement cgPropertyCallExp = LibraryPropertyCallingConvention.INSTANCE.createCGNavigationCallExp2(qvtiAnalyzer, cgProperty, cgThisExp);
-			//	CGValuedElement cgEqualsCallExp = qvtiAnalyzer.createCGIsEqual(cgIndexExp, cgPropertyCallExp);
-			//	if (cgResult == null) {
-			//		cgResult = cgEqualsCallExp;
-			//	}
-			//	else {
-			//		cgResult = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp2(qvtiAnalyzer, cgAnd2Operation, cgResult, cgPropertyCallExp);
-			//	}
 		}
 		CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpressionInOCL);
 		while (!cgLetVariables.isEmpty()) {
@@ -459,31 +409,6 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		//
 		cgCacheClass.getOperations().add(cgCacheOperation);
 		return cgCacheOperation;
-
-
-
-		/*	CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
-		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
-		NestedNameManager nameManager = as2cgVisitor.getNameManager();
-		//	CGParameter thisParameter = nameManager.getThisParameter();
-		//	CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
-		//
-		//	nameManager.createCGVariable(null)
-
-		CGOperation cgOperation = callingConvention.createCGOperation(as2cgVisitor, NULL_OPERATION);
-		cgOperation.setTypeId(analyzer.getCGTypeId(TypeId.BOOLEAN));
-		cgOperation.setRequired(true);
-		cgOperation.setCallingConvention(callingConvention);
-		nameManager.getGlobalNameManager().getIsEqualNameResolution().addCGElement(cgOperation);
-		//
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
-		//	analyzer.createCGNativePropertyCallExp(cgClass.getProperties().get(3)));
-		//	cgOperation.setBody(analyzer.createCGVariableExp(cgClass.getProperties().get(3)));
-		as2cgVisitor.pushNestedNameManager(cgOperation);
-		as2cgVisitor.popNestedNameManager();
-		asCacheOperations.add(asCacheOperation);
-		return asCacheOperation; */
 	}
 
 	protected void installCacheProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
