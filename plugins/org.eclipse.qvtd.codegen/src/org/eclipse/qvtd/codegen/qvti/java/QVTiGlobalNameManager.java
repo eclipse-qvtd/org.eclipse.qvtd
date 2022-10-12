@@ -45,6 +45,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String INVOCATION_HASH_CODE_NAME = "invocationHashCode";
 	private static final @NonNull String MODELS_NAME = "models";
 	private static final @NonNull String NEEDS_SPECULATION_NAME = "needsSpeculation";
+	private static final @NonNull String NEW_INSTANCE_NAME = "newInstance";
 	private static final @NonNull String OBJECT_MANAGER_NAME = "objectManager";
 	private static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
@@ -68,6 +69,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	protected final @NonNull NameResolution invocationHashCodeName;
 	protected final @NonNull NameResolution modelsName;
 	protected final @NonNull NameResolution needsSpeculationName;
+	protected final @NonNull NameResolution newInstanceName;
 	protected final @NonNull NameResolution objectManagerName;
 	protected final @NonNull NameResolution oppositeIndex2PropertyIdName;
 	protected final @NonNull NameResolution outputSpeculationSlotStateName;
@@ -93,6 +95,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.invocationHashCodeName = globalNameManager.declareEagerName(null, INVOCATION_HASH_CODE_NAME);
 		this.modelsName = globalNameManager.declareEagerName(null, MODELS_NAME);
 		this.needsSpeculationName = globalNameManager.declareEagerName(null, NEEDS_SPECULATION_NAME);
+		this.newInstanceName = globalNameManager.declareEagerName(null, NEW_INSTANCE_NAME);
 		this.objectManagerName = globalNameManager.declareEagerName(null, OBJECT_MANAGER_NAME);
 		this.oppositeIndex2PropertyIdName = globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
 		this.outputSpeculationSlotStateName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
@@ -189,6 +192,10 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public @NonNull String getNeedsSpeculationName() {
 		return needsSpeculationName.getResolvedName();
+	}
+
+	public @NonNull NameResolution getNewInstanceResolution() {
+		return newInstanceName;
 	}
 
 	public @NonNull String getObjectManagerName() {

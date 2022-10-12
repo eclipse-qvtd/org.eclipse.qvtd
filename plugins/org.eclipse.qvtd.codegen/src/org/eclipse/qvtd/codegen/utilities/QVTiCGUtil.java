@@ -93,6 +93,15 @@ public class QVTiCGUtil extends CGUtil
 		return null;
 	}
 
+	public static @Nullable CGTransformation basicGetContainingCGTransformation(@NonNull CGElement cgElement) {
+		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof CGTransformation) {
+				return (CGTransformation)eObject;
+			}
+		}
+		return null;
+	}
+
 	public static @NonNull Property getAST(@NonNull CGExecutorProperty cgProperty) {
 		return ClassUtil.nonNullState((Property)cgProperty.getAst());
 	}
@@ -155,6 +164,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {
 		return ClassUtil.nonNullState(basicGetContainingCGMapping(cgElement));
+	}
+
+	public static @NonNull CGTransformation getContainingCGTransformation(@NonNull CGElement cgElement) {
+		return ClassUtil.nonNullState(basicGetContainingCGTransformation(cgElement));
 	}
 
 	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGEcoreContainerAssignment cgContainerAssignment) {

@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -94,6 +95,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
+import org.eclipse.qvtd.codegen.qvti.java.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -1170,30 +1172,33 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		for (@NonNull CGOperation cgOperation : cgOperations) {
 			if (cgOperation instanceof CGFunction) {
 				CGFunction cgFunction = (CGFunction)cgOperation;
-				Function asFunction = QVTiCGUtil.getAST(cgFunction);
-				if (!asFunction.isIsTransient()) {
-					String functionName = cgFunction.getResolvedName();
-					js.append("protected final ");
-					js.appendClassReference(true, AbstractComputationConstructor.class);
-					js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
-					js.appendClassReference(null, AbstractComputationConstructor.class);
-					js.append("(idResolver)\n");
-					js.append("{\n");
-					js.pushIndentation(null);
-					js.append("@Override\n");
-					js.append("public ");
-					js.appendIsRequired(true);
-					js.append(" " + functionName + " newInstance(");
-					js.appendClassReference(false, Object.class);
-					js.append(" ");
-					js.appendIsRequired(true);
-					js.append(" [] values) {\n");
-					js.pushIndentation(null);
-					js.append("return new " + functionName + "(values);\n");
-					js.popIndentation();
-					js.append("}\n");
-					js.popIndentation();
-					js.append("};\n\n");
+				OperationCallingConvention callingConvention = cgFunction.getCallingConvention();
+				if (!(callingConvention instanceof ShadowDataTypeOperationCallingConvention)) {		// XXX eliminate
+					Function asFunction = QVTiCGUtil.getAST(cgFunction);
+					if (!asFunction.isIsTransient()) {
+						String functionName = cgFunction.getResolvedName();
+						js.append("protected final ");
+						js.appendClassReference(true, AbstractComputationConstructor.class);
+						js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
+						js.appendClassReference(null, AbstractComputationConstructor.class);
+						js.append("(idResolver)\n");
+						js.append("{\n");
+						js.pushIndentation(null);
+						js.append("@Override\n");
+						js.append("public ");
+						js.appendIsRequired(true);
+						js.append(" " + functionName + " newInstance(");
+						js.appendClassReference(false, Object.class);
+						js.append(" ");
+						js.appendIsRequired(true);
+						js.append(" [] values) {\n");
+						js.pushIndentation(null);
+						js.append("return new " + functionName + "(values);\n");
+						js.popIndentation();
+						js.append("}\n");
+						js.popIndentation();
+						js.append("};\n\n");
+					}
 				}
 			}
 		}
@@ -2353,8 +2358,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		return JavaStream.convertToJavaIdentifier("FUN_" + cgFunction.getName());
 	} */
 
-	protected @NonNull QVTiGlobalNameManager getGlobalNameManager() {
-		return getCodeGenerator().getGlobalNameManager();
+	@Override
+	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
+		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
 	private @Nullable Mapping getInvocationWrapper(@NonNull CGValuedElement cgValue) {

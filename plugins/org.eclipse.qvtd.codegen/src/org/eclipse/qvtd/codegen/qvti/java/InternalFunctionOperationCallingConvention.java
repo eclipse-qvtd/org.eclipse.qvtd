@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
-import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -266,7 +265,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 			@NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
-		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+		//	QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		//
 		NameResolution ctorNameResolution = cgCacheClass.getNameResolution();
 		String ctorName = ctorNameResolution.getResolvedName();
@@ -285,7 +284,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//
 		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asOperation);
 		ConstructorOperationCallingConvention callingConvention = ConstructorOperationCallingConvention.INSTANCE;
-		CGParameter thisTransformerParameter = nameManager.getThisTransformerParameter();
+		//	CGParameter thisTransformerParameter = nameManager.getThisTransformerParameter();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
 		//
 		CGOperation cgConstructor = callingConvention.createCGOperation(qvtiAnalyzer, asOperation);
@@ -360,7 +359,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		asCacheOperations.add(asCacheOperation);
 		//
 		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
-		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
+		OperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
 		CGTypeId cgTypeId = cgCacheProperty.getTypeId();
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
@@ -411,8 +410,8 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
 		//
-		NestedNameManager nameManager = qvtiAnalyzer.getNameManager();
-		CacheOperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
+		//	NestedNameManager nameManager = qvtiAnalyzer.getNameManager();
+		OperationCallingConvention callingConvention = CacheOperationCallingConvention.INSTANCE;
 		/*	CGTypeId cgTypeId = cgCacheProperty.getTypeId();
 
 		CGParameter cgThisParameter = nameManager.getThisParameter();
