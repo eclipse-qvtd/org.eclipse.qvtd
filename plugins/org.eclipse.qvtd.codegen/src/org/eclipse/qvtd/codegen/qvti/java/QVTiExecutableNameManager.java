@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 public class QVTiExecutableNameManager extends ExecutableNameManager
 {
 	private /*@LazyNonNull*/ CGParameter thisTransformerParameter = null;	// A local orphan parameter spelled "thisTransformer"
-	private /*@LazyNonNull*/ CGParameter idResolverParameter = null;		// A local orphan parameter spelled "idResolver"
+	private /*@LazyNonNull*/ CGParameter idResolverParameter = null;		// A local orphan parameter spelled "idResolver" -- XXX probably doesn't need caching
 
 	//	protected QVTiExecutableNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
 	//		super(codeGenerator, parent, cgScope);
@@ -57,8 +57,21 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		super(classNameManager, parentNameManager, cgScope);
 	}
 
+	//	public @Nullable CGParameter basicGetIdResolverParameter() {
+	//		return idResolverParameter;
+	//	}
+
+	//	@Override
+	//	public @Nullable CGVariable basicGetIdResolverVariable() {
+	//		if (idResolverParameter != null) {
+	//			return idResolverParameter;
+	//		}
+	//		return super.basicGetIdResolverVariable();
+	//	}
+
 	@Override
 	public @NonNull CGVariable createExecutorVariable() {
+		// create a 'parameter' variable that exposes the static field name as a variable
 		//	assert outerContext == null;
 		//	assert asScope instanceof Transformation;
 		NameResolution executorNameResolution = globalNameManager.getExecutorNameResolution();
@@ -90,13 +103,28 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	}
 
 	@Override
+	public @NonNull CGVariable createIdResolverVariable() {
+		// if idResolverParameter is non-null, create a 'parameter' variable that exposes the parameter name as a variable
+		// if idResolverParameter is null, create a 'parameter' variable that exposes the static field name as a variable
+		//	assert asScope instanceof Transformation; -- may be a Function
+		NameResolution idResolverNameResolution = globalNameManager.getIdResolverNameResolution();
+		CGVariable cgIdResolverVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+		//	cgExecutorVariable.setAst(asExecutorVariable);			// XXX misguided
+		cgIdResolverVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
+		//	executorVariable.setInit(executorInit);			// This name exposes a 'hidden' initialized name
+		cgIdResolverVariable.setNonInvalid();
+		cgIdResolverVariable.setNonNull();
+		idResolverNameResolution.addCGElement(cgIdResolverVariable);			// XXX share via createIdResolver(init)
+		return cgIdResolverVariable;			// XXX who owns the variable ??
+	}
+
+	@Override
 	public @NonNull CGVariable createQualifiedThisVariable() {
 		Class asClass = classNameManager.getASClass();
 		assert asClass instanceof Transformation;
 		NameResolution transformationName = getGlobalNameManager().getTransformationNameResolution();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
 		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, cgTypeId, true);
-		//	transformationVariable.setValueName(transformationName);
 		transformationVariable.setNonInvalid();
 		transformationVariable.setNonNull();
 		transformationName.addCGElement(transformationVariable);
@@ -201,6 +229,15 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		}
 		return idResolverParameter2;
 	}
+
+	/*	@Override
+	public @NonNull CGVariable getIdResolverVariable() {
+		CGVariable idResolverVariable = basicGetIdResolverVariable();
+		if (idResolverVariable == null) {
+			idResolverVariable = idResolverParameter = createIdResolverParameter();
+		}
+		return idResolverVariable;
+	} */
 
 	public @NonNull CGParameter getThisTransformerParameter() {
 		assert !isStatic;
