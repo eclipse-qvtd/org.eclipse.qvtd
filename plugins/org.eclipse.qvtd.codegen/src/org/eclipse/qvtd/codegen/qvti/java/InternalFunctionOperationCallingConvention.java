@@ -17,20 +17,17 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
@@ -42,15 +39,9 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.PivotFactory;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.library.AbstractProperty;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -80,37 +71,6 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		@Override
 		public boolean isInlined() {
 			return true;
-		}
-	}
-
-	/**
-	 * A CacheProperty instance supports evaluation of a property in a CGed cache. (It has no opposite).
-	 */
-	public static class CacheProperty extends AbstractProperty
-	{
-		private final @NonNull PropertyId propertyId;
-		private final @Nullable OCLExpression initExpression;
-		private final @Nullable Object defaultValue;
-
-		private CacheProperty(@NonNull PropertyId propertyId, @Nullable OCLExpression initExpression, @Nullable Object defaultValue) {
-			this.propertyId = propertyId;
-			this.initExpression = initExpression;
-			this.defaultValue = defaultValue;
-		}
-
-		/** @deprecated use Executor */
-		@Deprecated
-		@Override
-		public @Nullable Object evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-			return evaluate(getExecutor(evaluator), returnTypeId, sourceValue);
-		}
-
-		/**
-		 * @since 1.1
-		 */
-		@Override
-		public @Nullable Object evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -165,6 +125,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
+		ImperativeTransformation asTransformation = codeGenerator.getTransformation();
+		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
 		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
@@ -177,27 +140,37 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		}
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
 		assert jLanguageSupport != null;
+		//
 		org.eclipse.ocl.pivot.Class asCacheClass = jLanguageSupport.getCacheClass(asFunction);
-		org.eclipse.ocl.pivot.Class asSuperClass = jLanguageSupport.getNativeClass(AbstractComputation.class);
-		asCacheClass.getSuperClasses().add(asSuperClass);
+		org.eclipse.ocl.pivot.Class asCacheSuperClass = jLanguageSupport.getNativeClass(AbstractComputation.class);
+		asCacheClass.getSuperClasses().add(asCacheSuperClass);
+		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
 		//
 		CGClass cgCacheClass = qvtiAnalyzer.generateClassDeclaration(asCacheClass, CacheClassCallingConvention.INSTANCE);
-		//		CGClass cgCacheClass = analyzer.createNestedCGClass(qvtiAnalyzer, asCacheClass, CacheClassCallingConvention.INSTANCE);
-		createCacheProperties(qvtiAnalyzer, cgCacheClass, asFunction);
-		createCacheOperations(qvtiAnalyzer, cgCacheClass, asFunction);
-		CGClass cgSuperClass = qvtiAnalyzer.generateClassDeclaration(asSuperClass, getClassCallingConvention());
+		NameResolution cachedResultNameResolution = globalNameManager.getCachedResultNameResolution();
+		NameResolution thisTransformerNameResolution = globalNameManager.getThisTransformerNameResolution();
+		installCacheProperty(qvtiAnalyzer, cgCacheClass, thisTransformerNameResolution, asTransformation);
+		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asFunction)) {
+			installCacheProperty(qvtiAnalyzer, cgCacheClass, null, asParameter);
+			// XXX need to support a cached invalid
+		}
+		installCacheProperty(qvtiAnalyzer, cgCacheClass, cachedResultNameResolution, asFunction);
+		installCacheConstructor(qvtiAnalyzer, cgCacheClass, asFunction);
+		installCacheGetResultOperation(qvtiAnalyzer, cgCacheClass, asFunction);
+		installCacheIsEqualOperation(qvtiAnalyzer, cgCacheClass, asFunction);
+		CGClass cgSuperClass = qvtiAnalyzer.generateClassDeclaration(asCacheSuperClass, getClassCallingConvention());
 		cgCacheClass.getSuperTypes().add(cgSuperClass);
 	}
 
 
-	protected void createCacheOperations(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, @NonNull Function asFunction) {
+	/*	protected void createCacheOperations(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, @NonNull Function asFunction) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		installCacheConstructor(qvtiAnalyzer, cgCacheClass, asFunction);
 		installCacheGetResultOperation(qvtiAnalyzer, cgCacheClass, asFunction);
 		installCacheIsEqualOperation(qvtiAnalyzer, cgCacheClass, asFunction);
-	}
+	} */
 
-	protected void createCacheProperties(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, @NonNull Operation asOperation) {
+	/*	protected void createCacheProperties(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, @NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		List<@NonNull Property> asCacheProperties = PivotUtilInternal.getOwnedPropertiesList(asCacheClass);
@@ -210,7 +183,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		}
 		asCacheProperty = installCacheResultProperty(qvtiAnalyzer, asCacheProperties, asOperation);
 		installCGCacheProperty(qvtiAnalyzer, cgCacheProperties, asCacheProperty, ImmutableCachePropertyCallingConvention.INSTANCE);
-	}
+	} */
 
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
@@ -222,17 +195,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		return super.generateJavaDeclaration(cg2javaVisitor, js, cgOperation);
 	}
 
-	protected @NonNull CGProperty getCGCacheProperty(@NonNull CGClass cgCacheClass, @NonNull String name) {
-		for (@NonNull CGProperty cgProperty : CGUtil.getProperties(cgCacheClass)) {
-			Property asProperty = CGUtil.getAST(cgProperty);
-			if (name.equals(asProperty.getName())) {
-				return cgProperty;
-			}
-		}
-		throw new IllegalStateException();
-	}
-
-	protected @NonNull CGOperation installCGCacheOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull CGOperation> cgCacheOperations,
+	/*	protected @NonNull CGOperation installCGCacheOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull CGOperation> cgCacheOperations,
 			@NonNull Operation asCacheOperation, @NonNull OperationCallingConvention callingConvention) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		//
@@ -248,9 +211,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	NestedNameManager nameManager = qvtiAnalyzer.getNameManager();
 		//	nameManager.getGlobalNameManager().createNestedNameManager(nameManager, cgCacheOperation);
 		return cgCacheOperation;
-	}
+	} */
 
-	protected @NonNull CGProperty installCGCacheProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull CGProperty> cgCacheProperties,
+	/*	protected @NonNull CGProperty installCGCacheProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull CGProperty> cgCacheProperties,
 			@NonNull Property asCacheProperty, @NonNull PropertyCallingConvention callingConvention) {
 		//	CodeGenAnalyzer analyzer = as2cgVisitor.getAnalyzer();
 		//
@@ -259,9 +222,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGProperty cgCacheProperty = analyzer.generatePropertyDeclaration(asCacheProperty, callingConvention);
 		cgCacheProperties.add(cgCacheProperty);
 		return cgCacheProperty;
-	}
+	} */
 
-	protected @NonNull CGOperation installCacheConstructor(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
+	/*	protected @NonNull CGOperation installCacheConstructor(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
 			@NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
@@ -277,7 +240,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//		boolean isRequired = cgCacheProperty.isRequired();
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(ctorName, asCacheType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asCacheOperation = PivotUtil.createOperation(ctorName, asCacheType, /*CacheOperation.class* /null, null); //asExpression);
 		//		asCacheOperation.setIsRequired(isRequired);
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
@@ -336,9 +299,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//
 		//	globalNameManager.createNestedNameManager(nameManager, cgConstructor);
 		return cgConstructor;
-	}
+	} */
 
-	protected @NonNull CGOperation installCacheGetResultOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
+	/*	protected @NonNull CGOperation installCacheGetResultOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
 			@NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
@@ -353,7 +316,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		boolean isRequired = cgCacheProperty.isRequired();
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(getResultName, asCacheType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asCacheOperation = PivotUtil.createOperation(getResultName, asCacheType, / *CacheOperation.class* /null, null); //asExpression);
 		asCacheOperation.setIsRequired(isRequired);
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
@@ -385,11 +348,11 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//
 		//	globalNameManager.createNestedNameManager(nameManager, cgCacheOperation);
 		return cgCacheOperation;
-	}
+	} */
 
 
 
-	protected @NonNull CGOperation installCacheIsEqualOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
+	/*	protected @NonNull CGOperation installCacheIsEqualOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
 			@NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
@@ -405,7 +368,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		//	boolean isRequired = cgCacheProperty.isRequired();
 		//
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asCacheOperation = PivotUtil.createOperation(getResultName, asReturnType, /*CacheOperation.class*/null, null); //asExpression);
+		Operation asCacheOperation = PivotUtil.createOperation(getResultName, asReturnType, /*CacheOperation.class* /null, null); //asExpression);
 		asCacheOperation.setIsRequired(true);
 		List<@NonNull Operation> asCacheOperations = PivotUtilInternal.getOwnedOperationsList(asCacheClass);
 		asCacheOperations.add(asCacheOperation);
@@ -421,7 +384,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgPropertyCallExp.setAsProperty(asCacheProperty);
 		cgPropertyCallExp.setReferredProperty(cgCacheProperty);
 		cgPropertyCallExp.setTypeId(cgTypeId);
-		cgPropertyCallExp.setRequired(isRequired); */
+		cgPropertyCallExp.setRequired(isRequired); * /
 		//
 		CGOperation cgCacheOperation = callingConvention.createCGOperation(qvtiAnalyzer, asCacheOperation);
 		cgCacheOperation.setAst(asCacheOperation);
@@ -461,19 +424,19 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		as2cgVisitor.pushNestedNameManager(cgOperation);
 		as2cgVisitor.popNestedNameManager();
 		asCacheOperations.add(asCacheOperation);
-		return asCacheOperation; */
-	}
+		return asCacheOperation; * /
+	} */
 
-	protected @NonNull Property installCacheParameterProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties, @NonNull Parameter asParameter) {
+	/*	protected @NonNull Property installCacheParameterProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties, @NonNull Parameter asParameter) {
 		Property asCacheProperty = PivotFactory.eINSTANCE.createProperty();
 		asCacheProperty.setName(asParameter.getName());
 		asCacheProperty.setType(asParameter.getType());
 		asCacheProperty.setIsRequired(asParameter.isIsRequired());
 		asCacheProperties.add(asCacheProperty);
 		return asCacheProperty;
-	}
+	} */
 
-	protected @NonNull Property installCacheResultProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties, @NonNull Operation asOperation) {
+	/*	protected @NonNull Property installCacheResultProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties, @NonNull Operation asOperation) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		NameResolution cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultNameResolution();
@@ -484,9 +447,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		asCacheProperty.setIsRequired(asOperation.isIsRequired());
 		asCacheProperties.add(asCacheProperty);
 		return asCacheProperty;
-	}
+	} */
 
-	protected @NonNull Property installCacheTransformerProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties) {
+	/*	protected @NonNull Property installCacheTransformerProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull List<@NonNull Property> asCacheProperties) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		NameResolution thisTransformerNameResolution = codeGenerator.getGlobalNameManager().getThisTransformerNameResolution();
@@ -498,13 +461,17 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		asCacheProperty.setIsRequired(true);
 		asCacheProperties.add(asCacheProperty);
 		return asCacheProperty;
-	}
+	} */
 
 	@Override
 	public void rewriteWithBoxingAndGuards(@NonNull BoxingAnalyzer boxingAnalyzer, @NonNull CGOperation cgOperation) {
 		super.rewriteWithBoxingAndGuards(boxingAnalyzer, cgOperation);
-		CGValuedElement cgBody = CGUtil.getBody(cgOperation);
-		boxingAnalyzer.rewriteAsBoxed(cgBody);
+		//	CGValuedElement cgBody = CGUtil.getBody(cgOperation);
+		//	boxingAnalyzer.rewriteAsBoxed(cgBody);
+		CGValuedElement cgBody = cgOperation.getBody();
+		if (cgBody != null) {				// XXX null while developing
+			boxingAnalyzer.rewriteAsBoxed(cgBody);
+		}
 	}
 
 	@Override

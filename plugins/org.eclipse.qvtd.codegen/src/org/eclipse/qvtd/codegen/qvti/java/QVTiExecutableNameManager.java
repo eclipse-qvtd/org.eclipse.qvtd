@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvti.java;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
@@ -91,6 +92,26 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
 
+	@Override
+	public @NonNull CGFinalVariable createCGVariable(@NonNull VariableDeclaration asVariable) {
+		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
+		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
+			CGFinalVariable cgVariable = getQualifiedThisVariable();
+			addVariable(asVariable, cgVariable);
+			return cgVariable;
+		}
+		else if (eContainingFeature == QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT) {
+			CGFinalVariable cgVariable = super.createCGVariable(asVariable);
+			cgVariable.setAst(asVariable);
+			if (asVariable.isIsRequired()) {
+				cgVariable.setNonInvalid();
+				cgVariable.setNonNull();
+			}
+			return cgVariable;
+		}
+		return super.createCGVariable(asVariable);
+	}
+
 	protected @NonNull CGParameter createIdResolverParameter() {
 		assert !isStatic;
 		NameResolution idResolverNameResolution = getGlobalNameManager().getIdResolverNameResolution();
@@ -103,12 +124,12 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	}
 
 	@Override
-	public @NonNull CGVariable createIdResolverVariable() {
+	public @NonNull CGFinalVariable createIdResolverVariable() {
 		// if idResolverParameter is non-null, create a 'parameter' variable that exposes the parameter name as a variable
 		// if idResolverParameter is null, create a 'parameter' variable that exposes the static field name as a variable
 		//	assert asScope instanceof Transformation; -- may be a Function
 		NameResolution idResolverNameResolution = globalNameManager.getIdResolverNameResolution();
-		CGVariable cgIdResolverVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+		CGFinalVariable cgIdResolverVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
 		//	cgExecutorVariable.setAst(asExecutorVariable);			// XXX misguided
 		cgIdResolverVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
 		//	executorVariable.setInit(executorInit);			// This name exposes a 'hidden' initialized name
@@ -119,12 +140,14 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	}
 
 	@Override
-	public @NonNull CGVariable createQualifiedThisVariable() {
+	public @NonNull CGFinalVariable createQualifiedThisVariable() {
 		Class asClass = classNameManager.getASClass();
 		assert asClass instanceof Transformation;
 		NameResolution transformationName = getGlobalNameManager().getTransformationNameResolution();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
-		CGVariable transformationVariable = analyzer.createCGParameter(transformationName, cgTypeId, true);
+		//		CGFinalVariable transformationVariable = (CGFinalVariable) analyzer.createCGParameter(transformationName, cgTypeId, true);
+		CGFinalVariable transformationVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+		transformationVariable.setTypeId(cgTypeId);
 		transformationVariable.setNonInvalid();
 		transformationVariable.setNonNull();
 		transformationName.addCGElement(transformationVariable);
@@ -160,30 +183,14 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return super.getBody();
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull CGVariable getCGVariable(@NonNull VariableDeclaration asVariable) {
 		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
 		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
 			return getQualifiedThisVariable();
 		}
-		else if (eContainingFeature == QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT) {
-			//	TypedModel asTypedModel = (TypedModel)asVariable.eContainer();
-			//	CGTypedModel cgTypedModel = getAnalyzer().getCGTypedModel(asTypedModel);
-			//	ClassNameManager classNameManager = getClassNameManager();
-			CGVariable cgVariable = createCGVariable(asVariable);
-			cgVariable.setAst(asVariable);
-			//	cgVariable.setTypeId(cgInit.getTypeId());
-			//	cgVariable.setInit(cgInit);
-			//			nameResolution.addCGElement(cgVariable);
-			//	return cgVariable;
-			if (asVariable.isIsRequired()) {
-				cgVariable.setNonInvalid();
-				cgVariable.setNonNull();
-			}
-			return cgVariable;
-		}
 		return super.getCGVariable(asVariable);
-	}
+	} */
 
 	//	@Override
 	/*	protected boolean isQualifiedThis(@NonNull VariableExp asVariableExp, @NonNull Parameter asParameter) {

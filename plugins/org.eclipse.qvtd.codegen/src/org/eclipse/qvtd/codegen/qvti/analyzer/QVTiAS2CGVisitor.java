@@ -763,12 +763,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitSimpleParameterBinding(@NonNull SimpleParameterBinding asSimpleParameterBinding) {
 		OCLExpression asExpression = QVTimperativeUtil.getValue(asSimpleParameterBinding);
 		CGValuedElement cgElement = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
-		qvtiAnalyzer.initAst(cgElement, asSimpleParameterBinding, asExpression, true);
+		qvtiAnalyzer.initAst(cgElement, asSimpleParameterBinding.getValue(), asExpression, false);
 		//
 		VariableDeclaration asBoundVariable = QVTimperativeUtil.getBoundVariable(asSimpleParameterBinding);
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
 		cgMappingCallBinding.setOwnedValue(cgElement);
-		qvtiAnalyzer.initAst(cgMappingCallBinding, asSimpleParameterBinding, asBoundVariable, false);
+		qvtiAnalyzer.initAst(cgMappingCallBinding, asSimpleParameterBinding, asBoundVariable, true);
 		return cgMappingCallBinding;
 	}
 
