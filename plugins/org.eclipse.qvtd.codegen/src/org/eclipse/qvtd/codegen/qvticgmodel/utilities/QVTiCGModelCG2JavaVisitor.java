@@ -240,6 +240,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(" extends ");
 			js.appendClassReference(null, AbstractEvaluationOperation.class);
 			js.pushClassBody(instanceClassName);
+			js.append("\n");					// XXX delete me
 			doCachedInstanceBasicEvaluate();
 			js.append("\n");
 			doCachedInstanceEvaluate();
@@ -2884,6 +2885,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(" extends ");
 			js.appendClassReference(null, isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
 			js.pushClassBody(mappingName);
+			js.append("\n");					// XXX delete me
 			boolean needsNewLine = doMappingFields(cgMapping);
 			if (needsNewLine) {
 				js.append("\n");
@@ -3476,10 +3478,11 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		js.append(" * Extract each output model with {@link getRootEObjects(String)}\n");
 		js.append(" */\n");
 		//		js.append("@SuppressWarnings({\"nls\",\"unused\"})\n");
-		js.append("@SuppressWarnings(\"unused\")\n");
+		js.append("@SuppressWarnings({\"restriction\",\"unused\"})\n");
 		js.append("public class " + className + " extends ");
 		js.appendClassReference(null, getAbstractTransformationExecutorClass());
 		js.pushClassBody(className);
+		js.append("\n");					// XXX delete me
 		if (sortedGlobals != null) {
 			for (CGValuedElement cgElement : sortedGlobals) {
 				assert cgElement.isGlobal();

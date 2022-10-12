@@ -126,6 +126,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		js.append(" extends ");
 		js.appendClassReference(null, isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
 		js.pushClassBody(functionName);
+		js.append("\n");
 		js.append("protected final ");
 		js.appendTypeDeclaration(cgFunction);
 		js.append(" " + cachedResultName + ";\n");

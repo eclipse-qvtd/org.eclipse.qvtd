@@ -677,6 +677,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			js.append(" extends ");
 			js.appendClassReference(null, isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
 			js.pushClassBody(functionName);
+			js.append("\n");					// XXX delete me
 			//	js.append("protected final ");
 			//	js.appendIsRequired(true);
 			//	js.append(" ");
