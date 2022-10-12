@@ -642,7 +642,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
+			CGProperty cgProperty = generatePropertyDeclaration(asProperty, null);
 			cgPropertyAssignment.setAsProperty(asProperty);
+			cgPropertyAssignment.setReferredProperty(cgProperty);
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
 			//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
@@ -701,14 +703,14 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			assert asVariable != null;
 			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
+			CGProperty cgTargetProperty = generatePropertyDeclaration(asTargetProperty, null);
 			cgPropertyAssignment.setAsProperty(asTargetProperty);
+			cgPropertyAssignment.setReferredProperty(cgTargetProperty);
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
 			//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 			cgPropertyAssignment.setOwnedInitValue(createCGElement(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 			//	CGExecutorProperty cgExecutorProperty = qvtiAnalyzer.createExecutorProperty(asTargetProperty);
-			CGProperty cgTargetProperty = generatePropertyDeclaration(asTargetProperty, null);
-			cgPropertyAssignment.setReferredProperty(cgTargetProperty);
 			return cgPropertyAssignment;
 		}
 	}
