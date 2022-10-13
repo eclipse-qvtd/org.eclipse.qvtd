@@ -797,7 +797,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		return cgEvaluateOperation;
 	}
 
-	@Override
+	@Override	@Deprecated /* @deprecated use generateJavaEvaluateCall always */
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
 		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
 		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)cgOperationCallExp;
@@ -866,6 +866,41 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			js.append(cachedResultName);
 		}
 		js.append(";\n");
+		return true;
+	}
+
+	protected final boolean generateJavaEvaluateCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
+		// FIXME could be a regular CG call if CG and AS separately created by generateDeclaration
+		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
+		QVTiAnalyzer analyzer = qvticg2javaVisitor.getAnalyzer();
+		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)cgOperationCallExp;
+		CGFunction cgFunction = (CGFunction)QVTiCGUtil.getOperation(cgFunctionCallExp);
+		Function asFunction = QVTiCGUtil.getAST(cgFunction);
+		Iterable<@NonNull CGValuedElement> cgArguments = CGUtil.getArguments(cgFunctionCallExp);
+		Property asCacheInstance = analyzer.getCacheConstructorInstance(asFunction);
+		CGProperty cgCacheInstance = analyzer.getCGProperty(asCacheInstance);
+		//
+		for (@NonNull CGValuedElement cgArgument : cgArguments) {
+			CGValuedElement argument = qvticg2javaVisitor.getExpression(cgArgument);
+			if (!js.appendLocalStatements(argument)) {
+				return false;
+			}
+		}
+		//
+		js.appendDeclaration(cgFunctionCallExp);
+		js.append(" = ");
+		js.appendValueName(cgCacheInstance);
+		js.append(".evaluate(");
+		boolean isFirst = true;
+		for (@NonNull CGValuedElement cgArgument : cgArguments) {
+			if (!isFirst) {
+				js.append(", ");
+			}
+			CGValuedElement argument = qvticg2javaVisitor.getExpression(cgArgument);
+			js.appendValueName(argument);
+			isFirst = false;
+		}
+		js.append(");\n");
 		return true;
 	}
 

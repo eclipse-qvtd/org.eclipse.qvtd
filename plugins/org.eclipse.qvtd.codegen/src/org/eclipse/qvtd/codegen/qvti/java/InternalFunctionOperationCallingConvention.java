@@ -10,15 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
@@ -29,13 +26,11 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -84,7 +79,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
-		cgFunctionCallExp.getArguments().add(cgSource);
+		//	cgFunctionCallExp.getArguments().add(cgSource);
 		initCallArguments(qvtiAnalyzer, cgFunctionCallExp);
 		return cgFunctionCallExp;
 	}
@@ -100,39 +95,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		// FIXME could be a regular CG call if CG and AS separately created by generateDeclaration
-		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
-		QVTiAnalyzer analyzer = qvticg2javaVisitor.getAnalyzer();
-		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)cgOperationCallExp;
-		CGFunction cgFunction = (CGFunction)QVTiCGUtil.getOperation(cgFunctionCallExp);
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
-		Property asCacheInstance = analyzer.getCacheConstructorInstance(asFunction);
-		CGProperty cgCacheInstance = analyzer.getCGProperty(asCacheInstance);
-		//
-		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
-			CGValuedElement argument = qvticg2javaVisitor.getExpression(cgArgument);
-			if (!js.appendLocalStatements(argument)) {
-				return false;
-			}
-		}
-		//
-		js.appendDeclaration(cgFunctionCallExp);
-		js.append(" = ");
-		boolean needComma = false;
-		js.appendValueName(cgCacheInstance);
-		js.append(".evaluate(");
-		for (int i = 1; i < cgArguments.size(); i++) {			// Skip 'this'
-			if (needComma) {
-				js.append(", ");
-			}
-			CGValuedElement cgArgument = cgArguments.get(i);
-			CGValuedElement argument = qvticg2javaVisitor.getExpression(cgArgument);
-			js.appendValueName(argument);
-			needComma = true;
-		}
-		js.append(");\n");
-		return true;
+		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
 	}
 
 	@Override
