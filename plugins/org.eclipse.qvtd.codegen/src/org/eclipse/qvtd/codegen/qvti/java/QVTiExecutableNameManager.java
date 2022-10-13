@@ -183,14 +183,16 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return super.getBody();
 	}
 
-	/*	@Override
+	@Override
 	public @NonNull CGVariable getCGVariable(@NonNull VariableDeclaration asVariable) {
 		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
 		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-			return getQualifiedThisVariable();
+			CGFinalVariable cgVariable = getQualifiedThisVariable();
+			addVariable(asVariable, cgVariable);
+			return cgVariable;
 		}
 		return super.getCGVariable(asVariable);
-	} */
+	}
 
 	//	@Override
 	/*	protected boolean isQualifiedThis(@NonNull VariableExp asVariableExp, @NonNull Parameter asParameter) {

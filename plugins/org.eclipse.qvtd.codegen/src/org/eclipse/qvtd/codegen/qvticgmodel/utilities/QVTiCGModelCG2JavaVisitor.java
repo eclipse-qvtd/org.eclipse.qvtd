@@ -93,6 +93,7 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvti.java.ShadowDataTypeOperationCallingConvention;
@@ -1174,7 +1175,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			if (cgOperation instanceof CGFunction) {
 				CGFunction cgFunction = (CGFunction)cgOperation;
 				OperationCallingConvention callingConvention = cgFunction.getCallingConvention();
-				if (!(callingConvention instanceof ShadowDataTypeOperationCallingConvention)) {		// XXX eliminate
+				if (!(callingConvention instanceof ShadowDataTypeOperationCallingConvention) && !(callingConvention instanceof InternalFunctionOperationCallingConvention)) {		// XXX eliminate
 					Function asFunction = QVTiCGUtil.getAST(cgFunction);
 					if (!asFunction.isIsTransient()) {
 						String functionName = cgFunction.getResolvedName();

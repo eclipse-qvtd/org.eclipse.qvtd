@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -115,12 +114,6 @@ public class CGMiddlePropertyCallExpImpl extends CGOppositePropertyCallExpImpl i
 	@Override
 	public boolean isUnboxed() {
 		return true;
-	}
-
-	@Override
-	public void setAst(Element newAst) {		// XXX
-		// TODO Auto-generated method stub
-		super.setAst(newAst);
 	}
 
 } //CGMiddlePropertyCallExpImpl
