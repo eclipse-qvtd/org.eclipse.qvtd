@@ -12,8 +12,10 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -69,6 +71,7 @@ import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -332,6 +335,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	private final @NonNull TypeId runtimeThisTypeId;
 
 	private @Nullable PredicateTreeBuilder bodyBuilder;
+	private @NonNull Map<@NonNull Operation, @NonNull Property> asOperation2asCacheInstance = new HashMap<>();
+	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, org.eclipse.ocl.pivot.@NonNull Class> asConstructorClass2asCacheClass = new HashMap<>();
+	//	private @NonNull Map<@NonNull Operation, org.eclipse.ocl.pivot.@NonNull Property> asOperation2asConstructorClass = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
@@ -364,7 +370,18 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	}
 
 	public void addCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
-		asElement2cgElement.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+		CGNamedElement old = asElement2cgElement.put(QVTiCGUtil.getAST(cgTypedModel), cgTypedModel);
+		assert old == null;
+	}
+
+	public void addCacheConstructorInstance(@NonNull Operation asOperation, @NonNull Property asProperty, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		Property old1 = asOperation2asCacheInstance.put(asOperation, asProperty);
+		assert old1 == null;
+		org.eclipse.ocl.pivot.@NonNull Class asConstructorClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getType(asProperty);
+		org.eclipse.ocl.pivot.Class old2 = asConstructorClass2asCacheClass.put(asConstructorClass, asCacheClass);
+		assert old2 == null;
+		ImperativeTransformation asTransformation = getCodeGenerator().getTransformation();
+		asTransformation.getOwnedProperties().add(asProperty);
 	}
 
 	@Override
@@ -750,6 +767,14 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGTypedModel getCGTypedModel(@NonNull TypedModel asTypedModel) {
 		return ClassUtil.nonNullState(basicGetCGTypedModel(asTypedModel));
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class getCacheClass(org.eclipse.ocl.pivot.@NonNull Class asConstructorClass) {
+		return ClassUtil.nonNullState(asConstructorClass2asCacheClass.get(asConstructorClass));
+	}
+
+	public @NonNull Property getCacheConstructorInstance(@NonNull Operation asOperation) {
+		return ClassUtil.nonNullState(asOperation2asCacheInstance.get(asOperation));
 	}
 
 	/**

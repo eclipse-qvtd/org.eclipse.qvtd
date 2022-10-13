@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  *  ShadowDataTypeOperationCallingConvention defines the support for the call of an operation returning an implemented DataType.
@@ -28,7 +29,8 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		super.createCGParameters(operationNameManager, bodyExpression);
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(qvtiOperationNameManager);
-		createConstructorClass(qvtiOperationNameManager, asCacheClass);
+		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
+		Property asConstructorInstance = createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
 	}
 
 	@Override

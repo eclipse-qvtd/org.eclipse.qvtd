@@ -2104,6 +2104,17 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		return oppositeIndex2propertyIdName;
 	}
 
+	protected void doProperties(@NonNull CGTransformation cgTransformation) {
+		List<@NonNull CGProperty> cgProperties = new ArrayList<>(CGUtil.getPropertiesList(cgTransformation));
+		if (cgProperties.size() > 0) {
+			js.append("\n");
+			Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull CGProperty cgProperty : ClassUtil.nullFree(cgProperties)) {
+				cgProperty.accept(this);
+			}
+		}
+	}
+
 	protected void doRun(@NonNull CGTransformation cgTransformation, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		QVTiCodeGenerator codeGenerator = getCodeGenerator();
 		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
@@ -3504,6 +3515,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		doInstanceCaches(cgTransformation);
 		js.append("\n");
 		List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = doAllInstances(entryPointsAnalysis);
+		doProperties(cgTransformation);
 		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesAnalyses);
 		js.append("\n");
