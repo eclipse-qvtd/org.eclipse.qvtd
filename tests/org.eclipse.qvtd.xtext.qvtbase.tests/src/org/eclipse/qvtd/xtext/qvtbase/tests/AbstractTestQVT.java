@@ -46,8 +46,11 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -55,6 +58,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -573,6 +577,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
+		String packagePrefix = options.basicGetOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY);
+		if (packagePrefix != null) {
+			org.eclipse.ocl.pivot.Package asLeafPackage = null;
+			org.eclipse.ocl.pivot.Package asRootPackage = null;
+			Model asModel = PivotUtil.getContainingModel(asTransformation);
+			assert asModel != null;
+			String[] segments = packagePrefix.split("\\.");
+			for (int i = segments.length; --i >= 0; ) {
+				org.eclipse.ocl.pivot.Package asPackage = PivotFactory.eINSTANCE.createPackage();
+				asPackage.setName(segments[i]);
+				if (asRootPackage == null) {
+					asRootPackage = asPackage;
+				}
+				asLeafPackage = asPackage;
+			}
+			if (asLeafPackage != null) {
+				for (org.eclipse.ocl.pivot.Package asPackage : new ArrayList<>(asModel.getOwnedPackages())) {
+					PivotUtilInternal.resetContainer(asPackage);
+					asLeafPackage.getOwnedPackages().add(asPackage);
+				}
+				asModel.getOwnedPackages().add(asRootPackage);
+			}
+		}
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();

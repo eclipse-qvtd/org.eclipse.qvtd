@@ -321,55 +321,66 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	Scheduler.REGION_STACK.setState(true);
 		//    	Scheduler.REGION_TRAVERSAL.setState(true);
 		TestFile txFile = getTestProject().copyFiles(getTestProjectManager(), null, getModelsURI("forward2reverse"), "Forward2Reverse.qvtc", "DoublyLinkedList.ecore", "List2List.ecore", "List2List.genmodel");
-		MyQVT myQVT = createQVT("Forward2Reverse", txFile.getURI());
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("forward", false, "List2List.genmodel");
-			//			Class<? extends Transformer> txClassReverse = Forward2Reverse.class;
-			myQVT.assertRegionCount(RuleRegionImpl.class, 0);
-			//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 9);
+			MyQVT myQVT1 = createQVT("Forward2Reverse", txFile.getURI());
+			//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+			try {
+				Class<? extends Transformer> txClassReverse = myQVT1.buildTransformation("forward", false, "List2List.genmodel");
+				//			Class<? extends Transformer> txClassReverse = Forward2Reverse.class;
+				myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
+				//			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+				//			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+				//			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 9);
+				//
+				myQVT1.createGeneratedExecutor(txClassReverse);
+				myQVT1.addInputURI("reverse", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+				myQVT1.executeTransformation();
+				myQVT1.addOutputURI("forward", getTestURI("ThreeElementList_Reverse_CG.xmi"));
+				myQVT1.saveModels(null);
+				myQVT1.checkOutput(getTestURI("ThreeElementList_Reverse_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			}
+			finally {
+				myQVT1.dispose();
+			}
 			//
-			myQVT.createGeneratedExecutor(txClassReverse);
-			myQVT.addInputURI("reverse", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
-			myQVT.executeTransformation();
-			myQVT.addOutputURI("forward", getTestURI("ThreeElementList_Reverse_CG.xmi"));
-			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("ThreeElementList_Reverse_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("reverse", false, "List2List.genmodel");
-			//
-			myQVT.createGeneratedExecutor(txClass);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
-			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("EmptyList_CG.xmi"));
-			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("EmptyList_CG.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT.createGeneratedExecutor(txClass);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
-			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
-			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT.createGeneratedExecutor(txClass);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
-			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
-			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
-			myQVT.createGeneratedExecutor(txClass);
-			myQVT.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
-			myQVT.executeTransformation();
-			myQVT.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
-			myQVT.saveModels(null);
-			myQVT.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			MyQVT myQVT2 = createQVT("Forward2Reverse", txFile.getURI());
+			//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+			try {
+				Class<? extends Transformer> txClass = myQVT2.buildTransformation("reverse", false, "List2List.genmodel");
+				//
+				myQVT2.createGeneratedExecutor(txClass);
+				myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
+				myQVT2.executeTransformation();
+				myQVT2.addOutputURI("reverse", getTestURI("EmptyList_CG.xmi"));
+				myQVT2.saveModels(null);
+				myQVT2.checkOutput(getTestURI("EmptyList_CG.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+				//
+				myQVT2.createGeneratedExecutor(txClass);
+				myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
+				myQVT2.executeTransformation();
+				myQVT2.addOutputURI("reverse", getTestURI("OneElementList_CG.xmi"));
+				myQVT2.saveModels(null);
+				myQVT2.checkOutput(getTestURI("OneElementList_CG.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+				//
+				myQVT2.createGeneratedExecutor(txClass);
+				myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
+				myQVT2.executeTransformation();
+				myQVT2.addOutputURI("reverse", getTestURI("TwoElementList_CG.xmi"));
+				myQVT2.saveModels(null);
+				myQVT2.checkOutput(getTestURI("TwoElementList_CG.xmi"), getModelsURI("forward2reverse/samples/TwoElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+				//
+				myQVT2.createGeneratedExecutor(txClass);
+				myQVT2.addInputURI("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
+				myQVT2.executeTransformation();
+				myQVT2.addOutputURI("reverse", getTestURI("ThreeElementList_CG.xmi"));
+				myQVT2.saveModels(null);
+				myQVT2.checkOutput(getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
+			}
+			finally {
+				myQVT2.dispose();
+			}
 		}
 		finally {
-			myQVT.dispose();
 			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/List2List",
 					"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList");
 		}
