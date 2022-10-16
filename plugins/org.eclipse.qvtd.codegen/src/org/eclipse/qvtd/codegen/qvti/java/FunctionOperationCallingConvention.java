@@ -213,12 +213,12 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 	}
 
-	protected final @NonNull Parameter createBoundValuesParameter(@NonNull QVTiCodeGenerator codeGenerator) {
-		NameResolution boundValuesResolution = codeGenerator.getGlobalNameManager().getBoundValuesNameResolution();
-		String boundValuesName = boundValuesResolution.getResolvedName();
+	protected final @NonNull Parameter createBoxedValuesParameter(@NonNull QVTiCodeGenerator codeGenerator) {
+		NameResolution boxedValuesResolution = codeGenerator.getGlobalNameManager().getBoxedValuesNameResolution();
+		String boxedValuesName = boxedValuesResolution.getResolvedName();
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
-		org.eclipse.ocl.pivot.Class boundValueType = jLanguageSupport.getNativeClass(Object[].class);
-		Parameter asConstructorParameter = PivotUtil.createParameter(boundValuesName, boundValueType, true);
+		org.eclipse.ocl.pivot.Class boxedValueType = jLanguageSupport.getNativeClass(Object[].class);
+		Parameter asConstructorParameter = PivotUtil.createParameter(boxedValuesName, boxedValueType, true);
 		return asConstructorParameter;
 	}
 
@@ -268,8 +268,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		String ctorName = ctorNameResolution.getResolvedName();
 		Type asCacheType = environmentFactory.getStandardLibrary().getOclVoidType();
 		Operation asCacheOperation = PivotUtil.createOperation(ctorName, asCacheType, null, null);
-		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
-		asCacheOperation.getOwnedParameters().add(asBoundValuesParameter);
+		Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+		asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 		asCacheClass.getOwnedOperations().add(asCacheOperation);
 		//
 		ConstructorOperationCallingConvention callingConvention = ConstructorOperationCallingConvention.INSTANCE;
@@ -281,21 +281,21 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		ctorNameResolution.addCGElement(cgConstructor);
 		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(null, asCacheOperation);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
-		CGParameter cgCacheBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
-		globalNameManager.getBoundValuesNameResolution().addCGElement(cgCacheBoundValuesParameter);
-		cgParameters.add(cgCacheBoundValuesParameter);
+		CGParameter cgCacheBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgCacheBoxedValuesParameter);
+		cgParameters.add(cgCacheBoxedValuesParameter);
 
 		CGParameter cgThisParameter = operationNameManager.getThisParameter();
 		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
 		//
-		//	Unpack and assign boundValues
+		//	Unpack and assign boxedValues
 		//
 		for (int i = 0; i < cgProperties.size()-1; i++) {	// XXX not cachedResult
-			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoundValuesParameter);
+			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
 			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
-			cgIndexExp.setAst(asBoundValuesParameter);
+			cgIndexExp.setAst(asBoxedValuesParameter);
 			CGProperty cgProperty = cgProperties.get(i);
 			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			cgPropertyAssignment.setAst(cgProperty.getAst());
@@ -376,11 +376,11 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		// AS Operation - yyy2zzz
 		// AS Operation.ownedParameters - x1, x2
 		// AS Cache Operation - isEqual
-		// AS Cache Operation.parameters - boundValues
+		// AS Cache Operation.parameters - boxedValues
 		// AS Cache ExpressionInOCL.ownedContext - this
 		// AS Cache ExpressionInOCL.ownedParameters - thisTransformer, x1, x2
 		// CG Cache Operation - isEqual
-		// CG Cache Operation.parameters - idResolver, boundValues
+		// CG Cache Operation.parameters - idResolver, boxedValues
 		// CG Cache Operation.lets - thisTransformer, x1, x2
 		//
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
@@ -429,10 +429,10 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		/*QVTiExecutableNameManager operationNameManager =*/ qvtiAnalyzer.getOperationNameManager(cgCacheOperation, asCacheOperation);
 		//	List<@NonNull CGParameter> cgCacheParameters = CGUtil.getParametersList(cgCacheOperation);
 		//	cgCacheParameters.add(operationNameManager.getIdResolverParameter());
-		//	CGParameter cgCacheBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
-		//	cgCacheParameters.add(cgCacheBoundValuesParameter);
+		//	CGParameter cgCacheBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		//	cgCacheParameters.add(cgCacheBoxedValuesParameter);
 		//
-		//	Create CG body for isEqual unpacking boundValues to regular parameter variables
+		//	Create CG body for isEqual unpacking boxedValues to regular parameter variables
 		//
 		CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpressionInOCL);
 		cgCacheOperation.setBody(cgResult);
@@ -448,11 +448,11 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		// AS Operation - yyy2zzz
 		// AS Operation.ownedParameters - x1, x2
 		// AS Cache Operation - isEqual
-		// AS Cache Operation.parameters - boundValues
+		// AS Cache Operation.parameters - boxedValues
 		// AS Cache ExpressionInOCL.ownedContext - this
 		// AS Cache ExpressionInOCL.ownedParameters - thisTransformer, x1, x2
 		// CG Cache Operation - isEqual
-		// CG Cache Operation.parameters - idResolver, boundValues
+		// CG Cache Operation.parameters - idResolver, boxedValues
 		// CG Cache Operation.lets - thisTransformer, x1, x2
 		//
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
@@ -469,8 +469,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
 		Operation asCacheOperation = PivotUtil.createOperation(isEqualName, asReturnType, null, null);
 		asCacheOperation.setIsRequired(true);
-		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
-		asCacheOperation.getOwnedParameters().add(asBoundValuesParameter);
+		Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+		asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 		asCacheClass.getOwnedOperations().add(asCacheOperation);
 		//
 		//	Create AS body for isEqual
@@ -534,17 +534,17 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		//		CGVariable cgIdResolverVariable = operationNameManager.getIdResolverVariable();
 		CGParameter cgIdResolverParameter = operationNameManager.getIdResolverParameter();
 		cgCacheParameters.add(cgIdResolverParameter);
-		CGParameter cgCacheBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
-		globalNameManager.getBoundValuesNameResolution().addCGElement(cgCacheBoundValuesParameter);
-		cgCacheParameters.add(cgCacheBoundValuesParameter);
+		CGParameter cgCacheBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgCacheBoxedValuesParameter);
+		cgCacheParameters.add(cgCacheBoxedValuesParameter);
 		//	operationNameManager.getIdResolverParameter();
 		//
-		//	Create CG body for isEqual unpacking boundValues to regular parameter variables
+		//	Create CG body for isEqual unpacking boxedValues to regular parameter variables
 		//
 		Stack<@NonNull CGFinalVariable> cgLetVariables = new Stack<>();
 		for (int i = 0; i < asCacheProperties.size()-1; i++) {		// not cachedResult
 			ParameterVariable asParameterVariable = (ParameterVariable)asCacheParameterVariables.get(i);
-			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoundValuesParameter);
+			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
 			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
 			cgIndexExp.setAst(asParameterVariable);
 			CGFinalVariable cgParameterVariable = operationNameManager.createCGVariable(cgIndexExp);
@@ -639,8 +639,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		Type asReturnType = environmentFactory.getStandardLibrary().getOclVoidType();
 		Operation asConstructorOperation = PivotUtil.createOperation(constructorName, asReturnType, null, null);
 		asConstructorOperation.setIsRequired(true);
-		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
-		asConstructorOperation.getOwnedParameters().add(asBoundValuesParameter);
+		Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+		asConstructorOperation.getOwnedParameters().add(asBoxedValuesParameter);
 		asConstructorClass.getOwnedOperations().add(asConstructorOperation);
 		//
 		//	Create AS body for newInstance
@@ -656,9 +656,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		//	newInstanceNameResolution.addCGElement(cgConstructorOperation);
 		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgConstructorOperation, asConstructorOperation);
 		List<@NonNull CGParameter> cgCacheParameters = CGUtil.getParametersList(cgConstructorOperation);
-		CGParameter cgConstructorBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
-		globalNameManager.getBoundValuesNameResolution().addCGElement(cgConstructorBoundValuesParameter);
-		cgCacheParameters.add(cgConstructorBoundValuesParameter);
+		CGParameter cgConstructorBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgConstructorBoxedValuesParameter);
+		cgCacheParameters.add(cgConstructorBoxedValuesParameter);
 		//
 		//	Create CG body for newInstance
 		//
@@ -689,7 +689,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		// AS Operation - yyy2zzz
 		// AS Operation.ownedParameters -
 		// AS Cache Operation - newInstance
-		// AS Cache Operation.parameters - boundValues
+		// AS Cache Operation.parameters - boxedValues
 		// AS Cache ExpressionInOCL.ownedContext - this
 		// AS Cache ExpressionInOCL.ownedParameters -
 		// CG Cache Operation - newInstance
@@ -706,8 +706,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		String newInstanceName = newInstanceNameResolution.getResolvedName();
 		Operation asConstructorOperation = PivotUtil.createOperation(newInstanceName, asCacheClass, null, null);
 		asConstructorOperation.setIsRequired(true);
-		Parameter asBoundValuesParameter = createBoundValuesParameter(codeGenerator);
-		asConstructorOperation.getOwnedParameters().add(asBoundValuesParameter);
+		Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+		asConstructorOperation.getOwnedParameters().add(asBoxedValuesParameter);
 		asConstructorClass.getOwnedOperations().add(asConstructorOperation);
 		//
 		//	Create AS body for newInstance
@@ -723,9 +723,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		newInstanceNameResolution.addCGElement(cgConstructorOperation);
 		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgConstructorOperation, asConstructorOperation);
 		List<@NonNull CGParameter> cgCacheParameters = CGUtil.getParametersList(cgConstructorOperation);
-		CGParameter cgConstructorBoundValuesParameter = operationNameManager.getCGParameter(asBoundValuesParameter, (String)null);
-		globalNameManager.getBoundValuesNameResolution().addCGElement(cgConstructorBoundValuesParameter);
-		cgCacheParameters.add(cgConstructorBoundValuesParameter);
+		CGParameter cgConstructorBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgConstructorBoxedValuesParameter);
+		cgCacheParameters.add(cgConstructorBoxedValuesParameter);
 		//
 		//	Create CG body for newInstance
 		//
