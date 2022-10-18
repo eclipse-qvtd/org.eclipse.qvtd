@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,15 +34,16 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.TypeRepresentation;
+import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
-import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -121,6 +124,19 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		public static final @NonNull OperationCallingConvention INSTANCE = new DefaultCachedOperationCallingConvention();
 	}
 
+	public static class GetResultOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	{
+		public static final @NonNull OperationCallingConvention INSTANCE = new GetResultOperationCallingConvention();
+
+		@Override
+		public boolean generateJavaDeclaration(
+				@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js,
+				@NonNull CGOperation cgOperation) {
+			// TODO Auto-generated method stub
+			return super.generateJavaDeclaration(cg2javaVisitor, js, cgOperation);
+		}
+	}
+
 	public static class CacheConstructorConstructorOperationCallingConvention extends DefaultCachedOperationCallingConvention
 	{
 		public static final @NonNull OperationCallingConvention INSTANCE = new CacheConstructorConstructorOperationCallingConvention();
@@ -166,9 +182,6 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 	public static class ConstructorEvaluateOperationCallingConvention extends DefaultCachedOperationCallingConvention
 	{
 		public static final @NonNull OperationCallingConvention INSTANCE = new ConstructorEvaluateOperationCallingConvention();
-
-		@Override
-		protected void appendOverride(JavaStream js) {}
 
 		@Override
 		protected void generateJavaOperationBody(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
@@ -262,6 +275,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		EnvironmentFactory environmentFactory = codeGenerator.getEnvironmentFactory();
+		PivotHelper helper = new PivotHelper(environmentFactory);
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		//
 		NameResolution ctorNameResolution = cgCacheClass.getNameResolution();
@@ -310,16 +324,53 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		//	Assign cachedResult
 		//
 		{
-			LanguageExpression asExpression = asOperation.getBodyExpression();
-			assert asExpression != null;
-			CGValuedElement asValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpression);
+			ExpressionInOCL asExpressionInOCL = (ExpressionInOCL)asOperation.getBodyExpression();
+			assert asExpressionInOCL != null;
+			List<@NonNull Variable> asCacheParameterVariables = PivotUtilInternal.getOwnedParametersList(asExpressionInOCL);
+			List<@NonNull Property> asCacheProperties = PivotUtilInternal.getOwnedPropertiesList(asCacheClass);
+
+			Map<@NonNull CGProperty, @NonNull LetVariable> cgProperty2asLetVariable = new HashMap<>();
+			Stack<@NonNull LetVariable> asLetVariables = new Stack<>();
+			for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
+				CGProperty cgProperty = cgProperties.get(i);
+				ParameterVariable asParameterVariable = (ParameterVariable)(i == 0 ? asExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
+				//	CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
+				//	CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
+				//	cgIndexExp.setAst(asParameterVariable);
+				LetVariable asLetVariable = helper.createLetVariable(asParameterVariable.getName(), helper.createVariableExp(asParameterVariable));
+				//	operationNameManager.addVariable(asLetVariable, cgParameterVariable);
+				asLetVariables.push(asLetVariable);
+				cgProperty2asLetVariable.put(cgProperty, asLetVariable);
+			}
+			OCLExpression asResult = asExpressionInOCL.getOwnedBody();
+			PivotUtilInternal.resetContainer(asResult);
+			while (!asLetVariables.isEmpty()) {
+				LetVariable asLetVariable = asLetVariables.pop();
+				asResult = helper.createLetExp(asLetVariable, asResult);
+			}
+			asExpressionInOCL.setOwnedBody(asResult);
+			//		operationNameManager.add
+
+
+			CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asResult);
+
+
+			for (Map.Entry<@NonNull CGProperty, @NonNull LetVariable> entry : cgProperty2asLetVariable.entrySet()) {
+				CGProperty cgProperty = entry.getKey();
+				LetVariable asLetVariable = entry.getValue();
+				CGVariable cgLetVariable = operationNameManager.getCGVariable(asLetVariable);
+				cgProperty.getNameResolution().addCGElement(cgLetVariable);
+			}
+
+
+
 			CGProperty cgProperty = cgProperties.get(cgProperties.size()-1);
 			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			cgPropertyAssignment.setAst(cgProperty.getAst());
 			cgPropertyAssignment.setTypeId(cgTypeId);
 			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
 			cgPropertyAssignment.setReferredProperty(cgProperty);
-			cgPropertyAssignment.setOwnedInitValue(asValue);
+			cgPropertyAssignment.setOwnedInitValue(cgResult);
 			//	cgPropertyAssignment.setAsProperty(asProperty);
 			cgStatements.add(cgPropertyAssignment);
 			cgConstructor.setBody(cgSequence);
@@ -421,7 +472,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		//
 		//	Create CG declaration for isEqual
 		//
-		OperationCallingConvention callingConvention = DefaultCachedOperationCallingConvention.INSTANCE;
+		OperationCallingConvention callingConvention = GetResultOperationCallingConvention.INSTANCE;
 		CGOperation cgCacheOperation = callingConvention.createCGOperation(qvtiAnalyzer, asCacheOperation);
 		analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 		cgCacheOperation.setCallingConvention(callingConvention);
@@ -588,6 +639,11 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			nameResolution.addCGElement(cgCacheProperty);
 		}
 		cgCacheClass.getProperties().add(cgCacheProperty);
+		if (nameResolution == null) {
+			ClassNameManager nameManager = analyzer.getClassNameManager(cgCacheClass, asCacheClass);
+			//			nameManager.declareEagerName(cgCacheProperty)
+			nameResolution = nameManager.getNameResolution(cgCacheProperty);
+		}
 	}
 
 	protected final org.eclipse.ocl.pivot.@NonNull Class createConstructorClass(@NonNull QVTiExecutableNameManager qvtiOperationNameManager, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
