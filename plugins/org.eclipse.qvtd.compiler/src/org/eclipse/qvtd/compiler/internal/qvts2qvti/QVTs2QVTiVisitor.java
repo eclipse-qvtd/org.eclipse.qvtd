@@ -88,7 +88,7 @@ import com.google.common.collect.Lists;
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
 	@SuppressWarnings("serial")
-	protected class OperationCopier extends EcoreUtil.Copier
+	protected class OperationCopier extends EcoreUtil.Copier			// XXX Share RereferencingCopier
 	{
 		public <T extends EObject> @NonNull T copyContainmentAndReferences(@NonNull T eIn) {
 			@SuppressWarnings("unchecked") T eOut = (@NonNull T)copy(eIn);

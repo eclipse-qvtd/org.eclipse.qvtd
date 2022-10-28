@@ -77,10 +77,20 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 	protected CGValuedElement rewriteAsCast2(@NonNull Type asRequiredType, @NonNull CGValuedElement cgElement) {
 		//		CGVariable cgVariable = cgChild.getReferredVariable();
 		Element asElement = cgElement.getAst();
-		if ((asElement instanceof TypedElement) && !(asElement instanceof CGIndexExp)) {
-			Type asActualType = PivotUtil.getType((TypedElement)asElement);
-			if (asActualType.conformsTo(codeGenerator.getEnvironmentFactory().getStandardLibrary(), asRequiredType)) {
-				return cgElement;
+		if (asElement instanceof TypedElement) {
+			if (asElement instanceof CGCastExp) {
+				Type asActualType = PivotUtil.getType((TypedElement)asElement);
+				if (asActualType.conformsTo(codeGenerator.getEnvironmentFactory().getStandardLibrary(), asRequiredType)) {
+					return cgElement;
+				}
+			}
+			else if (asElement instanceof CGIndexExp) {
+			}
+			else {
+				Type asActualType = PivotUtil.getType((TypedElement)asElement);
+				if (asActualType.conformsTo(codeGenerator.getEnvironmentFactory().getStandardLibrary(), asRequiredType)) {
+					return cgElement;
+				}
 			}
 		}
 		//	Type asActualType = PivotUtil.getType(asElement);
