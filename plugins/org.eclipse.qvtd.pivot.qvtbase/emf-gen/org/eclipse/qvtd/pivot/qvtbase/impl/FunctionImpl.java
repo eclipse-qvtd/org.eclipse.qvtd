@@ -402,29 +402,52 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public void setQueryExpression(OCLExpression newQueryExpression) {
 		if (newQueryExpression != null) {
-			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
-			ParameterVariable asContextParameter = asTransformation.getOwnedContext();
-			assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
-			assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
-			ParameterVariable asContextVariable = QVTbaseUtil.createParameterVariable(asContextParameter);
-			int size = ownedParameters.size();
-			ParameterVariable[] asParameterVariables = new ParameterVariable[size];
-			for (int i = 0; i < size; i++) {
-				Parameter asParameter = ownedParameters.get(i);
-				assert asParameter != null;
-				asParameterVariables[i] = QVTbaseUtil.createParameterVariable(asParameter);
-			}
-			FunctionBody asFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
-			asFunctionBody.setOwnedContext(asContextVariable);
-			for (Variable asParameterVariable : asParameterVariables) {
-				asFunctionBody.getOwnedParameters().add(asParameterVariable);
+			FunctionBody asFunctionBody = basicGetFunctionBody();
+			if (asFunctionBody == null) {
+				asFunctionBody = createFunctionBody();
+				super.setBodyExpression(asFunctionBody);
 			}
 			asFunctionBody.setOwnedBody(newQueryExpression);
 			asFunctionBody.setIsRequired(newQueryExpression.isIsRequired());
-			super.setBodyExpression(asFunctionBody);
 		}
 		else {
 			super.setBodyExpression(null);
 		}
+	}
+
+	protected @Nullable FunctionBody basicGetFunctionBody() {
+		return (FunctionBody)super.getBodyExpression();
+	}
+
+	@Override
+	public @NonNull FunctionBody getFunctionBody() {
+		FunctionBody asFunctionBody = basicGetFunctionBody();
+		if (asFunctionBody == null) {
+			asFunctionBody = createFunctionBody();
+			super.setBodyExpression(asFunctionBody);
+		}
+		return asFunctionBody;
+	}
+
+	protected @NonNull FunctionBody createFunctionBody() {
+		assert super.getBodyExpression() == null;
+		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
+		ParameterVariable asContextParameter = asTransformation.getOwnedContext();
+		assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
+		assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
+		ParameterVariable asContextVariable = asContextParameter;//QVTbaseUtil.createParameterVariable(asContextParameter);
+		int size = ownedParameters.size();
+		ParameterVariable[] asParameterVariables = new ParameterVariable[size];
+		for (int i = 0; i < size; i++) {
+			Parameter asParameter = ownedParameters.get(i);
+			assert asParameter != null;
+			asParameterVariables[i] = QVTbaseUtil.createParameterVariable(asParameter);
+		}
+		FunctionBody asFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
+		asFunctionBody.setOwnedContext(asContextVariable);
+		for (Variable asParameterVariable : asParameterVariables) {
+			asFunctionBody.getOwnedParameters().add(asParameterVariable);
+		}
+		return asFunctionBody;
 	}
 } //FunctionImpl

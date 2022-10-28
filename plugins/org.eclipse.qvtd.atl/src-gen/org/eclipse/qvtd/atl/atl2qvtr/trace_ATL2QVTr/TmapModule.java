@@ -10,7 +10,6 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
-import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.ParameterVariable;
 
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -167,7 +166,7 @@ public interface TmapModule extends Execution {
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Parameter getT2_5();
+	ParameterVariable getT2_5();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_5 <em>T2 5</em>}' reference.
@@ -177,7 +176,7 @@ public interface TmapModule extends Execution {
 	 * @see #getT2_5()
 	 * @generated
 	 */
-	void setT2_5(Parameter value);
+	void setT2_5(ParameterVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>T2 6</b></em>' reference.

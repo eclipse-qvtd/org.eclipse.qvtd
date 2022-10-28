@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
@@ -124,7 +124,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * @generated
 	 * @ordered
 	 */
-	protected Parameter t2_5;
+	protected ParameterVariable t2_5;
 
 	/**
 	 * The cached value of the '{@link #getT2_6() <em>T2 6</em>}' reference.
@@ -314,10 +314,10 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * @generated
 	 */
 	@Override
-	public Parameter getT2_5() {
+	public ParameterVariable getT2_5() {
 		if (t2_5 != null && t2_5.eIsProxy()) {
 			InternalEObject oldT2_5 = (InternalEObject)t2_5;
-			t2_5 = (Parameter)eResolveProxy(oldT2_5);
+			t2_5 = (ParameterVariable)eResolveProxy(oldT2_5);
 			if (t2_5 != oldT2_5) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2_5, t2_5));
@@ -331,7 +331,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter basicGetT2_5() {
+	public ParameterVariable basicGetT2_5() {
 		return t2_5;
 	}
 
@@ -341,8 +341,8 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * @generated
 	 */
 	@Override
-	public void setT2_5(Parameter newT2_5) {
-		Parameter oldT2_5 = t2_5;
+	public void setT2_5(ParameterVariable newT2_5) {
+		ParameterVariable oldT2_5 = t2_5;
 		t2_5 = newT2_5;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2_5, t2_5));
@@ -481,7 +481,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 				setT2_4((RelationModel)newValue);
 			return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2_5((Parameter)newValue);
+				setT2_5((ParameterVariable)newValue);
 			return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2_6((TypedModel)newValue);
@@ -514,7 +514,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 				setT2_4((RelationModel)null);
 			return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2_5((Parameter)null);
+				setT2_5((ParameterVariable)null);
 			return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2_6((TypedModel)null);

@@ -412,7 +412,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	@Deprecated /* @deprecated distinct owningTransformation/typeTransformation no longer appropriate */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
+	public static @NonNull ParameterVariable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
 		assert owningTransformation == typeTransformation;
 		return getContextVariable(standardLibrary, owningTransformation);
 	}
@@ -531,11 +531,11 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
 	}
 
-	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
+	public static @NonNull ParameterVariable getOwnedContext(@NonNull Transformation asTransformation) {
 		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
 	}
 
-	public static @NonNull Parameter getOwnedContext(@NonNull TypedModel asTypedModel) {
+	public static @NonNull Parameter getOwnedContext(@NonNull TypedModel asTypedModel) {		// XXX ParameterVariable
 		return ClassUtil.nonNullState(asTypedModel.getOwnedContext());
 	}
 

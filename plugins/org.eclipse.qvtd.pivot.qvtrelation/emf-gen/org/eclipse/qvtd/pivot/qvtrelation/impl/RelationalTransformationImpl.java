@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -154,7 +154,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
+					final /*@NonInvalid*/ @Nullable ParameterVariable ownedContext = this.getOwnedContext();
 					final /*@NonInvalid*/ boolean IsEQ_ = ownedContext != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
@@ -328,8 +328,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
-				getOwnedKey().addAll((Collection<? extends Key>)newValue);
-				return;
+			getOwnedKey().addAll((Collection<? extends Key>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -344,7 +344,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

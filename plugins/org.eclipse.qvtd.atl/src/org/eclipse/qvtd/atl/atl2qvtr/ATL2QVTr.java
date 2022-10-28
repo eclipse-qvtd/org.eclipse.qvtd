@@ -53,6 +53,7 @@ import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -2814,7 +2815,7 @@ public class ATL2QVTr extends AbstractTransformer
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_4));
 		}
-		final @NonNull Parameter _5 = PivotFactory.eINSTANCE.createParameter();
+		final @NonNull ParameterVariable _5 = PivotFactory.eINSTANCE.createParameterVariable();
 		models[1/*qvtr*/].add(_5, false);
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_5));
