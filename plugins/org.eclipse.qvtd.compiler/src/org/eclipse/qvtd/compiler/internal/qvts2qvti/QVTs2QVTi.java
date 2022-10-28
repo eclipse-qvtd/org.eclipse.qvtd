@@ -30,7 +30,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Package;
-import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
@@ -105,7 +105,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		if ((iTransformation == null) || !(iTransformation instanceof ImperativeTransformation)) {
 			iTransformation = createTransformation(name);
 			asElement2iElement.put(asTransformation, iTransformation);
-			Parameter asContextParameter = asTransformation.getOwnedContext();
+			ParameterVariable asContextParameter = asTransformation.getOwnedContext();
 			if (asContextParameter != null) {
 				asElement2iElement.put(asContextParameter, QVTbaseUtil.getContextVariable(standardLibrary, (Transformation)iTransformation));
 			}

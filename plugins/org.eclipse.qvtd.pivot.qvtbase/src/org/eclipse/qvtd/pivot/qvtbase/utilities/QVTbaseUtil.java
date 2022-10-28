@@ -419,14 +419,14 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
-		Parameter ownedContext = asTransformation.getOwnedContext();
+	public static @NonNull ParameterVariable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
+		ParameterVariable ownedContext = asTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
 			//        	if (transformationType == null) {	// FIXME BUG 487123
 			//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
 			//        	}
-			ownedContext = PivotFactory.eINSTANCE.createParameter();
+			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName(QVTbaseUtil.THIS_NAME);
 			ownedContext.setType(asTransformation);		// FIXME promote API
 			//			ownedContext.setTypeValue(transformation);

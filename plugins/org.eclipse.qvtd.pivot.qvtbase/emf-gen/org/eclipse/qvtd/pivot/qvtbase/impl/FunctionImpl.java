@@ -309,7 +309,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -324,7 +324,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -403,7 +403,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	public void setQueryExpression(OCLExpression newQueryExpression) {
 		if (newQueryExpression != null) {
 			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
-			Parameter asContextParameter = asTransformation.getOwnedContext();
+			ParameterVariable asContextParameter = asTransformation.getOwnedContext();
 			assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
 			assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
 			ParameterVariable asContextVariable = QVTbaseUtil.createParameterVariable(asContextParameter);
