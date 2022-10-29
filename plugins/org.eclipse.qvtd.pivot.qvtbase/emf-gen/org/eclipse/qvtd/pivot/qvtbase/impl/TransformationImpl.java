@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
-import org.eclipse.ocl.pivot.ParameterVariable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -160,10 +160,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOwnedContext()
-	 * @generated XXX
+	 * @generated
 	 * @ordered
 	 */
-	protected ParameterVariable ownedContext;
+	protected Parameter ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -283,20 +283,20 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated XXX
+	 * @generated
 	 */
 	@Override
-	public ParameterVariable getOwnedContext() {
+	public Parameter getOwnedContext() {
 		return ownedContext;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated XXX
+	 * @generated
 	 */
-	public NotificationChain basicSetOwnedContext(ParameterVariable newOwnedContext, NotificationChain msgs) {
-		ParameterVariable oldOwnedContext = ownedContext;
+	public NotificationChain basicSetOwnedContext(Parameter newOwnedContext, NotificationChain msgs) {
+		Parameter oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassImpl.CLASS_FEATURE_COUNT + 5, oldOwnedContext, newOwnedContext);
@@ -308,10 +308,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated XXX
+	 * @generated
 	 */
 	@Override
-	public void setOwnedContext(ParameterVariable newOwnedContext) {
+	public void setOwnedContext(Parameter newOwnedContext) {
 		if (newOwnedContext != ownedContext) {
 			NotificationChain msgs = null;
 			if (ownedContext != null)
@@ -406,7 +406,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated XXX
+	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -432,7 +432,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				setExtends((Transformation)newValue);
 			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
-				setOwnedContext((ParameterVariable)newValue);
+				setOwnedContext((Parameter)newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -441,7 +441,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated XXX
+	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
@@ -462,7 +462,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				setExtends((Transformation)null);
 			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
-				setOwnedContext((ParameterVariable)null);
+				setOwnedContext((Parameter)null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -577,7 +577,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable ParameterVariable ownedContext = this.getOwnedContext();
+					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
 					final /*@NonInvalid*/ boolean IsEQ_ = ownedContext != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {

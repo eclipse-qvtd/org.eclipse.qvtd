@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
@@ -165,6 +166,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @Nullable Domain basicGetContainingDomain(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Domain) {
 				return (Domain) eObject;
@@ -174,6 +176,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @Nullable BaseModel basicGetContainingModel(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof BaseModel) {
 				return (BaseModel) eObject;
@@ -183,6 +186,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @Nullable Pattern basicGetContainingPattern(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Pattern) {
 				return (Pattern) eObject;
@@ -192,6 +196,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @Nullable Rule basicGetContainingRule(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Rule) {
 				return (Rule) eObject;
@@ -201,6 +206,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @Nullable Transformation basicGetContainingTransformation(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Transformation) {
 				return (Transformation) eObject;
@@ -277,16 +283,6 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return false;
-	}
-
-	// Promote to PivotUtil
-	public static @NonNull ParameterVariable createParameterVariable(@NonNull Parameter asParameter) {
-		ParameterVariable asParameterVariable = PivotFactory.eINSTANCE.createParameterVariable();
-		asParameterVariable.setName(asParameter.getName());
-		asParameterVariable.setType(asParameter.getType());
-		asParameterVariable.setIsRequired(asParameter.isIsRequired());
-		asParameterVariable.setRepresentedParameter(asParameter);
-		return asParameterVariable;
 	}
 
 	/**
@@ -367,6 +363,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Domain getContainingDomain(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Domain) {
 				return (Domain) eObject;
@@ -376,6 +373,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull BaseModel getContainingModel(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof BaseModel) {
 				return (BaseModel) eObject;
@@ -385,6 +383,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Package getContainingPackage(@Nullable EObject element) {
+		assert !(element instanceof Pivotable);
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof org.eclipse.ocl.pivot.Package) {
 				return (org.eclipse.ocl.pivot.Package)eObject;
@@ -394,6 +393,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Rule getContainingRule(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Rule) {
 				return (Rule) eObject;
@@ -403,6 +403,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Transformation getContainingTransformation(@Nullable EObject eObject) {
+		assert !(eObject instanceof Pivotable);
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Transformation) {
 				return (Transformation) eObject;
@@ -412,21 +413,21 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	@Deprecated /* @deprecated distinct owningTransformation/typeTransformation no longer appropriate */
-	public static @NonNull ParameterVariable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
 		assert owningTransformation == typeTransformation;
 		return getContextVariable(standardLibrary, owningTransformation);
 	}
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull ParameterVariable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
-		ParameterVariable ownedContext = asTransformation.getOwnedContext();
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
+		Parameter ownedContext = asTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
 			//        	if (transformationType == null) {	// FIXME BUG 487123
 			//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
 			//        	}
-			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
+			ownedContext = PivotFactory.eINSTANCE.createParameter();
 			ownedContext.setName(QVTbaseUtil.THIS_NAME);
 			ownedContext.setType(asTransformation);		// FIXME promote API
 			//			ownedContext.setTypeValue(transformation);
@@ -440,9 +441,9 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	/**
-	 * Return the context variable for a TypedModel, creating it if not yet available.
+	 * Return the context parameter for a TypedModel, creating it if not yet available.
 	 */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
+	public static @NonNull Parameter getContextParameter(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
 		Parameter ownedContext = typedModel.getOwnedContext();
 		if (ownedContext == null) {
 			ownedContext = PivotFactory.eINSTANCE.createParameter();
@@ -451,6 +452,22 @@ public class QVTbaseUtil extends PivotUtil
 			//        	ownedContext.setTypeValue(typedModel);
 			ownedContext.setIsRequired(true);
 			typedModel.setOwnedContext(ownedContext);
+		}
+		return ownedContext;
+	}
+
+	@Deprecated /* @deprecated use getContextParameter */
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
+		return getContextParameter(standardLibrary, typedModel);
+	}
+
+	public static @NonNull ParameterVariable getContextVariable(@NonNull Rule asRule) {
+		ParameterVariable ownedContext = asRule.getOwnedContext();
+		if (ownedContext == null) {
+			Transformation asTransformation = getContainingTransformation(asRule);
+			Parameter asParameter = getOwnedContext(asTransformation);
+			ownedContext = PivotUtil.createParameterVariable(asParameter);
+			asRule.setOwnedContext(ownedContext);
 		}
 		return ownedContext;
 	}
@@ -531,7 +548,7 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
 	}
 
-	public static @NonNull ParameterVariable getOwnedContext(@NonNull Transformation asTransformation) {
+	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
 		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
 	}
 

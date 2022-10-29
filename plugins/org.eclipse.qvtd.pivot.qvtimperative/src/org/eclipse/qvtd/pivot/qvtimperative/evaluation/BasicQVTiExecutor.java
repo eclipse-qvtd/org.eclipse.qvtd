@@ -440,7 +440,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		add(ownedContext, getTransformationExecution());
 		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
 			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace()) {
-				ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
+				ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, typedModel);
 				add(ownedContext, modelsManager.getTypedModelInstance(typedModel));
 			}
 		}

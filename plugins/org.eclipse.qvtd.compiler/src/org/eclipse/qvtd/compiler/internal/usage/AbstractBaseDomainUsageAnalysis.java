@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
@@ -146,6 +147,10 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 		if (rootAnalysis != this) {
 			return ClassUtil.nonNullState(rootAnalysis.basicGetUsage(object));
 		}
-		return ClassUtil.nonNullState(element2usage.get(object));
+		DomainUsage usage = element2usage.get(object);
+		if (usage == null) {
+			System.out.println(NameUtil.debugSimpleName(object) + " in " + object.eResource().getURI());			// XXX
+		}
+		return ClassUtil.nonNullState(usage);
 	}
 }

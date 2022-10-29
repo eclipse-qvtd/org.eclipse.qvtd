@@ -304,6 +304,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		if (pFunction != null) {
 			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
+				pFunction.getFunctionBody();
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				pFunction.setQueryExpression(target);
 			}

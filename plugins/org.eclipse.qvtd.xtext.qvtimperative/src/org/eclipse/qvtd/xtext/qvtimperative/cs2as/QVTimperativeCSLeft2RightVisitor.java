@@ -174,7 +174,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (TypedModel) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, (TypedModel) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);

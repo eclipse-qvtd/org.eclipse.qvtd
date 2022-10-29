@@ -2815,7 +2815,7 @@ public class ATL2QVTr extends AbstractTransformer
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_4));
 		}
-		final @NonNull ParameterVariable _5 = PivotFactory.eINSTANCE.createParameterVariable();
+		final @NonNull Parameter _5 = PivotFactory.eINSTANCE.createParameter();
 		models[1/*qvtr*/].add(_5, false);
 		if (debugCreations) {
 			AbstractTransformer.CREATIONS.println("created " + toDebugString(_5));

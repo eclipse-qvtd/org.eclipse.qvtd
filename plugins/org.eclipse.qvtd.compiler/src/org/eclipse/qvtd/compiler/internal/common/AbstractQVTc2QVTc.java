@@ -453,6 +453,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 					Resource vResource = variable.eResource();
 					//					assert vResource == eResource;
 					if (vResource != eResource) {
+						System.out.println(NameUtil.debugSimpleName(pOut) + " in " + eResource.getURI());			// XXX
+						System.out.println(NameUtil.debugSimpleName(variable) + " in " + vResource.getURI());			// XXX
 						QVTruntimeUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}
@@ -531,6 +533,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 
 		protected @NonNull Mapping doMapping(@NonNull Mapping mOut) {
 			Mapping mIn = context.equivalentSource(mOut);
+			updateChild(mOut.getOwnedContext());
 			updateChild(mOut.getGuardPattern());
 			updateChild(mOut.getBottomPattern());
 			updateAllChildren(mOut.getDomain());

@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -48,6 +49,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
@@ -283,9 +285,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated XXX
 	 */
 	public NotificationChain basicSetOwnedContext(ParameterVariable newOwnedContext, NotificationChain msgs) {
+		if (newOwnedContext != null) {
+			Resource eResource1 = newOwnedContext.eResource();
+			Resource eResource2 = eResource();
+			System.out.println(NameUtil.debugSimpleName(this) + " in " + eResource2.getURI());			// XXX
+			System.out.println(NameUtil.debugSimpleName(newOwnedContext) + " in " + eResource1.getURI());
+			assert eResource1 == eResource2;		// XXX
+		}
 		ParameterVariable oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
@@ -889,13 +898,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (overridden != null)
 					msgs = ((InternalEObject)overridden).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Rule.class, msgs);
-				return basicSetOverridden((Rule)otherEnd, msgs);
+			return basicSetOverridden((Rule)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverrides()).basicAdd(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTransformation((Transformation)otherEnd, msgs);
+			return basicSetTransformation((Transformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -950,7 +959,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return isIsAbstract();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getOverridden();
-				return basicGetOverridden();
+			return basicGetOverridden();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOverrides();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
@@ -972,24 +981,24 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-				getDomain().addAll((Collection<? extends Domain>)newValue);
-				return;
+			getDomain().addAll((Collection<? extends Domain>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract((Boolean)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-				getOverrides().addAll((Collection<? extends Rule>)newValue);
-				return;
+			getOverrides().addAll((Collection<? extends Rule>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setOwnedContext((ParameterVariable)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1004,22 +1013,22 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setOwnedContext((ParameterVariable)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

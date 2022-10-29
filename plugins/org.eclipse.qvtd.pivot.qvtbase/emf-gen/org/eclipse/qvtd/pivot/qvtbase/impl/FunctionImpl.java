@@ -432,16 +432,16 @@ public class FunctionImpl extends OperationImpl implements Function {
 	protected @NonNull FunctionBody createFunctionBody() {
 		assert super.getBodyExpression() == null;
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
-		ParameterVariable asContextParameter = asTransformation.getOwnedContext();
+		Parameter asContextParameter = asTransformation.getOwnedContext();
 		assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
 		assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
-		ParameterVariable asContextVariable = asContextParameter;//QVTbaseUtil.createParameterVariable(asContextParameter);
+		ParameterVariable asContextVariable = PivotUtil.createParameterVariable(asContextParameter);
 		int size = ownedParameters.size();
 		ParameterVariable[] asParameterVariables = new ParameterVariable[size];
 		for (int i = 0; i < size; i++) {
 			Parameter asParameter = ownedParameters.get(i);
 			assert asParameter != null;
-			asParameterVariables[i] = QVTbaseUtil.createParameterVariable(asParameter);
+			asParameterVariables[i] = PivotUtil.createParameterVariable(asParameter);
 		}
 		FunctionBody asFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
 		asFunctionBody.setOwnedContext(asContextVariable);

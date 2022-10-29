@@ -15,6 +15,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -29,6 +31,7 @@ import org.eclipse.ocl.pivot.utilities.Invocations.UnresolvedInvocations;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
+import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
@@ -37,10 +40,12 @@ import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSUtil;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSLeft2RightVisitor;
@@ -144,8 +149,22 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 				context.setReferredOperation(operationCallExp, function);
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
-				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
+				//	Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
+				VariableDeclaration contextVariable = null;		// Alwys ParameterVariable
+				Rule asRule = QVTbaseCSUtil.basicGetContainingRule(csRoundBracketedClause);
+				if (asRule != null) {
+					contextVariable = QVTbaseUtil.getContextVariable(asRule);
+				}
+				else {
+					Operation asOperation = ElementUtil.basicGetContainingOperation(csRoundBracketedClause);
+					if (asOperation != null) {
+						LanguageExpression asExpression = asOperation.getBodyExpression();
+						if (asExpression instanceof ExpressionInOCL) {		// Always true
+							contextVariable = ((ExpressionInOCL)asExpression).getOwnedContext();
+						}
+					}
+				}
+				assert contextVariable != null;			// XXX
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
@@ -161,7 +180,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (TypedModel) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, (TypedModel)element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);
