@@ -153,6 +153,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			context.addTrace(mIn, mOut);
 			mOut.setName(mIn.getName());
 			mOut.setIsAbstract(mIn.isIsAbstract());
+			mOut.setOwnedContext(create(mIn.getOwnedContext()));
 			mOut.setGuardPattern(create(mIn.getGuardPattern()));
 			mOut.setBottomPattern(create(mIn.getBottomPattern()));
 			createAll(mIn.getDomain(), mOut.getDomain());
@@ -692,6 +693,14 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			return pIn;
 		}
 
+		@Override
+		public @Nullable Object visitParameterVariable(@NonNull ParameterVariable pvOut) {
+			ParameterVariable pvIn = (ParameterVariable)super.visitParameterVariable(pvOut);
+			Parameter rpIn = pvIn.getRepresentedParameter();
+			pvOut.setRepresentedParameter(rpIn != null ? context.equivalentTarget(rpIn) : null);
+			return pvIn;
+		}
+
 		//
 		//	Predicates that were PropertyAssignments need a comparison to be synthesized.
 		//
@@ -759,6 +768,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			Type tvIn = vIn.getTypeValue();
 			vOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tOut));
+			//	Parameter rpIn = vIn.getRepresentedParameter();
+			//	vOut.setRepresentedParameter(rpIn != null ? context.equivalentTarget(rpIn) : null);		// FIXME Migrate to just ParameterVariable
 			return vIn;
 		}
 

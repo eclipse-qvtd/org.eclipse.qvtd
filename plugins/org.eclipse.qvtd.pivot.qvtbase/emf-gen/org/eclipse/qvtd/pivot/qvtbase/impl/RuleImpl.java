@@ -291,8 +291,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		if (newOwnedContext != null) {
 			Resource eResource1 = newOwnedContext.eResource();
 			Resource eResource2 = eResource();
-			System.out.println(NameUtil.debugSimpleName(this) + " in " + eResource2.getURI());			// XXX
-			System.out.println(NameUtil.debugSimpleName(newOwnedContext) + " in " + eResource1.getURI());
+			System.out.println(NameUtil.debugSimpleName(this) + ":" + getName() + " in " + (eResource2 != null ? eResource2.getURI() : "?"));			// XXX
+			System.out.println(NameUtil.debugSimpleName(newOwnedContext) + ":" + newOwnedContext.getName() + " in " + (eResource1 != null ? eResource1.getURI() : "?"));
 			assert eResource1 == eResource2;		// XXX
 		}
 		ParameterVariable oldOwnedContext = ownedContext;
