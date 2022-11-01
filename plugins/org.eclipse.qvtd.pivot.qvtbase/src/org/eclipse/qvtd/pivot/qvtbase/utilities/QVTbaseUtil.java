@@ -415,12 +415,12 @@ public class QVTbaseUtil extends PivotUtil
 	@Deprecated /* @deprecated distinct owningTransformation/typeTransformation no longer appropriate */
 	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation owningTransformation, @NonNull Transformation typeTransformation) {
 		assert owningTransformation == typeTransformation;
-		return getContextVariable(standardLibrary, owningTransformation);
+		return getContextVariable(owningTransformation);
 	}
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation asTransformation) {
+	public static @NonNull Parameter getContextVariable(@NonNull Transformation asTransformation) {
 		Parameter ownedContext = asTransformation.getOwnedContext();
 		if (ownedContext == null) {
 			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
@@ -546,6 +546,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull OCLExpression getOwnedConditionExpression(@NonNull Predicate asPredicate) {
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
+	}
+
+	public static @NonNull ParameterVariable getOwnedContext(@NonNull Rule asRule) {
+		return ClassUtil.nonNullState(asRule.getOwnedContext());
 	}
 
 	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
@@ -839,11 +843,10 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		if (missingSources != null) {
-			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 			for (OperationCallExp operationCallExp : missingSources) {
 				Transformation transformation = QVTbaseUtil.basicGetContainingTransformation(operationCallExp);
 				if (transformation != null) {
-					VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+					VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(transformation);
 					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
 				}
 			}

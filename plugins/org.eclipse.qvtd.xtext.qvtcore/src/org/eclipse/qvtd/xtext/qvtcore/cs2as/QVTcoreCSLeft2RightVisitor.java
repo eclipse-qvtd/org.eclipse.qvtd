@@ -176,7 +176,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 	@Override
 	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
 		if (element instanceof Transformation) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable((Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {

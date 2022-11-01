@@ -290,7 +290,6 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		EnvironmentFactory environmentFactory = codeGenerator.getEnvironmentFactory();
-		PivotHelper helper = new PivotHelper(environmentFactory);
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
 		//

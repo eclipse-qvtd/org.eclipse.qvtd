@@ -924,6 +924,9 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 	protected @NonNull <T extends Element> T equivalentTarget(/*@NonNull*/ T source) {
 		assert source != null;
 		assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
+		if (source instanceof ParameterVariable) {
+			getClass();		// XXX
+		}
 		List<@NonNull Element> targets = null;
 		for (int i = scopeStack.size(); (targets == null) && (--i >= 0); ) {
 			NamedElement scope = scopeStack.get(i);

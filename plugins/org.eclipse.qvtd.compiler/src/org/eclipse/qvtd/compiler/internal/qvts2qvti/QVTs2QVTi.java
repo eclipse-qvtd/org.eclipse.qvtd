@@ -107,7 +107,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 			asElement2iElement.put(asTransformation, iTransformation);
 			Parameter asContextParameter = asTransformation.getOwnedContext();
 			if (asContextParameter != null) {
-				asElement2iElement.put(asContextParameter, QVTbaseUtil.getContextVariable(standardLibrary, (Transformation)iTransformation));
+				asElement2iElement.put(asContextParameter, QVTbaseUtil.getContextVariable((Transformation)iTransformation));
 			}
 			iClasses.add(iTransformation);
 			Transformation2TracePackage transformation2TracePackage = scheduleManager.getTransformation2TracePackage(asTransformation);

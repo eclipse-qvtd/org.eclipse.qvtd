@@ -386,7 +386,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
-		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		QVTbaseUtil.getContextVariable(asTransformation);
 		return null;
 	}
 

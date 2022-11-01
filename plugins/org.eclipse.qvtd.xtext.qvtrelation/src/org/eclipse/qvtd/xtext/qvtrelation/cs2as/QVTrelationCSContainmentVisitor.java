@@ -640,7 +640,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
-		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		QVTbaseUtil.getContextVariable(asTransformation);
 		return null;
 	}
 

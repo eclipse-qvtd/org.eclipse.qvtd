@@ -147,7 +147,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
 				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
+				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(containingTransformation);
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
@@ -170,7 +170,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 	@Override
 	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
 		if (element instanceof Transformation) {
-			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
+			VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable((Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {

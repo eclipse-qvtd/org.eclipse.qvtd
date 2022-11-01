@@ -118,6 +118,10 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 		for (Domain domain : object.getDomain()) {
 			visit(domain);
 		}
+		//		VariableDeclaration ownedContext = transformation.getOwnedContext();
+		//		if (ownedContext != null) {
+		//			setUsage(ownedContext, getThisUsage());
+		//		}
 		return ruleUsage;
 	}
 

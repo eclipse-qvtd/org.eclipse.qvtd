@@ -22,6 +22,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -614,10 +616,19 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		}
 
 		public void synthesize(@NonNull Mapping mMapping) {
-			String name = createVisitor.getContext().getMappingName(uMapping);
+			QVTu2QVTm context = createVisitor.getContext();
+			String name = context.getMappingName(uMapping);
 			mMapping.setName(name);
-			super.synthesize(mMapping, mMapping);
 			Transformation uTransformation = QVTbaseUtil.getContainingTransformation(uMapping);
+			Transformation mTransformation = context.equivalentTarget(uTransformation);
+			Parameter mParameter = QVTbaseUtil.getOwnedContext(mTransformation);
+			ParameterVariable mParameterVariable = PivotUtil.createParameterVariable(mParameter);
+			mMapping.setOwnedContext(mParameterVariable);
+			for (@NonNull Mapping uMapping : Iterables.concat(siblingMappings, parentMappings, childMappings)) {
+				ParameterVariable uParameterVariable = QVTbaseUtil.getOwnedContext(uMapping);
+				context.addTrace(uParameterVariable, mParameterVariable);
+			}
+			super.synthesize(mMapping, mMapping);
 			for (@NonNull TypedModel uTypedModel : QVTbaseUtil.getModelParameters(uTransformation)) {
 				MergedDomain mergedDomain = uTypedModel2mergedDomain.get(uTypedModel);
 				if (mergedDomain != null) {

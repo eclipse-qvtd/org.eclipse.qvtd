@@ -380,7 +380,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		ImperativeTransformation asTransformation = refreshNamedElement(ImperativeTransformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
-		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		QVTbaseUtil.getContextVariable(asTransformation);
 		context.refreshPivotList(Mapping.class, asTransformation.getRule(), csElement.getOwnedMappings());
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());

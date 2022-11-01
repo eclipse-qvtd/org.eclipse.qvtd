@@ -510,7 +510,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGMapping generateMapping(@NonNull Mapping asMapping) {
 		CGMapping cgMapping = generateMappingDeclaration(asMapping);
-		getMappingNameManager(cgMapping, asMapping);
+		QVTiExecutableNameManager mappingNameManager = getMappingNameManager(cgMapping, asMapping);
+		CGVariable cgThisVariable = mappingNameManager.lazyGetCGVariable(QVTbaseUtil.getOwnedContext(asMapping));		//  XXX container
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(cgMapping);
 		bodyBuilder2.doBottoms();
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());

@@ -26,7 +26,7 @@ public class TransformationAttribution extends ClassAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Transformation transformation = (Transformation)target;
-		environmentView.addNamedElement(QVTbaseUtil.getContextVariable(environmentView.getStandardLibrary(), transformation));
+		environmentView.addNamedElement(QVTbaseUtil.getContextVariable(transformation));
 		environmentView.addNamedElements(transformation.getModelParameter());
 		PivotUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
 		PivotUtil.addAllNamedElements(environmentView, transformation.getOwnedProperties());

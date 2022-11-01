@@ -435,7 +435,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(transformation);
 		//		add(ownedContext, modelsManager.getTransformationInstance(transformation));
 		add(ownedContext, getTransformationExecution());
 		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {

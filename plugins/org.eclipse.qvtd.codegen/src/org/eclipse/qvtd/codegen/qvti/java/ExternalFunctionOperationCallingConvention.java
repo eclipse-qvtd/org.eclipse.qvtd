@@ -67,7 +67,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		PivotMetamodelManager metamodelManager = analyzer.getMetamodelManager();
 		LibraryOperation libraryOperation = (LibraryOperation) metamodelManager.getImplementation(asOuterFunction);
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asOuterFunction);
-		VariableDeclaration asThis = QVTbaseUtil.getContextVariable(metamodelManager.getEnvironmentFactory().getStandardLibrary(), asTransformation);
+		VariableDeclaration asThis = QVTbaseUtil.getContextVariable(asTransformation);
 		//	VariableExp zzasThisExp = PivotUtil.createVariableExp(asThis);
 		//	CGValuedElement cgSource = as2cgVisitor.doVisit(CGValuedElement.class, asThisExp);
 

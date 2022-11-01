@@ -180,7 +180,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
 				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, containingTransformation);
+				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(containingTransformation);
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				//	Type owningClass = function.getOwningClass();

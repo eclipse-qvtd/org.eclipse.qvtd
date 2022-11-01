@@ -113,7 +113,7 @@ class UMLXParserContext extends AbstractExtendedParserContext
 		super(environmentFactory, null); //ClassUtil.nonNullEMF(URI.createURI(EcoreUtil.generateUUID() + ".qvtr")));
 		this.contextElement = contextElement;
 		RelationalTransformation transformation = QVTrelationUtil.getContainingTransformation(contextElement);
-		this.contextVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), transformation);
+		this.contextVariable = QVTbaseUtil.getContextVariable(transformation);
 		addAttribution(EssentialOCLCSPackage.Literals.CONTEXT_CS, new ContextCSAttribution());
 	}
 
