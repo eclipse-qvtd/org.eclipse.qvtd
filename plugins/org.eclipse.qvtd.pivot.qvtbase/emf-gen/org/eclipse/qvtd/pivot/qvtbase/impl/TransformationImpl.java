@@ -396,7 +396,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return getRule();
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				if (resolve) return getExtends();
-			return basicGetExtends();
+				return basicGetExtends();
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return getOwnedContext();
 		}
@@ -414,26 +414,26 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-			getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
-			return;
+				getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-			getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
-			return;
+				getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-			getOwnedTargets().addAll((Collection<? extends Target>)newValue);
-			return;
+				getOwnedTargets().addAll((Collection<? extends Target>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-			getRule().addAll((Collection<? extends Rule>)newValue);
-			return;
+				getRule().addAll((Collection<? extends Rule>)newValue);
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)newValue);
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -448,22 +448,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)null);
-			return;
+				return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -577,8 +577,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable Parameter ownedContext = this.getOwnedContext();
-					final /*@NonInvalid*/ boolean IsEQ_ = ownedContext != null;
+					final /*@NonInvalid*/ @Nullable Parameter ownedContext_0 = this.getOwnedContext();
+					final /*@NonInvalid*/ boolean IsEQ_ = ownedContext_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -587,10 +587,10 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
-							if (ownedContext == null) {
+							if (ownedContext_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
-							final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
+							final /*@Thrown*/ @Nullable Type type = ownedContext_0.getType();
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_qvtbase_c_c_Transformation).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -670,8 +670,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 							if (extends_0 == null) {
 								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 							}
-							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = extends_0.getModelParameter();
-							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter_0 = extends_0.getModelParameter();
+							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 							@NonNull Iterator<Object> ITER_etm = BOXED_modelParameter.iterator();
 							/*@Thrown*/ @Nullable Boolean forAll;
@@ -692,8 +692,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 								 * self.modelParameter->select(name = etm.name)
 								 * .usedPackage->includesAll(etm.usedPackage)
 								 */
-								final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
-								final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
+								final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_1 = this.getModelParameter();
+								final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_1);
 								/*@NonInvalid*/ @NonNull Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
 								@NonNull Iterator<Object> ITER__1 = BOXED_modelParameter_0.iterator();
 								/*@NonInvalid*/ @NonNull OrderedSetValue select;
@@ -709,7 +709,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 									 */
 									final /*@NonInvalid*/ @Nullable String name = _1.getName();
 									final /*@NonInvalid*/ @Nullable String name_0 = etm.getName();
-									final /*@NonInvalid*/ boolean IsEQ__0 = (name != null) ? name.equals(name_0) : (name_0 == null);
+									final /*@NonInvalid*/ boolean IsEQ__0 = (name != null) ? idResolver.oclEquals(name, name_0) : (name_0 == null);
 									//
 									if (IsEQ__0) {
 										accumulator_0.add(_1);
@@ -818,8 +818,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
 				try {
-					final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter = this.getModelParameter();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+					final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
 					/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
 					@NonNull Iterator<Object> ITER__1 = BOXED_modelParameter.iterator();
 					/*@Thrown*/ boolean isUnique;

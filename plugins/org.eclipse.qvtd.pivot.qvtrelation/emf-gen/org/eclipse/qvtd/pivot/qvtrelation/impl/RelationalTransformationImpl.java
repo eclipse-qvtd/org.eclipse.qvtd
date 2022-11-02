@@ -145,6 +145,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_THIS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -328,8 +329,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
-			getOwnedKey().addAll((Collection<? extends Key>)newValue);
-			return;
+				getOwnedKey().addAll((Collection<? extends Key>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -344,7 +345,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

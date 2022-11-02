@@ -1685,7 +1685,6 @@ public class QVTcoreTables extends AbstractTables
 			QVTbaseTables.Properties._Rule__overrides,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTcoreTables.Properties._Mapping__refinement,
 			QVTcoreTables.Properties._Mapping__specification,

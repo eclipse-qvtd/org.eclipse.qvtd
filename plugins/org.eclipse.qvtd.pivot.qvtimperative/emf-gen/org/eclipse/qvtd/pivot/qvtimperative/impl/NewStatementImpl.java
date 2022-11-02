@@ -334,6 +334,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -343,8 +344,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ boolean IsEQ_ = ownedExpression != null;
+					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression_0 = this.getOwnedExpression();
+					final /*@NonInvalid*/ boolean IsEQ_ = ownedExpression_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -352,10 +353,10 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 					else {
 						/*@Caught*/ @Nullable Object CAUGHT_type;
 						try {
-							if (ownedExpression == null) {
+							if (ownedExpression_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
-							final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
+							final /*@Thrown*/ @Nullable Type type = ownedExpression_0.getType();
 							CAUGHT_type = type;
 						}
 						catch (Exception THROWN_CAUGHT_type) {

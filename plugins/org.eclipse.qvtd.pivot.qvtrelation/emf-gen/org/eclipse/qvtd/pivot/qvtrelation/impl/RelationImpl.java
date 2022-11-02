@@ -452,8 +452,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 									if (oclAsType == null) {
 										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Relation::isTopLevel\'");
 									}
-									final /*@Thrown*/ boolean isTopLevel = oclAsType.isIsTopLevel();
-									CAUGHT_isTopLevel = isTopLevel;
+									final /*@Thrown*/ boolean isTopLevel_0 = oclAsType.isIsTopLevel();
+									CAUGHT_isTopLevel = isTopLevel_0;
 								}
 								catch (Exception THROWN_CAUGHT_isTopLevel) {
 									CAUGHT_isTopLevel = ValueUtil.createInvalidValue(THROWN_CAUGHT_isTopLevel);
@@ -503,13 +503,13 @@ public class RelationImpl extends RuleImpl implements Relation {
 						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						final /*@NonInvalid*/ boolean isTopLevel_0 = this.isIsTopLevel();
+						final /*@NonInvalid*/ boolean isTopLevel_1 = this.isIsTopLevel();
 						final /*@NonInvalid*/ @Nullable Boolean not_0;
-						if (!isTopLevel_0) {
+						if (!isTopLevel_1) {
 							not_0 = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							if (isTopLevel_0) {
+							if (isTopLevel_1) {
 								not_0 = ValueUtil.FALSE_VALUE;
 							}
 							else {
@@ -663,8 +663,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<Variable> variable = this.getVariable();
-					final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable);
+					final /*@NonInvalid*/ @NonNull List<Variable> variable_0 = this.getVariable();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable_0);
 					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_Variable);
 					@NonNull Iterator<Object> ITER__1 = BOXED_variable.iterator();
 					/*@Thrown*/ boolean isUnique;
@@ -678,14 +678,14 @@ public class RelationImpl extends RuleImpl implements Relation {
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						final /*@NonInvalid*/ @Nullable String name_1 = _1.getName();
 						//
-						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
+						if (accumulator.includes(name_1) == ValueUtil.TRUE_VALUE) {
 							isUnique = false;
 							break;			// Abort after second find
 						}
 						else {
-							accumulator.add(name);
+							accumulator.add(name_1);
 						}
 					}
 					CAUGHT_isUnique = isUnique;
@@ -701,8 +701,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 					/*@Caught*/ @NonNull Object CAUGHT_collect;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull List<Variable> variable_0 = this.getVariable();
-						final /*@NonInvalid*/ @NonNull SetValue BOXED_variable_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable_0);
+						final /*@NonInvalid*/ @NonNull List<Variable> variable_1 = this.getVariable();
+						final /*@NonInvalid*/ @NonNull SetValue BOXED_variable_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable_1);
 						/*@NonInvalid*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_PRIMid_String);
 						@NonNull Iterator<Object> ITER__1_0 = BOXED_variable_0.iterator();
 						/*@Thrown*/ @NonNull BagValue collect;
@@ -716,9 +716,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 							/**
 							 * name
 							 */
-							final /*@NonInvalid*/ @Nullable String name_0 = _1_0.getName();
+							final /*@NonInvalid*/ @Nullable String name_1 = _1_0.getName();
 							//
-							accumulator_0.add(name_0);
+							accumulator_0.add(name_1);
 						}
 						CAUGHT_collect = collect;
 					}
@@ -821,7 +821,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 							else {
 								IF_IsEQ__0 = QVTrelationTables.STR_null;
 							}
-							final /*@NonInvalid*/ boolean IsEQ__0 = !acc.equals(QVTrelationTables.STR_);
+							final /*@NonInvalid*/ boolean IsEQ__0 = !idResolver.oclEquals(acc, QVTrelationTables.STR_);
 							/*@NonInvalid*/ @NonNull String IF_IsEQ_;
 							if (IsEQ__0) {
 								final /*@NonInvalid*/ @NonNull String sum_8 = StringConcatOperation.INSTANCE.evaluate(acc, QVTrelationTables.STR__44);
@@ -840,11 +840,11 @@ public class RelationImpl extends RuleImpl implements Relation {
 						if (transformation == null) {
 							throw new InvalidValueException("Null source for \'NamedElement::name\'");
 						}
-						final /*@Thrown*/ @Nullable String name_1 = transformation.getName();
-						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_3, name_1);
+						final /*@Thrown*/ @Nullable String name = transformation.getName();
+						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTrelationTables.STR__c_c);
-						final /*@NonInvalid*/ @Nullable String name_2 = this.getName();
-						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_2);
+						final /*@NonInvalid*/ @Nullable String name_0 = this.getName();
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_0);
 						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTrelationTables.STR__34);
 						CAUGHT_sum = sum;
 					}

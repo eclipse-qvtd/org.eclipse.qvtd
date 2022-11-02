@@ -419,15 +419,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		 * if isOpposite then targetProperty.opposite else targetProperty endif
 		 */
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Property targetProperty = this.getTargetProperty();
-		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
+		final /*@NonInvalid*/ @NonNull Property targetProperty_0 = this.getTargetProperty();
+		final /*@NonInvalid*/ boolean isOpposite_0 = this.isIsOpposite();
 		/*@NonInvalid*/ @Nullable Property IF_isOpposite;
-		if (isOpposite) {
-			final /*@NonInvalid*/ @Nullable Property opposite = targetProperty.getOpposite();
+		if (isOpposite_0) {
+			final /*@NonInvalid*/ @Nullable Property opposite = targetProperty_0.getOpposite();
 			IF_isOpposite = opposite;
 		}
 		else {
-			IF_isOpposite = targetProperty;
+			IF_isOpposite = targetProperty_0;
 		}
 		return IF_isOpposite;
 	}
@@ -468,6 +468,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -476,11 +477,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty.getOwningClass();
+				final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty_0.getOwningClass();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable = this.getTargetVariable();
-				final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
+				final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
+				final /*@NonInvalid*/ @Nullable Type type = targetVariable_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
@@ -609,15 +610,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				final /*@NonInvalid*/ boolean isPartial_0 = this.isIsPartial();
 				/*@Caught*/ @NonNull Object IF_isPartial;
-				if (isPartial) {
+				if (isPartial_0) {
 					/*@Caught*/ @NonNull Object CAUGHT_elementType;
 					try {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty_0.getType();
 						final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
 						if (oclAsType == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -629,8 +630,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						CAUGHT_elementType = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType);
 					}
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ @Nullable Type type_0 = ownedExpression.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+					final /*@NonInvalid*/ @Nullable Type type_0 = ownedExpression_0.getType();
 					final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
 					/*@Caught*/ @Nullable Object IF_IsEQ2_;
 					if (IsEQ2_) {
@@ -754,6 +755,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -761,13 +763,13 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
+				final /*@NonInvalid*/ boolean isPartial_0 = this.isIsPartial();
 				final /*@NonInvalid*/ @Nullable Boolean not;
-				if (!isPartial) {
+				if (!isPartial_0) {
 					not = ValueUtil.TRUE_VALUE;
 				}
 				else {
-					if (isPartial) {
+					if (isPartial_0) {
 						not = ValueUtil.FALSE_VALUE;
 					}
 					else {
@@ -780,11 +782,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				/*@Caught*/ @NonNull Object IF_not;
 				if (not) {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-					final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+					final /*@NonInvalid*/ @Nullable Type type = resolvedProperty_0.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ @Nullable Type type_0 = ownedExpression.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+					final /*@NonInvalid*/ @Nullable Type type_0 = ownedExpression_0.getType();
 					final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
 					/*@Caught*/ @Nullable Object IF_IsEQ2_;
 					if (IsEQ2_) {
@@ -914,8 +916,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableExp = idResolver.getClass(QVTimperativeTables.CLSSid_VariableExp, null);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
+					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+					final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression_0);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure = executor.getStaticTypeOfValue(null, oclAsSet);
 					final @NonNull LibraryIterationExtension IMPL_closure = (LibraryIterationExtension)TYPE_closure.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(executor, QVTimperativeTables.SET_CLSSid_OclElement, QVTimperativeTables.SET_CLSSid_OclElement);
@@ -981,8 +983,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CallExp = idResolver.getClass(QVTimperativeTables.CLSSid_CallExp, null);
 							final /*@NonInvalid*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, s);
-							final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_CallExp).booleanValue();
-							CAUGHT_oclIsKindOf = oclIsKindOf_0;
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_CallExp).booleanValue();
+							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
 						catch (Exception THROWN_CAUGHT_oclIsKindOf) {
 							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
@@ -1001,7 +1003,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 									throw new InvalidValueException("Null source for \'CallExp::ownedSource\'");
 								}
 								final /*@Thrown*/ @Nullable OCLExpression ownedSource = oclAsType.getOwnedSource();
-								final /*@Thrown*/ boolean IsEQ_ = s.equals(ownedSource);
+								final /*@Thrown*/ boolean IsEQ_ = idResolver.oclEquals(s, ownedSource);
 								CAUGHT_IsEQ_ = IsEQ_;
 							}
 							catch (Exception THROWN_CAUGHT_IsEQ_) {
@@ -1075,8 +1077,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-				final /*@NonInvalid*/ boolean isReadOnly = resolvedProperty.isIsReadOnly();
+				final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+				final /*@NonInvalid*/ boolean isReadOnly = resolvedProperty_0.isIsReadOnly();
 				final /*@NonInvalid*/ @Nullable Boolean not;
 				if (!isReadOnly) {
 					not = ValueUtil.TRUE_VALUE;

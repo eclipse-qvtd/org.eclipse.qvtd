@@ -377,6 +377,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -386,8 +387,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
-					final /*@NonInvalid*/ boolean IsEQ_ = typedModel != null;
+					final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
+					final /*@NonInvalid*/ boolean IsEQ_ = typedModel_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -396,11 +397,11 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 						/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
 						try {
 							final /*@NonInvalid*/ @Nullable String name = this.getName();
-							if (typedModel == null) {
+							if (typedModel_0 == null) {
 								throw new InvalidValueException("Null source for \'NamedElement::name\'");
 							}
-							final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
-							final /*@Thrown*/ boolean IsEQ__0 = (name != null) ? name.equals(name_0) : (name_0 == null);
+							final /*@Thrown*/ @Nullable String name_0 = typedModel_0.getName();
+							final /*@Thrown*/ boolean IsEQ__0 = (name != null) ? idResolver.oclEquals(name, name_0) : (name_0 == null);
 							CAUGHT_IsEQ_ = IsEQ__0;
 						}
 						catch (Exception THROWN_CAUGHT_IsEQ_) {
@@ -486,8 +487,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 							and = ValueUtil.FALSE_VALUE;
 						}
 						else {
-							final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
-							final /*@NonInvalid*/ boolean IsEQ_ = typedModel != null;
+							final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
+							final /*@NonInvalid*/ boolean IsEQ_ = typedModel_0 != null;
 							if (!IsEQ_) {
 								and = ValueUtil.FALSE_VALUE;
 							}
@@ -518,8 +519,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 							}
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-							final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
-							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
+							final /*@NonInvalid*/ @Nullable TypedModel typedModel_1 = this.getTypedModel();
+							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_1).booleanValue();
 							CAUGHT_includes = includes;
 						}
 						catch (Exception THROWN_CAUGHT_includes) {

@@ -232,8 +232,8 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable OCLExpression where = this.getWhere();
-					final /*@NonInvalid*/ boolean IsEQ_ = where != null;
+					final /*@NonInvalid*/ @Nullable OCLExpression where_0 = this.getWhere();
+					final /*@NonInvalid*/ boolean IsEQ_ = where_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -242,10 +242,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 						/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
 						try {
 							final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
-							if (where == null) {
+							if (where_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
-							final /*@Thrown*/ @Nullable Type type = where.getType();
+							final /*@Thrown*/ @Nullable Type type = where_0.getType();
 							final /*@Thrown*/ boolean IsEQ__0 = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 							CAUGHT_IsEQ_ = IsEQ__0;
 						}

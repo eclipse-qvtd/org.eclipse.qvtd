@@ -77,7 +77,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOwnedContext <em>Owned Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,7 +89,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RULE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	public static final int RULE_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -150,16 +149,6 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @ordered
 	 */
 	protected EList<Rule> overrides;
-
-	/**
-	 * The cached value of the '{@link #getOwnedContext() <em>Owned Context</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedContext()
-	 * @generated
-	 * @ordered
-	 */
-	protected ParameterVariable ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,16 +264,6 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ParameterVariable getOwnedContext() {
-		return ownedContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated XXX
 	 */
 	public NotificationChain basicSetOwnedContext(ParameterVariable newOwnedContext, NotificationChain msgs) {
@@ -302,26 +281,6 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedContext(ParameterVariable newOwnedContext) {
-		if (newOwnedContext != ownedContext) {
-			NotificationChain msgs = null;
-			if (ownedContext != null)
-				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5), null, msgs);
-			if (newOwnedContext != null)
-				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5), null, msgs);
-			msgs = basicSetOwnedContext(newOwnedContext, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, newOwnedContext, newOwnedContext));
 	}
 
 	/**
@@ -420,8 +379,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+					final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
 					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
 					@NonNull Iterator<Object> ITER__1 = BOXED_domain.iterator();
 					/*@Thrown*/ boolean isUnique;
@@ -496,8 +455,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+					final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
 					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_domain).booleanValue();
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!notEmpty) {
@@ -628,8 +587,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_excludes;
 				try {
-					final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
-					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule_0, overridden);
+					final /*@NonInvalid*/ @Nullable Rule overridden_0 = this.getOverridden();
+					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule_0, overridden_0);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure = executor.getStaticTypeOfValue(null, oclAsSet);
 					final @NonNull LibraryIterationExtension IMPL_closure = (LibraryIterationExtension)TYPE_closure.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Rule, QVTbaseTables.CLSSid_Rule);
@@ -646,8 +605,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 							if (CAST_1_ == null) {
 								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overridden\'");
 							}
-							final /*@Thrown*/ @Nullable Rule overridden_0 = CAST_1_.getOverridden();
-							return overridden_0;
+							final /*@Thrown*/ @Nullable Rule overridden_1 = CAST_1_.getOverridden();
+							return overridden_1;
 						}
 					};
 					final @NonNull ExecutorSingleIterationManager MGR_closure = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure, oclAsSet, ACC_closure);
@@ -700,15 +659,15 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ boolean isAbstract = this.isIsAbstract();
+				final /*@NonInvalid*/ boolean isAbstract_0 = this.isIsAbstract();
 				final /*@NonInvalid*/ @Nullable Boolean implies;
-				if (!isAbstract) {
+				if (!isAbstract_0) {
 					implies = ValueUtil.TRUE_VALUE;
 				}
 				else {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull List<Rule> overrides = this.getOverrides();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Rule, overrides);
+					final /*@NonInvalid*/ @NonNull List<Rule> overrides_0 = this.getOverrides();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Rule, overrides_0);
 					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_overrides).booleanValue();
 					if (notEmpty) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -762,8 +721,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
-					final /*@NonInvalid*/ boolean IsEQ_ = overridden != null;
+					final /*@NonInvalid*/ @Nullable Rule overridden_0 = this.getOverridden();
+					final /*@NonInvalid*/ boolean IsEQ_ = overridden_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -771,12 +730,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					else {
 						/*@Caught*/ @Nullable Object CAUGHT_forAll;
 						try {
-							if (overridden == null) {
+							if (overridden_0 == null) {
 								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
 							}
 							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();
-							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+							final /*@Thrown*/ @NonNull List<Domain> domain_0 = overridden_0.getDomain();
+							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 							@NonNull Iterator<Object> ITER_od = BOXED_domain.iterator();
 							/*@Thrown*/ @Nullable Boolean forAll;
@@ -798,8 +757,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 								/*@Caught*/ @NonNull Object CAUGHT_includes;
 								try {
 									@SuppressWarnings("null")
-									final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
-									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+									final /*@NonInvalid*/ @NonNull List<Domain> domain_1 = this.getDomain();
+									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_1);
 									/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
 									@NonNull Iterator<Object> ITER__1 = BOXED_domain_0.iterator();
 									/*@Thrown*/ @NonNull SequenceValue collect;
@@ -898,13 +857,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (overridden != null)
 					msgs = ((InternalEObject)overridden).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Rule.class, msgs);
-			return basicSetOverridden((Rule)otherEnd, msgs);
+				return basicSetOverridden((Rule)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverrides()).basicAdd(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetTransformation((Transformation)otherEnd, msgs);
+				return basicSetTransformation((Transformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -925,8 +884,6 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return ((InternalEList<?>)getOverrides()).basicRemove(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return basicSetTransformation(null, msgs);
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -959,13 +916,11 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return isIsAbstract();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getOverridden();
-			return basicGetOverridden();
+				return basicGetOverridden();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOverrides();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getTransformation();
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				return getOwnedContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -981,24 +936,21 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-			getDomain().addAll((Collection<? extends Domain>)newValue);
-			return;
+				getDomain().addAll((Collection<? extends Domain>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract((Boolean)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-			getOverrides().addAll((Collection<? extends Rule>)newValue);
-			return;
+				getOverrides().addAll((Collection<? extends Rule>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)newValue);
-			return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				setOwnedContext((ParameterVariable)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1013,22 +965,19 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)null);
-			return;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				setOwnedContext((ParameterVariable)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1051,8 +1000,6 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return overrides != null && !overrides.isEmpty();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getTransformation() != null;
-			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
-				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
 	}

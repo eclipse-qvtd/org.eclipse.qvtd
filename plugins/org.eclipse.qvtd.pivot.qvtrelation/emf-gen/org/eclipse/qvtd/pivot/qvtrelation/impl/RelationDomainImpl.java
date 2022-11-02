@@ -205,8 +205,8 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
+				final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment_0 = this.getDefaultAssignment();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment_0);
 				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
 				@NonNull Iterator<Object> ITER__1 = BOXED_defaultAssignment.iterator();
 				/*@NonInvalid*/ boolean isUnique;

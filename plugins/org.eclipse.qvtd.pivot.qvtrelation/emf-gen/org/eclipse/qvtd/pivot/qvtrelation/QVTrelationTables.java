@@ -1210,7 +1210,6 @@ public class QVTrelationTables extends AbstractTables
 			QVTbaseTables.Properties._Rule__overrides,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTbaseTables.Properties._Rule__transformation,
 			QVTrelationTables.Properties._Relation__variable,

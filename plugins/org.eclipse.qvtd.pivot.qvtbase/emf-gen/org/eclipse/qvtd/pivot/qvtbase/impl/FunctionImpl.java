@@ -204,6 +204,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -213,8 +214,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ @Nullable OCLExpression queryExpression = this.getQueryExpression();
-					final /*@NonInvalid*/ boolean IsEQ_ = queryExpression != null;
+					final /*@NonInvalid*/ @Nullable OCLExpression queryExpression_0 = this.getQueryExpression();
+					final /*@NonInvalid*/ boolean IsEQ_ = queryExpression_0 != null;
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!IsEQ_) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -222,10 +223,10 @@ public class FunctionImpl extends OperationImpl implements Function {
 					else {
 						/*@Caught*/ @Nullable Object CAUGHT_type;
 						try {
-							if (queryExpression == null) {
+							if (queryExpression_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
-							final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
+							final /*@Thrown*/ @Nullable Type type = queryExpression_0.getType();
 							CAUGHT_type = type;
 						}
 						catch (Exception THROWN_CAUGHT_type) {
@@ -309,7 +310,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -324,7 +325,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

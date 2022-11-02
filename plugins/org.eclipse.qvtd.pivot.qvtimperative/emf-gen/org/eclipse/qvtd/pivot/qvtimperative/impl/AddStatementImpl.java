@@ -312,8 +312,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable Type type = ownedExpression_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
@@ -326,8 +326,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 						}
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable = this.getTargetVariable();
-						final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable.getType();
+						final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable_0 = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable_0.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}

@@ -228,9 +228,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+					final /*@NonInvalid*/ boolean isCheck_0 = this.isIsCheck();
 					final /*@Thrown*/ @Nullable Boolean implies;
-					if (!isCheck) {
+					if (!isCheck_0) {
 						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
@@ -249,8 +249,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 								}
 								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-								final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+								final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+								final /*@NonInvalid*/ @Nullable Type type_0 = value_1.getType();
 								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 								CAUGHT_conformsTo = conformsTo;
 							}
@@ -322,13 +322,13 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
-					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+					final /*@NonInvalid*/ boolean isCheck_0 = this.isIsCheck();
 					final /*@NonInvalid*/ @Nullable Boolean not;
-					if (!isCheck) {
+					if (!isCheck_0) {
 						not = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						if (isCheck) {
+						if (isCheck_0) {
 							not = ValueUtil.FALSE_VALUE;
 						}
 						else {
@@ -341,8 +341,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type = value.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type = value_1.getType();
 						final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 						/*@Caught*/ @Nullable Object IF_IsEQ2_;
 						if (IsEQ2_) {

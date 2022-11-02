@@ -309,15 +309,15 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 		 * if isOpposite then referredProperty.opposite else referredProperty endif
 		 */
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ @NonNull Property referredProperty = this.getReferredProperty();
-		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
+		final /*@NonInvalid*/ @NonNull Property referredProperty_0 = this.getReferredProperty();
+		final /*@NonInvalid*/ boolean isOpposite_0 = this.isIsOpposite();
 		/*@NonInvalid*/ @Nullable Property IF_isOpposite;
-		if (isOpposite) {
-			final /*@NonInvalid*/ @Nullable Property opposite = referredProperty.getOpposite();
+		if (isOpposite_0) {
+			final /*@NonInvalid*/ @Nullable Property opposite = referredProperty_0.getOpposite();
 			IF_isOpposite = opposite;
 		}
 		else {
-			IF_isOpposite = referredProperty;
+			IF_isOpposite = referredProperty_0;
 		}
 		return IF_isOpposite;
 	}
@@ -364,12 +364,12 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer = this.getObjContainer();
+					final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer_0 = this.getObjContainer();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer.getReferredClass();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = objContainer_0.getReferredClass();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty.getOwningClass();
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = resolvedProperty_0.getOwningClass();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, referredClass, owningClass).booleanValue();
 					CAUGHT_conformsTo = conformsTo;
 				}
@@ -384,14 +384,14 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					/*@Caught*/ @NonNull Object CAUGHT_sum;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer_0 = this.getObjContainer();
+						final /*@NonInvalid*/ @NonNull ObjectTemplateExp objContainer_1 = this.getObjContainer();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = objContainer_0.getReferredClass();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = objContainer_1.getReferredClass();
 						final /*@NonInvalid*/ @Nullable String name = referredClass_0.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass_0 = resolvedProperty_0.getOwningClass();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass_0 = resolvedProperty_1.getOwningClass();
 						final /*@NonInvalid*/ boolean IsEQ2_ = owningClass_0 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2_;
 						if (IsEQ2_) {
@@ -470,8 +470,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-					final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+					final /*@NonInvalid*/ @Nullable Type type = resolvedProperty_0.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_not;
 					try {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
@@ -509,8 +509,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_0 = value_1.getType();
 						/*@Caught*/ @Nullable Object CAUGHT_or;
 						try {
 							final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
@@ -622,8 +622,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					/*@Caught*/ @NonNull Object CAUGHT_sum;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_2 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_1 = value_2.getType();
 						final /*@NonInvalid*/ boolean IsEQ2__1 = type_1 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2__1;
 						if (IsEQ2__1) {
@@ -636,8 +636,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(IF_IsEQ2__1, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type_2 = resolvedProperty_0.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type_2 = resolvedProperty_1.getType();
 						final /*@NonInvalid*/ boolean IsEQ2__2 = type_2 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2__2;
 						if (IsEQ2__2) {
@@ -725,8 +725,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty_0.getType();
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -744,8 +744,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 									@SuppressWarnings("null")
-									final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-									final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+									final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+									final /*@NonInvalid*/ @Nullable Type type_0 = value_1.getType();
 									final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_0).booleanValue();
 									CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 								}
@@ -804,8 +804,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_1.getType();
 							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_1);
 							if (oclAsType == null) {
 								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -817,8 +817,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							CAUGHT_elementType = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType);
 						}
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_2 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_2 = value_2.getType();
 						/*@Caught*/ @Nullable Object CAUGHT_or;
 						try {
 							final /*@NonInvalid*/ boolean IsEQ2_ = type_2 == null;
@@ -928,8 +928,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					try {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_3 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_3 = value_3.getType();
 						final /*@NonInvalid*/ boolean IsEQ2__0 = type_3 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2__0;
 						if (IsEQ2__0) {
@@ -942,8 +942,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(IF_IsEQ2__0, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_1.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_2 = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_2.getType();
 						final /*@Thrown*/ @Nullable CollectionType oclAsType_0 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_2);
 						if (oclAsType_0 == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -1029,8 +1029,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type = resolvedProperty_0.getType();
 							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
@@ -1046,8 +1046,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 							try {
 								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 								@SuppressWarnings("null")
-								final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-								final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+								final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+								final /*@NonInvalid*/ @Nullable Type type_0 = value_1.getType();
 								final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType_0).booleanValue();
 								CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 							}
@@ -1081,8 +1081,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_1 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Property resolvedProperty_0 = this.getResolvedProperty();
-							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
+							final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
+							final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_1.getType();
 							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_1);
 							if (oclAsType == null) {
 								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -1097,8 +1097,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_2 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-							final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
+							final /*@NonInvalid*/ @NonNull OCLExpression value_2 = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type_2 = value_2.getType();
 							final /*@Thrown*/ @Nullable CollectionType oclAsType_0 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_2, TYP_CollectionType_2);
 							if (oclAsType_0 == null) {
 								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -1210,8 +1210,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 					try {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_3 = idResolver.getClass(QVTtemplateTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_3 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_3 = value_3.getType();
 						final /*@Thrown*/ @Nullable CollectionType oclAsType_1 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_3);
 						if (oclAsType_1 == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -1220,8 +1220,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@Thrown*/ @Nullable String name = elementType_1.getName();
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property resolvedProperty_1 = this.getResolvedProperty();
-						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_1.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty_2 = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_2.getType();
 						final /*@Thrown*/ @Nullable CollectionType oclAsType_2 = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_3);
 						if (oclAsType_2 == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");

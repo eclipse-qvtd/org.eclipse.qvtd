@@ -97,7 +97,6 @@ public class QVTbaseTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclType = QVTbaseTables.PACKid_$metamodel$.getClassId("OclType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = QVTbaseTables.PACKid_$metamodel$.getClassId("Package", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = QVTbaseTables.PACKid_$metamodel$.getClassId("Parameter", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ParameterVariable = QVTbaseTables.PACKid_$metamodel$.getClassId("ParameterVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Predicate = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Predicate", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
@@ -424,8 +423,7 @@ public class QVTbaseTables extends AbstractTables
 		public static final @NonNull ExecutorProperty _Rule__isAbstract = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, Types._Rule, 1);
 		public static final @NonNull ExecutorProperty _Rule__overridden = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, Types._Rule, 2);
 		public static final @NonNull ExecutorProperty _Rule__overrides = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDES, Types._Rule, 3);
-		public static final @NonNull ExecutorProperty _Rule__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OWNED_CONTEXT, Types._Rule, 4);
-		public static final @NonNull ExecutorProperty _Rule__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 5);
+		public static final @NonNull ExecutorProperty _Rule__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 4);
 
 		public static final @NonNull ExecutorProperty _SimpleTargetElement__iterates = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, Types._SimpleTargetElement, 0);
 		public static final @NonNull ExecutorProperty _SimpleTargetElement__kind = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, Types._SimpleTargetElement, 1);
@@ -1568,7 +1566,6 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Rule__overrides,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
 			QVTbaseTables.Properties._Rule__transformation
 		};

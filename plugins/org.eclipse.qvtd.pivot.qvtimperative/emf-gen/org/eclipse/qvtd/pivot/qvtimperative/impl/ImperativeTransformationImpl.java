@@ -304,14 +304,14 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						/**
 						 * targetName
 						 */
-						final /*@NonInvalid*/ @Nullable String targetName_0 = _1_0.getTargetName();
+						final /*@NonInvalid*/ @Nullable String targetName = _1_0.getTargetName();
 						//
-						if (accumulator_0.includes(targetName_0) == ValueUtil.TRUE_VALUE) {
+						if (accumulator_0.includes(targetName) == ValueUtil.TRUE_VALUE) {
 							isUnique = false;
 							break;			// Abort after second find
 						}
 						else {
-							accumulator_0.add(targetName_0);
+							accumulator_0.add(targetName);
 						}
 					}
 					CAUGHT_isUnique = isUnique;

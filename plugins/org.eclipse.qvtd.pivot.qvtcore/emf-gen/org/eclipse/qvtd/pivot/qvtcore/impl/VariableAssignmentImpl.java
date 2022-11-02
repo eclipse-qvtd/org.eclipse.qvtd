@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -183,6 +184,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -193,11 +195,11 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 				/*@Caught*/ @Nullable Object CAUGHT_or;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable = this.getTargetVariable();
-					final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
-					final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+					final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type type = targetVariable_0.getType();
+					final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
 					final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
 					/*@Caught*/ @Nullable Object IF_IsEQ2_;
 					if (IsEQ2_) {
@@ -284,8 +286,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					/*@Caught*/ @NonNull Object CAUGHT_sum;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_1 = value_1.getType();
 						final /*@NonInvalid*/ boolean IsEQ2__1 = type_1 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2__1;
 						if (IsEQ2__1) {
@@ -299,8 +301,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, IF_IsEQ2__1);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTcoreTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_0 = this.getTargetVariable();
-						final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
+						final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable_1 = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_1.getType();
 						final /*@NonInvalid*/ boolean IsEQ2__2 = type_2 == null;
 						/*@Thrown*/ @Nullable String IF_IsEQ2__2;
 						if (IsEQ2__2) {

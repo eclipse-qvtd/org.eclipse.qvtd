@@ -166,8 +166,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 					try {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTcoreTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-						final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty.getType();
+						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
+						final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty_0.getType();
 						final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
 						if (oclAsType == null) {
 							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
@@ -179,8 +179,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						CAUGHT_elementType = ValueUtil.createInvalidValue(THROWN_CAUGHT_elementType);
 					}
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-					final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+					final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_or;
 					try {
 						final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
@@ -348,6 +348,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
@@ -374,11 +375,11 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				/*@Caught*/ @NonNull Object IF_not;
 				if (not) {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-					final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty.getType();
+					final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
+					final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty_0.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-					final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+					final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_or;
 					try {
 						final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
@@ -615,8 +616,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
 						}
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
+						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty_0.getOwningClass();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
