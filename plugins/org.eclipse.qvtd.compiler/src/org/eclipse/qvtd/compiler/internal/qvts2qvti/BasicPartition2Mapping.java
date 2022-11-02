@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
@@ -681,15 +680,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 	}
 
-	@NonNull VariableExp createContextVariableExp() {
-		ParameterVariable iParameterVariable = mapping.getOwnedContext();
-		if (iParameterVariable == null) {
-			Transformation iTransformation = visitor.getImperativeTransformation();
-			Parameter iParameter = QVTbaseUtil.getContextVariable(iTransformation);
-			iParameterVariable = PivotUtil.createParameterVariable(iParameter);
-			mapping.setOwnedContext(iParameterVariable);
-		}
-		return helper.createVariableExp(iParameterVariable);
+	public @NonNull VariableExp createContextVariableExp() {
+		Transformation iTransformation = visitor.getImperativeTransformation();
+		Parameter iParameter = QVTbaseUtil.getContextVariable(iTransformation);
+		return helper.createVariableExp(iParameter);
 	}
 
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {

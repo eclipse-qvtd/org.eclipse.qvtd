@@ -153,7 +153,6 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			context.addTrace(mIn, mOut);
 			mOut.setName(mIn.getName());
 			mOut.setIsAbstract(mIn.isIsAbstract());
-			mOut.setOwnedContext(create(mIn.getOwnedContext()));
 			mOut.setGuardPattern(create(mIn.getGuardPattern()));
 			mOut.setBottomPattern(create(mIn.getBottomPattern()));
 			createAll(mIn.getDomain(), mOut.getDomain());
@@ -534,7 +533,6 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 
 		protected @NonNull Mapping doMapping(@NonNull Mapping mOut) {
 			Mapping mIn = context.equivalentSource(mOut);
-			updateChild(mOut.getOwnedContext());
 			updateChild(mOut.getGuardPattern());
 			updateChild(mOut.getBottomPattern());
 			updateAllChildren(mOut.getDomain());

@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -461,15 +460,9 @@ public class QVTbaseUtil extends PivotUtil
 		return getContextParameter(standardLibrary, typedModel);
 	}
 
-	public static @NonNull ParameterVariable getContextVariable(@NonNull Rule asRule) {
-		ParameterVariable ownedContext = asRule.getOwnedContext();
-		if (ownedContext == null) {
-			Transformation asTransformation = getContainingTransformation(asRule);
-			Parameter asParameter = getOwnedContext(asTransformation);
-			ownedContext = PivotUtil.createParameterVariable(asParameter);
-			asRule.setOwnedContext(ownedContext);
-		}
-		return ownedContext;
+	public static @NonNull Parameter getContextVariable(@NonNull Rule asRule) {
+		Transformation asTransformation = getContainingTransformation(asRule);
+		return getOwnedContext(asTransformation);
 	}
 
 	public static @NonNull Iterable<@NonNull TypedModel> getDependsOns(@NonNull TypedModel asTypedModel) {
@@ -548,8 +541,8 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
 	}
 
-	public static @NonNull ParameterVariable getOwnedContext(@NonNull Rule asRule) {
-		return ClassUtil.nonNullState(asRule.getOwnedContext());
+	public static @NonNull Parameter getOwnedContext(@NonNull Rule asRule) {
+		return getContextVariable(asRule);
 	}
 
 	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {

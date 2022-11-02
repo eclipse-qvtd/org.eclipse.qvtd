@@ -41,7 +41,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -356,7 +355,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			}
 		}
 		iTransformation.getRule().add(mapping);
-		mapping.setOwnedContext(PivotUtil.createParameterVariable(QVTbaseUtil.getOwnedContext(iTransformation)));
+		//	mapping.setOwnedContext(PivotUtil.createParameterVariable(QVTbaseUtil.getOwnedContext(iTransformation)));
 		visitPartition(partition);
 		//		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCalledRegions()) {
 		//			if (region2region2mapping.get(childRegion) == null) {
