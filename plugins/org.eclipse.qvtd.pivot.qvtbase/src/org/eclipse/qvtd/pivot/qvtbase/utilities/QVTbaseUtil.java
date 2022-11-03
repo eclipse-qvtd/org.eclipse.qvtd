@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -519,6 +520,10 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return externalVariables;
+	}
+
+	public static @NonNull FunctionBody getFunctionBody(@NonNull Function asFunction) {
+		return ClassUtil.nonNullState(asFunction.getFunctionBody());
 	}
 
 	public static @NonNull Iterable<@NonNull TypedModel> getIterates(@NonNull TypedModel asTypedModel) {

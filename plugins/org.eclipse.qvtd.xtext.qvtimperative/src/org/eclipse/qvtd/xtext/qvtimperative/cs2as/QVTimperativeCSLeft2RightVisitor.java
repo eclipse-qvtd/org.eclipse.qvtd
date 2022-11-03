@@ -146,8 +146,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 				context.setReferredOperation(operationCallExp, function);
 				helper.setType(operationCallExp, function.getType(), function.isIsRequired());
 				resolveOperationArgumentTypes(function.getOwnedParameters(), csRoundBracketedClause);
-				Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(containingTransformation);
+				VariableDeclaration contextVariable = QVTbaseUtil.getOwnedContext(QVTbaseUtil.getFunctionBody(function));
 				operationCallExp.setOwnedSource(PivotUtil.createVariableExp(contextVariable));
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
