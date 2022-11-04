@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -661,10 +660,10 @@ public class MappingAnalysis extends RuleAnalysis
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
 		Node node = region.getNode(variableDeclaration);
 		if (node == null) {
-			if (variableDeclaration instanceof ParameterVariable) {
-				getClass();		// XXX
-				variableDeclaration = ((ParameterVariable)variableDeclaration).getRepresentedParameter();
-			}
+			//	if (variableDeclaration instanceof ParameterVariable) {
+			//		getClass();		// XXX
+			//		variableDeclaration = ((ParameterVariable)variableDeclaration).getRepresentedParameter();
+			//	}
 			if (variableDeclaration instanceof Variable) {
 				Variable variable = (Variable) variableDeclaration;
 				OCLExpression ownedInit = variable.getOwnedInit();

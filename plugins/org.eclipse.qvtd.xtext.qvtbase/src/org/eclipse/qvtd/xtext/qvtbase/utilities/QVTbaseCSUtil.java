@@ -14,6 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.LanguageExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -35,5 +39,24 @@ public class QVTbaseCSUtil extends ElementUtil
 			}
 		}
 		return null;
+	}
+
+	public static @NonNull VariableDeclaration getContextVariable(@NonNull ElementCS csElement) {
+		VariableDeclaration contextVariable = null;		// Always ParameterVariable
+		Rule asRule = QVTbaseCSUtil.basicGetContainingRule(csElement);
+		if (asRule != null) {
+			contextVariable = QVTbaseUtil.getContextVariable(asRule);
+		}
+		else {
+			Operation asOperation = ElementUtil.basicGetContainingOperation(csElement);
+			if (asOperation != null) {
+				LanguageExpression asExpression = asOperation.getBodyExpression();
+				if (asExpression instanceof ExpressionInOCL) {		// Always true
+					contextVariable = ((ExpressionInOCL)asExpression).getOwnedContext();
+				}
+			}
+		}
+		assert contextVariable != null;			// XXX
+		return contextVariable;
 	}
 }
