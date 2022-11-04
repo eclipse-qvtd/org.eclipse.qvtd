@@ -459,7 +459,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	protected void propagateChildNameResolution(@NonNull CGElement cgElement, @NonNull CGElement cgChild, @NonNull EReference eContainmentFeature, @Nullable NameResolution parentNameResolution) {
-		if (eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {
+		if (false && eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {
 			CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)cgElement;
 			NameResolution nameResolution = cgPropertyAssignment.basicGetNameResolution();
 			if (nameResolution == null) {
@@ -469,8 +469,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 					NestedNameManager nestedNameManager = globalNameManager.useSelfNestedNameManager(cgProperty);
 					nameResolution = nestedNameManager.getNameResolution(cgProperty);
 				}
-				nameResolution.addCGElement(cgPropertyAssignment);
-				nameResolution.addCGElement((CGValuedElement)cgChild);
+				//	nameResolution.addCGElement(cgPropertyAssignment);
+				//	nameResolution.addCGElement((CGValuedElement)cgChild);
 			}
 			propagateNameResolution(cgChild, nameResolution);
 		}
