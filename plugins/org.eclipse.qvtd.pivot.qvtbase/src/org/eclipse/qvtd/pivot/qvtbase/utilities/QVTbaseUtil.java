@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -49,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -846,5 +849,51 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		return missingSources;
+	}
+
+	/**
+	 * Rewrite asResource to replace VariableExp references to FunctionParameter by the relevant ParameterVariable.
+	 */
+	public static @Nullable List<@NonNull VariableExp> rewriteBadVariableExps(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
+		List<@NonNull VariableExp> badVariableExps = null;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof VariableExp) {
+				VariableExp variableExp = (VariableExp)eObject;
+				VariableDeclaration referredVariable = variableExp.getReferredVariable();
+				if (referredVariable instanceof FunctionParameter) {
+					if (badVariableExps == null) {
+						badVariableExps = new ArrayList<>();
+					}
+					badVariableExps.add(variableExp);
+				}
+			}
+		}
+		if (badVariableExps != null) {
+			for (VariableExp variableExp : badVariableExps) {
+				VariableDeclaration referredVariable = variableExp.getReferredVariable();
+				Operation operation = QVTbaseUtil.basicGetContainingOperation(variableExp);
+				if (operation != null) {
+					Variable fixedParameter = null;
+					ExpressionInOCL bodyExpression = PivotUtil.getBodyExpression(operation);
+					for (@NonNull Variable parameterVariable :  PivotUtil.getOwnedParameters(bodyExpression)) {
+						if (parameterVariable.getRepresentedParameter() == referredVariable) {
+							fixedParameter = parameterVariable;
+							break;
+						}
+					}
+					if (fixedParameter == null) {
+						Variable parameterVariable =  (Variable)PivotUtil.getOwnedContext(bodyExpression);
+						if (parameterVariable.getRepresentedParameter() == referredVariable) {
+							fixedParameter = parameterVariable;
+						}
+					}
+					if (fixedParameter != null) {
+						variableExp.setReferredVariable(fixedParameter);
+					}
+				}
+			}
+		}
+		return badVariableExps;
 	}
 }

@@ -990,6 +990,10 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		if (missingOperationCallSources != null) {
 			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
+		List<VariableExp> badVariableExps = QVTbaseUtil.rewriteBadVariableExps(environmentFactory, target);
+		if (badVariableExps != null) {
+			QVTruntimeUtil.errPrintln("Bad VariableCallExp sources were fixed up for '" + target.getURI() + "'");
+		}
 	}
 
 	protected void transform(@NonNull CoreModel mIn, @NonNull List<@NonNull EObject> mOuts) throws IOException {

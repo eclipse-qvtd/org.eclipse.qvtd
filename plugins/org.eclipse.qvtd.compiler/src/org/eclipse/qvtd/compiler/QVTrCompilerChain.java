@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -98,9 +99,13 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			qvtrResource.setURI(getURI());
 			qvtrResource.setUpdating(wasUpdating);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
-			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
+			List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
 			if (missingOperationCallSources != null) {
 				QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+			}
+			List<@NonNull VariableExp> badVariableExps = QVTbaseUtil.rewriteBadVariableExps(environmentFactory, qvtrResource);
+			if (badVariableExps != null) {
+				QVTruntimeUtil.errPrintln("Bad VariableCallExp sources were fixed up for '" + qvtrResource.getURI() + "'");
 			}
 			boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, qvtrResource);
 			if (missingTraceArtefacts) {
