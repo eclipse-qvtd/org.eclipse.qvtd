@@ -986,11 +986,11 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		assert assertOutputIsTraceable(target);
 
 		// FIXME the following lines should go obsolete
-		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
+		List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
 			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
-		List<VariableExp> badVariableExps = QVTbaseUtil.rewriteBadVariableExps(environmentFactory, target);
+		List<@NonNull VariableExp> badVariableExps = QVTbaseUtil.rewriteBadVariableExps(environmentFactory, target);
 		if (badVariableExps != null) {
 			QVTruntimeUtil.errPrintln("Bad VariableCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
