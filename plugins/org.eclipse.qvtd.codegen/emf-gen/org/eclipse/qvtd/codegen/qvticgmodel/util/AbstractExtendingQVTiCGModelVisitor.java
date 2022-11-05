@@ -156,6 +156,6 @@ public abstract class AbstractExtendingQVTiCGModelVisitor<R, C>
 
 	@Override
 	public R visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
-		return visitCGNamedElement(object);
+		return visitCGValuedElement(object);
 	}
 }

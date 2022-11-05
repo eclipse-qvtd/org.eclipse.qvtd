@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.codegen.qvti.java;
+package org.eclipse.qvtd.codegen.qvti.calling;
 
 import java.util.List;
 
@@ -45,6 +45,7 @@ import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 
 /**
  *  ConstructorOperationCallingConvention defines the support for the call of a cache costructor.

@@ -115,6 +115,8 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 			new QVTdCGValuedElementModelSpec(CGSpeculateExp.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 			new QVTdCGValuedElementModelSpec(CGSpeculatePart.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+
+			new QVTdCGValuedElementModelSpec(CGTypedModel.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 		}
 	}
 

@@ -362,7 +362,7 @@ public class CGMappingImpl extends CGValuedElementImpl implements CGMapping {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
+				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -442,29 +442,29 @@ public class CGMappingImpl extends CGValuedElementImpl implements CGMapping {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAssignments().clear();
-			getOwnedAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
-			return;
+				getOwnedAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedConnectionAssignments().clear();
-			getOwnedConnectionAssignments().addAll((Collection<? extends CGConnectionAssignment>)newValue);
-			return;
+				getOwnedConnectionAssignments().addAll((Collection<? extends CGConnectionAssignment>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedGuardVariables().clear();
-			getOwnedGuardVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
-			return;
+				getOwnedGuardVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				getOwnedRealizedVariables().clear();
-			getOwnedRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
-			return;
+				getOwnedRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				setOwningTransformation((CGTransformation)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 6:
 				setUseClass((Boolean)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -479,25 +479,25 @@ public class CGMappingImpl extends CGValuedElementImpl implements CGMapping {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAssignments().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedConnectionAssignments().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedGuardVariables().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				getOwnedRealizedVariables().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				setOwningTransformation((CGTransformation)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 6:
 				setUseClass(USE_CLASS_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

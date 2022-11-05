@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.codegen.qvti.java;
+package org.eclipse.qvtd.codegen.qvti.naming;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;

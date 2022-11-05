@@ -159,7 +159,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningMapping((CGMapping)otherEnd, msgs);
+				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParts()).basicAdd(otherEnd, msgs);
 		}
@@ -293,17 +293,17 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		switch (featureID) {
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				setExecutorType((CGExecutorType)newValue);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				setOwningMapping((CGMapping)newValue);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)newValue);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				getOwnedParts().clear();
-			getOwnedParts().addAll((Collection<? extends CGRealizedVariablePart>)newValue);
-			return;
+				getOwnedParts().addAll((Collection<? extends CGRealizedVariablePart>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -318,16 +318,16 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		switch (featureID) {
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				setExecutorType((CGExecutorType)null);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				setOwningMapping((CGMapping)null);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)null);
-			return;
+				return;
 			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				getOwnedParts().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

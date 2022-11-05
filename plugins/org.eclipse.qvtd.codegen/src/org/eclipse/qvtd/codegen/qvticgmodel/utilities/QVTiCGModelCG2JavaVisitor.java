@@ -93,10 +93,10 @@ import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.java.InternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
-import org.eclipse.qvtd.codegen.qvti.java.ShadowDataTypeOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -583,15 +583,12 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append("-1/*null*/");
 		}
 		else {
-			js.append(cgTypedModel.getModelIndex() + "/*" + CGUtil.getAST(cgTypedModel).getName() + "*/");
+			js.append(cgTypedModel.getModelIndex() + "/*" + QVTiCGUtil.getAST(cgTypedModel).getName() + "*/");
 		}
 	}
 
-	public void appendModelReference(@Nullable CGTypedModel cgTypedModel) {
-		js.append(getGlobalNameManager().getModelsName());
-		js.append("[");
-		appendModelIndex(cgTypedModel);
-		js.append("]");
+	public void appendModelReference(@NonNull CGTypedModel cgTypedModel) {		// XXX
+		js.append(cgTypedModel.getName());
 	}
 
 	protected void appendQualifiedLiteralName(@NonNull EStructuralFeature eStructuralFeature) {
@@ -847,9 +844,10 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
+		QVTiGlobalNameManager globalNameManager = getGlobalNameManager();
 		String evaluatorName = globalNameManager.getExecutorName();
 		String className = cgTransformation.getName();
-		String transformationName = getGlobalNameManager().getTransformationNameResolution().getResolvedName();
+		String transformationName = globalNameManager.getTransformationNameResolution().getResolvedName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		//
 		js.append("protected final ");
@@ -859,6 +857,16 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		js.append(" ");
 		js.append(transformationName);
 		js.append(" = this;\n");
+		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
+			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				js.append("protected final ");
+				js.appendClassReference(true, RuntimeModelsManager.Model.class);
+				js.append(" ");
+				js.appendValueName(cgTypedModel);
+				js.append(";\n");
+			}
+		}
 		js.append("\n");
 		//
 		js.append("public " + className + "(final ");
@@ -877,17 +885,24 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(oppositeName);
 			js.append(");\n");
 		}
-		int modelNumber = 0;
 		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
+			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				js.appendValueName(cgTypedModel);
+				js.append(" = ");
+			}
 			js.append("initModel(");
-			js.appendIntegerString(modelNumber);
+			js.appendIntegerString(cgTypedModel.getModelIndex());
 			js.append(", ");
-			String name = CGUtil.getAST(cgTypedModel).getName();
+			String name = asTypedModel.getName();
 			js.appendString(name != null ? name : "");
-			js.append(")");
-			if (allInstancesAnalyses != null) {
-				AllInstancesAnalysis allInstancesAnalysis = allInstancesAnalyses.get(modelNumber);
+			js.append(");\n");
+		}
+		if (allInstancesAnalyses != null) {
+			for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
+				AllInstancesAnalysis allInstancesAnalysis = allInstancesAnalyses.get(cgTypedModel.getModelIndex());
 				if (allInstancesAnalysis != null) {
+					js.appendValueName(cgTypedModel);
 					js.append(".initClassIds(");
 					js.append(allInstancesAnalysis.getNames()[0]);
 					js.append(", ");
@@ -902,10 +917,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 						js.append(extentOppositesName != null ? extentOppositesName : "null");
 						js.append(")");
 					}
+					js.append(";\n");
 				}
 			}
-			js.append(";\n");
-			modelNumber++;
 		}
 		js.append("initConnections();\n");
 		/*		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
@@ -2206,8 +2220,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				js.append(" ");
 				js.appendValueName(cgGuardVariable);
 				js.append(" = ");
-				js.append(codeGenerator.getGlobalNameManager().getModelsName());
-				js.append("[");
 				VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
 				Type type = QVTimperativeUtil.getType(asGuardVariable);
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
@@ -2222,11 +2234,11 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 					}
 				}
 				if (cgTypedModel != null) {
-					appendModelIndex(cgTypedModel);
 					assert allInstancesAnalyses != null;
 					allInstancesAnalysis = allInstancesAnalyses.get(cgTypedModel.getModelIndex());
+					js.append(cgTypedModel.getName());
 				}
-				js.append("].getConnection(");
+				js.append(".getConnection(");
 				assert allInstancesAnalysis != null;
 				CompleteClass completeType = completeModel.getCompleteClass(type);
 				Integer classIndex = allInstancesAnalysis.getInstancesCompleteClass2index().get(completeType);

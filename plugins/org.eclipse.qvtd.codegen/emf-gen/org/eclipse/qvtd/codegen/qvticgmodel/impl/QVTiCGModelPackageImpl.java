@@ -1086,8 +1086,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1);
 
 		cgTypedModelEClass = createEClass(23);
-		createEAttribute(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0);
-		createEReference(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(cgTypedModelEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgTypedModelEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 	}
 
 	/**
@@ -1144,7 +1144,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgSpeculateExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgSpeculatePartEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgTransformationEClass.getESuperTypes().add(theCGModelPackage.getCGClass());
-		cgTypedModelEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
+		cgTypedModelEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cgConnectionAssignmentEClass, CGConnectionAssignment.class, "CGConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

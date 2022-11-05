@@ -316,7 +316,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningMapping((CGMapping)otherEnd, msgs);
+				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -385,19 +385,19 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredProperty((CGProperty)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedInitValue((CGValuedElement)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				setOwnedSlotValue((CGValuedElement)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningMapping((CGMapping)newValue);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setAsProperty((Property)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -412,19 +412,19 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredProperty((CGProperty)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedInitValue((CGValuedElement)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				setOwnedSlotValue((CGValuedElement)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
 				setOwningMapping((CGMapping)null);
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setAsProperty(AS_PROPERTY_EDEFAULT);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

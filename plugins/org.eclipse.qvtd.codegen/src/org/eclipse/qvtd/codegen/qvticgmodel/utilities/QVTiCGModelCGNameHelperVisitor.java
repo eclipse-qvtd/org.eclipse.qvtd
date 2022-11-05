@@ -16,6 +16,7 @@ import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCGNameHelperVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 
@@ -78,5 +79,10 @@ public class QVTiCGModelCGNameHelperVisitor extends AbstractQVTiCGModelCGNameHel
 	@Override
 	public @NonNull String visitCGSpeculatePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSpeculatePart object) {
 		return NameResolution.NOT_NEEDED; // "XXX-SPEC-" + object.getEStructuralFeature().getName(); // Never used
+	}
+
+	@Override
+	public @NonNull String visitCGTypedModel(@NonNull CGTypedModel cgTypedModel) {
+		return "MODEL_" + context.getNameableHint(QVTiCGUtil.getAST(cgTypedModel));		// XXX not yet used since CGMapping is not a CGValuedElement
 	}
 }

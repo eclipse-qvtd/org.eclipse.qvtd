@@ -70,8 +70,17 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ExternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.java.FunctionOperationCallingConvention.CacheProperty;
+import org.eclipse.qvtd.codegen.qvti.calling.TransientFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.FunctionOperationCallingConvention.CacheProperty;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
@@ -459,7 +468,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	protected void propagateChildNameResolution(@NonNull CGElement cgElement, @NonNull CGElement cgChild, @NonNull EReference eContainmentFeature, @Nullable NameResolution parentNameResolution) {
-		if (false && eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {
+		if (false && eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {				// XXX
 			CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)cgElement;
 			NameResolution nameResolution = cgPropertyAssignment.basicGetNameResolution();
 			if (nameResolution == null) {

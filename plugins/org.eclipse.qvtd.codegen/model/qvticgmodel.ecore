@@ -171,7 +171,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypedModels" upperBound="-1"
         eType="#//CGTypedModel" containment="true" resolveProxies="false" eOpposite="#//CGTypedModel/owningTransformation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGTypedModel" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGNamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGTypedModel" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningTransformation" lowerBound="1"
         eType="#//CGTransformation" resolveProxies="false" eOpposite="#//CGTransformation/ownedTypedModels"/>

@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
@@ -45,7 +46,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  *
  * @generated
  */
-public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel {
+public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedModel {
 	/**
 	 * The number of structural features of the '<em>CG Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
@@ -53,7 +54,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CG_TYPED_MODEL_FEATURE_COUNT = CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	public static final int CG_TYPED_MODEL_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The default value of the '{@link #getModelIndex() <em>Model Index</em>}' attribute.
@@ -114,7 +115,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 		int oldModelIndex = modelIndex;
 		modelIndex = newModelIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0, oldModelIndex, modelIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, oldModelIndex, modelIndex));
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 */
 	@Override
 	public CGTransformation getOwningTransformation() {
-		if (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1)) return null;
+		if (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (CGTransformation)eInternalContainer();
 	}
 
@@ -134,7 +135,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformation(CGTransformation newOwningTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -145,7 +146,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 */
 	@Override
 	public void setOwningTransformation(CGTransformation newOwningTransformation) {
-		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1) && newOwningTransformation != null)) {
+		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1) && newOwningTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -157,7 +158,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, newOwningTransformation, newOwningTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, newOwningTransformation, newOwningTransformation));
 	}
 
 	/**
@@ -184,7 +185,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
@@ -200,7 +201,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwningTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -214,7 +215,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -228,9 +229,9 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return getModelIndex();
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningTransformation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -244,10 +245,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setModelIndex((Integer)newValue);
 				return;
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningTransformation((CGTransformation)newValue);
 				return;
 		}
@@ -262,10 +263,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setModelIndex(MODEL_INDEX_EDEFAULT);
 				return;
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningTransformation((CGTransformation)null);
 				return;
 		}
@@ -280,9 +281,9 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return modelIndex != MODEL_INDEX_EDEFAULT;
-			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningTransformation() != null;
 		}
 		return super.eIsSet(featureID);
@@ -315,6 +316,14 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public boolean isConstant() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	public boolean isContext() {
 		return true;
 	}
@@ -331,8 +340,45 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public boolean isInlined() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".rewriteAs()");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (this == thatValue) {
+			return Boolean.TRUE;
+		}
+		else {
+			return Boolean.FALSE;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isUncommonable() {
+		return true;
 	}
 
 } //CGTypedModelImpl

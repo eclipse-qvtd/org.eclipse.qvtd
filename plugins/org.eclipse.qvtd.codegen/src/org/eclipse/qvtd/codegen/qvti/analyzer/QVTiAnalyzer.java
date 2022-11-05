@@ -75,8 +75,8 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiExecutableNameManager;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -942,8 +942,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return cgVariable;
 	}
 
-	public @Nullable CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
-		return (CGTypedModel)asElement2cgElement.get(asTypedModel);
+	public @NonNull CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {
+		return (CGTypedModel)ClassUtil.nonNullState(asElement2cgElement.get(asTypedModel));
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {

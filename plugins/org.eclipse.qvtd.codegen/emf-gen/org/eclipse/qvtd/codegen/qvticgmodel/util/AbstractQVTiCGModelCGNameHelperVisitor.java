@@ -155,6 +155,6 @@ public abstract class AbstractQVTiCGModelCGNameHelperVisitor
 
 	@Override
 	public @NonNull String visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
-		return visitCGNamedElement(object);
+		return visitCGValuedElement(object);
 	}
 }
