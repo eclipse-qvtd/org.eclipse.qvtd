@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class QVTbaseCSUtil extends ElementUtil
@@ -45,7 +46,8 @@ public class QVTbaseCSUtil extends ElementUtil
 		VariableDeclaration contextVariable = null;		// Always ParameterVariable
 		Rule asRule = QVTbaseCSUtil.basicGetContainingRule(csElement);
 		if (asRule != null) {
-			contextVariable = QVTbaseUtil.getContextVariable(asRule);
+			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asRule);
+			contextVariable = QVTbaseUtil.getOwnedContext(asTransformation);
 		}
 		else {
 			Operation asOperation = ElementUtil.basicGetContainingOperation(csElement);

@@ -511,7 +511,22 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public @NonNull CGMapping generateMapping(@NonNull Mapping asMapping) {
 		CGMapping cgMapping = generateMappingDeclaration(asMapping);
 		QVTiExecutableNameManager mappingNameManager = getMappingNameManager(cgMapping, asMapping);
-		CGVariable cgThisVariable = mappingNameManager.lazyGetCGVariable(QVTbaseUtil.getOwnedContext(asMapping));		//  XXX container
+		//
+		//	Allocate Transformation and TypedModel context variables now to allow lazy assertion to be stronger.
+		//
+		Transformation asTransformation = QVTbaseUtil.getOwningTransformation(asMapping);
+		VariableDeclaration asContextVariable = QVTbaseUtil.getOwnedContext(asTransformation);
+		/*CGVariable cgThisVariable =*/ mappingNameManager.lazyGetCGVariable(asContextVariable);			// 'contained' by QVTiExecutableNameManager
+		for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getModelParameters(asTransformation)) {
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				VariableDeclaration asContextVariable2 = asTypedModel.getOwnedContext();
+				if (asContextVariable2 != null) {
+					CGVariable cgTypedModelVariable = mappingNameManager.lazyGetCGVariable(asContextVariable2);	// 'contained' by QVTiExecutableNameManager
+					CGTypedModel cgTypedModel = getCGTypedModel(asTypedModel);
+					globalNameManager.getNameResolution(cgTypedModel).addCGElement(cgTypedModelVariable);
+				}
+			}
+		}
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(cgMapping);
 		bodyBuilder2.doBottoms();
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());

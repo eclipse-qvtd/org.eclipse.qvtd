@@ -546,10 +546,6 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
 	}
 
-	public static @NonNull Parameter getOwnedContext(@NonNull Rule asRule) {
-		return getContextVariable(asRule);
-	}
-
 	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
 		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
 	}

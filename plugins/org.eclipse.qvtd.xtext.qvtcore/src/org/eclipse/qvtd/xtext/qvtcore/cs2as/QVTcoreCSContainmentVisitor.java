@@ -226,7 +226,9 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		if (csElement.getName() == null) {
 			asTypedModel.setIsTrace(true);
 		}
-		return new DirectionContentContinuation(context, csElement);
+		DirectionContentContinuation continuation = new DirectionContentContinuation(context, csElement);
+	//	QVTbaseUtil.getContextParameter(standardLibrary, asTypedModel);
+		return continuation;
 	}
 
 	@Override

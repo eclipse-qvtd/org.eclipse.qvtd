@@ -54,7 +54,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
@@ -66,7 +65,6 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
-import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Type;
@@ -122,7 +120,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -2447,7 +2444,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		return "INSTANCE_" + getNativeInstanceClassName(cgType);
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull String getResolvedName(@NonNull CGValuedElement cgElement) {
 		if (cgElement instanceof CGVariableExp) {
 			CGVariable cgVariable = ((CGVariableExp)cgElement).getReferredVariable();
@@ -2459,7 +2456,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 						Transformation asTransformation = ((TypedModel)asContainer).getTransformation();
 						if (asTransformation != null) {
 							int index = asTransformation.getModelParameter().indexOf(asContainer);			// XXX is this irregularity still necessary here ?
-							String name = getGlobalNameManager().getModelsName() + "[" + index + "/*" + ((TypedModel)asContainer).getName() + "*/]";
+							String name = getGlobalNameManager().getModelsName() + "[" + index + "/ *" + ((TypedModel)asContainer).getName() + "* /]";
 							return name;
 						}
 					}
@@ -2467,7 +2464,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			}
 		}
 		return super.getResolvedName(cgElement);
-	}
+	} */
 
 	/*	@Deprecated
 	protected @NonNull String getThisName(@NonNull CGElement cgElement) {
