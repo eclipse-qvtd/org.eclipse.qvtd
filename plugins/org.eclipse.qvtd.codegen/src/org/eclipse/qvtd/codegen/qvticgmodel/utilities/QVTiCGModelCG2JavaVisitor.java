@@ -428,7 +428,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals;
 	protected boolean isGeneratedDebug = false;
@@ -443,7 +442,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			@Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
 		super(codeGenerator, cgPackage, sortedGlobals);
 		QVTiCodeGenerator codeGenerator2 = (QVTiCodeGenerator)codeGenerator;
-		this.analyzer = codeGenerator2.getAnalyzer();
 		this.cgPackage = cgPackage;
 		this.sortedGlobals = sortedGlobals;
 		this.isGeneratedDebug = codeGenerator2.getOptions().isGeneratedDebug();
@@ -1290,7 +1288,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 					Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
 					NewStatement iNewStatement = QVTiCGUtil.getAST(cgRealizedVariable);
 					TypedModel asTypedModel = ClassUtil.nonNullState(iNewStatement.getReferredTypedModel());
-					CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+					CGTypedModel cgTypedModel = ClassUtil.nonNullState(getAnalyzer().getTypedModel(asTypedModel));
 					int modelIndex = cgTypedModel.getModelIndex();
 					CachedInstance cachedInstance = cachedInstances.get(asClass);
 					if (cachedInstance == null) {

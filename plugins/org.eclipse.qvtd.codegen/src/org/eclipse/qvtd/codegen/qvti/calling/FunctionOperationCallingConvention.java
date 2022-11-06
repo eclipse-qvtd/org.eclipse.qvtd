@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention.CachedFeatureAdapter;
 import org.eclipse.ocl.examples.codegen.calling.ConstructorClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
@@ -124,6 +125,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			throw new UnsupportedOperationException();
 		}
 	}
+
 	public static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
 
 	public static class DefaultCachedOperationCallingConvention extends AbstractCachedOperationCallingConvention
@@ -150,6 +152,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 
 		@Override
 		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+			//	js.appendCommentWithOCL(title, asFeature);
 			js.append("public ");
 			js.appendValueName(cgOperation);
 			js.append("() {\n");
@@ -256,6 +259,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		org.eclipse.ocl.pivot.@NonNull Package asPackage = AbstractLanguageSupport.getCachePackage(asFunction);
 		String name = "CACHE_" + PivotUtil.getName(PivotUtil.getOwningClass(asFunction)) + "_" + PivotUtil.getName(asFunction);
 		org.eclipse.ocl.pivot.Class asCacheClass = AbstractLanguageSupport.getClass(asPackage, name);
+		asCacheClass.eAdapters().add(new CachedFeatureAdapter(asFunction));
 		org.eclipse.ocl.pivot.Class asCacheSuperClass = jLanguageSupport.getNativeClass(AbstractComputation.class);
 		asCacheClass.getSuperClasses().add(asCacheSuperClass);
 		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
