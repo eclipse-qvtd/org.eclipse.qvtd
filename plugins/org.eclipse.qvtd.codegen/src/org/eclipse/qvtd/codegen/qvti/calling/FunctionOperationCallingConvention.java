@@ -66,6 +66,7 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractProperty;
 import org.eclipse.ocl.pivot.library.LibraryConstants;
+import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
@@ -252,7 +253,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		//	assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		//
-		org.eclipse.ocl.pivot.Class asCacheClass = jLanguageSupport.getCacheClass(asFunction);
+		org.eclipse.ocl.pivot.@NonNull Package asPackage = AbstractLanguageSupport.getCachePackage(asFunction);
+		String name = "CACHE_" + PivotUtil.getName(PivotUtil.getOwningClass(asFunction)) + "_" + PivotUtil.getName(asFunction);
+		org.eclipse.ocl.pivot.Class asCacheClass = AbstractLanguageSupport.getClass(asPackage, name);
 		org.eclipse.ocl.pivot.Class asCacheSuperClass = jLanguageSupport.getNativeClass(AbstractComputation.class);
 		asCacheClass.getSuperClasses().add(asCacheSuperClass);
 		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
@@ -683,7 +686,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		CGFunction cgFunction = (CGFunction)qvtiOperationNameManager.getCGScope();
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		//
-		org.eclipse.ocl.pivot.Class asConstructorClass = jLanguageSupport.getConstructorClass(asFunction);
+		org.eclipse.ocl.pivot.@NonNull Package asPackage = AbstractLanguageSupport.getCachePackage(asFunction);
+		String name = "CTOR_" + PivotUtil.getName(PivotUtil.getOwningClass(asFunction)) + "_" + PivotUtil.getName(asFunction);
+		org.eclipse.ocl.pivot.Class asConstructorClass = AbstractLanguageSupport.getClass(asPackage, name);
 		org.eclipse.ocl.pivot.Class asConstructorSuperClass = jLanguageSupport.getNativeClass(AbstractComputationConstructor.class);
 		asConstructorClass.getSuperClasses().add(asConstructorSuperClass);
 		importNameManager.reserveLocalName(PivotUtil.getName(asConstructorClass));

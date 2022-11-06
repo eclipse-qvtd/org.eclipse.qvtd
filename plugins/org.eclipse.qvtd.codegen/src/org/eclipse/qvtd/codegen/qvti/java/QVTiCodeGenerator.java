@@ -66,6 +66,7 @@ import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
@@ -100,7 +101,6 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -451,15 +451,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String getQualifiedName() {
-		StringBuilder s =  new StringBuilder();
-		CGPackage cgPackage = this.cgPackage;
-		appendSegmentName(s, cgPackage);
-		while (cgPackage.getPackages().size() > 0) {
-			cgPackage = cgPackage.getPackages().get(0);
-			appendSegmentName(s, cgPackage);
+		if (PivotUtil.getName(PivotUtil.getOwningPackage(asTransformation)).equals("")) {
+			return PivotUtil.getName(asTransformation);
 		}
-		s.append(QVTbaseUtil.getName(asTransformation));
-		return s.toString();
+		CGClass cgTransformation = analyzer.getCGClass(asTransformation);
+		return cgTransformation.toString().replace("::", ".");
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {
