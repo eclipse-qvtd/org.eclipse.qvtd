@@ -200,9 +200,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			String javaFilePath = ClassUtil.nonNullState(javaFileURI.toFileString());
 			String classFilePath = ClassUtil.nonNullState(classFileURI.toFileString());
 			new File(classFilePath).mkdirs();
-			File javaFile = cg.saveSourceFile(javaFilePath);		// use stream to avoid normalizing
-			compiled(javaFile);
-			return new JavaResult(javaFile, javaCodeSource, cg.getQualifiedName(), classFilePath);
+			File javaRoot = cg.saveSourceFile(javaFilePath);		// use stream to avoid normalizing
+			compiled(javaRoot);
+			return new JavaResult(javaRoot, javaCodeSource, cg.getQualifiedName(), classFilePath);
 		}
 
 		private void loadGenModel(@NonNull URI genModelURI) {

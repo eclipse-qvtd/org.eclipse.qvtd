@@ -46,11 +46,8 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
-import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -58,7 +55,6 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
@@ -578,7 +574,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
 		String packagePrefix = options.basicGetOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY);
-		if (packagePrefix != null) {
+		/*	if (packagePrefix != null) {
 			org.eclipse.ocl.pivot.Package asLeafPackage = null;
 			org.eclipse.ocl.pivot.Package asRootPackage = null;
 			Model asModel = PivotUtil.getContainingModel(asTransformation);
@@ -599,7 +595,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 				}
 				asModel.getOwnedPackages().add(asRootPackage);
 			}
-		}
+		} */
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
 			URI asURIstem = asURI.trimFileExtension();

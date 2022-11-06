@@ -74,7 +74,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.SimpleTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -620,13 +619,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
-		//		return qvtiAnalyzer.generateTransformation(asTransformation);
-		for (TypedModel asTypedModel : QVTbaseUtil.getModelParameters(asTransformation)) {
-			//			CGTypedModel cgTypedModel = qvtiAnalyzer.getCGTypedModel(asTypedModel);
-			//	CGTypedModel cgTypedModel = qvtiAnalyzer.getCGTypedModel(cgTypedModel);
-			//	CGVariableExp cgVariableExp = qvtiAnalyzer.createCGVariableExp(cgVariable);
-			//	qvtiAnalyzer.initAst(cgVariableExp, asLoopParameterBinding, asVariable, true);
-		}
 		return visitClass(asTransformation);
 	}
 

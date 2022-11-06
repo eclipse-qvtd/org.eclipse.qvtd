@@ -3481,9 +3481,9 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 
 	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {
-		js.appendClassHeader(cgTransformation.getContainingPackage());
-		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
-		EntryPointsAnalysis entryPointsAnalysis = getCodeGenerator().getEntryPointsAnalysis(transformation);
+		ImperativeTransformation asTransformation = QVTiCGUtil.getAST(cgTransformation);
+		js.appendClassHeader(asTransformation);
+		EntryPointsAnalysis entryPointsAnalysis = getCodeGenerator().getEntryPointsAnalysis(asTransformation);
 		//		this.entryPointsAnalysis = entryPointsAnalysis;
 		String className = cgTransformation.getName();
 		assert className != null;

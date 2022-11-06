@@ -64,6 +64,7 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
+import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -127,9 +128,15 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull ImperativeTransformation asTransformation;
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull Map<@NonNull ImperativeTransformation, @NonNull EntryPointsAnalysis> transformation2analysis = new HashMap<>();
-	private/* @LazyNonNull*/ CGPackage cgPackage;
-	private/* @LazyNonNull*/ String javaSourceCode = null;
-	private/* @LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
+	private /*@LazyNonNull*/ CGPackage cgPackage;
+	private /*@LazyNonNull*/ String javaSourceCode = null;
+	private /*@LazyNonNull*/ JavaLanguageSupport javaLanguageSupport = null;
+
+	/**
+	 * Optional additional qualified path for each class.
+	 */
+	private /*@LazyNonNull*/ Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull String> class2extraPrefix = null;
+	private /*@LazyNonNull*/ Map<@NonNull String, @NonNull String> qualifiedClassName2requalifiedClassName = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
@@ -149,6 +156,20 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
 		assert name != null;
 		return name;
+	}
+
+	private void addRequalification(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull String extraPrefix) {
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull String> class2extraPrefix2 = class2extraPrefix;
+		if (class2extraPrefix2 == null) {
+			class2extraPrefix2 = class2extraPrefix = new HashMap<>();
+		}
+		class2extraPrefix2.put(asClass, extraPrefix);
+		String qualifiedName = AbstractLanguageSupport.getQualifiedName(asClass);
+		Map<@NonNull String, @NonNull String> qualifiedClassName2requalifiedClassName2 = qualifiedClassName2requalifiedClassName;
+		if (qualifiedClassName2requalifiedClassName2 == null) {
+			qualifiedClassName2requalifiedClassName2 = qualifiedClassName2requalifiedClassName = new HashMap<>();
+		}
+		qualifiedClassName2requalifiedClassName2.put(qualifiedName, extraPrefix + "." + qualifiedName);
 	}
 
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage cgPackage) {
@@ -191,35 +212,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected @NonNull CGPackage createCGPackage() {
 		analyzer.setRootClass(asTransformation);				// Identify the host for synthesized nested classes
 		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
-		// FIXME rescue package prefix wrapping
-		//	for (org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
-		//	org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
-		//	CGPackage cgPackage2 = createCGPackage(asPackage);
-		//	if (cgTransformation.eContainer() == null) {
-		//	cgPackage2.getClasses().add(cgTransformation);
-		//	}
-		//	else {
-		//		cgPackage2.getPackages().add(cgPackage);
-		//	}
-		/*	CGPackage cgPackage = cgPackage2;
-		while (cgPackage.getContainingPackage() != null) {
-			cgPackage = cgPackage.getContainingPackage();
-		}
+		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
+		assert cgPackage != null;
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
-			String[] segments = packagePrefix.split("\\.");
-			for (int i = segments.length; --i >= 0; ) {
-				String segment = segments[i];
-				CGPackage cgPackage3 = CGModelFactory.eINSTANCE.createCGPackage();
-				globalNameManager.declareEagerName(cgPackage3, segment);
-				cgPackage3.getPackages().add(cgPackage);
-				cgPackage = cgPackage3;
+			addRequalification(asTransformation, packagePrefix);
+			org.eclipse.ocl.pivot.Package asCachePackage = AbstractLanguageSupport.basicGetCachePackage(asTransformation);
+			if (asCachePackage != null) {
+				for (org.eclipse.ocl.pivot.Class asCacheClass : PivotUtil.getOwnedClasses(asCachePackage))
+					addRequalification(asCacheClass, packagePrefix);
 			}
 		}
-		assert cgPackage != null;
-		analyzer.analyzeExternalFeatures();
-		return cgPackage; */
-		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
 		analyzer.analyzeExternalFeatures();
 		return cgPackage;
 	}
@@ -451,11 +454,30 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String getQualifiedName() {
-		if (PivotUtil.getName(PivotUtil.getOwningPackage(asTransformation)).equals("")) {
-			return PivotUtil.getName(asTransformation);
+		return getRequalifiedClassName(asTransformation);
+	}
+
+	@Override
+	public @NonNull String getRequalifiedClassName(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		String qualifiedName = super.getRequalifiedClassName(asClass);
+		if (class2extraPrefix != null) {
+			String extraPrefix = class2extraPrefix.get(asClass);
+			if (extraPrefix != null) {
+				return extraPrefix + "." + qualifiedName;
+			}
 		}
-		CGClass cgTransformation = analyzer.getCGClass(asTransformation);
-		return cgTransformation.toString().replace("::", ".");
+		return qualifiedName;
+	}
+
+	@Override
+	public @NonNull String getRequalifiedClassName(@NonNull String qualifiedClassName) {
+		if (qualifiedClassName2requalifiedClassName != null) {
+			String requalifiedClassName = qualifiedClassName2requalifiedClassName.get(qualifiedClassName);
+			if (requalifiedClassName != null) {
+				return requalifiedClassName;
+			}
+		}
+		return qualifiedClassName;
 	}
 
 	public @NonNull ImperativeTransformation getTransformation() {
@@ -485,22 +507,28 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
-		File saveFile = new File(savePath);
-		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveFile);
-		return saveFile;
+		File saveRoot = new File(savePath);
+		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveRoot);
+		return saveRoot;
 	}
 
-	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File parentFolder) throws IOException {
-		File folder = new File(parentFolder, cgPackage.getName());
+	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File saveRoot) throws IOException {
 		for (CGPackage cgChildPackage : cgPackage.getPackages()) {
 			if (cgChildPackage != null) {
-				saveSourceFiles(cgChildPackage, folder);
+				saveSourceFiles(cgChildPackage, saveRoot);
 			}
 		}
-		for (CGClass cgClass : cgPackage.getClasses()) {
-			folder.mkdirs();
+		for (CGClass cgClass : CGUtil.getClasses(cgPackage)) {
 			String javaCodeSource = generateClassFile();
-			Writer writer = new FileWriter(new File(folder, cgClass.getName() + ".java"));
+			org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
+			String qualifiedName = getRequalifiedClassName(asClass);
+			File folder = saveRoot;
+			@NonNull String[] segments = qualifiedName.split("\\.");
+			for (int i = 0; i < segments.length-1; i++) {			// Only generating one file so no point caching FILEs
+				folder = new File(folder, segments[i]);
+			}
+			folder.mkdirs();
+			Writer writer = new FileWriter(new File(folder, segments[segments.length-1] + ".java"));
 			writer.append(javaCodeSource);
 			writer.close();
 		}
