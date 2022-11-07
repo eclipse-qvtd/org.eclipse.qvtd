@@ -404,6 +404,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 		Function asFunction = getQVTrElement(Function.class, txQueryNode);
 		List<String> lines = txQueryNode.getInitExpressionLines();
 		if (lines.size() > 0) {
+			asFunction.getFunctionBody();
 			OCLExpression qvtrExpression = parseContextualExpression(asFunction, lines);
 			asFunction.setQueryExpression(qvtrExpression);
 		}
