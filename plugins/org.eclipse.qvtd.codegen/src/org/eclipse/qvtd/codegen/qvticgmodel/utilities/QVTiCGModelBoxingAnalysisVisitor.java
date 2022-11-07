@@ -18,13 +18,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIndexExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
-import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -34,10 +32,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiCGModelBoxingAnalysisVisitor;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
@@ -221,7 +217,7 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		return super.visitCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		CGProperty cgProperty = QVTiCGUtil.getReferredProperty(cgPropertyAssignment);
 		//	CGTypeId cgRequiredTypeId = CGUtil.getTypeId(cgProperty);
@@ -229,7 +225,7 @@ public class QVTiCGModelBoxingAnalysisVisitor extends AbstractQVTiCGModelBoxingA
 		CGValuedElement cgInitValue = QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment);
 		rewriteAsCast2(asRequiredType, cgInitValue);
 		return super.visitCGPropertyAssignment(cgPropertyAssignment);
-	}
+	} */
 
 	@Override
 	public @Nullable Object visitCGRealizedVariablePart(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {

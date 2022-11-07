@@ -773,12 +773,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	@Override
 	public @NonNull CGTypeId getCGTypeId(@NonNull TypeId typeId) {
-		if (typeId == originalThisTypeId) {
-			return super.getCGTypeId(runtimeThisTypeId);
-		}
-		else {
-			return super.getCGTypeId(typeId);
-		}
+		//	if (typeId == originalThisTypeId) {		// XXX
+		//		return super.getCGTypeId(runtimeThisTypeId);
+		//	}
+		//	else {
+		return super.getCGTypeId(typeId);
+		//	}
 	}
 
 	public @NonNull CGTypedModel getCGTypedModel(@NonNull TypedModel asTypedModel) {

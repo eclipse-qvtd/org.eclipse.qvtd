@@ -204,9 +204,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			js.append("return ((");
 			js.appendClassReference(cgCacheClass);
 			js.append(")getUniqueComputation(");
-			js.append(QVTiCGUtil.getContainingCGTransformation(cgOperation).getName());
-			js.append(".this.");
-			js.append(globalNameManager.getIdResolverName());
+			//	js.append(QVTiCGUtil.getContainingCGTransformation(cgOperation).getName());
+			js.append("transformation");		// XXX
+			//	js.append(globalNameManager.getIdResolverName());
 			for (@NonNull CGParameter cgParameter : CGUtil.getParameters(cgOperation)) {
 				js.append(", ");
 				js.appendValueName(cgParameter);
