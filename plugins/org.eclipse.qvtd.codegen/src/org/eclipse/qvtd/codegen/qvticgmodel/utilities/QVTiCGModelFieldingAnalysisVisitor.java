@@ -63,7 +63,7 @@ public class QVTiCGModelFieldingAnalysisVisitor extends AbstractQVTiCGModelField
 	@Override
 	public @NonNull ReturnState visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		String s = String.valueOf(cgMappingLoop.getAst());
-		System.out.println("\t" + s);
+		//	System.out.println("\t" + s);
 		if (s.contains("select(")) {
 			getClass();		// XXX
 		}

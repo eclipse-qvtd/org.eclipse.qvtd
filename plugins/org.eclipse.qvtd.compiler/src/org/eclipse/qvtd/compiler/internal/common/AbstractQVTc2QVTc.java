@@ -453,8 +453,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 					Resource vResource = variable.eResource();
 					//					assert vResource == eResource;
 					if (vResource != eResource) {
-						System.out.println(NameUtil.debugSimpleName(pOut) + " in " + eResource.getURI());			// XXX
-						System.out.println(NameUtil.debugSimpleName(variable) + " in " + vResource.getURI());			// XXX
+						//	System.out.println(NameUtil.debugSimpleName(pOut) + " in " + eResource.getURI());			// XXX
+						//	System.out.println(NameUtil.debugSimpleName(variable) + " in " + vResource.getURI());			// XXX
 						QVTruntimeUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}

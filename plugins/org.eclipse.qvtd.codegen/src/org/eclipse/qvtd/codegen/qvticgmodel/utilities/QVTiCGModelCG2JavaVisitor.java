@@ -3548,21 +3548,18 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		}
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
 			if (!(cgOperation instanceof CGCachedOperation)) {
-				System.out.println("visitCGTransformation-1 " + NameUtil.debugSimpleName(cgOperation) + " : " + CGUtil.getAST(cgOperation));
 				js.append("\n");
 				cgOperation.accept(this);
 			}
 		}
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
 			if ((cgOperation instanceof CGCachedOperation) && (((CGCachedOperation)cgOperation).getFinalOperations().size() <= 0)) {
-				System.out.println("visitCGTransformation-2 " + NameUtil.debugSimpleName(cgOperation) + " : " + CGUtil.getAST(cgOperation));
 				js.append("\n");
 				cgOperation.accept(this);
 			}
 		}
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
 			if ((cgOperation instanceof CGCachedOperation) && (((CGCachedOperation)cgOperation).getFinalOperations().size() > 0)) {
-				System.out.println("visitCGTransformation-3 " + NameUtil.debugSimpleName(cgOperation) + " : " + CGUtil.getAST(cgOperation));
 				js.append("\n");
 				cgOperation.accept(this);
 			}

@@ -223,7 +223,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 					addRequalification(asCacheClass, packagePrefix);
 			}
 		}
-		analyzer.analyzeExternalFeatures();
+		analyzer.analyzeExternalFeatures(cgTransformation);
 		return cgPackage;
 	}
 
@@ -357,7 +357,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull OperationCallingConvention getCallingConvention(@NonNull Operation asOperation, boolean isFinal) {
+	protected @NonNull OperationCallingConvention getCallingConventionInternal(@NonNull Operation asOperation, boolean isFinal) {
 		if (asOperation instanceof Function) {
 			Function asFunction = (Function)asOperation;
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
@@ -389,7 +389,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				return EmptyFunctionOperationCallingConvention.INSTANCE;
 			}
 		}
-		return super.getCallingConvention(asOperation, isFinal);
+		return super.getCallingConventionInternal(asOperation, isFinal);
 	}
 
 	@Override
