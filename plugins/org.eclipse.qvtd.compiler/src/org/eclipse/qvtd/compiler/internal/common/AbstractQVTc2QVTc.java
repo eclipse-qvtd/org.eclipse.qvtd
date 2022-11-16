@@ -77,7 +77,6 @@ import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTc/QVTu/QVTm chain.
@@ -455,7 +454,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 					if (vResource != eResource) {
 						//	System.out.println(NameUtil.debugSimpleName(pOut) + " in " + eResource.getURI());			// XXX
 						//	System.out.println(NameUtil.debugSimpleName(variable) + " in " + vResource.getURI());			// XXX
-						QVTruntimeUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
+						NameUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}
 				}
@@ -863,11 +862,11 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 				for (Setting setting : settings) {
 					EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
 					EObject eSource = setting.getEObject();
-					QVTruntimeUtil.errPrintln("source resource for " + eSource.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eSource)) + "::" + eStructuralFeature.getName() + " : " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)));
+					//	NameUtil.errPrintln("source resource for " + eSource.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eSource)) + "::" + eStructuralFeature.getName() + " : " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)));
 				}
 			}
 			else if (eTargetResource != targetResource) {
-				//	QVTruntimeUtil.errPrintln("Wrong2 resource for target " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				//	NameUtil.errPrintln("Wrong2 resource for target " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 		return true;
@@ -882,7 +881,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			EObject eSource = target2source.get(eTarget);
 			EObject eCopied = debugCopy2source.get(eTarget);
 			if ((eSource == null) && (eCopied == null)) {
-				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				NameUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 		return true;
@@ -988,11 +987,11 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		// FIXME the following lines should go obsolete
 		List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
-			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+			NameUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
 		List<@NonNull VariableExp> badVariableExps = QVTbaseUtil.rewriteBadVariableExps(environmentFactory, target);
 		if (badVariableExps != null) {
-			QVTruntimeUtil.errPrintln("Bad VariableCallExp sources were fixed up for '" + target.getURI() + "'");
+			NameUtil.errPrintln("Bad VariableCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
 	}
 

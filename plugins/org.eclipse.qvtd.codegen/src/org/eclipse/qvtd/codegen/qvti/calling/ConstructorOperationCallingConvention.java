@@ -51,7 +51,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 
 /**
- *  ConstructorOperationCallingConvention defines the support for the call of a cache costructor.
+ *  ConstructorOperationCallingConvention defines the support for the call of a cache constructor.
  */
 public class ConstructorOperationCallingConvention extends AbstractOperationCallingConvention
 {

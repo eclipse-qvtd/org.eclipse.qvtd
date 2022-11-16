@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
  *
  *  -- only used by QVTd
  */
+@Deprecated /* @deprecated not used */
 public class CacheOperationCallingConvention extends AbstractCachedOperationCallingConvention
 {
 	public static final @NonNull CacheOperationCallingConvention INSTANCE = new CacheOperationCallingConvention();

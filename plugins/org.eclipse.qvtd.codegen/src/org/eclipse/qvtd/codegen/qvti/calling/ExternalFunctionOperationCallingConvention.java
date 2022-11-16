@@ -339,7 +339,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+	public @NonNull /*CGFunction*/CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() != null;
 
 		//	CGClass cgClass = analyzer.createNestedCGClass(asOperation, "FTOR" + asOperation.getName());

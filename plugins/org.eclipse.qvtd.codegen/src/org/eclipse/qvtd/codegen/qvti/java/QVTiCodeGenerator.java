@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.CachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
@@ -74,6 +75,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ExternalFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ExternalOperationOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
@@ -389,7 +391,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				return EmptyFunctionOperationCallingConvention.INSTANCE;
 			}
 		}
-		return super.getCallingConventionInternal(asOperation, isFinal);
+		OperationCallingConvention callingConvention = super.getCallingConventionInternal(asOperation, isFinal);
+		if (callingConvention == CachedOperationCallingConvention.INSTANCE) {
+			return ExternalOperationOperationCallingConvention.INSTANCE;		// XXX promote to OCL
+		}
+		return callingConvention;
 	}
 
 	@Override
