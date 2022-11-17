@@ -15,6 +15,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
@@ -28,7 +30,9 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
@@ -44,7 +48,10 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() == null;
-		return CGModelFactory.eINSTANCE.createCGCachedOperation();
+		CGCachedOperation cgOperation = CGModelFactory.eINSTANCE.createCGCachedOperation();
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		return cgOperation;
 	}
 
 	@Override
@@ -63,18 +70,28 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		assert bodyExpression != null;
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
+		//	QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asOperation = CGUtil.getAST(cgOperation);
+		//	Operation asOperation = CGUtil.getAST(cgOperation);
 		//	boolean useClassToCreateObject = true; //QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		//	assert !useClassToCreateObject;
 		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
-		for (Parameter asParameter : asOperation.getOwnedParameters()) {
-			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
+		//	Variable asContextVariable = bodyExpression.getOwnedContext();
+		//	if (asContextVariable != null) {
+		//		CGParameter cgParameter = qvtiAnalyzer.getSelfParameter(operationNameManager, asContextVariable);
+		//		cgOperation.getParameters().add(cgParameter);
+		//	}
+		for (@NonNull Variable asParameterVariable : ClassUtil.nullFree(bodyExpression.getOwnedParameters())) {
+			CGParameter cgParameter = createCGParameter(operationNameManager, asParameterVariable);
 			cgParameters.add(cgParameter);
 		}
+
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(qvtiOperationNameManager);
+		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
+
 	}
 
 	@Override	@Deprecated /* @deprecated use generateJavaEvaluateCall always */
@@ -84,8 +101,8 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		Operation asOperation = QVTiCGUtil.getAST(cgOperation);
 		//	Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		//	CGFunction cgFunction = ClassUtil.nonNullState(cgFunctionCallExp.getFunction());
-		//	boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
-		boolean useCache = !asOperation.isIsTransient();
+		assert !asOperation.isIsTransient();
+		boolean useCache = true; //!asOperation.isIsTransient();
 		boolean isIdentifiedInstance = useCache;
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> asParameters = asOperation.getOwnedParameters();

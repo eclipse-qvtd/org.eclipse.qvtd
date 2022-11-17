@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -729,6 +730,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitParameter(@NonNull Parameter object) {
+		return visiting(object);		// ParameterVariable rather than Parameter shuld used
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
@@ -842,7 +848,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitVariable(@NonNull Variable object) {
-		return visiting(object);		// Really should not be happening.
+		return visiting(object);		// Really should not be happening
 		/*		CGVariable cgVariable = getVariable(asVariable);
 		CGValuedElement initValue = qvtiAnalyzer.createCGElement(CGValuedElement.class, asVariable.getOwnedExpression());
 		cgVariable.setInit(initValue);
@@ -853,7 +859,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitVariableDeclaration(@NonNull VariableDeclaration object) {
-		return visiting(object);		// Really should not be happening.
+		return visiting(object);		// Really should not be happening
 	}
 
 	@Override

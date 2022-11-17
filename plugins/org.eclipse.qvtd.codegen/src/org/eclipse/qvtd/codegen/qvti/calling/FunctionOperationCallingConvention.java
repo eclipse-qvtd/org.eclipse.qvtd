@@ -252,8 +252,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
-		CGFunction cgFunction = (CGFunction)qvtiOperationNameManager.getCGScope();
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
+		CGOperation cgFunction = (CGOperation)qvtiOperationNameManager.getCGScope();
+		Operation asFunction = QVTiCGUtil.getAST(cgFunction);
 		//	assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
 		//
 		org.eclipse.ocl.pivot.@NonNull Package asPackage = AbstractLanguageSupport.getCachePackage(asFunction);
@@ -687,8 +687,8 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
 		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
-		CGFunction cgFunction = (CGFunction)qvtiOperationNameManager.getCGScope();
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
+		CGOperation cgFunction = (CGOperation)qvtiOperationNameManager.getCGScope();
+		Operation asFunction = QVTiCGUtil.getAST(cgFunction);
 		//
 		org.eclipse.ocl.pivot.@NonNull Package asPackage = AbstractLanguageSupport.getCachePackage(asFunction);
 		String name = "CTOR_" + PivotUtil.getName(PivotUtil.getOwningClass(asFunction)) + "_" + PivotUtil.getName(asFunction);
@@ -830,7 +830,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		return cgConstructorOperation;
 	}
 
-	protected final @NonNull CGOperation createConstructorEvaluateOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, @NonNull Function asFunction, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+	protected final @NonNull CGOperation createConstructorEvaluateOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, @NonNull Operation asFunction, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
 		//
 		// AS Class - yyy2zzz
 		// AS Properties -
