@@ -11,11 +11,12 @@
 package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
-import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
 /**
@@ -26,7 +27,14 @@ public class TransformationCallingConvention extends AbstractClassCallingConvent
 	public static final @NonNull TransformationCallingConvention INSTANCE = new TransformationCallingConvention();
 
 	@Override
-	public @NonNull CGClass createCGClass(@NonNull NamedElement asNamedElement) {
+	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		CGTransformation cgTransformation = createCGClass();
+		installCGDefaultClassParent(analyzer, cgTransformation, asClass);
+		return cgTransformation;
+	}
+
+	@Override
+	public @NonNull CGTransformation createCGClass() {
 		return QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 	}
 
