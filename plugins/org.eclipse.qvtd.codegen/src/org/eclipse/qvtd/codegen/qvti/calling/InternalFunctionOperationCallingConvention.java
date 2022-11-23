@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
@@ -55,12 +54,13 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
-		CGFunction cgFunction = (CGFunction)cgOperation;
+		// cached class has no 'body' may be should migrate some createCGParameters functionality here;
+		/*	CGFunction cgFunction = (CGFunction)cgOperation;
 		Function asFunction = QVTiCGUtil.getAST(cgFunction);
 		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
 		assert asFunction.getImplementationClass() == null;
 		assert query != null;
-		super.createCGBody(analyzer, cgFunction);
+		super.createCGBody(analyzer, cgFunction); */
 	}
 
 	@Override

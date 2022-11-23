@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
+import org.eclipse.ocl.examples.codegen.calling.AbstractOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
@@ -455,8 +456,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = (CGFunction)qvtiAnalyzer.generateOperationDeclaration(asFunction, null, true);
-		//XXX		FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)cgFunction.getCallingConvention();
-		//XXX		callingConvention.createCGBody(qvtiAnalyzer, cgFunction);
+		AbstractOperationCallingConvention callingConvention = (AbstractOperationCallingConvention)cgFunction.getCallingConvention();
+		callingConvention.createCGBody(qvtiAnalyzer, cgFunction);
 		//	cgFunction.setRequired(asFunction.isIsRequired());
 		/*		OCLExpression query = asFunction.getQueryExpression(); //getBodyExpression();
 		//	callingConvention.createCGParameters(this, cgFunction, null);

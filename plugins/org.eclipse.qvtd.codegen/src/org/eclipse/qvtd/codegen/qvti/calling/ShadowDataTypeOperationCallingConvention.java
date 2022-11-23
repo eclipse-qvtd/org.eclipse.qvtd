@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
@@ -25,6 +26,11 @@ import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
  */
 public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOperationCallingConvention		// FIXME Promote to OCL
 {
+	@Override
+	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
+		// cached class has no 'body' may be should migrate some createCGParameters functionality here;
+	}
+
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		super.createCGParameters(operationNameManager, bodyExpression);
