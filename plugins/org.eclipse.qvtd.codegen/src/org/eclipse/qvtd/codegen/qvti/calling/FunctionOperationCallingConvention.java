@@ -192,7 +192,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			//
 			//	CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asExpressionInOCL);
 			//	cgCacheOperation.setBody(cgResult);
-			createCGBody(qvtiAnalyzer, cgCacheOperation);
+			//	createCGBody(qvtiAnalyzer, cgCacheOperation);
 			return cgCacheOperation;
 		}
 	}
@@ -331,7 +331,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			//
 			//	Create CG body for isEqual unpacking boxedValues to regular parameter variables
 			//
-			createCGBody(analyzer, cgCacheOperation);
+			//	createCGBody(analyzer, cgCacheOperation);
 			return cgCacheOperation;
 		}
 	}
@@ -395,7 +395,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			//
 			//	Create CG body
 			//
-			createCGBody(qvtiAnalyzer, cgConstructorOperation);
+			//	createCGBody(qvtiAnalyzer, cgConstructorOperation);
 			return cgConstructorOperation;
 		}
 
@@ -475,7 +475,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			//
 			//	Create CG body
 			//
-			createCGBody(qvtiAnalyzer, cgConstructorOperation);
+			//	createCGBody(qvtiAnalyzer, cgConstructorOperation);
 			return cgConstructorOperation;
 		}
 
