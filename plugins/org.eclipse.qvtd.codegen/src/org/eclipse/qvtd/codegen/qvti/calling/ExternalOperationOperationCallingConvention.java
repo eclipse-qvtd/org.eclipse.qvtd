@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention.CachedFeatureAdapter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -53,9 +52,18 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 {
 	public static final @NonNull ExternalOperationOperationCallingConvention INSTANCE = new ExternalOperationOperationCallingConvention();
 
-	public static class ExternalConstructorEvaluateOperationCallingConvention extends ConstructorEvaluateOperationCallingConvention
+	public static class ExternalConstructorEvaluateOperationCallingConvention extends AbstractConstructorEvaluateOperationCallingConvention
 	{
-		public static final @NonNull OperationCallingConvention INSTANCE = new ExternalConstructorEvaluateOperationCallingConvention();
+		public static final @NonNull ExternalConstructorEvaluateOperationCallingConvention INSTANCE = new ExternalConstructorEvaluateOperationCallingConvention();
+
+		@Override
+		protected @Nullable Parameter createConstructorEvaluateOperationSelfParameter(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+			CodeGenerator codeGenerator = analyzer.getCodeGenerator();
+			GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+			NameResolution selfNameResolution = globalNameManager.getSelfNameResolution();
+			Parameter asEvaluateParameter = PivotUtil.createParameter(selfNameResolution.getResolvedName(), PivotUtil.getOwningClass(asOperation), true);
+			return asEvaluateParameter;
+		}
 
 		@Override
 		protected void generateJavaOperationBody(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
@@ -142,15 +150,6 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	}
 
 	@Override
-	protected @Nullable Parameter createConstructorEvaluateOperationSelfParameter(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
-		CodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
-		NameResolution selfNameResolution = globalNameManager.getSelfNameResolution();
-		Parameter asEvaluateParameter = PivotUtil.createParameter(selfNameResolution.getResolvedName(), PivotUtil.getOwningClass(asOperation), true);
-		return asEvaluateParameter;
-	}
-
-	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
 		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
 	}
@@ -164,7 +163,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	}
 
 	@Override
-	protected @NonNull OperationCallingConvention getConstructorEvaluateOperationCallingConvention() {
+	protected @NonNull AbstractConstructorEvaluateOperationCallingConvention getConstructorEvaluateOperationCallingConvention() {
 		return ExternalConstructorEvaluateOperationCallingConvention.INSTANCE;
 	}
 }
