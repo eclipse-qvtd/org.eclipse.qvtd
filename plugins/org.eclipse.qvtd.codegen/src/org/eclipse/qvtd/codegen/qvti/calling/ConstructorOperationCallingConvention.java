@@ -108,6 +108,91 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 	}
 
 	@Override
+	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgConstructor) {
+		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
+		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
+		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
+		Operation asCacheOperation = CGUtil.getAST(cgConstructor);
+		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgConstructor, asCacheOperation);
+		CGClass cgCacheClass = CGUtil.getContainingClass(cgConstructor);
+
+		ExpressionInOCL asCacheExpressionInOCL = (ExpressionInOCL)asCacheOperation.getBodyExpression();
+		assert (asCacheExpressionInOCL != null);
+		OCLExpression asCacheResult = asCacheExpressionInOCL.getOwnedBody();
+
+		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
+		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
+		List<@NonNull Variable> asCacheParameterVariables = PivotUtilInternal.getOwnedParametersList(asCacheExpressionInOCL);
+		Map<@NonNull CGProperty, @NonNull ParameterVariable> cgProperty2asLetVariable = new HashMap<>();
+		//	Stack<@NonNull ParameterVariable> asLetVariables = new Stack<>();
+		for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
+			CGProperty cgProperty = cgProperties.get(i);
+			ParameterVariable asCacheParameterVariable = (ParameterVariable)(i == 0 ? asCacheExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
+			assert asCacheParameterVariable != null;
+			ParameterVariable asLetVariable = asCacheParameterVariable;//helper.createLetVariable(PivotUtil.getName(asCacheParameterVariable), helper.createVariableExp(asCacheParameterVariable));
+			cgProperty2asLetVariable.put(cgProperty, asLetVariable);
+		}
+		Parameter asBoxedValuesParameter = PivotUtilInternal.getOwnedParametersList(asCacheOperation).get(0);
+		CGParameter cgCacheBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
+		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgCacheBoxedValuesParameter);
+		cgParameters.add(cgCacheBoxedValuesParameter);
+		for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
+			ParameterVariable asCacheParameterVariable = (ParameterVariable)(i == 0 ? asCacheExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
+			assert asCacheParameterVariable != null;
+			operationNameManager.lazyGetCGVariable(asCacheParameterVariable);
+		}
+		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
+		CGParameter cgThisParameter = operationNameManager.getThisParameter();
+		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
+		//
+		//	Unpack and assign boxedValues
+		//
+		for (int i = 0; i < cgProperties.size()-1; i++) {	// XXX not cachedResult
+			CGProperty cgProperty = cgProperties.get(i);
+			Property asProperty = CGUtil.getAST(cgProperty);
+			Type asType = PivotUtil.getType(asProperty);
+			CGExecutorType cgExecutorType = operationNameManager.getCGExecutorType(asType);
+			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
+			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
+			cgIndexExp.setAst(asProperty);
+			CGCastExp cgCastExp = analyzer.createCGCastExp(cgExecutorType, cgIndexExp);
+			cgCastExp.setAst(asProperty);
+			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			cgPropertyAssignment.setAst(asProperty);
+			cgPropertyAssignment.setTypeId(cgTypeId);
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
+			cgPropertyAssignment.setReferredProperty(cgProperty);
+			cgPropertyAssignment.setOwnedInitValue(cgCastExp);
+			//	cgPropertyAssignment.setAsProperty(asProperty);
+			cgStatements.add(cgPropertyAssignment);
+			//	cgProperty.getNameResolution().addCGElement(cgCastExp);
+		}
+		//
+		//	Assign cachedResult
+		//
+		{
+			CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asCacheResult);
+			for (Map.Entry<@NonNull CGProperty, @NonNull ParameterVariable> entry : cgProperty2asLetVariable.entrySet()) {
+				CGProperty cgProperty = entry.getKey();
+				ParameterVariable asLetVariable = entry.getValue();
+				CGVariable cgLetVariable = operationNameManager.getCGVariable(asLetVariable);
+				cgProperty.getNameResolution().addCGElement(cgLetVariable);
+			}
+			CGProperty cgProperty = cgProperties.get(cgProperties.size()-1);
+			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			cgPropertyAssignment.setAst(cgProperty.getAst());
+			cgPropertyAssignment.setTypeId(cgTypeId);
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
+			cgPropertyAssignment.setReferredProperty(cgProperty);
+			cgPropertyAssignment.setOwnedInitValue(cgResult);
+			//	cgPropertyAssignment.setAsProperty(asProperty);
+			cgStatements.add(cgPropertyAssignment);
+			cgConstructor.setBody(cgSequence);
+		}
+	}
+
+	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		//	assert asOperation instanceof NullOperationImpl;
 		//		return fallbackCreateCGOperationWithoutBody(as2cgVisitor, asOperation);
@@ -159,7 +244,6 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		assert bodyExpression == null;
 		Operation asOperation = CGUtil.getAST(cgOperation);
@@ -192,10 +276,8 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		//
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		QVTiCodeGenerator codeGenerator = qvtiAnalyzer.getCodeGenerator();
-		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		EnvironmentFactory environmentFactory = codeGenerator.getEnvironmentFactory();
 		org.eclipse.ocl.pivot.@NonNull Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		List<@NonNull CGProperty> cgProperties = CGUtil.getPropertiesList(cgCacheClass);
 		//
 		NameResolution ctorNameResolution = cgCacheClass.getNameResolution();
 		String ctorName = ctorNameResolution.getResolvedName();
@@ -210,102 +292,20 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		ExpressionInOCL asExpressionInOCL = (ExpressionInOCL)asOperation.getBodyExpression();
 		assert asExpressionInOCL != null;
 		ExpressionInOCL asCacheExpressionInOCL = EcoreUtil.copy(asExpressionInOCL);
-		List<@NonNull Variable> asCacheParameterVariables = PivotUtilInternal.getOwnedParametersList(asCacheExpressionInOCL);
-		//	List<@NonNull Property> asCacheProperties = PivotUtilInternal.getOwnedPropertiesList(asCacheClass);
-		Map<@NonNull CGProperty, @NonNull ParameterVariable> cgProperty2asLetVariable = new HashMap<>();
-		//	Stack<@NonNull ParameterVariable> asLetVariables = new Stack<>();
-		for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
-			CGProperty cgProperty = cgProperties.get(i);
-			ParameterVariable asCacheParameterVariable = (ParameterVariable)(i == 0 ? asCacheExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
-			assert asCacheParameterVariable != null;
-			//	CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
-			//	CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
-			//	cgIndexExp.setAst(asParameterVariable);
-			ParameterVariable asLetVariable = asCacheParameterVariable;//helper.createLetVariable(PivotUtil.getName(asCacheParameterVariable), helper.createVariableExp(asCacheParameterVariable));
-			//	operationNameManager.addVariable(asLetVariable, cgParameterVariable);
-			//		asLetVariables.push(asLetVariable);
-			cgProperty2asLetVariable.put(cgProperty, asLetVariable);
-		}
 		OCLExpression asCacheResult = asCacheExpressionInOCL.getOwnedBody();
+		assert asCacheResult != null;
 		PivotUtilInternal.resetContainer(asCacheResult);
-		//	while (!asLetVariables.isEmpty()) {
-		//		ParameterVariable asLetVariable = asLetVariables.pop();
-		//		asCacheResult = helper.createLetExp(asLetVariable, asCacheResult);
-		//	}
 		asCacheExpressionInOCL.setOwnedBody(asCacheResult);
 		asCacheOperation.setBodyExpression(asCacheExpressionInOCL);
 		//
-		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
 		CGOperation cgConstructor = createCGOperation(qvtiAnalyzer, asCacheOperation);
 		cgConstructor.setCallingConvention(this);
 		qvtiAnalyzer.initAst(cgConstructor, asCacheOperation, true);
 		ctorNameResolution.addCGElement(cgConstructor);
-		QVTiExecutableNameManager operationNameManager = qvtiAnalyzer.getOperationNameManager(cgConstructor, asCacheOperation);
-		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgConstructor);
-		CGParameter cgCacheBoxedValuesParameter = operationNameManager.getCGParameter(asBoxedValuesParameter, (String)null);
-		globalNameManager.getBoxedValuesNameResolution().addCGElement(cgCacheBoxedValuesParameter);
-		cgParameters.add(cgCacheBoxedValuesParameter);
-		for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
-			ParameterVariable asCacheParameterVariable = (ParameterVariable)(i == 0 ? asCacheExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
-			assert asCacheParameterVariable != null;
-			operationNameManager.lazyGetCGVariable(asCacheParameterVariable);
-		}
-
-		CGParameter cgThisParameter = operationNameManager.getThisParameter();
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<@NonNull CGValuedElement> cgStatements = QVTiCGUtil.getOwnedStatementsList(cgSequence);
-		//
-		//	Unpack and assign boxedValues
-		//
-		for (int i = 0; i < cgProperties.size()-1; i++) {	// XXX not cachedResult
-			CGProperty cgProperty = cgProperties.get(i);
-			Property asProperty = CGUtil.getAST(cgProperty);
-			Type asType = PivotUtil.getType(asProperty);
-			CGExecutorType cgExecutorType = operationNameManager.getCGExecutorType(asType);
-			CGVariableExp cgVariableExp = analyzer.createCGVariableExp(cgCacheBoxedValuesParameter);
-			CGIndexExp cgIndexExp = analyzer.createCGIndexExp(cgVariableExp, i);
-			cgIndexExp.setAst(asProperty);
-			CGCastExp cgCastExp = analyzer.createCGCastExp(cgExecutorType, cgIndexExp);
-			cgCastExp.setAst(asProperty);
-			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-			cgPropertyAssignment.setAst(asProperty);
-			cgPropertyAssignment.setTypeId(cgTypeId);
-			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
-			cgPropertyAssignment.setReferredProperty(cgProperty);
-			cgPropertyAssignment.setOwnedInitValue(cgCastExp);
-			//	cgPropertyAssignment.setAsProperty(asProperty);
-			cgStatements.add(cgPropertyAssignment);
-			//	cgProperty.getNameResolution().addCGElement(cgCastExp);
-		}
-		//
-		//	Assign cachedResult
-		//
-		{
-			CGValuedElement cgResult = qvtiAnalyzer.createCGElement(CGValuedElement.class, asCacheResult);
-
-
-			for (Map.Entry<@NonNull CGProperty, @NonNull ParameterVariable> entry : cgProperty2asLetVariable.entrySet()) {
-				CGProperty cgProperty = entry.getKey();
-				ParameterVariable asLetVariable = entry.getValue();
-				CGVariable cgLetVariable = operationNameManager.getCGVariable(asLetVariable);
-				cgProperty.getNameResolution().addCGElement(cgLetVariable);
-			}
-
-
-
-			CGProperty cgProperty = cgProperties.get(cgProperties.size()-1);
-			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-			cgPropertyAssignment.setAst(cgProperty.getAst());
-			cgPropertyAssignment.setTypeId(cgTypeId);
-			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));
-			cgPropertyAssignment.setReferredProperty(cgProperty);
-			cgPropertyAssignment.setOwnedInitValue(cgResult);
-			//	cgPropertyAssignment.setAsProperty(asProperty);
-			cgStatements.add(cgPropertyAssignment);
-			cgConstructor.setBody(cgSequence);
-		}
-		//
+		qvtiAnalyzer.getOperationNameManager(cgConstructor, asCacheOperation);
 		cgCacheClass.getOperations().add(cgConstructor);
+		//
+		createCGBody(analyzer, cgConstructor);
 		return cgConstructor;
 	}
 
