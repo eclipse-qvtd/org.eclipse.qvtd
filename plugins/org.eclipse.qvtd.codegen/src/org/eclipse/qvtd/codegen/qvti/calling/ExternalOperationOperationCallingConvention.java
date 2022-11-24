@@ -52,9 +52,9 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 {
 	public static final @NonNull ExternalOperationOperationCallingConvention INSTANCE = new ExternalOperationOperationCallingConvention();
 
-	public static class ExternalConstructorEvaluateOperationCallingConvention extends AbstractConstructorEvaluateOperationCallingConvention
+	public static class ExternalEvaluateOperationCallingConvention extends AbstractEvaluateOperationCallingConvention
 	{
-		public static final @NonNull ExternalConstructorEvaluateOperationCallingConvention INSTANCE = new ExternalConstructorEvaluateOperationCallingConvention();
+		public static final @NonNull ExternalEvaluateOperationCallingConvention INSTANCE = new ExternalEvaluateOperationCallingConvention();
 
 		@Override
 		protected @Nullable Parameter createConstructorEvaluateOperationSelfParameter(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
@@ -163,7 +163,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	}
 
 	@Override
-	protected @NonNull AbstractConstructorEvaluateOperationCallingConvention getConstructorEvaluateOperationCallingConvention() {
-		return ExternalConstructorEvaluateOperationCallingConvention.INSTANCE;
+	protected @NonNull AbstractEvaluateOperationCallingConvention getEvaluateOperationCallingConvention() {
+		return ExternalEvaluateOperationCallingConvention.INSTANCE;
 	}
 }

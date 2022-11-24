@@ -305,7 +305,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		qvtiAnalyzer.getOperationNameManager(cgConstructor, asCacheOperation);
 		cgCacheClass.getOperations().add(cgConstructor);
 		//
-		createCGBody(analyzer, cgConstructor);
+		//	createCGBody(analyzer, cgConstructor);
 		return cgConstructor;
 	}
 

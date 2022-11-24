@@ -336,17 +336,17 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 	}
 
-	public static class CacheConstructorConstructorOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static class CacheConstructorCallingConvention extends AbstractCachedOperationCallingConvention
 	{
-		public static final @NonNull CacheConstructorConstructorOperationCallingConvention INSTANCE = new CacheConstructorConstructorOperationCallingConvention();
+		public static final @NonNull CacheConstructorCallingConvention INSTANCE = new CacheConstructorCallingConvention();
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
-			//	Implemented as direct synthesis in CacheConstructorConstructorOperationCallingConvention.
+			//	Implemented as direct synthesisn.
 			//	Needs an ability to specify a super() invocation and no return type.
 		}
 
-		public @NonNull CGOperation createConstructorConstructorOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass) {
+		public @NonNull CGOperation createConstructor(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass) {
 			//
 			// AS Class - yyy2zzz
 			// AS Properties -
@@ -417,9 +417,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 	}
 
-	public static class CacheConstructorNewInstanceOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static class NewInstanceOperationCallingConvention extends AbstractCachedOperationCallingConvention
 	{
-		public static final @NonNull CacheConstructorNewInstanceOperationCallingConvention INSTANCE = new CacheConstructorNewInstanceOperationCallingConvention();
+		public static final @NonNull NewInstanceOperationCallingConvention INSTANCE = new NewInstanceOperationCallingConvention();
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
@@ -427,7 +427,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 			//	Needs an ability to specify a new T invocation.
 		}
 
-		public final @NonNull CGOperation createConstructorNewInstanceOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		public final @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
 			//
 			// AS Class - yyy2zzz
 			// AS Properties -
@@ -496,9 +496,14 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 	}
 
-	public static abstract class AbstractConstructorEvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static abstract class AbstractEvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
 	{
-		public @NonNull CGOperation createConstructorEvaluateOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, @NonNull Operation asOperation, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		@Override
+		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
+			//	Implemented as direct synthesis
+		}
+
+		public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgConstructorClass, @NonNull Operation asOperation, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
 			//
 			// AS Class - yyy2zzz
 			// AS Properties -
@@ -552,12 +557,6 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 				CGParameter cgParameter = operationNameManager.getCGParameter(asEvaluateParameter, null);
 				cgEvaluateParameters.add(cgParameter);
 			}
-			//
-			//	Create CG body for newInstance
-			//
-			//	Implemented as direct synthesis in CacheConstructorNewInstanceOperationCallingConvention.
-			//	Needs an ability to specify a new T invocation.
-			//
 			cgConstructorClass.getOperations().add(cgEvaluateOperation);
 			return cgEvaluateOperation;
 		}
@@ -567,9 +566,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		}
 	}
 
-	public static class ConstructorEvaluateOperationCallingConvention extends AbstractConstructorEvaluateOperationCallingConvention
+	public static class EvaluateOperationCallingConvention extends AbstractEvaluateOperationCallingConvention
 	{
-		public static final @NonNull ConstructorEvaluateOperationCallingConvention INSTANCE = new ConstructorEvaluateOperationCallingConvention();
+		public static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
 
 		@Override
 		protected void generateJavaOperationBody(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
@@ -712,9 +711,9 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		CGClass cgConstructorSuperClass = qvtiAnalyzer.generateClassDeclaration(asConstructorSuperClass, getClassCallingConvention());
 		cgConstructorClass.getSuperTypes().add(cgConstructorSuperClass);
 		//
-		CacheConstructorConstructorOperationCallingConvention.INSTANCE.createConstructorConstructorOperation(qvtiAnalyzer, cgConstructorClass);
-		getConstructorEvaluateOperationCallingConvention().createConstructorEvaluateOperation(qvtiAnalyzer, cgConstructorClass, asOperation, asCacheClass);
-		CacheConstructorNewInstanceOperationCallingConvention.INSTANCE.createConstructorNewInstanceOperation(qvtiAnalyzer, cgConstructorClass, asCacheClass);
+		CacheConstructorCallingConvention.INSTANCE.createConstructor(qvtiAnalyzer, cgConstructorClass);
+		getEvaluateOperationCallingConvention().createOperation(qvtiAnalyzer, cgConstructorClass, asOperation, asCacheClass);
+		NewInstanceOperationCallingConvention.INSTANCE.createOperation(qvtiAnalyzer, cgConstructorClass, asCacheClass);
 		//
 		return asConstructorClass;
 	}
@@ -858,7 +857,7 @@ public abstract class FunctionOperationCallingConvention extends AbstractOperati
 		return AbstractLanguageSupport.getCachePackage(asOperation);
 	}
 
-	protected @NonNull AbstractConstructorEvaluateOperationCallingConvention getConstructorEvaluateOperationCallingConvention() {
-		return ConstructorEvaluateOperationCallingConvention.INSTANCE;
+	protected @NonNull AbstractEvaluateOperationCallingConvention getEvaluateOperationCallingConvention() {
+		return EvaluateOperationCallingConvention.INSTANCE;
 	}
 }
