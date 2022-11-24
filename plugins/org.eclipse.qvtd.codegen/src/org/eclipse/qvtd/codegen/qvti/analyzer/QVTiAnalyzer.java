@@ -385,8 +385,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	@Override
-	public void addVirtualCGOperation(@NonNull Operation asOperation, @NonNull CGCachedOperation cgOperation) {
-		super.addVirtualCGOperation(asOperation, cgOperation);
+	public void addVirtualCGOperation(@NonNull Operation asOperation, @NonNull CGCachedOperation cgDispatchOperation) {
+		super.addVirtualCGOperation(asOperation, cgDispatchOperation);
 		// XXX virtual functions
 	}
 
