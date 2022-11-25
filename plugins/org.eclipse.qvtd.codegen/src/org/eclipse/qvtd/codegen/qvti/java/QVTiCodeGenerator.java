@@ -359,7 +359,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	protected @NonNull OperationCallingConvention getCallingConventionInternal(@NonNull Operation asOperation, boolean isFinal) {
+	protected @NonNull OperationCallingConvention getCallingConventionInternal(@NonNull Operation asOperation, boolean maybeVirtual) {
 		if (asOperation instanceof Function) {
 			Function asFunction = (Function)asOperation;
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
@@ -391,7 +391,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				return EmptyFunctionOperationCallingConvention.INSTANCE;
 			}
 		}
-		OperationCallingConvention callingConvention = super.getCallingConventionInternal(asOperation, isFinal);
+		OperationCallingConvention callingConvention = super.getCallingConventionInternal(asOperation, maybeVirtual);
 		if (callingConvention == CachedOperationCallingConvention.INSTANCE) {
 			return ExternalOperationOperationCallingConvention.INSTANCE;		// XXX promote to OCL
 		}

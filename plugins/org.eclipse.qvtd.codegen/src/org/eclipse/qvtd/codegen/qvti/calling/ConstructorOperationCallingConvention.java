@@ -306,6 +306,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		cgCacheClass.getOperations().add(cgConstructor);
 		//
 		//	createCGBody(analyzer, cgConstructor);
+		//	analyzer.scanBody(asCacheResult);
 		return cgConstructor;
 	}
 
