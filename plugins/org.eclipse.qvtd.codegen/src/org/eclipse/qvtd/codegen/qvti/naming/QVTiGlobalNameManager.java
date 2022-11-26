@@ -31,7 +31,6 @@ import com.google.common.collect.Iterables;
  */
 public class QVTiGlobalNameManager extends GlobalNameManager
 {
-	private static final @NonNull String CACHED_RESULT_NAME = "cachedResult";
 	private static final @NonNull String CLASS_ID_2_CLASS_ID_ = "classIndex2classId_";
 	private static final @NonNull String CLASS_ID_2_ALL_CLASS_INDEXES_ = "classIndex2allClassIndexes_";
 	private static final @NonNull String CONSTRUCTOR_NAME = "constructor";
@@ -45,7 +44,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String INVOCATION_HASH_CODE_NAME = "invocationHashCode";
 	private static final @NonNull String MODELS_NAME = "models";
 	private static final @NonNull String NEEDS_SPECULATION_NAME = "needsSpeculation";
-	private static final @NonNull String NEW_INSTANCE_NAME = "newInstance";
 	private static final @NonNull String OBJECT_MANAGER_NAME = "objectManager";
 	private static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
@@ -54,7 +52,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
 	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
-	protected final @NonNull NameResolution cachedResultName;
 	protected @NonNull NameResolution @Nullable [] classId2AllClassIndexes;
 	protected @NonNull NameResolution @Nullable [] classId2ClassId;
 	protected final @NonNull NameResolution createFromStringName;
@@ -68,7 +65,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	protected final @NonNull NameResolution invocationHashCodeName;
 	protected final @NonNull NameResolution modelsName;
 	protected final @NonNull NameResolution needsSpeculationName;
-	protected final @NonNull NameResolution newInstanceName;
 	protected final @NonNull NameResolution objectManagerName;
 	protected final @NonNull NameResolution oppositeIndex2PropertyIdName;
 	protected final @NonNull NameResolution outputSpeculationSlotStateName;
@@ -79,7 +75,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
 		super(codeGenerator, helper);
-		this.cachedResultName = globalNameManager.declareEagerName(null, CACHED_RESULT_NAME);
 		this.classId2AllClassIndexes = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_ALL_CLASS_INDEXES_);
 		this.classId2ClassId = null; //globalNameManager.declareEagerName(null, CLASS_ID_2_CLASS_ID_);
 		this.constructorName = globalNameManager.declareEagerName(null, CONSTRUCTOR_NAME);
@@ -93,7 +88,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.invocationHashCodeName = globalNameManager.declareEagerName(null, INVOCATION_HASH_CODE_NAME);
 		this.modelsName = globalNameManager.declareEagerName(null, MODELS_NAME);
 		this.needsSpeculationName = globalNameManager.declareEagerName(null, NEEDS_SPECULATION_NAME);
-		this.newInstanceName = globalNameManager.declareEagerName(null, NEW_INSTANCE_NAME);
 		this.objectManagerName = globalNameManager.declareEagerName(null, OBJECT_MANAGER_NAME);
 		this.oppositeIndex2PropertyIdName = globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
 		this.outputSpeculationSlotStateName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
@@ -118,15 +112,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
 		//	addNameManager(cgScope, nestedNameManager.getParent());
 		return mappingLoopNameManager;
-	}
-
-	@Deprecated
-	public @NonNull String getCachedResultName() {
-		return cachedResultName.getResolvedName();
-	}
-
-	public @NonNull NameResolution getCachedResultNameResolution() {
-		return cachedResultName;
 	}
 
 	public @NonNull NameResolution getClassIndex2AllClassIndexes(int typedModelNumber) {
@@ -188,10 +173,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return needsSpeculationName.getResolvedName();
 	}
 
-	public @NonNull NameResolution getNewInstanceResolution() {
-		return newInstanceName;
-	}
-
 	public @NonNull String getObjectManagerName() {
 		return objectManagerName.getResolvedName();
 	}
@@ -212,6 +193,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return thisTransformerName.getResolvedName();
 	}
 
+	@Override
 	public @NonNull NameResolution getThisTransformerNameResolution() {
 		return thisTransformerName;
 	}

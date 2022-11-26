@@ -23,12 +23,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
-import org.eclipse.ocl.pivot.LanguageExpression;
-import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -38,7 +34,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -114,20 +109,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
-	}
-
-	public static @Nullable ShadowExp basicGetShadowExp(@NonNull Function asFunction) {
-		LanguageExpression asBodyExpression = asFunction.getBodyExpression();
-		if (asBodyExpression != null) {
-			OCLExpression asElement = ((ExpressionInOCL)asBodyExpression).getOwnedBody();
-			while (asElement instanceof LetExp) {				// Redundant since now using Function AS context
-				asElement = ((LetExp)asElement).getOwnedIn();
-			}
-			if (asElement instanceof ShadowExp) {			// QVTr Key
-				return (ShadowExp)asElement;		// FIXME replace with clearer strategy
-			}
-		}
-		return null;
 	}
 
 	public static @Nullable ImperativeTransformation basicGetContainingTransformation(@Nullable EObject eObject) {

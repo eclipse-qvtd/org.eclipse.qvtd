@@ -26,6 +26,8 @@ import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
  */
 public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOperationCallingConvention		// FIXME Promote to OCL
 {
+	public static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
+
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
 		// cached class has no 'body' may be should migrate some createCGParameters functionality here;

@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheProperty;
 import org.eclipse.ocl.examples.codegen.calling.CachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
@@ -82,7 +83,6 @@ import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConventi
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransientFunctionOperationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.calling.FunctionOperationCallingConvention.CacheProperty;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -424,6 +424,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return super.getCallingConvention(asProperty);
 	}
 
+	@Override
+	public @NonNull ImperativeTransformation getContextClass() {
+		return asTransformation;
+	}
+
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
@@ -486,8 +491,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return qualifiedClassName;
 	}
 
+	@Deprecated
 	public @NonNull ImperativeTransformation getTransformation() {
-		return asTransformation;
+		return getContextClass();
 	}
 
 	@Override

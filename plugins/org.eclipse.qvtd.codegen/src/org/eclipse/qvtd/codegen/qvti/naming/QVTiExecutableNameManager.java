@@ -231,6 +231,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
+	@Override
 	public @NonNull CGParameter getIdResolverParameter() {
 		assert !isStatic;
 		CGParameter idResolverParameter2 = idResolverParameter;
