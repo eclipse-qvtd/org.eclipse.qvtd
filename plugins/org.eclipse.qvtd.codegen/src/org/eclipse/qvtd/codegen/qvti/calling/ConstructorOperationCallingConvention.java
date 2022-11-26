@@ -139,7 +139,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		for (int i = 0; i < cgProperties.size()-1; i++) {		// not cachedResult		// not/correct thisTransformer
 			ParameterVariable asCacheParameterVariable = (ParameterVariable)(i == 0 ? asCacheExpressionInOCL.getOwnedContext() : asCacheParameterVariables.get(i-1));
 			assert asCacheParameterVariable != null;
-			operationNameManager.lazyGetCGVariable(asCacheParameterVariable);
+			operationNameManager.lazyGetCGVariable(asCacheParameterVariable);			// XXX needs container + init
 		}
 		CGTypeId cgTypeId = analyzer.getCGTypeId(TypeId.OCL_VOID);
 		CGParameter cgThisParameter = operationNameManager.getThisParameter();
