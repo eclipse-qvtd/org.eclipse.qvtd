@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention.CachedFeatureAdapter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -31,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
-import org.eclipse.ocl.pivot.Feature;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
@@ -122,7 +120,8 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
-		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
+		//	cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
+		cgParameters.add(qvtiOperationNameManager.getSelfParameter());
 		//	Variable asContextVariable = bodyExpression.getOwnedContext();
 		//	if (asContextVariable != null) {
 		//		CGParameter cgParameter = qvtiAnalyzer.getSelfParameter(operationNameManager, asContextVariable);
@@ -135,6 +134,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(qvtiOperationNameManager);
 		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
 		/*Property asConstructorInstance =*/ createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
+		//	/*Property asConstructorInstance =*/ createConstructorInstance2(qvtiOperationNameManager, asCacheClass);
 	}
 
 	@Override
@@ -142,8 +142,8 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		//	super.createCacheSelfProperty(analyzer, cgCacheClass);
 		CodeGenerator codeGenerator = analyzer.getCodeGenerator();
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Feature asFeature = CachedFeatureAdapter.getFeature(asCacheClass);
-		org.eclipse.ocl.pivot.Class asClass = PivotUtil.getOwningClass(asFeature);
+		Operation asOperation = analyzer.getCachedOperation(asCacheClass);
+		org.eclipse.ocl.pivot.Class asClass = PivotUtil.getOwningClass(asOperation);
 		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		NameResolution selfTransformerNameResolution = globalNameManager.getSelfNameResolution();
 		createCacheProperty(analyzer, cgCacheClass, selfTransformerNameResolution, asClass);

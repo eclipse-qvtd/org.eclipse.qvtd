@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
@@ -375,16 +374,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		ImperativeTransformation asTransformation = getCodeGenerator().getTransformation();
 		asTransformation.getOwnedProperties().add(asProperty);
 	}
-
-	@Override
-	public void addVirtualCGOperation(@NonNull Operation asOperation, @NonNull CGCachedOperation cgDispatchOperation) {
-		super.addVirtualCGOperation(asOperation, cgDispatchOperation);
-		// XXX virtual functions
-	}
-
-	//	public @Nullable CGFunction basicGetCGFunction(@NonNull Function asFunction) {
-	//		return asFunction2cgFunctions.get(asFunction);
-	//	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
 		return (CGMapping)asElement2cgElement.get(asMapping);

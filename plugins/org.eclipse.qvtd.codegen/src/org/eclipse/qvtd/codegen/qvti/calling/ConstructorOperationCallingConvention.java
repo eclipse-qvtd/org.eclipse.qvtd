@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractOperationCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.CacheClassCallingConvention.CachedFeatureAdapter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -317,7 +316,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
 		CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asOperation = (Operation) CachedFeatureAdapter.getFeature(asCacheClass);
+		Operation asOperation = cg2javaVisitor.getAnalyzer().getCachedOperation(asCacheClass);
 		LanguageExpression asExpression = asOperation.getBodyExpression();
 		CGValuedElement body = cg2javaVisitor.getExpression(cgOperation.getBody());
 		//
