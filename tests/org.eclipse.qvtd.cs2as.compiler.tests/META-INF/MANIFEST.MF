@@ -9,7 +9,7 @@ Bundle-Localization: plugin
 Comment: javax.annotation is a workaround to Bug 539038
 Require-Bundle: org.junit,
  org.eclipse.osgi,
- org.eclipse.ocl.xtext.completeocl;bundle-version="[1.18.0,1.19.0)",
+ org.eclipse.ocl.xtext.completeocl;bundle-version="[1.19.0,1.20.0)",
  org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.26.0,1.0.0)",
  org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.26.0,1.0.0)",
  org.eclipse.qvtd.cs2as.compiler;bundle-version="[0.26.0,1.0.0)",
