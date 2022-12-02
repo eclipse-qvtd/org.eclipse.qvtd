@@ -16,13 +16,13 @@ def : unqualified_env_Operation() : lookup::LookupEnvironment[1] =
 def : unqualified_env_Property() : lookup::LookupEnvironment[1] =
 	_unqualified_env_Property(null)
 
-def : _unqualified_env_Class(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Class(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Class()
-def : _unqualified_env_Package(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Package(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Package()
-def : _unqualified_env_Operation(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Operation(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Operation()
-def : _unqualified_env_Property(child : OclElement) : lookup::LookupEnvironment[1] =
+def : _unqualified_env_Property(child : OclElement[?]) : lookup::LookupEnvironment[1] =
 	parentEnv_Property()
 
 def : parentEnv_Class() : lookup::LookupEnvironment[1] =
@@ -64,7 +64,7 @@ package as
 
 	
 context Root
-def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Package(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
@@ -98,11 +98,11 @@ def : _qualified_env_Class() : lookup::LookupEnvironment =
 def : lookupQualifiedClass(aPathElementCS : cs::PathElementCS) : Class[?] =
    _lookupQualifiedClass(aPathElementCS.name)
    
-def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Package(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
-def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Class(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Class().nestedEnv()
 		.addElements(ownedClasses)
 		
@@ -136,24 +136,24 @@ def : _qualified_env_Property() : lookup::LookupEnvironment =
 def : lookupQualifiedProperty(aPathElementCS : cs::PathElementCS) : Property[?] =
    _lookupQualifiedProperty(aPathElementCS.name)
    
-def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Operation(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Operation().nestedEnv()
 		.addElements(self->closure(superClass).ownedOperations)
 		.nestedEnv()
 		.addElements(ownedOperations)
 		
-def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnvironment =
+def : _unqualified_env_Property(child : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	parentEnv_Property().nestedEnv()
 		.addElements(self->closure(superClass).ownedProperties)
 		.nestedEnv()
 		.addElements(ownedProperties)
 		
-def : _exported_env_Operation(importer : ocl::OclElement) : lookup::LookupEnvironment =
+def : _exported_env_Operation(importer : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment {}
 	in env
 		.addElements(ownedOperations)
 	
-def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnvironment =
+def : _exported_env_Property(importer : ocl::OclElement[?]) : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment {}
 	in env
 		.addElements(ownedProperties)
