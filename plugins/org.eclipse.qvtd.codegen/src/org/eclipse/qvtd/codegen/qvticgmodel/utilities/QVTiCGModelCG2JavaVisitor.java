@@ -3248,6 +3248,10 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		CGProperty cgProperty = cgPropertyAssignment.getReferredProperty();
 		CGValuedElement slotValue = QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment);
 		CGValuedElement initValue = QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment);
+		if (initValue.isInvalid()) {
+			js.appendValueName(initValue);
+			return false;
+		}
 		if (!js.appendLocalStatements(slotValue)) {
 			return false;
 		}
