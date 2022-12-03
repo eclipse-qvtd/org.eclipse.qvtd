@@ -12,9 +12,11 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -93,13 +95,13 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		String propertyName = classNameManager.getUniquePropertyName(NameManagerHelper.INSTANCE_PROPERTY_NAME_PREFIX, asCacheClass);
 		Property asProperty = PivotUtil.createProperty(propertyName, asCacheClass);
 		//	Operation asOperation = (Operation)operationNameManager.getASScope();
-		//	analyzer.addCacheConstructorInstance(asOperation, asProperty, asCacheClass);
+		analyzer.addCacheInstance(asProperty, asCacheClass);
 		//
-		//	CGClass cgClass = qvtiOperationNameManager.getClassNameManager().getCGClass();
-		//	CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
-		//	cgProperty.setCallingConvention(ConstructorInstancePropertyCallingConvention.INSTANCE);
+		CGClass cgClass = classNameManager.getCGClass();
+		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
+		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.INSTANCE);
 		//	cgClass.getProperties().add(cgProperty);
-		//	assert cgProperty.eContainer() != null;
+		assert cgProperty.eContainer() != null;
 		return asProperty;
 	}
 
