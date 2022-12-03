@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
+import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
@@ -701,6 +702,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			for (@NonNull NewStatementPart asPart : asParts) {
 				cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
 			}
+
+			org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
+
+			//	new
+			//	CGClass cgClass = context.generateClassDeclaration(asClass, TraceClassCallingConvention.INSTANCE);
+
+
+
 		}
 		else {
 			qvtiAnalyzer.getBodyBuilder().appendCheckedLetVariable(asNewStatement, asInit);
