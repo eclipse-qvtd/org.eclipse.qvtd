@@ -67,7 +67,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -520,8 +519,25 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
 		File saveRoot = new File(savePath);
-		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveRoot);
+		CGClass cgTransformation = analyzer.getCGClass(asTransformation);
+		//	saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveRoot);
+		saveSourceFile(cgTransformation, saveRoot);
 		return saveRoot;
+	}
+
+	public void saveSourceFile(@NonNull CGClass cgClass, @NonNull File saveRoot) throws IOException {
+		String javaCodeSource = generateClassFile();
+		org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
+		String qualifiedName = getRequalifiedClassName(asClass);
+		File folder = saveRoot;
+		@NonNull String[] segments = qualifiedName.split("\\.");
+		for (int i = 0; i < segments.length-1; i++) {			// Only generating one file so no point caching FILEs
+			folder = new File(folder, segments[i]);
+		}
+		folder.mkdirs();
+		Writer writer = new FileWriter(new File(folder, segments[segments.length-1] + ".java"));
+		writer.append(javaCodeSource);
+		writer.close();
 	}
 
 	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File saveRoot) throws IOException {
@@ -531,18 +547,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		for (CGClass cgClass : CGUtil.getClasses(cgPackage)) {
-			String javaCodeSource = generateClassFile();
-			org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
-			String qualifiedName = getRequalifiedClassName(asClass);
-			File folder = saveRoot;
-			@NonNull String[] segments = qualifiedName.split("\\.");
-			for (int i = 0; i < segments.length-1; i++) {			// Only generating one file so no point caching FILEs
-				folder = new File(folder, segments[i]);
-			}
-			folder.mkdirs();
-			Writer writer = new FileWriter(new File(folder, segments[segments.length-1] + ".java"));
-			writer.append(javaCodeSource);
-			writer.close();
+			saveSourceFile(cgClass, saveRoot);
 		}
 	}
 }
