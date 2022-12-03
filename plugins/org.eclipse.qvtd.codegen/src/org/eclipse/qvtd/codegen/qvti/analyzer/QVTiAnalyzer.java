@@ -12,8 +12,10 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -70,6 +72,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.CGVariableComparator;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor.InlinedBodyAdapter;
+import org.eclipse.qvtd.codegen.qvti.calling.RuleCacheClassCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
@@ -332,6 +335,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	private @Nullable PredicateTreeBuilder bodyBuilder;
 	//	private @NonNull Map<@NonNull Operation, org.eclipse.ocl.pivot.@NonNull Property> asOperation2asConstructorClass = new HashMap<>();
+
+	/**
+	 * The Trace instance class fro each Trace meta class.
+	 */
+	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, org.eclipse.ocl.pivot.@NonNull Class> asClass2asRuleCacheClass = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
@@ -928,6 +936,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			nameManager.addVariable(asNewStatement, cgVariable);
 		}
 		return cgVariable;
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		org.eclipse.ocl.pivot.Class asCacheClass = asClass2asRuleCacheClass.get(asClass);
+		if (asCacheClass == null) {
+			ClassNameManager classNameManager = getClassNameManager(null, asClass);
+			asCacheClass = RuleCacheClassCallingConvention.INSTANCE.createCacheClass(classNameManager);
+			asClass2asRuleCacheClass.put(asClass, asCacheClass);
+		}
+		return asCacheClass;
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {

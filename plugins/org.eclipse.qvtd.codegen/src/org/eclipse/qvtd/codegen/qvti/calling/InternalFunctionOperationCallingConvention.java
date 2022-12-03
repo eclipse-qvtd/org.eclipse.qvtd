@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -88,10 +87,9 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		//	super.createCGParameters(operationNameManager, bodyExpression);
-		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		org.eclipse.ocl.pivot.Class asCacheClass = createEntryClass(qvtiOperationNameManager);
-		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
-		/*Property asConstructorInstance =*/ createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
+		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 	}
 
 	@Override

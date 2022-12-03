@@ -96,7 +96,7 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 		}
 	}
 
-	protected org.eclipse.ocl.pivot.@NonNull Class createEntryClass(@NonNull ExecutableNameManager operationNameManager) {
+	public org.eclipse.ocl.pivot.@NonNull Class createEntryClass(@NonNull ExecutableNameManager operationNameManager) {
 		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();

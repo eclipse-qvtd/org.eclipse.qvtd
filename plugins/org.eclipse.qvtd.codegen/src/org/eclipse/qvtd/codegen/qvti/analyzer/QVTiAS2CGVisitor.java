@@ -48,6 +48,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.PredicateTreeBuilder;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -688,12 +689,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitNewStatement(@NonNull NewStatement asNewStatement) {
+		PredicateTreeBuilder bodyBuilder = qvtiAnalyzer.getBodyBuilder();
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
-			CGRealizedVariable CGRealizedVariable = qvtiAnalyzer.getBodyBuilder().addRealizedVariable(asNewStatement);
+			CGRealizedVariable CGRealizedVariable = bodyBuilder.addRealizedVariable(asNewStatement);
 			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asNewStatement);
 			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
-			//	getNameManager().declareStandardName(cgExecutorType);
 			CGRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
 			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
@@ -702,17 +703,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			for (@NonNull NewStatementPart asPart : asParts) {
 				cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
 			}
-
-			org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-
-			//	new
-			//	CGClass cgClass = context.generateClassDeclaration(asClass, TraceClassCallingConvention.INSTANCE);
-
-
-
+			if (asParts.size() > 0) {
+				org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
+				qvtiAnalyzer.getRuleCacheClass(asClass);
+			}
 		}
 		else {
-			qvtiAnalyzer.getBodyBuilder().appendCheckedLetVariable(asNewStatement, asInit);
+			bodyBuilder.appendCheckedLetVariable(asNewStatement, asInit);
 		}
 		return null;
 	}

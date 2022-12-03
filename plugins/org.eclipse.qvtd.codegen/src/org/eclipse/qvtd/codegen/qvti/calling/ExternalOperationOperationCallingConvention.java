@@ -40,7 +40,6 @@ import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 
@@ -147,11 +146,10 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		assert bodyExpression != null;
-		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		//	cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
-		cgParameters.add(qvtiOperationNameManager.getSelfParameter());
+		cgParameters.add(operationNameManager.getSelfParameter());
 		//	Variable asContextVariable = bodyExpression.getOwnedContext();
 		//	if (asContextVariable != null) {
 		//		CGParameter cgParameter = qvtiAnalyzer.getSelfParameter(operationNameManager, asContextVariable);
@@ -161,9 +159,9 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 			CGParameter cgParameter = createCGParameter(operationNameManager, asParameterVariable);
 			cgParameters.add(cgParameter);
 		}
-		org.eclipse.ocl.pivot.Class asCacheClass = createEntryClass(qvtiOperationNameManager);
-		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
-		/*Property asConstructorInstance =*/ createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
+		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 		//	/*Property asConstructorInstance =*/ createConstructorInstance2(qvtiOperationNameManager, asCacheClass);
 	}
 
