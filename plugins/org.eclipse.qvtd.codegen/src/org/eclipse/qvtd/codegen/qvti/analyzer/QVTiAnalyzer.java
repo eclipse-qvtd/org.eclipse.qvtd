@@ -376,13 +376,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		assert old == null;
 	}
 
-	@Override
-	public void addCacheInstance(@NonNull Operation asOperation, @NonNull Property asProperty, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
-		super.addCacheInstance(asOperation, asProperty, asCacheClass);
-		ImperativeTransformation asTransformation = getCodeGenerator().getTransformation();
-		asTransformation.getOwnedProperties().add(asProperty);
-	}
-
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
 		return (CGMapping)asElement2cgElement.get(asMapping);
 	}

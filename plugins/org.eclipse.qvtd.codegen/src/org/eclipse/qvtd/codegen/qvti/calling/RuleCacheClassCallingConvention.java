@@ -149,9 +149,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		String className = CGUtil.getName(cgClass);
 		CGPackage cgContainingPackage = cgClass.getContainingPackage();
 		assert cgContainingPackage == null;
-		String title = "The instance of " + cgClass.getName() + " caches the arguments and result of each distinct invocation of\n";
-		js.appendCommentWithOCL(title, cgClass.getAst());
-		js.append("public static class " + className);
+		String title = "The instance of " + cgClass.getName() + " caches the result of each distinct invocation of\n";
+		js.appendCommentWithOCL(title, cgClass.getAst());			// XXX lookup rule
+		js.append("private static class " + className);
 		appendSuperTypes(js, cgClass);
 		js.pushClassBody(className);
 		generateProperties(cg2javaVisitor, js, cgClass);
