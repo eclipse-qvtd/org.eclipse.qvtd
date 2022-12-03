@@ -1280,7 +1280,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				List<CGRealizedVariablePart> ownedParts = cgRealizedVariable.getOwnedParts();
 				if (ownedParts.size() > 0) {
 					CGExecutorType cgExecutorType = cgRealizedVariable.getExecutorType();
-					org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class) cgExecutorType.getAst();
+					org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
 					List<@NonNull CGProperty> cgProperties = new ArrayList<>();
 					for (CGRealizedVariablePart ownedPart : ownedParts) {
 						cgProperties.add(ownedPart.getReferredProperty());
@@ -3543,12 +3543,13 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		List<@NonNull CGClass> cgClasses = new ArrayList<>(CGUtil.getClassesList(cgTransformation));
 		Collections.sort(cgClasses, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull CGClass cgClass : cgClasses) {
-			if (!isEmpty(cgClass)) {
-				//	if (!(cgClass instanceof CGCachedOperation)) {
-				js.append("\n");
-				cgClass.accept(this);
-				//	}
-			}
+			cgClass.getCallingConvention().generateJavaDeclaration(this, js, cgClass);
+			//	if (!isEmpty(cgClass)) {
+			//	if (!(cgClass instanceof CGCachedOperation)) {
+			//		js.append("\n");
+			//		cgClass.accept(this);
+			//	}
+			//	}
 		}
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
 			if (!(cgOperation instanceof CGCachedOperation)) {
