@@ -377,8 +377,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	@Override
-	public void addCacheConstructorInstance(@NonNull Operation asOperation, @NonNull Property asProperty, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
-		super.addCacheConstructorInstance(asOperation, asProperty, asCacheClass);
+	public void addCacheInstance(@NonNull Operation asOperation, @NonNull Property asProperty, org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		super.addCacheInstance(asOperation, asProperty, asCacheClass);
 		ImperativeTransformation asTransformation = getCodeGenerator().getTransformation();
 		asTransformation.getOwnedProperties().add(asProperty);
 	}
