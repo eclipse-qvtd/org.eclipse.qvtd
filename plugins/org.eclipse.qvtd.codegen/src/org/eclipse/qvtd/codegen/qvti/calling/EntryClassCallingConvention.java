@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheProperty;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.GetResultOperationCallingConvention;
@@ -35,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.naming.PackageNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Feature;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Operation;
@@ -50,52 +50,20 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 
 /**
- *  CacheClassCallingConvention defines the style of a nested Class whose instance caches a feature computation.
+ *  EntryClassCallingConvention defines the style of a nested Class whose instance caches a feature computation.
  */
 public class EntryClassCallingConvention extends AbstractClassCallingConvention
 {
 	public static final @NonNull EntryClassCallingConvention INSTANCE = new EntryClassCallingConvention();
 
-	public static final org.eclipse.ocl.pivot.@NonNull Class createEntryClass(@NonNull ExecutableNameManager operationNameManager, @NonNull ClassCallingConvention cacheClassCallingConvention) {
-		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
-		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		boolean isIncremental = codeGenerator.getOptions().isIncremental();
-		//	ImperativeTransformation asTransformation = codeGenerator.getTransformation();
-		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
-		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
-		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
-		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asOperation = CGUtil.getAST(cgOperation);
-		//	assert QVTimperativeUtil.basicGetShadowExp(asOperation) == null;
-		//
-		org.eclipse.ocl.pivot.@NonNull Package asPackage = xxgetCachePackage(analyzer, asOperation);
-		PackageNameManager packageNameManager = analyzer.getPackageNameManager(null, asPackage);
-		String entryClassName = packageNameManager.getUniqueClassName(NameManagerHelper.ENTRY_CLASS_NAME_PREFIX, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = AbstractLanguageSupport.getClass(asPackage, entryClassName);
-		analyzer.addCachedOperation(asEntryClass, asOperation);
-		org.eclipse.ocl.pivot.Class asEntrySuperClass = jLanguageSupport.getNativeClass(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
-		asEntryClass.getSuperClasses().add(asEntrySuperClass);
-		importNameManager.reserveLocalName(PivotUtil.getName(asEntryClass));
-		//
-		CGClass cgEntryClass = analyzer.generateClassDeclaration(asEntryClass, EntryClassCallingConvention.INSTANCE);
-		CGClass cgEntrySuperClass = analyzer.generateClassDeclaration(asEntrySuperClass, cacheClassCallingConvention);
-		cgEntryClass.getSuperTypes().add(cgEntrySuperClass);
-		//
-		NameResolution cachedResultNameResolution = globalNameManager.getCachedResultNameResolution();
-		xxcreateCacheSelfProperty(analyzer, cgEntryClass);
-		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
-			xxcreateCacheProperty(analyzer, cgEntryClass, null, asParameter);
-			// XXX need to support a cached invalid
-		}
-		xxcreateCacheProperty(analyzer, cgEntryClass, cachedResultNameResolution, asOperation);
-		//
-		ConstructorOperationCallingConvention.INSTANCE.createCacheConstructor(analyzer, cgEntryClass, asOperation);
-		GetResultOperationCallingConvention.INSTANCE.createCacheGetResultOperation(analyzer, cgEntryClass, asOperation);
-		IsEqualOperationCallingConvention.INSTANCE.createCacheIsEqualOperation(analyzer, cgEntryClass, asOperation);
-		return asEntryClass;
+	@Override
+	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		CGClass cgClass = createCGClass();
+		installCGRootClassParent(analyzer, cgClass, asClass);
+		return cgClass;
 	}
 
-	private static void xxcreateCacheProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
+	private void createCacheProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass,
 			@Nullable NameResolution nameResolution, @NonNull NamedElement asTypeOrTypedElement) {
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		//
@@ -128,31 +96,48 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 		}
 	}
 
-	private static void xxcreateCacheSelfProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {
+	protected org.eclipse.ocl.pivot.@NonNull Class createEntryClass(@NonNull ExecutableNameManager operationNameManager) {
+		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		org.eclipse.ocl.pivot.Class asTransformation = codeGenerator.getContextClass();
+		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
-		NameResolution thisTransformerNameResolution = globalNameManager.getThisTransformerNameResolution();
-		xxcreateCacheProperty(analyzer, cgCacheClass, thisTransformerNameResolution, asTransformation);
-	}
-
-	private static org.eclipse.ocl.pivot.@NonNull Package xxgetCachePackage(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {	// XXX Regularly overridden
-		return AbstractLanguageSupport.getCachePackage(asOperation);
-	}
-
-	@Override
-	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		CGClass cgClass = createCGClass();
-		installCGRootClassParent(analyzer, cgClass, asClass);
-		return cgClass;
+		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
+		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		org.eclipse.ocl.pivot.@NonNull Package asParentPackage = getParentPackage(analyzer, asOperation);
+		//
+		PackageNameManager packageNameManager = analyzer.getPackageNameManager(null, asParentPackage);
+		String entryClassName = packageNameManager.getUniqueClassName(NameManagerHelper.ENTRY_CLASS_NAME_PREFIX, asOperation);
+		org.eclipse.ocl.pivot.Class asEntryClass = AbstractLanguageSupport.getClass(asParentPackage, entryClassName);
+		analyzer.addCachedOperation(asEntryClass, asOperation);
+		org.eclipse.ocl.pivot.Class asEntrySuperClass = jLanguageSupport.getNativeClass(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
+		asEntryClass.getSuperClasses().add(asEntrySuperClass);
+		importNameManager.reserveLocalName(PivotUtil.getName(asEntryClass));
+		//
+		CGClass cgEntryClass = analyzer.generateClassDeclaration(asEntryClass, this);
+		CGClass cgEntrySuperClass = analyzer.generateClassDeclaration(asEntrySuperClass, null);
+		cgEntryClass.getSuperTypes().add(cgEntrySuperClass);
+		//
+		NameResolution contextNameResolution = getContextNameResolution(globalNameManager);
+		org.eclipse.ocl.pivot.Class asContextClass = getContextClass(analyzer, cgEntryClass);
+		createCacheProperty(analyzer, cgEntryClass, contextNameResolution, asContextClass);
+		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
+			createCacheProperty(analyzer, cgEntryClass, null, asParameter);
+			// XXX need to support a cached invalid
+		}
+		NameResolution cachedResultNameResolution = globalNameManager.getCachedResultNameResolution();
+		createCacheProperty(analyzer, cgEntryClass, cachedResultNameResolution, asOperation);
+		//
+		ConstructorOperationCallingConvention.INSTANCE.createCacheConstructor(analyzer, cgEntryClass, asOperation);
+		GetResultOperationCallingConvention.INSTANCE.createCacheGetResultOperation(analyzer, cgEntryClass, asOperation);
+		IsEqualOperationCallingConvention.INSTANCE.createCacheIsEqualOperation(analyzer, cgEntryClass, asOperation);
+		return asEntryClass;
 	}
 
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgClass) {
 		assert cgClass.getContainingPackage() == null;			// container is a cgClass
-		if (isEmpty(cgClass)) {
-			return true;
-		}
 		js.append("\n");
 		String className = CGUtil.getName(cgClass);
 		String title = getTitle(cgClass);
@@ -185,6 +170,14 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 		throw new UnsupportedOperationException();
 	}
 
+	protected @NonNull Class getContextClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {
+		return analyzer.getCodeGenerator().getContextClass();
+	}
+
+	protected @NonNull NameResolution getContextNameResolution(@NonNull GlobalNameManager globalNameManager) {
+		return globalNameManager.getThisTransformerNameResolution();
+	}
+
 	@Override
 	public @NonNull String getName(@NonNull CodeGenAnalyzer analyzer, @NonNull NamedElement asNamedElement) {
 		if (asNamedElement instanceof Feature) {
@@ -194,6 +187,13 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 		else {
 			return /*"CACHE_" +*/ asNamedElement.getName();
 		}
+	}
+
+	/**
+	 * Return the Package within which the caache claass support for asOperation shuld be supported.
+	 */
+	protected org.eclipse.ocl.pivot.@NonNull Package getParentPackage(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {	// XXX Regularly overridden
+		return AbstractLanguageSupport.getCachePackage(asOperation);
 	}
 
 	protected @NonNull String getTitle(@NonNull CGClass cgClass) {

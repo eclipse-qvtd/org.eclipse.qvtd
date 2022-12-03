@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -49,6 +50,35 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 public class ExternalOperationOperationCallingConvention extends ExternalFunctionOperationCallingConvention
 {
 	public static final @NonNull ExternalOperationOperationCallingConvention INSTANCE = new ExternalOperationOperationCallingConvention();
+
+	/**
+	 *  ExternalEntryClassCallingConvention refines the standard EntryClassCallingConvention for the cache of a specific evaluation
+	 *  to support a local class for an non-local facility.
+	 */
+	public static class ExternalEntryClassCallingConvention extends EntryClassCallingConvention
+	{
+		public static final @NonNull ExternalEntryClassCallingConvention INSTANCE = new ExternalEntryClassCallingConvention();
+
+		@Override
+		protected @NonNull Class getContextClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {
+			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+			Operation asOperation = analyzer.getCachedOperation(asCacheClass);
+			return PivotUtil.getOwningClass(asOperation);
+		}
+
+		@Override
+		protected @NonNull NameResolution getContextNameResolution(@NonNull GlobalNameManager globalNameManager) {
+			return globalNameManager.getSelfNameResolution();
+		}
+
+		@Override
+		protected org.eclipse.ocl.pivot.@NonNull Package getParentPackage(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+			org.eclipse.ocl.pivot.Class asClass = PivotUtil.getOwningClass(asOperation);
+			CGClass cgClass = analyzer.getCGRootClass(asClass);
+			org.eclipse.ocl.pivot.Class asRootClass = CGUtil.getAST(cgClass);
+			return AbstractLanguageSupport.getCachePackage(asRootClass);
+		}
+	}
 
 	public static class ExternalEvaluateOperationCallingConvention extends AbstractEvaluateOperationCallingConvention
 	{
@@ -138,18 +168,6 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	}
 
 	@Override
-	protected void createCacheSelfProperty(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {
-		//	super.createCacheSelfProperty(analyzer, cgCacheClass);
-		CodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
-		Operation asOperation = analyzer.getCachedOperation(asCacheClass);
-		org.eclipse.ocl.pivot.Class asClass = PivotUtil.getOwningClass(asOperation);
-		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
-		NameResolution selfTransformerNameResolution = globalNameManager.getSelfNameResolution();
-		createCacheProperty(analyzer, cgCacheClass, selfTransformerNameResolution, asClass);
-	}
-
-	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
 		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
 	}
@@ -160,6 +178,11 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		CGClass cgClass = analyzer.getCGRootClass(asClass);
 		org.eclipse.ocl.pivot.Class asRootClass = CGUtil.getAST(cgClass);
 		return AbstractLanguageSupport.getCachePackage(asRootClass);
+	}
+
+	@Override
+	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention() {
+		return ExternalEntryClassCallingConvention.INSTANCE;
 	}
 
 	@Override
