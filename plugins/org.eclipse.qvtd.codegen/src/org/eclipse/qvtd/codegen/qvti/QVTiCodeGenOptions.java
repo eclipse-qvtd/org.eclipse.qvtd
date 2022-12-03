@@ -19,10 +19,6 @@ public class QVTiCodeGenOptions extends CodeGenOptions
 	 * True to generate debug code.
 	 */
 	private boolean isGeneratedDebug;
-	/**
-	 * True to generate an incremental transformation.
-	 */
-	private boolean isIncremental;
 
 	/**
 	 * Optional packaging prefix (may have internal dots, no trailing dots)
@@ -37,16 +33,8 @@ public class QVTiCodeGenOptions extends CodeGenOptions
 		return isGeneratedDebug;
 	}
 
-	public boolean isIncremental() {
-		return isIncremental;
-	}
-
 	public void setIsGeneratedDebug(boolean isGeneratedDebug) {
 		this.isGeneratedDebug = isGeneratedDebug;
-	}
-
-	public void setIsIncremental(boolean isIncremental) {
-		this.isIncremental = isIncremental;
 	}
 
 	public void setPackagePrefix(@Nullable String packagePrefix) {

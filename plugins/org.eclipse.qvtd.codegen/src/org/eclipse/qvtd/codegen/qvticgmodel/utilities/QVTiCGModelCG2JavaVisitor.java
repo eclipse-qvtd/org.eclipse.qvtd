@@ -445,7 +445,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		this.cgPackage = cgPackage;
 		this.sortedGlobals = sortedGlobals;
 		this.isGeneratedDebug = codeGenerator2.getOptions().isGeneratedDebug();
-		this.isIncremental = codeGenerator2.getOptions().isIncremental();
+		this.isIncremental = codeGenerator.getOptions().isIncremental();
 		this.alwaysUseClasses = isIncremental;
 		this.useGot = isIncremental;
 	}

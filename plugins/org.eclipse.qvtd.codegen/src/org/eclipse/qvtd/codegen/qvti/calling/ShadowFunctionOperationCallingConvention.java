@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
@@ -426,7 +427,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
 		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
-		QVTiCodeGenerator codeGenerator = qvticg2javaVisitor.getCodeGenerator();
+		JavaCodeGenerator codeGenerator = cg2javaVisitor.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		//

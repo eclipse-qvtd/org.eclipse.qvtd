@@ -89,7 +89,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		//	super.createCGParameters(operationNameManager, bodyExpression);
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(qvtiOperationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createEntryClass(qvtiOperationNameManager);
 		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
 		/*Property asConstructorInstance =*/ createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
 	}

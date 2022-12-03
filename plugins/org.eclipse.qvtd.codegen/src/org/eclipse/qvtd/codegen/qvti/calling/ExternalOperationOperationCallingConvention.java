@@ -131,7 +131,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 			CGParameter cgParameter = createCGParameter(operationNameManager, asParameterVariable);
 			cgParameters.add(cgParameter);
 		}
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(qvtiOperationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createEntryClass(qvtiOperationNameManager);
 		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(qvtiOperationNameManager, asCacheClass);
 		/*Property asConstructorInstance =*/ createConstructorInstance(qvtiOperationNameManager, asConstructorClass, asCacheClass);
 		//	/*Property asConstructorInstance =*/ createConstructorInstance2(qvtiOperationNameManager, asCacheClass);

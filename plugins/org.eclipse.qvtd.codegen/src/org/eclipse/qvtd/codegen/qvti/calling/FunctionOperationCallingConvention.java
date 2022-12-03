@@ -36,9 +36,10 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
  */
 public abstract class FunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention2	// cf ConstrainedOperationCallingConvention
 {
-	protected final org.eclipse.ocl.pivot.@NonNull Class createCacheClass(@NonNull ExecutableNameManager operationNameManager) {
+	protected final org.eclipse.ocl.pivot.@NonNull Class createEntryClass(@NonNull ExecutableNameManager operationNameManager) {
 		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
+		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		//	ImperativeTransformation asTransformation = codeGenerator.getTransformation();
 		GlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
@@ -50,27 +51,27 @@ public abstract class FunctionOperationCallingConvention extends AbstractCachedO
 		org.eclipse.ocl.pivot.@NonNull Package asPackage = getCachePackage(analyzer, asOperation);
 		PackageNameManager packageNameManager = analyzer.getPackageNameManager(null, asPackage);
 		String entryClassName = packageNameManager.getUniqueClassName(NameManagerHelper.ENTRY_CLASS_NAME_PREFIX, asOperation);
-		org.eclipse.ocl.pivot.Class asCacheClass = AbstractLanguageSupport.getClass(asPackage, entryClassName);
-		analyzer.addCachedOperation(asCacheClass, asOperation);
-		org.eclipse.ocl.pivot.Class asCacheSuperClass = jLanguageSupport.getNativeClass(AbstractComputation.class);
-		asCacheClass.getSuperClasses().add(asCacheSuperClass);
-		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
+		org.eclipse.ocl.pivot.Class asEntryClass = AbstractLanguageSupport.getClass(asPackage, entryClassName);
+		analyzer.addCachedOperation(asEntryClass, asOperation);
+		org.eclipse.ocl.pivot.Class asEntrySuperClass = jLanguageSupport.getNativeClass(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
+		asEntryClass.getSuperClasses().add(asEntrySuperClass);
+		importNameManager.reserveLocalName(PivotUtil.getName(asEntryClass));
 		//
-		CGClass cgCacheClass = analyzer.generateClassDeclaration(asCacheClass, CacheClassCallingConvention.INSTANCE);
-		CGClass cgSuperClass = analyzer.generateClassDeclaration(asCacheSuperClass, getClassCallingConvention());
-		cgCacheClass.getSuperTypes().add(cgSuperClass);
+		CGClass cgEntryClass = analyzer.generateClassDeclaration(asEntryClass, CacheClassCallingConvention.INSTANCE);
+		CGClass cgEntrySuperClass = analyzer.generateClassDeclaration(asEntrySuperClass, getClassCallingConvention());
+		cgEntryClass.getSuperTypes().add(cgEntrySuperClass);
 		//
 		NameResolution cachedResultNameResolution = globalNameManager.getCachedResultNameResolution();
-		createCacheSelfProperty(analyzer, cgCacheClass);
+		createCacheSelfProperty(analyzer, cgEntryClass);
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asOperation)) {
-			createCacheProperty(analyzer, cgCacheClass, null, asParameter);
+			createCacheProperty(analyzer, cgEntryClass, null, asParameter);
 			// XXX need to support a cached invalid
 		}
-		createCacheProperty(analyzer, cgCacheClass, cachedResultNameResolution, asOperation);
+		createCacheProperty(analyzer, cgEntryClass, cachedResultNameResolution, asOperation);
 		//
-		ConstructorOperationCallingConvention.INSTANCE.createCacheConstructor(analyzer, cgCacheClass, asOperation);
-		GetResultOperationCallingConvention.INSTANCE.createCacheGetResultOperation(analyzer, cgCacheClass, asOperation);
-		IsEqualOperationCallingConvention.INSTANCE.createCacheIsEqualOperation(analyzer, cgCacheClass, asOperation);
-		return asCacheClass;
+		ConstructorOperationCallingConvention.INSTANCE.createCacheConstructor(analyzer, cgEntryClass, asOperation);
+		GetResultOperationCallingConvention.INSTANCE.createCacheGetResultOperation(analyzer, cgEntryClass, asOperation);
+		IsEqualOperationCallingConvention.INSTANCE.createCacheIsEqualOperation(analyzer, cgEntryClass, asOperation);
+		return asEntryClass;
 	}
 }

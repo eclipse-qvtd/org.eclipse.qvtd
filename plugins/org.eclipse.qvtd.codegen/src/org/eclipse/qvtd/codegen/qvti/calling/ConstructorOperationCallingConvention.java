@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
@@ -83,6 +84,11 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 	protected void appendBody(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGValuedElement body) {
 		js.append(" {\n");
 		js.pushIndentation(null);
+		if (cg2javaVisitor.getCodeGenerator().getOptions().isIncremental()) {
+			js.append("super(");
+			js.appendString(((CGNamedElement)body.eContainer()).getResolvedName());
+			js.append(");\n");
+		}
 		//	cg2javaVisitor.appendReturn(body);
 		if (js.appendLocalStatements(body)) {
 			if (body instanceof CGThrowExp) {				// FIXME generalize

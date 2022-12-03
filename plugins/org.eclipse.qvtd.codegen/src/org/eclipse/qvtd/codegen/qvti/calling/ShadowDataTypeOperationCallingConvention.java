@@ -35,7 +35,7 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createEntryClass(operationNameManager);
 		org.eclipse.ocl.pivot.Class asConstructorClass = createConstructorClass(operationNameManager, asCacheClass);
 		/*Property asConstructorInstance =*/ createConstructorInstance(operationNameManager, asConstructorClass, asCacheClass);
 	}
