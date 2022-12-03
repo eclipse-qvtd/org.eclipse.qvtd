@@ -98,7 +98,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 			QVTiGlobalNameManager globalNameManager = qvtiAnalyzer.getGlobalNameManager();
 			Operation asOperation = CGUtil.getAST(cgOperation);
 			org.eclipse.ocl.pivot.Class asConstructorClass = PivotUtil.getOwningClass(asOperation);
-			org.eclipse.ocl.pivot.Class asCacheClass = qvtiAnalyzer.getCacheClass(asConstructorClass);
+			org.eclipse.ocl.pivot.Class asCacheClass = qvtiAnalyzer.getEntryClass(asConstructorClass);
 			CGClass cgCacheClass = qvtiAnalyzer.getCGClass(asCacheClass);
 			js.append("return ((");
 			js.appendClassReference(cgCacheClass);
