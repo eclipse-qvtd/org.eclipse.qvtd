@@ -692,20 +692,20 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		PredicateTreeBuilder bodyBuilder = qvtiAnalyzer.getBodyBuilder();
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
-			CGRealizedVariable CGRealizedVariable = bodyBuilder.addRealizedVariable(asNewStatement);
+			CGRealizedVariable cgRealizedVariable = bodyBuilder.addRealizedVariable(asNewStatement);
 			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asNewStatement);
 			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
-			CGRealizedVariable.setExecutorType(cgExecutorType);
+			cgRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
 			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
 			Collections.sort(asParts, NameUtil.NAMEABLE_COMPARATOR);
-			List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(CGRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
+			List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(cgRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
 			for (@NonNull NewStatementPart asPart : asParts) {
 				cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
 			}
 			if (asParts.size() > 0) {
 				org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-				qvtiAnalyzer.getRuleCacheClass(asClass);
+				qvtiAnalyzer.getRuleCacheClass(asNewStatement, asClass);
 			}
 		}
 		else {

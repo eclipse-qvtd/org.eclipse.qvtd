@@ -1078,7 +1078,11 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			if (ownedParts.size() > 0) {
 				hasParts = true;
 				assert cgMapping != null;
-				js.append(getNativeInstanceInstanceName(cgRealizedVariable.getExecutorType()));
+				CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
+				org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
+				org.eclipse.ocl.pivot.@NonNull Class asCacheClass = getAnalyzer().getRuleCacheClass(asClass);
+				Property asCacheInstance = analyzer.getCacheInstance(asCacheClass);
+				js.append(asCacheInstance.getName());
 				js.append(".evaluate(");
 				boolean isFirst = true;
 				for (@NonNull CGRealizedVariablePart cgPart : cgRealizedVariable.getOwnedParts()) {
@@ -3523,7 +3527,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		Collections.sort(cgOperations, NameUtil.NAMEABLE_COMPARATOR);
 		doMappingConstructorConstants(cgMappings);
 		doFunctionConstructorConstants(ClassUtil.nullFree(cgOperations));
-		doInstanceCaches(cgTransformation);
+		//	doInstanceCaches(cgTransformation);
 		js.append("\n");
 		List<@Nullable AllInstancesAnalysis> allInstancesAnalyses = doAllInstances(entryPointsAnalysis);
 		doProperties(cgTransformation);

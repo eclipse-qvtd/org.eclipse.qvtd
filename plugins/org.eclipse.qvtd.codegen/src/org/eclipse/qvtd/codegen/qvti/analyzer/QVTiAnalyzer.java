@@ -376,6 +376,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		assert old == null;
 	}
 
+	public void addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+		CacheClassData cacheClassData = addCacheInstanceInternal(asNewStatement, asCacheInstance, asEntryClass);
+		//	CacheClassData old = asOperation2cacheClassData.put(asOperation, cacheClassData);
+		//	assert old == null;
+	}
+
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
 		return (CGMapping)asElement2cgElement.get(asMapping);
 	}
@@ -767,6 +773,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return ClassUtil.nonNullState(basicGetCGTypedModel(asTypedModel));
 	}
 
+	public @NonNull CGRealizedVariable getCGRealizedVariable(@NonNull NewStatement asNewStatement) {
+		return (CGRealizedVariable)ClassUtil.nonNullState(asElement2cgElement.get(asNewStatement));
+	}
+
 	/**
 	 * Create or use the ClassNameManager for asClass exploiting an optionally already known cgClass.
 	 *
@@ -920,8 +930,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			if (cgVariable == null) {
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
-			cgVariable.setAst(asNewStatement);
-			cgVariable.setTypeId(getCGTypeId(asNewStatement.getTypeId()));
+			initAst(cgVariable, asNewStatement, true);
+			//	cgVariable.setAst(asNewStatement);
+			//	cgVariable.setTypeId(getCGTypeId(asNewStatement.getTypeId()));
 			//	nameManager.declarePreferredName(cgVariable);
 			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(getTypedModel(asTypedModel));
@@ -931,14 +942,19 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return cgVariable;
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+	@Deprecated // XXX avoid potentially non-unique asNewStatement
+	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(@NonNull NewStatement asNewStatement, org.eclipse.ocl.pivot.@NonNull Class asClass) {
 		org.eclipse.ocl.pivot.Class asCacheClass = asClass2asRuleCacheClass.get(asClass);
 		if (asCacheClass == null) {
 			ClassNameManager classNameManager = getClassNameManager(null, asClass);
-			asCacheClass = RuleCacheClassCallingConvention.INSTANCE.createCacheClass(classNameManager);
+			asCacheClass = RuleCacheClassCallingConvention.INSTANCE.createCacheClass(classNameManager, asNewStatement);
 			asClass2asRuleCacheClass.put(asClass, asCacheClass);
 		}
 		return asCacheClass;
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		return ClassUtil.nonNullState(asClass2asRuleCacheClass.get(asClass));
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {

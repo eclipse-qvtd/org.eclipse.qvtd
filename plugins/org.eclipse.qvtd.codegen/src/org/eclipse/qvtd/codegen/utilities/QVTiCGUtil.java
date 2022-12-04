@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -182,6 +183,10 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
 	}
 
+	public static @NonNull CGExecutorType getExecutorType(@NonNull CGRealizedVariable cgRealizedVariable) {
+		return ClassUtil.nonNullState(cgRealizedVariable.getExecutorType());
+	}
+
 	public static @NonNull CGValuedElement getIn(@NonNull CGLetExp cgLetExp) {	// FIXME move to CGUtil
 		return ClassUtil.nonNullState(cgLetExp.getIn());
 	}
@@ -226,6 +231,10 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nullFree(cgTransformation.getOwnedMappings());
 	}
 
+	public static @NonNull Iterable<@NonNull CGRealizedVariablePart> getOwnedParts(@NonNull CGRealizedVariable cgRealizedVariable) {
+		return ClassUtil.nullFree(cgRealizedVariable.getOwnedParts());
+	}
+
 	public static @NonNull Iterable<@NonNull CGRealizedVariable> getOwnedRealizedVariables(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
 	}
@@ -264,6 +273,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGMapping getReferredMapping(@NonNull CGMappingCall cgMappingCall) {
 		return ClassUtil.nonNullState(cgMappingCall.getReferredMapping());
+	}
+
+	public static @NonNull CGProperty getReferredProperty(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
+		return ClassUtil.nonNullState(cgRealizedVariablePart.getReferredProperty());
 	}
 
 	public static @NonNull CGProperty getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
