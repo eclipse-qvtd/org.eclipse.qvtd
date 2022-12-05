@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
@@ -55,19 +54,16 @@ import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LanguageSupport;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.CreationCache;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import com.google.common.collect.Iterables;
 
 /**
  *  RuleCacheClassCallingConvention defines the nested Class that defines the cache of all executions of a particular rule.
@@ -131,9 +127,10 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
 			GenModelHelper genModelHelper = analyzer.getGenModelHelper();
 			//
-			CGClass cgClass = CGUtil.getContainingClass(cgOperation);
-			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgClass);
-			NewStatement asNewStatement = analyzer.getNewStatement(asCacheClass);
+			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
+			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
+			NewStatement asNewStatement = creationCache.getNewStatement();
 			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
 			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
@@ -142,14 +139,12 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			String instanceName = "instance";
 			//
-			Iterable<@NonNull CGRealizedVariablePart> ownedParts = QVTiCGUtil.getOwnedParts(cgRealizedVariable);
-			assert Iterables.size(ownedParts) > 0;
 			org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
 			List<@NonNull CGProperty> cgProperties = new ArrayList<>();
-			for (@NonNull CGRealizedVariablePart ownedPart : ownedParts) {
-				cgProperties.add(QVTiCGUtil.getReferredProperty(ownedPart));
+			for (@NonNull Property asProperty : creationCache.getProperties()) {
+				CGProperty cgProperty = analyzer.getCGProperty(asProperty);
+				cgProperties.add(cgProperty);
 			}
-			Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
 			js.append("/**\n");
 			js.append(" * The inner evaluation, creates, initializes and installs the new trace singleton.\n");
 			js.append(" */\n");
@@ -310,19 +305,18 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
 			GenModelHelper genModelHelper = analyzer.getGenModelHelper();
 			//
-			CGClass cgClass = CGUtil.getContainingClass(cgOperation);
-			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgClass);
-			NewStatement asNewStatement = analyzer.getNewStatement(asCacheClass);
+			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
+			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
+			NewStatement asNewStatement = creationCache.getNewStatement();
 			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
 			//
-			Iterable<@NonNull CGRealizedVariablePart> ownedParts = QVTiCGUtil.getOwnedParts(cgRealizedVariable);
-			assert Iterables.size(ownedParts) > 0;
 			List<@NonNull CGProperty> cgProperties = new ArrayList<>();
-			for (@NonNull CGRealizedVariablePart ownedPart : ownedParts) {
-				cgProperties.add(QVTiCGUtil.getReferredProperty(ownedPart));
+			for (@NonNull Property asProperty : creationCache.getProperties()) {
+				CGProperty cgProperty = analyzer.getCGProperty(asProperty);
+				cgProperties.add(cgProperty);
 			}
-			Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
 			js.append("/**\n");
 			js.append(" * The outer evaluation provides a type safe interface.\n");
 			js.append(" */\n");

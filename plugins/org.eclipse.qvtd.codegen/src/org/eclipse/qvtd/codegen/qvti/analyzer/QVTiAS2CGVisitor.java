@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
-import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
@@ -109,6 +108,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<@Nullable CGNamedElement>
 {
@@ -699,17 +701,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(asType);
 			cgRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
-			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
-			Collections.sort(asParts, NameUtil.NAMEABLE_COMPARATOR);
-			List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(cgRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
-			for (@NonNull NewStatementPart asPart : asParts) {
-				cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
-			}
-			if (asParts.size() > 0) {
-				org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-				assert asClass == asType;
-				//	ClassNameManager classNameManager = qvtiAnalyzer.getClassNameManager(null, asClass);
-				qvtiAnalyzer.getRuleCacheClass(asNewStatement, QVTimperativeUtil.getReferredTypedModel(asNewStatement), asClass);
+			Iterable<@NonNull NewStatementPart> asParts = QVTimperativeUtil.getOwnedParts(asNewStatement);
+			if (Iterables.size(asParts) > 0) {
+				qvtiAnalyzer.getCreationCache(asNewStatement);
+				List<@NonNull NewStatementPart> sortedASParts = Lists.newArrayList(asParts);
+				Collections.sort(sortedASParts, NameUtil.NAMEABLE_COMPARATOR);
+				List<@NonNull CGRealizedVariablePart> cgParts = ClassUtil.nullFree(cgRealizedVariable.getOwnedParts());		// Ensure deterministic CGShadowPart order
+				for (@NonNull NewStatementPart asPart : sortedASParts) {
+					cgParts.add(qvtiAnalyzer.createCGElement(CGRealizedVariablePart.class, asPart));
+				}
 			}
 		}
 		else {
@@ -721,7 +721,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitNewStatementPart(@NonNull NewStatementPart element) {
 		CGRealizedVariablePart cgRealizedVariablePart = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariablePart();
-		cgRealizedVariablePart.setAst(element);
+		//	cgRealizedVariablePart.setAst(element);
+		qvtiAnalyzer.initAst(cgRealizedVariablePart, element, TypeId.OCL_VOID, true);
 		cgRealizedVariablePart.setInit(qvtiAnalyzer.createCGElement(CGValuedElement.class, element.getOwnedExpression()));
 		Property asProperty = element.getReferredProperty();
 		if (asProperty != null) {

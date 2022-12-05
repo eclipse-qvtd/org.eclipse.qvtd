@@ -1025,13 +1025,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return mappingNameManager;
 	}
 
-	@Deprecated // XXX temporary fudge
-	public @NonNull NewStatement getNewStatement(org.eclipse.ocl.pivot.Class asCacheClass) {
-		CreationCache cacheClassData = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
-		assert cacheClassData != null;
-		return cacheClassData.getNewStatement();
-	}
-
 	@Override
 	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
 		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation);
@@ -1061,23 +1054,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			nameManager.addVariable(asNewStatement, cgVariable);
 		}
 		return cgVariable;
-	}
-
-	@Deprecated // XXX avoid potentially non-unique asNewStatement
-	public void getRuleCacheClass(@NonNull NewStatement asNewStatement, @NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		assert asTypedModel == asNewStatement.getReferredTypedModel();
-		assert asClass == asNewStatement.getType();
-		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
-		if (asClass2creationCache == null) {
-			asClass2creationCache = new HashMap<>();
-			asTypedModel2asClass2creationCache.put(asTypedModel, asClass2creationCache);
-		}
-		CreationCache creationCache = asClass2creationCache.get(asClass);
-		if (creationCache == null) {
-			ClassNameManager classNameManager = getClassNameManager(null, asClass);
-			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
-			asClass2creationCache.put(asClass, creationCache);
-		}
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(@NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
