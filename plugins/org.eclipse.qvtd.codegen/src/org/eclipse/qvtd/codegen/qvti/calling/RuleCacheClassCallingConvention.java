@@ -418,24 +418,24 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	 * Returns true if control flow continues, false if an exception throw has been synthesized.
 	 */
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgClass) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgCacheClass) {
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) cg2javaVisitor.getAnalyzer();
-		org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
-		NewStatement asNewStatement = analyzer.getNewStatement(asClass);
-		//	if (isEmpty(cgClass)) {
+		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+		CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
+		//	if (isEmpty(cgCacheClass)) {
 		//		return true;
 		//	}
 		js.append("\n");
-		String className = CGUtil.getName(cgClass);
-		CGPackage cgContainingPackage = cgClass.getContainingPackage();
+		String className = CGUtil.getName(cgCacheClass);
+		CGPackage cgContainingPackage = cgCacheClass.getContainingPackage();
 		assert cgContainingPackage == null;
-		String title = "The instance of " + cgClass.getName() + " caches the result of each distinct creation of\n";
-		js.appendCommentWithOCL(title, asNewStatement/*.getOwnedExpression()*/);			// XXX lookup rule
+		String title = "The instance of " + cgCacheClass.getName() + " caches the result of each distinct creation of\n";
+		js.appendCommentWithOCL(title, creationCache.getASEntryClass());
 		js.append("private class " + className);
-		appendSuperTypes(js, cgClass);
+		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
-		generateProperties(cg2javaVisitor, js, cgClass);
-		generateOperations(cg2javaVisitor, js, cgClass);
+		generateProperties(cg2javaVisitor, js, cgCacheClass);
+		generateOperations(cg2javaVisitor, js, cgCacheClass);
 		js.popClassBody(false);
 		return true;
 	}

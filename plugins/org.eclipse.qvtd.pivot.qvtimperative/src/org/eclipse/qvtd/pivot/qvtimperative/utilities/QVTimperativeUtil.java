@@ -253,6 +253,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (@NonNull Iterable<@NonNull Mapping>)rule;
 	}
 
+	public static @NonNull Iterable<@NonNull NewStatementPart> getOwnedParts(@NonNull NewStatement asNewStatement) {
+		return ClassUtil.nullFree(asNewStatement.getOwnedParts());
+	}
+
 	public static @NonNull Iterable<@NonNull Statement> getOwnedStatements(@NonNull Mapping iMapping) {
 		return ClassUtil.nullFree(iMapping.getOwnedStatements());
 	}
