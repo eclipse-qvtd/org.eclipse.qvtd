@@ -419,7 +419,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	 */
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgClass) {
-		CodeGenAnalyzer analyzer = cg2javaVisitor.getAnalyzer();
+		QVTiAnalyzer analyzer = (QVTiAnalyzer) cg2javaVisitor.getAnalyzer();
 		org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
 		NewStatement asNewStatement = (NewStatement)analyzer.getOrigin(asClass);
 		//	if (isEmpty(cgClass)) {

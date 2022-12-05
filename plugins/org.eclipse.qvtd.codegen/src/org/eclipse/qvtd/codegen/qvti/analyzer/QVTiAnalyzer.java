@@ -119,6 +119,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 public class QVTiAnalyzer extends CodeGenAnalyzer
 {
 	/**
+	 * CreationCache describes the AS class and instance that cache distinct creations of a trace class.
+	 */
+	protected static class CreationCache extends AbstractCache
+	{
+		private @NonNull NamedElement asOrigin;		// Operation of Class or NewStatement
+
+		protected CreationCache(@NonNull NamedElement asOrigin, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+			super(asCacheInstance, asEntryClass);
+			this.asOrigin = asOrigin;
+		}
+
+		public @NonNull NamedElement getOrigin() {
+			return asOrigin;
+		}
+	}
+
+	/**
 	 * PredicateTreeBuilder supports building a CGMapping.body as a nest of if/let expressions top-down,
 	 * continually appending to the 'leaf' which is the then-expression of an if, or the in-expression of a let.
 	 */
@@ -377,9 +394,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public void addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
-		CacheClassData cacheClassData = addCacheInstanceInternal(asNewStatement, asCacheInstance, asEntryClass);
-		//	CacheClassData old = asOperation2cacheClassData.put(asOperation, cacheClassData);
-		//	assert old == null;
+		CreationCache creationCache = new CreationCache(asNewStatement, asCacheInstance, asEntryClass);
+		addCacheInstanceInternal(creationCache);
 	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
@@ -914,6 +930,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	@Override
 	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
 		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation);
+	}
+
+	public @NonNull NamedElement getOrigin(org.eclipse.ocl.pivot.Class asCacheClass) {
+		CreationCache cacheClassData = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
+		assert cacheClassData != null;
+		return cacheClassData.getOrigin();
 	}
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
