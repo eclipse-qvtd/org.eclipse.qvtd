@@ -89,6 +89,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -110,11 +111,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SpeculateStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Lists;
 
 public class QVTiAnalyzer extends CodeGenAnalyzer
 {
@@ -126,6 +130,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public static class CreationCache extends AbstractCache
 	{
 		private @NonNull TypedModel asTypedModel;
+		private @NonNull List<@NonNull NewStatementPart> sortedASParts;
+		private @NonNull List<@NonNull Property> asProperties;
 		//	private @NonNull CGTypedModel cgTypedModel;
 		//	private int modelIndex;
 		@Deprecated // XXX temporary fudge
@@ -137,6 +143,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			this.asTypedModel = asTypedModel;
 			//		this.cgTypedModel = getCGTypedModel(asTypedModel);
 			//		this.modelIndex = cgTypedModel.getModelIndex();
+			this.sortedASParts = Lists.newArrayList(QVTimperativeUtil.getOwnedParts(asNewStatement));
+			Collections.sort(sortedASParts, NameUtil.NAMEABLE_COMPARATOR);
+			List<@NonNull Property> asProperties = new ArrayList<>();
+			for (NewStatementPart asPart : sortedASParts) {
+				asProperties.add(QVTimperativeUtil.getReferredProperty(asPart));
+			}
+			this.asProperties = asProperties;
 		}
 
 		@Deprecated // XXX temporary fudge
@@ -144,8 +157,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			return asNewStatement;
 		}
 
+		public @NonNull List<@NonNull Property> getProperties() {
+			return asProperties;
+		}
+
 		public @NonNull TypedModel getTypedModel() {
 			return asTypedModel;
+		}
+
+		public @NonNull List<@NonNull NewStatementPart> getSortedASParts() {
+			return sortedASParts;
 		}
 	}
 
@@ -843,6 +864,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return (CGRealizedVariable)ClassUtil.nonNullState(asElement2cgElement.get(asNewStatement));
 	}
 
+	public @NonNull CGRealizedVariablePart getCGRealizedVariablePart(@NonNull NewStatementPart asNewStatementPart) {
+		return (CGRealizedVariablePart)ClassUtil.nonNullState(asElement2cgElement.get(asNewStatementPart));
+	}
+
 	/**
 	 * Create or use the ClassNameManager for asClass exploiting an optionally already known cgClass.
 	 *
@@ -877,6 +902,23 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public @NonNull CreationCache getCreationCache(org.eclipse.ocl.pivot.Class asCacheClass) {
 		CreationCache creationCache = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
 		assert creationCache != null;
+		return creationCache;
+	}
+
+	public @NonNull CreationCache getCreationCache(@NonNull NewStatement asNewStatement) {
+		TypedModel asTypedModel = QVTimperativeUtil.getReferredTypedModel(asNewStatement);
+		org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)QVTimperativeUtil.getType(asNewStatement);
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
+		if (asClass2creationCache == null) {
+			asClass2creationCache = new HashMap<>();
+			asTypedModel2asClass2creationCache.put(asTypedModel, asClass2creationCache);
+		}
+		CreationCache creationCache = asClass2creationCache.get(asClass);
+		if (creationCache == null) {
+			ClassNameManager classNameManager = getClassNameManager(null, asClass);
+			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
+			asClass2creationCache.put(asClass, creationCache);
+		}
 		return creationCache;
 	}
 
