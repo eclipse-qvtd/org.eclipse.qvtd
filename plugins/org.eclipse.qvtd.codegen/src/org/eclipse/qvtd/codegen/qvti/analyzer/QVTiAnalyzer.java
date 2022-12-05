@@ -120,8 +120,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 {
 	/**
 	 * CreationCache describes the AS class and instance that cache distinct creations of a trace class.
+	 *
+	 * ?? is it actually necessary to distingusish different typed models ??
 	 */
-	protected static class CreationCache extends AbstractCache
+	public static class CreationCache extends AbstractCache
 	{
 		private @NonNull TypedModel asTypedModel;
 		//	private @NonNull CGTypedModel cgTypedModel;
@@ -403,12 +405,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	/**
 	 * The Trace instance class for each Trace meta class.
 	 */
-	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, org.eclipse.ocl.pivot.@NonNull Class> asClass2asRuleCacheClass = new HashMap<>();
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache>> asTypedModel2asClass2creationCache = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
-		ImperativeTransformation iTransformation = codeGenerator.getTransformation();
+		ImperativeTransformation iTransformation = codeGenerator.getContextClass();
 		Type contextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 		if (contextClass != iTransformation) {
 			originalThisTypeId = iTransformation.getTypeId();
@@ -441,9 +442,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		assert old == null;
 	}
 
-	public void addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
-		CreationCache creationCache = new CreationCache(asNewStatement, asNewStatement.getReferredTypedModel(), asCacheInstance, asEntryClass);
+	public @NonNull CreationCache addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+		CreationCache creationCache = new CreationCache(asNewStatement, asNewStatement.getReferredTypedModel(), asCacheInstance, (org.eclipse.ocl.pivot.Class)asNewStatement.getType());
 		addCacheInstanceInternal(creationCache);
+		return creationCache;
 	}
 
 	public @Nullable CGMapping basicGetCGMapping(@NonNull Mapping asMapping) {
@@ -872,6 +874,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return classNameManager;
 	} */
 
+	public @NonNull CreationCache getCreationCache(org.eclipse.ocl.pivot.Class asCacheClass) {
+		CreationCache creationCache = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
+		assert creationCache != null;
+		return creationCache;
+	}
+
 	public @Nullable EClassifier getEClassifier(@Nullable Type type) {
 		if (type == null) {
 			return null;
@@ -1014,18 +1022,29 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	@Deprecated // XXX avoid potentially non-unique asNewStatement
-	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(@NonNull NewStatement asNewStatement, org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		org.eclipse.ocl.pivot.Class asCacheClass = asClass2asRuleCacheClass.get(asClass);
-		if (asCacheClass == null) {
-			ClassNameManager classNameManager = getClassNameManager(null, asClass);
-			asCacheClass = RuleCacheClassCallingConvention.INSTANCE.createCacheClass(classNameManager, asNewStatement);
-			asClass2asRuleCacheClass.put(asClass, asCacheClass);
+	public void getRuleCacheClass(@NonNull NewStatement asNewStatement, @NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		assert asTypedModel == asNewStatement.getReferredTypedModel();
+		assert asClass == asNewStatement.getType();
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
+		if (asClass2creationCache == null) {
+			asClass2creationCache = new HashMap<>();
+			asTypedModel2asClass2creationCache.put(asTypedModel, asClass2creationCache);
 		}
-		return asCacheClass;
+		CreationCache creationCache = asClass2creationCache.get(asClass);
+		if (creationCache == null) {
+			ClassNameManager classNameManager = getClassNameManager(null, asClass);
+			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
+			asClass2creationCache.put(asClass, creationCache);
+		}
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		return ClassUtil.nonNullState(asClass2asRuleCacheClass.get(asClass));
+	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(@NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache> asClass2creationCache = asTypedModel2asClass2creationCache.get(asTypedModel);
+		assert asClass2creationCache != null;
+		CreationCache creationCache = asClass2creationCache.get(asClass);
+		assert creationCache != null;
+		org.eclipse.ocl.pivot.Class asCacheClass = creationCache.getASCacheClass();
+		return asCacheClass;
 	}
 
 	public @NonNull TypedModel getTypedModel(org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {

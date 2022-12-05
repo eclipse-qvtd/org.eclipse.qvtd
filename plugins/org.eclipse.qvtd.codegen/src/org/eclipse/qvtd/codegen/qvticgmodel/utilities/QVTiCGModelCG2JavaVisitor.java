@@ -1080,7 +1080,8 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				assert cgMapping != null;
 				CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
 				org.eclipse.ocl.pivot.Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-				org.eclipse.ocl.pivot.@NonNull Class asCacheClass = getAnalyzer().getRuleCacheClass(asClass);
+				TypedModel iTypedModel = QVTimperativeUtil.getReferredTypedModel(iNewStatement);
+				org.eclipse.ocl.pivot.@NonNull Class asCacheClass = getAnalyzer().getRuleCacheClass(iTypedModel, asClass);
 				Property asCacheInstance = analyzer.getCacheInstance(asCacheClass);
 				js.append(asCacheInstance.getName());
 				js.append(".evaluate(");

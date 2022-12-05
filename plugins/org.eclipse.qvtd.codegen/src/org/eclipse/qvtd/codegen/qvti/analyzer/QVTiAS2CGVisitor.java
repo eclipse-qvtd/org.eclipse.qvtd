@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -49,7 +50,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.PredicateTreeBuilder;
-import org.eclipse.qvtd.codegen.qvti.calling.RuleCacheClassCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -695,7 +695,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		if (asInit == null) {
 			CGRealizedVariable cgRealizedVariable = bodyBuilder.addRealizedVariable(asNewStatement);
 			ExecutableNameManager executableNameManager = qvtiAnalyzer.useExecutableNameManager(asNewStatement);
-			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(PivotUtil.getType(asNewStatement));
+			Type asType = PivotUtil.getType(asNewStatement);
+			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(asType);
 			cgRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
 			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));
@@ -706,8 +707,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			}
 			if (asParts.size() > 0) {
 				org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
+				assert asClass == asType;
 				//	ClassNameManager classNameManager = qvtiAnalyzer.getClassNameManager(null, asClass);
-				RuleCacheClassCallingConvention.INSTANCE.createCacheClass2(qvtiAnalyzer, asClass, asNewStatement);
+				qvtiAnalyzer.getRuleCacheClass(asNewStatement, QVTimperativeUtil.getReferredTypedModel(asNewStatement), asClass);
 			}
 		}
 		else {

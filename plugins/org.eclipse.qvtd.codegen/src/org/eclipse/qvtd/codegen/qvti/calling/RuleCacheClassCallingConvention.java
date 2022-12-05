@@ -58,6 +58,7 @@ import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.CreationCache;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
@@ -66,7 +67,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -375,7 +375,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		return cgClass;
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Class createCacheClass(@NonNull ClassNameManager classNameManager, @NonNull NewStatement asNewStatement) {
+	public @NonNull CreationCache createCreationCache(@NonNull ClassNameManager classNameManager, @NonNull NewStatement asNewStatement) {
 		CodeGenAnalyzer analyzer = classNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
 		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
@@ -396,25 +396,21 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		//
 		BasicEvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
 		EvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
-		createCacheInstance(classNameManager, asCacheClass, asNewStatement);
-		return asCacheClass;
+		CreationCache creationCache = createCacheInstance(classNameManager, asCacheClass, asNewStatement);
+		return creationCache;
 	}
 
-	public void createCacheClass2(@NonNull QVTiAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull NewStatement asNewStatement) {
-		analyzer.getRuleCacheClass(asNewStatement, asClass);
-	}
-
-	protected final @NonNull Property createCacheInstance(@NonNull ClassNameManager classNameManager, org.eclipse.ocl.pivot.@NonNull Class asCacheClass, @NonNull NewStatement asNewStatement) {
+	protected final @NonNull CreationCache createCacheInstance(@NonNull ClassNameManager classNameManager, org.eclipse.ocl.pivot.@NonNull Class asCacheClass, @NonNull NewStatement asNewStatement) {
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) classNameManager.getAnalyzer();
 		String propertyName = classNameManager.getUniquePropertyName(NameManagerHelper.INSTANCE_PROPERTY_NAME_PREFIX, asCacheClass);
 		Property asProperty = PivotUtil.createProperty(propertyName, asCacheClass);
 		//	org.eclipse.ocl.pivot.Class asClass = classNameManager.getASClass();
-		analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
+		CreationCache creationCache = analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
 		//
 		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
 		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.INSTANCE);
 		assert cgProperty.eContainer() != null;
-		return asProperty;
+		return creationCache;
 	}
 
 	/**
