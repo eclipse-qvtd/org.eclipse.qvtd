@@ -123,17 +123,64 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	 */
 	protected static class CreationCache extends AbstractCache
 	{
-		private @NonNull NamedElement asOrigin;		// Operation of Class or NewStatement
+		private @NonNull TypedModel asTypedModel;
+		//	private @NonNull CGTypedModel cgTypedModel;
+		//	private int modelIndex;
+		@Deprecated // XXX temporary fudge
+		private @NonNull NewStatement asNewStatement;
 
-		protected CreationCache(@NonNull NamedElement asOrigin, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+		protected CreationCache(@NonNull NewStatement asNewStatement, @NonNull TypedModel asTypedModel, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
 			super(asCacheInstance, asEntryClass);
-			this.asOrigin = asOrigin;
+			this.asNewStatement = asNewStatement;
+			this.asTypedModel = asTypedModel;
+			//		this.cgTypedModel = getCGTypedModel(asTypedModel);
+			//		this.modelIndex = cgTypedModel.getModelIndex();
 		}
 
-		public @NonNull NamedElement getOrigin() {
-			return asOrigin;
+		@Deprecated // XXX temporary fudge
+		public @NonNull NewStatement getNewStatement() {
+			return asNewStatement;
+		}
+
+		public @NonNull TypedModel getTypedModel() {
+			return asTypedModel;
 		}
 	}
+
+	/**
+	 * A CachedInstance identifies the characteristics of a shared mapping invocation.
+	 *
+	public class CachedInstanceData
+	{
+		private org.eclipse.ocl.pivot.@NonNull Class asClass;
+		private @NonNull CGTypedModel cgTypedModel;
+		//	private @NonNull CGExecutorType cgExecutorType;
+		//	private @NonNull List<@NonNull CGProperty> cgProperties;
+		private int modelIndex;
+
+		//	protected CachedInstance(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull CGExecutorType cgExecutorType,
+		//			@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
+		//		this.asClass = asClass;
+		//		this.cgExecutorType = cgExecutorType;
+		//		this.cgProperties = cgProperties;
+		//	}
+
+		public CachedInstanceData(@NonNull TypedModel asTypedModel, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			this.asTypedModel = asTypedModel;
+			this.asClass = asClass;
+			this.cgTypedModel = getCGTypedModel(asTypedModel);
+			this.modelIndex = cgTypedModel.getModelIndex();
+		}
+
+		public void check(@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
+			// TODO Auto-generated method stub
+			//		List<@NonNull CGExecutorProperty> oldProperties = cachedInstances.put(cgType, cgProperties);
+			//		if (oldProperties != null) {
+			//			assert oldProperties.equals(cgProperties);
+			//		}
+
+		}
+	} */
 
 	/**
 	 * PredicateTreeBuilder supports building a CGMapping.body as a nest of if/let expressions top-down,
@@ -354,9 +401,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	//	private @NonNull Map<@NonNull Operation, org.eclipse.ocl.pivot.@NonNull Property> asOperation2asConstructorClass = new HashMap<>();
 
 	/**
-	 * The Trace instance class fro each Trace meta class.
+	 * The Trace instance class for each Trace meta class.
 	 */
 	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, org.eclipse.ocl.pivot.@NonNull Class> asClass2asRuleCacheClass = new HashMap<>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CreationCache>> asTypedModel2asClass2creationCache = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
@@ -394,7 +442,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public void addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
-		CreationCache creationCache = new CreationCache(asNewStatement, asCacheInstance, asEntryClass);
+		CreationCache creationCache = new CreationCache(asNewStatement, asNewStatement.getReferredTypedModel(), asCacheInstance, asEntryClass);
 		addCacheInstanceInternal(creationCache);
 	}
 
@@ -927,15 +975,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return mappingNameManager;
 	}
 
+	@Deprecated // XXX temporary fudge
+	public @NonNull NewStatement getNewStatement(org.eclipse.ocl.pivot.Class asCacheClass) {
+		CreationCache cacheClassData = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
+		assert cacheClassData != null;
+		return cacheClassData.getNewStatement();
+	}
+
 	@Override
 	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
 		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation);
-	}
-
-	public @NonNull NamedElement getOrigin(org.eclipse.ocl.pivot.Class asCacheClass) {
-		CreationCache cacheClassData = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);
-		assert cacheClassData != null;
-		return cacheClassData.getOrigin();
 	}
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {
@@ -977,6 +1026,12 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public org.eclipse.ocl.pivot.@NonNull Class getRuleCacheClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
 		return ClassUtil.nonNullState(asClass2asRuleCacheClass.get(asClass));
+	}
+
+	public @NonNull TypedModel getTypedModel(org.eclipse.ocl.pivot.@NonNull Class asCacheClass) {
+		CreationCache creationCache = (CreationCache)asCacheClass2abstractCache.get(asCacheClass);		// XXX basicGet ??
+		assert creationCache != null;
+		return creationCache.getTypedModel();
 	}
 
 	public @NonNull CGTypedModel getTypedModel(@NonNull TypedModel asTypedModel) {

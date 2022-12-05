@@ -133,7 +133,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			CGClass cgClass = CGUtil.getContainingClass(cgOperation);
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgClass);
-			NewStatement asNewStatement = (NewStatement)analyzer.getOrigin(asCacheClass);
+			NewStatement asNewStatement = analyzer.getNewStatement(asCacheClass);
 			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
 			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
@@ -312,7 +312,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			CGClass cgClass = CGUtil.getContainingClass(cgOperation);
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgClass);
-			NewStatement asNewStatement = (NewStatement)analyzer.getOrigin(asCacheClass);
+			NewStatement asNewStatement = analyzer.getNewStatement(asCacheClass);
 			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
 			//
@@ -400,6 +400,10 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		return asCacheClass;
 	}
 
+	public void createCacheClass2(@NonNull QVTiAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull NewStatement asNewStatement) {
+		analyzer.getRuleCacheClass(asNewStatement, asClass);
+	}
+
 	protected final @NonNull Property createCacheInstance(@NonNull ClassNameManager classNameManager, org.eclipse.ocl.pivot.@NonNull Class asCacheClass, @NonNull NewStatement asNewStatement) {
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) classNameManager.getAnalyzer();
 		String propertyName = classNameManager.getUniquePropertyName(NameManagerHelper.INSTANCE_PROPERTY_NAME_PREFIX, asCacheClass);
@@ -421,7 +425,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgClass) {
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) cg2javaVisitor.getAnalyzer();
 		org.eclipse.ocl.pivot.Class asClass = CGUtil.getAST(cgClass);
-		NewStatement asNewStatement = (NewStatement)analyzer.getOrigin(asClass);
+		NewStatement asNewStatement = analyzer.getNewStatement(asClass);
 		//	if (isEmpty(cgClass)) {
 		//		return true;
 		//	}

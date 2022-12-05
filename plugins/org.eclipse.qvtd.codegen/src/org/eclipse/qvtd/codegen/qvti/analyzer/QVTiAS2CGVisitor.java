@@ -49,6 +49,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.PredicateTreeBuilder;
+import org.eclipse.qvtd.codegen.qvti.calling.RuleCacheClassCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -705,7 +706,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			}
 			if (asParts.size() > 0) {
 				org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-				qvtiAnalyzer.getRuleCacheClass(asNewStatement, asClass);
+				//	ClassNameManager classNameManager = qvtiAnalyzer.getClassNameManager(null, asClass);
+				RuleCacheClassCallingConvention.INSTANCE.createCacheClass2(qvtiAnalyzer, asClass, asNewStatement);
 			}
 		}
 		else {
