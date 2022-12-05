@@ -133,7 +133,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			NewStatement asNewStatement = creationCache.getNewStatement();
 			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
 			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
-			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
+			TypedModel asTypedModel = creationCache.getTypedModel();
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 			int modelIndex = cgTypedModel.getModelIndex();
 			//
@@ -358,9 +358,6 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			return true;
 		}
 	}
-
-	/*	protected void doCachedInstanceEvaluate() {
-	} */
 
 	@Override
 	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
