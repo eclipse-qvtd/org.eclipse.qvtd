@@ -700,7 +700,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			Type asType = PivotUtil.getType(asNewStatement);
 			CGExecutorType cgExecutorType = executableNameManager.getCGExecutorType(asType);
 			cgRealizedVariable.setExecutorType(cgExecutorType);
-			cgExecutorType.setTypeId(qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId()));			// FIXME promote
+			assert cgExecutorType.getTypeId() == qvtiAnalyzer.getCGTypeId(asNewStatement.getTypeId());			// FIXME promote
 			Iterable<@NonNull NewStatementPart> asParts = QVTimperativeUtil.getOwnedParts(asNewStatement);
 			if (Iterables.size(asParts) > 0) {
 				qvtiAnalyzer.getCreationCache(asNewStatement);
