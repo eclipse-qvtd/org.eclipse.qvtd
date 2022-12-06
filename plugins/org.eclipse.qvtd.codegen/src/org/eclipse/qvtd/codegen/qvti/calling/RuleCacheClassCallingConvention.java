@@ -59,7 +59,6 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer.CreationCache;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -130,9 +129,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
-			NewStatement asNewStatement = creationCache.getNewStatement();
-			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
-			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
+			CGExecutorType cgExecutorType = creationCache.getExecutorType();
 			TypedModel asTypedModel = creationCache.getTypedModel();
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 			int modelIndex = cgTypedModel.getModelIndex();
@@ -301,16 +298,12 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		@Override
 		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
 			QVTiAnalyzer analyzer = (QVTiAnalyzer)cg2javaVisitor.getAnalyzer();
-			QVTiCodeGenerator codeGenerator = analyzer.getCodeGenerator();
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
-			GenModelHelper genModelHelper = analyzer.getGenModelHelper();
 			//
 			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
-			NewStatement asNewStatement = creationCache.getNewStatement();
-			CGRealizedVariable cgRealizedVariable = analyzer.getCGRealizedVariable(asNewStatement);
-			CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
+			CGExecutorType cgExecutorType = creationCache.getExecutorType();
 			//
 			List<@NonNull CGProperty> cgProperties = new ArrayList<>();
 			for (@NonNull Property asProperty : creationCache.getProperties()) {

@@ -48,6 +48,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -185,6 +186,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGExecutorType getExecutorType(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return ClassUtil.nonNullState(cgRealizedVariable.getExecutorType());
+	}
+
+	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGSpeculatePart cgSpeculatePart) {
+		return ClassUtil.nonNullState(cgSpeculatePart.getEStructuralFeature());
 	}
 
 	public static @NonNull CGValuedElement getIn(@NonNull CGLetExp cgLetExp) {	// FIXME move to CGUtil
@@ -327,5 +332,9 @@ public class QVTiCGUtil extends CGUtil
 			}
 		}
 		return cgTraceParameter;
+	}
+
+	public static @NonNull CGTypedModel getTypedModel(@NonNull CGRealizedVariable cgRealizedVariable) {
+		return ClassUtil.nonNullState(cgRealizedVariable.getTypedModel());
 	}
 }

@@ -130,21 +130,17 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	public static class CreationCache extends AbstractCache
 	{
 		private @NonNull TypedModel asTypedModel;
+		private @NonNull CGExecutorType cgExecutorType;
 		private @NonNull List<@NonNull NewStatementPart> sortedASParts;
 		private @NonNull List<@NonNull Property> asProperties;
-		//	private @NonNull CGTypedModel cgTypedModel;
-		//	private int modelIndex;
-		@Deprecated // XXX temporary fudge
-		private @NonNull NewStatement asNewStatement;
 
-		protected CreationCache(@NonNull NewStatement asNewStatement, @NonNull TypedModel asTypedModel, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
+		protected CreationCache(@NonNull TypedModel asTypedModel, @NonNull CGExecutorType cgExecutorType, @NonNull Iterable<@NonNull NewStatementPart> asParts, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
 			super(asCacheInstance, asEntryClass);
-			this.asNewStatement = asNewStatement;
 			this.asTypedModel = asTypedModel;
-			//		this.cgTypedModel = getCGTypedModel(asTypedModel);
-			//		this.modelIndex = cgTypedModel.getModelIndex();
-			this.sortedASParts = Lists.newArrayList(QVTimperativeUtil.getOwnedParts(asNewStatement));
+			this.cgExecutorType = cgExecutorType;
+			List<@NonNull NewStatementPart> sortedASParts = Lists.newArrayList(asParts);
 			Collections.sort(sortedASParts, NameUtil.NAMEABLE_COMPARATOR);
+			this.sortedASParts = sortedASParts;
 			List<@NonNull Property> asProperties = new ArrayList<>();
 			for (NewStatementPart asPart : sortedASParts) {
 				asProperties.add(QVTimperativeUtil.getReferredProperty(asPart));
@@ -152,21 +148,20 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			this.asProperties = asProperties;
 		}
 
-		@Deprecated // XXX temporary fudge
-		public @NonNull NewStatement getNewStatement() {
-			return asNewStatement;
+		public @NonNull CGExecutorType getExecutorType() {
+			return cgExecutorType;
 		}
 
 		public @NonNull List<@NonNull Property> getProperties() {
 			return asProperties;
 		}
 
-		public @NonNull TypedModel getTypedModel() {
-			return asTypedModel;
-		}
-
 		public @NonNull List<@NonNull NewStatementPart> getSortedASParts() {
 			return sortedASParts;
+		}
+
+		public @NonNull TypedModel getTypedModel() {
+			return asTypedModel;
 		}
 	}
 
@@ -464,7 +459,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	public @NonNull CreationCache addCacheInstance(@NonNull NewStatement asNewStatement, @NonNull Property asCacheInstance, org.eclipse.ocl.pivot.@NonNull Class asEntryClass) {
-		CreationCache creationCache = new CreationCache(asNewStatement, asNewStatement.getReferredTypedModel(), asCacheInstance, (org.eclipse.ocl.pivot.Class)asNewStatement.getType());
+		CGRealizedVariable cgRealizedVariable = getCGRealizedVariable(asNewStatement);
+		CGExecutorType cgExecutorType = QVTiCGUtil.getExecutorType(cgRealizedVariable);
+		Iterable<@NonNull NewStatementPart> asParts = QVTimperativeUtil.getOwnedParts(asNewStatement);
+		TypedModel asTypedModel = QVTimperativeUtil.getReferredTypedModel(asNewStatement);
+		CreationCache creationCache = new CreationCache(asTypedModel, cgExecutorType, asParts, asCacheInstance, (org.eclipse.ocl.pivot.Class)asNewStatement.getType());
 		addCacheInstanceInternal(creationCache);
 		return creationCache;
 	}

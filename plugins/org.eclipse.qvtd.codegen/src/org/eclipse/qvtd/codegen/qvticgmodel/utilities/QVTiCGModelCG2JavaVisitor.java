@@ -63,14 +63,12 @@ import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
@@ -78,7 +76,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
-import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
@@ -210,214 +207,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 
 		public void setNames(@NonNull String[] names) {
 			this.names = names;
-		}
-	}
-
-	/**
-	 * A CachedInstance identifies the characteristics of a shared mapping invocation.
-	 */
-	private class CachedInstance
-	{
-		private org.eclipse.ocl.pivot.@NonNull Class asClass;
-		private @NonNull CGExecutorType cgExecutorType;
-		private @NonNull List<@NonNull CGProperty> cgProperties;
-		private int modelIndex;
-
-		protected CachedInstance(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull CGExecutorType cgExecutorType,
-				@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
-			this.asClass = asClass;
-			this.cgExecutorType = cgExecutorType;
-			this.cgProperties = cgProperties;
-			this.modelIndex = modelIndex;
-		}
-
-		public @NonNull Boolean doCachedInstance() {
-			String instanceClassName = getNativeInstanceClassName(cgExecutorType);
-			js.append("public class ");
-			js.append(instanceClassName);
-			js.append(" extends ");
-			js.appendClassReference(null, AbstractEvaluationOperation.class);
-			js.pushClassBody(instanceClassName);
-			js.append("\n");					// XXX delete me
-			doCachedInstanceBasicEvaluate();
-			js.append("\n");
-			doCachedInstanceEvaluate();
-			js.popClassBody(false);
-			//
-			js.append("\n");
-			doCachedInstanceClassInstance();
-			return true;
-		}
-
-		protected void doCachedInstanceBasicEvaluate() {
-			js.append("@Override\n");
-			js.append("public ");
-			js.appendClassReference(false, Object.class);
-			js.append(" basicEvaluate(");
-			js.appendClassReference(true, Executor.class);
-			js.append(" ");
-			js.append(globalNameManager.getExecutorName());
-			js.append(", ");
-			js.appendClassReference(true, TypedElement.class);
-			js.append(" ");
-			js.append("caller");
-			js.append(", ");
-			js.appendClassReference(false, Object.class);
-			js.append(" ");
-			js.appendIsRequired(true);
-			js.append(" [] ");
-			js.append(JavaConstants.SOURCE_AND_ARGUMENT_VALUES_NAME);
-			js.append(") {\n");
-			js.pushIndentation(null);
-
-			EClass eClass = (EClass)asClass.getESObject();
-			assert eClass != null;
-			String createMethodName = "create" + eClass.getName();
-			boolean canSetNonNull = false;
-			EPackage ePackage = eClass.getEPackage();
-			String javaClass;
-			if (ePackage != null) {
-				Class<?> factoryClass = genModelHelper.getEcoreFactoryClass(ePackage);
-				if (factoryClass != null) {
-					javaClass = factoryClass.getName();
-					Method factoryMethod = context.getLeastDerivedMethod(factoryClass, createMethodName);
-					if (factoryMethod != null) {
-						if (context.getIsNonNull(factoryMethod) == Boolean.TRUE) {
-							canSetNonNull = true;
-						}
-					}
-				}
-				else {
-					javaClass = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
-				}
-			}
-			else {
-				javaClass = null;
-			}
-			//
-			String instanceName = "instance";
-			js.appendTypeDeclaration(cgExecutorType);
-			js.append(" " + instanceName + " = ");
-			js.appendClassReference(null, javaClass);
-			js.append(".eINSTANCE.");
-			js.append(createMethodName);
-			js.append("();\n");
-
-
-
-			Map<@NonNull Property, @NonNull String> oppositeProperties = getCodeGenerator().getOppositeProperties();
-			int i = 0;
-			for (@NonNull CGProperty cgProperty : cgProperties) {
-				Property asProperty = QVTiCGUtil.getAST(cgProperty);
-				String setAccessor = genModelHelper.getSetAccessor((EStructuralFeature)asProperty.getESObject());
-				if (cgProperty.getASTypeId() instanceof CollectionTypeId) {
-					js.append("@SuppressWarnings(\"unchecked\") ");
-				}
-				else if (cgProperty.isRequired()) {
-					if (js.appendSuppressWarningsNull(false)) {
-						js.append(" ");
-					}
-				}
-				js.appendTypeDeclaration(cgProperty);
-				js.append(" value" + i + " = (");
-				js.appendTypeDeclaration(cgProperty);
-				js.append(")");
-				js.append(JavaConstants.SOURCE_AND_ARGUMENT_VALUES_NAME);
-				js.append("[" + i + "];\n");
-
-				js.append(instanceName + "." + setAccessor + "(value" + i);
-				js.append(");\n");
-
-				if (oppositeProperties != null) {
-					Property iProperty = QVTiCGUtil.getAST(cgProperty);
-					String cacheName = oppositeProperties.get(iProperty);
-					if (cacheName != null) {
-						js.append(cacheName);
-						js.append(".put(value" + i);
-						js.append(", ");
-						//						js.appendReferenceTo(outerTypeDescriptor, slotValue);
-						js.append(instanceName);
-						js.append(");\n");
-					}
-				}
-
-
-				i++;
-
-
-			}
-
-
-			js.append(getGlobalNameManager().getModelsName());
-			js.append("[" + modelIndex + "].add(");
-			js.append(instanceName);
-			js.append(", false);\n");
-
-
-
-			js.append("return " + instanceName + ";\n");
-			js.popIndentation();
-			js.append("}\n");
-		}
-
-		protected void doCachedInstanceEvaluate() {
-			js.append("public ");
-			js.appendClassReference(true, cgExecutorType);
-			js.append(" ");
-			js.append(globalNameManager.getEvaluateName());
-			js.append("(");
-			boolean isFirst = true;
-			for (@NonNull CGProperty cgProperty : cgProperties) {
-				if (!isFirst) {
-					js.append(", ");
-				}
-				js.appendDeclaration(cgProperty);
-				isFirst = false;
-			}
-			js.append(") {\n");
-			js.pushIndentation(null);
-			js.append("return (");
-			js.appendClassReference(true, cgExecutorType);
-			js.append(")");
-			js.append(globalNameManager.getEvaluationCacheName());
-			js.append(".");
-			js.append(globalNameManager.getGetResultName());
-			js.append("(this, caller, new ");
-			js.appendClassReference(false, Object.class);
-			js.append("[]{");
-			isFirst = true;
-			for (@NonNull CGProperty cgProperty : cgProperties) {
-				if (!isFirst) {
-					js.append(", ");
-				}
-				js.appendValueName(cgProperty);
-				isFirst = false;
-			}
-			js.append("});\n");
-			js.popIndentation();
-			js.append("}\n");
-		}
-
-		protected void doCachedInstanceClassInstance() {
-			String instanceClassName = getNativeInstanceClassName(cgExecutorType);
-			js.append("protected final ");
-			js.appendIsRequired(true);
-			js.append(" ");
-			js.append(instanceClassName);
-			js.append(" ");
-			js.append(getNativeInstanceInstanceName(cgExecutorType));
-			js.append(" = new ");
-			js.append(instanceClassName);
-			js.append("();\n");
-		}
-
-		public void check(@NonNull List<@NonNull CGProperty> cgProperties, int modelIndex) {
-			// TODO Auto-generated method stub
-			//		List<@NonNull CGExecutorProperty> oldProperties = cachedInstances.put(cgType, cgProperties);
-			//		if (oldProperties != null) {
-			//			assert oldProperties.equals(cgProperties);
-			//		}
-
 		}
 	}
 
@@ -1086,7 +875,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 				js.append(asCacheInstance.getName());
 				js.append(".evaluate(");
 				boolean isFirst = true;
-				for (@NonNull CGRealizedVariablePart cgPart : cgRealizedVariable.getOwnedParts()) {
+				for (@NonNull CGRealizedVariablePart cgPart : QVTiCGUtil.getOwnedParts(cgRealizedVariable)) {
 					if (!isFirst) {
 						js.append(", ");
 					}
@@ -1274,44 +1063,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(", ");
 			js.appendValueName(cgPropertyCallExp);
 			js.append(");\n");
-		}
-	}
-
-	private void doInstanceCaches(@NonNull CGTransformation cgTransformation) {
-		Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull CachedInstance> cachedInstances = new HashMap<>();
-		for (@NonNull EObject element : new TreeIterable(cgTransformation, false)) {
-			if (element instanceof CGRealizedVariable) {
-				CGRealizedVariable cgRealizedVariable = (CGRealizedVariable)element;
-				List<CGRealizedVariablePart> ownedParts = cgRealizedVariable.getOwnedParts();
-				if (ownedParts.size() > 0) {
-					CGExecutorType cgExecutorType = cgRealizedVariable.getExecutorType();
-					org.eclipse.ocl.pivot.@NonNull Class asClass = (org.eclipse.ocl.pivot.Class)CGUtil.getAST(cgExecutorType);
-					List<@NonNull CGProperty> cgProperties = new ArrayList<>();
-					for (CGRealizedVariablePart ownedPart : ownedParts) {
-						cgProperties.add(ownedPart.getReferredProperty());
-					}
-					Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
-					NewStatement iNewStatement = QVTiCGUtil.getAST(cgRealizedVariable);
-					TypedModel asTypedModel = ClassUtil.nonNullState(iNewStatement.getReferredTypedModel());
-					CGTypedModel cgTypedModel = ClassUtil.nonNullState(getAnalyzer().getTypedModel(asTypedModel));
-					int modelIndex = cgTypedModel.getModelIndex();
-					CachedInstance cachedInstance = cachedInstances.get(asClass);
-					if (cachedInstance == null) {
-						cachedInstance = new CachedInstance(asClass, cgExecutorType, cgProperties, modelIndex);
-						cachedInstances.put(asClass, cachedInstance);
-					}
-					else {
-						cachedInstance.check(cgProperties, modelIndex);
-					}
-				}
-			}
-		}
-		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = new ArrayList<>(cachedInstances.keySet());
-		Collections.sort(asClasses, NameUtil.NAMEABLE_COMPARATOR);
-		for (org.eclipse.ocl.pivot.@NonNull Class asClass : asClasses) {
-			CachedInstance cachedInstance = cachedInstances.get(asClass);
-			assert cachedInstance != null;
-			cachedInstance.doCachedInstance();
 		}
 	}
 
@@ -1869,7 +1620,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			js.append(" * Destroy all created objects.\n");
 			js.append(" */\n");
 			for (@NonNull CGRealizedVariable cgRealizedVariable : ownedRealizedVariables) {
-				CGTypedModel cgTypedModel = cgRealizedVariable.getTypedModel();
+				CGTypedModel cgTypedModel = QVTiCGUtil.getTypedModel(cgRealizedVariable);
 				//
 				js.appendClassReference(null, cgRealizedVariable);
 				js.append(" ");
@@ -2438,15 +2189,6 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 		return JavaStream.convertToJavaIdentifier("MAP_" + cgMapping.getName());
 	}
 
-	protected @NonNull String getNativeInstanceClassName(@NonNull CGExecutorType cgType) {
-		Element ast = cgType.getAst();
-		return JavaStream.convertToJavaIdentifier("ICACHE_" + ((NamedElement)ast).getName());
-	}
-
-	protected @NonNull String getNativeInstanceInstanceName(@NonNull CGExecutorType cgType) {
-		return "INSTANCE_" + getNativeInstanceClassName(cgType);
-	}
-
 	/*	@Override
 	public @NonNull String getResolvedName(@NonNull CGValuedElement cgElement) {
 		if (cgElement instanceof CGVariableExp) {
@@ -2701,7 +2443,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 			return false;
 		}
 		ElementId sourceTypeId = cgSource.getTypeId().getElementId();
-		ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getTransformation();
+		ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getContextClass();
 		org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 		TypeId runtimeContextTypeId = runtimeContextClass.getTypeId();
 		if (sourceTypeId == runtimeContextTypeId) {		// FIXME make transformationInstance regular - cloned from appendCGEcorePropertyCallExp
@@ -3391,7 +3133,7 @@ public class QVTiCGModelCG2JavaVisitor extends AbstractQVTiCGModelCG2JavaVisitor
 							js.append(" != null) {\n");
 							js.pushIndentation(null);
 						}
-						EStructuralFeature inputAttribute = cgSpeculatePart.getEStructuralFeature();
+						EStructuralFeature inputAttribute = QVTiCGUtil.getEStructuralFeature(cgSpeculatePart);
 						String inputSetAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
 						//
 						js.append(inputSpeculationSlotStateName);
