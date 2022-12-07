@@ -74,8 +74,8 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.calling.ExternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ExternalOperationOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.ImplementedOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
@@ -364,7 +364,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
 			if (asOperation.getImplementationClass() != null) {
 				assert asBodyExpression == null;
-				return ExternalFunctionOperationCallingConvention.INSTANCE;
+				return ImplementedOperationCallingConvention.INSTANCE;
 			}
 			else if (asBodyExpression != null) {
 				ShadowExp asShadowExp = QVTimperativeUtil.basicGetShadowExp(asFunction);

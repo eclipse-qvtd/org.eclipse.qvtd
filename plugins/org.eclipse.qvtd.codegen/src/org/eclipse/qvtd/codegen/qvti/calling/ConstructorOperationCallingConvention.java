@@ -293,13 +293,17 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 		//	Wrap a copy of the original constructor bodies in a let expression per constructor parameter.
 		//
 		ExpressionInOCL asExpressionInOCL = (ExpressionInOCL)asOperation.getBodyExpression();
-		assert asExpressionInOCL != null;
-		ExpressionInOCL asCacheExpressionInOCL = EcoreUtil.copy(asExpressionInOCL);
-		OCLExpression asCacheResult = asCacheExpressionInOCL.getOwnedBody();
-		assert asCacheResult != null;
-		PivotUtilInternal.resetContainer(asCacheResult);
-		asCacheExpressionInOCL.setOwnedBody(asCacheResult);
-		asCacheOperation.setBodyExpression(asCacheExpressionInOCL);
+		if (asExpressionInOCL != null) {
+			ExpressionInOCL asCacheExpressionInOCL = EcoreUtil.copy(asExpressionInOCL);
+			OCLExpression asCacheResult = asCacheExpressionInOCL.getOwnedBody();
+			assert asCacheResult != null;
+			PivotUtilInternal.resetContainer(asCacheResult);
+			asCacheExpressionInOCL.setOwnedBody(asCacheResult);
+			asCacheOperation.setBodyExpression(asCacheExpressionInOCL);
+		}
+		else {
+			assert asOperation.getImplementationClass() != null;
+		}
 		//
 		CGOperation cgConstructor = createCGOperation(qvtiAnalyzer, asCacheOperation);
 		cgConstructor.setCallingConvention(this);

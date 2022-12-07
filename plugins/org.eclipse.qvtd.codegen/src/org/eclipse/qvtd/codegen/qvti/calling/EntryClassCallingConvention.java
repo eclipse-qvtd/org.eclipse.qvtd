@@ -129,7 +129,7 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 		NameResolution cachedResultNameResolution = globalNameManager.getCachedResultNameResolution();
 		createCacheProperty(analyzer, cgEntryClass, cachedResultNameResolution, asOperation);
 		//
-		ConstructorOperationCallingConvention.INSTANCE.createCacheConstructor(analyzer, cgEntryClass, asOperation);
+		getConstructorOperationCallingConvention().createCacheConstructor(analyzer, cgEntryClass, asOperation);
 		GetResultOperationCallingConvention.INSTANCE.createCacheGetResultOperation(analyzer, cgEntryClass, asOperation);
 		IsEqualOperationCallingConvention.INSTANCE.createCacheIsEqualOperation(analyzer, cgEntryClass, asOperation);
 		return asEntryClass;
@@ -168,6 +168,10 @@ public class EntryClassCallingConvention extends AbstractClassCallingConvention
 			return classNameManager;
 		}
 		throw new UnsupportedOperationException();
+	}
+
+	protected @NonNull ConstructorOperationCallingConvention getConstructorOperationCallingConvention() {
+		return ConstructorOperationCallingConvention.INSTANCE;
 	}
 
 	protected @NonNull Class getContextClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {

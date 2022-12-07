@@ -18,6 +18,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -41,7 +43,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -339,37 +340,45 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull /*CGFunction*/CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() != null;
 
 		//	CGClass cgClass = analyzer.createNestedCGClass(asOperation, "FTOR" + asOperation.getName());
 
-		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
+		//	CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
+		CGCachedOperation cgOperation = CGModelFactory.eINSTANCE.createCGCachedOperation();
+		analyzer.initAst(cgOperation, asOperation, true);
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
+		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
+		return cgOperation;
 	}
 
 	@Override
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		CGFunction cgFunction = (CGFunction)cgOperation;
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
-		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
-		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
+		Operation asOperation = QVTiCGUtil.getAST(cgOperation);
+		assert QVTimperativeUtil.basicGetShadowExp(asOperation) == null;
+		CGOperationCallExp cgOperationCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
+		initCallExp(qvtiAnalyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
 		assert cgSource != null;
-		cgFunctionCallExp.getArguments().add(cgSource);
-		initCallArguments(qvtiAnalyzer, cgFunctionCallExp);
-		return cgFunctionCallExp;
+		cgOperationCallExp.getArguments().add(cgSource);
+		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
+		return cgOperationCallExp;
 	}
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
 		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
-		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
+		Operation asFunction = QVTiCGUtil.getAST(cgOperation);
 		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
-		List<CGParameter> cgParameters = cgFunction.getParameters();
+		List<CGParameter> cgParameters = cgOperation.getParameters();
 		assert !useClassToCreateObject;
 		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		for (Parameter asParameter : asFunction.getOwnedParameters()) {
