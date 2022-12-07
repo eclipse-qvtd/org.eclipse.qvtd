@@ -103,9 +103,6 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 			js.append("return ((");
 			js.appendClassReference(cgCacheClass);
 			js.append(")getUniqueComputation(");
-			//	js.append(QVTiCGUtil.getContainingCGTransformation(cgOperation).getName());
-			//	js.append("transformation");		// XXX
-			//	js.append(globalNameManager.getIdResolverName());
 			boolean isFirst = true;
 			for (@NonNull CGParameter cgParameter : CGUtil.getParameters(cgOperation)) {
 				if (!isFirst) {
@@ -124,8 +121,13 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() == null;
 		CGCachedOperation cgOperation = CGModelFactory.eINSTANCE.createCGCachedOperation();
+		analyzer.initAst(cgOperation, asOperation, true);
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
+		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 		return cgOperation;
 	}
 
@@ -148,21 +150,11 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		assert bodyExpression != null;
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
-		//	cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
 		cgParameters.add(operationNameManager.getSelfParameter());
-		//	Variable asContextVariable = bodyExpression.getOwnedContext();
-		//	if (asContextVariable != null) {
-		//		CGParameter cgParameter = qvtiAnalyzer.getSelfParameter(operationNameManager, asContextVariable);
-		//		cgOperation.getParameters().add(cgParameter);
-		//	}
 		for (@NonNull Variable asParameterVariable : ClassUtil.nullFree(bodyExpression.getOwnedParameters())) {
 			CGParameter cgParameter = createCGParameter(operationNameManager, asParameterVariable);
 			cgParameters.add(cgParameter);
 		}
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
-		//	/*Property asConstructorInstance =*/ createConstructorInstance2(qvtiOperationNameManager, asCacheClass);
 	}
 
 	@Override
