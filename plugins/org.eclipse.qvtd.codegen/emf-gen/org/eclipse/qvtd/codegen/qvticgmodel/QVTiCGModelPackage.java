@@ -79,21 +79,21 @@ public interface QVTiCGModelPackage extends EPackage {
 	@NonNull QVTiCGModelPackage eINSTANCE = org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl.init();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>CG Ecore Property Assignment</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment
 	 * @generated
 	 */
 	EClass getCGEcorePropertyAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment#getEStructuralFeature <em>EStructural Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment#getEStructuralFeature()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment#getEStructuralFeature()
 	 * @see #getCGEcorePropertyAssignment()
 	 * @generated
 	 */
@@ -258,75 +258,75 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGConnectionVariable();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment <em>CG Ecore Container Assignment</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment <em>CG Ecore Container Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>CG Ecore Container Assignment</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment
 	 * @generated
 	 */
 	EClass getCGEcoreContainerAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment#getEStructuralFeature <em>EStructural Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment#getEStructuralFeature()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment#getEStructuralFeature()
 	 * @see #getCGEcoreContainerAssignment()
 	 * @generated
 	 */
 	EReference getCGEcoreContainerAssignment_EStructuralFeature();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment <em>CG Property Assignment</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment <em>CG Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>CG Property Assignment</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment
 	 * @generated
 	 */
 	EClass getCGPropertyAssignment();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty <em>As Property</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getAsProperty <em>As Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>As Property</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getAsProperty()
 	 * @see #getCGPropertyAssignment()
 	 * @generated
 	 */
 	EAttribute getCGPropertyAssignment_AsProperty();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Property</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getReferredProperty()
 	 * @see #getCGPropertyAssignment()
 	 * @generated
 	 */
 	EReference getCGPropertyAssignment_ReferredProperty();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Owned Init Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getOwnedInitValue()
 	 * @see #getCGPropertyAssignment()
 	 * @generated
 	 */
 	EReference getCGPropertyAssignment_OwnedInitValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Owned Slot Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment#getOwnedSlotValue()
 	 * @see #getCGPropertyAssignment()
 	 * @generated
 	 */
@@ -674,21 +674,21 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGRealizedVariablePart_ReferredProperty();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence <em>CG Sequence</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGSequence <em>CG Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>CG Sequence</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGSequence
 	 * @generated
 	 */
 	EClass getCGSequence();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getOwnedStatements <em>Owned Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGSequence#getOwnedStatements <em>Owned Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Statements</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getOwnedStatements()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGSequence#getOwnedStatements()
 	 * @see #getCGSequence()
 	 * @generated
 	 */
@@ -848,10 +848,10 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_CONNECTION_VARIABLE = eINSTANCE.getCGConnectionVariable();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl <em>CG Ecore Container Assignment</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreContainerAssignmentImpl <em>CG Ecore Container Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreContainerAssignmentImpl
 		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcoreContainerAssignment()
 		 * @generated
 		 */
@@ -866,10 +866,10 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_ECORE_CONTAINER_ASSIGNMENT__ESTRUCTURAL_FEATURE = eINSTANCE.getCGEcoreContainerAssignment_EStructuralFeature();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcorePropertyAssignmentImpl
 		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcorePropertyAssignment()
 		 * @generated
 		 */
@@ -974,10 +974,10 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_GUARD_VARIABLE__TYPED_MODEL = eINSTANCE.getCGGuardVariable_TypedModel();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl <em>CG Property Assignment</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyAssignmentImpl <em>CG Property Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyAssignmentImpl
 		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 		 * @generated
 		 */
@@ -1294,10 +1294,10 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_REALIZED_VARIABLE_PART__REFERRED_PROPERTY = eINSTANCE.getCGRealizedVariablePart_ReferredProperty();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGSequenceImpl
 		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
 		 * @generated
 		 */

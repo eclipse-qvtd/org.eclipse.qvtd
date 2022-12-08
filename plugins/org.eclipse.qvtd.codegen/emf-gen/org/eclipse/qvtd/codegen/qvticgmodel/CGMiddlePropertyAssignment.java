@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
 
 /**
  * <!-- begin-user-doc -->

@@ -12,6 +12,10 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 
 /**
  * <!-- begin-user-doc -->

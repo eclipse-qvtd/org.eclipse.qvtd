@@ -18,16 +18,6 @@
         eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedConnectionAssignments"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConnectionVariable" eSuperTypes="#//CGGuardVariable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGEcoreContainerAssignment" eSuperTypes="#//CGPropertyAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
-        resolveProxies="false"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGEcorePropertyAssignment" eSuperTypes="#//CGPropertyAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
-        resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcoreRealizedVariable" eSuperTypes="#//CGRealizedVariable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifier" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier" resolveProxies="false"/>
@@ -95,21 +85,8 @@
         containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGIterationCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="#//CGEcorePropertyAssignment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOppositePropertyCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGPropertyAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGProperty"
-        resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitValue" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedSlotValue" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="asProperty" lowerBound="1"
-        eType="ecore:EDataType ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//Property"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGRealizedVariable" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGVariable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="executorType" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGExecutorType"
@@ -138,11 +115,6 @@
         <details key="documentation" value="The shared type."/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGSequence" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGSpeculateExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" lowerBound="1" upperBound="-1"

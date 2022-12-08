@@ -49,12 +49,12 @@ public abstract class AbstractQVTiDependencyVisitor
 	}
 
 	@Override
-	public Object visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
+	public Object visitCGEcoreContainerAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
 	@Override
-	public Object visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
+	public Object visitCGEcorePropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
@@ -119,7 +119,7 @@ public abstract class AbstractQVTiDependencyVisitor
 	}
 
 	@Override
-	public Object visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
+	public Object visitCGPropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
@@ -134,7 +134,7 @@ public abstract class AbstractQVTiDependencyVisitor
 	}
 
 	@Override
-	public Object visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
+	public Object visitCGSequence(org.eclipse.ocl.examples.codegen.cgmodel.CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 

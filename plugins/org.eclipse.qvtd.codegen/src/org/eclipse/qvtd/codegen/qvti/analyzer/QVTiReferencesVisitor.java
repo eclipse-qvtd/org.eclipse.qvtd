@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
