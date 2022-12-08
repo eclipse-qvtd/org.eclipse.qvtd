@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -94,7 +95,6 @@ import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -494,7 +494,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	protected void propagateChildNameResolution(@NonNull CGElement cgElement, @NonNull CGElement cgChild, @NonNull EReference eContainmentFeature, @Nullable NameResolution parentNameResolution) {
-		if (false && eContainmentFeature == QVTiCGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {				// XXX
+		if (false && eContainmentFeature == CGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {				// XXX
 			CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)cgElement;
 			NameResolution nameResolution = cgPropertyAssignment.basicGetNameResolution();
 			if (nameResolution == null) {

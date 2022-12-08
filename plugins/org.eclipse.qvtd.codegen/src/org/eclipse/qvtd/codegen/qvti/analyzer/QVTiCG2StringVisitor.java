@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
@@ -132,16 +131,6 @@ public class QVTiCG2StringVisitor extends AbstractQVTiCG2StringVisitor
 		append(" ... ");
 		//		safeVisit(cgMappingLoop.getBody());
 		append(")");
-		return null;
-	}
-
-	@Override
-	public @Nullable String visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		safeVisit(cgPropertyAssignment.getOwnedSlotValue());
-		append(".");
-		appendName(cgPropertyAssignment.getReferredProperty());
-		append(" := ");
-		safeVisit(cgPropertyAssignment.getOwnedInitValue());
 		return null;
 	}
 

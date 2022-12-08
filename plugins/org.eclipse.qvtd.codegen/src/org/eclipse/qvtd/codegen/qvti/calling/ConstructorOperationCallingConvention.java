@@ -174,7 +174,7 @@ public class ConstructorOperationCallingConvention extends AbstractOperationCall
 			//
 			//	Assign  property from let-variable / computation
 			//
-			CGPropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			CGPropertyAssignment cgPropertyAssignment = CGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			cgPropertyAssignment.setAst(asProperty);
 			cgPropertyAssignment.setTypeId(cgTypeId);
 			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgThisParameter));

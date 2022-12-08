@@ -375,7 +375,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			}
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
 			cgMapping.getOwnedGuardVariables().addAll(cgFreeVariables);
-			CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+			CGSequence cgSequence = CGModelFactory.eINSTANCE.createCGSequence();
 			List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
 				CGNamedElement cgElement = createCGStatement(CGNamedElement.class, asStatement);
@@ -653,7 +653,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		assert forAllIteration != null;
 		cgMappingLoop.setAsIteration(forAllIteration);
 		cgMappingLoop.setReferredIteration(generateIterationDeclaration(/*asSource.getType(),*/ forAllIteration));
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		CGSequence cgSequence = CGModelFactory.eINSTANCE.createCGSequence();
 		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
 			CGValuedElement cgMappingStatement = createCGElement(CGValuedElement.class, asMappingStatement);
@@ -777,7 +777,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				if (eStructuralFeature != null) {
 					try {
 						genModelHelper.getGetAccessor(eStructuralFeature);
-						CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
+						CGEcorePropertyAssignment cgEcorePropertyAssignment = CGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
 						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
 						cgPropertyAssignment = cgEcorePropertyAssignment;
 					} catch (GenModelException e) {
@@ -792,7 +792,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 						assert ((EReference)eStructuralFeature).isContainment();
 						try {
 							genModelHelper.getGetAccessor(eStructuralFeature);
-							CGEcoreContainerAssignment cgEcoreContainerAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
+							CGEcoreContainerAssignment cgEcoreContainerAssignment = CGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
 							cgEcoreContainerAssignment.setEStructuralFeature(eStructuralFeature);
 							cgPropertyAssignment = cgEcoreContainerAssignment;
 						} catch (GenModelException e) {
@@ -803,7 +803,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				}
 			}
 			if (cgPropertyAssignment == null) {
-				cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+				cgPropertyAssignment = CGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			}
 			cgPropertyAssignment.setAst(asSetStatement);
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
