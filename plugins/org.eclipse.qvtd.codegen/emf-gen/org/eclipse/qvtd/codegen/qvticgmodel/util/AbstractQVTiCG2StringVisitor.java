@@ -48,12 +48,12 @@ public abstract class AbstractQVTiCG2StringVisitor
 	}
 
 	@Override
-	public @Nullable String visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
+	public @Nullable String visitCGEcoreContainerAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
 	@Override
-	public @Nullable String visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
+	public @Nullable String visitCGEcorePropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
@@ -118,7 +118,7 @@ public abstract class AbstractQVTiCG2StringVisitor
 	}
 
 	@Override
-	public @Nullable String visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
+	public @Nullable String visitCGPropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
@@ -133,7 +133,7 @@ public abstract class AbstractQVTiCG2StringVisitor
 	}
 
 	@Override
-	public @Nullable String visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
+	public @Nullable String visitCGSequence(org.eclipse.ocl.examples.codegen.cgmodel.CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
