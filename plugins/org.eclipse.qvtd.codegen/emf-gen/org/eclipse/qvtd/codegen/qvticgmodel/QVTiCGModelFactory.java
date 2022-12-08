@@ -54,24 +54,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGConnectionVariable createCGConnectionVariable();
 
 	/**
-	 * Returns a new object of class '<em>CG Ecore Container Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Ecore Container Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGEcoreContainerAssignment createCGEcoreContainerAssignment();
-
-	/**
-	 * Returns a new object of class '<em>CG Ecore Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Ecore Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGEcorePropertyAssignment createCGEcorePropertyAssignment();
-
-	/**
 	 * Returns a new object of class '<em>CG Ecore Realized Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,15 +97,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGGuardVariable createCGGuardVariable();
-
-	/**
-	 * Returns a new object of class '<em>CG Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGPropertyAssignment createCGPropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>CG Mapping</em>'.
@@ -223,15 +196,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGRealizedVariablePart createCGRealizedVariablePart();
-
-	/**
-	 * Returns a new object of class '<em>CG Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Sequence</em>'.
-	 * @generated
-	 */
-	@NonNull CGSequence createCGSequence();
 
 	/**
 	 * Returns a new object of class '<em>CG Speculate Exp</em>'.

@@ -72,28 +72,24 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 		switch (eClass.getClassifierID()) {
 			case 0: return createCGConnectionAssignment();
 			case 1: return createCGConnectionVariable();
-			case 2: return createCGEcoreContainerAssignment();
-			case 3: return createCGEcorePropertyAssignment();
-			case 4: return createCGEcoreRealizedVariable();
-			case 5: return createCGFunction();
-			case 6: return createCGFunctionCallExp();
-			case 7: return createCGFunctionParameter();
-			case 8: return createCGGuardVariable();
-			case 9: return createCGMapping();
-			case 10: return createCGMappingCall();
-			case 11: return createCGMappingCallBinding();
-			case 12: return createCGMappingExp();
-			case 13: return createCGMappingLoop();
-			case 14: return createCGMiddlePropertyAssignment();
-			case 15: return createCGMiddlePropertyCallExp();
-			case 16: return createCGPropertyAssignment();
-			case 17: return createCGRealizedVariable();
-			case 18: return createCGRealizedVariablePart();
-			case 19: return createCGSequence();
-			case 20: return createCGSpeculateExp();
-			case 21: return createCGSpeculatePart();
-			case 22: return createCGTransformation();
-			case 23: return createCGTypedModel();
+			case 2: return createCGEcoreRealizedVariable();
+			case 3: return createCGFunction();
+			case 4: return createCGFunctionCallExp();
+			case 5: return createCGFunctionParameter();
+			case 6: return createCGGuardVariable();
+			case 7: return createCGMapping();
+			case 8: return createCGMappingCall();
+			case 9: return createCGMappingCallBinding();
+			case 10: return createCGMappingExp();
+			case 11: return createCGMappingLoop();
+			case 12: return createCGMiddlePropertyAssignment();
+			case 13: return createCGMiddlePropertyCallExp();
+			case 14: return createCGRealizedVariable();
+			case 15: return createCGRealizedVariablePart();
+			case 16: return createCGSpeculateExp();
+			case 17: return createCGSpeculatePart();
+			case 18: return createCGTransformation();
+			case 19: return createCGTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -119,28 +115,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGConnectionVariable createCGConnectionVariable() {
 		CGConnectionVariableImpl cgConnectionVariable = new CGConnectionVariableImpl();
 		return cgConnectionVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGEcoreContainerAssignment createCGEcoreContainerAssignment() {
-		CGEcoreContainerAssignmentImpl cgEcoreContainerAssignment = new CGEcoreContainerAssignmentImpl();
-		return cgEcoreContainerAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGEcorePropertyAssignment createCGEcorePropertyAssignment() {
-		CGEcorePropertyAssignmentImpl cgEcorePropertyAssignment = new CGEcorePropertyAssignmentImpl();
-		return cgEcorePropertyAssignment;
 	}
 
 	/**
@@ -281,17 +255,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGPropertyAssignment createCGPropertyAssignment() {
-		CGPropertyAssignmentImpl cgPropertyAssignment = new CGPropertyAssignmentImpl();
-		return cgPropertyAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull CGRealizedVariable createCGRealizedVariable() {
 		CGRealizedVariableImpl cgRealizedVariable = new CGRealizedVariableImpl();
 		return cgRealizedVariable;
@@ -306,17 +269,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGRealizedVariablePart createCGRealizedVariablePart() {
 		CGRealizedVariablePartImpl cgRealizedVariablePart = new CGRealizedVariablePartImpl();
 		return cgRealizedVariablePart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGSequence createCGSequence() {
-		CGSequenceImpl cgSequence = new CGSequenceImpl();
-		return cgSequence;
 	}
 
 	/**
