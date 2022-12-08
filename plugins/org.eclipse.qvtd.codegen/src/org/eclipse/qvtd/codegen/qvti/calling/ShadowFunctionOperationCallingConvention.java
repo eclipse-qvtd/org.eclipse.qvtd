@@ -53,13 +53,13 @@ import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -137,7 +137,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		}
 	}
 
-	protected boolean doFunctionBody(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
+	protected boolean doFunctionBody(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
 		CGValuedElement body = qvticg2javaVisitor.getExpression(cgFunction.getBody());
 		ElementId elementId = cgFunction.getTypeId().getElementId();
 		js.append(" {\n");
@@ -202,7 +202,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		return true;
 	}
 
-	protected boolean doFunctionBody2(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+	protected boolean doFunctionBody2(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
 		QVTiCodeGenerator codeGenerator = qvticg2javaVisitor.getCodeGenerator();
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		Function function = QVTiCGUtil.getAST(cgFunction);
@@ -333,7 +333,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		return true;
 	}
 
-	protected void doFunctionConstructor(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+	protected void doFunctionConstructor(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
 		//		List<@NonNull CGParameter> cgParameters = ClassUtil.nullFree(cgFunction.getParameters());
 		//		if (js.isUseNullAnnotations()) {
 		//			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
@@ -363,7 +363,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		doFunctionBody2(qvticg2javaVisitor, js, cgFunction, cgShadowExp);
 	}
 
-	protected void doFunctionGetInstance(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
+	protected void doFunctionGetInstance(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
 		String cachedResultName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getCachedResultName();
 		js.append("@Override\n");
 		js.append("public ");
@@ -381,7 +381,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 		js.append("}\n");
 	}
 
-	protected void doFunctionIsEqual(@NonNull QVTiCGModelCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
+	protected void doFunctionIsEqual(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
 		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendClassReference(true, IdResolver.class);
@@ -426,7 +426,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
-		QVTiCGModelCG2JavaVisitor qvticg2javaVisitor = (QVTiCGModelCG2JavaVisitor)cg2javaVisitor;
+		QVTiCG2JavaVisitor qvticg2javaVisitor = (QVTiCG2JavaVisitor)cg2javaVisitor;
 		JavaCodeGenerator codeGenerator = cg2javaVisitor.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();

@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCGCG2StringVisitor;
+import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.AbstractCS2ASCG2StringVisitor;
 
-public class CS2ASCG2StringVisitor extends AbstractCS2ASCGCG2StringVisitor
+public class CS2ASCG2StringVisitor extends AbstractCS2ASCG2StringVisitor
 {
 	private static final class MyFactory extends AbstractFactory
 	{

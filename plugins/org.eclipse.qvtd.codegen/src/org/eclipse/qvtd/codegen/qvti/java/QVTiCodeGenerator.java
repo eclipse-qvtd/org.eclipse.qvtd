@@ -71,8 +71,13 @@ import org.eclipse.ocl.pivot.utilities.LanguageSupport;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ExternalOperationOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ImplementedOperationCallingConvention;
@@ -82,6 +87,7 @@ import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConventi
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransientFunctionOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiCGNameHelperVisitor;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -89,15 +95,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelAnalysisVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelBoxingAnalysisVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaNameVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaPreVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2JavaVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCG2StringVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelCGNameHelperVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelDependencyVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelReferencesVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -122,7 +119,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	{
 		@Override
 		protected @NonNull CGNameHelper createCGNameHelper() {
-			return new QVTiCGModelCGNameHelperVisitor(this);
+			return new QVTiCGNameHelperVisitor(this);
 		}
 	}
 
@@ -141,7 +138,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation asTransformation) {
 		super(environmentFactory, null);			// FIXME Pass a genmodel
-		QVTiCGModelCG2StringVisitor.FACTORY.getClass();
+		QVTiCG2StringVisitor.FACTORY.getClass();
 		this.asTransformation = asTransformation;
 		this.analyzer = createCodeGenAnalyzer();
 	}
@@ -188,26 +185,26 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
-		return new QVTiCGModelAnalysisVisitor(analyzer);
+		return new QVTiAnalysisVisitor(analyzer);
 	}
 
 	@Override
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
-		return new QVTiCGModelBoxingAnalysisVisitor(analyzer);
+		return new QVTiBoxingAnalyzer(analyzer);
 	}
 
 	@Override
 	public @NonNull CG2JavaNameVisitor createCG2JavaNameVisitor() {
-		return new QVTiCGModelCG2JavaNameVisitor(this);
+		return new QVTiCG2JavaNameVisitor(this);
 	}
 
 	@Override
 	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
-		return new QVTiCGModelCG2JavaPreVisitor(this);
+		return new QVTiCG2JavaPreVisitor(this);
 	}
 
-	protected @NonNull QVTiCGModelCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		return new QVTiCGModelCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
@@ -261,7 +258,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			metamodelManager.installRoot(nativeModel);
 		}
 		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage2);
-		QVTiCGModelCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
+		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		ImportNameManager importNameManager = generator.getImportNameManager();
 		Map<@NonNull String, @Nullable String> long2ShortImportNames = importNameManager.getLong2ShortImportNames();
@@ -299,7 +296,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull DependencyVisitor createDependencyVisitor() {
-		return new QVTiCGModelDependencyVisitor(this, getGlobalPlace());
+		return new QVTiDependencyVisitor(this, getGlobalPlace());
 	}
 
 	@Override
@@ -332,7 +329,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull ReferencesVisitor createReferencesVisitor() {
-		return QVTiCGModelReferencesVisitor.INSTANCE;
+		return QVTiReferencesVisitor.INSTANCE;
 	}
 
 	public @NonNull String generateClassFile() {

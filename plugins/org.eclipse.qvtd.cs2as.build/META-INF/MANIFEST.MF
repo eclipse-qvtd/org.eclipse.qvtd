@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.eclipse.qvtd.cs2as.build;singleton:=true
 Bundle-Version: 0.30.0.qualifier
 Export-Package: org.eclipse.qvtd.cs2as.build.modelspecs,
  org.eclipse.qvtd.cs2as.build.mwe,
- org.eclipse.qvtd.cs2as.build.utilities
+ org.eclipse.qvtd.cs2as.build.utilities,
+ org.eclipse.qvtd.cs2as.build.xtend
 Require-Bundle: org.eclipse.emf.codegen.ecore;bundle-version="[2.7.0,3.0.0)",
  org.eclipse.emf.mwe.core;bundle-version="[1.3.10,2.0.0)",
  org.eclipse.emf.mwe.utils;bundle-version="[1.3.10,2.0.0)",
@@ -13,7 +14,9 @@ Require-Bundle: org.eclipse.emf.codegen.ecore;bundle-version="[2.7.0,3.0.0)",
  org.eclipse.ocl.examples.build;bundle-version="[2.19.0,2.20.0)",
  org.eclipse.qvtd.cs2as.compiler;bundle-version="[0.26.0,1.0.0)",
  org.eclipse.qvtd.runtime;bundle-version="[0.26.0,1.0.0)",
- org.eclipse.qvtd.compiler;bundle-version="[0.26.0,1.0.0)"
+ org.eclipse.qvtd.build;bundle-version="[0.26.0,1.0.0)",
+ org.eclipse.qvtd.compiler;bundle-version="[0.26.0,1.0.0)",
+ org.eclipse.xtext.xbase.lib;bundle-version="[2.8.0,3.0.0)"
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName

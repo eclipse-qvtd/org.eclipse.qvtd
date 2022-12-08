@@ -13,7 +13,6 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
-import org.eclipse.qvtd.codegen.qvticgmodel.utilities.QVTiCGModelFieldingAnalysisVisitor;
 
 public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 {
@@ -23,6 +22,6 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 	@Override
 	protected @NonNull FieldingAnalysisVisitor createAnalysisVisitor(@NonNull ReturnState requiredReturn) {
-		return new QVTiCGModelFieldingAnalysisVisitor(this, requiredReturn);
+		return new QVTiFieldingAnalysisVisitor(this, requiredReturn);
 	}
 }
