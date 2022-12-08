@@ -54,7 +54,7 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -309,10 +309,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.BUFFER_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
@@ -324,18 +324,16 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeSupport.CLSSid_CollectionType, null);
 							if (ownedExpression_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedExpression_0.getType();
-							final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
-							if (oclAsType == null) {
-								throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
-							}
-							final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTimperativeTables.CLSSid_Type, oclAsType);
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
+							final /*@Thrown*/ @NonNull Type elementType = (@Nullable Type)CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTimperativeSupport.CLSSid_Type, oclAsType);
 							final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, elementType, type_0).booleanValue();
 							CAUGHT_conformsTo = conformsTo;
@@ -358,7 +356,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 				catch (Exception THROWN_CAUGHT_implies) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -366,6 +364,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -385,8 +384,8 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		assert names != null;
 		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
-		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
+		final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeSupport.ORD_PRIMid_String, names);
+		/*@NonInvalid*/ @NonNull String s = QVTimperativeSupport.STR_;
 		@NonNull Iterator<Object> ITER_n = BOXED_names.iterator();
 		/*@NonInvalid*/ @Nullable String iterate;
 		while (true) {
@@ -399,21 +398,21 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
-			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeTables.STR_);
+			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeSupport.STR_);
 			/*@NonInvalid*/ @NonNull String IF_IsEQ_;
 			if (IsEQ_) {
 				IF_IsEQ_ = n;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeSupport.STR__59);
 				final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, n);
 				IF_IsEQ_ = sum_1;
 			}
 			//
 			s = IF_IsEQ_;
 		}
-		final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
-		final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeTables.STR__125);
+		final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeSupport.STR__123, iterate);
+		final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeSupport.STR__125);
 		return sum;
 	}
 

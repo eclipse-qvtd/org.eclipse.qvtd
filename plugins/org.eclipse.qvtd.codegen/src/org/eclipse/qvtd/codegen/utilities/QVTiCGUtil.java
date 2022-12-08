@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.utilities;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,7 +26,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGShadowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -152,10 +149,6 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState((VariableExp)cgVariableExp.getAst());
 	}
 
-	public static @NonNull Property getAsProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getAsProperty());
-	}
-
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
 		return ClassUtil.nonNullState(cgMappingLoop.getBody());
 	}
@@ -220,10 +213,6 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState(cgConnectionAssignment.getOwnedInitValue());
 	}
 
-	public static @NonNull CGValuedElement getOwnedInitValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedInitValue());
-	}
-
 	public static @NonNull Iterable<@NonNull CGMappingCallBinding> getOwnedMappingCallBindings(@NonNull CGMappingCall cgMappingCall) {
 		return ClassUtil.nullFree(cgMappingCall.getOwnedMappingCallBindings());
 	}
@@ -238,18 +227,6 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull Iterable<@NonNull CGRealizedVariable> getOwnedRealizedVariables(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
-	}
-
-	public static @NonNull CGValuedElement getOwnedSlotValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedSlotValue());
-	}
-
-	public static @NonNull Iterable<@NonNull CGValuedElement> getOwnedStatements(@NonNull CGSequence cgSequence) {
-		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
-	}
-
-	public static @NonNull List<@NonNull CGValuedElement> getOwnedStatementsList(@NonNull CGSequence cgSequence) {
-		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
 	}
 
 	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {
@@ -278,10 +255,6 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGProperty getReferredProperty(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
 		return ClassUtil.nonNullState(cgRealizedVariablePart.getReferredProperty());
-	}
-
-	public static @NonNull CGProperty getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getReferredProperty());
 	}
 
 	public static @NonNull CGMapping getRootMapping(@NonNull CGTransformation cgTransformation) {

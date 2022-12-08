@@ -14,7 +14,6 @@ import java.lang.Iterable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
@@ -25,11 +24,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractCS2ASCG2JavaVisitor
-	extends org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor
-	implements CS2ASCGModelVisitor<@NonNull Boolean>
+extends org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor
+implements CS2ASCGModelVisitor<@NonNull Boolean>
 {
-	protected AbstractCS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		super(codeGenerator, cgPackage, sortedGlobals);
+	protected AbstractCS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		super(codeGenerator, sortedGlobals);
 	}
 
 	@Override

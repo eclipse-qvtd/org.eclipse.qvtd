@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvti.naming;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
@@ -27,18 +28,8 @@ public class QVTiCGNameHelperVisitor extends AbstractQVTiCGNameHelperVisitor
 	}
 
 	@Override
-	public @NonNull String visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object) {
+	public @NonNull String visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
 		return "CONNECTION_" + context.getNameableHint(object.getConnectionVariable());		// Never used
-	}
-
-	@Override
-	public @NonNull String visitCGEcoreContainerAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment object) {
-		return NameResolution.NOT_NEEDED; // "XXX" + context.getNameableHint(object);		// Never used
-	}
-
-	@Override
-	public @NonNull String visitCGEcorePropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment object) {
-		return NameResolution.NOT_NEEDED; // "XXX" + context.getNameableHint(object);		// Never used
 	}
 
 	@Override
@@ -64,10 +55,6 @@ public class QVTiCGNameHelperVisitor extends AbstractQVTiCGNameHelperVisitor
 	@Override
 	public @NonNull String visitCGMappingLoop(@NonNull CGMappingLoop object) {
 		return "loop";
-	}
-	@Override
-	public @NonNull String visitCGSequence(org.eclipse.ocl.examples.codegen.cgmodel.CGSequence object) {
-		return NameResolution.NOT_NEEDED; // "XXX-SEQ"; // Never used
 	}
 
 	@Override

@@ -13,19 +13,25 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
 /**
  *  ShadowDataTypeOperationCallingConvention defines the support for the call of an operation returning an implemented DataType.
  */
 public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOperationCallingConvention		// FIXME Promote to OCL
 {
-	public static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
+	private static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
+
+	public static @NonNull ShadowDataTypeOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
@@ -33,20 +39,25 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 	}
 
 	@Override
-	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
+	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
 
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
+	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
+		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
+		analyzer.initAst(cgOperation, asOperation, true);
+		cgOperation.setCallingConvention(this);
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		createCachingClassesAndInstance(analyzer, cgOperation);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
+		createCGParameters(operationNameManager, asExpressionInOCL);
+		return cgOperation;
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
 		return true;		 // functionality realized by finer-grained CG elements
 	}
 }

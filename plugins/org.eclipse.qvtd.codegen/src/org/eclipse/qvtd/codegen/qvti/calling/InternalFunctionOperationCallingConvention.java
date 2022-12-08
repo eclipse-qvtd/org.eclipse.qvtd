@@ -10,28 +10,30 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.calling;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -39,9 +41,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  *
  *  The implementation uses a class whose instance caches a result to ensure unique shared execution.
  */
-public class InternalFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
+public class InternalFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention // cg Cached/Constrained
 {
-	public static final @NonNull InternalFunctionOperationCallingConvention INSTANCE = new InternalFunctionOperationCallingConvention();
+	private static final @NonNull InternalFunctionOperationCallingConvention INSTANCE = new InternalFunctionOperationCallingConvention();
+
+	public static @NonNull InternalFunctionOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	protected static class CachePropertyCallExpImpl extends CGTuplePartCallExpImpl		// XXX move to CG model
 	{
@@ -63,9 +70,7 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
-		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
-		assert asOperation.getImplementationClass() == null;
+	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
 
@@ -73,32 +78,44 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		assert cgSource != null;
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		CGFunction cgFunction = (CGFunction)cgOperation;
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
-		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
-		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
-		//	cgFunctionCallExp.getArguments().add(cgSource);
-		initCallArguments(qvtiAnalyzer, cgFunctionCallExp);
-		return cgFunctionCallExp;
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		assert QVTimperativeUtil.basicGetShadowExp(asOperation) == null;
+		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
+		initCallExp(analyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
+		//	cgOperationCallExp.getArguments().add(cgSource);
+		initCallArguments(analyzer, cgOperationCallExp);
+		return cgOperationCallExp;
 	}
 
 	@Override
-	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		//	super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
+	protected /*final*/ void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		assert !asOperation.isIsStatic();
+		assert bodyExpression != null;
+		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOperation);
+		// contextVariable is always the transformation, so not passed
+		Iterable<@NonNull Variable> asParameterVariables = PivotUtil.getOwnedParameters(bodyExpression);
+		createCGParameters4asParameterVariables(operationNameManager, cgParameters, asParameterVariables);
 	}
 
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
+	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
+		assert asOperation.getImplementationClass() == null;
+		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
+		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
+		analyzer.initAst(cgOperation, asOperation, true);
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		createCachingClassesAndInstance(analyzer, cgOperation);
+		cgOperation.setCallingConvention(this);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
+		createCGParameters(operationNameManager, asExpressionInOCL);
+		return cgOperation;
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
 		return true;		 // functionality realized by finer-grained CG elements
 	}
 

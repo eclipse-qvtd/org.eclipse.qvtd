@@ -53,7 +53,7 @@ import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 
 /**
@@ -291,15 +291,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.MAPPING___VALIDATE_DOMAINS_ARE_CORE_DOMAINS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
+				final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreSupport.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITER__1 = BOXED_domain.iterator();
 				/*@NonInvalid*/ @Nullable Boolean forAll;
@@ -318,7 +318,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					/**
 					 * oclIsKindOf(CoreDomain)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_CoreDomain = idResolver.getClass(QVTcoreTables.CLSSid_CoreDomain, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_CoreDomain = idResolver.getClass(QVTcoreSupport.CLSSid_CoreDomain, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_CoreDomain).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
@@ -332,7 +332,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -340,6 +340,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -367,10 +368,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable Mapping context_1 = this.getContext();
@@ -389,7 +390,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						implies = ValueUtil.FALSE_VALUE;
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -397,6 +398,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -424,10 +426,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
@@ -446,7 +448,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						implies = ValueUtil.FALSE_VALUE;
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -454,6 +456,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -537,15 +540,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				if (guardPattern != null)
 					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 0), null, msgs);
-			return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
+				return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				if (bottomPattern != null)
 					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 1), null, msgs);
-			return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
+				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetContext((Mapping)otherEnd, msgs);
+				return basicSetContext((Mapping)otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocal()).basicAdd(otherEnd, msgs);
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
@@ -629,25 +632,25 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)newValue);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)newValue);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)newValue);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
-			getLocal().addAll((Collection<? extends Mapping>)newValue);
-			return;
+				getLocal().addAll((Collection<? extends Mapping>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
-			getRefinement().addAll((Collection<? extends Mapping>)newValue);
-			return;
+				getRefinement().addAll((Collection<? extends Mapping>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
-			getSpecification().addAll((Collection<? extends Mapping>)newValue);
-			return;
+				getSpecification().addAll((Collection<? extends Mapping>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -662,22 +665,22 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)null);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)null);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)null);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

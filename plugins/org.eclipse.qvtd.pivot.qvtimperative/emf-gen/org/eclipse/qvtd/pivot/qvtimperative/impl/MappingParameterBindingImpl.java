@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -44,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 
 /**
  * <!-- begin-user-doc -->
@@ -215,10 +216,10 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
@@ -227,11 +228,11 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 				final /*@NonInvalid*/ @NonNull Mapping referredMapping = owningMappingCall_0.getReferredMapping();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeSupport.SET_CLSSid_MappingParameter, ownedMappingParameters);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull MappingParameter boundVariable_0 = this.getBoundVariable();
 				final /*@NonInvalid*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, boundVariable_0).booleanValue();
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, includes, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, includes, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -239,6 +240,7 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

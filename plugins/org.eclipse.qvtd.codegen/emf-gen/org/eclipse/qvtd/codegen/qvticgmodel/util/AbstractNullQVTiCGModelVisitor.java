@@ -50,16 +50,6 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitCGEcoreContainerAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment object) {
-		return null;
-	}
-
-	@Override
-	public R visitCGEcorePropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment object) {
-		return null;
-	}
-
-	@Override
 	public R visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object) {
 		return null;
 	}
@@ -120,22 +110,12 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitCGPropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment object) {
-		return null;
-	}
-
-	@Override
 	public R visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
 		return null;
 	}
 
 	@Override
 	public R visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object) {
-		return null;
-	}
-
-	@Override
-	public R visitCGSequence(org.eclipse.ocl.examples.codegen.cgmodel.CGSequence object) {
 		return null;
 	}
 

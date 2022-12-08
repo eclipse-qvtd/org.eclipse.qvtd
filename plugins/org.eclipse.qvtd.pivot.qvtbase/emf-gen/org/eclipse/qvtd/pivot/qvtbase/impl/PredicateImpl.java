@@ -40,7 +40,7 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseSupport;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 /**
@@ -216,18 +216,18 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
+				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression conditionExpression_0 = this.getConditionExpression();
 				final /*@NonInvalid*/ @Nullable Type type = conditionExpression_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -235,6 +235,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

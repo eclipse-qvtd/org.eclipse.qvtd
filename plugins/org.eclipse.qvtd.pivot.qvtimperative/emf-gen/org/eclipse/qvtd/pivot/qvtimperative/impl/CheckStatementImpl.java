@@ -41,7 +41,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -172,18 +172,18 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.CHECK_STATEMENT___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
+				final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
 				final /*@NonInvalid*/ @Nullable Type type = ownedExpression_0.getType();
 				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -191,6 +191,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

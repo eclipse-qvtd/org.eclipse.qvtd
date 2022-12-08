@@ -13,9 +13,9 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
@@ -24,7 +24,12 @@ import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
  */
 public class TransformationCallingConvention extends AbstractClassCallingConvention
 {
-	public static final @NonNull TransformationCallingConvention INSTANCE = new TransformationCallingConvention();
+	private static final @NonNull TransformationCallingConvention INSTANCE = new TransformationCallingConvention();
+
+	public static @NonNull ClassCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		INSTANCE.logInstance(asClass);
+		return INSTANCE;
+	}
 
 	@Override
 	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
@@ -39,7 +44,7 @@ public class TransformationCallingConvention extends AbstractClassCallingConvent
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgClass) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGClass cgClass) {
 		return false;
 	}
 }

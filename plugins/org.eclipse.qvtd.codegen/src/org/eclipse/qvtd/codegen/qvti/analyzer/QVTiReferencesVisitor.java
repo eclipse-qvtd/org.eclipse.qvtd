@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculatePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiReferencesVisitor;
@@ -37,13 +36,6 @@ public class QVTiReferencesVisitor extends AbstractQVTiReferencesVisitor
 	public @NonNull List<@Nullable Object> visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		List<@Nullable Object> elements = super.visitCGMappingCall(cgMappingCall);
 		elements.add(QVTiCGUtil.getReferredMapping(cgMappingCall));
-		return elements;
-	}
-
-	@Override
-	public @NonNull List<@Nullable Object> visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgElement) {
-		List<@Nullable Object> elements = super.visitCGPropertyAssignment(cgElement);
-		elements.add(cgElement.getReferredProperty());
 		return elements;
 	}
 

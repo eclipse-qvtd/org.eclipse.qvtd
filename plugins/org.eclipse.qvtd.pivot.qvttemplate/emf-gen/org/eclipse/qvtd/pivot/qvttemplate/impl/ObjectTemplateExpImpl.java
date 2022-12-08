@@ -46,7 +46,7 @@ import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateSupport;
 import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
 
 /**
@@ -200,21 +200,21 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP___VALIDATE_PART_PROPERTY_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part_0 = this.getPart();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part_0);
-				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateSupport.SET_CLSSid_PropertyTemplateItem, part_0);
+				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateSupport.SET_CLSSid_PropertyTemplateItem);
 				@NonNull Iterator<Object> ITER__1 = BOXED_part.iterator();
 				/*@NonInvalid*/ boolean isUnique;
 				while (true) {
 					if (!ITER__1.hasNext()) {
-						isUnique = true;
+						isUnique = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -233,7 +233,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 						accumulator.add(resolvedProperty);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTtemplateSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -241,6 +241,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -268,17 +269,17 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass_0 = this.getReferredClass();
 				final /*@NonInvalid*/ boolean IsEQ_ = (type != null) ? (type.getTypeId() == referredClass_0.getTypeId()) : false;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTtemplateSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -286,6 +287,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

@@ -390,15 +390,6 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * @generated
 	 */
 	@Override
-	public boolean isAssertedNonNull() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isBoxed() {
 		return false;
 	}

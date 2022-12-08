@@ -12,10 +12,6 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,24 +48,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGConnectionVariable createCGConnectionVariable();
-
-	/**
-	 * Returns a new object of class '<em>CG Ecore Container Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Ecore Container Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGEcoreContainerAssignment createCGEcoreContainerAssignment();
-
-	/**
-	 * Returns a new object of class '<em>CG Ecore Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Ecore Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGEcorePropertyAssignment createCGEcorePropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>CG Ecore Realized Variable</em>'.
@@ -115,15 +93,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGGuardVariable createCGGuardVariable();
-
-	/**
-	 * Returns a new object of class '<em>CG Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGPropertyAssignment createCGPropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>CG Mapping</em>'.
@@ -223,15 +192,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGRealizedVariablePart createCGRealizedVariablePart();
-
-	/**
-	 * Returns a new object of class '<em>CG Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Sequence</em>'.
-	 * @generated
-	 */
-	@NonNull CGSequence createCGSequence();
 
 	/**
 	 * Returns a new object of class '<em>CG Speculate Exp</em>'.

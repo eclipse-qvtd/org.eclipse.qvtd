@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateSupport;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
@@ -224,10 +224,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplatePackage.Literals.TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTtemplateSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
@@ -239,9 +239,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 						implies = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+						/*@Caught*/ @Nullable Object CAUGHT_IsEQ_;
 						try {
-							final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
+							final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 							if (where_0 == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
@@ -267,7 +267,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 				catch (Exception THROWN_CAUGHT_implies) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTtemplateTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTtemplateSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -275,6 +275,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

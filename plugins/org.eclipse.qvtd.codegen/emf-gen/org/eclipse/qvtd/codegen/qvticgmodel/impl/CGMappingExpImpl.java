@@ -319,6 +319,24 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
+	public boolean isNonNull() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return true;
 	}

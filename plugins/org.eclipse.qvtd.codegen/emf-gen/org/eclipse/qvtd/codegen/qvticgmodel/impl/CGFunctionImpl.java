@@ -85,15 +85,6 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	 * @generated
 	 */
 	@Override
-	public boolean isAssertedNonNull() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isBoxed() {
 		return true;
 	}

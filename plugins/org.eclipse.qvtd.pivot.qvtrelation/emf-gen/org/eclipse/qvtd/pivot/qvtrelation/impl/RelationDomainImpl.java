@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -44,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationSupport;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
@@ -199,20 +200,20 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment_0 = this.getDefaultAssignment();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment_0);
-				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationSupport.SET_CLSSid_RelationDomainAssignment, defaultAssignment_0);
+				/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationSupport.SET_CLSSid_RelationDomainAssignment);
 				@NonNull Iterator<Object> ITER__1 = BOXED_defaultAssignment.iterator();
 				/*@NonInvalid*/ boolean isUnique;
 				while (true) {
 					if (!ITER__1.hasNext()) {
-						isUnique = true;
+						isUnique = ValueUtil.TRUE_VALUE;
 						break;
 					}
 					@SuppressWarnings("null")
@@ -231,7 +232,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 						accumulator.add(variable);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isUnique, QVTrelationSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -239,6 +240,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

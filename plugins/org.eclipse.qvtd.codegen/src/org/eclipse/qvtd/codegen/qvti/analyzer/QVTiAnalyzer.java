@@ -354,7 +354,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				cgMapping.setOwnedBody(cgElementRoot);
 			}
 			if (cgLeafExp instanceof CGLetExp) {
-				((CGLetExp)cgLeafExp).setIn(cgElementRoot);
+				CGLetExp cgLetExp = (CGLetExp)cgLeafExp;
+				cgLetExp.setIn(cgElementRoot);
+				cgLetExp.setRequired(cgElementRoot.isRequired());
 			}
 			else if (cgLeafExp instanceof CGIfExp) {
 				((CGIfExp)cgLeafExp).setThenExpression(cgElementRoot);
@@ -375,7 +377,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			}
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
 			cgMapping.getOwnedGuardVariables().addAll(cgFreeVariables);
-			CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+			CGSequence cgSequence = CGModelFactory.eINSTANCE.createCGSequence();
 			List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
 				CGNamedElement cgElement = createCGStatement(CGNamedElement.class, asStatement);
@@ -385,6 +387,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			}
 			appendSubTree(cgMappingExp);
 			cgMappingExp.setOwnedBody(cgSequence);
+			cgMappingExp.setRequired(true);
 		}
 
 		@Override
@@ -641,19 +644,19 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				cgIterator.setTypeId(getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
 				cgIterator.setRequired(asIterator.isIsRequired());
 				if (asIterator.isIsRequired()) {
-					cgIterator.setNonNull();
+					cgIterator.setRequired(true);
 				}
 				cgMappingLoop.getIterators().add(cgIterator);
 			}
 		}
 		//		cgIterator.setNonInvalid();
-		//		cgIterator.setNonNull();
+		//		cgIterator.setRequired(true);
 		CollectionType collectionType = getStandardLibrary().getCollectionType();
 		Iteration forAllIteration = (Iteration)NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		assert forAllIteration != null;
 		cgMappingLoop.setAsIteration(forAllIteration);
 		cgMappingLoop.setReferredIteration(generateIterationDeclaration(/*asSource.getType(),*/ forAllIteration));
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		CGSequence cgSequence = CGModelFactory.eINSTANCE.createCGSequence();
 		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
 			CGValuedElement cgMappingStatement = createCGElement(CGValuedElement.class, asMappingStatement);
@@ -662,25 +665,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		cgMappingLoop.setBody(cgSequence);
 		return cgMappingLoop;
 	}
-
-	/*	@Override
-	public @NonNull CGOperation generateOperationDeclaration(@NonNull Operation asOperation, @Nullable OperationCallingConvention callingConvention, boolean requireFinal) {
-		if (!requireFinal && (asOperation instanceof Function)) {			// XXX ??? eliminate override
-			Function asFunction = (Function)asOperation;
-			CGFunction cgFunction = basicGetCGFunction(asFunction);
-			if (cgFunction == null) {
-				FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)codeGenerator.getCallingConvention(asFunction, true);
-				//	CGClass cgClass = generateClassDeclaration(PivotUtil.getOwningClass(asOperation), callingConvention.getClassCallingConvention());
-				cgFunction = (CGFunction)callingConvention.createCGOperation(this, asFunction);
-				assert cgFunction.getAst() != null;
-				assert cgFunction.getCallingConvention() == callingConvention;
-				callingConvention.createCGParameters(this, cgFunction, (ExpressionInOCL)asFunction.getBodyExpression());
-				addCGFunction(cgFunction);
-			}
-			return cgFunction;
-		}
-		return super.generateOperationDeclaration(asOperation, callingConvention, requireFinal);
-	} */
 
 	@Override
 	public @NonNull CGValuedElement generatePropertyCallExp(@Nullable CGValuedElement cgSource, @NonNull PropertyCallExp element) {
@@ -777,7 +761,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				if (eStructuralFeature != null) {
 					try {
 						genModelHelper.getGetAccessor(eStructuralFeature);
-						CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
+						CGEcorePropertyAssignment cgEcorePropertyAssignment = CGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
 						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
 						cgPropertyAssignment = cgEcorePropertyAssignment;
 					} catch (GenModelException e) {
@@ -792,7 +776,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 						assert ((EReference)eStructuralFeature).isContainment();
 						try {
 							genModelHelper.getGetAccessor(eStructuralFeature);
-							CGEcoreContainerAssignment cgEcoreContainerAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
+							CGEcoreContainerAssignment cgEcoreContainerAssignment = CGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
 							cgEcoreContainerAssignment.setEStructuralFeature(eStructuralFeature);
 							cgPropertyAssignment = cgEcoreContainerAssignment;
 						} catch (GenModelException e) {
@@ -803,7 +787,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				}
 			}
 			if (cgPropertyAssignment == null) {
-				cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+				cgPropertyAssignment = CGModelFactory.eINSTANCE.createCGPropertyAssignment();
 			}
 			cgPropertyAssignment.setAst(asSetStatement);
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
@@ -915,7 +899,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		CreationCache creationCache = asClass2creationCache.get(asClass);
 		if (creationCache == null) {
 			ClassNameManager classNameManager = getClassNameManager(null, asClass);
-			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
+			creationCache = RuleCacheClassCallingConvention.getInstance(asClass).createCreationCache(classNameManager, asNewStatement);
 			asClass2creationCache.put(asClass, creationCache);
 		}
 		return creationCache;
@@ -950,7 +934,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			//	nameManager.declarePreferredName(cgFunctionParameter);
 			cgFunctionParameter.setTypeId(getCGTypeId(asFunctionParameter.getTypeId()));
 			if (asFunctionParameter.isIsRequired()) {
-				cgFunctionParameter.setNonNull();
+				cgFunctionParameter.setRequired(true);
 			}
 			operationNameManager.addVariable(asFunctionParameter, cgFunctionParameter);
 		}

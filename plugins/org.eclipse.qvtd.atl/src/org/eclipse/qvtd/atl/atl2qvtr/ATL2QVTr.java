@@ -53,7 +53,6 @@ import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -651,7 +650,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getCommonType = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getCommonType = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getCommonType newInstance(@Nullable Object @NonNull [] values) {
@@ -659,7 +658,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getHelper = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getHelper = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getHelper newInstance(@Nullable Object @NonNull [] values) {
@@ -667,7 +666,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getModule = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getModule = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getModule newInstance(@Nullable Object @NonNull [] values) {
@@ -675,7 +674,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getOperation = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getOperation = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getOperation newInstance(@Nullable Object @NonNull [] values) {
@@ -683,7 +682,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getPackage = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getPackage = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getPackage newInstance(@Nullable Object @NonNull [] values) {
@@ -691,7 +690,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getProperty = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getProperty = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getProperty newInstance(@Nullable Object @NonNull [] values) {
@@ -699,7 +698,7 @@ public class ATL2QVTr extends AbstractTransformer
 		}
 	};
 
-	protected final @NonNull AbstractComputationConstructor FTOR_getType = new AbstractComputationConstructor(idResolver)
+	protected final @NonNull AbstractComputationConstructor FTOR_getType = new AbstractComputationConstructor(executor, this)
 	{
 		@Override
 		public @NonNull FUN_getType newInstance(@Nullable Object @NonNull [] values) {

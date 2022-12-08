@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
@@ -28,7 +27,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGSourcedCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -116,28 +114,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case 2: {
-				CGEcoreContainerAssignment cgEcoreContainerAssignment = (CGEcoreContainerAssignment)theEObject;
-				T result = caseCGEcoreContainerAssignment(cgEcoreContainerAssignment);
-				if (result == null) result = caseCGPropertyAssignment(cgEcoreContainerAssignment);
-				if (result == null) result = caseCGValuedElement(cgEcoreContainerAssignment);
-				if (result == null) result = caseCGTypedElement(cgEcoreContainerAssignment);
-				if (result == null) result = caseCGNamedElement(cgEcoreContainerAssignment);
-				if (result == null) result = caseCGElement(cgEcoreContainerAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 3: {
-				CGEcorePropertyAssignment cgEcorePropertyAssignment = (CGEcorePropertyAssignment)theEObject;
-				T result = caseCGEcorePropertyAssignment(cgEcorePropertyAssignment);
-				if (result == null) result = caseCGPropertyAssignment(cgEcorePropertyAssignment);
-				if (result == null) result = caseCGValuedElement(cgEcorePropertyAssignment);
-				if (result == null) result = caseCGTypedElement(cgEcorePropertyAssignment);
-				if (result == null) result = caseCGNamedElement(cgEcorePropertyAssignment);
-				if (result == null) result = caseCGElement(cgEcorePropertyAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 4: {
 				CGEcoreRealizedVariable cgEcoreRealizedVariable = (CGEcoreRealizedVariable)theEObject;
 				T result = caseCGEcoreRealizedVariable(cgEcoreRealizedVariable);
 				if (result == null) result = caseCGRealizedVariable(cgEcoreRealizedVariable);
@@ -149,7 +125,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 5: {
+			case 3: {
 				CGFunction cgFunction = (CGFunction)theEObject;
 				T result = caseCGFunction(cgFunction);
 				if (result == null) result = caseCGOperation(cgFunction);
@@ -161,7 +137,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 6: {
+			case 4: {
 				CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)theEObject;
 				T result = caseCGFunctionCallExp(cgFunctionCallExp);
 				if (result == null) result = caseCGOperationCallExp(cgFunctionCallExp);
@@ -173,7 +149,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 7: {
+			case 5: {
 				CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)theEObject;
 				T result = caseCGFunctionParameter(cgFunctionParameter);
 				if (result == null) result = caseCGParameter(cgFunctionParameter);
@@ -185,7 +161,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 8: {
+			case 6: {
 				CGGuardVariable cgGuardVariable = (CGGuardVariable)theEObject;
 				T result = caseCGGuardVariable(cgGuardVariable);
 				if (result == null) result = caseCGParameter(cgGuardVariable);
@@ -197,7 +173,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 9: {
+			case 7: {
 				CGMapping cgMapping = (CGMapping)theEObject;
 				T result = caseCGMapping(cgMapping);
 				if (result == null) result = caseCGValuedElement(cgMapping);
@@ -207,7 +183,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 10: {
+			case 8: {
 				CGMappingCall cgMappingCall = (CGMappingCall)theEObject;
 				T result = caseCGMappingCall(cgMappingCall);
 				if (result == null) result = caseCGValuedElement(cgMappingCall);
@@ -217,7 +193,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 11: {
+			case 9: {
 				CGMappingCallBinding cgMappingCallBinding = (CGMappingCallBinding)theEObject;
 				T result = caseCGMappingCallBinding(cgMappingCallBinding);
 				if (result == null) result = caseCGValuedElement(cgMappingCallBinding);
@@ -227,7 +203,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 12: {
+			case 10: {
 				CGMappingExp cgMappingExp = (CGMappingExp)theEObject;
 				T result = caseCGMappingExp(cgMappingExp);
 				if (result == null) result = caseCGValuedElement(cgMappingExp);
@@ -237,7 +213,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 13: {
+			case 11: {
 				CGMappingLoop cgMappingLoop = (CGMappingLoop)theEObject;
 				T result = caseCGMappingLoop(cgMappingLoop);
 				if (result == null) result = caseCGIterationCallExp(cgMappingLoop);
@@ -250,7 +226,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 14: {
+			case 12: {
 				CGMiddlePropertyAssignment cgMiddlePropertyAssignment = (CGMiddlePropertyAssignment)theEObject;
 				T result = caseCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
 				if (result == null) result = caseCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
@@ -262,7 +238,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 15: {
+			case 13: {
 				CGMiddlePropertyCallExp cgMiddlePropertyCallExp = (CGMiddlePropertyCallExp)theEObject;
 				T result = caseCGMiddlePropertyCallExp(cgMiddlePropertyCallExp);
 				if (result == null) result = caseCGOppositePropertyCallExp(cgMiddlePropertyCallExp);
@@ -276,17 +252,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 16: {
-				CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)theEObject;
-				T result = caseCGPropertyAssignment(cgPropertyAssignment);
-				if (result == null) result = caseCGValuedElement(cgPropertyAssignment);
-				if (result == null) result = caseCGTypedElement(cgPropertyAssignment);
-				if (result == null) result = caseCGNamedElement(cgPropertyAssignment);
-				if (result == null) result = caseCGElement(cgPropertyAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 17: {
+			case 14: {
 				CGRealizedVariable cgRealizedVariable = (CGRealizedVariable)theEObject;
 				T result = caseCGRealizedVariable(cgRealizedVariable);
 				if (result == null) result = caseCGVariable(cgRealizedVariable);
@@ -297,7 +263,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 18: {
+			case 15: {
 				CGRealizedVariablePart cgRealizedVariablePart = (CGRealizedVariablePart)theEObject;
 				T result = caseCGRealizedVariablePart(cgRealizedVariablePart);
 				if (result == null) result = caseCGValuedElement(cgRealizedVariablePart);
@@ -307,17 +273,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 19: {
-				CGSequence cgSequence = (CGSequence)theEObject;
-				T result = caseCGSequence(cgSequence);
-				if (result == null) result = caseCGValuedElement(cgSequence);
-				if (result == null) result = caseCGTypedElement(cgSequence);
-				if (result == null) result = caseCGNamedElement(cgSequence);
-				if (result == null) result = caseCGElement(cgSequence);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 20: {
+			case 16: {
 				CGSpeculateExp cgSpeculateExp = (CGSpeculateExp)theEObject;
 				T result = caseCGSpeculateExp(cgSpeculateExp);
 				if (result == null) result = caseCGValuedElement(cgSpeculateExp);
@@ -327,7 +283,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 21: {
+			case 17: {
 				CGSpeculatePart cgSpeculatePart = (CGSpeculatePart)theEObject;
 				T result = caseCGSpeculatePart(cgSpeculatePart);
 				if (result == null) result = caseCGValuedElement(cgSpeculatePart);
@@ -337,7 +293,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 22: {
+			case 18: {
 				CGTransformation cgTransformation = (CGTransformation)theEObject;
 				T result = caseCGTransformation(cgTransformation);
 				if (result == null) result = caseCGClass(cgTransformation);
@@ -346,7 +302,7 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 23: {
+			case 19: {
 				CGTypedModel cgTypedModel = (CGTypedModel)theEObject;
 				T result = caseCGTypedModel(cgTypedModel);
 				if (result == null) result = caseCGValuedElement(cgTypedModel);
@@ -387,21 +343,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGConnectionVariable(CGConnectionVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Ecore Container Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Ecore Container Assignment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGEcoreContainerAssignment(CGEcoreContainerAssignment object) {
 		return null;
 	}
 
@@ -672,21 +613,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGRealizedVariablePart(CGRealizedVariablePart object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Sequence</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGSequence(CGSequence object) {
 		return null;
 	}
 

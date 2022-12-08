@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 
@@ -30,13 +29,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 public class QVTiEquivalenceUtil
 {
 	public static @Nullable Boolean isEquivalent(@NonNull CGMappingExp thisValue, @NonNull CGMappingExp thatValue) {
-		if (thisValue == thatValue) {
-			return Boolean.TRUE;
-		}
-		return null;
-	}
-
-	public static @Nullable Boolean isEquivalent(@NonNull CGPropertyAssignment thisValue, @NonNull CGPropertyAssignment thatValue) {
 		if (thisValue == thatValue) {
 			return Boolean.TRUE;
 		}

@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;

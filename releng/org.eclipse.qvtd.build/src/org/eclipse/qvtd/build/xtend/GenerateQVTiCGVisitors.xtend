@@ -41,7 +41,7 @@ class GenerateQVTiCGVisitors extends GenerateVisitorsXtend
 		ePackage.generateAbstractGenericVisitor3(Lists.newArrayList(NonNull, Nullable, CodeGenAnalyzer),
 			"AbstractQVTiBoxingAnalysisVisitor", "org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer", "@Nullable Object", "@NonNull CodeGenAnalyzer analyzer", "analyzer");
 		ePackage.generateAbstractGenericVisitor3(Lists.newArrayList(Iterable, NonNull, Nullable, JavaCodeGenerator, CGPackage, CGValuedElement),
-			"AbstractQVTiCG2JavaVisitor", "org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor", "@NonNull Boolean", "@NonNull JavaCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals", "codeGenerator, cgPackage, sortedGlobals");
+			"AbstractQVTiCG2JavaVisitor", "org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor", "@NonNull Boolean", "@NonNull JavaCodeGenerator codeGenerator", "codeGenerator");
 		ePackage.generateAbstractGenericVisitor3(Lists.newArrayList(NonNull, Nullable, JavaCodeGenerator),
 			"AbstractQVTiCG2JavaNameVisitor", "org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor", "@Nullable Object", "@NonNull JavaCodeGenerator codeGenerator", "codeGenerator");
 		ePackage.generateAbstractGenericVisitor3(Lists.newArrayList(NonNull, Nullable, JavaCodeGenerator),

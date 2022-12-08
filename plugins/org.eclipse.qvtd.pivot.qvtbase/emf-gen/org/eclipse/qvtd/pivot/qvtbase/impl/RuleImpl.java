@@ -57,7 +57,7 @@ import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseSupport;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
@@ -345,23 +345,23 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
+				/*@Caught*/ @Nullable Object CAUGHT_isUnique;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
-					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
+					final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseSupport.ORD_CLSSid_Domain, domain_0);
+					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseSupport.ORD_CLSSid_Domain);
 					@NonNull Iterator<Object> ITER__1 = BOXED_domain.iterator();
 					/*@Thrown*/ boolean isUnique;
 					while (true) {
 						if (!ITER__1.hasNext()) {
-							isUnique = true;
+							isUnique = ValueUtil.TRUE_VALUE;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -384,7 +384,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception THROWN_CAUGHT_isUnique) {
 					CAUGHT_isUnique = ValueUtil.createInvalidValue(THROWN_CAUGHT_isUnique);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -392,6 +392,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -421,17 +422,17 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+					final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseSupport.ORD_CLSSid_Domain, domain_0);
 					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_domain).booleanValue();
 					final /*@Thrown*/ @Nullable Boolean implies;
 					if (!notEmpty) {
@@ -517,7 +518,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception THROWN_CAUGHT_implies) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -525,6 +526,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -554,19 +556,19 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = executor.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_excludes;
+				/*@Caught*/ @Nullable Object CAUGHT_excludes;
 				try {
 					final /*@NonInvalid*/ @Nullable Rule overridden_0 = this.getOverridden();
-					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule_0, overridden_0);
+					final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseSupport.SET_CLSSid_Rule_0, overridden_0);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure = executor.getStaticTypeOfValue(null, oclAsSet);
 					final @NonNull LibraryIterationExtension IMPL_closure = (LibraryIterationExtension)TYPE_closure.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-					final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Rule, QVTbaseTables.CLSSid_Rule);
+					final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(executor, QVTbaseSupport.SET_CLSSid_Rule, QVTbaseSupport.CLSSid_Rule);
 					/**
 					 * Implementation of the iterator body.
 					 */
@@ -576,15 +578,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-							final /*@NonInvalid*/ @Nullable Rule CAST_1_ = (Rule)_1;
-							if (CAST_1_ == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overridden\'");
-							}
-							final /*@Thrown*/ @Nullable Rule overridden_1 = CAST_1_.getOverridden();
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull Rule CAST_1_ = (@NonNull Rule)_1;
+							final /*@NonInvalid*/ @Nullable Rule overridden_1 = CAST_1_.getOverridden();
 							return overridden_1;
 						}
 					};
-					final @NonNull ExecutorSingleIterationManager MGR_closure = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure, oclAsSet, ACC_closure);
+					final @NonNull ExecutorSingleIterationManager MGR_closure = new ExecutorSingleIterationManager(executor, QVTbaseSupport.SET_CLSSid_Rule, BODY_closure, oclAsSet, ACC_closure);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure.evaluateIteration(MGR_closure);
 					final /*@Thrown*/ boolean excludes = CollectionExcludesOperation.INSTANCE.evaluate(closure, this).booleanValue();
@@ -593,7 +593,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception THROWN_CAUGHT_excludes) {
 					CAUGHT_excludes = ValueUtil.createInvalidValue(THROWN_CAUGHT_excludes);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_excludes, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_excludes, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -601,6 +601,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -628,10 +629,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isAbstract_0 = this.isIsAbstract();
@@ -642,7 +643,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				else {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Rule> overrides_0 = this.getOverrides();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Rule, overrides_0);
+					final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_overrides = idResolver.createOrderedSetOfAll(QVTbaseSupport.ORD_CLSSid_Rule, overrides_0);
 					final /*@NonInvalid*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_overrides).booleanValue();
 					if (notEmpty) {
 						implies = ValueUtil.TRUE_VALUE;
@@ -651,7 +652,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						implies = ValueUtil.FALSE_VALUE;
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, implies, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -659,6 +660,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -688,10 +690,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
@@ -710,7 +712,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 							}
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull List<Domain> domain_0 = overridden_0.getDomain();
-							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+							final /*@Thrown*/ @Nullable OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseSupport.ORD_CLSSid_Domain, domain_0);
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 							@NonNull Iterator<Object> ITER_od = BOXED_domain.iterator();
 							/*@Thrown*/ @Nullable Boolean forAll;
@@ -729,12 +731,12 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 								/**
 								 * self.domain.name->includes(od.name)
 								 */
-								/*@Caught*/ @NonNull Object CAUGHT_includes;
+								/*@Caught*/ @Nullable Object CAUGHT_includes;
 								try {
 									@SuppressWarnings("null")
 									final /*@NonInvalid*/ @NonNull List<Domain> domain_1 = this.getDomain();
-									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_1);
-									/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
+									final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseSupport.ORD_CLSSid_Domain, domain_1);
+									/*@NonInvalid*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseSupport.SEQ_PRIMid_String);
 									@NonNull Iterator<Object> ITER__1 = BOXED_domain_0.iterator();
 									/*@Thrown*/ @NonNull SequenceValue collect;
 									while (true) {
@@ -798,7 +800,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				catch (Exception THROWN_CAUGHT_implies) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -806,6 +808,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -832,13 +835,13 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (overridden != null)
 					msgs = ((InternalEObject)overridden).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Rule.class, msgs);
-			return basicSetOverridden((Rule)otherEnd, msgs);
+				return basicSetOverridden((Rule)otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOverrides()).basicAdd(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetTransformation((Transformation)otherEnd, msgs);
+				return basicSetTransformation((Transformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -891,7 +894,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 				return isIsAbstract();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getOverridden();
-			return basicGetOverridden();
+				return basicGetOverridden();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOverrides();
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
@@ -911,21 +914,21 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-			getDomain().addAll((Collection<? extends Domain>)newValue);
-			return;
+				getDomain().addAll((Collection<? extends Domain>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract((Boolean)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)newValue);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-			getOverrides().addAll((Collection<? extends Rule>)newValue);
-			return;
+				getOverrides().addAll((Collection<? extends Rule>)newValue);
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -940,19 +943,19 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getDomain().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setOverridden((Rule)null);
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOverrides().clear();
-			return;
+				return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setTransformation((Transformation)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

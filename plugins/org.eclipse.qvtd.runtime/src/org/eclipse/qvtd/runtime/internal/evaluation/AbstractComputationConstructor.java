@@ -17,13 +17,15 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver.IdResolverExtension;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Computation;
 
 public abstract class AbstractComputationConstructor implements Computation.Constructor
 {
-	protected final IdResolver.@NonNull IdResolverExtension idResolver;
+	protected final @NonNull Executor executor;
+	protected final @NonNull Object rootObject;
 
 	/**
 	 * Map from invocation hashCode to one or more computations with that hashCode. Single map entries use the
@@ -35,12 +37,14 @@ public abstract class AbstractComputationConstructor implements Computation.Cons
 
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
-	protected AbstractComputationConstructor(@NonNull IdResolver idResolver) {
-		this.idResolver = (IdResolver.IdResolverExtension)idResolver;
+	public AbstractComputationConstructor(@NonNull Executor executor, @NonNull Object rootObject) {
+		this.executor = executor;
+		this.rootObject = rootObject;
 	}
 
 	@Override
 	public @NonNull Computation getUniqueComputation(@Nullable Object @NonNull ... argValues) {
+		IdResolverExtension idResolver = (IdResolverExtension)executor.getIdResolver();
 		int hashCode = 0;
 		for (@Nullable Object argValue : argValues) {
 			hashCode = 3 * hashCode + idResolver.oclHashCode(argValue);

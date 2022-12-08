@@ -15,11 +15,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.qvtd.codegen.qvti.cse.MappingExpPlaces;
-import org.eclipse.qvtd.codegen.qvti.cse.SequencePlaces;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
@@ -51,11 +48,6 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 	public static final @NonNull Ctl CTL_MEXP = new Ctl() { @Override
 		public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 		return "return " + classRef(MappingExpPlaces.class) + ".createMappingExpPlaces(element2place, this);";
-	}};
-
-	public static final @NonNull Ctl CTL_SEQ = new Ctl() { @Override
-		public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-		return "return " + classRef(SequencePlaces.class) + ".createSequencePlaces(element2place, this);";
 	}};
 
 	public static final @NonNull Inv INV_PRED = new Inv() {
@@ -108,13 +100,11 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 			new QVTdCGValuedElementModelSpec(CGConnectionAssignment.class, "ownedInitValue",	Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
 			new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "ownedValue",			Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 			new QVTdCGValuedElementModelSpec(CGMiddlePropertyCallExp.class, null,				Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-			new QVTdCGValuedElementModelSpec(CGPropertyAssignment.class, "ownedInitValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
 
 			new QVTdCGValuedElementModelSpec(CGFunction.class, null,							Box.BOX  , null     , null     , Nul.ECORE, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
 			new QVTdCGValuedElementModelSpec(CGMapping.class, null,								Box.ALL  , null     , null     , null     , null     , null     , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
-			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,							Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
-			new QVTdCGValuedElementModelSpec(CGSequence.class, null,							null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_SEQ  , null     , null     , Eq.SELF );
+			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,							Box.ALL  , null     , null     , Nul.NEVER, null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
 
 			new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 			new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );

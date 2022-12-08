@@ -49,16 +49,6 @@ public abstract class AbstractQVTiReferencesVisitor
 	}
 
 	@Override
-	public @NonNull List<@Nullable Object> visitCGEcoreContainerAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment object) {
-		return visitCGPropertyAssignment(object);
-	}
-
-	@Override
-	public @NonNull List<@Nullable Object> visitCGEcorePropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment object) {
-		return visitCGPropertyAssignment(object);
-	}
-
-	@Override
 	public @NonNull List<@Nullable Object> visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
@@ -119,22 +109,12 @@ public abstract class AbstractQVTiReferencesVisitor
 	}
 
 	@Override
-	public @NonNull List<@Nullable Object> visitCGPropertyAssignment(org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
 	public @NonNull List<@Nullable Object> visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
 	}
 
 	@Override
 	public @NonNull List<@Nullable Object> visitCGRealizedVariablePart(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariablePart object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
-	public @NonNull List<@Nullable Object> visitCGSequence(org.eclipse.ocl.examples.codegen.cgmodel.CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 

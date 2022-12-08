@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
@@ -29,7 +28,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGSourcedCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -101,14 +99,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGConnectionVariableAdapter();
 			}
 			@Override
-			public Adapter caseCGEcoreContainerAssignment(CGEcoreContainerAssignment object) {
-				return createCGEcoreContainerAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseCGEcorePropertyAssignment(CGEcorePropertyAssignment object) {
-				return createCGEcorePropertyAssignmentAdapter();
-			}
-			@Override
 			public Adapter caseCGEcoreRealizedVariable(CGEcoreRealizedVariable object) {
 				return createCGEcoreRealizedVariableAdapter();
 			}
@@ -157,20 +147,12 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGMiddlePropertyCallExpAdapter();
 			}
 			@Override
-			public Adapter caseCGPropertyAssignment(CGPropertyAssignment object) {
-				return createCGPropertyAssignmentAdapter();
-			}
-			@Override
 			public Adapter caseCGRealizedVariable(CGRealizedVariable object) {
 				return createCGRealizedVariableAdapter();
 			}
 			@Override
 			public Adapter caseCGRealizedVariablePart(CGRealizedVariablePart object) {
 				return createCGRealizedVariablePartAdapter();
-			}
-			@Override
-			public Adapter caseCGSequence(CGSequence object) {
-				return createCGSequenceAdapter();
 			}
 			@Override
 			public Adapter caseCGSpeculateExp(CGSpeculateExp object) {
@@ -237,6 +219,14 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGIterationCallExpAdapter();
 			}
 			@Override
+			public Adapter caseCGPropertyAssignment(CGPropertyAssignment object) {
+				return createCGPropertyAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseCGEcorePropertyAssignment(CGEcorePropertyAssignment object) {
+				return createCGEcorePropertyAssignmentAdapter();
+			}
+			@Override
 			public Adapter caseCGNavigationCallExp(CGNavigationCallExp object) {
 				return createCGNavigationCallExpAdapter();
 			}
@@ -293,20 +283,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGConnectionVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment <em>CG Ecore Container Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment
-	 * @generated
-	 */
-	public Adapter createCGEcoreContainerAssignmentAdapter() {
 		return null;
 	}
 
@@ -559,20 +535,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGRealizedVariablePartAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGSequence <em>CG Sequence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGSequence
-	 * @generated
-	 */
-	public Adapter createCGSequenceAdapter() {
 		return null;
 	}
 

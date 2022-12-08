@@ -17,8 +17,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
@@ -29,9 +29,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -53,9 +53,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 /**
  *  ExternalFunctionOperationCallingConvention defines the support for the call of a QVTi function implemented by a Java class.
  */
-public class ExternalFunctionOperationCallingConvention extends FunctionOperationCallingConvention
+public class ExternalFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention
 {
-	public static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
+	private static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
+
+	public static @NonNull ExternalFunctionOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOuterOperation) {
@@ -175,8 +180,8 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgFunction.setBody(cgBody);
 		//.getOwnedBody()));				// XXX is this line used (by testQVTrCompiler_ATL2QVTr_CG) - it seems like an infinite recursion
 		 */
-		/*	CGPropertyCallExp cgPropertyCallExp = analyzer.createCGNativePropertyCallExp(instanceField, NativePropertyCallingConvention.INSTANCE);
-		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, NativeOperationCallingConvention.INSTANCE);
+		/*	CGPropertyCallExp cgPropertyCallExp = analyzer.createCGNativePropertyCallExp(instanceField, NativePropertyCallingConvention.getInstance());
+		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, NativeOperationCallingConvention.getInstance());
 
 		OperationCallExp asOperationCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
 		asOperationCallExp.setReferredOperation(asFunction);
@@ -195,7 +200,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGOperationCallExp cgFunctionCallExp = (CGOperationCallExp)underlyingCallingConvention.createCGOperationCallExp(as2cgVisitor, cgUnderlyingOperation, libraryOperation, cgSource, asOperationCallExp);
 
 
-		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, SupportOperationCallingConvention.INSTANCE);
+		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, SupportOperationCallingConvention.getInstance());
 		cgFunctionCallExp.setTypeId(cgUnderlyingOperation.getTypeId());
 		cgFunctionCallExp.getArguments().add(cgSource);
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asFunction)) {
@@ -216,7 +221,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 			//	CGValuedElement cgArgument = doVisit(CGValuedElement.class, asParameterExp);
 			//	CGFunctionCallExp.getArguments().add(cgArgument);
 		}
-		//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+		//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.getInstance().createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)createCGOperationCallExp(as2cgVisitor, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 		 */		//	cgLibraryOperationCallExp.setAst(asOperationCallExp);
 		//	cgLibraryOperationCallExp.setTypeId(analyzer.getCGTypeId(asOperationCallExp.getTypeId()));
@@ -276,7 +281,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgInnerOperation.setAst(asOuterOperation);		// no inner available
 		cgInnerOperation.setTypeId(analyzer.getCGTypeId(asOuterOperation.getTypeId()));
 		cgInnerOperation.setRequired(asOuterOperation.isIsRequired());
-		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.INSTANCE);
+		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.getInstance(asOuterOperation, false));
 		ExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
 		//		analyzer.addCGOperation(cgOperation);
 		//	createCGParameters(as2cgVisitor, gOperation, null;
@@ -342,19 +347,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() != null;
-
-		//	CGClass cgClass = analyzer.createNestedCGClass(asOperation, "FTOR" + asOperation.getName());
-
-		//	CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		CGCachedOperation cgOperation = CGModelFactory.eINSTANCE.createCGCachedOperation();
-		analyzer.initAst(cgOperation, asOperation, true);
-		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
-		cgRootClass.getOperations().add(cgOperation);
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
-		return cgOperation;
+		return CGModelFactory.eINSTANCE.createCGCachedOperation();
 	}
 
 	@Override
@@ -373,49 +366,41 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
+		CodeGenAnalyzer qvtiAnalyzer = operationNameManager.getAnalyzer();
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asFunction = QVTiCGUtil.getAST(cgOperation);
-		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
-		for (Parameter asParameter : asFunction.getOwnedParameters()) {
+		cgParameters.add(operationNameManager.getContextObjectParameter());
+		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
 		}
 	}
 
-	/*	private @NonNull TypeExp createTypeExp(@NonNull EnvironmentFactory environmentFactory,  @NonNull Type type) {
-		TypeExp asTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-		asTypeExp.setIsRequired(true);
-		asTypeExp.setReferredType(type);
-		asTypeExp.setName(type.getName());
-		//	asTypeExp.setType(type instanceof TemplateParameter ? metamodelManager.getOclType("TemplateParameter") : standardLibrary.getClassType());
-		EClass eClass = type.eClass();
-		assert eClass != null;
-		asTypeExp.setType(environmentFactory.getIdResolver().getType(eClass));
-		asTypeExp.setTypeValue(type);
-		return asTypeExp;
-	} */
-
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		// TODO Auto-generated method stub
-		return super.generateJavaCall(cg2javaVisitor, js, cgOperationCallExp);
+	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
+		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
+		analyzer.initAst(cgOperation, asOperation, true);
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		createCachingClassesAndInstance(analyzer, cgOperation);
+		assert cgOperation.getCallingConvention() == null;
+		cgOperation.setCallingConvention(this);
+		Element asOperation2 = cgOperation.getAst();
+		assert asOperation2 == null;
+		assert analyzer.basicGetCGElement(asOperation) == null;
+		analyzer.initAst(cgOperation, asOperation, true);
+		assert cgOperation.eContainer() != null;
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
+		createCGParameters(operationNameManager, asExpressionInOCL);
+		return cgOperation;
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
-		return super.generateJavaDeclaration(cg2javaVisitor, js, cgOperation);
-	}
-
-	@Override
-	public void rewriteWithBoxingAndGuards(@NonNull BoxingAnalyzer boxingAnalyzer, @NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
-		super.rewriteWithBoxingAndGuards(boxingAnalyzer, cgOperation);
+	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperationCallExp cgOperationCallExp) {
+		return generateDeprecatedJavaCall(cg2javaVisitor, cgOperationCallExp);
 	}
 
 	@Override

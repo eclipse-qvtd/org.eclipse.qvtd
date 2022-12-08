@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheInstancePropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachePropertyCallingConvention.DefaultInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractUncachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -69,11 +68,21 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
  */
 public class RuleCacheClassCallingConvention extends AbstractClassCallingConvention
 {
-	public static final @NonNull RuleCacheClassCallingConvention INSTANCE = new RuleCacheClassCallingConvention();
+	private static final @NonNull RuleCacheClassCallingConvention INSTANCE = new RuleCacheClassCallingConvention();
 
-	public static class BasicEvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static @NonNull RuleCacheClassCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		INSTANCE.logInstance(asClass);
+		return INSTANCE;
+	}
+
+	public static class BasicEvaluateOperationCallingConvention extends AbstractUncachedOperationCallingConvention
 	{
-		public static final @NonNull BasicEvaluateOperationCallingConvention INSTANCE = new BasicEvaluateOperationCallingConvention();
+		private static final @NonNull BasicEvaluateOperationCallingConvention INSTANCE = new BasicEvaluateOperationCallingConvention();
+
+		public static @NonNull BasicEvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgCacheOperation) {
@@ -93,7 +102,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
 			Operation asCacheOperation = PivotUtil.createOperation(basicEvaluateName, asReturnType, null, null);
 			asCacheOperation.setIsRequired(true);
-			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator, false);
 			asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 			asCacheClass.getOwnedOperations().add(asCacheOperation);
 			//
@@ -120,7 +129,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 
 		@Override
-		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
+			JavaStream js = cg2javaVisitor.getJavaStream();
 			QVTiAnalyzer analyzer = (QVTiAnalyzer)cg2javaVisitor.getAnalyzer();
 			QVTiCodeGenerator codeGenerator = analyzer.getCodeGenerator();
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
@@ -247,9 +257,14 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 	}
 
-	public static class EvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static class EvaluateOperationCallingConvention extends AbstractUncachedOperationCallingConvention
 	{
-		public static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
+		private static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
+
+		public static @NonNull EvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgCacheOperation) {
@@ -269,7 +284,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
 			Operation asCacheOperation = PivotUtil.createOperation(basicEvaluateName, asReturnType, null, null);
 			asCacheOperation.setIsRequired(true);
-			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator, false);
 			asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 			asCacheClass.getOwnedOperations().add(asCacheOperation);
 			//
@@ -296,7 +311,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 
 		@Override
-		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
+			JavaStream js = cg2javaVisitor.getJavaStream();
 			QVTiAnalyzer analyzer = (QVTiAnalyzer)cg2javaVisitor.getAnalyzer();
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
 			//
@@ -362,7 +378,6 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	public @NonNull CreationCache createCreationCache(@NonNull ClassNameManager classNameManager, @NonNull NewStatement asNewStatement) {
 		CodeGenAnalyzer analyzer = classNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
 		org.eclipse.ocl.pivot.Class asClass = classNameManager.getASClass();
 		org.eclipse.ocl.pivot.@NonNull Package asParentPackage = getParentPackage(analyzer, asClass);
@@ -372,14 +387,13 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		org.eclipse.ocl.pivot.Class asCacheClass = AbstractLanguageSupport.getClass(asParentPackage, entryClassName);
 		org.eclipse.ocl.pivot.Class asCacheClassSuperClass = jLanguageSupport.getNativeClass(/*isIncremental ? AbstractEvaluationOperation.Incremental.class :*/ AbstractEvaluationOperation.class);
 		asCacheClass.getSuperClasses().add(asCacheClassSuperClass);
-		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
 		//
 		CGClass cgCacheClass = analyzer.generateClassDeclaration(asCacheClass, this);
 		CGClass cgCacheSuperClass = analyzer.generateClassDeclaration(asCacheClassSuperClass, null);
 		cgCacheClass.getSuperTypes().add(cgCacheSuperClass);
 		//
-		BasicEvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
-		EvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
+		BasicEvaluateOperationCallingConvention.getInstance(asCacheClass).createOperation(analyzer, cgCacheClass, asNewStatement);
+		EvaluateOperationCallingConvention.getInstance(asCacheClass).createOperation(analyzer, cgCacheClass, asNewStatement);
 		CreationCache creationCache = createCacheInstance(classNameManager, asCacheClass, asNewStatement);
 		return creationCache;
 	}
@@ -392,7 +406,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		CreationCache creationCache = analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
 		//
 		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
-		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.INSTANCE);
+		cgProperty.setCallingConvention(DefaultInstancePropertyCallingConvention.getInstance(asProperty));
 		assert cgProperty.eContainer() != null;
 		return creationCache;
 	}
@@ -402,14 +416,15 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	 * Returns true if control flow continues, false if an exception throw has been synthesized.
 	 */
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgCacheClass) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGClass cgCacheClass) {
+		JavaStream js = cg2javaVisitor.getJavaStream();
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) cg2javaVisitor.getAnalyzer();
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
 		//	if (isEmpty(cgCacheClass)) {
 		//		return true;
 		//	}
-		js.append("\n");
+		js.appendOptionalBlankLine();
 		String className = CGUtil.getName(cgCacheClass);
 		CGPackage cgContainingPackage = cgCacheClass.getContainingPackage();
 		assert cgContainingPackage == null;
@@ -418,8 +433,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		js.append("private class " + className);
 		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
-		generateProperties(cg2javaVisitor, js, cgCacheClass);
-		generateOperations(cg2javaVisitor, js, cgCacheClass);
+		generateProperties(cg2javaVisitor, cgCacheClass);
+		generateOperations(cg2javaVisitor, cgCacheClass);
 		js.popClassBody(false);
 		return true;
 	}

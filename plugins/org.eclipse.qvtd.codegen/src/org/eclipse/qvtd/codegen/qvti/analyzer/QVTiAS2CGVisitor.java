@@ -285,7 +285,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		else {
 			cgAccumulator.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
 		}
-		cgAccumulator.setNonNull();
+		cgAccumulator.setRequired(true);
 		cgAccumulator.setNonInvalid();
 		qvtiAnalyzer.getBodyBuilder().addAccumulator(cgAccumulator);
 		nameManager.addVariable(asVariable, cgAccumulator);
@@ -396,6 +396,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgIsKindOfExp.setExecutorType(cgExecutorType);
 			cgPredicate.setCondition(cgIsKindOfExp);
 			cgOuterLetExp.setIn(cgPredicate);
+			cgOuterLetExp.setRequired(cgPredicate.isRequired());
 
 			CGVariableExp cgUncastVariableExp2 = CGModelFactory.eINSTANCE.createCGVariableExp();
 			cgUncastVariableExp2.setAst(asVariable);
@@ -537,7 +538,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				//	CGValuedElement cgArgument = qvtiAnalyzer.createCGElement(CGValuedElement.class, asParameterExp);
 				//	CGFunctionCallExp.getArguments().add(cgArgument);
 			}
-			//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+			//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.getInstance().createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 			CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)callingConvention.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 			//	cgLibraryOperationCallExp.setAst(asOperationCallExp);
 			//	cgLibraryOperationCallExp.setTypeId(qvtiAnalyzer.getCGTypeId(asOperationCallExp.getTypeId()));
@@ -731,7 +732,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//	getNameManager().declareStandardName(cgExecutorProperty);
 			cgRealizedVariablePart.setReferredProperty(cgExecutorProperty);
 			cgExecutorProperty.setTypeId(qvtiAnalyzer.getCGTypeId(asProperty.getTypeId()));			// FIXME promote
-			qvtiAnalyzer.addExternalFeature(asProperty);
+			//	qvtiAnalyzer.addExternalFeature(asProperty);
 		}
 		return cgRealizedVariablePart;
 	}

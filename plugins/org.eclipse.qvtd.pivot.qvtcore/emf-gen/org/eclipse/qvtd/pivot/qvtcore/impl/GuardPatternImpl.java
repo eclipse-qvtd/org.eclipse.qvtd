@@ -55,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 
 /**
@@ -178,15 +178,15 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreSupport.SET_CLSSid_VariableDeclaration, ownedVariables);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITER__1 = BOXED_ownedVariables.iterator();
 				/*@NonInvalid*/ @Nullable Boolean forAll;
@@ -205,7 +205,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 					/**
 					 * oclIsKindOf(GuardVariable)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_GuardVariable = idResolver.getClass(QVTcoreTables.CLSSid_GuardVariable, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_GuardVariable = idResolver.getClass(QVTcoreSupport.CLSSid_GuardVariable, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_GuardVariable).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
@@ -219,7 +219,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -227,6 +227,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

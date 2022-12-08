@@ -287,15 +287,6 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * @generated
 	 */
 	@Override
-	public boolean isAssertedNonNull() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isBoxed() {
 		return true;
 	}
