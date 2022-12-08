@@ -47,7 +47,7 @@ public class ImplementedOperationCallingConvention extends ExternalOperationOper
 
 
 
-			asCacheOperation.setBodyExpression();
+			//			asCacheOperation.setBodyExpression();
 			super.createCGBody(analyzer, cgConstructor);
 		}
 
