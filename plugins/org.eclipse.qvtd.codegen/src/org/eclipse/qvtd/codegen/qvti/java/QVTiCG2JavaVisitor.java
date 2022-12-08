@@ -2813,15 +2813,15 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				}
 			}
 		}
-		Iterable<@NonNull CGPropertyAssignment> cgPropertyAssignments = QVTiCGUtil.getOwnedAssignments(cgMapping);
-		if (!Iterables.isEmpty(cgPropertyAssignments)) {
-			js.append("// property assignments\n");
-			for (@NonNull CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
-				if (!cgAssignment.accept(this)) {
-					return false;
-				}
-			}
-		}
+		//	Iterable<@NonNull CGPropertyAssignment> cgPropertyAssignments = QVTiCGUtil.getOwnedAssignments(cgMapping);
+		//	if (!Iterables.isEmpty(cgPropertyAssignments)) {
+		//		js.append("// property assignments\n");
+		//		for (@NonNull CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
+		//			if (!cgAssignment.accept(this)) {
+		//				return false;
+		//			}
+		//		}
+		//	}
 		Iterable<@NonNull CGConnectionAssignment> cgConnectionAssignments = QVTiCGUtil.getOwnedConnectionAssignments(cgMapping);
 		if (!Iterables.isEmpty(cgConnectionAssignments)) {
 			js.append("// connection assignments\n");

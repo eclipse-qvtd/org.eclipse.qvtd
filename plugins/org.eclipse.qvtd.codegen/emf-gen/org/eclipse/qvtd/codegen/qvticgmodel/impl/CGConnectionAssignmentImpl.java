@@ -131,7 +131,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, CGMapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, CGMapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -248,7 +248,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
-				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, CGMapping.class, msgs);
+				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

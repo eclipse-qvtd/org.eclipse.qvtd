@@ -115,7 +115,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3, CGMapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, CGMapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -185,7 +185,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3, CGMapping.class, msgs);
+				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

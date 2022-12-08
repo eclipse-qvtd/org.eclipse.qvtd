@@ -289,17 +289,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGPropertyAssignment();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Mapping</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping()
-	 * @see #getCGPropertyAssignment()
-	 * @generated
-	 */
-	EReference getCGPropertyAssignment_OwningMapping();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty <em>As Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -352,17 +341,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGMapping();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Assignments</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments()
-	 * @see #getCGMapping()
-	 * @generated
-	 */
-	EReference getCGMapping_OwnedAssignments();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedBody <em>Owned Body</em>}'.
@@ -1014,14 +992,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = eINSTANCE.getCGPropertyAssignment_ReferredProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Owning Mapping</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING = eINSTANCE.getCGPropertyAssignment_OwningMapping();
-
-		/**
 		 * The meta object literal for the '<em><b>As Property</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1054,14 +1024,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_MAPPING = eINSTANCE.getCGMapping();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Assignments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING__OWNED_ASSIGNMENTS = eINSTANCE.getCGMapping_OwnedAssignments();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Body</b></em>' containment reference feature.

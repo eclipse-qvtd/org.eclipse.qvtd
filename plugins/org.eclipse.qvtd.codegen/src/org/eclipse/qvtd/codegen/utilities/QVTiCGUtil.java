@@ -208,10 +208,6 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nullFree(cgMappingExp.getOwnedAccumulators());
 	}
 
-	public static @NonNull Iterable<@NonNull CGPropertyAssignment> getOwnedAssignments(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nullFree(cgMapping.getOwnedAssignments());
-	}
-
 	public static @NonNull Iterable<@NonNull CGConnectionAssignment> getOwnedConnectionAssignments(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nullFree(cgMapping.getOwnedConnectionAssignments());
 	}

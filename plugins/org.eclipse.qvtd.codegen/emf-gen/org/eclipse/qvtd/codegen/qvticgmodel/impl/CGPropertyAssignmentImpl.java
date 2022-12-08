@@ -41,7 +41,6 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwnedInitValue <em>Owned Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwnedSlotValue <em>Owned Slot Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl#getAsProperty <em>As Property</em>}</li>
  * </ul>
  *
@@ -55,7 +54,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
+	public static final int CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
@@ -155,49 +154,6 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 */
 	@Override
-	public CGMapping getOwningMapping() {
-		if (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3)) return null;
-		return (CGMapping)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningMapping(CGMapping newOwningMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningMapping(CGMapping newOwningMapping) {
-		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3) && newOwningMapping != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningMapping))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
-			msgs = basicSetOwningMapping(newOwningMapping, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3, newOwningMapping, newOwningMapping));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Property getAsProperty() {
 		return asProperty;
 	}
@@ -212,7 +168,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 		Property oldAsProperty = asProperty;
 		asProperty = newAsProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4, oldAsProperty, asProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3, oldAsProperty, asProperty));
 	}
 
 	/**
@@ -311,46 +267,14 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwnedInitValue(null, msgs);
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				return basicSetOwnedSlotValue(null, msgs);
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMapping.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -368,8 +292,6 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwnedSlotValue();
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				return getOwningMapping();
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				return getAsProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -393,9 +315,6 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 				setOwnedSlotValue((CGValuedElement)newValue);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				setOwningMapping((CGMapping)newValue);
-				return;
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setAsProperty((Property)newValue);
 				return;
 		}
@@ -420,9 +339,6 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 				setOwnedSlotValue((CGValuedElement)null);
 				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				setOwningMapping((CGMapping)null);
-				return;
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				setAsProperty(AS_PROPERTY_EDEFAULT);
 				return;
 		}
@@ -444,8 +360,6 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2:
 				return ownedSlotValue != null;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3:
-				return getOwningMapping() != null;
-			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4:
 				return AS_PROPERTY_EDEFAULT == null ? asProperty != null : !AS_PROPERTY_EDEFAULT.equals(asProperty);
 		}
 		return super.eIsSet(featureID);

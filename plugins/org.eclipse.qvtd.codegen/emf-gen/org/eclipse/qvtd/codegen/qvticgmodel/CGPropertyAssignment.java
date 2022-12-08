@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getAsProperty <em>As Property</em>}</li>
  * </ul>
  *
@@ -44,34 +43,6 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	 * @generated
 	 */
 	void setReferredProperty(CGProperty value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owning Mapping</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owning Mapping</em>' container reference.
-	 * @see #setOwningMapping(CGMapping)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_OwningMapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments
-	 * @model opposite="ownedAssignments" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGMapping getOwningMapping();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Mapping</em>' container reference.
-	 * @see #getOwningMapping()
-	 * @generated
-	 */
-	void setOwningMapping(CGMapping value);
 
 	/**
 	 * Returns the value of the '<em><b>As Property</b></em>' attribute.
