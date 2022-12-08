@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2;
+import org.eclipse.ocl.examples.codegen.calling.EntryClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 
 /**
