@@ -52,6 +52,7 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllbigMDE2016Tests.suite());	// NB this is very slow since we are -ea
 		result.addTest(Allexe2016Tests.suite());		// NB this is very slow since we are -ea
 		result.addTestSuite(MiniOCLCSParsingTest.class);
+		result.addTestSuite(LastTest.class);
 		return result;
 	}
 

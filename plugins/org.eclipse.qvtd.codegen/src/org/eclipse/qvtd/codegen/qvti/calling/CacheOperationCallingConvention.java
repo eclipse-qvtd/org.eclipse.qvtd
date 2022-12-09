@@ -12,10 +12,12 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.pivot.Operation;
 
 /**
  *  CachedOperationCallingConvention defines the support for the call of a Complete OCL-defined operation.
@@ -27,7 +29,12 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 @Deprecated /* @deprecated not used */
 public class CacheOperationCallingConvention extends AbstractCachedOperationCallingConvention
 {
-	public static final @NonNull CacheOperationCallingConvention INSTANCE = new CacheOperationCallingConvention();
+	private static final @NonNull CacheOperationCallingConvention INSTANCE = new CacheOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {

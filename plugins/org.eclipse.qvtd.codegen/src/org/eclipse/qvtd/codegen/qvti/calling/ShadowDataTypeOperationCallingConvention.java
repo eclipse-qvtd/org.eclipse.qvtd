@@ -13,19 +13,26 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Operation;
 
 /**
  *  ShadowDataTypeOperationCallingConvention defines the support for the call of an operation returning an implemented DataType.
  */
 public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOperationCallingConvention		// FIXME Promote to OCL
 {
-	public static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
+	private static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
@@ -35,7 +42,7 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, (Operation)operationNameManager.getASScope());
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
 		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 	}

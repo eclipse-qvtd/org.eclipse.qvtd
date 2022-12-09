@@ -537,7 +537,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				//	CGValuedElement cgArgument = qvtiAnalyzer.createCGElement(CGValuedElement.class, asParameterExp);
 				//	CGFunctionCallExp.getArguments().add(cgArgument);
 			}
-			//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+			//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.getInstance().createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 			CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)callingConvention.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 			//	cgLibraryOperationCallExp.setAst(asOperationCallExp);
 			//	cgLibraryOperationCallExp.setTypeId(qvtiAnalyzer.getCGTypeId(asOperationCallExp.getTypeId()));

@@ -17,7 +17,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
@@ -55,7 +57,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class ExternalFunctionOperationCallingConvention extends FunctionOperationCallingConvention
 {
-	public static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
+	private static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOuterOperation) {
@@ -175,8 +182,8 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgFunction.setBody(cgBody);
 		//.getOwnedBody()));				// XXX is this line used (by testQVTrCompiler_ATL2QVTr_CG) - it seems like an infinite recursion
 		 */
-		/*	CGPropertyCallExp cgPropertyCallExp = analyzer.createCGNativePropertyCallExp(instanceField, NativePropertyCallingConvention.INSTANCE);
-		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, NativeOperationCallingConvention.INSTANCE);
+		/*	CGPropertyCallExp cgPropertyCallExp = analyzer.createCGNativePropertyCallExp(instanceField, NativePropertyCallingConvention.getInstance());
+		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, NativeOperationCallingConvention.getInstance());
 
 		OperationCallExp asOperationCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
 		asOperationCallExp.setReferredOperation(asFunction);
@@ -195,7 +202,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGOperationCallExp cgFunctionCallExp = (CGOperationCallExp)underlyingCallingConvention.createCGOperationCallExp(as2cgVisitor, cgUnderlyingOperation, libraryOperation, cgSource, asOperationCallExp);
 
 
-		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, SupportOperationCallingConvention.INSTANCE);
+		CGOperationCallExp cgFunctionCallExp = analyzer.createCGNativeOperationCallExp(evaluateMethod, SupportOperationCallingConvention.getInstance());
 		cgFunctionCallExp.setTypeId(cgUnderlyingOperation.getTypeId());
 		cgFunctionCallExp.getArguments().add(cgSource);
 		for (@NonNull Parameter asParameter : PivotUtil.getOwnedParameters(asFunction)) {
@@ -216,7 +223,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 			//	CGValuedElement cgArgument = doVisit(CGValuedElement.class, asParameterExp);
 			//	CGFunctionCallExp.getArguments().add(cgArgument);
 		}
-		//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.INSTANCE.createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
+		//	CGCallExp cgFunctionCallExp = LibraryOperationCallingConvention.getInstance().createCGOperationCallExp(this, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 		CGFunctionCallExp cgFunctionCallExp = (CGFunctionCallExp)createCGOperationCallExp(as2cgVisitor, cgFunction, libraryOperation, cgSource, asOperationCallExp);
 		 */		//	cgLibraryOperationCallExp.setAst(asOperationCallExp);
 		//	cgLibraryOperationCallExp.setTypeId(analyzer.getCGTypeId(asOperationCallExp.getTypeId()));
@@ -276,7 +283,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		cgInnerOperation.setAst(asOuterOperation);		// no inner available
 		cgInnerOperation.setTypeId(analyzer.getCGTypeId(asOuterOperation.getTypeId()));
 		cgInnerOperation.setRequired(asOuterOperation.isIsRequired());
-		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.INSTANCE);
+		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.getInstance(asOuterOperation, false));
 		ExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
 		//		analyzer.addCGOperation(cgOperation);
 		//	createCGParameters(as2cgVisitor, gOperation, null;
@@ -351,7 +358,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
 		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, asOperation);
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
 		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 		return cgOperation;

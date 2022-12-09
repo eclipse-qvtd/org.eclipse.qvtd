@@ -62,7 +62,6 @@ import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-
 import junit.framework.TestCase;
 
 /**
@@ -446,6 +445,7 @@ public class PivotTestCase extends TestCase
 		Collections.sort(savedEPackageRegistry);
 		if (!TEST_START.isActive()) {
 			NameUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
+			NameUtil.contextText = getClass().getSimpleName() + "." + getName();
 		}
 		super.setUp();
 		if (DEBUG_ID) {
@@ -481,6 +481,7 @@ public class PivotTestCase extends TestCase
 		ThreadLocalExecutor.reset();
 		super.tearDown();
 		NameUtil.contextLine = null;
+		NameUtil.contextText = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//

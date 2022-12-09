@@ -349,47 +349,47 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull ClassCallingConvention getCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
 		if (asClass instanceof Transformation) {
-			return TransformationCallingConvention.INSTANCE;
+			return TransformationCallingConvention.getInstance(asClass);
 		}
 		return super.getCallingConvention(asClass);
 	}
 
 	@Override
-	protected @NonNull OperationCallingConvention getCallingConventionInternal(@NonNull Operation asOperation, boolean maybeVirtual) {
+	public @NonNull OperationCallingConvention getCallingConvention(@NonNull Operation asOperation, boolean maybeVirtual) {
 		if (asOperation instanceof Function) {
 			Function asFunction = (Function)asOperation;
 			LanguageExpression asBodyExpression = asOperation.getBodyExpression();
 			if (asOperation.getImplementationClass() != null) {
 				assert asBodyExpression == null;
-				return ImplementedOperationCallingConvention.INSTANCE;
+				return ImplementedOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 			}
 			else if (asBodyExpression != null) {
 				ShadowExp asShadowExp = QVTimperativeUtil.basicGetShadowExp(asFunction);
 				if (asShadowExp != null) {
 					Type type = asShadowExp.getType();
 					if (type instanceof DataType) {
-						return ShadowDataTypeOperationCallingConvention.INSTANCE;
+						return ShadowDataTypeOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 					}
 					else {
-						return ShadowClassOperationCallingConvention.INSTANCE;
+						return ShadowClassOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 					}
 				}
 				else {
 					if (asFunction.isIsTransient()) {
-						return TransientFunctionOperationCallingConvention.INSTANCE;
+						return TransientFunctionOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 					}
 					else {
-						return InternalFunctionOperationCallingConvention.INSTANCE;
+						return InternalFunctionOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 					}
 				}
 			}
 			else {
-				return EmptyFunctionOperationCallingConvention.INSTANCE;
+				return EmptyFunctionOperationCallingConvention.getInstance(asOperation, maybeVirtual);
 			}
 		}
-		OperationCallingConvention callingConvention = super.getCallingConventionInternal(asOperation, maybeVirtual);
-		if (callingConvention == CachedOperationCallingConvention.INSTANCE) {
-			return ExternalOperationOperationCallingConvention.INSTANCE;		// XXX promote to OCL
+		OperationCallingConvention callingConvention = super.getCallingConvention(asOperation, maybeVirtual);
+		if (callingConvention == CachedOperationCallingConvention.getInstance(asOperation, maybeVirtual)) {
+			return ExternalOperationOperationCallingConvention.getInstance(asOperation, maybeVirtual);		// XXX promote to OCL
 		}
 		return callingConvention;
 	}
@@ -406,16 +406,16 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				/*	if (eStructuralFeature != null) {
 					try {
 						getGenModelHelper().getGetAccessor(eStructuralFeature);
-						return EcoreOppositePropertyCallingConvention.INSTANCE;
+						return EcoreOppositePropertyCallingConvention.getInstance();
 					} catch (GenModelException e) {
 						addProblem(e);		// FIXME drop through to better default
 					}
 				} */
-				return MiddlePropertyCallingConvention.INSTANCE;
+				return MiddlePropertyCallingConvention.getInstance(asProperty);
 			}
 		}
 		if (libraryProperty instanceof CacheProperty) {
-			return ImmutableCachePropertyCallingConvention.INSTANCE;
+			return ImmutableCachePropertyCallingConvention.getInstance(asProperty);
 		}
 		return super.getCallingConvention(asProperty);
 	}

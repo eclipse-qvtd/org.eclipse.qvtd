@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.EntryClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -49,7 +50,12 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
  */
 public class ExternalOperationOperationCallingConvention extends ExternalFunctionOperationCallingConvention
 {
-	public static final @NonNull ExternalOperationOperationCallingConvention INSTANCE = new ExternalOperationOperationCallingConvention();
+	private static final @NonNull ExternalOperationOperationCallingConvention INSTANCE = new ExternalOperationOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	/**
 	 *  ExternalEntryClassCallingConvention refines the standard EntryClassCallingConvention for the cache of a specific evaluation
@@ -57,7 +63,16 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	 */
 	public static class ExternalEntryClassCallingConvention extends EntryClassCallingConvention
 	{
-		public static final @NonNull ExternalEntryClassCallingConvention INSTANCE = new ExternalEntryClassCallingConvention();
+		private static final @NonNull ExternalEntryClassCallingConvention INSTANCE = new ExternalEntryClassCallingConvention();
+
+		//		public static @NonNull ExternalEntryClassCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		//			INSTANCE.logInstance(asClass);
+		//		}
+
+		public static @NonNull ExternalEntryClassCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+			INSTANCE.logInstance(asOperation, maybeVirtual);
+			return INSTANCE;
+		}
 
 		@Override
 		protected @NonNull Class getContextClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass) {
@@ -82,7 +97,16 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 
 	public static class ExternalEvaluateOperationCallingConvention extends AbstractEvaluateOperationCallingConvention
 	{
-		public static final @NonNull ExternalEvaluateOperationCallingConvention INSTANCE = new ExternalEvaluateOperationCallingConvention();
+		private static final @NonNull ExternalEvaluateOperationCallingConvention INSTANCE = new ExternalEvaluateOperationCallingConvention();
+
+		//		public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		//			INSTANCE.logInstance(asOperation, maybeVirtual);
+		//		}
+
+		public static @NonNull ExternalEvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
 
 		@Override
 		protected @Nullable Parameter createConstructorEvaluateOperationSelfParameter(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
@@ -126,7 +150,7 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
 		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, asOperation);
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
 		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 		return cgOperation;
@@ -172,12 +196,18 @@ public class ExternalOperationOperationCallingConvention extends ExternalFunctio
 	}
 
 	@Override
-	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention() {
-		return ExternalEntryClassCallingConvention.INSTANCE;
+	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		//		return ExternalEntryClassCallingConvention.getInstance(asClass);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	protected @NonNull AbstractEvaluateOperationCallingConvention getEvaluateOperationCallingConvention() {
-		return ExternalEvaluateOperationCallingConvention.INSTANCE;
+	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention(@NonNull Operation asOperation) {
+		return ExternalEntryClassCallingConvention.getInstance(asOperation, false);
+	}
+
+	@Override
+	protected @NonNull AbstractEvaluateOperationCallingConvention getEvaluateOperationCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		return ExternalEvaluateOperationCallingConvention.getInstance(asClass);
 	}
 }

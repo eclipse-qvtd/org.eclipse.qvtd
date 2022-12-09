@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.ExecutorOppositePropertyCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
@@ -40,7 +41,12 @@ import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
  */
 public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCallingConvention
 {
-	public static final @NonNull MiddlePropertyCallingConvention INSTANCE = new MiddlePropertyCallingConvention();
+	private static final @NonNull MiddlePropertyCallingConvention INSTANCE = new MiddlePropertyCallingConvention();
+
+	public static @NonNull PropertyCallingConvention getInstance(@NonNull Property asProperty) {
+		INSTANCE.logInstance(asProperty);
+		return INSTANCE;
+	}
 
 	@Override
 	public @NonNull CGValuedElement createCGNavigationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGProperty cgProperty,

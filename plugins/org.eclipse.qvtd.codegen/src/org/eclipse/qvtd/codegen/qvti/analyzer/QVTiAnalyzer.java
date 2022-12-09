@@ -915,7 +915,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		CreationCache creationCache = asClass2creationCache.get(asClass);
 		if (creationCache == null) {
 			ClassNameManager classNameManager = getClassNameManager(null, asClass);
-			creationCache = RuleCacheClassCallingConvention.INSTANCE.createCreationCache(classNameManager, asNewStatement);
+			creationCache = RuleCacheClassCallingConvention.getInstance(asClass).createCreationCache(classNameManager, asNewStatement);
 			asClass2creationCache.put(asClass, creationCache);
 		}
 		return creationCache;

@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.ConstructorOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.EntryClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -33,11 +34,21 @@ import org.eclipse.ocl.pivot.Operation;
  */
 public class ImplementedOperationCallingConvention extends ExternalOperationOperationCallingConvention
 {
-	public static final @NonNull ImplementedOperationCallingConvention INSTANCE = new ImplementedOperationCallingConvention();
+	private static final @NonNull ImplementedOperationCallingConvention INSTANCE = new ImplementedOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	public static class ImplementedConstructorOperationCallingConvention extends ConstructorOperationCallingConvention
 	{
-		public static final @NonNull ImplementedConstructorOperationCallingConvention INSTANCE = new ImplementedConstructorOperationCallingConvention();
+		private static final @NonNull ImplementedConstructorOperationCallingConvention INSTANCE = new ImplementedConstructorOperationCallingConvention();
+
+		public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+			INSTANCE.logInstance(asOperation, maybeVirtual);
+			return INSTANCE;
+		}
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgConstructor) {	// merge with super
@@ -66,11 +77,11 @@ public class ImplementedOperationCallingConvention extends ExternalOperationOper
 	 */
 	public static class ImplementedEntryClassCallingConvention extends ExternalEntryClassCallingConvention
 	{
-		public static final @NonNull ImplementedEntryClassCallingConvention INSTANCE = new ImplementedEntryClassCallingConvention();
+		private static final @NonNull ImplementedEntryClassCallingConvention INSTANCE = new ImplementedEntryClassCallingConvention();
 
 		@Override
-		protected @NonNull ConstructorOperationCallingConvention getConstructorOperationCallingConvention() {
-			return ImplementedConstructorOperationCallingConvention.INSTANCE;
+		protected @NonNull ConstructorOperationCallingConvention getConstructorOperationCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			return ImplementedConstructorOperationCallingConvention.getInstance(asClass);
 		}
 
 		/*	@Override
@@ -108,7 +119,7 @@ public class ImplementedOperationCallingConvention extends ExternalOperationOper
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
 		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, asOperation);
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
 		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 		return cgOperation;
@@ -127,8 +138,8 @@ public class ImplementedOperationCallingConvention extends ExternalOperationOper
 	}
 
 	@Override
-	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention() {
-		return ImplementedEntryClassCallingConvention.INSTANCE;
+	protected @NonNull EntryClassCallingConvention getEntryClassCallingConvention(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		return ImplementedEntryClassCallingConvention.getInstance(asClass);
 	}
 
 	@Override

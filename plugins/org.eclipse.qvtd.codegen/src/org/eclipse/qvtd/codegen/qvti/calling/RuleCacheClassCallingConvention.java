@@ -69,11 +69,25 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
  */
 public class RuleCacheClassCallingConvention extends AbstractClassCallingConvention
 {
-	public static final @NonNull RuleCacheClassCallingConvention INSTANCE = new RuleCacheClassCallingConvention();
+	private static final @NonNull RuleCacheClassCallingConvention INSTANCE = new RuleCacheClassCallingConvention();
+
+	public static @NonNull RuleCacheClassCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		INSTANCE.logInstance(asClass);
+		return INSTANCE;
+	}
 
 	public static class BasicEvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
 	{
-		public static final @NonNull BasicEvaluateOperationCallingConvention INSTANCE = new BasicEvaluateOperationCallingConvention();
+		private static final @NonNull BasicEvaluateOperationCallingConvention INSTANCE = new BasicEvaluateOperationCallingConvention();
+
+		//		public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		//			INSTANCE.logInstance(asOperation, maybeVirtual);
+		//		}
+
+		public static @NonNull BasicEvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgCacheOperation) {
@@ -249,7 +263,12 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 
 	public static class EvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
 	{
-		public static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
+		private static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
+
+		public static @NonNull EvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
 
 		@Override
 		public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgCacheOperation) {
@@ -378,8 +397,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		CGClass cgCacheSuperClass = analyzer.generateClassDeclaration(asCacheClassSuperClass, null);
 		cgCacheClass.getSuperTypes().add(cgCacheSuperClass);
 		//
-		BasicEvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
-		EvaluateOperationCallingConvention.INSTANCE.createOperation(analyzer, cgCacheClass, asNewStatement);
+		BasicEvaluateOperationCallingConvention.getInstance(asCacheClass).createOperation(analyzer, cgCacheClass, asNewStatement);
+		EvaluateOperationCallingConvention.getInstance(asCacheClass).createOperation(analyzer, cgCacheClass, asNewStatement);
 		CreationCache creationCache = createCacheInstance(classNameManager, asCacheClass, asNewStatement);
 		return creationCache;
 	}
@@ -392,7 +411,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		CreationCache creationCache = analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
 		//
 		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
-		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.INSTANCE);
+		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.getInstance(asProperty));
 		assert cgProperty.eContainer() != null;
 		return creationCache;
 	}

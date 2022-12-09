@@ -14,6 +14,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -26,12 +29,8 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -41,7 +40,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class InternalFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
 {
-	public static final @NonNull InternalFunctionOperationCallingConvention INSTANCE = new InternalFunctionOperationCallingConvention();
+	private static final @NonNull InternalFunctionOperationCallingConvention INSTANCE = new InternalFunctionOperationCallingConvention();
+
+	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+		INSTANCE.logInstance(asOperation, maybeVirtual);
+		return INSTANCE;
+	}
 
 	protected static class CachePropertyCallExpImpl extends CGTuplePartCallExpImpl		// XXX move to CG model
 	{
@@ -73,21 +77,19 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	public @NonNull CGValuedElement createCGOperationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation, @NonNull LibraryOperation libraryOperation,
 			@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 		assert cgSource != null;
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
-		CGFunction cgFunction = (CGFunction)cgOperation;
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		assert QVTimperativeUtil.basicGetShadowExp(asFunction) == null;
-		CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
-		initCallExp(qvtiAnalyzer, cgFunctionCallExp, asOperationCallExp, cgOperation, asFunction.isIsRequired());
-		//	cgFunctionCallExp.getArguments().add(cgSource);
-		initCallArguments(qvtiAnalyzer, cgFunctionCallExp);
-		return cgFunctionCallExp;
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		assert QVTimperativeUtil.basicGetShadowExp(asOperation) == null;
+		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
+		initCallExp(analyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
+		//	cgOperationCallExp.getArguments().add(cgSource);
+		initCallArguments(analyzer, cgOperationCallExp);
+		return cgOperationCallExp;
 	}
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		//	super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, (Operation) operationNameManager.getASScope());
 		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
 		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
 	}
