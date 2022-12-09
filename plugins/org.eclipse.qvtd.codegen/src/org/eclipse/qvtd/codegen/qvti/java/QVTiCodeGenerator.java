@@ -32,7 +32,9 @@ import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheProperty;
 import org.eclipse.ocl.examples.codegen.calling.CachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.ExternalOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.ImplementedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -81,8 +83,6 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.calling.ExternalOperationOperationCallingConvention;
-import org.eclipse.qvtd.codegen.qvti.calling.ImplementedOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
@@ -389,7 +389,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 		OperationCallingConvention callingConvention = super.getCallingConvention(asOperation, maybeVirtual);
 		if (callingConvention == CachedOperationCallingConvention.getInstance(asOperation, maybeVirtual)) {
-			return ExternalOperationOperationCallingConvention.getInstance(asOperation, maybeVirtual);		// XXX promote to OCL
+			return ExternalOperationCallingConvention.getInstance(asOperation, maybeVirtual);		// XXX promote to OCL
 		}
 		return callingConvention;
 	}

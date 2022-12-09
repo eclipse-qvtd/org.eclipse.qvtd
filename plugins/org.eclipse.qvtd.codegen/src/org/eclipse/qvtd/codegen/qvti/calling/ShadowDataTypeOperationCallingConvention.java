@@ -13,7 +13,6 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
@@ -29,7 +28,7 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 {
 	private static final @NonNull ShadowDataTypeOperationCallingConvention INSTANCE = new ShadowDataTypeOperationCallingConvention();
 
-	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+	public static @NonNull ShadowDataTypeOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
 		INSTANCE.logInstance(asOperation, maybeVirtual);
 		return INSTANCE;
 	}

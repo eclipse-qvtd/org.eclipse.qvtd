@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
@@ -31,7 +30,7 @@ public class CacheOperationCallingConvention extends AbstractCachedOperationCall
 {
 	private static final @NonNull CacheOperationCallingConvention INSTANCE = new CacheOperationCallingConvention();
 
-	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+	public static @NonNull CacheOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
 		INSTANCE.logInstance(asOperation, maybeVirtual);
 		return INSTANCE;
 	}

@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.pivot.Operation;
 
 /**
@@ -21,7 +20,7 @@ public class ShadowClassOperationCallingConvention extends ShadowFunctionOperati
 {
 	private static final @NonNull ShadowClassOperationCallingConvention INSTANCE = new ShadowClassOperationCallingConvention();
 
-	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+	public static @NonNull ShadowClassOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
 		INSTANCE.logInstance(asOperation, maybeVirtual);
 		return INSTANCE;
 	}

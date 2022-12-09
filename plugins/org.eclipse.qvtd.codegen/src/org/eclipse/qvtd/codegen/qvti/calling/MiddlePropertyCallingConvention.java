@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.ExecutorOppositePropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
@@ -43,7 +42,7 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 {
 	private static final @NonNull MiddlePropertyCallingConvention INSTANCE = new MiddlePropertyCallingConvention();
 
-	public static @NonNull PropertyCallingConvention getInstance(@NonNull Property asProperty) {
+	public static @NonNull MiddlePropertyCallingConvention getInstance(@NonNull Property asProperty) {
 		INSTANCE.logInstance(asProperty);
 		return INSTANCE;
 	}

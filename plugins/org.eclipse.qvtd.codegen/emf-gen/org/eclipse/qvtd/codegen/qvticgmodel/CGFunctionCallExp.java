@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -15,6 +15,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>CG Function Call Exp</b></em>'.
+ *
+ * @deprecated no longer used
  * <!-- end-user-doc -->
  *
  * <p>
@@ -28,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
  * @model
  * @generated
  */
+@Deprecated
 public interface CGFunctionCallExp extends CGOperationCallExp {
 	/**
 	 * Returns the value of the '<em><b>Function</b></em>' reference.

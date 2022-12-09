@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
@@ -59,7 +58,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 {
 	private static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
 
-	public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
+	public static @NonNull ExternalFunctionOperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
 		INSTANCE.logInstance(asOperation, maybeVirtual);
 		return INSTANCE;
 	}
@@ -393,19 +392,6 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 			cgParameters.add(cgParameter);
 		}
 	}
-
-	/*	private @NonNull TypeExp createTypeExp(@NonNull EnvironmentFactory environmentFactory,  @NonNull Type type) {
-		TypeExp asTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-		asTypeExp.setIsRequired(true);
-		asTypeExp.setReferredType(type);
-		asTypeExp.setName(type.getName());
-		//	asTypeExp.setType(type instanceof TemplateParameter ? metamodelManager.getOclType("TemplateParameter") : standardLibrary.getClassType());
-		EClass eClass = type.eClass();
-		assert eClass != null;
-		asTypeExp.setType(environmentFactory.getIdResolver().getType(eClass));
-		asTypeExp.setTypeValue(type);
-		return asTypeExp;
-	} */
 
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
