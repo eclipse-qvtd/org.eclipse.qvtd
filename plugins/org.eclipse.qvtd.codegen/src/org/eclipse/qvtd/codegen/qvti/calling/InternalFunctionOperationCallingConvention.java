@@ -88,14 +88,12 @@ public class InternalFunctionOperationCallingConvention extends FunctionOperatio
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		//	super.createCGParameters(operationNameManager, bodyExpression);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, (Operation) operationNameManager.getASScope());
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		/*Property asConstructorInstance =*/ createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
-	}
-
-	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		return generateJavaEvaluateCall(cg2javaVisitor, js, cgOperationCallExp);
+		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(analyzer, cgOperation);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(analyzer, cgOperation, asEntryClass);
+		/*Property asConstructorInstance =*/ createCacheInstance(analyzer, asOperation, asCacheClass, asEntryClass);
 	}
 
 	@Override

@@ -348,18 +348,14 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() != null;
-
-		//	CGClass cgClass = analyzer.createNestedCGClass(asOperation, "FTOR" + asOperation.getName());
-
-		//	CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		CGCachedOperation cgOperation = CGModelFactory.eINSTANCE.createCGCachedOperation();
 		analyzer.initAst(cgOperation, asOperation, true);
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(operationNameManager, asOperation);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(operationNameManager, asEntryClass);
-		createCacheInstance(operationNameManager, asCacheClass, asEntryClass);
+		//	ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
+		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(analyzer, cgOperation);
+		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(analyzer, cgOperation, asEntryClass);
+		createCacheInstance(analyzer, asOperation, asCacheClass, asEntryClass);
 		return cgOperation;
 	}
 
@@ -395,20 +391,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		// TODO Auto-generated method stub
-		return super.generateJavaCall(cg2javaVisitor, js, cgOperationCallExp);
-	}
-
-	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
-		return super.generateJavaDeclaration(cg2javaVisitor, js, cgOperation);
-	}
-
-	@Override
-	public void rewriteWithBoxingAndGuards(@NonNull BoxingAnalyzer boxingAnalyzer, @NonNull CGOperation cgOperation) {
-		// TODO Auto-generated method stub
-		super.rewriteWithBoxingAndGuards(boxingAnalyzer, cgOperation);
+		return generateDeprecatedJavaCall(cg2javaVisitor, js, cgOperationCallExp);
 	}
 
 	@Override
