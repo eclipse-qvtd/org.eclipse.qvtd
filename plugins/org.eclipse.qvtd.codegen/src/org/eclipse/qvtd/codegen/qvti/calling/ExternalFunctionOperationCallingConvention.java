@@ -375,15 +375,14 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
+		CodeGenAnalyzer qvtiAnalyzer = operationNameManager.getAnalyzer();
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asFunction = QVTiCGUtil.getAST(cgOperation);
-		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
-		for (Parameter asParameter : asFunction.getOwnedParameters()) {
+		cgParameters.add(operationNameManager.getThisObjectParameter());
+		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
 		}

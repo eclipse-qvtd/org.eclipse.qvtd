@@ -48,6 +48,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATUS_NAME = "outputSpeculatingSlotStatus";
+	@Deprecated /* @deprecated use thisObject */
 	private static final @NonNull String THIS_TRANSFORMER_NAME = "thisTransformer";
 	private static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
 	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
@@ -69,6 +70,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	protected final @NonNull NameResolution oppositeIndex2PropertyIdName;
 	protected final @NonNull NameResolution outputSpeculationSlotStateName;
 	protected final @NonNull NameResolution outputSpeculationSlotStatusName;
+	@Deprecated /* @deprecated use thisObject */
 	protected final @NonNull NameResolution thisTransformerName;
 	protected final @NonNull NameResolution transformationExecutionName;
 	protected final @NonNull NameResolution transformationName ;
@@ -189,11 +191,12 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return outputSpeculationSlotStatusName.getResolvedName();
 	}
 
-	public @NonNull String getThisTransformerName() {
-		return thisTransformerName.getResolvedName();
-	}
+	//	@Deprecated /* @deprecated use thisObject */
+	//	public @NonNull String getThisTransformerName() {
+	//		return thisTransformerName.getResolvedName();
+	//	}
 
-	@Override
+	@Deprecated /* @deprecated use thisObject */
 	public @NonNull NameResolution getThisTransformerNameResolution() {
 		return thisTransformerName;
 	}

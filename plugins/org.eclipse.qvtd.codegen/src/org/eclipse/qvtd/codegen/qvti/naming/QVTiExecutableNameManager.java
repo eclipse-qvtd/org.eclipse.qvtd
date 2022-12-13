@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -28,20 +27,16 @@ import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 
 /**
  * QVTiNestedNameManager provides QVTi-specific overrides for nested contexts.
  */
 public class QVTiExecutableNameManager extends ExecutableNameManager
 {
-	private /*@LazyNonNull*/ CGParameter thisTransformerParameter = null;	// A local orphan parameter spelled "thisTransformer"
-	private /*@LazyNonNull*/ CGParameter idResolverParameter = null;		// A local orphan parameter spelled "idResolver" -- XXX probably doesn't need caching
 
 	//	protected QVTiExecutableNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
 	//		super(codeGenerator, parent, cgScope);
@@ -113,16 +108,6 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return super.createCGVariable(asVariable);
 	}
 
-	protected @NonNull CGParameter createIdResolverParameter() {
-		assert !isStatic;
-		NameResolution idResolverNameResolution = getGlobalNameManager().getIdResolverNameResolution();
-		CGTypeId cgTypeId = analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID);
-		CGParameter idResolverParameter = analyzer.createCGParameter(idResolverNameResolution, cgTypeId, true);
-		//	thisTransformerParameter.setIsThis(true);
-		idResolverParameter.setNonInvalid();
-		idResolverParameter.setNonNull();
-		return idResolverParameter;
-	}
 
 	@Override
 	public @NonNull CGFinalVariable createIdResolverVariable() {
@@ -153,19 +138,6 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		transformationVariable.setNonNull();
 		transformationName.addCGElement(transformationVariable);
 		return transformationVariable;
-	}
-
-	protected @NonNull CGParameter createThisTransformerParameter() {
-		assert !isStatic;
-		QVTiCodeGenerator qvtiCodeGenerator = (QVTiCodeGenerator)codeGenerator;
-		ImperativeTransformation asTransformation = qvtiCodeGenerator.getTransformation();
-		NameResolution thisTransformerName = getGlobalNameManager().getThisTransformerNameResolution();
-		CGTypeId cgTypeId = analyzer.getCGTypeId(asTransformation.getTypeId());
-		CGParameter thisTransformerParameter = analyzer.createCGParameter(thisTransformerName, cgTypeId, true);
-		//	thisTransformerParameter.setIsThis(true);
-		thisTransformerParameter.setNonInvalid();
-		thisTransformerParameter.setNonNull();
-		return thisTransformerParameter;
 	}
 
 	@Override
@@ -231,16 +203,6 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
-	@Override
-	public @NonNull CGParameter getIdResolverParameter() {
-		assert !isStatic;
-		CGParameter idResolverParameter2 = idResolverParameter;
-		if (idResolverParameter2 == null) {
-			idResolverParameter = idResolverParameter2 = createIdResolverParameter();
-		}
-		return idResolverParameter2;
-	}
-
 	/*	@Override
 	public @NonNull CGVariable getIdResolverVariable() {
 		CGVariable idResolverVariable = basicGetIdResolverVariable();
@@ -249,13 +211,4 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		}
 		return idResolverVariable;
 	} */
-
-	public @NonNull CGParameter getThisTransformerParameter() {
-		assert !isStatic;
-		CGParameter thisTransformerParameter2 = thisTransformerParameter;
-		if (thisTransformerParameter2 == null) {
-			thisTransformerParameter = thisTransformerParameter2 = createThisTransformerParameter();
-		}
-		return thisTransformerParameter2;
-	}
 }

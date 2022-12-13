@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
-import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
@@ -85,16 +84,15 @@ public class EmptyFunctionOperationCallingConvention extends FunctionOperationCa
 
 	@Override
 	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiExecutableNameManager qvtiOperationNameManager = (QVTiExecutableNameManager)operationNameManager;
-		QVTiAnalyzer qvtiAnalyzer = qvtiOperationNameManager.getAnalyzer();
-		CGFunction cgFunction = (CGFunction)operationNameManager.getCGScope();
-		Function asFunction = QVTiCGUtil.getAST(cgFunction);
-		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asFunction) != null;
+		CodeGenAnalyzer analyzer = operationNameManager.getAnalyzer();
+		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
+		Operation asOperation = CGUtil.getAST(cgOperation);
+		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asOperation) != null;
 		assert !useClassToCreateObject;
-		List<CGParameter> cgParameters = cgFunction.getParameters();
-		cgParameters.add(qvtiOperationNameManager.getThisTransformerParameter());
-		for (Parameter asParameter : asFunction.getOwnedParameters()) {
-			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
+		List<CGParameter> cgParameters = cgOperation.getParameters();
+		cgParameters.add(operationNameManager.getThisObjectParameter());
+		for (Parameter asParameter : asOperation.getOwnedParameters()) {
+			CGParameter cgParameter = analyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
 		}
 	}
