@@ -90,7 +90,7 @@ public class EmptyFunctionOperationCallingConvention extends FunctionOperationCa
 		boolean useClassToCreateObject = QVTimperativeUtil.basicGetShadowExp(asOperation) != null;
 		assert !useClassToCreateObject;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
-		cgParameters.add(operationNameManager.getThisObjectParameter());
+		cgParameters.add(operationNameManager.getContextObjectParameter());
 		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = analyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);

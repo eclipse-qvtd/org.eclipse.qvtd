@@ -381,7 +381,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(operationNameManager.getThisObjectParameter());
+		cgParameters.add(operationNameManager.getContextObjectParameter());
 		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);

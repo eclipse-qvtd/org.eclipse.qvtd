@@ -104,7 +104,7 @@ public class TransientFunctionOperationCallingConvention extends FunctionOperati
 		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
 		assert !useClassToCreateObject;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
-		cgParameters.add(operationNameManager.getThisObjectParameter());
+		cgParameters.add(operationNameManager.getContextObjectParameter());
 		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
