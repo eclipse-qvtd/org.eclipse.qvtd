@@ -29,8 +29,8 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheProperty;
-import org.eclipse.ocl.examples.codegen.calling.CachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention.CacheProperty;
+import org.eclipse.ocl.examples.codegen.calling.DefaultOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ExternalOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention;
@@ -388,7 +388,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		OperationCallingConvention callingConvention = super.getCallingConvention(asOperation, maybeVirtual);
-		if (callingConvention == CachedOperationCallingConvention.getInstance(asOperation, maybeVirtual)) {
+		if (callingConvention == DefaultOperationCallingConvention.getInstance(asOperation, maybeVirtual)) {
 			return ExternalOperationCallingConvention.getInstance(asOperation, maybeVirtual);		// XXX promote to OCL
 		}
 		return callingConvention;

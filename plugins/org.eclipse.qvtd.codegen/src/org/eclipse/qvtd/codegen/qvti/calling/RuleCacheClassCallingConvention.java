@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2.CacheInstancePropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention.CacheInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractUncachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -76,13 +76,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		return INSTANCE;
 	}
 
-	public static class BasicEvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static class BasicEvaluateOperationCallingConvention extends AbstractUncachedOperationCallingConvention
 	{
 		private static final @NonNull BasicEvaluateOperationCallingConvention INSTANCE = new BasicEvaluateOperationCallingConvention();
-
-		//		public static @NonNull OperationCallingConvention getInstance(@NonNull Operation asOperation, boolean maybeVirtual) {
-		//			INSTANCE.logInstance(asOperation, maybeVirtual);
-		//		}
 
 		public static @NonNull BasicEvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
 			INSTANCE.logInstance(asClass);
@@ -261,7 +257,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 	}
 
-	public static class EvaluateOperationCallingConvention extends AbstractCachedOperationCallingConvention
+	public static class EvaluateOperationCallingConvention extends AbstractUncachedOperationCallingConvention
 	{
 		private static final @NonNull EvaluateOperationCallingConvention INSTANCE = new EvaluateOperationCallingConvention();
 

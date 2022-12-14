@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -35,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  *
  *  The implementation uses a class whose instance caches a result to ensure unique shared execution.
  */
-public class InternalFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention2 // cg Cached/Constrained
+public class InternalFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention // cg Cached/Constrained
 {
 	private static final @NonNull InternalFunctionOperationCallingConvention INSTANCE = new InternalFunctionOperationCallingConvention();
 
