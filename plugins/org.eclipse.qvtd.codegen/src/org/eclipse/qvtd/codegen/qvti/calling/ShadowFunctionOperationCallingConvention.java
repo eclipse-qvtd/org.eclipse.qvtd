@@ -103,7 +103,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends FunctionO
 	}
 
 	@Override
-	public @NonNull CGFunction createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
+	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
 		assert asOperation.getImplementationClass() == null;
 		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
