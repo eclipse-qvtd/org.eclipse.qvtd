@@ -42,9 +42,7 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		analyzer.initAst(cgOperation, asOperation, true);
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(analyzer, cgOperation);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(analyzer, cgOperation, asEntryClass);
-		createCacheInstance(analyzer, asOperation, asCacheClass, asEntryClass);
+		createCachingClassesAndInstance(analyzer, cgOperation);
 		return cgOperation;
 	}
 

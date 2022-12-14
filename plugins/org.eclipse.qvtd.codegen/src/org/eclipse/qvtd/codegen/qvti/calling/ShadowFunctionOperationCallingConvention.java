@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
@@ -74,7 +74,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 /**
  *  ShadowFunctionOperationCallingConvention defines the support for the call of a QVTi function to create a keyed shaow object.
  */
-public abstract class ShadowFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
+public abstract class ShadowFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention2 // cg Cached/Constrained
 {
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {

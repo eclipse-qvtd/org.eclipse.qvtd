@@ -17,7 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2;
 import org.eclipse.ocl.examples.codegen.calling.LibraryOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -54,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 /**
  *  ExternalFunctionOperationCallingConvention defines the support for the call of a QVTi function implemented by a Java class.
  */
-public class ExternalFunctionOperationCallingConvention extends FunctionOperationCallingConvention
+public class ExternalFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention2
 {
 	private static final @NonNull ExternalFunctionOperationCallingConvention INSTANCE = new ExternalFunctionOperationCallingConvention();
 
@@ -352,10 +352,7 @@ public class ExternalFunctionOperationCallingConvention extends FunctionOperatio
 		analyzer.initAst(cgOperation, asOperation, true);
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
-		//	ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
-		org.eclipse.ocl.pivot.Class asEntryClass = createEntryClass(analyzer, cgOperation);
-		org.eclipse.ocl.pivot.Class asCacheClass = createCacheClass(analyzer, cgOperation, asEntryClass);
-		createCacheInstance(analyzer, asOperation, asCacheClass, asEntryClass);
+		createCachingClassesAndInstance(analyzer, cgOperation);
 		return cgOperation;
 	}
 

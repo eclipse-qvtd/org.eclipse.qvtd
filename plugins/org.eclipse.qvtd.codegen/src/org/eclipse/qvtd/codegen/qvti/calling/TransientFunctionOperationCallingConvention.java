@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.FunctionOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention2;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
@@ -40,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 /**
  *  InternalFunctionOperationCallingConvention defines the uncached support for the call of a transient QVTi function implemented by an OCL expression.
  */
-public class TransientFunctionOperationCallingConvention extends FunctionOperationCallingConvention // cg Cached/Constrained
+public class TransientFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention2 // cg Cached/Constrained
 {
 	private static final @NonNull TransientFunctionOperationCallingConvention INSTANCE = new TransientFunctionOperationCallingConvention();
 
