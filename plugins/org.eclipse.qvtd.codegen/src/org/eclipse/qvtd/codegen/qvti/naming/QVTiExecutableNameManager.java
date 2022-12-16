@@ -203,6 +203,14 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
 
+	@Override
+	public void addVariable(@NonNull VariableDeclaration asVariable, @NonNull CGVariable cgVariable) {
+		if (String.valueOf(asScope).contains("getResult")) {
+			getClass();		// XXX
+		}
+		super.addVariable(asVariable, cgVariable);
+	}
+
 	/*	@Override
 	public @NonNull CGVariable getIdResolverVariable() {
 		CGVariable idResolverVariable = basicGetIdResolverVariable();

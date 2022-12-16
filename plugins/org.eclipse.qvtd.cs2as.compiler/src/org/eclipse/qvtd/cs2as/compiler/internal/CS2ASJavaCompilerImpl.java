@@ -19,10 +19,8 @@ import javax.tools.JavaFileObject;
 import org.apache.commons.logging.Log;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
@@ -48,7 +46,6 @@ import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
@@ -96,10 +93,10 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			return new CS2ASCG2JavaVisitor(this, cgPackage, sortedGlobals);
 		}
 
-		@Override
-		public @NonNull AS2CGVisitor createAS2CGVisitor(@NonNull CodeGenAnalyzer codeGenAnalyzer) {
-			return new CS2ASAS2CGVisitor((QVTiAnalyzer)codeGenAnalyzer);
-		}
+		//	@Override
+		//	public @NonNull AS2CGVisitor createAS2CGVisitor(@NonNull CodeGenAnalyzer codeGenAnalyzer) {
+		//		return new CS2ASAS2CGVisitor((QVTiAnalyzer)codeGenAnalyzer);
+		//	}
 
 		@Override
 		public @NonNull AnalysisVisitor createAnalysisVisitor() {
@@ -327,12 +324,12 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 	}
 
-	protected static class CS2ASAS2CGVisitor extends QVTiAS2CGVisitor {
-
-		public CS2ASAS2CGVisitor(@NonNull QVTiAnalyzer analyzer) {
-			super(analyzer);
-		}
-	}
+	//	protected static class CS2ASAS2CGVisitor extends QVTiAS2CGVisitor {
+	//
+	//		public CS2ASAS2CGVisitor(@NonNull QVTiAnalyzer analyzer) {
+	//			super(analyzer);
+	//		}
+	//	}
 
 	protected static class CS2ASAnalysisVisitor extends AbstractCS2ASAnalysisVisitor
 	{
