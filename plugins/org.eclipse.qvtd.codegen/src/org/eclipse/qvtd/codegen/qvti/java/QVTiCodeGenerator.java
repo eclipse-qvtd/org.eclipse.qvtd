@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
@@ -209,8 +208,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull CGPackage createCGPackage() {
 		analyzer.setRootClass(asTransformation);				// Identify the host for synthesized nested classes
-		CGTransformation cgTransformation = analyzer.createCGElement(CGTransformation.class, asTransformation);
-		CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
+		CGPackage cgPackage = analyzer.createCGElement(CGPackage.class, asTransformation.getOwningPackage());
+		CGTransformation cgTransformation = (CGTransformation)analyzer.getCGClass(asTransformation);
+		//	CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
 		assert cgPackage != null;
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
