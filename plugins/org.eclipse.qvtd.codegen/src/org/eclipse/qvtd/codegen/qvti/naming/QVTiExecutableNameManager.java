@@ -129,14 +129,14 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	public @NonNull CGFinalVariable createQualifiedThisVariable() {
 		Class asClass = classNameManager.getASClass();
 		assert asClass instanceof Transformation;
-		NameResolution transformationName = getGlobalNameManager().getTransformationNameResolution();
+		NameResolution rootObjectName = getGlobalNameManager().getRootObjectNameResolution();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
 		//		CGFinalVariable transformationVariable = (CGFinalVariable) analyzer.createCGParameter(transformationName, cgTypeId, true);
 		CGFinalVariable transformationVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
 		transformationVariable.setTypeId(cgTypeId);
 		transformationVariable.setNonInvalid();
 		transformationVariable.setNonNull();
-		transformationName.addCGElement(transformationVariable);
+		rootObjectName.addCGElement(transformationVariable);
 		return transformationVariable;
 	}
 

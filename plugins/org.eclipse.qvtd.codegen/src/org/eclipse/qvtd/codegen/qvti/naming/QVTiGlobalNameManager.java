@@ -73,7 +73,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	@Deprecated /* @deprecated use thisObject */
 	protected final @NonNull NameResolution thisTransformerName;
 	protected final @NonNull NameResolution transformationExecutionName;
-	protected final @NonNull NameResolution transformationName ;
 
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
 		super(codeGenerator, helper);
@@ -96,7 +95,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.outputSpeculationSlotStatusName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATUS_NAME);
 		this.thisTransformerName = globalNameManager.declareEagerName(null, THIS_TRANSFORMER_NAME);
 		this.transformationExecutionName = globalNameManager.declareEagerName(null, TRANSFORMATION_EXECUTION_NAME);
-		this.transformationName = globalNameManager.declareEagerName(null, TRANSFORMATION_NAME);
 	}
 
 	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
@@ -201,9 +199,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return thisTransformerName;
 	}
 
-	public @NonNull NameResolution getTransformationNameResolution() {
-		return transformationName;
-	}
 
 	public @NonNull String getTransformationExecutionName() {
 		return transformationExecutionName.getResolvedName();

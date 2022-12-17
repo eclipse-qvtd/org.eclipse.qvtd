@@ -626,10 +626,9 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
-		QVTiGlobalNameManager globalNameManager = getGlobalNameManager();
 		String evaluatorName = globalNameManager.getExecutorName();
 		String className = cgTransformation.getName();
-		String transformationName = globalNameManager.getTransformationNameResolution().getResolvedName();
+		String rootObjectName = globalNameManager.getRootObjectNameResolution().getResolvedName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		//
 		js.append("protected final ");
@@ -637,7 +636,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.append(" ");
 		js.append(className);
 		js.append(" ");
-		js.append(transformationName);
+		js.append(rootObjectName);
 		js.append(" = this;\n");
 		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
 			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);

@@ -119,7 +119,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 		initCallExp(qvtiAnalyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
 		assert cgSource instanceof CGVariableExp;
-		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getTransformationNameResolution();
+		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootObjectNameResolution();
 		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
 		return cgOperationCallExp;
 	}
