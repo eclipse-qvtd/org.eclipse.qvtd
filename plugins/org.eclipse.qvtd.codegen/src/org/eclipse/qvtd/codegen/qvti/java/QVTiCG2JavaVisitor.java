@@ -628,27 +628,8 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		//		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = globalNameManager.getExecutorName();
 		String className = cgTransformation.getName();
-		String rootObjectName = globalNameManager.getRootObjectNameResolution().getResolvedName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
-		//
-		js.append("protected final ");
-		js.appendIsRequired(true);
-		js.append(" ");
-		js.append(className);
-		js.append(" ");
-		js.append(rootObjectName);
-		js.append(" = this;\n");
-		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
-			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
-			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
-				js.append("protected final ");
-				js.appendClassReference(true, RuntimeModelsManager.Model.class);
-				js.append(" ");
-				js.appendValueName(cgTypedModel);
-				js.append(";\n");
-			}
-		}
-		js.append("\n");
+		js.appendOptionalBlankLine();
 		//
 		js.append("public " + className + "(final ");
 		js.appendClassReference(true, TransformationExecutor.class);
@@ -721,6 +702,31 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		//		doFunctionConstructorInitializers(cgTransformation);
 		js.popIndentation();
 		js.append("}\n");
+	}
+
+	protected void doContextProperties(@NonNull CGTransformation cgTransformation) {
+		js.appendOptionalBlankLine();;
+		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
+		String className = cgTransformation.getName();
+		String rootObjectName = globalNameManager.getRootObjectNameResolution().getResolvedName();
+		//
+		js.append("protected final ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.append(className);
+		js.append(" ");
+		js.append(rootObjectName);
+		js.append(" = this;\n");
+		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
+			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
+			if (!asTypedModel.isIsPrimitive() && !asTypedModel.isIsThis()) {
+				js.append("protected final ");
+				js.appendClassReference(true, RuntimeModelsManager.Model.class);
+				js.append(" ");
+				js.appendValueName(cgTypedModel);
+				js.append(";\n");
+			}
+		}
 	}
 
 	/*	protected void doCreateInterval(@NonNull CGTransformation cgTransformation) {
@@ -983,7 +989,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 						js.appendClassReference(true, AbstractComputationConstructor.class);
 						js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
 						js.appendClassReference(null, AbstractComputationConstructor.class);
-						js.append("(idResolver)\n");
+						js.append("(executor, rootObject)\n");
 						js.append("{\n");
 						js.pushIndentation(null);
 						js.append("@Override\n");
@@ -1867,9 +1873,9 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 	}
 
 	protected void doProperties(@NonNull CGTransformation cgTransformation) {
+		js.appendOptionalBlankLine();;
 		List<@NonNull CGProperty> cgProperties = new ArrayList<>(CGUtil.getPropertiesList(cgTransformation));
 		if (cgProperties.size() > 0) {
-			js.append("\n");
 			Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
 			for (@NonNull CGProperty cgProperty : ClassUtil.nullFree(cgProperties)) {
 				cgProperty.accept(this);
@@ -3222,19 +3228,19 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.append("public class " + className + " extends ");
 		js.appendClassReference(null, getAbstractTransformationExecutorClass());
 		js.pushClassBody(className);
-		js.append("\n");					// XXX delete me
 		if (sortedGlobals != null) {
 			for (CGValuedElement cgElement : sortedGlobals) {
 				assert cgElement.isGlobal();
 				cgElement.accept(this);
 			}
 		}
+		js.appendOptionalBlankLine();
+		doContextProperties(cgTransformation);
+		js.appendOptionalBlankLine();
 		doOppositeCaches(entryPointsAnalysis);
-		js.append("\n");
+		js.appendOptionalBlankLine();
 		String oppositeIndex2propertyIdName = doOppositePropertyIds(entryPointsAnalysis);
-		if (oppositeIndex2propertyIdName != null) {
-			js.append("\n");
-		}
+		js.appendOptionalBlankLine();
 		List<@NonNull CGMapping> cgMappings = ClassUtil.nullFree(cgTransformation.getOwnedMappings());
 		List<@NonNull CGOperation> cgOperations = new ArrayList<>(CGUtil.getOperationsList(cgTransformation));
 		Collections.sort(cgOperations, NameUtil.NAMEABLE_COMPARATOR);

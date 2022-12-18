@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention.CacheInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractUncachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.ImmutableCachePropertyCallingConvention.DefaultInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -407,7 +407,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		CreationCache creationCache = analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
 		//
 		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
-		cgProperty.setCallingConvention(CacheInstancePropertyCallingConvention.getInstance(asProperty));
+		cgProperty.setCallingConvention(DefaultInstancePropertyCallingConvention.getInstance(asProperty));
 		assert cgProperty.eContainer() != null;
 		return creationCache;
 	}

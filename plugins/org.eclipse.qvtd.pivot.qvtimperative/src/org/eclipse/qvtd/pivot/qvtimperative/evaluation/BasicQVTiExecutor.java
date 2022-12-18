@@ -598,7 +598,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		}
 		Computation.Constructor computationConstructor = operation2computationConstructor2.get(asFunction);
 		if (computationConstructor == null) {
-			computationConstructor = new AbstractComputationConstructor(idResolver)
+			computationConstructor = new AbstractComputationConstructor(this, getTransformation())
 			{
 				@Override
 				public @NonNull Computation newInstance(@Nullable Object @NonNull [] theseValues) {
