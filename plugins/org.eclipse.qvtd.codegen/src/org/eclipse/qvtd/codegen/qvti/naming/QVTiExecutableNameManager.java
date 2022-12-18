@@ -109,7 +109,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	}
 
 
-	@Override
+	/*	@Override
 	public @NonNull CGFinalVariable createIdResolverVariable() {
 		// if idResolverParameter is non-null, create a 'parameter' variable that exposes the parameter name as a variable
 		// if idResolverParameter is null, create a 'parameter' variable that exposes the static field name as a variable
@@ -123,7 +123,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		cgIdResolverVariable.setNonNull();
 		idResolverNameResolution.addCGElement(cgIdResolverVariable);			// XXX share via createIdResolver(init)
 		return cgIdResolverVariable;			// XXX who owns the variable ??
-	}
+	} */
 
 	@Override
 	public @NonNull CGFinalVariable createQualifiedThisVariable() {
