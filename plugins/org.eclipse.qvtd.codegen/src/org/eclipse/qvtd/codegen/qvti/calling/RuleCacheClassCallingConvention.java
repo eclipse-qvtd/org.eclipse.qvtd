@@ -103,7 +103,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
 			Operation asCacheOperation = PivotUtil.createOperation(basicEvaluateName, asReturnType, null, null);
 			asCacheOperation.setIsRequired(true);
-			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator, false);
 			asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 			asCacheClass.getOwnedOperations().add(asCacheOperation);
 			//
@@ -284,7 +284,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			Type asReturnType = environmentFactory.getStandardLibrary().getBooleanType();
 			Operation asCacheOperation = PivotUtil.createOperation(basicEvaluateName, asReturnType, null, null);
 			asCacheOperation.setIsRequired(true);
-			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator);
+			Parameter asBoxedValuesParameter = createBoxedValuesParameter(codeGenerator, false);
 			asCacheOperation.getOwnedParameters().add(asBoxedValuesParameter);
 			asCacheClass.getOwnedOperations().add(asCacheOperation);
 			//
