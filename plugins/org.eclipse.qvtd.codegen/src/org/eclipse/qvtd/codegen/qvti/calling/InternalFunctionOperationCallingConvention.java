@@ -89,7 +89,7 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
 		return true;		 // functionality realized by finer-grained CG elements
 	}
 

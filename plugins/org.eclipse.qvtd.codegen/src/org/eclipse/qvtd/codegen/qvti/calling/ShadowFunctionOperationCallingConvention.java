@@ -203,7 +203,8 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		return true;
 	}
 
-	protected boolean doFunctionBody2(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+	protected boolean doFunctionBody2(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+		JavaStream js = qvticg2javaVisitor.getJavaStream();
 		QVTiCodeGenerator codeGenerator = qvticg2javaVisitor.getCodeGenerator();
 		boolean isIncremental = codeGenerator.getOptions().isIncremental();
 		Function function = QVTiCGUtil.getAST(cgFunction);
@@ -334,7 +335,8 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		return true;
 	}
 
-	protected void doFunctionConstructor(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+	protected void doFunctionConstructor(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp) {
+		JavaStream js = qvticg2javaVisitor.getJavaStream();
 		//		List<@NonNull CGParameter> cgParameters = ClassUtil.nullFree(cgFunction.getParameters());
 		//		if (js.isUseNullAnnotations()) {
 		//			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
@@ -361,10 +363,11 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 				js.append("boundValues[" + i++);
 				js.append("];\n");
 			} */
-		doFunctionBody2(qvticg2javaVisitor, js, cgFunction, cgShadowExp);
+		doFunctionBody2(qvticg2javaVisitor, cgFunction, cgShadowExp);
 	}
 
-	protected void doFunctionGetInstance(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
+	protected void doFunctionGetInstance(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull CGFunction cgFunction) {
+		JavaStream js = qvticg2javaVisitor.getJavaStream();
 		String cachedResultName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getCachedResultName();
 		js.append("@Override\n");
 		js.append("public ");
@@ -382,7 +385,8 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		js.append("}\n");
 	}
 
-	protected void doFunctionIsEqual(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
+	protected void doFunctionIsEqual(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
+		JavaStream js = qvticg2javaVisitor.getJavaStream();
 		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendClassReference(true, IdResolver.class);
@@ -426,7 +430,8 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
+		JavaStream js = cg2javaVisitor.getJavaStream();
 		QVTiCG2JavaVisitor qvticg2javaVisitor = (QVTiCG2JavaVisitor)cg2javaVisitor;
 		JavaCodeGenerator codeGenerator = cg2javaVisitor.getCodeGenerator();
 		CGFunction cgFunction = (CGFunction)cgOperation;
@@ -447,11 +452,11 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		js.appendTypeDeclaration(cgFunction);
 		js.append(" " + cachedResultName + ";\n");
 		js.append("\n");
-		doFunctionConstructor(qvticg2javaVisitor, js, cgFunction, cgShadowExp);
+		doFunctionConstructor(qvticg2javaVisitor, cgFunction, cgShadowExp);
 		js.append("\n");
-		doFunctionGetInstance(qvticg2javaVisitor, js, cgFunction);
+		doFunctionGetInstance(qvticg2javaVisitor, cgFunction);
 		js.append("\n");
-		doFunctionIsEqual(qvticg2javaVisitor, js, cgShadowExp, cachedResultName);
+		doFunctionIsEqual(qvticg2javaVisitor, cgShadowExp, cachedResultName);
 		js.popClassBody(false);
 		return true;
 	}

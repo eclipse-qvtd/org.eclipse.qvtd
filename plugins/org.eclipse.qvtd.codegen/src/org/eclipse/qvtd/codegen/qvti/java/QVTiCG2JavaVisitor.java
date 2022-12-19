@@ -3266,7 +3266,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		List<@NonNull CGClass> cgClasses = new ArrayList<>(CGUtil.getClassesList(cgTransformation));
 		Collections.sort(cgClasses, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull CGClass cgClass : cgClasses) {
-			cgClass.getCallingConvention().generateJavaDeclaration(this, js, cgClass);
+			cgClass.getCallingConvention().generateJavaDeclaration(this, cgClass);
 			//	if (!isEmpty(cgClass)) {
 			//	if (!(cgClass instanceof CGCachedOperation)) {
 			//		js.append("\n");

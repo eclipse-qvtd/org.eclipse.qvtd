@@ -94,26 +94,26 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 	}
 
 	@Override
-	protected boolean generateForwardJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGExecutorPropertyCallExp cgPropertyCallExp) {
+	protected boolean generateForwardJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGExecutorPropertyCallExp cgPropertyCallExp) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean generateJavaDeclaration(	@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGProperty cgProperty) {
+	public boolean generateJavaDeclaration(	@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGProperty cgProperty) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGNavigationCallExp cgPropertyCallExp) {
+	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGNavigationCallExp cgPropertyCallExp) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	protected boolean generateOppositeJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGExecutorOppositePropertyCallExp cgPropertyCallExp) {
+	protected boolean generateOppositeJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGExecutorOppositePropertyCallExp cgPropertyCallExp) {
 		throw new UnsupportedOperationException();
 	}
 
-	private boolean generateOppositeJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGExecutorOppositeProperty cgProperty) {
+	private boolean generateOppositeJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGExecutorOppositeProperty cgProperty) {
 		throw new UnsupportedOperationException();
 	}
 }

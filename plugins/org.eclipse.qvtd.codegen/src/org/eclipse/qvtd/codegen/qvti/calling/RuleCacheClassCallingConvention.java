@@ -130,7 +130,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 
 		@Override
-		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
+			JavaStream js = cg2javaVisitor.getJavaStream();
 			QVTiAnalyzer analyzer = (QVTiAnalyzer)cg2javaVisitor.getAnalyzer();
 			QVTiCodeGenerator codeGenerator = analyzer.getCodeGenerator();
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
@@ -311,7 +312,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		}
 
 		@Override
-		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperation cgOperation) {
+		public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
+			JavaStream js = cg2javaVisitor.getJavaStream();
 			QVTiAnalyzer analyzer = (QVTiAnalyzer)cg2javaVisitor.getAnalyzer();
 			QVTiGlobalNameManager globalNameManager = analyzer.getGlobalNameManager();
 			//
@@ -417,7 +419,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	 * Returns true if control flow continues, false if an exception throw has been synthesized.
 	 */
 	@Override
-	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGClass cgCacheClass) {
+	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGClass cgCacheClass) {
+		JavaStream js = cg2javaVisitor.getJavaStream();
 		QVTiAnalyzer analyzer = (QVTiAnalyzer) cg2javaVisitor.getAnalyzer();
 		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 		CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
@@ -433,8 +436,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		js.append("private class " + className);
 		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
-		generateProperties(cg2javaVisitor, js, cgCacheClass);
-		generateOperations(cg2javaVisitor, js, cgCacheClass);
+		generateProperties(cg2javaVisitor, cgCacheClass);
+		generateOperations(cg2javaVisitor, cgCacheClass);
 		js.popClassBody(false);
 		return true;
 	}

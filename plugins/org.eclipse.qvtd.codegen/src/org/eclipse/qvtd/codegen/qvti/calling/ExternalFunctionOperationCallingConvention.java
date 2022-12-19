@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -386,8 +385,8 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull JavaStream js, @NonNull CGOperationCallExp cgOperationCallExp) {
-		return generateDeprecatedJavaCall(cg2javaVisitor, js, cgOperationCallExp);
+	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperationCallExp cgOperationCallExp) {
+		return generateDeprecatedJavaCall(cg2javaVisitor, cgOperationCallExp);
 	}
 
 	@Override
