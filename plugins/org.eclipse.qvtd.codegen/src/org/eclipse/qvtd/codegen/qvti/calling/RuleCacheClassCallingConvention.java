@@ -427,7 +427,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		//	if (isEmpty(cgCacheClass)) {
 		//		return true;
 		//	}
-		js.append("\n");
+		js.appendOptionalBlankLine();
 		String className = CGUtil.getName(cgCacheClass);
 		CGPackage cgContainingPackage = cgCacheClass.getContainingPackage();
 		assert cgContainingPackage == null;

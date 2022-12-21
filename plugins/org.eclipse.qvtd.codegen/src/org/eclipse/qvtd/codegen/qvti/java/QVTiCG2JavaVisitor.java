@@ -498,7 +498,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				//	Emit the classIndex2allClassIndexes array of arrays
 				//
 				String classIndex2allClassIndexes = globalNameManager.getClassIndex2AllClassIndexes(typedModelNumber).getResolvedName();
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				js.append("/*\n");
 				js.append(" * Mapping from each TypedModel " + typedModelNumber + " ClassIndex to all the ClassIndexes\n");
 				js.append(" * to which an object of the outer index may contribute results to an allInstances() invocation.\n");
@@ -757,7 +757,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.append(");\n");
 		js.popIndentation();
 		js.append("}\n");
-		js.append("\n");
+		js.appendOptionalBlankLine();
 		js.append("@Override\n");
 		js.append("protected ");
 		js.appendClassReference(true, ObjectManager.class);
@@ -1926,7 +1926,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.append("return run();\n");
 			js.popIndentation();
 			js.append("}\n");
-			js.append("\n");
+			js.appendOptionalBlankLine();
 			js.append("@Override\n");
 			js.append("public boolean run() {\n");
 			js.pushIndentation(null);
@@ -2058,7 +2058,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.appendClassReference(false, javaClass);
 				String transformationExecutionName = globalNameManager.getTransformationExecutionName();
 				js.append(" " + transformationExecutionName + " = null;\n");
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				js.append("public ");
 				js.appendClassReference(true, javaClass);
 				js.append(" " + globalNameManager.getGetTransformationExecutionName() + "() {\n");
@@ -2075,7 +2075,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.append("return " + transformationExecutionName + ";\n");
 				js.popIndentation();
 				js.append("}\n");
-				js.append("\n");
+				js.appendOptionalBlankLine();
 			}
 		}
 	}
@@ -2496,11 +2496,11 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.append("protected final ");
 				js.appendTypeDeclaration(cgFunction);
 				js.append(" " + cachedResultName + ";\n");
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionConstructor(cgFunction, cgShadowExp);
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionGetInstance(cgFunction);
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionIsEqual(cgShadowExp, cachedResultName);
 				js.popClassBody(false);
 			}
@@ -2537,11 +2537,11 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				CGValuedElement cgBody = cgFunction.getBody();
 				js.appendTypeDeclaration(cgBody != null ? cgBody : cgFunction);
 				js.append(" " + cachedResultName + ";\n");
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionConstructor(cgFunction);
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionGetInstance(cgFunction);
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doFunctionIsEqual(cgFunction);
 				js.popClassBody(false);
 			}
@@ -2654,27 +2654,27 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.append(" extends ");
 			js.appendClassReference(null, isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
 			js.pushClassBody(mappingName);
-			js.append("\n");					// XXX delete me
+			js.appendOptionalBlankLine();					// XXX delete me
 			boolean needsNewLine = doMappingFields(cgMapping);
 			if (needsNewLine) {
-				js.append("\n");
+				js.appendOptionalBlankLine();
 			}
 			doMappingConstructor(cgMapping);
 			if (isIncremental) {
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doMappingDestroy(cgMapping);
 			}
-			js.append("\n");
+			js.appendOptionalBlankLine();
 			js.append("@Override\n");
 			js.append("public boolean execute() ");
 			doMappingBody(cgMapping, null);
 			if (isIncremental) {
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doMappingGetBoundValue(cgMapping);
-				js.append("\n");
+				js.appendOptionalBlankLine();
 				doMappingGetBoundValues(cgMapping);
 			}
-			js.append("\n");
+			js.appendOptionalBlankLine();
 			doIsEqual(cgFreeVariables);
 			js.popClassBody(false);
 		}
@@ -3255,10 +3255,10 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.appendOptionalBlankLine();
 		/*		if (isIncremental) {
 				doCreateIncrementalManagers();
-				js.append("\n");
+				js.appendOptionalBlankLine();
 			} */
 		/*	doCreateInterval(cgTransformation);
-			js.append("\n"); */
+			js.appendOptionalBlankLine(); */
 		doTransformationExecution(cgTransformation);
 		doRun(cgTransformation, allInstancesAnalyses);
 		//			break;
@@ -3269,7 +3269,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			cgClass.getCallingConvention().generateJavaDeclaration(this, cgClass);
 			//	if (!isEmpty(cgClass)) {
 			//	if (!(cgClass instanceof CGCachedOperation)) {
-			//		js.append("\n");
+			//		js.appendOptionalBlankLine();
 			//		cgClass.accept(this);
 			//	}
 			//	}
