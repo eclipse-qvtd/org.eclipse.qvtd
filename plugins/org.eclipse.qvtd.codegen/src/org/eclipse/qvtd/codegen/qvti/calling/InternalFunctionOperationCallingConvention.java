@@ -22,8 +22,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
@@ -65,14 +66,7 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 
 	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
-		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
-		assert asOperation.getImplementationClass() == null;
-		CGOperation cgOperation = QVTiCGModelFactory.eINSTANCE.createCGFunction();
-		analyzer.initAst(cgOperation, asOperation, true);
-		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
-		cgRootClass.getOperations().add(cgOperation);
-		createCachingClassesAndInstance(analyzer, cgOperation);
-		return cgOperation;
+		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
 	}
 
 	@Override
@@ -86,6 +80,21 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 		//	cgOperationCallExp.getArguments().add(cgSource);
 		initCallArguments(analyzer, cgOperationCallExp);
 		return cgOperationCallExp;
+	}
+
+	@Override
+	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
+		assert asOperation.getImplementationClass() == null;
+		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
+		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
+		analyzer.initAst(cgOperation, asOperation, true);
+		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
+		cgRootClass.getOperations().add(cgOperation);
+		createCachingClassesAndInstance(analyzer, cgOperation);
+		cgOperation.setCallingConvention(this);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
+		createCGParameters(operationNameManager, asExpressionInOCL);
+		return cgOperation;
 	}
 
 	@Override

@@ -11,11 +11,13 @@
 package org.eclipse.qvtd.codegen.qvti.calling;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
@@ -38,11 +40,19 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 
 	@Override
 	public @NonNull CGOperation createCGOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation) {
-		CGOperation cgOperation = QVTiCGModelFactory.eINSTANCE.createCGFunction();
+		return QVTiCGModelFactory.eINSTANCE.createCGFunction();
+	}
+
+	@Override
+	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
+		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
 		analyzer.initAst(cgOperation, asOperation, true);
+		cgOperation.setCallingConvention(this);
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
 		createCachingClassesAndInstance(analyzer, cgOperation);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
+		createCGParameters(operationNameManager, asExpressionInOCL);
 		return cgOperation;
 	}
 
