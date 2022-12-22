@@ -731,7 +731,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//	getNameManager().declareStandardName(cgExecutorProperty);
 			cgRealizedVariablePart.setReferredProperty(cgExecutorProperty);
 			cgExecutorProperty.setTypeId(qvtiAnalyzer.getCGTypeId(asProperty.getTypeId()));			// FIXME promote
-			qvtiAnalyzer.addExternalFeature(asProperty);
+			//	qvtiAnalyzer.addExternalFeature(asProperty);
 		}
 		return cgRealizedVariablePart;
 	}
