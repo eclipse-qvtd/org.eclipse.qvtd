@@ -222,7 +222,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 					addRequalification(asCacheClass, packagePrefix);
 			}
 		}
-		analyzer.analyzeExternalFeatures(cgTransformation);
 		return cgPackage;
 	}
 
