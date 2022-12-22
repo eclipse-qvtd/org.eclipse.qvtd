@@ -663,25 +663,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return cgMappingLoop;
 	}
 
-	/*	@Override
-	public @NonNull CGOperation generateOperationDeclaration(@NonNull Operation asOperation, @Nullable OperationCallingConvention callingConvention, boolean requireFinal) {
-		if (!requireFinal && (asOperation instanceof Function)) {			// XXX ??? eliminate override
-			Function asFunction = (Function)asOperation;
-			CGFunction cgFunction = basicGetCGFunction(asFunction);
-			if (cgFunction == null) {
-				FunctionOperationCallingConvention callingConvention = (FunctionOperationCallingConvention)codeGenerator.getCallingConvention(asFunction, true);
-				//	CGClass cgClass = generateClassDeclaration(PivotUtil.getOwningClass(asOperation), callingConvention.getClassCallingConvention());
-				cgFunction = (CGFunction)callingConvention.createCGOperation(this, asFunction);
-				assert cgFunction.getAst() != null;
-				assert cgFunction.getCallingConvention() == callingConvention;
-				callingConvention.createCGParameters(this, cgFunction, (ExpressionInOCL)asFunction.getBodyExpression());
-				addCGFunction(cgFunction);
-			}
-			return cgFunction;
-		}
-		return super.generateOperationDeclaration(asOperation, callingConvention, requireFinal);
-	} */
-
 	@Override
 	public @NonNull CGValuedElement generatePropertyCallExp(@Nullable CGValuedElement cgSource, @NonNull PropertyCallExp element) {
 		Property asProperty = ClassUtil.nonNullModel(element.getReferredProperty());
