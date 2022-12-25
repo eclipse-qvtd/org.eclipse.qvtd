@@ -2522,7 +2522,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					//						js.appendDeclaration(cgParameter);
 					//						js.appendTypeDeclaration(cgParameter);
 					boolean isPrimitive = js.isPrimitive(cgParameter);
-					boolean isRequired = !isPrimitive && !cgParameter.isAssertedNonNull() && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/ *|| cgElement.isRequired()* /;	// FIXME Ugh!
+					boolean isRequired = !isPrimitive && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/ *|| cgElement.isRequired()* /;	// FIXME Ugh!
 					js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
 					js.append(" ");
 					js.appendClassReference(isPrimitive ? null : isRequired ? true : null, cgParameter);
