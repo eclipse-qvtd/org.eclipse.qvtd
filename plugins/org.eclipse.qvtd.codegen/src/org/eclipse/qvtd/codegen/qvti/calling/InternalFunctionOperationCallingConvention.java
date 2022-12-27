@@ -93,10 +93,6 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 		Operation asOperation = CGUtil.getAST(cgOperation);
 		assert !asOperation.isIsStatic();
 		assert bodyExpression != null;
-		//	for (@NonNull Variable asParameterVariable : PivotUtil.getOwnedParameters(bodyExpression)) {
-		//		CGParameter cgParameter = createCGParameter(operationNameManager, asParameterVariable);
-		//		cgOperation.getParameters().add(cgParameter);
-		//	}
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOperation);
 		// contextVariable is always the transformation, so not passed
 		Iterable<@NonNull Variable> asParameterVariables = PivotUtil.getOwnedParameters(bodyExpression);
