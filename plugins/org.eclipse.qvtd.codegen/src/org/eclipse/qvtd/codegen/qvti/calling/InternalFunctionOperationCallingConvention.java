@@ -77,7 +77,7 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 		assert QVTimperativeUtil.basicGetShadowExp(asOperation) == null;
 		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 		initCallExp(analyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
-		//	cgOperationCallExp.getArguments().add(cgSource);
+		cgOperationCallExp.getArguments().add(cgSource);
 		initCallArguments(analyzer, cgOperationCallExp);
 		return cgOperationCallExp;
 	}
