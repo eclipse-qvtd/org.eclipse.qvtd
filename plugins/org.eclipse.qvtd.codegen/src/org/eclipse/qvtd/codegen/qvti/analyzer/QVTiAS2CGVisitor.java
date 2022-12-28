@@ -396,6 +396,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgIsKindOfExp.setExecutorType(cgExecutorType);
 			cgPredicate.setCondition(cgIsKindOfExp);
 			cgOuterLetExp.setIn(cgPredicate);
+			cgOuterLetExp.setRequired(cgPredicate.isRequired());
 
 			CGVariableExp cgUncastVariableExp2 = CGModelFactory.eINSTANCE.createCGVariableExp();
 			cgUncastVariableExp2.setAst(asVariable);

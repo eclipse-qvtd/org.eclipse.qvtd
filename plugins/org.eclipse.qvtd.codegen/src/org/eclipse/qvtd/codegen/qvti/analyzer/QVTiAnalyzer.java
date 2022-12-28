@@ -354,7 +354,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				cgMapping.setOwnedBody(cgElementRoot);
 			}
 			if (cgLeafExp instanceof CGLetExp) {
-				((CGLetExp)cgLeafExp).setIn(cgElementRoot);
+				CGLetExp cgLetExp = (CGLetExp)cgLeafExp;
+				cgLetExp.setIn(cgElementRoot);
+				cgLetExp.setRequired(cgElementRoot.isRequired());
 			}
 			else if (cgLeafExp instanceof CGIfExp) {
 				((CGIfExp)cgLeafExp).setThenExpression(cgElementRoot);
@@ -385,6 +387,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			}
 			appendSubTree(cgMappingExp);
 			cgMappingExp.setOwnedBody(cgSequence);
+			cgMappingExp.setRequired(true);
 		}
 
 		@Override
