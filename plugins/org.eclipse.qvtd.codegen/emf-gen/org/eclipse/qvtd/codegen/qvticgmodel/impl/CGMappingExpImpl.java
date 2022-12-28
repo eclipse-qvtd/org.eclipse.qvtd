@@ -202,11 +202,11 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAccumulators().clear();
-			getOwnedAccumulators().addAll((Collection<? extends CGAccumulator>)newValue);
-			return;
+				getOwnedAccumulators().addAll((Collection<? extends CGAccumulator>)newValue);
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -221,10 +221,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		switch (featureID) {
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAccumulators().clear();
-			return;
+				return;
 			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -319,13 +319,25 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
-	public boolean isUnboxed() {
+	public boolean isNonNull() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
-	public boolean isNonNull() {
-		// XXX Auto-generated method stub
-		return super.isNonNull();
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return true;
 	}
 } //CGMappingExpImpl

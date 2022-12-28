@@ -104,7 +104,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 			new QVTdCGValuedElementModelSpec(CGFunction.class, null,							Box.BOX  , null     , null     , Nul.ECORE, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
 			new QVTdCGValuedElementModelSpec(CGMapping.class, null,								Box.ALL  , null     , null     , null     , null     , null     , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
-			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,							Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
+			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,							Box.ALL  , null     , null     , Nul.NEVER, null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
 
 			new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 			new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
