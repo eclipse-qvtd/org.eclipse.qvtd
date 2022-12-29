@@ -685,7 +685,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			Type tIn = pIn.getType();
 			Type tVar = tIn != null ? context.equivalentTarget(tIn) : null;
 			pOut.setType(tVar);
-			Type tvIn = pIn.getTypeValue();
+			Element tvIn = pIn.getTypeValue();
 			pOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			return pIn;
 		}
@@ -762,7 +762,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			Type tIn = vIn.getType();
 			Type tOut = tIn != null ? context.equivalentTarget(tIn) : null;
 			vOut.setType(tOut);
-			Type tvIn = vIn.getTypeValue();
+			Element tvIn = vIn.getTypeValue();
 			vOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tOut));
 			//	Parameter rpIn = vIn.getRepresentedParameter();

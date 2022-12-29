@@ -567,7 +567,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			Type tIn = pIn.getType();
 			Type tVar = tIn != null ? context.equivalentTarget(tIn) : null;
 			pOut.setType(tVar);
-			Type tvIn = pIn.getTypeValue();
+			Element tvIn = pIn.getTypeValue();
 			pOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			return pIn;
 		}
@@ -669,7 +669,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			Type tIn = vIn.getType();
 			Type tVar = tIn != null ? context.equivalentTarget(tIn) : null;
 			vOut.setType(tVar);
-			Type tvIn = vIn.getTypeValue();
+			Element tvIn = vIn.getTypeValue();
 			vOut.setTypeValue(tvIn != null ? context.equivalentTarget(tvIn) : null);
 			vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tVar));
 			return vIn;
