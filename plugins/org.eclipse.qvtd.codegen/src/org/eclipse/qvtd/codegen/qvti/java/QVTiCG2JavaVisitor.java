@@ -1264,7 +1264,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.append(") {\n");
 				js.pushIndentation(null);
 			}
-			else if (!ownedValue.isNonNull()) {
+			else if (!ownedValue.isNonNullChecked()) {
 				Element asMappingParameterBinding = cgMappingCallBinding.getAst();
 				if (!(asMappingParameterBinding instanceof GuardParameterBinding)) {		// FIXME this should be part of isNonNull
 					js.append("if (");
@@ -1318,7 +1318,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.popIndentation();
 				js.append("}\n");
 			}
-			else if (!cgMappingCallBinding.getOwnedValue().isNonNull()) {
+			else if (!cgMappingCallBinding.getOwnedValue().isNonNullChecked()) {
 				Element asMappingParameterBinding = cgMappingCallBinding.getAst();
 				if (!(asMappingParameterBinding instanceof GuardParameterBinding)) {		// FIXME this should be part of isNonNull
 					js.popIndentation();
@@ -1368,7 +1368,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					js.append(") {\n");
 					js.pushIndentation(null);
 				}
-				else if (!cgMappingCallBinding.getOwnedValue().isNonNull()) {
+				else if (!cgMappingCallBinding.getOwnedValue().isNonNullChecked()) {
 					js.append("if (");
 					js.appendValueName(cgMappingCallBinding.getOwnedValue());
 					js.append(" != null) {\n");
@@ -1417,7 +1417,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.popIndentation();
 				js.append("}\n");
 			}
-			else if (!cgMappingCallBinding.getOwnedValue().isNonNull()) {
+			else if (!cgMappingCallBinding.getOwnedValue().isNonNullChecked()) {
 				js.popIndentation();
 				js.append("}\n");
 			}
@@ -2522,7 +2522,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					//						js.appendDeclaration(cgParameter);
 					//						js.appendTypeDeclaration(cgParameter);
 					boolean isPrimitive = js.isPrimitive(cgParameter);
-					boolean isRequired = !isPrimitive && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/ *|| cgElement.isRequired()* /;	// FIXME Ugh!
+					boolean isRequired = !isPrimitive && cgParameter.isNonNullChecked() && !(cgParameter instanceof CGUnboxExp)/ *|| cgElement.isRequired()* /;	// FIXME Ugh!
 					js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
 					js.append(" ");
 					js.appendClassReference(isPrimitive ? null : isRequired ? true : null, cgParameter);
@@ -2885,14 +2885,14 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		}
 		js.append(") {\n");
 		js.pushIndentation(null);
-		if (!iterator.isNonNull()) {
+		if (!iterator.isNonNullChecked()) {
 			js.append("if (");
 			js.appendValueName(iterator);
 			js.append(" != null) {\n");
 			js.pushIndentation(null);
 		}
 		body.accept(this);
-		if (!iterator.isNonNull()) {
+		if (!iterator.isNonNullChecked()) {
 			js.popIndentation();
 			js.append("}\n");
 		}
@@ -3089,7 +3089,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 						//	if (cgInput instanceof CGEcorePropertyCallExp) {cgInput;
 						CGValuedElement cgInputObject = cgSpeculatePart.getObjectExp();
 						//	boolean isRequired = cgInputObject.isRequired();
-						boolean isNonNull = cgInputObject.isNonNull();
+						boolean isNonNull = cgInputObject.isNonNullChecked();
 						if (isNonNull) {
 							js.append("if (");
 							js.appendValueName(cgInputObject);
