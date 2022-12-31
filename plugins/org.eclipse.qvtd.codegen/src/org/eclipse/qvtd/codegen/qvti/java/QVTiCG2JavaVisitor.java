@@ -422,7 +422,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.appendClassReference(null, AbstractTransformer.class);
 			js.append(".CREATIONS.println(\"created \"");
 			js.append(" + toDebugString(");
-			js.append(getResolvedName(cgRealizedVariable));
+			js.append(cgRealizedVariable.getResolvedName());
 			js.append(")");
 			js.append(");\n");
 			js.popIndentation();
@@ -1119,7 +1119,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					js.append("\n\t&& ");
 				}
 				js.append("idResolver.oclEquals(");
-				js.append(getResolvedName(cgFreeVariable));
+				js.append(cgFreeVariable.getResolvedName());
 				js.append(", thoseValues[" + index++ + "])");
 			}
 		}
@@ -1147,7 +1147,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					//	js.append(", ");
 					js.append("\\\"" + cgGuardVariable.getName() + "\\\":\"");
 					js.append(" + toDebugString(");
-					js.append(getResolvedName(cgGuardVariable));
+					js.append(cgGuardVariable.getResolvedName());
 					js.append(")");
 					Element ast = cgGuardVariable.getAst();
 					if (ast instanceof TypedElement) {
@@ -1157,7 +1157,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 							js.append(" +\n\t\"\\n\\t");
 							js.append("\\\"dispatcher\\\":\"");
 							js.append(" + toDebugString(");
-							js.append(getResolvedName(cgGuardVariable));
+							js.append(cgGuardVariable.getResolvedName());
 							js.append(".getDispatcher())");
 							for (Property dispatcherProperty : PivotUtil.getOwnedProperties(PivotUtil.getClass(trace2dispatcherProperty))) {
 								String name = PivotUtil.getName(dispatcherProperty);
@@ -1165,7 +1165,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 									js.append(" +\n\t\"\\n\\t");
 									js.append("\\\"dispatcher." + name + "\\\":\"");
 									js.append(" + toDebugString(");
-									js.append(getResolvedName(cgGuardVariable));
+									js.append(cgGuardVariable.getResolvedName());
 									String prefix = dispatcherProperty.getTypeId() == TypeId.BOOLEAN ? "is" : "get";		// FIXME Use GenModel
 									js.append(".getDispatcher()." + prefix + Character.toUpperCase(name.charAt(0)) + name.substring(1) + "())");
 
@@ -1434,7 +1434,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.append("final ");
 			js.appendClassReference(true, isIncremental ? Connection.Incremental.class : Connection.class);
 			js.append(" ");
-			js.append(getResolvedName(cgFreeVariable));
+			js.append(cgFreeVariable.getResolvedName());
 		}
 		else{
 			js.getBoxedTypeRepresentation().appendDeclaration(cgFreeVariable);
@@ -1475,7 +1475,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		//
 		int i = 0;
 		for (@NonNull CGGuardVariable cgGuardVariable : cgGuardVariables) {
-			String valueName = getResolvedName(cgGuardVariable);
+			String valueName = cgGuardVariable.getResolvedName();
 			js.append(valueName);
 			js.append(" = ");
 			//							js.appendClassCast(cgFreeVariable);
@@ -1706,7 +1706,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.pushIndentation(null);
 		int i = 0;
 		for (@NonNull CGGuardVariable cgGuardVariable : cgGuardVariables) {
-			String valueName = getResolvedName(cgGuardVariable);
+			String valueName = cgGuardVariable.getResolvedName();
 			js.append("case " + i++ + ": return ");
 			js.append(valueName);
 			js.append(";\n");

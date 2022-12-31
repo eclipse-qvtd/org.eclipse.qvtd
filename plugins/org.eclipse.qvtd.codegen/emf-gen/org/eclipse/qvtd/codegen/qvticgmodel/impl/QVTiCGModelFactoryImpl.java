@@ -16,14 +16,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreContainerAssignmentImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcorePropertyAssignmentImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyAssignmentImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGSequenceImpl;
 import org.eclipse.qvtd.codegen.qvticgmodel.*;
 
 /**
