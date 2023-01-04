@@ -644,13 +644,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				cgIterator.setTypeId(getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
 				cgIterator.setRequired(asIterator.isIsRequired());
 				if (asIterator.isIsRequired()) {
-					cgIterator.setNonNull();
+					cgIterator.setRequired(true);
 				}
 				cgMappingLoop.getIterators().add(cgIterator);
 			}
 		}
 		//		cgIterator.setNonInvalid();
-		//		cgIterator.setNonNull();
+		//		cgIterator.setRequired(true);
 		CollectionType collectionType = getStandardLibrary().getCollectionType();
 		Iteration forAllIteration = (Iteration)NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		assert forAllIteration != null;
@@ -934,7 +934,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			//	nameManager.declarePreferredName(cgFunctionParameter);
 			cgFunctionParameter.setTypeId(getCGTypeId(asFunctionParameter.getTypeId()));
 			if (asFunctionParameter.isIsRequired()) {
-				cgFunctionParameter.setNonNull();
+				cgFunctionParameter.setRequired(true);
 			}
 			operationNameManager.addVariable(asFunctionParameter, cgFunctionParameter);
 		}

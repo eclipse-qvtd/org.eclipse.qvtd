@@ -83,7 +83,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		cgExecutorVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID));
 		//	executorVariable.setInit(executorInit);
 		cgExecutorVariable.setNonInvalid();
-		cgExecutorVariable.setNonNull();
+		cgExecutorVariable.setRequired(true);
 		executorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
 		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
@@ -101,7 +101,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 			cgVariable.setAst(asVariable);
 			if (asVariable.isIsRequired()) {
 				cgVariable.setNonInvalid();
-				cgVariable.setNonNull();
+				cgVariable.setRequired(true);
 			}
 			return cgVariable;
 		}
@@ -120,7 +120,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		cgIdResolverVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
 		//	executorVariable.setInit(executorInit);			// This name exposes a 'hidden' initialized name
 		cgIdResolverVariable.setNonInvalid();
-		cgIdResolverVariable.setNonNull();
+		cgIdResolverVariable.setRequired(true);
 		idResolverNameResolution.addCGElement(cgIdResolverVariable);			// XXX share via createIdResolver(init)
 		return cgIdResolverVariable;			// XXX who owns the variable ??
 	} */
@@ -135,7 +135,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		CGFinalVariable transformationVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
 		transformationVariable.setTypeId(cgTypeId);
 		transformationVariable.setNonInvalid();
-		transformationVariable.setNonNull();
+		transformationVariable.setRequired(true);
 		rootObjectName.addCGElement(transformationVariable);
 		return transformationVariable;
 	}

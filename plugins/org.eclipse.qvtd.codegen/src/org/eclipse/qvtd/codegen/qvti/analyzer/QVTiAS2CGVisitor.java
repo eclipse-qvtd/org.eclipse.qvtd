@@ -285,7 +285,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		else {
 			cgAccumulator.setTypeId(qvtiAnalyzer.getCGTypeId(asVariable.getTypeId()));
 		}
-		cgAccumulator.setNonNull();
+		cgAccumulator.setRequired(true);
 		cgAccumulator.setNonInvalid();
 		qvtiAnalyzer.getBodyBuilder().addAccumulator(cgAccumulator);
 		nameManager.addVariable(asVariable, cgAccumulator);
