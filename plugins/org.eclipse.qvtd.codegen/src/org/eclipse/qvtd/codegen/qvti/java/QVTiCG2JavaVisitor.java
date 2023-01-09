@@ -50,7 +50,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGSequence;
@@ -215,7 +214,6 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals;
 	protected boolean isGeneratedDebug = false;
 	protected boolean isIncremental = false;
@@ -225,11 +223,9 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 	/* Non-null while wrapping a function-implemented mapping in a SimpleInvocation */
 	private @Nullable Mapping invocationWrapper = null;
 
-	public QVTiCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator, @NonNull CGPackage cgPackage,
-			@Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		super(codeGenerator, cgPackage, sortedGlobals);
+	public QVTiCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		super(codeGenerator);
 		QVTiCodeGenerator codeGenerator2 = (QVTiCodeGenerator)codeGenerator;
-		this.cgPackage = cgPackage;
 		this.sortedGlobals = sortedGlobals;
 		this.isGeneratedDebug = codeGenerator2.getOptions().isGeneratedDebug();
 		this.isIncremental = codeGenerator.getOptions().isIncremental();

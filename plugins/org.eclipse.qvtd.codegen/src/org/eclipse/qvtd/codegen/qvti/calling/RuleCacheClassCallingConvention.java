@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -379,7 +378,6 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 	public @NonNull CreationCache createCreationCache(@NonNull ClassNameManager classNameManager, @NonNull NewStatement asNewStatement) {
 		CodeGenAnalyzer analyzer = classNameManager.getAnalyzer();
 		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
-		ImportNameManager importNameManager = codeGenerator.getImportNameManager();
 		LanguageSupport jLanguageSupport = codeGenerator.getLanguageSupport();
 		org.eclipse.ocl.pivot.Class asClass = classNameManager.getASClass();
 		org.eclipse.ocl.pivot.@NonNull Package asParentPackage = getParentPackage(analyzer, asClass);
@@ -389,7 +387,6 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		org.eclipse.ocl.pivot.Class asCacheClass = AbstractLanguageSupport.getClass(asParentPackage, entryClassName);
 		org.eclipse.ocl.pivot.Class asCacheClassSuperClass = jLanguageSupport.getNativeClass(/*isIncremental ? AbstractEvaluationOperation.Incremental.class :*/ AbstractEvaluationOperation.class);
 		asCacheClass.getSuperClasses().add(asCacheClassSuperClass);
-		importNameManager.reserveLocalName(PivotUtil.getName(asCacheClass));
 		//
 		CGClass cgCacheClass = analyzer.generateClassDeclaration(asCacheClass, this);
 		CGClass cgCacheSuperClass = analyzer.generateClassDeclaration(asCacheClassSuperClass, null);

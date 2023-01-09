@@ -202,11 +202,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiCG2JavaPreVisitor(this);
 	}
 
-	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+		return new QVTiCG2JavaVisitor(this, sortedGlobals);
 	}
 
-	protected @NonNull CGPackage createCGPackage() {
+	protected @NonNull CGTransformation createCGTransformation() {
 		analyzer.setRootClass(asTransformation);				// Identify the host for synthesized nested classes
 		//	CGPackage cgPackage = analyzer.createCGElement(CGPackage.class, asTransformation.getOwningPackage());
 		CGPackage cgPackage = analyzer.generateRootPackage(asTransformation.getOwningPackage());
@@ -222,7 +222,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 					addRequalification(asCacheClass, packagePrefix);
 			}
 		}
-		return cgPackage;
+		return cgTransformation;
 	}
 
 	protected @NonNull CGPackage createCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
@@ -247,7 +247,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		globalNameManager.getOppositeIndex2PropertyIdName();
 		EntryPointsAnalysis entryPointsAnalysis = getEntryPointsAnalysis(asTransformation);
 		globalNameManager.reserveGlobalNames(entryPointsAnalysis);
-		CGPackage cgPackage2 = createCGPackage();
+		CGTransformation cgTransformation = createCGTransformation();
+		CGPackage cgPackage2 = cgTransformation.getContainingPackage();
 		cgPackage = cgPackage2;
 		optimize(cgPackage2);
 
@@ -258,11 +259,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			metamodelManager.installRoot(nativeModel);
 		}
 		Iterable<@NonNull CGValuedElement> sortedGlobals = pregenerate(cgPackage2);
-		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
-		generator.safeVisit(cgPackage2);
-		ImportNameManager importNameManager = generator.getImportNameManager();
+		QVTiCG2JavaVisitor cg2java = createCG2JavaVisitor(sortedGlobals);
+		ImportNameManager importNameManager = cg2java.getImportNameManager();
+		importNameManager.reserveNestedClassNames(cgTransformation);
+		cg2java.safeVisit(cgPackage2);
 		Map<@NonNull String, @Nullable String> long2ShortImportNames = importNameManager.getLong2ShortImportNames();
-		String javaSourceCode = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
+		String javaSourceCode = ImportUtils.resolveImports(cg2java.toString(), long2ShortImportNames, false);
 		return javaSourceCode;
 	}
 

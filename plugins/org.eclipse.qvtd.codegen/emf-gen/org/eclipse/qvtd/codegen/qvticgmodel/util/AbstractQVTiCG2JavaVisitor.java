@@ -37,8 +37,8 @@ public abstract class AbstractQVTiCG2JavaVisitor
 	extends org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor
 	implements QVTiCGModelVisitor<@NonNull Boolean>
 {
-	protected AbstractQVTiCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-		super(codeGenerator, cgPackage, sortedGlobals);
+	protected AbstractQVTiCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator) {
+		super(codeGenerator);
 	}
 
 	@Override

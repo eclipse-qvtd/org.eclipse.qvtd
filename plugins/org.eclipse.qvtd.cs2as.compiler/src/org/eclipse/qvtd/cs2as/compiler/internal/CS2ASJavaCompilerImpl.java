@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -89,8 +88,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		@Override
-		protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-			return new CS2ASCG2JavaVisitor(this, cgPackage, sortedGlobals);
+		protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+			return new CS2ASCG2JavaVisitor(this, sortedGlobals);
 		}
 
 		//	@Override
@@ -152,8 +151,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	{
 		private static final String LOOKUP_SOLVER_FIELD_NAME = "lookupSolver";
 
-		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
-			super(codeGenerator, cgPackage, sortedGlobals);
+		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
+			super(codeGenerator, sortedGlobals);
 		}
 
 		@Override
