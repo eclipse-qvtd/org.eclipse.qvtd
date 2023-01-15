@@ -208,11 +208,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull CGTransformation createCGTransformation() {
 		analyzer.setRootClass(asTransformation);				// Identify the host for synthesized nested classes
-		//	CGPackage cgPackage = analyzer.createCGElement(CGPackage.class, asTransformation.getOwningPackage());
-		CGPackage cgPackage = analyzer.generateRootPackage(asTransformation.getOwningPackage());
+		/*CGPackage cgRootPackage =*/ analyzer.generatePackage(null, PivotUtil.getOwningPackage(asTransformation));
+		analyzer.generateInjectedCGClasses();
 		CGTransformation cgTransformation = (CGTransformation)analyzer.getCGClass(asTransformation);
-		//	CGPackage cgPackage = (CGPackage) EcoreUtil.getRootContainer(cgTransformation);
-		assert cgPackage != null;
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
 			addRequalification(asTransformation, packagePrefix);
