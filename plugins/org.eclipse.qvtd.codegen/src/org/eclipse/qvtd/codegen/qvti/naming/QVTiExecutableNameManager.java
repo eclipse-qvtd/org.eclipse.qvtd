@@ -67,7 +67,16 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	//	}
 
 	@Override
-	public @NonNull CGVariable createExecutorVariable() {
+	public @Nullable CGVariable basicGetExecutorVariable() {
+		CGVariable executorVariable = super.basicGetExecutorVariable();
+		if (executorVariable == null) {
+			getExecutorParameter();		// Always exists so must create
+		}
+		return executorVariable;
+	}
+
+	@Override
+	protected @NonNull CGVariable createExecutorVariable() {
 		// create a 'parameter' variable that exposes the static field name as a variable
 		//	assert outerContext == null;
 		//	assert asScope instanceof Transformation;
@@ -126,7 +135,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	} */
 
 	@Override
-	public @NonNull CGFinalVariable createQualifiedThisVariable() {
+	protected @NonNull CGFinalVariable createQualifiedThisVariable() {
 		Class asClass = classNameManager.getASClass();
 		assert asClass instanceof Transformation;
 		NameResolution rootObjectName = getGlobalNameManager().getRootObjectNameResolution();
