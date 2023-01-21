@@ -49,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -308,15 +308,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean IsEQ_ = name != null;
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IsEQ_, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -324,6 +324,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -351,23 +352,23 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
+				/*@Caught*/ @Nullable Object CAUGHT_isUnique;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters_0 = this.getOwnedMappingParameters();
-					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters_0);
-					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
+					final /*@NonInvalid*/ @Nullable SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeSupport.SET_CLSSid_MappingParameter, ownedMappingParameters_0);
+					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeSupport.SET_CLSSid_MappingParameter);
 					@NonNull Iterator<Object> ITER__1 = BOXED_ownedMappingParameters.iterator();
 					/*@Thrown*/ boolean isUnique;
 					while (true) {
 						if (!ITER__1.hasNext()) {
-							isUnique = true;
+							isUnique = ValueUtil.TRUE_VALUE;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -390,7 +391,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				catch (Exception THROWN_CAUGHT_isUnique) {
 					CAUGHT_isUnique = ValueUtil.createInvalidValue(THROWN_CAUGHT_isUnique);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -398,6 +399,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -428,29 +430,29 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
+				/*@Caught*/ @Nullable Object CAUGHT_isUnique;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_VariableStatement = idResolver.getClass(QVTimperativeTables.CLSSid_VariableStatement, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_VariableStatement = idResolver.getClass(QVTimperativeSupport.CLSSid_VariableStatement, null);
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters_0 = this.getOwnedMappingParameters();
-					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters_0);
+					final /*@NonInvalid*/ @Nullable SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeSupport.SET_CLSSid_MappingParameter, ownedMappingParameters_0);
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull List<Statement> ownedStatements_0 = this.getOwnedStatements();
-					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_Statement, ownedStatements_0);
-					final /*@NonInvalid*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
-					final /*@NonInvalid*/ @NonNull SetValue union = (@Nullable SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
-					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
+					final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeSupport.ORD_CLSSid_Statement, ownedStatements_0);
+					final /*@NonInvalid*/ @NonNull OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
+					final /*@NonInvalid*/ @NonNull SetValue union = (SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
+					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeSupport.SET_CLSSid_VariableDeclaration);
 					@NonNull Iterator<Object> ITER__1 = union.iterator();
 					/*@Thrown*/ boolean isUnique;
 					while (true) {
 						if (!ITER__1.hasNext()) {
-							isUnique = true;
+							isUnique = ValueUtil.TRUE_VALUE;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -473,7 +475,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				catch (Exception THROWN_CAUGHT_isUnique) {
 					CAUGHT_isUnique = ValueUtil.createInvalidValue(THROWN_CAUGHT_isUnique);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -481,6 +483,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

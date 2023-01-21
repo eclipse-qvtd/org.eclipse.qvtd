@@ -38,7 +38,7 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 
 /**
@@ -111,10 +111,10 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_implies;
@@ -141,19 +141,19 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 							throw (InvalidValueException)CAUGHT_type;
 						}
 						final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-						final /*@NonInvalid*/ boolean IsEQ2_ = THROWN_type == null;
+						final /*@NonInvalid*/ Boolean IsEQ2_ = THROWN_type == null;
 						/*@Caught*/ @Nullable Object IF_IsEQ2_;
 						if (IsEQ2_) {
 							IF_IsEQ2_ = null;
 						}
 						else {
-							/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+							/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 							try {
 								if (THROWN_type == null) {
-									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 								}
 								final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_type, type_0).booleanValue();
+								final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_type, type_0).booleanValue();
 								CAUGHT_conformsTo = conformsTo;
 							}
 							catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -181,7 +181,7 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 				catch (Exception THROWN_CAUGHT_implies) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(THROWN_CAUGHT_implies);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_implies, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -189,6 +189,7 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

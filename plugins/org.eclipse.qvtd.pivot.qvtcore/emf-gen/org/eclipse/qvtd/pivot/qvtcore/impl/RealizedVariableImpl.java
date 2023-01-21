@@ -34,9 +34,8 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 
@@ -109,45 +108,28 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @Nullable Object CAUGHT_not;
-				try {
-					/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
-					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTcoreTables.CLSSid_DataType, null);
-						final /*@NonInvalid*/ @Nullable Type type = this.getType();
-						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
-						CAUGHT_oclIsKindOf = oclIsKindOf;
-					}
-					catch (Exception THROWN_CAUGHT_oclIsKindOf) {
-						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclIsKindOf);
-					}
-					if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_oclIsKindOf;
-					}
-					final /*@Thrown*/ @Nullable Boolean not;
-					if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {
-						not = ValueUtil.TRUE_VALUE;
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTcoreSupport.CLSSid_DataType, null);
+				final /*@NonInvalid*/ @Nullable Type type = this.getType();
+				final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
+				final /*@NonInvalid*/ @Nullable Boolean not;
+				if (!oclIsKindOf) {
+					not = ValueUtil.TRUE_VALUE;
+				}
+				else {
+					if (oclIsKindOf) {
+						not = ValueUtil.FALSE_VALUE;
 					}
 					else {
-						if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {
-							not = ValueUtil.FALSE_VALUE;
-						}
-						else {
-							not = null;
-						}
+						not = null;
 					}
-					CAUGHT_not = not;
 				}
-				catch (Exception THROWN_CAUGHT_not) {
-					CAUGHT_not = ValueUtil.createInvalidValue(THROWN_CAUGHT_not);
-				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_not, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, not, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -155,6 +137,7 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

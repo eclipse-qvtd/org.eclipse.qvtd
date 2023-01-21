@@ -62,7 +62,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
@@ -260,15 +260,15 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreSupport.SET_CLSSid_VariableDeclaration, ownedVariables);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITER__1 = BOXED_ownedVariables.iterator();
 				/*@NonInvalid*/ @Nullable Boolean forAll;
@@ -287,7 +287,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 					/**
 					 * oclIsKindOf(BottomVariable)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_BottomVariable = idResolver.getClass(QVTcoreTables.CLSSid_BottomVariable, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_BottomVariable = idResolver.getClass(QVTcoreSupport.CLSSid_BottomVariable, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_BottomVariable).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
@@ -301,7 +301,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -309,6 +309,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

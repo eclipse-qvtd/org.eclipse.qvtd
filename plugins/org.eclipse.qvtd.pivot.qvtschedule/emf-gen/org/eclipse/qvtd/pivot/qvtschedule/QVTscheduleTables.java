@@ -23,17 +23,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotTables;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.DataTypeId;
-import org.eclipse.ocl.pivot.ids.EnumerationId;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
-import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
@@ -48,8 +39,6 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 // import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 // import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables;
 
@@ -74,114 +63,6 @@ public class QVTscheduleTables extends AbstractTables
 	 *	The library of all packages and types.
 	 */
 	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
-
-	/**
-	 *	Constants used by auto-generated code.
-	 */
-	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2017/QVTschedule", null, QVTschedulePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BasicPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("BasicPartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CastEdge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CastEdge", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTscheduleTables.PACKid_$metamodel$.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ClassDatum = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ClassDatum", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Cluster = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Cluster", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionClassDatum = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CollectionClassDatum", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionLiteralPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("CollectionLiteralPart", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompleteClass = QVTscheduleTables.PACKid_$metamodel$.getClassId("CompleteClass", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompositePartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CompositePartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Connection = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Connection", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ConnectionEnd = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ConnectionEnd", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CyclicMappingRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CyclicMappingRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DispatchRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("DispatchRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Edge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Edge", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EdgeConnection = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("EdgeConnection", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnumerationLiteral = QVTscheduleTables.PACKid_$metamodel$.getClassId("EnumerationLiteral", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_KeyPartEdge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("KeyPartEdge", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_KeyedValueNode = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("KeyedValueNode", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoadingPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("LoadingPartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoadingRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("LoadingRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MapLiteralPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("MapLiteralPart", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MappingPartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MappingRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MergedPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MergedPartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NavigableEdge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("NavigableEdge", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NavigationEdge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("NavigationEdge", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Node = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Node", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NodeConnection = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("NodeConnection", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Operation = QVTscheduleTables.PACKid_$metamodel$.getClassId("Operation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("OperationRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = QVTscheduleTables.PACKid_$metamodel$.getClassId("Parameter", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Partition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Partition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTscheduleTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyDatum = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("PropertyDatum", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Region = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Region", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RootPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RootPartition", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RootRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RootRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RuleRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RuleRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ScheduleModel = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduleModel", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ShadowPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("ShadowPart", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TupleLiteralPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("TupleLiteralPart", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTscheduleTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTscheduleTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VerdictRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("VerdictRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EInt = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
-	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EIntegerObject = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EIntegerObject", 0);
-	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_Number = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getDataTypeId("Number", 0);
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_ConnectionRole = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("ConnectionRole");
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_Role = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Role");
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_Utility = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getEnumerationId("Utility");
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_BasicPartition = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_BasicPartition, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_CastEdge = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_CastEdge, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_ClassDatum = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_ClassDatum, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_CollectionClassDatum = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_CollectionClassDatum, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Connection = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_Connection, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_CyclicMappingRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_CyclicMappingRegion, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_DispatchRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_DispatchRegion, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_EdgeConnection = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_EdgeConnection, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_KeyPartEdge = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_KeyPartEdge, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_KeyedValueNode = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_KeyedValueNode, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_MappingPartition = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_MappingPartition, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_MappingRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_MappingRegion, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_NavigableEdge = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_NavigableEdge, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_NavigationEdge = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_NavigationEdge, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Node = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_Node, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_NodeConnection = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_NodeConnection, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_OperationRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_OperationRegion, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Partition = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_Partition, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_PropertyDatum = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_PropertyDatum, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_RootPartition = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_RootPartition, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_VerdictRegion = TypeId.BAG.getSpecializedId(QVTscheduleTables.CLSSid_VerdictRegion, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_BasicPartition = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_BasicPartition, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_ClassDatum = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_ClassDatum, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Cluster = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Cluster, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_CompleteClass = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_CompleteClass, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Connection = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Connection, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Edge = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Edge, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_EdgeConnection = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_EdgeConnection, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingPartition = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_MappingPartition, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingRegion = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_MappingRegion, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_MappingRegion_0 = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_MappingRegion, true, ValueUtil.ONE_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Node = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Node, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Node_0 = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Node, true, ValueUtil.ONE_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_NodeConnection = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_NodeConnection, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_OperationRegion = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_OperationRegion, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_PropertyDatum, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Region = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_Region, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RootRegion = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.CLSSid_RootRegion, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_DATAid_EInt = TypeId.ORDERED_SET.getSpecializedId(QVTscheduleTables.DATAid_EInt, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_BasicPartition = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_BasicPartition, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_ConnectionEnd = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_ConnectionEnd, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Edge = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_Edge, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_MappingPartition = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_MappingPartition, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_NavigableEdge = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_NavigableEdge, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Node = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_Node, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_NodeConnection = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_NodeConnection, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Partition = TypeId.SET.getSpecializedId(QVTscheduleTables.CLSSid_Partition, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	/**
 	 *	The type parameters for templated types and operations.

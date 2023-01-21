@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -181,14 +181,14 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_ALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeSupport.SET_CLSSid_Rule, rule);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITER__1 = BOXED_rule.iterator();
 				/*@NonInvalid*/ @Nullable Boolean forAll;
@@ -207,7 +207,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 					/**
 					 * oclIsKindOf(Mapping)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeSupport.CLSSid_Mapping, null);
 					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
 					//
 					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
@@ -221,7 +221,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, forAll, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -229,6 +229,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -259,19 +260,19 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION___VALIDATE_UNIQUE_TARGET_NAMES__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_isUnique;
+				/*@Caught*/ @Nullable Object CAUGHT_isUnique;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_EntryPoint = idResolver.getClass(QVTimperativeTables.CLSSid_EntryPoint, null);
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_EntryPoint = idResolver.getClass(QVTimperativeSupport.CLSSid_EntryPoint, null);
 					final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-					final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
-					final /*@NonInvalid*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_rule, TYP_qvtimperative_c_c_EntryPoint);
-					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					final /*@NonInvalid*/ @Nullable SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeSupport.SET_CLSSid_Rule, rule);
+					final /*@NonInvalid*/ @NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_rule, TYP_qvtimperative_c_c_EntryPoint);
+					/*@NonInvalid*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeSupport.SET_CLSSid_EntryPoint);
 					@NonNull Iterator<Object> ITER__1 = selectByKind.iterator();
 					/*@NonInvalid*/ @NonNull SetValue select;
 					while (true) {
@@ -291,12 +292,12 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 							accumulator.add(_1);
 						}
 					}
-					/*@NonInvalid*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_EntryPoint);
+					/*@NonInvalid*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeSupport.SET_CLSSid_EntryPoint);
 					@NonNull Iterator<Object> ITER__1_0 = select.iterator();
 					/*@Thrown*/ boolean isUnique;
 					while (true) {
 						if (!ITER__1_0.hasNext()) {
-							isUnique = true;
+							isUnique = ValueUtil.TRUE_VALUE;
 							break;
 						}
 						@SuppressWarnings("null")
@@ -319,7 +320,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 				catch (Exception THROWN_CAUGHT_isUnique) {
 					CAUGHT_isUnique = ValueUtil.createInvalidValue(THROWN_CAUGHT_isUnique);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, CAUGHT_isUnique, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -327,6 +328,7 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

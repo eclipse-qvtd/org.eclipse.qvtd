@@ -30,7 +30,7 @@ import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
@@ -95,8 +95,8 @@ public abstract class VariableStatementImpl extends VariableDeclarationImpl impl
 		assert names != null;
 		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
-		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
+		final /*@NonInvalid*/ @Nullable OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeSupport.ORD_PRIMid_String, names);
+		/*@NonInvalid*/ @NonNull String s = QVTimperativeSupport.STR_;
 		@NonNull Iterator<Object> ITER_n = BOXED_names.iterator();
 		/*@NonInvalid*/ @Nullable String iterate;
 		while (true) {
@@ -109,21 +109,21 @@ public abstract class VariableStatementImpl extends VariableDeclarationImpl impl
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
-			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeTables.STR_);
+			final /*@NonInvalid*/ boolean IsEQ_ = idResolver.oclEquals(s, QVTimperativeSupport.STR_);
 			/*@NonInvalid*/ @NonNull String IF_IsEQ_;
 			if (IsEQ_) {
 				IF_IsEQ_ = n;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeSupport.STR__59);
 				final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, n);
 				IF_IsEQ_ = sum_1;
 			}
 			//
 			s = IF_IsEQ_;
 		}
-		final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
-		final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeTables.STR__125);
+		final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeSupport.STR__123, iterate);
+		final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTimperativeSupport.STR__125);
 		return sum;
 	}
 

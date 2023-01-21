@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationSupport;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
@@ -270,30 +270,30 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTrelationSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression valueExp_0 = this.getValueExp();
 				final /*@NonInvalid*/ @Nullable Type type = valueExp_0.getType();
-				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
+				final /*@NonInvalid*/ Boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
 					IF_IsEQ2_ = null;
 				}
 				else {
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 					try {
 						if (type == null) {
-							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull VariableDeclaration variable_0 = this.getVariable();
 						final /*@NonInvalid*/ @Nullable Type type_0 = variable_0.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
 					catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -301,7 +301,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 					}
 					IF_IsEQ2_ = CAUGHT_conformsTo;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTrelationSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -309,6 +309,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

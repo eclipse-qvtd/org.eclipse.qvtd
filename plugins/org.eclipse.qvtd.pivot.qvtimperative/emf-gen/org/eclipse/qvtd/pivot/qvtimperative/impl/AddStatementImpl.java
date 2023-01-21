@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeSupport;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -305,30 +305,30 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTimperativeSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression_0 = this.getOwnedExpression();
 				final /*@NonInvalid*/ @Nullable Type type = ownedExpression_0.getType();
-				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
+				final /*@NonInvalid*/ Boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
 					IF_IsEQ2_ = null;
 				}
 				else {
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 					try {
 						if (type == null) {
-							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable_0 = this.getTargetVariable();
 						final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable_0.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
 					catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -336,7 +336,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 					}
 					IF_IsEQ2_ = CAUGHT_conformsTo;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTimperativeSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -344,6 +344,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

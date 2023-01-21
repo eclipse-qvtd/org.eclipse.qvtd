@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -39,7 +38,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseSupport;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
@@ -436,40 +435,40 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbasePackage.Literals.TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTbaseSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isPrimitive_0 = this.isIsPrimitive();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isPrimitive;
 				if (isPrimitive_0) {
-					IF_isPrimitive = QVTbaseTables.INT_1;
+					IF_isPrimitive = QVTbaseSupport.INT_1;
 				}
 				else {
-					IF_isPrimitive = QVTbaseTables.INT_0;
+					IF_isPrimitive = QVTbaseSupport.INT_0;
 				}
 				final /*@NonInvalid*/ boolean isThis_0 = this.isIsThis();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isThis;
 				if (isThis_0) {
-					IF_isThis = QVTbaseTables.INT_1;
+					IF_isThis = QVTbaseSupport.INT_1;
 				}
 				else {
-					IF_isThis = QVTbaseTables.INT_0;
+					IF_isThis = QVTbaseSupport.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(IF_isPrimitive, IF_isThis);
+				final /*@NonInvalid*/ @NonNull IntegerValue sum_0 = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(IF_isPrimitive, IF_isThis);
 				final /*@NonInvalid*/ boolean isTrace_0 = this.isIsTrace();
 				/*@NonInvalid*/ @NonNull IntegerValue IF_isTrace;
 				if (isTrace_0) {
-					IF_isTrace = QVTbaseTables.INT_1;
+					IF_isTrace = QVTbaseSupport.INT_1;
 				}
 				else {
-					IF_isTrace = QVTbaseTables.INT_0;
+					IF_isTrace = QVTbaseSupport.INT_0;
 				}
-				final /*@NonInvalid*/ @NonNull IntegerValue sum = (@Nullable IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum_0, IF_isTrace);
-				final /*@NonInvalid*/ boolean le_0 = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, sum, QVTbaseTables.INT_1).booleanValue();
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, le_0, QVTbaseTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ @NonNull IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(sum_0, IF_isTrace);
+				final /*@NonInvalid*/ boolean le_0 = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, sum, QVTbaseSupport.INT_1).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, le_0, QVTbaseSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -477,6 +476,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

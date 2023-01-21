@@ -47,7 +47,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreSupport;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 
 /**
@@ -157,26 +157,24 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
 				/*@Caught*/ @NonNull Object IF_isPartial;
 				if (isPartial) {
-					/*@Caught*/ @NonNull Object CAUGHT_elementType;
+					/*@Caught*/ @Nullable Object CAUGHT_elementType;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTcoreTables.CLSSid_CollectionType, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTcoreSupport.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
 						final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty_0.getType();
-						final /*@Thrown*/ @Nullable CollectionType oclAsType = (@Nullable CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
-						if (oclAsType == null) {
-							throw new InvalidValueException("Null source for \'CollectionType::elementType\'");
-						}
-						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTcoreTables.CLSSid_Type, oclAsType);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
+						final /*@Thrown*/ @NonNull Type elementType = (@Nullable Type)CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTcoreSupport.CLSSid_Type, oclAsType);
 						CAUGHT_elementType = elementType;
 					}
 					catch (Exception THROWN_CAUGHT_elementType) {
@@ -187,22 +185,22 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 					final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_or;
 					try {
-						final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
+						final /*@NonInvalid*/ Boolean IsEQ2_ = type_0 == null;
 						/*@Caught*/ @Nullable Object IF_IsEQ2_;
 						if (IsEQ2_) {
 							IF_IsEQ2_ = null;
 						}
 						else {
-							/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+							/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 							try {
 								if (type_0 == null) {
-									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 								}
 								if (CAUGHT_elementType instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_elementType;
 								}
-								final /*@Thrown*/ @NonNull Type THROWN_elementType = (@NonNull Type)CAUGHT_elementType;
-								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_0, THROWN_elementType).booleanValue();
+								final /*@Thrown*/ @Nullable Type THROWN_elementType = (@Nullable Type)CAUGHT_elementType;
+								final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_0, THROWN_elementType).booleanValue();
 								CAUGHT_conformsTo = conformsTo;
 							}
 							catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -215,12 +213,12 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 							or = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+							/*@Caught*/ @Nullable Object CAUGHT_conformsTo_0;
 							try {
 								if (CAUGHT_elementType instanceof InvalidValueException) {
 									throw (InvalidValueException)CAUGHT_elementType;
 								}
-								final /*@Thrown*/ @NonNull Type THROWN_elementType_0 = (@NonNull Type)CAUGHT_elementType;
+								final /*@Thrown*/ @Nullable Type THROWN_elementType_0 = (@Nullable Type)CAUGHT_elementType;
 								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, THROWN_elementType_0, type_0).booleanValue();
 								CAUGHT_conformsTo_0 = conformsTo_0;
 							}
@@ -250,7 +248,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 					catch (Exception THROWN_CAUGHT_or) {
 						CAUGHT_or = ValueUtil.createInvalidValue(THROWN_CAUGHT_or);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+					/*@Caught*/ @Nullable Object CAUGHT_IsEQ_;
 					try {
 						if (CAUGHT_or instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_or;
@@ -267,9 +265,9 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 						IF_CAUGHT_IsEQ_ = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @NonNull Object CAUGHT_sum;
+						/*@Caught*/ @Nullable Object CAUGHT_sum;
 						try {
-							final /*@NonInvalid*/ boolean IsEQ2__0 = type_0 == null;
+							final /*@NonInvalid*/ Boolean IsEQ2__0 = type_0 == null;
 							/*@Thrown*/ @Nullable String IF_IsEQ2__0;
 							if (IsEQ2__0) {
 								IF_IsEQ2__0 = null;
@@ -279,21 +277,21 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 								final /*@Thrown*/ @Nullable String name = type_0.getName();
 								IF_IsEQ2__0 = name;
 							}
-							final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32, IF_IsEQ2__0);
-							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+							final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(QVTcoreSupport.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue_c_32, IF_IsEQ2__0);
+							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTcoreSupport.STR__32_must_32_conform_32_to_32);
 							if (CAUGHT_elementType instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_elementType;
 							}
-							final /*@Thrown*/ @NonNull Type THROWN_elementType_1 = (@NonNull Type)CAUGHT_elementType;
+							final /*@Thrown*/ @Nullable Type THROWN_elementType_1 = (@Nullable Type)CAUGHT_elementType;
 							final /*@Thrown*/ @Nullable String name_0 = THROWN_elementType_1.getName();
 							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_0);
-							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTcoreTables.STR__32_or_32_vice_m_versa);
+							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTcoreSupport.STR__32_or_32_vice_m_versa);
 							CAUGHT_sum = sum;
 						}
 						catch (Exception THROWN_CAUGHT_sum) {
 							CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
 						}
-						final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, CAUGHT_sum, CAUGHT_or);
+						final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTcoreSupport.TUPLid_, CAUGHT_sum, CAUGHT_or);
 						IF_CAUGHT_IsEQ_ = TUP_;
 					}
 					IF_isPartial = IF_CAUGHT_IsEQ_;
@@ -301,7 +299,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				else {
 					IF_isPartial = ValueUtil.TRUE_VALUE;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_isPartial, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_isPartial, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -309,6 +307,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -354,10 +353,10 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
@@ -386,18 +385,18 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 					final /*@NonInvalid*/ @Nullable Type type_0 = value_0.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_or;
 					try {
-						final /*@NonInvalid*/ boolean IsEQ2_ = type_0 == null;
+						final /*@NonInvalid*/ Boolean IsEQ2_ = type_0 == null;
 						/*@Caught*/ @Nullable Object IF_IsEQ2_;
 						if (IsEQ2_) {
 							IF_IsEQ2_ = null;
 						}
 						else {
-							/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+							/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 							try {
 								if (type_0 == null) {
-									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+									throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 								}
-								final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_0, type).booleanValue();
+								final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_0, type).booleanValue();
 								CAUGHT_conformsTo = conformsTo;
 							}
 							catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -410,18 +409,18 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 							or = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							final /*@NonInvalid*/ boolean IsEQ2__0 = type == null;
+							final /*@NonInvalid*/ Boolean IsEQ2__0 = type == null;
 							/*@Caught*/ @Nullable Object IF_IsEQ2__0;
 							if (IsEQ2__0) {
 								IF_IsEQ2__0 = null;
 							}
 							else {
-								/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+								/*@Caught*/ @Nullable Object CAUGHT_conformsTo_0;
 								try {
 									if (type == null) {
-										throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+										throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 									}
-									final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+									final /*@Thrown*/ Boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 									CAUGHT_conformsTo_0 = conformsTo_0;
 								}
 								catch (Exception THROWN_CAUGHT_conformsTo_0) {
@@ -452,7 +451,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 					catch (Exception THROWN_CAUGHT_or) {
 						CAUGHT_or = ValueUtil.createInvalidValue(THROWN_CAUGHT_or);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_IsEQ_;
+					/*@Caught*/ @Nullable Object CAUGHT_IsEQ_;
 					try {
 						if (CAUGHT_or instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_or;
@@ -469,9 +468,9 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 						IF_CAUGHT_IsEQ_ = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Caught*/ @NonNull Object CAUGHT_sum;
+						/*@Caught*/ @Nullable Object CAUGHT_sum;
 						try {
-							final /*@NonInvalid*/ boolean IsEQ2__1 = type_0 == null;
+							final /*@NonInvalid*/ Boolean IsEQ2__1 = type_0 == null;
 							/*@Thrown*/ @Nullable String IF_IsEQ2__1;
 							if (IsEQ2__1) {
 								IF_IsEQ2__1 = null;
@@ -481,9 +480,9 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 								final /*@Thrown*/ @Nullable String name = type_0.getName();
 								IF_IsEQ2__1 = name;
 							}
-							final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32, IF_IsEQ2__1);
-							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTcoreTables.STR__32_must_32_conform_32_to_32);
-							final /*@NonInvalid*/ boolean IsEQ2__2 = type == null;
+							final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(QVTcoreSupport.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue_c_32, IF_IsEQ2__1);
+							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_2, QVTcoreSupport.STR__32_must_32_conform_32_to_32);
+							final /*@NonInvalid*/ Boolean IsEQ2__2 = type == null;
 							/*@Thrown*/ @Nullable String IF_IsEQ2__2;
 							if (IsEQ2__2) {
 								IF_IsEQ2__2 = null;
@@ -494,13 +493,13 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 								IF_IsEQ2__2 = name_0;
 							}
 							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum_1, IF_IsEQ2__2);
-							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTcoreTables.STR__32_or_32_vice_m_versa);
+							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTcoreSupport.STR__32_or_32_vice_m_versa);
 							CAUGHT_sum = sum;
 						}
 						catch (Exception THROWN_CAUGHT_sum) {
 							CAUGHT_sum = ValueUtil.createInvalidValue(THROWN_CAUGHT_sum);
 						}
-						final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, CAUGHT_sum, CAUGHT_or);
+						final /*@Caught*/ @NonNull Object TUP_ = ValueUtil.createTupleOfEach(QVTcoreSupport.TUPLid_, CAUGHT_sum, CAUGHT_or);
 						IF_CAUGHT_IsEQ_ = TUP_;
 					}
 					IF_not = IF_CAUGHT_IsEQ_;
@@ -508,7 +507,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				else {
 					IF_not = ValueUtil.TRUE_VALUE;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_not, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_not, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -516,6 +515,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -542,16 +542,16 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
 				final /*@NonInvalid*/ boolean isImplicit = getReferredTargetProperty_0.isIsImplicit();
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isImplicit, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, isImplicit, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -559,6 +559,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**
@@ -587,30 +588,30 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 			final /*@NonInvalid*/ @NonNull IntegerValue getSeverity = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreTables.INT_0).booleanValue();
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, getSeverity, QVTcoreSupport.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean IF_le;
 			if (le) {
-				IF_le = true;
+				IF_le = ValueUtil.TRUE_VALUE;
 			}
 			else {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull OCLExpression slotExpression = this.getSlotExpression();
 				final /*@NonInvalid*/ @Nullable Type type = slotExpression.getType();
-				final /*@NonInvalid*/ boolean IsEQ2_ = type == null;
+				final /*@NonInvalid*/ Boolean IsEQ2_ = type == null;
 				/*@Caught*/ @Nullable Object IF_IsEQ2_;
 				if (IsEQ2_) {
 					IF_IsEQ2_ = null;
 				}
 				else {
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_conformsTo;
 					try {
 						if (type == null) {
-							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' value required");
+							throw new InvalidValueException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty_0.getOwningClass();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
+						final /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
 					catch (Exception THROWN_CAUGHT_conformsTo) {
@@ -618,7 +619,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 					}
 					IF_IsEQ2_ = CAUGHT_conformsTo;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, getSeverity, IF_IsEQ2_, QVTcoreSupport.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -626,6 +627,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		catch (Throwable e) {
 			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
+
 	}
 
 	/**

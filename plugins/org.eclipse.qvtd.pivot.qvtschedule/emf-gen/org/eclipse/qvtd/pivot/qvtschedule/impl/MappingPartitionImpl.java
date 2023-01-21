@@ -232,10 +232,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * @generated
 	 */
 	public Region basicGetRegion() {
-		// TODO: implement this method to return the 'Region' reference
-		// -> do not perform proxy resolution
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!region
 	}
 
 	/**
