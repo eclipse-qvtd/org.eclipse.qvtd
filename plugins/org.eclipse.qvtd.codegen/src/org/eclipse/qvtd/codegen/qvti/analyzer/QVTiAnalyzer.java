@@ -703,7 +703,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 					//	CGExecutorProperty cgExecutorProperty = analyzer.createExecutorProperty(asProperty);
 					CGProperty cgExecutorProperty = generatePropertyDeclaration(asProperty, null);
 					cgExecutorPropertyCallExp.setReferredProperty(cgExecutorProperty);
-					cgExecutorPropertyCallExp.getOwns().add(cgExecutorProperty);
+					//					cgExecutorPropertyCallExp.getOwns().add(cgExecutorProperty);
 					cgPropertyCallExp = cgExecutorPropertyCallExp;
 				}
 				CGProperty cgProperty = generatePropertyDeclaration(asProperty, null);

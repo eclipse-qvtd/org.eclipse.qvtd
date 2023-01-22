@@ -47,7 +47,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 {
 	public static final @NonNull Ctl CTL_MEXP = new Ctl() { @Override
 		public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-		return "return " + classRef(MappingExpPlaces.class) + ".createMappingExpPlaces(element2place, this);";
+		return "return " + classRef(MappingExpPlaces.class) + ".createMappingExpPlaces(analyzer, element2place, this);";
 	}};
 
 	public static final @NonNull Inv INV_PRED = new Inv() {
