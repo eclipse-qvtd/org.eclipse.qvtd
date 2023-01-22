@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
@@ -307,14 +308,16 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public @Nullable AbstractPlace getPlace(@NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place) {
-		return GlobalPlace.createGlobalPlace(element2place, this);
+	@Override
+	public @Nullable AbstractPlace getPlace(@NonNull CodeGenAnalyzer analyzer, @NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place) {
+		return GlobalPlace.createGlobalPlace(analyzer, element2place, this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isConstant() {
 		return true;
 	}
@@ -323,6 +326,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isContext() {
 		return true;
 	}
@@ -331,6 +335,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isGlobal() {
 		return true;
 	}
@@ -339,6 +344,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isInlined() {
 		return false;
 	}
@@ -347,6 +353,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".rewriteAs()");
 	}
@@ -355,6 +362,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
 	}
@@ -363,6 +371,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;
@@ -376,6 +385,7 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUncommonable() {
 		return true;
 	}

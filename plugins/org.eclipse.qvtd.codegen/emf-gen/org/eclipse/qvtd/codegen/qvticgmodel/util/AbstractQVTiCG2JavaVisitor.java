@@ -19,8 +19,12 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.codegen.qvticgmodel.util;
 
+import java.lang.Iterable;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
  * An AbstractQVTiCG2JavaVisitor provides a default implementation for each
@@ -30,8 +34,8 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTiCG2JavaVisitor
-extends org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor
-implements QVTiCGModelVisitor<@NonNull Boolean>
+	extends org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor
+	implements QVTiCGModelVisitor<@NonNull Boolean>
 {
 	protected AbstractQVTiCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator) {
 		super(codeGenerator);

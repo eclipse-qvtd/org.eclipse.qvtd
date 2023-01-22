@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
@@ -526,8 +527,8 @@ public class CGMappingImpl extends CGValuedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public @Nullable AbstractPlace getPlace(@NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place) {
-		return OuterStackPlace.createOuterStackPlace(element2place, this);
+	public @Nullable AbstractPlace getPlace(@NonNull CodeGenAnalyzer analyzer, @NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place) {
+		return OuterStackPlace.createOuterStackPlace(analyzer, element2place, this);
 	}
 
 	/**
