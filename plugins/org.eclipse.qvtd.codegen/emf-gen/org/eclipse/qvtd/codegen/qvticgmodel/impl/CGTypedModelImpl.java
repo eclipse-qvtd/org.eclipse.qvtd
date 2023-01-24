@@ -354,15 +354,6 @@ public class CGTypedModelImpl extends CGValuedElementImpl implements CGTypedMode
 	 * @generated
 	 */
 	@Override
-	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
-		throw new UnsupportedOperationException(getClass().getName() + ".rewriteAs()");
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isCommonable() {
 		return false;
 	}

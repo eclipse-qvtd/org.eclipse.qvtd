@@ -17,7 +17,6 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -37,13 +36,9 @@ import org.eclipse.ocl.examples.codegen.calling.ImplementedOperationCallingConve
 import org.eclipse.ocl.examples.codegen.calling.OperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.PropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaNameVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
@@ -56,8 +51,6 @@ import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
-import org.eclipse.ocl.examples.codegen.naming.NameResolution;
-import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
@@ -95,7 +88,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
-import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
@@ -490,28 +482,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Deprecated
 	public @NonNull ImperativeTransformation getTransformation() {
 		return getContextClass();
-	}
-
-	@Override
-	protected void propagateChildNameResolution(@NonNull CGElement cgElement, @NonNull CGElement cgChild, @NonNull EReference eContainmentFeature, @Nullable NameResolution parentNameResolution) {
-		if (false && eContainmentFeature == CGModelPackage.Literals.CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE) {				// XXX
-			CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)cgElement;
-			NameResolution nameResolution = cgPropertyAssignment.basicGetNameResolution();
-			if (nameResolution == null) {
-				CGProperty cgProperty = QVTiCGUtil.getReferredProperty(cgPropertyAssignment);
-				nameResolution = cgProperty.basicGetNameResolution();
-				if (nameResolution == null) {		// Never happens
-					NestedNameManager nestedNameManager = globalNameManager.useSelfNestedNameManager(cgProperty);
-					nameResolution = nestedNameManager.getNameResolution(cgProperty);
-				}
-				//	nameResolution.addCGElement(cgPropertyAssignment);
-				//	nameResolution.addCGElement((CGValuedElement)cgChild);
-			}
-			propagateNameResolution(cgChild, nameResolution);
-		}
-		else {
-			super.propagateChildNameResolution(cgElement, cgChild, eContainmentFeature, parentNameResolution);
-		}
 	}
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
