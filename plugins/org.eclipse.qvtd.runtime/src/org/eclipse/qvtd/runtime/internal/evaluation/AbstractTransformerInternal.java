@@ -74,7 +74,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 		@Override
 		protected @NonNull InvocationManager createInvocationManager() {
-			return new IncrementalInvocationManager(executor);
+			return new IncrementalInvocationManager(rootExecutor);
 		}
 
 		@Override
@@ -109,10 +109,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 	}
 
-	protected final @NonNull TransformationExecutor executor;
-	/** deprecated use executor */
+	protected final @NonNull TransformationExecutor rootExecutor;
+	/** deprecated use rootExecutor */
 	@Deprecated
 	protected final @NonNull Evaluator evaluator;
+	/** deprecated use rootExecutor (legacy CG tests use executor) */
+	@Deprecated
+	protected final @NonNull TransformationExecutor executor;
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final RuntimeModelsManager.@NonNull Model @NonNull [] models;
 	//	protected final @NonNull Map<@Nullable String, @NonNull Integer> modelIndexes = new HashMap<>();
@@ -152,8 +155,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	protected AbstractTransformerInternal(@NonNull TransformationExecutor executor, int models) {
-		this.executor = executor;
+		this.rootExecutor = executor;
 		this.evaluator = executor;
+		this.executor = executor;
 		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
@@ -196,7 +200,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 * Create the evaluationCache. Creates a EvaluationCache by default.
 	 */
 	protected @NonNull EvaluationCache createEvaluationCache() {
-		return new EvaluationCache(executor);
+		return new EvaluationCache(rootExecutor);
 	}
 
 	protected @NonNull Interval createInterval(int intervalIndex) {
@@ -207,7 +211,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 * Create the InvocationManager. Creates a LazyInvocationManager by default.
 	 */
 	protected @NonNull InvocationManager createInvocationManager() {
-		return new LazyInvocationManager(executor);
+		return new LazyInvocationManager(rootExecutor);
 	}
 
 	protected RuntimeModelsManager.@NonNull Model createTypedModelInstance(@NonNull String modelName) {
@@ -243,7 +247,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	@Override
 	public @NonNull TransformationExecutor getExecutor() {
-		return executor;
+		return rootExecutor;
 	}
 
 	@Override

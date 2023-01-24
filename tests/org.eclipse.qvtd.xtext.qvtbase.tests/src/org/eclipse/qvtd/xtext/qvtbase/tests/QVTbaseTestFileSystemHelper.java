@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 
 public class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
-{
+{ // FIXME share with UsageTests.getTestFileSystemHelper
 	private @NonNull List<@NonNull String> exportedPackages = new ArrayList<>();
 	private @NonNull List<@NonNull String> requiredBundles = new ArrayList<>();
 
@@ -140,9 +140,9 @@ public class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 		try {
 			s = new FileWriter(file);
 			s.append("Manifest-Version: 1.0\n");
+			s.append("Automatic-Module-Name: " + projectName + "\n");
 			s.append("Bundle-ManifestVersion: 2\n");
 			s.append("Bundle-Name: " + projectName + "\n");
-			s.append("Automatic-Module-Name: " + projectName + "\n");
 			s.append("Bundle-SymbolicName: " + projectName + ";singleton:=true\n");
 			s.append("Bundle-Version: 1.0.0.qualifier\n");
 			s.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.8\n");

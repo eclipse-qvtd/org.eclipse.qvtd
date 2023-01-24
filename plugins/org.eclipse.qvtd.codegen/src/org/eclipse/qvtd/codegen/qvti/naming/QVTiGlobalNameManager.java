@@ -98,7 +98,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	}
 
 	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
-		QVTiExecutableNameManager mappingNameManager = getCodeGenerator().createMappingNameManager(transformationNameManager, cgMapping);
+		QVTiExecutableNameManager mappingNameManager = getCodeGenerator().createMappingNameManager(transformationNameManager, cgMapping, null);
 		assert basicGetChildNameManager(cgMapping) == mappingNameManager;
 		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
 		//	addNameManager(cgScope, nestedNameManager.getParent());
@@ -107,7 +107,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 
 	// reuse createLoopNameManager
 	public @NonNull ExecutableNameManager createExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
-		ExecutableNameManager mappingLoopNameManager = getCodeGenerator().createExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+		ExecutableNameManager mappingLoopNameManager = getCodeGenerator().createExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop, null);
 		assert basicGetChildNameManager(cgMappingLoop) == mappingLoopNameManager;
 		//	we could populate the cgScope to parent NameManager now but any CSE rewrite could invalidate this premature action.
 		//	addNameManager(cgScope, nestedNameManager.getParent());

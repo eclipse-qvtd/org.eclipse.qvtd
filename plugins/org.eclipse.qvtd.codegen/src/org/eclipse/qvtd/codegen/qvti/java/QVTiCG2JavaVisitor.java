@@ -704,14 +704,14 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.appendOptionalBlankLine();;
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		String className = cgTransformation.getName();
-		String rootObjectName = globalNameManager.getRootObjectNameResolution().getResolvedName();
+		String rootThisName = globalNameManager.getRootThisNameResolution().getResolvedName();
 		//
 		js.append("protected final ");
 		js.appendIsRequired(true);
 		js.append(" ");
 		js.append(className);
 		js.append(" ");
-		js.append(rootObjectName);
+		js.append(rootThisName);
 		js.append(" = this;\n");
 		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
 			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
@@ -981,11 +981,16 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					Function asFunction = QVTiCGUtil.getAST(cgFunction);
 					if (!asFunction.isIsTransient()) {
 						String functionName = cgFunction.getResolvedName();
+						js.append("// " + callingConvention + "\n");
 						js.append("protected final ");
 						js.appendClassReference(true, AbstractComputationConstructor.class);
 						js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
 						js.appendClassReference(null, AbstractComputationConstructor.class);
-						js.append("(executor, rootObject)\n");
+						js.append("(");
+						js.append(globalNameManager.getRootExecutorNameResolution().getResolvedName());
+						js.append(", ");
+						js.append(globalNameManager.getRootThisNameResolution().getResolvedName());
+						js.append(")\n");
 						js.append("{\n");
 						js.pushIndentation(null);
 						js.append("@Override\n");

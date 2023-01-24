@@ -45,6 +45,8 @@ public class QVTiCG2JavaPreVisitor extends AbstractQVTiCG2JavaPreVisitor
 	@Override
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		super.visitCGMapping(cgMapping);
+		//	ExecutableNameManager executableNameManager = analyzer.useExecutableNameManager(QVTiCGUtil.getAST(cgMapping)).getRootExecutableNameManager();
+		//	executableNameManager.getExecutorVariable();
 		wrapLetVariables(cgMapping);
 		return null;
 	}

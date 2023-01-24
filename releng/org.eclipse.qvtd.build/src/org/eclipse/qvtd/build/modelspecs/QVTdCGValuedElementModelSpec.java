@@ -87,7 +87,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 	public static class Register {
 		public Register() {
-			new QVTdCGValuedElementModelSpec(CGTypedModel.class, null,							null     , null     , null     , null     , null     , Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , Rew.UNSUP, null    );
+			new QVTdCGValuedElementModelSpec(CGTypedModel.class, null,							null     , null     , null     , null     , null     , Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , null     , null    );
 
 			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,						Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,					Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
