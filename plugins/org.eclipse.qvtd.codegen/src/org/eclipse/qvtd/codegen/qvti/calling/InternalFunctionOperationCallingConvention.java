@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.codegen.qvti.calling.ShadowFunctionOperationCallingConvention.FunctionEvaluateOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -117,6 +118,13 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperation cgOperation) {
 		return true;		 // functionality realized by finer-grained CG elements
+	}
+
+	@Override
+	public void installEvaluateOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, org.eclipse.ocl.pivot.@NonNull Class asEntryClass, @NonNull Operation asOperation) {
+		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+		FunctionEvaluateOperationCallingConvention callingConvention = FunctionEvaluateOperationCallingConvention.getInstance(asCacheClass);
+		callingConvention.createOperation(analyzer, cgCacheClass, asOperation, asEntryClass);
 	}
 
 	@Override

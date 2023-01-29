@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
@@ -37,6 +38,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
+import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -76,6 +78,27 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
  */
 public abstract class ShadowFunctionOperationCallingConvention extends AbstractCachedOperationCallingConvention // cg Cached/Constrained
 {
+	public static class FunctionEvaluateOperationCallingConvention extends AbstractEvaluateOperationCallingConvention
+	{
+		private static final @NonNull FunctionEvaluateOperationCallingConvention INSTANCE = new FunctionEvaluateOperationCallingConvention();
+
+		public static @NonNull FunctionEvaluateOperationCallingConvention getInstance(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+			INSTANCE.logInstance(asClass);
+			return INSTANCE;
+		}
+
+		@Override
+		protected void generateUniqueComputationArguments(@NonNull CG2JavaVisitor cg2javaVisitor, boolean isFirst, @NonNull GlobalNameManager globalNameManager, @NonNull CGOperation cgOperation) {
+			cg2javaVisitor.getJavaStream().append(globalNameManager.getRootObjectNameResolution().getResolvedName());
+			super.generateUniqueComputationArguments(cg2javaVisitor, false, globalNameManager, cgOperation);
+		}
+
+		@Override
+		protected @NonNull ASParameterStyle @NonNull [] getASParameterStyles(@NonNull TypedElement asOrigin) {
+			return AS_PARAMETER_STYLES_PARAMETERS;
+		}
+	}
+
 	@Override
 	public void createCGBody(@NonNull CodeGenAnalyzer analyzer, @NonNull CGOperation cgOperation) {
 		CGFunction cgFunction = (CGFunction)cgOperation;
@@ -459,5 +482,12 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		doFunctionIsEqual(qvticg2javaVisitor, cgShadowExp, cachedResultName);
 		js.popClassBody(false);
 		return true;
+	}
+
+	@Override
+	public void installEvaluateOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull CGClass cgCacheClass, org.eclipse.ocl.pivot.@NonNull Class asEntryClass, @NonNull Operation asOperation) {
+		org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
+		FunctionEvaluateOperationCallingConvention callingConvention = FunctionEvaluateOperationCallingConvention.getInstance(asCacheClass);
+		callingConvention.createOperation(analyzer, cgCacheClass, asOperation, asEntryClass);
 	}
 }
