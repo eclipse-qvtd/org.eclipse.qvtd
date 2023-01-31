@@ -366,22 +366,6 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	public final void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		CodeGenAnalyzer qvtiAnalyzer = operationNameManager.getAnalyzer();
-		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asOperation = CGUtil.getAST(cgOperation);
-		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
-		List<CGParameter> cgParameters = cgOperation.getParameters();
-		assert !useClassToCreateObject;
-		/*	cgParameters.add(operationNameManager.getContextObjectParameter());
-		for (Parameter asParameter : asOperation.getOwnedParameters()) {
-			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
-			cgParameters.add(cgParameter);
-		} */
-		initCGParameters(operationNameManager, null);
-	}
-
-	@Override
 	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
 		CGOperation cgOperation = createCGOperation(analyzer, asOperation);
 		analyzer.initAst(cgOperation, asOperation, true);
@@ -391,12 +375,13 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		assert cgOperation.getCallingConvention() == null;
 		cgOperation.setCallingConvention(this);
 		Element asOperation2 = cgOperation.getAst();
-		assert asOperation2 == null;
+		assert asOperation2 == null;		// XXX surely wrong ??
 		assert analyzer.basicGetCGElement(asOperation) == null;
 		analyzer.initAst(cgOperation, asOperation, true);
 		assert cgOperation.eContainer() != null;
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
-		createCGParameters(operationNameManager, asExpressionInOCL);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
+		assert PivotUtil.basicGetShadowExp(asOperation) == null;
+		initCGParameters(operationNameManager, null);
 		return cgOperation;
 	}
 
