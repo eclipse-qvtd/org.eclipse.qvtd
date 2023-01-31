@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
@@ -365,18 +366,19 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+	public final void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
 		CodeGenAnalyzer qvtiAnalyzer = operationNameManager.getAnalyzer();
 		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
 		Operation asOperation = CGUtil.getAST(cgOperation);
 		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		assert !useClassToCreateObject;
-		cgParameters.add(operationNameManager.getContextObjectParameter());
+		/*	cgParameters.add(operationNameManager.getContextObjectParameter());
 		for (Parameter asParameter : asOperation.getOwnedParameters()) {
 			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
 			cgParameters.add(cgParameter);
-		}
+		} */
+		initCGParameters(operationNameManager, null);
 	}
 
 	@Override
@@ -401,6 +403,11 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperationCallExp cgOperationCallExp) {
 		return generateDeprecatedJavaCall(cg2javaVisitor, cgOperationCallExp);
+	}
+
+	@Override
+	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+		return CG_PARAMETER_STYLES_CONTEXT_OBJECT_PARAMETERS;
 	}
 
 	@Override
