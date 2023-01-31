@@ -100,7 +100,7 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 		createCachingClassesAndInstance(analyzer, cgOperation);
 		cgOperation.setCallingConvention(this);
 		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
-		createCGParameters(operationNameManager, asExpressionInOCL);
+		initCGParameters(operationNameManager, null);
 		return cgOperation;
 	}
 
