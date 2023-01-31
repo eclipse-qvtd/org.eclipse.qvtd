@@ -45,7 +45,6 @@ import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.Type;
@@ -148,17 +147,8 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 	}
 
 	@Override
-	public void createCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)operationNameManager.getAnalyzer();
-		CGOperation cgOperation = (CGOperation)operationNameManager.getCGScope();
-		Operation asOperation = QVTiCGUtil.getAST(cgOperation);
-		boolean useClassToCreateObject = PivotUtil.basicGetShadowExp(asOperation) != null;
-		List<CGParameter> cgParameters = cgOperation.getParameters();
-		assert useClassToCreateObject;
-		for (Parameter asParameter : asOperation.getOwnedParameters()) {
-			CGParameter cgParameter = qvtiAnalyzer.createCGElement(CGParameter.class, asParameter);
-			cgParameters.add(cgParameter);
-		}
+	public final void newCreateCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
+		initCGParameters(operationNameManager, null);
 	}
 
 	protected boolean doFunctionBody(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {
@@ -482,6 +472,13 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		doFunctionIsEqual(qvticg2javaVisitor, cgShadowExp, cachedResultName);
 		js.popClassBody(false);
 		return true;
+	}
+
+	@Override
+	protected final @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+		Operation asOperation = (Operation)operationNameManager.getASScope();
+		assert PivotUtil.basicGetShadowExp(asOperation) != null;
+		return CG_PARAMETER_STYLES_PARAMETERS;
 	}
 
 	@Override
