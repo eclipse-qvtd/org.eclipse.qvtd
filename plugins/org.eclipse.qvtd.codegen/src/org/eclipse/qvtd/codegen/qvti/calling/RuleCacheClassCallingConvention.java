@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachePropertyCallingConvention.DefaultInstancePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
+import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameManagerHelper;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
@@ -103,7 +105,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for basicEvaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, CG_PARAMETER_STYLES_ID_RESOLVER_BOXED_VALUES);
+				basicEvaluateNameResolution, null);
 			/*	CGOperation cgCacheOperation = createCGOperation(analyzer, asCacheOperation);
 			analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 			cgCacheOperation.setCallingConvention(this);
@@ -253,6 +255,11 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		protected @NonNull ASParameterStyle @NonNull [] getASParameterStyles(@NonNull TypedElement asOrigin) {
 			return AS_PARAMETER_STYLES_BOXED_VALUES_OPTIONAL;
 		}
+
+		@Override
+		protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+			return CG_PARAMETER_STYLES_ID_RESOLVER_BOXED_VALUES;
+		}
 	}
 
 	public static class EvaluateOperationCallingConvention extends AbstractUncachedOperationCallingConvention
@@ -288,7 +295,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for evaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, CG_PARAMETER_STYLES_ID_RESOLVER_BOXED_VALUES);
+				basicEvaluateNameResolution, null);
 			return cgCacheOperation;
 		}
 
@@ -352,6 +359,11 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		@Override
 		protected @NonNull ASParameterStyle @NonNull [] getASParameterStyles(@NonNull TypedElement asOrigin) {
 			return AS_PARAMETER_STYLES_BOXED_VALUES_OPTIONAL;
+		}
+
+		@Override
+		protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+			return CG_PARAMETER_STYLES_ID_RESOLVER_BOXED_VALUES;
 		}
 	}
 
