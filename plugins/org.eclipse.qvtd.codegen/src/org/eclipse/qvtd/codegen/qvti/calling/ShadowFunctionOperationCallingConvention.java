@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -144,11 +143,6 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootObjectNameResolution();
 		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
 		return cgOperationCallExp;
-	}
-
-	@Override
-	public final void newCreateCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		initCGParameters(operationNameManager, null);
 	}
 
 	protected boolean doFunctionBody(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull JavaStream js, @NonNull CGFunction cgFunction) {

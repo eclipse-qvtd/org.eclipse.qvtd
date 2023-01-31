@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -75,12 +74,6 @@ public class EmptyFunctionOperationCallingConvention extends AbstractUncachedOpe
 		cgOperationCallExp.getArguments().add(cgSource);
 		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
 		return cgOperationCallExp;
-	}
-
-
-	@Override
-	public void newCreateCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		initCGParameters(operationNameManager, null);
 	}
 
 	@Override

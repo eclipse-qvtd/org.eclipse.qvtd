@@ -85,11 +85,6 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	protected /*final*/ void newCreateCGParameters(@NonNull ExecutableNameManager operationNameManager, @Nullable ExpressionInOCL bodyExpression) {
-		initCGParameters(operationNameManager, null);
-	}
-
-	@Override
 	public @NonNull CGOperation createOperation(@NonNull CodeGenAnalyzer analyzer, @NonNull Operation asOperation, @Nullable ExpressionInOCL asExpressionInOCL) {
 		assert asOperation.getImplementationClass() == null;
 		//	assert asOperation.getImplementation() == null;		-- maybe ConstrainedOperation
