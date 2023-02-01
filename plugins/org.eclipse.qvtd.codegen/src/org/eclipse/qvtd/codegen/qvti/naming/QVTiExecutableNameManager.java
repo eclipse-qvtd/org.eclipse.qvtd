@@ -36,40 +36,15 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public class QVTiExecutableNameManager extends ExecutableNameManager
 {
-
-	//	protected QVTiExecutableNameManager(@NonNull JavaCodeGenerator codeGenerator, @NonNull NameManager parent, @NonNull CGNamedElement cgScope) {
-	//		super(codeGenerator, parent, cgScope);
-	//	}
-
-	//	public QVTiExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
-	//		super(transformationNameManager, transformationNameManager, cgMapping);
-	//	}
-
-	//	public QVTiExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
-	//		super(transformationNameManager, parentNameManager, cgMappingLoop);
-	//	}
-
 	public QVTiExecutableNameManager(@NonNull ClassNameManager classNameManager, @NonNull NestedNameManager parentNameManager, @NonNull CGNamedElement cgScope) {
 		super(classNameManager, parentNameManager, cgScope);
 	}
-
-	//	public @Nullable CGParameter basicGetIdResolverParameter() {
-	//		return idResolverParameter;
-	//	}
-
-	//	@Override
-	//	public @Nullable CGVariable basicGetIdResolverVariable() {
-	//		if (idResolverParameter != null) {
-	//			return idResolverParameter;
-	//		}
-	//		return super.basicGetIdResolverVariable();
-	//	}
 
 	@Override
 	public @Nullable CGVariable basicGetExecutorVariable() {
 		CGVariable executorVariable = super.basicGetExecutorVariable();
 		if (executorVariable == null) {
-			executorVariable = getExecutorVariable();		// Always exists so must create
+			executorVariable = lazyGetExecutorVariable();		// Always exists so must create
 		}
 		return executorVariable;
 	}
@@ -96,7 +71,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	public @NonNull CGFinalVariable createCGVariable(@NonNull VariableDeclaration asVariable) {
 		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
 		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-			CGFinalVariable cgVariable = getQualifiedThisVariable();
+			CGFinalVariable cgVariable = lazyGetQualifiedThisVariable();
 			addVariable(asVariable, cgVariable);
 			return cgVariable;
 		}
@@ -111,23 +86,6 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		}
 		return super.createCGVariable(asVariable);
 	}
-
-
-	/*	@Override
-	public @NonNull CGFinalVariable createIdResolverVariable() {
-		// if idResolverParameter is non-null, create a 'parameter' variable that exposes the parameter name as a variable
-		// if idResolverParameter is null, create a 'parameter' variable that exposes the static field name as a variable
-		//	assert asScope instanceof Transformation; -- may be a Function
-		NameResolution idResolverNameResolution = globalNameManager.getIdResolverNameResolution();
-		CGFinalVariable cgIdResolverVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
-		//	cgExecutorVariable.setAst(asExecutorVariable);			// XXX misguided
-		cgIdResolverVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.ID_RESOLVER_TYPE_ID));
-		//	executorVariable.setInit(executorInit);			// This name exposes a 'hidden' initialized name
-		cgIdResolverVariable.setNonInvalid();
-		cgIdResolverVariable.setRequired(true);
-		idResolverNameResolution.addCGElement(cgIdResolverVariable);			// XXX share via createIdResolver(init)
-		return cgIdResolverVariable;			// XXX who owns the variable ??
-	} */
 
 	@Override
 	protected @NonNull CGFinalVariable createQualifiedThisVariable() {
@@ -156,59 +114,8 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		return super.getBody();
 	}
 
-	/*	@Override
-	public @NonNull CGVariable getCGVariable(@NonNull VariableDeclaration asVariable) {
-		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
-		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-			CGFinalVariable cgVariable = getQualifiedThisVariable();
-			addVariable(asVariable, cgVariable);
-			return cgVariable;
-		}
-		return super.getCGVariable(asVariable);
-	} */
-
-	//	@Override
-	/*	protected boolean isQualifiedThis(@NonNull VariableExp asVariableExp, @NonNull Parameter asParameter) {
-		assert asParameter == PivotUtil.getReferredVariable(asVariableExp);
-		assert isThis(asParameter);
-		Type currentType = PivotUtil.getContainingType(asVariableExp);
-		Mapping currentMapping = QVTimperativeUtil.basicGetContainingMapping(asVariableExp);
-		Operation currentOperation = QVTimperativeUtil.basicGetContainingOperation(asVariableExp);
-		Type referencedType = PivotUtil.getContainingType(asParameter);  // FIXME Mappings
-		return (currentType != referencedType) || (currentMapping != null) || (currentOperation != null);
-	} */
-
-	/**
-	 * Return true if asParameter is a 'this' parameter.
-	 *
-	//	@Override
-	protected boolean isThis(@NonNull Parameter asParameter) {
-		EStructuralFeature eContainingFeature = asParameter.eContainingFeature();
-		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-			return true;
-		}
-		return false;//super.isThis(asParameter);
-	} */
-
-	//	@Override
-	//	public @NonNull CGVariable getExecutorVariable() {
-	//	if ((asScope instanceof Function) || (asScope instanceof Mapping)) {
-	//		return ((NestedNameManager)parent).getExecutorVariable();
-	//	}
-	//		return super.getExecutorVariable();
-	//	}
-
 	@Override
 	public @NonNull QVTiGlobalNameManager getGlobalNameManager() {
 		return (QVTiGlobalNameManager)super.getGlobalNameManager();
 	}
-
-	/*	@Override
-	public @NonNull CGVariable getIdResolverVariable() {
-		CGVariable idResolverVariable = basicGetIdResolverVariable();
-		if (idResolverVariable == null) {
-			idResolverVariable = idResolverParameter = createIdResolverParameter();
-		}
-		return idResolverVariable;
-	} */
 }
