@@ -249,16 +249,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGValuedElement cgInit = createCGElement(CGValuedElement.class, asInit);
 
 			if (needsTypeCheck || needsNullTest) {
-				CGFinalVariable cgRawVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+				CGTypeId cgTypeId = getCGTypeId(asInit.getTypeId());
+				CGFinalVariable cgRawVariable = createCGFinalVariable(null, cgTypeId, asInit.isIsRequired());
 				cgRawVariable.setAst(asInit);
-				cgRawVariable.setTypeId(getCGTypeId(asInit.getTypeId()));
 				cgRawVariable.setInit(cgInit);
 				//	cgRawVariable.setName("raw_" + asVariable.getName());
 				//	getNameManager().declareLazyName(cgRawVariable);
 				//
 				CGLetExp cgRawLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
 				cgRawLetExp.setAst(asInit);
-				cgRawLetExp.setTypeId(getCGTypeId(asInit.getTypeId()));
+				cgRawLetExp.setTypeId(cgTypeId);
 				cgRawLetExp.setInit(cgRawVariable);
 				//				cgRawLetExp.setIn(cgIn);
 				cgRawLetExp.setTypeId(getCGTypeId(TypeId.BOOLEAN));

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -70,7 +69,7 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 	public @Nullable CGVariable basicGetExecutorVariable() {
 		CGVariable executorVariable = super.basicGetExecutorVariable();
 		if (executorVariable == null) {
-			getExecutorParameter();		// Always exists so must create
+			executorVariable = getExecutorVariable();		// Always exists so must create
 		}
 		return executorVariable;
 	}
@@ -87,12 +86,8 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		//	asExecutorVariable.setIsRequired(true);
 		//	asVariable.setOwnedInit(asInitExpression);
 		//	PivotUtil.createVariable(executorNameResolution.getResolvedName(), JavaConstants.EXECUTOR_TYPE_ID, null);
-		CGVariable cgExecutorVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
-		//	cgExecutorVariable.setAst(asExecutorVariable);			// XXX misguided
-		cgExecutorVariable.setTypeId(analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID));
-		//	executorVariable.setInit(executorInit);
+		CGVariable cgExecutorVariable = analyzer.createCGFinalVariable(executorNameResolution, analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID), true);
 		cgExecutorVariable.setNonInvalid();
-		cgExecutorVariable.setRequired(true);
 		executorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
 		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
@@ -140,12 +135,8 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		assert asClass instanceof Transformation;
 		NameResolution rootObjectName = getGlobalNameManager().getRootObjectNameResolution();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
-		//		CGFinalVariable transformationVariable = (CGFinalVariable) analyzer.createCGParameter(transformationName, cgTypeId, true);
-		CGFinalVariable transformationVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
-		transformationVariable.setTypeId(cgTypeId);
+		CGFinalVariable transformationVariable = analyzer.createCGFinalVariable(rootObjectName, cgTypeId, true);
 		transformationVariable.setNonInvalid();
-		transformationVariable.setRequired(true);
-		rootObjectName.addCGElement(transformationVariable);
 		return transformationVariable;
 	}
 

@@ -331,7 +331,7 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		int i = 0;
 		for (@NonNull CGParameter cgParameter : cgParameters) {
 			if (i == 0) {
-				CGVariable executorVariable = analyzer.getExecutorVariable(nameManager);
+				CGVariable executorVariable = nameManager.getExecutorVariable();
 				cgArguments.add(analyzer.createCGVariableExp(executorVariable));
 			}
 			else if (i == 1) {
