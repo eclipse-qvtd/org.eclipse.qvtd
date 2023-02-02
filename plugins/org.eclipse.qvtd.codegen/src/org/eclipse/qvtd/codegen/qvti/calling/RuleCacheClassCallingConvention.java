@@ -404,8 +404,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		//	org.eclipse.ocl.pivot.Class asClass = classNameManager.getASClass();
 		CreationCache creationCache = analyzer.addCacheInstance(asNewStatement, asProperty, asCacheClass);
 		//
-		CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
-		cgProperty.setCallingConvention(DefaultInstancePropertyCallingConvention.getInstance(asProperty));
+		//	CGProperty cgProperty = analyzer.createCGElement(CGProperty.class, asProperty);
+		CGProperty cgProperty = analyzer.generatePropertyDeclaration(asProperty, DefaultInstancePropertyCallingConvention.getInstance(asProperty));
 		assert cgProperty.eContainer() != null;
 		return creationCache;
 	}
