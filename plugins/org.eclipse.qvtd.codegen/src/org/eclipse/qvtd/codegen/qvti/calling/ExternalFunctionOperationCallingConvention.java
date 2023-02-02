@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
@@ -281,7 +280,7 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		cgInnerOperation.setRequired(asOuterOperation.isIsRequired());
 		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.getInstance(asOuterOperation, false));
 		cgInnerOperation.setRequired(analyzer.getCodeGenerator().getIsNonNull(jMethod) == Boolean.TRUE);
-		ExecutableNameManager nameManager = analyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
+		ExecutableNameManager nameManager = analyzer.getOperationNameManager(cgInnerOperation, asOuterOperation, null);
 		nameManager.createCGOperationParameters(CG_PARAMETER_STYLES_EXECUTOR_TYPE_ID_PARAMETERS);
 		return cgInnerOperation;
 	}
@@ -303,7 +302,7 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		//	cgOperationCallExp.setValidating(asOperation.isIsValidating());
 		cgOperationCallExp.setRequired(isRequired);
 
-		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgOuterOperation, asOuterOperation);
+		QVTiExecutableNameManager nameManager = qvtiAnalyzer.getOperationNameManager(cgOuterOperation, asOuterOperation, null);
 		List<@NonNull CGParameter> cgParameters = CGUtil.getParametersList(cgOuterOperation);
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		int i = 0;
@@ -357,9 +356,9 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		assert analyzer.basicGetCGElement(asOperation) == null;
 		analyzer.initAst(cgOperation, asOperation, true);
 		assert cgOperation.eContainer() != null;
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation, null);
 		assert PivotUtil.basicGetShadowExp(asOperation) == null;
-		initCGParameters(operationNameManager, null);
+		initCGParameters(operationNameManager);
 		return cgOperation;
 	}
 
@@ -369,7 +368,7 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
 		return CG_PARAMETER_STYLES_CONTEXT_OBJECT_PARAMETERS;
 	}
 

@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -97,7 +96,7 @@ public class TransientFunctionOperationCallingConvention extends AbstractUncache
 	}
 
 	@Override
-	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
 		Operation asOperation = (Operation)operationNameManager.getASScope();
 		assert PivotUtil.basicGetShadowExp(asOperation) == null;
 		return CG_PARAMETER_STYLES_CONTEXT_OBJECT_PARAMETERS;

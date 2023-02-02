@@ -469,7 +469,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 	}
 
 	@Override
-	protected final @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+	protected final @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
 		Operation asOperation = (Operation)operationNameManager.getASScope();
 		assert PivotUtil.basicGetShadowExp(asOperation) != null;
 		return CG_PARAMETER_STYLES_PARAMETERS;

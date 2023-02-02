@@ -51,8 +51,8 @@ public class ShadowDataTypeOperationCallingConvention extends ShadowFunctionOper
 		CGClass cgRootClass = analyzer.getCGRootClass(asOperation);
 		cgRootClass.getOperations().add(cgOperation);
 		createCachingClassesAndInstance(analyzer, cgOperation);
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
-		initCGParameters(operationNameManager, null);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation, null);	// Needed to support downstream useOperationNameManager()
+		initCGParameters(operationNameManager);
 		return cgOperation;
 	}
 

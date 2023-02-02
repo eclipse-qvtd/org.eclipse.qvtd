@@ -60,6 +60,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.AbstractLanguageSupport;
@@ -263,17 +264,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiAnalyzer(this);
 	}
 
-	public @NonNull QVTiExecutableNameManager createExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop) {
-		return new QVTiExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop);
+	public @NonNull QVTiExecutableNameManager createExecutableNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull ExecutableNameManager parentNameManager, @NonNull CGMappingLoop cgMappingLoop, @Nullable TypedElement asOrigin) {
+		return new QVTiExecutableNameManager(transformationNameManager, parentNameManager, cgMappingLoop, asOrigin);
 	}
 
-	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping) {
-		return new QVTiExecutableNameManager(transformationNameManager, transformationNameManager, cgMapping);
+	public @NonNull QVTiExecutableNameManager createMappingNameManager(@NonNull ClassNameManager transformationNameManager, @NonNull CGMapping cgMapping, @Nullable TypedElement asOrigin) {
+		return new QVTiExecutableNameManager(transformationNameManager, transformationNameManager, cgMapping, asOrigin);
 	}
 
 	@Override
-	public @NonNull QVTiExecutableNameManager createOperationNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation) {
-		return new QVTiExecutableNameManager(classNameManager, classNameManager, cgOperation);
+	public @NonNull QVTiExecutableNameManager createOperationNameManager(@NonNull ClassNameManager classNameManager, @NonNull CGOperation cgOperation, @Nullable TypedElement asOrigin) {
+		return new QVTiExecutableNameManager(classNameManager, classNameManager, cgOperation, asOrigin);
 	}
 
 	@Override

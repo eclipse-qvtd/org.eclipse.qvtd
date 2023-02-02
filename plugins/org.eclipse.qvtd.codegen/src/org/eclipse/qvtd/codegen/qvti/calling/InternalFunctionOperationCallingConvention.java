@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowFunctionOperationCallingConvention.FunctionEvaluateOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -94,8 +93,8 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 		cgRootClass.getOperations().add(cgOperation);
 		createCachingClassesAndInstance(analyzer, cgOperation);
 		cgOperation.setCallingConvention(this);
-		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation);	// Needed to support downstream useOperationNameManager()
-		initCGParameters(operationNameManager, null);
+		ExecutableNameManager operationNameManager = analyzer.getOperationNameManager(cgOperation, asOperation, null);	// Needed to support downstream useOperationNameManager()
+		initCGParameters(operationNameManager);
 		return cgOperation;
 	}
 
@@ -105,7 +104,7 @@ public class InternalFunctionOperationCallingConvention extends AbstractCachedOp
 	}
 
 	@Override
-	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager, @Nullable TypedElement zzasOrigin) {
+	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
 		Operation asOperation = (Operation)operationNameManager.getASScope();
 		assert !asOperation.isIsStatic();
 		assert asOperation.getBodyExpression() != null;

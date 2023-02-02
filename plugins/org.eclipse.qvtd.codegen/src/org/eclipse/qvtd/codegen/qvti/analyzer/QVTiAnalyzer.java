@@ -66,6 +66,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.CompositionProperty;
@@ -925,7 +926,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		Function asFunction = QVTiCGUtil.getOwningFunction(asFunctionParameter);
-		ExecutableNameManager operationNameManager = getOperationNameManager(null, asFunction);
+		ExecutableNameManager operationNameManager = getOperationNameManager(null, asFunction, null);
 		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetCGParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
@@ -1009,8 +1010,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	}
 
 	@Override
-	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation) {
-		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation);
+	public @NonNull QVTiExecutableNameManager getOperationNameManager(@Nullable CGOperation cgOperation, @NonNull Operation asOperation, @Nullable TypedElement asOrigin) {
+		return (QVTiExecutableNameManager)super.getOperationNameManager(cgOperation, asOperation, asOrigin);
 	}
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement asNewStatement) {

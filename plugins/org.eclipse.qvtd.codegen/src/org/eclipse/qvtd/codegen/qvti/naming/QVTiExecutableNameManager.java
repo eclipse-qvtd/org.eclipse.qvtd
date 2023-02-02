@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -36,8 +37,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public class QVTiExecutableNameManager extends ExecutableNameManager
 {
-	public QVTiExecutableNameManager(@NonNull ClassNameManager classNameManager, @NonNull NestedNameManager parentNameManager, @NonNull CGNamedElement cgScope) {
-		super(classNameManager, parentNameManager, cgScope);
+	public QVTiExecutableNameManager(@NonNull ClassNameManager classNameManager, @NonNull NestedNameManager parentNameManager, @NonNull CGNamedElement cgScope, @Nullable TypedElement asOrigin) {
+		super(classNameManager, parentNameManager, cgScope, asOrigin);
 	}
 
 	@Override
