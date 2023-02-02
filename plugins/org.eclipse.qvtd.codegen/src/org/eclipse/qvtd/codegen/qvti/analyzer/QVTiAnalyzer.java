@@ -640,7 +640,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		if (asIterators.size() > 0) {
 			LoopVariable asIterator = asIterators.get(0);
 			if (asIterator != null) {
-				CGIterator cgIterator = useExecutableNameManager(asIterator).getIterator(asIterator);
+				CGIterator cgIterator = useExecutableNameManager(asIterator).lazyGetIterator(asIterator);
 				cgIterator.setTypeId(getCGTypeId(asIterator.getTypeId()));		// XXX why repeat ???
 				cgIterator.setRequired(asIterator.isIsRequired());
 				if (asIterator.isIsRequired()) {
