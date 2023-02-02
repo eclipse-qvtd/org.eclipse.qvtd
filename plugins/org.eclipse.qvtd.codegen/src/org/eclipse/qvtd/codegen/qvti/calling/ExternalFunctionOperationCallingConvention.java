@@ -282,7 +282,7 @@ public class ExternalFunctionOperationCallingConvention extends AbstractCachedOp
 		cgInnerOperation.setCallingConvention(LibraryOperationCallingConvention.getInstance(asOuterOperation, false));
 		cgInnerOperation.setRequired(analyzer.getCodeGenerator().getIsNonNull(jMethod) == Boolean.TRUE);
 		ExecutableNameManager nameManager = analyzer.getOperationNameManager(cgInnerOperation, asOuterOperation);
-		nameManager.createCGOperationParameters(CG_PARAMETER_STYLES_EXECUTOR_TYPE_ID_PARAMETERS, null);
+		nameManager.createCGOperationParameters(CG_PARAMETER_STYLES_EXECUTOR_TYPE_ID_PARAMETERS);
 		return cgInnerOperation;
 	}
 
