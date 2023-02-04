@@ -55,16 +55,16 @@ public class QVTiExecutableNameManager extends ExecutableNameManager
 		// create a 'parameter' variable that exposes the static field name as a variable
 		//	assert outerContext == null;
 		//	assert asScope instanceof Transformation;
-		NameResolution executorNameResolution = globalNameManager.getExecutorNameResolution();
+		NameResolution rootExecutorNameResolution = globalNameManager.getRootExecutorNameResolution();
 		//	Variable asExecutorVariable = PivotFactory.eINSTANCE.createVariable();
 		//	asExecutorVariable.setName(executorNameResolution.getResolvedName());
 		//	asVariable.setType(asType);
 		//	asExecutorVariable.setIsRequired(true);
 		//	asVariable.setOwnedInit(asInitExpression);
 		//	PivotUtil.createVariable(executorNameResolution.getResolvedName(), JavaConstants.EXECUTOR_TYPE_ID, null);
-		CGVariable cgExecutorVariable = analyzer.createCGFinalVariable(executorNameResolution, analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID), true);
+		CGVariable cgExecutorVariable = analyzer.createCGFinalVariable(rootExecutorNameResolution, analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID), true);
 		cgExecutorVariable.setNonInvalid();
-		executorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
+		rootExecutorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
 		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
 

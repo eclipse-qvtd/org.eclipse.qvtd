@@ -278,7 +278,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				js.append(" = new ");
 				js.appendClassReference(null, lookupSolver);
 				js.append("(");
-				js.append(globalNameManager.getExecutorName());
+				js.append(globalNameManager.getRootExecutorNameResolution().getResolvedName());
 				js.append(");\n");
 			}
 		}
