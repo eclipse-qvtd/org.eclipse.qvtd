@@ -87,7 +87,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 
 		@Override
 		protected void generateUniqueComputationArguments(@NonNull CG2JavaVisitor cg2javaVisitor, boolean isFirst, @NonNull GlobalNameManager globalNameManager, @NonNull CGOperation cgOperation) {
-			cg2javaVisitor.getJavaStream().append(globalNameManager.getRootObjectNameResolution().getResolvedName());
+			cg2javaVisitor.getJavaStream().append(globalNameManager.getRootThisNameResolution().getResolvedName());
 			super.generateUniqueComputationArguments(cg2javaVisitor, false, globalNameManager, cgOperation);
 		}
 
@@ -140,7 +140,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 		initCallExp(qvtiAnalyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
 		assert cgSource instanceof CGVariableExp;
-		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootObjectNameResolution();
+		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootThisNameResolution();
 		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
 		return cgOperationCallExp;
 	}

@@ -704,14 +704,14 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.appendOptionalBlankLine();;
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
 		String className = cgTransformation.getName();
-		String rootObjectName = globalNameManager.getRootObjectNameResolution().getResolvedName();
+		String rootThisName = globalNameManager.getRootThisNameResolution().getResolvedName();
 		//
 		js.append("protected final ");
 		js.appendIsRequired(true);
 		js.append(" ");
 		js.append(className);
 		js.append(" ");
-		js.append(rootObjectName);
+		js.append(rootThisName);
 		js.append(" = this;\n");
 		for (@NonNull CGTypedModel cgTypedModel : cgTypedModels) {
 			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
