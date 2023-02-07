@@ -434,7 +434,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		js.append("private class " + className);
 		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
-		generateProperties(cg2javaVisitor, cgCacheClass);
+		generatePropertyDeclarations(cg2javaVisitor, cgCacheClass);
 		generateOperations(cg2javaVisitor, cgCacheClass);
 		js.popClassBody(false);
 		return true;

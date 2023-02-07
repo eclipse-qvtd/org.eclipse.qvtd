@@ -92,6 +92,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -626,6 +627,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		String evaluatorName = globalNameManager.getExecutorName();
 		String className = cgTransformation.getName();
 		Iterable<@NonNull CGTypedModel> cgTypedModels = QVTiCGUtil.getOwnedTypedModels(cgTransformation);
+		TransformationCallingConvention transformationCallingConvention = (TransformationCallingConvention)cgTransformation.getCallingConvention();
 		js.appendOptionalBlankLine();
 		//
 		js.append("public " + className + "(final ");
@@ -639,6 +641,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.append(", ");
 		js.appendIntegerString(Iterables.size(cgTypedModels));
 		js.append(");\n");
+		transformationCallingConvention.generatePropertyInitializations(this, cgTransformation);
 		if (oppositeName != null) {
 			js.append("initOpposites(");
 			js.append(oppositeName);

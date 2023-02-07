@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -54,5 +55,9 @@ public class TransformationCallingConvention extends AbstractClassCallingConvent
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGClass cgClass) {
 		return false;
+	}
+
+	public void generatePropertyInitializations(@NonNull QVTiCG2JavaVisitor qvticg2JavaVisitor, @NonNull CGTransformation cgTransformation) {
+		super.generatePropertyInitializations(qvticg2JavaVisitor, cgTransformation);
 	}
 }
