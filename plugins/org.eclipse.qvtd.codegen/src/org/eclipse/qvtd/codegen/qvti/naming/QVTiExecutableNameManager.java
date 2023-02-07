@@ -17,12 +17,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.naming.ClassNameManager;
-import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
+import org.eclipse.ocl.examples.codegen.naming.SupportedExecutableNameManager;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -35,37 +33,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 /**
  * QVTiNestedNameManager provides QVTi-specific overrides for nested contexts.
  */
-public class QVTiExecutableNameManager extends ExecutableNameManager
+public class QVTiExecutableNameManager extends SupportedExecutableNameManager
 {
 	public QVTiExecutableNameManager(@NonNull ClassNameManager classNameManager, @NonNull NestedNameManager parentNameManager, @NonNull CGNamedElement cgScope, @Nullable TypedElement asOrigin) {
 		super(classNameManager, parentNameManager, cgScope, asOrigin);
-	}
-
-	@Override
-	public @Nullable CGVariable basicGetExecutorVariable() {
-		CGVariable executorVariable = super.basicGetExecutorVariable();
-		if (executorVariable == null) {
-			executorVariable = lazyGetExecutorVariable();		// Always exists so must create
-		}
-		return executorVariable;
-	}
-
-	@Override
-	protected @NonNull CGVariable createExecutorVariable() {
-		// create a 'parameter' variable that exposes the static field name as a variable
-		//	assert outerContext == null;
-		//	assert asScope instanceof Transformation;
-		NameResolution rootExecutorNameResolution = globalNameManager.getRootExecutorNameResolution();
-		//	Variable asExecutorVariable = PivotFactory.eINSTANCE.createVariable();
-		//	asExecutorVariable.setName(executorNameResolution.getResolvedName());
-		//	asVariable.setType(asType);
-		//	asExecutorVariable.setIsRequired(true);
-		//	asVariable.setOwnedInit(asInitExpression);
-		//	PivotUtil.createVariable(executorNameResolution.getResolvedName(), JavaConstants.EXECUTOR_TYPE_ID, null);
-		CGVariable cgExecutorVariable = analyzer.createCGFinalVariable(rootExecutorNameResolution, analyzer.getCGTypeId(JavaConstants.EXECUTOR_TYPE_ID), true);
-		cgExecutorVariable.setNonInvalid();
-		rootExecutorNameResolution.addCGElement(cgExecutorVariable);			// XXX share via createExecutor(init)
-		return cgExecutorVariable;			// XXX who owns the variable ??
 	}
 
 	@Override
