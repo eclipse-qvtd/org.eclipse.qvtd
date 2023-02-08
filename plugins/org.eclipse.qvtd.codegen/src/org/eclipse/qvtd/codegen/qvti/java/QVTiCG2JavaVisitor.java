@@ -461,6 +461,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				//
 				//	Emit the ClassId array
 				//
+				js.appendOptionalBlankLine();
 				js.append("/*\n");
 				js.append(" * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex for TypedModel " + typedModelNumber + ".\n");
 				js.append(" */\n");
@@ -981,6 +982,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					Function asFunction = QVTiCGUtil.getAST(cgFunction);
 					if (!asFunction.isIsTransient()) {
 						String functionName = cgFunction.getResolvedName();
+						js.appendOptionalBlankLine();
 						js.append("// " + callingConvention + "\n");
 						js.append("protected final ");
 						js.appendClassReference(true, AbstractComputationConstructor.class);
@@ -1006,7 +1008,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 						js.popIndentation();
 						js.append("}\n");
 						js.popIndentation();
-						js.append("};\n\n");
+						js.append("};\n");
 					}
 				}
 			}
@@ -1510,6 +1512,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			if (useClass(cgMapping)) {// && (isIncremental || (cgMapping.getFreeVariables().size() > 0))) {
 				Mapping asMapping = QVTiCGUtil.getAST(cgMapping);
 				Class<?> constructorClass = isIncremental ? AbstractInvocationConstructor.Incremental.class : AbstractInvocationConstructor.class;
+				js.appendOptionalBlankLine();
 				js.append("protected final ");
 				js.appendClassReference(true, constructorClass);
 				js.append(" " + getMappingCtorName(cgMapping) + " = new ");
@@ -1552,7 +1555,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.popIndentation();
 				js.append("}\n");
 				js.popIndentation();
-				js.append("};\n\n");
+				js.append("};\n");
 			}
 		}
 	}
@@ -1800,7 +1803,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		if (opposites.size() <= 0) {
 			return;
 		}
-		js.append("\n/*\n * Property-source to Property-target unnavigable navigation caches\n */\n");
+		js.append("/*\n * Property-source to Property-target unnavigable navigation caches\n */\n");
 		Map<@NonNull String, @NonNull Property> key2property = new HashMap<>();
 		for (Map.Entry<@NonNull Property, @NonNull Integer> entry : opposites.entrySet()) {
 			Property property = entry.getKey();
@@ -1874,7 +1877,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 	}
 
 	protected void doProperties(@NonNull CGTransformation cgTransformation) {
-		js.appendOptionalBlankLine();;
+		js.appendOptionalBlankLine();
 		List<@NonNull CGProperty> cgProperties = new ArrayList<>(CGUtil.getPropertiesList(cgTransformation));
 		if (cgProperties.size() > 0) {
 			Collections.sort(cgProperties, NameUtil.NAMEABLE_COMPARATOR);
