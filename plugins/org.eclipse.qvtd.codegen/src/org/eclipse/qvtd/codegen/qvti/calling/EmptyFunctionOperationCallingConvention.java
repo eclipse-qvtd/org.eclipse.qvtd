@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -80,10 +79,10 @@ public class EmptyFunctionOperationCallingConvention extends AbstractUncachedOpe
 		return generateDeprecatedJavaCall(cg2javaVisitor, cgOperationCallExp);
 	}
 
-	@Override
-	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
-		Operation asOperation = (Operation)operationNameManager.getASScope();
-		assert PivotUtil.basicGetShadowExp(asOperation) == null;
-		return CG_PARAMETER_STYLES_CONTEXT_OBJECT_PARAMETERS;
-	}
+	//	@Override
+	//	protected @NonNull CGParameterStyle @NonNull [] getCGParameterStyles(@NonNull ExecutableNameManager operationNameManager) {
+	//		Operation asOperation = (Operation)operationNameManager.getASScope();
+	//		assert PivotUtil.basicGetShadowExp(asOperation) == null;
+	//		return CG_PARAMETER_STYLES_CONTEXT_OBJECT_PARAMETERS;
+	//	}
 }

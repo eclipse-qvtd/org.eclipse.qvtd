@@ -10,23 +10,28 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.calling;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.calling.ExecutorOppositePropertyCallingConvention;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 
@@ -97,15 +102,58 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 
 	@Override
 	public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGNavigationCallExp cgPropertyCallExp) {
-		throw new UnsupportedOperationException();
+		//	CGMiddlePropertyCallExp cgMiddlePropertyCallExp = (CGMiddlePropertyCallExp)cgPropertyCallExp;
+		JavaStream js = cg2javaVisitor.getJavaStream();
+		QVTiCG2JavaVisitor qvticg2javaVisitor = (QVTiCG2JavaVisitor)cg2javaVisitor;
+		Property asOppositeProperty = ClassUtil.nonNullModel(cgPropertyCallExp.getAsProperty());
+		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
+		assert !asProperty.isIsImplicit();
+		CGValuedElement source = qvticg2javaVisitor.getExpression(cgPropertyCallExp.getSource());
+		//
+		if (!js.appendLocalStatements(source)) {
+			return false;
+		}
+		//
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState((EStructuralFeature) asProperty.getESObject());
+		qvticg2javaVisitor.doGetting(cgPropertyCallExp, eStructuralFeature, true);
+		js.appendDeclaration(cgPropertyCallExp);
+		js.append(" = ");
+		Map<@NonNull Property, @NonNull String> oppositeProperties = qvticg2javaVisitor.getCodeGenerator().getOppositeProperties();
+		if (oppositeProperties != null) {
+			boolean isRequired = cgPropertyCallExp.isRequired();
+			String cacheName = oppositeProperties.get(asProperty);
+			if (cacheName != null) {
+				SubStream castBody = new SubStream() {
+					@Override
+					public void append() {
+						if (isRequired) {
+							js.appendClassReference(null, ClassUtil.class);
+							js.append(".nonNullState (");
+						}
+						js.append(cacheName);
+						js.append(".get(");
+						js.appendValueName(source);
+						js.append(")");
+						if (isRequired) {
+							js.append(")");
+						}
+					}
+				};
+				if (asOppositeProperty.isIsMany()) {
+					js.appendClassCast(cgPropertyCallExp, castBody);
+				}
+				else {
+					castBody.append();
+				}
+			}
+			js.append(";\n");
+		}
+		qvticg2javaVisitor.doGot(cgPropertyCallExp, source, eStructuralFeature);
+		return true;
 	}
 
 	@Override
 	protected boolean generateOppositeJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGExecutorOppositePropertyCallExp cgPropertyCallExp) {
-		throw new UnsupportedOperationException();
-	}
-
-	private boolean generateOppositeJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGExecutorOppositeProperty cgProperty) {
 		throw new UnsupportedOperationException();
 	}
 }

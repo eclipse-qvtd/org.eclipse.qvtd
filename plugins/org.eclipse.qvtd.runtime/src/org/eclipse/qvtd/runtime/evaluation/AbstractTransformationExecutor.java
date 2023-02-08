@@ -159,8 +159,8 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
-	public @Nullable TransformationExecution getTransformationExecution() {
-		return transformer.getTransformationExecution();
+	public @Nullable TransformationExecution getTransformationExecution(@Nullable Object object) {
+		return transformer.getTransformationExecution(object);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 
 	@Override
 	public void setContextualProperty(@NonNull String propertyName, Object value) {
-		TransformationExecution txInstance = getTransformationExecution();
+		TransformationExecution txInstance = getTransformationExecution(transformer);
 		if (txInstance == null) {
 			throw new IllegalArgumentException("No contextual instance available");
 		}

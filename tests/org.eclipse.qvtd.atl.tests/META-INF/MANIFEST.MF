@@ -20,5 +20,6 @@ Require-Bundle: org.junit,
  org.eclipse.m2m.atl.emftvm;bundle-version="[4.0.0,5.0.0)",
  org.eclipse.m2m.atl.engine;bundle-version="[4.0.0,5.0.0)",
  org.eclipse.qvtd.xtext.qvtbase.tests,
- javax.annotation;resolution:=optional
+ javax.annotation;resolution:=optional,
+ org.eclipse.qvtd.xtext.qvtrelation.tests
 Automatic-Module-Name: org.eclipse.qvtd.atl.tests

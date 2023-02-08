@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachePropertyCallingConvention.ImmutableCachePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.AbstractCachedOperationCallingConvention.CacheProperty;
 import org.eclipse.ocl.examples.codegen.calling.DefaultOperationCallingConvention;
+import org.eclipse.ocl.examples.codegen.calling.EcorePropertyCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ExternalOperationCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ImplementedOperationCallingConvention;
@@ -78,9 +79,11 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvti.calling.EmptyFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.InternalFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.MiddlePropertyCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.QVTiEcorePropertyCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowClassOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.ShadowDataTypeOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransformationCallingConvention;
+import org.eclipse.qvtd.codegen.qvti.calling.TransformationPropertyCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.calling.TransientFunctionOperationCallingConvention;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiCGNameHelperVisitor;
 import org.eclipse.qvtd.codegen.qvti.naming.QVTiExecutableNameManager;
@@ -389,6 +392,13 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull PropertyCallingConvention getCallingConvention(@NonNull Property asProperty) {
+		//	if (asProperty.getName().contains("PREFER")) {
+		org.eclipse.ocl.pivot.Class asClass = PivotUtil.getOwningClass(asProperty);
+		org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(asTransformation);
+		if (asClass == runtimeContextClass) {
+			return TransformationPropertyCallingConvention.getInstance(asProperty);
+		}
+		//	}
 		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
 		//	Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
 		Property asOppositeProperty2 = asProperty.getOpposite();
@@ -416,6 +426,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull ImperativeTransformation getContextClass() {
 		return asTransformation;
+	}
+
+	@Override
+	protected @NonNull EcorePropertyCallingConvention getEcorePropertyCallingConvention(@NonNull Property asProperty) {
+		return QVTiEcorePropertyCallingConvention.getInstance(asProperty);
 	}
 
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {

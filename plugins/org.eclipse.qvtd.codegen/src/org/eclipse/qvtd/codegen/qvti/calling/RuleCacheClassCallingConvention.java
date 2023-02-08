@@ -26,8 +26,10 @@ import org.eclipse.ocl.examples.codegen.calling.AbstractUncachedOperationCalling
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -92,7 +94,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			//	Create AS declaration for basicEvaluate
 			//
-			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateNameResolution();
+			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateName();
 			String basicEvaluateName = basicEvaluateNameResolution.getResolvedName();
 			Operation asCacheOperation = createASOperationDeclaration(analyzer, asCacheClass, asNewStatement,
 				basicEvaluateName, ASResultStyle.BOOLEAN);
@@ -104,7 +106,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for basicEvaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, null);
+				basicEvaluateNameResolution, asNewStatement);
 			/*	CGOperation cgCacheOperation = createCGOperation(analyzer, asCacheOperation);
 			analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 			cgCacheOperation.setCallingConvention(this);
@@ -131,6 +133,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			GenModelHelper genModelHelper = analyzer.getGenModelHelper();
 			//
 			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
+			ClassNameManager classNameManager = globalNameManager.useClassNameManager(cgCacheClass);
+			CGVariable cgExecutorVariable = classNameManager.getRootExecutorVariable();
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
 			CGExecutorType cgExecutorType = creationCache.getExecutorType();
@@ -149,14 +153,16 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("/**\n");
 			js.append(" * The inner evaluation, creates, initializes and installs the new trace singleton.\n");
 			js.append(" */\n");
-			js.append("// " + cgOperation.getCallingConvention() + "\n");
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				js.append("// " + cgOperation.getCallingConvention() + "\n");
+			}
 			js.append("@Override\n");
 			js.append("public ");
 			js.appendClassReference(false, Object.class);
 			js.append(" basicEvaluate(");
 			js.appendClassReference(true, Executor.class);
 			js.append(" ");
-			js.append(globalNameManager.getExecutorName());
+			js.appendValueName(cgExecutorVariable);
 			js.append(", ");
 			js.appendClassReference(true, TypedElement.class);
 			js.append(" ");
@@ -241,7 +247,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 				i++;
 			}
 			// Install trace instance
-			js.append(globalNameManager.getModelsName());
+			js.appendName(globalNameManager.getModelsName());
 			js.append("[" + modelIndex + "].add(");
 			js.append(instanceName);
 			js.append(", false);\n");
@@ -283,10 +289,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			//	Create AS declaration for evaluate
 			//
-			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateNameResolution();
-			String basicEvaluateName = basicEvaluateNameResolution.getResolvedName();
+			NameResolution basicEvaluateName = globalNameManager.getBasicEvaluateName();
 			Operation asCacheOperation = createASOperationDeclaration(analyzer, asCacheClass, asNewStatement,
-				basicEvaluateName, ASResultStyle.BOOLEAN);
+				basicEvaluateName.getResolvedName(), ASResultStyle.BOOLEAN);
 			//
 			//	Create AS body for evaluate
 			//
@@ -295,8 +300,17 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for evaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, null);
+				basicEvaluateName, asNewStatement);
 			return cgCacheOperation;
+		}
+
+		@Override
+		public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperationCallExp cgOperationCallExp) {
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				JavaStream js = cg2javaVisitor.getJavaStream();
+				js.append("/* " + cgOperationCallExp.getReferredOperation().getCallingConvention() + "*/");
+			}
+			return super.generateJavaCall(cg2javaVisitor, cgOperationCallExp);
 		}
 
 		@Override
@@ -318,11 +332,13 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("/**\n");
 			js.append(" * The outer evaluation provides a type safe interface.\n");
 			js.append(" */\n");
-			js.append("// " + cgOperation.getCallingConvention() + "\n");
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				js.append("// " + cgOperation.getCallingConvention() + "\n");
+			}
 			js.append("public ");
 			js.appendClassReference(true, cgExecutorType);
 			js.append(" ");
-			js.append(globalNameManager.getEvaluateName());
+			js.appendName(globalNameManager.getEvaluateName());
 			js.append("(");
 			boolean isFirst = true;
 			for (@NonNull CGProperty cgProperty : cgProperties) {
@@ -337,9 +353,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("return (");
 			js.appendClassReference(true, cgExecutorType);
 			js.append(")");
-			js.append(globalNameManager.getEvaluationCacheName());
+			js.appendName(globalNameManager.getEvaluationCacheName());
 			js.append(".");
-			js.append(globalNameManager.getGetCachedEvaluationResultName());
+			js.appendName(globalNameManager.getGetCachedEvaluationResultName());
 			js.append("(this, caller, new ");
 			js.appendClassReference(false, Object.class);
 			js.append("[]{");
@@ -430,11 +446,13 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		assert cgContainingPackage == null;
 		String title = "The instance of " + cgCacheClass.getName() + " caches the result of each distinct creation of\n";
 		js.appendCommentWithOCL(title, creationCache.getASEntryClass());
-		js.append("// " + cgCacheClass.getCallingConvention() + "\n");
+		if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+			js.append("// " + cgCacheClass.getCallingConvention() + "\n");
+		}
 		js.append("private class " + className);
 		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
-		generateProperties(cg2javaVisitor, cgCacheClass);
+		generatePropertyDeclarations(cg2javaVisitor, cgCacheClass);
 		generateOperations(cg2javaVisitor, cgCacheClass);
 		js.popClassBody(false);
 		return true;

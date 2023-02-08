@@ -39,8 +39,8 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getT0varName <em>T0var Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getT1atlVariable <em>T1atl Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getT1varName <em>T1var Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getT3atlVariable <em>T3atl Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExpImpl#getWmapVariableExp_referredVariable <em>Wmap Variable Exp referred Variable</em>}</li>
  * </ul>
  *
@@ -67,34 +67,34 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 
 
 	/**
-	 * The default value of the '{@link #getT0varName() <em>T0var Name</em>}' attribute.
+	 * The default value of the '{@link #getT1varName() <em>T1var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0varName()
+	 * @see #getT1varName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0VAR_NAME_EDEFAULT = null;
+	protected static final String T1VAR_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0varName() <em>T0var Name</em>}' attribute.
+	 * The cached value of the '{@link #getT1varName() <em>T1var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0varName()
+	 * @see #getT1varName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0varName = T0VAR_NAME_EDEFAULT;
+	protected String t1varName = T1VAR_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
+	 * The cached value of the '{@link #getT3atlVariable() <em>T3atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlVariable()
+	 * @see #getT3atlVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableDeclaration t1atlVariable;
+	protected VariableDeclaration t3atlVariable;
 
 	/**
 	 * The cached value of the '{@link #getWmapVariableExp_referredVariable() <em>Wmap Variable Exp referred Variable</em>}' reference.
@@ -174,8 +174,8 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	@Override
-	public String getT0varName() {
-		return t0varName;
+	public String getT1varName() {
+		return t1varName;
 	}
 
 	/**
@@ -184,11 +184,11 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	@Override
-	public void setT0varName(String newT0varName) {
-		String oldT0varName = t0varName;
-		t0varName = newT0varName;
+	public void setT1varName(String newT1varName) {
+		String oldT1varName = t1varName;
+		t1varName = newT1varName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0varName, t0varName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1varName, t1varName));
 	}
 
 	/**
@@ -197,16 +197,16 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	@Override
-	public VariableDeclaration getT1atlVariable() {
-		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = t1atlVariable;
-			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
-			if (t1atlVariable != oldT1atlVariable) {
+	public VariableDeclaration getT3atlVariable() {
+		if (t3atlVariable != null && t3atlVariable.eIsProxy()) {
+			InternalEObject oldT3atlVariable = t3atlVariable;
+			t3atlVariable = (VariableDeclaration)eResolveProxy(oldT3atlVariable);
+			if (t3atlVariable != oldT3atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
 			}
 		}
-		return t1atlVariable;
+		return t3atlVariable;
 	}
 
 	/**
@@ -214,8 +214,8 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration basicGetT1atlVariable() {
-		return t1atlVariable;
+	public VariableDeclaration basicGetT3atlVariable() {
+		return t3atlVariable;
 	}
 
 	/**
@@ -224,11 +224,11 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	@Override
-	public void setT1atlVariable(VariableDeclaration newT1atlVariable) {
-		VariableDeclaration oldT1atlVariable = t1atlVariable;
-		t1atlVariable = newT1atlVariable;
+	public void setT3atlVariable(VariableDeclaration newT3atlVariable) {
+		VariableDeclaration oldT3atlVariable = t3atlVariable;
+		t3atlVariable = newT3atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
 	}
 
 	/**
@@ -326,10 +326,10 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return getT0varName();
+				return getT1varName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlVariable();
-				return basicGetT1atlVariable();
+				if (resolve) return getT3atlVariable();
+				return basicGetT3atlVariable();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getWmapVariableExp_referredVariable();
 				return basicGetWmapVariableExp_referredVariable();
@@ -349,10 +349,10 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 				setDispatcher((DmapOclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0varName((String)newValue);
+				setT1varName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlVariable((VariableDeclaration)newValue);
+				setT3atlVariable((VariableDeclaration)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)newValue);
@@ -373,10 +373,10 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 				setDispatcher((DmapOclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0varName(T0VAR_NAME_EDEFAULT);
+				setT1varName(T1VAR_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlVariable((VariableDeclaration)null);
+				setT3atlVariable((VariableDeclaration)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)null);
@@ -396,9 +396,9 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return T0VAR_NAME_EDEFAULT == null ? t0varName != null : !T0VAR_NAME_EDEFAULT.equals(t0varName);
+				return T1VAR_NAME_EDEFAULT == null ? t1varName != null : !T1VAR_NAME_EDEFAULT.equals(t1varName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlVariable != null;
+				return t3atlVariable != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return wmapVariableExp_referredVariable != null;
 		}
@@ -415,8 +415,8 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0varName: ");
-		result.append(t0varName);
+		result.append(" (t1varName: ");
+		result.append(t1varName);
 		result.append(')');
 		return result.toString();
 	}

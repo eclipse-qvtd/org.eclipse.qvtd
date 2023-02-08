@@ -24,4 +24,19 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	protected @NonNull FieldingAnalysisVisitor createAnalysisVisitor(@NonNull ReturnState requiredReturn) {
 		return new QVTiFieldingAnalysisVisitor(this, requiredReturn);
 	}
+
+	@Override
+	public @NonNull FieldingAnalysisVisitor getMayBeThrownVisitor() {
+		return super.getMayBeThrownVisitor();
+	}
+
+	@Override
+	public @NonNull FieldingAnalysisVisitor getMustBeCaughtVisitor() {
+		return super.getMustBeCaughtVisitor();
+	}
+
+	@Override
+	public @NonNull QVTiFieldingAnalysisVisitor getMustBeThrownVisitor() {
+		return (QVTiFieldingAnalysisVisitor)super.getMustBeThrownVisitor();
+	}
 }

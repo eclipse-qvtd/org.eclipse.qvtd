@@ -32,10 +32,6 @@ public interface TmapOclType extends ImapOclExpression {
 	 * Returns the value of the '<em><b>Dispatcher</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOclType <em>Domap Ocl Type</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dispatcher</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dispatcher</em>' container reference.
 	 * @see #setDispatcher(DmapOclExpression)

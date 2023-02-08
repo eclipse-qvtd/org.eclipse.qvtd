@@ -21,7 +21,7 @@ package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp#getT0symbol <em>T0symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp#getT1symbol <em>T1symbol</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapStringExp()
@@ -33,10 +33,6 @@ public interface TmapStringExp extends ImapOclExpression {
 	 * Returns the value of the '<em><b>Dispatcher</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapStringExp <em>Domap String Exp</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dispatcher</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dispatcher</em>' container reference.
 	 * @see #setDispatcher(DmapOclExpression)
@@ -58,30 +54,26 @@ public interface TmapStringExp extends ImapOclExpression {
 	void setDispatcher(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T0symbol</b></em>' attribute.
+	 * Returns the value of the '<em><b>T1symbol</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0symbol</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0symbol</em>' attribute.
-	 * @see #setT0symbol(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapStringExp_T0symbol()
+	 * @return the value of the '<em>T1symbol</em>' attribute.
+	 * @see #setT1symbol(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapStringExp_T1symbol()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0symbol();
+	String getT1symbol();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp#getT0symbol <em>T0symbol</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp#getT1symbol <em>T1symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0symbol</em>' attribute.
-	 * @see #getT0symbol()
+	 * @param value the new value of the '<em>T1symbol</em>' attribute.
+	 * @see #getT1symbol()
 	 * @generated
 	 */
-	void setT0symbol(String value);
+	void setT1symbol(String value);
 
 } // TmapStringExp

@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.ProjectTestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
@@ -172,7 +173,12 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	}
 
 	private @NonNull TestFileSystemHelper getTestFileSystemHelper() {
-		return new TestFileSystemHelper();
+		ProjectTestFileSystemHelper testProjectHelper = new ProjectTestFileSystemHelper();
+		testProjectHelper.addRequiredBundle("org.eclipse.m2m.atl.common");
+		testProjectHelper.addRequiredBundle("org.eclipse.qvtd.atl");
+		testProjectHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtrelation");
+		testProjectHelper.addRequiredBundle("org.eclipse.qvtd.runtime");
+		return testProjectHelper;
 	}
 
 	/**
@@ -194,7 +200,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	}
 
 	protected @NonNull String getTestProjectName() {
-		return "QVTd_" + getClass().getSimpleName() + "__" + getTestName();
+		return "_QVTd_" + getClass().getSimpleName() + "__" + getTestName();
 	}
 
 	protected @NonNull String getTestName() {

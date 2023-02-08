@@ -29,7 +29,7 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.ImapHelperImpl#getSuccess <em>Success</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.ImapHelperImpl#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,24 +55,24 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 
 
 	/**
-	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean SUCCESS_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean success = SUCCESS_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,8 +99,8 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	 * @generated
 	 */
 	@Override
-	public Boolean getSuccess() {
-		return success;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -109,11 +109,11 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	 * @generated
 	 */
 	@Override
-	public void setSuccess(Boolean newSuccess) {
-		Boolean oldSuccess = success;
-		success = newSuccess;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getSuccess();
+				return getS0global();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -139,7 +139,7 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess((Boolean)newValue);
+				setS0global((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -154,7 +154,7 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess(SUCCESS_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -169,7 +169,7 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -184,8 +184,8 @@ public abstract class ImapHelperImpl extends ExecutionImpl implements ImapHelper
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (success: ");
-		result.append(success);
+		result.append(" (s0global: ");
+		result.append(s0global);
 		result.append(')');
 		return result.toString();
 	}

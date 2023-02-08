@@ -25,9 +25,10 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT0tmName <em>T0tm Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT1oclMetamodel <em>T1ocl Metamodel</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT1tmName <em>T1tm Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT3oclMetamodel <em>T3ocl Metamodel</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel()
@@ -36,86 +37,96 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapOclMetamodel extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T0tm Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0tm Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0tm Name</em>' attribute.
-	 * @see #setT0tmName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T0tmName()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>T1tm Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T1tm Name</em>' attribute.
+	 * @see #setT1tmName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T1tmName()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0tmName();
+	String getT1tmName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT0tmName <em>T0tm Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT1tmName <em>T1tm Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0tm Name</em>' attribute.
-	 * @see #getT0tmName()
+	 * @param value the new value of the '<em>T1tm Name</em>' attribute.
+	 * @see #getT1tmName()
 	 * @generated
 	 */
-	void setT0tmName(String value);
+	void setT1tmName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>T1ocl Metamodel</b></em>' reference.
+	 * Returns the value of the '<em><b>T3ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1ocl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1ocl Metamodel</em>' reference.
-	 * @see #setT1oclMetamodel(OclModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T1oclMetamodel()
+	 * @return the value of the '<em>T3ocl Metamodel</em>' reference.
+	 * @see #setT3oclMetamodel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T3oclMetamodel()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOclMetamodel'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModel getT1oclMetamodel();
+	OclModel getT3oclMetamodel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT1oclMetamodel <em>T1ocl Metamodel</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT3oclMetamodel <em>T3ocl Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1ocl Metamodel</em>' reference.
-	 * @see #getT1oclMetamodel()
+	 * @param value the new value of the '<em>T3ocl Metamodel</em>' reference.
+	 * @see #getT3oclMetamodel()
 	 * @generated
 	 */
-	void setT1oclMetamodel(OclModel value);
+	void setT3oclMetamodel(OclModel value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Typed Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Typed Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #setT2qvtrTypedModel(TypedModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T2qvtrTypedModel()
+	 * @return the value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #setT4qvtrTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclMetamodel_T4qvtrTypedModel()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOclMetamodel'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TypedModel getT2qvtrTypedModel();
+	TypedModel getT4qvtrTypedModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #getT2qvtrTypedModel()
+	 * @param value the new value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #getT4qvtrTypedModel()
 	 * @generated
 	 */
-	void setT2qvtrTypedModel(TypedModel value);
+	void setT4qvtrTypedModel(TypedModel value);
 
 } // TmapOclMetamodel

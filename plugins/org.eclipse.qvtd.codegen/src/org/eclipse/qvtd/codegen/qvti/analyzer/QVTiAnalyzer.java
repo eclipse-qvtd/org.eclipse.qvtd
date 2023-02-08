@@ -254,8 +254,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				CGFinalVariable cgRawVariable = createCGFinalVariable(null, cgTypeId, asInit.isIsRequired());
 				cgRawVariable.setAst(asInit);
 				cgRawVariable.setInit(cgInit);
-				//	cgRawVariable.setName("raw_" + asVariable.getName());
-				//	getNameManager().declareLazyName(cgRawVariable);
 				//
 				CGLetExp cgRawLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
 				cgRawLetExp.setAst(asInit);
@@ -286,8 +284,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGFinalVariable cgVariable = useExecutableNameManager(asVariable).createCGVariable(asVariable);
 			cgVariable.setInit(cgInit);
 			CGLetExp cgLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
-			cgLetExp.setAst(asVariable);
-			cgLetExp.setTypeId(getCGTypeId(asVariable.getTypeId()));
+			initAst(cgLetExp, asVariable, true);
 			cgLetExp.setInit(cgVariable);
 			cgLetExp.setTypeId(getCGTypeId(TypeId.BOOLEAN));
 			appendSubTree(cgLetExp);
@@ -673,7 +670,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		boolean isRequired = asProperty.isIsRequired();
 		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
 		boolean isThis = false;
-		if (asSourceClass instanceof ImperativeTransformation) {
+		if (asSourceClass instanceof ImperativeTransformation) {	// XXX ??? obsolete wrt TransformationPropertyCallingConvention
 			ImperativeTransformation iTransformation = (ImperativeTransformation)asSourceClass;
 			org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 			Property iProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), asProperty.getName());
@@ -930,13 +927,13 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)operationNameManager.basicGetCGParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
 			cgFunctionParameter = QVTiCGModelFactory.eINSTANCE.createCGFunctionParameter();
-			cgFunctionParameter.setAst(asFunctionParameter);
+			initAst(cgFunctionParameter, asFunctionParameter, true);
 			//	cgFunctionParameter.setTypeId(getCGTypeId(asFunctionParameter.getTypeId()));
 			//	nameManager.declarePreferredName(cgFunctionParameter);
-			cgFunctionParameter.setTypeId(getCGTypeId(asFunctionParameter.getTypeId()));
-			if (asFunctionParameter.isIsRequired()) {
-				cgFunctionParameter.setRequired(true);
-			}
+			//	cgFunctionParameter.setTypeId(getCGTypeId(asFunctionParameter.getTypeId()));
+			//	if (asFunctionParameter.isIsRequired()) {
+			//		cgFunctionParameter.setRequired(true);
+			//	}
 			operationNameManager.addVariable(asFunctionParameter, cgFunctionParameter);
 		}
 		return cgFunctionParameter;
@@ -959,8 +956,9 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		else {
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGGuardVariable();
 		}
-		cgGuardVariable.setAst(asVariable);
-		cgGuardVariable.setTypeId(getCGTypeId(asVariable.getTypeId()));
+		initAst(cgGuardVariable, asVariable, true);
+		//	cgGuardVariable.setAst(asVariable);
+		//	cgGuardVariable.setTypeId(getCGTypeId(asVariable.getTypeId()));
 		//	nameManager.declarePreferredName(cgGuardVariable);
 		if (!isConnectionVariable && !isPrimitiveVariable) {
 			cgGuardVariable.setTypedModel(getTypedModel(asVariable));
@@ -1029,9 +1027,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
 			initAst(cgVariable, asNewStatement, true);
-			//	cgVariable.setAst(asNewStatement);
-			//	cgVariable.setTypeId(getCGTypeId(asNewStatement.getTypeId()));
-			//	nameManager.declarePreferredName(cgVariable);
 			TypedModel asTypedModel = ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(getTypedModel(asTypedModel));
 			cgVariable.setTypedModel(cgTypedModel);

@@ -336,6 +336,15 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	TmapVariableExp_referredVariable_VariableDeclaration createTmapVariableExp_referredVariable_VariableDeclaration();
 
 	/**
+	 * Returns a new object of class '<em>Tx ATL2QV Tr</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx ATL2QV Tr</em>'.
+	 * @generated
+	 */
+	TxATL2QVTr createTxATL2QVTr();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

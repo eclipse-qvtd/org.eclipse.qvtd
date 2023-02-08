@@ -312,7 +312,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -327,7 +327,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		switch (featureID) {
 			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

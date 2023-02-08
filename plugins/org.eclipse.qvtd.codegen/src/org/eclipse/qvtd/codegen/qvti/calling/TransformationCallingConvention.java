@@ -16,8 +16,11 @@ import org.eclipse.ocl.examples.codegen.calling.AbstractClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.calling.ClassCallingConvention;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 
 /**
  *  TransformationCallingConvention defines a Transformation declaration.
@@ -35,6 +38,12 @@ public class TransformationCallingConvention extends AbstractClassCallingConvent
 	public @NonNull CGClass createCGClass(@NonNull CodeGenAnalyzer analyzer, org.eclipse.ocl.pivot.@NonNull Class asClass) {
 		CGTransformation cgTransformation = createCGClass();
 		installCGDefaultClassParent(analyzer, cgTransformation, asClass);
+		JavaCodeGenerator codeGenerator = analyzer.getCodeGenerator();
+		boolean isIncremental = codeGenerator.getOptions().isIncremental();
+		Class<?> jSuperClass = isIncremental ? AbstractTransformer.Incremental.class : AbstractTransformer.class;
+		org.eclipse.ocl.pivot.@NonNull Class asSuperClass = codeGenerator.getLanguageSupport().getNativeClass(jSuperClass);
+		CGClass cgSuperClass = analyzer.generateClassDeclaration(asSuperClass, null);
+		cgTransformation.getSuperTypes().add(cgSuperClass);
 		return cgTransformation;
 	}
 
@@ -46,5 +55,9 @@ public class TransformationCallingConvention extends AbstractClassCallingConvent
 	@Override
 	public boolean generateJavaDeclaration(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGClass cgClass) {
 		return false;
+	}
+
+	public void generatePropertyInitializations(@NonNull QVTiCG2JavaVisitor qvticg2JavaVisitor, @NonNull CGTransformation cgTransformation) {
+		super.generatePropertyInitializations(qvticg2JavaVisitor, cgTransformation);
 	}
 }

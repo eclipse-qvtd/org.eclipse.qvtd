@@ -25,10 +25,11 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT1atlChildRule <em>T1atl Child Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT1atlSuperRule <em>T1atl Super Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT2qvtrOverriddenRelation <em>T2qvtr Overridden Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT2qvtrOverridesRelation <em>T2qvtr Overrides Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT3atlChildRule <em>T3atl Child Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT3atlSuperRule <em>T3atl Super Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT4qvtrOverriddenRelation <em>T4qvtr Overridden Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT4qvtrOverridesRelation <em>T4qvtr Overrides Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getWmapMatchedRule1 <em>Wmap Matched Rule1</em>}</li>
  * </ul>
@@ -39,127 +40,127 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapMatchedRule_super extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T1atl Child Rule</b></em>' reference.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Child Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Child Rule</em>' reference.
-	 * @see #setT1atlChildRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T1atlChildRule()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule_super'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_S0global()
+	 * @model
 	 * @generated
 	 */
-	MatchedRule getT1atlChildRule();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT1atlChildRule <em>T1atl Child Rule</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Child Rule</em>' reference.
-	 * @see #getT1atlChildRule()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setT1atlChildRule(MatchedRule value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Super Rule</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Child Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Super Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Super Rule</em>' reference.
-	 * @see #setT1atlSuperRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T1atlSuperRule()
+	 * @return the value of the '<em>T3atl Child Rule</em>' reference.
+	 * @see #setT3atlChildRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T3atlChildRule()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	MatchedRule getT1atlSuperRule();
+	MatchedRule getT3atlChildRule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT1atlSuperRule <em>T1atl Super Rule</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT3atlChildRule <em>T3atl Child Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Super Rule</em>' reference.
-	 * @see #getT1atlSuperRule()
+	 * @param value the new value of the '<em>T3atl Child Rule</em>' reference.
+	 * @see #getT3atlChildRule()
 	 * @generated
 	 */
-	void setT1atlSuperRule(MatchedRule value);
+	void setT3atlChildRule(MatchedRule value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Overridden Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Super Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Overridden Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Overridden Relation</em>' reference.
-	 * @see #setT2qvtrOverriddenRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T2qvtrOverriddenRelation()
+	 * @return the value of the '<em>T3atl Super Rule</em>' reference.
+	 * @see #setT3atlSuperRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T3atlSuperRule()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	MatchedRule getT3atlSuperRule();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT3atlSuperRule <em>T3atl Super Rule</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Super Rule</em>' reference.
+	 * @see #getT3atlSuperRule()
+	 * @generated
+	 */
+	void setT3atlSuperRule(MatchedRule value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Overridden Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Overridden Relation</em>' reference.
+	 * @see #setT4qvtrOverriddenRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T4qvtrOverriddenRelation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Relation getT2qvtrOverriddenRelation();
+	Relation getT4qvtrOverriddenRelation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT2qvtrOverriddenRelation <em>T2qvtr Overridden Relation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT4qvtrOverriddenRelation <em>T4qvtr Overridden Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Overridden Relation</em>' reference.
-	 * @see #getT2qvtrOverriddenRelation()
+	 * @param value the new value of the '<em>T4qvtr Overridden Relation</em>' reference.
+	 * @see #getT4qvtrOverriddenRelation()
 	 * @generated
 	 */
-	void setT2qvtrOverriddenRelation(Relation value);
+	void setT4qvtrOverriddenRelation(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Overrides Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Overrides Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Overrides Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Overrides Relation</em>' reference.
-	 * @see #setT2qvtrOverridesRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T2qvtrOverridesRelation()
+	 * @return the value of the '<em>T4qvtr Overrides Relation</em>' reference.
+	 * @see #setT4qvtrOverridesRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_T4qvtrOverridesRelation()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule_super'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Relation getT2qvtrOverridesRelation();
+	Relation getT4qvtrOverridesRelation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT2qvtrOverridesRelation <em>T2qvtr Overrides Relation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super#getT4qvtrOverridesRelation <em>T4qvtr Overrides Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Overrides Relation</em>' reference.
-	 * @see #getT2qvtrOverridesRelation()
+	 * @param value the new value of the '<em>T4qvtr Overrides Relation</em>' reference.
+	 * @see #getT4qvtrOverridesRelation()
 	 * @generated
 	 */
-	void setT2qvtrOverridesRelation(Relation value);
+	void setT4qvtrOverridesRelation(Relation value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Matched Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Matched Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Matched Rule</em>' reference.
 	 * @see #setWmapMatchedRule(TmapMatchedRule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_WmapMatchedRule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapMatchedRule getWmapMatchedRule();
@@ -177,15 +178,11 @@ public interface TmapMatchedRule_super extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Matched Rule1</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Matched Rule1</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Matched Rule1</em>' reference.
 	 * @see #setWmapMatchedRule1(TmapMatchedRule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_super_WmapMatchedRule1()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapMatchedRule getWmapMatchedRule1();

@@ -34,9 +34,10 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT0tmName <em>T0tm Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT1oclMetamodel <em>T1ocl Metamodel</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT1tmName <em>T1tm Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT3oclMetamodel <em>T3ocl Metamodel</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOclMetamodelImpl#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,7 +50,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_OCL_METAMODEL_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 3;
+	public static final int TMAP_OCL_METAMODEL_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Tmap Ocl Metamodel</em>' class.
@@ -62,44 +63,64 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 
 
 	/**
-	 * The default value of the '{@link #getT0tmName() <em>T0tm Name</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0tmName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0TM_NAME_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0tmName() <em>T0tm Name</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0tmName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0tmName = T0TM_NAME_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1oclMetamodel() <em>T1ocl Metamodel</em>}' reference.
+	 * The default value of the '{@link #getT1tmName() <em>T1tm Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1oclMetamodel()
+	 * @see #getT1tmName()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclModel t1oclMetamodel;
+	protected static final String T1TM_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrTypedModel() <em>T2qvtr Typed Model</em>}' reference.
+	 * The cached value of the '{@link #getT1tmName() <em>T1tm Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrTypedModel()
+	 * @see #getT1tmName()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel t2qvtrTypedModel;
+	protected String t1tmName = T1TM_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getT3oclMetamodel() <em>T3ocl Metamodel</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT3oclMetamodel()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclModel t3oclMetamodel;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrTypedModel() <em>T4qvtr Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrTypedModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedModel t4qvtrTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,8 +147,8 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public String getT0tmName() {
-		return t0tmName;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -136,11 +157,11 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public void setT0tmName(String newT0tmName) {
-		String oldT0tmName = t0tmName;
-		t0tmName = newT0tmName;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT0tmName, t0tmName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -149,16 +170,39 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public OclModel getT1oclMetamodel() {
-		if (t1oclMetamodel != null && t1oclMetamodel.eIsProxy()) {
-			InternalEObject oldT1oclMetamodel = t1oclMetamodel;
-			t1oclMetamodel = (OclModel)eResolveProxy(oldT1oclMetamodel);
-			if (t1oclMetamodel != oldT1oclMetamodel) {
+	public String getT1tmName() {
+		return t1tmName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT1tmName(String newT1tmName) {
+		String oldT1tmName = t1tmName;
+		t1tmName = newT1tmName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1tmName, t1tmName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OclModel getT3oclMetamodel() {
+		if (t3oclMetamodel != null && t3oclMetamodel.eIsProxy()) {
+			InternalEObject oldT3oclMetamodel = t3oclMetamodel;
+			t3oclMetamodel = (OclModel)eResolveProxy(oldT3oclMetamodel);
+			if (t3oclMetamodel != oldT3oclMetamodel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3oclMetamodel, t3oclMetamodel));
 			}
 		}
-		return t1oclMetamodel;
+		return t3oclMetamodel;
 	}
 
 	/**
@@ -166,8 +210,8 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclModel basicGetT1oclMetamodel() {
-		return t1oclMetamodel;
+	public OclModel basicGetT3oclMetamodel() {
+		return t3oclMetamodel;
 	}
 
 	/**
@@ -176,11 +220,11 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public void setT1oclMetamodel(OclModel newT1oclMetamodel) {
-		OclModel oldT1oclMetamodel = t1oclMetamodel;
-		t1oclMetamodel = newT1oclMetamodel;
+	public void setT3oclMetamodel(OclModel newT3oclMetamodel) {
+		OclModel oldT3oclMetamodel = t3oclMetamodel;
+		t3oclMetamodel = newT3oclMetamodel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3oclMetamodel, t3oclMetamodel));
 	}
 
 	/**
@@ -189,16 +233,16 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public TypedModel getT2qvtrTypedModel() {
-		if (t2qvtrTypedModel != null && t2qvtrTypedModel.eIsProxy()) {
-			InternalEObject oldT2qvtrTypedModel = (InternalEObject)t2qvtrTypedModel;
-			t2qvtrTypedModel = (TypedModel)eResolveProxy(oldT2qvtrTypedModel);
-			if (t2qvtrTypedModel != oldT2qvtrTypedModel) {
+	public TypedModel getT4qvtrTypedModel() {
+		if (t4qvtrTypedModel != null && t4qvtrTypedModel.eIsProxy()) {
+			InternalEObject oldT4qvtrTypedModel = (InternalEObject)t4qvtrTypedModel;
+			t4qvtrTypedModel = (TypedModel)eResolveProxy(oldT4qvtrTypedModel);
+			if (t4qvtrTypedModel != oldT4qvtrTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrTypedModel, t2qvtrTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrTypedModel, t4qvtrTypedModel));
 			}
 		}
-		return t2qvtrTypedModel;
+		return t4qvtrTypedModel;
 	}
 
 	/**
@@ -206,8 +250,8 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetT2qvtrTypedModel() {
-		return t2qvtrTypedModel;
+	public TypedModel basicGetT4qvtrTypedModel() {
+		return t4qvtrTypedModel;
 	}
 
 	/**
@@ -216,11 +260,11 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrTypedModel(TypedModel newT2qvtrTypedModel) {
-		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
-		t2qvtrTypedModel = newT2qvtrTypedModel;
+	public void setT4qvtrTypedModel(TypedModel newT4qvtrTypedModel) {
+		TypedModel oldT4qvtrTypedModel = t4qvtrTypedModel;
+		t4qvtrTypedModel = newT4qvtrTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrTypedModel, t2qvtrTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrTypedModel, t4qvtrTypedModel));
 	}
 
 	/**
@@ -232,13 +276,15 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getT0tmName();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1oclMetamodel();
-				return basicGetT1oclMetamodel();
+				return getT1tmName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT2qvtrTypedModel();
-				return basicGetT2qvtrTypedModel();
+				if (resolve) return getT3oclMetamodel();
+				return basicGetT3oclMetamodel();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				if (resolve) return getT4qvtrTypedModel();
+				return basicGetT4qvtrTypedModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -252,13 +298,16 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0tmName((String)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1oclMetamodel((OclModel)newValue);
+				setT1tmName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrTypedModel((TypedModel)newValue);
+				setT3oclMetamodel((OclModel)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				setT4qvtrTypedModel((TypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -273,13 +322,16 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0tmName(T0TM_NAME_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1oclMetamodel((OclModel)null);
+				setT1tmName(T1TM_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrTypedModel((TypedModel)null);
+				setT3oclMetamodel((OclModel)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				setT4qvtrTypedModel((TypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,11 +346,13 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return T0TM_NAME_EDEFAULT == null ? t0tmName != null : !T0TM_NAME_EDEFAULT.equals(t0tmName);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1oclMetamodel != null;
+				return T1TM_NAME_EDEFAULT == null ? t1tmName != null : !T1TM_NAME_EDEFAULT.equals(t1tmName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t2qvtrTypedModel != null;
+				return t3oclMetamodel != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				return t4qvtrTypedModel != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -313,8 +367,10 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0tmName: ");
-		result.append(t0tmName);
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(", t1tmName: ");
+		result.append(t1tmName);
 		result.append(')');
 		return result.toString();
 	}

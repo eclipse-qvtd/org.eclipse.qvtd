@@ -30,12 +30,13 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlContext <em>T1atl Context</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlDefinition <em>T1atl Definition</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlHelper <em>T1atl Helper</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlReturnType <em>T1atl Return Type</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT2qvtrFunction <em>T2qvtr Function</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT2qvtrParameter <em>T2qvtr Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlContext <em>T3atl Context</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlDefinition <em>T3atl Definition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlHelper <em>T3atl Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlReturnType <em>T3atl Return Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT4qvtrFunction <em>T4qvtr Function</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT4qvtrParameter <em>T4qvtr Parameter</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getWmapVariable <em>Wmap Variable</em>}</li>
  * </ul>
  *
@@ -45,176 +46,174 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapHelper_Context extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T1atl Context</b></em>' reference.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Context</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Context</em>' reference.
-	 * @see #setT1atlContext(OclContextDefinition)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T1atlContext()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_S0global()
+	 * @model
 	 * @generated
 	 */
-	OclContextDefinition getT1atlContext();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlContext <em>T1atl Context</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Context</em>' reference.
-	 * @see #getT1atlContext()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setT1atlContext(OclContextDefinition value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Definition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Definition</em>' reference.
-	 * @see #setT1atlDefinition(OclFeatureDefinition)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T1atlDefinition()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	OclFeatureDefinition getT1atlDefinition();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlDefinition <em>T1atl Definition</em>}' reference.
+	 * Returns the value of the '<em><b>T3atl Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Definition</em>' reference.
-	 * @see #getT1atlDefinition()
-	 * @generated
-	 */
-	void setT1atlDefinition(OclFeatureDefinition value);
-
-	/**
-	 * Returns the value of the '<em><b>T1atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Helper</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Helper</em>' reference.
-	 * @see #setT1atlHelper(Helper)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T1atlHelper()
+	 * @return the value of the '<em>T3atl Context</em>' reference.
+	 * @see #setT3atlContext(OclContextDefinition)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T3atlContext()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	Helper getT1atlHelper();
+	OclContextDefinition getT3atlContext();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlHelper <em>T1atl Helper</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlContext <em>T3atl Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Helper</em>' reference.
-	 * @see #getT1atlHelper()
+	 * @param value the new value of the '<em>T3atl Context</em>' reference.
+	 * @see #getT3atlContext()
 	 * @generated
 	 */
-	void setT1atlHelper(Helper value);
+	void setT3atlContext(OclContextDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Return Type</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Return Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Return Type</em>' reference.
-	 * @see #setT1atlReturnType(OclType)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T1atlReturnType()
+	 * @return the value of the '<em>T3atl Definition</em>' reference.
+	 * @see #setT3atlDefinition(OclFeatureDefinition)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T3atlDefinition()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclType getT1atlReturnType();
+	OclFeatureDefinition getT3atlDefinition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT1atlReturnType <em>T1atl Return Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlDefinition <em>T3atl Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Return Type</em>' reference.
-	 * @see #getT1atlReturnType()
+	 * @param value the new value of the '<em>T3atl Definition</em>' reference.
+	 * @see #getT3atlDefinition()
 	 * @generated
 	 */
-	void setT1atlReturnType(OclType value);
+	void setT3atlDefinition(OclFeatureDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Function</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Helper</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Function</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Function</em>' reference.
-	 * @see #setT2qvtrFunction(Function)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T2qvtrFunction()
+	 * @return the value of the '<em>T3atl Helper</em>' reference.
+	 * @see #setT3atlHelper(Helper)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T3atlHelper()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	Helper getT3atlHelper();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlHelper <em>T3atl Helper</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Helper</em>' reference.
+	 * @see #getT3atlHelper()
+	 * @generated
+	 */
+	void setT3atlHelper(Helper value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Return Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Return Type</em>' reference.
+	 * @see #setT3atlReturnType(OclType)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T3atlReturnType()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	OclType getT3atlReturnType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT3atlReturnType <em>T3atl Return Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Return Type</em>' reference.
+	 * @see #getT3atlReturnType()
+	 * @generated
+	 */
+	void setT3atlReturnType(OclType value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Function</em>' reference.
+	 * @see #setT4qvtrFunction(Function)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T4qvtrFunction()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Function getT2qvtrFunction();
+	Function getT4qvtrFunction();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT2qvtrFunction <em>T2qvtr Function</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT4qvtrFunction <em>T4qvtr Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Function</em>' reference.
-	 * @see #getT2qvtrFunction()
+	 * @param value the new value of the '<em>T4qvtr Function</em>' reference.
+	 * @see #getT4qvtrFunction()
 	 * @generated
 	 */
-	void setT2qvtrFunction(Function value);
+	void setT4qvtrFunction(Function value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Parameter</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Parameter</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Parameter</em>' reference.
-	 * @see #setT2qvtrParameter(FunctionParameter)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T2qvtrParameter()
+	 * @return the value of the '<em>T4qvtr Parameter</em>' reference.
+	 * @see #setT4qvtrParameter(FunctionParameter)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Context_T4qvtrParameter()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapHelper_Context'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	FunctionParameter getT2qvtrParameter();
+	FunctionParameter getT4qvtrParameter();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT2qvtrParameter <em>T2qvtr Parameter</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context#getT4qvtrParameter <em>T4qvtr Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Parameter</em>' reference.
-	 * @see #getT2qvtrParameter()
+	 * @param value the new value of the '<em>T4qvtr Parameter</em>' reference.
+	 * @see #getT4qvtrParameter()
 	 * @generated
 	 */
-	void setT2qvtrParameter(FunctionParameter value);
+	void setT4qvtrParameter(FunctionParameter value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Variable</em>' reference.
 	 * @see #setWmapVariable(TmapVariable)

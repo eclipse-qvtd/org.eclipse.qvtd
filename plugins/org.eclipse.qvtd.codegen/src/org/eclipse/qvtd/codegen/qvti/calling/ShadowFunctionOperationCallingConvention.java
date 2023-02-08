@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.naming.ExecutableNameManager;
 import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
+import org.eclipse.ocl.examples.codegen.naming.NameResolution;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -59,6 +60,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.codegen.qvti.naming.QVTiGlobalNameManager;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
@@ -87,7 +89,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 
 		@Override
 		protected void generateUniqueComputationArguments(@NonNull CG2JavaVisitor cg2javaVisitor, boolean isFirst, @NonNull GlobalNameManager globalNameManager, @NonNull CGOperation cgOperation) {
-			cg2javaVisitor.getJavaStream().append(globalNameManager.getRootThisNameResolution().getResolvedName());
+			cg2javaVisitor.getJavaStream().appendName(globalNameManager.getRootThisName());
 			super.generateUniqueComputationArguments(cg2javaVisitor, false, globalNameManager, cgOperation);
 		}
 
@@ -140,7 +142,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		CGOperationCallExp cgOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 		initCallExp(qvtiAnalyzer, cgOperationCallExp, asOperationCallExp, cgOperation, asOperation.isIsRequired());
 		assert cgSource instanceof CGVariableExp;
-		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootThisNameResolution();
+		assert CGUtil.getReferredVariable((CGVariableExp)cgSource).basicGetNameResolution() == codeGenerator.getGlobalNameManager().getRootThisName();
 		initCallArguments(qvtiAnalyzer, cgOperationCallExp);
 		return cgOperationCallExp;
 	}
@@ -195,7 +197,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 					TypeDescriptor javaTypeDescriptor = qvticg2javaVisitor.getCodeGenerator().getUnboxedDescriptor(elementId);
 					js.appendClassReference(null, javaTypeDescriptor);
 				}
-				String emptyListName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getEmptyListName();
+				String emptyListName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getEmptyListName().getResolvedName();
 				js.append(" " + emptyListName + " = ");
 				js.appendClassReference(null, Collections.class);
 				js.append("." + emptyListName + "();\n");
@@ -218,7 +220,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(function);
 		EntryPointsAnalysis entryPointsAnalysis = codeGenerator.getEntryPointsAnalysis(transformation);
 		String functionName = cgFunction.getResolvedName();
-		String cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultName();
+		QVTiGlobalNameManager globalNameManager = codeGenerator.getGlobalNameManager();
 		js.append(" {\n");
 		js.pushIndentation(null);
 		if (isIncremental) {
@@ -291,7 +293,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		//
 		js.appendThis(functionName);
 		js.append(".");
-		js.append(cachedResultName);
+		js.appendName(globalNameManager.getCachedResultName());
 		js.append(" = ");
 		js.appendValueName(cgShadowExp);
 		js.append(";\n");
@@ -375,7 +377,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 
 	protected void doFunctionGetInstance(@NonNull QVTiCG2JavaVisitor qvticg2javaVisitor, @NonNull CGFunction cgFunction) {
 		JavaStream js = qvticg2javaVisitor.getJavaStream();
-		String cachedResultName = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager().getCachedResultName();
+		QVTiGlobalNameManager globalNameManager = qvticg2javaVisitor.getCodeGenerator().getGlobalNameManager();
 		js.append("@Override\n");
 		js.append("public ");
 		//	js.appendIsRequired(false);
@@ -387,7 +389,9 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		}
 		js.append(" getResult() {\n");
 		js.pushIndentation(null);
-		js.append("return " + cachedResultName + ";\n");
+		js.append("return ");
+		js.appendName( globalNameManager.getCachedResultName());
+		js.append(";\n");
 		js.popIndentation();
 		js.append("}\n");
 	}
@@ -448,7 +452,7 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		CGShadowExp cgShadowExp = QVTiCGUtil.basicGetCGShadowExp(cgFunction);
 		assert cgShadowExp != null;
 		String functionName = cgFunction.getResolvedName();
-		String cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultName();
+		NameResolution cachedResultName = codeGenerator.getGlobalNameManager().getCachedResultName();
 		js.append("protected class ");
 		js.append(functionName);
 		js.append(" extends ");
@@ -457,13 +461,15 @@ public abstract class ShadowFunctionOperationCallingConvention extends AbstractC
 		js.appendOptionalBlankLine();
 		js.append("protected final ");
 		js.appendTypeDeclaration(cgFunction);
-		js.append(" " + cachedResultName + ";\n");
+		js.append(" ");
+		js.appendName(cachedResultName);
+		js.append(";\n");
 		js.appendOptionalBlankLine();
 		doFunctionConstructor(qvticg2javaVisitor, cgFunction, cgShadowExp);
 		js.appendOptionalBlankLine();
 		doFunctionGetInstance(qvticg2javaVisitor, cgFunction);
 		js.appendOptionalBlankLine();
-		doFunctionIsEqual(qvticg2javaVisitor, cgShadowExp, cachedResultName);
+		doFunctionIsEqual(qvticg2javaVisitor, cgShadowExp, cachedResultName.getResolvedName());
 		js.popClassBody(false);
 		return true;
 	}

@@ -1,7 +1,6 @@
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer.ReturnState;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
@@ -17,14 +16,19 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 
 public class QVTiFieldingAnalysisVisitor extends AbstractQVTiFieldingAnalysisVisitor
 {
-	public QVTiFieldingAnalysisVisitor(@NonNull FieldingAnalyzer context, @NonNull ReturnState requiredReturn) {
+	public QVTiFieldingAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context, @NonNull ReturnState requiredReturn) {
 		super(context, requiredReturn);
 	}
 
 	@Override
-	protected @NonNull QVTiFieldingAnalysisVisitor getMustBeThrownVisitor() {
-		return (QVTiFieldingAnalysisVisitor)super.getMustBeThrownVisitor();
+	public @NonNull QVTiFieldingAnalyzer getFieldingAnalyzer() {
+		return (QVTiFieldingAnalyzer)super.getFieldingAnalyzer();
 	}
+
+	//	@Override
+	//	protected @NonNull QVTiFieldingAnalysisVisitor getMustBeThrownVisitor() {
+	//		return (QVTiFieldingAnalysisVisitor)super.getMustBeThrownVisitor();
+	//	}
 
 	/*	@Override
 	protected @NonNull FieldingAnalysisVisitor getNestedVisitor(@NonNull CGOperation cgOperation) {
@@ -51,7 +55,7 @@ public class QVTiFieldingAnalysisVisitor extends AbstractQVTiFieldingAnalysisVis
 
 	@Override
 	public @NonNull ReturnState visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
-		QVTiFieldingAnalysisVisitor mustBeThrownVisitor = getMustBeThrownVisitor();
+		QVTiFieldingAnalysisVisitor mustBeThrownVisitor = getFieldingAnalyzer().getMustBeThrownVisitor();
 		if (mustBeThrownVisitor != this) {
 			return mustBeThrownVisitor.visit(cgMappingCall);
 		}
@@ -67,7 +71,7 @@ public class QVTiFieldingAnalysisVisitor extends AbstractQVTiFieldingAnalysisVis
 		if (s.contains("select(")) {
 			getClass();		// XXX
 		}
-		QVTiFieldingAnalysisVisitor mustBeThrownVisitor = getMustBeThrownVisitor();
+		QVTiFieldingAnalysisVisitor mustBeThrownVisitor = getFieldingAnalyzer().getMustBeThrownVisitor();
 		mustBeThrownVisitor.visit(CGUtil.getSource(cgMappingLoop));
 		for (CGIterator cgIterator : CGUtil.getIterators(cgMappingLoop)) {
 			mustBeThrownVisitor.visit(cgIterator);

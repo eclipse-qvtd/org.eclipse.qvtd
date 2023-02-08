@@ -23,6 +23,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
 import org.eclipse.qvtd.runtime.qvttrace.Execution;
 import org.eclipse.qvtd.runtime.qvttrace.TraceElement;
 import org.eclipse.qvtd.runtime.qvttrace.TraceInstance;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 /**
  * <!-- begin-user-doc -->
@@ -428,6 +429,16 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseExecution(tmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = caseTraceInstance(tmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = caseTraceElement(tmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case 37: {
+				TxATL2QVTr txATL2QVTr = (TxATL2QVTr)theEObject;
+				T result = caseTxATL2QVTr(txATL2QVTr);
+				if (result == null) result = caseTransformationExecution(txATL2QVTr);
+				if (result == null) result = caseExecution(txATL2QVTr);
+				if (result == null) result = caseTraceInstance(txATL2QVTr);
+				if (result == null) result = caseTraceElement(txATL2QVTr);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -991,6 +1002,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tx ATL2QV Tr</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tx ATL2QV Tr</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTxATL2QVTr(TxATL2QVTr object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Trace Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1047,6 +1073,21 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExecution(Execution object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transformation Execution</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transformation Execution</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTransformationExecution(TransformationExecution object) {
 		return null;
 	}
 
