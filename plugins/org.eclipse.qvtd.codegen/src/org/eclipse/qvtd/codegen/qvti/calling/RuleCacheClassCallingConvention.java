@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -131,6 +132,8 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			GenModelHelper genModelHelper = analyzer.getGenModelHelper();
 			//
 			CGClass cgCacheClass = CGUtil.getContainingClass(cgOperation);
+			ClassNameManager classNameManager = globalNameManager.useClassNameManager(cgCacheClass);
+			CGVariable cgExecutorVariable = classNameManager.getRootExecutorVariable();
 			org.eclipse.ocl.pivot.Class asCacheClass = CGUtil.getAST(cgCacheClass);
 			CreationCache creationCache = analyzer.getCreationCache(asCacheClass);
 			CGExecutorType cgExecutorType = creationCache.getExecutorType();
@@ -156,7 +159,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append(" basicEvaluate(");
 			js.appendClassReference(true, Executor.class);
 			js.append(" ");
-			js.append(globalNameManager.getExecutorName());
+			js.appendValueName(cgExecutorVariable);
 			js.append(", ");
 			js.appendClassReference(true, TypedElement.class);
 			js.append(" ");
