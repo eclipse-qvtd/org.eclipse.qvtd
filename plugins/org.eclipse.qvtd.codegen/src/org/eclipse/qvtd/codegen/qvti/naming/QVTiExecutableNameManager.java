@@ -63,7 +63,7 @@ public class QVTiExecutableNameManager extends SupportedExecutableNameManager
 	protected @NonNull CGFinalVariable createQualifiedThisVariable() {
 		Class asClass = classNameManager.getASClass();
 		assert asClass instanceof Transformation;
-		NameResolution rootThisName = getGlobalNameManager().getRootThisNameResolution();
+		NameResolution rootThisName = getGlobalNameManager().getRootThisName();
 		CGTypeId cgTypeId = analyzer.getCGTypeId(asClass.getTypeId());
 		CGFinalVariable transformationVariable = analyzer.createCGFinalVariable(rootThisName, cgTypeId, true);
 		transformationVariable.setNonInvalid();

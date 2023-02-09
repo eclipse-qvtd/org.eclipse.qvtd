@@ -93,7 +93,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			//	Create AS declaration for basicEvaluate
 			//
-			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateNameResolution();
+			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateName();
 			String basicEvaluateName = basicEvaluateNameResolution.getResolvedName();
 			Operation asCacheOperation = createASOperationDeclaration(analyzer, asCacheClass, asNewStatement,
 				basicEvaluateName, ASResultStyle.BOOLEAN);
@@ -244,7 +244,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 				i++;
 			}
 			// Install trace instance
-			js.append(globalNameManager.getModelsName());
+			js.appendName(globalNameManager.getModelsName());
 			js.append("[" + modelIndex + "].add(");
 			js.append(instanceName);
 			js.append(", false);\n");
@@ -286,10 +286,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//
 			//	Create AS declaration for evaluate
 			//
-			NameResolution basicEvaluateNameResolution = globalNameManager.getBasicEvaluateNameResolution();
-			String basicEvaluateName = basicEvaluateNameResolution.getResolvedName();
+			NameResolution basicEvaluateName = globalNameManager.getBasicEvaluateName();
 			Operation asCacheOperation = createASOperationDeclaration(analyzer, asCacheClass, asNewStatement,
-				basicEvaluateName, ASResultStyle.BOOLEAN);
+				basicEvaluateName.getResolvedName(), ASResultStyle.BOOLEAN);
 			//
 			//	Create AS body for evaluate
 			//
@@ -298,7 +297,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for evaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, null);
+				basicEvaluateName, null);
 			return cgCacheOperation;
 		}
 
@@ -325,7 +324,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("public ");
 			js.appendClassReference(true, cgExecutorType);
 			js.append(" ");
-			js.append(globalNameManager.getEvaluateName());
+			js.appendName(globalNameManager.getEvaluateName());
 			js.append("(");
 			boolean isFirst = true;
 			for (@NonNull CGProperty cgProperty : cgProperties) {
@@ -340,9 +339,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("return (");
 			js.appendClassReference(true, cgExecutorType);
 			js.append(")");
-			js.append(globalNameManager.getEvaluationCacheName());
+			js.appendName(globalNameManager.getEvaluationCacheName());
 			js.append(".");
-			js.append(globalNameManager.getGetCachedEvaluationResultName());
+			js.appendName(globalNameManager.getGetCachedEvaluationResultName());
 			js.append("(this, caller, new ");
 			js.appendClassReference(false, Object.class);
 			js.append("[]{");

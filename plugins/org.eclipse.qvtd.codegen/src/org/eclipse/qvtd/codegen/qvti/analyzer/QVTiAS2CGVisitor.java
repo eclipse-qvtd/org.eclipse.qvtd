@@ -174,7 +174,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
 		//	JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
-		NameResolution instanceName = globalNameManager.getInstanceNameResolution();
+		NameResolution instanceName = globalNameManager.getInstanceName();
 		CGValuedElement instanceKey = cgFunction.getBody();
 		if (instanceKey == null) {
 			/*instanceKey =*/ QVTiCGUtil.getAST(cgFunction).getImplementationClass();

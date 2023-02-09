@@ -48,10 +48,7 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	private static final @NonNull String OPPOSITE_INDEX_2_PROPERTY_ID_NAME = "oppositeIndex2propertyIdName";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATE_NAME = "outputSpeculatingSlotState";
 	private static final @NonNull String OUTPUT_SPECULATION_SLOT_STATUS_NAME = "outputSpeculatingSlotStatus";
-	@Deprecated /* @deprecated use thisObject */
-	private static final @NonNull String THIS_TRANSFORMER_NAME = "thisTransformer";
 	private static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
-	private static final @NonNull String TRANSFORMATION_NAME = "transformation";
 
 	protected @NonNull NameResolution @Nullable [] classId2AllClassIndexes;
 	protected @NonNull NameResolution @Nullable [] classId2ClassId;
@@ -70,8 +67,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 	protected final @NonNull NameResolution oppositeIndex2PropertyIdName;
 	protected final @NonNull NameResolution outputSpeculationSlotStateName;
 	protected final @NonNull NameResolution outputSpeculationSlotStatusName;
-	@Deprecated /* @deprecated use thisObject */
-	protected final @NonNull NameResolution thisTransformerName;
 	protected final @NonNull NameResolution transformationExecutionName;
 
 	public QVTiGlobalNameManager(@NonNull QVTiCodeGenerator codeGenerator, @NonNull QVTiNameManagerHelper helper) {
@@ -93,7 +88,6 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		this.oppositeIndex2PropertyIdName = globalNameManager.declareEagerName(null, OPPOSITE_INDEX_2_PROPERTY_ID_NAME);
 		this.outputSpeculationSlotStateName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATE_NAME);
 		this.outputSpeculationSlotStatusName = globalNameManager.declareEagerName(null, OUTPUT_SPECULATION_SLOT_STATUS_NAME);
-		this.thisTransformerName = globalNameManager.declareEagerName(null, THIS_TRANSFORMER_NAME);
 		this.transformationExecutionName = globalNameManager.declareEagerName(null, TRANSFORMATION_EXECUTION_NAME);
 	}
 
@@ -137,71 +131,61 @@ public class QVTiGlobalNameManager extends GlobalNameManager
 		return createFromStringName;
 	}
 
-	public @NonNull String getEmptyListName() {
-		return emptyListName.getResolvedName();
+	public @NonNull NameResolution getEmptyListName() {
+		return emptyListName;
 	}
 
-	public @NonNull String getGetSpeculationSlotStateName() {
-		return getSpeculationSlotStateName.getResolvedName();
+	public @NonNull NameResolution getGetSpeculationSlotStateName() {
+		return getSpeculationSlotStateName;
 	}
 
-	public @NonNull String getGetSpeculationStatusName() {
-		return getSpeculationStatusName.getResolvedName();
+	public @NonNull NameResolution getGetSpeculationStatusName() {
+		return getSpeculationStatusName;
 	}
 
-	public @NonNull String getGetTransformationExecutionName() {
-		return getTransformationExecutionName.getResolvedName();
+	public @NonNull NameResolution getGetTransformationExecutionName() {
+		return getTransformationExecutionName;
 	}
 
-	public @NonNull String getInputSpeculationSlotStateName() {
-		return inputSpeculationSlotStateName.getResolvedName();
+	public @NonNull NameResolution getInputSpeculationSlotStateName() {
+		return inputSpeculationSlotStateName;
 	}
 
-	public @NonNull String getInputSpeculationSlotStatusName() {
-		return inputSpeculationSlotStatusName.getResolvedName();
+	public @NonNull NameResolution getInputSpeculationSlotStatusName() {
+		return inputSpeculationSlotStatusName;
 	}
 
-	public @NonNull String getInvocationHashCodeName() {
-		return invocationHashCodeName.getResolvedName();
+	public @NonNull NameResolution getInvocationHashCodeName() {
+		return invocationHashCodeName;
 	}
 
-	public @NonNull String getModelsName() {
-		return modelsName.getResolvedName();
+	public @NonNull NameResolution getModelsName() {
+		return modelsName;
 	}
 
-	public @NonNull String getNeedsSpeculationName() {
-		return needsSpeculationName.getResolvedName();
+	public @NonNull NameResolution getNeedsSpeculationName() {
+		return needsSpeculationName;
 	}
 
-	public @NonNull String getObjectManagerName() {
-		return objectManagerName.getResolvedName();
+	public @NonNull NameResolution getObjectManagerName() {
+		return objectManagerName;
 	}
 
-	public @NonNull String getOppositeIndex2PropertyIdName() {
-		return oppositeIndex2PropertyIdName.getResolvedName();
+	public @NonNull NameResolution getOppositeIndex2PropertyIdName() {
+		return oppositeIndex2PropertyIdName;
 	}
 
-	public @NonNull String getOutputSpeculationSlotStateName() {
-		return outputSpeculationSlotStateName.getResolvedName();
+	public @NonNull NameResolution getOutputSpeculationSlotStateName() {
+		return outputSpeculationSlotStateName;
 	}
 
-	public @NonNull String getOutputSpeculationSlotStatusName() {
-		return outputSpeculationSlotStatusName.getResolvedName();
-	}
-
-	//	@Deprecated /* @deprecated use thisObject */
-	//	public @NonNull String getThisTransformerName() {
-	//		return thisTransformerName.getResolvedName();
-	//	}
-
-	@Deprecated /* @deprecated use thisObject */
-	public @NonNull NameResolution getThisTransformerNameResolution() {
-		return thisTransformerName;
+	public @NonNull NameResolution getOutputSpeculationSlotStatusName() {
+		return outputSpeculationSlotStatusName;
 	}
 
 
-	public @NonNull String getTransformationExecutionName() {
-		return transformationExecutionName.getResolvedName();
+	public @NonNull NameResolution getTransformationExecutionName() {
+		return transformationExecutionName;
 	}
 
 	public void reserveGlobalNames(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
