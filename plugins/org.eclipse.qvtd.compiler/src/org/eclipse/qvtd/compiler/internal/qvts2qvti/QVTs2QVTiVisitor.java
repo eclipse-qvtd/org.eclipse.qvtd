@@ -32,15 +32,20 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -50,7 +55,9 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionsAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -257,19 +264,31 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			List<@NonNull PropertyDatum> propertyDatums = new ArrayList<>(keyedClassDatum2propertyDatums.get(classDatum));
 			Collections.sort(propertyDatums, NameUtil.NAMEABLE_COMPARATOR);
 			String functionName = scheduleManager.getNameGenerator().createKeyFunctionName(classDatum);
-			List<@NonNull FunctionParameter> asParameters = new ArrayList<>();
-			List<@NonNull ShadowPart> asShadowParts = new ArrayList<>();
+
+
+			QVTbaseUtil.getContextVariable(iTransformation);
+			Function iFunction = qvts2qvti.createFunction(functionName, primaryClass, true, null);
+			FunctionBody iFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
+			//
+			Parameter asContextParameter = asTransformation.getOwnedContext();
+			assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
+			ParameterVariable iContextVariable = PivotUtil.createParameterVariable(asContextParameter);
+			iFunctionBody.setOwnedContext(iContextVariable);
 			//
 			//	One shadow part per key property datum
 			//
+			List<@NonNull Parameter> iParameters = PivotUtilInternal.getOwnedParametersList(iFunction);
+			List<@NonNull Variable> iParameterVariables = PivotUtilInternal.getOwnedParametersList(iFunctionBody);
+			List<@NonNull ShadowPart> iShadowParts = new ArrayList<>();
 			for (@NonNull PropertyDatum propertyDatum : propertyDatums) {
 				Property keyProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
-				FunctionParameter cParameter = qvts2qvti.createFunctionParameter(keyProperty);
-				asParameters.add(cParameter);
-				ShadowPart asShadowPart = qvts2qvti.createShadowPart(keyProperty, qvts2qvti.createVariableExp(cParameter));
-				asShadowParts.add(asShadowPart);
+				FunctionParameter iParameter = qvts2qvti.createFunctionParameter(keyProperty);				// XXX ParameterVariable
+				iParameters.add(iParameter);
+				ParameterVariable iParameterVariable = PivotUtil.createParameterVariable(iParameter);
+				iParameterVariables.add(iParameterVariable);
+				ShadowPart iShadowPart = qvts2qvti.createShadowPart(keyProperty, qvts2qvti.createVariableExp(iParameterVariable));
+				iShadowParts.add(iShadowPart);
 			}
-			Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
 			//
 			//	One shadow part per uninitialized key property
 			//
@@ -288,15 +307,34 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			QVTbaseUtil.getContextVariable(iTransformation);
-			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
-			iTransformation.getOwnedOperations().add(asFunction);
-			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
-			asFunction.setQueryExpression(asShadowExp);
-			classDatum2keyFunction.put(classDatum, asFunction);
+			iTransformation.getOwnedOperations().add(iFunction);
+			OCLExpression iShadowExp = qvts2qvti.createShadowExp(primaryClass, iShadowParts);
+			//	asFunctionBody.setOwnedBody(asShadowExp);
+			iFunction.setBodyExpression(iFunctionBody);
+			iFunction.setQueryExpression(iShadowExp);
+			classDatum2keyFunction.put(classDatum, iFunction);
 		}
 	}
-
+	/*
+	assert super.getBodyExpression() == null;
+	Transformation asTransformation = QVTbaseUtil.getContainingTransformation(this);
+	Parameter asContextParameter = asTransformation.getOwnedContext();
+	assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
+	assert ownedParameters != null;			// Caller must create this.getOwnedParameters()
+	ParameterVariable asContextVariable = PivotUtil.createParameterVariable(asContextParameter);
+	int size = ownedParameters.size();
+	ParameterVariable[] asParameterVariables = new ParameterVariable[size];
+	for (int i = 0; i < size; i++) {
+		Parameter asParameter = ownedParameters.get(i);
+		assert asParameter != null;
+		asParameterVariables[i] = PivotUtil.createParameterVariable(asParameter);
+	}
+	FunctionBody asFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
+	asFunctionBody.setOwnedContext(asContextVariable);
+	for (Variable asParameterVariable : asParameterVariables) {
+		asFunctionBody.getOwnedParameters().add(asParameterVariable);
+	}
+	 */
 	public void createPartition2Mapping(@NonNull PartialRegionAnalysis<@NonNull PartitionsAnalysis> partitionAnalysis) {
 		Partition partition = partitionAnalysis.getPartition();
 		AbstractPartition2Mapping partition2mapping = partition2partition2mapping.get(partition);

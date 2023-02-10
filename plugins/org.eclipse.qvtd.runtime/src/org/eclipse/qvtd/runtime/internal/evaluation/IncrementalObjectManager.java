@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
@@ -33,7 +34,6 @@ import org.eclipse.qvtd.runtime.evaluation.Execution;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * An IncrementalObjectManager supervises objects during a transformation maintaining sufficient context to allow
@@ -102,7 +102,7 @@ public class IncrementalObjectManager extends AbstractObjectManager<IncrementalO
 					break;
 				case ASSIGNED:
 					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+						NameUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 					}
 					break;
 				case REASSIGNABLE:
