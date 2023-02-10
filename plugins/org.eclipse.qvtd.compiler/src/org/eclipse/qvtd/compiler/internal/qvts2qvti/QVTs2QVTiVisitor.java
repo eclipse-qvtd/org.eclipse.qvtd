@@ -264,15 +264,13 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			List<@NonNull PropertyDatum> propertyDatums = new ArrayList<>(keyedClassDatum2propertyDatums.get(classDatum));
 			Collections.sort(propertyDatums, NameUtil.NAMEABLE_COMPARATOR);
 			String functionName = scheduleManager.getNameGenerator().createKeyFunctionName(classDatum);
-
-
-			QVTbaseUtil.getContextVariable(iTransformation);
+			Parameter iContextParameter = QVTbaseUtil.getContextVariable(iTransformation);
 			Function iFunction = qvts2qvti.createFunction(functionName, primaryClass, true, null);
 			FunctionBody iFunctionBody = QVTbaseFactory.eINSTANCE.createFunctionBody();
 			//
-			Parameter asContextParameter = asTransformation.getOwnedContext();
-			assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
-			ParameterVariable iContextVariable = PivotUtil.createParameterVariable(asContextParameter);
+			//	Parameter asContextParameter = asTransformation.getOwnedContext();
+			//	assert asContextParameter != null;		// Caller must create asTransformation.getOwnedContext()
+			ParameterVariable iContextVariable = PivotUtil.createParameterVariable(iContextParameter);
 			iFunctionBody.setOwnedContext(iContextVariable);
 			//
 			//	One shadow part per key property datum
@@ -282,7 +280,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			List<@NonNull ShadowPart> iShadowParts = new ArrayList<>();
 			for (@NonNull PropertyDatum propertyDatum : propertyDatums) {
 				Property keyProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
-				FunctionParameter iParameter = qvts2qvti.createFunctionParameter(keyProperty);				// XXX ParameterVariable
+				FunctionParameter iParameter = qvts2qvti.createFunctionParameter(keyProperty);
 				iParameters.add(iParameter);
 				ParameterVariable iParameterVariable = PivotUtil.createParameterVariable(iParameter);
 				iParameterVariables.add(iParameterVariable);
@@ -307,11 +305,14 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					}
 				}
 			} */
-			iTransformation.getOwnedOperations().add(iFunction);
 			OCLExpression iShadowExp = qvts2qvti.createShadowExp(primaryClass, iShadowParts);
-			//	asFunctionBody.setOwnedBody(asShadowExp);
+			iFunctionBody.setOwnedBody(iShadowExp);
+			iFunctionBody.setIsRequired(iShadowExp.isIsRequired());
+			iFunctionBody.setType(iShadowExp.getType());
 			iFunction.setBodyExpression(iFunctionBody);
-			iFunction.setQueryExpression(iShadowExp);
+			iFunction.setIsRequired(iFunctionBody.isIsRequired());
+			iFunction.setType(iFunctionBody.getType());
+			iTransformation.getOwnedOperations().add(iFunction);
 			classDatum2keyFunction.put(classDatum, iFunction);
 		}
 	}
