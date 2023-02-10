@@ -986,7 +986,9 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 					if (!asFunction.isIsTransient()) {
 						String functionName = cgFunction.getResolvedName();
 						js.appendOptionalBlankLine();
-						js.append("// " + callingConvention + "\n");
+						if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+							js.append("// " + callingConvention + "\n");
+						}
 						js.append("protected final ");
 						js.appendClassReference(true, AbstractComputationConstructor.class);
 						js.append(" " + getFunctionCtorName(cgFunction) + " = new ");

@@ -152,7 +152,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("/**\n");
 			js.append(" * The inner evaluation, creates, initializes and installs the new trace singleton.\n");
 			js.append(" */\n");
-			js.append("// " + cgOperation.getCallingConvention() + "\n");
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				js.append("// " + cgOperation.getCallingConvention() + "\n");
+			}
 			js.append("@Override\n");
 			js.append("public ");
 			js.appendClassReference(false, Object.class);
@@ -320,7 +322,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			js.append("/**\n");
 			js.append(" * The outer evaluation provides a type safe interface.\n");
 			js.append(" */\n");
-			js.append("// " + cgOperation.getCallingConvention() + "\n");
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				js.append("// " + cgOperation.getCallingConvention() + "\n");
+			}
 			js.append("public ");
 			js.appendClassReference(true, cgExecutorType);
 			js.append(" ");
@@ -432,7 +436,9 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 		assert cgContainingPackage == null;
 		String title = "The instance of " + cgCacheClass.getName() + " caches the result of each distinct creation of\n";
 		js.appendCommentWithOCL(title, creationCache.getASEntryClass());
-		js.append("// " + cgCacheClass.getCallingConvention() + "\n");
+		if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+			js.append("// " + cgCacheClass.getCallingConvention() + "\n");
+		}
 		js.append("private class " + className);
 		appendSuperTypes(js, cgCacheClass);
 		js.pushClassBody(className);
