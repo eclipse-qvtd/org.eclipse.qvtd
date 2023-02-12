@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.calling.AbstractUncachedOperationCalling
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -301,6 +302,15 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
 				basicEvaluateName, null);
 			return cgCacheOperation;
+		}
+
+		@Override
+		public boolean generateJavaCall(@NonNull CG2JavaVisitor cg2javaVisitor, @NonNull CGOperationCallExp cgOperationCallExp) {
+			if (JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.isActive()) {
+				JavaStream js = cg2javaVisitor.getJavaStream();
+				js.append("/* " + cgOperationCallExp.getReferredOperation().getCallingConvention() + "*/");
+			}
+			return super.generateJavaCall(cg2javaVisitor, cgOperationCallExp);
 		}
 
 		@Override

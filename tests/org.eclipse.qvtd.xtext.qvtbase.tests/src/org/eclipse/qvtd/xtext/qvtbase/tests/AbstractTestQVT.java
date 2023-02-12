@@ -45,6 +45,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -53,6 +54,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -85,7 +87,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -313,6 +314,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		// therefore suppress diagnostics about confusing usage.
 		//
 		getProjectManager().configureLoadFirst(getResourceSet(), EcorePackage.eNS_URI);
+		JavaCodeGenerator.CALLING_CONVENTION_COMMENTS.setState(true);
 	}
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {
@@ -358,7 +360,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public void assertRegionCount(@NonNull Class<? extends Region> partitionClass, int count) {
-		QVTruntimeUtil.errPrintln("assertRegionCount suppressed");
+		NameUtil.errPrintln("assertRegionCount suppressed");
 	}
 
 	//	public void assertRegionCount(@NonNull Class<? extends Partition> partitionClass, int count) {
@@ -573,7 +575,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(typedModelsConfigurations);
-		String packagePrefix = options.basicGetOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY);
+		//	String packagePrefix = options.basicGetOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY);
 		/*	if (packagePrefix != null) {
 			org.eclipse.ocl.pivot.Package asLeafPackage = null;
 			org.eclipse.ocl.pivot.Package asRootPackage = null;
