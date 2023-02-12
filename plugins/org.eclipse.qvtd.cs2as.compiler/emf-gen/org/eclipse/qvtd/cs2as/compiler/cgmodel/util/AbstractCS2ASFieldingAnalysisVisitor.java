@@ -11,8 +11,8 @@
 package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer.ReturnState;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 
 /**
  * An AbstractCS2ASFieldingAnalysisVisitor provides a default implementation for each
@@ -22,10 +22,10 @@ import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer.ReturnState;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractCS2ASFieldingAnalysisVisitor
-	extends org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalysisVisitor
-	implements CS2ASCGModelVisitor<@NonNull ReturnState>
+extends org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalysisVisitor
+implements CS2ASCGModelVisitor<@NonNull ReturnState>
 {
-	protected AbstractCS2ASFieldingAnalysisVisitor(@NonNull FieldingAnalyzer context, @NonNull ReturnState requiredReturn) {
+	protected AbstractCS2ASFieldingAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context, @NonNull ReturnState requiredReturn) {
 		super(context, requiredReturn);
 	}
 

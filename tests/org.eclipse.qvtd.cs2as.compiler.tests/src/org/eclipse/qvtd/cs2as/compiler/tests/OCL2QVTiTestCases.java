@@ -294,6 +294,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_Source2Target_Interpreted() throws Exception {
+		// FIXME Success of this test depends on prior success of a dropping from testOCL2QVTi_Source2Target_CG
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
 		try {
