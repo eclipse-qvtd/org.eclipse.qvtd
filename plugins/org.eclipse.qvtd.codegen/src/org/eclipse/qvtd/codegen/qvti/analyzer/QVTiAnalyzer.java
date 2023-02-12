@@ -673,7 +673,7 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		boolean isRequired = asProperty.isIsRequired();
 		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
 		boolean isThis = false;
-		if (asSourceClass instanceof ImperativeTransformation) {
+		if (asSourceClass instanceof ImperativeTransformation) {	// XXX ??? obsolete wrt TransformationPropertyCallingConvention
 			ImperativeTransformation iTransformation = (ImperativeTransformation)asSourceClass;
 			org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
 			Property iProperty = NameUtil.getNameable(runtimeContextClass.getOwnedProperties(), asProperty.getName());

@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
@@ -58,7 +57,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
@@ -74,7 +72,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -106,7 +103,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
@@ -244,67 +240,6 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.append(")");
 		}
 		js.appendValueName(cgMappingCallBinding.getOwnedValue());
-	}
-
-	/**
-	 * Append the code for an EcorePropertyCall. If source is null, the code for the source will also be appended.
-	 * If source is non-null the caller has already appended it.
-	 */
-	@Deprecated // XXX obsolete
-	protected @NonNull Boolean appendCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp, @Nullable CGValuedElement source) {
-		Property asProperty = ClassUtil.nonNullState(cgPropertyCallExp.getAsProperty());
-		assert getESObject(asProperty) == ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
-		//
-		if (source == null) {
-			source = getExpression(cgPropertyCallExp.getSource());
-			if (!js.appendLocalStatements(source)) {
-				return false;
-			}
-		}
-		//
-		Boolean ecoreIsRequired = context.isNonNull(asProperty);
-		boolean isPrimitive = js.isPrimitive(cgPropertyCallExp);
-		if (!isPrimitive) appendSuppressWarningsNull(cgPropertyCallExp, ecoreIsRequired);
-		//		js.append("/* " + ecoreIsRequired + " " + isRequired + " */\n");
-		js.appendDeclaration(cgPropertyCallExp);
-		js.append(" = ");
-		appendEcoreGet(source, asProperty);
-		js.append(";\n");
-		return true;
-	}
-
-	@Deprecated // XXX obsolete
-	protected void appendEcoreGet(@NonNull CGValuedElement cgSource, @NonNull Property asProperty) {
-		CGTypeId cgTypeId = analyzer.getCGTypeId(asProperty.getOwningClass().getTypeId());
-		ElementId elementId = ClassUtil.nonNullState(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(elementId);
-		//		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
-		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
-		String getAccessor;
-		if (eStructuralFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-			getAccessor = JavaConstants.E_CONTAINER_NAME;
-		}
-		else {
-			getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-		}
-		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
-		Method leastDerivedMethod = requiredJavaClass != null ? context.getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
-		Class<?> unboxedSourceClass;
-		if (leastDerivedMethod != null) {
-			unboxedSourceClass = leastDerivedMethod.getDeclaringClass();
-		}
-		else {
-			unboxedSourceClass = requiredJavaClass;
-		}
-		if ((unboxedSourceClass != null) && (unboxedSourceClass != Object.class)) {
-			js.appendAtomicReferenceTo(unboxedSourceClass, cgSource);
-		}
-		else {
-			js.appendAtomicReferenceTo(cgSource);
-		}
-		js.append(".");
-		js.append(getAccessor);
-		js.append("()");
 	}
 
 	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit, boolean isPartial) {
@@ -1020,7 +955,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		}
 	}
 
-	protected void doGetting(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull EStructuralFeature eStructuralFeature, boolean isOpposite) {
+	public void doGetting(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull EStructuralFeature eStructuralFeature, boolean isOpposite) {
 		Element asPropertyCallExp = cgPropertyCallExp.getAst();
 		CGMapping cgMapping = QVTiCGUtil.basicGetContainingCGMapping(cgPropertyCallExp);
 		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
@@ -1042,7 +977,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		}
 	}
 
-	protected void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
+	public void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
 		if (useGot) {
 			//
 			NameResolution objectManagerName = getGlobalNameManager().getObjectManagerName();
@@ -2458,207 +2393,10 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 	}
 
 	@Override
-	public @NonNull Boolean visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
-		CGValuedElement cgSource = getExpression(cgPropertyCallExp.getSource());
-		if (!js.appendLocalStatements(cgSource)) {
-			return false;
-		}
-		ElementId sourceTypeId = cgSource.getTypeId().getElementId();
-		ImperativeTransformation iTransformation = getAnalyzer().getCodeGenerator().getContextClass();
-		org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
-		TypeId runtimeContextTypeId = runtimeContextClass.getTypeId();
-		if (sourceTypeId == runtimeContextTypeId) {		// FIXME make transformationInstance regular - cloned from appendCGEcorePropertyCallExp
-			Property asProperty = ClassUtil.nonNullState(cgPropertyCallExp.getAsProperty());
-			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(getESObject(asProperty));
-			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-			js.appendDeclaration(cgPropertyCallExp);
-			js.append(" = " + getGlobalNameManager().getGetTransformationExecutionName() + "().");
-			js.append(getAccessor);
-			js.append("();\n");
-			return true;
-		}
-		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyCallExp);
-		doGetting(cgPropertyCallExp, eStructuralFeature, false);
-		Boolean status = appendCGEcorePropertyCallExp(cgPropertyCallExp, cgSource);
-		if (status != ValueUtil.TRUE_VALUE) {
-			return status;
-		}
-		doGot(cgPropertyCallExp, cgSource, eStructuralFeature);
-		return status;
-	}
-
-	@Override
 	public @NonNull Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
 		EClassifier eClassifier = ClassUtil.nonNullState(cgRealizedVariable.getEClassifier());
 		return doEcoreCreateClass(cgRealizedVariable, (EClass)eClassifier, true);
 	}
-
-	/*	@Override
-	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
-		JavaLocalContext currentNameManager2 = globalContext.getLocalContext(cgFunction);
-		currentNameManager = currentNameManager2;
-		//			currentNameManager.
-		try {
-			List<CGParameter> cgParameters = cgFunction.getParameters();
-			//
-			js.appendCommentWithOCL(null, cgFunction.getAst());
-			CGShadowExp cgShadowExp = useClassToCreateObject(cgFunction);
-			String functionName = getFunctionName(cgFunction);
-			String cachedResultName = getGlobalContext().getCachedResultName();
-			if (cgShadowExp != null) {
-				js.append("protected class ");
-				js.append(functionName);
-				js.append(" extends ");
-				js.appendClassReference(null, isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
-				js.pushClassBody(functionName);
-				js.append("protected final ");
-				js.appendTypeDeclaration(cgFunction);
-				js.append(" " + cachedResultName + ";\n");
-				js.appendOptionalBlankLine();
-				doFunctionConstructor(cgFunction, cgShadowExp);
-				js.appendOptionalBlankLine();
-				doFunctionGetInstance(cgFunction);
-				js.appendOptionalBlankLine();
-				doFunctionIsEqual(cgShadowExp, cachedResultName);
-				js.popClassBody(false);
-			}
-			else if (useCache(cgFunction)) {
-				String thisTransformerName = getGlobalContext().getThisTransformerName();
-				CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
-				js.append("protected class ");
-				js.append(functionName);
-				js.append(" extends ");
-				js.appendClassReference(null, isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
-				js.pushClassBody(functionName);
-				js.append("protected final ");
-				js.appendIsRequired(true);
-				js.append(" ");
-				js.appendClassReference(cgClass);
-				js.append(" " + thisTransformerName + ";\n");
-				for (@NonNull CGParameter cgParameter : ClassUtil.nullFree(cgFunction.getParameters())) {
-					js.append("protected ");
-					//						js.appendDeclaration(cgParameter);
-					//						js.appendTypeDeclaration(cgParameter);
-					boolean isPrimitive = js.isPrimitive(cgParameter);
-					boolean isRequired = !isPrimitive && cgParameter.isNonNull() && !(cgParameter instanceof CGUnboxExp)/ *|| cgElement.isRequired()* /;	// FIXME Ugh!
-					js.appendIsCaught(cgParameter.isNonInvalid(), cgParameter.isCaught());
-					js.append(" ");
-					js.appendClassReference(isPrimitive ? null : isRequired ? true : null, cgParameter);
-					js.append(" ");
-					js.appendValueName(cgParameter);
-					js.append(";\n");
-				}
-				//		CGValuedElement body = getExpression(cgFunction.getBody());
-				//ElementId elementId = cgFunction.getTypeId().getElementId();
-
-				js.append("protected final ");
-				CGValuedElement cgBody = cgFunction.getBody();
-				js.appendTypeDeclaration(cgBody != null ? cgBody : cgFunction);
-				js.append(" " + cachedResultName + ";\n");
-				js.appendOptionalBlankLine();
-				doFunctionConstructor(cgFunction);
-				js.appendOptionalBlankLine();
-				doFunctionGetInstance(cgFunction);
-				js.appendOptionalBlankLine();
-				doFunctionIsEqual(cgFunction);
-				js.popClassBody(false);
-			}
-			else {
-				//
-				js.append("protected ");
-				js.appendIsRequired(cgFunction.isRequired());
-				//		js.append(" ");
-				//		js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
-				js.append(" ");
-				ElementId elementId = cgFunction.getTypeId().getElementId();
-				if (elementId != null) {
-					TypeDescriptor javaTypeDescriptor = context.getUnboxedDescriptor(elementId);
-					js.appendClassReference(null, javaTypeDescriptor);
-				}
-				js.append(" ");
-				js.append(cgFunction.getName());
-				js.append("(");
-				boolean isFirst = true;
-				for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-					if (!isFirst) {
-						js.append(", ");
-					}
-					js.appendDeclaration(cgParameter);
-					isFirst = false;
-				}
-				js.append(")");
-				return doFunctionBody(cgFunction);
-			}
-		}
-		finally {
-			currentNameManager = null;
-		}
-		return true;
-	} */
-
-	/*	@Override
-	public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
-
-		Operation pOperation = cgFunctionCallExp.getReferredOperation();
-		CGFunction cgFunction = ClassUtil.nonNullState(cgFunctionCallExp.getFunction());
-		boolean useClass = useClass(cgFunction);
-		boolean useClassToCreateObject = useClassToCreateObject(cgFunction) != null;
-		boolean useCache = useCache(cgFunction);
-		boolean isIdentifiedInstance = useClass || useCache;
-		List<CGValuedElement> cgArguments = cgFunctionCallExp.getCgArguments();
-		List<Parameter> pParameters = pOperation.getOwnedParameters();
-		//
-		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
-			CGValuedElement argument = getExpression(cgArgument);
-			if (!js.appendLocalStatements(argument)) {
-				return false;
-			}
-		}
-		//
-		js.appendDeclaration(cgFunctionCallExp);
-		js.append(" = ");
-		boolean needComma = false;
-		if (isIdentifiedInstance) {
-			js.append("((");
-			js.append(getFunctionName(cgFunction));
-			js.append(")");
-			js.append(getFunctionCtorName(cgFunction));
-			js.append(".getUniqueComputation(");
-			if (useCache && !useClassToCreateObject) {
-				CGClass cgClass = ClassUtil.nonNullState(cgFunction.getContainingClass());
-				//				js.appendClassReference(cgClass);
-				//				js.append(".this");
-				appendThis(cgClass);
-				needComma = true;
-			}
-		}
-		else {
-			js.append(pOperation.getName());
-			js.append("(");
-		}
-		int iMax = Math.min(pParameters.size(), cgArguments.size());
-		for (int i = 0; i < iMax; i++) {
-			if (needComma) {
-				js.append(", ");
-			}
-			CGValuedElement cgArgument = cgArguments.get(i);
-			CGValuedElement argument = getExpression(cgArgument);
-			Parameter pParameter = pParameters.get(i);
-			//			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(pParameter.getTypeId());
-			js.appendReferenceTo(parameterTypeDescriptor, argument);
-			needComma = true;
-		}
-		js.append(")");
-		if (isIdentifiedInstance) {
-			js.append(")");
-			String cachedResultName = getCachedResultName(cgFunction);
-			js.append(".");
-			js.append(cachedResultName);
-		}
-		js.append(";\n");
-		return true;
-	} */
 
 	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
@@ -2960,55 +2698,6 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			}
 		}
 		return visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
-	}
-
-	@Override
-	public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp cgPropertyCallExp) {
-		Property asOppositeProperty = ClassUtil.nonNullModel(cgPropertyCallExp.getAsProperty());
-		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
-		assert !asProperty.isIsImplicit();
-		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
-		//
-		if (!js.appendLocalStatements(source)) {
-			return false;
-		}
-		//
-		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState((EStructuralFeature) asProperty.getESObject());
-		doGetting(cgPropertyCallExp, eStructuralFeature, true);
-		js.appendDeclaration(cgPropertyCallExp);
-		js.append(" = ");
-		Map<@NonNull Property, @NonNull String> oppositeProperties = getCodeGenerator().getOppositeProperties();
-		if (oppositeProperties != null) {
-			boolean isRequired = cgPropertyCallExp.isRequired();
-			String cacheName = oppositeProperties.get(asProperty);
-			if (cacheName != null) {
-				SubStream castBody = new SubStream() {
-					@Override
-					public void append() {
-						if (isRequired) {
-							js.appendClassReference(null, ClassUtil.class);
-							js.append(".nonNullState (");
-						}
-						js.append(cacheName);
-						js.append(".get(");
-						js.appendValueName(source);
-						js.append(")");
-						if (isRequired) {
-							js.append(")");
-						}
-					}
-				};
-				if (asOppositeProperty.isIsMany()) {
-					js.appendClassCast(cgPropertyCallExp, castBody);
-				}
-				else {
-					castBody.append();
-				}
-			}
-			js.append(";\n");
-		}
-		doGot(cgPropertyCallExp, source, eStructuralFeature);
-		return true;
 	}
 
 	@Override
