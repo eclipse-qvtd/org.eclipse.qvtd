@@ -33,7 +33,7 @@ public interface TransformationExecutor extends ExecutorExtension
 	void dispose();
 	Boolean execute(@Nullable String targetName) throws Exception;
 	@NonNull ModelsManager getModelsManager();
-	@Nullable EObject getTransformationExecution();
+	@Nullable EObject getTransformationExecution(@Nullable Object object);
 	@NonNull Transformer getTransformer();
 	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);

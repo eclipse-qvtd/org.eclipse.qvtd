@@ -46,7 +46,7 @@ public interface Transformer extends ExecutionVisitable
 	@NonNull InvocationManager getInvocationManager();
 	@NonNull ModelsManager getModelsManager();
 	@NonNull ObjectManager getObjectManager();
-	@Nullable TransformationExecution getTransformationExecution();
+	@Nullable TransformationExecution getTransformationExecution(@Nullable Object object);
 	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;

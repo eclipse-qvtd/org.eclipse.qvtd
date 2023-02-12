@@ -401,7 +401,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			assert iNewStatementPart != null;
 			sourceAndArgumentValues[i+1] = iNewStatementPart.getOwnedExpression().accept(undecoratedVisitor);
 		}
-		@NonNull EObject element = (@NonNull EObject) getCachedEvaluationResult(newStatementOperation, iNewStatement, sourceAndArgumentValues);
+		EObject element = (EObject)getCachedEvaluationResult(newStatementOperation, iNewStatement, sourceAndArgumentValues);
+		assert element != null;
 		return element;
 	}
 
@@ -439,7 +440,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
 		VariableDeclaration ownedContext = QVTbaseUtil.getContextVariable(transformation);
 		//		add(ownedContext, modelsManager.getTransformationInstance(transformation));
-		add(ownedContext, getTransformationExecution());
+		add(ownedContext, getTransformationExecution(transformation));
 		for (@NonNull TypedModel typedModel : QVTimperativeUtil.getModelParameters(transformation)) {
 			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace()) {
 				ownedContext = QVTbaseUtil.getContextParameter(standardLibrary, typedModel);
@@ -529,7 +530,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	public @Nullable EObject getTransformationExecution() {
+	public @Nullable EObject getTransformationExecution(@Nullable Object object) {
 		if (transformationExecution == null) {
 			org.eclipse.ocl.pivot.Class runtimeContextClass = QVTimperativeUtil.getRuntimeContextClass(transformation);
 			EObject contextEObject = runtimeContextClass.getESObject();
@@ -918,7 +919,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			//	assert ValueUtil.isEcore(ecoreValue);
 			EStructuralFeature eTarget = (EStructuralFeature)targetProperty.getESObject();
 			EStructuralFeature eFeature = eTarget;
-			List<Object> eObjects = (List<Object>) ((EObject)sourceObject).eGet(eFeature);
+			@SuppressWarnings("unchecked")
+			List<Object> eObjects = (List<Object>)((EObject)sourceObject).eGet(eFeature);
 			eObjects.add(ecoreValue);
 		}
 		else {
@@ -1112,7 +1114,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 
 	@Override
 	public void setContextualProperty(@NonNull String propertyName, Object value) {
-		EObject transformationExecution = getTransformationExecution();
+		EObject transformationExecution = getTransformationExecution(transformation);
 		if (transformationExecution == null) {
 			throw new IllegalArgumentException("No contextual instance available");
 		}

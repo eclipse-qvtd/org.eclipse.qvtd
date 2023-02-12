@@ -282,7 +282,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	@Override
-	public @Nullable TransformationExecution getTransformationExecution() {
+	public @Nullable TransformationExecution getTransformationExecution(@Nullable Object object) {
 		return null;
 	}
 

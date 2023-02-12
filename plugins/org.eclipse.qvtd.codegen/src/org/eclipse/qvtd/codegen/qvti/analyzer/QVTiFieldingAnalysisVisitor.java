@@ -8,7 +8,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiFieldingAnalysisVisitor;
@@ -52,14 +51,6 @@ public class QVTiFieldingAnalysisVisitor extends AbstractQVTiFieldingAnalysisVis
 		assert cgAccumulator.isNonInvalid();
 		cgAccumulator.setCaught(false);
 		return ReturnState.IS_VALID;
-	}
-
-	@Override
-	public @NonNull ReturnState visitCGMapping(@NonNull CGMapping object) {
-		if (object.toString().contains("mFtoP1__Daughter2Female__persons")) {
-			getClass();			// XXX
-		}
-		return super.visitCGMapping(object);
 	}
 
 	@Override
