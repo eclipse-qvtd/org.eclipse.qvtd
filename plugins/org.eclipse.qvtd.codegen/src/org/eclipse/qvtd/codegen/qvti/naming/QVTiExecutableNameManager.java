@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
 import org.eclipse.ocl.examples.codegen.naming.SupportedExecutableNameManager;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -40,23 +39,23 @@ public class QVTiExecutableNameManager extends SupportedExecutableNameManager
 	}
 
 	@Override
-	public @NonNull CGFinalVariable createCGVariable(@NonNull VariableDeclaration asVariable) {
-		EStructuralFeature eContainingFeature = asVariable.eContainingFeature();
+	public @NonNull CGFinalVariable createCGVariable(@NonNull TypedElement asTypedElement) {
+		EStructuralFeature eContainingFeature = asTypedElement.eContainingFeature();
 		if (eContainingFeature == QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
 			CGFinalVariable cgVariable = lazyGetQualifiedThisVariable();
-			addVariable(asVariable, cgVariable);
+			addVariable(asTypedElement, cgVariable);
 			return cgVariable;
 		}
 		else if (eContainingFeature == QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT) {
-			CGFinalVariable cgVariable = super.createCGVariable(asVariable);
-			cgVariable.setAst(asVariable);
-			if (asVariable.isIsRequired()) {
+			CGFinalVariable cgVariable = super.createCGVariable(asTypedElement);
+			cgVariable.setAst(asTypedElement);
+			if (asTypedElement.isIsRequired()) {
 				cgVariable.setNonInvalid();
 				cgVariable.setRequired(true);
 			}
 			return cgVariable;
 		}
-		return super.createCGVariable(asVariable);
+		return super.createCGVariable(asTypedElement);
 	}
 
 	@Override
