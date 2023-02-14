@@ -2012,10 +2012,12 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 				js.append(" = null;\n");
 				js.appendOptionalBlankLine();
 				js.append("public ");
-				js.appendClassReference(true, javaClass);
+				js.appendClassReference(false, javaClass);
 				js.append(" ");
 				js.appendName(globalNameManager.getGetTransformationExecutionName());
-				js.append("(Object o) {\n");
+				js.append("(");
+				js.appendClassReference(false, Object.class);
+				js.append(" o) {\n");
 				js.pushIndentation(null);
 				js.append("if (");
 				js.appendName(transformationExecutionName);
