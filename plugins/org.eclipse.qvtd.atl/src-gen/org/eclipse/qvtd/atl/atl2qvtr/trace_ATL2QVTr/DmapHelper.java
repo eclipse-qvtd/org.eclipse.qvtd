@@ -25,11 +25,12 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD1atlHelper <em>D1atl Helper</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD2qvtrFunction <em>D2qvtr Function</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD3atlHelper <em>D3atl Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD4qvtrFunction <em>D4qvtr Function</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getDomapHelper_Attribute <em>Domap Helper Attribute</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getDomapHelper_Operation <em>Domap Helper Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper()
@@ -38,69 +39,57 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  */
 public interface DmapHelper extends Dispatch {
 	/**
-	 * Returns the value of the '<em><b>D1atl Helper</b></em>' reference.
+	 * Returns the value of the '<em><b>D3atl Helper</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>D1atl Helper</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D1atl Helper</em>' reference.
-	 * @see #setD1atlHelper(Helper)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper_D1atlHelper()
+	 * @return the value of the '<em>D3atl Helper</em>' reference.
+	 * @see #setD3atlHelper(Helper)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper_D3atlHelper()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapHelper'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	Helper getD1atlHelper();
+	Helper getD3atlHelper();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD1atlHelper <em>D1atl Helper</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD3atlHelper <em>D3atl Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D1atl Helper</em>' reference.
-	 * @see #getD1atlHelper()
+	 * @param value the new value of the '<em>D3atl Helper</em>' reference.
+	 * @see #getD3atlHelper()
 	 * @generated
 	 */
-	void setD1atlHelper(Helper value);
+	void setD3atlHelper(Helper value);
 
 	/**
-	 * Returns the value of the '<em><b>D2qvtr Function</b></em>' reference.
+	 * Returns the value of the '<em><b>D4qvtr Function</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>D2qvtr Function</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D2qvtr Function</em>' reference.
-	 * @see #setD2qvtrFunction(Function)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper_D2qvtrFunction()
+	 * @return the value of the '<em>D4qvtr Function</em>' reference.
+	 * @see #setD4qvtrFunction(Function)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper_D4qvtrFunction()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapHelper'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Function getD2qvtrFunction();
+	Function getD4qvtrFunction();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD2qvtrFunction <em>D2qvtr Function</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getD4qvtrFunction <em>D4qvtr Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D2qvtr Function</em>' reference.
-	 * @see #getD2qvtrFunction()
+	 * @param value the new value of the '<em>D4qvtr Function</em>' reference.
+	 * @see #getD4qvtrFunction()
 	 * @generated
 	 */
-	void setD2qvtrFunction(Function value);
+	void setD4qvtrFunction(Function value);
 
 	/**
 	 * Returns the value of the '<em><b>Domap Helper Attribute</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Attribute#getDispatcher <em>Dispatcher</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domap Helper Attribute</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domap Helper Attribute</em>' containment reference.
 	 * @see #setDomapHelper_Attribute(TmapHelper_Attribute)
@@ -126,10 +115,6 @@ public interface DmapHelper extends Dispatch {
 	 * Returns the value of the '<em><b>Domap Helper Operation</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getDispatcher <em>Dispatcher</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domap Helper Operation</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domap Helper Operation</em>' containment reference.
 	 * @see #setDomapHelper_Operation(TmapHelper_Operation)
@@ -154,10 +139,6 @@ public interface DmapHelper extends Dispatch {
 	/**
 	 * Returns the value of the '<em><b>Result</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Result</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Result</em>' reference.
 	 * @see #setResult(ImapHelper)
@@ -176,5 +157,27 @@ public interface DmapHelper extends Dispatch {
 	 * @generated
 	 */
 	void setResult(ImapHelper value);
+
+	/**
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapHelper_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
 
 } // DmapHelper

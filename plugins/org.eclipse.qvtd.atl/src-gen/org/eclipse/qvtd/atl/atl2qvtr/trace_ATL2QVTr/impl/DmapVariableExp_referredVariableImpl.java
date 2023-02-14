@@ -37,11 +37,12 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getD1atlExpression <em>D1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getD2qvtrExpression <em>D2qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getD3atlExpression <em>D3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getD4qvtrExpression <em>D4qvtr Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getDomapVariableExp_referredVariable_Helper <em>Domap Variable Exp referred Variable Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getDomapVariableExp_referredVariable_VariableDeclaration <em>Domap Variable Exp referred Variable Variable Declaration</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapVariableExp_referredVariableImpl#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,7 +55,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 5;
+	public static final int DMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Dmap Variable Exp referred Variable</em>' class.
@@ -67,24 +68,24 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 
 
 	/**
-	 * The cached value of the '{@link #getD1atlExpression() <em>D1atl Expression</em>}' reference.
+	 * The cached value of the '{@link #getD3atlExpression() <em>D3atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD1atlExpression()
+	 * @see #getD3atlExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableExp d1atlExpression;
+	protected VariableExp d3atlExpression;
 
 	/**
-	 * The cached value of the '{@link #getD2qvtrExpression() <em>D2qvtr Expression</em>}' reference.
+	 * The cached value of the '{@link #getD4qvtrExpression() <em>D4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD2qvtrExpression()
+	 * @see #getD4qvtrExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.VariableExp d2qvtrExpression;
+	protected org.eclipse.ocl.pivot.VariableExp d4qvtrExpression;
 
 	/**
 	 * The cached value of the '{@link #getDomapVariableExp_referredVariable_Helper() <em>Domap Variable Exp referred Variable Helper</em>}' containment reference.
@@ -117,6 +118,26 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	protected ImapVariableExp_referredVariable result;
 
 	/**
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -141,16 +162,16 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 */
 	@Override
-	public VariableExp getD1atlExpression() {
-		if (d1atlExpression != null && d1atlExpression.eIsProxy()) {
-			InternalEObject oldD1atlExpression = d1atlExpression;
-			d1atlExpression = (VariableExp)eResolveProxy(oldD1atlExpression);
-			if (d1atlExpression != oldD1atlExpression) {
+	public VariableExp getD3atlExpression() {
+		if (d3atlExpression != null && d3atlExpression.eIsProxy()) {
+			InternalEObject oldD3atlExpression = d3atlExpression;
+			d3atlExpression = (VariableExp)eResolveProxy(oldD3atlExpression);
+			if (d3atlExpression != oldD3atlExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlExpression, d3atlExpression));
 			}
 		}
-		return d1atlExpression;
+		return d3atlExpression;
 	}
 
 	/**
@@ -158,8 +179,8 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableExp basicGetD1atlExpression() {
-		return d1atlExpression;
+	public VariableExp basicGetD3atlExpression() {
+		return d3atlExpression;
 	}
 
 	/**
@@ -168,11 +189,11 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 */
 	@Override
-	public void setD1atlExpression(VariableExp newD1atlExpression) {
-		VariableExp oldD1atlExpression = d1atlExpression;
-		d1atlExpression = newD1atlExpression;
+	public void setD3atlExpression(VariableExp newD3atlExpression) {
+		VariableExp oldD3atlExpression = d3atlExpression;
+		d3atlExpression = newD3atlExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlExpression, d3atlExpression));
 	}
 
 	/**
@@ -181,16 +202,16 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.pivot.VariableExp getD2qvtrExpression() {
-		if (d2qvtrExpression != null && d2qvtrExpression.eIsProxy()) {
-			InternalEObject oldD2qvtrExpression = (InternalEObject)d2qvtrExpression;
-			d2qvtrExpression = (org.eclipse.ocl.pivot.VariableExp)eResolveProxy(oldD2qvtrExpression);
-			if (d2qvtrExpression != oldD2qvtrExpression) {
+	public org.eclipse.ocl.pivot.VariableExp getD4qvtrExpression() {
+		if (d4qvtrExpression != null && d4qvtrExpression.eIsProxy()) {
+			InternalEObject oldD4qvtrExpression = (InternalEObject)d4qvtrExpression;
+			d4qvtrExpression = (org.eclipse.ocl.pivot.VariableExp)eResolveProxy(oldD4qvtrExpression);
+			if (d4qvtrExpression != oldD4qvtrExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrExpression, d4qvtrExpression));
 			}
 		}
-		return d2qvtrExpression;
+		return d4qvtrExpression;
 	}
 
 	/**
@@ -198,8 +219,8 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.VariableExp basicGetD2qvtrExpression() {
-		return d2qvtrExpression;
+	public org.eclipse.ocl.pivot.VariableExp basicGetD4qvtrExpression() {
+		return d4qvtrExpression;
 	}
 
 	/**
@@ -208,11 +229,11 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 */
 	@Override
-	public void setD2qvtrExpression(org.eclipse.ocl.pivot.VariableExp newD2qvtrExpression) {
-		org.eclipse.ocl.pivot.VariableExp oldD2qvtrExpression = d2qvtrExpression;
-		d2qvtrExpression = newD2qvtrExpression;
+	public void setD4qvtrExpression(org.eclipse.ocl.pivot.VariableExp newD4qvtrExpression) {
+		org.eclipse.ocl.pivot.VariableExp oldD4qvtrExpression = d4qvtrExpression;
+		d4qvtrExpression = newD4qvtrExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrExpression, d4qvtrExpression));
 	}
 
 	/**
@@ -351,6 +372,29 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * @generated
 	 */
 	@Override
+	public Boolean getS0global() {
+		return s0global;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 5, oldS0global, s0global));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
@@ -390,11 +434,11 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				if (resolve) return getD1atlExpression();
-				return basicGetD1atlExpression();
+				if (resolve) return getD3atlExpression();
+				return basicGetD3atlExpression();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				if (resolve) return getD2qvtrExpression();
-				return basicGetD2qvtrExpression();
+				if (resolve) return getD4qvtrExpression();
+				return basicGetD4qvtrExpression();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return getDomapVariableExp_referredVariable_Helper();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
@@ -402,6 +446,8 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				if (resolve) return getResult();
 				return basicGetResult();
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				return getS0global();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -415,10 +461,10 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlExpression((VariableExp)newValue);
+				setD3atlExpression((VariableExp)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrExpression((org.eclipse.ocl.pivot.VariableExp)newValue);
+				setD4qvtrExpression((org.eclipse.ocl.pivot.VariableExp)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapVariableExp_referredVariable_Helper((TmapVariableExp_referredVariable_Helper)newValue);
@@ -428,6 +474,9 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapVariableExp_referredVariable)newValue);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				setS0global((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -442,10 +491,10 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlExpression((VariableExp)null);
+				setD3atlExpression((VariableExp)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrExpression((org.eclipse.ocl.pivot.VariableExp)null);
+				setD4qvtrExpression((org.eclipse.ocl.pivot.VariableExp)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapVariableExp_referredVariable_Helper((TmapVariableExp_referredVariable_Helper)null);
@@ -455,6 +504,9 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapVariableExp_referredVariable)null);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -469,17 +521,35 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				return d1atlExpression != null;
+				return d3atlExpression != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				return d2qvtrExpression != null;
+				return d4qvtrExpression != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return domapVariableExp_referredVariable_Helper != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return domapVariableExp_referredVariable_VariableDeclaration != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				return result != null;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(')');
+		return result.toString();
 	}
 
 

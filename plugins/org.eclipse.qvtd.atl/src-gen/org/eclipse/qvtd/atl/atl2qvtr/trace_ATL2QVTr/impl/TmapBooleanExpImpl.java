@@ -36,7 +36,7 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBooleanExpImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBooleanExpImpl#isT0symbol <em>T0symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBooleanExpImpl#isT1symbol <em>T1symbol</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,24 +62,24 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 
 
 	/**
-	 * The default value of the '{@link #isT0symbol() <em>T0symbol</em>}' attribute.
+	 * The default value of the '{@link #isT1symbol() <em>T1symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isT0symbol()
+	 * @see #isT1symbol()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean T0SYMBOL_EDEFAULT = false;
+	protected static final boolean T1SYMBOL_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isT0symbol() <em>T0symbol</em>}' attribute.
+	 * The cached value of the '{@link #isT1symbol() <em>T1symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isT0symbol()
+	 * @see #isT1symbol()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean t0symbol = T0SYMBOL_EDEFAULT;
+	protected boolean t1symbol = T1SYMBOL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,8 +149,8 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 * @generated
 	 */
 	@Override
-	public boolean isT0symbol() {
-		return t0symbol;
+	public boolean isT1symbol() {
+		return t1symbol;
 	}
 
 	/**
@@ -159,11 +159,11 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 * @generated
 	 */
 	@Override
-	public void setT0symbol(boolean newT0symbol) {
-		boolean oldT0symbol = t0symbol;
-		t0symbol = newT0symbol;
+	public void setT1symbol(boolean newT1symbol) {
+		boolean oldT1symbol = t1symbol;
+		t1symbol = newT1symbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0symbol, t0symbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1symbol, t1symbol));
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return isT0symbol();
+				return isT1symbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,7 +238,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 				setDispatcher((DmapOclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0symbol((Boolean)newValue);
+				setT1symbol((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -256,7 +256,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 				setDispatcher((DmapOclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0symbol(T0SYMBOL_EDEFAULT);
+				setT1symbol(T1SYMBOL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -273,7 +273,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t0symbol != T0SYMBOL_EDEFAULT;
+				return t1symbol != T1SYMBOL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -288,8 +288,8 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0symbol: ");
-		result.append(t0symbol);
+		result.append(" (t1symbol: ");
+		result.append(t1symbol);
 		result.append(')');
 		return result.toString();
 	}

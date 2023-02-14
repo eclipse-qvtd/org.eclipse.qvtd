@@ -31,13 +31,14 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT0propertyName <em>T0property Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlBinding <em>T1atl Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlExpression <em>T1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlOutPatternElement <em>T1atl Out Pattern Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrExpression <em>T2qvtr Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrPart <em>T2qvtr Part</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrTemplate <em>T2qvtr Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1propertyName <em>T1property Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlBinding <em>T3atl Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlExpression <em>T3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlOutPatternElement <em>T3atl Out Pattern Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrExpression <em>T4qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrPart <em>T4qvtr Part</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrTemplate <em>T4qvtr Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getWmapSimpleOutPatternElement <em>Wmap Simple Out Pattern Element</em>}</li>
  * </ul>
@@ -48,208 +49,200 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapBinding extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T0property Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0property Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0property Name</em>' attribute.
-	 * @see #setT0propertyName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T0propertyName()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>T1property Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T1property Name</em>' attribute.
+	 * @see #setT1propertyName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T1propertyName()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0propertyName();
+	String getT1propertyName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT0propertyName <em>T0property Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1propertyName <em>T1property Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0property Name</em>' attribute.
-	 * @see #getT0propertyName()
+	 * @param value the new value of the '<em>T1property Name</em>' attribute.
+	 * @see #getT1propertyName()
 	 * @generated
 	 */
-	void setT0propertyName(String value);
+	void setT1propertyName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Binding</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Binding</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Binding</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Binding</em>' reference.
-	 * @see #setT1atlBinding(Binding)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T1atlBinding()
+	 * @return the value of the '<em>T3atl Binding</em>' reference.
+	 * @see #setT3atlBinding(Binding)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T3atlBinding()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapBinding'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	Binding getT1atlBinding();
+	Binding getT3atlBinding();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlBinding <em>T1atl Binding</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlBinding <em>T3atl Binding</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Binding</em>' reference.
-	 * @see #getT1atlBinding()
+	 * @param value the new value of the '<em>T3atl Binding</em>' reference.
+	 * @see #getT3atlBinding()
 	 * @generated
 	 */
-	void setT1atlBinding(Binding value);
+	void setT3atlBinding(Binding value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Expression</em>' reference.
-	 * @see #setT1atlExpression(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T1atlExpression()
+	 * @return the value of the '<em>T3atl Expression</em>' reference.
+	 * @see #setT3atlExpression(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T3atlExpression()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapBinding'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	OclExpression getT3atlExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlExpression <em>T3atl Expression</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Expression</em>' reference.
+	 * @see #getT3atlExpression()
+	 * @generated
+	 */
+	void setT3atlExpression(OclExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Out Pattern Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Out Pattern Element</em>' reference.
+	 * @see #setT3atlOutPatternElement(SimpleOutPatternElement)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T3atlOutPatternElement()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getT1atlExpression();
+	SimpleOutPatternElement getT3atlOutPatternElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlExpression <em>T1atl Expression</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT3atlOutPatternElement <em>T3atl Out Pattern Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Expression</em>' reference.
-	 * @see #getT1atlExpression()
+	 * @param value the new value of the '<em>T3atl Out Pattern Element</em>' reference.
+	 * @see #getT3atlOutPatternElement()
 	 * @generated
 	 */
-	void setT1atlExpression(OclExpression value);
+	void setT3atlOutPatternElement(SimpleOutPatternElement value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Out Pattern Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Out Pattern Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Out Pattern Element</em>' reference.
-	 * @see #setT1atlOutPatternElement(SimpleOutPatternElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T1atlOutPatternElement()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	SimpleOutPatternElement getT1atlOutPatternElement();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT1atlOutPatternElement <em>T1atl Out Pattern Element</em>}' reference.
+	 * Returns the value of the '<em><b>T4qvtr Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Out Pattern Element</em>' reference.
-	 * @see #getT1atlOutPatternElement()
-	 * @generated
-	 */
-	void setT1atlOutPatternElement(SimpleOutPatternElement value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Expression</em>' reference.
-	 * @see #setT2qvtrExpression(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T2qvtrExpression()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	OCLExpression getT2qvtrExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrExpression <em>T2qvtr Expression</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Expression</em>' reference.
-	 * @see #getT2qvtrExpression()
-	 * @generated
-	 */
-	void setT2qvtrExpression(OCLExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Part</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Part</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Part</em>' reference.
-	 * @see #setT2qvtrPart(PropertyTemplateItem)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T2qvtrPart()
+	 * @return the value of the '<em>T4qvtr Expression</em>' reference.
+	 * @see #setT4qvtrExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T4qvtrExpression()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapBinding'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	PropertyTemplateItem getT2qvtrPart();
+	OCLExpression getT4qvtrExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrPart <em>T2qvtr Part</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrExpression <em>T4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Part</em>' reference.
-	 * @see #getT2qvtrPart()
+	 * @param value the new value of the '<em>T4qvtr Expression</em>' reference.
+	 * @see #getT4qvtrExpression()
 	 * @generated
 	 */
-	void setT2qvtrPart(PropertyTemplateItem value);
+	void setT4qvtrExpression(OCLExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Template</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Part</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Template</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Template</em>' reference.
-	 * @see #setT2qvtrTemplate(ObjectTemplateExp)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T2qvtrTemplate()
+	 * @return the value of the '<em>T4qvtr Part</em>' reference.
+	 * @see #setT4qvtrPart(PropertyTemplateItem)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T4qvtrPart()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapBinding'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	PropertyTemplateItem getT4qvtrPart();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrPart <em>T4qvtr Part</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Part</em>' reference.
+	 * @see #getT4qvtrPart()
+	 * @generated
+	 */
+	void setT4qvtrPart(PropertyTemplateItem value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Template</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Template</em>' reference.
+	 * @see #setT4qvtrTemplate(ObjectTemplateExp)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_T4qvtrTemplate()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	ObjectTemplateExp getT2qvtrTemplate();
+	ObjectTemplateExp getT4qvtrTemplate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT2qvtrTemplate <em>T2qvtr Template</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding#getT4qvtrTemplate <em>T4qvtr Template</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Template</em>' reference.
-	 * @see #getT2qvtrTemplate()
+	 * @param value the new value of the '<em>T4qvtr Template</em>' reference.
+	 * @see #getT4qvtrTemplate()
 	 * @generated
 	 */
-	void setT2qvtrTemplate(ObjectTemplateExp value);
+	void setT4qvtrTemplate(ObjectTemplateExp value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Expression</em>' reference.
 	 * @see #setWmapOclExpression(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_WmapOclExpression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression();
@@ -267,15 +260,11 @@ public interface TmapBinding extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Simple Out Pattern Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Simple Out Pattern Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Simple Out Pattern Element</em>' reference.
 	 * @see #setWmapSimpleOutPatternElement(TmapSimpleOutPatternElement)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapBinding_WmapSimpleOutPatternElement()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapSimpleOutPatternElement getWmapSimpleOutPatternElement();

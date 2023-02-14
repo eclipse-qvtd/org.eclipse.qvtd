@@ -13,6 +13,7 @@ package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 import org.eclipse.m2m.atl.common.OCL.OclExpression;
 
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,11 +25,12 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT0operationName <em>T0operation Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT1atlSource <em>T1atl Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrSource <em>T2qvtr Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT1operationName <em>T1operation Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT3atlSource <em>T3atl Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT4qvtrOperation <em>T4qvtr Operation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT4qvtrSource <em>T4qvtr Source</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getLocalSuccess <em>Local Success</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getS0local <em>S0local</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp()
@@ -40,10 +42,6 @@ public interface TmapOperatorCallExp extends ImapOclExpression {
 	 * Returns the value of the '<em><b>Dispatcher</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOperatorCallExp <em>Domap Operator Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dispatcher</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dispatcher</em>' container reference.
 	 * @see #setDispatcher(DmapOclExpression)
@@ -65,98 +63,107 @@ public interface TmapOperatorCallExp extends ImapOclExpression {
 	void setDispatcher(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T0operation Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>T1operation Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0operation Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0operation Name</em>' attribute.
-	 * @see #setT0operationName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T0operationName()
+	 * @return the value of the '<em>T1operation Name</em>' attribute.
+	 * @see #setT1operationName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T1operationName()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0operationName();
+	String getT1operationName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT0operationName <em>T0operation Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT1operationName <em>T1operation Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0operation Name</em>' attribute.
-	 * @see #getT0operationName()
+	 * @param value the new value of the '<em>T1operation Name</em>' attribute.
+	 * @see #getT1operationName()
 	 * @generated
 	 */
-	void setT0operationName(String value);
+	void setT1operationName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Source</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Source</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Source</em>' reference.
-	 * @see #setT1atlSource(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T1atlSource()
+	 * @return the value of the '<em>T3atl Source</em>' reference.
+	 * @see #setT3atlSource(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T3atlSource()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOperatorCallExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getT1atlSource();
+	OclExpression getT3atlSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT1atlSource <em>T1atl Source</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT3atlSource <em>T3atl Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Source</em>' reference.
-	 * @see #getT1atlSource()
+	 * @param value the new value of the '<em>T3atl Source</em>' reference.
+	 * @see #getT3atlSource()
 	 * @generated
 	 */
-	void setT1atlSource(OclExpression value);
+	void setT3atlSource(OclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Source</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Operation</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Source</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Source</em>' reference.
-	 * @see #setT2qvtrSource(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T2qvtrSource()
+	 * @return the value of the '<em>T4qvtr Operation</em>' reference.
+	 * @see #setT4qvtrOperation(Operation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T4qvtrOperation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	OCLExpression getT2qvtrSource();
+	Operation getT4qvtrOperation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT2qvtrSource <em>T2qvtr Source</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT4qvtrOperation <em>T4qvtr Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Source</em>' reference.
-	 * @see #getT2qvtrSource()
+	 * @param value the new value of the '<em>T4qvtr Operation</em>' reference.
+	 * @see #getT4qvtrOperation()
 	 * @generated
 	 */
-	void setT2qvtrSource(OCLExpression value);
+	void setT4qvtrOperation(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Source</em>' reference.
+	 * @see #setT4qvtrSource(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_T4qvtrSource()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOperatorCallExp'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	OCLExpression getT4qvtrSource();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getT4qvtrSource <em>T4qvtr Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Source</em>' reference.
+	 * @see #getT4qvtrSource()
+	 * @generated
+	 */
+	void setT4qvtrSource(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Expression</em>' reference.
 	 * @see #setWmapOclExpression(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_WmapOclExpression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression();
@@ -172,29 +179,25 @@ public interface TmapOperatorCallExp extends ImapOclExpression {
 	void setWmapOclExpression(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Local Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0local</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Local Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Local Success</em>' attribute.
-	 * @see #setLocalSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_LocalSuccess()
+	 * @return the value of the '<em>S0local</em>' attribute.
+	 * @see #setS0local(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOperatorCallExp_S0local()
 	 * @model
 	 * @generated
 	 */
-	Boolean getLocalSuccess();
+	Boolean getS0local();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getLocalSuccess <em>Local Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp#getS0local <em>S0local</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Local Success</em>' attribute.
-	 * @see #getLocalSuccess()
+	 * @param value the new value of the '<em>S0local</em>' attribute.
+	 * @see #getS0local()
 	 * @generated
 	 */
-	void setLocalSuccess(Boolean value);
+	void setS0local(Boolean value);
 
 } // TmapOperatorCallExp

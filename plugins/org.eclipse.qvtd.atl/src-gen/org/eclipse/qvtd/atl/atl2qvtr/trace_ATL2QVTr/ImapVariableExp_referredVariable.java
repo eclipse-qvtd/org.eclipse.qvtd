@@ -21,7 +21,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable#getSuccess <em>Success</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getImapVariableExp_referredVariable()
@@ -30,29 +30,25 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface ImapVariableExp_referredVariable extends Execution {
 	/**
-	 * Returns the value of the '<em><b>Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Success</em>' attribute.
-	 * @see #setSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getImapVariableExp_referredVariable_Success()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getImapVariableExp_referredVariable_S0global()
 	 * @model
 	 * @generated
 	 */
-	Boolean getSuccess();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable#getSuccess <em>Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Success</em>' attribute.
-	 * @see #getSuccess()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setSuccess(Boolean value);
+	void setS0global(Boolean value);
 
 } // ImapVariableExp_referredVariable

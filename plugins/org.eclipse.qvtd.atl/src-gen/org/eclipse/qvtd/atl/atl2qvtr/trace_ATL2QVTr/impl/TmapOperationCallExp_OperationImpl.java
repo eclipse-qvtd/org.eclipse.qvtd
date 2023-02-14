@@ -10,17 +10,23 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.m2m.atl.common.OCL.OclExpression;
+import org.eclipse.m2m.atl.common.OCL.Operation;
 
 import org.eclipse.ocl.pivot.OCLExpression;
 
@@ -40,11 +46,14 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT0operationName <em>T0operation Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT1atlSource <em>T1atl Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT2qvtrSource <em>T2qvtr Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT1operationName <em>T1operation Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT3atlModule <em>T3atl Module</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT3atlOperations <em>T3atl Operations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT3atlSource <em>T3atl Source</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT4qvtrOperation <em>T4qvtr Operation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getT4qvtrSource <em>T4qvtr Source</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getLocalSuccess <em>Local Success</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_OperationImpl#getS0local <em>S0local</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,7 +66,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6;
+	public static final int TMAP_OPERATION_CALL_EXP_OPERATION_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Tmap Operation Call Exp Operation</em>' class.
@@ -70,44 +79,74 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 
 
 	/**
-	 * The default value of the '{@link #getT0operationName() <em>T0operation Name</em>}' attribute.
+	 * The default value of the '{@link #getT1operationName() <em>T1operation Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0operationName()
+	 * @see #getT1operationName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0OPERATION_NAME_EDEFAULT = null;
+	protected static final String T1OPERATION_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0operationName() <em>T0operation Name</em>}' attribute.
+	 * The cached value of the '{@link #getT1operationName() <em>T1operation Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0operationName()
+	 * @see #getT1operationName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0operationName = T0OPERATION_NAME_EDEFAULT;
+	protected String t1operationName = T1OPERATION_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlSource() <em>T1atl Source</em>}' reference.
+	 * The cached value of the '{@link #getT3atlModule() <em>T3atl Module</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlSource()
+	 * @see #getT3atlModule()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression t1atlSource;
+	protected org.eclipse.m2m.atl.common.ATL.Module t3atlModule;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrSource() <em>T2qvtr Source</em>}' reference.
+	 * The cached value of the '{@link #getT3atlOperations() <em>T3atl Operations</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrSource()
+	 * @see #getT3atlOperations()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression t2qvtrSource;
+	protected EList<Operation> t3atlOperations;
+
+	/**
+	 * The cached value of the '{@link #getT3atlSource() <em>T3atl Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT3atlSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected OclExpression t3atlSource;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrOperation() <em>T4qvtr Operation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.Operation t4qvtrOperation;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrSource() <em>T4qvtr Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression t4qvtrSource;
 
 	/**
 	 * The cached value of the '{@link #getWmapOclExpression() <em>Wmap Ocl Expression</em>}' reference.
@@ -120,24 +159,24 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	protected DmapOclExpression wmapOclExpression;
 
 	/**
-	 * The default value of the '{@link #getLocalSuccess() <em>Local Success</em>}' attribute.
+	 * The default value of the '{@link #getS0local() <em>S0local</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLocalSuccess()
+	 * @see #getS0local()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean LOCAL_SUCCESS_EDEFAULT = null;
+	protected static final Boolean S0LOCAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLocalSuccess() <em>Local Success</em>}' attribute.
+	 * The cached value of the '{@link #getS0local() <em>S0local</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLocalSuccess()
+	 * @see #getS0local()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean localSuccess = LOCAL_SUCCESS_EDEFAULT;
+	protected Boolean s0local = S0LOCAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,8 +246,8 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public String getT0operationName() {
-		return t0operationName;
+	public String getT1operationName() {
+		return t1operationName;
 	}
 
 	/**
@@ -217,11 +256,11 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public void setT0operationName(String newT0operationName) {
-		String oldT0operationName = t0operationName;
-		t0operationName = newT0operationName;
+	public void setT1operationName(String newT1operationName) {
+		String oldT1operationName = t1operationName;
+		t1operationName = newT1operationName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT0operationName, t0operationName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1operationName, t1operationName));
 	}
 
 	/**
@@ -230,16 +269,16 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public OclExpression getT1atlSource() {
-		if (t1atlSource != null && t1atlSource.eIsProxy()) {
-			InternalEObject oldT1atlSource = t1atlSource;
-			t1atlSource = (OclExpression)eResolveProxy(oldT1atlSource);
-			if (t1atlSource != oldT1atlSource) {
+	public org.eclipse.m2m.atl.common.ATL.Module getT3atlModule() {
+		if (t3atlModule != null && t3atlModule.eIsProxy()) {
+			InternalEObject oldT3atlModule = t3atlModule;
+			t3atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldT3atlModule);
+			if (t3atlModule != oldT3atlModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlSource, t1atlSource));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlModule, t3atlModule));
 			}
 		}
-		return t1atlSource;
+		return t3atlModule;
 	}
 
 	/**
@@ -247,8 +286,8 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression basicGetT1atlSource() {
-		return t1atlSource;
+	public org.eclipse.m2m.atl.common.ATL.Module basicGetT3atlModule() {
+		return t3atlModule;
 	}
 
 	/**
@@ -257,11 +296,11 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public void setT1atlSource(OclExpression newT1atlSource) {
-		OclExpression oldT1atlSource = t1atlSource;
-		t1atlSource = newT1atlSource;
+	public void setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module newT3atlModule) {
+		org.eclipse.m2m.atl.common.ATL.Module oldT3atlModule = t3atlModule;
+		t3atlModule = newT3atlModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlSource, t1atlSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlModule, t3atlModule));
 	}
 
 	/**
@@ -270,16 +309,29 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getT2qvtrSource() {
-		if (t2qvtrSource != null && t2qvtrSource.eIsProxy()) {
-			InternalEObject oldT2qvtrSource = (InternalEObject)t2qvtrSource;
-			t2qvtrSource = (OCLExpression)eResolveProxy(oldT2qvtrSource);
-			if (t2qvtrSource != oldT2qvtrSource) {
+	public EList<Operation> getT3atlOperations() {
+		if (t3atlOperations == null) {
+			t3atlOperations = new EObjectResolvingEList<Operation>(Operation.class, this, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		}
+		return t3atlOperations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OclExpression getT3atlSource() {
+		if (t3atlSource != null && t3atlSource.eIsProxy()) {
+			InternalEObject oldT3atlSource = t3atlSource;
+			t3atlSource = (OclExpression)eResolveProxy(oldT3atlSource);
+			if (t3atlSource != oldT3atlSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrSource, t2qvtrSource));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT3atlSource, t3atlSource));
 			}
 		}
-		return t2qvtrSource;
+		return t3atlSource;
 	}
 
 	/**
@@ -287,8 +339,8 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression basicGetT2qvtrSource() {
-		return t2qvtrSource;
+	public OclExpression basicGetT3atlSource() {
+		return t3atlSource;
 	}
 
 	/**
@@ -297,11 +349,91 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrSource(OCLExpression newT2qvtrSource) {
-		OCLExpression oldT2qvtrSource = t2qvtrSource;
-		t2qvtrSource = newT2qvtrSource;
+	public void setT3atlSource(OclExpression newT3atlSource) {
+		OclExpression oldT3atlSource = t3atlSource;
+		t3atlSource = newT3atlSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrSource, t2qvtrSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT3atlSource, t3atlSource));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public org.eclipse.ocl.pivot.Operation getT4qvtrOperation() {
+		if (t4qvtrOperation != null && t4qvtrOperation.eIsProxy()) {
+			InternalEObject oldT4qvtrOperation = (InternalEObject)t4qvtrOperation;
+			t4qvtrOperation = (org.eclipse.ocl.pivot.Operation)eResolveProxy(oldT4qvtrOperation);
+			if (t4qvtrOperation != oldT4qvtrOperation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrOperation, t4qvtrOperation));
+			}
+		}
+		return t4qvtrOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.Operation basicGetT4qvtrOperation() {
+		return t4qvtrOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT4qvtrOperation(org.eclipse.ocl.pivot.Operation newT4qvtrOperation) {
+		org.eclipse.ocl.pivot.Operation oldT4qvtrOperation = t4qvtrOperation;
+		t4qvtrOperation = newT4qvtrOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrOperation, t4qvtrOperation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OCLExpression getT4qvtrSource() {
+		if (t4qvtrSource != null && t4qvtrSource.eIsProxy()) {
+			InternalEObject oldT4qvtrSource = (InternalEObject)t4qvtrSource;
+			t4qvtrSource = (OCLExpression)eResolveProxy(oldT4qvtrSource);
+			if (t4qvtrSource != oldT4qvtrSource) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrSource, t4qvtrSource));
+			}
+		}
+		return t4qvtrSource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OCLExpression basicGetT4qvtrSource() {
+		return t4qvtrSource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT4qvtrSource(OCLExpression newT4qvtrSource) {
+		OCLExpression oldT4qvtrSource = t4qvtrSource;
+		t4qvtrSource = newT4qvtrSource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrSource, t4qvtrSource));
 	}
 
 	/**
@@ -316,7 +448,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -341,7 +473,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -350,8 +482,8 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public Boolean getLocalSuccess() {
-		return localSuccess;
+	public Boolean getS0local() {
+		return s0local;
 	}
 
 	/**
@@ -360,11 +492,11 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * @generated
 	 */
 	@Override
-	public void setLocalSuccess(Boolean newLocalSuccess) {
-		Boolean oldLocalSuccess = localSuccess;
-		localSuccess = newLocalSuccess;
+	public void setS0local(Boolean newS0local) {
+		Boolean oldS0local = s0local;
+		s0local = newS0local;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldLocalSuccess, localSuccess));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldS0local, s0local));
 	}
 
 	/**
@@ -422,18 +554,26 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return getT0operationName();
+				return getT1operationName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlSource();
-				return basicGetT1atlSource();
+				if (resolve) return getT3atlModule();
+				return basicGetT3atlModule();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT2qvtrSource();
-				return basicGetT2qvtrSource();
+				return getT3atlOperations();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				if (resolve) return getT3atlSource();
+				return basicGetT3atlSource();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+				if (resolve) return getT4qvtrOperation();
+				return basicGetT4qvtrOperation();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				if (resolve) return getT4qvtrSource();
+				return basicGetT4qvtrSource();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return getLocalSuccess();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
+				return getS0local();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -443,6 +583,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -450,19 +591,29 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 				setDispatcher((DmapOclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0operationName((String)newValue);
+				setT1operationName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlSource((OclExpression)newValue);
+				setT3atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrSource((OCLExpression)newValue);
+				getT3atlOperations().clear();
+				getT3atlOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setWmapOclExpression((DmapOclExpression)newValue);
+				setT3atlSource((OclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setLocalSuccess((Boolean)newValue);
+				setT4qvtrOperation((org.eclipse.ocl.pivot.Operation)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				setT4qvtrSource((OCLExpression)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				setWmapOclExpression((DmapOclExpression)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
+				setS0local((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -480,19 +631,28 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 				setDispatcher((DmapOclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT0operationName(T0OPERATION_NAME_EDEFAULT);
+				setT1operationName(T1OPERATION_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlSource((OclExpression)null);
+				setT3atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrSource((OCLExpression)null);
+				getT3atlOperations().clear();
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setWmapOclExpression((DmapOclExpression)null);
+				setT3atlSource((OclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setLocalSuccess(LOCAL_SUCCESS_EDEFAULT);
+				setT4qvtrOperation((org.eclipse.ocl.pivot.Operation)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				setT4qvtrSource((OCLExpression)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				setWmapOclExpression((DmapOclExpression)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
+				setS0local(S0LOCAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -509,15 +669,21 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return T0OPERATION_NAME_EDEFAULT == null ? t0operationName != null : !T0OPERATION_NAME_EDEFAULT.equals(t0operationName);
+				return T1OPERATION_NAME_EDEFAULT == null ? t1operationName != null : !T1OPERATION_NAME_EDEFAULT.equals(t1operationName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlSource != null;
+				return t3atlModule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t2qvtrSource != null;
+				return t3atlOperations != null && !t3atlOperations.isEmpty();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return wmapOclExpression != null;
+				return t3atlSource != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return LOCAL_SUCCESS_EDEFAULT == null ? localSuccess != null : !LOCAL_SUCCESS_EDEFAULT.equals(localSuccess);
+				return t4qvtrOperation != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				return t4qvtrSource != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				return wmapOclExpression != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
+				return S0LOCAL_EDEFAULT == null ? s0local != null : !S0LOCAL_EDEFAULT.equals(s0local);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -532,10 +698,10 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0operationName: ");
-		result.append(t0operationName);
-		result.append(", localSuccess: ");
-		result.append(localSuccess);
+		result.append(" (t1operationName: ");
+		result.append(t1operationName);
+		result.append(", s0local: ");
+		result.append(s0local);
 		result.append(')');
 		return result.toString();
 	}

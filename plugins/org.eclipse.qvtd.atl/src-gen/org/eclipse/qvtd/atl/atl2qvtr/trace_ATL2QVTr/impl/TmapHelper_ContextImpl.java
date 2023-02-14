@@ -40,12 +40,13 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT1atlContext <em>T1atl Context</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT1atlDefinition <em>T1atl Definition</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT1atlHelper <em>T1atl Helper</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT1atlReturnType <em>T1atl Return Type</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT2qvtrFunction <em>T2qvtr Function</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT2qvtrParameter <em>T2qvtr Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT3atlContext <em>T3atl Context</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT3atlDefinition <em>T3atl Definition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT3atlHelper <em>T3atl Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT3atlReturnType <em>T3atl Return Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT4qvtrFunction <em>T4qvtr Function</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getT4qvtrParameter <em>T4qvtr Parameter</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapHelper_ContextImpl#getWmapVariable <em>Wmap Variable</em>}</li>
  * </ul>
  *
@@ -59,7 +60,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_HELPER_CONTEXT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 7;
+	public static final int TMAP_HELPER_CONTEXT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Tmap Helper Context</em>' class.
@@ -72,64 +73,84 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 
 
 	/**
-	 * The cached value of the '{@link #getT1atlContext() <em>T1atl Context</em>}' reference.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlContext()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclContextDefinition t1atlContext;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT1atlDefinition() <em>T1atl Definition</em>}' reference.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlDefinition()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclFeatureDefinition t1atlDefinition;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlHelper() <em>T1atl Helper</em>}' reference.
+	 * The cached value of the '{@link #getT3atlContext() <em>T3atl Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlHelper()
+	 * @see #getT3atlContext()
 	 * @generated
 	 * @ordered
 	 */
-	protected Helper t1atlHelper;
+	protected OclContextDefinition t3atlContext;
 
 	/**
-	 * The cached value of the '{@link #getT1atlReturnType() <em>T1atl Return Type</em>}' reference.
+	 * The cached value of the '{@link #getT3atlDefinition() <em>T3atl Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlReturnType()
+	 * @see #getT3atlDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclType t1atlReturnType;
+	protected OclFeatureDefinition t3atlDefinition;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrFunction() <em>T2qvtr Function</em>}' reference.
+	 * The cached value of the '{@link #getT3atlHelper() <em>T3atl Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrFunction()
+	 * @see #getT3atlHelper()
 	 * @generated
 	 * @ordered
 	 */
-	protected Function t2qvtrFunction;
+	protected Helper t3atlHelper;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrParameter() <em>T2qvtr Parameter</em>}' reference.
+	 * The cached value of the '{@link #getT3atlReturnType() <em>T3atl Return Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrParameter()
+	 * @see #getT3atlReturnType()
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionParameter t2qvtrParameter;
+	protected OclType t3atlReturnType;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrFunction() <em>T4qvtr Function</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrFunction()
+	 * @generated
+	 * @ordered
+	 */
+	protected Function t4qvtrFunction;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrParameter() <em>T4qvtr Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected FunctionParameter t4qvtrParameter;
 
 	/**
 	 * The cached value of the '{@link #getWmapVariable() <em>Wmap Variable</em>}' reference.
@@ -166,16 +187,39 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public OclContextDefinition getT1atlContext() {
-		if (t1atlContext != null && t1atlContext.eIsProxy()) {
-			InternalEObject oldT1atlContext = t1atlContext;
-			t1atlContext = (OclContextDefinition)eResolveProxy(oldT1atlContext);
-			if (t1atlContext != oldT1atlContext) {
+	public Boolean getS0global() {
+		return s0global;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OclContextDefinition getT3atlContext() {
+		if (t3atlContext != null && t3atlContext.eIsProxy()) {
+			InternalEObject oldT3atlContext = t3atlContext;
+			t3atlContext = (OclContextDefinition)eResolveProxy(oldT3atlContext);
+			if (t3atlContext != oldT3atlContext) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlContext, t1atlContext));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlContext, t3atlContext));
 			}
 		}
-		return t1atlContext;
+		return t3atlContext;
 	}
 
 	/**
@@ -183,8 +227,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclContextDefinition basicGetT1atlContext() {
-		return t1atlContext;
+	public OclContextDefinition basicGetT3atlContext() {
+		return t3atlContext;
 	}
 
 	/**
@@ -193,11 +237,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT1atlContext(OclContextDefinition newT1atlContext) {
-		OclContextDefinition oldT1atlContext = t1atlContext;
-		t1atlContext = newT1atlContext;
+	public void setT3atlContext(OclContextDefinition newT3atlContext) {
+		OclContextDefinition oldT3atlContext = t3atlContext;
+		t3atlContext = newT3atlContext;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlContext, t1atlContext));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlContext, t3atlContext));
 	}
 
 	/**
@@ -206,16 +250,16 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public OclFeatureDefinition getT1atlDefinition() {
-		if (t1atlDefinition != null && t1atlDefinition.eIsProxy()) {
-			InternalEObject oldT1atlDefinition = t1atlDefinition;
-			t1atlDefinition = (OclFeatureDefinition)eResolveProxy(oldT1atlDefinition);
-			if (t1atlDefinition != oldT1atlDefinition) {
+	public OclFeatureDefinition getT3atlDefinition() {
+		if (t3atlDefinition != null && t3atlDefinition.eIsProxy()) {
+			InternalEObject oldT3atlDefinition = t3atlDefinition;
+			t3atlDefinition = (OclFeatureDefinition)eResolveProxy(oldT3atlDefinition);
+			if (t3atlDefinition != oldT3atlDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlDefinition, t1atlDefinition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlDefinition, t3atlDefinition));
 			}
 		}
-		return t1atlDefinition;
+		return t3atlDefinition;
 	}
 
 	/**
@@ -223,8 +267,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclFeatureDefinition basicGetT1atlDefinition() {
-		return t1atlDefinition;
+	public OclFeatureDefinition basicGetT3atlDefinition() {
+		return t3atlDefinition;
 	}
 
 	/**
@@ -233,11 +277,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT1atlDefinition(OclFeatureDefinition newT1atlDefinition) {
-		OclFeatureDefinition oldT1atlDefinition = t1atlDefinition;
-		t1atlDefinition = newT1atlDefinition;
+	public void setT3atlDefinition(OclFeatureDefinition newT3atlDefinition) {
+		OclFeatureDefinition oldT3atlDefinition = t3atlDefinition;
+		t3atlDefinition = newT3atlDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlDefinition, t1atlDefinition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlDefinition, t3atlDefinition));
 	}
 
 	/**
@@ -246,16 +290,16 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public Helper getT1atlHelper() {
-		if (t1atlHelper != null && t1atlHelper.eIsProxy()) {
-			InternalEObject oldT1atlHelper = t1atlHelper;
-			t1atlHelper = (Helper)eResolveProxy(oldT1atlHelper);
-			if (t1atlHelper != oldT1atlHelper) {
+	public Helper getT3atlHelper() {
+		if (t3atlHelper != null && t3atlHelper.eIsProxy()) {
+			InternalEObject oldT3atlHelper = t3atlHelper;
+			t3atlHelper = (Helper)eResolveProxy(oldT3atlHelper);
+			if (t3atlHelper != oldT3atlHelper) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlHelper, t1atlHelper));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlHelper, t3atlHelper));
 			}
 		}
-		return t1atlHelper;
+		return t3atlHelper;
 	}
 
 	/**
@@ -263,8 +307,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Helper basicGetT1atlHelper() {
-		return t1atlHelper;
+	public Helper basicGetT3atlHelper() {
+		return t3atlHelper;
 	}
 
 	/**
@@ -273,11 +317,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT1atlHelper(Helper newT1atlHelper) {
-		Helper oldT1atlHelper = t1atlHelper;
-		t1atlHelper = newT1atlHelper;
+	public void setT3atlHelper(Helper newT3atlHelper) {
+		Helper oldT3atlHelper = t3atlHelper;
+		t3atlHelper = newT3atlHelper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlHelper, t1atlHelper));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlHelper, t3atlHelper));
 	}
 
 	/**
@@ -286,16 +330,16 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public OclType getT1atlReturnType() {
-		if (t1atlReturnType != null && t1atlReturnType.eIsProxy()) {
-			InternalEObject oldT1atlReturnType = t1atlReturnType;
-			t1atlReturnType = (OclType)eResolveProxy(oldT1atlReturnType);
-			if (t1atlReturnType != oldT1atlReturnType) {
+	public OclType getT3atlReturnType() {
+		if (t3atlReturnType != null && t3atlReturnType.eIsProxy()) {
+			InternalEObject oldT3atlReturnType = t3atlReturnType;
+			t3atlReturnType = (OclType)eResolveProxy(oldT3atlReturnType);
+			if (t3atlReturnType != oldT3atlReturnType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlReturnType, t1atlReturnType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlReturnType, t3atlReturnType));
 			}
 		}
-		return t1atlReturnType;
+		return t3atlReturnType;
 	}
 
 	/**
@@ -303,8 +347,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclType basicGetT1atlReturnType() {
-		return t1atlReturnType;
+	public OclType basicGetT3atlReturnType() {
+		return t3atlReturnType;
 	}
 
 	/**
@@ -313,11 +357,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT1atlReturnType(OclType newT1atlReturnType) {
-		OclType oldT1atlReturnType = t1atlReturnType;
-		t1atlReturnType = newT1atlReturnType;
+	public void setT3atlReturnType(OclType newT3atlReturnType) {
+		OclType oldT3atlReturnType = t3atlReturnType;
+		t3atlReturnType = newT3atlReturnType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlReturnType, t1atlReturnType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlReturnType, t3atlReturnType));
 	}
 
 	/**
@@ -326,16 +370,16 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public Function getT2qvtrFunction() {
-		if (t2qvtrFunction != null && t2qvtrFunction.eIsProxy()) {
-			InternalEObject oldT2qvtrFunction = (InternalEObject)t2qvtrFunction;
-			t2qvtrFunction = (Function)eResolveProxy(oldT2qvtrFunction);
-			if (t2qvtrFunction != oldT2qvtrFunction) {
+	public Function getT4qvtrFunction() {
+		if (t4qvtrFunction != null && t4qvtrFunction.eIsProxy()) {
+			InternalEObject oldT4qvtrFunction = (InternalEObject)t4qvtrFunction;
+			t4qvtrFunction = (Function)eResolveProxy(oldT4qvtrFunction);
+			if (t4qvtrFunction != oldT4qvtrFunction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrFunction, t2qvtrFunction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrFunction, t4qvtrFunction));
 			}
 		}
-		return t2qvtrFunction;
+		return t4qvtrFunction;
 	}
 
 	/**
@@ -343,8 +387,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function basicGetT2qvtrFunction() {
-		return t2qvtrFunction;
+	public Function basicGetT4qvtrFunction() {
+		return t4qvtrFunction;
 	}
 
 	/**
@@ -353,11 +397,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrFunction(Function newT2qvtrFunction) {
-		Function oldT2qvtrFunction = t2qvtrFunction;
-		t2qvtrFunction = newT2qvtrFunction;
+	public void setT4qvtrFunction(Function newT4qvtrFunction) {
+		Function oldT4qvtrFunction = t4qvtrFunction;
+		t4qvtrFunction = newT4qvtrFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrFunction, t2qvtrFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrFunction, t4qvtrFunction));
 	}
 
 	/**
@@ -366,16 +410,16 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public FunctionParameter getT2qvtrParameter() {
-		if (t2qvtrParameter != null && t2qvtrParameter.eIsProxy()) {
-			InternalEObject oldT2qvtrParameter = (InternalEObject)t2qvtrParameter;
-			t2qvtrParameter = (FunctionParameter)eResolveProxy(oldT2qvtrParameter);
-			if (t2qvtrParameter != oldT2qvtrParameter) {
+	public FunctionParameter getT4qvtrParameter() {
+		if (t4qvtrParameter != null && t4qvtrParameter.eIsProxy()) {
+			InternalEObject oldT4qvtrParameter = (InternalEObject)t4qvtrParameter;
+			t4qvtrParameter = (FunctionParameter)eResolveProxy(oldT4qvtrParameter);
+			if (t4qvtrParameter != oldT4qvtrParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrParameter, t2qvtrParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrParameter, t4qvtrParameter));
 			}
 		}
-		return t2qvtrParameter;
+		return t4qvtrParameter;
 	}
 
 	/**
@@ -383,8 +427,8 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionParameter basicGetT2qvtrParameter() {
-		return t2qvtrParameter;
+	public FunctionParameter basicGetT4qvtrParameter() {
+		return t4qvtrParameter;
 	}
 
 	/**
@@ -393,11 +437,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrParameter(FunctionParameter newT2qvtrParameter) {
-		FunctionParameter oldT2qvtrParameter = t2qvtrParameter;
-		t2qvtrParameter = newT2qvtrParameter;
+	public void setT4qvtrParameter(FunctionParameter newT4qvtrParameter) {
+		FunctionParameter oldT4qvtrParameter = t4qvtrParameter;
+		t4qvtrParameter = newT4qvtrParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrParameter, t2qvtrParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrParameter, t4qvtrParameter));
 	}
 
 	/**
@@ -412,7 +456,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 			wmapVariable = (TmapVariable)eResolveProxy(oldWmapVariable);
 			if (wmapVariable != oldWmapVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapVariable, wmapVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapVariable, wmapVariable));
 			}
 		}
 		return wmapVariable;
@@ -437,7 +481,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		TmapVariable oldWmapVariable = wmapVariable;
 		wmapVariable = newWmapVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapVariable, wmapVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapVariable, wmapVariable));
 	}
 
 	/**
@@ -449,24 +493,26 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				if (resolve) return getT1atlContext();
-				return basicGetT1atlContext();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1atlDefinition();
-				return basicGetT1atlDefinition();
+				if (resolve) return getT3atlContext();
+				return basicGetT3atlContext();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlHelper();
-				return basicGetT1atlHelper();
+				if (resolve) return getT3atlDefinition();
+				return basicGetT3atlDefinition();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlReturnType();
-				return basicGetT1atlReturnType();
+				if (resolve) return getT3atlHelper();
+				return basicGetT3atlHelper();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT2qvtrFunction();
-				return basicGetT2qvtrFunction();
+				if (resolve) return getT3atlReturnType();
+				return basicGetT3atlReturnType();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				if (resolve) return getT2qvtrParameter();
-				return basicGetT2qvtrParameter();
+				if (resolve) return getT4qvtrFunction();
+				return basicGetT4qvtrFunction();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+				if (resolve) return getT4qvtrParameter();
+				return basicGetT4qvtrParameter();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getWmapVariable();
 				return basicGetWmapVariable();
 		}
@@ -482,24 +528,27 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT1atlContext((OclContextDefinition)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlDefinition((OclFeatureDefinition)newValue);
+				setT3atlContext((OclContextDefinition)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlHelper((Helper)newValue);
+				setT3atlDefinition((OclFeatureDefinition)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlReturnType((OclType)newValue);
+				setT3atlHelper((Helper)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrFunction((Function)newValue);
+				setT3atlReturnType((OclType)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrParameter((FunctionParameter)newValue);
+				setT4qvtrFunction((Function)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+				setT4qvtrParameter((FunctionParameter)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setWmapVariable((TmapVariable)newValue);
 				return;
 		}
@@ -515,24 +564,27 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT1atlContext((OclContextDefinition)null);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlDefinition((OclFeatureDefinition)null);
+				setT3atlContext((OclContextDefinition)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlHelper((Helper)null);
+				setT3atlDefinition((OclFeatureDefinition)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlReturnType((OclType)null);
+				setT3atlHelper((Helper)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrFunction((Function)null);
+				setT3atlReturnType((OclType)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrParameter((FunctionParameter)null);
+				setT4qvtrFunction((Function)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+				setT4qvtrParameter((FunctionParameter)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setWmapVariable((TmapVariable)null);
 				return;
 		}
@@ -548,21 +600,39 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return t1atlContext != null;
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1atlDefinition != null;
+				return t3atlContext != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlHelper != null;
+				return t3atlDefinition != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlReturnType != null;
+				return t3atlHelper != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t2qvtrFunction != null;
+				return t3atlReturnType != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return t2qvtrParameter != null;
+				return t4qvtrFunction != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
+				return t4qvtrParameter != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				return wmapVariable != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(')');
+		return result.toString();
 	}
 
 

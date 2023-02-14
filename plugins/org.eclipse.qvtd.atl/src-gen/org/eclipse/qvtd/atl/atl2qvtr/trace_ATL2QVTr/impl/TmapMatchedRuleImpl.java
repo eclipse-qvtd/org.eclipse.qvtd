@@ -38,14 +38,14 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT0ruleName <em>T0rule Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1atlModule <em>T1atl Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1atlOutPattern <em>T1atl Out Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1matchedRule <em>T1matched Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2_6 <em>T2 6</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT1ruleName <em>T1rule Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT3atlModule <em>T3atl Module</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT3atlOutPattern <em>T3atl Out Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT3matchedRule <em>T3matched Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT4_6 <em>T4 6</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getT4qvtrTransformation <em>T4qvtr Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapMatchedRuleImpl#getWmapModule <em>Wmap Module</em>}</li>
  * </ul>
  *
@@ -72,104 +72,104 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 
 
 	/**
-	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean SUCCESS_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean success = SUCCESS_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getT0ruleName() <em>T0rule Name</em>}' attribute.
+	 * The default value of the '{@link #getT1ruleName() <em>T1rule Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0ruleName()
+	 * @see #getT1ruleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0RULE_NAME_EDEFAULT = null;
+	protected static final String T1RULE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0ruleName() <em>T0rule Name</em>}' attribute.
+	 * The cached value of the '{@link #getT1ruleName() <em>T1rule Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0ruleName()
+	 * @see #getT1ruleName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0ruleName = T0RULE_NAME_EDEFAULT;
+	protected String t1ruleName = T1RULE_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlModule() <em>T1atl Module</em>}' reference.
+	 * The cached value of the '{@link #getT3atlModule() <em>T3atl Module</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlModule()
+	 * @see #getT3atlModule()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.m2m.atl.common.ATL.Module t1atlModule;
+	protected org.eclipse.m2m.atl.common.ATL.Module t3atlModule;
 
 	/**
-	 * The cached value of the '{@link #getT1atlOutPattern() <em>T1atl Out Pattern</em>}' reference.
+	 * The cached value of the '{@link #getT3atlOutPattern() <em>T3atl Out Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlOutPattern()
+	 * @see #getT3atlOutPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected OutPattern t1atlOutPattern;
+	protected OutPattern t3atlOutPattern;
 
 	/**
-	 * The cached value of the '{@link #getT1matchedRule() <em>T1matched Rule</em>}' reference.
+	 * The cached value of the '{@link #getT3matchedRule() <em>T3matched Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1matchedRule()
+	 * @see #getT3matchedRule()
 	 * @generated
 	 * @ordered
 	 */
-	protected MatchedRule t1matchedRule;
+	protected MatchedRule t3matchedRule;
 
 	/**
-	 * The cached value of the '{@link #getT2_6() <em>T2 6</em>}' reference.
+	 * The cached value of the '{@link #getT4_6() <em>T4 6</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2_6()
+	 * @see #getT4_6()
 	 * @generated
 	 * @ordered
 	 */
-	protected SharedVariable t2_6;
+	protected SharedVariable t4_6;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrRelation() <em>T2qvtr Relation</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrRelation() <em>T4qvtr Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrRelation()
+	 * @see #getT4qvtrRelation()
 	 * @generated
 	 * @ordered
 	 */
-	protected Relation t2qvtrRelation;
+	protected Relation t4qvtrRelation;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrTransformation() <em>T2qvtr Transformation</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrTransformation() <em>T4qvtr Transformation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrTransformation()
+	 * @see #getT4qvtrTransformation()
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationalTransformation t2qvtrTransformation;
+	protected RelationalTransformation t4qvtrTransformation;
 
 	/**
 	 * The cached value of the '{@link #getWmapModule() <em>Wmap Module</em>}' reference.
@@ -206,8 +206,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public Boolean getSuccess() {
-		return success;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -216,11 +216,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setSuccess(Boolean newSuccess) {
-		Boolean oldSuccess = success;
-		success = newSuccess;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -229,8 +229,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public String getT0ruleName() {
-		return t0ruleName;
+	public String getT1ruleName() {
+		return t1ruleName;
 	}
 
 	/**
@@ -239,11 +239,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT0ruleName(String newT0ruleName) {
-		String oldT0ruleName = t0ruleName;
-		t0ruleName = newT0ruleName;
+	public void setT1ruleName(String newT1ruleName) {
+		String oldT1ruleName = t1ruleName;
+		t1ruleName = newT1ruleName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT0ruleName, t0ruleName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1ruleName, t1ruleName));
 	}
 
 	/**
@@ -252,16 +252,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.m2m.atl.common.ATL.Module getT1atlModule() {
-		if (t1atlModule != null && t1atlModule.eIsProxy()) {
-			InternalEObject oldT1atlModule = t1atlModule;
-			t1atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldT1atlModule);
-			if (t1atlModule != oldT1atlModule) {
+	public org.eclipse.m2m.atl.common.ATL.Module getT3atlModule() {
+		if (t3atlModule != null && t3atlModule.eIsProxy()) {
+			InternalEObject oldT3atlModule = t3atlModule;
+			t3atlModule = (org.eclipse.m2m.atl.common.ATL.Module)eResolveProxy(oldT3atlModule);
+			if (t3atlModule != oldT3atlModule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlModule, t1atlModule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlModule, t3atlModule));
 			}
 		}
-		return t1atlModule;
+		return t3atlModule;
 	}
 
 	/**
@@ -269,8 +269,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.m2m.atl.common.ATL.Module basicGetT1atlModule() {
-		return t1atlModule;
+	public org.eclipse.m2m.atl.common.ATL.Module basicGetT3atlModule() {
+		return t3atlModule;
 	}
 
 	/**
@@ -279,11 +279,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module newT1atlModule) {
-		org.eclipse.m2m.atl.common.ATL.Module oldT1atlModule = t1atlModule;
-		t1atlModule = newT1atlModule;
+	public void setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module newT3atlModule) {
+		org.eclipse.m2m.atl.common.ATL.Module oldT3atlModule = t3atlModule;
+		t3atlModule = newT3atlModule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlModule, t1atlModule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlModule, t3atlModule));
 	}
 
 	/**
@@ -292,16 +292,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public OutPattern getT1atlOutPattern() {
-		if (t1atlOutPattern != null && t1atlOutPattern.eIsProxy()) {
-			InternalEObject oldT1atlOutPattern = t1atlOutPattern;
-			t1atlOutPattern = (OutPattern)eResolveProxy(oldT1atlOutPattern);
-			if (t1atlOutPattern != oldT1atlOutPattern) {
+	public OutPattern getT3atlOutPattern() {
+		if (t3atlOutPattern != null && t3atlOutPattern.eIsProxy()) {
+			InternalEObject oldT3atlOutPattern = t3atlOutPattern;
+			t3atlOutPattern = (OutPattern)eResolveProxy(oldT3atlOutPattern);
+			if (t3atlOutPattern != oldT3atlOutPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPattern, t1atlOutPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlOutPattern, t3atlOutPattern));
 			}
 		}
-		return t1atlOutPattern;
+		return t3atlOutPattern;
 	}
 
 	/**
@@ -309,8 +309,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutPattern basicGetT1atlOutPattern() {
-		return t1atlOutPattern;
+	public OutPattern basicGetT3atlOutPattern() {
+		return t3atlOutPattern;
 	}
 
 	/**
@@ -319,11 +319,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT1atlOutPattern(OutPattern newT1atlOutPattern) {
-		OutPattern oldT1atlOutPattern = t1atlOutPattern;
-		t1atlOutPattern = newT1atlOutPattern;
+	public void setT3atlOutPattern(OutPattern newT3atlOutPattern) {
+		OutPattern oldT3atlOutPattern = t3atlOutPattern;
+		t3atlOutPattern = newT3atlOutPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPattern, t1atlOutPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlOutPattern, t3atlOutPattern));
 	}
 
 	/**
@@ -332,16 +332,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public MatchedRule getT1matchedRule() {
-		if (t1matchedRule != null && t1matchedRule.eIsProxy()) {
-			InternalEObject oldT1matchedRule = t1matchedRule;
-			t1matchedRule = (MatchedRule)eResolveProxy(oldT1matchedRule);
-			if (t1matchedRule != oldT1matchedRule) {
+	public MatchedRule getT3matchedRule() {
+		if (t3matchedRule != null && t3matchedRule.eIsProxy()) {
+			InternalEObject oldT3matchedRule = t3matchedRule;
+			t3matchedRule = (MatchedRule)eResolveProxy(oldT3matchedRule);
+			if (t3matchedRule != oldT3matchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1matchedRule, t1matchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3matchedRule, t3matchedRule));
 			}
 		}
-		return t1matchedRule;
+		return t3matchedRule;
 	}
 
 	/**
@@ -349,8 +349,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MatchedRule basicGetT1matchedRule() {
-		return t1matchedRule;
+	public MatchedRule basicGetT3matchedRule() {
+		return t3matchedRule;
 	}
 
 	/**
@@ -359,11 +359,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT1matchedRule(MatchedRule newT1matchedRule) {
-		MatchedRule oldT1matchedRule = t1matchedRule;
-		t1matchedRule = newT1matchedRule;
+	public void setT3matchedRule(MatchedRule newT3matchedRule) {
+		MatchedRule oldT3matchedRule = t3matchedRule;
+		t3matchedRule = newT3matchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1matchedRule, t1matchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3matchedRule, t3matchedRule));
 	}
 
 	/**
@@ -372,16 +372,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public SharedVariable getT2_6() {
-		if (t2_6 != null && t2_6.eIsProxy()) {
-			InternalEObject oldT2_6 = (InternalEObject)t2_6;
-			t2_6 = (SharedVariable)eResolveProxy(oldT2_6);
-			if (t2_6 != oldT2_6) {
+	public SharedVariable getT4_6() {
+		if (t4_6 != null && t4_6.eIsProxy()) {
+			InternalEObject oldT4_6 = (InternalEObject)t4_6;
+			t4_6 = (SharedVariable)eResolveProxy(oldT4_6);
+			if (t4_6 != oldT4_6) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2_6, t2_6));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4_6, t4_6));
 			}
 		}
-		return t2_6;
+		return t4_6;
 	}
 
 	/**
@@ -389,8 +389,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SharedVariable basicGetT2_6() {
-		return t2_6;
+	public SharedVariable basicGetT4_6() {
+		return t4_6;
 	}
 
 	/**
@@ -399,11 +399,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT2_6(SharedVariable newT2_6) {
-		SharedVariable oldT2_6 = t2_6;
-		t2_6 = newT2_6;
+	public void setT4_6(SharedVariable newT4_6) {
+		SharedVariable oldT4_6 = t4_6;
+		t4_6 = newT4_6;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2_6, t2_6));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4_6, t4_6));
 	}
 
 	/**
@@ -412,16 +412,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public Relation getT2qvtrRelation() {
-		if (t2qvtrRelation != null && t2qvtrRelation.eIsProxy()) {
-			InternalEObject oldT2qvtrRelation = (InternalEObject)t2qvtrRelation;
-			t2qvtrRelation = (Relation)eResolveProxy(oldT2qvtrRelation);
-			if (t2qvtrRelation != oldT2qvtrRelation) {
+	public Relation getT4qvtrRelation() {
+		if (t4qvtrRelation != null && t4qvtrRelation.eIsProxy()) {
+			InternalEObject oldT4qvtrRelation = (InternalEObject)t4qvtrRelation;
+			t4qvtrRelation = (Relation)eResolveProxy(oldT4qvtrRelation);
+			if (t4qvtrRelation != oldT4qvtrRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrRelation, t4qvtrRelation));
 			}
 		}
-		return t2qvtrRelation;
+		return t4qvtrRelation;
 	}
 
 	/**
@@ -429,8 +429,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetT2qvtrRelation() {
-		return t2qvtrRelation;
+	public Relation basicGetT4qvtrRelation() {
+		return t4qvtrRelation;
 	}
 
 	/**
@@ -439,11 +439,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrRelation(Relation newT2qvtrRelation) {
-		Relation oldT2qvtrRelation = t2qvtrRelation;
-		t2qvtrRelation = newT2qvtrRelation;
+	public void setT4qvtrRelation(Relation newT4qvtrRelation) {
+		Relation oldT4qvtrRelation = t4qvtrRelation;
+		t4qvtrRelation = newT4qvtrRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrRelation, t4qvtrRelation));
 	}
 
 	/**
@@ -452,16 +452,16 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public RelationalTransformation getT2qvtrTransformation() {
-		if (t2qvtrTransformation != null && t2qvtrTransformation.eIsProxy()) {
-			InternalEObject oldT2qvtrTransformation = (InternalEObject)t2qvtrTransformation;
-			t2qvtrTransformation = (RelationalTransformation)eResolveProxy(oldT2qvtrTransformation);
-			if (t2qvtrTransformation != oldT2qvtrTransformation) {
+	public RelationalTransformation getT4qvtrTransformation() {
+		if (t4qvtrTransformation != null && t4qvtrTransformation.eIsProxy()) {
+			InternalEObject oldT4qvtrTransformation = (InternalEObject)t4qvtrTransformation;
+			t4qvtrTransformation = (RelationalTransformation)eResolveProxy(oldT4qvtrTransformation);
+			if (t4qvtrTransformation != oldT4qvtrTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTransformation, t2qvtrTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrTransformation, t4qvtrTransformation));
 			}
 		}
-		return t2qvtrTransformation;
+		return t4qvtrTransformation;
 	}
 
 	/**
@@ -469,8 +469,8 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationalTransformation basicGetT2qvtrTransformation() {
-		return t2qvtrTransformation;
+	public RelationalTransformation basicGetT4qvtrTransformation() {
+		return t4qvtrTransformation;
 	}
 
 	/**
@@ -479,11 +479,11 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrTransformation(RelationalTransformation newT2qvtrTransformation) {
-		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
-		t2qvtrTransformation = newT2qvtrTransformation;
+	public void setT4qvtrTransformation(RelationalTransformation newT4qvtrTransformation) {
+		RelationalTransformation oldT4qvtrTransformation = t4qvtrTransformation;
+		t4qvtrTransformation = newT4qvtrTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTransformation, t2qvtrTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrTransformation, t4qvtrTransformation));
 	}
 
 	/**
@@ -535,27 +535,27 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getSuccess();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return getT0ruleName();
+				return getT1ruleName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlModule();
-				return basicGetT1atlModule();
+				if (resolve) return getT3atlModule();
+				return basicGetT3atlModule();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlOutPattern();
-				return basicGetT1atlOutPattern();
+				if (resolve) return getT3atlOutPattern();
+				return basicGetT3atlOutPattern();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT1matchedRule();
-				return basicGetT1matchedRule();
+				if (resolve) return getT3matchedRule();
+				return basicGetT3matchedRule();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				if (resolve) return getT2_6();
-				return basicGetT2_6();
+				if (resolve) return getT4_6();
+				return basicGetT4_6();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				if (resolve) return getT2qvtrRelation();
-				return basicGetT2qvtrRelation();
+				if (resolve) return getT4qvtrRelation();
+				return basicGetT4qvtrRelation();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				if (resolve) return getT2qvtrTransformation();
-				return basicGetT2qvtrTransformation();
+				if (resolve) return getT4qvtrTransformation();
+				return basicGetT4qvtrTransformation();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapModule();
 				return basicGetWmapModule();
@@ -572,28 +572,28 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess((Boolean)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT0ruleName((String)newValue);
+				setT1ruleName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
+				setT3atlModule((org.eclipse.m2m.atl.common.ATL.Module)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlOutPattern((OutPattern)newValue);
+				setT3atlOutPattern((OutPattern)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT1matchedRule((MatchedRule)newValue);
+				setT3matchedRule((MatchedRule)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2_6((SharedVariable)newValue);
+				setT4_6((SharedVariable)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrRelation((Relation)newValue);
+				setT4qvtrRelation((Relation)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setT2qvtrTransformation((RelationalTransformation)newValue);
+				setT4qvtrTransformation((RelationalTransformation)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapModule((TmapModule)newValue);
@@ -611,28 +611,28 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess(SUCCESS_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT0ruleName(T0RULE_NAME_EDEFAULT);
+				setT1ruleName(T1RULE_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
+				setT3atlModule((org.eclipse.m2m.atl.common.ATL.Module)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlOutPattern((OutPattern)null);
+				setT3atlOutPattern((OutPattern)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT1matchedRule((MatchedRule)null);
+				setT3matchedRule((MatchedRule)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2_6((SharedVariable)null);
+				setT4_6((SharedVariable)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrRelation((Relation)null);
+				setT4qvtrRelation((Relation)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setT2qvtrTransformation((RelationalTransformation)null);
+				setT4qvtrTransformation((RelationalTransformation)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapModule((TmapModule)null);
@@ -650,21 +650,21 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return T0RULE_NAME_EDEFAULT == null ? t0ruleName != null : !T0RULE_NAME_EDEFAULT.equals(t0ruleName);
+				return T1RULE_NAME_EDEFAULT == null ? t1ruleName != null : !T1RULE_NAME_EDEFAULT.equals(t1ruleName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlModule != null;
+				return t3atlModule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlOutPattern != null;
+				return t3atlOutPattern != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t1matchedRule != null;
+				return t3matchedRule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return t2_6 != null;
+				return t4_6 != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return t2qvtrRelation != null;
+				return t4qvtrRelation != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				return t2qvtrTransformation != null;
+				return t4qvtrTransformation != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return wmapModule != null;
 		}
@@ -681,10 +681,10 @@ public class TmapMatchedRuleImpl extends ExecutionImpl implements TmapMatchedRul
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (success: ");
-		result.append(success);
-		result.append(", t0ruleName: ");
-		result.append(t0ruleName);
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(", t1ruleName: ");
+		result.append(t1ruleName);
 		result.append(')');
 		return result.toString();
 	}

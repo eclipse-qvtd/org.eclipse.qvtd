@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.m2m.atl.common.ATL.Helper;
+
 import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable;
@@ -38,8 +40,10 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT1atlVariable <em>T1atl Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT3atlHelper <em>T3atl Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT3atlVariable <em>T3atl Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getS0local <em>S0local</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,7 +56,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 3;
+	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Tmap Variable Exp referred Variable Helper</em>' class.
@@ -65,24 +69,54 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 
 
 	/**
-	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
+	 * The cached value of the '{@link #getT3atlHelper() <em>T3atl Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlVariable()
+	 * @see #getT3atlHelper()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableDeclaration t1atlVariable;
+	protected Helper t3atlHelper;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrVariable() <em>T2qvtr Variable</em>}' reference.
+	 * The cached value of the '{@link #getT3atlVariable() <em>T3atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrVariable()
+	 * @see #getT3atlVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.VariableDeclaration t2qvtrVariable;
+	protected VariableDeclaration t3atlVariable;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrVariable() <em>T4qvtr Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.VariableDeclaration t4qvtrVariable;
+
+	/**
+	 * The default value of the '{@link #getS0local() <em>S0local</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0local()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean S0LOCAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getS0local() <em>S0local</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0local()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean s0local = S0LOCAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,16 +186,16 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	@Override
-	public VariableDeclaration getT1atlVariable() {
-		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = t1atlVariable;
-			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
-			if (t1atlVariable != oldT1atlVariable) {
+	public Helper getT3atlHelper() {
+		if (t3atlHelper != null && t3atlHelper.eIsProxy()) {
+			InternalEObject oldT3atlHelper = t3atlHelper;
+			t3atlHelper = (Helper)eResolveProxy(oldT3atlHelper);
+			if (t3atlHelper != oldT3atlHelper) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlHelper, t3atlHelper));
 			}
 		}
-		return t1atlVariable;
+		return t3atlHelper;
 	}
 
 	/**
@@ -169,8 +203,8 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration basicGetT1atlVariable() {
-		return t1atlVariable;
+	public Helper basicGetT3atlHelper() {
+		return t3atlHelper;
 	}
 
 	/**
@@ -179,11 +213,11 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	@Override
-	public void setT1atlVariable(VariableDeclaration newT1atlVariable) {
-		VariableDeclaration oldT1atlVariable = t1atlVariable;
-		t1atlVariable = newT1atlVariable;
+	public void setT3atlHelper(Helper newT3atlHelper) {
+		Helper oldT3atlHelper = t3atlHelper;
+		t3atlHelper = newT3atlHelper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlHelper, t3atlHelper));
 	}
 
 	/**
@@ -192,16 +226,16 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.pivot.VariableDeclaration getT2qvtrVariable() {
-		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
-			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
-			t2qvtrVariable = (org.eclipse.ocl.pivot.VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
-			if (t2qvtrVariable != oldT2qvtrVariable) {
+	public VariableDeclaration getT3atlVariable() {
+		if (t3atlVariable != null && t3atlVariable.eIsProxy()) {
+			InternalEObject oldT3atlVariable = t3atlVariable;
+			t3atlVariable = (VariableDeclaration)eResolveProxy(oldT3atlVariable);
+			if (t3atlVariable != oldT3atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
 			}
 		}
-		return t2qvtrVariable;
+		return t3atlVariable;
 	}
 
 	/**
@@ -209,8 +243,8 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.VariableDeclaration basicGetT2qvtrVariable() {
-		return t2qvtrVariable;
+	public VariableDeclaration basicGetT3atlVariable() {
+		return t3atlVariable;
 	}
 
 	/**
@@ -219,11 +253,74 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrVariable(org.eclipse.ocl.pivot.VariableDeclaration newT2qvtrVariable) {
-		org.eclipse.ocl.pivot.VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
-		t2qvtrVariable = newT2qvtrVariable;
+	public void setT3atlVariable(VariableDeclaration newT3atlVariable) {
+		VariableDeclaration oldT3atlVariable = t3atlVariable;
+		t3atlVariable = newT3atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public org.eclipse.ocl.pivot.VariableDeclaration getT4qvtrVariable() {
+		if (t4qvtrVariable != null && t4qvtrVariable.eIsProxy()) {
+			InternalEObject oldT4qvtrVariable = (InternalEObject)t4qvtrVariable;
+			t4qvtrVariable = (org.eclipse.ocl.pivot.VariableDeclaration)eResolveProxy(oldT4qvtrVariable);
+			if (t4qvtrVariable != oldT4qvtrVariable) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT4qvtrVariable, t4qvtrVariable));
+			}
+		}
+		return t4qvtrVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.eclipse.ocl.pivot.VariableDeclaration basicGetT4qvtrVariable() {
+		return t4qvtrVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT4qvtrVariable(org.eclipse.ocl.pivot.VariableDeclaration newT4qvtrVariable) {
+		org.eclipse.ocl.pivot.VariableDeclaration oldT4qvtrVariable = t4qvtrVariable;
+		t4qvtrVariable = newT4qvtrVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT4qvtrVariable, t4qvtrVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Boolean getS0local() {
+		return s0local;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0local(Boolean newS0local) {
+		Boolean oldS0local = s0local;
+		s0local = newS0local;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldS0local, s0local));
 	}
 
 	/**
@@ -281,11 +378,16 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlVariable();
-				return basicGetT1atlVariable();
+				if (resolve) return getT3atlHelper();
+				return basicGetT3atlHelper();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT2qvtrVariable();
-				return basicGetT2qvtrVariable();
+				if (resolve) return getT3atlVariable();
+				return basicGetT3atlVariable();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				if (resolve) return getT4qvtrVariable();
+				return basicGetT4qvtrVariable();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				return getS0local();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,10 +404,16 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 				setDispatcher((DmapVariableExp_referredVariable)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlVariable((VariableDeclaration)newValue);
+				setT3atlHelper((Helper)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)newValue);
+				setT3atlVariable((VariableDeclaration)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				setT4qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				setS0local((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -323,10 +431,16 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 				setDispatcher((DmapVariableExp_referredVariable)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlVariable((VariableDeclaration)null);
+				setT3atlHelper((Helper)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)null);
+				setT3atlVariable((VariableDeclaration)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				setT4qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				setS0local(S0LOCAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -343,11 +457,31 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlVariable != null;
+				return t3atlHelper != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t2qvtrVariable != null;
+				return t3atlVariable != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				return t4qvtrVariable != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				return S0LOCAL_EDEFAULT == null ? s0local != null : !S0LOCAL_EDEFAULT.equals(s0local);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0local: ");
+		result.append(s0local);
+		result.append(')');
+		return result.toString();
 	}
 
 

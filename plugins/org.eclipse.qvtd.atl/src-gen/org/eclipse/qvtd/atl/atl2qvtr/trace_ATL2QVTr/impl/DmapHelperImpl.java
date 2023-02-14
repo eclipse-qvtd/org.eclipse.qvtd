@@ -39,11 +39,12 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getD1atlHelper <em>D1atl Helper</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getD2qvtrFunction <em>D2qvtr Function</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getD3atlHelper <em>D3atl Helper</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getD4qvtrFunction <em>D4qvtr Function</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getDomapHelper_Attribute <em>Domap Helper Attribute</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getDomapHelper_Operation <em>Domap Helper Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapHelperImpl#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,7 +57,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DMAP_HELPER_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 5;
+	public static final int DMAP_HELPER_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Dmap Helper</em>' class.
@@ -69,24 +70,24 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 
 
 	/**
-	 * The cached value of the '{@link #getD1atlHelper() <em>D1atl Helper</em>}' reference.
+	 * The cached value of the '{@link #getD3atlHelper() <em>D3atl Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD1atlHelper()
+	 * @see #getD3atlHelper()
 	 * @generated
 	 * @ordered
 	 */
-	protected Helper d1atlHelper;
+	protected Helper d3atlHelper;
 
 	/**
-	 * The cached value of the '{@link #getD2qvtrFunction() <em>D2qvtr Function</em>}' reference.
+	 * The cached value of the '{@link #getD4qvtrFunction() <em>D4qvtr Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD2qvtrFunction()
+	 * @see #getD4qvtrFunction()
 	 * @generated
 	 * @ordered
 	 */
-	protected Function d2qvtrFunction;
+	protected Function d4qvtrFunction;
 
 	/**
 	 * The cached value of the '{@link #getDomapHelper_Attribute() <em>Domap Helper Attribute</em>}' containment reference.
@@ -119,6 +120,26 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	protected ImapHelper result;
 
 	/**
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -143,16 +164,16 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 */
 	@Override
-	public Helper getD1atlHelper() {
-		if (d1atlHelper != null && d1atlHelper.eIsProxy()) {
-			InternalEObject oldD1atlHelper = d1atlHelper;
-			d1atlHelper = (Helper)eResolveProxy(oldD1atlHelper);
-			if (d1atlHelper != oldD1atlHelper) {
+	public Helper getD3atlHelper() {
+		if (d3atlHelper != null && d3atlHelper.eIsProxy()) {
+			InternalEObject oldD3atlHelper = d3atlHelper;
+			d3atlHelper = (Helper)eResolveProxy(oldD3atlHelper);
+			if (d3atlHelper != oldD3atlHelper) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlHelper, d1atlHelper));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlHelper, d3atlHelper));
 			}
 		}
-		return d1atlHelper;
+		return d3atlHelper;
 	}
 
 	/**
@@ -160,8 +181,8 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Helper basicGetD1atlHelper() {
-		return d1atlHelper;
+	public Helper basicGetD3atlHelper() {
+		return d3atlHelper;
 	}
 
 	/**
@@ -170,11 +191,11 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 */
 	@Override
-	public void setD1atlHelper(Helper newD1atlHelper) {
-		Helper oldD1atlHelper = d1atlHelper;
-		d1atlHelper = newD1atlHelper;
+	public void setD3atlHelper(Helper newD3atlHelper) {
+		Helper oldD3atlHelper = d3atlHelper;
+		d3atlHelper = newD3atlHelper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlHelper, d1atlHelper));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlHelper, d3atlHelper));
 	}
 
 	/**
@@ -183,16 +204,16 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 */
 	@Override
-	public Function getD2qvtrFunction() {
-		if (d2qvtrFunction != null && d2qvtrFunction.eIsProxy()) {
-			InternalEObject oldD2qvtrFunction = (InternalEObject)d2qvtrFunction;
-			d2qvtrFunction = (Function)eResolveProxy(oldD2qvtrFunction);
-			if (d2qvtrFunction != oldD2qvtrFunction) {
+	public Function getD4qvtrFunction() {
+		if (d4qvtrFunction != null && d4qvtrFunction.eIsProxy()) {
+			InternalEObject oldD4qvtrFunction = (InternalEObject)d4qvtrFunction;
+			d4qvtrFunction = (Function)eResolveProxy(oldD4qvtrFunction);
+			if (d4qvtrFunction != oldD4qvtrFunction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrFunction, d2qvtrFunction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrFunction, d4qvtrFunction));
 			}
 		}
-		return d2qvtrFunction;
+		return d4qvtrFunction;
 	}
 
 	/**
@@ -200,8 +221,8 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function basicGetD2qvtrFunction() {
-		return d2qvtrFunction;
+	public Function basicGetD4qvtrFunction() {
+		return d4qvtrFunction;
 	}
 
 	/**
@@ -210,11 +231,11 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 */
 	@Override
-	public void setD2qvtrFunction(Function newD2qvtrFunction) {
-		Function oldD2qvtrFunction = d2qvtrFunction;
-		d2qvtrFunction = newD2qvtrFunction;
+	public void setD4qvtrFunction(Function newD4qvtrFunction) {
+		Function oldD4qvtrFunction = d4qvtrFunction;
+		d4qvtrFunction = newD4qvtrFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrFunction, d2qvtrFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrFunction, d4qvtrFunction));
 	}
 
 	/**
@@ -353,6 +374,29 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * @generated
 	 */
 	@Override
+	public Boolean getS0global() {
+		return s0global;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 5, oldS0global, s0global));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
@@ -392,11 +436,11 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				if (resolve) return getD1atlHelper();
-				return basicGetD1atlHelper();
+				if (resolve) return getD3atlHelper();
+				return basicGetD3atlHelper();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				if (resolve) return getD2qvtrFunction();
-				return basicGetD2qvtrFunction();
+				if (resolve) return getD4qvtrFunction();
+				return basicGetD4qvtrFunction();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return getDomapHelper_Attribute();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
@@ -404,6 +448,8 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				if (resolve) return getResult();
 				return basicGetResult();
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				return getS0global();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -417,10 +463,10 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlHelper((Helper)newValue);
+				setD3atlHelper((Helper)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrFunction((Function)newValue);
+				setD4qvtrFunction((Function)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapHelper_Attribute((TmapHelper_Attribute)newValue);
@@ -430,6 +476,9 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapHelper)newValue);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				setS0global((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -444,10 +493,10 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlHelper((Helper)null);
+				setD3atlHelper((Helper)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrFunction((Function)null);
+				setD4qvtrFunction((Function)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapHelper_Attribute((TmapHelper_Attribute)null);
@@ -457,6 +506,9 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapHelper)null);
+				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -471,17 +523,35 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				return d1atlHelper != null;
+				return d3atlHelper != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				return d2qvtrFunction != null;
+				return d4qvtrFunction != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return domapHelper_Attribute != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return domapHelper_Operation != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				return result != null;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 5:
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(')');
+		return result.toString();
 	}
 
 

@@ -48,8 +48,8 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getD1atlExpression <em>D1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getD2qvtrExpression <em>D2qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getD3atlExpression <em>D3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getD4qvtrExpression <em>D4qvtr Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapBooleanExp <em>Domap Boolean Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapIfExp <em>Domap If Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapIntegerExp <em>Domap Integer Exp</em>}</li>
@@ -62,6 +62,7 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapStringExp <em>Domap String Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getDomapVariableExp <em>Domap Variable Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.DmapOclExpressionImpl#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,7 +75,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DMAP_OCL_EXPRESSION_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 14;
+	public static final int DMAP_OCL_EXPRESSION_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of operations of the '<em>Dmap Ocl Expression</em>' class.
@@ -87,24 +88,24 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 
 
 	/**
-	 * The cached value of the '{@link #getD1atlExpression() <em>D1atl Expression</em>}' reference.
+	 * The cached value of the '{@link #getD3atlExpression() <em>D3atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD1atlExpression()
+	 * @see #getD3atlExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression d1atlExpression;
+	protected OclExpression d3atlExpression;
 
 	/**
-	 * The cached value of the '{@link #getD2qvtrExpression() <em>D2qvtr Expression</em>}' reference.
+	 * The cached value of the '{@link #getD4qvtrExpression() <em>D4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getD2qvtrExpression()
+	 * @see #getD4qvtrExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression d2qvtrExpression;
+	protected OCLExpression d4qvtrExpression;
 
 	/**
 	 * The cached value of the '{@link #getDomapBooleanExp() <em>Domap Boolean Exp</em>}' containment reference.
@@ -227,6 +228,26 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	protected ImapOclExpression result;
 
 	/**
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0global()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -251,16 +272,16 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 */
 	@Override
-	public OclExpression getD1atlExpression() {
-		if (d1atlExpression != null && d1atlExpression.eIsProxy()) {
-			InternalEObject oldD1atlExpression = d1atlExpression;
-			d1atlExpression = (OclExpression)eResolveProxy(oldD1atlExpression);
-			if (d1atlExpression != oldD1atlExpression) {
+	public OclExpression getD3atlExpression() {
+		if (d3atlExpression != null && d3atlExpression.eIsProxy()) {
+			InternalEObject oldD3atlExpression = d3atlExpression;
+			d3atlExpression = (OclExpression)eResolveProxy(oldD3atlExpression);
+			if (d3atlExpression != oldD3atlExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlExpression, d3atlExpression));
 			}
 		}
-		return d1atlExpression;
+		return d3atlExpression;
 	}
 
 	/**
@@ -268,8 +289,8 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression basicGetD1atlExpression() {
-		return d1atlExpression;
+	public OclExpression basicGetD3atlExpression() {
+		return d3atlExpression;
 	}
 
 	/**
@@ -278,11 +299,11 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 */
 	@Override
-	public void setD1atlExpression(OclExpression newD1atlExpression) {
-		OclExpression oldD1atlExpression = d1atlExpression;
-		d1atlExpression = newD1atlExpression;
+	public void setD3atlExpression(OclExpression newD3atlExpression) {
+		OclExpression oldD3atlExpression = d3atlExpression;
+		d3atlExpression = newD3atlExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD3atlExpression, d3atlExpression));
 	}
 
 	/**
@@ -291,16 +312,16 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getD2qvtrExpression() {
-		if (d2qvtrExpression != null && d2qvtrExpression.eIsProxy()) {
-			InternalEObject oldD2qvtrExpression = (InternalEObject)d2qvtrExpression;
-			d2qvtrExpression = (OCLExpression)eResolveProxy(oldD2qvtrExpression);
-			if (d2qvtrExpression != oldD2qvtrExpression) {
+	public OCLExpression getD4qvtrExpression() {
+		if (d4qvtrExpression != null && d4qvtrExpression.eIsProxy()) {
+			InternalEObject oldD4qvtrExpression = (InternalEObject)d4qvtrExpression;
+			d4qvtrExpression = (OCLExpression)eResolveProxy(oldD4qvtrExpression);
+			if (d4qvtrExpression != oldD4qvtrExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrExpression, d4qvtrExpression));
 			}
 		}
-		return d2qvtrExpression;
+		return d4qvtrExpression;
 	}
 
 	/**
@@ -308,8 +329,8 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression basicGetD2qvtrExpression() {
-		return d2qvtrExpression;
+	public OCLExpression basicGetD4qvtrExpression() {
+		return d4qvtrExpression;
 	}
 
 	/**
@@ -318,11 +339,11 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 */
 	@Override
-	public void setD2qvtrExpression(OCLExpression newD2qvtrExpression) {
-		OCLExpression oldD2qvtrExpression = d2qvtrExpression;
-		d2qvtrExpression = newD2qvtrExpression;
+	public void setD4qvtrExpression(OCLExpression newD4qvtrExpression) {
+		OCLExpression oldD4qvtrExpression = d4qvtrExpression;
+		d4qvtrExpression = newD4qvtrExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD4qvtrExpression, d4qvtrExpression));
 	}
 
 	/**
@@ -866,6 +887,29 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * @generated
 	 */
 	@Override
+	public Boolean getS0global() {
+		return s0global;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 14, oldS0global, s0global));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
@@ -959,11 +1003,11 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				if (resolve) return getD1atlExpression();
-				return basicGetD1atlExpression();
+				if (resolve) return getD3atlExpression();
+				return basicGetD3atlExpression();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				if (resolve) return getD2qvtrExpression();
-				return basicGetD2qvtrExpression();
+				if (resolve) return getD4qvtrExpression();
+				return basicGetD4qvtrExpression();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return getDomapBooleanExp();
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
@@ -989,6 +1033,8 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				if (resolve) return getResult();
 				return basicGetResult();
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 14:
+				return getS0global();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1002,10 +1048,10 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlExpression((OclExpression)newValue);
+				setD3atlExpression((OclExpression)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrExpression((OCLExpression)newValue);
+				setD4qvtrExpression((OCLExpression)newValue);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapBooleanExp((TmapBooleanExp)newValue);
@@ -1043,6 +1089,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				setResult((ImapOclExpression)newValue);
 				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 14:
+				setS0global((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1056,10 +1105,10 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				setD1atlExpression((OclExpression)null);
+				setD3atlExpression((OclExpression)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				setD2qvtrExpression((OCLExpression)null);
+				setD4qvtrExpression((OCLExpression)null);
 				return;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapBooleanExp((TmapBooleanExp)null);
@@ -1097,6 +1146,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				setResult((ImapOclExpression)null);
 				return;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 14:
+				setS0global(S0GLOBAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1110,9 +1162,9 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
-				return d1atlExpression != null;
+				return d3atlExpression != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
-				return d2qvtrExpression != null;
+				return d4qvtrExpression != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return domapBooleanExp != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
@@ -1137,8 +1189,26 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 				return domapVariableExp != null;
 			case DispatchImpl.DISPATCH_FEATURE_COUNT + 13:
 				return result != null;
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 14:
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(')');
+		return result.toString();
 	}
 
 

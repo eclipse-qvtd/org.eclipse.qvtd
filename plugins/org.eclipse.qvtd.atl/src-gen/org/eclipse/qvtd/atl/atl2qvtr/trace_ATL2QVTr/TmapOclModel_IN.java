@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.m2m.atl.common.OCL.OclModel;
 
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -27,11 +29,13 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1atlModule <em>T1atl Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclMetamodel <em>T1ocl Metamodel</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclModel <em>T1ocl Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3atlModule <em>T3atl Module</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3oclMetamodel <em>T3ocl Metamodel</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3oclModel <em>T3ocl Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT4qvtrPackages <em>T4qvtr Packages</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT4qvtrTransformation <em>T4qvtr Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getWmapModule <em>Wmap Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}</li>
  * </ul>
@@ -42,154 +46,165 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapOclModel_IN extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T1atl Module</b></em>' reference.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Module</em>' reference.
-	 * @see #setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T1atlModule()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Module</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Module</em>' reference.
+	 * @see #setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T3atlModule()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	org.eclipse.m2m.atl.common.ATL.Module getT1atlModule();
+	org.eclipse.m2m.atl.common.ATL.Module getT3atlModule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1atlModule <em>T1atl Module</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3atlModule <em>T3atl Module</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Module</em>' reference.
-	 * @see #getT1atlModule()
+	 * @param value the new value of the '<em>T3atl Module</em>' reference.
+	 * @see #getT3atlModule()
 	 * @generated
 	 */
-	void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
+	void setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
 
 	/**
-	 * Returns the value of the '<em><b>T1ocl Metamodel</b></em>' reference.
+	 * Returns the value of the '<em><b>T3ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1ocl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1ocl Metamodel</em>' reference.
-	 * @see #setT1oclMetamodel(OclModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T1oclMetamodel()
+	 * @return the value of the '<em>T3ocl Metamodel</em>' reference.
+	 * @see #setT3oclMetamodel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T3oclMetamodel()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModel getT1oclMetamodel();
+	OclModel getT3oclMetamodel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclMetamodel <em>T1ocl Metamodel</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3oclMetamodel <em>T3ocl Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1ocl Metamodel</em>' reference.
-	 * @see #getT1oclMetamodel()
+	 * @param value the new value of the '<em>T3ocl Metamodel</em>' reference.
+	 * @see #getT3oclMetamodel()
 	 * @generated
 	 */
-	void setT1oclMetamodel(OclModel value);
+	void setT3oclMetamodel(OclModel value);
 
 	/**
-	 * Returns the value of the '<em><b>T1ocl Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T3ocl Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1ocl Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1ocl Model</em>' reference.
-	 * @see #setT1oclModel(OclModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T1oclModel()
+	 * @return the value of the '<em>T3ocl Model</em>' reference.
+	 * @see #setT3oclModel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T3oclModel()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOclModel_IN'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModel getT1oclModel();
+	OclModel getT3oclModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT1oclModel <em>T1ocl Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT3oclModel <em>T3ocl Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1ocl Model</em>' reference.
-	 * @see #getT1oclModel()
+	 * @param value the new value of the '<em>T3ocl Model</em>' reference.
+	 * @see #getT3oclModel()
 	 * @generated
 	 */
-	void setT1oclModel(OclModel value);
+	void setT3oclModel(OclModel value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Transformation</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Packages</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Package}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Transformation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #setT2qvtrTransformation(RelationalTransformation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T2qvtrTransformation()
+	 * @return the value of the '<em>T4qvtr Packages</em>' reference list.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T4qvtrPackages()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	EList<org.eclipse.ocl.pivot.Package> getT4qvtrPackages();
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Transformation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Transformation</em>' reference.
+	 * @see #setT4qvtrTransformation(RelationalTransformation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T4qvtrTransformation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationalTransformation getT2qvtrTransformation();
+	RelationalTransformation getT4qvtrTransformation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT2qvtrTransformation <em>T2qvtr Transformation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT4qvtrTransformation <em>T4qvtr Transformation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #getT2qvtrTransformation()
+	 * @param value the new value of the '<em>T4qvtr Transformation</em>' reference.
+	 * @see #getT4qvtrTransformation()
 	 * @generated
 	 */
-	void setT2qvtrTransformation(RelationalTransformation value);
+	void setT4qvtrTransformation(RelationalTransformation value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Typed Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Typed Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #setT2qvtrTypedModel(TypedModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T2qvtrTypedModel()
+	 * @return the value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #setT4qvtrTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_T4qvtrTypedModel()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapOclModel_IN'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TypedModel getT2qvtrTypedModel();
+	TypedModel getT4qvtrTypedModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #getT2qvtrTypedModel()
+	 * @param value the new value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #getT4qvtrTypedModel()
 	 * @generated
 	 */
-	void setT2qvtrTypedModel(TypedModel value);
+	void setT4qvtrTypedModel(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Module</em>' reference.
 	 * @see #setWmapModule(TmapModule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_WmapModule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapModule getWmapModule();
@@ -207,15 +222,11 @@ public interface TmapOclModel_IN extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Metamodel</em>' reference.
 	 * @see #setWmapOclMetamodel(TmapOclMetamodel)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapOclModel_IN_WmapOclMetamodel()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapOclMetamodel getWmapOclMetamodel();

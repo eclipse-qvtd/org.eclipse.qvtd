@@ -28,14 +28,14 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT0ruleName <em>T0rule Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlModule <em>T1atl Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlOutPattern <em>T1atl Out Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1matchedRule <em>T1matched Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_6 <em>T2 6</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1ruleName <em>T1rule Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3atlModule <em>T3atl Module</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3atlOutPattern <em>T3atl Out Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3matchedRule <em>T3matched Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4_6 <em>T4 6</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4qvtrTransformation <em>T4qvtr Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getWmapModule <em>Wmap Module</em>}</li>
  * </ul>
  *
@@ -45,234 +45,200 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapMatchedRule extends Execution {
 	/**
-	 * Returns the value of the '<em><b>Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Success</em>' attribute.
-	 * @see #setSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_Success()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_S0global()
 	 * @model
 	 * @generated
 	 */
-	Boolean getSuccess();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getSuccess <em>Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Success</em>' attribute.
-	 * @see #getSuccess()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setSuccess(Boolean value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T0rule Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>T1rule Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0rule Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0rule Name</em>' attribute.
-	 * @see #setT0ruleName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T0ruleName()
+	 * @return the value of the '<em>T1rule Name</em>' attribute.
+	 * @see #setT1ruleName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T1ruleName()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0ruleName();
+	String getT1ruleName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT0ruleName <em>T0rule Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1ruleName <em>T1rule Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0rule Name</em>' attribute.
-	 * @see #getT0ruleName()
+	 * @param value the new value of the '<em>T1rule Name</em>' attribute.
+	 * @see #getT1ruleName()
 	 * @generated
 	 */
-	void setT0ruleName(String value);
+	void setT1ruleName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Module</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Module</em>' reference.
-	 * @see #setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T1atlModule()
+	 * @return the value of the '<em>T3atl Module</em>' reference.
+	 * @see #setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T3atlModule()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	org.eclipse.m2m.atl.common.ATL.Module getT1atlModule();
+	org.eclipse.m2m.atl.common.ATL.Module getT3atlModule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlModule <em>T1atl Module</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3atlModule <em>T3atl Module</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Module</em>' reference.
-	 * @see #getT1atlModule()
+	 * @param value the new value of the '<em>T3atl Module</em>' reference.
+	 * @see #getT3atlModule()
 	 * @generated
 	 */
-	void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
+	void setT3atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Out Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Out Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Out Pattern</em>' reference.
-	 * @see #setT1atlOutPattern(OutPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T1atlOutPattern()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	OutPattern getT1atlOutPattern();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlOutPattern <em>T1atl Out Pattern</em>}' reference.
+	 * Returns the value of the '<em><b>T3atl Out Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Out Pattern</em>' reference.
-	 * @see #getT1atlOutPattern()
-	 * @generated
-	 */
-	void setT1atlOutPattern(OutPattern value);
-
-	/**
-	 * Returns the value of the '<em><b>T1matched Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1matched Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1matched Rule</em>' reference.
-	 * @see #setT1matchedRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T1matchedRule()
+	 * @return the value of the '<em>T3atl Out Pattern</em>' reference.
+	 * @see #setT3atlOutPattern(OutPattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T3atlOutPattern()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	MatchedRule getT1matchedRule();
+	OutPattern getT3atlOutPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1matchedRule <em>T1matched Rule</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3atlOutPattern <em>T3atl Out Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1matched Rule</em>' reference.
-	 * @see #getT1matchedRule()
+	 * @param value the new value of the '<em>T3atl Out Pattern</em>' reference.
+	 * @see #getT3atlOutPattern()
 	 * @generated
 	 */
-	void setT1matchedRule(MatchedRule value);
+	void setT3atlOutPattern(OutPattern value);
 
 	/**
-	 * Returns the value of the '<em><b>T2 6</b></em>' reference.
+	 * Returns the value of the '<em><b>T3matched Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2 6</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2 6</em>' reference.
-	 * @see #setT2_6(SharedVariable)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T2_6()
+	 * @return the value of the '<em>T3matched Rule</em>' reference.
+	 * @see #setT3matchedRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T3matchedRule()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	SharedVariable getT2_6();
+	MatchedRule getT3matchedRule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_6 <em>T2 6</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT3matchedRule <em>T3matched Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2 6</em>' reference.
-	 * @see #getT2_6()
+	 * @param value the new value of the '<em>T3matched Rule</em>' reference.
+	 * @see #getT3matchedRule()
 	 * @generated
 	 */
-	void setT2_6(SharedVariable value);
+	void setT3matchedRule(MatchedRule value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>T4 6</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #setT2qvtrRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T2qvtrRelation()
+	 * @return the value of the '<em>T4 6</em>' reference.
+	 * @see #setT4_6(SharedVariable)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T4_6()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Relation getT2qvtrRelation();
+	SharedVariable getT4_6();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrRelation <em>T2qvtr Relation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4_6 <em>T4 6</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #getT2qvtrRelation()
+	 * @param value the new value of the '<em>T4 6</em>' reference.
+	 * @see #getT4_6()
 	 * @generated
 	 */
-	void setT2qvtrRelation(Relation value);
+	void setT4_6(SharedVariable value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Transformation</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Transformation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #setT2qvtrTransformation(RelationalTransformation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T2qvtrTransformation()
+	 * @return the value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #setT4qvtrRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T4qvtrRelation()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapMatchedRule'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	Relation getT4qvtrRelation();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4qvtrRelation <em>T4qvtr Relation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #getT4qvtrRelation()
+	 * @generated
+	 */
+	void setT4qvtrRelation(Relation value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Transformation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Transformation</em>' reference.
+	 * @see #setT4qvtrTransformation(RelationalTransformation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T4qvtrTransformation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationalTransformation getT2qvtrTransformation();
+	RelationalTransformation getT4qvtrTransformation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT4qvtrTransformation <em>T4qvtr Transformation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Transformation</em>' reference.
-	 * @see #getT2qvtrTransformation()
+	 * @param value the new value of the '<em>T4qvtr Transformation</em>' reference.
+	 * @see #getT4qvtrTransformation()
 	 * @generated
 	 */
-	void setT2qvtrTransformation(RelationalTransformation value);
+	void setT4qvtrTransformation(RelationalTransformation value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Module</em>' reference.
 	 * @see #setWmapModule(TmapModule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_WmapModule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapModule getWmapModule();

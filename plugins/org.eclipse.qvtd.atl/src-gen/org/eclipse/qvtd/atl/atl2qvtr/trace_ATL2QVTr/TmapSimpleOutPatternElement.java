@@ -17,6 +17,8 @@ import org.eclipse.m2m.atl.common.ATL.SimpleOutPatternElement;
 import org.eclipse.m2m.atl.common.OCL.OclModel;
 import org.eclipse.m2m.atl.common.OCL.OclModelElement;
 
+import org.eclipse.ocl.pivot.Type;
+
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -37,19 +39,20 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT0elementName <em>T0element Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlElement <em>T1atl Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel <em>T1atl Metamodel</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlPattern <em>T1atl Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlRule <em>T1atl Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType <em>T1atl Type</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrDomain <em>T2qvtr Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrPattern <em>T2qvtr Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTemplate <em>T2qvtr Template</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1elementName <em>T1element Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlElement <em>T3atl Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlMetamodel <em>T3atl Metamodel</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlPattern <em>T3atl Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlRule <em>T3atl Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlType <em>T3atl Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrDomain <em>T4qvtr Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrPattern <em>T4qvtr Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrTemplate <em>T4qvtr Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrType <em>T4qvtr Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getWmapVariable <em>Wmap Variable</em>}</li>
@@ -61,369 +64,339 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapSimpleOutPatternElement extends Execution {
 	/**
-	 * Returns the value of the '<em><b>Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Success</em>' attribute.
-	 * @see #setSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_Success()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_S0global()
 	 * @model
 	 * @generated
 	 */
-	Boolean getSuccess();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getSuccess <em>Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Success</em>' attribute.
-	 * @see #getSuccess()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setSuccess(Boolean value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T0element Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>T1element Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T0element Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0element Name</em>' attribute.
-	 * @see #setT0elementName(String)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T0elementName()
+	 * @return the value of the '<em>T1element Name</em>' attribute.
+	 * @see #setT1elementName(String)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1elementName()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	String getT0elementName();
+	String getT1elementName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT0elementName <em>T0element Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1elementName <em>T1element Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0element Name</em>' attribute.
-	 * @see #getT0elementName()
+	 * @param value the new value of the '<em>T1element Name</em>' attribute.
+	 * @see #getT1elementName()
 	 * @generated
 	 */
-	void setT0elementName(String value);
+	void setT1elementName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Element</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Element</em>' reference.
-	 * @see #setT1atlElement(SimpleOutPatternElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlElement()
+	 * @return the value of the '<em>T3atl Element</em>' reference.
+	 * @see #setT3atlElement(SimpleOutPatternElement)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T3atlElement()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapSimpleOutPatternElement'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	SimpleOutPatternElement getT1atlElement();
+	SimpleOutPatternElement getT3atlElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlElement <em>T1atl Element</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlElement <em>T3atl Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Element</em>' reference.
-	 * @see #getT1atlElement()
+	 * @param value the new value of the '<em>T3atl Element</em>' reference.
+	 * @see #getT3atlElement()
 	 * @generated
 	 */
-	void setT1atlElement(SimpleOutPatternElement value);
+	void setT3atlElement(SimpleOutPatternElement value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Metamodel</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Metamodel</em>' reference.
-	 * @see #setT1atlMetamodel(OclModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlMetamodel()
+	 * @return the value of the '<em>T3atl Metamodel</em>' reference.
+	 * @see #setT3atlMetamodel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T3atlMetamodel()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModel getT1atlMetamodel();
+	OclModel getT3atlMetamodel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlMetamodel <em>T1atl Metamodel</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlMetamodel <em>T3atl Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Metamodel</em>' reference.
-	 * @see #getT1atlMetamodel()
+	 * @param value the new value of the '<em>T3atl Metamodel</em>' reference.
+	 * @see #getT3atlMetamodel()
 	 * @generated
 	 */
-	void setT1atlMetamodel(OclModel value);
+	void setT3atlMetamodel(OclModel value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Pattern</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #setT1atlPattern(OutPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlPattern()
+	 * @return the value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #setT3atlPattern(OutPattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T3atlPattern()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OutPattern getT1atlPattern();
+	OutPattern getT3atlPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlPattern <em>T1atl Pattern</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlPattern <em>T3atl Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #getT1atlPattern()
+	 * @param value the new value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #getT3atlPattern()
 	 * @generated
 	 */
-	void setT1atlPattern(OutPattern value);
+	void setT3atlPattern(OutPattern value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Rule</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Rule</em>' reference.
-	 * @see #setT1atlRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlRule()
+	 * @return the value of the '<em>T3atl Rule</em>' reference.
+	 * @see #setT3atlRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T3atlRule()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	MatchedRule getT1atlRule();
+	MatchedRule getT3atlRule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlRule <em>T1atl Rule</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlRule <em>T3atl Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Rule</em>' reference.
-	 * @see #getT1atlRule()
+	 * @param value the new value of the '<em>T3atl Rule</em>' reference.
+	 * @see #getT3atlRule()
 	 * @generated
 	 */
-	void setT1atlRule(MatchedRule value);
+	void setT3atlRule(MatchedRule value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Type</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Type</em>' reference.
-	 * @see #setT1atlType(OclModelElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T1atlType()
+	 * @return the value of the '<em>T3atl Type</em>' reference.
+	 * @see #setT3atlType(OclModelElement)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T3atlType()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapSimpleOutPatternElement'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModelElement getT1atlType();
+	OclModelElement getT3atlType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT1atlType <em>T1atl Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT3atlType <em>T3atl Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Type</em>' reference.
-	 * @see #getT1atlType()
+	 * @param value the new value of the '<em>T3atl Type</em>' reference.
+	 * @see #getT3atlType()
 	 * @generated
 	 */
-	void setT1atlType(OclModelElement value);
+	void setT3atlType(OclModelElement value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Domain</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Domain</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #setT2qvtrDomain(RelationDomain)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrDomain()
+	 * @return the value of the '<em>T4qvtr Domain</em>' reference.
+	 * @see #setT4qvtrDomain(RelationDomain)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrDomain()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationDomain getT2qvtrDomain();
+	RelationDomain getT4qvtrDomain();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrDomain <em>T2qvtr Domain</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrDomain <em>T4qvtr Domain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #getT2qvtrDomain()
+	 * @param value the new value of the '<em>T4qvtr Domain</em>' reference.
+	 * @see #getT4qvtrDomain()
 	 * @generated
 	 */
-	void setT2qvtrDomain(RelationDomain value);
+	void setT4qvtrDomain(RelationDomain value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Pattern</em>' reference.
-	 * @see #setT2qvtrPattern(DomainPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrPattern()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	DomainPattern getT2qvtrPattern();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrPattern <em>T2qvtr Pattern</em>}' reference.
+	 * Returns the value of the '<em><b>T4qvtr Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Pattern</em>' reference.
-	 * @see #getT2qvtrPattern()
-	 * @generated
-	 */
-	void setT2qvtrPattern(DomainPattern value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #setT2qvtrRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrRelation()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	Relation getT2qvtrRelation();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrRelation <em>T2qvtr Relation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #getT2qvtrRelation()
-	 * @generated
-	 */
-	void setT2qvtrRelation(Relation value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Template</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Template</em>' reference.
-	 * @see #setT2qvtrTemplate(ObjectTemplateExp)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrTemplate()
+	 * @return the value of the '<em>T4qvtr Pattern</em>' reference.
+	 * @see #setT4qvtrPattern(DomainPattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrPattern()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapSimpleOutPatternElement'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	ObjectTemplateExp getT2qvtrTemplate();
+	DomainPattern getT4qvtrPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTemplate <em>T2qvtr Template</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrPattern <em>T4qvtr Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Template</em>' reference.
-	 * @see #getT2qvtrTemplate()
+	 * @param value the new value of the '<em>T4qvtr Pattern</em>' reference.
+	 * @see #getT4qvtrPattern()
 	 * @generated
 	 */
-	void setT2qvtrTemplate(ObjectTemplateExp value);
+	void setT4qvtrPattern(DomainPattern value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Typed Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Typed Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #setT2qvtrTypedModel(TypedModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrTypedModel()
+	 * @return the value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #setT4qvtrRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrRelation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TypedModel getT2qvtrTypedModel();
+	Relation getT4qvtrRelation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrRelation <em>T4qvtr Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #getT2qvtrTypedModel()
+	 * @param value the new value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #getT4qvtrRelation()
 	 * @generated
 	 */
-	void setT2qvtrTypedModel(TypedModel value);
+	void setT4qvtrRelation(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Template</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Variable</em>' reference.
-	 * @see #setT2qvtrVariable(TemplateVariable)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T2qvtrVariable()
+	 * @return the value of the '<em>T4qvtr Template</em>' reference.
+	 * @see #setT4qvtrTemplate(ObjectTemplateExp)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrTemplate()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapSimpleOutPatternElement'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	ObjectTemplateExp getT4qvtrTemplate();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrTemplate <em>T4qvtr Template</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Template</em>' reference.
+	 * @see #getT4qvtrTemplate()
+	 * @generated
+	 */
+	void setT4qvtrTemplate(ObjectTemplateExp value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Type</em>' reference.
+	 * @see #setT4qvtrType(Type)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrType()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TemplateVariable getT2qvtrVariable();
+	Type getT4qvtrType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT2qvtrVariable <em>T2qvtr Variable</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrType <em>T4qvtr Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Variable</em>' reference.
-	 * @see #getT2qvtrVariable()
+	 * @param value the new value of the '<em>T4qvtr Type</em>' reference.
+	 * @see #getT4qvtrType()
 	 * @generated
 	 */
-	void setT2qvtrVariable(TemplateVariable value);
+	void setT4qvtrType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #setT4qvtrTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrTypedModel()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	TypedModel getT4qvtrTypedModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #getT4qvtrTypedModel()
+	 * @generated
+	 */
+	void setT4qvtrTypedModel(TypedModel value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Variable</em>' reference.
+	 * @see #setT4qvtrVariable(TemplateVariable)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_T4qvtrVariable()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapSimpleOutPatternElement'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	TemplateVariable getT4qvtrVariable();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement#getT4qvtrVariable <em>T4qvtr Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Variable</em>' reference.
+	 * @see #getT4qvtrVariable()
+	 * @generated
+	 */
+	void setT4qvtrVariable(TemplateVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Matched Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Matched Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Matched Rule</em>' reference.
 	 * @see #setWmapMatchedRule(TmapMatchedRule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_WmapMatchedRule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapMatchedRule getWmapMatchedRule();
@@ -441,15 +414,11 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Metamodel</em>' reference.
 	 * @see #setWmapOclMetamodel(TmapOclMetamodel)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapSimpleOutPatternElement_WmapOclMetamodel()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapOclMetamodel getWmapOclMetamodel();
@@ -467,10 +436,6 @@ public interface TmapSimpleOutPatternElement extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Variable</em>' reference.
 	 * @see #setWmapVariable(TmapVariable)

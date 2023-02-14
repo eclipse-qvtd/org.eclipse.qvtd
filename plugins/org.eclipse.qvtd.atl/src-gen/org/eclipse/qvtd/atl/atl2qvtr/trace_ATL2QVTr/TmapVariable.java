@@ -25,9 +25,9 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT1atlVariable <em>T1atl Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT3atlVariable <em>T3atl Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable()
@@ -36,85 +36,73 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapVariable extends Execution {
 	/**
-	 * Returns the value of the '<em><b>Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Success</em>' attribute.
-	 * @see #setSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_Success()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_S0global()
 	 * @model
 	 * @generated
 	 */
-	Boolean getSuccess();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getSuccess <em>Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Success</em>' attribute.
-	 * @see #getSuccess()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setSuccess(Boolean value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Variable</em>' reference.
-	 * @see #setT1atlVariable(LocatedElement)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_T1atlVariable()
+	 * @return the value of the '<em>T3atl Variable</em>' reference.
+	 * @see #setT3atlVariable(LocatedElement)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_T3atlVariable()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapVariable'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	LocatedElement getT1atlVariable();
+	LocatedElement getT3atlVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT1atlVariable <em>T1atl Variable</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT3atlVariable <em>T3atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Variable</em>' reference.
-	 * @see #getT1atlVariable()
+	 * @param value the new value of the '<em>T3atl Variable</em>' reference.
+	 * @see #getT3atlVariable()
 	 * @generated
 	 */
-	void setT1atlVariable(LocatedElement value);
+	void setT3atlVariable(LocatedElement value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Variable</em>' reference.
-	 * @see #setT2qvtrVariable(VariableDeclaration)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_T2qvtrVariable()
+	 * @return the value of the '<em>T4qvtr Variable</em>' reference.
+	 * @see #setT4qvtrVariable(VariableDeclaration)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariable_T4qvtrVariable()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapVariable'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	VariableDeclaration getT2qvtrVariable();
+	VariableDeclaration getT4qvtrVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT2qvtrVariable <em>T2qvtr Variable</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable#getT4qvtrVariable <em>T4qvtr Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Variable</em>' reference.
-	 * @see #getT2qvtrVariable()
+	 * @param value the new value of the '<em>T4qvtr Variable</em>' reference.
+	 * @see #getT4qvtrVariable()
 	 * @generated
 	 */
-	void setT2qvtrVariable(VariableDeclaration value);
+	void setT4qvtrVariable(VariableDeclaration value);
 
 } // TmapVariable

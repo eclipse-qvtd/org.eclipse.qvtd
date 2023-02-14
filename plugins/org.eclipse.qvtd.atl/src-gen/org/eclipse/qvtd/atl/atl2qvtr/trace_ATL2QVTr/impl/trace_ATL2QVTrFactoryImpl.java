@@ -98,6 +98,7 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 			case 34: return createTmapVariableExp();
 			case 35: return createTmapVariableExp_referredVariable_Helper();
 			case 36: return createTmapVariableExp_referredVariable_VariableDeclaration();
+			case 37: return createTxATL2QVTr();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -475,6 +476,17 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	public TmapVariableExp_referredVariable_VariableDeclaration createTmapVariableExp_referredVariable_VariableDeclaration() {
 		TmapVariableExp_referredVariable_VariableDeclarationImpl tmapVariableExp_referredVariable_VariableDeclaration = new TmapVariableExp_referredVariable_VariableDeclarationImpl();
 		return tmapVariableExp_referredVariable_VariableDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxATL2QVTr createTxATL2QVTr() {
+		TxATL2QVTrImpl txATL2QVTr = new TxATL2QVTrImpl();
+		return txATL2QVTr;
 	}
 
 	/**

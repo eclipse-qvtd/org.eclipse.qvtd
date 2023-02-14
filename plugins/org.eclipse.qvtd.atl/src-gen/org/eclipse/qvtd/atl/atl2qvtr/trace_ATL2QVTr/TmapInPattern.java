@@ -31,13 +31,13 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlModel <em>T1atl Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlPattern <em>T1atl Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlRule <em>T1atl Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrDomain <em>T2qvtr Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlModel <em>T3atl Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlPattern <em>T3atl Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlRule <em>T3atl Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrDomain <em>T4qvtr Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getWmapOclMetamodel <em>Wmap Ocl Metamodel</em>}</li>
  * </ul>
@@ -48,207 +48,176 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapInPattern extends Execution {
 	/**
-	 * Returns the value of the '<em><b>Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Success</em>' attribute.
-	 * @see #setSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_Success()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_S0global()
 	 * @model
 	 * @generated
 	 */
-	Boolean getSuccess();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getSuccess <em>Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Success</em>' attribute.
-	 * @see #getSuccess()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setSuccess(Boolean value);
+	void setS0global(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Model</em>' reference.
-	 * @see #setT1atlModel(OclModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T1atlModel()
+	 * @return the value of the '<em>T3atl Model</em>' reference.
+	 * @see #setT3atlModel(OclModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T3atlModel()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclModel getT1atlModel();
+	OclModel getT3atlModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlModel <em>T1atl Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlModel <em>T3atl Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Model</em>' reference.
-	 * @see #getT1atlModel()
+	 * @param value the new value of the '<em>T3atl Model</em>' reference.
+	 * @see #getT3atlModel()
 	 * @generated
 	 */
-	void setT1atlModel(OclModel value);
+	void setT3atlModel(OclModel value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Pattern</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Pattern</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #setT1atlPattern(InPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T1atlPattern()
+	 * @return the value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #setT3atlPattern(InPattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T3atlPattern()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	InPattern getT1atlPattern();
+	InPattern getT3atlPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlPattern <em>T1atl Pattern</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlPattern <em>T3atl Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #getT1atlPattern()
+	 * @param value the new value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #getT3atlPattern()
 	 * @generated
 	 */
-	void setT1atlPattern(InPattern value);
+	void setT3atlPattern(InPattern value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Rule</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Rule</em>' reference.
-	 * @see #setT1atlRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T1atlRule()
+	 * @return the value of the '<em>T3atl Rule</em>' reference.
+	 * @see #setT3atlRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T3atlRule()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	MatchedRule getT1atlRule();
+	MatchedRule getT3atlRule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT1atlRule <em>T1atl Rule</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT3atlRule <em>T3atl Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Rule</em>' reference.
-	 * @see #getT1atlRule()
+	 * @param value the new value of the '<em>T3atl Rule</em>' reference.
+	 * @see #getT3atlRule()
 	 * @generated
 	 */
-	void setT1atlRule(MatchedRule value);
+	void setT3atlRule(MatchedRule value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Domain</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Domain</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #setT2qvtrDomain(RelationDomain)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T2qvtrDomain()
+	 * @return the value of the '<em>T4qvtr Domain</em>' reference.
+	 * @see #setT4qvtrDomain(RelationDomain)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T4qvtrDomain()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationDomain getT2qvtrDomain();
+	RelationDomain getT4qvtrDomain();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrDomain <em>T2qvtr Domain</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrDomain <em>T4qvtr Domain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #getT2qvtrDomain()
+	 * @param value the new value of the '<em>T4qvtr Domain</em>' reference.
+	 * @see #getT4qvtrDomain()
 	 * @generated
 	 */
-	void setT2qvtrDomain(RelationDomain value);
+	void setT4qvtrDomain(RelationDomain value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #setT2qvtrRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T2qvtrRelation()
+	 * @return the value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #setT4qvtrRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T4qvtrRelation()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	Relation getT2qvtrRelation();
+	Relation getT4qvtrRelation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrRelation <em>T2qvtr Relation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrRelation <em>T4qvtr Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #getT2qvtrRelation()
+	 * @param value the new value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #getT4qvtrRelation()
 	 * @generated
 	 */
-	void setT2qvtrRelation(Relation value);
+	void setT4qvtrRelation(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Typed Model</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Typed Model</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #setT2qvtrTypedModel(TypedModel)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T2qvtrTypedModel()
+	 * @return the value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #setT4qvtrTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_T4qvtrTypedModel()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TypedModel getT2qvtrTypedModel();
+	TypedModel getT4qvtrTypedModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT2qvtrTypedModel <em>T2qvtr Typed Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern#getT4qvtrTypedModel <em>T4qvtr Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Typed Model</em>' reference.
-	 * @see #getT2qvtrTypedModel()
+	 * @param value the new value of the '<em>T4qvtr Typed Model</em>' reference.
+	 * @see #getT4qvtrTypedModel()
 	 * @generated
 	 */
-	void setT2qvtrTypedModel(TypedModel value);
+	void setT4qvtrTypedModel(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Matched Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Matched Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Matched Rule</em>' reference.
 	 * @see #setWmapMatchedRule(TmapMatchedRule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_WmapMatchedRule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapMatchedRule getWmapMatchedRule();
@@ -266,15 +235,11 @@ public interface TmapInPattern extends Execution {
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Metamodel</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Metamodel</em>' reference.
 	 * @see #setWmapOclMetamodel(TmapOclMetamodel)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_WmapOclMetamodel()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapOclMetamodel getWmapOclMetamodel();

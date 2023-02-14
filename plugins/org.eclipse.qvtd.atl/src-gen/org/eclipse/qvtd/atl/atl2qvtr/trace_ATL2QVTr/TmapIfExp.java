@@ -24,16 +24,16 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlCondition <em>T1atl Condition</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlElse <em>T1atl Else</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlThen <em>T1atl Then</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrCondition <em>T2qvtr Condition</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrElse <em>T2qvtr Else</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrThen <em>T2qvtr Then</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlCondition <em>T3atl Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlElse <em>T3atl Else</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlThen <em>T3atl Then</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrCondition <em>T4qvtr Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrElse <em>T4qvtr Else</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrThen <em>T4qvtr Then</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getWmapOclExpression1 <em>Wmap Ocl Expression1</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getWmapOclExpression2 <em>Wmap Ocl Expression2</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getLocalSuccess <em>Local Success</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getS0local <em>S0local</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp()
@@ -45,10 +45,6 @@ public interface TmapIfExp extends ImapOclExpression {
 	 * Returns the value of the '<em><b>Dispatcher</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapIfExp <em>Domap If Exp</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dispatcher</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dispatcher</em>' container reference.
 	 * @see #setDispatcher(DmapOclExpression)
@@ -70,179 +66,157 @@ public interface TmapIfExp extends ImapOclExpression {
 	void setDispatcher(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Condition</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Condition</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Condition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Condition</em>' reference.
-	 * @see #setT1atlCondition(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T1atlCondition()
+	 * @return the value of the '<em>T3atl Condition</em>' reference.
+	 * @see #setT3atlCondition(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T3atlCondition()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getT1atlCondition();
+	OclExpression getT3atlCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlCondition <em>T1atl Condition</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlCondition <em>T3atl Condition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Condition</em>' reference.
-	 * @see #getT1atlCondition()
+	 * @param value the new value of the '<em>T3atl Condition</em>' reference.
+	 * @see #getT3atlCondition()
 	 * @generated
 	 */
-	void setT1atlCondition(OclExpression value);
+	void setT3atlCondition(OclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Else</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Else</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Else</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Else</em>' reference.
-	 * @see #setT1atlElse(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T1atlElse()
+	 * @return the value of the '<em>T3atl Else</em>' reference.
+	 * @see #setT3atlElse(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T3atlElse()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getT1atlElse();
+	OclExpression getT3atlElse();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlElse <em>T1atl Else</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlElse <em>T3atl Else</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Else</em>' reference.
-	 * @see #getT1atlElse()
+	 * @param value the new value of the '<em>T3atl Else</em>' reference.
+	 * @see #getT3atlElse()
 	 * @generated
 	 */
-	void setT1atlElse(OclExpression value);
+	void setT3atlElse(OclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T1atl Then</b></em>' reference.
+	 * Returns the value of the '<em><b>T3atl Then</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Then</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Then</em>' reference.
-	 * @see #setT1atlThen(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T1atlThen()
+	 * @return the value of the '<em>T3atl Then</em>' reference.
+	 * @see #setT3atlThen(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T3atlThen()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getT1atlThen();
+	OclExpression getT3atlThen();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT1atlThen <em>T1atl Then</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT3atlThen <em>T3atl Then</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Then</em>' reference.
-	 * @see #getT1atlThen()
+	 * @param value the new value of the '<em>T3atl Then</em>' reference.
+	 * @see #getT3atlThen()
 	 * @generated
 	 */
-	void setT1atlThen(OclExpression value);
+	void setT3atlThen(OclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Condition</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Condition</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Condition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Condition</em>' reference.
-	 * @see #setT2qvtrCondition(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T2qvtrCondition()
+	 * @return the value of the '<em>T4qvtr Condition</em>' reference.
+	 * @see #setT4qvtrCondition(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T4qvtrCondition()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	OCLExpression getT2qvtrCondition();
+	OCLExpression getT4qvtrCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrCondition <em>T2qvtr Condition</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrCondition <em>T4qvtr Condition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Condition</em>' reference.
-	 * @see #getT2qvtrCondition()
+	 * @param value the new value of the '<em>T4qvtr Condition</em>' reference.
+	 * @see #getT4qvtrCondition()
 	 * @generated
 	 */
-	void setT2qvtrCondition(OCLExpression value);
+	void setT4qvtrCondition(OCLExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Else</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Else</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Else</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Else</em>' reference.
-	 * @see #setT2qvtrElse(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T2qvtrElse()
+	 * @return the value of the '<em>T4qvtr Else</em>' reference.
+	 * @see #setT4qvtrElse(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T4qvtrElse()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	OCLExpression getT2qvtrElse();
+	OCLExpression getT4qvtrElse();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrElse <em>T2qvtr Else</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrElse <em>T4qvtr Else</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Else</em>' reference.
-	 * @see #getT2qvtrElse()
+	 * @param value the new value of the '<em>T4qvtr Else</em>' reference.
+	 * @see #getT4qvtrElse()
 	 * @generated
 	 */
-	void setT2qvtrElse(OCLExpression value);
+	void setT4qvtrElse(OCLExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T2qvtr Then</b></em>' reference.
+	 * Returns the value of the '<em><b>T4qvtr Then</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Then</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Then</em>' reference.
-	 * @see #setT2qvtrThen(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T2qvtrThen()
+	 * @return the value of the '<em>T4qvtr Then</em>' reference.
+	 * @see #setT4qvtrThen(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_T4qvtrThen()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapIfExp'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	OCLExpression getT2qvtrThen();
+	OCLExpression getT4qvtrThen();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT2qvtrThen <em>T2qvtr Then</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getT4qvtrThen <em>T4qvtr Then</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Then</em>' reference.
-	 * @see #getT2qvtrThen()
+	 * @param value the new value of the '<em>T4qvtr Then</em>' reference.
+	 * @see #getT4qvtrThen()
 	 * @generated
 	 */
-	void setT2qvtrThen(OCLExpression value);
+	void setT4qvtrThen(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Expression</em>' reference.
 	 * @see #setWmapOclExpression(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_WmapOclExpression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression();
@@ -260,15 +234,11 @@ public interface TmapIfExp extends ImapOclExpression {
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression1</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Expression1</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Expression1</em>' reference.
 	 * @see #setWmapOclExpression1(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_WmapOclExpression1()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression1();
@@ -286,15 +256,11 @@ public interface TmapIfExp extends ImapOclExpression {
 	/**
 	 * Returns the value of the '<em><b>Wmap Ocl Expression2</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap Ocl Expression2</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wmap Ocl Expression2</em>' reference.
 	 * @see #setWmapOclExpression2(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_WmapOclExpression2()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression2();
@@ -310,29 +276,25 @@ public interface TmapIfExp extends ImapOclExpression {
 	void setWmapOclExpression2(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Local Success</b></em>' attribute.
+	 * Returns the value of the '<em><b>S0local</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Local Success</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Local Success</em>' attribute.
-	 * @see #setLocalSuccess(Boolean)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_LocalSuccess()
+	 * @return the value of the '<em>S0local</em>' attribute.
+	 * @see #setS0local(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIfExp_S0local()
 	 * @model
 	 * @generated
 	 */
-	Boolean getLocalSuccess();
+	Boolean getS0local();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getLocalSuccess <em>Local Success</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp#getS0local <em>S0local</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Local Success</em>' attribute.
-	 * @see #getLocalSuccess()
+	 * @param value the new value of the '<em>S0local</em>' attribute.
+	 * @see #getS0local()
 	 * @generated
 	 */
-	void setLocalSuccess(Boolean value);
+	void setS0local(Boolean value);
 
 } // TmapIfExp

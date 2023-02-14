@@ -25,6 +25,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
 import org.eclipse.qvtd.runtime.qvttrace.Execution;
 import org.eclipse.qvtd.runtime.qvttrace.TraceElement;
 import org.eclipse.qvtd.runtime.qvttrace.TraceInstance;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 /**
  * <!-- begin-user-doc -->
@@ -231,6 +232,10 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 				return createTmapVariableExp_referredVariable_VariableDeclarationAdapter();
 			}
 			@Override
+			public Adapter caseTxATL2QVTr(TxATL2QVTr object) {
+				return createTxATL2QVTrAdapter();
+			}
+			@Override
 			public Adapter caseTraceElement(TraceElement object) {
 				return createTraceElementAdapter();
 			}
@@ -245,6 +250,10 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExecution(Execution object) {
 				return createExecutionAdapter();
+			}
+			@Override
+			public Adapter caseTransformationExecution(TransformationExecution object) {
+				return createTransformationExecutionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -785,6 +794,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TxATL2QVTr <em>Tx ATL2QV Tr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TxATL2QVTr
+	 * @generated
+	 */
+	public Adapter createTxATL2QVTrAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.TraceElement <em>Trace Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -837,6 +860,20 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.TransformationExecution <em>Transformation Execution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.runtime.qvttrace.TransformationExecution
+	 * @generated
+	 */
+	public Adapter createTransformationExecutionAdapter() {
 		return null;
 	}
 

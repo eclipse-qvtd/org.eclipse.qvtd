@@ -23,11 +23,12 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD1atlExpression <em>D1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD2qvtrExpression <em>D2qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD3atlExpression <em>D3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD4qvtrExpression <em>D4qvtr Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getDomapVariableExp_referredVariable_Helper <em>Domap Variable Exp referred Variable Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getDomapVariableExp_referredVariable_VariableDeclaration <em>Domap Variable Exp referred Variable Variable Declaration</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable()
@@ -36,69 +37,57 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  */
 public interface DmapVariableExp_referredVariable extends Dispatch {
 	/**
-	 * Returns the value of the '<em><b>D1atl Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>D3atl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>D1atl Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D1atl Expression</em>' reference.
-	 * @see #setD1atlExpression(VariableExp)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable_D1atlExpression()
+	 * @return the value of the '<em>D3atl Expression</em>' reference.
+	 * @see #setD3atlExpression(VariableExp)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable_D3atlExpression()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapVariableExp_referredVariable'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	VariableExp getD1atlExpression();
+	VariableExp getD3atlExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD1atlExpression <em>D1atl Expression</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD3atlExpression <em>D3atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D1atl Expression</em>' reference.
-	 * @see #getD1atlExpression()
+	 * @param value the new value of the '<em>D3atl Expression</em>' reference.
+	 * @see #getD3atlExpression()
 	 * @generated
 	 */
-	void setD1atlExpression(VariableExp value);
+	void setD3atlExpression(VariableExp value);
 
 	/**
-	 * Returns the value of the '<em><b>D2qvtr Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>D4qvtr Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>D2qvtr Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D2qvtr Expression</em>' reference.
-	 * @see #setD2qvtrExpression(org.eclipse.ocl.pivot.VariableExp)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable_D2qvtrExpression()
+	 * @return the value of the '<em>D4qvtr Expression</em>' reference.
+	 * @see #setD4qvtrExpression(org.eclipse.ocl.pivot.VariableExp)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable_D4qvtrExpression()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapVariableExp_referredVariable'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	org.eclipse.ocl.pivot.VariableExp getD2qvtrExpression();
+	org.eclipse.ocl.pivot.VariableExp getD4qvtrExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD2qvtrExpression <em>D2qvtr Expression</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getD4qvtrExpression <em>D4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D2qvtr Expression</em>' reference.
-	 * @see #getD2qvtrExpression()
+	 * @param value the new value of the '<em>D4qvtr Expression</em>' reference.
+	 * @see #getD4qvtrExpression()
 	 * @generated
 	 */
-	void setD2qvtrExpression(org.eclipse.ocl.pivot.VariableExp value);
+	void setD4qvtrExpression(org.eclipse.ocl.pivot.VariableExp value);
 
 	/**
 	 * Returns the value of the '<em><b>Domap Variable Exp referred Variable Helper</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getDispatcher <em>Dispatcher</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domap Variable Exp referred Variable Helper</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domap Variable Exp referred Variable Helper</em>' containment reference.
 	 * @see #setDomapVariableExp_referredVariable_Helper(TmapVariableExp_referredVariable_Helper)
@@ -124,10 +113,6 @@ public interface DmapVariableExp_referredVariable extends Dispatch {
 	 * Returns the value of the '<em><b>Domap Variable Exp referred Variable Variable Declaration</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_VariableDeclaration#getDispatcher <em>Dispatcher</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domap Variable Exp referred Variable Variable Declaration</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domap Variable Exp referred Variable Variable Declaration</em>' containment reference.
 	 * @see #setDomapVariableExp_referredVariable_VariableDeclaration(TmapVariableExp_referredVariable_VariableDeclaration)
@@ -152,10 +137,6 @@ public interface DmapVariableExp_referredVariable extends Dispatch {
 	/**
 	 * Returns the value of the '<em><b>Result</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Result</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Result</em>' reference.
 	 * @see #setResult(ImapVariableExp_referredVariable)
@@ -174,5 +155,27 @@ public interface DmapVariableExp_referredVariable extends Dispatch {
 	 * @generated
 	 */
 	void setResult(ImapVariableExp_referredVariable value);
+
+	/**
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapVariableExp_referredVariable_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
 
 } // DmapVariableExp_referredVariable
