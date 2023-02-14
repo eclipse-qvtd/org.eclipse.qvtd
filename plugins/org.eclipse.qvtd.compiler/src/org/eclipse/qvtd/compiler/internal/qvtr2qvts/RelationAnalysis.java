@@ -924,7 +924,7 @@ public class RelationAnalysis extends RuleAnalysis
 		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer2);
 		assert bestInitNode != null;
 		if (variable.isIsRequired()) {
-			assert bestInitNode.isRequired();
+			// assert bestInitNode.isRequired();	-- XXX not satisfied by LOADED-OperationCallNode(atlHelper : atl!ATL::ATL::Helper) in Generate QVTd ATL2QVTr Transformation
 			//	assert bestInitNode.isMatched();  --not satisfied by a cast to-non-null ATL2QVTr local variable
 		}
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {

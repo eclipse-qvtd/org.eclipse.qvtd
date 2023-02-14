@@ -123,7 +123,7 @@ public class ATLExampleTests extends LoadTestCase
 			Resource atlResource = myQVT.addInputURI("atl", atlURI);
 			assert atlResource != null;
 			EList<@NonNull EObject> contents = atlResource.getContents();
-			assert !contents.isEmpty() : "ATL's ANTLR cannot co-exist with Xext's ANTLR - run test separately";
+			assert !contents.isEmpty() : "ATL's ANTLR cannot co-exist with Xtext's ANTLR - run test separately";
 			Resource atlXmiResource = atlResource.getResourceSet().createResource(atlXMIURI);
 			atlXmiResource.getContents().addAll(contents);
 			atlXmiResource.save(XMIUtil.createSaveOptions());
