@@ -42,6 +42,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrNormalizer;
 import org.junit.Test;
 
 /**
@@ -130,11 +131,12 @@ public class ATLExampleTests extends LoadTestCase
 			contents.addAll(atlXmiResource.getContents());
 			String name = atlURI.trimFileExtension().lastSegment();
 			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), QVTrelationUtil.QVTRAS_FILE_EXTENSION);
+			URI expectedURI = atlURI.trimSegments(1).appendSegment(name + "_expected.qvtras");
 			try {
 				myQVT.executeTransformation();
 				myQVT.addOutputURI("qvtr", outputURI);
 				myQVT.saveModels(null);
-				myQVT.checkOutput(outputURI, atlURI.trimSegments(1).appendSegment(name + "_expected.qvtras"), null);
+				myQVT.checkOutput(outputURI, expectedURI, QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
 			}
 			catch (InvalidEvaluationException e) {
 				myQVT.addOutputURI("qvtr", outputURI);
