@@ -15,7 +15,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 public class QVTimperativeTestFileSystemHelper extends QVTbaseTestFileSystemHelper
 {
 	public QVTimperativeTestFileSystemHelper() {
-		//	addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		addRequiredBundle("org.eclipse.qvtd.xtext.qvtimperative.tests");
 	}
 }

@@ -10,14 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseTestFileSystemHelper;
 
 public class QVTrelationTestFileSystemHelper extends QVTbaseTestFileSystemHelper
@@ -25,8 +17,8 @@ public class QVTrelationTestFileSystemHelper extends QVTbaseTestFileSystemHelper
 	public QVTrelationTestFileSystemHelper() {
 	}
 
-	@Override
-	public @Nullable File createBuildDotProperties(@NonNull File projectFolder, @NonNull String projectName) {
+	/*	@Override
+	protected @Nullable File createBuildDotProperties(@NonNull File projectFolder, @NonNull String projectName) {
 		File file = new File(projectFolder, "build.properties");
 		Writer s;
 		try {
@@ -40,5 +32,5 @@ public class QVTrelationTestFileSystemHelper extends QVTbaseTestFileSystemHelper
 			throw new WrappedException(e);
 		}
 		return file;
-	}
+	} */
 }
