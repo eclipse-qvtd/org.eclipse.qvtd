@@ -106,7 +106,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for basicEvaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateNameResolution, null);
+				basicEvaluateNameResolution, asNewStatement);
 			/*	CGOperation cgCacheOperation = createCGOperation(analyzer, asCacheOperation);
 			analyzer.initAst(cgCacheOperation, asCacheOperation, true);
 			cgCacheOperation.setCallingConvention(this);
@@ -300,7 +300,7 @@ public class RuleCacheClassCallingConvention extends AbstractClassCallingConvent
 			//	Create CG declaration for evaluate
 			//
 			CGOperation cgCacheOperation = createCGOperationDeclaration(analyzer, cgCacheClass, asCacheOperation,
-				basicEvaluateName, null);
+				basicEvaluateName, asNewStatement);
 			return cgCacheOperation;
 		}
 
