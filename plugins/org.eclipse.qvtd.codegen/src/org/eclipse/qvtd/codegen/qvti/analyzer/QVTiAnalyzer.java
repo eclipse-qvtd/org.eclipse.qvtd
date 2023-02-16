@@ -323,13 +323,10 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			cgCondition.setArgument(createCGConstantExp(getCGNull()));
 			//			setAst(cgCondition, asExpression);
 			cgCondition.setTypeId(getCGTypeId(TypeId.BOOLEAN));
-			cgCondition.setInvalidating(false);
-			cgCondition.setValidating(true);
 			//
 			CGIfExp cgIfExp = CGModelFactory.eINSTANCE.createCGIfExp();
 			//			setAst(cgIfExp, asExpression);
 			cgIfExp.setTypeId(getCGTypeId(TypeId.BOOLEAN));
-			//	cgIfExp.setName(cgVariable.getName());
 			cgIfExp.setCondition(cgCondition);
 			cgIfExp.setElseExpression(createCGConstantExp(getCGBoolean(false)));
 			//
@@ -652,7 +649,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		CollectionType collectionType = getStandardLibrary().getCollectionType();
 		Iteration forAllIteration = (Iteration)NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		assert forAllIteration != null;
-		cgMappingLoop.setAsIteration(forAllIteration);
 		cgMappingLoop.setReferredIteration(generateIterationDeclaration(/*asSource.getType(),*/ forAllIteration));
 		CGSequence cgSequence = CGModelFactory.eINSTANCE.createCGSequence();
 		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
@@ -705,7 +701,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 					cgPropertyCallExp = cgExecutorPropertyCallExp;
 				}
 				CGProperty cgProperty = generatePropertyDeclaration(asProperty, null);
-				cgPropertyCallExp.setAsProperty(asProperty);
 				cgPropertyCallExp.setReferredProperty(cgProperty);
 				cgPropertyCallExp.setAst(element);
 				cgPropertyCallExp.setTypeId(getCGTypeId(element.getTypeId()));
@@ -732,7 +727,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
 			CGProperty cgProperty = generatePropertyDeclaration(asProperty, null);
-			cgPropertyAssignment.setAsProperty(asProperty);
 			cgPropertyAssignment.setReferredProperty(cgProperty);
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
@@ -793,7 +787,6 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 			CGVariable cgVariable = useExecutableNameManager(asVariable).getCGVariable(asVariable);
 			cgPropertyAssignment.setOwnedSlotValue(createCGVariableExp(cgVariable));
 			CGProperty cgTargetProperty = generatePropertyDeclaration(asTargetProperty, null);
-			cgPropertyAssignment.setAsProperty(asTargetProperty);
 			cgPropertyAssignment.setReferredProperty(cgTargetProperty);
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(getCGTypeId(TypeId.OCL_VOID));
