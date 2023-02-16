@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
@@ -53,7 +52,6 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 	@Override
 	public @NonNull CGValuedElement createCGNavigationCallExp(@NonNull CodeGenAnalyzer analyzer, @NonNull CGProperty cgProperty,
 			@NonNull LibraryProperty libraryProperty, @Nullable CGValuedElement cgSource, @NonNull NavigationCallExp asNavigationCallExp) {
-		QVTiAnalyzer qvtiAnalyzer = (QVTiAnalyzer)analyzer;
 		/*		CodeGenerator codeGenerator = as2cgVisitor.getCodeGenerator();
 		OppositePropertyCallExp asOppositePropertyCallExp = (OppositePropertyCallExp)asNavigationCallExp;
 		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
@@ -75,8 +73,6 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 		return cgPropertyCallExp; */
 		//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
 		OppositePropertyCallExp asOppositePropertyCallExp = (OppositePropertyCallExp)asNavigationCallExp;
-		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
-		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();
 		cgPropertyCallExp.setAst(asOppositePropertyCallExp);
 		//		CGExecutorProperty cgExecutorProperty = analyzer.getExecutorProperty(asProperty);
@@ -84,7 +80,6 @@ public class MiddlePropertyCallingConvention extends ExecutorOppositePropertyCal
 		//		cgPropertyCallExp = cgExecutorPropertyCallExp;
 		//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
 		cgPropertyCallExp.setReferredProperty(cgProperty);
-		cgPropertyCallExp.setAsProperty(asProperty);
 		analyzer.initAst(cgPropertyCallExp, asOppositePropertyCallExp, true);
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;

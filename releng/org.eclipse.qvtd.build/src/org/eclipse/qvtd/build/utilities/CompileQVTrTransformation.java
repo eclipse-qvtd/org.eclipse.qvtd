@@ -234,6 +234,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 			QVTrelationStandaloneSetup.doSetup();
 			QVTcorePivotStandaloneSetup.doSetup();
 			QVTimperativeStandaloneSetup.doSetup();
+			//	FieldingAnalyzer.CATCHES.setState(true);
 			log.info("Compiling '" + qvtrModel + "'");
 
 			TestProject testProject = getTestProject();
