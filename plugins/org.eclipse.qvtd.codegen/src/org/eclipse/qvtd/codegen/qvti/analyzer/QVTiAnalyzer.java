@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
@@ -89,7 +88,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
@@ -410,8 +408,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 	 * Mapping from each AS TypedModel to its corresponding CGTypedModel.
 	 */
 	//	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
-	private final @Nullable TypeId originalThisTypeId;
-	private final @NonNull TypeId runtimeThisTypeId;
+	//	private final @Nullable TypeId originalThisTypeId;
+	//	private final @NonNull TypeId runtimeThisTypeId;
 
 	private @Nullable PredicateTreeBuilder bodyBuilder;
 	//	private @NonNull Map<@NonNull Operation, org.eclipse.ocl.pivot.@NonNull Property> asOperation2asConstructorClass = new HashMap<>();
@@ -423,16 +421,16 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
-		ImperativeTransformation iTransformation = codeGenerator.getContextClass();
-		Type contextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
-		if (contextClass != iTransformation) {
-			originalThisTypeId = iTransformation.getTypeId();
-			runtimeThisTypeId = contextClass.getTypeId();
-		}
-		else {
-			originalThisTypeId = null;
-			runtimeThisTypeId = iTransformation.getTypeId();
-		}
+		//	ImperativeTransformation iTransformation = codeGenerator.getContextClass();
+		//	Type contextClass = QVTimperativeUtil.getRuntimeContextClass(iTransformation);
+		//	if (contextClass != iTransformation) {
+		//		originalThisTypeId = iTransformation.getTypeId();
+		//		runtimeThisTypeId = contextClass.getTypeId();
+		//	}
+		//	else {
+		//		originalThisTypeId = null;
+		//		runtimeThisTypeId = iTransformation.getTypeId();
+		//	}
 	}
 
 	//	public void addCGFunction(@NonNull CGFunction cgFunction) {
@@ -713,13 +711,14 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		return super.generatePropertyCallExp(cgSource, element);
 	}
 
-	public CGNamedElement generateSetStatement(SetStatement asSetStatement) {
+	public @NonNull CGNamedElement generateSetStatement(@NonNull SetStatement asSetStatement) {
 		ImperativeTransformation asTransformation = QVTimperativeUtil.getContainingTransformation(asSetStatement);
 		EntryPointsAnalysis entryPointsAnalysis = getCodeGenerator().getEntryPointsAnalysis(asTransformation);
 		Integer cacheIndex = entryPointsAnalysis.getCacheIndex(asSetStatement);
 		if (cacheIndex != null) {
 			//			Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
+			//	CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
+			CGEcorePropertyAssignment cgPropertyAssignment = CGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
 			cgPropertyAssignment.setAst(asSetStatement);
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
 			assert asVariable != null;
@@ -768,7 +767,8 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 						assert ((EReference)eStructuralFeature).isContainment();
 						try {
 							genModelHelper.getGetAccessor(eStructuralFeature);
-							CGEcoreContainerAssignment cgEcoreContainerAssignment = CGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
+							//	CGEcoreContainerAssignment cgEcoreContainerAssignment = CGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
+							CGEcorePropertyAssignment cgEcoreContainerAssignment = CGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
 							cgEcoreContainerAssignment.setEStructuralFeature(eStructuralFeature);
 							cgPropertyAssignment = cgEcoreContainerAssignment;
 						} catch (GenModelException e) {

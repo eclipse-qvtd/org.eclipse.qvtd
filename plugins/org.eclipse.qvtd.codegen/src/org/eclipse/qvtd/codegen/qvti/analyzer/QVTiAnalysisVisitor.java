@@ -11,15 +11,9 @@
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.naming.GlobalNameManager;
 import org.eclipse.ocl.examples.codegen.naming.NestedNameManager;
-import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiAnalysisVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 
 public class QVTiAnalysisVisitor extends AbstractQVTiAnalysisVisitor
 {
@@ -31,7 +25,7 @@ public class QVTiAnalysisVisitor extends AbstractQVTiAnalysisVisitor
 		return (QVTiAnalyzer) context;
 	}
 
-	@Override
+	/*	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Function asFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
 		if (asFunction != null) {
@@ -39,9 +33,9 @@ public class QVTiAnalysisVisitor extends AbstractQVTiAnalysisVisitor
 			cgFunctionCallExp.setFunction(cgFunction);
 		}
 		return visitCGOperationCallExp(cgFunctionCallExp);
-	}
+	} */
 
-	@Override
+	/*	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		visitCGValuedElement(cgMappingCallBinding);
 		GlobalNameManager globalNameManager = context.getGlobalNameManager();
@@ -49,7 +43,7 @@ public class QVTiAnalysisVisitor extends AbstractQVTiAnalysisVisitor
 		//	nameManager.queueValueName(cgMappingCallBinding, null, cgMappingCallBinding.getName());
 		//	nameManager.declareStandardName(cgMappingCallBinding);
 		return null;
-	}
+	} */
 
 	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {

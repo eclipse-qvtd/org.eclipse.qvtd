@@ -59,11 +59,6 @@ public abstract class AbstractQVTiCG2JavaNameVisitor
 	}
 
 	@Override
-	public @Nullable Object visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
-		return visitCGOperationCallExp(object);
-	}
-
-	@Override
 	public @Nullable Object visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
@@ -96,11 +91,6 @@ public abstract class AbstractQVTiCG2JavaNameVisitor
 	@Override
 	public @Nullable Object visitCGMappingLoop(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
-	}
-
-	@Override
-	public @Nullable Object visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
-		return visitCGEcorePropertyAssignment(object);
 	}
 
 	@Override

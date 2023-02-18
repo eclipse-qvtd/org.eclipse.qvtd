@@ -59,11 +59,6 @@ public abstract class AbstractQVTiFieldingAnalysisVisitor
 	}
 
 	@Override
-	public @NonNull ReturnState visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
-		return visitCGOperationCallExp(object);
-	}
-
-	@Override
 	public @NonNull ReturnState visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
@@ -96,11 +91,6 @@ public abstract class AbstractQVTiFieldingAnalysisVisitor
 	@Override
 	public @NonNull ReturnState visitCGMappingLoop(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
-	}
-
-	@Override
-	public @NonNull ReturnState visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
-		return visitCGEcorePropertyAssignment(object);
 	}
 
 	@Override

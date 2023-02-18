@@ -68,15 +68,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGFunction createCGFunction();
 
 	/**
-	 * Returns a new object of class '<em>CG Function Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Function Call Exp</em>'.
-	 * @generated
-	 */
-	@NonNull CGFunctionCallExp createCGFunctionCallExp();
-
-	/**
 	 * Returns a new object of class '<em>CG Function Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,15 +147,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGMappingLoop createCGMappingLoop();
-
-	/**
-	 * Returns a new object of class '<em>CG Middle Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Middle Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>CG Middle Property Call Exp</em>'.

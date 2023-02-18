@@ -955,46 +955,35 @@ public class ATL2QVTr extends AbstractTransformer
 			final /*@NonInvalid*/ @NonNull LocatedElement element = (LocatedElement)boxedValues[1];
 			this.contextObject = contextObject;
 			this.element = element;
-			/*@Caught*/ @Nullable Object CAUGHT_selectByKind;
-			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ATL_c_c_Helper = idResolver.getClass(CLSSid_Helper, null);
-				final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_LocatedElement, element);
-				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure = rootExecutor.getStaticTypeOfValue(null, oclAsSet);
-				final LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure = (LibraryIteration.LibraryIterationExtension)TYPE_closure.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-				final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(rootExecutor, SET_CLSSid_OclElement, CLSSid_OclElement);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ATL_c_c_Helper = idResolver.getClass(CLSSid_Helper, null);
+			final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_LocatedElement, element);
+			final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure = rootExecutor.getStaticTypeOfValue(null, oclAsSet);
+			final LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure = (LibraryIteration.LibraryIterationExtension)TYPE_closure.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+			final @NonNull Object ACC_closure = IMPL_closure.createAccumulatorValue(rootExecutor, SET_CLSSid_OclElement, CLSSid_OclElement);
+			/**
+			 * Implementation of the iterator body.
+			 */
+			final @NonNull AbstractBinaryOperation BODY_closure = new AbstractBinaryOperation()
+			{
 				/**
-				 * Implementation of the iterator body.
+				 * e.oclContainer()
 				 */
-				final @NonNull AbstractBinaryOperation BODY_closure = new AbstractBinaryOperation()
-				{
-					/**
-					 * e.oclContainer()
-					 */
-					@Override
-					public @Nullable Object evaluate(final @NonNull Executor rootExecutor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object e) {
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Object CAST_e = (@NonNull Object)e;
-						final /*@NonInvalid*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(rootExecutor, CAST_e);
-						return oclContainer;
-					}
-				};
-				final @NonNull ExecutorSingleIterationManager MGR_closure = new ExecutorSingleIterationManager(rootExecutor, SET_CLSSid_OclElement, BODY_closure, oclAsSet, ACC_closure);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure.evaluateIteration(MGR_closure);
-				final /*@Thrown*/ @NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(rootExecutor, closure, TYP_ATL_c_c_Helper);
-				CAUGHT_selectByKind = selectByKind;
-			}
-			catch (Exception THROWN_CAUGHT_selectByKind) {
-				CAUGHT_selectByKind = ValueUtil.createInvalidValue(THROWN_CAUGHT_selectByKind);
-			}
-			if (CAUGHT_selectByKind instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_selectByKind;
-			}
-			final /*@Thrown*/ @Nullable SetValue THROWN_selectByKind = (@Nullable SetValue)CAUGHT_selectByKind;
-			final /*@Thrown*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(THROWN_selectByKind).booleanValue();
+				@Override
+				public @Nullable Object evaluate(final @NonNull Executor rootExecutor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object e) {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ @NonNull Object CAST_e = (@NonNull Object)e;
+					final /*@NonInvalid*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(rootExecutor, CAST_e);
+					return oclContainer;
+				}
+			};
+			final @NonNull ExecutorSingleIterationManager MGR_closure = new ExecutorSingleIterationManager(rootExecutor, SET_CLSSid_OclElement, BODY_closure, oclAsSet, ACC_closure);
+			@SuppressWarnings("null")
+			final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure.evaluateIteration(MGR_closure);
+			final /*@Thrown*/ @NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(rootExecutor, closure, TYP_ATL_c_c_Helper);
+			final /*@Thrown*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(selectByKind).booleanValue();
 			/*@Thrown*/ @Nullable Helper IF_notEmpty;
 			if (notEmpty) {
-				@NonNull Iterator<Object> ITER__1 = THROWN_selectByKind.iterator();
+				@NonNull Iterator<Object> ITER__1 = selectByKind.iterator();
 				/*@Thrown*/ @NonNull Helper any_0;
 				while (true) {
 					if (!ITER__1.hasNext()) {
@@ -4291,36 +4280,14 @@ public class ATL2QVTr extends AbstractTransformer
 				if (module == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				/*@Caught*/ @Nullable Object CAUGHT_TmapModule;
-				try {
-					final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
-					CAUGHT_TmapModule = TmapModule;
-				}
-				catch (Exception THROWN_CAUGHT_TmapModule) {
-					CAUGHT_TmapModule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule);
-				}
-				if (CAUGHT_TmapModule instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_TmapModule;
-				}
-				final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule = (@Nullable TmapModule)CAUGHT_TmapModule;
-				final /*@Thrown*/ Boolean IsEQ__1 = THROWN_TmapModule != null;
+				final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
+				final /*@Thrown*/ Boolean IsEQ__1 = TmapModule != null;
 				/*@Thrown*/ Boolean IF_IsEQ__1;
 				if (IsEQ__1) {
-					/*@Caught*/ @Nullable Object CAUGHT_TmapModule_0;
-					try {
-						if (THROWN_TmapModule == null) {
-							throw new InvalidEvaluationException("Null where non-null value required");
-						}
-						CAUGHT_TmapModule_0 = THROWN_TmapModule;
+					if (TmapModule == null) {
+						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					catch (Exception THROWN_CAUGHT_TmapModule_0) {
-						CAUGHT_TmapModule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule_0);
-					}
-					if (CAUGHT_TmapModule_0 instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapModule_0;
-					}
-					final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule_0 = (@Nullable TmapModule)CAUGHT_TmapModule_0;
-					final /*@Thrown*/ @Nullable Boolean s0global = THROWN_TmapModule_0.getS0global();
+					final /*@Thrown*/ @Nullable Boolean s0global = TmapModule.getS0global();
 					if (s0global == null) {
 						throw new InvalidEvaluationException("Null if condition");
 					}
@@ -4340,15 +4307,8 @@ public class ATL2QVTr extends AbstractTransformer
 							final /*@NonInvalid*/ @NonNull String name = CAST_feature.getName();
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull OclType type = CAST_feature.getType();
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = THROWN_TmapModule_0.getT4qvtrTransformation();
-								CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-								CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-							}
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
 							final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(initExpression);
 							final /*@NonInvalid*/ Boolean IsEQ__2 = DmapOclExpression != null;
 							/*@NonInvalid*/ Boolean IF_IsEQ__2;
@@ -4365,12 +4325,8 @@ public class ATL2QVTr extends AbstractTransformer
 								trace.setT3atlFeature(CAST_feature);
 								trace.setT3atlModule(module);
 								trace.setT3atlType(type);
-								if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-								}
-								final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-								trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation);
-								trace.setWmapModule(THROWN_TmapModule_0);
+								trace.setT4qvtrTransformation(t4qvtrTransformation);
+								trace.setWmapModule(TmapModule);
 								trace.setWmapOclExpression(DmapOclExpression);
 								final /*@NonInvalid*/ boolean mmapHelper__Attribute__qvtr__init__ = ValueUtil.TRUE_VALUE;
 								IF_IsEQ__2 = mmapHelper__Attribute__qvtr__init__;
@@ -4466,36 +4422,14 @@ public class ATL2QVTr extends AbstractTransformer
 				if (module == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				/*@Caught*/ @Nullable Object CAUGHT_TmapModule;
-				try {
-					final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
-					CAUGHT_TmapModule = TmapModule;
-				}
-				catch (Exception THROWN_CAUGHT_TmapModule) {
-					CAUGHT_TmapModule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule);
-				}
-				if (CAUGHT_TmapModule instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_TmapModule;
-				}
-				final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule = (@Nullable TmapModule)CAUGHT_TmapModule;
-				final /*@Thrown*/ Boolean IsEQ__1 = THROWN_TmapModule != null;
+				final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
+				final /*@Thrown*/ Boolean IsEQ__1 = TmapModule != null;
 				/*@Thrown*/ Boolean IF_IsEQ__1;
 				if (IsEQ__1) {
-					/*@Caught*/ @Nullable Object CAUGHT_TmapModule_0;
-					try {
-						if (THROWN_TmapModule == null) {
-							throw new InvalidEvaluationException("Null where non-null value required");
-						}
-						CAUGHT_TmapModule_0 = THROWN_TmapModule;
+					if (TmapModule == null) {
+						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					catch (Exception THROWN_CAUGHT_TmapModule_0) {
-						CAUGHT_TmapModule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule_0);
-					}
-					if (CAUGHT_TmapModule_0 instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapModule_0;
-					}
-					final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule_0 = (@Nullable TmapModule)CAUGHT_TmapModule_0;
-					final /*@Thrown*/ @Nullable Boolean s0global = THROWN_TmapModule_0.getS0global();
+					final /*@Thrown*/ @Nullable Boolean s0global = TmapModule.getS0global();
 					if (s0global == null) {
 						throw new InvalidEvaluationException("Null if condition");
 					}
@@ -4515,15 +4449,8 @@ public class ATL2QVTr extends AbstractTransformer
 							final /*@NonInvalid*/ @NonNull String name = CAST_feature.getName();
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull OclType returnType = CAST_feature.getReturnType();
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = THROWN_TmapModule_0.getT4qvtrTransformation();
-								CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-								CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-							}
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
 							final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(body);
 							final /*@NonInvalid*/ Boolean IsEQ__2 = DmapOclExpression != null;
 							/*@NonInvalid*/ Boolean IF_IsEQ__2;
@@ -4540,12 +4467,8 @@ public class ATL2QVTr extends AbstractTransformer
 								trace.setT3atlFeature(CAST_feature);
 								trace.setT3atlModule(module);
 								trace.setT3atlType(returnType);
-								if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-								}
-								final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-								trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation);
-								trace.setWmapModule(THROWN_TmapModule_0);
+								trace.setT4qvtrTransformation(t4qvtrTransformation);
+								trace.setWmapModule(TmapModule);
 								trace.setWmapOclExpression(DmapOclExpression);
 								final /*@NonInvalid*/ boolean mmapHelper__Operation__qvtr__init__ = ValueUtil.TRUE_VALUE;
 								IF_IsEQ__2 = mmapHelper__Operation__qvtr__init__;
@@ -4696,36 +4619,14 @@ public class ATL2QVTr extends AbstractTransformer
 			if (module == null) {
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
-			/*@Caught*/ @Nullable Object CAUGHT_TmapModule;
-			try {
-				final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
-				CAUGHT_TmapModule = TmapModule;
-			}
-			catch (Exception THROWN_CAUGHT_TmapModule) {
-				CAUGHT_TmapModule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule);
-			}
-			if (CAUGHT_TmapModule instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_TmapModule;
-			}
-			final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule = (@Nullable TmapModule)CAUGHT_TmapModule;
-			final /*@Thrown*/ Boolean IsEQ__0 = THROWN_TmapModule != null;
+			final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(module);
+			final /*@Thrown*/ Boolean IsEQ__0 = TmapModule != null;
 			/*@Thrown*/ Boolean IF_IsEQ__0;
 			if (IsEQ__0) {
-				/*@Caught*/ @Nullable Object CAUGHT_TmapModule_0;
-				try {
-					if (THROWN_TmapModule == null) {
-						throw new InvalidEvaluationException("Null where non-null value required");
-					}
-					CAUGHT_TmapModule_0 = THROWN_TmapModule;
+				if (TmapModule == null) {
+					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				catch (Exception THROWN_CAUGHT_TmapModule_0) {
-					CAUGHT_TmapModule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule_0);
-				}
-				if (CAUGHT_TmapModule_0 instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_TmapModule_0;
-				}
-				final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule_0 = (@Nullable TmapModule)CAUGHT_TmapModule_0;
-				final /*@Thrown*/ @Nullable Boolean s0global = THROWN_TmapModule_0.getS0global();
+				final /*@Thrown*/ @Nullable Boolean s0global = TmapModule.getS0global();
 				if (s0global == null) {
 					throw new InvalidEvaluationException("Null if condition");
 				}
@@ -4741,15 +4642,8 @@ public class ATL2QVTr extends AbstractTransformer
 						if (outPattern == null) {
 							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-						try {
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = THROWN_TmapModule_0.getT4qvtrTransformation();
-							CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-						}
-						catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-							CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
 						// creations
 						final @NonNull SharedVariable _6 = QVTrelationFactory.eINSTANCE.createSharedVariable();
 						MODEL_qvtr.add(_6, false);
@@ -4766,21 +4660,13 @@ public class ATL2QVTr extends AbstractTransformer
 						qvtrRelation.setName(name);
 						trace.setT1ruleName(name);
 						qvtrRelation.getVariable().add(_6);
-						if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-						}
-						final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-						qvtrRelation.setTransformation(THROWN_t4qvtrTransformation);
+						qvtrRelation.setTransformation(t4qvtrTransformation);
 						trace.setT3atlModule(module);
 						trace.setT3atlOutPattern(outPattern);
 						trace.setT4_6(_6);
 						trace.setT4qvtrRelation(qvtrRelation);
-						if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-						}
-						final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation_0 = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-						trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation_0);
-						trace.setWmapModule(THROWN_TmapModule_0);
+						trace.setT4qvtrTransformation(t4qvtrTransformation);
+						trace.setWmapModule(TmapModule);
 						final /*@NonInvalid*/ boolean mmapMatchedRule__qvtr__init__ = ValueUtil.TRUE_VALUE;
 						IF_IsEQ__1 = mmapMatchedRule__qvtr__init__;
 					}
@@ -4868,167 +4754,52 @@ public class ATL2QVTr extends AbstractTransformer
 					if (Module == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_TmapModule;
-					try {
-						final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(Module);
-						CAUGHT_TmapModule = TmapModule;
-					}
-					catch (Exception THROWN_CAUGHT_TmapModule) {
-						CAUGHT_TmapModule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule);
-					}
-					if (CAUGHT_TmapModule instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapModule;
-					}
-					final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule = (@Nullable TmapModule)CAUGHT_TmapModule;
-					final /*@Thrown*/ Boolean IsEQ__2 = THROWN_TmapModule != null;
+					final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(Module);
+					final /*@Thrown*/ Boolean IsEQ__2 = TmapModule != null;
 					/*@Thrown*/ Boolean IF_IsEQ__2;
 					if (IsEQ__2) {
-						/*@Caught*/ @Nullable Object CAUGHT_TmapModule_0;
-						try {
-							if (THROWN_TmapModule == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_TmapModule_0 = THROWN_TmapModule;
+						if (TmapModule == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_TmapModule_0) {
-							CAUGHT_TmapModule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule_0);
-						}
-						if (CAUGHT_TmapModule_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_TmapModule_0;
-						}
-						final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule_0 = (@Nullable TmapModule)CAUGHT_TmapModule_0;
-						final /*@Thrown*/ @Nullable Boolean s0global = THROWN_TmapModule_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global = TmapModule.getS0global();
 						if (s0global == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
 						/*@Thrown*/ boolean IF_s0global;
 						if (s0global) {
-							/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel;
-							try {
-								final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(metamodel);
-								CAUGHT_TmapOclMetamodel = TmapOclMetamodel;
-							}
-							catch (Exception THROWN_CAUGHT_TmapOclMetamodel) {
-								CAUGHT_TmapOclMetamodel = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel);
-							}
-							if (CAUGHT_TmapOclMetamodel instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_TmapOclMetamodel;
-							}
-							final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel;
-							final /*@Thrown*/ Boolean IsEQ__3 = THROWN_TmapOclMetamodel != null;
+							final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(metamodel);
+							final /*@Thrown*/ Boolean IsEQ__3 = TmapOclMetamodel != null;
 							/*@Thrown*/ Boolean IF_IsEQ__3;
 							if (IsEQ__3) {
-								/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel_0;
-								try {
-									if (THROWN_TmapOclMetamodel == null) {
-										throw new InvalidEvaluationException("Null where non-null value required");
-									}
-									CAUGHT_TmapOclMetamodel_0 = THROWN_TmapOclMetamodel;
+								if (TmapOclMetamodel == null) {
+									throw new InvalidEvaluationException("Null where non-null value required");
 								}
-								catch (Exception THROWN_CAUGHT_TmapOclMetamodel_0) {
-									CAUGHT_TmapOclMetamodel_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel_0);
-								}
-								if (CAUGHT_TmapOclMetamodel_0 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_TmapOclMetamodel_0;
-								}
-								final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel_0 = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel_0;
-								final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_TmapOclMetamodel_0.getS0global();
+								final /*@Thrown*/ @Nullable Boolean s0global_0 = TmapOclMetamodel.getS0global();
 								if (s0global_0 == null) {
 									throw new InvalidEvaluationException("Null if condition");
 								}
 								/*@Thrown*/ boolean IF_s0global_0;
 								if (s0global_0) {
-									/*@Caught*/ @Nullable Object CAUGHT_name;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull String name = metamodel.getName();
-										CAUGHT_name = name;
-									}
-									catch (Exception THROWN_CAUGHT_name) {
-										CAUGHT_name = ValueUtil.createInvalidValue(THROWN_CAUGHT_name);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = THROWN_TmapModule_0.getT4qvtrTransformation();
-										CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-										CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTypedModel;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = THROWN_TmapOclMetamodel_0.getT4qvtrTypedModel();
-										CAUGHT_t4qvtrTypedModel = t4qvtrTypedModel;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrTypedModel) {
-										CAUGHT_t4qvtrTypedModel = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTypedModel);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_getPackage;
-									try {
-										if (CAUGHT_name instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_name;
-										}
-										final /*@Thrown*/ @Nullable String THROWN_name = (@Nullable String)CAUGHT_name;
-										final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Package getPackage_0 = INSTANCE_CACHE_ATL2QVTr_getPackage.evaluate(rootThis, Module, THROWN_name);
-										CAUGHT_getPackage = getPackage_0;
-									}
-									catch (Exception THROWN_CAUGHT_getPackage) {
-										CAUGHT_getPackage = ValueUtil.createInvalidValue(THROWN_CAUGHT_getPackage);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_oclAsSet;
-									try {
-										if (CAUGHT_getPackage instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_getPackage;
-										}
-										final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package THROWN_getPackage = (org.eclipse.ocl.pivot.@Nullable Package)CAUGHT_getPackage;
-										final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_Package, THROWN_getPackage);
-										CAUGHT_oclAsSet = oclAsSet;
-									}
-									catch (Exception THROWN_CAUGHT_oclAsSet) {
-										CAUGHT_oclAsSet = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclAsSet);
-									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull String name = metamodel.getName();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = TmapOclMetamodel.getT4qvtrTypedModel();
+									final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Package getPackage_0 = INSTANCE_CACHE_ATL2QVTr_getPackage.evaluate(rootThis, Module, name);
+									final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_Package, getPackage_0);
 									// mapping statements
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									if (CAUGHT_oclAsSet instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_oclAsSet;
-									}
-									final /*@Thrown*/ @Nullable SetValue THROWN_oclAsSet = (@Nullable SetValue)CAUGHT_oclAsSet;
-									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, THROWN_oclAsSet);
-									THROWN_t4qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
-									if (CAUGHT_oclAsSet instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_oclAsSet;
-									}
-									final /*@Thrown*/ @Nullable SetValue THROWN_oclAsSet_0 = (@Nullable SetValue)CAUGHT_oclAsSet;
-									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, THROWN_oclAsSet_0);
+									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
+									t4qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
+									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
 									trace.getT4qvtrPackages().addAll(ECORE_oclAsSet_0);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_0 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-									}
-									final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-									THROWN_t4qvtrTypedModel_0.setTransformation(THROWN_t4qvtrTransformation);
+									t4qvtrTypedModel.setTransformation(t4qvtrTransformation);
 									trace.setT3atlModule(Module);
 									trace.setT3oclMetamodel(metamodel);
-									if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-									}
-									final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation_0 = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-									trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation_0);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_1 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									trace.setT4qvtrTypedModel(THROWN_t4qvtrTypedModel_1);
-									trace.setWmapModule(THROWN_TmapModule_0);
-									trace.setWmapOclMetamodel(THROWN_TmapOclMetamodel_0);
+									trace.setT4qvtrTransformation(t4qvtrTransformation);
+									trace.setT4qvtrTypedModel(t4qvtrTypedModel);
+									trace.setWmapModule(TmapModule);
+									trace.setWmapOclMetamodel(TmapOclMetamodel);
 									final /*@NonInvalid*/ boolean mmapOclModel__IN__qvtr__init__ = ValueUtil.TRUE_VALUE;
 									IF_s0global_0 = mmapOclModel__IN__qvtr__init__;
 								}
@@ -5131,167 +4902,52 @@ public class ATL2QVTr extends AbstractTransformer
 					if (Module == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_TmapModule;
-					try {
-						final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(Module);
-						CAUGHT_TmapModule = TmapModule;
-					}
-					catch (Exception THROWN_CAUGHT_TmapModule) {
-						CAUGHT_TmapModule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule);
-					}
-					if (CAUGHT_TmapModule instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapModule;
-					}
-					final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule = (@Nullable TmapModule)CAUGHT_TmapModule;
-					final /*@Thrown*/ Boolean IsEQ__2 = THROWN_TmapModule != null;
+					final /*@Thrown*/ @Nullable TmapModule TmapModule = OPPOSITE_OF_TmapModule_t3atlModule.get(Module);
+					final /*@Thrown*/ Boolean IsEQ__2 = TmapModule != null;
 					/*@Thrown*/ Boolean IF_IsEQ__2;
 					if (IsEQ__2) {
-						/*@Caught*/ @Nullable Object CAUGHT_TmapModule_0;
-						try {
-							if (THROWN_TmapModule == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_TmapModule_0 = THROWN_TmapModule;
+						if (TmapModule == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_TmapModule_0) {
-							CAUGHT_TmapModule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapModule_0);
-						}
-						if (CAUGHT_TmapModule_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_TmapModule_0;
-						}
-						final /*@Thrown*/ @Nullable TmapModule THROWN_TmapModule_0 = (@Nullable TmapModule)CAUGHT_TmapModule_0;
-						final /*@Thrown*/ @Nullable Boolean s0global = THROWN_TmapModule_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global = TmapModule.getS0global();
 						if (s0global == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
 						/*@Thrown*/ boolean IF_s0global;
 						if (s0global) {
-							/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel;
-							try {
-								final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(metamodel);
-								CAUGHT_TmapOclMetamodel = TmapOclMetamodel;
-							}
-							catch (Exception THROWN_CAUGHT_TmapOclMetamodel) {
-								CAUGHT_TmapOclMetamodel = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel);
-							}
-							if (CAUGHT_TmapOclMetamodel instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_TmapOclMetamodel;
-							}
-							final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel;
-							final /*@Thrown*/ Boolean IsEQ__3 = THROWN_TmapOclMetamodel != null;
+							final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(metamodel);
+							final /*@Thrown*/ Boolean IsEQ__3 = TmapOclMetamodel != null;
 							/*@Thrown*/ Boolean IF_IsEQ__3;
 							if (IsEQ__3) {
-								/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel_0;
-								try {
-									if (THROWN_TmapOclMetamodel == null) {
-										throw new InvalidEvaluationException("Null where non-null value required");
-									}
-									CAUGHT_TmapOclMetamodel_0 = THROWN_TmapOclMetamodel;
+								if (TmapOclMetamodel == null) {
+									throw new InvalidEvaluationException("Null where non-null value required");
 								}
-								catch (Exception THROWN_CAUGHT_TmapOclMetamodel_0) {
-									CAUGHT_TmapOclMetamodel_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel_0);
-								}
-								if (CAUGHT_TmapOclMetamodel_0 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_TmapOclMetamodel_0;
-								}
-								final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel_0 = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel_0;
-								final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_TmapOclMetamodel_0.getS0global();
+								final /*@Thrown*/ @Nullable Boolean s0global_0 = TmapOclMetamodel.getS0global();
 								if (s0global_0 == null) {
 									throw new InvalidEvaluationException("Null if condition");
 								}
 								/*@Thrown*/ boolean IF_s0global_0;
 								if (s0global_0) {
-									/*@Caught*/ @Nullable Object CAUGHT_name;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull String name = metamodel.getName();
-										CAUGHT_name = name;
-									}
-									catch (Exception THROWN_CAUGHT_name) {
-										CAUGHT_name = ValueUtil.createInvalidValue(THROWN_CAUGHT_name);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = THROWN_TmapModule_0.getT4qvtrTransformation();
-										CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-										CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTypedModel;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = THROWN_TmapOclMetamodel_0.getT4qvtrTypedModel();
-										CAUGHT_t4qvtrTypedModel = t4qvtrTypedModel;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrTypedModel) {
-										CAUGHT_t4qvtrTypedModel = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTypedModel);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_getPackage;
-									try {
-										if (CAUGHT_name instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_name;
-										}
-										final /*@Thrown*/ @Nullable String THROWN_name = (@Nullable String)CAUGHT_name;
-										final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Package getPackage_0 = INSTANCE_CACHE_ATL2QVTr_getPackage.evaluate(rootThis, Module, THROWN_name);
-										CAUGHT_getPackage = getPackage_0;
-									}
-									catch (Exception THROWN_CAUGHT_getPackage) {
-										CAUGHT_getPackage = ValueUtil.createInvalidValue(THROWN_CAUGHT_getPackage);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_oclAsSet;
-									try {
-										if (CAUGHT_getPackage instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_getPackage;
-										}
-										final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Package THROWN_getPackage = (org.eclipse.ocl.pivot.@Nullable Package)CAUGHT_getPackage;
-										final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_Package, THROWN_getPackage);
-										CAUGHT_oclAsSet = oclAsSet;
-									}
-									catch (Exception THROWN_CAUGHT_oclAsSet) {
-										CAUGHT_oclAsSet = ValueUtil.createInvalidValue(THROWN_CAUGHT_oclAsSet);
-									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull String name = metamodel.getName();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = TmapOclMetamodel.getT4qvtrTypedModel();
+									final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Package getPackage_0 = INSTANCE_CACHE_ATL2QVTr_getPackage.evaluate(rootThis, Module, name);
+									final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(rootExecutor, SET_CLSSid_Package, getPackage_0);
 									// mapping statements
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									if (CAUGHT_oclAsSet instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_oclAsSet;
-									}
-									final /*@Thrown*/ @Nullable SetValue THROWN_oclAsSet = (@Nullable SetValue)CAUGHT_oclAsSet;
-									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, THROWN_oclAsSet);
-									THROWN_t4qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
-									if (CAUGHT_oclAsSet instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_oclAsSet;
-									}
-									final /*@Thrown*/ @Nullable SetValue THROWN_oclAsSet_0 = (@Nullable SetValue)CAUGHT_oclAsSet;
-									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, THROWN_oclAsSet_0);
+									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
+									t4qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
+									final /*@Thrown*/ @Nullable List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
 									trace.getT4qvtrPackages().addAll(ECORE_oclAsSet_0);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_0 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-									}
-									final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-									THROWN_t4qvtrTypedModel_0.setTransformation(THROWN_t4qvtrTransformation);
+									t4qvtrTypedModel.setTransformation(t4qvtrTransformation);
 									trace.setT3atlModule(Module);
 									trace.setT3oclMetamodel(metamodel);
-									if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-									}
-									final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation_0 = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-									trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation_0);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_1 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									trace.setT4qvtrTypedModel(THROWN_t4qvtrTypedModel_1);
-									trace.setWmapModule(THROWN_TmapModule_0);
-									trace.setWmapOclMetamodel(THROWN_TmapOclMetamodel_0);
+									trace.setT4qvtrTransformation(t4qvtrTransformation);
+									trace.setT4qvtrTypedModel(t4qvtrTypedModel);
+									trace.setWmapModule(TmapModule);
+									trace.setWmapOclMetamodel(TmapOclMetamodel);
 									final /*@NonInvalid*/ boolean mmapOclModel__OUT__qvtr__init__ = ValueUtil.TRUE_VALUE;
 									IF_s0global_0 = mmapOclModel__OUT__qvtr__init__;
 								}
@@ -5609,146 +5265,66 @@ public class ATL2QVTr extends AbstractTransformer
 			if (s0global) {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull List<InPatternElement> elements = t3atlPattern.getElements();
-				/*@Caught*/ @Nullable Object CAUGHT_collect;
-				try {
-					final /*@NonInvalid*/ @Nullable SetValue BOXED_elements = idResolver.createSetOfAll(SET_CLSSid_InPatternElement, elements);
-					/*@NonInvalid*/ BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_OclType);
-					@NonNull Iterator<Object> ITER_i = BOXED_elements.iterator();
-					/*@Thrown*/ @NonNull BagValue collect;
-					while (true) {
-						if (!ITER_i.hasNext()) {
-							collect = accumulator;
-							break;
-						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull InPatternElement i = (@NonNull InPatternElement)ITER_i.next();
-						/**
-						 * i.type
-						 */
-						final /*@NonInvalid*/ @Nullable OclType type = i.getType();
-						//
-						accumulator.add(type);
+				final /*@NonInvalid*/ @Nullable SetValue BOXED_elements = idResolver.createSetOfAll(SET_CLSSid_InPatternElement, elements);
+				/*@NonInvalid*/ BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_OclType);
+				@NonNull Iterator<Object> ITER_i = BOXED_elements.iterator();
+				/*@Thrown*/ @NonNull BagValue collect;
+				while (true) {
+					if (!ITER_i.hasNext()) {
+						collect = accumulator;
+						break;
 					}
-					CAUGHT_collect = collect;
-				}
-				catch (Exception THROWN_CAUGHT_collect) {
-					CAUGHT_collect = ValueUtil.createInvalidValue(THROWN_CAUGHT_collect);
-				}
-				/*@Caught*/ @Nullable Object CAUGHT_selectByKind;
-				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_OCL_c_c_OclModelElement = idResolver.getClass(CLSSid_OclModelElement, null);
-					if (CAUGHT_collect instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_collect;
-					}
-					final /*@Thrown*/ @Nullable BagValue THROWN_collect = (@Nullable BagValue)CAUGHT_collect;
-					final /*@Thrown*/ @NonNull BagValue selectByKind = (BagValue)CollectionSelectByKindOperation.INSTANCE.evaluate(rootExecutor, THROWN_collect, TYP_OCL_c_c_OclModelElement);
-					CAUGHT_selectByKind = selectByKind;
-				}
-				catch (Exception THROWN_CAUGHT_selectByKind) {
-					CAUGHT_selectByKind = ValueUtil.createInvalidValue(THROWN_CAUGHT_selectByKind);
-				}
-				/*@Caught*/ @Nullable Object CAUGHT_any;
-				try {
-					if (CAUGHT_selectByKind instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_selectByKind;
-					}
-					final /*@Thrown*/ @Nullable BagValue THROWN_selectByKind = (@Nullable BagValue)CAUGHT_selectByKind;
-					@NonNull Iterator<Object> ITER_i_0 = THROWN_selectByKind.iterator();
-					/*@Thrown*/ @NonNull OclModelElement any_0;
-					while (true) {
-						if (!ITER_i_0.hasNext()) {
-							throw new InvalidValueException("Nothing to return for ''any''");
-						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull OclModelElement i_0 = (@NonNull OclModelElement)ITER_i_0.next();
-						/**
-						 * true
-						 */
-						//
-						if (ValueUtil.TRUE_VALUE) {			// Carry on till something found
-							any_0 = i_0;
-							break;
-						}
-					}
-					CAUGHT_any = any_0;
-				}
-				catch (Exception THROWN_CAUGHT_any) {
-					CAUGHT_any = ValueUtil.createInvalidValue(THROWN_CAUGHT_any);
-				}
-				/*@Caught*/ @Nullable Object CAUGHT_model;
-				try {
-					if (CAUGHT_any instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_any;
-					}
-					final /*@Thrown*/ @Nullable OclModelElement THROWN_any = (@Nullable OclModelElement)CAUGHT_any;
 					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull OclModel model = THROWN_any.getModel();
-					CAUGHT_model = model;
+					/*@NonInvalid*/ @NonNull InPatternElement i = (@NonNull InPatternElement)ITER_i.next();
+					/**
+					 * i.type
+					 */
+					final /*@NonInvalid*/ @Nullable OclType type = i.getType();
+					//
+					accumulator.add(type);
 				}
-				catch (Exception THROWN_CAUGHT_model) {
-					CAUGHT_model = ValueUtil.createInvalidValue(THROWN_CAUGHT_model);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_OCL_c_c_OclModelElement = idResolver.getClass(CLSSid_OclModelElement, null);
+				final /*@Thrown*/ @NonNull BagValue selectByKind = (BagValue)CollectionSelectByKindOperation.INSTANCE.evaluate(rootExecutor, collect, TYP_OCL_c_c_OclModelElement);
+				@NonNull Iterator<Object> ITER_i_0 = selectByKind.iterator();
+				/*@Thrown*/ @NonNull OclModelElement any_0;
+				while (true) {
+					if (!ITER_i_0.hasNext()) {
+						throw new InvalidValueException("Nothing to return for ''any''");
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ @NonNull OclModelElement i_0 = (@NonNull OclModelElement)ITER_i_0.next();
+					/**
+					 * true
+					 */
+					//
+					if (ValueUtil.TRUE_VALUE) {			// Carry on till something found
+						any_0 = i_0;
+						break;
+					}
 				}
-				if (CAUGHT_model instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_model;
-				}
-				final /*@Thrown*/ @Nullable OclModel THROWN_model = (@Nullable OclModel)CAUGHT_model;
-				final /*@Thrown*/ @Nullable OclModel metamodel = THROWN_model.getMetamodel();
+				@SuppressWarnings("null")
+				final /*@Thrown*/ @NonNull OclModel model = any_0.getModel();
+				final /*@Thrown*/ @Nullable OclModel metamodel = model.getMetamodel();
 				final /*@Thrown*/ boolean IsEQ__0 = metamodel == null;
 				/*@Thrown*/ boolean IF_IsEQ__0;
 				if (IsEQ__0) {
-					/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel;
-					try {
-						final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(THROWN_model);
-						CAUGHT_TmapOclMetamodel = TmapOclMetamodel;
-					}
-					catch (Exception THROWN_CAUGHT_TmapOclMetamodel) {
-						CAUGHT_TmapOclMetamodel = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel);
-					}
-					if (CAUGHT_TmapOclMetamodel instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapOclMetamodel;
-					}
-					final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel;
-					final /*@Thrown*/ Boolean IsEQ__1 = THROWN_TmapOclMetamodel != null;
+					final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(model);
+					final /*@Thrown*/ Boolean IsEQ__1 = TmapOclMetamodel != null;
 					/*@Thrown*/ Boolean IF_IsEQ__1;
 					if (IsEQ__1) {
-						/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel_0;
-						try {
-							if (THROWN_TmapOclMetamodel == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_TmapOclMetamodel_0 = THROWN_TmapOclMetamodel;
+						if (TmapOclMetamodel == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_TmapOclMetamodel_0) {
-							CAUGHT_TmapOclMetamodel_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel_0);
-						}
-						if (CAUGHT_TmapOclMetamodel_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_TmapOclMetamodel_0;
-						}
-						final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel_0 = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel_0;
-						final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_TmapOclMetamodel_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global_0 = TmapOclMetamodel.getS0global();
 						if (s0global_0 == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
 						/*@Thrown*/ boolean IF_s0global_0;
 						if (s0global_0) {
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
-								CAUGHT_t4qvtrRelation = t4qvtrRelation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrRelation) {
-								CAUGHT_t4qvtrRelation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTypedModel;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = THROWN_TmapOclMetamodel_0.getT4qvtrTypedModel();
-								CAUGHT_t4qvtrTypedModel = t4qvtrTypedModel;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTypedModel) {
-								CAUGHT_t4qvtrTypedModel = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTypedModel);
-							}
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = TmapOclMetamodel.getT4qvtrTypedModel();
 							// creations
 							final @NonNull RelationDomain qvtrDomain = QVTrelationFactory.eINSTANCE.createRelationDomain();
 							MODEL_qvtr.add(qvtrDomain, false);
@@ -5756,31 +5332,15 @@ public class ATL2QVTr extends AbstractTransformer
 								AbstractTransformer.CREATIONS.println("created " + toDebugString(qvtrDomain));
 							}
 							// mapping statements
-							if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-							qvtrDomain.setRule(THROWN_t4qvtrRelation);
-							if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-							}
-							final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-							qvtrDomain.setTypedModel(THROWN_t4qvtrTypedModel);
-							trace.setT3atlModel(THROWN_model);
+							qvtrDomain.setRule(t4qvtrRelation);
+							qvtrDomain.setTypedModel(t4qvtrTypedModel);
+							trace.setT3atlModel(model);
 							trace.setT3atlRule(rule);
 							trace.setT4qvtrDomain(qvtrDomain);
-							if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_0 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-							trace.setT4qvtrRelation(THROWN_t4qvtrRelation_0);
-							if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-							}
-							final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_0 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-							trace.setT4qvtrTypedModel(THROWN_t4qvtrTypedModel_0);
+							trace.setT4qvtrRelation(t4qvtrRelation);
+							trace.setT4qvtrTypedModel(t4qvtrTypedModel);
 							trace.setWmapMatchedRule(TmapMatchedRule);
-							trace.setWmapOclMetamodel(THROWN_TmapOclMetamodel_0);
+							trace.setWmapOclMetamodel(TmapOclMetamodel);
 							final /*@NonInvalid*/ boolean mmapInPattern__qvtr__init__ = ValueUtil.TRUE_VALUE;
 							IF_s0global_0 = mmapInPattern__qvtr__init__;
 						}
@@ -5911,82 +5471,30 @@ public class ATL2QVTr extends AbstractTransformer
 					if (superRule == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_TmapMatchedRule;
-					try {
-						final /*@Thrown*/ @Nullable TmapMatchedRule TmapMatchedRule_0 = OPPOSITE_OF_TmapMatchedRule_t3matchedRule.get(superRule);
-						CAUGHT_TmapMatchedRule = TmapMatchedRule_0;
-					}
-					catch (Exception THROWN_CAUGHT_TmapMatchedRule) {
-						CAUGHT_TmapMatchedRule = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapMatchedRule);
-					}
-					if (CAUGHT_TmapMatchedRule instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_TmapMatchedRule;
-					}
-					final /*@Thrown*/ @Nullable TmapMatchedRule THROWN_TmapMatchedRule = (@Nullable TmapMatchedRule)CAUGHT_TmapMatchedRule;
-					final /*@Thrown*/ Boolean IsEQ__1 = THROWN_TmapMatchedRule != null;
+					final /*@Thrown*/ @Nullable TmapMatchedRule TmapMatchedRule_0 = OPPOSITE_OF_TmapMatchedRule_t3matchedRule.get(superRule);
+					final /*@Thrown*/ Boolean IsEQ__1 = TmapMatchedRule_0 != null;
 					/*@Thrown*/ Boolean IF_IsEQ__1;
 					if (IsEQ__1) {
-						/*@Caught*/ @Nullable Object CAUGHT_TmapMatchedRule_0;
-						try {
-							if (THROWN_TmapMatchedRule == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_TmapMatchedRule_0 = THROWN_TmapMatchedRule;
+						if (TmapMatchedRule_0 == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_TmapMatchedRule_0) {
-							CAUGHT_TmapMatchedRule_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapMatchedRule_0);
-						}
-						if (CAUGHT_TmapMatchedRule_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_TmapMatchedRule_0;
-						}
-						final /*@Thrown*/ @Nullable TmapMatchedRule THROWN_TmapMatchedRule_0 = (@Nullable TmapMatchedRule)CAUGHT_TmapMatchedRule_0;
-						final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_TmapMatchedRule_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global_0 = TmapMatchedRule_0.getS0global();
 						if (s0global_0 == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
 						/*@Thrown*/ boolean IF_s0global_0;
 						if (s0global_0) {
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
-								CAUGHT_t4qvtrRelation = t4qvtrRelation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrRelation) {
-								CAUGHT_t4qvtrRelation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation_0;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull Relation t4qvtrRelation_0 = THROWN_TmapMatchedRule_0.getT4qvtrRelation();
-								CAUGHT_t4qvtrRelation_0 = t4qvtrRelation_0;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrRelation_0) {
-								CAUGHT_t4qvtrRelation_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation_0);
-							}
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull Relation t4qvtrRelation_0 = TmapMatchedRule_0.getT4qvtrRelation();
 							// mapping statements
-							if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_0 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-							if (CAUGHT_t4qvtrRelation_0 instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation_0;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation = (@Nullable Relation)CAUGHT_t4qvtrRelation_0;
-							THROWN_t4qvtrRelation_0.getOverrides().add(THROWN_t4qvtrRelation);
+							t4qvtrRelation.getOverrides().add(t4qvtrRelation_0);
 							trace.setT3atlSuperRule(superRule);
-							if (CAUGHT_t4qvtrRelation_0 instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation_0;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_1 = (@Nullable Relation)CAUGHT_t4qvtrRelation_0;
-							trace.setT4qvtrOverriddenRelation(THROWN_t4qvtrRelation_1);
-							if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-							}
-							final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_2 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-							trace.setT4qvtrOverridesRelation(THROWN_t4qvtrRelation_2);
+							trace.setT4qvtrOverriddenRelation(t4qvtrRelation_0);
+							trace.setT4qvtrOverridesRelation(t4qvtrRelation);
 							trace.setWmapMatchedRule1(TmapMatchedRule);
-							trace.setWmapMatchedRule(THROWN_TmapMatchedRule_0);
+							trace.setWmapMatchedRule(TmapMatchedRule_0);
 							final /*@NonInvalid*/ boolean mmapMatchedRule__super__qvtr__init__ = ValueUtil.TRUE_VALUE;
 							IF_s0global_0 = mmapMatchedRule__super__qvtr__init__;
 						}
@@ -6091,20 +5599,9 @@ public class ATL2QVTr extends AbstractTransformer
 			if (CAST_type == null) {
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
-			/*@Caught*/ @Nullable Object CAUGHT_model;
-			try {
-				@SuppressWarnings("null")
-				final /*@Thrown*/ @NonNull OclModel model = CAST_type.getModel();
-				CAUGHT_model = model;
-			}
-			catch (Exception THROWN_CAUGHT_model) {
-				CAUGHT_model = ValueUtil.createInvalidValue(THROWN_CAUGHT_model);
-			}
-			if (CAUGHT_model instanceof InvalidValueException) {
-				throw (InvalidValueException)CAUGHT_model;
-			}
-			final /*@Thrown*/ @Nullable OclModel THROWN_model = (@Nullable OclModel)CAUGHT_model;
-			final /*@Thrown*/ @Nullable OclModel metamodel = THROWN_model.getMetamodel();
+			@SuppressWarnings("null")
+			final /*@Thrown*/ @NonNull OclModel model = CAST_type.getModel();
+			final /*@Thrown*/ @Nullable OclModel metamodel = model.getMetamodel();
 			final /*@Thrown*/ boolean IsEQ_ = metamodel == null;
 			/*@Thrown*/ boolean IF_IsEQ_;
 			if (IsEQ_) {
@@ -6129,36 +5626,14 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						/*@Thrown*/ boolean IF_s0global;
 						if (s0global) {
-							/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel;
-							try {
-								final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(THROWN_model);
-								CAUGHT_TmapOclMetamodel = TmapOclMetamodel;
-							}
-							catch (Exception THROWN_CAUGHT_TmapOclMetamodel) {
-								CAUGHT_TmapOclMetamodel = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel);
-							}
-							if (CAUGHT_TmapOclMetamodel instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_TmapOclMetamodel;
-							}
-							final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel;
-							final /*@Thrown*/ Boolean IsEQ__1 = THROWN_TmapOclMetamodel != null;
+							final /*@Thrown*/ @Nullable TmapOclMetamodel TmapOclMetamodel = OPPOSITE_OF_TmapOclMetamodel_t3oclMetamodel.get(model);
+							final /*@Thrown*/ Boolean IsEQ__1 = TmapOclMetamodel != null;
 							/*@Thrown*/ Boolean IF_IsEQ__1;
 							if (IsEQ__1) {
-								/*@Caught*/ @Nullable Object CAUGHT_TmapOclMetamodel_0;
-								try {
-									if (THROWN_TmapOclMetamodel == null) {
-										throw new InvalidEvaluationException("Null where non-null value required");
-									}
-									CAUGHT_TmapOclMetamodel_0 = THROWN_TmapOclMetamodel;
+								if (TmapOclMetamodel == null) {
+									throw new InvalidEvaluationException("Null where non-null value required");
 								}
-								catch (Exception THROWN_CAUGHT_TmapOclMetamodel_0) {
-									CAUGHT_TmapOclMetamodel_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_TmapOclMetamodel_0);
-								}
-								if (CAUGHT_TmapOclMetamodel_0 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_TmapOclMetamodel_0;
-								}
-								final /*@Thrown*/ @Nullable TmapOclMetamodel THROWN_TmapOclMetamodel_0 = (@Nullable TmapOclMetamodel)CAUGHT_TmapOclMetamodel_0;
-								final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_TmapOclMetamodel_0.getS0global();
+								final /*@Thrown*/ @Nullable Boolean s0global_0 = TmapOclMetamodel.getS0global();
 								if (s0global_0 == null) {
 									throw new InvalidEvaluationException("Null if condition");
 								}
@@ -6166,32 +5641,11 @@ public class ATL2QVTr extends AbstractTransformer
 								if (s0global_0) {
 									@SuppressWarnings("null")
 									final /*@NonInvalid*/ @NonNull String varName = t3atlElement.getVarName();
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
-										CAUGHT_t4qvtrRelation = t4qvtrRelation;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrRelation) {
-										CAUGHT_t4qvtrRelation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTypedModel;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = THROWN_TmapOclMetamodel_0.getT4qvtrTypedModel();
-										CAUGHT_t4qvtrTypedModel = t4qvtrTypedModel;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrTypedModel) {
-										CAUGHT_t4qvtrTypedModel = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTypedModel);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_getType;
-									try {
-										final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, CAST_type);
-										CAUGHT_getType = getType_0;
-									}
-									catch (Exception THROWN_CAUGHT_getType) {
-										CAUGHT_getType = ValueUtil.createInvalidValue(THROWN_CAUGHT_getType);
-									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull TypedModel t4qvtrTypedModel = TmapOclMetamodel.getT4qvtrTypedModel();
+									final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, CAST_type);
 									// creations
 									final @NonNull RelationDomain qvtrDomain = QVTrelationFactory.eINSTANCE.createRelationDomain();
 									MODEL_qvtr.add(qvtrDomain, false);
@@ -6220,66 +5674,30 @@ public class ATL2QVTr extends AbstractTransformer
 									// mapping statements
 									qvtrVariable.setName(varName);
 									trace.setT1elementName(varName);
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									qvtrDomain.setRule(THROWN_t4qvtrRelation);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									qvtrDomain.setTypedModel(THROWN_t4qvtrTypedModel);
+									qvtrDomain.setRule(t4qvtrRelation);
+									qvtrDomain.setTypedModel(t4qvtrTypedModel);
 									qvtrPattern.setRelationDomain(qvtrDomain);
 									qvtrPattern.setTemplateExpression(qvtrTemplate);
 									qvtrTemplate.setBindsTo(qvtrVariable);
-									if (CAUGHT_getType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_getType;
-									}
-									final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-									qvtrTemplate.setReferredClass(THROWN_getType);
-									if (CAUGHT_getType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_getType;
-									}
-									final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType_0 = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-									qvtrTemplate.setType(THROWN_getType_0);
-									objectManager.assigned(qvtrTemplate, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_getType_0, false);
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_0 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									THROWN_t4qvtrRelation_0.getVariable().add(qvtrVariable);
+									qvtrTemplate.setReferredClass(getType_0);
+									qvtrTemplate.setType(getType_0);
+									objectManager.assigned(qvtrTemplate, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getType_0, false);
+									t4qvtrRelation.getVariable().add(qvtrVariable);
 									qvtrDomain.getRootVariable().add(qvtrVariable);
-									if (CAUGHT_getType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_getType;
-									}
-									final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType_1 = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-									qvtrVariable.setType(THROWN_getType_1);
-									trace.setT3atlMetamodel(THROWN_model);
+									qvtrVariable.setType(getType_0);
+									trace.setT3atlMetamodel(model);
 									trace.setT3atlPattern(outPattern);
 									trace.setT3atlRule(CAST_rule);
 									trace.setT3atlType(CAST_type);
 									trace.setT4qvtrDomain(qvtrDomain);
 									trace.setT4qvtrPattern(qvtrPattern);
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_1 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									trace.setT4qvtrRelation(THROWN_t4qvtrRelation_1);
+									trace.setT4qvtrRelation(t4qvtrRelation);
 									trace.setT4qvtrTemplate(qvtrTemplate);
-									if (CAUGHT_getType instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_getType;
-									}
-									final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType_2 = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-									trace.setT4qvtrType(THROWN_getType_2);
-									if (CAUGHT_t4qvtrTypedModel instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrTypedModel;
-									}
-									final /*@Thrown*/ @Nullable TypedModel THROWN_t4qvtrTypedModel_0 = (@Nullable TypedModel)CAUGHT_t4qvtrTypedModel;
-									trace.setT4qvtrTypedModel(THROWN_t4qvtrTypedModel_0);
+									trace.setT4qvtrType(getType_0);
+									trace.setT4qvtrTypedModel(t4qvtrTypedModel);
 									trace.setT4qvtrVariable(qvtrVariable);
 									trace.setWmapMatchedRule(TmapMatchedRule);
-									trace.setWmapOclMetamodel(THROWN_TmapOclMetamodel_0);
+									trace.setWmapOclMetamodel(TmapOclMetamodel);
 									trace.setWmapVariable(where_mapVariable);
 									jm_TmapVariable.appendElement(where_mapVariable);
 									final /*@NonInvalid*/ boolean mmapSimpleOutPatternElement__qvtr__init__ = ValueUtil.TRUE_VALUE;
@@ -6514,27 +5932,9 @@ public class ATL2QVTr extends AbstractTransformer
 				if (context_ == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				/*@Caught*/ @Nullable Object CAUGHT_context_;
-				try {
-					@SuppressWarnings("null")
-					final /*@Thrown*/ @NonNull OclType context__0 = context_.getContext_();
-					CAUGHT_context_ = context__0;
-				}
-				catch (Exception THROWN_CAUGHT_context_) {
-					CAUGHT_context_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_context_);
-				}
-				/*@Caught*/ @Nullable Object CAUGHT_getType;
-				try {
-					if (CAUGHT_context_ instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_context_;
-					}
-					final /*@Thrown*/ @Nullable OclType THROWN_context_ = (@Nullable OclType)CAUGHT_context_;
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, THROWN_context_);
-					CAUGHT_getType = getType_0;
-				}
-				catch (Exception THROWN_CAUGHT_getType) {
-					CAUGHT_getType = ValueUtil.createInvalidValue(THROWN_CAUGHT_getType);
-				}
+				@SuppressWarnings("null")
+				final /*@Thrown*/ @NonNull OclType context__0 = context_.getContext_();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, context__0);
 				// creations
 				final @NonNull FunctionParameter qvtrParameter = QVTbaseFactory.eINSTANCE.createFunctionParameter();
 				MODEL_qvtr.add(qvtrParameter, false);
@@ -6550,20 +5950,12 @@ public class ATL2QVTr extends AbstractTransformer
 				objectManager.assigned(qvtrParameter, PivotPackage.Literals.NAMED_ELEMENT__NAME, STR_self, false);
 				trace.setT3atlContext(context_);
 				trace.setT3atlDefinition(definition);
-				if (CAUGHT_context_ instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_context_;
-				}
-				final /*@Thrown*/ @Nullable OclType THROWN_context__0 = (@Nullable OclType)CAUGHT_context_;
-				trace.setT3atlReturnType(THROWN_context__0);
+				trace.setT3atlReturnType(context__0);
 				trace.setT4qvtrParameter(qvtrParameter);
 				trace.setWmapVariable(where_mapVariable);
 				qvtrParameter.setOwningOperation(t4qvtrFunction);
-				if (CAUGHT_getType instanceof InvalidValueException) {
-					throw (InvalidValueException)CAUGHT_getType;
-				}
-				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-				qvtrParameter.setType(THROWN_getType);
-				objectManager.assigned(qvtrParameter, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_getType, false);
+				qvtrParameter.setType(getType_0);
+				objectManager.assigned(qvtrParameter, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getType_0, false);
 				jm_TmapVariable.appendElement(where_mapVariable);
 				final /*@NonInvalid*/ boolean mmapHelper__Context__qvtr__loop__ = ValueUtil.TRUE_VALUE;
 				IF_IsEQ_ = mmapHelper__Context__qvtr__loop__;
@@ -7014,66 +6406,30 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						/*@Thrown*/ boolean IF_s0global;
 						if (s0global) {
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
-								CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-								CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_ownedContext;
-							try {
-								if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-								}
-								final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-								final /*@Thrown*/ @Nullable Parameter ownedContext = THROWN_t4qvtrTransformation.getOwnedContext();
-								CAUGHT_ownedContext = ownedContext;
-							}
-							catch (Exception THROWN_CAUGHT_ownedContext) {
-								CAUGHT_ownedContext = ValueUtil.createInvalidValue(THROWN_CAUGHT_ownedContext);
-							}
-							if (CAUGHT_ownedContext instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_ownedContext;
-							}
-							final /*@Thrown*/ @Nullable Parameter THROWN_ownedContext = (@Nullable Parameter)CAUGHT_ownedContext;
-							final /*@NonInvalid*/ Boolean IsEQ2_ = THROWN_ownedContext == null;
-							/*@Caught*/ @Nullable Object IF_IsEQ2_;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
+							final /*@Thrown*/ @Nullable Parameter ownedContext = t4qvtrTransformation.getOwnedContext();
+							final /*@NonInvalid*/ Boolean IsEQ2_ = ownedContext == null;
+							/*@Thrown*/ @Nullable String IF_IsEQ2_;
 							if (IsEQ2_) {
 								IF_IsEQ2_ = null;
 							}
 							else {
-								/*@Caught*/ @Nullable Object CAUGHT_name;
-								try {
-									assert THROWN_ownedContext != null;
-									objectManager.getting(THROWN_ownedContext, PivotPackage.Literals.NAMED_ELEMENT__NAME, false);
-									final /*@Thrown*/ @Nullable String name = THROWN_ownedContext.getName();
-									CAUGHT_name = name;
-								}
-								catch (Exception THROWN_CAUGHT_name) {
-									CAUGHT_name = ValueUtil.createInvalidValue(THROWN_CAUGHT_name);
-								}
-								IF_IsEQ2_ = CAUGHT_name;
+								assert ownedContext != null;
+								objectManager.getting(ownedContext, PivotPackage.Literals.NAMED_ELEMENT__NAME, false);
+								final /*@Thrown*/ @Nullable String name = ownedContext.getName();
+								IF_IsEQ2_ = name;
 							}
-							final /*@NonInvalid*/ Boolean IsEQ2__0 = THROWN_ownedContext == null;
-							/*@Caught*/ @Nullable Object IF_IsEQ2__0;
+							final /*@NonInvalid*/ Boolean IsEQ2__0 = ownedContext == null;
+							/*@Thrown*/ @Nullable Type IF_IsEQ2__0;
 							if (IsEQ2__0) {
 								IF_IsEQ2__0 = null;
 							}
 							else {
-								/*@Caught*/ @Nullable Object CAUGHT_type;
-								try {
-									assert THROWN_ownedContext != null;
-									objectManager.getting(THROWN_ownedContext, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
-									final /*@Thrown*/ @Nullable Type type = THROWN_ownedContext.getType();
-									CAUGHT_type = type;
-								}
-								catch (Exception THROWN_CAUGHT_type) {
-									CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-								}
-								IF_IsEQ2__0 = CAUGHT_type;
+								assert ownedContext != null;
+								objectManager.getting(ownedContext, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
+								final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
+								IF_IsEQ2__0 = type;
 							}
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull List<ModuleElement> elements = getModule_0.getElements();
@@ -7174,77 +6530,37 @@ public class ATL2QVTr extends AbstractTransformer
 									}
 									final /*@NonInvalid*/ @Nullable OclFeatureDefinition definition = any_0.getDefinition();
 									final /*@NonInvalid*/ Boolean IsEQ2__1 = definition == null;
-									/*@Caught*/ @Nullable Object IF_IsEQ2__1;
+									/*@Thrown*/ @Nullable Helper IF_IsEQ2__1;
 									if (IsEQ2__1) {
 										IF_IsEQ2__1 = null;
 									}
 									else {
-										/*@Caught*/ @Nullable Object CAUGHT_Helper;
-										try {
-											// ExecutorCompositionPropertyCallingConvention
-											final /*@NonInvalid*/ @Nullable UnboxedCompositionProperty IMPPROPid_definition = new UnboxedCompositionProperty(PROPid_definition);
-											assert definition != null;
-											final /*@Thrown*/ @Nullable Helper Helper = (@Nullable Helper)IMPPROPid_definition.evaluate(rootExecutor, CLSSid_Helper, definition);
-											CAUGHT_Helper = Helper;
-										}
-										catch (Exception THROWN_CAUGHT_Helper) {
-											CAUGHT_Helper = ValueUtil.createInvalidValue(THROWN_CAUGHT_Helper);
-										}
-										IF_IsEQ2__1 = CAUGHT_Helper;
+										// ExecutorCompositionPropertyCallingConvention
+										final /*@NonInvalid*/ @Nullable UnboxedCompositionProperty IMPPROPid_definition = new UnboxedCompositionProperty(PROPid_definition);
+										assert definition != null;
+										final /*@Thrown*/ @Nullable Helper Helper = (@Nullable Helper)IMPPROPid_definition.evaluate(rootExecutor, CLSSid_Helper, definition);
+										IF_IsEQ2__1 = Helper;
 									}
 									final /*@NonInvalid*/ boolean IsEQ__2 = definition == null;
-									/*@Caught*/ @Nullable Object IF_IF_IsEQ_;
-									if (IsEQ__2 == Boolean.TRUE) {
+									/*@Thrown*/ @Nullable Helper IF_IF_IsEQ_;
+									if (IsEQ__2) {
 										IF_IF_IsEQ_ = null;
 									}
 									else {
 										IF_IF_IsEQ_ = IF_IsEQ2__1;
 									}
-									if (IF_IF_IsEQ_ instanceof InvalidValueException) {
-										throw (InvalidValueException)IF_IF_IsEQ_;
-									}
-									final /*@Thrown*/ @Nullable Helper THROWN_IF_IF_IsEQ_ = (@Nullable Helper)IF_IF_IsEQ_;
-									final /*@Thrown*/ Boolean IsEQ__3 = THROWN_IF_IF_IsEQ_ != null;
+									final /*@Thrown*/ Boolean IsEQ__3 = IF_IF_IsEQ_ != null;
 									/*@Thrown*/ Boolean IF_IsEQ__2;
 									if (IsEQ__3) {
-										/*@Caught*/ @Nullable Object CAUGHT_IF_IF_IsEQ_;
-										try {
-											if (THROWN_IF_IF_IsEQ_ == null) {
-												throw new InvalidEvaluationException("Null where non-null value required");
-											}
-											CAUGHT_IF_IF_IsEQ_ = THROWN_IF_IF_IsEQ_;
+										if (IF_IF_IsEQ_ == null) {
+											throw new InvalidEvaluationException("Null where non-null value required");
 										}
-										catch (Exception THROWN_CAUGHT_IF_IF_IsEQ_) {
-											CAUGHT_IF_IF_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IF_IF_IsEQ_);
-										}
-										/*@Caught*/ @Nullable Object CAUGHT_DmapHelper;
-										try {
-											if (CAUGHT_IF_IF_IsEQ_ instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_IF_IF_IsEQ_;
-											}
-											final /*@Thrown*/ @Nullable Helper THROWN_IF_IF_IsEQ__0 = (@Nullable Helper)CAUGHT_IF_IF_IsEQ_;
-											final /*@Thrown*/ @Nullable DmapHelper DmapHelper = OPPOSITE_OF_DmapHelper_d3atlHelper.get(THROWN_IF_IF_IsEQ__0);
-											CAUGHT_DmapHelper = DmapHelper;
-										}
-										catch (Exception THROWN_CAUGHT_DmapHelper) {
-											CAUGHT_DmapHelper = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapHelper);
-										}
-										if (CAUGHT_DmapHelper instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_DmapHelper;
-										}
-										final /*@Thrown*/ @Nullable DmapHelper THROWN_DmapHelper = (@Nullable DmapHelper)CAUGHT_DmapHelper;
-										final /*@Thrown*/ Boolean IsEQ__4 = THROWN_DmapHelper != null;
+										final /*@Thrown*/ @Nullable DmapHelper DmapHelper = OPPOSITE_OF_DmapHelper_d3atlHelper.get(IF_IF_IsEQ_);
+										final /*@Thrown*/ Boolean IsEQ__4 = DmapHelper != null;
 										/*@Thrown*/ Boolean IF_IsEQ__3;
 										if (IsEQ__4) {
-											/*@Caught*/ @Nullable Object CAUGHT_DmapHelper_0;
-											try {
-												if (THROWN_DmapHelper == null) {
-													throw new InvalidEvaluationException("Null where non-null value required");
-												}
-												CAUGHT_DmapHelper_0 = THROWN_DmapHelper;
-											}
-											catch (Exception THROWN_CAUGHT_DmapHelper_0) {
-												CAUGHT_DmapHelper_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapHelper_0);
+											if (DmapHelper == null) {
+												throw new InvalidEvaluationException("Null where non-null value required");
 											}
 											// mapping statements
 											trace.setT1propertyName(name_0);
@@ -7255,26 +6571,14 @@ public class ATL2QVTr extends AbstractTransformer
 											objectManager.assigned(dispatcher, trace_ATL2QVTrPackage.Literals.DMAP_OCL_EXPRESSION__RESULT, trace, false);
 											trace.setT3atlModule(getModule_0);
 											trace.setT3atlSource(source);
-											if (CAUGHT_ownedContext instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_ownedContext;
-											}
-											final /*@Thrown*/ @Nullable Parameter THROWN_ownedContext_0 = (@Nullable Parameter)CAUGHT_ownedContext;
-											if (THROWN_ownedContext_0 == null) {
+											if (ownedContext == null) {
 												throw new InvalidEvaluationException("Null value for t4qvtrThisVariable assignment");
 											}
-											trace.setT4qvtrThisVariable(THROWN_ownedContext_0);
-											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T4QVTR_THIS_VARIABLE, THROWN_ownedContext_0, false);
-											if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-											}
-											final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation_0 = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-											trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation_0);
-											if (CAUGHT_DmapHelper_0 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_DmapHelper_0;
-											}
-											final /*@Thrown*/ @Nullable DmapHelper THROWN_DmapHelper_0 = (@Nullable DmapHelper)CAUGHT_DmapHelper_0;
-											trace.setWmapHelper(THROWN_DmapHelper_0);
-											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_HELPER, THROWN_DmapHelper_0, false);
+											trace.setT4qvtrThisVariable(ownedContext);
+											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T4QVTR_THIS_VARIABLE, ownedContext, false);
+											trace.setT4qvtrTransformation(t4qvtrTransformation);
+											trace.setWmapHelper(DmapHelper);
+											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_HELPER, DmapHelper, false);
 											trace.setWmapModule(TmapModule);
 											trace.setWmapOclExpression(DmapOclExpression);
 											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_OCL_EXPRESSION, DmapOclExpression, false);
@@ -7982,66 +7286,30 @@ public class ATL2QVTr extends AbstractTransformer
 						}
 						/*@Thrown*/ boolean IF_s0global;
 						if (s0global) {
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTransformation;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
-								CAUGHT_t4qvtrTransformation = t4qvtrTransformation;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTransformation) {
-								CAUGHT_t4qvtrTransformation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTransformation);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_ownedContext;
-							try {
-								if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-								}
-								final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-								final /*@Thrown*/ @Nullable Parameter ownedContext = THROWN_t4qvtrTransformation.getOwnedContext();
-								CAUGHT_ownedContext = ownedContext;
-							}
-							catch (Exception THROWN_CAUGHT_ownedContext) {
-								CAUGHT_ownedContext = ValueUtil.createInvalidValue(THROWN_CAUGHT_ownedContext);
-							}
-							if (CAUGHT_ownedContext instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_ownedContext;
-							}
-							final /*@Thrown*/ @Nullable Parameter THROWN_ownedContext = (@Nullable Parameter)CAUGHT_ownedContext;
-							final /*@NonInvalid*/ Boolean IsEQ2_ = THROWN_ownedContext == null;
-							/*@Caught*/ @Nullable Object IF_IsEQ2_;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull RelationalTransformation t4qvtrTransformation = TmapModule.getT4qvtrTransformation();
+							final /*@Thrown*/ @Nullable Parameter ownedContext = t4qvtrTransformation.getOwnedContext();
+							final /*@NonInvalid*/ Boolean IsEQ2_ = ownedContext == null;
+							/*@Thrown*/ @Nullable String IF_IsEQ2_;
 							if (IsEQ2_) {
 								IF_IsEQ2_ = null;
 							}
 							else {
-								/*@Caught*/ @Nullable Object CAUGHT_name;
-								try {
-									assert THROWN_ownedContext != null;
-									objectManager.getting(THROWN_ownedContext, PivotPackage.Literals.NAMED_ELEMENT__NAME, false);
-									final /*@Thrown*/ @Nullable String name = THROWN_ownedContext.getName();
-									CAUGHT_name = name;
-								}
-								catch (Exception THROWN_CAUGHT_name) {
-									CAUGHT_name = ValueUtil.createInvalidValue(THROWN_CAUGHT_name);
-								}
-								IF_IsEQ2_ = CAUGHT_name;
+								assert ownedContext != null;
+								objectManager.getting(ownedContext, PivotPackage.Literals.NAMED_ELEMENT__NAME, false);
+								final /*@Thrown*/ @Nullable String name = ownedContext.getName();
+								IF_IsEQ2_ = name;
 							}
-							final /*@NonInvalid*/ Boolean IsEQ2__0 = THROWN_ownedContext == null;
-							/*@Caught*/ @Nullable Object IF_IsEQ2__0;
+							final /*@NonInvalid*/ Boolean IsEQ2__0 = ownedContext == null;
+							/*@Thrown*/ @Nullable Type IF_IsEQ2__0;
 							if (IsEQ2__0) {
 								IF_IsEQ2__0 = null;
 							}
 							else {
-								/*@Caught*/ @Nullable Object CAUGHT_type;
-								try {
-									assert THROWN_ownedContext != null;
-									objectManager.getting(THROWN_ownedContext, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
-									final /*@Thrown*/ @Nullable Type type = THROWN_ownedContext.getType();
-									CAUGHT_type = type;
-								}
-								catch (Exception THROWN_CAUGHT_type) {
-									CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-								}
-								IF_IsEQ2__0 = CAUGHT_type;
+								assert ownedContext != null;
+								objectManager.getting(ownedContext, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
+								final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
+								IF_IsEQ2__0 = type;
 							}
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull List<ModuleElement> elements = getModule_0.getElements();
@@ -8142,77 +7410,37 @@ public class ATL2QVTr extends AbstractTransformer
 									}
 									final /*@NonInvalid*/ @Nullable OclFeatureDefinition definition = any_0.getDefinition();
 									final /*@NonInvalid*/ Boolean IsEQ2__1 = definition == null;
-									/*@Caught*/ @Nullable Object IF_IsEQ2__1;
+									/*@Thrown*/ @Nullable Helper IF_IsEQ2__1;
 									if (IsEQ2__1) {
 										IF_IsEQ2__1 = null;
 									}
 									else {
-										/*@Caught*/ @Nullable Object CAUGHT_Helper;
-										try {
-											// ExecutorCompositionPropertyCallingConvention
-											final /*@NonInvalid*/ @Nullable UnboxedCompositionProperty IMPPROPid_definition_0 = new UnboxedCompositionProperty(PROPid_definition);
-											assert definition != null;
-											final /*@Thrown*/ @Nullable Helper Helper = (@Nullable Helper)IMPPROPid_definition_0.evaluate(rootExecutor, CLSSid_Helper, definition);
-											CAUGHT_Helper = Helper;
-										}
-										catch (Exception THROWN_CAUGHT_Helper) {
-											CAUGHT_Helper = ValueUtil.createInvalidValue(THROWN_CAUGHT_Helper);
-										}
-										IF_IsEQ2__1 = CAUGHT_Helper;
+										// ExecutorCompositionPropertyCallingConvention
+										final /*@NonInvalid*/ @Nullable UnboxedCompositionProperty IMPPROPid_definition_0 = new UnboxedCompositionProperty(PROPid_definition);
+										assert definition != null;
+										final /*@Thrown*/ @Nullable Helper Helper = (@Nullable Helper)IMPPROPid_definition_0.evaluate(rootExecutor, CLSSid_Helper, definition);
+										IF_IsEQ2__1 = Helper;
 									}
 									final /*@NonInvalid*/ boolean IsEQ__2 = definition == null;
-									/*@Caught*/ @Nullable Object IF_IF_IsEQ_;
-									if (IsEQ__2 == Boolean.TRUE) {
+									/*@Thrown*/ @Nullable Helper IF_IF_IsEQ_;
+									if (IsEQ__2) {
 										IF_IF_IsEQ_ = null;
 									}
 									else {
 										IF_IF_IsEQ_ = IF_IsEQ2__1;
 									}
-									if (IF_IF_IsEQ_ instanceof InvalidValueException) {
-										throw (InvalidValueException)IF_IF_IsEQ_;
-									}
-									final /*@Thrown*/ @Nullable Helper THROWN_IF_IF_IsEQ_ = (@Nullable Helper)IF_IF_IsEQ_;
-									final /*@Thrown*/ Boolean IsEQ__3 = THROWN_IF_IF_IsEQ_ != null;
+									final /*@Thrown*/ Boolean IsEQ__3 = IF_IF_IsEQ_ != null;
 									/*@Thrown*/ Boolean IF_IsEQ__2;
 									if (IsEQ__3) {
-										/*@Caught*/ @Nullable Object CAUGHT_IF_IF_IsEQ_;
-										try {
-											if (THROWN_IF_IF_IsEQ_ == null) {
-												throw new InvalidEvaluationException("Null where non-null value required");
-											}
-											CAUGHT_IF_IF_IsEQ_ = THROWN_IF_IF_IsEQ_;
+										if (IF_IF_IsEQ_ == null) {
+											throw new InvalidEvaluationException("Null where non-null value required");
 										}
-										catch (Exception THROWN_CAUGHT_IF_IF_IsEQ_) {
-											CAUGHT_IF_IF_IsEQ_ = ValueUtil.createInvalidValue(THROWN_CAUGHT_IF_IF_IsEQ_);
-										}
-										/*@Caught*/ @Nullable Object CAUGHT_DmapHelper;
-										try {
-											if (CAUGHT_IF_IF_IsEQ_ instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_IF_IF_IsEQ_;
-											}
-											final /*@Thrown*/ @Nullable Helper THROWN_IF_IF_IsEQ__0 = (@Nullable Helper)CAUGHT_IF_IF_IsEQ_;
-											final /*@Thrown*/ @Nullable DmapHelper DmapHelper = OPPOSITE_OF_DmapHelper_d3atlHelper.get(THROWN_IF_IF_IsEQ__0);
-											CAUGHT_DmapHelper = DmapHelper;
-										}
-										catch (Exception THROWN_CAUGHT_DmapHelper) {
-											CAUGHT_DmapHelper = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapHelper);
-										}
-										if (CAUGHT_DmapHelper instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_DmapHelper;
-										}
-										final /*@Thrown*/ @Nullable DmapHelper THROWN_DmapHelper = (@Nullable DmapHelper)CAUGHT_DmapHelper;
-										final /*@Thrown*/ Boolean IsEQ__4 = THROWN_DmapHelper != null;
+										final /*@Thrown*/ @Nullable DmapHelper DmapHelper = OPPOSITE_OF_DmapHelper_d3atlHelper.get(IF_IF_IsEQ_);
+										final /*@Thrown*/ Boolean IsEQ__4 = DmapHelper != null;
 										/*@Thrown*/ Boolean IF_IsEQ__3;
 										if (IsEQ__4) {
-											/*@Caught*/ @Nullable Object CAUGHT_DmapHelper_0;
-											try {
-												if (THROWN_DmapHelper == null) {
-													throw new InvalidEvaluationException("Null where non-null value required");
-												}
-												CAUGHT_DmapHelper_0 = THROWN_DmapHelper;
-											}
-											catch (Exception THROWN_CAUGHT_DmapHelper_0) {
-												CAUGHT_DmapHelper_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapHelper_0);
+											if (DmapHelper == null) {
+												throw new InvalidEvaluationException("Null where non-null value required");
 											}
 											// mapping statements
 											trace.setT1operationName(operationName);
@@ -8223,26 +7451,14 @@ public class ATL2QVTr extends AbstractTransformer
 											objectManager.assigned(dispatcher, trace_ATL2QVTrPackage.Literals.DMAP_OCL_EXPRESSION__RESULT, trace, false);
 											trace.setT3atlModule(getModule_0);
 											trace.setT3atlSource(source);
-											if (CAUGHT_ownedContext instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_ownedContext;
-											}
-											final /*@Thrown*/ @Nullable Parameter THROWN_ownedContext_0 = (@Nullable Parameter)CAUGHT_ownedContext;
-											if (THROWN_ownedContext_0 == null) {
+											if (ownedContext == null) {
 												throw new InvalidEvaluationException("Null value for t4qvtrThisVariable assignment");
 											}
-											trace.setT4qvtrThisVariable(THROWN_ownedContext_0);
-											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_OPERATION_CALL_EXP_HELPER__T4QVTR_THIS_VARIABLE, THROWN_ownedContext_0, false);
-											if (CAUGHT_t4qvtrTransformation instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_t4qvtrTransformation;
-											}
-											final /*@Thrown*/ @Nullable RelationalTransformation THROWN_t4qvtrTransformation_0 = (@Nullable RelationalTransformation)CAUGHT_t4qvtrTransformation;
-											trace.setT4qvtrTransformation(THROWN_t4qvtrTransformation_0);
-											if (CAUGHT_DmapHelper_0 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_DmapHelper_0;
-											}
-											final /*@Thrown*/ @Nullable DmapHelper THROWN_DmapHelper_0 = (@Nullable DmapHelper)CAUGHT_DmapHelper_0;
-											trace.setWmapHelper(THROWN_DmapHelper_0);
-											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_OPERATION_CALL_EXP_HELPER__WMAP_HELPER, THROWN_DmapHelper_0, false);
+											trace.setT4qvtrThisVariable(ownedContext);
+											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_OPERATION_CALL_EXP_HELPER__T4QVTR_THIS_VARIABLE, ownedContext, false);
+											trace.setT4qvtrTransformation(t4qvtrTransformation);
+											trace.setWmapHelper(DmapHelper);
+											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_OPERATION_CALL_EXP_HELPER__WMAP_HELPER, DmapHelper, false);
 											trace.setWmapModule(TmapModule);
 											trace.setWmapOclExpression(DmapOclExpression);
 											objectManager.assigned(trace, trace_ATL2QVTrPackage.Literals.TMAP_OPERATION_CALL_EXP_HELPER__WMAP_OCL_EXPRESSION, DmapOclExpression, false);
@@ -8821,32 +8037,11 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@NonInvalid*/ @Nullable OclType type = t3atlElement.getType();
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String varName = t3atlElement.getVarName();
-						/*@Caught*/ @Nullable Object CAUGHT_t4qvtrDomain;
-						try {
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull RelationDomain t4qvtrDomain = TmapInPattern.getT4qvtrDomain();
-							CAUGHT_t4qvtrDomain = t4qvtrDomain;
-						}
-						catch (Exception THROWN_CAUGHT_t4qvtrDomain) {
-							CAUGHT_t4qvtrDomain = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrDomain);
-						}
-						/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation;
-						try {
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
-							CAUGHT_t4qvtrRelation = t4qvtrRelation;
-						}
-						catch (Exception THROWN_CAUGHT_t4qvtrRelation) {
-							CAUGHT_t4qvtrRelation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation);
-						}
-						/*@Caught*/ @Nullable Object CAUGHT_getType;
-						try {
-							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, type);
-							CAUGHT_getType = getType_0;
-						}
-						catch (Exception THROWN_CAUGHT_getType) {
-							CAUGHT_getType = ValueUtil.createInvalidValue(THROWN_CAUGHT_getType);
-						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull RelationDomain t4qvtrDomain = TmapInPattern.getT4qvtrDomain();
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class getType_0 = INSTANCE_CACHE_ATL2QVTr_getType.evaluate(rootThis, type);
 						// creations
 						final @NonNull DomainPattern qvtrPattern = QVTrelationFactory.eINSTANCE.createDomainPattern();
 						MODEL_qvtr.add(qvtrPattern, false);
@@ -8870,52 +8065,20 @@ public class ATL2QVTr extends AbstractTransformer
 						// mapping statements
 						qvtrVariable.setName(varName);
 						trace.setT1elementName(varName);
-						if (CAUGHT_t4qvtrDomain instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrDomain;
-						}
-						final /*@Thrown*/ @Nullable RelationDomain THROWN_t4qvtrDomain = (@Nullable RelationDomain)CAUGHT_t4qvtrDomain;
-						qvtrPattern.setRelationDomain(THROWN_t4qvtrDomain);
+						qvtrPattern.setRelationDomain(t4qvtrDomain);
 						qvtrPattern.setTemplateExpression(qvtrTemplate);
 						qvtrTemplate.setBindsTo(qvtrVariable);
-						if (CAUGHT_getType instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getType;
-						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-						qvtrTemplate.setReferredClass(THROWN_getType);
-						if (CAUGHT_getType instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getType;
-						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType_0 = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-						qvtrTemplate.setType(THROWN_getType_0);
-						objectManager.assigned(qvtrTemplate, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_getType_0, false);
-						if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-						}
-						final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-						THROWN_t4qvtrRelation.getVariable().add(qvtrVariable);
-						if (CAUGHT_t4qvtrDomain instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrDomain;
-						}
-						final /*@Thrown*/ @Nullable RelationDomain THROWN_t4qvtrDomain_0 = (@Nullable RelationDomain)CAUGHT_t4qvtrDomain;
-						THROWN_t4qvtrDomain_0.getRootVariable().add(qvtrVariable);
-						if (CAUGHT_getType instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getType;
-						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class THROWN_getType_1 = (org.eclipse.ocl.pivot.@Nullable Class)CAUGHT_getType;
-						qvtrVariable.setType(THROWN_getType_1);
+						qvtrTemplate.setReferredClass(getType_0);
+						qvtrTemplate.setType(getType_0);
+						objectManager.assigned(qvtrTemplate, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getType_0, false);
+						t4qvtrRelation.getVariable().add(qvtrVariable);
+						t4qvtrDomain.getRootVariable().add(qvtrVariable);
+						qvtrVariable.setType(getType_0);
 						trace.setT3atlPattern(inPattern);
 						trace.setT3atlRule(rule);
-						if (CAUGHT_t4qvtrDomain instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrDomain;
-						}
-						final /*@Thrown*/ @Nullable RelationDomain THROWN_t4qvtrDomain_1 = (@Nullable RelationDomain)CAUGHT_t4qvtrDomain;
-						trace.setT4qvtrDomain(THROWN_t4qvtrDomain_1);
+						trace.setT4qvtrDomain(t4qvtrDomain);
 						trace.setT4qvtrPattern(qvtrPattern);
-						if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-						}
-						final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_0 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-						trace.setT4qvtrRelation(THROWN_t4qvtrRelation_0);
+						trace.setT4qvtrRelation(t4qvtrRelation);
 						trace.setT4qvtrTemplate(qvtrTemplate);
 						trace.setT4qvtrVariable(qvtrVariable);
 						trace.setWmapInPattern(TmapInPattern);
@@ -9134,51 +8297,15 @@ public class ATL2QVTr extends AbstractTransformer
 						if (s0global_0) {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ @NonNull String propertyName = t3atlBinding.getPropertyName();
-							/*@Caught*/ @Nullable Object CAUGHT_d4qvtrExpression;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = DmapOclExpression.getD4qvtrExpression();
-								CAUGHT_d4qvtrExpression = d4qvtrExpression;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = DmapOclExpression.getD4qvtrExpression();
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull ObjectTemplateExp t4qvtrTemplate = TmapSimpleOutPatternElement.getT4qvtrTemplate();
+							final /*@Thrown*/ @Nullable Type type = t4qvtrTemplate.getType();
+							if (type == null) {
+								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 							}
-							catch (Exception THROWN_CAUGHT_d4qvtrExpression) {
-								CAUGHT_d4qvtrExpression = ValueUtil.createInvalidValue(THROWN_CAUGHT_d4qvtrExpression);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_t4qvtrTemplate;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull ObjectTemplateExp t4qvtrTemplate = TmapSimpleOutPatternElement.getT4qvtrTemplate();
-								CAUGHT_t4qvtrTemplate = t4qvtrTemplate;
-							}
-							catch (Exception THROWN_CAUGHT_t4qvtrTemplate) {
-								CAUGHT_t4qvtrTemplate = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrTemplate);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_type;
-							try {
-								if (CAUGHT_t4qvtrTemplate instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_t4qvtrTemplate;
-								}
-								final /*@Thrown*/ @Nullable ObjectTemplateExp THROWN_t4qvtrTemplate = (@Nullable ObjectTemplateExp)CAUGHT_t4qvtrTemplate;
-								final /*@Thrown*/ @Nullable Type type = THROWN_t4qvtrTemplate.getType();
-								CAUGHT_type = type;
-							}
-							catch (Exception THROWN_CAUGHT_type) {
-								CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-							}
-							/*@Caught*/ @Nullable Object CAUGHT_getProperty;
-							try {
-								if (CAUGHT_type instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_type;
-								}
-								final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-								if (THROWN_type == null) {
-									throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-								}
-								final /*@Thrown*/ @NonNull Property getProperty_0 = INSTANCE_CACHE_ATL2QVTr_getProperty.evaluate(rootThis, THROWN_type, propertyName);
-								CAUGHT_getProperty = getProperty_0;
-							}
-							catch (Exception THROWN_CAUGHT_getProperty) {
-								CAUGHT_getProperty = ValueUtil.createInvalidValue(THROWN_CAUGHT_getProperty);
-							}
+							final /*@Thrown*/ @NonNull Property getProperty_0 = INSTANCE_CACHE_ATL2QVTr_getProperty.evaluate(rootThis, type, propertyName);
 							// creations
 							final @NonNull PropertyTemplateItem qvtrPart = QVTtemplateFactory.eINSTANCE.createPropertyTemplateItem();
 							MODEL_qvtr.add(qvtrPart, false);
@@ -9187,34 +8314,14 @@ public class ATL2QVTr extends AbstractTransformer
 							}
 							// mapping statements
 							trace.setT1propertyName(propertyName);
-							if (CAUGHT_t4qvtrTemplate instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrTemplate;
-							}
-							final /*@Thrown*/ @Nullable ObjectTemplateExp THROWN_t4qvtrTemplate_0 = (@Nullable ObjectTemplateExp)CAUGHT_t4qvtrTemplate;
-							qvtrPart.setObjContainer(THROWN_t4qvtrTemplate_0);
-							if (CAUGHT_getProperty instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_getProperty;
-							}
-							final /*@Thrown*/ @Nullable Property THROWN_getProperty = (@Nullable Property)CAUGHT_getProperty;
-							qvtrPart.setReferredProperty(THROWN_getProperty);
-							if (CAUGHT_d4qvtrExpression instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_d4qvtrExpression;
-							}
-							final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression;
-							qvtrPart.setValue(THROWN_d4qvtrExpression);
+							qvtrPart.setObjContainer(t4qvtrTemplate);
+							qvtrPart.setReferredProperty(getProperty_0);
+							qvtrPart.setValue(d4qvtrExpression);
 							trace.setT3atlExpression(value);
 							trace.setT3atlOutPatternElement(CAST_outPatternElement);
-							if (CAUGHT_d4qvtrExpression instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_d4qvtrExpression;
-							}
-							final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression_0 = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression;
-							trace.setT4qvtrExpression(THROWN_d4qvtrExpression_0);
+							trace.setT4qvtrExpression(d4qvtrExpression);
 							trace.setT4qvtrPart(qvtrPart);
-							if (CAUGHT_t4qvtrTemplate instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_t4qvtrTemplate;
-							}
-							final /*@Thrown*/ @Nullable ObjectTemplateExp THROWN_t4qvtrTemplate_1 = (@Nullable ObjectTemplateExp)CAUGHT_t4qvtrTemplate;
-							trace.setT4qvtrTemplate(THROWN_t4qvtrTemplate_1);
+							trace.setT4qvtrTemplate(t4qvtrTemplate);
 							trace.setWmapOclExpression(DmapOclExpression);
 							trace.setWmapSimpleOutPatternElement(TmapSimpleOutPatternElement);
 							final /*@NonInvalid*/ boolean mmapBinding__qvtr__init__ = ValueUtil.TRUE_VALUE;
@@ -9525,36 +8632,14 @@ public class ATL2QVTr extends AbstractTransformer
 					if (filter == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_DmapOclExpression;
-					try {
-						final /*@Thrown*/ @Nullable DmapOclExpression DmapOclExpression = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(filter);
-						CAUGHT_DmapOclExpression = DmapOclExpression;
-					}
-					catch (Exception THROWN_CAUGHT_DmapOclExpression) {
-						CAUGHT_DmapOclExpression = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapOclExpression);
-					}
-					if (CAUGHT_DmapOclExpression instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_DmapOclExpression;
-					}
-					final /*@Thrown*/ @Nullable DmapOclExpression THROWN_DmapOclExpression = (@Nullable DmapOclExpression)CAUGHT_DmapOclExpression;
-					final /*@Thrown*/ Boolean IsEQ__1 = THROWN_DmapOclExpression != null;
+					final /*@Thrown*/ @Nullable DmapOclExpression DmapOclExpression = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(filter);
+					final /*@Thrown*/ Boolean IsEQ__1 = DmapOclExpression != null;
 					/*@Thrown*/ Boolean IF_IsEQ__1;
 					if (IsEQ__1) {
-						/*@Caught*/ @Nullable Object CAUGHT_DmapOclExpression_0;
-						try {
-							if (THROWN_DmapOclExpression == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_DmapOclExpression_0 = THROWN_DmapOclExpression;
+						if (DmapOclExpression == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_DmapOclExpression_0) {
-							CAUGHT_DmapOclExpression_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapOclExpression_0);
-						}
-						if (CAUGHT_DmapOclExpression_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_DmapOclExpression_0;
-						}
-						final /*@Thrown*/ @Nullable DmapOclExpression THROWN_DmapOclExpression_0 = (@Nullable DmapOclExpression)CAUGHT_DmapOclExpression_0;
-						final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_DmapOclExpression_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global_0 = DmapOclExpression.getS0global();
 						if (s0global_0 == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
@@ -9575,33 +8660,12 @@ public class ATL2QVTr extends AbstractTransformer
 								}
 								/*@Thrown*/ boolean IF_s0global_1;
 								if (s0global_1) {
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrDomain;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull RelationDomain t4qvtrDomain = TmapInPattern.getT4qvtrDomain();
-										CAUGHT_t4qvtrDomain = t4qvtrDomain;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrDomain) {
-										CAUGHT_t4qvtrDomain = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrDomain);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_d4qvtrExpression;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = THROWN_DmapOclExpression_0.getD4qvtrExpression();
-										CAUGHT_d4qvtrExpression = d4qvtrExpression;
-									}
-									catch (Exception THROWN_CAUGHT_d4qvtrExpression) {
-										CAUGHT_d4qvtrExpression = ValueUtil.createInvalidValue(THROWN_CAUGHT_d4qvtrExpression);
-									}
-									/*@Caught*/ @Nullable Object CAUGHT_t4qvtrRelation;
-									try {
-										@SuppressWarnings("null")
-										final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
-										CAUGHT_t4qvtrRelation = t4qvtrRelation;
-									}
-									catch (Exception THROWN_CAUGHT_t4qvtrRelation) {
-										CAUGHT_t4qvtrRelation = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrRelation);
-									}
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull RelationDomain t4qvtrDomain = TmapInPattern.getT4qvtrDomain();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = DmapOclExpression.getD4qvtrExpression();
+									@SuppressWarnings("null")
+									final /*@Thrown*/ @NonNull Relation t4qvtrRelation = TmapMatchedRule.getT4qvtrRelation();
 									// creations
 									final @NonNull Predicate p = QVTbaseFactory.eINSTANCE.createPredicate();
 									MODEL_qvtr.add(p, false);
@@ -9614,48 +8678,20 @@ public class ATL2QVTr extends AbstractTransformer
 										AbstractTransformer.CREATIONS.println("created " + toDebugString(w));
 									}
 									// mapping statements
-									if (CAUGHT_t4qvtrDomain instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrDomain;
-									}
-									final /*@Thrown*/ @Nullable RelationDomain THROWN_t4qvtrDomain = (@Nullable RelationDomain)CAUGHT_t4qvtrDomain;
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									THROWN_t4qvtrDomain.setRule(THROWN_t4qvtrRelation);
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_0 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									THROWN_t4qvtrRelation_0.setWhen(w);
-									if (CAUGHT_d4qvtrExpression instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_d4qvtrExpression;
-									}
-									final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression;
-									p.setConditionExpression(THROWN_d4qvtrExpression);
+									t4qvtrDomain.setRule(t4qvtrRelation);
+									t4qvtrRelation.setWhen(w);
+									p.setConditionExpression(d4qvtrExpression);
 									p.setPattern(w);
 									trace.setT3atlExpression(filter);
 									trace.setT3atlRule(rule);
 									trace.setT4p(p);
-									if (CAUGHT_t4qvtrDomain instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrDomain;
-									}
-									final /*@Thrown*/ @Nullable RelationDomain THROWN_t4qvtrDomain_0 = (@Nullable RelationDomain)CAUGHT_t4qvtrDomain;
-									trace.setT4qvtrDomain(THROWN_t4qvtrDomain_0);
-									if (CAUGHT_d4qvtrExpression instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_d4qvtrExpression;
-									}
-									final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression_0 = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression;
-									trace.setT4qvtrExpression(THROWN_d4qvtrExpression_0);
-									if (CAUGHT_t4qvtrRelation instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_t4qvtrRelation;
-									}
-									final /*@Thrown*/ @Nullable Relation THROWN_t4qvtrRelation_1 = (@Nullable Relation)CAUGHT_t4qvtrRelation;
-									trace.setT4qvtrRelation(THROWN_t4qvtrRelation_1);
+									trace.setT4qvtrDomain(t4qvtrDomain);
+									trace.setT4qvtrExpression(d4qvtrExpression);
+									trace.setT4qvtrRelation(t4qvtrRelation);
 									trace.setT4w(w);
 									trace.setWmapInPattern(TmapInPattern);
 									trace.setWmapMatchedRule(TmapMatchedRule);
-									trace.setWmapOclExpression(THROWN_DmapOclExpression_0);
+									trace.setWmapOclExpression(DmapOclExpression);
 									final /*@NonInvalid*/ boolean mmapInPattern__filter__qvtr__init__ = ValueUtil.TRUE_VALUE;
 									IF_s0global_1 = mmapInPattern__filter__qvtr__init__;
 								}
@@ -10048,96 +9084,33 @@ public class ATL2QVTr extends AbstractTransformer
 					if (parentOperation == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_DmapOclExpression;
-					try {
-						final /*@Thrown*/ @Nullable DmapOclExpression DmapOclExpression_0 = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(parentOperation);
-						CAUGHT_DmapOclExpression = DmapOclExpression_0;
-					}
-					catch (Exception THROWN_CAUGHT_DmapOclExpression) {
-						CAUGHT_DmapOclExpression = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapOclExpression);
-					}
-					if (CAUGHT_DmapOclExpression instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_DmapOclExpression;
-					}
-					final /*@Thrown*/ @Nullable DmapOclExpression THROWN_DmapOclExpression = (@Nullable DmapOclExpression)CAUGHT_DmapOclExpression;
-					final /*@Thrown*/ Boolean IsEQ__1 = THROWN_DmapOclExpression != null;
+					final /*@Thrown*/ @Nullable DmapOclExpression DmapOclExpression_0 = OPPOSITE_OF_DmapOclExpression_d3atlExpression.get(parentOperation);
+					final /*@Thrown*/ Boolean IsEQ__1 = DmapOclExpression_0 != null;
 					/*@Thrown*/ Boolean IF_IsEQ__1;
 					if (IsEQ__1) {
-						/*@Caught*/ @Nullable Object CAUGHT_DmapOclExpression_0;
-						try {
-							if (THROWN_DmapOclExpression == null) {
-								throw new InvalidEvaluationException("Null where non-null value required");
-							}
-							CAUGHT_DmapOclExpression_0 = THROWN_DmapOclExpression;
+						if (DmapOclExpression_0 == null) {
+							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						catch (Exception THROWN_CAUGHT_DmapOclExpression_0) {
-							CAUGHT_DmapOclExpression_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_DmapOclExpression_0);
-						}
-						if (CAUGHT_DmapOclExpression_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_DmapOclExpression_0;
-						}
-						final /*@Thrown*/ @Nullable DmapOclExpression THROWN_DmapOclExpression_0 = (@Nullable DmapOclExpression)CAUGHT_DmapOclExpression_0;
-						final /*@Thrown*/ @Nullable Boolean s0global_0 = THROWN_DmapOclExpression_0.getS0global();
+						final /*@Thrown*/ @Nullable Boolean s0global_0 = DmapOclExpression_0.getS0global();
 						if (s0global_0 == null) {
 							throw new InvalidEvaluationException("Null if condition");
 						}
 						/*@Thrown*/ boolean IF_s0global_0;
 						if (s0global_0) {
-							/*@Caught*/ @Nullable Object CAUGHT_d4qvtrExpression;
-							try {
-								@SuppressWarnings("null")
-								final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = THROWN_DmapOclExpression_0.getD4qvtrExpression();
-								CAUGHT_d4qvtrExpression = d4qvtrExpression;
-							}
-							catch (Exception THROWN_CAUGHT_d4qvtrExpression) {
-								CAUGHT_d4qvtrExpression = ValueUtil.createInvalidValue(THROWN_CAUGHT_d4qvtrExpression);
-							}
-							if (CAUGHT_d4qvtrExpression instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_d4qvtrExpression;
-							}
-							final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression;
-							final /*@NonInvalid*/ boolean IsKINDOF_ = THROWN_d4qvtrExpression instanceof org.eclipse.ocl.pivot.OperationCallExp;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression = DmapOclExpression_0.getD4qvtrExpression();
+							final /*@NonInvalid*/ boolean IsKINDOF_ = d4qvtrExpression instanceof org.eclipse.ocl.pivot.OperationCallExp;
 							/*@NonInvalid*/ boolean IF_IsKINDOF_;
 							if (IsKINDOF_) {
-								/*@Caught*/ @Nullable Object CAUGHT_d4qvtrExpression_0;
-								try {
-									final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OperationCallExp CAST_d4qvtrExpression = (org.eclipse.ocl.pivot.OperationCallExp)THROWN_d4qvtrExpression;
-									CAUGHT_d4qvtrExpression_0 = CAST_d4qvtrExpression;
-								}
-								catch (Exception THROWN_CAUGHT_d4qvtrExpression_0) {
-									CAUGHT_d4qvtrExpression_0 = ValueUtil.createInvalidValue(THROWN_CAUGHT_d4qvtrExpression_0);
-								}
-								/*@Caught*/ @Nullable Object CAUGHT_d4qvtrExpression_1;
-								try {
-									@SuppressWarnings("null")
-									final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression_0 = DmapOclExpression.getD4qvtrExpression();
-									CAUGHT_d4qvtrExpression_1 = d4qvtrExpression_0;
-								}
-								catch (Exception THROWN_CAUGHT_d4qvtrExpression_1) {
-									CAUGHT_d4qvtrExpression_1 = ValueUtil.createInvalidValue(THROWN_CAUGHT_d4qvtrExpression_1);
-								}
+								final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OperationCallExp CAST_d4qvtrExpression = (org.eclipse.ocl.pivot.OperationCallExp)d4qvtrExpression;
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull OCLExpression d4qvtrExpression_0 = DmapOclExpression.getD4qvtrExpression();
 								// mapping statements
-								if (CAUGHT_d4qvtrExpression_0 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_d4qvtrExpression_0;
-								}
-								final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OperationCallExp THROWN_d4qvtrExpression_1 = (org.eclipse.ocl.pivot.@Nullable OperationCallExp)CAUGHT_d4qvtrExpression_0;
-								if (CAUGHT_d4qvtrExpression_1 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_d4qvtrExpression_1;
-								}
-								final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression_0 = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression_1;
-								THROWN_d4qvtrExpression_1.getOwnedArguments().add(THROWN_d4qvtrExpression_0);
+								CAST_d4qvtrExpression.getOwnedArguments().add(d4qvtrExpression_0);
 								trace.setT3atlParent(parentOperation);
-								if (CAUGHT_d4qvtrExpression_1 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_d4qvtrExpression_1;
-								}
-								final /*@Thrown*/ @Nullable OCLExpression THROWN_d4qvtrExpression_2 = (@Nullable OCLExpression)CAUGHT_d4qvtrExpression_1;
-								trace.setT4qvtrArgument(THROWN_d4qvtrExpression_2);
-								if (CAUGHT_d4qvtrExpression_0 instanceof InvalidValueException) {
-									throw (InvalidValueException)CAUGHT_d4qvtrExpression_0;
-								}
-								final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OperationCallExp THROWN_d4qvtrExpression_3 = (org.eclipse.ocl.pivot.@Nullable OperationCallExp)CAUGHT_d4qvtrExpression_0;
-								trace.setT4qvtrParent(THROWN_d4qvtrExpression_3);
-								trace.setWmapOclExpression1(THROWN_DmapOclExpression_0);
+								trace.setT4qvtrArgument(d4qvtrExpression_0);
+								trace.setT4qvtrParent(CAST_d4qvtrExpression);
+								trace.setWmapOclExpression1(DmapOclExpression_0);
 								trace.setWmapOclExpression(DmapOclExpression);
 								final /*@NonInvalid*/ boolean mmapOperationCallExp__argument__qvtr__init__ = ValueUtil.TRUE_VALUE;
 								IF_IsKINDOF_ = mmapOperationCallExp__argument__qvtr__init__;
@@ -10301,63 +9274,18 @@ public class ATL2QVTr extends AbstractTransformer
 					if (TmapVariable == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					/*@Caught*/ @Nullable Object CAUGHT_t4qvtrVariable;
-					try {
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull VariableDeclaration t4qvtrVariable = TmapVariable.getT4qvtrVariable();
-						CAUGHT_t4qvtrVariable = t4qvtrVariable;
-					}
-					catch (Exception THROWN_CAUGHT_t4qvtrVariable) {
-						CAUGHT_t4qvtrVariable = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrVariable);
-					}
-					/*@Caught*/ @Nullable Object CAUGHT_name;
-					try {
-						if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-						}
-						final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-						final /*@Thrown*/ @Nullable String name = THROWN_t4qvtrVariable.getName();
-						CAUGHT_name = name;
-					}
-					catch (Exception THROWN_CAUGHT_name) {
-						CAUGHT_name = ValueUtil.createInvalidValue(THROWN_CAUGHT_name);
-					}
-					/*@Caught*/ @Nullable Object CAUGHT_type;
-					try {
-						if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-						}
-						final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable_0 = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-						final /*@Thrown*/ @Nullable Type type = THROWN_t4qvtrVariable_0.getType();
-						CAUGHT_type = type;
-					}
-					catch (Exception THROWN_CAUGHT_type) {
-						CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-					}
+					@SuppressWarnings("null")
+					final /*@Thrown*/ @NonNull VariableDeclaration t4qvtrVariable = TmapVariable.getT4qvtrVariable();
+					final /*@Thrown*/ @Nullable String name = t4qvtrVariable.getName();
+					final /*@Thrown*/ @Nullable Type type = t4qvtrVariable.getType();
 					// mapping statements
-					if (CAUGHT_name instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_name;
-					}
-					final /*@Thrown*/ @Nullable String THROWN_name = (@Nullable String)CAUGHT_name;
-					d4qvtrExpression.setName(THROWN_name);
+					d4qvtrExpression.setName(name);
 					dispatcher.setResult(trace);
-					if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-					}
-					final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable_1 = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-					d4qvtrExpression.setReferredVariable(THROWN_t4qvtrVariable_1);
-					if (CAUGHT_type instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_type;
-					}
-					final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-					d4qvtrExpression.setType(THROWN_type);
-					objectManager.assigned(d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_type, false);
+					d4qvtrExpression.setReferredVariable(t4qvtrVariable);
+					d4qvtrExpression.setType(type);
+					objectManager.assigned(d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type, false);
 					trace.setT3atlVariable(CAST_referredVariable);
-					if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-						throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-					}
-					final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable_2 = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-					trace.setT4qvtrVariable(THROWN_t4qvtrVariable_2);
+					trace.setT4qvtrVariable(t4qvtrVariable);
 					final /*@NonInvalid*/ boolean mmapVariableExp__referredVariable__VariableDeclarat = ValueUtil.TRUE_VALUE;
 					IF_IsEQ__0 = mmapVariableExp__referredVariable__VariableDeclarat;
 				}
@@ -10628,28 +9556,13 @@ public class ATL2QVTr extends AbstractTransformer
 							}
 						}
 						boolean SPEC_ = true;
-						/*@Caught*/ @Nullable Object CAUGHT_t4qvtrVariable;
-						try {
-							@SuppressWarnings("null")
-							final /*@Thrown*/ @NonNull VariableDeclaration t4qvtrVariable = TmapVariable.getT4qvtrVariable();
-							CAUGHT_t4qvtrVariable = t4qvtrVariable;
-						}
-						catch (Exception THROWN_CAUGHT_t4qvtrVariable) {
-							CAUGHT_t4qvtrVariable = ValueUtil.createInvalidValue(THROWN_CAUGHT_t4qvtrVariable);
-						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull VariableDeclaration t4qvtrVariable = TmapVariable.getT4qvtrVariable();
 						// mapping statements
 						d4qvtrExpression.setName(STR_self);
 						dispatcher.setS0global((Boolean)ValueUtil.TRUE_VALUE);
-						if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-						}
-						final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-						d4qvtrExpression.setReferredVariable(THROWN_t4qvtrVariable);
-						if (CAUGHT_t4qvtrVariable instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_t4qvtrVariable;
-						}
-						final /*@Thrown*/ @Nullable VariableDeclaration THROWN_t4qvtrVariable_0 = (@Nullable VariableDeclaration)CAUGHT_t4qvtrVariable;
-						trace.setT4qvtrVariable(THROWN_t4qvtrVariable_0);
+						d4qvtrExpression.setReferredVariable(t4qvtrVariable);
+						trace.setT4qvtrVariable(t4qvtrVariable);
 						final /*@NonInvalid*/ boolean mmapVariableExp__referredVariable__Helper__qvtr__lo = ValueUtil.TRUE_VALUE;
 						IF_IsEQ__0 = SPEC_;
 					}
@@ -10927,27 +9840,16 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@NonInvalid*/ @NonNull OCLExpression t4qvtrElse = trace.getT4qvtrElse();
 						objectManager.getting(t4qvtrElse, PivotPackage.Literals.TYPED_ELEMENT__TYPE, false);
 						final /*@NonInvalid*/ @Nullable Type type_0 = t4qvtrElse.getType();
-						/*@Caught*/ @Nullable Object CAUGHT_getCommonType;
-						try {
-							if (type == null) {
-								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-							}
-							if (type_0 == null) {
-								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-							}
-							final /*@Thrown*/ @NonNull Type getCommonType_0 = INSTANCE_CACHE_ATL2QVTr_getCommonType.evaluate(rootThis, type, type_0);
-							CAUGHT_getCommonType = getCommonType_0;
+						if (type == null) {
+							throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
-						catch (Exception THROWN_CAUGHT_getCommonType) {
-							CAUGHT_getCommonType = ValueUtil.createInvalidValue(THROWN_CAUGHT_getCommonType);
+						if (type_0 == null) {
+							throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
+						final /*@Thrown*/ @NonNull Type getCommonType_0 = INSTANCE_CACHE_ATL2QVTr_getCommonType.evaluate(rootThis, type, type_0);
 						// mapping statements
-						if (CAUGHT_getCommonType instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getCommonType;
-						}
-						final /*@Thrown*/ @Nullable Type THROWN_getCommonType = (@Nullable Type)CAUGHT_getCommonType;
-						CAST_d4qvtrExpression.setType(THROWN_getCommonType);
-						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_getCommonType, false);
+						CAST_d4qvtrExpression.setType(getCommonType_0);
+						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, getCommonType_0, false);
 						final /*@NonInvalid*/ boolean mmapIfExp__qvtr__xtra__ = ValueUtil.TRUE_VALUE;
 						IF_s0global = mmapIfExp__qvtr__xtra__;
 					}
@@ -11028,46 +9930,16 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@NonInvalid*/ @Nullable Type type = t4qvtrSource.getType();
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String t1propertyName = trace.getT1propertyName();
-						/*@Caught*/ @Nullable Object CAUGHT_getProperty;
-						try {
-							if (type == null) {
-								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-							}
-							final /*@Thrown*/ @NonNull Property getProperty_0 = INSTANCE_CACHE_ATL2QVTr_getProperty.evaluate(rootThis, type, t1propertyName);
-							CAUGHT_getProperty = getProperty_0;
+						if (type == null) {
+							throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
-						catch (Exception THROWN_CAUGHT_getProperty) {
-							CAUGHT_getProperty = ValueUtil.createInvalidValue(THROWN_CAUGHT_getProperty);
-						}
-						/*@Caught*/ @Nullable Object CAUGHT_type;
-						try {
-							if (CAUGHT_getProperty instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_getProperty;
-							}
-							final /*@Thrown*/ @Nullable Property THROWN_getProperty = (@Nullable Property)CAUGHT_getProperty;
-							final /*@Thrown*/ @Nullable Type type_0 = THROWN_getProperty.getType();
-							CAUGHT_type = type_0;
-						}
-						catch (Exception THROWN_CAUGHT_type) {
-							CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-						}
+						final /*@Thrown*/ @NonNull Property getProperty_0 = INSTANCE_CACHE_ATL2QVTr_getProperty.evaluate(rootThis, type, t1propertyName);
+						final /*@Thrown*/ @Nullable Type type_0 = getProperty_0.getType();
 						// mapping statements
-						if (CAUGHT_getProperty instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getProperty;
-						}
-						final /*@Thrown*/ @Nullable Property THROWN_getProperty_0 = (@Nullable Property)CAUGHT_getProperty;
-						trace.setT4qvtrProperty(THROWN_getProperty_0);
-						if (CAUGHT_getProperty instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getProperty;
-						}
-						final /*@Thrown*/ @Nullable Property THROWN_getProperty_1 = (@Nullable Property)CAUGHT_getProperty;
-						CAST_d4qvtrExpression.setReferredProperty(THROWN_getProperty_1);
-						if (CAUGHT_type instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_type;
-						}
-						final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-						CAST_d4qvtrExpression.setType(THROWN_type);
-						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_type, false);
+						trace.setT4qvtrProperty(getProperty_0);
+						CAST_d4qvtrExpression.setReferredProperty(getProperty_0);
+						CAST_d4qvtrExpression.setType(type_0);
+						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_0, false);
 						final /*@NonInvalid*/ boolean mmapNavigationOrAttributeCallExp__Property__qvtr__x = ValueUtil.TRUE_VALUE;
 						IF_s0global = mmapNavigationOrAttributeCallExp__Property__qvtr__x;
 					}
@@ -11148,46 +10020,16 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@NonInvalid*/ @Nullable Type type = t4qvtrSource.getType();
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String t1operationName = trace.getT1operationName();
-						/*@Caught*/ @Nullable Object CAUGHT_getOperation;
-						try {
-							if (type == null) {
-								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-							}
-							final /*@Thrown*/ @NonNull Operation getOperation_0 = INSTANCE_CACHE_ATL2QVTr_getOperation.evaluate(rootThis, type, t1operationName);
-							CAUGHT_getOperation = getOperation_0;
+						if (type == null) {
+							throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
-						catch (Exception THROWN_CAUGHT_getOperation) {
-							CAUGHT_getOperation = ValueUtil.createInvalidValue(THROWN_CAUGHT_getOperation);
-						}
-						/*@Caught*/ @Nullable Object CAUGHT_type;
-						try {
-							if (CAUGHT_getOperation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_getOperation;
-							}
-							final /*@Thrown*/ @Nullable Operation THROWN_getOperation = (@Nullable Operation)CAUGHT_getOperation;
-							final /*@Thrown*/ @Nullable Type type_0 = THROWN_getOperation.getType();
-							CAUGHT_type = type_0;
-						}
-						catch (Exception THROWN_CAUGHT_type) {
-							CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-						}
+						final /*@Thrown*/ @NonNull Operation getOperation_0 = INSTANCE_CACHE_ATL2QVTr_getOperation.evaluate(rootThis, type, t1operationName);
+						final /*@Thrown*/ @Nullable Type type_0 = getOperation_0.getType();
 						// mapping statements
-						if (CAUGHT_getOperation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getOperation;
-						}
-						final /*@Thrown*/ @Nullable Operation THROWN_getOperation_0 = (@Nullable Operation)CAUGHT_getOperation;
-						trace.setT4qvtrOperation(THROWN_getOperation_0);
-						if (CAUGHT_getOperation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getOperation;
-						}
-						final /*@Thrown*/ @Nullable Operation THROWN_getOperation_1 = (@Nullable Operation)CAUGHT_getOperation;
-						CAST_d4qvtrExpression.setReferredOperation(THROWN_getOperation_1);
-						if (CAUGHT_type instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_type;
-						}
-						final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-						CAST_d4qvtrExpression.setType(THROWN_type);
-						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_type, false);
+						trace.setT4qvtrOperation(getOperation_0);
+						CAST_d4qvtrExpression.setReferredOperation(getOperation_0);
+						CAST_d4qvtrExpression.setType(type_0);
+						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_0, false);
 						final /*@NonInvalid*/ boolean mmapOperationCallExp__Operation__qvtr__xtra__ = ValueUtil.TRUE_VALUE;
 						IF_s0global = mmapOperationCallExp__Operation__qvtr__xtra__;
 					}
@@ -11268,46 +10110,16 @@ public class ATL2QVTr extends AbstractTransformer
 						final /*@NonInvalid*/ @Nullable Type type = t4qvtrSource.getType();
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull String t1operationName = trace.getT1operationName();
-						/*@Caught*/ @Nullable Object CAUGHT_getOperation;
-						try {
-							if (type == null) {
-								throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
-							}
-							final /*@Thrown*/ @NonNull Operation getOperation_0 = INSTANCE_CACHE_ATL2QVTr_getOperation.evaluate(rootThis, type, t1operationName);
-							CAUGHT_getOperation = getOperation_0;
+						if (type == null) {
+							throw new InvalidEvaluationException("Null \'\'Type\'\' rather than \'\'OclVoid\'\' elementId");
 						}
-						catch (Exception THROWN_CAUGHT_getOperation) {
-							CAUGHT_getOperation = ValueUtil.createInvalidValue(THROWN_CAUGHT_getOperation);
-						}
-						/*@Caught*/ @Nullable Object CAUGHT_type;
-						try {
-							if (CAUGHT_getOperation instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_getOperation;
-							}
-							final /*@Thrown*/ @Nullable Operation THROWN_getOperation = (@Nullable Operation)CAUGHT_getOperation;
-							final /*@Thrown*/ @Nullable Type type_0 = THROWN_getOperation.getType();
-							CAUGHT_type = type_0;
-						}
-						catch (Exception THROWN_CAUGHT_type) {
-							CAUGHT_type = ValueUtil.createInvalidValue(THROWN_CAUGHT_type);
-						}
+						final /*@Thrown*/ @NonNull Operation getOperation_0 = INSTANCE_CACHE_ATL2QVTr_getOperation.evaluate(rootThis, type, t1operationName);
+						final /*@Thrown*/ @Nullable Type type_0 = getOperation_0.getType();
 						// mapping statements
-						if (CAUGHT_getOperation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getOperation;
-						}
-						final /*@Thrown*/ @Nullable Operation THROWN_getOperation_0 = (@Nullable Operation)CAUGHT_getOperation;
-						trace.setT4qvtrOperation(THROWN_getOperation_0);
-						if (CAUGHT_getOperation instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_getOperation;
-						}
-						final /*@Thrown*/ @Nullable Operation THROWN_getOperation_1 = (@Nullable Operation)CAUGHT_getOperation;
-						CAST_d4qvtrExpression.setReferredOperation(THROWN_getOperation_1);
-						if (CAUGHT_type instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_type;
-						}
-						final /*@Thrown*/ @Nullable Type THROWN_type = (@Nullable Type)CAUGHT_type;
-						CAST_d4qvtrExpression.setType(THROWN_type);
-						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, THROWN_type, false);
+						trace.setT4qvtrOperation(getOperation_0);
+						CAST_d4qvtrExpression.setReferredOperation(getOperation_0);
+						CAST_d4qvtrExpression.setType(type_0);
+						objectManager.assigned(CAST_d4qvtrExpression, PivotPackage.Literals.TYPED_ELEMENT__TYPE, type_0, false);
 						final /*@NonInvalid*/ boolean mmapOperatorCallExp__qvtr__xtra__ = ValueUtil.TRUE_VALUE;
 						IF_s0global = mmapOperatorCallExp__qvtr__xtra__;
 					}

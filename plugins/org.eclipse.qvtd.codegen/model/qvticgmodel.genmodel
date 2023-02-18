@@ -30,9 +30,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcoreRealizedVariable/eClassifier"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGFunction"/>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGFunctionCallExp">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGFunctionCallExp/function"/>
-    </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGFunctionParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGFunctionParameter/function"/>
     </genClasses>
@@ -61,7 +58,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/ownedBody"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingLoop"/>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyAssignment"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyCallExp"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGRealizedVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGRealizedVariable/executorType"/>

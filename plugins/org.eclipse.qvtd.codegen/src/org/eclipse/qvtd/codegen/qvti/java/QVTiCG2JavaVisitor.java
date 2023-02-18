@@ -38,8 +38,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreContainerAssignment;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyAssignment;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
@@ -102,7 +100,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSpeculateExp;
@@ -126,7 +123,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatementPart;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
@@ -242,48 +238,6 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.appendValueName(cgMappingCallBinding.getOwnedValue());
 	}
 
-	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit, boolean isPartial) {
-		EClassifier eType = eStructuralFeature.getEType();
-		String instanceClassName = eType.getInstanceClassName();
-		if (eStructuralFeature.isMany()) {
-			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-			//
-			js.appendValueName(cgSlot);
-			js.append(".");
-			js.append(getAccessor);
-			js.append("().");
-			if (isPartial) {
-				js.append("add(");
-				if (instanceClassName != null) {
-					js.appendEcoreValue(instanceClassName, cgInit);
-				}
-				else {
-					js.appendAtomicReferenceTo(cgInit);
-				}
-			}
-			else {
-				js.append( "addAll(");		// FIXME may need to loop addAll manually
-				js.appendAtomicReferenceTo(cgInit);
-			}
-			js.append(");\n");
-		}
-		else {
-			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-			//
-			js.appendValueName(cgSlot);
-			js.append(".");
-			js.append(setAccessor);
-			js.append("(");
-			if (instanceClassName != null) {
-				js.appendEcoreValue(instanceClassName, cgInit);
-			}
-			else {
-				js.appendAtomicReferenceTo(cgInit);
-			}
-			js.append(");\n");
-		}
-	}
-
 	@Override		// FIXME promote to OCL
 	protected void appendGuardFailure(@NonNull CGGuardExp cgGuardExp) {
 		js.append("throw new ");
@@ -306,16 +260,8 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		js.append(cgTypedModel.getName());
 	}
 
-	protected void appendQualifiedLiteralName(@NonNull EStructuralFeature eStructuralFeature) {
-		EClass eContainingClass = ClassUtil.nonNullState(eStructuralFeature.getEContainingClass());
-		EPackage ePackage = ClassUtil.nonNullState(eContainingClass.getEPackage());
-		js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-		js.append(".Literals.");
-		js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
-	}
-
-	@Deprecated
-	protected void appendThis(@NonNull CGElement cgElement) {
+	@Deprecated			// XXX rewrite to exploit 'rootThis'
+	public void appendThis(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
 				//				js.appendThis(getMappingName((CGMapping)eObject));		// + ".this"
@@ -498,7 +444,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		return allInstancesAnalyses;
 	}
 
-	protected void doAssigned(@NonNull CGEcoreContainerAssignment cgPropertyAssignment) {
+	/*	protected void doAssigned(@NonNull CGEcoreContainerAssignment cgPropertyAssignment) {
 		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
 		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
 		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
@@ -516,29 +462,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			js.appendValueName(cgSlot);
 			js.append(", false);\n");
 		}
-	}
-
-	protected void doAssigned(@NonNull CGEcorePropertyAssignment cgPropertyAssignment, boolean isPartial) {
-		EStructuralFeature eStructuralFeature = QVTiCGUtil.getEStructuralFeature(cgPropertyAssignment);
-		CGValuedElement cgSlot = getExpression(QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment));
-		CGValuedElement cgInit = getExpression(QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment));
-		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsNotify()) {
-			js.appendName(getGlobalNameManager().getObjectManagerName());
-			js.append(".assigned(");
-			if (isIncremental) {
-				appendThis(cgPropertyAssignment);
-				js.append(", ");
-			}
-			js.appendValueName(cgSlot);
-			js.append(", ");
-			appendQualifiedLiteralName(eStructuralFeature);
-			js.append(", ");
-			js.appendValueName(cgInit);
-			js.append(", ");
-			js.appendBooleanString(eStructuralFeature.isMany() && isPartial);
-			js.append(");\n");
-		}
-	}
+	} */
 
 	private void doAssigned(@NonNull CGGuardVariable cgGuardVariable, @NonNull EStructuralFeature eStructuralFeature, CGValuedElement cgInit) {
 		CGValuedElement cgSlot = cgGuardVariable;
@@ -2333,7 +2257,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		return Boolean.TRUE;
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull Boolean visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgPropertyAssignment) {
 		//		Property referredProperty = cgPropertyAssignment.getReferredProperty();
 		//		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
@@ -2374,10 +2298,28 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		}
 		doAssigned(cgPropertyAssignment);
 		return Boolean.TRUE;
-	}
+	} */
 
-	@Override
+	/*	@Override
 	public @NonNull Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
+		Property pReferredProperty = QVTiCGUtil.getAsProperty(cgPropertyAssignment);
+		assert !pReferredProperty.isIsImplicit();
+		CGValuedElement slotValue = QVTiCGUtil.getOwnedSlotValue(cgPropertyAssignment);
+		CGValuedElement initValue = QVTiCGUtil.getOwnedInitValue(cgPropertyAssignment);
+		Map<@NonNull Property, @NonNull String> oppositeProperties = getCodeGenerator().getOppositeProperties();
+		if (oppositeProperties != null) {
+			String cacheName = oppositeProperties.get(pReferredProperty);
+			if (cacheName != null) {
+				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(pReferredProperty.getOwningClass().getTypeId());
+				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(PivotUtil.getElementalType(PivotUtil.getType(pReferredProperty)).getTypeId());
+				js.append(cacheName);
+				js.append(".put(");
+				js.appendReferenceTo(middleTypeDescriptor, initValue);
+				js.append(", ");
+				js.appendReferenceTo(outerTypeDescriptor, slotValue);
+				js.append(");\n");
+			}
+		}
 		//		Property referredProperty = cgPropertyAssignment.getReferredProperty();
 		//		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 		//		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
@@ -2400,7 +2342,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		appendEcoreSet(cgSlot, eStructuralFeature, cgInit, isPartial);
 		doAssigned(cgPropertyAssignment, isPartial);
 		return Boolean.TRUE;
-	}
+	} */
 
 	@Override
 	public @NonNull Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
@@ -2688,7 +2630,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 		return Boolean.TRUE;
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		Property pReferredProperty = QVTiCGUtil.getAsProperty(cgMiddlePropertyAssignment);
 		assert !pReferredProperty.isIsImplicit();
@@ -2709,7 +2651,7 @@ public class QVTiCG2JavaVisitor extends AbstractQVTiCG2JavaVisitor
 			}
 		}
 		return visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
-	}
+	} */
 
 	@Override
 	public @NonNull Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
