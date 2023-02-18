@@ -23,10 +23,6 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGFunction" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGFunctionCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOperationCallExp">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
-        eType="#//CGFunction" resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGFunctionParameter" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGParameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
         eType="#//CGFunction" resolveProxies="false"/>
@@ -85,7 +81,6 @@
         containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGIterationCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOppositePropertyCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGRealizedVariable" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGVariable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="executorType" lowerBound="1"

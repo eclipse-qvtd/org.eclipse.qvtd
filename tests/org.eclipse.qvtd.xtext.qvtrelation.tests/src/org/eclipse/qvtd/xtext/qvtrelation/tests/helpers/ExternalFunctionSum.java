@@ -14,15 +14,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
+import org.eclipse.ocl.pivot.library.AbstractTernaryOperation;
 
-public class ExternalFunctionSum extends AbstractBinaryOperation
+public class ExternalFunctionSum extends AbstractTernaryOperation
 {
 	public static final @NonNull ExternalFunctionSum INSTANCE = new ExternalFunctionSum();
 
 	@SuppressWarnings("null")
 	@Override
-	public @NonNull Integer evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object firstValue, @Nullable Object secondValue) {
+	public @NonNull Integer evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object selfValue, @Nullable Object firstValue, @Nullable Object secondValue) {
 		Integer int1 = (@NonNull Integer)firstValue;
 		Integer int2 = (@NonNull Integer)secondValue;
 		return Integer.valueOf(int1 + int2);

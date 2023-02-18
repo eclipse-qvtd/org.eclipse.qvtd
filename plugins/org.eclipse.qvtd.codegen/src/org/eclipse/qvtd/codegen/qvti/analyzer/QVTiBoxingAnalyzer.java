@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.AbstractQVTiBoxingAnalysisVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -179,12 +178,28 @@ public class QVTiBoxingAnalyzer extends AbstractQVTiBoxingAnalysisVisitor
 		}
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
+		System.out.println(cgMiddlePropertyAssignment.getReferredProperty().getCallingConvention() + " <=m " + NameUtil.debugSimpleName(cgMiddlePropertyAssignment));
+
+
+		SetStatement asSetStatement = QVTiCGUtil.getAST(cgMiddlePropertyAssignment);
+		ImperativeTransformation asTransformation = QVTimperativeUtil.getContainingTransformation(asSetStatement);
+		EntryPointsAnalysis entryPointsAnalysis = ((QVTiCodeGenerator)getCodeGenerator()).getEntryPointsAnalysis(asTransformation);
+		Integer cacheIndex = entryPointsAnalysis.getCacheIndex(asSetStatement);
+		assert (cacheIndex != null);
+
+
+
+
+
+		EStructuralFeature eStructuralFeature = cgMiddlePropertyAssignment.getEStructuralFeature();
+		assert eStructuralFeature instanceof EReference;
+		assert ((EReference)eStructuralFeature).getEOpposite() == null;
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedSlotValue());
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedInitValue());
 		return super.visitCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
-	}
+	} */
 
 	/*	@Override
 	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {

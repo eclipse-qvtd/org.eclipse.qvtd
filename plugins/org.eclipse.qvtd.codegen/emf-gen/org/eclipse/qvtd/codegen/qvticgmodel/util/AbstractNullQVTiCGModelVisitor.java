@@ -60,11 +60,6 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
-		return null;
-	}
-
-	@Override
 	public R visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
 		return null;
 	}
@@ -96,11 +91,6 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 
 	@Override
 	public R visitCGMappingLoop(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingLoop object) {
-		return null;
-	}
-
-	@Override
-	public R visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
 		return null;
 	}
 

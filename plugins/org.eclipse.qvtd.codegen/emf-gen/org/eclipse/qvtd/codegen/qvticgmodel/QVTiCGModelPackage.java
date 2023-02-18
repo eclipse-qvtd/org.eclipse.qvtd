@@ -110,27 +110,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGFunction();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp <em>CG Function Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CG Function Call Exp</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp
-	 * @generated
-	 */
-	EClass getCGFunctionCallExp();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp#getFunction <em>Function</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Function</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp#getFunction()
-	 * @see #getCGFunctionCallExp()
-	 * @generated
-	 */
-	EReference getCGFunctionCallExp_Function();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter <em>CG Function Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -483,16 +462,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingLoop();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment <em>CG Middle Property Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CG Middle Property Assignment</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment
-	 * @generated
-	 */
-	EClass getCGMiddlePropertyAssignment();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp <em>CG Middle Property Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,24 +728,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_FUNCTION = eINSTANCE.getCGFunction();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionCallExpImpl <em>CG Function Call Exp</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionCallExpImpl
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunctionCallExp()
-		 * @generated
-		 */
-		EClass CG_FUNCTION_CALL_EXP = eINSTANCE.getCGFunctionCallExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_FUNCTION_CALL_EXP__FUNCTION = eINSTANCE.getCGFunctionCallExp_Function();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionParameterImpl <em>CG Function Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1017,16 +968,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_MAPPING_LOOP = eINSTANCE.getCGMappingLoop();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMiddlePropertyAssignmentImpl <em>CG Middle Property Assignment</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMiddlePropertyAssignmentImpl
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyAssignment()
-		 * @generated
-		 */
-		EClass CG_MIDDLE_PROPERTY_ASSIGNMENT = eINSTANCE.getCGMiddlePropertyAssignment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMiddlePropertyCallExpImpl <em>CG Middle Property Call Exp</em>}' class.

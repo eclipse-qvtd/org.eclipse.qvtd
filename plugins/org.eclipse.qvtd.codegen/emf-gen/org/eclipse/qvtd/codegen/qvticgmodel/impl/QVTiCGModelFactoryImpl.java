@@ -66,22 +66,20 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case 1: return createCGConnectionVariable();
 			case 2: return createCGEcoreRealizedVariable();
 			case 3: return createCGFunction();
-			case 4: return createCGFunctionCallExp();
-			case 5: return createCGFunctionParameter();
-			case 6: return createCGGuardVariable();
-			case 7: return createCGMapping();
-			case 8: return createCGMappingCall();
-			case 9: return createCGMappingCallBinding();
-			case 10: return createCGMappingExp();
-			case 11: return createCGMappingLoop();
-			case 12: return createCGMiddlePropertyAssignment();
-			case 13: return createCGMiddlePropertyCallExp();
-			case 14: return createCGRealizedVariable();
-			case 15: return createCGRealizedVariablePart();
-			case 16: return createCGSpeculateExp();
-			case 17: return createCGSpeculatePart();
-			case 18: return createCGTransformation();
-			case 19: return createCGTypedModel();
+			case 4: return createCGFunctionParameter();
+			case 5: return createCGGuardVariable();
+			case 6: return createCGMapping();
+			case 7: return createCGMappingCall();
+			case 8: return createCGMappingCallBinding();
+			case 9: return createCGMappingExp();
+			case 10: return createCGMappingLoop();
+			case 11: return createCGMiddlePropertyCallExp();
+			case 12: return createCGRealizedVariable();
+			case 13: return createCGRealizedVariablePart();
+			case 14: return createCGSpeculateExp();
+			case 15: return createCGSpeculatePart();
+			case 16: return createCGTransformation();
+			case 17: return createCGTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,17 +127,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGFunction createCGFunction() {
 		CGFunctionImpl cgFunction = new CGFunctionImpl();
 		return cgFunction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGFunctionCallExp createCGFunctionCallExp() {
-		CGFunctionCallExpImpl cgFunctionCallExp = new CGFunctionCallExpImpl();
-		return cgFunctionCallExp;
 	}
 
 	/**
@@ -217,17 +204,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGMappingLoop createCGMappingLoop() {
 		CGMappingLoopImpl cgMappingLoop = new CGMappingLoopImpl();
 		return cgMappingLoop;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment() {
-		CGMiddlePropertyAssignmentImpl cgMiddlePropertyAssignment = new CGMiddlePropertyAssignmentImpl();
-		return cgMiddlePropertyAssignment;
 	}
 
 	/**

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGParameterImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
@@ -25,7 +24,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -33,7 +31,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
@@ -84,13 +81,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass cgFunctionCallExpEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass cgFunctionParameterEClass = null;
 
 	/**
@@ -134,13 +124,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	private EClass cgMappingLoopEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cgMiddlePropertyAssignmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -333,26 +316,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	@Override
 	public EClass getCGFunction() {
 		return cgFunctionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCGFunctionCallExp() {
-		return cgFunctionCallExpEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGFunctionCallExp_Function() {
-		return (EReference)cgFunctionCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -573,16 +536,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	@Override
 	public EClass getCGMappingLoop() {
 		return cgMappingLoopEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCGMiddlePropertyAssignment() {
-		return cgMiddlePropertyAssignmentEClass;
 	}
 
 	/**
@@ -846,17 +799,14 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 		cgFunctionEClass = createEClass(3);
 
-		cgFunctionCallExpEClass = createEClass(4);
-		createEReference(cgFunctionCallExpEClass, CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0);
-
-		cgFunctionParameterEClass = createEClass(5);
+		cgFunctionParameterEClass = createEClass(4);
 		createEReference(cgFunctionParameterEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0);
 
-		cgGuardVariableEClass = createEClass(6);
+		cgGuardVariableEClass = createEClass(5);
 		createEReference(cgGuardVariableEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0);
 		createEReference(cgGuardVariableEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 1);
 
-		cgMappingEClass = createEClass(7);
+		cgMappingEClass = createEClass(6);
 		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
@@ -864,48 +814,46 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4);
 		createEAttribute(cgMappingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
 
-		cgMappingCallEClass = createEClass(8);
+		cgMappingCallEClass = createEClass(7);
 		createEReference(cgMappingCallEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgMappingCallEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgMappingCallBindingEClass = createEClass(9);
+		cgMappingCallBindingEClass = createEClass(8);
 		createEReference(cgMappingCallBindingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgMappingCallBindingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgMappingExpEClass = createEClass(10);
+		cgMappingExpEClass = createEClass(9);
 		createEReference(cgMappingExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgMappingExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgMappingLoopEClass = createEClass(11);
+		cgMappingLoopEClass = createEClass(10);
 
-		cgMiddlePropertyAssignmentEClass = createEClass(12);
+		cgMiddlePropertyCallExpEClass = createEClass(11);
 
-		cgMiddlePropertyCallExpEClass = createEClass(13);
-
-		cgRealizedVariableEClass = createEClass(14);
+		cgRealizedVariableEClass = createEClass(12);
 		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0);
 		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1);
 		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2);
 		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3);
 
-		cgRealizedVariablePartEClass = createEClass(15);
+		cgRealizedVariablePartEClass = createEClass(13);
 		createEReference(cgRealizedVariablePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgRealizedVariablePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 		createEReference(cgRealizedVariablePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
 
-		cgSpeculateExpEClass = createEClass(16);
+		cgSpeculateExpEClass = createEClass(14);
 		createEReference(cgSpeculateExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgSpeculateExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgSpeculatePartEClass = createEClass(17);
+		cgSpeculatePartEClass = createEClass(15);
 		createEReference(cgSpeculatePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgSpeculatePartEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgTransformationEClass = createEClass(18);
+		cgTransformationEClass = createEClass(16);
 		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0);
 		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1);
 
-		cgTypedModelEClass = createEClass(19);
+		cgTypedModelEClass = createEClass(17);
 		createEAttribute(cgTypedModelEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		createEReference(cgTypedModelEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 	}
@@ -945,7 +893,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgConnectionVariableEClass.getESuperTypes().add(this.getCGGuardVariable());
 		cgEcoreRealizedVariableEClass.getESuperTypes().add(this.getCGRealizedVariable());
 		cgFunctionEClass.getESuperTypes().add(theCGModelPackage.getCGOperation());
-		cgFunctionCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOperationCallExp());
 		cgFunctionParameterEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
 		cgGuardVariableEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
 		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
@@ -953,7 +900,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgMappingCallBindingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingExpEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingLoopEClass.getESuperTypes().add(theCGModelPackage.getCGIterationCallExp());
-		cgMiddlePropertyAssignmentEClass.getESuperTypes().add(theCGModelPackage.getCGEcorePropertyAssignment());
 		cgMiddlePropertyCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOppositePropertyCallExp());
 		cgRealizedVariableEClass.getESuperTypes().add(theCGModelPackage.getCGVariable());
 		cgRealizedVariablePartEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
@@ -974,9 +920,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGEcoreRealizedVariable_EClassifier(), ecorePackage.getEClassifier(), null, "eClassifier", null, 1, 1, CGEcoreRealizedVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgFunctionEClass, CGFunction.class, "CGFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(cgFunctionCallExpEClass, CGFunctionCallExp.class, "CGFunctionCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGFunctionCallExp_Function(), this.getCGFunction(), null, "function", null, 1, 1, CGFunctionCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgFunctionParameterEClass, CGFunctionParameter.class, "CGFunctionParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGFunctionParameter_Function(), this.getCGFunction(), null, "function", null, 1, 1, CGFunctionParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1006,8 +949,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGMappingExp_OwnedBody(), theCGModelPackage.getCGValuedElement(), null, "ownedBody", null, 0, 1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingLoopEClass, CGMappingLoop.class, "CGMappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(cgMiddlePropertyAssignmentEClass, CGMiddlePropertyAssignment.class, "CGMiddlePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgMiddlePropertyCallExpEClass, CGMiddlePropertyCallExp.class, "CGMiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1055,11 +996,11 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	protected void createImportAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
-		   });
+		(this,
+			source,
+			new String[] {
+				"ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		});
 	}
 
 } //QVTiCGModelPackageImpl
