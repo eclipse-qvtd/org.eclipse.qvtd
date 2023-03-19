@@ -21,11 +21,6 @@
     <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-    <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.14"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone/latest"/>
-  </location>
-  <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.epsilon.core.feature.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.epsilon.emf.feature.feature.group" version="0.0.0"/>
     <repository location="https://download.eclipse.org/epsilon/updates/1.5"/>
