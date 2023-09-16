@@ -18,8 +18,8 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/nightly/latest"/>
-    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone/latest"/>
+    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/nightly"/>
+    <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.transaction" version="0.0.0"/>
@@ -86,7 +86,6 @@
     <unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.generator" version="0.0.0"/>
-    <!--repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/head"/-->
     <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly"/>
     <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones"/>
     <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest"/>
@@ -94,7 +93,7 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/interim/latest"/>
+    <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/interim/latest"/-->
     <repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones/latest"/>
     <repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/releases/latest"/>
   </location>
@@ -104,9 +103,11 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="com.google.guava" version="0.0.0"/>
+    <unit id="com.ibm.icu" version="0.0.0"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-I"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-S"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+    <!-- legacy repo needed for com.ibm.icu.text for Sirius/GMF/GEF/Draw2D -->
     <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
   </location>
 </locations>
