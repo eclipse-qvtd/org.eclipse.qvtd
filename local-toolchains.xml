@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+  <!-- JDK toolchains for local usage -->
+  <!-- referenced using <dash><dash>global-toolchains ../../local-toolchains.xml on maven command line -->
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>1.5</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+	 <jdkHome>E:/Tools/Java/jdk1.5.0_22/bin</jdkHome>
+    </configuration>
+  </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>1.8</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+	  <jdkHome>E:/Tools/Java/jdk-1.8.0_371/bin</jdkHome>
+    </configuration>
+  </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>11.0</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+	  <jdkHome>E:/Tools/Java/jdk-11.0.19/bin</jdkHome>
+    </configuration>
+  </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>17.0</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+ 	  <jdkHome>E:/Tools/Java/jdk-17.0.8/bin</jdkHome>
+   </configuration>
+  </toolchain>
+</toolchains>
