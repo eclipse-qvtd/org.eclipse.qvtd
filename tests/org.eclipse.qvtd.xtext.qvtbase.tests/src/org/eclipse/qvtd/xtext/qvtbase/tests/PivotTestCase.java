@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,14 +43,13 @@ import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
-import org.eclipse.ocl.pivot.validation.ComposedEValidator;
+import org.eclipse.ocl.pivot.validation.ValidationContext;
+import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
@@ -224,8 +222,10 @@ public class PivotTestCase extends TestCase
 	}
 
 	protected static void assertNoValidationErrorsInternal(@NonNull String string, @NonNull EObject eObject) {
-		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(eObject);
+		ValidationContext validationContext = new ValidationContext(validationRegistry);
+		Diagnostician diagnostician = validationContext.getDiagnostician();
+		Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
 		if (children.size() <= 0) {
 			return;
@@ -314,17 +314,19 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
-		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
+		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(resource);
+		ValidationContext validationContext = new ValidationContext(validationRegistry);
 		return assertValidationDiagnostics(prefix, resource, validationContext, messages);
 	}
 
-	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, Map<Object, Object> validationContext, String... messages) {
+	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, @NonNull ValidationContext validationContext, String... messages) {
 		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
 		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
 		try {
+			Diagnostician diagnostician = validationContext.getDiagnostician();
 			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 			for (EObject eObject : resource.getContents()) {
-				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);		// FIXME inline 1 call level
+				Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);		// FIXME inline 1 call level
 				diagnostics.addAll(diagnostic.getChildren());
 			}
 			return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
@@ -342,17 +344,14 @@ public class PivotTestCase extends TestCase
 	}
 
 	/**
-	 * Remove the global EPackage.Registry and EValidator.Registry for the nsURIs.
+	 * Remove the global EPackage.Registry for the nsURIs.
 	 * This should be invoked at the end of a test that installs compiled models to avoid pollution
 	 * affecting subsequent tests that may re-use the nsURI.
 	 */
 	protected static void cleanup(@NonNull String @NonNull ... nsURIs) {
 		for (@NonNull String nsURI : nsURIs) {
 			Object ePackage = EPackage.Registry.INSTANCE.remove(nsURI);
-			if (ePackage instanceof EPackage) {
-				EValidator.Registry.INSTANCE.remove(ePackage);
-			}
-			else {
+			if (!(ePackage instanceof EPackage)) {
 				QVTruntimeUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
 			}
 		}
@@ -456,10 +455,10 @@ public class PivotTestCase extends TestCase
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		startTime = System.nanoTime();
-		resetEValidators();
+		//	resetEValidators();
 	}
 
-	private void resetEValidators() {		// FIXME Bug 571755 this should not be needed
+	/*	private void resetEValidators() {		// FIXME Bug 571755 this should not be needed
 		for (Map.Entry<EPackage, Object> entry : EValidator.Registry.INSTANCE.entrySet()) {
 			Object eValidator = entry.getValue();
 			if (eValidator instanceof ComposedEValidator) {
@@ -471,7 +470,7 @@ public class PivotTestCase extends TestCase
 				}
 			}
 		}
-	}
+	} */
 
 	static long startTime;
 

@@ -51,12 +51,13 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.ocl.pivot.validation.ValidationContext;
+import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -203,9 +204,11 @@ public class CompilerUtil extends QVTscheduleUtil
 		}
 	}
 
-	public static void assertNoValidationErrors(@NonNull String string, EObject eObject) {
-		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull EObject eObject) {
+		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(eObject);
+		ValidationContext validationContext = new ValidationContext(validationRegistry);
+		Diagnostician diagnostician = validationContext.getDiagnostician();
+		Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
 		if (children.size() <= 0) {
 			return;

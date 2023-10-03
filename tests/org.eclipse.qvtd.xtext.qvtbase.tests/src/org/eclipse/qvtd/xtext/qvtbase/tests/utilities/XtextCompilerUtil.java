@@ -12,8 +12,6 @@ package org.eclipse.qvtd.xtext.qvtbase.tests.utilities;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -28,8 +26,9 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.validation.ValidationContext;
+import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -66,9 +65,11 @@ public class XtextCompilerUtil extends CompilerUtil
 		}
 	}
 
-	public static void assertNoValidationErrors(@NonNull String string, EObject eObject) {
-		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull EObject eObject) {
+		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(eObject);
+		ValidationContext validationContext = new ValidationContext(validationRegistry);
+		Diagnostician diagnostician = validationContext.getDiagnostician();
+		Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
 		if (children.size() <= 0) {
 			return;
