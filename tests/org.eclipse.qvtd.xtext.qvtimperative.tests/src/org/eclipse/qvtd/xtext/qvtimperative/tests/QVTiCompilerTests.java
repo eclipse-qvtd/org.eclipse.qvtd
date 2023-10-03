@@ -59,6 +59,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
+import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -157,10 +158,13 @@ public class QVTiCompilerTests extends LoadTestCase
 			//			completeOCLEObjectValidator1.initialize();
 			completeOCLEObjectValidator2.initialize(environmentFactory);
 			//			completeOCLEObjectValidator3.initialize();
-			PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), environmentFactory);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
+			ResourceSet asResourceSet = asResource.getResourceSet();
+			assert asResourceSet != null;
+			ValidationRegistryAdapter asValidationRegistry = ValidationRegistryAdapter.getAdapter(asResourceSet);
+			//	PivotEObjectValidator.install(ClassUtil.nonNullState(asResourceSet), environmentFactory);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
 
 			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 			if (asResource.isSaveable()) {
