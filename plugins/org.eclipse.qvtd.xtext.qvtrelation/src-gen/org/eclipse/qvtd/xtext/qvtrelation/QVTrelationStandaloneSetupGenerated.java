@@ -1,31 +1,31 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2022 Willink Transformations and others.
+ * Copyright (c) 2011, 2023 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ISetup;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class QVTrelationStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup.doSetup();
+		QVTbaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -33,18 +33,14 @@ public class QVTrelationStandaloneSetupGenerated implements ISetup {
 	}
 
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.qvtd.xtext.qvtrelation.QVTrelationRuntimeModule());
+		return Guice.createInjector(new QVTrelationRuntimeModule());
 	}
 
 	public void register(Injector injector) {
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("qvtr", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("qvtr", serviceProvider);
-
-
-
-
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("qvtr", serviceProvider);
 	}
 }

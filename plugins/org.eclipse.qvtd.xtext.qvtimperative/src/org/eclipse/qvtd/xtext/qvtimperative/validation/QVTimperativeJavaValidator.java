@@ -11,11 +11,11 @@
 package org.eclipse.qvtd.xtext.qvtimperative.validation;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-public class QVTimperativeJavaValidator extends org.eclipse.qvtd.xtext.qvtimperative.validation.AbstractQVTimperativeJavaValidator {
+public class QVTimperativeJavaValidator extends QVTimperativeValidator {
 
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {

@@ -1,9 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2022 Willink Transformations and others.
+ * Copyright (c) 2011, 2023 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
+ *
+ * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
@@ -11,11 +13,12 @@
 package org.eclipse.qvtd.xtext.qvtcore.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.qvtd.xtext.qvtcore.parser.antlr.internal.InternalQVTcoreParser;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class QVTcoreParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+public class QVTcoreParser extends AbstractAntlrParser {
 
 	@Inject
 	private QVTcoreGrammarAccess grammarAccess;
@@ -25,9 +28,10 @@ public class QVTcoreParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrP
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 
+
 	@Override
-	protected org.eclipse.qvtd.xtext.qvtcore.parser.antlr.internal.InternalQVTcoreParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.qvtd.xtext.qvtcore.parser.antlr.internal.InternalQVTcoreParser(stream, getGrammarAccess());
+	protected InternalQVTcoreParser createParser(XtextTokenStream stream) {
+		return new InternalQVTcoreParser(stream, getGrammarAccess());
 	}
 
 	@Override
@@ -42,5 +46,4 @@ public class QVTcoreParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrP
 	public void setGrammarAccess(QVTcoreGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-
 }
