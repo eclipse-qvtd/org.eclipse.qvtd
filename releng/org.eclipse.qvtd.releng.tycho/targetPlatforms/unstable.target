@@ -10,8 +10,8 @@
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/releases/photon/201806271001"/>
-    <repository location="https://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
+    <repository location="https://download.eclipse.org/releases/latest"/>
+    <repository location="https://download.eclipse.org/mmt/atl/updates/releases/latest"/>
     <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
     <repository location="https://ci.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/targetPlatform"/>
     <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones"/>
@@ -32,8 +32,11 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="com.google.guava" version="0.0.0"/>
+    <unit id="com.ibm.icu" version="0.0.0"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-S"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+    <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+    <!-- legacy repo needed for com.ibm.icu.text for Sirius/GMF/GEF/Draw2D -->
     <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
