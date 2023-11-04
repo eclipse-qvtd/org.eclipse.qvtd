@@ -12,5 +12,5 @@ Export-Package: org.eclipse.qvtd.doc.miniocl,
  org.eclipse.qvtd.doc.miniocl.lookup.impl,
  org.eclipse.qvtd.doc.miniocl.lookup.util,
  org.eclipse.qvtd.doc.miniocl.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.qvtd.doc.miniocl
