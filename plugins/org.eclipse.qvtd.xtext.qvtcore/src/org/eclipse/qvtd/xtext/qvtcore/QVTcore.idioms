@@ -12,3 +12,81 @@
  *******************************************************************************/
 model org.eclipse.qvtd.xtext.qvtcore.QVTcore
 with "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/src/org/eclipse/qvtd/xtext/qvtbase/QVTbase.idioms"
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#/" as qvtcorecs
+
+idiom BOTTOM_PATTERN_SPACING1 for qvtcorecs::BottomPatternCS {
+	at "{" do soft-new-line value push soft-new-line;
+	at "|" do soft-new-line pop value push;
+	at "}" do pop value soft-new-line;
+}
+
+idiom BOTTOM_PATTERN_SPACING2a for qvtcorecs::BottomPatternCS {
+	at "{" do soft-new-line value push;
+	at each assignment qvtcorecs::BottomPatternCS::ownedRealizedVariables do soft-new-line value;
+	at "}" do pop value soft-new-line;
+}
+
+idiom BOTTOM_PATTERN_SPACING2b for qvtcorecs::BottomPatternCS {
+	at "{" do soft-new-line value push;
+	at each assignment qvtcorecs::BottomPatternCS::ownedUnrealizedVariables do soft-new-line value;
+	at "}" do pop value soft-new-line;
+}
+
+idiom BOTTOM_PATTERN_SPACING2c for qvtcorecs::BottomPatternCS {
+	at "{" do soft-new-line value push;
+	at "}" do pop value soft-new-line;
+}
+
+idiom BOTTOM_PATTERN_COMMA for qvtcorecs::BottomPatternCS at "," do no-space value soft-new-line ;
+
+idiom BOTTOM_PATTERN_INNER for qvtcorecs::BottomPatternCS at each assignment qvtcorecs::BottomPatternCS::ownedConstraints do soft-new-line value;
+
+idiom GUARD_PATTERN_SPACING1 for qvtcorecs::GuardPatternCS {
+	at "(" do soft-new-line value push;
+	at all assignment qvtcorecs::GuardPatternCS::ownedUnrealizedVariables do soft-new-line value;
+	at "|" do soft-new-line pop value push;
+	at ")" do pop value soft-new-line;
+}
+
+idiom GUARD_PATTERN_SPACING2a for qvtcorecs::GuardPatternCS {
+	at "(" do soft-new-line value push;
+	at each assignment qvtcorecs::GuardPatternCS::ownedUnrealizedVariables do soft-new-line value;
+	at each assignment qvtcorecs::GuardPatternCS::ownedUnrealizedVariables do soft-new-line value;
+	at ")" do soft-new-line pop value soft-new-line;
+}
+
+idiom GUARD_PATTERN_SPACING2b for qvtcorecs::GuardPatternCS {
+	at "(" do soft-new-line value push;
+	at each assignment qvtcorecs::GuardPatternCS::ownedUnrealizedVariables do soft-new-line value;
+	at ")" do soft-new-line pop value soft-new-line;
+}
+
+idiom GUARD_PATTERN_SPACING2c for qvtcorecs::GuardPatternCS {
+	at "(" do soft-new-line value push;
+	at ")" do pop value soft-new-line;
+}
+
+idiom GUARD_PATTERN_INNER for qvtcorecs::GuardPatternCS at each assignment qvtcorecs::GuardPatternCS::ownedPredicates do soft-new-line value;
+
+idiom IMPORTS_SPACING at all assignment qvtcorecs::TopLevelCS::ownedImports do value half-new-line;
+
+idiom MAPPING_SPACING for qvtcorecs::MappingCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do pop value soft-new-line ;
+}
+
+idiom MAPPINGS_SPACING at assignment qvtcorecs::TopLevelCS::ownedMappings do half-new-line value half-new-line;
+
+idiom QUERIES_SPACING at assignment qvtcorecs::TopLevelCS::ownedQueries do half-new-line value half-new-line;
+
+idiom QUERY_SPACING for qvtcorecs::QueryCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom TRANSFORMATION_SPACING for qvtcorecs::TransformationCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom TRANSFORMATIONS_SPACING at assignment qvtcorecs::TopLevelCS::ownedTransformations do half-new-line value half-new-line;

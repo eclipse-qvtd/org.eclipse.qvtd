@@ -12,3 +12,58 @@
  *******************************************************************************/
 model org.eclipse.qvtd.xtext.qvtrelation.QVTrelation
 with "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/src/org/eclipse/qvtd/xtext/qvtbase/QVTbase.idioms"
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.ecore#/" as qvtrelationcs
+
+idiom COLLECTION_TEMPLATE_SPACING1 for qvtrelationcs::CollectionTemplateCS {
+	at "{" do soft-space value push soft-new-line;
+	at assignment qvtrelationcs::CollectionTemplateCS::ownedMemberIdentifiers do value;
+	at "}" do soft-new-line pop value;
+}
+
+idiom COLLECTION_TEMPLATE_SPACING2 for qvtrelationcs::CollectionTemplateCS {
+	at "{" do soft-space value no-space;
+	at "}" do no-space value soft-space;
+}
+
+idiom DOMAIN_SPACING for qvtrelationcs::DomainCS at ";" do no-space value soft-new-line half-new-line;
+
+idiom IMPORTS_SPACING at all assignment qvtrelationcs::TopLevelCS::ownedImports do value half-new-line;
+
+idiom MODEL_DECL_SPACING2 for qvtrelationcs::ModelDeclCS {
+	at all "{" do soft-space value no-space;
+	at all "}" do no-space value;
+}
+
+idiom OBJECT_TEMPLATE_SPACING0 for qvtrelationcs::ObjectTemplateCS {
+	at "{" do soft-space value push no-space;
+	at "}" do half-new-line no-space pop value soft-space;
+}
+
+idiom OBJECT_TEMPLATE_SPACING1 for qvtrelationcs::ObjectTemplateCS at assignment qvtrelationcs::ObjectTemplateCS::ownedPropertyTemplates do soft-new-line value half-new-line;
+
+idiom OBJECT_TEMPLATE_SPACING2 for qvtrelationcs::ObjectTemplateCS at "," do no-space value soft-new-line;
+
+idiom PACKAGES_SPACING at assignment qvtrelationcs::TopLevelCS::ownedPackages do half-new-line value half-new-line;
+
+//idiom PROPERTIES_SPACING at assignment qvtrelationcs::TransformationCS::ownedProperties do half-new-line value half-new-line;
+
+idiom QUERIES_SPACING at assignment qvtrelationcs::TransformationCS::ownedQueries do half-new-line value half-new-line;
+
+idiom QUERY_SPACING for qvtrelationcs::QueryCS {
+	at "{" do soft-new-line value push soft-new-line;
+	at "}" do soft-new-line pop value soft-new-line;
+}
+
+idiom RELATION_SPACING for qvtrelationcs::RelationCS {
+	at "{" do soft-new-line value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom RELATIONS_SPACING at assignment qvtrelationcs::TransformationCS::ownedRelations do half-new-line value half-new-line;
+
+idiom TRANSFORMATION_SPACING for qvtrelationcs::TransformationCS {
+	at "{" do soft-new-line value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom TRANSFORMATIONS_SPACING at assignment qvtrelationcs::TopLevelCS::ownedTransformations do half-new-line value half-new-line;

@@ -132,6 +132,7 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 			DirectionCSElements a = f.getDirectionCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_2_2_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		{
 			EntryPointCSElements a = f.getEntryPointCSAccess();
@@ -253,7 +254,6 @@ public class QVTimperativeFormatter extends QVTbaseFormatter
 			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_7());
 			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_7());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 		}
 	}
 

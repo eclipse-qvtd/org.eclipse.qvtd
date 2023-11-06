@@ -12,3 +12,49 @@
  *******************************************************************************/
 model org.eclipse.qvtd.xtext.qvtimperative.QVTimperative
 with "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/src/org/eclipse/qvtd/xtext/qvtbase/QVTbase.idioms"
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.ecore#/" as qvtimperativecs
+//grammar "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/src/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext" as qvtimperativext
+
+idiom BUFFER_STATEMENT_COLON_SPACING for qvtimperativecs::BufferStatementCS {
+	at ":" do no-space value no-space;
+	at ":" do soft-space value soft-space;
+}
+
+//idiom DIRECTION_SPACING at ";" do no-space value soft-new-line half-new-line;
+
+idiom DIRECTIONS_SPACING at all assignment qvtimperativecs::TransformationCS::ownedDirections do value half-new-line;
+
+idiom GUARD_PARAMETER_COLON_SPACING for qvtimperativecs::GuardParameterCS {
+	at ":" do no-space value no-space;
+	at ":" do soft-space value soft-space;
+}
+
+idiom IMPORTS_SPACING at all assignment qvtimperativecs::TopLevelCS::ownedImports do value half-new-line;
+
+idiom MAP_COLON_SPACING for qvtimperativecs::MappingCS at ":" do no-space value no-space;
+
+idiom MAPPING_SPACING for qvtimperativecs::MappingCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom MAPPINGS_SPACING at assignment qvtimperativecs::TransformationCS::ownedMappings do half-new-line value half-new-line;
+
+idiom NEW_STATEMENT_COLON_SPACING for qvtimperativecs::NewStatementCS {
+	at ":" do no-space value no-space;
+	at ":" do soft-space value soft-space;
+}
+
+idiom QUERIES_SPACING at assignment qvtimperativecs::TransformationCS::ownedQueries do half-new-line value half-new-line;
+
+idiom SIMPLE_PARAMETER_COLON_SPACING for qvtimperativecs::SimpleParameterCS {
+	at ":" do no-space value no-space;
+	at ":" do soft-space value soft-space;
+}
+
+idiom TRANSFORMATION_SPACING for qvtimperativecs::TransformationCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do pop value soft-new-line;
+}
+
+idiom TRANSFORMATIONS_SPACING at all assignment qvtimperativecs::TopLevelCS::ownedTransformations do half-new-line value half-new-line;

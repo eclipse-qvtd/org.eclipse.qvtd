@@ -230,7 +230,8 @@ public class QVTimperativeGrammarResource extends AbstractGrammarResource
 						setCardinality("*", createGroup(
 							createKeyword(","),
 							createAssignment("imports", "+=", createCrossReference(
-								createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.PACKAGE), createRuleCall(PR_UnrestrictedName)))))))));
+								createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.PACKAGE), createRuleCall(PR_UnrestrictedName))))))),
+					createKeyword(";")));
 			PR_EntryPointCS.setAlternatives(
 				createGroup(
 					createAction(null, null, createTypeRef(MM, org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage.Literals.ENTRY_POINT_CS)),
@@ -546,9 +547,7 @@ public class QVTimperativeGrammarResource extends AbstractGrammarResource
 						createKeyword(":"),
 						createAssignment("ownedContextType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)))),
 					createKeyword("{"),
-					setCardinality("*", createGroup(
-						createAssignment("ownedDirections", "+=", createRuleCall(PR_DirectionCS)),
-						createKeyword(";"))),
+					setCardinality("*", createAssignment("ownedDirections", "+=", createRuleCall(PR_DirectionCS))),
 					setCardinality("*", createAlternatives(
 						createAssignment("ownedMappings", "+=", createAlternatives(
 							createRuleCall(PR_EntryPointCS),

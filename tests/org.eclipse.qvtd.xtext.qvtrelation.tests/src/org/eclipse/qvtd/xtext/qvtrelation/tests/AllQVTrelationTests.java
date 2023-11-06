@@ -38,6 +38,7 @@ public class AllQVTrelationTests extends TestCase
 		//			result.addTestSuite(EditorTests.class);		-- not yet written
 		//		}
 		result.addTestSuite(QVTrSerializeTests.class);
+		result.addTestSuite(QVTrFormatTests.class);
 		result.addTestSuite(QVTrCompilerTests.class);
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			result.addTestSuite(QVTrBuilderTests.class);

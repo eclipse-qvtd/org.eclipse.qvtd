@@ -190,7 +190,6 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getSpeculateStatementCSAccess().getGroup_2(), "rule__SpeculateStatementCS__Group_2__0");
 			builder.put(grammarAccess.getTransformationCSAccess().getGroup(), "rule__TransformationCS__Group__0");
 			builder.put(grammarAccess.getTransformationCSAccess().getGroup_3(), "rule__TransformationCS__Group_3__0");
-			builder.put(grammarAccess.getTransformationCSAccess().getGroup_5(), "rule__TransformationCS__Group_5__0");
 			builder.put(grammarAccess.getAttributeCSAccess().getGroup(), "rule__AttributeCS__Group__0");
 			builder.put(grammarAccess.getAttributeCSAccess().getGroup_0_0(), "rule__AttributeCS__Group_0_0__0");
 			builder.put(grammarAccess.getAttributeCSAccess().getGroup_0_1(), "rule__AttributeCS__Group_0_1__0");
@@ -476,7 +475,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTransformationCSAccess().getOwnedPathNameAssignment_1(), "rule__TransformationCS__OwnedPathNameAssignment_1");
 			builder.put(grammarAccess.getTransformationCSAccess().getNameAssignment_2(), "rule__TransformationCS__NameAssignment_2");
 			builder.put(grammarAccess.getTransformationCSAccess().getOwnedContextTypeAssignment_3_1(), "rule__TransformationCS__OwnedContextTypeAssignment_3_1");
-			builder.put(grammarAccess.getTransformationCSAccess().getOwnedDirectionsAssignment_5_0(), "rule__TransformationCS__OwnedDirectionsAssignment_5_0");
+			builder.put(grammarAccess.getTransformationCSAccess().getOwnedDirectionsAssignment_5(), "rule__TransformationCS__OwnedDirectionsAssignment_5");
 			builder.put(grammarAccess.getTransformationCSAccess().getOwnedMappingsAssignment_6_0(), "rule__TransformationCS__OwnedMappingsAssignment_6_0");
 			builder.put(grammarAccess.getTransformationCSAccess().getOwnedQueriesAssignment_6_1(), "rule__TransformationCS__OwnedQueriesAssignment_6_1");
 			builder.put(grammarAccess.getTransformationCSAccess().getOwnedPropertiesAssignment_6_2(), "rule__TransformationCS__OwnedPropertiesAssignment_6_2");

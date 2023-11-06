@@ -546,14 +546,15 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		private final Assignment cImportsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
 		private final CrossReference cImportsPackageCrossReference_2_2_1_0 = (CrossReference)cImportsAssignment_2_2_1.eContents().get(0);
 		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_2_2_1_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 
 		//DirectionCS: {DirectionCS} name=Identifier?
-		//    ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+		//    ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)? ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{DirectionCS} name=Identifier?
-		//   ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+		//   ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)? ';'
 		public Group getGroup() { return cGroup; }
 
 		//{DirectionCS}
@@ -594,6 +595,9 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 
 		//UnrestrictedName
 		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1; }
+
+		//';'
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 	public class EntryPointCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.EntryPointCS");
@@ -2116,10 +2120,8 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		private final Assignment cOwnedContextTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cOwnedContextTypeTypeExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedContextTypeAssignment_3_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Assignment cOwnedDirectionsAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
-		private final RuleCall cOwnedDirectionsDirectionCSParserRuleCall_5_0_0 = (RuleCall)cOwnedDirectionsAssignment_5_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Assignment cOwnedDirectionsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOwnedDirectionsDirectionCSParserRuleCall_5_0 = (RuleCall)cOwnedDirectionsAssignment_5.eContents().get(0);
 		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
 		private final Assignment cOwnedMappingsAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
 		private final Alternatives cOwnedMappingsAlternatives_6_0_0 = (Alternatives)cOwnedMappingsAssignment_6_0.eContents().get(0);
@@ -2133,11 +2135,11 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 
 		//TransformationCS:
 		//    'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
-		//    '{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
+		//    '{' ownedDirections+=DirectionCS* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
-		//'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}'
+		//'{' ownedDirections+=DirectionCS* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}'
 		public Group getGroup() { return cGroup; }
 
 		//'transformation'
@@ -2170,17 +2172,11 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//(ownedDirections+=DirectionCS ';')*
-		public Group getGroup_5() { return cGroup_5; }
-
-		//ownedDirections+=DirectionCS
-		public Assignment getOwnedDirectionsAssignment_5_0() { return cOwnedDirectionsAssignment_5_0; }
+		//ownedDirections+=DirectionCS*
+		public Assignment getOwnedDirectionsAssignment_5() { return cOwnedDirectionsAssignment_5; }
 
 		//DirectionCS
-		public RuleCall getOwnedDirectionsDirectionCSParserRuleCall_5_0_0() { return cOwnedDirectionsDirectionCSParserRuleCall_5_0_0; }
-
-		//';'
-		public Keyword getSemicolonKeyword_5_1() { return cSemicolonKeyword_5_1; }
+		public RuleCall getOwnedDirectionsDirectionCSParserRuleCall_5_0() { return cOwnedDirectionsDirectionCSParserRuleCall_5_0; }
 
 		//(ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)*
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
@@ -2659,7 +2655,7 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 	}
 
 	//DirectionCS: {DirectionCS} name=Identifier?
-	//    ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	//    ('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)? ';'
 	//;
 	public DirectionCSElements getDirectionCSAccess() {
 		return pDirectionCS;
@@ -2897,7 +2893,7 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 
 	//TransformationCS:
 	//    'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
-	//    '{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
+	//    '{' ownedDirections+=DirectionCS* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 	public TransformationCSElements getTransformationCSAccess() {
 		return pTransformationCS;
 	}

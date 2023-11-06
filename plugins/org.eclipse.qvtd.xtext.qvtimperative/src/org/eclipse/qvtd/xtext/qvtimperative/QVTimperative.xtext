@@ -46,7 +46,7 @@ DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProp
 	isCheck?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 
 DirectionCS: {DirectionCS} name=Identifier?
-	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)? ';'
 ;
 
 EntryPointCS: {EntryPointCS} isStrict?='strict'? 'entry' (':' targetName=UnrestrictedName)?
@@ -130,7 +130,7 @@ SpeculateStatementCS: 'speculate' ownedConditions+=ExpCS (',' ownedConditions+=E
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName (':' ownedContextType=TypeExpCS)?
-	'{' (ownedDirections+=DirectionCS ';')* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
+	'{' ownedDirections+=DirectionCS* (ownedMappings+=(EntryPointCS | MappingCS) | ownedQueries+=QueryCS | ownedProperties+=StructuralFeatureCS)* '}';
 
 QVTimperativeUnrestrictedName:
 	'add'
