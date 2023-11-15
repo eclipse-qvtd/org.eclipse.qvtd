@@ -1770,7 +1770,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 			(0 << 16) | 10	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPathName=URIPathNameCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 10	/* isAll?="::" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 5	/* isAll?="::" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 10	/* "*" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 6	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
@@ -1996,7 +1996,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 			(0 << 16) | 0	/* MultiplicityStringCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 5	/* "|?" : [value] | [no-space, value, no-space] */,
-			(0 << 16) | 10	/* isNullFree?="|1" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 5	/* isNullFree?="|1" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 1	/* "]" : [value] | [no-space, value] */
 		);
 		grammarRuleValues[69] = createParserRuleValue(69, "MultiplicityStringCS", -1,
@@ -2111,7 +2111,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 				47	/* NavigatingCommaArgCS-3: NavigatingArgCS::prefix=',' NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 10	/* prefix="," : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 7	/* prefix="," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedNameExpression=NavigatingArgExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
@@ -2150,7 +2150,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 				48	/* NavigatingSemiArgCS-0: NavigatingArgCS::prefix=';' NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS (':' NavigatingArgCS::ownedType=TypeExpCS ('=' NavigatingArgCS::ownedInitExpression=ExpCS)[V1:?])[V0:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 10	/* prefix=";" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 6	/* prefix=";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* ownedNameExpression=NavigatingArgExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 10	/* ":" : [value] | [soft-space, value, soft-space] */,

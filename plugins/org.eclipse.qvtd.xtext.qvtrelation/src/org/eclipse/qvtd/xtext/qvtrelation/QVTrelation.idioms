@@ -29,6 +29,8 @@ idiom DOMAIN_SPACING for qvtrelationcs::DomainCS at ";" do no-space value soft-n
 
 idiom IMPORTS_SPACING at all assignment qvtrelationcs::TopLevelCS::ownedImports do value half-new-line;
 
+idiom MODEL_DECL_SPACING1 for qvtrelationcs::ModelDeclCS at ":" do no-space value no-space;
+
 idiom MODEL_DECL_SPACING2 for qvtrelationcs::ModelDeclCS {
 	at all "{" do soft-space value no-space;
 	at all "}" do no-space value;
@@ -60,6 +62,13 @@ idiom RELATION_SPACING for qvtrelationcs::RelationCS {
 }
 
 idiom RELATIONS_SPACING at assignment qvtrelationcs::TransformationCS::ownedRelations do half-new-line value half-new-line;
+
+idiom TEMPLATE_SPACING0 for qvtrelationcs::TemplateCS {
+	at "{" do soft-space value push soft-new-line;
+	at "}" do soft-new-line pop value soft-space;
+}
+
+//idiom TEMPLATE_SPACING1 for qvtrelationcs::TemplateCS at assignment qvtrelationcs::TemplateCS::ownedGuardExpression do soft-new-line value soft-new-line;
 
 idiom TRANSFORMATION_SPACING for qvtrelationcs::TransformationCS {
 	at "{" do soft-new-line value push soft-new-line;

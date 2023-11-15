@@ -164,6 +164,8 @@ public class QVTrSerializeTests extends LoadTestCase
 	}
 
 	public void testQVTrSerialize_HierarchicalStateMachine2FlatStateMachine() throws Exception {
+		//	DeclarativeSerializer.SERIALIZER_FRAGMENTS.setState(true);
+		//	SerializationBuilder.SERIALIZATION.setState(true);
 		doSerializeRoundTripFromCS(getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"), null);
 	}
 

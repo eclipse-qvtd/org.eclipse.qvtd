@@ -169,7 +169,7 @@ public class QVTrFormatTests extends LoadTestCase
 		//	xtextResource.save(XMIUtil.createSaveOptions());
 		int selectOffset = 0;//rootOffset + rootLength/4;
 		int selectLength = rootLength;// / 2;
-		// XXX	doReformatText(declarativeFormatter, rootNode, selectOffset, selectLength, referenceText);
+		doReformatText(declarativeFormatter, rootNode, selectOffset, selectLength, referenceText);
 		ocl.dispose();
 	}
 }
