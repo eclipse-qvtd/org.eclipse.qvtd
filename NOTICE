@@ -19,7 +19,7 @@ source code repository logs.
 
 This program and the accompanying materials are made available under the terms
 of the Eclipse Public License v. 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+https://www.eclipse.org/legal/epl-2.0.
 
 SPDX-License-Identifier: EPL-2.0
 
@@ -27,51 +27,26 @@ SPDX-License-Identifier: EPL-2.0
 
 The project maintains the following source code repositories:
 
-* http://git.eclipse.org/c/mmt/org.eclipse.qvtd.git
+* https://git.eclipse.org/r/mmt/org.eclipse.qvtd
+
 
 ## Third-party Content
 
 This project leverages the following third party content.
 
-ANTLR (3.1)
+ANTLR (3.2.0)
 
 * License: New BSD license
 
-Google Guava (14.0.1)
+Google Guava (14.0.1 ...)
 
 * License: Apache License, 2.0
 
-Google Guava (15.0.0)
+Google Guava (15.0.0 ...)
 
 * License: Apache License, 2.0
 
-Google Guava (17.0)
-
-* License: Apache License, 2.0
-
-Google Guava (18.0)
-
-* License: Apache License, 2.0
-
-Google Guava (19.0)
-
-* License: Apache License, 2.0
-
-Guava (11.0.2)
-
-* License: Apache License, 2.0
-
-Guava (12.0)
-
-* License: Eclipse Public License
-
-Guava (13.0.1)
-
-* License: Apache License, 2.0
-
-guava (16.0)
-
-* License: Apache License, 2.0
+Guava (11.0.2 ...)
 
 LPG (2.0.17)
 
