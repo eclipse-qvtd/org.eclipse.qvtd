@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.eclipse.qvtd</groupId>
     <artifactId>org.eclipse.qvtd.releng.tycho</artifactId>
-    <version>0.30.0-SNAPSHOT</version>
+    <version>0.30.1-SNAPSHOT</version>
     <relativePath>../releng/org.eclipse.qvtd.releng.tycho</relativePath>
   </parent>
   <groupId>org.eclipse.qvtd-features</groupId>
   <artifactId>org.eclipse.qvtd.features-folder</artifactId>
-  <version>0.30.0-SNAPSHOT</version>
+  <version>0.30.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
