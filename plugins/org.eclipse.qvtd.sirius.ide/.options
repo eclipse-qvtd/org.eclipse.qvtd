@@ -1,0 +1,4 @@
+# Debugging options for the org.eclipse.qvtd.sirius.ide plug-in
+
+# Turn on tracing of componentization extension point analysis
+org.eclipse.qvtd.sirius.ide/componentization/analysis=false
