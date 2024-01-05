@@ -586,6 +586,12 @@
               xsi:type="predicates:NotPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
+                pattern="org\.eclipse\.qvtd\.sirius(\..*)?"/>
+          </operand>
+          <operand
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
                 pattern="org\.eclipse\.qvtd\.oomph"/>
           </operand>
           <operand
@@ -642,10 +648,16 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="${scope.project.root.label} Sirius Designs">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org\.eclipse\.qvtd\..*\.design"/>
+          name="${scope.project.root.label} Sirius">
+          <operand
+              xsi:type="predicates:OrPredicate">
+	        <predicate
+	            xsi:type="predicates:NamePredicate"
+	            pattern="org\.eclipse\.qvtd\..*\.design"/>
+	        <predicate
+	            xsi:type="predicates:NamePredicate"
+               pattern="org\.eclipse\.qvtd\.sirius(\..*)?"/>
+           </operand>
       </workingSet>
       <workingSet
           name="OCL Plugins">

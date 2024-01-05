@@ -29,6 +29,8 @@
     <module>org.eclipse.qvtd.pivot.qvtschedule</module>
     <module>org.eclipse.qvtd.pivot.qvttemplate</module>
     <module>org.eclipse.qvtd.runtime</module>
+    <module>org.eclipse.qvtd.sirius</module>
+    <module>org.eclipse.qvtd.sirius.ide</module>
     <module>org.eclipse.qvtd.text</module>
     <module>org.eclipse.qvtd.umlx</module>
     <module>org.eclipse.qvtd.umlx.design</module>

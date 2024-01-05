@@ -12,7 +12,6 @@
     Contributors:
         E.D.Willink - initial API and implementation
  -->
-
 <feature
       id="org.eclipse.qvtd.umlx"
       label="%featureName"
@@ -32,16 +31,18 @@
 
    <plugin
          id="org.eclipse.qvtd.umlx.design"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.qvtd.xml.design"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvtd.sirius"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.qvtd.sirius.ide"
+         version="0.0.0"/>
 
 </feature>
