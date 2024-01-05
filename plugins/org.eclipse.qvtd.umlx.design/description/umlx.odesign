@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="umlx" version="11.1.1.201610211630">
-  <ownedViewpoints name="umlx-viewpoint-id" label="UMLX Viewpoint Label" modelFileExtension="umlx" icon="/org.eclipse.qvtd.umlx.ui/icons/UMLXModelFile.gif">
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Relation Diagram" titleExpression="service: umlxRelDiagramTitleExpression" domainClass="umlx.RelDiagram">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="umlx" version="12.0.0.2017041100">
+  <ownedViewpoints endUserDocumentation="Diagrams of a UMLX transformation." name="org.eclipse.qvtd.umlx.viewpoint" label="UMLX Viewpoint" modelFileExtension="umlx" icon="/org.eclipse.qvtd.umlx.ui/icons/UMLXModelFile.gif">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" endUserDocumentation="A diagram showing the internals of a relation." name="org.eclipse.qvtd.umlx.relation" label="UMLX Relation Diagram" titleExpression="service: umlxRelDiagramTitleExpression" domainClass="umlx.RelDiagram">
       <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
       <defaultLayer name="Default">
-        <edgeMappings name="RelPatternEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer'] //@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subNodeMappings[name='RelConstraintNode']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="umlx.RelPatternEdge" useDomainElement="true">
+        <edgeMappings name="RelPatternEdge" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer'] //@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subNodeMappings[name='RelConstraintNode']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="umlx.RelPatternEdge" useDomainElement="true">
           <style sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service: umlxPatternEdgeBeginLabel">
@@ -64,7 +64,7 @@
             </style>
           </conditionnalStyles>
         </edgeMappings>
-        <edgeMappings name="RelInvocationEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelInvocationContainer']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" targetFinderExpression="feature:invokingRelPatternNode" sourceFinderExpression="feature:owningRelInvocationNode" domainClass="umlx.RelInvocationEdge" useDomainElement="true">
+        <edgeMappings name="RelInvocationEdge" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelInvocationContainer']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" targetFinderExpression="feature:invokingRelPatternNode" sourceFinderExpression="feature:owningRelInvocationNode" domainClass="umlx.RelInvocationEdge" useDomainElement="true">
           <style sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" sizeComputationExpression="2" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
             <endLabelStyleDescription showIcon="false" labelExpression="service: umlxInvocationEdgeEndLabel">
@@ -169,7 +169,7 @@
               <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createDomain" label="Domain" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createDomain" label="Domain" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -180,7 +180,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createInvocation" label="Invocation" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelInvocationContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXEvolution.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createInvocation" label="Invocation" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelInvocationContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXEvolution.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -191,7 +191,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createPatternNode" label="Pattern Node" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="createPatternNode" label="Pattern Node" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@containerMappings[name='RelDiagramContainer']/@subContainerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -204,7 +204,7 @@
           </ownedTools>
         </toolSections>
         <toolSections name="CreateEdgesId" label="Edges">
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createInvocationEdge" label="Invocation" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createInvocationEdge" label="Invocation" edgeMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -217,7 +217,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createPatternEdge" label="Pattern" edgeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="createPatternEdge" label="Pattern" edgeMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.relation']/@defaultLayer/@edgeMappings[name='RelPatternEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -234,10 +234,10 @@
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" endUserDocumentation="A diagram showing the inter-relatioonships of transformations." name="org.eclipse.qvtd.umlx.transformation" label="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
       <defaultLayer name="Default">
-        <edgeMappings name="UsedPackageEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxPackageContainer']" targetFinderExpression="feature:usedTxPackageNodes">
+        <edgeMappings name="UsedPackageEdge" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxPackageContainer']" targetFinderExpression="feature:usedTxPackageNodes">
           <style lineStyle="dash" sizeComputationExpression="2" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="«uses»">
@@ -245,7 +245,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="DependsOnEdge" sourceMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetMapping="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetFinderExpression="feature:dependsOns">
+        <edgeMappings name="DependsOnEdge" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetFinderExpression="feature:dependsOns">
           <style lineStyle="dash" sizeComputationExpression="2" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="«dependsOns»">
@@ -308,7 +308,7 @@
           </style>
         </containerMappings>
         <toolSections name="TxNodesId" label="Nodes">
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Key" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxKeyContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtrelation.ui/icons/Key.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Key" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxKeyContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtrelation.ui/icons/Key.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -317,7 +317,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Key Part" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxKeyContainer']/@subNodeMappings[name='TxPartNode']" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Key Part" nodeMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxKeyContainer']/@subNodeMappings[name='TxPartNode']" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EReference.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -326,7 +326,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Package" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxPackageContainer']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Package" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxPackageContainer']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -337,7 +337,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Query" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Query" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxQueryContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/Function.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -346,7 +346,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Query Parameter" nodeMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']/@subNodeMappings[name='TxParameterNode']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Query Parameter" nodeMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxQueryContainer']/@subNodeMappings[name='TxParameterNode']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -355,7 +355,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Relation" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Relation" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -366,7 +366,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="TypedModel" containerMappings="//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="TypedModel" containerMappings="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/TypedModel.gif">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
