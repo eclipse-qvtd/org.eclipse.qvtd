@@ -25,6 +25,12 @@
             class="org.eclipse.qvtd.umlx.resource.UMLXResourceFactoryImpl"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="umlx"
+            class="org.eclipse.qvtd.umlx.resource.UMLXResourceFactoryImpl"/>
+   </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2016/UMLX"
