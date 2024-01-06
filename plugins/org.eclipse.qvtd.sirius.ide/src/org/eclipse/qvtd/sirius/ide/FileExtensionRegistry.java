@@ -145,7 +145,7 @@ public class FileExtensionRegistry implements IResourceChangeListener, IResource
 			if (HAS_O_DESIGN.equals(property) && (receiver instanceof IFile)) {
 				String fileExtension = ((IFile)receiver).getFileExtension();
 				boolean hasODesign = FileExtensionRegistry.getInstance().hasODesign(fileExtension);
-				System.out.println(property + " for " + receiver + " => " + hasODesign);
+			//	System.out.println(property + " for " + receiver + " => " + hasODesign);
 				return expectedValue != null ? Boolean.valueOf(hasODesign).equals(expectedValue) : hasODesign;
 			}
 			return expectedValue != null ? Boolean.FALSE.equals(expectedValue) : false;
