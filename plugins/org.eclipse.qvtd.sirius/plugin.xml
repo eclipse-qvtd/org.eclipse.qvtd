@@ -2,6 +2,8 @@
 <?eclipse version="3.4"?>
 <plugin>
 	<extension point="org.eclipse.ui.commands">
+		<category id="org.eclipse.qvtd.sirius.commands.category"
+		name="QVTd Sirius Category"/>
 		<command categoryId="org.eclipse.qvtd.sirius.commands.category"
 			name="InitializeDiagram"
 			id="org.eclipse.qvtd.sirius.commands.initializeDiagram"/>
