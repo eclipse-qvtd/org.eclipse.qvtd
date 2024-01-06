@@ -234,7 +234,7 @@
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" endUserDocumentation="A diagram showing the inter-relatioonships of transformations." name="org.eclipse.qvtd.umlx.transformation" label="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" endUserDocumentation="A diagram showing the inter-relationships of transformations." name="org.eclipse.qvtd.umlx.transformation" label="UMLX Transformation Diagram" titleExpression="service: umlxTxDiagramTitleExpression" domainClass="umlx.TxDiagram" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/qvt/2016/UMLX#/"/>
       <defaultLayer name="Default">
         <edgeMappings name="UsedPackageEdge" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.umlx.viewpoint']/@ownedRepresentations[name='org.eclipse.qvtd.umlx.transformation']/@defaultLayer/@containerMappings[name='TxPackageContainer']" targetFinderExpression="feature:usedTxPackageNodes">
