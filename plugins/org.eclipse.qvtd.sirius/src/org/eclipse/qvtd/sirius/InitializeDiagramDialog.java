@@ -34,6 +34,7 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.resource.ColorDescriptor;
+import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
@@ -41,6 +42,7 @@ import org.eclipse.jface.viewers.DecorationOverlayIcon;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
+import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.helper.SiriusUtil;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
@@ -54,6 +56,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
@@ -113,6 +116,13 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private Tree viewpointsTree;
 	private Text representationDiagramNameText;
 
+	// THe working state
+	private RepresentationDescription selectedRepresentationDescription = null;
+	private Font defaultFont = null;
+	private Font boldFont = null;
+	private Font boldItalicFont = null;
+	private Font italicFont = null;
+
 	// The 'output's for access post-dispose().
 	private String finalRepresentationDiagramName = null;
 	private URI finalRepresentationFileURI = null;
@@ -171,8 +181,10 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		assert getShell() != null;
 		TreeItem[] selection = viewpointsTree.getSelection();
 		if ((selection == null) || (selection.length != 1)) {
+	//		System.out.println("Selected3 null ");
 			return null;
 		}
+	//	System.out.println("Selected3 " + selection.length);
 		Object data = selection[0].getData();
 		if (!(data instanceof RepresentationDescription)) {
 			return null;
@@ -260,24 +272,40 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 		Composite modelsElementsComposite = new Composite(modelsComposite, SWT.NONE);
 		modelsElementsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		GridLayout gl_modelsElementsComposite = new GridLayout(2, false);
+		GridLayout gl_modelsElementsComposite = new GridLayout(3, false);
 		gl_modelsElementsComposite.verticalSpacing = 2;
 		gl_modelsElementsComposite.marginWidth = 0;
 		gl_modelsElementsComposite.marginHeight = 0;
 		modelsElementsComposite.setLayout(gl_modelsElementsComposite);
 
-		Label modelsElementsLabel = new Label(modelsElementsComposite, SWT.NONE);
+		Composite modelElementsBannerComposite = new Composite(modelsElementsComposite, SWT.NONE);
+		modelElementsBannerComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		modelElementsBannerComposite.setLayout(new GridLayout(2, false));
+
+		Label modelsElementsLabel = new Label(modelElementsBannerComposite, SWT.NONE);
 		modelsElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		modelsElementsLabel.setBounds(0, 0, 81, 25);
 		modelsElementsLabel.setText("Model(s) Elements");
-		new Label(modelsElementsComposite, SWT.NONE);
+		defaultFont = modelsElementsLabel.getFont();
+
+		Button showAllElementsCheckButton = new Button(modelsElementsComposite, SWT.CHECK);
+		showAllElementsCheckButton.setText("Show All");
+		showAllElementsCheckButton.addSelectionListener(new DefaultSelectionListener()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				refreshModelElements();
+				refreshModelElementsRendering();
+				super.widgetSelected(e);
+			}
+		});
 
 		modelsElementsTree = new Tree(modelsElementsComposite, SWT.BORDER | SWT.CHECK | SWT.MULTI);
-		GridData gd_modelsElementsTree = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		GridData gd_modelsElementsTree = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
 		gd_modelsElementsTree.minimumHeight = 100;
 		modelsElementsTree.setLayoutData(gd_modelsElementsTree);
 		modelsElementsTree.setBounds(0, 0, 94, 94);
 		modelsElementsTree.addSelectionListener(defaultSelectionListener);
+		modelsElementsTree.setToolTipText("The models to be diagrammed\n  and their contained contents\nSelected root element in bold.\nNot-compatible representations in italics.");
 
 		TreeItem treeItem = new TreeItem(modelsElementsTree, SWT.NONE);
 		treeItem.setText("Initializing Model Elements ...");
@@ -337,7 +365,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		sharedRepresentationFileCheckButton = new Button(diagramRepresentationComposite, SWT.CHECK);
 		sharedRepresentationFileCheckButton.setSelection(true);
 		sharedRepresentationFileCheckButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		sharedRepresentationFileCheckButton.setToolTipText("Use a shared representation, typically reprersentations.aird, for all diagrams, or a distinct representation for thsi diagram.");
+		sharedRepresentationFileCheckButton.setToolTipText("Use a shared representation, typically reprersentations.aird, for all diagrams, or a distinct representation for this model/diagram.");
 		sharedRepresentationFileCheckButton.setText("Shared");
 		sharedRepresentationFileCheckButton.addSelectionListener(new DefaultSelectionListener()
 		{
@@ -356,6 +384,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				refreshViewpoints();
+				refreshViewpointsRendering();
 				super.widgetSelected(e);
 			}
 		});
@@ -384,9 +413,26 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		viewpointsComposite.setLayout(gl_viewpointsComposite);
 
 		viewpointsTree = new Tree(viewpointsComposite, SWT.BORDER);
-		viewpointsTree.setToolTipText("The viewpoints (diagram families) and representations (diagram types)");
+		viewpointsTree.setToolTipText("The available viewpoints (diagram families)\n  and their representations (diagram types)\nSelected representation in bold.\nNot-applicable representations in italics.");
 		viewpointsTree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		viewpointsTree.addSelectionListener(defaultSelectionListener);
+		viewpointsTree.addSelectionListener(new DefaultSelectionListener()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TreeItem[] selection = viewpointsTree.getSelection();
+				if ((selection != null) && (selection.length > 0) && (selection[0] instanceof RepresentationDescription)) {
+					selectedRepresentationDescription = (RepresentationDescription)selection[0].getData();
+				}
+				else {
+					selectedRepresentationDescription = null;
+				}
+//				refreshViewpoints();
+				refreshViewpointsRendering();
+				refreshModelElementsRendering();
+				super.widgetSelected(e);
+//				System.out.println("Selected " + viewpointsTree.getSelection().length);
+			}
+		});
 
 		Composite representationDiagramNameComposite = new Composite(representationComposite, SWT.NONE);
 		representationDiagramNameComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -412,7 +458,9 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 		refreshRepresentationFileName();
 		refreshViewpoints();
+		refreshViewpointsRendering();
 		refreshModelElements();
+		refreshModelElementsRendering();
 		if (okButton != null) {
 			refreshMessage();
 		}
@@ -633,6 +681,24 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
+	protected void refreshModelElementsRendering() {
+		for (TreeItem rootItem : modelsElementsTree.getItems()) {
+			for (TreeItem item : rootItem.getItems()) {
+				refreshModelElementsRendering(item);
+			}
+		}
+	}
+
+	protected void refreshModelElementsRendering(TreeItem treeItem) {
+		EObject eObject = (EObject)treeItem.getData();
+//        DiagramDescription diagramDescription = (DiagramDescription)selectedRepresentationDescription;
+        boolean canCreate = DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+        setFont(treeItem, canCreate ? 0 : SWT.ITALIC);
+		for (TreeItem childItem : treeItem.getItems()) {
+			refreshModelElementsRendering(childItem);
+		}
+	}
+
 	protected void refreshRepresentationFileName() {
 		boolean sharedRepresentationFile = sharedRepresentationFileCheckButton.getSelection();
 		URI sessionURI;
@@ -701,6 +767,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				rootTreeItem.setGrayed(!hasURI);
 				rootTreeItem.setData(viewpoint);
 				for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
+					boolean isSelected = representationDescription == selectedRepresentationDescription;
 					image = labelProvider.getImage(representationDescription);
 					if ((image != null) && (decoratorDescriptor != null)) {
 						DecorationOverlayIcon icon = new DecorationOverlayIcon(image, decoratorDescriptor, IDecoration.BOTTOM_LEFT);
@@ -714,6 +781,9 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 					treeItem.setText(text);
 					treeItem.setGrayed(!hasURI);
 					treeItem.setData(representationDescription);
+					if (isSelected) {
+						viewpointsTree.setSelection(treeItem);
+					}
 					if (hasURI) {
 						Set<String> designDomainClasses = new HashSet<>();
 						gatherDomainClasses(representationDescription, designDomainClasses);
@@ -724,5 +794,73 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				rootTreeItem.setExpanded(true);
 			}
 		}
+		refreshViewpointsRendering();
+	}
+
+	protected void refreshViewpointsRendering() {
+		for (TreeItem viewpointItem : viewpointsTree.getItems()) {
+		//	Viewpoint viewpoint = (Viewpoint)viewpointItem.getData();
+			boolean hasURI = false;
+			for (TreeItem representationDescriptionItem : viewpointItem.getItems()) {
+				RepresentationDescription representationDescription  = (RepresentationDescription)representationDescriptionItem.getData();
+				for (EPackage metamodel : representationDescription.getMetamodel()) {
+					String nsURI = getSafeNsURI(metamodel);
+					if (modelURIs.contains(nsURI)) {
+						hasURI = true; break;
+					}
+				}
+			}
+			setFont(viewpointItem, hasURI ? 0 : SWT.ITALIC);
+		//	Set<EClass> selectedEClasses = new HashSet<>();
+		//	gatherSelectedEClasses(modelsElementsTree.getItems(), selectedEClasses);
+			for (TreeItem representationDescriptionItem : viewpointItem.getItems()) {
+				RepresentationDescription representationDescription  = (RepresentationDescription)representationDescriptionItem.getData();
+				boolean isSelected = representationDescription == selectedRepresentationDescription;
+				int fontFlags = 0;
+				if (hasURI) {
+				//	Set<String> designDomainClasses = new HashSet<>();
+				//	gatherDomainClasses(representationDescription, designDomainClasses);
+				//	List<String> missingDomainClasses = computeMissingDomainClasses(selectedEClasses, designDomainClasses);
+				//	representationDescriptionItem.setChecked(missingDomainClasses == null);
+					if (isSelected) {
+						fontFlags = SWT.BOLD;
+					}
+				}
+				else {
+					fontFlags = (isSelected ? SWT.BOLD : 0)|SWT.ITALIC;
+				}
+				setFont(representationDescriptionItem, fontFlags);
+			}
+		}
+	}
+
+	protected void setFont(TreeItem treeItem, int fontFlags) {
+		Font newFont = defaultFont;
+		assert newFont != null;;
+		boolean isBold = (fontFlags & SWT.BOLD) != 0;
+		boolean isItalic = (fontFlags & SWT.ITALIC) != 0;
+		newFont = isBold ? isItalic ? boldItalicFont : boldFont : isItalic ? italicFont : defaultFont;
+		if (newFont == null) {
+			FontDescriptor clonedFont = FontDescriptor.createFrom(defaultFont);
+			FontDescriptor styledFont = clonedFont.setStyle(fontFlags);
+			newFont = localResourceManager.create(styledFont);
+			if (isBold) {
+				if (isItalic) {
+					boldItalicFont = newFont;
+				}
+				else {
+					boldFont = newFont;
+				}
+			}
+			else {
+				if (isItalic) {
+					italicFont = newFont;
+				}
+				else {
+					assert defaultFont == newFont;
+				}
+			}
+		}
+		treeItem.setFont(newFont);
 	}
 }
