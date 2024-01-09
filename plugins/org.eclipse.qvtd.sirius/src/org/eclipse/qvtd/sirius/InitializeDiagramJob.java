@@ -28,16 +28,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.sirius.business.api.dialect.command.CreateRepresentationCommand;
 import org.eclipse.sirius.business.api.helper.SiriusResourceHelper;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.business.api.session.danalysis.DAnalysisSelector;
+import org.eclipse.sirius.business.internal.session.SessionTransientAttachment;
 import org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl;
 import org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionServicesImpl;
+import org.eclipse.sirius.diagram.business.api.query.EObjectQuery;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.session.EditingSessionEvent;
 import org.eclipse.sirius.ui.business.api.session.IEditingSession;
@@ -50,9 +53,12 @@ import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.provider.SiriusEditPlugin;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -89,6 +95,13 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				TransactionalEditingDomain transactionalEditingDomain = session.getTransactionalEditingDomain();
 				CommandStack commandStack = transactionalEditingDomain.getCommandStack();
 
+				if (!session.getSemanticResources().contains(modelObject.eResource())) {
+					session.close(monitor);
+					session.getSemanticResources();
+				}
+
+
+
 				Viewpoint registryViewpoint = (Viewpoint) registryRepresentationDescription.eContainer();
 				ViewpointSelectionCallback callback = new ViewpointSelectionCallback();
 				Set<Viewpoint> registryViewpoints = Collections.singleton(registryViewpoint);
@@ -101,18 +114,18 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 
 				Viewpoint editingDomainViewpoint = SiriusResourceHelper.getCorrespondingViewpoint(session, registryViewpoint);	// XXX error dialog
 				if (editingDomainViewpoint == null) {
-					plugin.getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, "Failed to localize " +  registryViewpoint.getName()));
+					openError(null, "Failed to localize \"" +  registryViewpoint.getLabel() + "\" Viewpoint", null);
 					return;
 				}
 			    String representationDescriptionName = registryRepresentationDescription.getName();
 				RepresentationDescription editingDomainRepresentationDescription = getRepresentationDescription(editingDomainViewpoint, representationDescriptionName);
 				if (editingDomainRepresentationDescription == null) {
-					plugin.getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, "Failed to localize " +  representationDescriptionName));
+					openError(null, "Failed to localize \"" +  registryRepresentationDescription.getLabel() + "\" RepresentationDesacription", null);
 					return;
 				}
 			//	new ViewpointSelector(session).selectViewpoint(registryViewpoint, createNewRepresentations, monitor);
 
-				CreateRepresentationCommand createRepresentationCommand = new CreateRepresentationCommand(session, editingDomainRepresentationDescription, modelObject, representationDiagramName,
+				MyCreateRepresentationCommand createRepresentationCommand = new MyCreateRepresentationCommand(session, editingDomainRepresentationDescription, modelObject, representationDiagramName,
 						new SubProgressMonitor(monitor, 4));
 				DAnalysis dAnalysis = null;
 				if (representationFileURI != null) {
@@ -147,7 +160,18 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 		            }
 		        });
 
+		        Session semanticSession = new EObjectQuery(modelObject).getSession();
+				if (semanticSession == null) {				// If not (yet) known to representations.aird
+					modelObject.eResource().eAdapters().add(new SessionTransientAttachment(session));
+			        semanticSession = new EObjectQuery(modelObject).getSession();
+			        assert semanticSession != null;
+				}
+
 				editingSession.notify(EditingSessionEvent.REPRESENTATION_ABOUT_TO_BE_CREATED_BEFORE_OPENING);
+				if (!createRepresentationCommand.canExecute()) {
+					openError(null, "Unable to create \"" +  registryRepresentationDescription.getLabel() + "\"", null);
+					return;
+				}
 				commandStack.execute(createRepresentationCommand);
 				editingSession.notify(EditingSessionEvent.REPRESENTATION_CREATED_BEFORE_OPENING);
 				DRepresentation createdDRepresentation = createRepresentationCommand.getCreatedRepresentation();
@@ -159,10 +183,8 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			//	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				IRunnableContext context = new ProgressMonitorDialog(null);
 				PlatformUI.getWorkbench().getProgressService().runInUI(context, runnable, null);
-			} catch (final InvocationTargetException e) {
-				plugin.getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, e.getLocalizedMessage(), e));
-			} catch (final InterruptedException e) {
-				plugin.getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, e.getLocalizedMessage(), e));
+			} catch (Exception e) {
+				openError(null, e.getLocalizedMessage(), e);
 			} finally {
 				monitor.done();
 			}
@@ -262,6 +284,19 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			}
 		});
 	}
+
+	public static void openError(String message, String reason, @Nullable Throwable e) {
+		Bundle bundle = FrameworkUtil.getBundle(InitializeDiagramHandler.class);
+		Status status = new Status(IStatus.ERROR, bundle.getSymbolicName(), 0, reason, e);
+		Display.getDefault().asyncExec(new Runnable()
+		{
+			@Override
+			public void run() {
+				ErrorDialog.openError(null, "Initialize Diagram Error", message, status);
+			}
+		});
+	}
+
 
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) {

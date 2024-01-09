@@ -116,7 +116,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private Tree viewpointsTree;
 	private Text representationDiagramNameText;
 
-	// THe working state
+	// The working state
 	private RepresentationDescription selectedRepresentationDescription = null;
 	private Font defaultFont = null;
 	private Font boldFont = null;
