@@ -56,6 +56,8 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.provider.SiriusEditPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
@@ -67,9 +69,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
@@ -104,11 +104,43 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
+	protected class ModelElementsTreeMouseListener implements MouseListener
+	{
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+	//		System.out.println("mouseDoubleClick = " + e);
+		}
+
+		@Override
+		public void mouseDown(MouseEvent e) {
+	//		System.out.println("mouseDown = " + e);
+		}
+
+		@Override
+		public void mouseUp(MouseEvent e) {
+	//		System.out.println("mouseUp = " + e);
+			refreshModelElementsRendering();
+			refreshMessage();
+		}
+	}
+
 	protected class ModelElementsTreeSelectionListener extends AbstractSelectionListener
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
+			TreeItem[] selection = modelsElementsTree.getSelection();
+			Object data;
+			if ((selection != null) && (selection.length > 0) && ((data = selection[0].getData()) instanceof EObject)) {
+				selectedRootModelElement = (EObject)data;
+			}
+			else {
+				selectedRootModelElement = null;
+			}
+//				refreshViewpoints();
+//			refreshViewpointsRendering();
+			refreshModelElementsRendering();
 			refreshMessage();
+//				System.out.println("Selected " + viewpointsTree.getSelection().length);
 		}
 	}
 
@@ -192,6 +224,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private Text representationDiagramNameText;
 
 	// The working state
+	private EObject selectedRootModelElement = null;
 	private RepresentationDescription selectedRepresentationDescription = null;
 	private Font defaultFont = null;
 	private Font boldFont = null;
@@ -392,6 +425,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		modelsElementsTree.setBounds(0, 0, 94, 94);
 		modelsElementsTree.addSelectionListener(new ModelElementsTreeSelectionListener());
 		modelsElementsTree.setToolTipText("Select from the models to be diagrammed\n  and their contained contents\nSelected root element in bold.\nNot-compatible representations in italics.");
+		modelsElementsTree.addMouseListener(new ModelElementsTreeMouseListener());
 
 		TreeItem treeItem = new TreeItem(modelsElementsTree, SWT.NONE);
 		treeItem.setText("Initializing Model Elements ...");
@@ -719,13 +753,13 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		treeItem.setText(text);
 		treeItem.setChecked(explicit.contains(eObject));
 		treeItem.setData(eObject);
-		treeItem.addListener(SWT.Selection, new Listener()
+	/*	treeItem.addListener(SWT.Selection, new Listener()
 			{
 				@Override
 				public void handleEvent(Event event) {
 					System.out.println("Selected = " + getSelectedElements());
 				}
-			});
+			}); */
 		for (EObject childEObject : eObject.eContents()) {
 			assert childEObject != null;
 			refreshModelElements(treeItem, childEObject, explicit);
@@ -735,19 +769,20 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	protected void refreshModelElementsRendering() {
 		for (TreeItem rootItem : modelsElementsTree.getItems()) {
 			for (TreeItem item : rootItem.getItems()) {
-				refreshModelElementsRendering(item);
+				refreshModelElementsRendering(item, false);
 			}
 		}
 	}
 
-	protected void refreshModelElementsRendering(TreeItem treeItem) {
+	protected void refreshModelElementsRendering(TreeItem treeItem, boolean parentCanCreate) {
 		EObject eObject = (EObject)treeItem.getData();
+		boolean isSelected = eObject == selectedRootModelElement;
 //        DiagramDescription diagramDescription = (DiagramDescription)selectedRepresentationDescription;
-        boolean canCreate = DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
-        setFont(treeItem, canCreate ? 0 : SWT.ITALIC);
+        boolean canCreate = parentCanCreate || DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+        setFont(treeItem, (canCreate ? 0 : SWT.ITALIC) | (isSelected ? SWT.BOLD : 0));
         treeItem.setGrayed(!canCreate);
 		for (TreeItem childItem : treeItem.getItems()) {
-			refreshModelElementsRendering(childItem);
+			refreshModelElementsRendering(childItem, canCreate);
 		}
 	}
 
