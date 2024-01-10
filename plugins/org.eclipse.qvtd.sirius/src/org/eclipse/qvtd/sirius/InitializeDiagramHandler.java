@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -57,7 +58,7 @@ public class InitializeDiagramHandler extends AbstractHandler
 			return null;
 		}
 		IStructuredSelection structuredSelection = (IStructuredSelection)currentSelection;
-		Set<EObject> selectedEObjects = new HashSet<>();
+		Set<@NonNull EObject> selectedEObjects = new HashSet<>();
 		ResourceSet resourceSet = null;
 		for (Object selection : structuredSelection) {
 			if (selection instanceof IFile) {

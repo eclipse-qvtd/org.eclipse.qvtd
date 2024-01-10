@@ -75,12 +75,13 @@ public class FileExtensionRegistry implements IResourceChangeListener, IResource
 	private static final String O_DESIGN = "odesign";
 	private static final String STAR_DOT_O_DESIGN = "*." + O_DESIGN;
 
-	private static @NonNull FileExtensionRegistry INSTANCE = new FileExtensionRegistry();
+	private static @Nullable FileExtensionRegistry INSTANCE = new FileExtensionRegistry();
 
 	public static @NonNull FileExtensionRegistry getInstance() {
 		if (INSTANCE == null) {
-
+			INSTANCE = new FileExtensionRegistry();
 		}
+		assert INSTANCE != null;
 		return INSTANCE;
 	}
 

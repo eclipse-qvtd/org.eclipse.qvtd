@@ -87,7 +87,6 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 
 		@Override
 		protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {		// execute on main
-			SiriusEditPlugin.Implementation plugin = SiriusEditPlugin.getPlugin();
 			try {
 				monitor.beginTask(org.eclipse.sirius.viewpoint.provider.Messages.CreateRepresentationAction_creationTask, 15);
 

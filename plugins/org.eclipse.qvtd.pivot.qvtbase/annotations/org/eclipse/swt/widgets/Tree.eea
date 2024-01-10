@@ -1,0 +1,4 @@
+class org/eclipse/swt/widgets/Tree
+getItems
+ ()[Lorg/eclipse/swt/widgets/TreeItem;
+ ()[L1org/eclipse/swt/widgets/TreeItem;
