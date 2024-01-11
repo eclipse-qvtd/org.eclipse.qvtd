@@ -90,8 +90,9 @@ public class InitializeDiagramHandler extends AbstractHandler
 		}
 
 		InitializeDiagramDialog initializeDiagramDialog = new InitializeDiagramDialog(activeShell, selectedEObjects);
+	//	assert initializeDiagramDialog.getShell() != null;
 		int status = initializeDiagramDialog.open();
-		if (status == Status.OK) {
+		if ((status == Status.OK) && (initializeDiagramDialog.getShell() == null)) {		// !null for forced Eclipse exit
 			// Convert selection-space elements to URIs for reloading in the Sirius-space.
 			List<URI> selectedElements = new ArrayList<>();
 			for (EObject selectedElement : initializeDiagramDialog.getSelectedElements()) {

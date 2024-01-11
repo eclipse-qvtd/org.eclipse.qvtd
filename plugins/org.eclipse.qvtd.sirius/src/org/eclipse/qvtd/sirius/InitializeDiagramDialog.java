@@ -47,6 +47,7 @@ import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.helper.SiriusUtil;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
+import org.eclipse.sirius.diagram.description.ContainerMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramImportDescription;
 import org.eclipse.sirius.diagram.description.Layer;
@@ -70,6 +71,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
@@ -84,10 +86,10 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 	protected abstract class AbstractSelectionListener implements SelectionListener
 	{
-		protected void setDeepSelected(@NonNull TreeItem[] items, boolean isSelected) {
+		protected void setDeepChecked(@NonNull TreeItem[] items, boolean isSelected) {
 			for (TreeItem item : items) {
 				item.setChecked(isSelected);
-				setDeepSelected(item.getItems(), isSelected);
+				setDeepChecked(item.getItems(), isSelected);
 			}
 		}
 
@@ -95,11 +97,11 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void widgetDefaultSelected(SelectionEvent e) {}
 	}
 
-	protected class DeselectAllElementsSelectionListener extends AbstractSelectionListener
+	protected class UncheckAllElementsSelectionListener extends AbstractSelectionListener
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			setDeepSelected(modelsElementsTree.getItems(), false);
+			setDeepChecked(modelsElementsTree.getItems(), false);
 			refreshMessage();
 		}
 	}
@@ -144,11 +146,11 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected class SelectAllElementsSelectionListener extends AbstractSelectionListener
+	protected class CheckAllElementsSelectionListener extends AbstractSelectionListener
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			setDeepSelected(modelsElementsTree.getItems(), true);
+			setDeepChecked(modelsElementsTree.getItems(), true);
 			refreshMessage();
 		}
 	}
@@ -188,12 +190,11 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void widgetSelected(SelectionEvent e) {
 			TreeItem[] selection = viewpointsTree.getSelection();
 			Object data;
+			RepresentationDescription selectedRepresentationDescription = null;
 			if ((selection != null) && (selection.length > 0) && ((data = selection[0].getData()) instanceof RepresentationDescription)) {
 				selectedRepresentationDescription = (RepresentationDescription)data;
 			}
-			else {
-				selectedRepresentationDescription = null;
-			}
+			setSelectedRepresentationDescription(selectedRepresentationDescription);
 //				refreshViewpoints();
 			refreshViewpointsRendering();
 			refreshModelElementsRendering();
@@ -222,14 +223,16 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private Tree modelsElementsTree;
 	private Tree viewpointsTree;
 	private Text representationDiagramNameText;
+	private Text statusText;
 
 	// The working state
-	private EObject selectedRootModelElement = null;
-	private RepresentationDescription selectedRepresentationDescription = null;
-	private Font defaultFont = null;
-	private Font boldFont = null;
-	private Font boldItalicFont = null;
-	private Font italicFont = null;
+	private @Nullable EObject selectedRootModelElement = null;
+	private @Nullable RepresentationDescription selectedRepresentationDescription = null;
+	private @Nullable Set<@NonNull String> createableDomainClasses = null;
+	private @Nullable Font defaultFont = null;
+	private @Nullable Font boldFont = null;
+	private @Nullable Font boldItalicFont = null;
+	private @Nullable Font italicFont = null;
 
 	// The 'output's for access post-dispose().
 	private String finalRepresentationDiagramName = null;
@@ -342,11 +345,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		return closeStatus;
 	}
 
-	protected List<String> computeMissingDomainClasses(Set<EClass> selectedEClasses, Set<String> designDomainClasses) {
-		List<String> missingDomainClasses = null;
+	protected @Nullable List<@NonNull String> computeMissingDomainClasses(@NonNull Set<@NonNull EClass> selectedEClasses, @NonNull Set<@NonNull String> designDomainClasses) {
+		List<@NonNull String> missingDomainClasses = null;
 		for (EClass selectedEClass : selectedEClasses) {
-			String selectedDomainClass = selectedEClass.getEPackage().getName() + "::" + selectedEClass.getName();
-			if (!designDomainClasses.contains(selectedDomainClass)) {
+			String selectedDomainClass = getDomainClass(selectedEClass);
+			boolean isCreateable = designDomainClasses.contains(selectedDomainClass);
+			if (!isCreateable) {
 				if (missingDomainClasses == null) {
 					missingDomainClasses = new ArrayList<>();
 
@@ -363,8 +367,25 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
+		Layout layout = parent.getLayout();
+		if (layout instanceof GridLayout) {
+			((GridLayout)layout).makeColumnsEqualWidth = false;
+			((GridLayout)layout).numColumns++;
+		}
+		Object layoutData = parent.getLayoutData();
+		if (layoutData instanceof GridData) {
+			((GridData)layoutData).horizontalAlignment = SWT.FILL;
+			((GridData)layoutData).grabExcessHorizontalSpace = true;
+		}
+
+		statusText = new Text(parent, SWT.NONE);
+		statusText.setEnabled(false);
+		statusText.setEditable(false);
+		statusText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+
 		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+
 		refreshMessage();
 	}
 
@@ -410,13 +431,15 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		modelElementsBannerComposite.setLayout(new GridLayout(2, false));
 
 		Label modelsElementsLabel = new Label(modelElementsBannerComposite, SWT.NONE);
+		modelsElementsLabel.setFont(localResourceManager.create(FontDescriptor.createFrom("Segoe UI", 9, SWT.BOLD)));
 		modelsElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		modelsElementsLabel.setText("Model(s) Elements Selector");
-		defaultFont = modelsElementsLabel.getFont();
+		new Label(modelElementsBannerComposite, SWT.NONE);
 
 		Button showAllElementsCheckButton = new Button(modelsElementsComposite, SWT.CHECK);
 		showAllElementsCheckButton.setText("Show All");
 		showAllElementsCheckButton.addSelectionListener(new ShowAllElementsSelectionListener());
+		new Label(modelsElementsComposite, SWT.NONE);
 
 		modelsElementsTree = new Tree(modelsElementsComposite, SWT.BORDER | SWT.CHECK | SWT.MULTI);
 		GridData gd_modelsElementsTree = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
@@ -434,15 +457,17 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		modelButtons.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
 		modelButtons.setLayout(new GridLayout(1, false));
 
-		Button selectAllButton = new Button(modelButtons, SWT.NONE);
-		selectAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		selectAllButton.setText("Select All");
-		selectAllButton.addSelectionListener(new SelectAllElementsSelectionListener());
+		Button checkAllButton = new Button(modelButtons, SWT.NONE);
+		checkAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		checkAllButton.setText("Check All");
+		checkAllButton.addSelectionListener(new CheckAllElementsSelectionListener());
+		checkAllButton.setToolTipText("Check all model elements transitively contained by the selectred root model element.");
 
-		Button deSelectAllButton = new Button(modelButtons, SWT.NONE);
-		deSelectAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		deSelectAllButton.setText("Deselect All");
-		deSelectAllButton.addSelectionListener(new DeselectAllElementsSelectionListener());
+		Button uncheckAllButton = new Button(modelButtons, SWT.NONE);
+		uncheckAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		uncheckAllButton.setText("Uncheck All");
+		uncheckAllButton.addSelectionListener(new UncheckAllElementsSelectionListener());
+		uncheckAllButton.setToolTipText("Uncheck all model elements transitively contained by the selectred root model element.");
 
 		SashForm representationSash = new SashForm(overallSash, SWT.NONE);
 
@@ -465,6 +490,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		diagramRepresentationComposite.setLayout(gl_diagramRepresentationComposite);
 
 		Label diagramRepresentationLabel = new Label(diagramRepresentationComposite, SWT.NONE);
+		diagramRepresentationLabel.setFont(localResourceManager.create(FontDescriptor.createFrom("Segoe UI", 9, SWT.BOLD)));
 		diagramRepresentationLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		diagramRepresentationLabel.setText("Diagram Representation Selector");
 
@@ -541,7 +567,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		return container;
 	}
 
-	protected void gatherDomainClasses(RepresentationDescription representationDescription, Set<String> domainClasses) {
+	protected void gatherDomainClasses(@NonNull RepresentationDescription representationDescription, @NonNull Set<@NonNull String> domainClasses) {
 		DiagramDescription diagramDescription;
 		if (representationDescription instanceof DiagramImportDescription) {
 			diagramDescription = ((DiagramImportDescription)representationDescription).getImportedDiagram();
@@ -552,15 +578,44 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		else {
 			throw new UnsupportedOperationException("Unknown RepresentationDescription: " + representationDescription.getClass().getName());
 		}
-		domainClasses.add(diagramDescription.getDomainClass());
-		for (NodeMapping nodeMapping : diagramDescription.getNodeMappings()) {
-			domainClasses.add(nodeMapping.getDomainClass());
+		String domainClass = diagramDescription.getDomainClass();
+		if (domainClass != null) {
+			domainClasses.add(domainClass);
 		}
+		gatherDomainClassesForContainerMapping(diagramDescription.getContainerMappings(), domainClasses);
+		gatherDomainClassesForNodeMapping(diagramDescription.getNodeMappings(), domainClasses);
+	//	gatherDomainClassesForNodeMapping(diagramDescription.getReusedMappings(), domainClasses);
 		Layer layer = diagramDescription.getDefaultLayer();
 		if (layer != null) {
-			for (NodeMapping nodeMapping : layer.getNodeMappings()) {
-				domainClasses.add(nodeMapping.getDomainClass());
+			gatherDomainClassesForContainerMapping(layer.getContainerMappings(), domainClasses);
+			gatherDomainClassesForNodeMapping(layer.getNodeMappings(), domainClasses);
+		//	gatherDomainClassesForNodeMapping(layer.getReusedMappings(), domainClasses);
+		}
+	}
+
+	protected void gatherDomainClassesForContainerMapping(Iterable<ContainerMapping> containerMappings, @NonNull Set<@NonNull String> domainClasses) {
+		for (ContainerMapping containerMapping : containerMappings) {
+			String domainClass = containerMapping.getDomainClass();
+			if (domainClass != null) {
+				domainClasses.add(domainClass);
 			}
+			gatherDomainClassesForNodeMapping(containerMapping.getBorderedNodeMappings(), domainClasses);
+			gatherDomainClassesForNodeMapping(containerMapping.getReusedBorderedNodeMappings(), domainClasses);
+			gatherDomainClassesForContainerMapping(containerMapping.getReusedContainerMappings(), domainClasses);
+			gatherDomainClassesForNodeMapping(containerMapping.getReusedNodeMappings(), domainClasses);
+			gatherDomainClassesForContainerMapping(containerMapping.getSubContainerMappings(), domainClasses);
+			gatherDomainClassesForNodeMapping(containerMapping.getSubNodeMappings(), domainClasses);
+		}
+	}
+
+	protected void gatherDomainClassesForNodeMapping(Iterable<NodeMapping> nodeMappings, @NonNull Set<@NonNull String> domainClasses) {
+		for (NodeMapping nodeMapping : nodeMappings) {
+			String domainClass = nodeMapping.getDomainClass();
+			if (domainClass != null) {
+				domainClasses.add(domainClass);
+			}
+			gatherDomainClassesForNodeMapping(nodeMapping.getBorderedNodeMappings(), domainClasses);
+			gatherDomainClassesForNodeMapping(nodeMapping.getReusedBorderedNodeMappings(), domainClasses);
 		}
 	}
 
@@ -576,16 +631,20 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	}
 
 	protected void gatherSelectedElements(@NonNull TreeItem treeItem, @NonNull List<@NonNull EObject> selectedElements) {
-	if (treeItem.getChecked()) {
-		Object data = treeItem.getData();
-		if (data instanceof EObject) {
-			selectedElements.add((EObject)data);
+		if (treeItem.getChecked()) {
+			Object data = treeItem.getData();
+			if (data instanceof EObject) {
+				selectedElements.add((EObject)data);
+			}
+		}
+		for (TreeItem childItem : treeItem.getItems()) {
+			gatherSelectedElements(childItem, selectedElements);
 		}
 	}
-	for (TreeItem childItem : treeItem.getItems()) {
-		gatherSelectedElements(childItem, selectedElements);
+
+	protected @NonNull String getDomainClass(@NonNull EClass selectedEClass) {
+		return selectedEClass.getEPackage().getName() + "." + selectedEClass.getName();
 	}
-}
 
 	/**
 	 * Return the initial size of the dialog.
@@ -721,7 +780,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				setMessage(warningMessage, IMessageProvider.WARNING);
 			}
 			else {
-				setMessage("Check the models elements with which to initialize a diagram and select its representation (diagram style).");
+				setMessage("Select a diagram representation, then select a corresponding root model element\nthen check the models elements with which to initialize the diagram.");
 			}
 		}
 	}
@@ -776,13 +835,21 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 	protected void refreshModelElementsRendering(TreeItem treeItem, boolean parentCanCreate) {
 		EObject eObject = (EObject)treeItem.getData();
-		boolean isSelected = eObject == selectedRootModelElement;
+		EClass eClass = eObject.eClass();
+		String domainClass = getDomainClass(eClass);
+		boolean isCreateable = (createableDomainClasses != null) && createableDomainClasses.contains(domainClass);
+
+        boolean rootCreate = !parentCanCreate && DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+
+
+
+		boolean isSelected = !parentCanCreate && (eObject == selectedRootModelElement);
 //        DiagramDescription diagramDescription = (DiagramDescription)selectedRepresentationDescription;
-        boolean canCreate = parentCanCreate || DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
-        setFont(treeItem, (canCreate ? 0 : SWT.ITALIC) | (isSelected ? SWT.BOLD : 0));
-        treeItem.setGrayed(!canCreate);
+//        boolean canCreate = parentCanCreate || DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+        setFont(treeItem, (isCreateable ? 0 : SWT.ITALIC) | (isSelected ? SWT.BOLD : 0));
+        treeItem.setGrayed(!isCreateable);
 		for (TreeItem childItem : treeItem.getItems()) {
-			refreshModelElementsRendering(childItem, canCreate);
+			refreshModelElementsRendering(childItem, rootCreate || parentCanCreate);
 		}
 	}
 
@@ -837,6 +904,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				rootTreeItem.setText(text);
 				rootTreeItem.setData(viewpoint);
 				for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
+					assert representationDescription != null;
 					boolean isSelected = representationDescription == selectedRepresentationDescription;
 					image = labelProvider.getImage(representationDescription);
 					if ((image != null) && (decoratorDescriptor != null)) {
@@ -904,11 +972,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	}
 
 	protected void setFont(@NonNull TreeItem treeItem, int fontFlags) {
-		Font newFont = defaultFont;
-		assert newFont != null;;
+		if (defaultFont == null) {
+			defaultFont = treeItem.getFont();
+		}
 		boolean isBold = (fontFlags & SWT.BOLD) != 0;
 		boolean isItalic = (fontFlags & SWT.ITALIC) != 0;
-		newFont = isBold ? isItalic ? boldItalicFont : boldFont : isItalic ? italicFont : defaultFont;
+		Font newFont = isBold ? isItalic ? boldItalicFont : boldFont : isItalic ? italicFont : defaultFont;
 		if (newFont == null) {
 			FontDescriptor clonedFont = FontDescriptor.createFrom(defaultFont);
 			FontDescriptor styledFont = clonedFont.setStyle(fontFlags);
@@ -931,5 +1000,16 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			}
 		}
 		treeItem.setFont(newFont);
+	}
+
+	protected void setSelectedRepresentationDescription(@Nullable RepresentationDescription selectedRepresentationDescription) {
+		this.selectedRepresentationDescription = selectedRepresentationDescription;
+		if (selectedRepresentationDescription == null) {
+			createableDomainClasses = null;
+		}
+		else {
+			createableDomainClasses = new HashSet<>();
+			gatherDomainClasses(selectedRepresentationDescription, createableDomainClasses);
+		}
 	}
 }
