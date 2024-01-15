@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -35,7 +36,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
-import org.eclipse.jface.resource.ColorDescriptor;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -61,10 +61,10 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -97,12 +97,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void widgetDefaultSelected(SelectionEvent e) {}
 	}
 
-	protected class UncheckAllElementsSelectionListener extends AbstractSelectionListener
+	protected class CheckAllElementsSelectionListener extends AbstractSelectionListener
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			setDeepChecked(modelsElementsTree.getItems(), false);
-			refreshMessage();
+			setDeepChecked(modelsElementsTree.getItems(), true);
+			refreshMessage("CheckAllElementsSelectionListener");
 		}
 	}
 
@@ -122,7 +122,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void mouseUp(MouseEvent e) {
 	//		System.out.println("mouseUp = " + e);
 			refreshModelElementsRendering();
-			refreshMessage();
+			refreshMessage(statusText.getText());
 		}
 	}
 
@@ -130,28 +130,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			TreeItem[] selection = modelsElementsTree.getSelection();
-			Object data;
-			if ((selection != null) && (selection.length > 0) && ((data = selection[0].getData()) instanceof EObject)) {
-				selectedRootModelElement = (EObject)data;
-			}
-			else {
-				selectedRootModelElement = null;
-			}
+			String problemMessage = setSelectedRootModelElement();
 //				refreshViewpoints();
 //			refreshViewpointsRendering();
 			refreshModelElementsRendering();
-			refreshMessage();
+			refreshMessage(problemMessage);
 //				System.out.println("Selected " + viewpointsTree.getSelection().length);
-		}
-	}
-
-	protected class CheckAllElementsSelectionListener extends AbstractSelectionListener
-	{
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			setDeepChecked(modelsElementsTree.getItems(), true);
-			refreshMessage();
 		}
 	}
 
@@ -160,7 +144,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			refreshRepresentationFileName();
-			refreshMessage();
+			refreshMessage("SharedRepresentationSelectionListener");
 		}
 	}
 
@@ -168,9 +152,9 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			refreshModelElements();
+			refreshModelElements(null);
 			refreshModelElementsRendering();
-			refreshMessage();
+			refreshMessage("ShowAllElementsSelectionListener");
 		}
 	}
 
@@ -180,7 +164,16 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void widgetSelected(SelectionEvent e) {
 			refreshViewpoints();
 			refreshViewpointsRendering();
-			refreshMessage();
+			refreshMessage(null);
+		}
+	}
+
+	protected class UncheckAllElementsSelectionListener extends AbstractSelectionListener
+	{
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			setDeepChecked(modelsElementsTree.getItems(), false);
+			refreshMessage(null);
 		}
 	}
 
@@ -188,17 +181,11 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			TreeItem[] selection = viewpointsTree.getSelection();
-			Object data;
-			RepresentationDescription selectedRepresentationDescription = null;
-			if ((selection != null) && (selection.length > 0) && ((data = selection[0].getData()) instanceof RepresentationDescription)) {
-				selectedRepresentationDescription = (RepresentationDescription)data;
-			}
-			setSelectedRepresentationDescription(selectedRepresentationDescription);
+			String problemMessage = setSelectedRepresentationDescription();
 //				refreshViewpoints();
 			refreshViewpointsRendering();
 			refreshModelElementsRendering();
-			refreshMessage();
+			refreshMessage(problemMessage);
 //				System.out.println("Selected " + viewpointsTree.getSelection().length);
 		}
 	}
@@ -214,6 +201,23 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private final Set<EPackage> modelEPackages;
 	private final Set<String> modelURIs;
 
+	// The derived state
+	private final @NonNull List<@NonNull Viewpoint> allViewpoints;
+	private final @NonNull Set<@NonNull String> allDomainClasses;
+	private final @NonNull Set<@NonNull String> allRootableDomainClasses;
+	private final @NonNull Set<@NonNull EObject> allRootableEObjects;
+//	private final @NonNull Set<@NonNull EClass> rootableEClasses;
+	private final @NonNull Set<@NonNull Object> initialExpansions;
+
+	// The working state
+	private @Nullable RepresentationDescription selectedRepresentationDescription = null;
+	private @NonNull Set<@NonNull String> selectedDomainClasses = Collections.emptySet();
+	private @NonNull Set<@NonNull String> selectedRootableDomainClasses = Collections.emptySet();
+	//
+	private @Nullable EObject selectedRootModelElement = null;
+	private @NonNull Set<@NonNull EObject> selectedRootableEObjects = Collections.emptySet();
+	private @NonNull Set<@NonNull Notifier> selectedAncestralModelElements = Collections.emptySet();
+
 	// The widgets
 	private Button okButton;
 	private Button sharedRepresentationFileCheckButton;
@@ -224,11 +228,8 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private Tree viewpointsTree;
 	private Text representationDiagramNameText;
 	private Text statusText;
-
-	// The working state
-	private @Nullable EObject selectedRootModelElement = null;
-	private @Nullable RepresentationDescription selectedRepresentationDescription = null;
-	private @Nullable Set<@NonNull String> createableDomainClasses = null;
+	private Label representationDiagramNameLabel;
+	//
 	private @Nullable Font defaultFont = null;
 	private @Nullable Font boldFont = null;
 	private @Nullable Font boldItalicFont = null;
@@ -289,7 +290,8 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		this.modelURI = firstModelResource.getURI();
 		this.modelEPackages = new HashSet<>();
 		this.modelURIs = new HashSet<>();
-		for (Resource eResource : resource2elements.keySet()) {
+		Iterable<@NonNull Resource> allResources = resource2elements.keySet();
+		for (Resource eResource : allResources) {
 			for (TreeIterator<EObject> tit = eResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				assert eObject != null;
@@ -302,12 +304,26 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				}
 			}
 		}
+		this.allViewpoints = gatherAllViewpoints();
+		this.allDomainClasses = gatherDomainClasses(allViewpoints);
+		this.allRootableDomainClasses = gatherRootableDomainClasses(allViewpoints);
+		this.allRootableEObjects = gatherRootableEObjects(allRootableDomainClasses);
+	//	this.rootableEClasses = gatherRootableEClasses(rootableEObjects);
+		this.initialExpansions = gatherInitialExpansions(allRootableEObjects);
 	}
+
 	private void createResourceManager() {
 		localResourceManager = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	public @Nullable RepresentationDescription basicGetRegistryRepresentationDescription() {
+		assert getShell() != null;
+		RepresentationDescription r1 = basicGetRegistryRepresentationDescription1();
+		RepresentationDescription r2 = selectedRepresentationDescription;
+		assert r1 == r2;
+		return r1;
+	}
+	public @Nullable RepresentationDescription basicGetRegistryRepresentationDescription1() {
 		assert getShell() != null;
 		TreeItem[] selection = viewpointsTree.getSelection();
 		if ((selection == null) || (selection.length != 1)) {
@@ -386,7 +402,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 
-		refreshMessage();
+		refreshMessage(null);
 	}
 
 	/**
@@ -530,7 +546,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		viewpointsComposite.setLayout(gl_viewpointsComposite);
 
 		viewpointsTree = new Tree(viewpointsComposite, SWT.BORDER);
-		viewpointsTree.setToolTipText("The available viewpoints (diagram families)\n  and their representations (diagram types)\nSelected representation in bold.\nNot-applicable representations in italics.");
+		viewpointsTree.setToolTipText("The available viewpoints (diagram families)\n  and their representations (diagram types)\\nBold for selected representation.\nWhite background for selectable representations.\nItalics for no possible URI compatibility.");
 		viewpointsTree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		viewpointsTree.addSelectionListener(new ViewpointsTreeSelectionListener());
 
@@ -540,7 +556,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		gl_representationDiagramNameComposite.marginWidth = 0;
 		representationDiagramNameComposite.setLayout(gl_representationDiagramNameComposite);
 
-		Label representationDiagramNameLabel = new Label(representationDiagramNameComposite, SWT.NONE);
+		representationDiagramNameLabel = new Label(representationDiagramNameComposite, SWT.NONE);
 		representationDiagramNameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		representationDiagramNameLabel.setSize(81, 25);
 		representationDiagramNameLabel.setText("Representation Name:");
@@ -550,21 +566,83 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		representationDiagramNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		descriptionText = new Text(representationSash, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
-		descriptionText.setBackground(localResourceManager.create(ColorDescriptor.createFrom(new RGB(255, 255, 255))));
+		descriptionText.setBackground(getWhiteBackground());
 		descriptionText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		overallSash.setWeights(new int[] {1, 1});
 		representationSash.setWeights(new int[] {2, 1});
 
+		printSelectedRepresentation();
+		printSelectedRootModelElement();
+
 		refreshRepresentationFileName();
 		refreshViewpoints();
 		refreshViewpointsRendering();
-		refreshModelElements();
+		refreshModelElements(initialExpansions);
 		refreshModelElementsRendering();
 		if (okButton != null) {
-			refreshMessage();
+			refreshMessage(null);
 		}
 		return container;
+	}
+
+	protected @NonNull List<@NonNull Viewpoint> gatherAllViewpoints() {
+		List<@NonNull Viewpoint> allViewpoints = new ArrayList<>();
+		ViewpointRegistry instance = ViewpointRegistry.getInstance();
+		for (Viewpoint viewpoint : instance.getViewpoints()) {
+			assert viewpoint != null;
+			allViewpoints.add(viewpoint);
+		}
+		allViewpoints.sort(viewpointComparator);
+		return allViewpoints;
+	}
+
+	protected @NonNull Set<@NonNull Notifier> gatherAncestralModelElements(@NonNull Iterable<@NonNull EObject> selectedRootableEObjects) {
+		Set<@NonNull Notifier> ancestralModelElements = new HashSet<>();
+		for (EObject rootable : selectedRootableEObjects) {
+			Resource eResource = rootable.eResource();
+			if (eResource != null) {
+				ancestralModelElements.add(eResource);
+			}
+			for (EObject eObject = rootable; eObject != null; eObject = eObject.eContainer()) {
+				ancestralModelElements.add(eObject);
+			}
+		}
+		return ancestralModelElements;
+	}
+
+	protected @NonNull Set<@NonNull EClass> gatherCheckedEClasses() {
+		Set<@NonNull EClass> selectedEClasses = new HashSet<>();
+		gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
+		return selectedEClasses;
+	}
+
+	protected void gatherCheckedEClasses(TreeItem[] items, Set<EClass> eClasses) {
+		for (TreeItem item : items) {
+			Object object = item.getData();
+			if ((object instanceof EObject) && item.getChecked()) {
+				EClass eClass = ((EObject)object).eClass();
+				eClasses.add(eClass);
+			}
+			gatherCheckedEClasses(item.getItems(), eClasses);
+		}
+	}
+
+	protected @NonNull Set<@NonNull String> gatherDomainClasses(@NonNull Iterable<@NonNull Viewpoint> viewpoints) {
+		Set<@NonNull String> domainClasses = new HashSet<>();
+		for (Viewpoint viewpoint : viewpoints) {
+			for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
+				assert representationDescription != null;
+				gatherDomainClasses(representationDescription, domainClasses);
+			}
+		}
+		return domainClasses;
+	}
+
+	protected @NonNull Set<@NonNull String> gatherDomainClasses(@NonNull RepresentationDescription representationDescription) {
+		Set<@NonNull String> domainClasses = new HashSet<>();
+		gatherDomainClasses(representationDescription, domainClasses);
+		return domainClasses;
 	}
 
 	protected void gatherDomainClasses(@NonNull RepresentationDescription representationDescription, @NonNull Set<@NonNull String> domainClasses) {
@@ -619,15 +697,79 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected void gatherSelectedEClasses(TreeItem[] items, Set<EClass> eClasses) {
-		for (TreeItem item : items) {
-			Object object = item.getData();
-			if ((object instanceof EObject) && item.getChecked()) {
-				EClass eClass = ((EObject)object).eClass();
-				eClasses.add(eClass);
+	protected void gatherExpandedElements(@NonNull TreeItem[] treeItems, @NonNull Set<Object> expanded) {
+		for (TreeItem item : treeItems) {
+			if (item.getExpanded()) {
+				expanded.add(item.getData());
 			}
-			gatherSelectedEClasses(item.getItems(), eClasses);
+			gatherExpandedElements(item.getItems(), expanded);
 		}
+	}
+
+	protected @NonNull Set<@NonNull Object> gatherInitialExpansions(@NonNull Iterable<@NonNull EObject> rootableEObjects) {
+		Set<@NonNull Object> initialExpansions = new HashSet<>();
+		for (EObject rootableEObject : rootableEObjects) {
+			for (EObject eObject = rootableEObject; (eObject = eObject.eContainer()) != null; ) {
+				initialExpansions.add(eObject);
+				Resource eResource = eObject.eResource();
+				if (eResource != null) {
+					initialExpansions.add(eResource);
+				}
+			}
+		}
+		return initialExpansions;
+	}
+
+	protected @NonNull Set<@NonNull String> gatherRootableDomainClasses(@NonNull Iterable<@NonNull Viewpoint> viewpoints) {
+		Set<@NonNull String> rootDomainClasses = new HashSet<>();
+		for (Viewpoint viewpoint : viewpoints) {
+			for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
+				assert representationDescription != null;
+				String domainClass = getDomainClass(representationDescription);
+				rootDomainClasses.add(domainClass);
+			}
+		}
+		return rootDomainClasses;
+	}
+
+/*	protected @NonNull Set<@NonNull EClass> gatherRootableEClasses(@NonNull Set<@NonNull EObject> rootableEObjects2) {
+	/ *	Map<@NonNull EClass, @NonNull String> eClass2domainClass = new HashMap<>();
+		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+		for (Resource resource : resource2elements.keySet()) {
+			for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				EClass eClass = eObject.eClass();
+				if (!eClass2domainClass.containsKey(eClass)) {
+					String domainClass = getDomainClass(eClass);
+					eClass2domainClass.put(eClass, domainClass);
+					if (rootableDomainClasses.contains(domainClass)) {
+						rootableEClasses.add(eClass);
+					}
+				}
+			}
+		}
+		return rootableEClasses; * /
+		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+		for (EObject eObject : rootableEObjects2) {
+			EClass eClass = eObject.eClass();
+			rootableEClasses.add(eClass);
+		}
+		return rootableEClasses;
+	} */
+
+	protected @NonNull Set<@NonNull EObject> gatherRootableEObjects(@NonNull Set<@NonNull String> rootableDomainClasses) {
+		Set<@NonNull EObject> rootableEObjects = new HashSet<>();
+		for (Resource resource : resource2elements.keySet()) {
+			for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				EClass eClass = eObject.eClass();
+				String domainClass = getDomainClass(eClass);
+				if (rootableDomainClasses.contains(domainClass)) {
+					rootableEObjects.add(eObject);
+				}
+			}
+		}
+		return rootableEObjects;
 	}
 
 	protected void gatherSelectedElements(@NonNull TreeItem treeItem, @NonNull List<@NonNull EObject> selectedElements) {
@@ -642,8 +784,32 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected @NonNull String getDomainClass(@NonNull EClass selectedEClass) {
+	protected @NonNull String getDomainClass(EClass selectedEClass) {
 		return selectedEClass.getEPackage().getName() + "." + selectedEClass.getName();
+	}
+
+	protected @NonNull String getDomainClass(@NonNull RepresentationDescription representationDescription) {
+		DiagramDescription diagramDescription;
+		if (representationDescription instanceof DiagramImportDescription) {
+			diagramDescription = ((DiagramImportDescription)representationDescription).getImportedDiagram();
+		}
+		else if (representationDescription instanceof DiagramDescription) {
+			diagramDescription = (DiagramDescription)representationDescription;
+		}
+		else {
+			throw new UnsupportedOperationException("Unknown RepresentationDescription: " + representationDescription.getClass().getName());
+		}
+		String domainClass = diagramDescription.getDomainClass();
+		assert domainClass != null;
+		return domainClass;
+	}
+
+	protected Color getGreyBackground() {
+		return representationDiagramNameLabel.getBackground();
+	}
+
+	protected Color getWhiteBackground() {
+		return viewpointsTree.getBackground();
 	}
 
 	/**
@@ -694,6 +860,61 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		return modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
 	}
 
+	protected boolean hasModelURI(@NonNull RepresentationDescription representationDescription) {
+		for (EPackage metamodel : representationDescription.getMetamodel()) {
+			assert metamodel != null;
+			String nsURI = getSafeNsURI(metamodel);
+			if (modelURIs.contains(nsURI)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected void printSelectedRepresentation() {
+		StringBuilder s = new StringBuilder();
+		RepresentationDescription selectedRepresentationDescription2 = selectedRepresentationDescription;
+		if (selectedRepresentationDescription2 == null) {
+			s.append("selectedRepresentationDescription = null");
+			s.append("\n  domainClass = null");
+		}
+		else {
+			s.append("selectedRepresentationDescription = " + selectedRepresentationDescription2.getLabel());
+			s.append("\n  domainClass = " + getDomainClass(selectedRepresentationDescription2));
+		}
+		s.append("\n  selectedRootableDomainClasses =");
+		for (String domainClass : selectedRootableDomainClasses) {
+			s.append(" " + domainClass);
+		}
+		s.append("\n  selectedDomainClasses =");
+		for (String domainClass : selectedDomainClasses) {
+			s.append(" " + domainClass);
+		}
+		System.out.println(s.toString());
+	}
+
+	protected void printSelectedRootModelElement() {
+		StringBuilder s = new StringBuilder();
+		EObject selectedRootModelElement2 = selectedRootModelElement;
+		if (selectedRootModelElement2 == null) {
+			s.append("selectedRootModelElement2 = null");
+		//	s.append("\ndomainClass = null");
+		}
+		else {
+			s.append("selectedRootModelElement2 = " + selectedRootModelElement2.toString());
+		//	s.append("\n  domainClass = " + getDomainClass(selectedRepresentationDescription2));
+		}
+		s.append("\n  selectedRootableEObjects =");
+		for (EObject eObject : selectedRootableEObjects) {
+			s.append("\n\t" + labelProvider.getText(eObject));
+		}
+		s.append("\n  selectedAncestralModelElements =");
+		for (Notifier notifier : selectedAncestralModelElements) {
+			s.append("\\n\\t" + labelProvider.getText(notifier));
+		}
+		System.out.println(s.toString());
+	}
+
 	protected void refreshDescription() {
 		StringBuilder s = new StringBuilder();
 		for (TreeItem item : viewpointsTree.getSelection()) {
@@ -731,29 +952,31 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		descriptionText.setText(s.toString());
 	}
 
-	protected void refreshMessage() {
+	protected void refreshMessage(@Nullable String problemMessage) {
 		refreshDescription();
 		String errorMessage = null;
 		String warningMessage = null;
-		RepresentationDescription finalRegistryRepresentationDescription = basicGetRegistryRepresentationDescription();
-		if (finalRegistryRepresentationDescription == null) {
-			errorMessage = "No unique representation description selected.\nSelect exactly one leaf representation in the Diagram Representation tree.";
+		if (selectedRepresentationDescription == null) {
+			errorMessage = "No representation description selected.\nSelect a white-background representation in the Diagram Representation Selector.";
 		}
-		else {
+		else if (selectedRootModelElement == null) {
+			errorMessage = "No root model element selected.\nSelect a white-background model element in the Model(s) Elements Selector.";
+		}
+	/*	else {
 			List<EObject> selectedElements = basicGetSelectedElements();
 			if (selectedElements.isEmpty()) {
 				warningMessage = "No model elements selected.\nCheck at least one non-root element in the Model(s) Elements tree.";
 			}
-		}
+		} */
 		if ((errorMessage == null) && (warningMessage == null)) {
 			Set<EClass> selectedEClasses = new HashSet<>();
-			gatherSelectedEClasses(modelsElementsTree.getItems(), selectedEClasses);
+			gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
 			for (TreeItem rootTreeItem : viewpointsTree.getItems()) {
 				for (TreeItem treeItem : rootTreeItem.getItems()) {
 					if (treeItem.getChecked()) {
 						RepresentationDescription representationDescription = (RepresentationDescription)treeItem.getData();
-						Set<String> designDomainClasses = new HashSet<>();
-						gatherDomainClasses(representationDescription, designDomainClasses);
+						assert representationDescription != null;
+						Set<@NonNull String> designDomainClasses = gatherDomainClasses(representationDescription);
 						List<String> missingDomainClasses = computeMissingDomainClasses(selectedEClasses, designDomainClasses);
 						if (missingDomainClasses != null) {
 							Collections.sort(missingDomainClasses);
@@ -783,9 +1006,19 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				setMessage("Select a diagram representation, then select a corresponding root model element\nthen check the models elements with which to initialize the diagram.");
 			}
 		}
+		if (problemMessage != null) {
+			statusText.setText(problemMessage);
+		}
+		else {
+			statusText.setText("");
+		}
 	}
 
-	protected void refreshModelElements() {
+	protected void refreshModelElements(@Nullable Set<Object> expanded) {
+		if (expanded == null) {
+			expanded = new HashSet<>();
+			gatherExpandedElements(modelsElementsTree.getItems(), expanded);
+		}
 		for (TreeItem item : modelsElementsTree.getItems()) {
 			item.dispose();
 		}
@@ -796,15 +1029,17 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			rootTreeItem.setImage(image);
 			rootTreeItem.setText(text);
 			rootTreeItem.setData(resource);
+			rootTreeItem.setBackground(getGreyBackground());
+		//	setFont(rootTreeItem, SWT.ITALIC);
 			Set<@NonNull EObject> explicit = new HashSet<>(resource2elements.get(resource));
 			for (EObject eObject : resource.getContents()) {
-				refreshModelElements(rootTreeItem, eObject, explicit);
+				refreshModelElements(rootTreeItem, eObject, explicit, expanded);
 			}
-			rootTreeItem.setExpanded(true);
+			rootTreeItem.setExpanded(expanded.isEmpty() || expanded.contains(resource));
 		}
 	}
 
-	protected void refreshModelElements(@NonNull TreeItem parentTreeItem, @NonNull EObject eObject, Set<@NonNull EObject> explicit) {
+	protected void refreshModelElements(@NonNull TreeItem parentTreeItem, @NonNull EObject eObject, Set<@NonNull EObject> explicit, @NonNull Set<Object> expanded) {
 		Image image = labelProvider.getImage(eObject);
 		String text = labelProvider.getText(eObject);
 		TreeItem treeItem = new TreeItem(parentTreeItem, SWT.NONE);
@@ -812,23 +1047,19 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		treeItem.setText(text);
 		treeItem.setChecked(explicit.contains(eObject));
 		treeItem.setData(eObject);
-	/*	treeItem.addListener(SWT.Selection, new Listener()
-			{
-				@Override
-				public void handleEvent(Event event) {
-					System.out.println("Selected = " + getSelectedElements());
-				}
-			}); */
 		for (EObject childEObject : eObject.eContents()) {
 			assert childEObject != null;
-			refreshModelElements(treeItem, childEObject, explicit);
+			refreshModelElements(treeItem, childEObject, explicit, expanded);
 		}
+		treeItem.setExpanded((expanded.isEmpty() && (eObject.eResource() == null)) || expanded.contains(eObject));
 	}
 
 	protected void refreshModelElementsRendering() {
 		for (TreeItem rootItem : modelsElementsTree.getItems()) {
+			rootItem.setGrayed(true);
 			for (TreeItem item : rootItem.getItems()) {
 				refreshModelElementsRendering(item, false);
+				item.setGrayed(true);
 			}
 		}
 	}
@@ -837,16 +1068,57 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		EObject eObject = (EObject)treeItem.getData();
 		EClass eClass = eObject.eClass();
 		String domainClass = getDomainClass(eClass);
-		boolean isCreateable = (createableDomainClasses != null) && createableDomainClasses.contains(domainClass);
+		boolean isCreateable = selectedDomainClasses.contains(domainClass);
+		boolean isRootable = selectedRootableDomainClasses.contains(domainClass);
+		boolean isAncestor = selectedAncestralModelElements.contains(eObject);
 
-        boolean rootCreate = !parentCanCreate && DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+        RepresentationDescription selectedRepresentationDescription2 = selectedRepresentationDescription;
+		boolean rootCreate = !parentCanCreate && DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription2, false);
 
 
 
-		boolean isSelected = !parentCanCreate && (eObject == selectedRootModelElement);
+		boolean isSelected = false; //!parentCanCreate && (eObject == selectedRootModelElement);
 //        DiagramDescription diagramDescription = (DiagramDescription)selectedRepresentationDescription;
 //        boolean canCreate = parentCanCreate || DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
-        setFont(treeItem, (isCreateable ? 0 : SWT.ITALIC) | (isSelected ? SWT.BOLD : 0));
+		Color background = getGreyBackground();
+		boolean isBold = false;
+		boolean isItalic = false;
+		if (selectedRepresentationDescription == null) {
+			isCreateable = allDomainClasses.contains(domainClass);
+			isRootable = allRootableDomainClasses.contains(domainClass);
+		//	assert !isCreateable;
+		//	assert !isSelected;
+		}
+		else if (selectedRootModelElement == null) {
+			isBold = isSelected;
+			isItalic = !isCreateable;
+		//	if (domainClass.equals(getDomainClass(selectedRepresentationDescription2))) {
+		//		background = getWhiteBackground();
+		//	}
+		}
+		else {
+			isBold = isSelected;
+			isItalic = !isCreateable;
+			if (selectedRootModelElement == eObject) {
+				isSelected = true;
+				background = getWhiteBackground();
+			}
+			else if (isRootable && isCreateable) {
+				background = getWhiteBackground();
+			}
+		//	if (isSelected)
+		/*	if (!selectedDomainClasses.contains(domainClass)) {
+			}
+			else if ((selectedRootModelElement == null) && !domainClass.equals(getDomainClass(selectedRepresentationDescription2))) {
+			}
+			else if ((selectedRootModelElement != null) && !selectedDomainClasses.contains(domainClass)) {
+			}
+			else {
+				background = getWhiteBackground();
+			} */
+		}
+		treeItem.setBackground(background);
+		setFont(treeItem, (isItalic ? SWT.ITALIC : 0) | (isBold ? SWT.BOLD : 0));
         treeItem.setGrayed(!isCreateable);
 		for (TreeItem childItem : treeItem.getItems()) {
 			refreshModelElementsRendering(childItem, rootCreate || parentCanCreate);
@@ -870,23 +1142,17 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		for (TreeItem item : viewpointsTree.getItems()) {
 			item.dispose();
 		}
+		Set<@NonNull EClass> checkedEClasses = gatherCheckedEClasses();
 		boolean showAllViewpoints = showAllViewpointsCheckButton.getSelection();
-		ViewpointRegistry instance = ViewpointRegistry.getInstance();
-		@SuppressWarnings("null") List<@NonNull Viewpoint> allViewpoints = new ArrayList<>(instance.getViewpoints());
-		allViewpoints.sort(viewpointComparator);
-		Set<EClass> selectedEClasses = new HashSet<>();
-		gatherSelectedEClasses(modelsElementsTree.getItems(), selectedEClasses);
 		for (Viewpoint viewpoint : allViewpoints) {
 			boolean hasURI = false;
-			List<RepresentationDescription> representationDescriptions = new ArrayList<>(viewpoint.getOwnedRepresentations());
+			@SuppressWarnings("null")
+			List<@NonNull RepresentationDescription> representationDescriptions = new ArrayList<>(viewpoint.getOwnedRepresentations());
 			representationDescriptions.sort(representationDescriptorComparator);
 			for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
-				for (EPackage metamodel : representationDescription.getMetamodel()) {
-					assert metamodel != null;
-					String nsURI = getSafeNsURI(metamodel);
-					if (modelURIs.contains(nsURI)) {
-						hasURI = true;
-					}
+				assert representationDescription != null;
+				if (hasModelURI(representationDescription)) {
+					hasURI = true;
 				}
 			}
 			if (hasURI || showAllViewpoints) {
@@ -903,6 +1169,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				rootTreeItem.setImage(image);
 				rootTreeItem.setText(text);
 				rootTreeItem.setData(viewpoint);
+				rootTreeItem.setBackground(getGreyBackground());
 				for (RepresentationDescription representationDescription : viewpoint.getOwnedRepresentations()) {
 					assert representationDescription != null;
 					boolean isSelected = representationDescription == selectedRepresentationDescription;
@@ -916,13 +1183,13 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 					treeItem.setImage(image);
 					treeItem.setText(text);
 					treeItem.setData(representationDescription);
+					treeItem.setBackground(hasURI ? getWhiteBackground() : getGreyBackground());
 					if (isSelected) {
 						viewpointsTree.setSelection(treeItem);
 					}
 					if (hasURI) {
-						Set<String> designDomainClasses = new HashSet<>();
-						gatherDomainClasses(representationDescription, designDomainClasses);
-						List<String> missingDomainClasses = computeMissingDomainClasses(selectedEClasses, designDomainClasses);
+						Set<@NonNull String> designDomainClasses = gatherDomainClasses(representationDescription);
+						List<@NonNull String> missingDomainClasses = computeMissingDomainClasses(checkedEClasses, designDomainClasses);
 						treeItem.setChecked(missingDomainClasses == null);			// XXX
 					}
 				}
@@ -934,7 +1201,6 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 	protected void refreshViewpointsRendering() {
 		for (TreeItem viewpointItem : viewpointsTree.getItems()) {
-		//	Viewpoint viewpoint = (Viewpoint)viewpointItem.getData();
 			boolean hasURI = false;
 			for (TreeItem representationDescriptionItem : viewpointItem.getItems()) {
 				RepresentationDescription representationDescription  = (RepresentationDescription)representationDescriptionItem.getData();
@@ -948,27 +1214,26 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				}
 			}
 			setFont(viewpointItem, hasURI ? 0 : SWT.ITALIC);
-		//	Set<EClass> selectedEClasses = new HashSet<>();
-		//	gatherSelectedEClasses(modelsElementsTree.getItems(), selectedEClasses);
 			for (TreeItem representationDescriptionItem : viewpointItem.getItems()) {
 				RepresentationDescription representationDescription  = (RepresentationDescription)representationDescriptionItem.getData();
 				boolean isSelected = representationDescription == selectedRepresentationDescription;
-				int fontFlags = 0;
-				if (hasURI) {
-				//	Set<String> designDomainClasses = new HashSet<>();
-				//	gatherDomainClasses(representationDescription, designDomainClasses);
-				//	List<String> missingDomainClasses = computeMissingDomainClasses(selectedEClasses, designDomainClasses);
-				//	representationDescriptionItem.setChecked(missingDomainClasses == null);
-					if (isSelected) {
-						fontFlags = SWT.BOLD;
-					}
-				}
-				else {
-					fontFlags = (isSelected ? SWT.BOLD : 0) | SWT.ITALIC;
-				}
-				setFont(representationDescriptionItem, fontFlags);
+				setFont(representationDescriptionItem, (isSelected ? SWT.BOLD : 0) | (hasURI ? 0 : SWT.ITALIC));
 			}
 		}
+	}
+
+	protected void resetRepresentationDescriptionSelection() {
+		selectedRepresentationDescription = null;
+		selectedDomainClasses = allDomainClasses;
+		selectedRootableDomainClasses = allRootableDomainClasses;
+		resetRootModelElementSelection();
+	}
+
+	protected void resetRootModelElementSelection() {
+		selectedRootModelElement = null;
+		selectedAncestralModelElements = Collections.emptySet();
+		this.selectedRootableEObjects = gatherRootableEObjects(allRootableDomainClasses);
+		this.selectedAncestralModelElements = gatherAncestralModelElements(selectedRootableEObjects);
 	}
 
 	protected void setFont(@NonNull TreeItem treeItem, int fontFlags) {
@@ -1002,14 +1267,72 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		treeItem.setFont(newFont);
 	}
 
-	protected void setSelectedRepresentationDescription(@Nullable RepresentationDescription selectedRepresentationDescription) {
-		this.selectedRepresentationDescription = selectedRepresentationDescription;
+	protected @Nullable String setSelectedRootModelElement() {
+		@Nullable String message = setSelectedRootModelElement1();
+		printSelectedRootModelElement();
+		return message;
+	}
+
+	protected @Nullable String setSelectedRootModelElement1() {
+		TreeItem[] selection = modelsElementsTree.getSelection();
+		if ((selection == null) || (selection.length <= 0)) {
+			resetRootModelElementSelection();
+			return null;
+		}
 		if (selectedRepresentationDescription == null) {
-			createableDomainClasses = null;
+			resetRootModelElementSelection();
+			return "No diagram representation selected";
 		}
-		else {
-			createableDomainClasses = new HashSet<>();
-			gatherDomainClasses(selectedRepresentationDescription, createableDomainClasses);
+		Object data = selection[0].getData();
+		if (!(data instanceof EObject)) {
+			resetRootModelElementSelection();
+			return "Not a model element";
 		}
+		EObject eObject = (EObject)data;
+		boolean canCreate =  DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription, false);
+		if (!canCreate) {
+			resetRootModelElementSelection();
+			assert selectedRepresentationDescription != null;
+			return "Not a " + selectedRepresentationDescription.getLabel() + " root model element";
+		}
+		selectedRootModelElement = eObject;
+		this.selectedAncestralModelElements = gatherAncestralModelElements(Collections.singleton(eObject));
+		return "";
+	}
+
+	protected @Nullable String setSelectedRepresentationDescription() {
+		@Nullable String message = setSelectedRepresentationDescription2();
+		printSelectedRepresentation();
+		printSelectedRootModelElement();
+		return message;
+	}
+
+	protected @Nullable String setSelectedRepresentationDescription2() {
+		TreeItem[] selection = viewpointsTree.getSelection();
+		if ((selection == null) || (selection.length <= 0)) {
+			resetRepresentationDescriptionSelection();
+			return null;
+		}
+		Object data = selection[0].getData();
+		if (!(data instanceof RepresentationDescription)) {
+			resetRepresentationDescriptionSelection();
+			return "Not a diagram representation description";
+		}
+		RepresentationDescription selectedRepresentationDescription = (RepresentationDescription)data;
+		if (!hasModelURI(selectedRepresentationDescription)) {
+			resetRepresentationDescriptionSelection();
+			return "No metamodel commonality with models";
+		}
+		if (this.selectedRepresentationDescription != selectedRepresentationDescription) {
+			resetRootModelElementSelection();
+		}
+		this.selectedRepresentationDescription = selectedRepresentationDescription;
+		boolean canCreate = DialectManager.INSTANCE.canCreate(selectedRootModelElement, selectedRepresentationDescription, false);
+		if (!canCreate) {
+			resetRootModelElementSelection();
+		}
+		selectedDomainClasses = gatherDomainClasses(selectedRepresentationDescription);
+		selectedRootableDomainClasses = Collections.singleton(getDomainClass(selectedRepresentationDescription));
+		return "";
 	}
 }
