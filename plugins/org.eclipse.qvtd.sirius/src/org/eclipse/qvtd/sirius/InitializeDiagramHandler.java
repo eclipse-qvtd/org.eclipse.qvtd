@@ -95,7 +95,7 @@ public class InitializeDiagramHandler extends AbstractHandler
 		if ((status == Status.OK) && (initializeDiagramDialog.getShell() == null)) {		// !null for forced Eclipse exit
 			// Convert selection-space elements to URIs for reloading in the Sirius-space.
 			List<URI> selectedElements = new ArrayList<>();
-			for (EObject selectedElement : initializeDiagramDialog.getSelectedElements()) {
+			for (EObject selectedElement : initializeDiagramDialog.getCheckedElements()) {
 				selectedElements.add(EcoreUtil.getURI(selectedElement));
 			}
 			URI sessionURI = initializeDiagramDialog.getSessionURI();
