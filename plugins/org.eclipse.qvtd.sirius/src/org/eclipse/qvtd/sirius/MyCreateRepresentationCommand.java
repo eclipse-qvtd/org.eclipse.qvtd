@@ -66,6 +66,22 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
         this.semantic = eObject;
         this.name = name;
         this.monitor = monitor;
+
+/*        RepresentationElementMapping mapping = dde.getMapping();
+        if (mapping != null) {
+            EObject sessionFinder = null;
+            final EList<EObject> semanticElements = dde.getSemanticElements();
+            if (semanticElements != null && !semanticElements.isEmpty()) {
+                sessionFinder = semanticElements.get(0);
+            } else if (dde.getTarget() != null) {
+                sessionFinder = dde.getTarget();
+            }
+            final Session session = sessionFinder != null ? SessionManager.INSTANCE.getSession(sessionFinder) : null;
+            if (session != null) {
+                for (RepresentationCreationDescription desc : mapping.getDetailDescriptions()) {
+        */
+
+     //   this.creationDescription = description.getRepresentationDescription();
     }
 
     /**

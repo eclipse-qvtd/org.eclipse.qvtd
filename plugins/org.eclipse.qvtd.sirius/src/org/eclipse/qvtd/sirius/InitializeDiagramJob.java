@@ -11,8 +11,10 @@
 package org.eclipse.qvtd.sirius;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -60,8 +63,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
-import com.google.common.collect.Iterables;
-
 /**
  * InitializeDiagramJob provides a non-interactive sequencing of the three interactive activities.
  * OpenRepresentationsFileJob to establish a Session, ChangeViewpointSelectionCommand to establish a DView,
@@ -71,18 +72,18 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 {
 	protected static class InitializeDiagramCreate extends WorkspaceModifyOperation // ?? implements Runnable
 	{
-		protected final Session session;
-		protected final RepresentationDescription registryRepresentationDescription;
-		protected final URI representationFileURI;
-		protected final EObject modelObject;
-		protected final String representationDiagramName;
+		protected final @NonNull Session session;
+		protected final @NonNull RepresentationDescription registryRepresentationDescription;
+		protected final @NonNull URI representationFileURI;
+		protected final @NonNull List<@NonNull EObject> modelObjects;
+		protected final @NonNull String representationDiagramName;
 
-		protected InitializeDiagramCreate(Session session, RepresentationDescription registryRepresentationDescription, URI representationFileURI, String representationDiagramName, EObject modelObject) {													// ctor on main
+		protected InitializeDiagramCreate(@NonNull Session session, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull EObject> modelObjects) {													// ctor on main
 			this.session = session;
 			this.registryRepresentationDescription = registryRepresentationDescription;
 			this.representationFileURI = representationFileURI;
 			this.representationDiagramName = representationDiagramName;
-			this.modelObject = modelObject;		// XXX multi-object
+			this.modelObjects = modelObjects;
 		}
 
 		@Override
@@ -94,6 +95,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				TransactionalEditingDomain transactionalEditingDomain = session.getTransactionalEditingDomain();
 				CommandStack commandStack = transactionalEditingDomain.getCommandStack();
 
+				EObject modelObject = modelObjects.get(0);
 				if (!session.getSemanticResources().contains(modelObject.eResource())) {
 					session.close(monitor);
 					session.getSemanticResources();
@@ -168,7 +170,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 
 				editingSession.notify(EditingSessionEvent.REPRESENTATION_ABOUT_TO_BE_CREATED_BEFORE_OPENING);
 				if (!createRepresentationCommand.canExecute()) {
-					openError(null, "Unable to create \"" +  registryRepresentationDescription.getLabel() + "\"", null);
+					openError(null, "Unable to create \"" +  registryRepresentationDescription.getLabel() + "\"\nFIXME need to break out canExecute failures", null);
 					return;
 				}
 				commandStack.execute(createRepresentationCommand);
@@ -233,8 +235,8 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 	 *			<code>true</code> if this session opening comes from a direct user action, </code>false<code>
 	 *			otherwise
 	 */
-	public static void scheduleNewWhenPossible(final URI sessionURI, RepresentationDescription representationDescription, URI representationFileURI, String representationDiagramName, final Iterable<URI> modelObjects) {
-		Job job = new InitializeDiagramJob(sessionURI, representationDescription, representationFileURI, representationDiagramName, modelObjects);
+	public static void scheduleNewWhenPossible(@NonNull URI sessionURI, @NonNull RepresentationDescription representationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull URI> modelObjectURIs) {
+		Job job = new InitializeDiagramJob(sessionURI, representationDescription, representationFileURI, representationDiagramName, modelObjectURIs);
 		job.setUser(true);
 		job.setPriority(Job.SHORT);
 		job.schedule();
@@ -244,11 +246,11 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 		}
 	}
 
-	protected final URI sessionURI;
-	protected final RepresentationDescription registryRepresentationDescription;
-	protected final URI representationFileURI;		// Null for shared into ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME
-	protected final String representationDiagramName;
-	protected Iterable<URI> modelObjects;
+	protected final @NonNull URI sessionURI;
+	protected final @NonNull RepresentationDescription registryRepresentationDescription;
+	protected final @NonNull URI representationFileURI;		// Null for shared into ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME
+	protected final @NonNull String representationDiagramName;
+	protected final @NonNull List<@NonNull URI> modelObjectURIs;
 
 	/**
 	 * Constructor to open only one representations file.
@@ -260,22 +262,24 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 	 *			<code>true</code> if this session opening comes from a direct user action, </code>false<code>
 	 *			otherwise
 	 */
-	private InitializeDiagramJob(final URI sessionURI, final RepresentationDescription registryRepresentationDescription, URI representationFileURI, String representationDiagramName, final Iterable<URI> modelObjects) {
+	private InitializeDiagramJob(@NonNull URI sessionURI, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull URI> modelObjectURIs) {
 		super(sessionURI, true);
 		this.sessionURI = sessionURI;
 		this.registryRepresentationDescription = registryRepresentationDescription;
 		this.representationFileURI = representationFileURI;
 		this.representationDiagramName = representationDiagramName;
-		this.modelObjects = modelObjects;
+		this.modelObjectURIs = modelObjectURIs;
+		assert modelObjectURIs.size() >= 1;
 	}
 
-	protected void createDiagram(Session session, EObject modelObject) {
+	protected void createDiagram(@NonNull Session session, @NonNull List<@NonNull EObject> modelObjects) {
+		assert modelObjects.size() >= 1;
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
 		{
 			@Override
 			public void run() {																	// run on main
 				try {
-					WorkspaceModifyOperation op = new InitializeDiagramCreate(session, registryRepresentationDescription, representationFileURI, representationDiagramName, modelObject);
+					WorkspaceModifyOperation op = new InitializeDiagramCreate(session, registryRepresentationDescription, representationFileURI, representationDiagramName, modelObjects);
 					new ProgressMonitorDialog(null).run(true, true, op);
 				} catch (InvocationTargetException | InterruptedException e) {
 					SiriusEditPlugin.getPlugin().getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, e.getLocalizedMessage(), e));
@@ -309,9 +313,14 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 		}
 		assert session != null;
 		ResourceSet resourceSet = session.getSessionResource().getResourceSet();
-		URI modelURI = Iterables.getFirst(modelObjects, null);
-		EObject modelObject = resourceSet.getEObject(modelURI, true);
-		createDiagram(session, modelObject);
+		List<@NonNull EObject> modelObjects = new ArrayList<>(modelObjectURIs.size());
+		for (@NonNull URI modelURI : modelObjectURIs) {
+		//	URI modelURI = modelObjectURIs.get(0);
+			EObject modelObject = resourceSet.getEObject(modelURI, true);
+			assert modelObject != null;
+			modelObjects.add(modelObject);
+		}
+		createDiagram(session, modelObjects);
 		return Status.OK_STATUS;
 	}
 }

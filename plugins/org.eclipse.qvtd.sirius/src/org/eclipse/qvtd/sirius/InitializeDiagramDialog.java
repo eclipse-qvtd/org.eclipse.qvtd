@@ -26,9 +26,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.ENamedElementImpl;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -63,6 +64,8 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.TreeEvent;
+import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
@@ -80,6 +83,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
+import com.google.common.collect.Iterables;
+
 /**
  * The InitializeDiagramDialog is seeded by a UI (multi-)selection and prepares the configuration for
  * the creation of an (additional) diagram representation.
@@ -88,29 +93,51 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 {
 
 	private static final @NonNull String emptyString = "«null»";
-	private static final @NonNull EObject nullEObject = new NullEObject();
-	private static @NonNull MapOfSetEntry<@NonNull EObject> emptyEObject2EObjectsEntry = new MapOfSetEntry<>(nullEObject, Collections.emptySet());
+//	private static final @NonNull EObject zznullEObject = new NullEObject();
+	private static final @NonNull EObject noSelectedEObject = new NoSelectedEObject();
+	private static @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> emptyEObject2EObjectsEntry = new HashMap<>();
+	static { emptyEObject2EObjectsEntry.put(noSelectedEObject, Collections.emptySet()); }
 	private static @NonNull MapOfSetEntry<@NonNull String> emptyString2StringsEntry = new MapOfSetEntry<>(emptyString, Collections.emptySet());
 
 	protected abstract class AbstractSelectionListener implements SelectionListener
 	{
-		protected void setDeepChecked(@NonNull TreeItem[] items, boolean isSelected) {
-			for (TreeItem item : items) {
-				item.setChecked(isSelected);
-				setDeepChecked(item.getItems(), isSelected);
-			}
-		}
-
 		@Override
 		public void widgetDefaultSelected(SelectionEvent e) {}
 	}
 
 	protected class CheckAllElementsSelectionListener extends AbstractSelectionListener
 	{
+		protected final boolean isSelected;
+
+		public CheckAllElementsSelectionListener(boolean isSelected) {
+			this.isSelected = isSelected;
+		}
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			setDeepChecked(modelsElementsTree.getItems(), true);
-			refreshMessage("CheckAllElementsSelectionListener");
+			if (selectedRootModelElement != noSelectedEObject) {
+				setDeepChecked(selectedRootModelElement, isSelected);
+				refreshModelElementsRendering();
+				refreshMessage(null);
+			}
+		}
+	}
+
+	protected class ExpandAllElementsSelectionListener extends AbstractSelectionListener
+	{
+		protected final boolean isExpanded;
+
+		public ExpandAllElementsSelectionListener(boolean isExpanded) {
+			this.isExpanded = isExpanded;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			if (selectedRootModelElement != noSelectedEObject) {
+				setDeepExpanded(selectedRootModelElement, isExpanded);
+				refreshModelElementsRendering();
+				refreshMessage(null);
+			}
 		}
 	}
 
@@ -134,6 +161,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			String label = notifier2label.get(notifier);
 			if (label == null) {
 				label = labelProvider.getText(notifier);
+				assert label != null;
 				notifier2label.put(notifier, label);
 			}
 			return label;
@@ -210,21 +238,83 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 	protected class ModelElementsTreeMouseListener implements MouseListener
 	{
+		public @Nullable TreeItem getTreeItem(MouseEvent e) {
+			Object source = e.getSource();
+			if (!(source instanceof Tree)) {
+				return null;
+			}
+			Tree tree = (Tree)source;
+			return tree.getItem(new Point(e.x, e.y));
+		}
+
 		@Override
 		public void mouseDoubleClick(MouseEvent e) {
-	//		System.out.println("mouseDoubleClick = " + e);
+			TreeItem treeItem = getTreeItem(e);
+			Object notifier = treeItem != null ? treeItem.getData() : null;
+			System.out.println("mouseDoubleClick = " + labelProvider.getText(notifier));
 		}
 
 		@Override
 		public void mouseDown(MouseEvent e) {
-	//		System.out.println("mouseDown = " + e);
+			TreeItem treeItem = getTreeItem(e);
+			Object notifier = treeItem != null ? treeItem.getData() : null;
+			System.out.println("mouseDown = " + labelProvider.getText(notifier));
 		}
 
 		@Override
 		public void mouseUp(MouseEvent e) {
-	//		System.out.println("mouseUp = " + e);
+			TreeItem treeItem = getTreeItem(e);
+			Object notifier = null;
+			if (treeItem != null) {
+				notifier = treeItem.getData();
+				if (notifier != null) {
+					setChecked(notifier, !treeItem.getChecked());
+				}
+			}
+			System.out.println("mouseUp = " + labelProvider.getText(notifier));
 			refreshModelElementsRendering();
 			refreshMessage(statusText.getText());
+		}
+	}
+
+	protected class ModelElementsTreeListener implements TreeListener
+	{
+		public @Nullable Object getTreeItemData(TreeEvent e) {
+			Widget treeItem = e.item;
+			if (treeItem == null) {
+				return null;
+			}
+			return treeItem.getData();
+		}
+
+		@Override
+		public void treeCollapsed(TreeEvent e) {
+			String problemMessage = null;
+			Object notifier = getTreeItemData(e);
+			if (notifier != null) {
+				setExpanded(notifier, false);
+			}
+			else {
+				problemMessage = "No model element selection.";
+			}
+			refreshModelElementsRendering();
+			refreshMessage(problemMessage);
+			System.out.println("treeCollapsed = " + labelProvider.getText(notifier));
+		}
+
+		@Override
+		public void treeExpanded(TreeEvent e) {
+			String problemMessage = null;
+			Object notifier = getTreeItemData(e);
+			if (notifier != null) {
+				setExpanded(notifier, true);
+			}
+			else {
+				problemMessage = "No model element selection.";
+			}
+			refreshModelElementsRendering();
+			refreshMessage(problemMessage);
+			System.out.println("treeExpanded = " + labelProvider.getText(notifier));
 		}
 	}
 
@@ -232,12 +322,29 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			String problemMessage = setSelectedRootModelElement();
-			Widget item = e.item;
+			System.out.println("treeSelect = " + e + " " + labelProvider.getText(e.data));
+			RepresentationDescription selectedRepresentationDescription2 = selectedRepresentationDescription;
+			String problemMessage;
+			TreeItem item = (TreeItem) e.item;
 			Object data = item.getData();
-			if ((data != selectedRootModelElement) && (data != selectedRootableEObject2checkableEObjects.getKey())) {
-				selectedRootModelElement = (EObject)data;
-				refreshModelElements(null);
+			if (selectedRepresentationDescription2 == null) {
+				problemMessage = "No diagram representation selected";
+			}
+			else if (data instanceof EObject) {
+				EObject eObject = (EObject)data;
+			//	setChecked(eObject, item.getChecked());
+			//	if ((data != selectedRootModelElement) && (data != selectedRootableEObject2checkableEObjects.getKey())) {
+				if (selectableRootableEObject2checkableEObjects.containsKey(data)) {
+					problemMessage = setSelectedRootModelElement();
+				//	selectedRootModelElement = eObject;
+				//	checkedModelElements.add(eObject);
+					refreshModelElements();
+				}
+				else {
+					problemMessage = "Not a " + selectedRepresentationDescription2.getLabel() + " element";
+				}
+			} else {
+				problemMessage = "Not a " + selectedRepresentationDescription2.getLabel() + " root element";
 			}
 //				refreshViewpoints();
 //			refreshViewpointsRendering();
@@ -247,13 +354,65 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected static final class NullEObject extends EObjectImpl
+/*	protected static final class NoSelectedEClass extends EClassImpl
 	{
+		private static final @NonNull EClass INSTANCE = new NoSelectedEClass();
+
+		@Override
+		public @NonNull EPackage getEPackage() {
+			return NoSelectedEPackage.INSTANCE;
+		}
+
 		@Override
 		public @NonNull String toString() {
-			return "«null-EObject»";
+			return "«no-selected-EClass»";
 		}
+	} */
+
+	protected static final class NoSelectedEObject extends ENamedElementImpl
+	{
+	//	@Override
+	//	public @NonNull EClass eClass() {
+	//		return NoSelectedEClass.INSTANCE;
+	//	}
+
+		@Override
+		public @NonNull String getName() {
+			return "«no-selected-EObject»";
+		}
+
+	/*	@Override
+		public @NonNull String toString() {
+			return "«no-selected-EObject»";
+		} */
 	}
+
+/*	protected static final class NoSelectedEPackage extends EPackageImpl
+	{
+		private static final @NonNull EPackage INSTANCE = new NoSelectedEPackage();
+
+		@Override
+		public @NonNull String toString() {
+			return "«no-selected-EPackage»";
+		}
+	} */
+
+/*	protected static final class NoSelectedEObjectAdapterFactory extends AdapterFactoryImpl
+	{
+		public NoSelectedEObjectAdapterFactory() {
+			super();
+		}
+
+		@Override
+		public boolean isFactoryForType(Object object) {
+			return (object instanceof NoSelectedEObject) || (object instanceof NoSelectedEPackage) || (object instanceof IItemLabelProvider);
+		}
+
+		@Override
+		public Adapter createAdapter(Notifier target) {
+			return null;
+		}
+	} */
 
 	protected class SharedRepresentationSelectionListener extends AbstractSelectionListener
 	{
@@ -268,7 +427,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
-			refreshModelElements(null);
+			refreshModelElements();
 			refreshModelElementsRendering();
 			refreshMessage("ShowAllElementsSelectionListener");
 		}
@@ -284,15 +443,6 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected class UncheckAllElementsSelectionListener extends AbstractSelectionListener
-	{
-		@Override
-		public void widgetSelected(SelectionEvent e) {
-			setDeepChecked(modelsElementsTree.getItems(), false);
-			refreshMessage(null);
-		}
-	}
-
 	protected class ViewpointsTreeSelectionListener extends AbstractSelectionListener
 	{
 		@Override
@@ -300,7 +450,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			String problemMessage = setSelectedRepresentationDescription();
 		//	refreshViewpoints();
 			refreshViewpointsRendering();
-			refreshModelElements(null);
+			refreshModelElements();
 			refreshModelElementsRendering();
 			refreshMessage(problemMessage);
 //				System.out.println("Selected " + viewpointsTree.getSelection().length);
@@ -311,12 +461,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	protected final Iterable<@NonNull EObject> modelEObjects;
 
 	// The derived 'input's.
-	private final ComposedAdapterFactory adapterFactory;
-	private final ILabelProvider labelProvider;
-	private final Map<@NonNull Resource, @NonNull List<@NonNull EObject>> resource2elements;
-	private final URI modelURI;
-	private final Set<EPackage> modelEPackages;
-	private final Set<String> modelURIs;
+	private final @NonNull ComposedAdapterFactory adapterFactory;
+	private final @NonNull ILabelProvider labelProvider;
+	private final @NonNull Map<@NonNull Resource, @NonNull List<@NonNull EObject>> resource2elements;
+	private final @NonNull URI modelURI;
+	private final @NonNull Set<@NonNull EPackage> modelEPackages;
+	private final @NonNull Set<@NonNull String> modelURIs;
 
 	// The derived state
 	private final @NonNull Map<@NonNull Viewpoint, @NonNull List<@NonNull RepresentationDescription>> allViewpoint2representationDescriptions;
@@ -325,18 +475,25 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private final @NonNull Map<@NonNull EObject, Set<@NonNull EObject>> allRootableEObject2checkableEObjects;
 	private final @NonNull Map<@NonNull String, Set<@NonNull EObject>> allRootableDomainClass2EObjects;
 	private final @NonNull Map<@NonNull EObject, Set<@NonNull Notifier>> allRootableEObject2ancestralModelElements;
-	private final @NonNull Set<@NonNull Notifier> allAncestralModelElements;
-	private final @NonNull Set<@NonNull Object> initialExpansions;
+//	private final @NonNull Set<@NonNull Notifier> allAncestralModelElements;
+//	private final @NonNull Set<@NonNull Object> initialExpansions;
 
 	// The working state
 	private @Nullable RepresentationDescription selectedRepresentationDescription = null;
 	private Map.@NonNull Entry<@NonNull String, @NonNull Set<@NonNull String>> selectedRootableDomainClass2domainClasses = emptyString2StringsEntry;
+	private final @NonNull Set<@NonNull EObject> checkedModelElements = new HashSet<>();
+	private final @NonNull Set<@NonNull Object> expandedModelElements;// = new HashSet<>();
 	//
-	private @Nullable EObject selectedRootModelElement = null;
-	private Map.@NonNull Entry<@NonNull EObject, @NonNull Set<@NonNull EObject>> selectedRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry;
-	private @NonNull Set<@NonNull Notifier> selectedAncestralModelElements = Collections.emptySet();
+	private @NonNull EObject selectedRootModelElement = noSelectedEObject;
+	private @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> selectableRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry;
+//	private Map.@NonNull Entry<@NonNull EObject, @NonNull Set<@NonNull EObject>> selectedRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry;
+//	private @NonNull Set<@NonNull Notifier> selectedAncestralModelElements = Collections.emptySet();
 
 	// The widgets
+	private Button checkAllButton;
+	private Button collapseAllButton;
+	private Button expandAllButton;
+	private Button uncheckAllButton;
 	private Button okButton;
 	private Button sharedRepresentationFileCheckButton;
 	private Button showAllElementsCheckButton;
@@ -357,7 +514,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	// The 'output's for access post-dispose().
 	private String finalRepresentationDiagramName = null;
 	private URI finalRepresentationFileURI = null;
-	private List<@NonNull EObject> finalCheckedElements = null;
+//	private List<@NonNull EObject> finalCheckedElements = null;
 	private RepresentationDescription finalRegistryRepresentationDescription = null;
 	private Text descriptionText;
 	private LocalResourceManager localResourceManager;
@@ -386,9 +543,11 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		setHelpAvailable(false);
 		setShellStyle(SWT.CLOSE | SWT.RESIZE | SWT.TITLE);
 		this.modelEObjects = modelEObjects;
+		Iterables.addAll(this.checkedModelElements, modelEObjects);
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+//		adapterFactory.addAdapterFactory(new NoSelectedEObjectAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 		labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 		this.resource2elements = new HashMap<>();
@@ -407,7 +566,9 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			}
 		}
 		assert firstModelResource != null;
-		this.modelURI = firstModelResource.getURI();
+		URI uri = firstModelResource.getURI();
+		assert uri != null;
+		this.modelURI = uri;
 		this.modelEPackages = new HashSet<>();
 		this.modelURIs = new HashSet<>();
 		Iterable<@NonNull Resource> allResources = resource2elements.keySet();
@@ -420,7 +581,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				assert ePackage != null;
 				if (modelEPackages.add(ePackage)) {
 					String nsURI = getSafeNsURI(ePackage);
-					modelURIs.add(nsURI.toString());
+					modelURIs.add(String.valueOf(nsURI));
 				}
 			}
 		}
@@ -431,9 +592,8 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		this.allRootableEObject2checkableEObjects = gatherRootableEObject2checkableEObjects(allRootableEObjects);
 		this.allRootableDomainClass2EObjects = gatherCompatibleEObjects(allRootableEObjects);
 		this.allRootableEObject2ancestralModelElements = gatherAncestralModelElements(allRootableEObjects);
-		this.allAncestralModelElements = gatherAncestralModelElements(allRootableEObject2ancestralModelElements);
 	//	this.rootableEClasses = gatherRootableEClasses(rootableEObjects);
-		this.initialExpansions = gatherInitialExpansions(allRootableEObjects);
+		this.expandedModelElements = gatherInitialExpansions(allRootableEObjects);
 		printAllRepresentations();
 		printAllModelElements();
 	}
@@ -464,23 +624,23 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		return (RepresentationDescription)data;
 	}
 
-	protected @NonNull List<@NonNull EObject> basicGetCheckedElements() {
+/*	protected @NonNull List<@NonNull EObject> zzbasicGetCheckedElements() {
 		assert getShell() != null;
 		List<@NonNull EObject> checkedElements = new ArrayList<>();
 		for (TreeItem rootItem : modelsElementsTree.getItems()) {
 			for (TreeItem childItem : rootItem.getItems()) {
-				gatherCheckedElements(childItem, checkedElements);
+				zzgatherCheckedElements(childItem, checkedElements);
 			}
 		}
 		return checkedElements;
-	}
+	} */
 
 	@Override
 	public boolean close() {
 		assert getShell() != null;
 		finalRepresentationDiagramName = representationDiagramNameText.getText();
 		finalRepresentationFileURI = sharedRepresentationFileCheckButton.getSelection() ? null : URI.createURI(representationFileNameText.getText());
-		finalCheckedElements = basicGetCheckedElements();
+	//	finalCheckedElements = basicGetCheckedElements();
 		finalRegistryRepresentationDescription = basicGetRegistryRepresentationDescription();
 		boolean closeStatus = super.close();
 		assert getShell() == null;
@@ -594,6 +754,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		modelsElementsTree.addSelectionListener(new ModelElementsTreeSelectionListener());
 		modelsElementsTree.setToolTipText("Select from the models to be diagrammed\n  and their contained contents\nSelected root element in bold.\nNot-compatible representations in italics.");
 		modelsElementsTree.addMouseListener(new ModelElementsTreeMouseListener());
+		modelsElementsTree.addTreeListener(new ModelElementsTreeListener());
 
 		TreeItem treeItem = new TreeItem(modelsElementsTree, SWT.NONE);
 		treeItem.setText("Initializing Model Elements ...");
@@ -602,17 +763,29 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		modelButtons.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
 		modelButtons.setLayout(new GridLayout(1, false));
 
-		Button checkAllButton = new Button(modelButtons, SWT.NONE);
+		checkAllButton = new Button(modelButtons, SWT.NONE);
 		checkAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		checkAllButton.setText("Check All");
-		checkAllButton.addSelectionListener(new CheckAllElementsSelectionListener());
-		checkAllButton.setToolTipText("Check all model elements transitively contained by the selectred root model element.");
+		checkAllButton.addSelectionListener(new CheckAllElementsSelectionListener(true));
+		checkAllButton.setToolTipText("Check all model elements transitively contained by the selected root model element.");
 
-		Button uncheckAllButton = new Button(modelButtons, SWT.NONE);
+		uncheckAllButton = new Button(modelButtons, SWT.NONE);
 		uncheckAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		uncheckAllButton.setText("Uncheck All");
-		uncheckAllButton.addSelectionListener(new UncheckAllElementsSelectionListener());
-		uncheckAllButton.setToolTipText("Uncheck all model elements transitively contained by the selectred root model element.");
+		uncheckAllButton.addSelectionListener(new CheckAllElementsSelectionListener(false));
+		uncheckAllButton.setToolTipText("Uncheck all model elements transitively contained by the selected root model element.");
+
+		expandAllButton = new Button(modelButtons, SWT.NONE);
+		expandAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		expandAllButton.setText("Expand All");
+		expandAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(true));
+		expandAllButton.setToolTipText("Expand all model elements transitively contained by the selected root model element.");
+
+		collapseAllButton = new Button(modelButtons, SWT.NONE);
+		collapseAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		collapseAllButton.setText("Collapse All");
+		collapseAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(false));
+		collapseAllButton.setToolTipText("Collapse all model elements transitively contained by the selected root model element.");
 
 		SashForm representationSash = new SashForm(overallSash, SWT.NONE);
 
@@ -708,7 +881,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		refreshRepresentationFileName();
 		refreshViewpoints();
 		refreshViewpointsRendering();
-		refreshModelElements(initialExpansions);
+		refreshModelElements();
 		refreshModelElementsRendering();
 		if (okButton != null) {
 			refreshMessage(null);
@@ -717,167 +890,35 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	}
 
 	protected @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull Notifier>> gatherAncestralModelElements(@NonNull Iterable<@NonNull EObject> rootableEObjects) {
+		Set<@NonNull Notifier> allAncestralModelElements = new HashSet<>();
 		Map<@NonNull EObject, @NonNull Set<@NonNull Notifier>> rootableEObjects2ancestralModelElements = new HashMap<>();
+		rootableEObjects2ancestralModelElements.put(noSelectedEObject, allAncestralModelElements);
 		for (EObject rootableEObject : rootableEObjects) {
 			Set<@NonNull Notifier> ancestralModelElements = new HashSet<>();
 			rootableEObjects2ancestralModelElements.put(rootableEObject, ancestralModelElements);
 			Resource eResource = rootableEObject.eResource();
 			if (eResource != null) {
 				ancestralModelElements.add(eResource);
+				allAncestralModelElements.add(eResource);
 			}
 			for (EObject eObject = rootableEObject; eObject != null; eObject = eObject.eContainer()) {
 				ancestralModelElements.add(eObject);
+				allAncestralModelElements.add(eObject);
 			}
 		}
 		return rootableEObjects2ancestralModelElements;
 	}
 
-	protected @NonNull Set<@NonNull Notifier> gatherAncestralModelElements(@NonNull Map<@NonNull EObject, Set<@NonNull Notifier>> allRootableEObject2ancestralModelElements) {
-		Set<@NonNull Notifier> ancestralModelElements = new HashSet<>();
-		for (Set<@NonNull Notifier> values : allRootableEObject2ancestralModelElements.values()) {
-			ancestralModelElements.addAll(values);
-		}
-		return ancestralModelElements;
-	}
-
 	protected @NonNull Set<@NonNull EClass> gatherCheckedEClasses() {
-		Set<@NonNull EClass> selectedEClasses = new HashSet<>();
-		gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
-		return selectedEClasses;
-	}
-
-	protected void gatherCheckedEClasses(TreeItem[] items, Set<EClass> eClasses) {
-		for (TreeItem item : items) {
-			Object object = item.getData();
-			if ((object instanceof EObject) && item.getChecked()) {
-				EClass eClass = ((EObject)object).eClass();
-				eClasses.add(eClass);
-			}
-			gatherCheckedEClasses(item.getItems(), eClasses);
-		}
-	}
-
-	/*	protected @NonNull Set<@NonNull EClass> gatherRootableEClasses(@NonNull Set<@NonNull EObject> rootableEObjects2) {
-	/ *	Map<@NonNull EClass, @NonNull String> eClass2domainClass = new HashMap<>();
-		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
-		for (Resource resource : resource2elements.keySet()) {
-			for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				EClass eClass = eObject.eClass();
-				if (!eClass2domainClass.containsKey(eClass)) {
-					String domainClass = getDomainClass(eClass);
-					eClass2domainClass.put(eClass, domainClass);
-					if (rootableDomainClasses.contains(domainClass)) {
-						rootableEClasses.add(eClass);
-					}
-				}
-			}
-		}
-		return rootableEClasses; * /
-		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
-		for (EObject eObject : rootableEObjects2) {
+		Set<@NonNull EClass> checkedEClasses = new HashSet<>();
+		for (EObject eObject : checkedModelElements) {
 			EClass eClass = eObject.eClass();
-			rootableEClasses.add(eClass);
+			checkedEClasses.add(eClass);
 		}
-		return rootableEClasses;
-	} */
-
-	protected void gatherCheckedElements(@NonNull TreeItem treeItem, @NonNull List<@NonNull EObject> selectedElements) {
-		if (treeItem.getChecked()) {
-			Object data = treeItem.getData();
-			if (data instanceof EObject) {
-				selectedElements.add((EObject)data);
-			}
-		}
-		for (TreeItem childItem : treeItem.getItems()) {
-			gatherCheckedElements(childItem, selectedElements);
-		}
+		return checkedEClasses;
 	}
 
-	/*	protected @NonNull Set<@NonNull EClass> gatherRootableEClasses(@NonNull Set<@NonNull EObject> rootableEObjects2) {
-	/ *	Map<@NonNull EClass, @NonNull String> eClass2domainClass = new HashMap<>();
-		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
-		for (Resource resource : resource2elements.keySet()) {
-			for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				EClass eClass = eObject.eClass();
-				if (!eClass2domainClass.containsKey(eClass)) {
-					String domainClass = getDomainClass(eClass);
-					eClass2domainClass.put(eClass, domainClass);
-					if (rootableDomainClasses.contains(domainClass)) {
-						rootableEClasses.add(eClass);
-					}
-				}
-			}
-		}
-		return rootableEClasses; * /
-		Set<@NonNull EClass> rootableEClasses = new HashSet<>();
-		for (EObject eObject : rootableEObjects2) {
-			EClass eClass = eObject.eClass();
-			rootableEClasses.add(eClass);
-		}
-		return rootableEClasses;
-	} */
-
-	protected @NonNull Set<@NonNull EObject> gatherRootableEObjects(@NonNull Set<@NonNull String> rootableDomainClasses) {
-		@NonNull Set<@NonNull EObject> rootableEObjects = new HashSet<>();
-		for (Resource resource : resource2elements.keySet()) {
-			for (EObject eObject : resource.getContents()) {
-				gatherRootableEObjects1(eObject, rootableDomainClasses, rootableEObjects);
-			}
-		}
-		return rootableEObjects;
-	}
-	private void gatherRootableEObjects1(@NonNull EObject eObject, @NonNull Set<@NonNull String> rootableDomainClasses, @NonNull Set<@NonNull EObject> rootableEObjects) {
-		EClass eClass = eObject.eClass();
-		String domainClass = getDomainClass(eClass);
-		if (rootableDomainClasses.contains(domainClass)) {
-			rootableEObjects.add(eObject);
-		}
-		for (EObject childEObject : eObject.eContents()) {
-			gatherRootableEObjects1(childEObject, rootableDomainClasses, rootableEObjects);
-		}
-	}
-
-	protected @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> gatherRootableEObject2checkableEObjects(@NonNull Set<@NonNull EObject> rootableEObjects) {
-		Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> rootableEObject2checkableEObjects = new HashMap<>();
-		for (EObject eObject : rootableEObjects) {
-			Set<@NonNull EObject> checkableEObjects = new HashSet<>();
-			EClass eClass = eObject.eClass();
-			String domainClass = getDomainClass(eClass);
-			Set<@NonNull String> domainClasses = allRootableDomainClass2domainClasses.get(domainClass);
-			assert domainClasses != null;
-			rootableEObject2checkableEObjects.put(eObject, checkableEObjects);
-			gatherRootableEObject2checkableEObjects2(eObject, domainClasses, checkableEObjects);
-		}
-		return rootableEObject2checkableEObjects;
-	}
-/*	private void gatherRootableEObject2checkableEObjects1(@NonNull EObject parentEObject, @NonNull Set<@NonNull String> rootableDomainClasses, @NonNull Map<@NonNull EObject, Set<@NonNull EObject>> rootableEObject2checkableEObjects) {
-		for (EObject eObject : parentEObject.eContents()) {
-			EClass eClass = eObject.eClass();
-			String domainClass = getDomainClass(eClass);
-			if (!rootableDomainClasses.contains(domainClass)) {
-				gatherRootableEObject2checkableEObjects1(eObject, rootableDomainClasses, rootableEObject2checkableEObjects);
-			}
-			else {
-				Set<@NonNull EObject> checkableEObjects = new HashSet<>();
-				rootableEObject2checkableEObjects.put(eObject, checkableEObjects);
-				gatherRootableEObject2checkableEObjects2(eObject, checkableEObjects);
-			}
-		}
-	} */
-	private void gatherRootableEObject2checkableEObjects2(@NonNull EObject checkableEObject, @NonNull Set<@NonNull String> checkableDomainClasses, @NonNull Set<@NonNull EObject> checkableEObjects) {
-		EClass eClass = checkableEObject.eClass();
-		String domainClass = getDomainClass(eClass);
-		if (checkableDomainClasses.contains(domainClass)) {
-			checkableEObjects.add(checkableEObject);
-			for (@NonNull EObject eObject : checkableEObject.eContents()) {
-				gatherRootableEObject2checkableEObjects2(eObject, checkableDomainClasses, checkableEObjects);
-			}
-		}
-	}
-
-	protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCompatibleEObjects(@NonNull Set<@NonNull EObject> rootableEObjects) {
+protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCompatibleEObjects(@NonNull Set<@NonNull EObject> rootableEObjects) {
 		Map<@NonNull String, @NonNull Set<@NonNull EObject>> rootableDomainClass2EObjects = new HashMap<>();
 		for (EObject eObject : rootableEObjects) {
 			EClass eClass = eObject.eClass();
@@ -981,14 +1022,14 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-	protected void gatherExpandedElements(@NonNull TreeItem[] treeItems, @NonNull Set<Object> expanded) {
+/*	protected void gatherExpandedElements(@NonNull TreeItem[] treeItems, @NonNull Set<Object> expanded) {
 		for (TreeItem item : treeItems) {
 			if (item.getExpanded()) {
 				expanded.add(item.getData());
 			}
 			gatherExpandedElements(item.getItems(), expanded);
 		}
-	}
+	} */
 
 	protected @NonNull Set<@NonNull Object> gatherInitialExpansions(@NonNull Iterable<@NonNull EObject> rootableEObjects) {
 		Set<@NonNull Object> initialExpansions = new HashSet<>();
@@ -1024,9 +1065,148 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		return viewpoint2representationDescriptions;
 	}
 
-public List<@NonNull EObject> getCheckedElements() {
-		assert getShell() == null;
-		return finalCheckedElements;
+	/*	protected @NonNull Set<@NonNull EClass> gatherCheckedEClasses() {
+			Set<@NonNull EClass> selectedEClasses = new HashSet<>();
+			gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
+			return selectedEClasses;
+		}
+
+		protected void gatherCheckedEClasses(TreeItem[] items, Set<EClass> eClasses) {
+			for (TreeItem item : items) {
+				Object object = item.getData();
+				if ((object instanceof EObject) && item.getChecked()) {
+					EClass eClass = ((EObject)object).eClass();
+					eClasses.add(eClass);
+				}
+				gatherCheckedEClasses(item.getItems(), eClasses);
+			}
+		} */
+
+		/*	protected @NonNull Set<@NonNull EClass> gatherRootableEClasses(@NonNull Set<@NonNull EObject> rootableEObjects2) {
+		/ *	Map<@NonNull EClass, @NonNull String> eClass2domainClass = new HashMap<>();
+			Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+			for (Resource resource : resource2elements.keySet()) {
+				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					EClass eClass = eObject.eClass();
+					if (!eClass2domainClass.containsKey(eClass)) {
+						String domainClass = getDomainClass(eClass);
+						eClass2domainClass.put(eClass, domainClass);
+						if (rootableDomainClasses.contains(domainClass)) {
+							rootableEClasses.add(eClass);
+						}
+					}
+				}
+			}
+			return rootableEClasses; * /
+			Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+			for (EObject eObject : rootableEObjects2) {
+				EClass eClass = eObject.eClass();
+				rootableEClasses.add(eClass);
+			}
+			return rootableEClasses;
+		} */
+
+	/*	protected void zzgatherCheckedElements(@NonNull TreeItem treeItem, @NonNull List<@NonNull EObject> selectedElements) {
+			if (treeItem.getChecked()) {
+				Object data = treeItem.getData();
+				if (data instanceof EObject) {
+					selectedElements.add((EObject)data);
+				}
+			}
+			for (TreeItem childItem : treeItem.getItems()) {
+				zzgatherCheckedElements(childItem, selectedElements);
+			}
+		} */
+
+		/*	protected @NonNull Set<@NonNull EClass> gatherRootableEClasses(@NonNull Set<@NonNull EObject> rootableEObjects2) {
+		/ *	Map<@NonNull EClass, @NonNull String> eClass2domainClass = new HashMap<>();
+			Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+			for (Resource resource : resource2elements.keySet()) {
+				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					EClass eClass = eObject.eClass();
+					if (!eClass2domainClass.containsKey(eClass)) {
+						String domainClass = getDomainClass(eClass);
+						eClass2domainClass.put(eClass, domainClass);
+						if (rootableDomainClasses.contains(domainClass)) {
+							rootableEClasses.add(eClass);
+						}
+					}
+				}
+			}
+			return rootableEClasses; * /
+			Set<@NonNull EClass> rootableEClasses = new HashSet<>();
+			for (EObject eObject : rootableEObjects2) {
+				EClass eClass = eObject.eClass();
+				rootableEClasses.add(eClass);
+			}
+			return rootableEClasses;
+		} */
+
+		protected @NonNull Set<@NonNull EObject> gatherRootableEObjects(@NonNull Set<@NonNull String> rootableDomainClasses) {
+			@NonNull Set<@NonNull EObject> rootableEObjects = new HashSet<>();
+			for (Resource resource : resource2elements.keySet()) {
+				for (EObject eObject : resource.getContents()) {
+					gatherRootableEObjects1(eObject, rootableDomainClasses, rootableEObjects);
+				}
+			}
+			return rootableEObjects;
+		}
+
+	private void gatherRootableEObjects1(@NonNull EObject eObject, @NonNull Set<@NonNull String> rootableDomainClasses, @NonNull Set<@NonNull EObject> rootableEObjects) {
+		EClass eClass = eObject.eClass();
+		String domainClass = getDomainClass(eClass);
+		if (rootableDomainClasses.contains(domainClass)) {
+			rootableEObjects.add(eObject);
+		}
+		for (EObject childEObject : eObject.eContents()) {
+			assert childEObject != null;
+			gatherRootableEObjects1(childEObject, rootableDomainClasses, rootableEObjects);
+		}
+	}
+
+	protected @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> gatherRootableEObject2checkableEObjects(@NonNull Set<@NonNull EObject> rootableEObjects) {
+		Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> rootableEObject2checkableEObjects = new HashMap<>();
+		Set<@NonNull EObject> allCheckableEObjects = new HashSet<>();
+		rootableEObject2checkableEObjects.put(noSelectedEObject, allCheckableEObjects);
+		for (EObject eObject : rootableEObjects) {
+			Set<@NonNull EObject> checkableEObjects = new HashSet<>();
+			EClass eClass = eObject.eClass();
+			String domainClass = getDomainClass(eClass);
+			Set<@NonNull String> domainClasses = allRootableDomainClass2domainClasses.get(domainClass);
+			assert domainClasses != null;
+			rootableEObject2checkableEObjects.put(eObject, checkableEObjects);
+			gatherRootableEObject2checkableEObjects2(eObject, domainClasses, checkableEObjects);
+			allCheckableEObjects.addAll(checkableEObjects);
+		}
+		return rootableEObject2checkableEObjects;
+	}
+
+	/*	private void gatherRootableEObject2checkableEObjects1(@NonNull EObject parentEObject, @NonNull Set<@NonNull String> rootableDomainClasses, @NonNull Map<@NonNull EObject, Set<@NonNull EObject>> rootableEObject2checkableEObjects) {
+		for (EObject eObject : parentEObject.eContents()) {
+			EClass eClass = eObject.eClass();
+			String domainClass = getDomainClass(eClass);
+			if (!rootableDomainClasses.contains(domainClass)) {
+				gatherRootableEObject2checkableEObjects1(eObject, rootableDomainClasses, rootableEObject2checkableEObjects);
+			}
+			else {
+				Set<@NonNull EObject> checkableEObjects = new HashSet<>();
+				rootableEObject2checkableEObjects.put(eObject, checkableEObjects);
+				gatherRootableEObject2checkableEObjects2(eObject, checkableEObjects);
+			}
+		}
+	} */
+	private void gatherRootableEObject2checkableEObjects2(@NonNull EObject checkableEObject, @NonNull Set<@NonNull String> checkableDomainClasses, @NonNull Set<@NonNull EObject> checkableEObjects) {
+		EClass eClass = checkableEObject.eClass();
+		String domainClass = getDomainClass(eClass);
+		if (checkableDomainClasses.contains(domainClass)) {
+			checkableEObjects.add(checkableEObject);
+			for (EObject eObject : checkableEObject.eContents()) {
+				assert eObject != null;
+				gatherRootableEObject2checkableEObjects2(eObject, checkableDomainClasses, checkableEObjects);
+			}
+		}
 	}
 
 	protected @NonNull String getDomainClass(EClass eClass) {
@@ -1098,6 +1278,26 @@ public List<@NonNull EObject> getCheckedElements() {
 		return label != null ? label : "";
 	}
 
+	public @NonNull List<@NonNull URI> getSelectedCheckedElements() {
+		assert getShell() == null;
+		List<@NonNull URI> selectedCheckedElements = new ArrayList<>();
+		if (selectedRootModelElement != noSelectedEObject) {
+			selectedCheckedElements.add(EcoreUtil.getURI(selectedRootModelElement));
+			getSelectedCheckedElements(selectedRootModelElement, selectedCheckedElements);
+		}
+		return selectedCheckedElements;
+	}
+
+	protected void getSelectedCheckedElements(@NonNull EObject eObject, @NonNull List<@NonNull URI> selectedCheckedElements) {
+		for (EObject eChild : eObject.eContents()) {
+			assert eChild != null;
+			if (checkedModelElements.contains(eChild)) {
+				selectedCheckedElements.add(EcoreUtil.getURI(eChild));
+			}
+			getSelectedCheckedElements(eChild, selectedCheckedElements);
+		}
+	}
+
 	public @NonNull URI getSessionURI() {
 		assert getShell() == null;
 		return modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
@@ -1126,14 +1326,14 @@ public List<@NonNull EObject> getCheckedElements() {
 		Collections.sort(allRootableEObjects, modelElementDepthComparator);
 		for (Object modelElement : allRootableEObjects) {
 			s.append("\n  " + labelProvider.getText(modelElement));
-			EClass eClass = ((EObject)modelElement).eClass();
-			s.append(" => " + getDomainClass(eClass));
+		//	EClass eClass = ((EObject)modelElement).eClass();
+		//	s.append(" => " + getDomainClass(eClass));
 			List<@NonNull EObject> checkableEObjects = new ArrayList<>(allRootableEObject2checkableEObjects.get(modelElement));
 			Collections.sort(checkableEObjects, modelElementDepthComparator);
 			for (Object checkableEObject : checkableEObjects) {
 				s.append("\n    " + labelProvider.getText(checkableEObject));
-				eClass = ((EObject)checkableEObject).eClass();
-				s.append(" => " + getDomainClass(eClass));
+			//	eClass = ((EObject)checkableEObject).eClass();
+			//	s.append(" => " + getDomainClass(eClass));
 			}
 		}
 		s.append("\nallRootableEObject2ancestralModelElements =");
@@ -1141,8 +1341,10 @@ public List<@NonNull EObject> getCheckedElements() {
 		Collections.sort(modelElements, modelElementDepthComparator);
 		for (@NonNull EObject modelElement : modelElements) {
 			s.append("\n  " + labelProvider.getText(modelElement));
-			EClass eClass = modelElement.eClass();
-			s.append(" => " + getDomainClass(eClass));
+			if (!(modelElement instanceof NoSelectedEObject)) {
+				EClass eClass = modelElement.eClass();
+				s.append(" => " + getDomainClass(eClass));
+			}
 			List<@NonNull Notifier> ancestralModelElements = new ArrayList<>(allRootableEObject2ancestralModelElements.get(modelElement));
 			Collections.sort(ancestralModelElements, modelElementDepthComparator);
 			for (@NonNull Notifier ancestralModelElement : ancestralModelElements) {
@@ -1196,31 +1398,30 @@ public List<@NonNull EObject> getCheckedElements() {
 
 	protected void printSelectedRootModelElement() {
 		StringBuilder s = new StringBuilder();
-		EObject selectedRootModelElement2 = selectedRootModelElement;
-		if (selectedRootModelElement2 == null) {
-			s.append("selectedRootModelElement = null");
-		//	s.append("\ndomainClass = null");
-		}
-		else {
-			s.append("selectedRootModelElement = " + selectedRootModelElement2.toString());
-		//	s.append("\n  domainClass = " + getDomainClass(selectedRepresentationDescription2));
-		}
-		s.append("\n  selectedAncestralModelElements =");
+		s.append("selectedRootModelElement = " + labelProvider.getText(selectedRootModelElement));
+	/*	s.append("\n  selectedAncestralModelElements =");
 		ArrayList<@NonNull Notifier> selectedAncestralModelElements = new ArrayList<>(this.selectedAncestralModelElements);
 		Collections.sort(selectedAncestralModelElements, new LabelProviderComparator(labelProvider));
 		for (Notifier notifier : selectedAncestralModelElements) {
 			s.append("\n    " + labelProvider.getText(notifier));
-		}
+		} */
 	//	for (Map.Entry<@NonNull EObject, @NonNull Set<@NonNull EObject>> entry : selectedRootableEObject2checkableEObjects.entrySet()) {
-		if (selectedRootableEObject2checkableEObjects != emptyEObject2EObjectsEntry) {
-			EObject selectedRootableEObject = selectedRootableEObject2checkableEObjects.getKey();
-			Set<@NonNull EObject> selectedCheckableEObjects = selectedRootableEObject2checkableEObjects.getValue();
-			s.append("\nselectedRootableEObject2checkableEObjects =");
-			s.append("\n  " + (selectedRootableEObject == nullEObject ? selectedRootableEObject.toString() : labelProvider.getText(selectedRootableEObject)));
-			for (@NonNull EObject eObject : selectedCheckableEObjects) {
-				s.append("\n    " + labelProvider.getText(eObject));
+	//	if (selectedRootableEObject2checkableEObjects != emptyEObject2EObjectsEntry) {
+	//	Set<@NonNull EObject> checkableEObjects = selectableRootableEObject2checkableEObjects.get(selectedRootModelElement2);
+	//	if (checkableEObjects != null) {
+		//	EObject selectedRootableEObject = selectedRootModelElement2; //selectedRootableEObject2checkableEObjects.getKey();
+		//	Set<@NonNull EObject> selectedCheckableEObjects = checkableEObjects; //selectedRootableEObject2checkableEObjects.getValue();
+			s.append("\nselectableRootableEObject2checkableEObjects =");
+		//	s.append("\n  " + (selectedRootableEObject == nullEObject ? selectedRootableEObject.toString() : labelProvider.getText(selectedRootableEObject)));
+			for (@NonNull EObject rootableEObject : selectableRootableEObject2checkableEObjects.keySet()) {
+				s.append("\n  " + /*(rootableEObject instanceof NoSelectedEObject ? rootableEObject.toString() :*/ labelProvider.getText(rootableEObject)/*)*/);
+				Set<@NonNull EObject> checkableEObjects = selectableRootableEObject2checkableEObjects.get(rootableEObject);
+				assert checkableEObjects != null;
+				for (@NonNull EObject eObject : checkableEObjects) {
+					s.append("\n    " + labelProvider.getText(eObject));
+				}
 			}
-		}
+	//	}
 		System.out.println(s.toString());
 	}
 
@@ -1268,7 +1469,7 @@ public List<@NonNull EObject> getCheckedElements() {
 		if (selectedRepresentationDescription == null) {
 			errorMessage = "No representation description selected.\nSelect a white-background representation in the Diagram Representation Selector.";
 		}
-		else if (selectedRootModelElement == null) {
+		else if (selectedRootModelElement == noSelectedEObject) {
 			errorMessage = "No root model element selected.\nSelect a white-background model element in the Model(s) Elements Selector.";
 		}
 	/*	else {
@@ -1278,8 +1479,8 @@ public List<@NonNull EObject> getCheckedElements() {
 			}
 		} */
 		if ((errorMessage == null) && (warningMessage == null)) {
-			Set<EClass> selectedEClasses = new HashSet<>();
-			gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
+			Set<EClass> selectedEClasses = gatherCheckedEClasses();
+		//	gatherCheckedEClasses(modelsElementsTree.getItems(), selectedEClasses);
 			for (TreeItem rootTreeItem : viewpointsTree.getItems()) {
 				for (TreeItem treeItem : rootTreeItem.getItems()) {
 					if (treeItem.getChecked()) {
@@ -1323,11 +1524,10 @@ public List<@NonNull EObject> getCheckedElements() {
 		}
 	}
 
-	protected void refreshModelElements(@Nullable Set<Object> expanded) {
-		if (expanded == null) {
-			expanded = new HashSet<>();
-			gatherExpandedElements(modelsElementsTree.getItems(), expanded);
-		}
+	protected void refreshModelElements(/*@Nullable Set<Object> expanded*/) {
+	//	if (expanded == null) {
+	//		expanded = expandedModelElements;
+	//	}
 		for (TreeItem item : modelsElementsTree.getItems()) {
 			item.dispose();
 		}
@@ -1342,17 +1542,23 @@ public List<@NonNull EObject> getCheckedElements() {
 		//	setFont(rootTreeItem, SWT.ITALIC);
 			Set<@NonNull EObject> explicit = new HashSet<>(resource2elements.get(resource));
 			for (EObject eObject : resource.getContents()) {
-				refreshModelElements(rootTreeItem, eObject, explicit, expanded);
+				refreshModelElements(rootTreeItem, eObject, explicit);
 			}
-			rootTreeItem.setExpanded(expanded.isEmpty() || expanded.contains(resource));
+			rootTreeItem.setExpanded(expandedModelElements.contains(resource));
 		}
 	}
 
-	protected void refreshModelElements(@NonNull TreeItem parentTreeItem, @NonNull EObject eObject, Set<@NonNull EObject> explicit, @NonNull Set<Object> expanded) {
+	protected void refreshModelElements(@NonNull TreeItem parentTreeItem, @NonNull EObject eObject, Set<@NonNull EObject> explicit) {
 		boolean showAllElements = showAllElementsCheckButton.getSelection();
-		boolean isAncestral = (selectedRootModelElement != null ? selectedAncestralModelElements : allAncestralModelElements).contains(eObject);
-		boolean isCheckable = selectedRootableEObject2checkableEObjects.getValue().contains(eObject);
-		if (showAllElements || isCheckable || isAncestral) {
+		Set<@NonNull Notifier> ancestralModelElements = allRootableEObject2ancestralModelElements.get(selectedRootModelElement);
+		assert ancestralModelElements != null;
+		boolean isAncestral = ancestralModelElements.contains(eObject);
+	//	boolean isCheckable = selectedRootableEObject2checkableEObjects.getValue().contains(eObject);
+		Set<@NonNull EObject> checkableEObjects = selectableRootableEObject2checkableEObjects.get(selectedRootModelElement);
+	//	assert checkableEObjects != null;
+		boolean isCheckable = (checkableEObjects != null) && (checkableEObjects.contains(eObject));
+		boolean isRootable = selectableRootableEObject2checkableEObjects.containsKey(eObject);
+		if (showAllElements || isCheckable || isRootable || isAncestral) {
 			Image image = labelProvider.getImage(eObject);
 			String text = labelProvider.getText(eObject);
 			TreeItem treeItem = new TreeItem(parentTreeItem, SWT.NONE);
@@ -1362,13 +1568,21 @@ public List<@NonNull EObject> getCheckedElements() {
 			treeItem.setData(eObject);
 			for (EObject childEObject : eObject.eContents()) {
 				assert childEObject != null;
-				refreshModelElements(treeItem, childEObject, explicit, expanded);
+				refreshModelElements(treeItem, childEObject, explicit);
 			}
-			treeItem.setExpanded((expanded.isEmpty() && (eObject.eResource() == null)) || expanded.contains(eObject));
 		}
 	}
 
 	protected void refreshModelElementsRendering() {
+		boolean isEnabled = selectedRootModelElement != noSelectedEObject;
+		checkAllButton.setEnabled(isEnabled);
+		checkAllButton.setGrayed(!isEnabled);
+		collapseAllButton.setEnabled(isEnabled);
+		collapseAllButton.setGrayed(!isEnabled);
+		expandAllButton.setEnabled(isEnabled);
+		expandAllButton.setGrayed(!isEnabled);
+		uncheckAllButton.setEnabled(isEnabled);
+		uncheckAllButton.setGrayed(!isEnabled);
 		for (TreeItem rootItem : modelsElementsTree.getItems()) {
 			rootItem.setGrayed(true);
 			for (TreeItem item : rootItem.getItems()) {
@@ -1389,6 +1603,10 @@ public List<@NonNull EObject> getCheckedElements() {
         RepresentationDescription selectedRepresentationDescription2 = selectedRepresentationDescription;
 		boolean rootCreate = !parentCanCreate && DialectManager.INSTANCE.canCreate(eObject, selectedRepresentationDescription2, false);
 
+		Set<@NonNull Notifier> ancestralModelElements = allRootableEObject2ancestralModelElements.get(selectedRootModelElement);
+		assert ancestralModelElements != null;
+		Set<@NonNull EObject> checkableModelElements = allRootableEObject2checkableEObjects.get(selectedRootModelElement);
+		assert checkableModelElements != null;
 
 
 //		boolean isSelected = false; //!parentCanCreate && (eObject == selectedRootModelElement);
@@ -1398,6 +1616,8 @@ public List<@NonNull EObject> getCheckedElements() {
 		boolean isBold = false;
 		boolean isItalic = false;
 		boolean isGrayed = false;
+		boolean isChecked = (selectedRootModelElement == eObject) || checkedModelElements.contains(eObject);
+		boolean isCheckable = false;
 		if (selectedRepresentationDescription == null) {
 		//	isCreateable = allDomainClasses.contains(domainClass);
 		//	isRootable = allRootableDomainClasses.contains(domainClass);
@@ -1405,7 +1625,7 @@ public List<@NonNull EObject> getCheckedElements() {
 		//	assert !isSelected;
 			isGrayed = true;
 		}
-		else if (selectedRootModelElement == null) {
+		else if (selectedRootModelElement == noSelectedEObject) {
 		//	assert isSelected == false;
 		//	isBold = isSelected;
 		//	isItalic = !isCreateable;
@@ -1414,12 +1634,14 @@ public List<@NonNull EObject> getCheckedElements() {
 		//	}
 		//	boolean isAncestralEObject = selectedAncestralModelElements.contains(eObject);
 		//	boolean isRootableEObject = selectedRootableEObjects.contains(eObject);
-			EObject selectedRootableEObject = selectedRootableEObject2checkableEObjects.getKey();
-			if (eObject == selectedRootableEObject) {
+		//	EObject selectedRootableEObject = selectedRootableEObject2checkableEObjects.getKey();
+		//	if (eObject == selectedRootableEObject) {
+			if (selectableRootableEObject2checkableEObjects.containsKey(eObject)) {
 				background = getWhiteBackground();
-			}
-			else if (!selectedAncestralModelElements.contains(eObject)) {
-				isItalic = true;
+			} else {
+				if (!ancestralModelElements.contains(eObject)) {
+					isItalic = true;
+				}
 			}
 			isGrayed = true;
 		}
@@ -1428,14 +1650,21 @@ public List<@NonNull EObject> getCheckedElements() {
 		//	isBold = isSelected;
 		//	boolean isAncestralEObject = selectedAncestralModelElements.contains(eObject);
 		//	isItalic = !isCreateable;
+			Set<@NonNull EObject> checkableEObjects = selectableRootableEObject2checkableEObjects.get(selectedRootModelElement);
+			assert checkableEObjects != null;
 			if (selectedRootModelElement == eObject) {
 				isBold = true;
 				background = getWhiteBackground();
 			}
-			else if (selectedAncestralModelElements.contains(eObject)) {
+			else if (ancestralModelElements.contains(eObject)) {
 				isGrayed = true;
 			}
-			else if (selectedRootableEObject2checkableEObjects.getValue().contains(eObject)) {
+			else if (checkableEObjects.contains(eObject)) {
+//	else if (selctedRootableEObject2checkableEObjects.getValue().contains(eObject)) {
+				background = getWhiteBackground();
+			}
+			else if (selectableRootableEObject2checkableEObjects.containsKey(eObject)) { //.contains(eObject)) {
+//	else if (selctedRootableEObject2checkableEObjects.getValue().contains(eObject)) {
 				background = getWhiteBackground();
 			}
 			else /*if (isRootable && isCreateable)*/ {
@@ -1452,13 +1681,16 @@ public List<@NonNull EObject> getCheckedElements() {
 			else {
 				background = getWhiteBackground();
 			} */
+			isCheckable = checkableModelElements.contains(eObject);
 		}
 		treeItem.setBackground(background);
 		setFont(treeItem, (isItalic ? SWT.ITALIC : 0) | (isBold ? SWT.BOLD : 0));
-        treeItem.setGrayed(isGrayed);
+        treeItem.setChecked(isChecked);
+        treeItem.setGrayed(!isCheckable);
 		for (TreeItem childItem : treeItem.getItems()) {
 			refreshModelElementsRendering(childItem, rootCreate || parentCanCreate);
 		}
+		treeItem.setExpanded(expandedModelElements.contains(eObject));
 	}
 
 	protected void refreshRepresentationFileName() {
@@ -1566,10 +1798,10 @@ public List<@NonNull EObject> getCheckedElements() {
 	}
 
 	protected void resetRootModelElementSelection() {
-		this.selectedRootModelElement = null;
+		this.selectedRootModelElement = noSelectedEObject;
 		RepresentationDescription selectedRepresentationDescription2 = selectedRepresentationDescription;
 		if (selectedRepresentationDescription2 == null) {
-			this.selectedRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry; // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
+			this.selectableRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry; // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
 		}
 		else {
 		//	String domainClass = getDomainClass(selectedRepresentationDescription2);
@@ -1580,10 +1812,14 @@ public List<@NonNull EObject> getCheckedElements() {
 			Map<@NonNull String, @NonNull Set<@NonNull EObject>> compatibleEObjects = gatherCompatibleEObjects(rootableEObjects);
 			assert rootableEObjects != null;
 			Set<@NonNull Notifier> ancestralEObjects = new HashSet<>();
-		//	Set<@NonNull EObject> checkableEObjects = new HashSet<>();
+			//	Set<@NonNull EObject> checkableEObjects = new HashSet<>();
+			this.selectableRootableEObject2checkableEObjects = new HashMap<>();
 			for (@NonNull EObject rootableEObject : rootableEObjects) {
 				ancestralEObjects.addAll(allRootableEObject2ancestralModelElements.get(rootableEObject));
 			//	checkableEObjects.addAll(allRootableEObject2checkableEObjects.get(rootableEObject));
+				Set<@NonNull EObject> checkableEObjects = allRootableEObject2checkableEObjects.get(rootableEObject);
+				assert checkableEObjects != null;
+				selectableRootableEObject2checkableEObjects.put(rootableEObject, checkableEObjects);
 			}
 		//	Set<@NonNull String> domainClasses = selectedRootableDomainClass2domainClasses.getValue();
 		//	Set<@NonNull EObject> rootableEObjects = gatherRootableEObjects(domainClasses); //selectedRepresentationDescription != null ? selectedDomainClasses : allDomainClasses);
@@ -1591,11 +1827,53 @@ public List<@NonNull EObject> getCheckedElements() {
 		//	Set<@NonNull EObject> selectedRootableEObjects = allRootableDomainClass2EObjects.get(domainClass).getValue(); // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
 		//	this.selectedRootableEObject2checkableEObjects = allRootableDomainClass2EObjects.get(domainClass).getValue(); // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
 		//	this.selectedAncestralModelElements = gatherAncestralModelElements(selectedRootableEObjects);
-			this.selectedRootableEObject2checkableEObjects = new MapOfSetEntry<>(nullEObject, rootableEObjects/*checkableEObjects*/); //emptyEObject2EObjectsEntry; // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
+		//	this.selectedRootableEObject2checkableEObjects = new MapOfSetEntry<>(nullEObject, rootableEObjects/*checkableEObjects*/); //emptyEObject2EObjectsEntry; // gatherCompatibleEObjects(selectedRootableDomainClass2domainClasses.getValue()); //selectedRepresentationDescription != null ? selectedRootableDomainClasses : allRootableDomainClasses);
 		//	this.selectedAncestralModelElements = gatherAncestralModelElements(selectedRootableEObject2checkableEObjects.getValue());
 		//	this.selectedAncestralModelElements = ancestralEObjects;
 		}
-		this.selectedAncestralModelElements = allAncestralModelElements;
+	//	this.selectedAncestralModelElements = allAncestralModelElements;
+	}
+
+	protected void setChecked(@NonNull Object object, boolean isChecked) {
+		System.out.println("setChecked = " + isChecked + " " + labelProvider.getText(object));
+		if (object instanceof EObject) {			// Skip Notifier
+			EObject eObject = (EObject)object;
+			if (isChecked) {
+				checkedModelElements.add(eObject);
+			}
+			else {
+				checkedModelElements.remove(eObject);
+			}
+		}
+	}
+
+	protected void setDeepChecked(@NonNull EObject eObject, boolean isSelected) {
+		setChecked(eObject, isSelected);
+		for (EObject eChild : eObject.eContents()) {
+			assert eChild != null;
+			setDeepChecked(eChild, isSelected);
+		}
+	}
+
+	protected void setDeepExpanded(@NonNull EObject eObject, boolean isExpanded) {
+		setExpanded(eObject, isExpanded);
+		for (EObject eChild : eObject.eContents()) {
+			assert eChild != null;
+			setDeepExpanded(eChild, isExpanded);
+		}
+	}
+
+	protected void setExpanded(@NonNull Object object, boolean isExpanded) {
+		System.out.println("setExpanded = " + isExpanded + " " + labelProvider.getText(object));
+		if (object instanceof EObject) {			// Skip Notifier
+			EObject eObject = (EObject)object;
+			if (isExpanded) {
+				expandedModelElements.add(eObject);
+			}
+			else {
+				expandedModelElements.remove(eObject);
+			}
+		}
 	}
 
 	protected void setFont(@NonNull TreeItem treeItem, int fontFlags) {
@@ -1654,9 +1932,9 @@ public List<@NonNull EObject> getCheckedElements() {
 			}
 			this.selectedRootModelElement = eObject;
 		//	this.selectedAncestralModelElements = gatherAncestralModelElements(Collections.singleton(eObject));
-			Set<@NonNull Notifier> ancestralModelElements = allRootableEObject2ancestralModelElements.get(eObject);
-			assert ancestralModelElements != null;
-			this.selectedAncestralModelElements = ancestralModelElements;
+		//	Set<@NonNull Notifier> ancestralModelElements = allRootableEObject2ancestralModelElements.get(eObject);
+		//	assert ancestralModelElements != null;
+		//	this.selectedAncestralModelElements = ancestralModelElements;
 			return "";
 		}
 		finally {
