@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.sirius;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +21,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -29,6 +36,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.ENamedElementImpl;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -60,6 +68,8 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.provider.SiriusEditPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -82,22 +92,83 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.collect.Iterables;
 
 /**
- * The InitializeDiagramDialog is seeded by a UI (multi-)selection and prepares the configuration for
- * the creation of an (additional) diagram representation.
+ * The InitializeDiagramDialog determines the parameterisation for an (additional) diagram representation.
+ * <p>
+ * The dialog is seeded by a UI (multi-)selection, which determines the ResourceSEt containing the
+ * models from which some or all elements are to be rendered in a diagram.
+ * <p>
+ * The dialog supports selection of the type of diagram, the root model element for the diagram,
+ * and which elements are to be rendered.
+ * <p>
+ * The diagram can be shared with the standard primary representations.aird, or may be separated into a
+ * secondary *.aird.
  */
 public class InitializeDiagramDialog extends TitleAreaDialog
 {
-
+//	private static final Logger logger = Logger.getLogger(InitializeDiagramDialog.class);
+	// This Dialog can be maintained using WindowBuilder although the buttons bar renders imperfectly.
 	private static final @NonNull String emptyString = "«null»";
 //	private static final @NonNull EObject zznullEObject = new NullEObject();
 	private static final @NonNull EObject noSelectedEObject = new NoSelectedEObject();
 	private static @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> emptyEObject2EObjectsEntry = new HashMap<>();
 	static { emptyEObject2EObjectsEntry.put(noSelectedEObject, Collections.emptySet()); }
 	private static @NonNull MapOfSetEntry<@NonNull String> emptyString2StringsEntry = new MapOfSetEntry<>(emptyString, Collections.emptySet());
+
+	/**
+	 * AIRDReader provides the SAX callbacks to support reading the
+	 * viewpoint:DAnalysis.ownedViews.ownedRepresentationDescriptors.name attribute(s) in an aird file.
+	 */
+	protected static class AIRDReader extends DefaultHandler
+	{
+		public static final @NonNull String DAnalysisTag = "viewpoint:DAnalysis";
+		public static final @NonNull String ownedViewsTag = "ownedViews";
+		public static final @NonNull String ownedRepresentationDescriptorsTag = "ownedRepresentationDescriptors";
+		public static final @NonNull String nameAttribute = "name";
+
+		protected final @NonNull List<@NonNull String> diagramNames;
+
+		private @NonNull Stack<@NonNull String> elements = new Stack<>();
+
+		public AIRDReader() {
+			this.diagramNames = new ArrayList<>();
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+			elements.pop();
+		}
+
+
+		public @NonNull List<@NonNull String> getDiagramNames() {
+			return diagramNames;
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+			assert qName != null;
+			int size = elements.size();
+			if (ownedRepresentationDescriptorsTag.equals(qName)) {
+				if (size >= 2) {		// Probably has an xmi:XMI
+					if (ownedViewsTag.equals(elements.elementAt(size-1))) {
+						if (DAnalysisTag.equals(elements.elementAt(size-2))) {
+							String diagramName = attributes.getValue(nameAttribute);
+							if (diagramName != null) {
+								diagramNames.add(diagramName);
+							}
+						}
+					}
+				}
+			}
+			elements.push(qName);
+		}
+	}
 
 	protected abstract class AbstractSelectionListener implements SelectionListener
 	{
@@ -251,14 +322,14 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void mouseDoubleClick(MouseEvent e) {
 			TreeItem treeItem = getTreeItem(e);
 			Object notifier = treeItem != null ? treeItem.getData() : null;
-			System.out.println("mouseDoubleClick = " + labelProvider.getText(notifier));
+		//	System.out.println("mouseDoubleClick = " + labelProvider.getText(notifier));
 		}
 
 		@Override
 		public void mouseDown(MouseEvent e) {
 			TreeItem treeItem = getTreeItem(e);
 			Object notifier = treeItem != null ? treeItem.getData() : null;
-			System.out.println("mouseDown = " + labelProvider.getText(notifier));
+		//	System.out.println("mouseDown = " + labelProvider.getText(notifier));
 		}
 
 		@Override
@@ -271,7 +342,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 					setChecked(notifier, !treeItem.getChecked());
 				}
 			}
-			System.out.println("mouseUp = " + labelProvider.getText(notifier));
+		//	System.out.println("mouseUp = " + labelProvider.getText(notifier));
 			refreshModelElementsRendering();
 			refreshMessage(statusText.getText());
 		}
@@ -299,7 +370,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			}
 			refreshModelElementsRendering();
 			refreshMessage(problemMessage);
-			System.out.println("treeCollapsed = " + labelProvider.getText(notifier));
+		//	System.out.println("treeCollapsed = " + labelProvider.getText(notifier));
 		}
 
 		@Override
@@ -314,7 +385,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			}
 			refreshModelElementsRendering();
 			refreshMessage(problemMessage);
-			System.out.println("treeExpanded = " + labelProvider.getText(notifier));
+		//	System.out.println("treeExpanded = " + labelProvider.getText(notifier));
 		}
 	}
 
@@ -331,7 +402,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 				problemMessage = "No diagram representation selected";
 			}
 			else if (data instanceof EObject) {
-				EObject eObject = (EObject)data;
+			//	EObject eObject = (EObject)data;
 			//	setChecked(eObject, item.getChecked());
 			//	if ((data != selectedRootModelElement) && (data != selectedRootableEObject2checkableEObjects.getKey())) {
 				if (selectableRootableEObject2checkableEObjects.containsKey(data)) {
@@ -354,72 +425,41 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		}
 	}
 
-/*	protected static final class NoSelectedEClass extends EClassImpl
+	private static final class NoSelectedEObject extends ENamedElementImpl
 	{
-		private static final @NonNull EClass INSTANCE = new NoSelectedEClass();
-
-		@Override
-		public @NonNull EPackage getEPackage() {
-			return NoSelectedEPackage.INSTANCE;
-		}
-
-		@Override
-		public @NonNull String toString() {
-			return "«no-selected-EClass»";
-		}
-	} */
-
-	protected static final class NoSelectedEObject extends ENamedElementImpl
-	{
-	//	@Override
-	//	public @NonNull EClass eClass() {
-	//		return NoSelectedEClass.INSTANCE;
-	//	}
-
 		@Override
 		public @NonNull String getName() {
 			return "«no-selected-EObject»";
 		}
-
-	/*	@Override
-		public @NonNull String toString() {
-			return "«no-selected-EObject»";
-		} */
 	}
 
-/*	protected static final class NoSelectedEPackage extends EPackageImpl
+	protected class RepresentationDiagramNameTextModifyListener implements ModifyListener
 	{
-		private static final @NonNull EPackage INSTANCE = new NoSelectedEPackage();
-
 		@Override
-		public @NonNull String toString() {
-			return "«no-selected-EPackage»";
+		public void modifyText(ModifyEvent e) {
+			Text text = (Text)e.getSource();
+			representationDiagramName = text.getText();
+		//	System.out.println("Modified \"" + representationDiagramName + "\"");
+			refreshMessage(null);
 		}
-	} */
+	}
 
-/*	protected static final class NoSelectedEObjectAdapterFactory extends AdapterFactoryImpl
+	protected class RepresentationFileNameTextModifyListener implements ModifyListener
 	{
-		public NoSelectedEObjectAdapterFactory() {
-			super();
-		}
-
 		@Override
-		public boolean isFactoryForType(Object object) {
-			return (object instanceof NoSelectedEObject) || (object instanceof NoSelectedEPackage) || (object instanceof IItemLabelProvider);
+		public void modifyText(ModifyEvent e) {
+			oldDiagramNames = null;
+		//	System.out.println("Modified \""); // + e.  getText() + "\"");
+			refreshMessage(null);
 		}
-
-		@Override
-		public Adapter createAdapter(Notifier target) {
-			return null;
-		}
-	} */
+	}
 
 	protected class SharedRepresentationSelectionListener extends AbstractSelectionListener
 	{
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			refreshRepresentationFileName();
-			refreshMessage("SharedRepresentationSelectionListener");
+			refreshMessage(null);
 		}
 	}
 
@@ -429,7 +469,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		public void widgetSelected(SelectionEvent e) {
 			refreshModelElements();
 			refreshModelElementsRendering();
-			refreshMessage("ShowAllElementsSelectionListener");
+			refreshMessage(null);
 		}
 	}
 
@@ -475,8 +515,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private final @NonNull Map<@NonNull EObject, Set<@NonNull EObject>> allRootableEObject2checkableEObjects;
 	private final @NonNull Map<@NonNull String, Set<@NonNull EObject>> allRootableDomainClass2EObjects;
 	private final @NonNull Map<@NonNull EObject, Set<@NonNull Notifier>> allRootableEObject2ancestralModelElements;
-//	private final @NonNull Set<@NonNull Notifier> allAncestralModelElements;
-//	private final @NonNull Set<@NonNull Object> initialExpansions;
+	private @Nullable List<@NonNull String> oldDiagramNames = null;
 
 	// The working state
 	private @Nullable RepresentationDescription selectedRepresentationDescription = null;
@@ -486,8 +525,6 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	//
 	private @NonNull EObject selectedRootModelElement = noSelectedEObject;
 	private @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull EObject>> selectableRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry;
-//	private Map.@NonNull Entry<@NonNull EObject, @NonNull Set<@NonNull EObject>> selectedRootableEObject2checkableEObjects = emptyEObject2EObjectsEntry;
-//	private @NonNull Set<@NonNull Notifier> selectedAncestralModelElements = Collections.emptySet();
 
 	// The widgets
 	private Button checkAllButton;
@@ -512,10 +549,8 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	private @Nullable Font italicFont = null;
 
 	// The 'output's for access post-dispose().
-	private String finalRepresentationDiagramName = null;
-	private URI finalRepresentationFileURI = null;
-//	private List<@NonNull EObject> finalCheckedElements = null;
-	private RepresentationDescription finalRegistryRepresentationDescription = null;
+	private @NonNull String representationDiagramName = "new Diagram Name";
+	private URI representationFileURI = null;
 	private Text descriptionText;
 	private LocalResourceManager localResourceManager;
 
@@ -594,58 +629,21 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		this.allRootableEObject2ancestralModelElements = gatherAncestralModelElements(allRootableEObjects);
 	//	this.rootableEClasses = gatherRootableEClasses(rootableEObjects);
 		this.expandedModelElements = gatherInitialExpansions(allRootableEObjects);
-		printAllRepresentations();
-		printAllModelElements();
+	//	printAllRepresentations();
+	//	printAllModelElements();
 	}
 
-	private void createResourceManager() {
-		localResourceManager = new LocalResourceManager(JFaceResources.getResources());
-	}
-
-	public @Nullable RepresentationDescription basicGetRegistryRepresentationDescription() {
-		assert getShell() != null;
-		RepresentationDescription r1 = basicGetRegistryRepresentationDescription1();
-		RepresentationDescription r2 = selectedRepresentationDescription;
-		assert r1 == r2;
-		return r1;
-	}
-	public @Nullable RepresentationDescription basicGetRegistryRepresentationDescription1() {
-		assert getShell() != null;
-		TreeItem[] selection = viewpointsTree.getSelection();
-		if ((selection == null) || (selection.length != 1)) {
-	//		System.out.println("Selected3 null ");
-			return null;
-		}
-	//	System.out.println("Selected3 " + selection.length);
-		Object data = selection[0].getData();
-		if (!(data instanceof RepresentationDescription)) {
-			return null;
-		}
-		return (RepresentationDescription)data;
-	}
-
-/*	protected @NonNull List<@NonNull EObject> zzbasicGetCheckedElements() {
-		assert getShell() != null;
-		List<@NonNull EObject> checkedElements = new ArrayList<>();
-		for (TreeItem rootItem : modelsElementsTree.getItems()) {
-			for (TreeItem childItem : rootItem.getItems()) {
-				zzgatherCheckedElements(childItem, checkedElements);
-			}
-		}
-		return checkedElements;
-	} */
-
-	@Override
+/*	@Override
 	public boolean close() {
 		assert getShell() != null;
-		finalRepresentationDiagramName = representationDiagramNameText.getText();
-		finalRepresentationFileURI = sharedRepresentationFileCheckButton.getSelection() ? null : URI.createURI(representationFileNameText.getText());
+	//	finalRepresentationDiagramName = representationDiagramNameText.getText();
+	//	finalRepresentationFileURI = sharedRepresentationFileCheckButton.getSelection() ? null : URI.createURI(representationFileNameText.getText());
 	//	finalCheckedElements = basicGetCheckedElements();
-		finalRegistryRepresentationDescription = basicGetRegistryRepresentationDescription();
+	//	finalRegistryRepresentationDescription = selectedRepresentationDescription;
 		boolean closeStatus = super.close();
 		assert getShell() == null;
 		return closeStatus;
-	}
+	} */
 
 	/**
 	 * Return the DomainClasses corresponding to selected EClasses for which there is no design DomainClass support. Returns null if all supported.
@@ -672,10 +670,12 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
+	//	Composite parent = new Composite(zparent, SWT.NONE);
 		Layout layout = parent.getLayout();
 		if (layout instanceof GridLayout) {
 			((GridLayout)layout).makeColumnsEqualWidth = false;
 			((GridLayout)layout).numColumns++;
+			((GridLayout)layout).marginHeight = 5;
 		}
 		Object layoutData = parent.getLayoutData();
 		if (layoutData instanceof GridData) {
@@ -683,10 +683,13 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 			((GridData)layoutData).grabExcessHorizontalSpace = true;
 		}
 
-		statusText = new Text(parent, SWT.NONE);
-		statusText.setEnabled(false);
+		statusText = new Text(parent, SWT.WRAP | SWT.V_SCROLL | SWT.MULTI | SWT.READ_ONLY);
+	//	statusText.setEnabled(true);
 		statusText.setEditable(false);
-		statusText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData textLayoutData = new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1);
+		textLayoutData.heightHint = 50;
+		textLayoutData.widthHint = 50;
+		statusText.setLayoutData(textLayoutData);
 
 		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
@@ -700,12 +703,8 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-	//	SelectionListener defaultSelectionListener = new AbstractSelectionListener();
 		setTitle("Initialize Diagram");
 		Composite container = (Composite) super.createDialogArea(parent);
-	//	Composite container = new Composite(parent, SWT.NONE);
-
-	//	setControl(container);
 		GridLayout gl_container = new GridLayout(1, true);
 		gl_container.marginWidth = 0;
 		gl_container.marginHeight = 0;
@@ -714,78 +713,6 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 
 		SashForm overallSash = new SashForm(container, SWT.VERTICAL);
 		overallSash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-		Composite modelsComposite = new Composite(overallSash, SWT.BORDER);
-		modelsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		GridLayout gl_modelsComposite = new GridLayout(2, false);
-		gl_modelsComposite.horizontalSpacing = 0;
-		gl_modelsComposite.marginWidth = 0;
-		gl_modelsComposite.marginHeight = 0;
-		modelsComposite.setLayout(gl_modelsComposite);
-
-		Composite modelsElementsComposite = new Composite(modelsComposite, SWT.NONE);
-		modelsElementsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		GridLayout gl_modelsElementsComposite = new GridLayout(3, false);
-		gl_modelsElementsComposite.verticalSpacing = 2;
-		gl_modelsElementsComposite.marginWidth = 0;
-		gl_modelsElementsComposite.marginHeight = 0;
-		modelsElementsComposite.setLayout(gl_modelsElementsComposite);
-
-		Composite modelElementsBannerComposite = new Composite(modelsElementsComposite, SWT.NONE);
-		modelElementsBannerComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		modelElementsBannerComposite.setLayout(new GridLayout(2, false));
-
-		Label modelsElementsLabel = new Label(modelElementsBannerComposite, SWT.NONE);
-		modelsElementsLabel.setFont(localResourceManager.create(FontDescriptor.createFrom("Segoe UI", 9, SWT.BOLD)));
-		modelsElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		modelsElementsLabel.setText("Model(s) Elements Selector");
-		new Label(modelElementsBannerComposite, SWT.NONE);
-
-		showAllElementsCheckButton = new Button(modelsElementsComposite, SWT.CHECK);
-		showAllElementsCheckButton.setText("Show All");
-		showAllElementsCheckButton.addSelectionListener(new ShowAllElementsSelectionListener());
-		new Label(modelsElementsComposite, SWT.NONE);
-
-		modelsElementsTree = new Tree(modelsElementsComposite, SWT.BORDER | SWT.CHECK | SWT.MULTI);
-		GridData gd_modelsElementsTree = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
-		gd_modelsElementsTree.minimumHeight = 100;
-		modelsElementsTree.setLayoutData(gd_modelsElementsTree);
-		modelsElementsTree.setBounds(0, 0, 94, 94);
-		modelsElementsTree.addSelectionListener(new ModelElementsTreeSelectionListener());
-		modelsElementsTree.setToolTipText("Select from the models to be diagrammed\n  and their contained contents\nSelected root element in bold.\nNot-compatible representations in italics.");
-		modelsElementsTree.addMouseListener(new ModelElementsTreeMouseListener());
-		modelsElementsTree.addTreeListener(new ModelElementsTreeListener());
-
-		TreeItem treeItem = new TreeItem(modelsElementsTree, SWT.NONE);
-		treeItem.setText("Initializing Model Elements ...");
-
-		Composite modelButtons = new Composite(modelsComposite, SWT.NONE);
-		modelButtons.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
-		modelButtons.setLayout(new GridLayout(1, false));
-
-		checkAllButton = new Button(modelButtons, SWT.NONE);
-		checkAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		checkAllButton.setText("Check All");
-		checkAllButton.addSelectionListener(new CheckAllElementsSelectionListener(true));
-		checkAllButton.setToolTipText("Check all model elements transitively contained by the selected root model element.");
-
-		uncheckAllButton = new Button(modelButtons, SWT.NONE);
-		uncheckAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		uncheckAllButton.setText("Uncheck All");
-		uncheckAllButton.addSelectionListener(new CheckAllElementsSelectionListener(false));
-		uncheckAllButton.setToolTipText("Uncheck all model elements transitively contained by the selected root model element.");
-
-		expandAllButton = new Button(modelButtons, SWT.NONE);
-		expandAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		expandAllButton.setText("Expand All");
-		expandAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(true));
-		expandAllButton.setToolTipText("Expand all model elements transitively contained by the selected root model element.");
-
-		collapseAllButton = new Button(modelButtons, SWT.NONE);
-		collapseAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		collapseAllButton.setText("Collapse All");
-		collapseAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(false));
-		collapseAllButton.setToolTipText("Collapse all model elements transitively contained by the selected root model element.");
 
 		SashForm representationSash = new SashForm(overallSash, SWT.NONE);
 
@@ -817,12 +744,10 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		sharedRepresentationFileCheckButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		sharedRepresentationFileCheckButton.setToolTipText("Use a shared representation, typically reprersentations.aird, for all diagrams, or a distinct representation for this model/diagram.");
 		sharedRepresentationFileCheckButton.setText("Shared");
-		sharedRepresentationFileCheckButton.addSelectionListener(new SharedRepresentationSelectionListener());
 
 		showAllViewpointsCheckButton = new Button(diagramRepresentationComposite, SWT.CHECK);
 		showAllViewpointsCheckButton.setToolTipText("Show not-applicable as well as applicable viewpoints.");
 		showAllViewpointsCheckButton.setText("Show All");
-		showAllViewpointsCheckButton.addSelectionListener(new ShowAllViewpointsSelectionListener());
 
 		Composite representationFileNameComposite = new Composite(representationComposite, SWT.NONE);
 		representationFileNameComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -850,7 +775,6 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		viewpointsTree = new Tree(viewpointsComposite, SWT.BORDER);
 		viewpointsTree.setToolTipText("The available viewpoints (diagram families)\n  and their representations (diagram types)\\nBold for selected representation.\nWhite background for selectable representations.\nItalics for no possible URI compatibility.");
 		viewpointsTree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		viewpointsTree.addSelectionListener(new ViewpointsTreeSelectionListener());
 
 		Composite representationDiagramNameComposite = new Composite(representationComposite, SWT.NONE);
 		representationDiagramNameComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -864,29 +788,110 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		representationDiagramNameLabel.setText("Representation Name:");
 
 		representationDiagramNameText = new Text(representationDiagramNameComposite, SWT.BORDER);
-		representationDiagramNameText.setText("new Diagram Name");
+		representationDiagramNameText.setText(representationDiagramName);
 		representationDiagramNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		descriptionText = new Text(representationSash, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		descriptionText.setBackground(getWhiteBackground());
 		descriptionText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
+		Composite modelsComposite = new Composite(overallSash, SWT.BORDER);
+		modelsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		GridLayout gl_modelsComposite = new GridLayout(2, false);
+		gl_modelsComposite.horizontalSpacing = 0;
+		gl_modelsComposite.marginWidth = 0;
+		gl_modelsComposite.marginHeight = 0;
+		modelsComposite.setLayout(gl_modelsComposite);
+
+		Composite modelsElementsComposite = new Composite(modelsComposite, SWT.NONE);
+		modelsElementsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		GridLayout gl_modelsElementsComposite = new GridLayout(3, false);
+		gl_modelsElementsComposite.verticalSpacing = 2;
+		gl_modelsElementsComposite.marginWidth = 0;
+		gl_modelsElementsComposite.marginHeight = 0;
+		modelsElementsComposite.setLayout(gl_modelsElementsComposite);
+
+		Composite modelElementsBannerComposite = new Composite(modelsElementsComposite, SWT.NONE);
+		modelElementsBannerComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		modelElementsBannerComposite.setLayout(new GridLayout(2, false));
+
+		Label modelsElementsLabel = new Label(modelElementsBannerComposite, SWT.NONE);
+		modelsElementsLabel.setFont(localResourceManager.create(FontDescriptor.createFrom("Segoe UI", 9, SWT.BOLD)));
+		modelsElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		modelsElementsLabel.setText("Model(s) Elements Selector");
+		new Label(modelElementsBannerComposite, SWT.NONE);
+
+		showAllElementsCheckButton = new Button(modelsElementsComposite, SWT.CHECK);
+		showAllElementsCheckButton.setText("Show All");
+		new Label(modelsElementsComposite, SWT.NONE);
+
+		modelsElementsTree = new Tree(modelsElementsComposite, SWT.BORDER | SWT.CHECK | SWT.MULTI);
+		GridData gd_modelsElementsTree = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
+		gd_modelsElementsTree.minimumHeight = 100;
+		modelsElementsTree.setLayoutData(gd_modelsElementsTree);
+		modelsElementsTree.setBounds(0, 0, 94, 94);
+		modelsElementsTree.setToolTipText("Select from the models to be diagrammed\n  and their contained contents\nSelected root element in bold.\nNot-compatible representations in italics.");
+
+		TreeItem treeItem = new TreeItem(modelsElementsTree, SWT.NONE);
+		treeItem.setText("Initializing Model Elements ...");
+
+		Composite modelButtons = new Composite(modelsComposite, SWT.NONE);
+		modelButtons.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
+		modelButtons.setLayout(new GridLayout(1, false));
+
+		checkAllButton = new Button(modelButtons, SWT.NONE);
+		checkAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		checkAllButton.setText("Check All");
+		checkAllButton.setToolTipText("Check all model elements transitively contained by the selected root model element.");
+
+		uncheckAllButton = new Button(modelButtons, SWT.NONE);
+		uncheckAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		uncheckAllButton.setText("Uncheck All");
+		uncheckAllButton.setToolTipText("Uncheck all model elements transitively contained by the selected root model element.");
+
+		expandAllButton = new Button(modelButtons, SWT.NONE);
+		expandAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		expandAllButton.setText("Expand All");
+		expandAllButton.setToolTipText("Expand all model elements transitively contained by the selected root model element.");
+
+		collapseAllButton = new Button(modelButtons, SWT.NONE);
+		collapseAllButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		collapseAllButton.setText("Collapse All");
+		collapseAllButton.setToolTipText("Collapse all model elements transitively contained by the selected root model element.");
+
 		overallSash.setWeights(new int[] {1, 1});
 		representationSash.setWeights(new int[] {2, 1});
 
 		resetRepresentationDescriptionSelection();
-		printSelectedRepresentation();
-		printSelectedRootModelElement();
+	//	printSelectedRepresentation();
+	//	printSelectedRootModelElement();
 
 		refreshRepresentationFileName();
 		refreshViewpoints();
 		refreshViewpointsRendering();
 		refreshModelElements();
 		refreshModelElementsRendering();
-		if (okButton != null) {
-			refreshMessage(null);
-		}
+		//
+		//	Add listeners once content stable
+		//
+		sharedRepresentationFileCheckButton.addSelectionListener(new SharedRepresentationSelectionListener());
+		showAllViewpointsCheckButton.addSelectionListener(new ShowAllViewpointsSelectionListener());
+		representationFileNameText.addModifyListener(new RepresentationFileNameTextModifyListener());
+		viewpointsTree.addSelectionListener(new ViewpointsTreeSelectionListener());
+		representationDiagramNameText.addModifyListener(new RepresentationDiagramNameTextModifyListener());
+		showAllElementsCheckButton.addSelectionListener(new ShowAllElementsSelectionListener());
+		modelsElementsTree.addMouseListener(new ModelElementsTreeMouseListener());
+		modelsElementsTree.addSelectionListener(new ModelElementsTreeSelectionListener());
+		modelsElementsTree.addTreeListener(new ModelElementsTreeListener());
+		checkAllButton.addSelectionListener(new CheckAllElementsSelectionListener(true));
+		uncheckAllButton.addSelectionListener(new CheckAllElementsSelectionListener(false));
+		expandAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(true));
+		collapseAllButton.addSelectionListener(new ExpandAllElementsSelectionListener(false));
 		return container;
+	}
+
+	private void createResourceManager() {
+		localResourceManager = new LocalResourceManager(JFaceResources.getResources());
 	}
 
 	protected @NonNull Map<@NonNull EObject, @NonNull Set<@NonNull Notifier>> gatherAncestralModelElements(@NonNull Iterable<@NonNull EObject> rootableEObjects) {
@@ -913,6 +918,7 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		Set<@NonNull EClass> checkedEClasses = new HashSet<>();
 		for (EObject eObject : checkedModelElements) {
 			EClass eClass = eObject.eClass();
+			assert eClass != null;
 			checkedEClasses.add(eClass);
 		}
 		return checkedEClasses;
@@ -1249,18 +1255,18 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 	}
 
 	public RepresentationDescription getRegistryRepresentationDescription() {
-		assert getShell() == null;
-		return finalRegistryRepresentationDescription;
+	;;	assert getShell() == null;
+		return selectedRepresentationDescription;
 	}
 
 	public String getRepresentationDiagramName() {
-		assert getShell() == null;
-		return finalRepresentationDiagramName;
+	//	assert getShell() == null;
+		return representationDiagramName;
 	}
 
-	public URI getRepresentationFileURI() {
-		assert getShell() == null;
-		return finalRepresentationFileURI;
+	public @NonNull URI getRepresentationFileURI() {
+		assert representationFileURI != null;
+		return representationFileURI;
 	}
 
 	protected @NonNull String getSafeLabel(@NonNull RepresentationDescription representationDescription) {
@@ -1299,7 +1305,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 	}
 
 	public @NonNull URI getSessionURI() {
-		assert getShell() == null;
+	//	assert getShell() == null;
 		return modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
 	}
 
@@ -1462,11 +1468,56 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		descriptionText.setText(s.toString());
 	}
 
+	protected @Nullable String refreshDiagramNames() {
+		if (oldDiagramNames == null) {
+			URI uri = getRepresentationFileURI();
+			AIRDReader airdReader = new AIRDReader();
+			if (URIConverter.INSTANCE.exists(uri, null)) {
+				try {
+					InputStream inputStream = URIConverter.INSTANCE.createInputStream(uri);
+					SAXParserFactory factory = SAXParserFactory.newInstance();
+					try {
+						SAXParser saxParser = factory.newSAXParser();
+						try {
+							assert saxParser != null;
+							saxParser.parse(inputStream, airdReader);
+							oldDiagramNames = airdReader.getDiagramNames();
+						} catch (IOException e) {
+							return "Failed to read " + uri.toString() + "\n" + e.getLocalizedMessage();
+						} catch (SAXException e) {
+							return "Failed to parse " + uri.toString() + "\n" + e.getLocalizedMessage();
+						}
+					} catch (ParserConfigurationException | SAXException e) {
+						return "Failed to prepare SAXParser\n" + e.getLocalizedMessage();
+					}
+				} catch (IOException e) {
+					return "Failed to open " + uri.toString() + "\n" + e.getLocalizedMessage();
+				}
+			}
+			else {
+				oldDiagramNames = null;
+			}
+		}
+		return null;
+	}
+
 	protected void refreshMessage(@Nullable String problemMessage) {
 		refreshDescription();
-		String errorMessage = null;
 		String warningMessage = null;
-		if (selectedRepresentationDescription == null) {
+		String errorMessage = refreshDiagramNames();
+		String representationDiagramName = representationDiagramNameText.getText();
+		List<@NonNull String> oldDiagramNames2 = oldDiagramNames;
+		if (errorMessage != null) {
+		//	assert ;
+		}
+		else if ((oldDiagramNames2 != null) && oldDiagramNames2.contains(representationDiagramName)) {
+			StringBuilder s = new StringBuilder();
+			for (String name : oldDiagramNames2) {
+				s.append(" \"" + name + "\"");
+			}
+			errorMessage = "Diagram name \"" + representationDiagramName + "\" is already in use.\nSelect a name other than: " + s.toString();
+		}
+		else if (selectedRepresentationDescription == null) {
 			errorMessage = "No representation description selected.\nSelect a white-background representation in the Diagram Representation Selector.";
 		}
 		else if (selectedRootModelElement == noSelectedEObject) {
@@ -1513,7 +1564,8 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 				setMessage(warningMessage, IMessageProvider.WARNING);
 			}
 			else {
-				setMessage("Select a diagram representation, then select a corresponding root model element\nthen check the models elements with which to initialize the diagram.");
+			//	setMessage("Select a diagram representation, then select a corresponding root model element\nthen check the models elements with which to initialize the diagram.");
+				setMessage("Check the models elements with which to initialize the diagram.");
 			}
 		}
 		if (problemMessage != null) {
@@ -1615,7 +1667,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		Color background = getGreyBackground();
 		boolean isBold = false;
 		boolean isItalic = false;
-		boolean isGrayed = false;
+	//	boolean isGrayed = false;
 		boolean isChecked = (selectedRootModelElement == eObject) || checkedModelElements.contains(eObject);
 		boolean isCheckable = false;
 		if (selectedRepresentationDescription == null) {
@@ -1623,7 +1675,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		//	isRootable = allRootableDomainClasses.contains(domainClass);
 		//	assert !isCreateable;
 		//	assert !isSelected;
-			isGrayed = true;
+		//	isGrayed = true;
 		}
 		else if (selectedRootModelElement == noSelectedEObject) {
 		//	assert isSelected == false;
@@ -1643,7 +1695,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 					isItalic = true;
 				}
 			}
-			isGrayed = true;
+		//	isGrayed = true;
 		}
 		else {
 		//	boolean isSelected = false; //!parentCanCreate && (eObject == selectedRootModelElement);
@@ -1657,7 +1709,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 				background = getWhiteBackground();
 			}
 			else if (ancestralModelElements.contains(eObject)) {
-				isGrayed = true;
+		//		isGrayed = true;
 			}
 			else if (checkableEObjects.contains(eObject)) {
 //	else if (selctedRootableEObject2checkableEObjects.getValue().contains(eObject)) {
@@ -1669,7 +1721,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 			}
 			else /*if (isRootable && isCreateable)*/ {
 				isItalic = true;
-				isGrayed = true;
+		//		isGrayed = true;
 			}
 		//	if (isSelected)
 		/*	if (!selectedDomainClasses.contains(domainClass)) {
@@ -1695,15 +1747,17 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 
 	protected void refreshRepresentationFileName() {
 		boolean sharedRepresentationFile = sharedRepresentationFileCheckButton.getSelection();
-		URI sessionURI;
+	//	URI sessionURI;
 		if (sharedRepresentationFile) {
-			sessionURI = modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
+			representationFileURI = modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
 		}
 		else {
-			sessionURI = modelURI.trimFileExtension().appendFileExtension(SiriusUtil.SESSION_RESOURCE_EXTENSION);
+			representationFileURI = modelURI.trimFileExtension().appendFileExtension(SiriusUtil.SESSION_RESOURCE_EXTENSION);
 		}
+	//	representationFileName = String.valueOf(sessionURI);
 		representationFileNameText.setEditable(!sharedRepresentationFile);
-		representationFileNameText.setText(String.valueOf(sessionURI));
+		representationFileNameText.setText(String.valueOf(representationFileURI));
+		oldDiagramNames = null;
 	}
 
 	protected void refreshViewpoints() {
@@ -1809,7 +1863,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		//	Set<@NonNull EObject> rootableEObjects = selectedRootableDomainClass2domainClasses.get(domainClass);
 			Set<@NonNull EObject> rootableEObjects = allRootableDomainClass2EObjects.get(domainClass);
 			assert rootableEObjects != null;
-			Map<@NonNull String, @NonNull Set<@NonNull EObject>> compatibleEObjects = gatherCompatibleEObjects(rootableEObjects);
+		//	Map<@NonNull String, @NonNull Set<@NonNull EObject>> compatibleEObjects = gatherCompatibleEObjects(rootableEObjects);
 			assert rootableEObjects != null;
 			Set<@NonNull Notifier> ancestralEObjects = new HashSet<>();
 			//	Set<@NonNull EObject> checkableEObjects = new HashSet<>();
@@ -1835,7 +1889,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 	}
 
 	protected void setChecked(@NonNull Object object, boolean isChecked) {
-		System.out.println("setChecked = " + isChecked + " " + labelProvider.getText(object));
+	//	System.out.println("setChecked = " + isChecked + " " + labelProvider.getText(object));
 		if (object instanceof EObject) {			// Skip Notifier
 			EObject eObject = (EObject)object;
 			if (isChecked) {
@@ -1864,7 +1918,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 	}
 
 	protected void setExpanded(@NonNull Object object, boolean isExpanded) {
-		System.out.println("setExpanded = " + isExpanded + " " + labelProvider.getText(object));
+	//	System.out.println("setExpanded = " + isExpanded + " " + labelProvider.getText(object));
 		if (object instanceof EObject) {			// Skip Notifier
 			EObject eObject = (EObject)object;
 			if (isExpanded) {
@@ -1938,7 +1992,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 			return "";
 		}
 		finally {
-			printSelectedRootModelElement();
+		//	printSelectedRootModelElement();
 		}
 	}
 
@@ -1968,8 +2022,8 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 			return "";
 		}
 		finally {
-			printSelectedRepresentation();
-			printSelectedRootModelElement();
+		//	printSelectedRepresentation();
+		//	printSelectedRootModelElement();
 		}
 	}
 }

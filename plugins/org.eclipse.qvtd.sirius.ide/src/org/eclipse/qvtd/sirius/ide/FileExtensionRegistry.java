@@ -252,7 +252,7 @@ public class FileExtensionRegistry implements IResourceChangeListener, IResource
 		try {
 			return factory.newSAXParser();
 		} catch (ParserConfigurationException | SAXException e) {
-			logger.error("Failed to prepare to SAXParser");
+			logger.error("Failed to prepare SAXParser");
 			return null;
 		}
 	}
