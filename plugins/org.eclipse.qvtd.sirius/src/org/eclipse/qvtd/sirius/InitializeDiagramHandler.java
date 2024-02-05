@@ -19,7 +19,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -28,23 +27,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 public class InitializeDiagramHandler extends AbstractHandler
 {
-	public static void openError(Shell activeShell, String message, String reason) {
-		Bundle bundle = FrameworkUtil.getBundle(InitializeDiagramHandler.class);
-		Status status = new Status(IStatus.ERROR, bundle.getSymbolicName(), 0, reason, null);
-		ErrorDialog.openError(activeShell, "Initialize Diagram Error", message, status);
-	}
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = HandlerUtil.getActiveShell(event);
@@ -52,7 +42,7 @@ public class InitializeDiagramHandler extends AbstractHandler
 		if (!(currentSelection instanceof IStructuredSelection) || currentSelection.isEmpty()) {
 			String reason = "A selection directly or indirectly associated with a model resource is required.";
 			String message = "Nothing selected.";
-			openError(activeShell, message, reason);
+			InitializeDiagramUtils.openError(activeShell, message, reason);
 			return null;
 		}
 		IStructuredSelection structuredSelection = (IStructuredSelection)currentSelection;
@@ -82,7 +72,7 @@ public class InitializeDiagramHandler extends AbstractHandler
 			else {
 				String reason = "A selection directly or indirectly associated with a model resource is required.";
 				String message = "Unsuitable selection: " + selection.getClass().getName() + ".";
-				openError(activeShell, message, reason);
+				InitializeDiagramUtils.openError(activeShell, message, reason);
 				return null;
 			}
 		}
@@ -93,11 +83,11 @@ public class InitializeDiagramHandler extends AbstractHandler
 		if ((status == Status.OK) && (initializeDiagramDialog.getShell() == null)) {		// !null for forced Eclipse exit
 			// Convert selection-space elements to URIs for reloading in the Sirius-space.
 			List<@NonNull URI> selectedElements = initializeDiagramDialog.getSelectedCheckedElements();
-			URI sessionURI = initializeDiagramDialog.getSessionURI();
+			URI masterSessionURI = initializeDiagramDialog.getMasterSessionURI();
 			String representationDiagramName = initializeDiagramDialog.getRepresentationDiagramName();
-			URI representationFileURI = initializeDiagramDialog.getRepresentationFileURI();
+			URI slaveSessionURI = initializeDiagramDialog.getSlaveSessionURI();
 			RepresentationDescription registryRepresentationDescription = initializeDiagramDialog.getRegistryRepresentationDescription();
-			InitializeDiagramJob.scheduleNewWhenPossible(sessionURI, registryRepresentationDescription, representationFileURI, representationDiagramName, selectedElements);
+			InitializeDiagramJob.scheduleNewWhenPossible(masterSessionURI, registryRepresentationDescription, slaveSessionURI, representationDiagramName, selectedElements);
 		}
 		return null;
 	}
