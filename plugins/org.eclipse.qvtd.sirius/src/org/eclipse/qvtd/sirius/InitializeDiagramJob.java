@@ -135,8 +135,8 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			return op.resource;
 		}
 
-		public static @Nullable DAnalysis prepare(@NonNull IProgressMonitor monitor, @NonNull DAnalysisSession session, @NonNull URI representationFileURI) {
-			TransactionalEditingDomain transactionalEditingDomain = session.getTransactionalEditingDomain();	// XXX masterSession
+		public static @Nullable DAnalysis prepare(@NonNull IProgressMonitor monitor, @NonNull DAnalysisSession masterSession, @NonNull DAnalysisSession slaveSession, @NonNull URI representationFileURI) {
+			TransactionalEditingDomain transactionalEditingDomain = masterSession.getTransactionalEditingDomain();	// XXX masterSession
 			ResourceSet resourceSet = transactionalEditingDomain.getResourceSet();
 			assert resourceSet != null;
 			Resource resource;
@@ -155,7 +155,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			}
 			assert resource != null;
 			if (dAnalysis == null) {
-			    dAnalysis = createDAnalysis(session, resource);
+			    dAnalysis = createDAnalysis(slaveSession, resource);
 			}
 			assert resource.getContents().contains(dAnalysis);
 			try {
@@ -166,7 +166,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				return null;
 			}
 			final DAnalysis finalDAnalysis = dAnalysis;
-			((DAnalysisSessionServicesImpl)session.getServices()).setAnalysisSelector(new DAnalysisSelector() {
+			((DAnalysisSessionServicesImpl)slaveSession.getServices()).setAnalysisSelector(new DAnalysisSelector() {
 
 				@Override
 				public DAnalysis selectSmartlyAnalysisForAddedResource(Resource resource, Collection<DAnalysis> allAnalysis) {
@@ -200,13 +200,13 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 
 	protected static class DiagramCreateOperation extends WorkspaceModifyOperation // ?? implements Runnable
 	{
-		protected static void create(@NonNull DAnalysisSession session, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull EObject> modelObjects) {
+		protected static void create(@NonNull DAnalysisSession masterSession, @NonNull DAnalysisSession slaveSession, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull EObject> modelObjects) {
 			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
 			{
 				@Override
 				public void run() {																	// run on main
 					try {
-						WorkspaceModifyOperation op = new DiagramCreateOperation(session, registryRepresentationDescription, representationFileURI, representationDiagramName, modelObjects);
+						WorkspaceModifyOperation op = new DiagramCreateOperation(masterSession, slaveSession, registryRepresentationDescription, representationFileURI, representationDiagramName, modelObjects);
 						new ProgressMonitorDialog(null).run(true, true, op);
 					} catch (InvocationTargetException | InterruptedException e) {
 						SiriusEditPlugin.getPlugin().getLog().log(new Status(IStatus.ERROR, SiriusEditPlugin.ID, e.getLocalizedMessage(), e));
@@ -215,14 +215,16 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			});
 		}
 
-		protected final @NonNull DAnalysisSession session;
+		protected final @NonNull DAnalysisSession masterSession;
+		protected final @NonNull DAnalysisSession slaveSession;
 		protected final @NonNull RepresentationDescription registryRepresentationDescription;
 		protected final @NonNull URI representationFileURI;
 		protected final @NonNull List<@NonNull EObject> modelObjects;
 		protected final @NonNull String representationDiagramName;
 
-		protected DiagramCreateOperation(@NonNull DAnalysisSession session, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull EObject> modelObjects) {													// ctor on main
-			this.session = session;
+		protected DiagramCreateOperation(@NonNull DAnalysisSession masterSession, @NonNull DAnalysisSession slaveSession, @NonNull RepresentationDescription registryRepresentationDescription, @NonNull URI representationFileURI, @NonNull String representationDiagramName, @NonNull List<@NonNull EObject> modelObjects) {													// ctor on main
+			this.masterSession = masterSession;
+			this.slaveSession = slaveSession;
 			this.registryRepresentationDescription = registryRepresentationDescription;
 			this.representationFileURI = representationFileURI;
 			this.representationDiagramName = representationDiagramName;
@@ -230,21 +232,21 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			assert modelObjects.size() >= 1;
 		}
 
-		protected @Nullable DRepresentation createRepresentation(@NonNull IProgressMonitor monitor, @NonNull DAnalysis dAnalysis, @NonNull RepresentationDescription editingDomainRepresentationDescription) {
-			TransactionalEditingDomain transactionalEditingDomain = session.getTransactionalEditingDomain();
+		protected @Nullable DRepresentation createRepresentation(@NonNull IProgressMonitor monitor, @NonNull DAnalysis zdAnalysis, @NonNull RepresentationDescription editingDomainRepresentationDescription) {
+			TransactionalEditingDomain transactionalEditingDomain = masterSession.getTransactionalEditingDomain();
 			EObject modelObject = modelObjects.get(0);
 			CommandStack commandStack = transactionalEditingDomain.getCommandStack();
 			assert commandStack != null;
 			ResourceSet resourceSet = transactionalEditingDomain.getResourceSet();
 			assert resourceSet != null;
-			IEditingSession editingSession = SessionUIManager.INSTANCE.getUISession(session);
-			MyCreateRepresentationCommand createRepresentationCommand = new MyCreateRepresentationCommand(session, editingDomainRepresentationDescription, modelObject, representationDiagramName,
+			IEditingSession editingSession = SessionUIManager.INSTANCE.getUISession(masterSession);
+			MyCreateRepresentationCommand createRepresentationCommand = new MyCreateRepresentationCommand(masterSession, zdAnalysis, editingDomainRepresentationDescription, modelObject, representationDiagramName,
 					new SubProgressMonitor(monitor, 4));
 		//	DAnalysis dAnalysis = getDAnalysis(resourceSet);
 
 			Session semanticSession = new EObjectQuery(modelObject).getSession();
 			if (semanticSession == null) {				// If not (yet) known to representations.aird
-				modelObject.eResource().eAdapters().add(new SessionTransientAttachment(session));
+				modelObject.eResource().eAdapters().add(new SessionTransientAttachment(slaveSession));
 				semanticSession = new EObjectQuery(modelObject).getSession();
 				assert semanticSession != null;
 			}
@@ -256,11 +258,11 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			}
 			commandStack.execute(createRepresentationCommand);
 			editingSession.notify(EditingSessionEvent.REPRESENTATION_CREATED_BEFORE_OPENING);
-			return createRepresentationCommand.getCreatedRepresentation();
+			return createRepresentationCommand.basicGetCreatedRepresentation();
 		}
 
 		protected void editDiagram(@NonNull DRepresentation createdDRepresentation) throws InvocationTargetException, InterruptedException {
-			IRunnableWithProgress runnable = new DiagramEditRunnable(session, createdDRepresentation);
+			IRunnableWithProgress runnable = new DiagramEditRunnable(slaveSession, createdDRepresentation);
 			IRunnableContext context = new ProgressMonitorDialog(null);
 			PlatformUI.getWorkbench().getProgressService().runInUI(context, runnable, null);
 		}
@@ -272,37 +274,21 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				monitor.beginTask(org.eclipse.sirius.viewpoint.provider.Messages.CreateRepresentationAction_creationTask, 15);
 
 				EObject modelObject = modelObjects.get(0);
-				if (!session.getSemanticResources().contains(modelObject.eResource())) {
-					session.close(monitor);
-					session.getSemanticResources();
+				if (!slaveSession.getSemanticResources().contains(modelObject.eResource())) {
+					slaveSession.close(monitor);
+					slaveSession.getSemanticResources();
 				}
 
-				DAnalysis dAnalysis = DAnalysisPreparationOperation.prepare(monitor, session, representationFileURI);
+				DAnalysis dAnalysis = DAnalysisPreparationOperation.prepare(monitor, masterSession, slaveSession, representationFileURI);
 				if (dAnalysis == null) {
 					return;
-				}	// XXX old slaveAnalysis
-			/*    final DAnalysis slaveAnalysis = ViewpointFactory.eINSTANCE.createDAnalysis();
-			    TransactionalEditingDomain domain = session.getTransactionalEditingDomain();
-				PrepareNewAnalysisCommand command = new PrepareNewAnalysisCommand(domain, airdResource, slaveAnalysis, session);
-				domain.getCommandStack().execute(command);
-
-				try {
-					assert airdResource != null;
-					airdResource.save(null);
-				} catch (IOException e) {
-					String message = "Failed to save " + representationFileURI;
-				//	IStatus status = new Status(IStatus.ERROR, InitializeDiagramHandler.PLUGIN_ID, 0, message, e);
-				//	throw new CoreException(status);
-					openError(null, message, e);
-					return;
-				} */
-
+				}
 
 				Viewpoint registryViewpoint = selectViewpoint(monitor);
 
 				// XXX wrap above in a ProgressMonitorDialog cf ViewpointHelper.applyNewViewpointSelection
 
-				Viewpoint editingDomainViewpoint = SiriusResourceHelper.getCorrespondingViewpoint(session, registryViewpoint);	// XXX error dialog
+				Viewpoint editingDomainViewpoint = SiriusResourceHelper.getCorrespondingViewpoint(masterSession, registryViewpoint);	// XXX error dialog
 				if (editingDomainViewpoint == null) {
 					InitializeDiagramUtils.openError(mainMessage, "Failed to localize \"" +  registryViewpoint.getLabel() + "\" Viewpoint", null);
 					return;
@@ -316,6 +302,8 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			//	new ViewpointSelector(session).selectViewpoint(registryViewpoint, createNewRepresentations, monitor);
 
 				DRepresentation createdDRepresentation = createRepresentation(monitor, dAnalysis, editingDomainRepresentationDescription);
+
+				// XXX move reprfesentation
 				monitor.worked(1);
 				if (createdDRepresentation != null) {
 					editDiagram(createdDRepresentation);
@@ -337,7 +325,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 		}
 
 		protected @NonNull Viewpoint selectViewpoint(@NonNull IProgressMonitor monitor) {
-			TransactionalEditingDomain transactionalEditingDomain = session.getTransactionalEditingDomain();
+			TransactionalEditingDomain transactionalEditingDomain = masterSession.getTransactionalEditingDomain();
 			CommandStack commandStack = transactionalEditingDomain.getCommandStack();
 			assert commandStack != null;
 			Viewpoint registryViewpoint = (Viewpoint)registryRepresentationDescription.eContainer();
@@ -345,7 +333,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 			ViewpointSelectionCallback callback = new ViewpointSelectionCallback();
 			Set<Viewpoint> registryViewpoints = Collections.singleton(registryViewpoint);
 			boolean createNewRepresentations = true;
-			ChangeViewpointSelectionCommand changeViewpointSelectionCommand = new ChangeViewpointSelectionCommand(session, callback, registryViewpoints, Collections.EMPTY_SET, createNewRepresentations,
+			ChangeViewpointSelectionCommand changeViewpointSelectionCommand = new ChangeViewpointSelectionCommand(masterSession, callback, registryViewpoints, Collections.EMPTY_SET, createNewRepresentations,
 					new SubProgressMonitor(monitor, 4));
 			commandStack.execute(changeViewpointSelectionCommand);	// XXX canCreate should use selected elements
 			return registryViewpoint;
@@ -393,7 +381,8 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 	protected final @NonNull String representationDiagramName;
 	protected final @NonNull List<@NonNull URI> modelObjectURIs;
 
-	private Session session;
+	private Session masterSession;
+	private Session slaveSession;
 
 	/**
 	 * Constructor to open only one representations file.
@@ -427,20 +416,36 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) {
-		this.session = SessionManager.INSTANCE.getExistingSession(slaveSessionURI); // sessionURI);
-		if (session == null) {
+		this.masterSession = SessionManager.INSTANCE.getExistingSession(masterSessionURI);
+		if (masterSession == null) {
+			IStatus status;
+			if (masterSessionURI != slaveSessionURI) {
+				status = new OpenRepresentationsFileJob(masterSessionURI).runInWorkspace(monitor);
+			}
+			else {
+				status = super.runInWorkspace(monitor);
+			}
+			if (!status.isOK()) {
+				return status;
+			}
+			masterSession = SessionManager.INSTANCE.getExistingSession(masterSessionURI);
+		}
+		DAnalysisSession masterSession2 = (DAnalysisSession)masterSession;
+		assert masterSession2 != null;
+		this.slaveSession = SessionManager.INSTANCE.getExistingSession(slaveSessionURI);
+		if (slaveSession == null) {
 			IStatus status = super.runInWorkspace(monitor);
 			if (!status.isOK()) {
 				return status;
 			}
-			session = SessionManager.INSTANCE.getExistingSession(slaveSessionURI); // sessionURI);
+			slaveSession = SessionManager.INSTANCE.getExistingSession(slaveSessionURI);
 		}
-		DAnalysisSession session2 = (DAnalysisSession)session;
-		assert session2 != null;
-		ResourceSet resourceSet = session.getSessionResource().getResourceSet();
+		DAnalysisSession slaveSession2 = (DAnalysisSession)slaveSession;
+		assert slaveSession2 != null;
+		ResourceSet resourceSet = masterSession2.getTransactionalEditingDomain().getResourceSet();
 		assert resourceSet != null;
 		List<@NonNull EObject> modelObjects = getModelObjects(resourceSet);
-		DiagramCreateOperation.create(session2, registryRepresentationDescription, slaveSessionURI, representationDiagramName, modelObjects);
+		DiagramCreateOperation.create(masterSession2, slaveSession2, registryRepresentationDescription, slaveSessionURI, representationDiagramName, modelObjects);
 		return Status.OK_STATUS;
 	}
 }
