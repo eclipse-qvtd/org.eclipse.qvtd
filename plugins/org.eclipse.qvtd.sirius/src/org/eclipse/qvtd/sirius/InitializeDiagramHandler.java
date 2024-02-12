@@ -83,11 +83,11 @@ public class InitializeDiagramHandler extends AbstractHandler
 		if ((status == Status.OK) && (initializeDiagramDialog.getShell() == null)) {		// !null for forced Eclipse exit
 			// Convert selection-space elements to URIs for reloading in the Sirius-space.
 			List<@NonNull URI> selectedElements = initializeDiagramDialog.getSelectedCheckedElements();
-			URI masterSessionURI = initializeDiagramDialog.getMasterSessionURI();
+			URI sessionURI = initializeDiagramDialog.getSessionURI();
 			String representationDiagramName = initializeDiagramDialog.getRepresentationDiagramName();
-			URI slaveSessionURI = initializeDiagramDialog.getSlaveSessionURI();
+			URI representationFileURI = initializeDiagramDialog.getRepresentationFileURI();
 			RepresentationDescription registryRepresentationDescription = initializeDiagramDialog.getRegistryRepresentationDescription();
-			InitializeDiagramJob.scheduleNewWhenPossible(masterSessionURI, registryRepresentationDescription, slaveSessionURI, representationDiagramName, selectedElements);
+			InitializeDiagramJob.scheduleNewWhenPossible(sessionURI, registryRepresentationDescription, representationFileURI, representationDiagramName, selectedElements);
 		}
 		return null;
 	}

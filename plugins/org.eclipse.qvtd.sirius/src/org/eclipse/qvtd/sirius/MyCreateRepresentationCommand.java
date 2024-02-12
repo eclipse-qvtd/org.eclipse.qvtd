@@ -8,7 +8,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.logger.RuntimeLoggerManager;
@@ -18,7 +17,6 @@ import org.eclipse.sirius.common.tools.api.interpreter.EvaluationException;
 import org.eclipse.sirius.common.tools.api.interpreter.IInterpreter;
 import org.eclipse.sirius.common.tools.api.util.StringUtil;
 import org.eclipse.sirius.tools.api.Messages;
-import org.eclipse.sirius.viewpoint.DAnalysis;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.tool.RepresentationCreationDescription;
@@ -34,8 +32,7 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 
 	private RepresentationDescription description;
 
-	private Session masterSession;
-	private DAnalysis dAnalysis;
+	private Session session;
 
 	private EObject semantic;
 
@@ -63,42 +60,14 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 	 * @param monitor
 	 *			a {@link IProgressMonitor} to report progression of representation creation
 	 */
-	public MyCreateRepresentationCommand(Session masterSession, @NonNull DAnalysis dAnalysis, RepresentationDescription description, EObject eObject, String name, IProgressMonitor monitor) {
-		super(masterSession.getTransactionalEditingDomain(), Messages.CreateRepresentationCommand_label);
-		this.masterSession = masterSession;
-		this.dAnalysis = dAnalysis;
+	public MyCreateRepresentationCommand(Session session, RepresentationDescription description, EObject eObject, String name, IProgressMonitor monitor) {
+		super(session.getTransactionalEditingDomain(), Messages.CreateRepresentationCommand_label);
+		this.session = session;
 		this.description = description;
 		this.semantic = eObject;
 		this.name = name;
 		this.monitor = monitor;
-
-/*		RepresentationElementMapping mapping = dde.getMapping();
-		if (mapping != null) {
-			EObject sessionFinder = null;
-			final EList<EObject> semanticElements = dde.getSemanticElements();
-			if (semanticElements != null && !semanticElements.isEmpty()) {
-				sessionFinder = semanticElements.get(0);
-			} else if (dde.getTarget() != null) {
-				sessionFinder = dde.getTarget();
-			}
-			final Session session = sessionFinder != null ? SessionManager.INSTANCE.getSession(sessionFinder) : null;
-			if (session != null) {
-				for (RepresentationCreationDescription desc : mapping.getDetailDescriptions()) {
-		*/
-
-	 //   this.creationDescription = description.getRepresentationDescription();
 	}
-
-	/**
-	 * Set if there is an initial operation or not.
-	 *
-	 * @param creationDesc
-	 *			the creation tool
-	 *
-	public void setInitialOperation(final RepresentationCreationDescription creationDesc) {
-		this.creationDescription = creationDesc;
-		isInitialOperation = creationDesc.getInitialOperation() != null && creationDesc.getInitialOperation().getFirstModelOperations() != null;
-	} */
 
 	public @Nullable DRepresentation basicGetCreatedRepresentation() {
 		return representation;
@@ -117,14 +86,13 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 		if (isInitialOperation) {
 			return super.canExecute();
 		} */
-		final EObject root = computeRepresentationRoot(masterSession.getInterpreter(), creationDescription, semantic);
+		final EObject root = computeRepresentationRoot(session.getInterpreter(), creationDescription, semantic);
 		return DialectManager.INSTANCE.canCreate(root, description);
 	}
 
 	private void clearData() {
 		this.representation = null;
-		this.masterSession = null;
-		this.dAnalysis = null;
+		this.session = null;
 		this.description = null;
 		this.semantic = null;
 		this.name = null;
@@ -154,8 +122,8 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 	 */
 	@Override
 	protected void doExecute() {
-		final EObject root = computeRepresentationRoot(masterSession.getInterpreter(), creationDescription, semantic);
-		representation = DialectManager.INSTANCE.createRepresentation(this.name, root, this.description, this.masterSession, monitor);
+		final EObject root = computeRepresentationRoot(session.getInterpreter(), creationDescription, semantic);
+		representation = DialectManager.INSTANCE.createRepresentation(this.name, root, this.description, this.session, monitor);
 		if (representation != null) {
 			new DRepresentationQuery(representation).getRepresentationDescriptor().setName(name);
 		}
@@ -176,15 +144,6 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 	}
 
 	/**
-	 * Get the created representation.
-	 *
-	 * @return the created representation
-	 */
-	public DRepresentation getCreatedRepresentation() {
-		return (DRepresentation) getResult().iterator().next();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.eclipse.emf.transaction.RecordingCommand#dispose()
@@ -194,11 +153,4 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 		super.dispose();
 		clearData();
 	}
-
-	@Override
-	protected void postExecute() {
-		assert representation != null;
-		dAnalysis.eResource().getContents().add(representation);
-	}
-
 }

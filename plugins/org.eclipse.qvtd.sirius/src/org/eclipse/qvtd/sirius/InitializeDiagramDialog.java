@@ -1254,11 +1254,6 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		return new Point(800, 800);
 	}
 
-	public @NonNull URI getMasterSessionURI() {
-	//	assert getShell() == null;
-		return modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
-	}
-
 	public RepresentationDescription getRegistryRepresentationDescription() {
 	;;	assert getShell() == null;
 		return selectedRepresentationDescription;
@@ -1267,6 +1262,11 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 	public String getRepresentationDiagramName() {
 	//	assert getShell() == null;
 		return representationDiagramName;
+	}
+
+	public @NonNull URI getRepresentationFileURI() {
+		assert representationFileURI != null;
+		return representationFileURI;
 	}
 
 	protected @NonNull String getSafeLabel(@NonNull RepresentationDescription representationDescription) {
@@ -1304,9 +1304,9 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 		}
 	}
 
-	public @NonNull URI getSlaveSessionURI() {
-		assert representationFileURI != null;
-		return representationFileURI;
+	public @NonNull URI getSessionURI() {
+	//	assert getShell() == null;
+		return modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
 	}
 
 	protected Color getWhiteBackground() {
@@ -1470,7 +1470,7 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 
 	protected @Nullable String refreshDiagramNames() {
 		if (oldDiagramNames == null) {
-			URI uri = getSlaveSessionURI();
+			URI uri = getRepresentationFileURI();
 			AIRDReader airdReader = new AIRDReader();
 			if (URIConverter.INSTANCE.exists(uri, null)) {
 				try {
