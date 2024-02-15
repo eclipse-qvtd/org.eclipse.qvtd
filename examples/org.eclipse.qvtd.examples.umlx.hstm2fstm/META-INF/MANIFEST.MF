@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.qvtd.examples.umlx.hstm2fstm
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.examples.umlx.hstm2fstm;singleton:=true
 Bundle-Version: 0.30.0.qualifier
