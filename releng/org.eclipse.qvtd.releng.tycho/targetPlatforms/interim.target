@@ -98,9 +98,9 @@
     <!-- legacy repo needed for com.ibm.icu.text for Sirius/GMF/GEF/Draw2D -->
     <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
   </location>
-  <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+  <!--location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="javax.annotation" version="0.0.0"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
-  </location>
+  </location-->
 </locations>
 </target>

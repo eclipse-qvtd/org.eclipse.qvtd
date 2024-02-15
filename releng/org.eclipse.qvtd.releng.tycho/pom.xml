@@ -73,6 +73,7 @@
     <tycho-extras-version>${tycho-version}</tycho-extras-version>
     
     <BUILD_ALIAS></BUILD_ALIAS>
+    <argLineTail>-Declipse.e4.inject.javax.disabled=true -ea</argLineTail>
   </properties>
   
   <modules>
@@ -172,11 +173,11 @@
                 <id>org.eclipse.jdt.annotation</id>
                 <versionRange>[2.0.0,3.0.0)</versionRange>
               </requirement>
-              <requirement>
+              <!--requirement>
                 <type>eclipse-plugin</type>
                 <id>javax.annotation</id>
                 <versionRange>[1.0.0,2.0.0)</versionRange>
-              </requirement>
+              </requirement-->
               <requirement>
                 <type>eclipse-plugin</type>
                 <id>org.eclipse.xtext.logging</id>
