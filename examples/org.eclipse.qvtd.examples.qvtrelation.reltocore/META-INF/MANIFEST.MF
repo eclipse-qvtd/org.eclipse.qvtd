@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.qvtd.examples.qvtrelation.reltocore
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.examples.qvtrelation.reltocore;singleton:=true
-Bundle-Version: 0.30.0.qualifier
+Bundle-Version: 0.31.0.qualifier
 Export-Package: org.eclipse.qvtd.examples.qvtrelation.reltocore
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

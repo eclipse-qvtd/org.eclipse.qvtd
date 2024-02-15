@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.qvtd-tests</groupId>
   <artifactId>org.eclipse.qvtd.all.tests</artifactId>
-  <version>0.30.0-SNAPSHOT</version>
+  <version>0.31.0-SNAPSHOT</version>
   <packaging>eclipse-test-plugin</packaging>
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>

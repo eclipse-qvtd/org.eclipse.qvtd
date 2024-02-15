@@ -16,7 +16,7 @@
 <feature
       id="org.eclipse.qvtd.doc"
       label="%featureName"
-      version="0.30.1.qualifier"
+      version="0.31.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.qvtd.doc"
       license-feature="org.eclipse.license"
