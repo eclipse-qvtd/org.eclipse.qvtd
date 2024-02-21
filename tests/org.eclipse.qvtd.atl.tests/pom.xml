@@ -19,7 +19,7 @@
   <groupId>org.eclipse.qvtd-tests</groupId>
   <artifactId>org.eclipse.qvtd.atl.tests</artifactId>
   <version>0.31.0-SNAPSHOT</version>
-  <packaging>eclipse-plugin</packaging>
+  <packaging>eclipse-test-plugin</packaging>
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>
     <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
@@ -27,24 +27,30 @@
   </parent>
   <build>
     <plugins>
-    <!--plugin>
-      <groupId>org.eclipse.tycho</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <version>${maven-surefire-version}</version>
-      <configuration>
-        <!- -excludes>
-          <exclude>**/*.java</exclude>
-        </excludes- ->
-        <includes>
-          <include>org.eclipse.ocl.examples.test.xtext.AllXtextTests.java</include>
-        </includes>
-        <argLine>-DtestNameSuffix="maven" ${argLineTail}</argLine>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/AllATLTests.java</include>
+              </includes>
+              <argLine>-DtestNameSuffix="maven" ${argLineTail}</argLine>
               <systemProperties>
                 <MAVEN_TEST>true</MAVEN_TEST>
               </systemProperties>
-        <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
-      </configuration>
-    </plugin-->
+              <reportsDirectory>${project.build.directory}/surefire-reports/standalone</reportsDirectory>
+              <workingDirectory>${project.build.directory}/test-reports</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-surefire-plugin</artifactId>
