@@ -8,7 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Comment: javax.annotation is a workaround to Bug 539038
 Require-Bundle: org.junit,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
@@ -19,8 +18,7 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.codegen;bundle-version="[0.26.0,1.0.0)",
  org.eclipse.qvtd.debug.ui;bundle-version="[0.26.0,1.0.0)",
  org.eclipse.qvtd.xtext.qvtimperative.ui;bundle-version="[0.26.0,1.0.0)";visibility:=reexport,
- org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.26.0,1.0.0)";visibility:=reexport,
- javax.annotation;resolution:=optional
+ org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.26.0,1.0.0)";visibility:=reexport
 Export-Package: classes;x-internal:=true,
  classes.impl;x-internal:=true,
  classes.util;x-internal:=true,
