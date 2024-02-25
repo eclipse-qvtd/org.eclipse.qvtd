@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.jdt.core;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.compare,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.xtext.ui.shared,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.sirius;bundle-version="7.3.0";resolution:=optional
 Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui,
  org.eclipse.qvtd.xtext.qvtbase.ui.builder,
  org.eclipse.qvtd.xtext.qvtbase.ui.commands,

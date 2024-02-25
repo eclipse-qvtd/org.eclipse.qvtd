@@ -144,4 +144,7 @@
          <filter name="open" value="true"/>
       </page>
    </extension-->
+   <extension point="org.eclipse.sirius.resourceStrategy">
+      <resourceStrategy class="org.eclipse.qvtd.xtext.qvtbase.ui.QVTdNotAResourceStrategyImpl"/>
+   </extension>
 </plugin>
