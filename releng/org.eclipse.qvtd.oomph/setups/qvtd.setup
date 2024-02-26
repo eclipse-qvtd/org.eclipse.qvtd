@@ -56,7 +56,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2022-03"
+      defaultValue="2024-03"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
@@ -67,6 +67,10 @@
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Preferences">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="instance/org.eclipse.epp.mpc.ui/org.eclipse.epp.mpc.naturelookup"
+        value="false"/>
     <setupTask
         xsi:type="setup:PreferenceTask"
         key="instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"
@@ -108,7 +112,8 @@
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"/>
       <requirement
-          name="org.eclipse.xtext.generator"/>
+          name="org.eclipse.xtext.generator"
+          optional="true"/>
       <sourceLocator
           rootFolder="${git.clone.qvtd.git.location}"
           locateNestedProjects="true"/>
@@ -121,7 +126,9 @@
         <repository
             url="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
         <repository
-            url="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/latest"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
         <repository
             url="https://download.eclipse.org/epsilon/updates/2.1"/>
         <repository
@@ -136,13 +143,58 @@
         </repository>
       </repositoryList>
       <repositoryList
-          name="2022-03">
+          name="2024-03">
         <repository
             url="https://download.eclipse.org/releases/latest"/>
         <repository
             url="http://download.eclipse.org/cbi/updates/license"/>
         <repository
-            url="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.20.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-03"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2023-12">
+        <repository
+            url="https://download.eclipse.org/releases/2023-12"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.19.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2023-12"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-12">
+        <repository
+            url="https://download.eclipse.org/releases/2022-12"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.18.0"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-03">
+        <repository
+            url="https://download.eclipse.org/releases/2022-03"/>
+        <repository
+            url="http://download.eclipse.org/cbi/updates/license"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.17.1"/>
         <repository
             url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
         <repository
@@ -653,6 +705,30 @@
           value="master"/>
     </stream>
     <stream
+        name="0.31.0"
+        label="0.31.0 (2024-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.20.0"/>
+    </stream>
+    <stream
+        name="0.30.0"
+        label="0.30.0 (2023-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.19.0"/>
+    </stream>
+    <stream
+        name="0.29.0"
+        label="0.29.0 (2022-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.18.0"/>
+    </stream>
+    <stream
         name="0.28.1"
         label="0.28.1 (2022-03)">
       <setupTask
@@ -906,7 +982,8 @@
       <requirement
           name="org.eclipse.xtext.sdk.feature.group"/>
       <requirement
-          name="org.eclipse.xtext.generator"/>
+          name="org.eclipse.xtext.generator"
+          optional="true"/>
     </setupTask>
     <stream
         name="master"
@@ -915,6 +992,30 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.31.0"
+        label="0.31.0 (2024-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.20.0"/>
+    </stream>
+    <stream
+        name="0.30.0"
+        label="0.30.0 (2023-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.19.0"/>
+    </stream>
+    <stream
+        name="0.29.0"
+        label="0.29.0 (2022-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.18.0"/>
     </stream>
     <stream
         name="0.28.1"
@@ -1201,6 +1302,30 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.31.0"
+        label="0.31.0 (2024-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.20.0"/>
+    </stream>
+    <stream
+        name="0.30.0"
+        label="0.30.0 (2023-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.19.0"/>
+    </stream>
+    <stream
+        name="0.29.0"
+        label="0.29.0 (2022-12)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.18.0"/>
     </stream>
     <stream
         name="0.28.1"
