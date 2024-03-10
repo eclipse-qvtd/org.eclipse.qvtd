@@ -14,9 +14,9 @@
     <repository location="https://download.eclipse.org/releases/latest"/>
     <repository location="https://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
     <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/milestones/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/latest"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/milestone/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/release/latest"/>
+    <repository location="https://download.eclipse.org/mmt/qvto/builds/milestone/latest"/>
     <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -26,8 +26,8 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/milestones/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/milestone/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/release/latest"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.license.feature.group" version="0.0.0"/>

@@ -60,18 +60,16 @@
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/nightly/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/interim/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/milestones/latest"/>
-    <repository location="https://download.eclipse.org/modeling/mdt/ocl/updates/releases/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/nightly/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/milestone/latest"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/release/latest"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.samples" version="0.0.0"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/nightly/latest"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/interim/latest"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones/latest"/>
-    <repository location="https://download.eclipse.org/mmt/qvto/updates/releases/latest"/>
+    <repository location="https://download.eclipse.org/mmt/qvto/builds/nightly/latest"/>
+    <repository location="https://download.eclipse.org/mmt/qvto/builds/milestone/latest"/>
+    <repository location="https://download.eclipse.org/mmt/qvto/builds/release/latest"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
