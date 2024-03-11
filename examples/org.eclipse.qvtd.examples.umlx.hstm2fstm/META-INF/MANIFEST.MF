@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.qvtd.examples.umlx.hstm2fstm
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.examples.umlx.hstm2fstm;singleton:=true
-Bundle-Version: 0.31.0.qualifier
+Bundle-Version: 0.32.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

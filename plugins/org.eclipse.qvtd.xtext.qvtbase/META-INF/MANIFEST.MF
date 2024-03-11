@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtbase;singleton:=true
-Bundle-Version: 0.31.0.qualifier
+Bundle-Version: 0.32.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbasePlugin$Implementation
