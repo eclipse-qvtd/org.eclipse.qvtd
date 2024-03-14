@@ -1749,14 +1749,12 @@ protected @NonNull Map<@NonNull String, @NonNull Set<@NonNull EObject>> gatherCo
 
 	protected void refreshRepresentationFileName() {
 		boolean sharedRepresentationFile = sharedRepresentationFileCheckButton.getSelection();
-	//	URI sessionURI;
 		if (sharedRepresentationFile) {
 			representationFileURI = modelURI.trimSegments(1).appendSegment(ModelingProject.DEFAULT_REPRESENTATIONS_FILE_NAME);
 		}
 		else {
 			representationFileURI = modelURI.trimFileExtension().appendFileExtension(SiriusUtil.SESSION_RESOURCE_EXTENSION);
 		}
-	//	representationFileName = String.valueOf(sessionURI);
 		representationFileNameText.setEditable(!sharedRepresentationFile);
 		representationFileNameText.setText(String.valueOf(representationFileURI));
 		oldDiagramNames = null;

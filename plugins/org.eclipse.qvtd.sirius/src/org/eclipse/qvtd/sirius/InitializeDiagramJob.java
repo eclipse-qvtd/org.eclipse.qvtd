@@ -12,6 +12,7 @@ package org.eclipse.qvtd.sirius;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,10 @@ import org.eclipse.sirius.business.api.helper.SiriusResourceHelper;
 import org.eclipse.sirius.business.api.resource.ResourceDescriptor;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.business.api.session.danalysis.DAnalysisSelector;
 import org.eclipse.sirius.business.api.session.danalysis.DAnalysisSession;
 import org.eclipse.sirius.business.internal.session.SessionTransientAttachment;
+import org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionServicesImpl;
 import org.eclipse.sirius.diagram.business.api.query.EObjectQuery;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.business.api.session.EditingSessionEvent;
@@ -170,7 +173,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				}
 			} */
 			final DAnalysis finalDAnalysis = dAnalysis;
-		/*	((DAnalysisSessionServicesImpl)session.getServices()).setAnalysisSelector(new DAnalysisSelector() {
+			((DAnalysisSessionServicesImpl)session.getServices()).setAnalysisSelector(new DAnalysisSelector() {
 
 				@Override
 				public DAnalysis selectSmartlyAnalysisForAddedResource(Resource resource, Collection<DAnalysis> allAnalysis) {
@@ -181,7 +184,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				public DAnalysis selectSmartlyAnalysisForAddedRepresentation(DRepresentation representation, Collection<DAnalysis> allAnalysis) {
 					return finalDAnalysis;//allAnalysis.iterator().next();
 				}
-			}); */
+			});
 			return finalDAnalysis;
 		}
 
@@ -298,6 +301,40 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 				}
 			//	new ViewpointSelector(session).selectViewpoint(registryViewpoint, createNewRepresentations, monitor);
 
+			/*	DAnalysisSelector analysisSelector = ((DAnalysisSessionServicesImpl)session.getServices()).getAnalysisSelector();
+					((DAnalysisSessionServicesImpl)session.getServices()).setAnalysisSelector(new DAnalysisSelector() {
+
+						@Override
+						public DAnalysis selectSmartlyAnalysisForAddedResource(Resource resource, Collection<DAnalysis> allAnalysis) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public DAnalysis selectSmartlyAnalysisForAddedRepresentation(
+								DRepresentation representation,
+								Collection<DAnalysis> allAnalysis) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+			//	@Override
+			//	public DAnalysis selectSmartlyAnalysisForAddedResource(Resource resource, Collection<DAnalysis> allAnalysis) {
+			//		return finalDAnalysis;//allAnalysis.iterator().next();
+			//	}
+
+			//	@Override
+			//	public DAnalysis selectSmartlyAnalysisForAddedRepresentation(DRepresentation representation, Collection<DAnalysis> allAnalysis) {
+			//		return finalDAnalysis;//allAnalysis.iterator().next();
+			//	}
+			}); */
+
+
+				DAnalysis slaveAnalysis = DAnalysisPreparationOperation.prepare(monitor, session, representationFileURI);
+			//	if (slaveAnalysis == null) {
+			//		return;
+			//	}
+
 				DRepresentation createdDRepresentation = createRepresentation(monitor, editingDomainRepresentationDescription);
 				if (representationFileURI != session.getSessionResource().getURI()) {
 					List<DRepresentationDescriptor> repDescriptors = new ArrayList<>();;
@@ -309,7 +346,7 @@ public class InitializeDiagramJob extends OpenRepresentationsFileJob
 							}
 						}
 					}
-					DAnalysis slaveAnalysis = DAnalysisPreparationOperation.prepare(monitor, session, representationFileURI);
+				//	DAnalysis slaveAnalysis = DAnalysisPreparationOperation.prepare(monitor, session, representationFileURI);
 					if (slaveAnalysis == null) {
 						return;
 					}
