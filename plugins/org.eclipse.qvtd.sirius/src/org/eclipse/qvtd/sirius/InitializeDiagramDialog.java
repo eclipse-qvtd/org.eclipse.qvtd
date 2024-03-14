@@ -449,7 +449,9 @@ public class InitializeDiagramDialog extends TitleAreaDialog
 		@Override
 		public void modifyText(ModifyEvent e) {
 			oldDiagramNames = null;
-		//	System.out.println("Modified \""); // + e.  getText() + "\"");
+			Text text = (Text)e.getSource();
+			representationFileURI = URI.createURI(text.getText());
+	//	System.out.println("Modified \""); // + e.  getText() + "\"");
 			refreshMessage(null);
 		}
 	}
