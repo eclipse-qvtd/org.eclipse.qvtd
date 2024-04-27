@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.eclipse.qvtd.sirius.ide;singleton:=true
+Bundle-Version: 0.31.0.v20240312-2003
+Require-Bundle: org.eclipse.core.expressions,org.eclipse.core.resources,
+ org.eclipse.core.runtime,org.eclipse.jface.text,org.eclipse.ui.workbenc
+ h,org.eclipse.jdt.annotation,org.eclipse.emf.ecore
+Automatic-Module-Name: org.eclipse.qvtd.sirius.ide
+Export-Package: org.eclipse.qvtd.sirius.ide
+Import-Package: org.apache.log4j
+Eclipse-SourceReferences: scm:git:https://git.eclipse.org/c/mmt/org.ecli
+ pse.qvtd.git;path="plugins/org.eclipse.qvtd.sirius.ide";commitId=62eaba
+ 158b93be1a634b4b23550165ea50328c34
+Bundle-License: Eclipse Public License v2.0
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+

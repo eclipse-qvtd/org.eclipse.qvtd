@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='2'>
+  <artifact classifier='osgi.bundle' id='org.eclipse.qvtd.sirius.ide' version='0.31.0.v20240312-2003'>
+    <properties size='9'>
+      <property name='artifact.size' value='12185'/>
+      <property name='download.size' value='12185'/>
+      <property name='download.checksum.sha-512' value='00ffb85cb29172e2ca9f6050be385ea419d985f4f0569317fa98e9f07d6a197dafb24519c44027e2143653c3e21d6cdbabd0743496a7683add87dd6979ca8e7c'/>
+      <property name='download.checksum.sha-1' value='9224dd3137d4983987db47ddad3e34bdec52131e'/>
+      <property name='download.checksum.sha-256' value='e7f52c66576b2643f031d36015498fc99129329b143351153bdb0ec9e4efe458'/>
+      <property name='maven-groupId' value='org.eclipse.qvtd'/>
+      <property name='maven-artifactId' value='org.eclipse.qvtd.sirius.ide'/>
+      <property name='maven-version' value='0.31.0-SNAPSHOT'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+  </artifact>
+  <artifact classifier='osgi.bundle' id='org.eclipse.qvtd.sirius.ide.source' version='0.31.0.v20240312-2003'>
+    <properties size='10'>
+      <property name='artifact.size' value='6344'/>
+      <property name='download.size' value='6344'/>
+      <property name='download.checksum.sha-512' value='3f789578289225023f3f41a6e9554e0a79f8e00ab5f2e9a927979270bae48dd1040ef70f925afc92d5aa0b5b1830fbe585567fb837216075e95956733e2db25a'/>
+      <property name='download.checksum.sha-1' value='282307ffb0e21aea45c556417fdaca0c34de386c'/>
+      <property name='download.checksum.sha-256' value='5d559399a0df9df806ca9573a6ad455b154f680031ab78f4a767702e93c2999c'/>
+      <property name='maven-groupId' value='org.eclipse.qvtd'/>
+      <property name='maven-artifactId' value='org.eclipse.qvtd.sirius.ide'/>
+      <property name='maven-version' value='0.31.0-SNAPSHOT'/>
+      <property name='maven-classifier' value='sources'/>
+      <property name='maven-type' value='java-source'/>
+    </properties>
+  </artifact>
+</artifacts>
