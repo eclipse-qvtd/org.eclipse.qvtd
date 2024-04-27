@@ -6,13 +6,15 @@
  * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *	 E.D.Willink - initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.umlx.design;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -21,56 +23,65 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
-    // The plug-in ID
-    public static final String PLUGIN_ID = "org.eclipse.qvtd.umlx.design";
+public class UMLXDesignActivator extends AbstractUIPlugin
+{
+	// The plug-in ID
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.umlx.design";
 
-    // The shared instance
-    private static Activator plugin;
+	public static final @NonNull String VIEWPOINT_ID = "org.eclipse.qvtd.umlx.viewpoint";
+	public static final @NonNull String RELATION_REPRESENTATION_DESCRIPTION_ID = "org.eclipse.qvtd.umlx.relation";
+	public static final @NonNull String TRANSFORMATION_REPRESENTATION_DESCRIPTION_ID = "org.eclipse.qvtd.umlx.transformation";
 
-    private static Set<Viewpoint> viewpoints; 
+	public static final @NonNull URI VIEWPOINT_URI = URI.createURI("viewpoint:/" + PLUGIN_ID + "/" + VIEWPOINT_ID);
 
-    /**
-     * The constructor
-     */
-    public Activator() {
-    }
+	// The shared instance
+	private static UMLXDesignActivator plugin;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-     */
-    public void start(BundleContext context) throws Exception {
-      super.start(context);
-	  plugin = this;
-	  viewpoints = new HashSet<Viewpoint>();
-	  viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/umlx.odesign")); 
-    }
+	private static Set<Viewpoint> viewpoints;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-     */
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	if (viewpoints != null) {
-	    for (final Viewpoint viewpoint: viewpoints) {
-		ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
-	    }
-	    viewpoints.clear();
-	    viewpoints = null; 
+	/**
+	 * The constructor
+	 */
+	public UMLXDesignActivator() {
 	}
-	super.stop(context);
-    }
 
-    /**
-     * Returns the shared instance
-     * 
-     * @return the shared instance
-     */
-    public static Activator getDefault() {
-	return plugin;
-    }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+		viewpoints = new HashSet<Viewpoint>();
+		viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/umlx.odesign"));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		if (viewpoints != null) {
+			for (final Viewpoint viewpoint: viewpoints) {
+				ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
+			}
+			viewpoints.clear();
+			viewpoints = null;
+		}
+		super.stop(context);
+	}
+
+	/**
+	 * Returns the shared instance
+	 *
+	 * @return the shared instance
+	 */
+	public static UMLXDesignActivator getDefault() {
+		return plugin;
+	}
 }

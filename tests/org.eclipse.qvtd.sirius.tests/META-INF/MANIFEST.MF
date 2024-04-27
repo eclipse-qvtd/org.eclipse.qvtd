@@ -4,13 +4,19 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: org.eclipse.qvtd.sirius.tests;singleton:=true
 Bundle-Version: 0.31.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Comment: javax.annotation is a workaround to Bug 539038
-Require-Bundle: org.eclipse.qvtd.sirius.ide;bundle-version="[0.26.0,1.0.0)",
- javax.annotation;resolution:=optional,
- org.junit,
+Require-Bundle: org.junit,
+ org.eclipse.core.jobs,
  org.eclipse.jdt.annotation,
- org.eclipse.qvtd.xtext.qvtbase.tests
+ org.eclipse.emf.ecore,
+ org.eclipse.sirius,
+ org.eclipse.sirius.model,
+ org.eclipse.sirius.ui,
+ org.eclipse.qvtd.xtext.qvtbase.tests,
+ org.eclipse.qvtd.sirius,
+ org.eclipse.qvtd.sirius.ide,
+ org.eclipse.qvtd.umlx.design
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.sirius.tests
 Automatic-Module-Name: org.eclipse.qvtd.sirius.tests

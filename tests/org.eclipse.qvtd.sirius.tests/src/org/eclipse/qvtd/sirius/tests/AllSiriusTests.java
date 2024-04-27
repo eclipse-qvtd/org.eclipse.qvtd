@@ -28,7 +28,7 @@ public class AllSiriusTests extends TestCase
 
 	public static Test suite() {
 		TestSuite result = new TestSuite("All Sirius Tests");
-		result.addTestSuite(SiriusMenuTests.class);
+		result.addTestSuite(SiriusInitializeDiagramTests.class);
 		return result;
 	}
 

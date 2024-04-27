@@ -61,7 +61,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 
-public class XtextTestCase extends PivotTestCase
+public class XtextTestCase extends PivotTestCase	// FIXME rename - nothing to do with Xtext, just TestProject
 {
 	public static final class TestCaseAppender extends ConsoleAppender
 	{

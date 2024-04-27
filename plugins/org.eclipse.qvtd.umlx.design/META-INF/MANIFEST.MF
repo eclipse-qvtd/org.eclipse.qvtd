@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.umlx.design;singleton:=true
 Bundle-Version: 0.32.0.qualifier
-Bundle-Activator: org.eclipse.qvtd.umlx.design.Activator
+Bundle-Activator: org.eclipse.qvtd.umlx.design.UMLXDesignActivator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",

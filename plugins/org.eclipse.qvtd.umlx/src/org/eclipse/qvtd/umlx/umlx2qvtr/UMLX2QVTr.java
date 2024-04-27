@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -68,12 +67,12 @@ public class UMLX2QVTr extends QVTrelationHelper
 {
 	protected static class CreateVisitor extends AbstractExtendingUMLXVisitor<@Nullable Element, @NonNull UMLX2QVTr>
 	{
-		protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
+		protected final @NonNull EnvironmentFactory environmentFactory;
 		protected final @NonNull RelationModel qvtrModel;
 
 		public CreateVisitor(@NonNull UMLX2QVTr context, @NonNull RelationModel qvtrModel) {
 			super(context);
-			this.environmentFactory = (EnvironmentFactoryInternalExtension) context.getEnvironmentFactory();
+			this.environmentFactory = context.getEnvironmentFactory();
 			this.qvtrModel = qvtrModel;
 		}
 

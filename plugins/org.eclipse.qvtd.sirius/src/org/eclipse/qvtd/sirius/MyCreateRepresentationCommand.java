@@ -87,7 +87,8 @@ public class MyCreateRepresentationCommand extends RecordingCommand {
 			return super.canExecute();
 		} */
 		final EObject root = computeRepresentationRoot(session.getInterpreter(), creationDescription, semantic);
-		return DialectManager.INSTANCE.canCreate(root, description);
+	//	return DialectManager.INSTANCE.canCreate(root, description);      // XXX , false
+		return DialectManager.INSTANCE.canCreate(root, description, false);
 	}
 
 	private void clearData() {

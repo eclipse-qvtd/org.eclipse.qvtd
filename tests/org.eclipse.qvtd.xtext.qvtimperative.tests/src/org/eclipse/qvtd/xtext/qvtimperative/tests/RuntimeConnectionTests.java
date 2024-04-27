@@ -22,9 +22,8 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.AbstractInterpretedInvocation;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
@@ -42,14 +41,14 @@ public class RuntimeConnectionTests extends TestCase
 {
 	public static final class Tester
 	{
-		protected final @NonNull OCL ocl;
+		protected final @NonNull OCLInternal ocl;
 		protected final @NonNull TestExecutor executor;
 		protected final @NonNull TestInvocationManager invocationManager;
 		protected final @NonNull TestInvocationConstructor invocationConstructor;
 		protected final @NonNull List<@NonNull TestConnection> testConnections = new ArrayList<>();
 
 		public Tester() {
-			ocl = OCL.newInstance();
+			ocl = OCLInternal.newInstance();
 			executor = new TestExecutor(ocl.getEnvironmentFactory());
 			invocationManager = new TestInvocationManager(executor);
 			invocationConstructor = new TestInvocationConstructor(invocationManager, "name", false);
@@ -112,8 +111,8 @@ public class RuntimeConnectionTests extends TestCase
 
 	public static final class TestExecutor extends AbstractExecutor
 	{
-		public TestExecutor(@NonNull EnvironmentFactory environmentFactory) {
-			super((@NonNull EnvironmentFactoryInternalExtension) environmentFactory);
+		public TestExecutor(@NonNull EnvironmentFactoryInternal environmentFactory) {
+			super(environmentFactory);
 		}
 
 		@Override

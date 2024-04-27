@@ -32,8 +32,9 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -64,7 +65,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 
 	protected final @NonNull EntryPoint entryPoint;
 	protected final @NonNull EntryPointsAnalysis entryPointsAnalysis;
-	protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
+	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
 
 	/**
 	 * Array of caches for the un-navigable opposite of each used property.
@@ -307,7 +308,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 
 	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance	// FIXME reimplement using CG variant
 	{
-		protected final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
+		protected final @NonNull EnvironmentFactoryInternal environmentFactory;
 		protected final @NonNull TypedModel typedModel;
 		private @Nullable EClass extentEClass = null;
 

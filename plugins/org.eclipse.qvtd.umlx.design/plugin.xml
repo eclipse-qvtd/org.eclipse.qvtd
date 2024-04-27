@@ -16,7 +16,7 @@
 
 <plugin>
   <extension point="org.eclipse.sirius.componentization">
-    <component class="org.eclipse.qvtd.umlx.design.Activator"
+    <component class="org.eclipse.qvtd.umlx.design.UMLXDesignActivator"
                id="org.eclipse.qvtd.umlx.design"
 	       name="umlx">
     </component>

@@ -54,7 +54,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * FileExtensionRegistry maintains a mapping between the file extensions and the *.odesign files
- * that declare diagramming support fpor those file extensions.
+ * that declare diagramming support for those file extensions.
  * <br>
  * HasODesignPropertyTester provides support for use within org.eclipse.ui.menus extension points.
  * <br>
