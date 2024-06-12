@@ -290,6 +290,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private Collection<@NonNull GenPackage> usedGenPackages = null;
 	private Collection<@NonNull EPackage> loadedEPackages = null;
 	private @Nullable String copyright = null;
+	private @Nullable Map<@NonNull String, @NonNull EPackage> extraLocalPackageRegistryEntries = null;
 
 	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
 		super(new QVTiEnvironmentFactory(projectManager, null));
@@ -611,18 +612,20 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
 		deactivate();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		//	Executor savedExecutor = PivotUtil.basicGetExecutor();
 		//
 		//	Load QVTiAS
 		//
 		OCL ocl = QVTbase.newInstance(getTestProjectManager());
+		if (extraLocalPackageRegistryEntries != null) {
+			ocl.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
+		}
 		ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 		XtextResource xtextResource = null;
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
 			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
+			ResourceSet resourceSet = new ResourceSetImpl();
 			try {
 				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
 				//
@@ -645,6 +648,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 
 		QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
+		if (extraLocalPackageRegistryEntries != null) {
+			qvti.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
+		}
 		try {
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
 			Resource asResource2 = asTransformation.eResource();
@@ -785,9 +791,17 @@ public abstract class AbstractTestQVT extends QVTimperative
 	} */
 
 	public void loadEcoreFile(URI fileURI, EPackage ePackage) {
-		ResourceSet rSet = getResourceSet();
-		rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+		// Install nsURI in global registry
 		EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+		// Install physical path in local registry
+		String fileURIstring = String.valueOf(fileURI);
+		getResourceSet().getPackageRegistry().put(fileURIstring, ePackage);
+		// Cache physical path for downstream (serialize) local registries
+		Map<@NonNull String, @NonNull EPackage> extraLocalPackageRegistryEntries2 = extraLocalPackageRegistryEntries;
+		if (extraLocalPackageRegistryEntries2 == null) {
+			extraLocalPackageRegistryEntries2 = extraLocalPackageRegistryEntries = new HashMap<>();
+		}
+		extraLocalPackageRegistryEntries2.put(fileURIstring, ePackage);
 	}
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
