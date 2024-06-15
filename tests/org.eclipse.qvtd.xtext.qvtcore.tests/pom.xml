@@ -18,12 +18,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.qvtd-tests</groupId>
   <artifactId>org.eclipse.qvtd.xtext.qvtcore.tests</artifactId>
-  <version>0.32.0-SNAPSHOT</version>
+  <version>0.33.0-SNAPSHOT</version>
   <packaging>eclipse-test-plugin</packaging>
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>
     <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
-    <version>0.32.0-SNAPSHOT</version>
+    <version>0.33.0-SNAPSHOT</version>
   </parent>
   <build>
     <plugins>
