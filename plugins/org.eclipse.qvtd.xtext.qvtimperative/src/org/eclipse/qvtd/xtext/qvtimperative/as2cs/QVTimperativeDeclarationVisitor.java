@@ -16,11 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -39,19 +36,16 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
-import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
-import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
@@ -500,34 +494,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
-		BaseCSResource csResource = context.getCSResource();
-		Namespace asNamespace = asUnit.getImportedNamespace();
-		EObject eObject = asNamespace.getESObject();
-		String importURI = null;
-		if (eObject instanceof EPackage) {
-			EPackage ePackage = (EPackage)eObject;
-			Resource resource = ePackage.eResource();
-			if (ClassUtil.isRegistered(resource)) {
-				importURI = ePackage.getNsURI();
-			}
-		}
-		if ((importURI == null) && (csResource != null)) {
-			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
-			URI csURI = csResource.getURI();
-			URI deresolvedURI = URIUtil.deresolve(fullURI, csURI, true, true, false);
-			importURI = deresolvedURI.toString();
-		}
-		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
-		csImport.setPivot(asUnit);
-		csImport.setName(asUnit.getName());
-		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
-		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
-		csSimpleRef.setReferredElement(asNamespace);
-		csSimpleRef.setUri(importURI);
-		csPath.add(csSimpleRef);
-		csImport.setOwnedPathName(csPathName);
-		return csImport;
+		return resolveImport(asUnit);
 	}
 
 	@Override

@@ -13,25 +13,40 @@ package org.eclipse.qvtd.xtext.qvtbase.as2cs;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.LanguageExpression;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
+import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
+import org.eclipse.ocl.xtext.basecs.PathElementCS;
+import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.SpecificationCS;
 import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
@@ -93,6 +108,43 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 		TypedRefCS csTypeRef = createTypeRefCS(asTypedElement);
 		csTypedElement.setOwnedType(csTypeRef);
 		return csTypedElement;
+	}
+
+	protected @NonNull ImportCS resolveImport(@NonNull Import asUnit) {
+		String importURI = null;
+		BaseCSResource csResource = context.getCSResource();
+		Namespace asNamespace = asUnit.getImportedNamespace();
+		EObject eObject = null;
+		if (asNamespace instanceof Model) {
+			importURI = ((Model)asNamespace).getExternalURI();
+		}
+		else {
+			eObject = asNamespace.getESObject();
+			if (eObject instanceof EPackage) {
+				EPackage ePackage = (EPackage)eObject;
+				Resource resource = ePackage.eResource();
+				if (ClassUtil.isRegistered(resource)) {
+					importURI = ePackage.getNsURI();
+				}
+			}
+		}
+		if ((importURI == null) && (csResource != null)) {
+			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
+			URI csURI = csResource.getURI();
+			URI deresolvedURI = URIUtil.deresolve(fullURI, csURI, true, true, false);
+			importURI = deresolvedURI.toString();
+		}
+		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
+		csImport.setPivot(asUnit);
+		csImport.setName(asUnit.getName());
+		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
+		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
+		csSimpleRef.setReferredElement(asNamespace);
+		csSimpleRef.setUri(importURI);
+		csPath.add(csSimpleRef);
+		csImport.setOwnedPathName(csPathName);
+		return csImport;
 	}
 
 	@Override
