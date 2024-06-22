@@ -360,6 +360,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable EClassifier getEcoreClassifier() {
 		return null;
 	}
@@ -368,6 +369,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isBoxed() {
 		return true;
 	}
@@ -376,6 +378,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
 	}
@@ -384,6 +387,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isConstant() {
 		return false;
 	}
@@ -392,6 +396,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isEcore() {
 		return false;
 	}
@@ -400,6 +405,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtil.isEquivalent(this, (CGRealizedVariablePart)thatValue) : null;
 	}
@@ -408,6 +414,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isGlobal() {
 		return false;
 	}
@@ -416,6 +423,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
@@ -424,6 +432,7 @@ public class CGRealizedVariablePartImpl extends CGValuedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUncommonable() {
 		return true;
 	}
