@@ -102,6 +102,7 @@
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="com.google.guava" version="0.0.0"/>
     <unit id="com.ibm.icu" version="0.0.0"/>
+    <unit id="org.apache.commons.logging" version="0.0.0"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-I"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-S"/>
     <repository location="https://download.eclipse.org/tools/orbit/downloads/latest-R"/>
