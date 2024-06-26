@@ -131,8 +131,9 @@ public class UMLXSerializeTests extends LoadTestCase
 		if (!skipCompare) {				// FIXME BUG 511230
 			assertSameModel(qvtrResource1, qvtrResource2);
 		}
-		ocl1.dispose();
 		ocl2.dispose();
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	private void normalize(@NonNull Resource qvtrResource) {
