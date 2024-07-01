@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.BaseEditor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 
 public class QVTimperativeEditor extends BaseEditor
@@ -20,6 +21,11 @@ public class QVTimperativeEditor extends BaseEditor
 
 	public QVTimperativeEditor() {
 		super();
+	}
+
+	@Override
+	public @NonNull String getCSXMIfileExtension() {
+		return QVTbaseUtil.QVTICS_FILE_EXTENSION;
 	}
 
 	@Override

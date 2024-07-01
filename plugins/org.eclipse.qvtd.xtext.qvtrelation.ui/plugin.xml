@@ -166,6 +166,18 @@
         </resourceServiceProvider>
     </extension>
 
+  <extension point="org.eclipse.core.contenttype.contentTypes">
+	<content-type id="org.eclipse.qvtd.xtext.qvtrelation" name="%QVTrelationName" 
+		base-type="org.eclipse.core.runtime.text"
+		file-extensions="qvtr"
+        default-charset="UTF-8">
+         <describer class="org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl$Describer"/>
+      </content-type>
+  </extension>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="qvtr" type="text" />
+   </extension>
 
     <!-- marker definitions for org.eclipse.qvtd.xtext.qvtrelation.QVTrelation -->
     <extension point="org.eclipse.core.resources.markers"

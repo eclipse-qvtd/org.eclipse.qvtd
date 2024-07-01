@@ -20,14 +20,30 @@
 
 <plugin>
 
-  <extension point="org.eclipse.core.contenttype.contentTypes">
-	<content-type id="org.eclipse.qvtd.xtext.qvtrelation" name="%QVTrelationName" 
-		base-type="org.eclipse.core.runtime.text"
-		file-extensions="qvtr"
-        default-charset="UTF-8">
-         <describer class="org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl$Describer"/>
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+     <content-type
+            base-type="org.eclipse.qvtd.qvtbcs"
+            file-extensions="qvtrcs"
+            id="org.eclipse.qvtd.qvtrcs"
+            name="%QVTrelationCSName"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTrelationCS"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
       </content-type>
-  </extension>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtrcs"
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSXMIResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtrcs"
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSXMIResourceFactory"/>
+   </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
@@ -37,7 +53,6 @@
    </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
-      <fileTypes extension="qvtr" type="text" />
-      <fileTypes extension="qvtrcs" type="text" />
+       <fileTypes extension="qvtrcs" type="text" />
    </extension>
 </plugin>
