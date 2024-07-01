@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtbase.ui;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.sirius.business.api.resource.strategy.AbstractResourceStrategyImpl;
 import org.eclipse.sirius.business.api.session.Session;
 
@@ -28,7 +29,7 @@ public class QVTdNotAResourceStrategyImpl extends AbstractResourceStrategyImpl
 	@Override
 	public boolean canHandle(URI resourceURI, ResourceStrategyType resourceStrategyType) {
 		String fileExtension = resourceURI.fileExtension();
-		if ("qvtcas".equals(fileExtension) || "qvtias".equals(fileExtension) || "qvtras".equals(fileExtension) || "qvtsas".equals(fileExtension)) {
+		if (QVTbaseUtil.QVTCAS_FILE_EXTENSION.equals(fileExtension) || QVTbaseUtil.QVTIAS_FILE_EXTENSION.equals(fileExtension) || QVTbaseUtil.QVTRAS_FILE_EXTENSION.equals(fileExtension) || QVTbaseUtil.QVTSAS_FILE_EXTENSION.equals(fileExtension)) {
 			return true;
 		}
 		return false;
