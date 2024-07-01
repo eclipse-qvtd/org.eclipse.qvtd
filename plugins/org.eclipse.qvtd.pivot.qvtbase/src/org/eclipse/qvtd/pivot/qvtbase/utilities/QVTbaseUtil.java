@@ -727,8 +727,8 @@ public class QVTbaseUtil extends PivotUtil
 				}
 			}
 		} finally {
-			if (!keepDebug && (xtextResource instanceof CSResource.CSResourceExtension)) {
-				((CSResource.CSResourceExtension)xtextResource).dispose();
+			if (!keepDebug && (xtextResource instanceof CSResource)) {
+				((CSResource)xtextResource).dispose();
 			}
 		}
 		throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
@@ -772,8 +772,8 @@ public class QVTbaseUtil extends PivotUtil
 				asResource = ((CSResource)xtextResource).getASResource();
 			}
 		} finally {
-			if (!keepDebug && (xtextResource instanceof CSResource.CSResourceExtension)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned
-				//				((CSResource.CSResourceExtension)xtextResource).dispose();
+			if (!keepDebug && (xtextResource instanceof CSResource)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned
+				//				((CSResource)xtextResource).dispose();
 			}
 		}
 		if (asResource == null) {
