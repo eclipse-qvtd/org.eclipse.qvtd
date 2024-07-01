@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.BaseEditor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
 
 public class QVTrelationEditor extends BaseEditor
@@ -20,6 +21,11 @@ public class QVTrelationEditor extends BaseEditor
 
 	public QVTrelationEditor() {
 		super();
+	}
+
+	@Override
+	public @NonNull String getCSXMIfileExtension() {
+		return QVTbaseUtil.QVTRCS_FILE_EXTENSION;
 	}
 
 	@Override
