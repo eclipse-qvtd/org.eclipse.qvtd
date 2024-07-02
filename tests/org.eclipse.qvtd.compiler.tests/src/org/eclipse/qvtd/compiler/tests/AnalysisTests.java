@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.InheritanceAnalysis;
@@ -298,7 +299,8 @@ public class AnalysisTests extends XtextTestCase
 		//
 		URI qvtcURI = URI.createPlatformResourceURI(getClass().getPackage().getName() + "/src/" + getProjectName() + "/companies/CompaniesCS2AS.qvtc", true);
 		BaseCSResource csResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(qvtcURI, true);
-		ASResource asResource = csResource.getASResource();
+		CS2AS cs2as = csResource.getCS2AS(environmentFactory);
+		ASResource asResource = cs2as.getASResource();
 		Model asModel = (Model)asResource.getContents().get(0);
 		Transformation asTransformation = QVTcoreUtil.getAllTransformations(asModel).get(0);
 

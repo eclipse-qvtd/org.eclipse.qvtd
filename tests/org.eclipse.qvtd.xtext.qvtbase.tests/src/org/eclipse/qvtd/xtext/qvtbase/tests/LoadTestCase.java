@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -63,7 +64,8 @@ public abstract class LoadTestCase extends XtextTestCase
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
-		ASResource pivotResource = xtextResource.getASResource();
+		CS2AS cs2as = xtextResource.getCS2AS(ocl.getEnvironmentFactory());
+		ASResource pivotResource = cs2as.getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
