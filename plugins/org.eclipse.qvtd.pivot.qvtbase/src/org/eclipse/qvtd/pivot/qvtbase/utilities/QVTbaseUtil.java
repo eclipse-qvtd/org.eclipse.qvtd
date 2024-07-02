@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -709,7 +710,8 @@ public class QVTbaseUtil extends PivotUtil
 			if (csMessage != null) {
 				throw new IOException(csMessage);
 			}
-			asResource = ((CSResource)xtextResource).getASResource();
+			ICS2AS cs2as = ((CSResource)xtextResource).getCS2AS(environmentFactory);
+			asResource = cs2as.getASResource();
 		}
 		try {
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
@@ -769,7 +771,8 @@ public class QVTbaseUtil extends PivotUtil
 				if (csMessage != null) {
 					throw new IOException(csMessage);
 				}
-				asResource = ((CSResource)xtextResource).getASResource();
+				ICS2AS cs2as = ((CSResource)xtextResource).getCS2AS(environmentFactory);
+				asResource = cs2as.getASResource();
 			}
 		} finally {
 			if (!keepDebug && (xtextResource instanceof CSResource)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned

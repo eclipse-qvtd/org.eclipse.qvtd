@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -139,7 +140,8 @@ class UMLXParserContext extends AbstractExtendedParserContext
 		EObject eContainer = owner.eContainer();
 		String parentName = eContainer instanceof Nameable ? ((Nameable)eContainer).getName() : "<unknown>";
 		PivotUtil.checkResourceErrors(StringUtil.bind(PivotMessagesInternal.ValidationConstraintIsInvalid_ERROR_, parentName, childName, expression.trim()), resource);
-		ASResource asResource = resource.getASResource();
+		ICS2AS cs2as = resource.getCS2AS(environmentFactory);
+		ASResource asResource = cs2as.getASResource();
 		assert asResource.getContents().size() == 1;
 		ExpressionInOCL asExpression = (ExpressionInOCL) asResource.getContents().get(0);
 		return PivotUtil.getOwnedBody(asExpression);
