@@ -60,6 +60,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -142,7 +143,8 @@ public class QVTiCompilerTests extends LoadTestCase
 			BaseCSResource xtextResource = (BaseCSResource) getResourceSet().getResource(inputURI, true);
 			assert xtextResource != null;
 			assertNoResourceErrors("Load failed", xtextResource);
-			ASResource asResource = xtextResource.getASResource();
+			CS2AS cs2as = xtextResource.getCS2AS(environmentFactory);
+			ASResource asResource = cs2as.getASResource();
 			//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 			assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));

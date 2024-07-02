@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
@@ -139,7 +140,8 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		BaseCSResource xtextResource = (BaseCSResource) myQVT.getResourceSet().getResource(transformURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
-		ASResource asResource = xtextResource.getASResource();
+		CS2AS cs2as = xtextResource.getCS2AS(myQVT.getEnvironmentFactory());
+		ASResource asResource = cs2as.getASResource();
 		//		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));

@@ -50,6 +50,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -435,6 +436,7 @@ public class XtextTestCase extends PivotTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		PivotUtilInternal.DEBUG_DEPRECATIONS.setState(true);
 		testCaseAppender.install();
 		//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 		//    		OCL.initialize(null);
