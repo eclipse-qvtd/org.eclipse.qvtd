@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtrcs:TopLevelCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basecs="http://www.eclipse.org/ocl/2015/BaseCS" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtrcs="http://www.eclipse.org/qvt/2015/QVTrelationCS">
+  <ownedImports name="qvtrelation">
+    <ownedPathName>
+      <ownedPathElements xsi:type="basecs:PathElementWithURICS">
+        <referredElement xsi:type="pivot:Model" href="platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore"/>
+      </ownedPathElements>
+      <ownedPathElements>
+        <referredElement xsi:type="pivot:Package" href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation"/>
+      </ownedPathElements>
+    </ownedPathName>
+  </ownedImports>
+  <ownedImports name="emof">
+    <ownedPathName>
+      <ownedPathElements xsi:type="basecs:PathElementWithURICS">
+        <referredElement xsi:type="pivot:Model" href="platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore"/>
+      </ownedPathElements>
+      <ownedPathElements>
+        <referredElement xsi:type="pivot:Package" href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF"/>
+      </ownedPathElements>
+    </ownedPathName>
+  </ownedImports>
+  <ownedTransformations name="Keys">
+    <ownedModelDecls name="mm">
+      <metamodelIds xsi:type="pivot:Package" href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation"/>
+      <metamodelIds xsi:type="pivot:Package" href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF"/>
+    </ownedModelDecls>
+    <ownedKeyDecls>
+      <ownedPathName>
+        <ownedPathElements>
+          <referredElement xsi:type="pivot:Class" href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation.Key"/>
+        </ownedPathElements>
+      </ownedPathName>
+      <propertyIds href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation.Key.identifies"/>
+    </ownedKeyDecls>
+    <ownedKeyDecls>
+      <ownedPathName>
+        <ownedPathElements>
+          <referredElement xsi:type="pivot:Class" href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation.Key"/>
+        </ownedPathElements>
+      </ownedPathName>
+      <propertyIds href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation.Key.identifies"/>
+      <propertyIds href="../../../org.eclipse.qvt/model/ecore/QVTRelation.ecore#QVTRelation.Key.part"/>
+    </ownedKeyDecls>
+    <ownedKeyDecls>
+      <ownedPathName>
+        <ownedPathElements>
+          <referredElement xsi:type="pivot:Class" href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF.Class"/>
+        </ownedPathElements>
+      </ownedPathName>
+      <propertyIds href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF.NamedElement.name"/>
+    </ownedKeyDecls>
+    <ownedKeyDecls>
+      <ownedPathName>
+        <ownedPathElements>
+          <referredElement xsi:type="pivot:Class" href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF.NamedElement"/>
+        </ownedPathElements>
+      </ownedPathName>
+      <propertyIds href="../../../org.eclipse.qvt/model/ecore/EMOF.ecore#EMOF.NamedElement.name"/>
+    </ownedKeyDecls>
+  </ownedTransformations>
+</qvtrcs:TopLevelCS>

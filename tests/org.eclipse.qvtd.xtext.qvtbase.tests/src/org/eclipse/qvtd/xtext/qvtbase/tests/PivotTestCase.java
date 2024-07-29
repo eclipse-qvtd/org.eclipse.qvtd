@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -43,6 +45,7 @@ import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -74,13 +77,13 @@ public class PivotTestCase extends TestCase
 	/*
 	 * The following may be tweaked to assist debugging.
 	 */
-	//public static boolean DEBUG_GC = false;			// True performs an enthusuastic resource release and GC at the end of each test
+	public static boolean DEBUG_GC = false;			// True performs an enthusuastic resource release and GC at the end of each test
 	public static boolean DEBUG_ID = false;			// True prints the start and end of each test.
 	{
-		//	PivotUtilInternal.noDebug = false;
-		//	DEBUG_GC = true;
-		//	DEBUG_ID = true;
-		//	AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
+		PivotUtilInternal.noDebug = false;
+		DEBUG_GC = true;
+		DEBUG_ID = true;
+		AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
 		//	PivotMetamodelManager.liveMetamodelManagers = new WeakHashMap<>();			// Prints the create/finalize of each MetamodelManager
 		//	StandaloneProjectMap.liveStandaloneProjectMaps = new WeakHashMap<>();		// Prints the create/finalize of each StandaloneProjectMap
 		//	ResourceSetImpl.liveResourceSets = new WeakHashMap<>();						// Requires edw-debug private EMF branch
@@ -495,6 +498,15 @@ public class PivotTestCase extends TestCase
 					PivotUtilInternal.debugPrintln("Extra " + nsURI);
 				}
 			}
+		}
+		ThreadLocalExecutor.reset();
+		if (DEBUG_GC) {
+			//	uninstall();
+			//	makeCopyOfGlobalState.restoreGlobalState();
+			//	makeCopyOfGlobalState = null;
+			System.gc();
+			System.runFinalization();
+			//			MetamodelManagerResourceAdapter.INSTANCES.show();
 		}
 		if (DEBUG_ID) {
 			PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
