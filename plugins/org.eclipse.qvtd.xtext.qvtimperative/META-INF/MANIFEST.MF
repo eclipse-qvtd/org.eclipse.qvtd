@@ -11,6 +11,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativePlugin$Implementation
 Export-Package: org.eclipse.qvtd.xtext.qvtimperative,
  org.eclipse.qvtd.xtext.qvtimperative.as2cs,
+ org.eclipse.qvtd.xtext.qvtimperative.attributes,
  org.eclipse.qvtd.xtext.qvtimperative.cs2as,
  org.eclipse.qvtd.xtext.qvtimperative.formatting,
  org.eclipse.qvtd.xtext.qvtimperative.parser.antlr,

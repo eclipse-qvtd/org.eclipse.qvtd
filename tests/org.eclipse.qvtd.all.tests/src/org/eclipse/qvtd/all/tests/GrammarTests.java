@@ -15,6 +15,7 @@ import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseGrammarResource;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreGrammarResource;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeGrammarResource;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationGrammarResource;
@@ -29,6 +30,10 @@ public class GrammarTests extends AbstractGrammarTests
 		CompleteOCLStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
 		OCLinEcoreStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
 		OCLstdlibStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
+		//	XtextCompilerUtil.doQVTbaseSetup();
+		XtextCompilerUtil.doQVTcoreSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTrelationSetup();
 		super.setUp();
 	}
 
