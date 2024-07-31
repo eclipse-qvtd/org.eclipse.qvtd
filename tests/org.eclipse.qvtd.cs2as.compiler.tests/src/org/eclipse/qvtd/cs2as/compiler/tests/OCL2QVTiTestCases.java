@@ -225,9 +225,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	public void setUp() throws Exception {
 		super.setUp();
 		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
+		TestUtil.doCompleteOCLSetup();
 		XtextCompilerUtil.doQVTimperativeSetup(); // To be able to add QVTimperative.ocl validation
 		XtextCompilerUtil.doQVTcoreSetup();
-		TestUtil.doCompleteOCLSetup();
 	}
 
 	@Override

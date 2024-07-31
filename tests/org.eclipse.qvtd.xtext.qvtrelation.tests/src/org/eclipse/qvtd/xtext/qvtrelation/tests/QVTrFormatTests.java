@@ -151,7 +151,7 @@ public class QVTrFormatTests extends LoadTestCase
 		//	DeclarativeFormatter.FORMATTER_FRAGMENTS.setState(true);
 		//	DeclarativeSerializer.SERIALIZER_FRAGMENTS.setState(true);
 		//	SerializationBuilder.SERIALIZATION.setState(true);
-		DeclarativeFormatter declarativeFormatter = new QVTrelationStandaloneSetup().createInjector().getInstance(DeclarativeFormatter.class);
+		DeclarativeFormatter declarativeFormatter = QVTrelationStandaloneSetup.getInjector().getInstance(DeclarativeFormatter.class);
 		OCLInternal ocl = createOCL();
 		URI inputURI = getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr");
 		URI referenceURI = getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr");
