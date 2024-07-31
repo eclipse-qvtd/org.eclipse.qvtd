@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.QVTimperativeScoping;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -25,9 +27,29 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 	private static Injector injector = null;
 
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 381901/382058 fix
 		if (injector == null) {
 			injector = new QVTimperativeStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
+	}
+
+	public static void doTearDown() {
+		injector = null;
+	}
+
+	/**
+	 * Return the Injector for this plugin.
+	 */
+	public static final Injector getInjector() {
+		if (injector == null) {
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				doSetup();
+			}
+			else {
+				injector = Guice.createInjector(new QVTimperativeRuntimeModule());
+			}
+		}
+		return injector;
 	}
 
 	public static void init() {
@@ -37,20 +59,12 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 		//		QVTimperativeCS2MonikerVisitor.FACTORY.getClass();
 	}
 
-	/**
-	 * Return the Injector for this plugin.
-	 */
-	public static final Injector getInjector() {
-		if (injector == null) {
-			doSetup();
-		}
-		return injector;
-	}
-
 	@Override
 	public Injector createInjector() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 
