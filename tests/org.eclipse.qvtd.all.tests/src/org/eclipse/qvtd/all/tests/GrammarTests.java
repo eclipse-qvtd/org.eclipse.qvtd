@@ -30,6 +30,7 @@ public class GrammarTests extends AbstractGrammarTests
 		CompleteOCLStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
 		OCLinEcoreStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
 		OCLstdlibStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
+		CompleteOCLStandaloneSetup.doSetup();
 		//	XtextCompilerUtil.doQVTbaseSetup();
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
