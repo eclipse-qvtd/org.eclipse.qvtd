@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
-import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -422,25 +421,16 @@ public class PivotTestCase extends AbstractPivotTestCase
 		resourceSet.eAdapters().clear();
 	}
 
-	protected static boolean noDebug = false;
+	//	protected static boolean noDebug = false;
 
-	public static void debugPrintln(String string) {
-		if (!noDebug) {
-			System.out.println(string);
-		}
-	}
+	//	public static void debugPrintln(String string) {
+	//		if (!noDebug) {
+	//			System.out.println(string);
+	//		}
+	//	}
 
 	protected PivotTestCase() {
 		super(QVTTestHelper.INSTANCE);
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return TestUtil.getName(getTestName());
-	}
-
-	public @NonNull String getTestName() {
-		return ClassUtil.nonNullState(super.getName());
 	}
 
 	private static List<String> savedEPackageRegistry = null;

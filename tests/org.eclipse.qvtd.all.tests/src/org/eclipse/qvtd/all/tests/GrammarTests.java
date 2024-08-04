@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.all.tests;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase.TestHelper;
 import org.eclipse.ocl.examples.test.xtext.AbstractGrammarTests;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
@@ -54,11 +52,11 @@ public class GrammarTests extends AbstractGrammarTests
 	 *
 	 * FIXME check the library/model version instead.
 	 */
-	public void zztestGrammar_QVTbase() throws Exception {
+	public void testGrammar_QVTbase() throws Exception {
 		doTestGrammar(QVTbaseGrammarResource.class, "QVTbase.xtextbin", QVTbaseGrammarResource.INSTANCE);
 	}
 
-	public void zztestGrammar_QVTcore() throws Exception {
+	public void testGrammar_QVTcore() throws Exception {
 		doTestGrammar(QVTcoreGrammarResource.class, "QVTcore.xtextbin", QVTcoreGrammarResource.INSTANCE);
 	}
 
@@ -66,7 +64,7 @@ public class GrammarTests extends AbstractGrammarTests
 		doTestGrammar(QVTimperativeGrammarResource.class, "QVTimperative.xtextbin", QVTimperativeGrammarResource.INSTANCE);
 	}
 
-	public void zztestGrammar_QVTrelation() throws Exception {
+	public void testGrammar_QVTrelation() throws Exception {
 		doTestGrammar(QVTrelationGrammarResource.class, "QVTrelation.xtextbin", QVTrelationGrammarResource.INSTANCE);
 	}
 }
