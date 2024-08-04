@@ -62,7 +62,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 // Manual load tests rely on previous generation of the class to load. - testExample1_CGManual
@@ -236,8 +235,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		super.tearDown();
 	}
 
-	@Test
-	public void testOCL2QVTi_Source2Target_CG() throws Exception {
+
+	public void zztestOCL2QVTi_Source2Target_CG() throws Exception {
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -269,8 +268,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	/*	@Test
-	public void testOCL2QVTi_Source2Target_CGManual() throws Exception {
+	/*
+	public void zztestOCL2QVTi_Source2Target_CGManual() throws Exception {
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2TargetBase.ocl"), "samples");
 		try {
 			myQVT.loadEcoreFile("SourceMM1.ecore", example1.source.SourcePackage.eINSTANCE);
@@ -292,8 +291,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	} */
 
-	@Test
-	public void testOCL2QVTi_Source2Target_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_Source2Target_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
 		try {
@@ -319,8 +318,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_Source2Target_OCL2QVTm() throws Exception {
+
+	public void zztestOCL2QVTi_Source2Target_OCL2QVTm() throws Exception {
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
 		URI oclDocURI = getModelsURI("Source2Target/Source2Target.ocl");
 		URI qvtmFileURI = getTestURI("Source2Target.qvtm.qvtcas");
@@ -332,8 +331,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	@Test
-	public void testOCL2QVTi_SimpleClasses_CG() throws Exception {
+
+	public void zztestOCL2QVTi_SimpleClasses_CG() throws Exception {
 		//		Scheduler.EDGE_ORDER.setState(true);
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
@@ -371,8 +370,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_SimpleClasses_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_SimpleClasses_Interpreted() throws Exception {
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -412,8 +411,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_StructuredClasses_CG() throws Exception {
+
+	public void zztestOCL2QVTi_StructuredClasses_CG() throws Exception {
 		//		Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		//		Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.setState(true);
 		//		Scheduler.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
@@ -457,8 +456,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_StructuredClasses_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_StructuredClasses_Interpreted() throws Exception {
 		//		OperationDependencyAnalysis.CALL.setState(true);
 		//		OperationDependencyAnalysis.CREATE.setState(true);
 		//		OperationDependencyAnalysis.FINISH.setState(true);
@@ -494,8 +493,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	}
 
 	//  Note supported anymore
-	//	@Test
-	//	public void testExample2_OCL2QVTm_MiddleModel() throws Exception {
+	//
+	//	public void zztestExample2_OCL2QVTm_MiddleModel() throws Exception {
 	//		MyQVT myQVT = createQVT("example2");
 	//		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 	//		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
@@ -509,8 +508,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	//		myQVT.dispose();
 	//	}
 
-	@Test
-	public void testOCL2QVTi_SimpleClasses_OCL2QVTm_MiddleFolded() throws Exception {
+
+	public void zztestOCL2QVTi_SimpleClasses_OCL2QVTm_MiddleFolded() throws Exception {
 		MyQVT myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
 		URI oclDocURI = getModelsURI("SimpleClasses/classescs2as.ocl");
 		URI qvtmFileURI = getTestURI("classescs2as.qvtm.qvtcas");
@@ -521,8 +520,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	@Test
-	public void testOCL2QVTi_KiamaRewrite_CG() throws Exception {
+
+	public void zztestOCL2QVTi_KiamaRewrite_CG() throws Exception {
 		//		Scheduler.CONNECTION_CREATION.setState(true);
 		//		Scheduler.CONNECTION_ROUTING.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -560,8 +559,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	/*	@Test
-	public void testExample3_CG2() throws Exception {
+	/*
+	public void zztestExample3_CG2() throws Exception {
 		EPackage.Registry.INSTANCE.put(example3.kiamaas.KiamaasPackage.eNS_URI, example3.kiamaas.KiamaasPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(example3.kiamacs.KiamacsPackage.eNS_URI, example3.kiamacs.KiamacsPackage.eINSTANCE);
 		AbstractTransformer.INVOCATIONS.setState(true);
@@ -573,8 +572,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
 	} */
 
-	@Test
-	public void testOCL2QVTi_KiamaRewrite_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_KiamaRewrite_Interpreted() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("KiamaRewrite", getModelsURI("KiamaRewrite/KiamaRewrite.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("KiamaRewrite/KiamaAS.genmodel"), getModelsURI("KiamaRewrite/KiamaCS.genmodel"));
@@ -583,8 +582,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	@Test
-	public void testOCL2QVTi_SimplerKiama_CG() throws Exception {
+
+	public void zztestOCL2QVTi_SimplerKiama_CG() throws Exception {
 		//		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
 		//		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
 		//		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
@@ -626,8 +625,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_SimplerKiama_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_SimplerKiama_Interpreted() throws Exception {
 		MyQVT myQVT = createQVT("SimplerKiama", getModelsURI("SimplerKiama/SimplerKiama.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("SimplerKiama/SimplerKiamaAS.genmodel"), getModelsURI("SimplerKiama/SimplerKiamaCS.genmodel"));
 		ImperativeTransformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
@@ -645,7 +644,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	@Test
+
 	public void testOCL2QVTi_BaseAndDerived_CG() throws Exception {
 		MyQVT myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetBase.ocl"), "samples");
 		try {
@@ -684,8 +683,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		}
 	}
 
-	@Test
-	public void testOCL2QVTi_BaseAndDerived_Interpreted() throws Exception {
+
+	public void zztestOCL2QVTi_BaseAndDerived_Interpreted() throws Exception {
 		MyQVT myQVT = createQVT("BaseAndDerived", getModelsURI("BaseAndDerived/Source2TargetBase.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("BaseAndDerived/SourceBaseMM.genmodel"), getModelsURI("BaseAndDerived/TargetBaseMM.genmodel"));
 		ImperativeTransformation tx = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");

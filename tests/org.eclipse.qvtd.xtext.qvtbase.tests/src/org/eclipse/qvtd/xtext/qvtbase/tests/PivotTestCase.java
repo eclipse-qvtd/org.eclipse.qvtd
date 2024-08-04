@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -34,6 +35,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -55,6 +58,10 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
+import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -62,16 +69,28 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * Tests for OclAny operations.
  */
-public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTestCase
+public class PivotTestCase extends AbstractPivotTestCase
 {
-	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
-
 	{
 		//	TEST_START.setState(true);
 		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
 		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
 		DefaultCompilerOptions.defaultSavingOptions.put(AS2ID.DEBUG_LUSSID_COLLISIONS, Boolean.TRUE);
 		DefaultCompilerOptions.defaultSavingOptions.put(AS2ID.DEBUG_XMIID_COLLISIONS, Boolean.TRUE);
+	}
+
+	public static class QVTTestHelper extends TestHelper
+	{
+		public static final @NonNull QVTTestHelper INSTANCE = new QVTTestHelper();
+
+		@Override
+		public void doTearDown() {
+			super.doTearDown();
+			QVTbaseStandaloneSetup.doTearDown();
+			QVTcoreStandaloneSetup.doTearDown();
+			QVTimperativeStandaloneSetup.doTearDown();
+			QVTrelationStandaloneSetup.doTearDown();
+		}
 	}
 
 	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
@@ -403,9 +422,25 @@ public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTes
 		resourceSet.eAdapters().clear();
 	}
 
-	@Deprecated
+	protected static boolean noDebug = false;
+
 	public static void debugPrintln(String string) {
-		PivotUtilInternal.debugPrintln(string);
+		if (!noDebug) {
+			System.out.println(string);
+		}
+	}
+
+	protected PivotTestCase() {
+		super(QVTTestHelper.INSTANCE);
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return TestUtil.getName(getTestName());
+	}
+
+	public @NonNull String getTestName() {
+		return ClassUtil.nonNullState(super.getName());
 	}
 
 	private static List<String> savedEPackageRegistry = null;
