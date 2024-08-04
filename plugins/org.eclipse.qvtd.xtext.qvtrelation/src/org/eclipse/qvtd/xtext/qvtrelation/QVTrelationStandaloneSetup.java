@@ -34,11 +34,8 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 		}
 	}
 
-	public static void init() {
-		QVTrelationPivotStandaloneSetup.doSetup();
-		QVTrelationCSPackage.eINSTANCE.getName();
-		QVTrelationScoping.init();
-		//		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
+	public static void doTearDown() {
+		injector = null;
 	}
 
 	/**
@@ -56,10 +53,19 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 		return injector;
 	}
 
+	public static void init() {
+		QVTrelationPivotStandaloneSetup.doSetup();
+		QVTrelationCSPackage.eINSTANCE.getName();
+		QVTrelationScoping.init();
+		//		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
+	}
+
 	@Override
 	public Injector createInjector() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 

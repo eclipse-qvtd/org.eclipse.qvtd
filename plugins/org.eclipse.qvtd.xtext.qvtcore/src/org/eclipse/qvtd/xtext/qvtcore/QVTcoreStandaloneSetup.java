@@ -31,10 +31,8 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 		}
 	}
 
-	public static void init() {
-		QVTcorePivotStandaloneSetup.doSetup();
-		QVTcoreCSPackage.eINSTANCE.getName();
-		//		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
+	public static void doTearDown() {
+		injector = null;
 	}
 
 	/**
@@ -52,10 +50,18 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 		return injector;
 	}
 
+	public static void init() {
+		QVTcorePivotStandaloneSetup.doSetup();
+		QVTcoreCSPackage.eINSTANCE.getName();
+		//		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
+	}
+
 	@Override
 	public Injector createInjector() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
 

@@ -31,10 +31,8 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 		}
 	}
 
-	public static void init() {
-		QVTbasePivotStandaloneSetup.doSetup();
-		QVTbaseCSPackage.eINSTANCE.getName();
-		//		QVTbaseCS2MonikerVisitor.FACTORY.getClass();
+	public static void doTearDown() {
+		injector = null;
 	}
 
 	/**
@@ -52,9 +50,17 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 		return injector;
 	}
 
+	public static void init() {
+		QVTbasePivotStandaloneSetup.doSetup();
+		QVTbaseCSPackage.eINSTANCE.getName();
+		//		QVTbaseCS2MonikerVisitor.FACTORY.getClass();
+	}
+
 	@Override
 	public Injector createInjector() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;
 		init();
-		return super.createInjector();
+		injector = super.createInjector();
+		return injector;
 	}
 }
