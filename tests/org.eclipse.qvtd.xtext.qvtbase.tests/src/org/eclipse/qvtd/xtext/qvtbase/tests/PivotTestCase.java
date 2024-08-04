@@ -15,7 +15,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,17 +26,13 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
@@ -46,11 +41,9 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.validation.ValidationContext;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
-import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
@@ -63,7 +56,6 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * Tests for OclAny operations.
@@ -142,46 +134,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 			}
 		}
 		return diagnostics;
-	}
-
-	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
-		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
-		if (diagnostics.size() > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(message);
-			for (Diagnostic diagnostic : diagnostics) {
-				s.append("\n");
-				s.append(diagnostic.toString());
-			}
-			fail(s.toString());
-		}
-	}
-
-	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
-		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
-		if (message != null)
-			fail(message);
-	}
-
-	public static void assertNoUnresolvedProxies(String message, Resource resource) {
-		Map<EObject, Collection<Setting>> unresolvedProxies = UnresolvedProxyCrossReferencer.find(resource);
-		if (unresolvedProxies.size() > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(unresolvedProxies.size());
-			s.append(" unresolved proxies in '" + resource.getURI() + "' ");
-			s.append(message);
-			for (Map.Entry<EObject, Collection<Setting>> unresolvedProxy : unresolvedProxies.entrySet()) {
-				s.append("\n");
-				BasicEObjectImpl key = (BasicEObjectImpl) unresolvedProxy.getKey();
-				s.append(key.eProxyURI());
-				for (Setting setting : unresolvedProxy.getValue()) {
-					s.append("\n\t");
-					EObject eObject = setting.getEObject();
-					s.append(eObject.toString());
-				}
-			}
-			fail(s.toString());
-		}
 	}
 
 	public static void assertNoValidationErrors(@NonNull String string, @NonNull Resource resource) {
@@ -358,22 +310,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	}
 
-	protected static Value failOn(String expression, Throwable e) {
-		if (e instanceof EvaluationException) {
-			Throwable eCause = e.getCause();
-			if (eCause != null) {
-				return failOn(expression, eCause);
-			}
-			throw new Error("Failed to evaluate \"" + expression + "\"", e);
-		}
-		else if (e instanceof EvaluationException) {
-			throw new Error("Failed to parse or evaluate \"" + expression + "\"", e);
-		}
-		else {
-			throw new Error("Failure for \"" + expression + "\"", e);
-		}
-	}
-
 	public static Resource getEcoreFromCS(@NonNull OCL ocl, String testDocument, URI ecoreURI) throws IOException {
 		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
 		URI xtextURI = URI.createURI("test.oclinecore");
@@ -412,13 +348,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 			pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		}
 		return pivotResource;
-	}
-
-	public static void unloadResourceSet(ResourceSet resourceSet) {
-		for (Resource resource : resourceSet.getResources()) {
-			resource.unload();
-		}
-		resourceSet.eAdapters().clear();
 	}
 
 	//	protected static boolean noDebug = false;
