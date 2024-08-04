@@ -10,9 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
-
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -24,6 +25,7 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 	private static Injector injector = null;
 
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 381901/382058 fix
 		if (injector == null) {
 			injector = new QVTbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
@@ -40,7 +42,12 @@ public class QVTbaseStandaloneSetup extends QVTbaseStandaloneSetupGenerated
 	 */
 	public static final Injector getInjector() {
 		if (injector == null) {
-			doSetup();
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				doSetup();
+			}
+			else {
+				injector = Guice.createInjector(new QVTbaseRuntimeModule());
+			}
 		}
 		return injector;
 	}

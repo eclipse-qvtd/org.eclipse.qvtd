@@ -11,10 +11,12 @@
 
 package org.eclipse.qvtd.xtext.qvtrelation;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScoping;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -26,6 +28,7 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 	private static Injector injector = null;
 
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 381901/382058 fix
 		if (injector == null) {
 			injector = new QVTrelationStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
@@ -35,7 +38,7 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 		QVTrelationPivotStandaloneSetup.doSetup();
 		QVTrelationCSPackage.eINSTANCE.getName();
 		QVTrelationScoping.init();
-//		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
+		//		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
 	}
 
 	/**
@@ -43,7 +46,12 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 	 */
 	public static final Injector getInjector() {
 		if (injector == null) {
-			doSetup();
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				doSetup();
+			}
+			else {
+				injector = Guice.createInjector(new QVTrelationRuntimeModule());
+			}
 		}
 		return injector;
 	}

@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.QVTimperativeScoping;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -25,6 +27,7 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 	private static Injector injector = null;
 
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 381901/382058 fix
 		if (injector == null) {
 			injector = new QVTimperativeStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
@@ -42,7 +45,12 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 	 */
 	public static final Injector getInjector() {
 		if (injector == null) {
-			doSetup();
+			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+				doSetup();
+			}
+			else {
+				injector = Guice.createInjector(new QVTimperativeRuntimeModule());
+			}
 		}
 		return injector;
 	}

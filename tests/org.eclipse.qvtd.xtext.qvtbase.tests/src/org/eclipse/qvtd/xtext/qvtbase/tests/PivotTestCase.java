@@ -22,8 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -36,7 +34,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -45,12 +42,10 @@ import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
-import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.validation.ValidationContext;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
 import org.eclipse.ocl.pivot.values.Value;
@@ -64,29 +59,14 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
-import junit.framework.TestCase;
-
 /**
  * Tests for OclAny operations.
  */
-public class PivotTestCase extends TestCase
+public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTestCase
 {
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
-	public static final @NonNull TracingOption TEST_START = new TracingOption(PLUGIN_ID, "test/start");
 
-	/*
-	 * The following may be tweaked to assist debugging.
-	 */
-	public static boolean DEBUG_GC = false;			// True performs an enthusuastic resource release and GC at the end of each test
-	public static boolean DEBUG_ID = false;			// True prints the start and end of each test.
 	{
-		PivotUtilInternal.noDebug = false;
-		DEBUG_GC = true;
-		DEBUG_ID = true;
-		AbstractEnvironmentFactory.liveEnvironmentFactories = new WeakHashMap<>();	// Prints the create/finalize of each EnvironmentFactory
-		//	PivotMetamodelManager.liveMetamodelManagers = new WeakHashMap<>();			// Prints the create/finalize of each MetamodelManager
-		//	StandaloneProjectMap.liveStandaloneProjectMaps = new WeakHashMap<>();		// Prints the create/finalize of each StandaloneProjectMap
-		//	ResourceSetImpl.liveResourceSets = new WeakHashMap<>();						// Requires edw-debug private EMF branch
 		//	TEST_START.setState(true);
 		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
 		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
@@ -423,21 +403,9 @@ public class PivotTestCase extends TestCase
 		resourceSet.eAdapters().clear();
 	}
 
-	protected static boolean noDebug = false;
-
+	@Deprecated
 	public static void debugPrintln(String string) {
-		if (!noDebug) {
-			System.out.println(string);
-		}
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return TestUtil.getName(getTestName());
-	}
-
-	public @NonNull String getTestName() {
-		return ClassUtil.nonNullState(super.getName());
+		PivotUtilInternal.debugPrintln(string);
 	}
 
 	private static List<String> savedEPackageRegistry = null;
