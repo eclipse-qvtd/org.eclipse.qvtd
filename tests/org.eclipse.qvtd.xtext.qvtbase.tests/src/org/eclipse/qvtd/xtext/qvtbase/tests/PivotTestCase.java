@@ -84,58 +84,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	}
 
-	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
-		Map<String, Integer> expected = new HashMap<String, Integer>();
-		for (String message : messages) {
-			Integer count = expected.get(message);
-			count = count == null ? 1 : count + 1;
-			expected.put(message, count);
-		}
-		StringBuilder s1 = null;
-		for (Diagnostic diagnostic : diagnostics) {
-			String actual = diagnostic.getMessage();
-			Integer expectedCount = expected.get(actual);
-			if ((expectedCount == null) || (expectedCount <= 0)) {
-				if (s1 == null) {
-					s1 = new StringBuilder();
-					s1.append("\nUnexpected errors");
-				}
-				s1.append("\n");
-				s1.append(actual);
-			}
-			else {
-				expected.put(actual, expectedCount-1);
-			}
-		}
-		StringBuilder s2 = null;
-		for (String key : expected.keySet()) {
-			Integer count = expected.get(key);
-			assert count != null;
-			while (count-- > 0) {
-				if (s2 == null) {
-					s2 = new StringBuilder();
-					s2.append("\nMissing errors");
-				}
-				s2.append("\n");
-				s2.append(key);
-			}
-		}
-		if (s1 == null) {
-			if (s2 != null) {
-				fail(s2.toString());
-			}
-		}
-		else {
-			if (s2 == null) {
-				fail(s1.toString());
-			}
-			else {
-				fail(s1.toString() + s2.toString());
-			}
-		}
-		return diagnostics;
-	}
-
 	public static void assertNoValidationErrors(@NonNull String string, @NonNull Resource resource) {
 		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
 		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
@@ -262,36 +210,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 			}
 			else {
 				fail(s1.toString() + s2.toString());
-			}
-		}
-	}
-
-	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
-		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(resource);
-		ValidationContext validationContext = new ValidationContext(validationRegistry);
-		return assertValidationDiagnostics(prefix, resource, validationContext, messages);
-	}
-
-	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, @NonNull ValidationContext validationContext, String... messages) {
-		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
-		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
-		try {
-			Diagnostician diagnostician = validationContext.getDiagnostician();
-			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-			for (EObject eObject : resource.getContents()) {
-				Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);		// FIXME inline 1 call level
-				diagnostics.addAll(diagnostic.getChildren());
-			}
-			return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
-		}
-		finally {
-			if (savedExecutor != ThreadLocalExecutor.basicGetExecutor()) {
-				ThreadLocalExecutor.setExecutor(null);
-			}
-			else if (savedExecutor != null) {
-				if (savedInterpretedExecutor != savedExecutor.basicGetInterpretedExecutor()) {
-					savedExecutor.setInterpretedExecutor(null);
-				}
 			}
 		}
 	}
