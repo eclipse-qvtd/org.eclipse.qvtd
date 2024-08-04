@@ -15,27 +15,24 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
@@ -48,23 +45,23 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.validation.ValidationContext;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
-import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * Tests for OclAny operations.
  */
-public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTestCase
+public class PivotTestCase extends AbstractPivotTestCase
 {
-	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
-
 	{
 		//	TEST_START.setState(true);
 		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
@@ -73,95 +70,17 @@ public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTes
 		DefaultCompilerOptions.defaultSavingOptions.put(AS2ID.DEBUG_XMIID_COLLISIONS, Boolean.TRUE);
 	}
 
-	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
-		Map<String, Integer> expected = new HashMap<String, Integer>();
-		for (String message : messages) {
-			Integer count = expected.get(message);
-			count = count == null ? 1 : count + 1;
-			expected.put(message, count);
-		}
-		StringBuilder s1 = null;
-		for (Diagnostic diagnostic : diagnostics) {
-			String actual = diagnostic.getMessage();
-			Integer expectedCount = expected.get(actual);
-			if ((expectedCount == null) || (expectedCount <= 0)) {
-				if (s1 == null) {
-					s1 = new StringBuilder();
-					s1.append("\nUnexpected errors");
-				}
-				s1.append("\n");
-				s1.append(actual);
-			}
-			else {
-				expected.put(actual, expectedCount-1);
-			}
-		}
-		StringBuilder s2 = null;
-		for (String key : expected.keySet()) {
-			Integer count = expected.get(key);
-			assert count != null;
-			while (count-- > 0) {
-				if (s2 == null) {
-					s2 = new StringBuilder();
-					s2.append("\nMissing errors");
-				}
-				s2.append("\n");
-				s2.append(key);
-			}
-		}
-		if (s1 == null) {
-			if (s2 != null) {
-				fail(s2.toString());
-			}
-		}
-		else {
-			if (s2 == null) {
-				fail(s1.toString());
-			}
-			else {
-				fail(s1.toString() + s2.toString());
-			}
-		}
-		return diagnostics;
-	}
+	public static class QVTTestHelper extends TestHelper
+	{
+		public static final @NonNull QVTTestHelper INSTANCE = new QVTTestHelper();
 
-	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
-		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
-		if (diagnostics.size() > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(message);
-			for (Diagnostic diagnostic : diagnostics) {
-				s.append("\n");
-				s.append(diagnostic.toString());
-			}
-			fail(s.toString());
-		}
-	}
-
-	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
-		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
-		if (message != null)
-			fail(message);
-	}
-
-	public static void assertNoUnresolvedProxies(String message, Resource resource) {
-		Map<EObject, Collection<Setting>> unresolvedProxies = UnresolvedProxyCrossReferencer.find(resource);
-		if (unresolvedProxies.size() > 0) {
-			StringBuilder s = new StringBuilder();
-			s.append(unresolvedProxies.size());
-			s.append(" unresolved proxies in '" + resource.getURI() + "' ");
-			s.append(message);
-			for (Map.Entry<EObject, Collection<Setting>> unresolvedProxy : unresolvedProxies.entrySet()) {
-				s.append("\n");
-				BasicEObjectImpl key = (BasicEObjectImpl) unresolvedProxy.getKey();
-				s.append(key.eProxyURI());
-				for (Setting setting : unresolvedProxy.getValue()) {
-					s.append("\n\t");
-					EObject eObject = setting.getEObject();
-					s.append(eObject.toString());
-				}
-			}
-			fail(s.toString());
+		@Override
+		public void doTearDown() {
+			super.doTearDown();
+			QVTbaseStandaloneSetup.doTearDown();
+			QVTcoreStandaloneSetup.doTearDown();
+			QVTimperativeStandaloneSetup.doTearDown();
+			QVTrelationStandaloneSetup.doTearDown();
 		}
 	}
 
@@ -295,36 +214,6 @@ public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTes
 		}
 	}
 
-	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
-		ValidationRegistryAdapter validationRegistry = ValidationRegistryAdapter.getAdapter(resource);
-		ValidationContext validationContext = new ValidationContext(validationRegistry);
-		return assertValidationDiagnostics(prefix, resource, validationContext, messages);
-	}
-
-	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, @NonNull ValidationContext validationContext, String... messages) {
-		Executor savedExecutor = ThreadLocalExecutor.basicGetExecutor();
-		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
-		try {
-			Diagnostician diagnostician = validationContext.getDiagnostician();
-			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-			for (EObject eObject : resource.getContents()) {
-				Diagnostic diagnostic = diagnostician.validate(eObject, validationContext);		// FIXME inline 1 call level
-				diagnostics.addAll(diagnostic.getChildren());
-			}
-			return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
-		}
-		finally {
-			if (savedExecutor != ThreadLocalExecutor.basicGetExecutor()) {
-				ThreadLocalExecutor.setExecutor(null);
-			}
-			else if (savedExecutor != null) {
-				if (savedInterpretedExecutor != savedExecutor.basicGetInterpretedExecutor()) {
-					savedExecutor.setInterpretedExecutor(null);
-				}
-			}
-		}
-	}
-
 	/**
 	 * Remove the global EPackage.Registry for the nsURIs.
 	 * This should be invoked at the end of a test that installs compiled models to avoid pollution
@@ -336,22 +225,6 @@ public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTes
 			if (!(ePackage instanceof EPackage)) {
 				PivotUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
 			}
-		}
-	}
-
-	protected static Value failOn(String expression, Throwable e) {
-		if (e instanceof EvaluationException) {
-			Throwable eCause = e.getCause();
-			if (eCause != null) {
-				return failOn(expression, eCause);
-			}
-			throw new Error("Failed to evaluate \"" + expression + "\"", e);
-		}
-		else if (e instanceof EvaluationException) {
-			throw new Error("Failed to parse or evaluate \"" + expression + "\"", e);
-		}
-		else {
-			throw new Error("Failure for \"" + expression + "\"", e);
 		}
 	}
 
@@ -395,16 +268,16 @@ public class PivotTestCase extends org.eclipse.ocl.examples.pivot.tests.PivotTes
 		return pivotResource;
 	}
 
-	public static void unloadResourceSet(ResourceSet resourceSet) {
-		for (Resource resource : resourceSet.getResources()) {
-			resource.unload();
-		}
-		resourceSet.eAdapters().clear();
-	}
+	//	protected static boolean noDebug = false;
 
-	@Deprecated
-	public static void debugPrintln(String string) {
-		PivotUtilInternal.debugPrintln(string);
+	//	public static void debugPrintln(String string) {
+	//		if (!noDebug) {
+	//			System.out.println(string);
+	//		}
+	//	}
+
+	protected PivotTestCase() {
+		super(QVTTestHelper.INSTANCE);
 	}
 
 	private static List<String> savedEPackageRegistry = null;
