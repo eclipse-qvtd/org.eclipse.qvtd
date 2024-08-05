@@ -91,8 +91,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -318,7 +316,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					addTrace(checkStatement, edge);
 				}
 				else {
-					QVTruntimeUtil.errPrintln("Speculation code omitted for " + partition);
+					PivotUtil.errPrintln("Speculation code omitted for " + partition);
 				}
 			}
 			else {
@@ -1000,7 +998,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						bottomPattern.getAssignment().add(propertyAssignment);
 					}
 					else {
-						QVTruntimeUtil.errPrintln("No assignment in " + this + " to " + slotVariableExp + "." + property);
+						PivotUtil.errPrintln("No assignment in " + this + " to " + slotVariableExp + "." + property);
 	 * /
 
 			}

@@ -15,12 +15,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * An AbstractVariableAnalysis provides the abstract accumulation the usage of a core or relation variable.
@@ -43,7 +43,7 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 
 	@Override
 	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".addNavigationAssignment for " + this);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 
 	@Override
 	public boolean hasWhenDomain() {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".hasWhenDomain for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".hasWhenDomain for " + this);
 		return false;
 	}
 
@@ -62,12 +62,12 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @NonNull TypedModel rEnforcedTypedModel, @Nullable Key rKey) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedBound for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedBound for " + this);
 	}
 
 	@Override
 	public void setIsEnforcedReferred() {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedReferred for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setIsEnforcedReferred for " + this);
 	}
 
 	@Override
@@ -77,27 +77,27 @@ public abstract class AbstractVariable2Variable implements Variable2Variable
 
 	@Override
 	public void setOtherBound(@NonNull TypedModel rOtherTypedModel) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setOtherBound for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setOtherBound for " + this);
 	}
 
 	@Override
 	public void setOtherReferred(@NonNull TypedModel rOtherTypedModel) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setOtherReferred for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setOtherReferred for " + this);
 	}
 
 	@Override
 	public void setPredicate(@NonNull TypedModel rPredicateTypedModel) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setPredicate for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setPredicate for " + this);
 	}
 
 	@Override
 	public void setWhen(@NonNull TypedModel rWhenTypedModel) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setWhen for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setWhen for " + this);
 	}
 
 	@Override
 	public void setWhere(@NonNull TypedModel rWhereTypedModel) {
-		QVTruntimeUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
+		PivotUtil.errPrintln("Unexpected " + getClass().getSimpleName() + ".setWhere for " + this);
 	}
 
 	@Override

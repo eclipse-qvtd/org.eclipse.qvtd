@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 /**
  * CompilerProblems accumulates problems during the execution of a transformation and
@@ -34,7 +34,7 @@ public class CompilerProblems
 					errors = new ArrayList<>();
 				}
 				problems = errors;
-				QVTruntimeUtil.errPrintln(String.valueOf(problem));
+				PivotUtil.errPrintln(String.valueOf(problem));
 				break;
 			}
 			case INFO: {
@@ -68,7 +68,7 @@ public class CompilerProblems
 		}
 		if (warnings != null) {
 			for (CompilerProblem warning : warnings) {
-				QVTruntimeUtil.errPrintln(String.valueOf(warning));
+				PivotUtil.errPrintln(String.valueOf(warning));
 			}
 			//	throw new CompilerChainException("{0}", String.valueOf(warnings));
 		}

@@ -45,6 +45,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.NumberValue;
@@ -57,7 +58,6 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.InvocationFailedException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.ObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class LazyObjectManager extends AbstractObjectManager
 {
@@ -206,7 +206,7 @@ public class LazyObjectManager extends AbstractObjectManager
 					break;
 				case ASSIGNED:
 					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+						PivotUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 					}
 					break;
 			}
