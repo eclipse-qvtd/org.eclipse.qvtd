@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -51,8 +52,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor2;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -205,16 +204,16 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				getPasses().addAll((Collection<? extends Integer>)newValue);
-				return;
+			getPasses().addAll((Collection<? extends Integer>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
-				return;
+			getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -229,13 +228,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -613,7 +612,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			}
 			else {
 				symbolName2 = s1.toString();
-				QVTruntimeUtil.errPrintln("Failed to reserve '" + symbolName2 + "' for " + this);
+				PivotUtil.errPrintln("Failed to reserve '" + symbolName2 + "' for " + this);
 			}
 			symbolName = symbolName2;
 			//			if ((symbolName != null) && symbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {

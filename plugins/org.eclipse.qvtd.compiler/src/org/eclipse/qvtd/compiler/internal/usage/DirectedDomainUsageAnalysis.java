@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelConfiguration;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
 import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis.DomainUsageConstant;
@@ -33,8 +34,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
 import com.google.common.collect.Iterables;
 
 public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
@@ -91,13 +90,13 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
 			}
 			if (dirtyProperty.isIsReadOnly()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is readonly");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is readonly");
 			}
 			if (dirtyProperty.isIsRequired()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is required");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is required");
 			}
 		}
 	}

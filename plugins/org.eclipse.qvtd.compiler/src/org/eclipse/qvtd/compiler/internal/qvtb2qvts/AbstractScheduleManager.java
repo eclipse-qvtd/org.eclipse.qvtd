@@ -93,8 +93,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeLibraryHelper;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -947,7 +945,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				outputStream.write(visitor.toString().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
 	}
@@ -964,7 +962,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				outputStream.write(visitor.toString().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
 	} */
@@ -1046,7 +1044,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					catch (Throwable e) {}
 				}
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
 	}
@@ -1068,7 +1066,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					catch (Throwable e) {}
 				}
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
 	}
@@ -1091,7 +1089,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					catch (Throwable e) {}
 				}
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((RootRegion)region)) {
 				if (nestedRegion instanceof RootRegion) {
@@ -1118,7 +1116,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					catch (Throwable e) {}
 				}
 			} catch (IOException e) {
-				QVTruntimeUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+				PivotUtil.errPrintln("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((RootRegion)region)) {
 				if (nestedRegion instanceof RootRegion) {

@@ -18,8 +18,8 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.doc.services.MiniOCLCSGrammarAccess;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 @SuppressWarnings("all")
 public class InternalMiniOCLCSParser extends AbstractInternalAntlrParser {
@@ -6949,7 +6949,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalAntlrParser {
         try {
             synpred20_InternalMiniOCLCS_fragment(); // can never throw exception
         } catch (RecognitionException re) {
-            QVTruntimeUtil.errPrintln("impossible: "+re);
+            PivotUtil.errPrintln("impossible: "+re);
         }
         boolean success = !state.failed;
         input.rewind(start);
@@ -6963,7 +6963,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalAntlrParser {
         try {
             synpred18_InternalMiniOCLCS_fragment(); // can never throw exception
         } catch (RecognitionException re) {
-            QVTruntimeUtil.errPrintln("impossible: "+re);
+            PivotUtil.errPrintln("impossible: "+re);
         }
         boolean success = !state.failed;
         input.rewind(start);

@@ -40,7 +40,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.genmodel.OCLGenModelUtil;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 /**
  * GenModelCompilerStep activates the EMF GenModel tooling to generate the Java classes from the
@@ -71,7 +71,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 		public void addError(@NonNull CompilerChain compilerChain, String message,
 				Object object, Object object2, Throwable throwable,
 				List<Object> data) {
-			QVTruntimeUtil.errPrintln(message);
+			PivotUtil.errPrintln(message);
 		}
 
 		public void addWarning(@NonNull CompilerChain compilerChain, String message,
@@ -81,7 +81,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 		}
 
 		public void addError(@NonNull CompilerChain compilerChain, String string) {
-			QVTruntimeUtil.errPrintln(string);
+			PivotUtil.errPrintln(string);
 		}
 
 		public void addWarning(@NonNull CompilerChain compilerChain, String string) {

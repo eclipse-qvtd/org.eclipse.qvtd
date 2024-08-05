@@ -50,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
@@ -85,7 +84,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 						return rootDomainUsageAnalysis.getTypedModel(i);
 					}
 					if (!(context instanceof NullLiteralExp)) {
-						QVTruntimeUtil.errPrintln("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
+						PivotUtil.errPrintln("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
 					}
 					//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
 					return rootDomainUsageAnalysis.getTypedModel(i);
@@ -319,7 +318,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		if (primitiveTypedModel == null) {
 			primitiveTypedModel = new QVTimperativeHelper(environmentFactory).createPrimitiveTypedModel();
 			transformation.getModelParameter().add(0, primitiveTypedModel);
-			QVTruntimeUtil.errPrintln("Missing primitive TypedModel fixed up for " + transformation);
+			PivotUtil.errPrintln("Missing primitive TypedModel fixed up for " + transformation);
 		}
 		this.primitiveTypedModel = primitiveTypedModel;
 		add(primitiveTypedModel);
@@ -329,7 +328,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		if (thisTypedModel == null) {
 			thisTypedModel = new QVTimperativeHelper(environmentFactory).createThisTypedModel();
 			transformation.getModelParameter().add(1, thisTypedModel);
-			//	QVTruntimeUtil.errPrintln("Missing this TypedModel fixed up for " + transformation);
+			//	PivotUtil.errPrintln("Missing this TypedModel fixed up for " + transformation);
 		}
 		this.thisTypedModel = thisTypedModel;
 		add(thisTypedModel);
@@ -390,13 +389,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	/*	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
 		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is not transient");
 			}
 			if (dirtyProperty.isIsReadOnly()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is readonly");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is readonly");
 			}
 			if (dirtyProperty.isIsRequired()) {
-				QVTruntimeUtil.errPrintln("Dirty " + dirtyProperty + " is required");
+				PivotUtil.errPrintln("Dirty " + dirtyProperty + " is required");
 			}
 		}
 	} */
