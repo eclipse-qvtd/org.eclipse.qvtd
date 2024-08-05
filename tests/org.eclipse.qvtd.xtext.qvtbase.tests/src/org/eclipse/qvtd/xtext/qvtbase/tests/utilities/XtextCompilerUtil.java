@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -117,6 +118,7 @@ public class XtextCompilerUtil extends CompilerUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTcoreSetup() {
+		assert AbstractPivotTestCase.assertTestIsNotSetup();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			QVTcoreStandaloneSetup.doSetup();
 			QVTschedulePivotStandaloneSetup.doSetup();
@@ -139,6 +141,7 @@ public class XtextCompilerUtil extends CompilerUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTimperativeSetup() {
+		assert AbstractPivotTestCase.assertTestIsNotSetup();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			QVTimperativeStandaloneSetup.doSetup();
 		}
@@ -153,6 +156,7 @@ public class XtextCompilerUtil extends CompilerUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTrelationSetup() {
+		assert AbstractPivotTestCase.assertTestIsNotSetup();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			QVTrelationStandaloneSetup.doSetup();
 		}
@@ -167,6 +171,7 @@ public class XtextCompilerUtil extends CompilerUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTscheduleSetup() {
+		assert AbstractPivotTestCase.assertTestIsNotSetup();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			QVTschedulePivotStandaloneSetup.doSetup();
 		}

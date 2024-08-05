@@ -322,7 +322,47 @@ public class PivotTestCase extends AbstractPivotTestCase
 	} */
 
 	private void superTearDown1() throws Exception {
-		super.tearDown();
+		try {
+			//		if (DEBUG_ID) {
+			//			PivotUtilInternal.debugPrintln("==> Done " + getName());
+			//		}
+			ThreadLocalExecutor.reset();
+			if (DEBUG_GC) {
+				testHelper.doTearDown();
+				//	makeCopyOfGlobalState.restoreGlobalState();
+				//	makeCopyOfGlobalState = null;
+				gc(null);
+			}
+			super.tearDown();
+
+
+
+			if (DEBUG_ID) {
+				PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
+			}
+			AbstractEnvironmentFactory.diagnoseLiveEnvironmentFactories();
+			/**
+			 * Reset any PivotEObject.target that may have reverted to proxies when a ProjectMap unloaded,
+			 * and which might be resolved using the wrong strategy in another test.
+			 */
+			OCLstdlib oclstdlib = OCLstdlib.basicGetDefault();
+			if (oclstdlib != null) {
+				for (TreeIterator<EObject> tit = oclstdlib.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					if (eObject instanceof PivotObjectImpl) {
+						PivotObjectImpl asObject = (PivotObjectImpl)eObject;
+						asObject.resetStaleESObject();
+					}
+				}
+			}
+
+
+
+		}
+		finally {
+			assert ThreadLocalExecutor.basicGetEnvironmentFactory() == null : getName() + " failed to detach EnvironmentFactory.";
+			PivotUtil.contextLine = null;
+		}
 	}
 
 	private void superTearDown2() throws Exception {
@@ -366,9 +406,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	@Override
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
-		ThreadLocalExecutor.reset();
 		superTearDown1();
-		PivotUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//
@@ -385,7 +423,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 				}
 			}
 		}
-		ThreadLocalExecutor.reset();
+		//	ThreadLocalExecutor.reset();
 		if (DEBUG_GC) {
 			//	uninstall();
 			//	makeCopyOfGlobalState.restoreGlobalState();
@@ -393,9 +431,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 			System.gc();
 			System.runFinalization();
 			//			MetamodelManagerResourceAdapter.INSTANCES.show();
-		}
-		if (DEBUG_ID) {
-			PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
 		}
 	}
 }

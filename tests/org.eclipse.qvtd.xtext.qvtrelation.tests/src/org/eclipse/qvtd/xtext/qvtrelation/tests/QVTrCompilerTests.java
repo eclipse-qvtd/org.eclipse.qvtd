@@ -246,13 +246,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", ~0);
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
-		super.setUp();
-		OCLstdlib.install();
 		XtextCompilerUtil.doQVTrelationSetup();
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
-		//		QVTrelationPivotStandaloneSetup.doSetup();
-		//		QVTimperativePivotStandaloneSetup.doSetup();
+		super.setUp();
+		OCLstdlib.install();
 		ConnectivityChecker.CONNECTIVITY.setState(true);
 		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
 	}

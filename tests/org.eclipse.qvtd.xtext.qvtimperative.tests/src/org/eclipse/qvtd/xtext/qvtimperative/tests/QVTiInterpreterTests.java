@@ -172,6 +172,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
+		TestUtil.doCompleteOCLSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
 		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
@@ -347,7 +348,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("ManualRDBMSPeople.xmi");
 		URI traceURI = getTestURI("ManualUML2RDBMS.xmi");
 		MyQVT myQVT = createQVT("ManualUML2RDBMS", txURI, ModeFactory.LAZY);
-		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 		@SuppressWarnings("unused")
@@ -384,7 +384,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		URI outputURI = getTestURI("SimpleRDBMSPeople.xmi");
 		URI traceURI = getTestURI("SimpleUML2RDBMS.xmi");
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI, ModeFactory.LAZY);
-		TestUtil.doCompleteOCLSetup();
 		URI oclURI = getResourceURI("org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl");
 		@SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
@@ -432,7 +431,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	@Test
 	public void testQVTiInterpreter_ClassesCS2AS_bug457239() throws Exception {
-		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2AS.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
@@ -455,7 +453,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	@Test
 	public void testQVTiInterpreter_ClassesCS2AS_bug457239b() throws Exception {
-		TestUtil.doCompleteOCLSetup();
 		URI txURI = getModelsURI("ClassesCS2AS/bug457239/ClassesCS2ASv2_AS.qvtias");
 		URI inputURI = getModelsURI("ClassesCS2AS/bug457239/example_input.xmi");
 		URI outputURI = getTestURI("example_output.xmi");
