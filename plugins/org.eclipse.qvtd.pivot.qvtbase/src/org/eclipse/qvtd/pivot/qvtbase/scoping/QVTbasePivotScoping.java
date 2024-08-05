@@ -10,10 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.scoping;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.BaseModelAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.DomainAttribution;
@@ -23,10 +21,10 @@ import org.eclipse.qvtd.pivot.qvtbase.attributes.TransformationAttribution;
 public class QVTbasePivotScoping
 {
 	public static void init() {
-		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTbasePackage.Literals.BASE_MODEL, BaseModelAttribution.INSTANCE);
-		registry.put(QVTbasePackage.Literals.DOMAIN, DomainAttribution.INSTANCE);
-		registry.put(QVTbasePackage.Literals.FUNCTION, FunctionAttribution.INSTANCE);
-		registry.put(QVTbasePackage.Literals.TRANSFORMATION, TransformationAttribution.INSTANCE);
+		AttributionRegistryInstaller registryInstaller = Attribution.REGISTRY.getInstaller(QVTbasePivotScoping.class);
+		registryInstaller.install(QVTbasePackage.Literals.BASE_MODEL, BaseModelAttribution.INSTANCE);
+		registryInstaller.install(QVTbasePackage.Literals.DOMAIN, DomainAttribution.INSTANCE);
+		registryInstaller.install(QVTbasePackage.Literals.FUNCTION, FunctionAttribution.INSTANCE);
+		registryInstaller.install(QVTbasePackage.Literals.TRANSFORMATION, TransformationAttribution.INSTANCE);
 	}
 }

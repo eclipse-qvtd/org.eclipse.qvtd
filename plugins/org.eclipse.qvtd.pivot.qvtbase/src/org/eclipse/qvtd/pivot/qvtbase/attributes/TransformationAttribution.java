@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class TransformationAttribution extends ClassAttribution
 {
-	public static final TransformationAttribution INSTANCE = new TransformationAttribution();
+	public static final @NonNull TransformationAttribution INSTANCE = new TransformationAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

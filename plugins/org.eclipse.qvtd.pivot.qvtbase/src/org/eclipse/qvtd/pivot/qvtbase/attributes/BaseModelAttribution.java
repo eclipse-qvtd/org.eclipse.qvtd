@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class BaseModelAttribution extends ModelAttribution
 {
-	public static final BaseModelAttribution INSTANCE = new BaseModelAttribution();
+	public static final @NonNull BaseModelAttribution INSTANCE = new BaseModelAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

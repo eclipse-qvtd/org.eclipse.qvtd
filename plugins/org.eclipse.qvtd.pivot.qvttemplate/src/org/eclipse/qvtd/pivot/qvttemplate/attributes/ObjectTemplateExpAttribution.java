@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
 public class ObjectTemplateExpAttribution extends TemplateExpAttribution
 {
-	public static final ObjectTemplateExpAttribution INSTANCE = new ObjectTemplateExpAttribution();
+	public static final @NonNull ObjectTemplateExpAttribution INSTANCE = new ObjectTemplateExpAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

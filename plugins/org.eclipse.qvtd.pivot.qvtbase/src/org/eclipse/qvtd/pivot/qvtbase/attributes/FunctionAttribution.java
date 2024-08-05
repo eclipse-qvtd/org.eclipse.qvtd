@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 public class FunctionAttribution extends OperationAttribution
 {
-	public static final FunctionAttribution INSTANCE = new FunctionAttribution();
+	public static final @NonNull FunctionAttribution INSTANCE = new FunctionAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

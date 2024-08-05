@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class GuardPatternAttribution extends AbstractAttribution
 {
-	public static final GuardPatternAttribution INSTANCE = new GuardPatternAttribution();
+	public static final @NonNull GuardPatternAttribution INSTANCE = new GuardPatternAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
@@ -33,12 +33,12 @@ public class GuardPatternAttribution extends AbstractAttribution
 		if (area instanceof Mapping) {
 			Mapping mapping = (Mapping)area;;
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
-				for (TypedModel typedModel : transformation.getModelParameter()) {
-					for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
-						environmentView.addNamedElement(pPackage);
-						environmentView.addNamedElements(pPackage.getOwnedClasses());
-					}
+			for (TypedModel typedModel : transformation.getModelParameter()) {
+				for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
+					environmentView.addNamedElement(pPackage);
+					environmentView.addNamedElements(pPackage.getOwnedClasses());
 				}
+			}
 			QVTcoreEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 		}
 		else {
