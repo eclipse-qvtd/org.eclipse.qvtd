@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class BottomPatternAttribution extends AbstractAttribution
 {
-	public static final BottomPatternAttribution INSTANCE = new BottomPatternAttribution();
+	public static final @NonNull BottomPatternAttribution INSTANCE = new BottomPatternAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

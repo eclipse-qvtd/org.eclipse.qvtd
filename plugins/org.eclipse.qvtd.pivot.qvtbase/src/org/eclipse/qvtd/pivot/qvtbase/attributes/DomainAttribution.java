@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public class DomainAttribution extends AbstractAttribution
 {
-	public static final DomainAttribution INSTANCE = new DomainAttribution();
+	public static final @NonNull DomainAttribution INSTANCE = new DomainAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

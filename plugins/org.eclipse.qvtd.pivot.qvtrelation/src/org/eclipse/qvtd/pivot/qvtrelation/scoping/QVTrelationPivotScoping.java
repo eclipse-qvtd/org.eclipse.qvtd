@@ -11,12 +11,10 @@
 package org.eclipse.qvtd.pivot.qvtrelation.scoping;
 
 import java.util.Comparator;
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.attributes.KeyAttribution;
@@ -51,11 +49,11 @@ public class QVTrelationPivotScoping
 	}
 
 	public static void init() {
-		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTrelationPackage.Literals.KEY, KeyAttribution.INSTANCE);
-		registry.put(QVTrelationPackage.Literals.RELATION, RelationAttribution.INSTANCE);
-		//		registry.put(QVTrelationPackage.Literals.RELATION_CALL_EXP, RelationCallExpAttribution.INSTANCE);
-		registry.put(QVTrelationPackage.Literals.RELATION_DOMAIN, RelationDomainAttribution.INSTANCE);
+		AttributionRegistryInstaller registryInstaller = Attribution.REGISTRY.getInstaller(QVTrelationPivotScoping.class);
+		registryInstaller.install(QVTrelationPackage.Literals.KEY, KeyAttribution.INSTANCE);
+		registryInstaller.install(QVTrelationPackage.Literals.RELATION, RelationAttribution.INSTANCE);
+		//		registryInstaller.install(QVTrelationPackage.Literals.RELATION_CALL_EXP, RelationCallExpAttribution.INSTANCE);
+		registryInstaller.install(QVTrelationPackage.Literals.RELATION_DOMAIN, RelationDomainAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Function.class, new FunctionDisambiguator());
 	}
 }

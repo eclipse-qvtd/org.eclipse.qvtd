@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class KeyAttribution extends AbstractAttribution
 {
-	public static final KeyAttribution INSTANCE = new KeyAttribution();
+	public static final @NonNull KeyAttribution INSTANCE = new KeyAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
