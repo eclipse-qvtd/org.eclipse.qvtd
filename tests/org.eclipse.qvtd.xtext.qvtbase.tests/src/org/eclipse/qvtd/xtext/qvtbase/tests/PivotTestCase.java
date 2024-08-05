@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -36,9 +37,11 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
-import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotObjectImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -300,18 +303,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	protected void setUp() throws Exception {
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
-		if (!TEST_START.isActive()) {
-			PivotUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
-		}
 		super.setUp();
-		if (DEBUG_ID) {
-			PivotUtilInternal.debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
-		}
-		//	TracingOption.resetAll();
-		ThreadLocalExecutor.reset();
-		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
-		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
-		startTime = System.nanoTime();
 		//	resetEValidators();
 	}
 
@@ -329,13 +321,53 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	} */
 
-	static long startTime;
+	private void superTearDown1() throws Exception {
+		super.tearDown();
+	}
+
+	private void superTearDown2() throws Exception {
+		try {
+			//		if (DEBUG_ID) {
+			//			PivotUtilInternal.debugPrintln("==> Done " + getName());
+			//		}
+			ThreadLocalExecutor.reset();
+			if (DEBUG_GC) {
+				testHelper.doTearDown();
+				makeCopyOfGlobalState.restoreGlobalState();
+				makeCopyOfGlobalState = null;
+				gc(null);
+			}
+			if (DEBUG_ID) {
+				PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
+			}
+			AbstractEnvironmentFactory.diagnoseLiveEnvironmentFactories();
+			/**
+			 * Reset any PivotEObject.target that may have reverted to proxies when a ProjectMap unloaded,
+			 * and which might be resolved using the wrong strategy in another test.
+			 */
+			OCLstdlib oclstdlib = OCLstdlib.basicGetDefault();
+			if (oclstdlib != null) {
+				for (TreeIterator<EObject> tit = oclstdlib.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					if (eObject instanceof PivotObjectImpl) {
+						PivotObjectImpl asObject = (PivotObjectImpl)eObject;
+						asObject.resetStaleESObject();
+					}
+				}
+			}
+			super.tearDown();
+		}
+		finally {
+			assert ThreadLocalExecutor.basicGetEnvironmentFactory() == null : getName() + " failed to detach EnvironmentFactory.";
+			PivotUtil.contextLine = null;
+		}
+	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
 		ThreadLocalExecutor.reset();
-		super.tearDown();
+		superTearDown1();
 		PivotUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
