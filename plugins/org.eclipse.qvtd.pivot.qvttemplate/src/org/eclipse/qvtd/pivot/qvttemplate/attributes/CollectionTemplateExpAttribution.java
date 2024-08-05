@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 
 public class CollectionTemplateExpAttribution extends TemplateExpAttribution
 {
-	public static final CollectionTemplateExpAttribution INSTANCE = new CollectionTemplateExpAttribution();
+	public static final @NonNull CollectionTemplateExpAttribution INSTANCE = new CollectionTemplateExpAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

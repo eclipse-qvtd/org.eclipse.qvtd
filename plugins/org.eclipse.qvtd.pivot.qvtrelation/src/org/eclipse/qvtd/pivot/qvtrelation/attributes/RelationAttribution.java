@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 
 public class RelationAttribution extends AbstractAttribution
 {
-	public static final RelationAttribution INSTANCE = new RelationAttribution();
+	public static final @NonNull RelationAttribution INSTANCE = new RelationAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

@@ -10,19 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate.scoping;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.attributes.CollectionTemplateExpAttribution;
 import org.eclipse.qvtd.pivot.qvttemplate.attributes.ObjectTemplateExpAttribution;
 
 public class QVTtemplatePivotScoping
-{	
+{
 	public static void init() {
-		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, CollectionTemplateExpAttribution.INSTANCE);
-		registry.put(QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, ObjectTemplateExpAttribution.INSTANCE);
+		AttributionRegistryInstaller registryInstaller = Attribution.REGISTRY.getInstaller(QVTtemplatePivotScoping.class);
+		registryInstaller.install(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, CollectionTemplateExpAttribution.INSTANCE);
+		registryInstaller.install(QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, ObjectTemplateExpAttribution.INSTANCE);
 	}
 }

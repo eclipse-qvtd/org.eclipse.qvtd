@@ -10,16 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.attributes;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 
 public class QVTimperativeScoping
 {
 	public static void init() {
-		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(EssentialOCLCSPackage.Literals.SHADOW_PART_CS, QVTimperativeShadowPartCSAttribution.INSTANCE);
+		AttributionRegistryInstaller registryInstaller = Attribution.REGISTRY.getInstaller(QVTimperativeScoping.class);
+		registryInstaller.install(EssentialOCLCSPackage.Literals.SHADOW_PART_CS, QVTimperativeShadowPartCSAttribution.INSTANCE);
 	}
 }

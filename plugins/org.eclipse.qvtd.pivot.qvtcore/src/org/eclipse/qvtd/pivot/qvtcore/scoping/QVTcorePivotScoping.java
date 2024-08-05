@@ -11,14 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtcore.scoping;
 
 import java.util.Comparator;
-import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.BottomPatternAttribution;
@@ -52,12 +51,13 @@ public class QVTcorePivotScoping
 			return 0;
 		}
 	}
+
 	public static void init() {
-		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTcorePackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
-		registry.put(QVTcorePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
-		registry.put(QVTcorePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
-		registry.put(QVTcorePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
+		AttributionRegistryInstaller registryInstaller = Attribution.REGISTRY.getInstaller(QVTcorePivotScoping.class);
+		registryInstaller.install(QVTcorePackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
+		registryInstaller.install(QVTcorePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
+		registryInstaller.install(QVTcorePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
+		registryInstaller.install(QVTcorePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Variable.class, new GuardVariableDisambiguator());
 	}
 }

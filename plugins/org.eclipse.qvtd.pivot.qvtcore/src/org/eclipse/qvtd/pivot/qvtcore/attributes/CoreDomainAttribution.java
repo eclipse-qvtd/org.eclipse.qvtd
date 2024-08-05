@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 
 public class CoreDomainAttribution extends AbstractAttribution
 {
-	public static final CoreDomainAttribution INSTANCE = new CoreDomainAttribution();
+	public static final @NonNull CoreDomainAttribution INSTANCE = new CoreDomainAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
