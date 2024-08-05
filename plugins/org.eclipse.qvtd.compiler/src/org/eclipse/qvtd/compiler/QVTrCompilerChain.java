@@ -51,6 +51,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfiguration;
@@ -77,7 +78,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -100,11 +100,11 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
 			if (missingOperationCallSources != null) {
-				QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+				PivotUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
 			boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, qvtrResource);
 			if (missingTraceArtefacts) {
-				QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
+				PivotUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
 			}
 			checkForProxyURIs(qvtrResource);
 			qvtrResource.setSaveable(true);			// By default *.qvtras is a derived not-saveable Resource see Bug 535842
@@ -151,11 +151,11 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					// FIXME the following lines should go obsolete
 					List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtsResource);
 					if (missingOperationCallSources != null) {
-						QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + qvtsResource.getURI() + "'");
+						PivotUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + qvtsResource.getURI() + "'");
 					}
 					boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, qvtrResource);
 					if (missingTraceArtefacts) {
-						QVTruntimeUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + qvtsResource.getURI() + "'");
+						PivotUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + qvtsResource.getURI() + "'");
 					}
 					Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
 					String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;

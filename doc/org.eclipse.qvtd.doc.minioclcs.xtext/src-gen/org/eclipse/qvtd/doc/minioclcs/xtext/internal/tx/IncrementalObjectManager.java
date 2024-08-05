@@ -37,6 +37,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractSlotState;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractTransformer;
@@ -45,7 +46,6 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Invocation;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.InvocationFailedException;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.ObjectManager;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.SlotState;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class IncrementalObjectManager extends AbstractObjectManager
 {
@@ -88,7 +88,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
-					QVTruntimeUtil.errPrintln("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					PivotUtil.errPrintln("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
 					break;
 				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;

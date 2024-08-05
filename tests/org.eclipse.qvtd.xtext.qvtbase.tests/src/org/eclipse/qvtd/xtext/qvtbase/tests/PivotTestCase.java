@@ -59,7 +59,6 @@ import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -355,7 +354,7 @@ public class PivotTestCase extends TestCase
 		for (@NonNull String nsURI : nsURIs) {
 			Object ePackage = EPackage.Registry.INSTANCE.remove(nsURI);
 			if (!(ePackage instanceof EPackage)) {
-				QVTruntimeUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
+				PivotUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
 			}
 		}
 	}
@@ -447,7 +446,7 @@ public class PivotTestCase extends TestCase
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
 		if (!TEST_START.isActive()) {
-			QVTruntimeUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
+			PivotUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
 		}
 		super.setUp();
 		if (DEBUG_ID) {
@@ -482,7 +481,7 @@ public class PivotTestCase extends TestCase
 		//	long time = System.nanoTime() - startTime;
 		ThreadLocalExecutor.reset();
 		super.tearDown();
-		QVTruntimeUtil.contextLine = null;
+		PivotUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//
@@ -491,7 +490,7 @@ public class PivotTestCase extends TestCase
 		if (newSet.size() > 0) {
 			List<String> newList = new ArrayList<>(newSet);
 			Collections.sort(newList);
-			//	QVTruntimeUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
+			//	PivotUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
 			for (String nsURI : newList) {
 				if (nsURI.contains("example") || nsURI.contains("test")		// FIXME Avoid using http://www.eclipse.org for test models
 						|| (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {
