@@ -49,7 +49,14 @@ import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
 import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
+import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -77,10 +84,17 @@ public class PivotTestCase extends AbstractPivotTestCase
 		@Override
 		public void doTearDown() {
 			super.doTearDown();
+			QVTbasePivotStandaloneSetup.doTearDown();
+			QVTcorePivotStandaloneSetup.doTearDown();
+			QVTimperativePivotStandaloneSetup.doTearDown();
+			QVTrelationPivotStandaloneSetup.doTearDown();
+			QVTschedulePivotStandaloneSetup.doTearDown();
+			QVTtemplatePivotStandaloneSetup.doTearDown();
 			QVTbaseStandaloneSetup.doTearDown();
 			QVTcoreStandaloneSetup.doTearDown();
 			QVTimperativeStandaloneSetup.doTearDown();
 			QVTrelationStandaloneSetup.doTearDown();
+			UMLXStandaloneSetup.doTearDown();
 		}
 	}
 
