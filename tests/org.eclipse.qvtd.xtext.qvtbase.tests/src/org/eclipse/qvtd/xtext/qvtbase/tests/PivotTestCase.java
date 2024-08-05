@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.validation.ValidationContext;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
@@ -55,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -237,7 +237,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		for (@NonNull String nsURI : nsURIs) {
 			Object ePackage = EPackage.Registry.INSTANCE.remove(nsURI);
 			if (!(ePackage instanceof EPackage)) {
-				QVTruntimeUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
+				PivotUtil.errPrintln("No EPackage to cleanup for '" + nsURI + "'");
 			}
 		}
 	}
@@ -301,7 +301,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
 		if (!TEST_START.isActive()) {
-			QVTruntimeUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
+			PivotUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
 		}
 		super.setUp();
 		if (DEBUG_ID) {
@@ -336,7 +336,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		//	long time = System.nanoTime() - startTime;
 		ThreadLocalExecutor.reset();
 		super.tearDown();
-		QVTruntimeUtil.contextLine = null;
+		PivotUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//
@@ -345,7 +345,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		if (newSet.size() > 0) {
 			List<String> newList = new ArrayList<>(newSet);
 			Collections.sort(newList);
-			//	QVTruntimeUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
+			//	PivotUtil.errPrintln("EPackage.Registry.INSTANCE pre-extras");
 			for (String nsURI : newList) {
 				if (nsURI.contains("example") || nsURI.contains("test")		// FIXME Avoid using http://www.eclipse.org for test models
 						|| (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {

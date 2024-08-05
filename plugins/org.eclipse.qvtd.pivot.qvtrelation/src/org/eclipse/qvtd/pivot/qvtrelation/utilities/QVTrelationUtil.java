@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -52,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateUtil;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTtemplateUtil
@@ -168,7 +168,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 				while ((aRule = aRelation.getOverridden()) instanceof Relation) {
 					aRelation = (Relation) aRule;
 					if (!relations.add(aRelation)) {
-						QVTruntimeUtil.errPrintln("Cyclic override of '" + relation + "' ignored.");
+						PivotUtil.errPrintln("Cyclic override of '" + relation + "' ignored.");
 						return relation;
 					}
 				}

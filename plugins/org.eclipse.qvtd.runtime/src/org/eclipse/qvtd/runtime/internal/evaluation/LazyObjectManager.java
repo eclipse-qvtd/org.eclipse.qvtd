@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
@@ -32,7 +33,6 @@ import org.eclipse.qvtd.runtime.evaluation.Execution;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * A LazyObjectManager supervises objects during a transformation avoiding the heavyweight costs that
@@ -94,7 +94,7 @@ public class LazyObjectManager extends AbstractObjectManager<LazyObjectManager.@
 		@Override
 		public synchronized void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue, boolean isPartial) {
 			if (isAssigned() && !(eFeature instanceof EOppositeReferenceImpl)) {
-				QVTruntimeUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+				PivotUtil.errPrintln("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 			}
 			assignedSlot();
 		}

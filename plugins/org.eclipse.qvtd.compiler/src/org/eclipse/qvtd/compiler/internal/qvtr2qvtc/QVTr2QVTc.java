@@ -52,6 +52,7 @@ import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.CompilerChain;
@@ -73,7 +74,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
@@ -140,7 +140,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				overriddens = new HashSet<>();
 				for (Relation overridden = relation; overridden != null; overridden = QVTrelationUtil.basicGetOverridden(overridden)) {
 					if (!overriddens.add(overridden)) {
-						QVTruntimeUtil.errPrintln("Cyclic override for " + relation + " at " + overridden);
+						PivotUtil.errPrintln("Cyclic override for " + relation + " at " + overridden);
 						break;
 					}
 				}

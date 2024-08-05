@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -55,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import com.google.common.collect.Iterables;
 
 public class QVTcoreUtil extends QVTbaseUtil
@@ -226,7 +226,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 			ASResource asResource = loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(environmentFactory, asResource);
 			if (missingIsTraces != null) {
-				QVTruntimeUtil.errPrintln("TypedModel.isTrace fixed up for '" + transformationURI + "'");
+				PivotUtil.errPrintln("TypedModel.isTrace fixed up for '" + transformationURI + "'");
 			}
 			return asResource;
 		}

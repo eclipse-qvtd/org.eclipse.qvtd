@@ -53,6 +53,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -77,7 +78,6 @@ import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTc/QVTu/QVTm chain.
@@ -453,7 +453,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 					Resource vResource = variable.eResource();
 					//					assert vResource == eResource;
 					if (vResource != eResource) {
-						QVTruntimeUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
+						PivotUtil.errPrintln(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}
 				}
@@ -851,11 +851,11 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 				for (Setting setting : settings) {
 					EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
 					EObject eSource = setting.getEObject();
-					QVTruntimeUtil.errPrintln("source resource for " + eSource.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eSource)) + "::" + eStructuralFeature.getName() + " : " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)));
+					PivotUtil.errPrintln("source resource for " + eSource.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eSource)) + "::" + eStructuralFeature.getName() + " : " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)));
 				}
 			}
 			else if (eTargetResource != targetResource) {
-				//	QVTruntimeUtil.errPrintln("Wrong2 resource for target " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				//	PivotUtil.errPrintln("Wrong2 resource for target " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 		return true;
@@ -870,7 +870,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			EObject eSource = target2source.get(eTarget);
 			EObject eCopied = debugCopy2source.get(eTarget);
 			if ((eSource == null) && (eCopied == null)) {
-				QVTruntimeUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				PivotUtil.errPrintln("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 		return true;
@@ -973,7 +973,7 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
-			QVTruntimeUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+			PivotUtil.errPrintln("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
 	}
 

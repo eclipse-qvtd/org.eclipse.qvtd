@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.RelationVariableAnalysis;
@@ -42,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 
 /**
  * A RelationVariableAnalysis accumulates the usage of a relation variable and eventually synthesizes an appropriate core variable.
@@ -115,12 +115,12 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 		boolean isRealized =  variableAnalysis.getStrategy() == Strategy.REALIZED_BOTTOM;
 		if (variablesAnalysis.isAbstract() && isRealized) {
 			if (cVariable != null) {
-				QVTruntimeUtil.errPrintln("cVariable for abstract " + this);
+				PivotUtil.errPrintln("cVariable for abstract " + this);
 			}
 			return;
 		}
 		if (cVariable == null) {
-			QVTruntimeUtil.errPrintln("No cVariable for " + this);
+			PivotUtil.errPrintln("No cVariable for " + this);
 			return;
 		}
 		CorePattern cPattern = getCorePattern();

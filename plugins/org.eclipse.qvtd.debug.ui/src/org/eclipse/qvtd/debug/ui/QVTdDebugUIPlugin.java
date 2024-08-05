@@ -27,8 +27,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ocl.examples.debug.vm.ui.DebugVMUIPlugin;
 import org.eclipse.ocl.examples.debug.vm.ui.actions.DebugVMImages;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
-import org.eclipse.qvtd.runtime.utilities.QVTruntimeUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
@@ -190,7 +190,7 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 
 				System.err.print(code);
 				System.err.print(": "); //$NON-NLS-1$
-				QVTruntimeUtil.errPrintln(message);
+				PivotUtil.errPrintln(message);
 
 				if (throwable != null) {
 					throwable.printStackTrace(System.err);
