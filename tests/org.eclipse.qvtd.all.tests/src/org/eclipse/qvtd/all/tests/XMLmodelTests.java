@@ -95,6 +95,12 @@ public class XMLmodelTests extends XtextTestCase
 		TestUtil.assertSameModel(expectedResource, actualResource);
 	}
 
+	@Override
+	protected void setUp() throws Exception {
+		ATLPackage.eINSTANCE.getClass();
+		super.setUp();
+	}
+
 	public void testXML_junit_noframes_xsl() throws Exception {
 		String inPath = getTestBundleName() + "/models/junit-noframes.xsl";
 		URI inURI = URI.createPlatformResourceURI(inPath, true);
@@ -123,7 +129,6 @@ public class XMLmodelTests extends XtextTestCase
 	}
 
 	public void testXML_Families2Persons_atl_xmi() throws Exception {
-		ATLPackage.eINSTANCE.getClass();
 		String inPath = getTestBundleName() + "/models/Families2Persons.atl.xmi";
 		URI inURI = URI.createPlatformResourceURI(inPath, true);
 		XMLmodelResourceImpl resource = (XMLmodelResourceImpl) doXMLtest(inURI, true, false);

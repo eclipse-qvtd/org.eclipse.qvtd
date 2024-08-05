@@ -329,8 +329,8 @@ public class PivotTestCase extends AbstractPivotTestCase
 			ThreadLocalExecutor.reset();
 			if (DEBUG_GC) {
 				testHelper.doTearDown();
-				//	makeCopyOfGlobalState.restoreGlobalState();
-				//	makeCopyOfGlobalState = null;
+				makeCopyOfGlobalState.restoreGlobalState();
+				makeCopyOfGlobalState = null;
 				gc(null);
 			}
 			super.tearDown();
