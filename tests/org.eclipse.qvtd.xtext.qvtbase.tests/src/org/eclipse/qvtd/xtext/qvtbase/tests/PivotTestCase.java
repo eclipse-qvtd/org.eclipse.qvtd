@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -38,10 +37,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotObjectImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -85,19 +81,45 @@ public class PivotTestCase extends AbstractPivotTestCase
 		public static final @NonNull QVTTestHelper INSTANCE = new QVTTestHelper();
 
 		@Override
+		public void doStartUp() {
+			super.doStartUp();
+			//	QVTbasePivotStandaloneSetup.class.getName();
+			//	QVTcorePivotStandaloneSetup.class.getName();
+			//	QVTimperativePivotStandaloneSetup.class.getName();
+			//	QVTrelationPivotStandaloneSetup.class.getName();
+			QVTschedulePivotStandaloneSetup.class.getName();
+			QVTtemplatePivotStandaloneSetup.class.getName();
+			QVTbaseStandaloneSetup.class.getName();
+			QVTcoreStandaloneSetup.class.getName();
+			QVTimperativeStandaloneSetup.class.getName();
+			QVTrelationStandaloneSetup.class.getName();
+			UMLXStandaloneSetup.class.getName();
+		}
+
+		@Override
 		public void doTearDown() {
 			super.doTearDown();
+			//	if (QVTbasePlugin.getPlugin() != null) {
 			QVTbasePivotStandaloneSetup.doTearDown();
-			QVTcorePivotStandaloneSetup.doTearDown();
-			QVTimperativePivotStandaloneSetup.doTearDown();
-			QVTrelationPivotStandaloneSetup.doTearDown();
 			QVTschedulePivotStandaloneSetup.doTearDown();
-			QVTtemplatePivotStandaloneSetup.doTearDown();
 			QVTbaseStandaloneSetup.doTearDown();
-			QVTcoreStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTimperativePlugin.getPlugin() != null) {
+			QVTimperativePivotStandaloneSetup.doTearDown();
 			QVTimperativeStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTcorePlugin.getPlugin() != null) {
+			QVTcorePivotStandaloneSetup.doTearDown();
+			QVTcoreStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTrelationPlugin.getPlugin() != null) {
+			QVTrelationPivotStandaloneSetup.doTearDown();
+			QVTtemplatePivotStandaloneSetup.doTearDown();
 			QVTrelationStandaloneSetup.doTearDown();
+			//	}
+			//	if (UMLXPlugin.getPlugin() != null) {
 			UMLXStandaloneSetup.doTearDown();
+			//	}
 		}
 	}
 
@@ -321,92 +343,11 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	} */
 
-	private void superTearDown1() throws Exception {
-		try {
-			//		if (DEBUG_ID) {
-			//			PivotUtilInternal.debugPrintln("==> Done " + getName());
-			//		}
-			ThreadLocalExecutor.reset();
-			if (DEBUG_GC) {
-				testHelper.doTearDown();
-				makeCopyOfGlobalState.restoreGlobalState();
-				makeCopyOfGlobalState = null;
-				gc(null);
-			}
-			super.tearDown();
-
-
-
-			if (DEBUG_ID) {
-				PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
-			}
-			AbstractEnvironmentFactory.diagnoseLiveEnvironmentFactories();
-			/**
-			 * Reset any PivotEObject.target that may have reverted to proxies when a ProjectMap unloaded,
-			 * and which might be resolved using the wrong strategy in another test.
-			 */
-			OCLstdlib oclstdlib = OCLstdlib.basicGetDefault();
-			if (oclstdlib != null) {
-				for (TreeIterator<EObject> tit = oclstdlib.getAllContents(); tit.hasNext(); ) {
-					EObject eObject = tit.next();
-					if (eObject instanceof PivotObjectImpl) {
-						PivotObjectImpl asObject = (PivotObjectImpl)eObject;
-						asObject.resetStaleESObject();
-					}
-				}
-			}
-
-
-
-		}
-		finally {
-			assert ThreadLocalExecutor.basicGetEnvironmentFactory() == null : getName() + " failed to detach EnvironmentFactory.";
-			PivotUtil.contextLine = null;
-		}
-	}
-
-	private void superTearDown2() throws Exception {
-		try {
-			//		if (DEBUG_ID) {
-			//			PivotUtilInternal.debugPrintln("==> Done " + getName());
-			//		}
-			ThreadLocalExecutor.reset();
-			if (DEBUG_GC) {
-				testHelper.doTearDown();
-				makeCopyOfGlobalState.restoreGlobalState();
-				makeCopyOfGlobalState = null;
-				gc(null);
-			}
-			if (DEBUG_ID) {
-				PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
-			}
-			AbstractEnvironmentFactory.diagnoseLiveEnvironmentFactories();
-			/**
-			 * Reset any PivotEObject.target that may have reverted to proxies when a ProjectMap unloaded,
-			 * and which might be resolved using the wrong strategy in another test.
-			 */
-			OCLstdlib oclstdlib = OCLstdlib.basicGetDefault();
-			if (oclstdlib != null) {
-				for (TreeIterator<EObject> tit = oclstdlib.getAllContents(); tit.hasNext(); ) {
-					EObject eObject = tit.next();
-					if (eObject instanceof PivotObjectImpl) {
-						PivotObjectImpl asObject = (PivotObjectImpl)eObject;
-						asObject.resetStaleESObject();
-					}
-				}
-			}
-			super.tearDown();
-		}
-		finally {
-			assert ThreadLocalExecutor.basicGetEnvironmentFactory() == null : getName() + " failed to detach EnvironmentFactory.";
-			PivotUtil.contextLine = null;
-		}
-	}
-
 	@Override
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
-		superTearDown1();
+		//	superTearDown1();
+		super.tearDown();
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//
@@ -422,15 +363,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 					PivotUtilInternal.debugPrintln("Extra " + nsURI);
 				}
 			}
-		}
-		//	ThreadLocalExecutor.reset();
-		if (DEBUG_GC) {
-			//	uninstall();
-			//	makeCopyOfGlobalState.restoreGlobalState();
-			//	makeCopyOfGlobalState = null;
-			System.gc();
-			System.runFinalization();
-			//			MetamodelManagerResourceAdapter.INSTANCES.show();
 		}
 	}
 }
