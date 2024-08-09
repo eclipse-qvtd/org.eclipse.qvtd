@@ -20,3 +20,5 @@ Export-Package: org.eclipse.qvtd.umlx,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Localization: plugin
 Automatic-Module-Name: org.eclipse.qvtd.umlx
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.qvtd.umlx.utilities.UMLXPlugin
