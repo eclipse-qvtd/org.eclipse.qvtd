@@ -298,7 +298,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	}
 
 	public static @NonNull Resource savePivotFromCS(@NonNull OCL ocl, @NonNull BaseCSResource xtextResource, URI pivotURI) throws IOException {
-		Resource pivotResource = xtextResource.getASResource();
+		Resource pivotResource = xtextResource.getCS2AS(ocl.getEnvironmentFactory()).getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
 			pivotResource.setURI(pivotURI);
