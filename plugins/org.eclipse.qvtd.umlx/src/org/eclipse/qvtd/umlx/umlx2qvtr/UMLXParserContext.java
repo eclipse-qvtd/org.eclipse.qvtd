@@ -17,13 +17,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
-import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
-import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
-import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -31,7 +28,6 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
-import org.eclipse.ocl.xtext.base.attributes.PivotableElementCSAttribution;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.AbstractExtendedParserContext;
@@ -39,7 +35,6 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
 import org.eclipse.ocl.xtext.essentialoclcs.ContextCS;
-import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -54,23 +49,8 @@ import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCSLeft2RightVisitor;
  * QVTr extensions such as RelationCallExp. THe QVTr parser is in turn overridden to support resolution of
  * name lookups and iterator implicit sources within the embedding QVTr model.
  */
-class UMLXParserContext extends AbstractExtendedParserContext
+public class UMLXParserContext extends AbstractExtendedParserContext
 {
-	protected class ContextCSAttribution extends PivotableElementCSAttribution
-	{
-		@Override
-		public @Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-			ScopeView computeLookup = super.computeLookup(target, environmentView, scopeView);
-			//
-			//	Last, last alternative. If nothing found get the UMLXParserContext to help out.
-			//
-			if (!environmentView.hasFinalResult()) {// && ((computeLookup == null) || (computeLookup.getTarget() == null))) {
-				return UMLXParserContext.this.computeLookup(target, environmentView, scopeView);
-			}
-			return computeLookup;
-		}
-	}
-
 	protected class UMLXCS2AS extends QVTrelationCS2AS
 	{
 		protected UMLXCS2AS(@NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
@@ -115,23 +95,16 @@ class UMLXParserContext extends AbstractExtendedParserContext
 		this.contextElement = contextElement;
 		RelationalTransformation transformation = QVTrelationUtil.getContainingTransformation(contextElement);
 		this.contextVariable = QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), transformation);
-		addAttribution(EssentialOCLCSPackage.Literals.CONTEXT_CS, new ContextCSAttribution());
-	}
-
-	private @Nullable ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		EObject pivot = contextElement;
-		if ((pivot instanceof Element) && (pivot.eResource() != null) && !(pivot instanceof InvalidType)) {
-			environmentView.computeLookups((Element) pivot, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
-		}
-		if (!environmentView.hasFinalResult()) {
-			return scopeView.getParent();
-		}
-		return scopeView.getParent();
 	}
 
 	@Override
 	public @Nullable CS2AS createCS2AS(@NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
 		return new UMLXCS2AS(csResource, asResource);
+	}
+
+	@Override
+	public @Nullable Element getElementContext() {
+		return contextElement instanceof Element ? (Element)contextElement : null;
 	}
 
 	public @NonNull OCLExpression parseExpression(@NonNull EObject owner, @NonNull String expression) throws ParserException, IOException {
