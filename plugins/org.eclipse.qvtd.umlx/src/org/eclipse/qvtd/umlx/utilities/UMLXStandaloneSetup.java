@@ -27,6 +27,7 @@ import org.eclipse.qvtd.umlx.labels.UMLXNamedElementLabelGenerator;
 import org.eclipse.qvtd.umlx.labels.RelDomainNodeLabelGenerator;
 import org.eclipse.qvtd.umlx.labels.RelPatternNodeLabelGenerator;
 import org.eclipse.qvtd.umlx.resource.UMLXResourceFactoryImpl;
+import org.eclipse.qvtd.umlx.scoping.UMLXScoping;
 import org.eclipse.qvtd.umlx.util.UMLXValidator;
 
 import com.google.inject.Guice;
@@ -55,6 +56,7 @@ public class UMLXStandaloneSetup
 		}
 		EPackage.Registry.INSTANCE.put(UMLXPackage.eNS_URI, UMLXPackage.eINSTANCE);
 		EValidator.Registry.INSTANCE.put(UMLXPackage.eINSTANCE, UMLXValidator.INSTANCE);
+		UMLXScoping.init();
 		RelDomainNodeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
 		RelPatternNodeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
 		RelPatternEdgeLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
