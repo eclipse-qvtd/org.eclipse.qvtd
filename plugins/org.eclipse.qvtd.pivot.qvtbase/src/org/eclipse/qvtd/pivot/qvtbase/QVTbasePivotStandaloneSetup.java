@@ -41,7 +41,7 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 	}
 
 	public static void init() {
-		QVTruntimeLibrary.lazyInstall();							// XXX
+		QVTruntimeLibrary.lazyInstall();
 		QVTruntimeLibraryPackage.eINSTANCE.getClass();
 		QVTtracePackage.eINSTANCE.getClass();
 		PivotStandaloneSetup.doSetup();
