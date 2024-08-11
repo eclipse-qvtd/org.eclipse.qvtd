@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
-import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -50,6 +49,13 @@ import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
+import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -75,12 +81,45 @@ public class PivotTestCase extends AbstractPivotTestCase
 		public static final @NonNull QVTTestHelper INSTANCE = new QVTTestHelper();
 
 		@Override
+		public void doStartUp() {
+			super.doStartUp();
+			//	QVTbasePivotStandaloneSetup.class.getName();
+			//	QVTcorePivotStandaloneSetup.class.getName();
+			//	QVTimperativePivotStandaloneSetup.class.getName();
+			//	QVTrelationPivotStandaloneSetup.class.getName();
+			QVTschedulePivotStandaloneSetup.class.getName();
+			QVTtemplatePivotStandaloneSetup.class.getName();
+			QVTbaseStandaloneSetup.class.getName();
+			QVTcoreStandaloneSetup.class.getName();
+			QVTimperativeStandaloneSetup.class.getName();
+			QVTrelationStandaloneSetup.class.getName();
+			UMLXStandaloneSetup.class.getName();
+		}
+
+		@Override
 		public void doTearDown() {
 			super.doTearDown();
+			//	if (QVTbasePlugin.getPlugin() != null) {
+			QVTbasePivotStandaloneSetup.doTearDown();
+			QVTschedulePivotStandaloneSetup.doTearDown();
 			QVTbaseStandaloneSetup.doTearDown();
-			QVTcoreStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTimperativePlugin.getPlugin() != null) {
+			QVTimperativePivotStandaloneSetup.doTearDown();
 			QVTimperativeStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTcorePlugin.getPlugin() != null) {
+			QVTcorePivotStandaloneSetup.doTearDown();
+			QVTcoreStandaloneSetup.doTearDown();
+			//	}
+			//	if (QVTrelationPlugin.getPlugin() != null) {
+			QVTrelationPivotStandaloneSetup.doTearDown();
+			QVTtemplatePivotStandaloneSetup.doTearDown();
 			QVTrelationStandaloneSetup.doTearDown();
+			//	}
+			//	if (UMLXPlugin.getPlugin() != null) {
+			UMLXStandaloneSetup.doTearDown();
+			//	}
 		}
 	}
 
@@ -259,7 +298,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	}
 
 	public static @NonNull Resource savePivotFromCS(@NonNull OCL ocl, @NonNull BaseCSResource xtextResource, URI pivotURI) throws IOException {
-		Resource pivotResource = xtextResource.getASResource();
+		Resource pivotResource = xtextResource.getCS2AS(ocl.getEnvironmentFactory()).getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
 			pivotResource.setURI(pivotURI);
@@ -286,18 +325,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	protected void setUp() throws Exception {
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
-		if (!TEST_START.isActive()) {
-			PivotUtil.contextLine = "-----Starting " + getClass().getSimpleName() + "." + getName() + "-----";
-		}
 		super.setUp();
-		if (DEBUG_ID) {
-			PivotUtilInternal.debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
-		}
-		//	TracingOption.resetAll();
-		ThreadLocalExecutor.reset();
-		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
-		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
-		startTime = System.nanoTime();
 		//	resetEValidators();
 	}
 
@@ -315,14 +343,11 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	} */
 
-	static long startTime;
-
 	@Override
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
-		ThreadLocalExecutor.reset();
+		//	superTearDown1();
 		super.tearDown();
-		PivotUtil.contextLine = null;
 		//
 		//	Diagnose the unexpected residual EPackage.Registry that are being left lying around to pollute another test.
 		//
@@ -338,18 +363,6 @@ public class PivotTestCase extends AbstractPivotTestCase
 					PivotUtilInternal.debugPrintln("Extra " + nsURI);
 				}
 			}
-		}
-		ThreadLocalExecutor.reset();
-		if (DEBUG_GC) {
-			//	uninstall();
-			//	makeCopyOfGlobalState.restoreGlobalState();
-			//	makeCopyOfGlobalState = null;
-			System.gc();
-			System.runFinalization();
-			//			MetamodelManagerResourceAdapter.INSTANCES.show();
-		}
-		if (DEBUG_ID) {
-			PivotUtilInternal.debugPrintln("==> Finish " + getClass().getSimpleName() + "." + getName());
 		}
 	}
 }

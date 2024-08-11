@@ -27,6 +27,10 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
+import org.eclipse.debug.internal.ui.sourcelookup.SourceLookupFacility;
+import org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider;
+import org.eclipse.debug.internal.ui.views.variables.VariablesView;
+import org.eclipse.debug.ui.AbstractDebugView;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,6 +39,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.core.VMVariable;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
@@ -45,7 +50,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.ui.model.BaseEditorCallback;
-import org.eclipse.ocl.xtext.base.ui.utilities.ThreadLocalExecutorUI;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
@@ -56,9 +60,17 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
+import org.eclipse.ui.IPartService;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+
 import com.google.inject.Injector;
 
-import junit.framework.TestCase;
 import test.hsl.HSLTree.HSLTreePackage;
 import test.hsv.HSVTree.HSVTreePackage;
 import test.middle.HSV2HSL.HSV2HSLPackage;
@@ -200,6 +212,16 @@ public class QVTiDebuggerTests extends XtextTestCase
 		TestUIUtil.closeIntro();
 		TestUIUtil.enableSwitchToDebugPerspectivePreference();
 		//
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		IWorkbenchWindow initialWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+		assert initialWorkbenchWindow != null;
+		IWorkbenchPage initialPage = initialWorkbenchWindow.getActivePage();
+		assert initialPage != null;
+		IPartService initialPartService = initialWorkbenchWindow.getPartService();
+		assert initialPartService != null;
+		IWorkbenchPart initialPart = initialPartService.getActivePart();
+		assert initialPart != null;
+		//
 		Injector injector = QVTimperativeActivator.getInstance().getInjector(QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE);
 		injector.getInstance(BaseEditorCallback.class).setDontAskForNatureAgain();
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
@@ -232,78 +254,92 @@ public class QVTiDebuggerTests extends XtextTestCase
 		VariableExp asVariableExp = (VariableExp) asPropertyCallExpCallExp.getOwnedSource();
 		NullLiteralExp asNullLiteralExp = (NullLiteralExp) asOperationCallExp.getOwnedArguments().get(0); */
 		//
+		IThread vmThread = null;
 		QVTiDebugTarget debugTarget = (QVTiDebugTarget) launch.getDebugTarget();
 		QVTiVMVirtualMachine vm = (QVTiVMVirtualMachine) debugTarget.getVM();
-		QVTiVMRootEvaluationEnvironment vmRootEvaluationEnvironment = (QVTiVMRootEvaluationEnvironment) vm.getEvaluationEnv();
-		assert vmRootEvaluationEnvironment != null;
-		ImperativeTransformation asTransformation = (ImperativeTransformation) vmRootEvaluationEnvironment.getDebuggableElement();
-		TypedModel inTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, inName);
-		TypedModel middleTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, middleName);
-		TypedModel outTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, outName);
-		VariableDeclaration asTransformationVariable = asTransformation.getOwnedContext();
-		VariableDeclaration asInVariable = inTypedModel.getOwnedContext();
-		VariableDeclaration asMiddleVariable = middleTypedModel.getOwnedContext();
-		VariableDeclaration asOutVariable = outTypedModel.getOwnedContext();
-		assert (asTransformationVariable != null) && (asInVariable != null) && (asMiddleVariable != null) && (asOutVariable != null);
+		try {
+			QVTiVMRootEvaluationEnvironment vmRootEvaluationEnvironment = (QVTiVMRootEvaluationEnvironment) vm.getEvaluationEnv();
+			assert vmRootEvaluationEnvironment != null;
+			ImperativeTransformation asTransformation = (ImperativeTransformation) vmRootEvaluationEnvironment.getDebuggableElement();
+			TypedModel inTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, inName);
+			TypedModel middleTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, middleName);
+			TypedModel outTypedModel = QVTimperativeUtil.getModelParameter(asTransformation, outName);
+			VariableDeclaration asTransformationVariable = asTransformation.getOwnedContext();
+			VariableDeclaration asInVariable = inTypedModel.getOwnedContext();
+			VariableDeclaration asMiddleVariable = middleTypedModel.getOwnedContext();
+			VariableDeclaration asOutVariable = outTypedModel.getOwnedContext();
+			assert (asTransformationVariable != null) && (asInVariable != null) && (asMiddleVariable != null) && (asOutVariable != null);
 
-		IThread vmThread = debugTarget.getThreads()[0];
-		assert vmThread != null;
-		TestUIUtil.waitForSuspended(vmThread);
-		TestUIUtil.waitForNotStepping(vmThread);
-		//
-		checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix for Bug 495979
-		checkVariables(vmThread, VMVirtualMachine.PC_NAME, QVTbaseUtil.THIS_NAME, outName, inName, middleName);
-		checkVariable(vmThread, VMVirtualMachine.PC_NAME, asTransformation);
-		checkVariable(vmThread, QVTbaseUtil.THIS_NAME, vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
-		checkVariable(vmThread, outName, vmRootEvaluationEnvironment.getValueOf(asOutVariable));
-		checkVariable(vmThread, inName, vmRootEvaluationEnvironment.getValueOf(asInVariable));
-		checkVariable(vmThread, middleName, vmRootEvaluationEnvironment.getValueOf(asMiddleVariable));
-		//
-		vmThread.stepInto();
-		TestUIUtil.waitForSuspended(vmThread);
-		//
-		checkPosition(vmThread, 20, 1022, 1030);
-		checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
-		checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
-		//
-		vmThread.stepReturn();
-		//		TestUIUtil.waitForTerminated(vmThread);
-		boolean hasTerminated = false;
-		for (int i = 0; i < 10; i++){
-			TestUIUtil.flushEvents();
-			Thread.sleep(100);
-			if (vmThread.isTerminated()) {
-				hasTerminated = true;
-				break;
-			}
+			vmThread = debugTarget.getThreads()[0];
+			assert vmThread != null;
+			TestUIUtil.waitForSuspended(vmThread);
+			TestUIUtil.waitForNotStepping(vmThread);
+			//
+			checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix for Bug 495979
+			checkVariables(vmThread, VMVirtualMachine.PC_NAME, QVTbaseUtil.THIS_NAME, outName, inName, middleName);
+			checkVariable(vmThread, VMVirtualMachine.PC_NAME, asTransformation);
+			checkVariable(vmThread, QVTbaseUtil.THIS_NAME, vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
+			checkVariable(vmThread, outName, vmRootEvaluationEnvironment.getValueOf(asOutVariable));
+			checkVariable(vmThread, inName, vmRootEvaluationEnvironment.getValueOf(asInVariable));
+			checkVariable(vmThread, middleName, vmRootEvaluationEnvironment.getValueOf(asMiddleVariable));
+			//
+			vmThread.stepInto();
+			TestUIUtil.waitForSuspended(vmThread);
+			//
+			checkPosition(vmThread, 20, 1022, 1030);
+			checkVariables(vmThread, VMVirtualMachine.PC_NAME, "nodes");
+			checkVariable(vmThread, VMVirtualMachine.PC_NAME, QVTimperativeUtil.getDefaultEntryPoint(asTransformation));
+			//
+			vmThread.stepReturn();
+			TestUIUtil.waitForTerminated(vmThread);
 		}
-		if (!hasTerminated) {
-			IStackFrame topStackFrame = vmThread.getTopStackFrame();
-			IVariable[] variables = topStackFrame.getVariables();
-			if (variables != null){
-				for (IVariable variable : variables) {
-					if (VMVirtualMachine.EXCEPTION_NAME.equals(variable.getName()) && (variable instanceof VMVariable)) {
-						Object valueObject = ((VMVariable)variable).getVmVar().valueObject;
-						throw (Exception)valueObject;
+		finally {
+			try {
+				launch.terminate();
+				TestUIUtil.waitForLaunchToTerminate(launch, 10000);
+				/* if (!hasTerminated) {
+					IStackFrame topStackFrame = vmThread.getTopStackFrame();
+					IVariable[] variables = topStackFrame.getVariables();
+					if (variables != null){
+						for (IVariable variable : variables) {
+							if (VMVirtualMachine.EXCEPTION_NAME.equals(variable.getName()) && (variable instanceof VMVariable)) {
+								Object valueObject = ((VMVariable)variable).getVmVar().valueObject;
+								throw (Exception)valueObject;
+							}
+						}
+					}
+					TestCase.fail("Failed to terminate");
+				} */
+				assertEquals(0, vm.getExitCode());
+				//
+				TestUIUtil.flushEvents();
+				ResourceSet expectedResourceSet = new ResourceSetImpl();
+				ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+				Resource expectedResource = expectedResourceSet.getResource(getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), true);
+				assert expectedResource != null;
+				ResourceSet actualResourceSet = new ResourceSetImpl();
+				//		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
+				Resource actualResource = actualResourceSet.getResource(outFile.getURI(), true);
+				assert actualResource != null;
+				TestUtil.assertSameModel(expectedResource, actualResource);
+			}
+			finally {
+				ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+				TestUIUtil.removeTerminatedLaunches(launches);
+				SourceLookupFacility.shutdown();
+				initialPage.activate(initialPart);
+				initialPage.closeAllEditors(false);
+				IViewReference[] viewReferences = initialPage.getViewReferences();
+				for (IViewReference viewReference : viewReferences) {
+					IViewPart viewPart = viewReference.getView(false);
+					if (viewPart instanceof VariablesView) {
+						AbstractDebugView variablesView = (AbstractDebugView)viewPart;
+						variablesView.getViewer().setInput(null);
+						TreeViewer treeModelViewer = (TreeViewer)variablesView.getViewer();
+						treeModelViewer.setContentProvider(new TreeModelContentProvider());
 					}
 				}
 			}
-			TestCase.fail("Failed to terminate");
 		}
-		assertEquals(0, vm.getExitCode());
-		//
-		TestUIUtil.flushEvents();
-		ResourceSet expectedResourceSet = new ResourceSetImpl();
-		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
-		Resource expectedResource = expectedResourceSet.getResource(getModelsURI("HSV2HSL/HSLNodeValidate.xmi"), true);
-		assert expectedResource != null;
-		ResourceSet actualResourceSet = new ResourceSetImpl();
-		//		ocl.getProjectManager().initializeResourceSet(expectedResourceSet);
-		Resource actualResource = actualResourceSet.getResource(outFile.getURI(), true);
-		assert actualResource != null;
-		TestUtil.assertSameModel(expectedResource, actualResource);
-		ThreadLocalExecutorUI.closeEditors();
-		TestUIUtil.flushEvents();
-		ocl.dispose();
 	}
 }

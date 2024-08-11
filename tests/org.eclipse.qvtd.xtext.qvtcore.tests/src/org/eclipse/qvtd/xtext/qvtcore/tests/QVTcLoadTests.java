@@ -37,6 +37,8 @@ public class QVTcLoadTests extends LoadTestCase
 	protected void setUp() throws Exception {
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		XtextCompilerUtil.doQVTcoreSetup();
+		XtextCompilerUtil.doQVTimperativeSetup();
+		XtextCompilerUtil.doQVTscheduleSetup();
 		super.setUp();
 		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
 	}
@@ -84,7 +86,6 @@ public class QVTcLoadTests extends LoadTestCase
 	 * Check that e.g. the Sample Ecore Model Editor can open the transitive qvtcas reference.
 	 */
 	public void testQVTcLoad_HSV2HSL_qvtias() throws Exception {
-		XtextCompilerUtil.doQVTimperativeSetup();
 		// hsv2hsl/HSV2HSL.qvtias is copied from the testQVTcCompiler_HSVToHSL_CG results with ../xxpaths stripped
 		// hsv2hsl/HSV2HSL.qvtm.qvtcas is copied from the testQVTcCompiler_HSVToHSL_CG results
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -102,8 +103,6 @@ public class QVTcLoadTests extends LoadTestCase
 	 * Check that e.g. the Sample Ecore Model Editor can open a qvtsas reference.
 	 */
 	public void testQVTcLoad_HSV2HSL_qvtsas() throws Exception {
-		XtextCompilerUtil.doQVTimperativeSetup();
-		XtextCompilerUtil.doQVTscheduleSetup();
 		// hsv2hsl/HSV2HSL.qvtsas is copied from the testQVTcCompiler_HSVToHSL_CG results with ../xxpaths stripped
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getTestProjectManager().initializeResourceSet(resourceSet);

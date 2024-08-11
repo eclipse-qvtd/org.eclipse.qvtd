@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
+import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
+import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,8 +36,14 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 		}
 	}
 
+	public static void doTearDown() {
+		injector = null;
+	}
+
 	public static void init() {
-		QVTruntimeLibrary.lazyInstall();
+		QVTruntimeLibrary.lazyInstall();							// XXX
+		QVTruntimeLibraryPackage.eINSTANCE.getClass();
+		QVTtracePackage.eINSTANCE.getClass();
 		PivotStandaloneSetup.doSetup();
 		QVTbasePivotScoping.init();
 	}

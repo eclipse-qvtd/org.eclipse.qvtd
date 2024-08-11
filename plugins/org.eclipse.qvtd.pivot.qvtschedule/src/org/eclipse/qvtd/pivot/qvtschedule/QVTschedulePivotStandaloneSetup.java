@@ -34,6 +34,10 @@ public class QVTschedulePivotStandaloneSetup
 		}
 	}
 
+	public static void doTearDown() {
+		injector = null;
+	}
+
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
 		//		QVTschedulePivotScoping.init();

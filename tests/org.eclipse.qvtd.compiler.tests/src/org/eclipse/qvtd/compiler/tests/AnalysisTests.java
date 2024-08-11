@@ -62,6 +62,8 @@ public class AnalysisTests extends XtextTestCase
 {
 	@Override
 	protected void setUp() throws Exception {
+		TestUtil.doCompleteOCLSetup();
+		XtextCompilerUtil.doQVTcoreSetup();
 		super.setUp();
 		OCLstdlib.install();
 	}
@@ -292,8 +294,6 @@ public class AnalysisTests extends XtextTestCase
 
 	@Test
 	public void testOperationDependencyAnalysis_Companies() throws ParserException {
-		TestUtil.doCompleteOCLSetup();
-		XtextCompilerUtil.doQVTcoreSetup();
 		OCLInternal ocl = OCLInternal.newInstance();
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		//
