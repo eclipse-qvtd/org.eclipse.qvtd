@@ -177,8 +177,8 @@ public class QVTruntimeLibraryTests extends XtextTestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		super.setUp();
 		TestUtil.doOCLstdlibSetup();
+		super.setUp();
 	}
 
 	@Override

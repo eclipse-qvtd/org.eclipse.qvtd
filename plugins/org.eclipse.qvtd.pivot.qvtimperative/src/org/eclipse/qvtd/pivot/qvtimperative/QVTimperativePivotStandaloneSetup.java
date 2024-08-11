@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.LabelGeneratorRegistry;
-import org.eclipse.qvtd.runtime.labels.QVTiLabelGenerators;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
+import org.eclipse.qvtd.runtime.labels.QVTiLabelGenerators;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -38,6 +38,10 @@ public class QVTimperativePivotStandaloneSetup
 		if (injector == null) {
 			injector = new QVTimperativePivotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
+	}
+
+	public static void doTearDown() {
+		injector = null;
 	}
 
 	public static void init() {

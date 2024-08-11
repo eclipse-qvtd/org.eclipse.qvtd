@@ -131,16 +131,14 @@ public class UMLXCompilerTests extends LoadTestCase
 	public void setUp() throws Exception {
 //		BaseLinkingService.DEBUG_RETRY.setState(true);
 		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
-		super.setUp();
-		OCLstdlib.install();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			UMLXStandaloneSetup.doSetup();
 		}
 		XtextCompilerUtil.doQVTrelationSetup();
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
-		//		QVTrelationPivotStandaloneSetup.doSetup();
-		//		QVTimperativePivotStandaloneSetup.doSetup();
+		super.setUp();
+		OCLstdlib.install();
 	}
 
 	/* (non-Javadoc)

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.m2m.atl.common.ATL.ATLPackage;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
@@ -245,14 +246,13 @@ public class QVTrCompilerTests extends LoadTestCase
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2018/QVTtrace", ~0);
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", ~0);
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
-		super.setUp();
-		OCLstdlib.install();
+		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
+		ATLPackage.eINSTANCE.getClass();
 		XtextCompilerUtil.doQVTrelationSetup();
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
-		//		QVTrelationPivotStandaloneSetup.doSetup();
-		//		QVTimperativePivotStandaloneSetup.doSetup();
+		super.setUp();
+		OCLstdlib.install();
 		ConnectivityChecker.CONNECTIVITY.setState(true);
 		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = true;
 	}

@@ -151,7 +151,6 @@ public class QVTiCompilerTests extends LoadTestCase
 			//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 			TestUtil.saveAsXMI(xtextResource, cstURI, getSaveOptions());
 
-			TestUtil.doCompleteOCLSetup();
 			URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
