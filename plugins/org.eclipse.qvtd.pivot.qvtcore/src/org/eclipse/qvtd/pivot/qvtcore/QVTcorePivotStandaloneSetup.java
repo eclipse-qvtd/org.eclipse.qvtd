@@ -35,6 +35,10 @@ public class QVTcorePivotStandaloneSetup //implements ISetup
 		}
 	}
 
+	public static void doTearDown() {
+		injector = null;
+	}
+
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
 		QVTcoreASResourceFactory.getInstance();

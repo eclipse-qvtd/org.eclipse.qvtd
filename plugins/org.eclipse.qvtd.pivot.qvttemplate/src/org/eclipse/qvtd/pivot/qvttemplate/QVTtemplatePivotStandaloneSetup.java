@@ -26,18 +26,22 @@ import com.google.inject.Injector;
 public class QVTtemplatePivotStandaloneSetup //implements ISetup
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTtemplatePivotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 
+	public static void doTearDown() {
+		injector = null;
+	}
+
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
 		QVTtemplatePivotScoping.init();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -73,12 +77,12 @@ public class QVTtemplatePivotStandaloneSetup //implements ISetup
 		register(injector);
 		return injector;
 	}
-	
+
 	public void register(Injector injector) {
-//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
-//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
+		//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
 	}
 }
 
