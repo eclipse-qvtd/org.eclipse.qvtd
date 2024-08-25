@@ -132,7 +132,7 @@ public class UMLXSerializeTests extends LoadTestCase
 			assertSameModel(qvtrResource1, qvtrResource2);
 		}
 		ocl2.dispose();
-		ocl1.activate();
+		ocl1.activate();				// XXX
 		ocl1.dispose();
 	}
 

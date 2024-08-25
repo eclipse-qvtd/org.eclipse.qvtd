@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
@@ -110,7 +111,7 @@ public class QVTcLoadTests extends LoadTestCase
 		Resource resource = resourceSet.getResource(uri, true);
 		assert resource != null;
 		assertNoResourceErrors("Load", resource);
-		EcoreUtil.resolveAll(resource);
+		AbstractTestQVT.resolveAllandSkipPreUnload(resourceSet);
 		assertNoUnresolvedProxies("Resolve", resource);;
 		assertNoValidationErrors("Validate", resource);;
 	}

@@ -10,8 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ParameterImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -76,5 +78,25 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	@Override
+	public void setName(String newName) {
+		if ("self".equals(newName)) {
+			getClass();		// XXX
+		}
+		super.setName(newName);
+	}
+
+	@Override
+	protected boolean setReloadableProxy() {
+		// XXX Auto-generated method stub
+		return super.setReloadableProxy();
+	}
+
+	@Override
+	public @Nullable Notifier getReloadableNotifier() {
+		// XXX Auto-generated method stub
+		return super.getReloadableNotifier();
 	}
 } //FunctionParameterImpl

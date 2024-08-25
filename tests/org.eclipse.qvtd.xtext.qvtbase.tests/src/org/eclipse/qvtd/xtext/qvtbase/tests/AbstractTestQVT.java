@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -237,8 +238,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
-		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
+		List<Resource> asResources = asResourceSet.getResources();
+		int oldResourceCount = asResources.size();
+		ASResource asResource = (ASResource)asResourceSet.getResource(inputURI, true);
 		assert asResource != null;
+		resolveAllandSkipPreUnload(asResourceSet);
 		//		List<String> conversionErrors = new ArrayList<String>();
 		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 		//		Resource eResource = documentCS.eResource();
@@ -246,7 +251,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
 		//		xtextResource.getContents().add(documentCS);
-		return (ASResource) asResource;
+		return asResource;
+	}
+
+	public static void resolveAllandSkipPreUnload(@NonNull ResourceSet resourceSet) {
+		EcoreUtil.resolveAll(resourceSet);
+		for (Resource resource : resourceSet.getResources()) {
+			if (resource instanceof ASResource) {
+				ASResource asResource = (ASResource)resource;
+				if (asResource.isSaveable()) {
+					asResource.setSkipPreUnload(true);
+				}
+			}
+		}
 	}
 
 	/**
@@ -410,7 +427,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//			resourceSet = getResourceSet();
 		//		}
 		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
-		EcoreUtil.resolveAll(actualResourceSet);
+		resolveAllandSkipPreUnload(actualResourceSet);
 		if (expectedURI != null) {
 			String actualFileStem = actualURI.trimFileExtension().lastSegment();
 			String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
@@ -604,7 +621,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Resource resource = resourceSet.getResource(uri, true);
 		assert resource != null;
 		PivotTestCase.assertNoResourceErrors("Load", resource);
-		EcoreUtil.resolveAll(resource);
+		resolveAllandSkipPreUnload(resourceSet);
 		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 		PivotTestCase.assertNoValidationErrors("Validate", resource);;
 		activate();

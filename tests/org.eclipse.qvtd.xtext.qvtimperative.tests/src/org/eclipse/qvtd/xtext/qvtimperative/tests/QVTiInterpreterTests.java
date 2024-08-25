@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -144,11 +145,12 @@ public class QVTiInterpreterTests extends LoadTestCase
 			OCLstdlib.install();
 			((OCLInternal)ocl).getMetamodelManager().getASmetamodel();
 		}
-		Resource resource = asResourceSet.getResource(asURI, true);
-		assert resource != null;
-		EcoreUtil.resolveAll(resource);
-		assertNoUnresolvedProxies("Loading", resource);
-		assertNoResourceErrors("Loading", resource);
+		ASResource asResource = (ASResource)asResourceSet.getResource(asURI, true);
+		assert asResource != null;
+		EcoreUtil.resolveAll(asResource);
+		assertNoUnresolvedProxies("Loading", asResource);
+		assertNoResourceErrors("Loading", asResource);
+		asResource.setSkipPreUnload(true);
 		ocl.dispose();
 	}
 

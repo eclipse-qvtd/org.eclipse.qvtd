@@ -52,8 +52,9 @@ public class QVTrSerializeTests extends LoadTestCase
 		Resource asResource3 = doLoad_Concrete(ocl2, serializedInputURI, serializedPivotURI, NO_MESSAGES);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
 		ocl2.dispose();
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
@@ -72,8 +73,9 @@ public class QVTrSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
 		ocl2.dispose();
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	// FIXME workaround for Bug 510503
@@ -93,8 +95,9 @@ public class QVTrSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
 		ocl2.dispose();
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	// FIXME workaround for Bug 510503

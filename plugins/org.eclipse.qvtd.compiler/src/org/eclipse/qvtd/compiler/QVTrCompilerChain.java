@@ -96,6 +96,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			ASResource qvtrResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
 			boolean wasUpdating = qvtrResource.setUpdating(true);
 			qvtrResource.setURI(getURI());
+			qvtrResource.setSkipPreUnload(true);
 			qvtrResource.setUpdating(wasUpdating);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
@@ -137,7 +138,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			//					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
 			//				}
 			//			}
-			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
+			ASResource qvtsResource = (ASResource) createResource(QVTschedulePackage.eCONTENT_TYPE);
+			qvtsResource.setSkipPreUnload(true);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);

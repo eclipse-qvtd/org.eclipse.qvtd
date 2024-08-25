@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaSourceFileObject;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -144,7 +145,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				CompilerUtil.addTransformationError(this, transformation, "Inconsistent configuration\n" + s);
 			}
 			try {
-				Resource uResource = createResource(QVTcorePackage.eCONTENT_TYPE);
+				ASResource uResource = (ASResource) createResource(QVTcorePackage.eCONTENT_TYPE);
+				uResource.setSkipPreUnload(true);
 				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, this, typedModelsConfiguration);
 				tx.transform(cResource, uResource);
 				return saveResource(uResource);
@@ -261,7 +263,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 		public @NonNull ImperativeTransformation execute(@NonNull ScheduleManager scheduleManager) throws IOException {
 			// Default QVTi strategy ok.
-			Resource iResource = createResource(QVTimperativePackage.eCONTENT_TYPE);
+			ASResource iResource = (ASResource) createResource(QVTimperativePackage.eCONTENT_TYPE);
+			iResource.setSkipPreUnload(true);
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 			ImperativeModel model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 			iResource.getContents().add(model);
@@ -297,7 +300,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull Resource execute(@NonNull Resource uResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				Resource mResource = createResource(QVTcorePackage.eCONTENT_TYPE);
+				ASResource mResource = (ASResource)createResource(QVTcorePackage.eCONTENT_TYPE);
+				mResource.setSkipPreUnload(true);
 				QVTu2QVTm tx = new QVTu2QVTm(environmentFactory);
 				tx.transform(uResource, mResource);
 				return saveResource(mResource);

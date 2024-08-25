@@ -76,15 +76,16 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		Transformation asTransformation = loadTransformation(myQVT, inURI);
 		QVTr2QVTrCopier copier = new QVTr2QVTrCopier(myQVT.getEnvironmentFactory());
 		Resource inResource = asTransformation.eResource();
-		Resource outResource = inResource.getResourceSet().createResource(outURI, null);
+		ASResource outResource = (ASResource) inResource.getResourceSet().createResource(outURI, null);
 		assert outResource != null;
-		copier.transform((ASResource)inResource, (ASResource)outResource);
+		outResource.setSkipPreUnload(true);
+		copier.transform((ASResource)inResource, outResource);
 		Model outModel = QVTrelationUtil.getModel(outResource);
 		outModel.setName(inURI.lastSegment());
 		outModel.setExternalURI(inURI.toString());
 		//	assertSameModel(inResource, outResource); -- no xmi:ids
 		//	((ASResource)inResource).setSaveable(true);
-		((ASResource)outResource).setSaveable(true);
+		outResource.setSaveable(true);
 		//	inResource.save(DefaultCompilerOptions.defaultSavingOptions);			-- saved during loadTransformation
 		outResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertSameModel(inResource, outResource);

@@ -17,6 +17,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -335,7 +336,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		switch (featureID) {
 			case VariableImpl.VARIABLE_FEATURE_COUNT + 0:
 				if (resolve) return getTypedModel();
-				return basicGetTypedModel();
+			return basicGetTypedModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -350,7 +351,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		switch (featureID) {
 			case VariableImpl.VARIABLE_FEATURE_COUNT + 0:
 				setTypedModel((TypedModel)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -365,7 +366,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		switch (featureID) {
 			case VariableImpl.VARIABLE_FEATURE_COUNT + 0:
 				setTypedModel((TypedModel)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -414,5 +415,13 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	@Override
+	public @Nullable Notifier getReloadableNotifier() {
+		if (isIsImplicit()) {
+			return null;
+		}
+		return super.getReloadableNotifier();
 	}
 } //SharedVariableImpl

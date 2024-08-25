@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -693,8 +694,9 @@ public class QVTbaseUtil extends PivotUtil
 		Resource xtextResource = null;
 		ASResource asResource;
 		// Load the transformation resource
+		ResourceSet asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
 		if (PivotUtilInternal.isASURI(transformationURI)) {
-			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+			asResource = (ASResource) asResourceSet.getResource(transformationURI, true);
 		}
 		else {
 			xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
@@ -710,6 +712,16 @@ public class QVTbaseUtil extends PivotUtil
 			}
 			ICS2AS cs2as = ((CSResource)xtextResource).getCS2AS(environmentFactory);
 			asResource = cs2as.getASResource();
+		}
+		if (!keepDebug) {
+			for (Resource resource : asResourceSet.getResources()) {
+				if (resource instanceof ASResource) {
+					ASResource asResource2 = (ASResource)resource;
+					//	if (asResource2.isSaveable()) {
+					asResource2.setSkipPreUnload(true);
+					//	}
+				}
+			}
 		}
 		try {
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
@@ -756,6 +768,9 @@ public class QVTbaseUtil extends PivotUtil
 			// Load the transformation resource
 			if (PivotUtilInternal.isASURI(transformationURI)) {
 				asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+				if (!keepDebug) {
+					asResource.setSkipPreUnload(true);
+				}
 			}
 			else {
 				xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
@@ -774,7 +789,7 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		} finally {
 			if (!keepDebug && (xtextResource instanceof CSResource)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned
-				//				((CSResource)xtextResource).dispose();
+				// XXX				((CSResource)xtextResource).dispose();
 			}
 		}
 		if (asResource == null) {

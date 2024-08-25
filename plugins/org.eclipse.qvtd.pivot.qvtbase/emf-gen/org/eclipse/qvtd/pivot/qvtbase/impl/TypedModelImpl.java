@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -490,7 +491,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTransformation((Transformation)otherEnd, msgs);
+			return basicSetTransformation((Transformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -564,31 +565,31 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setTransformation((Transformation)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getUsedPackage().clear();
-				getUsedPackage().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
-				return;
+			getUsedPackage().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getDependsOn().clear();
-				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedContext((Parameter)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive((Boolean)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsThis((Boolean)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setIsTrace((Boolean)newValue);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getIterates().clear();
-				getIterates().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getIterates().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -603,28 +604,28 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		switch (featureID) {
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setTransformation((Transformation)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getUsedPackage().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getDependsOn().clear();
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedContext((Parameter)null);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive(IS_PRIMITIVE_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsThis(IS_THIS_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setIsTrace(IS_TRACE_EDEFAULT);
-				return;
+			return;
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				getIterates().clear();
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -686,6 +687,14 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		else {
 			return super.accept(visitor);
 		}
+	}
+
+	@Override
+	public @Nullable Notifier getReloadableNotifier() {
+		if (isPrimitive || isThis || isTrace) {
+			return null;
+		}
+		return super.getReloadableNotifier();
 	}
 
 	@Override
