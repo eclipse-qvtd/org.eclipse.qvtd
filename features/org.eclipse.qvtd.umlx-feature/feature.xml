@@ -16,7 +16,7 @@
 <feature
       id="org.eclipse.qvtd.umlx"
       label="%featureName"
-      version="0.33.0.qualifier"
+      version="0.34.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.qvtd.umlx.design"
       license-feature="org.eclipse.license"
