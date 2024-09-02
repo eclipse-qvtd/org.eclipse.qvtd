@@ -56,7 +56,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2024-03"
+      defaultValue="2024-09"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
@@ -65,24 +65,20 @@
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
+      xsi:type="setup:PreferenceTask"
+      key="instance/org.eclipse.epp.mpc.ui/org.eclipse.epp.mpc.naturelookup"
+      value="false"/>
+  <setupTask
+      xsi:type="setup:PreferenceTask"
+      key="instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"
+      value="ignore"/>
+  <setupTask
       xsi:type="setup:CompoundTask"
-      name="Preferences">
+      name="org.eclipse.pde.api.tools">
     <setupTask
         xsi:type="setup:PreferenceTask"
-        key="instance/org.eclipse.epp.mpc.ui/org.eclipse.epp.mpc.naturelookup"
-        value="false"/>
-    <setupTask
-        xsi:type="setup:PreferenceTask"
-        key="instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"
-        value="ignore"/>
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="org.eclipse.pde.api.tools">
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          key="/instance/org.eclipse.pde.api.tools/missing_default_api_profile"
-          value="Ignore"/>
-    </setupTask>
+        key="/instance/org.eclipse.pde.api.tools/missing_default_api_profile"
+        value="Ignore"/>
   </setupTask>
   <setupTask
       xsi:type="setup.targlets:TargletTask">
@@ -141,6 +137,39 @@
             </detail>
           </annotation>
         </repository>
+      </repositoryList>
+      <repositoryList
+          name="2024-12">
+        <repository
+            url="https://download.eclipse.org/releases/2024-12"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-12"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2024-09">
+        <repository
+            url="https://download.eclipse.org/releases/2024-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2024-06">
+        <repository
+            url="https://download.eclipse.org/releases/2024-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
       </repositoryList>
       <repositoryList
           name="2024-03">
@@ -705,6 +734,22 @@
           value="master"/>
     </stream>
     <stream
+        name="0.33.0"
+        label="0.33.0 (2024-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.22.0"/>
+    </stream>
+    <stream
+        name="0.32.0"
+        label="0.32.0 (2024-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.21.0"/>
+    </stream>
+    <stream
         name="0.31.0"
         label="0.31.0 (2024-03)">
       <setupTask
@@ -992,6 +1037,22 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.33.0"
+        label="0.33.0 (2024-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.22.0"/>
+    </stream>
+    <stream
+        name="0.32.0"
+        label="0.32.0 (2024-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.21.0"/>
     </stream>
     <stream
         name="0.31.0"
@@ -1302,6 +1363,22 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.33.0"
+        label="0.33.0 (2024-09)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.22.0"/>
+    </stream>
+    <stream
+        name="0.32.0"
+        label="0.32.0 (2024-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.21.0"/>
     </stream>
     <stream
         name="0.31.0"
