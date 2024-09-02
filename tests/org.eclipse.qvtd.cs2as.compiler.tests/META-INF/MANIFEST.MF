@@ -62,4 +62,5 @@ Export-Package: example1.source,
  example5.tderived.impl,
  example5.tderived.util,
  org.eclipse.qvtd.cs2as.compiler.tests
+Import-Package: org.apache.log4j;version="[1.2.15,2.0.0)"
 Automatic-Module-Name: org.eclipse.qvtd.cs2as.compiler.tests
