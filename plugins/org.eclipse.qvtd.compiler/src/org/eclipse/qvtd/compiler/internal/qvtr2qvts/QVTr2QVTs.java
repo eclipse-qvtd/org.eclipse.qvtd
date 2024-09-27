@@ -623,7 +623,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 			else {
 				traceModel = PivotFactory.eINSTANCE.createModel();
-				traceModel.setExternalURI(traceResource.getURI().toString());
+				traceModel.setExternalURI(traceResource.getURI().trimFileExtension().toString());
 				traceResource.getContents().add(traceModel);
 			}
 			for (@NonNull Rule rule : rules) {

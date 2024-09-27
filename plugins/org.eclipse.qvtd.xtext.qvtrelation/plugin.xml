@@ -36,13 +36,13 @@
 
    <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
-            contentTypeIdentifier="org.eclipse.qvtd.qvtrcs"
-            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSXMIResourceFactory"/>
+            contentTypeIdentifier="org.eclipse.ocl.oclcs"
+            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="qvtrcs"
-            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSXMIResourceFactory"/>
+      <parser type="oclcs"
+            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

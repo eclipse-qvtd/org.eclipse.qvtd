@@ -15,15 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -36,7 +32,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -135,30 +130,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		return csPathName;
 	}
 
-	/**
-	 * QVTrelationAliasAnalysis revises AliasAnalysis to support only those names explicitly defined (as a consequence
-	 * of Unit AS elements).
-	 */
-	public static class QVTrelationAliasAnalysis extends AliasAnalysis
-	{
-		public static @NonNull QVTrelationAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			List<Adapter> eAdapters = resource.eAdapters();
-			for (Adapter adapter : eAdapters) {
-				if (adapter instanceof QVTrelationAliasAnalysis) {
-					QVTrelationAliasAnalysis aliasAnalysis = (QVTrelationAliasAnalysis)adapter;
-					if (aliasAnalysis.environmentFactory == environmentFactory) {
-						return aliasAnalysis;
-					}
-				}
-			}
-			return new QVTrelationAliasAnalysis(resource, environmentFactory);
-		}
-
-		public QVTrelationAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			super(resource, environmentFactory);
-		}
-	}
-
 	public QVTrelationDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
@@ -193,7 +164,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 	public void buildModel(@NonNull RootPackageCS csRootPackage, @NonNull Model asModel) {
 		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
-			if (!Orphanage.isTypeOrphanage(asPackage)) {
+			if (!Orphanage.isOrphanage(asPackage)) {
 				buildPackage(csRootPackage, null, asPackage);
 			}
 		}
@@ -292,24 +263,8 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	@Override
 	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<@NonNull Namespace, @NonNull List<@NonNull String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
-		QVTrelationAliasAnalysis aliasAdapter = QVTrelationAliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
-		List<EObject> contents = csResource.getContents();
-		if (contents.size() > 0) {
-			EObject root = contents.get(0);
-			if (root instanceof RootPackageCS) {
-				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
-					Element pivot = csImport.getPivot();
-					if (pivot instanceof Import) {
-						Import asImport = (Import)pivot;
-						String alias = asImport.getName();
-						Namespace asNamespace = asImport.getImportedNamespace();
-						if ((asNamespace != null) && (alias != null)) {
-							aliasAdapter.getAlias(asNamespace, alias);
-						}
-					}
-				}
-			}
-		}
+		AliasAnalysis aliasAdapter = AliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
+		aliasAdapter.computeCandidates(csResource);
 	}
 
 	@Override
@@ -602,7 +557,8 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTrelationCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
 		csTransformation.setOwnedPathName(null);
-		List<@NonNull TypedModel> modelParameters = Lists.newArrayList(QVTrelationUtil.getModelParameters(asTransformation));
+		@SuppressWarnings("null")
+		@NonNull List<@NonNull TypedModel> modelParameters = Lists.newArrayList(QVTrelationUtil.getModelParameters(asTransformation));
 		TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 		if (traceTypedModel != null) {
 			modelParameters.remove(traceTypedModel);

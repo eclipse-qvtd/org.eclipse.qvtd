@@ -14,11 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 
@@ -98,17 +96,5 @@ public class FunctionBodyImpl extends ExpressionInOCLImpl implements FunctionBod
 	@Override
 	public Type getType() {
 		return ownedBody.getType();
-	}
-
-	@Override
-	protected boolean setReloadableProxy() {
-		// TODO Auto-generated method stub
-		return super.setReloadableProxy();
-	}
-
-	@Override
-	public @Nullable Notifier getReloadableNotifier() {
-		// TODO Auto-generated method stub
-		return super.getReloadableNotifier();
 	}
 } //FunctionBodyImpl

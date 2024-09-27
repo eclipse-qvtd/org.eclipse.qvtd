@@ -12,7 +12,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
@@ -63,7 +62,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 	}
 
 	@Override
-	public @Nullable Notifier getReloadableNotifier() {
+	public @Nullable Object getReloadableEObjectOrURI() {
 		return null;
 	}
 } //AbstractDatumImpl

@@ -370,11 +370,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			ASResource qvtrASResource = (ASResource) myQVT2.addOutputURI("qvtr", txURI2);
-			qvtrASResource.setSkipPreUnload(true);
+			qvtrASResource.setASonly(true);
 			myQVT2.saveModels(null);
 			myQVT2.checkOutput(txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
 		}
 		finally {
+			myQVT2.activate();
 			myQVT2.dispose();
 			myQVT2 = null;
 		}
@@ -968,7 +969,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
-			((ASResource)myQVT1.getEnvironmentFactory().getASResourceSet().getResources().get(0)).setSkipPreUnload(true);
+			((ASResource)myQVT1.getEnvironmentFactory().getASResourceSet().getResources().get(0)).setASonly(true);
 		}
 		finally {
 			myQVT1.dispose();

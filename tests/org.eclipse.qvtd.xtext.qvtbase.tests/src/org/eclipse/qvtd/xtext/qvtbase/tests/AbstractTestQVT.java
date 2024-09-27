@@ -243,7 +243,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		int oldResourceCount = asResources.size();
 		ASResource asResource = (ASResource)asResourceSet.getResource(inputURI, true);
 		assert asResource != null;
-		resolveAllandSkipPreUnload(asResourceSet);
+		resolveAllandSetASonly(asResourceSet);
 		//		List<String> conversionErrors = new ArrayList<String>();
 		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 		//		Resource eResource = documentCS.eResource();
@@ -254,13 +254,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return asResource;
 	}
 
-	public static void resolveAllandSkipPreUnload(@NonNull ResourceSet resourceSet) {
+	public static void resolveAllandSetASonly(@NonNull ResourceSet resourceSet) {
 		EcoreUtil.resolveAll(resourceSet);
 		for (Resource resource : resourceSet.getResources()) {
 			if (resource instanceof ASResource) {
 				ASResource asResource = (ASResource)resource;
 				if (asResource.isSaveable()) {
-					asResource.setSkipPreUnload(true);
+					asResource.setASonly(true);
 				}
 			}
 		}
@@ -427,7 +427,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//			resourceSet = getResourceSet();
 		//		}
 		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
-		resolveAllandSkipPreUnload(actualResourceSet);
+		resolveAllandSetASonly(actualResourceSet);
 		if (expectedURI != null) {
 			String actualFileStem = actualURI.trimFileExtension().lastSegment();
 			String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
@@ -621,7 +621,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Resource resource = resourceSet.getResource(uri, true);
 		assert resource != null;
 		PivotTestCase.assertNoResourceErrors("Load", resource);
-		resolveAllandSkipPreUnload(resourceSet);
+		resolveAllandSetASonly(resourceSet);
 		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 		PivotTestCase.assertNoValidationErrors("Validate", resource);;
 		activate();

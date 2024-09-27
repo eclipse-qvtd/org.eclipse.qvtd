@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource.OCLCSResourceLoadFactory;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -36,6 +37,17 @@ import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 
 public class QVTcoreCSResource extends QVTbaseCSResource
 {
+	/**
+	 * A QVTcoreCSResourceLoadFactory supports creation of a BaseCSXMIResource that supports persistence of the CS model directly as XMI
+	 * rather than exploiting Xtext to serialize to / parse from a text file.
+	 */
+	public static class QVTcoreCSResourceLoadFactory extends OCLCSResourceLoadFactory
+	{
+		public QVTcoreCSResourceLoadFactory() {
+			super(QVTcoreASResourceFactory.getInstance());
+		}
+	}
+
 	@Override
 	public @NonNull AS2CS createAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {

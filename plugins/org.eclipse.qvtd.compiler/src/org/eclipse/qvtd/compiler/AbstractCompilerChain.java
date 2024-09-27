@@ -146,7 +146,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			}
 			try {
 				ASResource uResource = (ASResource) createResource(QVTcorePackage.eCONTENT_TYPE);
-				uResource.setSkipPreUnload(true);
+				uResource.setASonly(true);
 				QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, this, typedModelsConfiguration);
 				tx.transform(cResource, uResource);
 				return saveResource(uResource);
@@ -264,7 +264,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull ImperativeTransformation execute(@NonNull ScheduleManager scheduleManager) throws IOException {
 			// Default QVTi strategy ok.
 			ASResource iResource = (ASResource) createResource(QVTimperativePackage.eCONTENT_TYPE);
-			iResource.setSkipPreUnload(true);
+			iResource.setASonly(true);
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 			ImperativeModel model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 			iResource.getContents().add(model);
@@ -301,7 +301,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				ASResource mResource = (ASResource)createResource(QVTcorePackage.eCONTENT_TYPE);
-				mResource.setSkipPreUnload(true);
+				mResource.setASonly(true);
 				QVTu2QVTm tx = new QVTu2QVTm(environmentFactory);
 				tx.transform(uResource, mResource);
 				return saveResource(mResource);

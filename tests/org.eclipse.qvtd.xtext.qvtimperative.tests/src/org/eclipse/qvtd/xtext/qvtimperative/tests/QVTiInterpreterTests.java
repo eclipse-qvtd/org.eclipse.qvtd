@@ -150,7 +150,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		EcoreUtil.resolveAll(asResource);
 		assertNoUnresolvedProxies("Loading", asResource);
 		assertNoResourceErrors("Loading", asResource);
-		asResource.setSkipPreUnload(true);
+		asResource.setASonly(true);
 		ocl.dispose();
 	}
 

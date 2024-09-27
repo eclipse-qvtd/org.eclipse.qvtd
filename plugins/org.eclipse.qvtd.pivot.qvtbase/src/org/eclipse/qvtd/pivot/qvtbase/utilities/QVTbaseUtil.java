@@ -718,7 +718,7 @@ public class QVTbaseUtil extends PivotUtil
 				if (resource instanceof ASResource) {
 					ASResource asResource2 = (ASResource)resource;
 					//	if (asResource2.isSaveable()) {
-					asResource2.setSkipPreUnload(true);
+					asResource2.setASonly(true);
 					//	}
 				}
 			}
@@ -769,7 +769,7 @@ public class QVTbaseUtil extends PivotUtil
 			if (PivotUtilInternal.isASURI(transformationURI)) {
 				asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 				if (!keepDebug) {
-					asResource.setSkipPreUnload(true);
+					asResource.setASonly(true);
 				}
 			}
 			else {

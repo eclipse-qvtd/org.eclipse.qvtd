@@ -635,6 +635,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.checkOutput(getTestURI("SimpleGraphLower_Interpreted.xmi"), getModelsURI("upper2lower/samples/SimpleGraphLower_expected.xmi"), Upper2LowerNormalizer.INSTANCE);
 		}
 		finally {
+			myQVT.activate();
 			myQVT.dispose();
 			cleanup(SimplegraphPackage.eNS_URI,
 				Simplegraph2graphPackage.eNS_URI);

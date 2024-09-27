@@ -14,7 +14,6 @@
  */
 package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -88,7 +87,7 @@ public class TemplateVariableImpl extends VariableImpl implements TemplateVariab
 	}
 
 	@Override
-	public @Nullable Notifier getReloadableNotifier() {
+	public @Nullable Object getReloadableEObjectOrURI() {
 		assert getESObject() == null;
 		return null;
 	}

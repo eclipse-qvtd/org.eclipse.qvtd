@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -690,11 +689,11 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	}
 
 	@Override
-	public @Nullable Notifier getReloadableNotifier() {
+	public @Nullable Object getReloadableEObjectOrURI() {
 		if (isPrimitive || isThis || isTrace) {
 			return null;
 		}
-		return super.getReloadableNotifier();
+		return super.getReloadableEObjectOrURI();
 	}
 
 	@Override

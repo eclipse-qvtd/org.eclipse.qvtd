@@ -78,7 +78,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		Resource inResource = asTransformation.eResource();
 		ASResource outResource = (ASResource) inResource.getResourceSet().createResource(outURI, null);
 		assert outResource != null;
-		outResource.setSkipPreUnload(true);
+		outResource.setASonly(true);
 		copier.transform((ASResource)inResource, outResource);
 		Model outModel = QVTrelationUtil.getModel(outResource);
 		outModel.setName(inURI.lastSegment());

@@ -111,7 +111,7 @@ public class QVTcLoadTests extends LoadTestCase
 		Resource resource = resourceSet.getResource(uri, true);
 		assert resource != null;
 		assertNoResourceErrors("Load", resource);
-		AbstractTestQVT.resolveAllandSkipPreUnload(resourceSet);
+		AbstractTestQVT.resolveAllandSetASonly(resourceSet);
 		assertNoUnresolvedProxies("Resolve", resource);;
 		assertNoValidationErrors("Validate", resource);;
 	}

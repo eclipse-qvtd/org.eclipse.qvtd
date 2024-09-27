@@ -17,6 +17,17 @@
       </content-type>
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            contentTypeIdentifier="org.eclipse.ocl.oclcs"
+            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="oclcs"
+            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
+   </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTcoreCS"

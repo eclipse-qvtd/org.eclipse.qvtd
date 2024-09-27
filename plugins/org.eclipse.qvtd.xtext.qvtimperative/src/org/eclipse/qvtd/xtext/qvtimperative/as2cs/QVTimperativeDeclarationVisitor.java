@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -32,7 +29,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -130,30 +126,6 @@ import com.google.common.collect.Iterables;
 
 public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTimperativeVisitor<ElementCS>
 {
-	/**
-	 * QVTimperativeAliasAnalysis revises AliasAnalysis to support only those names explicitly defined (as a consequence
-	 * of Unit AS elements).
-	 */
-	public static class QVTimperativeAliasAnalysis extends AliasAnalysis
-	{
-		public static @NonNull QVTimperativeAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			List<Adapter> eAdapters = resource.eAdapters();
-			for (Adapter adapter : eAdapters) {
-				if (adapter instanceof QVTimperativeAliasAnalysis) {
-					QVTimperativeAliasAnalysis aliasAnalysis = (QVTimperativeAliasAnalysis)adapter;
-					if (aliasAnalysis.environmentFactory == environmentFactory) {
-						return aliasAnalysis;
-					}
-				}
-			}
-			return new QVTimperativeAliasAnalysis(resource, environmentFactory);
-		}
-
-		public QVTimperativeAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			super(resource, environmentFactory);
-		}
-	}
-
 	protected static @NonNull CurlyBracketedClauseCS createCurlyBracketedClauseCS(@NonNull Iterable<? extends @NonNull ShadowPartCS> csParts) {
 		CurlyBracketedClauseCS csCurlyBracketedClause = EssentialOCLCSFactory.eINSTANCE.createCurlyBracketedClauseCS();
 		for (@NonNull ShadowPartCS csPart : csParts) {
@@ -210,7 +182,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	public void buildModel(@NonNull RootPackageCS csRootPackage, @NonNull Model asModel) {
 		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
-			if (!Orphanage.isTypeOrphanage(asPackage)) {
+			if (!Orphanage.isOrphanage(asPackage)) {
 				buildPackage(csRootPackage, null, asPackage);
 			}
 		}
@@ -283,24 +255,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<@NonNull Namespace, @NonNull List<@NonNull String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
-		QVTimperativeAliasAnalysis aliasAdapter = QVTimperativeAliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
-		List<EObject> contents = csResource.getContents();
-		if (contents.size() > 0) {
-			EObject root = contents.get(0);
-			if (root instanceof RootPackageCS) {
-				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
-					Element pivot = csImport.getPivot();
-					if (pivot instanceof Import) {
-						Import asImport = (Import)pivot;
-						String alias = asImport.getName();
-						Namespace asNamespace = asImport.getImportedNamespace();
-						if ((asNamespace != null) && (alias != null)) {
-							aliasAdapter.getAlias(asNamespace, alias);
-						}
-					}
-				}
-			}
-		}
+		AliasAnalysis aliasAdapter = AliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
+		aliasAdapter.computeCandidates(csResource);
 	}
 
 	protected void refreshObservedProperties(@NonNull ObservableStatement asStatement, /*@NonNull*/ List<PathNameCS> csPathNames, /*@NonNull*/ List<@NonNull Property> asProperties) {
@@ -512,14 +468,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
 		Type type = asVariable.getType();
 		if ((type instanceof CollectionType) && (((CollectionType)type).getUnspecializedElement() != context.getMetamodelManager().getStandardLibrary().getCollectionType())) {
-			PivotUtil.debugWellContainedness(type);
+			PivotUtil.debugWellContainedness((Element)type);
 			type = ((CollectionType)type).getElementType();
 		}
 		else if (type instanceof VoidType) {
 			type = null;
 		}
 		if (type != null) {
-			PivotUtil.debugWellContainedness(type);
+			PivotUtil.debugWellContainedness((Element)type);
 			TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type, null);
 			csVariable.setOwnedType(typeRef);
 		}

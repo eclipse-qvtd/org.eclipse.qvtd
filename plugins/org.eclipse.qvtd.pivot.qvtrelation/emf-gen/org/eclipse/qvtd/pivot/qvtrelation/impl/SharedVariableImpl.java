@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -418,10 +417,10 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 	}
 
 	@Override
-	public @Nullable Notifier getReloadableNotifier() {
+	public @Nullable Object getReloadableEObjectOrURI() {
 		if (isIsImplicit()) {
 			return null;
 		}
-		return super.getReloadableNotifier();
+		return super.getReloadableEObjectOrURI();
 	}
 } //SharedVariableImpl

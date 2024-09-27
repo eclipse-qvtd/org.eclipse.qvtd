@@ -37,6 +37,17 @@ import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 
 public class QVTimperativeCSResource extends QVTbaseCSResource
 {
+	/**
+	 * A QVTimperativeCSResourceLoadFactory supports creation of a BaseCSXMIResource that supports persistence of the CS model directly as XMI
+	 * rather than exploiting Xtext to serialize to / parse from a text file.
+	 */
+	public static class QVTimperativeCSResourceLoadFactory extends OCLCSResourceLoadFactory
+	{
+		public QVTimperativeCSResourceLoadFactory() {
+			super(QVTimperativeASResourceFactory.getInstance());
+		}
+	}
+
 	@Override
 	public @NonNull AS2CS createAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
