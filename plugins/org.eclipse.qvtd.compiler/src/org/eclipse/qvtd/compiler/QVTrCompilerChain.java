@@ -182,13 +182,16 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					saveResource(qvtsResource);
 				}
 				catch (CompilerChainException|AssertionError e) {
-					//
-					//	Save trace for debugging. Normally trace saved as part of GenModel creation.
-					//
-					URI ecoreURI = traceResource.getURI().trimFileExtension();
-					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
-					ecoreResource.save(null);
+					try {
+						//
+						//	Save trace for debugging. Normally trace saved as part of GenModel creation.
+						//
+						URI ecoreURI = traceResource.getURI().trimFileExtension();
+						AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
+						XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
+						ecoreResource.save(null);
+					}
+					catch (Throwable e2) {}			// Swallow nested exception so that JUnit reports the original.
 					throw e;
 				}
 				return multipleScheduleManager;
