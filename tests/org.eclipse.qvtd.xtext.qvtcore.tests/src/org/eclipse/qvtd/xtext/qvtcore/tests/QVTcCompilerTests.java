@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -148,6 +149,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
+		ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
@@ -475,6 +477,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.checkOutput(getTestURI("SimpleRDBMSPeople_Interpreted.xmi"), getModelsURI("uml2rdbms/samples/SimpleRDBMSPeople_expected.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 		}
 		finally {
+			myQVT.activate();
 			myQVT.dispose();
 			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS",
 				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML",

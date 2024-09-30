@@ -625,7 +625,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		resolveAllandSetASonly(resourceSet);
 		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 		PivotTestCase.assertNoValidationErrors("Validate", resource);;
-		activate();
+		activate();									// re-active the TestQVT after the excursion for validation
 	}
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
@@ -642,8 +642,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		XtextResource xtextResource = null;
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
-			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
-			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
+			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI + " loading " + inputURI, asResource);
+			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI + " loading " + inputURI, asResource);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			try {
 				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
@@ -690,7 +690,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}
-		activate();
+		activate();				// re-active the TestQVT after the excursion for serialization
 		return xtextResource;
 	}
 

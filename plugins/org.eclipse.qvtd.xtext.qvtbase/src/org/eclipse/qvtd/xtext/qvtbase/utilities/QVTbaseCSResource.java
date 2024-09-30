@@ -29,7 +29,7 @@ public abstract class QVTbaseCSResource extends EssentialOCLCSResource
 
 	@Override
 	public @Nullable NamedElement isPathable(@NonNull EObject element) {
-		if (element instanceof Parameter) {		// Paramter / FunctionParamter promote to Pivot
+		if (element instanceof Parameter) {		// Parameter / FunctionParamter promote to Pivot
 			return (Parameter)element;
 		}
 		else {

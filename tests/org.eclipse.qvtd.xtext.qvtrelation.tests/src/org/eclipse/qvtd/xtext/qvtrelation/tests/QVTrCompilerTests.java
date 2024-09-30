@@ -268,7 +268,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		super.tearDown();
 	}
 
-	public void zztestQVTrCompiler_ATL2QVTr_CG() throws Exception {
+	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
 		ASResourceImpl.SKIP_CHECK_BAD_REFERENCES = false;	// Incur the Bug 578030 serialization check overheads for one QVTr test.
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -425,7 +425,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_ATL2QVTr_reverse_CG() throws Exception {
+	public void testQVTrCompiler_ATL2QVTr_reverse_CG() throws Exception {
 		if (!ENABLE_ATL2QVTr_reverse_CG) {
 			return;
 		}
@@ -554,7 +554,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		} */
 	}
 
-	public void zztestQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
+	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
 		if (!ENABLE_ATL2QVTr_CG_exec) {
 			return;
 		}
@@ -649,7 +649,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_Ecore2Pivot() throws Exception {
+	public void testQVTrCompiler_Ecore2Pivot() throws Exception {
 		/*	QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;
@@ -708,7 +708,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		} */
 	}
 
-	public void zztestQVTrCompiler_Ecore2Pivot_CG() throws Exception {
+	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
 		/*	//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace(OCLstdlibPackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace(PivotPackage.eNS_URI, ~0);
@@ -951,7 +951,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_Families2Persons_CG() throws Exception {
+	public void testQVTrCompiler_Families2Persons_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -1043,7 +1043,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
     } */
 
-	public void zztestQVTrCompiler_Forward2Reverse() throws Exception {
+	public void testQVTrCompiler_Forward2Reverse() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -1090,7 +1090,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_Forward2Reverse_CG() throws Exception {
+	public void testQVTrCompiler_Forward2Reverse_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -1165,7 +1165,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_HierarchicalStateMachine2FlatStateMachine() throws Exception {
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
@@ -1200,7 +1200,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -1271,7 +1271,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -1316,7 +1316,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_iCG() throws Exception {
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_iCG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
@@ -1386,7 +1386,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_Iterated2Iterated_CG() throws Exception {
+	public void testQVTrCompiler_Iterated2Iterated_CG() throws Exception {
 		//	StandaloneProjectMap.addTrace(EcorePackage.eNS_URI, ~0);
 		//	StandaloneProjectMap.addTrace("http://www.eclipse.org/ocl/2015/Library", ~0);
 		//		Splitter.GROUPS.setState(true);
@@ -1429,7 +1429,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_MiToSiSimple_CG() throws Exception {
+	public void testQVTrCompiler_MiToSiSimple_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -1487,7 +1487,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_MiToSiSimpleWithKeys_CG() throws Exception {
+	public void testQVTrCompiler_MiToSiSimpleWithKeys_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -1679,7 +1679,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	} */
 
-	public void zztestQVTrCompiler_Persons2Names2Families_CG() throws Exception {
+	public void testQVTrCompiler_Persons2Names2Families_CG() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -1707,6 +1707,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txClass = myQVT1.buildTransformation(TargetConfiguration.createTargetConfigurations("families", "persons"), false);
 		}
 		finally {
+			myQVT1.activate();
 			myQVT1.dispose();
 			myQVT1 = null;
 		}
@@ -1739,7 +1740,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_Persons2Names2Families() throws Exception {
+	public void testQVTrCompiler_Persons2Names2Families() throws Exception {
 		ToStringVisitor.SHOW_ALL_MULTIPLICITIES = true;
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getTestProjectManager().initializeResourceSet(resourceSet);
@@ -1777,12 +1778,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.checkOutput(familiesOutURI, refFamilyFile.getURI(), null); //FamilyPlansNormalizer.INSTANCE);
 		}
 		finally {
+			myQVT.activate();
 			myQVT.dispose();
 			myQVT = null;
 		}
 	}
 
-	public void zztestQVTrCompiler_SeqToStm() throws Exception {
+	public void testQVTrCompiler_SeqToStm() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT("SeqToStm", getModelsURI("seq2stm/SeqToStm.qvtr"));
@@ -1803,7 +1805,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_SeqToStm_CG() throws Exception {
+	public void testQVTrCompiler_SeqToStm_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -1845,7 +1847,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_SeqToStm_iCG() throws Exception {
+	public void testQVTrCompiler_SeqToStm_iCG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
@@ -1884,7 +1886,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	public void zztestQVTrCompiler_TinyIsomorph_CG() throws Exception {
+	public void testQVTrCompiler_TinyIsomorph_CG() throws Exception {
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);

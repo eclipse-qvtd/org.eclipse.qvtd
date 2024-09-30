@@ -223,7 +223,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Collections.sort(sortedImportedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : sortedImportedNamespaces) {
-			if (!(importedNamespace instanceof org.eclipse.ocl.pivot.Package) || !Orphanage.isTypeOrphanage((org.eclipse.ocl.pivot.Package)importedNamespace)) {
+			if (!(importedNamespace instanceof org.eclipse.ocl.pivot.Package) || !Orphanage.isOrphanage((org.eclipse.ocl.pivot.Package)importedNamespace)) {
 				SymbolNameBuilder s = new SymbolNameBuilder();
 				s.appendString("mm_");
 				//			for (@NonNull String partialName : partialNames) {

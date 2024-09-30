@@ -39,7 +39,6 @@ import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -232,7 +231,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	public org.eclipse.ocl.pivot.Class getReferredClass() {
 		if (referredClass != null && referredClass.eIsProxy()) {
 			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			System.out.println("getReferredClass " + NameUtil.debugSimpleName(this) + " : " + NameUtil.debugSimpleName(oldReferredClass) + " in " + NameUtil.debugSimpleName(eContainer));
+			// XXX		System.out.println("getReferredClass " + NameUtil.debugSimpleName(this) + " : " + NameUtil.debugSimpleName(oldReferredClass) + " in " + NameUtil.debugSimpleName(eContainer));
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
@@ -258,7 +257,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 */
 	@Override
 	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {
-		System.out.println("setReferredClass " + NameUtil.debugSimpleName(this) + " : " + name + " : " + NameUtil.debugSimpleName(newReferredClass));
 		assert (newReferredClass == null) || !newReferredClass.eIsProxy();
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;

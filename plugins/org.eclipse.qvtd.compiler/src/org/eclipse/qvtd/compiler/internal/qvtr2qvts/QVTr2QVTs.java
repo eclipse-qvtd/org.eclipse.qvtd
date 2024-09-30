@@ -73,6 +73,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
+import com.google.common.collect.Lists;
+
 public class QVTr2QVTs extends AbstractQVTb2QVTs
 {
 	/**
@@ -161,6 +163,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		@Override
 		public @Nullable Element visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
+		}
+
+		@Override
+		public Element visitClass(org.eclipse.ocl.pivot.@NonNull Class object) {
+			return null;			// Classes are not transformed
 		}
 
 		@Override
@@ -355,8 +362,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			context.addTrace(mIn, mOut);
 			createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
 			//			createAll(mIn.getOwnedPackages(), mOut.getOwnedPackages());
-			for (org.eclipse.ocl.pivot.@NonNull Package p : PivotUtil.getOwnedPackages(mIn)) {
-				if (!Orphanage.isTypeOrphanage(p)) {
+			List<org.eclipse.ocl.pivot.@NonNull Package> ownedPackages = Lists.newArrayList(PivotUtil.getOwnedPackages(mIn));
+			for (org.eclipse.ocl.pivot.@NonNull Package p : ownedPackages) {	// No need to traverse extra complete packages
+				if (!Orphanage.isOrphanage(p)) {
 					doPackage(p, mOut);
 				}
 			}
