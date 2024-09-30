@@ -18,14 +18,27 @@
   </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTcore NOT -->
+      <!-- parser contentTypeIdentifier="org.eclipse.qvtd.qvtcore"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtcore"
+            class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
             contentTypeIdentifier="org.eclipse.ocl.oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
+            class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
+      <parser type="qvtcas"
+            class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtccs"
+            class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreCSResource$QVTcoreCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -34,6 +47,11 @@
             class="org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage"
             genModel="model/QVTcoreCS.genmodel"/>
    </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreASResourceFactory"
+     	extension="qvtc" contentType="org.eclipse.qvtd.qvtcore"/>
+  </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtc" type="text" />

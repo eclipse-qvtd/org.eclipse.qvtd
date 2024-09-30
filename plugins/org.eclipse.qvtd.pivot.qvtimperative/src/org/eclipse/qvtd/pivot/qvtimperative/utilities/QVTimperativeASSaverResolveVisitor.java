@@ -16,7 +16,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverRes
 
 public class QVTimperativeASSaverResolveVisitor extends AbstractQVTimperativeASSaverResolveVisitor
 {
-	protected QVTimperativeASSaverResolveVisitor(@NonNull ASSaver context) {
+	public QVTimperativeASSaverResolveVisitor(@NonNull ASSaver context) {
 		super(context);
 	}
 }

@@ -14,6 +14,7 @@ package org.eclipse.qvtd.xtext.qvtrelation;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScoping;
+import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 
 import com.google.inject.Guice;
@@ -55,6 +56,7 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 
 	public static void init() {
 		QVTrelationPivotStandaloneSetup.doSetup();
+		QVTrelationASResourceFactory.getInstance();
 		QVTrelationCSPackage.eINSTANCE.getName();
 		QVTrelationScoping.init();
 		//		QVTrelationCS2MonikerVisitor.FACTORY.getClass();

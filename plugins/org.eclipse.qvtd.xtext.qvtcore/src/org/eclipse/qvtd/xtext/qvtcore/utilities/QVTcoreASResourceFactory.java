@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtcore.utilities;
+package org.eclipse.qvtd.xtext.qvtcore.utilities;
 
 import java.util.Map;
 
@@ -43,6 +43,16 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreAS2MonikerVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreAS2XMIidVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverLocateVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverNormalizeVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverResolveVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcorePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
  * QVTcoreASResourceFactory supports creation of a QVTcore AS resource and associated artefacts.

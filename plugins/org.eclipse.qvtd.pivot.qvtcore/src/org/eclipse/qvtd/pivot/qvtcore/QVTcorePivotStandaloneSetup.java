@@ -16,9 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtcore.scoping.QVTcorePivotScoping;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -41,7 +39,6 @@ public class QVTcorePivotStandaloneSetup //implements ISetup
 
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
-		QVTcoreASResourceFactory.getInstance();
 		QVTcorePivotScoping.init();
 		QVTcoreToStringVisitor.FACTORY.getClass();
 	}

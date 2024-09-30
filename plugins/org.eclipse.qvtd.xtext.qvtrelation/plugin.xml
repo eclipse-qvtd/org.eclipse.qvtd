@@ -35,14 +35,33 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTrelation NOT-->
+      <!--parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtrelation"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtrelation"
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
             contentTypeIdentifier="org.eclipse.ocl.oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
+   </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationASResourceFactory"
+     	extension="qvtr" contentType="org.eclipse.qvtd.qvtrelation"/>
+  </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtras"
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
+      <parser type="qvtrcs"
+            class="org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource$QVTrelationCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

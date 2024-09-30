@@ -30,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtrelation.as2cs.QVTrelationAS2CS;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;

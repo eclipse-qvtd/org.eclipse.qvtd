@@ -18,14 +18,27 @@
   </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTimperative NOT -->
+      <!--parser contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
             contentTypeIdentifier="org.eclipse.ocl.oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtias"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="oclcs"
-            class="org.eclipse.ocl.xtext.completeocl.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
+      <parser type="qvtics"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -34,6 +47,11 @@
             class="org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
             genModel="model/QVTimperativeCS.genmodel"/>
    </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"
+     	extension="qvti" contentType="org.eclipse.qvtd.qvtimperative"/>
+  </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvti" type="text" />

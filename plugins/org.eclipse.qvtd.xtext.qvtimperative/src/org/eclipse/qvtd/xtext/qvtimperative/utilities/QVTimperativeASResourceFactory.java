@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
-package org.eclipse.qvtd.pivot.qvtimperative.utilities;
+package org.eclipse.qvtd.xtext.qvtimperative.utilities;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
@@ -36,6 +36,15 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2MonikerVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2XMIidVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverLocateVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverNormalizeVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverResolveVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTimperativeASResourceFactory supports creation of a QVTimperative AS resource and associated artefacts.

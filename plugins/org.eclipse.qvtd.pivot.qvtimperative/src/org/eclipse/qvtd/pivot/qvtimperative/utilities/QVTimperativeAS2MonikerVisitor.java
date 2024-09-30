@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2Moniker
 
 public class QVTimperativeAS2MonikerVisitor extends AbstractQVTimperativeAS2MonikerVisitor
 {
-	protected QVTimperativeAS2MonikerVisitor(@NonNull AS2Moniker context) {
+	public QVTimperativeAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
 	}
 
