@@ -567,24 +567,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	@Override
 	public synchronized void dispose() {
-		if (loadedEPackages != null) {
-			for (@NonNull EPackage ePackage : loadedEPackages) {
-				EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+		try {
+			if (loadedEPackages != null) {
+				for (@NonNull EPackage ePackage : loadedEPackages) {
+					EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+				}
+			}
+			super.dispose();
+			if (executor != null) {
+				executor.dispose();
+			}
+			if (compilerChain != null) {
+				compilerChain.dispose();
+			}
+			/**
+			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
+			 * do not confuse subsequent tests that may want to use dynamic models.
+			 */
+			for (String nsURI : nsURIs) {
+				EPackage.Registry.INSTANCE.remove(nsURI);
 			}
 		}
-		super.dispose();
-		if (executor != null) {
-			executor.dispose();
-		}
-		if (compilerChain != null) {
-			compilerChain.dispose();
-		}
-		/**
-		 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
-		 * do not confuse subsequent tests that may want to use dynamic models.
-		 */
-		for (String nsURI : nsURIs) {
-			EPackage.Registry.INSTANCE.remove(nsURI);
+		catch (Throwable e) {			// Absorb dispose exception to allow an outer exception to propagate
+			e.printStackTrace();
 		}
 	}
 
@@ -662,9 +667,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 		}
 		finally {
-			System.out.println("\nocl-dispose1 " + NameUtil.debugSimpleName(ocl));
+			System.out.println("\nocl-serialize-dispose1 " + NameUtil.debugSimpleName(ocl));
 			ocl.dispose();
-			System.out.println("ocl-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
+			System.out.println("ocl-serialize-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
 			ocl = null;
 		}
 

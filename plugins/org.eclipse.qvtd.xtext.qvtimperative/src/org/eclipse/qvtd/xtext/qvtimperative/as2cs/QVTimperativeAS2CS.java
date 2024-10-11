@@ -63,7 +63,7 @@ public class QVTimperativeAS2CS extends EssentialOCLAS2CS
 		addFactory(Factory.INSTANCE);
 		for (BaseCSResource csResource : cs2asResourceMap.keySet()) {
 			assert csResource != null;
-			environmentFactory.adapt(csResource);
+			// XXX	environmentFactory.adapt(csResource);
 		}
 	}
 

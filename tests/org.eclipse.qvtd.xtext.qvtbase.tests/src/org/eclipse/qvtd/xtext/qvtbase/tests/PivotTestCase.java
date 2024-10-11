@@ -273,7 +273,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
 		assert xtextResource != null;
-		ocl.getEnvironmentFactory().adapt(xtextResource);
+		// XXX	ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
 		Resource pivotResource = savePivotFromCS(ocl, xtextResource, null);
