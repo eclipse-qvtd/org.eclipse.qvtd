@@ -26,13 +26,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -137,14 +139,13 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
 		ProjectManager projectManager = getTestProjectManager();
-		OCL ocl = OCL.newInstance(projectManager); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
-
-
-		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
+		OCLInternal ocl = OCLInternal.newInstance(projectManager, null); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
+		MetamodelManagerInternal metamodelManager = ocl.getMetamodelManager();
+		ResourceSet asResourceSet = metamodelManager.getASResourceSet();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
-			((OCLInternal)ocl).getMetamodelManager().getASmetamodel();
 		}
+		metamodelManager.getASmetamodel();
 		ASResource asResource = (ASResource)asResourceSet.getResource(asURI, true);
 		assert asResource != null;
 		EcoreUtil.resolveAll(asResource);
@@ -261,6 +262,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 */
 	@Test
 	public void testQVTiInterpreter_HSV2HSL() throws Exception {
+		ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
+		AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
 		URI txURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("HSV2HSL/HSVNode.xmi");
