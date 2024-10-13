@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager.IPackageDescriptor;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
@@ -812,7 +811,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		URI asURI2a = getTestURI("Families2.ecore.oclas");
 		ProjectManager testProjectManager = getTestProjectManager();
 		OCL ocl = OCL.newInstance(testProjectManager);
-		System.out.println("\nocl " + NameUtil.debugSimpleName(ocl) + " : " + ecoreURI + " => " + asURI2a + "\n");
+		//	System.out.println("\nocl " + NameUtil.debugSimpleName(ocl) + " : " + ecoreURI + " => " + asURI2a + "\n");
 		try {
 			Resource inputResource = ocl.getResourceSet().getResource(ecoreURI, true);
 			assert inputResource != null;
@@ -829,13 +828,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			assertValidationDiagnostics("Ecore2AS invalid", asResource, NO_MESSAGES);
 		}
 		finally {
-			System.out.println("\nocl-dispose1 " + NameUtil.debugSimpleName(ocl));
+			//	System.out.println("\nocl-dispose1 " + NameUtil.debugSimpleName(ocl));
 			ocl.dispose();
-			System.out.println("ocl-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
+			//	System.out.println("ocl-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
 			ocl = null;
 		}
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr"));
-		System.out.println("\nqvt " + NameUtil.debugSimpleName(myQVT) + " : ecore2pivotRoot/Ecore2PivotRoot.qvtr\n");
+		//	System.out.println("\nqvt " + NameUtil.debugSimpleName(myQVT) + " : ecore2pivotRoot/Ecore2PivotRoot.qvtr\n");
 		//	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		URI asURI2 = getTestURI("Families.ecore.oclas");
 		try {
@@ -843,18 +842,18 @@ public class QVTrCompilerTests extends LoadTestCase
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.addInputURI("ecore", ecoreURI);
-			System.out.println("\nqvt-execute" + NameUtil.debugSimpleName(myQVT));
+			//	System.out.println("\nqvt-execute" + NameUtil.debugSimpleName(myQVT));
 			myQVT.executeTransformation();
 			myQVT.addOutputURI("as", asURI2);
-			System.out.println("\nqvt-save" + NameUtil.debugSimpleName(myQVT));
+			//	System.out.println("\nqvt-save" + NameUtil.debugSimpleName(myQVT));
 			myQVT.saveModels(null);
-			System.out.println("\nqvt-check" + NameUtil.debugSimpleName(myQVT));
+			//	System.out.println("\nqvt-check" + NameUtil.debugSimpleName(myQVT));
 			myQVT.checkOutput(asURI2, asURI2a, DummyPivotExternalURINormalizer.INSTANCE);
 		}
 		finally {
-			System.out.println("\nqvt-dispose1 " + NameUtil.debugSimpleName(myQVT));
+			//	System.out.println("\nqvt-dispose1 " + NameUtil.debugSimpleName(myQVT));
 			myQVT.dispose();
-			System.out.println("qvt-dispose2 " + NameUtil.debugSimpleName(myQVT) + "\n");
+			//	System.out.println("qvt-dispose2 " + NameUtil.debugSimpleName(myQVT) + "\n");
 			myQVT = null;
 		}
 	}
@@ -882,7 +881,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
 		URI txURI1 = getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr");
 		MyQVT myQVT1 = createQVT("Ecore2PivotRoot", txURI1);
-		System.out.println("\nqvt " + NameUtil.debugSimpleName(myQVT1) + " : ecore2pivotRoot/Ecore2PivotRoot.qvtr\n");
+		//	System.out.println("\nqvt " + NameUtil.debugSimpleName(myQVT1) + " : ecore2pivotRoot/Ecore2PivotRoot.qvtr\n");
 		myQVT1.configureGeneratedPackage(EcorePackage.eNS_URI);
 		myQVT1.configureGeneratedPackage(PivotPackage.eNS_URI);
 		myQVT1.configureGeneratedPackage(OCLstdlibPackage.eNS_URI);
@@ -902,9 +901,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
 		}
 		finally {
-			System.out.println("\nqvt-dispose1 " + NameUtil.debugSimpleName(myQVT1));
+			//	System.out.println("\nqvt-dispose1 " + NameUtil.debugSimpleName(myQVT1));
 			myQVT1.dispose();
-			System.out.println("qvt-dispose2 " + NameUtil.debugSimpleName(myQVT1) + "\n");
+			//	System.out.println("qvt-dispose2 " + NameUtil.debugSimpleName(myQVT1) + "\n");
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();

@@ -32,9 +32,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.ThreadLocalExecutor;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -262,8 +260,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 */
 	@Test
 	public void testQVTiInterpreter_HSV2HSL() throws Exception {
-		ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
-		AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
+		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
+		//	AbstractEnvironmentFactory.ENVIRONMENT_FACTORY_ATTACH.setState(true);
 		URI txURI = getModelsURI("HSV2HSL/HSV2HSL.qvti");
 		URI txASURI = getTestURIWithExtension(txURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		URI inputURI = getModelsURI("HSV2HSL/HSVNode.xmi");

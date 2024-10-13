@@ -54,7 +54,6 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -639,7 +638,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//	Load QVTiAS
 		//
 		OCL ocl = QVTbase.newInstance(getTestProjectManager());
-		System.out.println("\nocl-serialize " + NameUtil.debugSimpleName(ocl) + " : " + inputURI + " => " + serializedURI + "\n");
+		//	System.out.println("\nocl-serialize " + NameUtil.debugSimpleName(ocl) + " : " + inputURI + " => " + serializedURI + "\n");
 		if (extraLocalPackageRegistryEntries != null) {
 			ocl.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
 		}
@@ -667,14 +666,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 		}
 		finally {
-			System.out.println("\nocl-serialize-dispose1 " + NameUtil.debugSimpleName(ocl));
+			//	System.out.println("\nocl-serialize-dispose1 " + NameUtil.debugSimpleName(ocl));
 			ocl.dispose();
-			System.out.println("ocl-serialize-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
+			//	System.out.println("ocl-serialize-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
 			ocl = null;
 		}
 
 		QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
-		System.out.println("\nqvti " + NameUtil.debugSimpleName(qvti) + "\n");
+		//	System.out.println("\nqvti " + NameUtil.debugSimpleName(qvti) + "\n");
 		if (extraLocalPackageRegistryEntries != null) {
 			qvti.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
 		}
@@ -687,9 +686,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 			LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
 		}
 		finally {
-			System.out.println("\nqvti-dispose1 " + NameUtil.debugSimpleName(qvti));
+			//	System.out.println("\nqvti-dispose1 " + NameUtil.debugSimpleName(qvti));
 			qvti.dispose();
-			System.out.println("qvti-dispose2 " + NameUtil.debugSimpleName(qvti) + "\n");
+			//	System.out.println("qvti-dispose2 " + NameUtil.debugSimpleName(qvti) + "\n");
 			qvti = null;
 		}
 		//	if (savedExecutor != null) {
