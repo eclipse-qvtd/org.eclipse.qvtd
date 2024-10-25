@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.qvtd.compiler.internal.common.TypedModelsConfigurations;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -62,7 +61,7 @@ public interface CompilerChain
 	public static final CompilerOptions.@NonNull Key<@Nullable URI> URI_KEY = new CompilerOptions.Key<>("uri");
 	public static final CompilerOptions.@NonNull Key<Boolean> VALIDATE_KEY = new CompilerOptions.Key<>("validate");
 
-	public static final CompilerOptions.@NonNull Key<@NonNull JavaClasspath> CLASSPATH_KEY = new CompilerOptions.Key<>("classpath");
+	public static final CompilerOptions.@NonNull Key<org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath> CLASSPATH_KEY = new CompilerOptions.Key<>("classpath");
 
 	public static final CompilerOptions.@NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new CompilerOptions.Key<>("javaExtraPrefix");
 	public static final CompilerOptions.@NonNull Key<@Nullable Boolean> JAVA_GENERATED_DEBUG_KEY = new CompilerOptions.Key<>("javaGeneratedDebug");
