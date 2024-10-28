@@ -197,7 +197,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			getTestProject().getOutputFile(JavaFileUtil.TEST_SRC_FOLDER_NAME).getFileString());
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-			classpath.addClass(getClass()/*getTestBundleName()*/);
+			classpath.addBundleForClass(getClass()/*getTestBundleName()*/);
 			cgParams.setClasspath(classpath);
 		}
 		cgParams.setClassLoader(getClass().getClassLoader());

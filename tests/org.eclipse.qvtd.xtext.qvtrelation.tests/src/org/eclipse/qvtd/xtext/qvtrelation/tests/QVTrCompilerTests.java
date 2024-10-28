@@ -329,11 +329,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
 		JavaClasspath classpath1 = myQVT1.getClasspath();
-		classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
-		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+		classpath1.addBundleForClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
@@ -383,11 +383,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
 		myQVT3.setKeepOldJavaFiles();
 		JavaClasspath classpath3 = myQVT3.getClasspath();
-		classpath3.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
-		classpath3.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
-		classpath3.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
-		classpath3.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
-		classpath3.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+		classpath3.addBundleForClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath3.addBundleForClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath3.addBundleForClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath3.addBundleForClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath3.addBundleForClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");
@@ -469,11 +469,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
 		JavaClasspath classpath1 = myQVT1.getClasspath();
-		classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
-		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
-		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+		classpath1.addBundleForClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath1.addBundleForClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;

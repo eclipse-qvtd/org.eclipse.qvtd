@@ -187,7 +187,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
 			cg.saveSourceFile(srcPath.getFileString());
 			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-			classpath.addClass(getClass());
+			classpath.addBundleForClass(getClass());
 			// System.out.println("projectNames => " + projectNames);
 			// List<@NonNull String> classpathList = classpath.getClasspathProjectList();
 			// System.out.println("classpathList => " + classpathList);

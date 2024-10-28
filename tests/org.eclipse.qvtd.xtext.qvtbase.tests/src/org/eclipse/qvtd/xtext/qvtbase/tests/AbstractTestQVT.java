@@ -334,7 +334,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {
-		classpath.addClass(classpathClass);
+		classpath.addBundleForClass(classpathClass);
 	}
 
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
@@ -481,7 +481,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	 * @throws IOException
 	 */
 	protected @NonNull JavaClasspath createClassProjectNames() {
-		classpath.addClass(getClass()); //testProjectName);
+		classpath.addBundleForClass(getClass()); //testProjectName);
 		return classpath;
 	}
 
