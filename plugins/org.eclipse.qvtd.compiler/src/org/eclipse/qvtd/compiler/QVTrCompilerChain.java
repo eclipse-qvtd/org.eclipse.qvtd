@@ -187,8 +187,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						//	Save trace for debugging. Normally trace saved as part of GenModel creation.
 						//
 						URI ecoreURI = traceResource.getURI().trimFileExtension();
-						AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-						XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
+						XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, traceResource, ecoreURI, null);
 						ecoreResource.save(null);
 					}
 					catch (Throwable e2) {}			// Swallow nested exception so that JUnit reports the original.
@@ -215,8 +214,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//	Create and Save Ecore variant of Trace Model
 				//
 				URI ecoreURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-				AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-				XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
+				XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, traceResource, ecoreURI, null);
 				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();

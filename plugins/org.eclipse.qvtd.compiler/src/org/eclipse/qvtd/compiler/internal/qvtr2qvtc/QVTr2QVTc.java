@@ -514,8 +514,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				root.getOwnedPackages().add(rootPackage);
 			}
 		}
-		AS2Ecore as2ecore = new AS2Ecore((EnvironmentFactoryInternal) environmentFactory, traceURI, null);
-		XMLResource ecoreResource = as2ecore.convertResource(asResource, traceURI);
+		XMLResource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) environmentFactory, asResource, traceURI, null);
 		ecoreResource.save(saveOptions);
 		return ecoreResource;
 	}
