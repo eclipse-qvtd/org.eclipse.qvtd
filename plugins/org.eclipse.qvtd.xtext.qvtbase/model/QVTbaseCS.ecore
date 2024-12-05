@@ -13,10 +13,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTargetElements" upperBound="-1"
         eType="#//SimpleTargetElementCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaClassCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaImplementationCS" abstract="true"
+  <eClassifiers xsi:type="ecore:EClass" name="DummyQVTbaseConstraintClass" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" eType="#//JavaClassCS"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="DummyConstraint"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Dummy Constraint class ensures Validator is generated"/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QualifiedPackageCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"

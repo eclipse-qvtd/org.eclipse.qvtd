@@ -92,7 +92,7 @@ PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':=' | isPart
 QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS
-		(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
+		(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
 //<query> ::= 'query' <PathNameCS>
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>

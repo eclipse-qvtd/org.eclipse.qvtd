@@ -30,10 +30,7 @@
     <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//CompoundTargetElementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//CompoundTargetElementCS/ownedTargetElements"/>
     </genClasses>
-    <genClasses ecoreClass="QVTbaseCS.ecore#//JavaClassCS"/>
-    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//JavaImplementationCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//JavaImplementationCS/implementation"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//DummyQVTbaseConstraintClass"/>
     <genClasses ecoreClass="QVTbaseCS.ecore#//QualifiedPackageCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//QualifiedPackageCS/ownedPathName"/>
     </genClasses>
