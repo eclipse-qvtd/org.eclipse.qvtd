@@ -301,7 +301,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		switch (featureID) {
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				if (resolve) return getBindsTo();
-				return basicGetBindsTo();
+			return basicGetBindsTo();
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				return getWhere();
 		}
@@ -318,10 +318,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		switch (featureID) {
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				setBindsTo((Variable)newValue);
-				return;
+			return;
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				setWhere((OCLExpression)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -336,10 +336,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		switch (featureID) {
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				setBindsTo((Variable)null);
-				return;
+			return;
 			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				setWhere((OCLExpression)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

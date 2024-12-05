@@ -395,17 +395,4 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			return super.accept(visitor);
 		}
 	}
-
-	/* XXX	@Override
-	public void preUnload() {
-		assert eResource() != null;
-		for (EObject eObject : eContents()) {
-			if (eObject instanceof PivotObjectImpl) {		// Propagate setReloadableProxy through hierarchy to
-				if (eObject.eContainmentFeature() != QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT) {
-					((PivotObjectImpl)eObject).preUnload();		// proxify the esObject before the eContainer() vanishes
-				}
-			}
-		}
-		setReloadableProxy();
-	} */
 } //RelationalTransformationImpl

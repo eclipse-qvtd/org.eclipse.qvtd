@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.VariableImpl;
 
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -86,9 +85,9 @@ public class TemplateVariableImpl extends VariableImpl implements TemplateVariab
 		}
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object getReloadableEObjectOrURI() {
 		assert getESObject() == null;
 		return null;
-	}
+	} */
 } //TemplateVariableImpl

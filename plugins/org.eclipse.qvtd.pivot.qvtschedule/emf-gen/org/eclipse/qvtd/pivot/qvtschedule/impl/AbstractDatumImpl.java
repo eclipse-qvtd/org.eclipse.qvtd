@@ -13,7 +13,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -61,8 +60,8 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 		return QVTschedulePackage.Literals.ABSTRACT_DATUM;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object getReloadableEObjectOrURI() {
 		return null;
-	}
+	} */
 } //AbstractDatumImpl

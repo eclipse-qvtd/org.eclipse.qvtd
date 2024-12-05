@@ -416,11 +416,11 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		}
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object getReloadableEObjectOrURI() {
 		if (isIsImplicit()) {
 			return null;
 		}
 		return super.getReloadableEObjectOrURI();
-	}
+	} */
 } //SharedVariableImpl

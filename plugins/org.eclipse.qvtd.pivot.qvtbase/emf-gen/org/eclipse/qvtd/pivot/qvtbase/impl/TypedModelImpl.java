@@ -688,13 +688,13 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		}
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object getReloadableEObjectOrURI() {
 		if (isPrimitive || isThis || isTrace) {
 			return null;
 		}
 		return super.getReloadableEObjectOrURI();
-	}
+	} */
 
 	@Override
 	public String toString() {

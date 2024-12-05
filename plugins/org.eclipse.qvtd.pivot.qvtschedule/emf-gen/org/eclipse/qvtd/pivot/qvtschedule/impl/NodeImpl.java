@@ -927,10 +927,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return null;
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Object getReloadableEObjectOrURI() {
 		return null;
-	}
+	} */
 
 	@Override
 	public @Nullable String getShape() {
