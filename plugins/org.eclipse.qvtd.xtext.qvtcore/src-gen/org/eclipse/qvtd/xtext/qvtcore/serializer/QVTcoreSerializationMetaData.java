@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Willink Transformations and others.
+ * Copyright (c) 2011, 2024 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -82,8 +82,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 	private final @NonNull SerializationMatchStep @NonNull [] serializationMatchSteps = new @NonNull SerializationMatchStep[396];
 	private final @NonNull SerializationMatchTerm @NonNull [] serializationMatchTerms = new @NonNull SerializationMatchTerm[293];
 	private final @NonNull SerializationRule @NonNull [] serializationRules = new @NonNull SerializationRule[169];
-	private final @NonNull SerializationSegment @NonNull [] @NonNull [] serializationSegments = new @NonNull SerializationSegment @NonNull [25] @NonNull [];
-	private final @NonNull SerializationStep @NonNull [] serializationSteps = new @NonNull SerializationStep[313];
+	private final @NonNull SerializationSegment @NonNull [] @NonNull [] serializationSegments = new @NonNull SerializationSegment @NonNull [26] @NonNull [];
+	private final @NonNull SerializationStep @NonNull [] serializationSteps = new @NonNull SerializationStep[314];
 	private final @NonNull SubstringStep @NonNull [] substringSteps = new @NonNull SubstringStep[10];
 	private final @Nullable String @Nullable [] multipleLineCommentMidfixes = new @Nullable String[] {" *"};
 	private final @NonNull String @Nullable [] multipleLineCommentPrefixes = new @NonNull String[] {"/*"};
@@ -143,7 +143,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 
 	@Override
 	protected int getLastGlobalSerializationStepLiteralIndex() {
-		return 216;
+		return 217;
 	}
 
 	@Override
@@ -1128,61 +1128,61 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "attribute" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "attribute" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypedMultiplicityRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* default=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* default=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group+ : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="id" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!id" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="readonly" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!readonly" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="transient" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!transient" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unsettable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unsettable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="volatile" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!volatile" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 8	/* ","? : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="id" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!id" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="readonly" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!readonly" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="transient" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!transient" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unsettable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unsettable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="volatile" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!volatile" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 9	/* ","? : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives* : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "initial" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "initial" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* UnrestrictedName? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedDefaultExpressions+=SpecificationCS? : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "derivation" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "derivation" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* UnrestrictedName? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedDefaultExpressions+=SpecificationCS? : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
-		grammarRuleValues[2] = createDataTypeRuleValue(2, "BinaryOperatorName", 12 /* [soft-space, value, soft-space] */,
+		grammarRuleValues[2] = createDataTypeRuleValue(2, "BinaryOperatorName", 13 /* [soft-space, value, soft-space] */,
 			0	/* '->' : [no-space, value, no-space] */,
 			1	/* '.' : [no-space, value, no-space] */,
 			2	/* '?->' : [no-space, value, no-space] */,
@@ -1192,8 +1192,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				18	/* BooleanLiteralExpCS-0: BooleanLiteralExpCS::symbol='false|true' */
 			),
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* symbol="true" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* symbol="false" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* symbol="true" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* symbol="false" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[4] = createParserRuleValue(4, "BottomPatternCS", -1,
 			createSerializationRules(
@@ -1210,37 +1210,37 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 18	/* "{" : [value] | [soft-new-line, value, push, soft-new-line] */,
+			(0 << 16) | 19	/* "{" : [value] | [soft-new-line, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* ownedUnrealizedVariables+=UnrealizedVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedRealizedVariables+=RealizedVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 7	/* "," : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* ownedUnrealizedVariables+=UnrealizedVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedRealizedVariables+=RealizedVariableCS : [value] | [value] */,
-			(0 << 16) | 15	/* "|" : [value] | [soft-new-line, pop, value, push] */,
+			(0 << 16) | 16	/* "|" : [value] | [soft-new-line, pop, value, push] */,
 			(0 << 16) | 3	/* ownedConstraints+=PredicateOrAssignmentCS* : [value] | [soft-new-line, value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 10	/* "{" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 11	/* "{" : [value] | [soft-new-line, value, push] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* ownedUnrealizedVariables+=UnrealizedVariableCS : [value] | [value] */,
 			(0 << 16) | 3	/* ownedRealizedVariables+=RealizedVariableCS : [value] | [soft-new-line, value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 7	/* "," : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* ownedUnrealizedVariables+=UnrealizedVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedRealizedVariables+=RealizedVariableCS : [value] | [value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 10	/* "{" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 11	/* "{" : [value] | [soft-new-line, value, push] */,
 			(0 << 16) | 3	/* ownedConstraints+=PredicateOrAssignmentCS+ : [value] | [soft-new-line, value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {BottomPatternCS} : [value] | [value] */,
-			(0 << 16) | 10	/* "{" : [value] | [soft-new-line, value, push] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */
+			(0 << 16) | 11	/* "{" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */
 		);
 		grammarRuleValues[5] = createParserRuleValue(5, "ClassCS", 48 /* ClassCS|DataTypeCS|EnumerationCS|StructuredClassCS */,
 			createSerializationRules(
@@ -1269,9 +1269,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				19	/* CoIteratorVariableCS-0: NamedElementCS::name=UnrestrictedName (':' VariableCS::ownedType=TypeExpCS)[V0:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[7] = createParserRuleValue(7, "CollectionLiteralExpCS", -1,
@@ -1280,13 +1280,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* ownedType=CollectionTypeCS : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParts+=CollectionLiteralPartCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParts+=CollectionLiteralPartCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[8] = createParserRuleValue(8, "CollectionLiteralPartCS", -1,
 			createSerializationRules(
@@ -1297,7 +1297,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* ".." : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* ".." : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedLastExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedExpression=PatternExpCS : [value] | [value] */
 		);
@@ -1307,39 +1307,39 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedType=CollectionTypeCS : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParts+=PatternExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParts+=PatternExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "++" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* restVariableName=Identifier : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 13	/* "++" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* restVariableName=Identifier : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[10] = createParserRuleValue(10, "CollectionTypeCS", -1,
 			createSerializationRules(
 				24	/* CollectionTypeCS-0: CollectionTypeCS::name=CollectionTypeIdentifier ('(' CollectionTypeCS::ownedType=TypeExpWithoutMultiplicityCS (CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS)[V1:?] ')')[V0:?] */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* name=CollectionTypeIdentifier : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=CollectionTypeIdentifier : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpWithoutMultiplicityCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedCollectionMultiplicity=MultiplicityCS? : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
-		grammarRuleValues[11] = createDataTypeRuleValue(11, "CollectionTypeIdentifier", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[11] = createDataTypeRuleValue(11, "CollectionTypeIdentifier", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[12] = createParserRuleValue(12, "CompoundTargetElementCS", -1,
 			createSerializationRules(
 				89	/* CompoundTargetElementCS-0: '{' (CompoundTargetElementCS::ownedTargetElements+=SimpleTargetElementCS)[V0:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedTargetElements+=SimpleTargetElementCS* : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";"? : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";"? : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[13] = createParserRuleValue(13, "CurlyBracketedClauseCS", -1,
 			createSerializationRules(
@@ -1347,13 +1347,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {CurlyBracketedClauseCS} : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParts+=ShadowPartCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParts+=ShadowPartCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[14] = new TerminalRuleValue(14, "DOUBLE_QUOTED_STRING");
 		grammarRuleValues[15] = createParserRuleValue(15, "DataTypeCS", -1,
@@ -1366,24 +1366,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				95	/* DataTypeCS-5: (DataTypeCS::isPrimitive?='primitive')[V0:?] 'datatype' NamedElementCS::name=UnrestrictedName (TemplateableElementCS::ownedSignature=TemplateSignatureCS)[V1:?] (':' ClassCS::instanceClassName=SINGLE_QUOTED_STRING)[V2:?] ('{' '}')[V3:?] '{' '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* isPrimitive?="primitive"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "datatype" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isPrimitive?="primitive"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "datatype" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSignature=TemplateSignatureCS? : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
-			(0 << 16) | 12	/* isSerializable?="serializable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "!serializable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* isSerializable?="serializable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "!serializable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[16] = createParserRuleValue(16, "DirectionCS", -1,
 			createSerializationRules(
@@ -1391,18 +1391,18 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {DirectionCS} : [value] | [value] */,
-			(0 << 16) | 12	/* name=Identifier? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "imports" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* imports+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=Identifier? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "imports" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* imports+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 12	/* imports+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 13	/* imports+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "uses" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* uses+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "uses" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* uses+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 12	/* uses+=UnrestrictedName : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 13	/* uses+=UnrestrictedName : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[17] = new TerminalRuleValue(17, "ESCAPED_CHARACTER");
 		grammarRuleValues[18] = new TerminalRuleValue(18, "ESCAPED_ID");
@@ -1411,9 +1411,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				26	/* ElseIfThenExpCS-0: 'elseif' IfThenExpCS::ownedCondition=ExpCS 'then' IfThenExpCS::ownedThenExpression=ExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 24	/* "elseif" : [value] | [soft-new-line, pop, soft-space, value, push, soft-space] */,
+			(0 << 16) | 25	/* "elseif" : [value] | [soft-new-line, pop, soft-space, value, push, soft-space] */,
 			(0 << 16) | 0	/* ownedCondition=ExpCS : [value] | [value] */,
-			(0 << 16) | 14	/* "then" : [value] | [pop, value, push, soft-space] */,
+			(0 << 16) | 15	/* "then" : [value] | [pop, value, push, soft-space] */,
 			(0 << 16) | 0	/* ownedThenExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[20] = createParserRuleValue(20, "EnumerationCS", -1,
@@ -1426,24 +1426,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				101	/* EnumerationCS-5: 'enum' NamedElementCS::name=UnrestrictedName (TemplateableElementCS::ownedSignature=TemplateSignatureCS)[V0:?] (':' ClassCS::instanceClassName=SINGLE_QUOTED_STRING)[V1:?] ('{' '}')[V2:?] '{' (EnumerationCS::ownedLiterals+=EnumerationLiteralCS)[V3:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "enum" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "enum" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSignature=TemplateSignatureCS? : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
-			(0 << 16) | 12	/* isSerializable?="serializable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "!serializable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* isSerializable?="serializable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "!serializable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedLiterals+=EnumerationLiteralCS* : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[21] = createParserRuleValue(21, "EnumerationLiteralCS", -1,
 			createSerializationRules(
@@ -1455,35 +1455,35 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "literal" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=EnumerationLiteralName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "literal" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=EnumerationLiteralName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* value=SIGNED : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* value=SIGNED : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
-		grammarRuleValues[22] = createDataTypeRuleValue(22, "EnumerationLiteralName", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[23] = createDataTypeRuleValue(23, "EssentialOCLInfixOperatorName", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[24] = createDataTypeRuleValue(24, "EssentialOCLNavigationOperatorName", 6 /* [no-space, value, no-space] */,
+		grammarRuleValues[22] = createDataTypeRuleValue(22, "EnumerationLiteralName", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[23] = createDataTypeRuleValue(23, "EssentialOCLInfixOperatorName", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[24] = createDataTypeRuleValue(24, "EssentialOCLNavigationOperatorName", 7 /* [no-space, value, no-space] */,
 			0	/* '->' : [no-space, value, no-space] */,
 			1	/* '.' : [no-space, value, no-space] */,
 			2	/* '?->' : [no-space, value, no-space] */,
 			3	/* '?.' : [no-space, value, no-space] */);
-		grammarRuleValues[25] = createDataTypeRuleValue(25, "EssentialOCLReservedKeyword", 12 /* [soft-space, value, soft-space] */,
+		grammarRuleValues[25] = createDataTypeRuleValue(25, "EssentialOCLReservedKeyword", 13 /* [soft-space, value, soft-space] */,
 			4	/* 'else' : [soft-new-line, pop, value, push, soft-space] */,
 			5	/* 'endif' : [soft-new-line, pop, value, soft-space] */,
 			6	/* 'if' : [soft-new-line, value, push, soft-space] */,
 			7	/* 'in' : [soft-space, pop, value, soft-new-line] */,
 			8	/* 'let' : [soft-space, value, push] */,
 			9	/* 'then' : [pop, soft-space, value, push, soft-space] */);
-		grammarRuleValues[26] = createDataTypeRuleValue(26, "EssentialOCLUnaryOperatorName", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[27] = createDataTypeRuleValue(27, "EssentialOCLUnreservedName", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[28] = createDataTypeRuleValue(28, "EssentialOCLUnrestrictedName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[26] = createDataTypeRuleValue(26, "EssentialOCLUnaryOperatorName", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[27] = createDataTypeRuleValue(27, "EssentialOCLUnreservedName", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[28] = createDataTypeRuleValue(28, "EssentialOCLUnrestrictedName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[29] = createParserRuleValue(29, "ExpCS", 75 /* BooleanLiteralExpCS|CollectionLiteralExpCS|ExpCS|IfExpCS|InvalidLiteralExpCS|LambdaLiteralExpCS|LetExpCS|MapLiteralExpCS|NameExpCS|NestedExpCS|NullLiteralExpCS|NumberLiteralExpCS|PrefixedLetExpCS|PrefixedPrimaryExpCS|PrimaryExpCS|PrimitiveLiteralExpCS|SelfExpCS|StringLiteralExpCS|TupleLiteralExpCS|TypeLiteralExpCS|UnlimitedNaturalLiteralExpCS */,
 			createSerializationRules(
 				18	/* BooleanLiteralExpCS-0: BooleanLiteralExpCS::symbol='false|true' */,
@@ -1511,7 +1511,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* PrefixedPrimaryExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* {InfixExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* name=BinaryOperatorName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=BinaryOperatorName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedRight=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* PrefixedLetExpCS : [value] | [value] */
 		);
@@ -1519,7 +1519,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			createSerializationRules(
 				0	/* FirstPathElementCS-0: PathElementCS::referredElement=UnrestrictedName */
 			),
-			(0 << 16) | 12	/* referredElement=UnrestrictedName : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* referredElement=UnrestrictedName : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[31] = createParserRuleValue(31, "GuardPatternCS", -1,
 			createSerializationRules(
@@ -1530,103 +1530,103 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 10	/* "(" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 11	/* "(" : [value] | [soft-new-line, value, push] */,
 			(3 << 16) | 0	/* ownedUnrealizedVariables+=GuardVariableCS : [soft-new-line, value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedUnrealizedVariables+=GuardVariableCS : [value] | [value] */,
-			(0 << 16) | 15	/* "|" : [value] | [soft-new-line, pop, value, push] */,
+			(0 << 16) | 16	/* "|" : [value] | [soft-new-line, pop, value, push] */,
 			(0 << 16) | 3	/* ownedPredicates+=PredicateCS* : [value] | [soft-new-line, value] */,
-			(0 << 16) | 9	/* ")" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* ")" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 10	/* "(" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 11	/* "(" : [value] | [soft-new-line, value, push] */,
 			(0 << 16) | 3	/* ownedUnrealizedVariables+=GuardVariableCS : [value] | [soft-new-line, value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 3	/* ownedUnrealizedVariables+=GuardVariableCS : [value] | [soft-new-line, value] */,
-			(0 << 16) | 16	/* ")" : [value] | [soft-new-line, pop, value, soft-new-line] */,
+			(0 << 16) | 17	/* ")" : [value] | [soft-new-line, pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 10	/* "(" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 11	/* "(" : [value] | [soft-new-line, value, push] */,
 			(0 << 16) | 3	/* ownedPredicates+=PredicateCS+ : [value] | [soft-new-line, value] */,
-			(0 << 16) | 9	/* ")" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* ")" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {GuardPatternCS} : [value] | [value] */,
-			(0 << 16) | 10	/* "(" : [value] | [soft-new-line, value, push] */,
-			(0 << 16) | 9	/* ")" : [value] | [pop, value, soft-new-line] */
+			(0 << 16) | 11	/* "(" : [value] | [soft-new-line, value, push] */,
+			(0 << 16) | 10	/* ")" : [value] | [pop, value, soft-new-line] */
 		);
 		grammarRuleValues[32] = createParserRuleValue(32, "GuardVariableCS", -1,
 			createSerializationRules(
 				150	/* GuardVariableCS-0: NamedElementCS::name=UnrestrictedName ':' TypedElementCS::ownedType=TypeExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
-		grammarRuleValues[33] = createDataTypeRuleValue(33, "ID", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[33] = createDataTypeRuleValue(33, "ID", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[34] = new TerminalRuleValue(34, "INT");
-		grammarRuleValues[35] = createDataTypeRuleValue(35, "Identifier", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[35] = createDataTypeRuleValue(35, "Identifier", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[36] = createParserRuleValue(36, "IfExpCS", -1,
 			createSerializationRules(
 				28	/* IfExpCS-0: 'if' IfExpCS::ownedCondition=ExpCS|PatternExpCS 'then' IfExpCS::ownedThenExpression=ExpCS (IfExpCS::ownedIfThenExpressions+=ElseIfThenExpCS)[V0:*] 'else' IfExpCS::ownedElseExpression=ExpCS 'endif' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 19	/* "if" : [value] | [soft-new-line, value, push, soft-space] */,
+			(0 << 16) | 20	/* "if" : [value] | [soft-new-line, value, push, soft-space] */,
 			(0 << 16) | 0	/* ownedCondition=(ExpCS|PatternExpCS) : [value] | [value] */,
-			(0 << 16) | 22	/* "then" : [value] | [pop, soft-space, value, push, soft-space] */,
+			(0 << 16) | 23	/* "then" : [value] | [pop, soft-space, value, push, soft-space] */,
 			(0 << 16) | 0	/* ownedThenExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedIfThenExpressions+=ElseIfThenExpCS* : [value] | [value] */,
-			(0 << 16) | 23	/* "else" : [value] | [soft-new-line, pop, value, push, soft-space] */,
+			(0 << 16) | 24	/* "else" : [value] | [soft-new-line, pop, value, push, soft-space] */,
 			(0 << 16) | 0	/* ownedElseExpression=ExpCS : [value] | [value] */,
-			(0 << 16) | 17	/* "endif" : [value] | [soft-new-line, pop, value, soft-space] */
+			(0 << 16) | 18	/* "endif" : [value] | [soft-new-line, pop, value, soft-space] */
 		);
 		grammarRuleValues[37] = createParserRuleValue(37, "ImportCS", -1,
 			createSerializationRules(
 				151	/* ImportCS-0: 'import' (NamedElementCS::name=Identifier ':')[V0:?] ImportCS::ownedPathName=URIPathNameCS (ImportCS::isAll?='::' '*')[V1:?] ';' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "import" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "import" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* name=Identifier : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=Identifier : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPathName=URIPathNameCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* isAll?="::" : [value] | [no-space, value, no-space] */,
-			(0 << 16) | 12	/* "*" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 7	/* isAll?="::" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 13	/* "*" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
-		grammarRuleValues[38] = createDataTypeRuleValue(38, "InfixOperatorName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[38] = createDataTypeRuleValue(38, "InfixOperatorName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[39] = createParserRuleValue(39, "InvalidLiteralExpCS", -1,
 			createSerializationRules(
 				29	/* InvalidLiteralExpCS-0: 'invalid' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {InvalidLiteralExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* "invalid" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* "invalid" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[40] = new TerminalRuleValue(40, "LETTER_CHARACTER");
-		grammarRuleValues[41] = createDataTypeRuleValue(41, "LOWER", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[41] = createDataTypeRuleValue(41, "LOWER", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[42] = createParserRuleValue(42, "LambdaLiteralExpCS", -1,
 			createSerializationRules(
 				30	/* LambdaLiteralExpCS-0: 'Lambda' '{' LambdaLiteralExpCS::ownedExpressionCS=ExpCS '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "Lambda" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 13	/* "Lambda" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedExpressionCS=ExpCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[43] = createParserRuleValue(43, "LetExpCS", -1,
 			createSerializationRules(
 				31	/* LetExpCS-0: 'let' LetExpCS::ownedVariables+=LetVariableCS (',' LetExpCS::ownedVariables+=LetVariableCS)[V0:*] 'in' LetExpCS::ownedInExpression=ExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 11	/* "let" : [value] | [soft-space, value, push] */,
+			(0 << 16) | 12	/* "let" : [value] | [soft-space, value, push] */,
 			(0 << 16) | 0	/* ownedVariables+=LetVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedVariables+=LetVariableCS : [value] | [value] */,
-			(0 << 16) | 20	/* "in" : [value] | [soft-space, pop, value, soft-new-line] */,
+			(0 << 16) | 21	/* "in" : [value] | [soft-space, pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* ownedInExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[44] = createParserRuleValue(44, "LetVariableCS", -1,
@@ -1634,12 +1634,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				32	/* LetVariableCS-0: NamedElementCS::name=UnrestrictedName (LetVariableCS::ownedRoundBracketedClause=RoundBracketedClauseCS)[V0:?] (':' VariableCS::ownedType=TypeExpCS)[V1:?] '=' VariableCS::ownedInitExpression=ExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedRoundBracketedClause=RoundBracketedClauseCS? : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[45] = new TerminalRuleValue(45, "ML_COMMENT");
@@ -1650,13 +1650,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* ownedType=MapTypeCS : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParts+=MapLiteralPartCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParts+=MapLiteralPartCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[48] = createParserRuleValue(48, "MapLiteralPartCS", -1,
 			createSerializationRules(
@@ -1665,8 +1665,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* ownedKey=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedValue=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[49] = createParserRuleValue(49, "MapTypeCS", -1,
@@ -1674,11 +1674,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				35	/* MapTypeCS-0: MapTypeCS::name='Map' ('(' MapTypeCS::ownedKeyType=TypeExpCS ',' MapTypeCS::ownedValueType=TypeExpCS ')')[V0:?] */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* name="Map" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name="Map" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedKeyType=TypeExpCS : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedValueType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
@@ -1688,25 +1688,25 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {MappingCS} : [value] | [value] */,
-			(0 << 16) | 12	/* isAbstract?="abstract"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "map" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isAbstract?="abstract"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "map" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName? : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "in" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "in" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInPathName=PathNameCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "refines" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* refines+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "refines" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* refines+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 12	/* refines+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 13	/* refines+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedDomains+=NamedDomainCS* : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "where" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "where" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedMiddle=UnnamedDomainCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedComposedMappings+=MappingCS* : [value] | [value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */
 		);
 		grammarRuleValues[51] = createParserRuleValue(51, "Model", -1,
 			createSerializationRules(
@@ -1719,10 +1719,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				1	/* MultiplicityBoundsCS-0: MultiplicityBoundsCS::lowerBound=LOWER ('..' MultiplicityBoundsCS::upperBound=UPPER)[V0:?] */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* lowerBound=LOWER : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* lowerBound=LOWER : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* ".." : [value] | [no-space, value, no-space] */,
-			(0 << 16) | 12	/* upperBound=UPPER : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 7	/* ".." : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 13	/* upperBound=UPPER : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[53] = createParserRuleValue(53, "MultiplicityCS", -1,
 			createSerializationRules(
@@ -1734,22 +1734,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				7	/* MultiplicityCS-5: '[' MultiplicityStringCS::stringBounds='*|+|?' ']' */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 6	/* "[" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "[" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* MultiplicityBoundsCS : [value] | [value] */,
 			(0 << 16) | 0	/* MultiplicityStringCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
-			(0 << 16) | 6	/* "|?" : [value] | [no-space, value, no-space] */,
-			(0 << 16) | 6	/* isNullFree?="|1" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "|?" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* isNullFree?="|1" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 1	/* "]" : [value] | [no-space, value] */
 		);
 		grammarRuleValues[54] = createParserRuleValue(54, "MultiplicityStringCS", -1,
 			createSerializationRules(
 				8	/* MultiplicityStringCS-0: MultiplicityStringCS::stringBounds='*|+|?' */
 			),
-			(0 << 16) | 12	/* stringBounds=("*"|"+"|"?") : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* stringBounds=("*"|"+"|"?") : [value] | [soft-space, value, soft-space] */
 		);
-		grammarRuleValues[55] = createDataTypeRuleValue(55, "NUMBER_LITERAL", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[55] = createDataTypeRuleValue(55, "NUMBER_LITERAL", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[56] = createParserRuleValue(56, "NameExpCS", -1,
 			createSerializationRules(
 				37	/* NameExpCS-0: AbstractNameExpCS::ownedPathName=PathNameCS (AbstractNameExpCS::ownedSquareBracketedClauses+=SquareBracketedClauseCS)[V0:*] (AbstractNameExpCS::ownedRoundBracketedClause=RoundBracketedClauseCS)[V1:?] (AbstractNameExpCS::ownedCurlyBracketedClause=CurlyBracketedClauseCS)[V2:?] (AbstractNameExpCS::isPre?='@' 'pre')[V3:?] */
@@ -1760,17 +1760,17 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* ownedRoundBracketedClause=RoundBracketedClauseCS? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedCurlyBracketedClause=CurlyBracketedClauseCS? : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* isPre?="@" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "pre" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* isPre?="@" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "pre" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[57] = createParserRuleValue(57, "NamedDomainCS", -1,
 			createSerializationRules(
 				153	/* NamedDomainCS-0: (DomainCS::isCheck?='check')[V0:?] (DomainCS::isEnforce?='enforce')[V1:?] DomainCS::direction=UnrestrictedName AreaCS::ownedGuardPattern=GuardPatternCS AreaCS::ownedBottomPattern=BottomPatternCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* isCheck?="check"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* isEnforce?="enforce"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* direction=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isCheck?="check"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isEnforce?="enforce"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* direction=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedGuardPattern=GuardPatternCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedBottomPattern=BottomPatternCS : [value] | [value] */
 		);
@@ -1788,36 +1788,36 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
-			(0 << 16) | 12	/* "in" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "in" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[59] = createParserRuleValue(59, "NavigatingArgExpCS", 76 /* BooleanLiteralExpCS|CollectionLiteralExpCS|ExpCS|IfExpCS|InvalidLiteralExpCS|LambdaLiteralExpCS|LetExpCS|MapLiteralExpCS|NameExpCS|NavigatingArgExpCS|NestedExpCS|NullLiteralExpCS|NumberLiteralExpCS|PrefixedLetExpCS|PrefixedPrimaryExpCS|PrimaryExpCS|PrimitiveLiteralExpCS|SelfExpCS|StringLiteralExpCS|TupleLiteralExpCS|TypeLiteralExpCS|UnlimitedNaturalLiteralExpCS */,
@@ -1849,13 +1849,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				43	/* NavigatingBarArgCS-0: NavigatingArgCS::prefix='|' NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS (':' NavigatingArgCS::ownedType=TypeExpCS ('=' NavigatingArgCS::ownedInitExpression=ExpCS)[V1:?])[V0:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* prefix="|" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* prefix="|" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedNameExpression=NavigatingArgExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[61] = createParserRuleValue(61, "NavigatingCommaArgCS", -1,
@@ -1866,38 +1866,38 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				47	/* NavigatingCommaArgCS-3: NavigatingArgCS::prefix=',' NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 8	/* prefix="," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* prefix="," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedNameExpression=NavigatingArgExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* "with" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "<-" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "with" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "<-" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedCoIterator=CoIteratorVariableCS : [value] | [value] */,
-			(0 << 16) | 12	/* "in" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "in" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[62] = createParserRuleValue(62, "NavigatingSemiArgCS", -1,
@@ -1905,16 +1905,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				48	/* NavigatingSemiArgCS-0: NavigatingArgCS::prefix=';' NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS (':' NavigatingArgCS::ownedType=TypeExpCS ('=' NavigatingArgCS::ownedInitExpression=ExpCS)[V1:?])[V0:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 7	/* prefix=";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* prefix=";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* ownedNameExpression=NavigatingArgExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
-		grammarRuleValues[63] = createDataTypeRuleValue(63, "NavigationOperatorName", 12 /* [soft-space, value, soft-space] */,
+		grammarRuleValues[63] = createDataTypeRuleValue(63, "NavigationOperatorName", 13 /* [soft-space, value, soft-space] */,
 			0	/* '->' : [no-space, value, no-space] */,
 			1	/* '.' : [no-space, value, no-space] */,
 			2	/* '?->' : [no-space, value, no-space] */,
@@ -1924,7 +1924,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				49	/* NestedExpCS-0: '(' NestedExpCS::ownedExpression=ExpCS ')' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 5	/* "(" : [value] | [value, no-space] */,
 			(0 << 16) | 0	/* ownedExpression=ExpCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
@@ -1932,7 +1932,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			createSerializationRules(
 				9	/* NextPathElementCS-0: PathElementCS::referredElement=UnreservedName */
 			),
-			(0 << 16) | 12	/* referredElement=UnreservedName : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* referredElement=UnreservedName : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[66] = createParserRuleValue(66, "NullLiteralExpCS", -1,
 			createSerializationRules(
@@ -1940,7 +1940,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {NullLiteralExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* "null" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* "null" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[67] = createParserRuleValue(67, "NumberLiteralExpCS", -1,
 			createSerializationRules(
@@ -1960,61 +1960,61 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "operation" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "operation" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSignature=TemplateSignatureCS? : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParameters+=ParameterCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParameters+=ParameterCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypedMultiplicityRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "throws" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "throws" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedExceptions+=TypedRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedExceptions+=TypedRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group+ : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 8	/* ","? : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 9	/* ","? : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 12	/* "body" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "body" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* UnrestrictedName? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedBodyExpressions+=SpecificationCS? : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[69] = createParserRuleValue(69, "ParamDeclarationCS", -1,
 			createSerializationRules(
 				154	/* ParamDeclarationCS-0: NamedElementCS::name=UnrestrictedName ':' TypedElementCS::ownedType=TypeExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[70] = createParserRuleValue(70, "ParameterCS", -1,
@@ -2022,23 +2022,23 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				112	/* ParameterCS-0: NamedElementCS::name=UnrestrictedName (':' TypedElementCS::ownedType=TypedMultiplicityRefCS)[V0:?] ('{' (TypedElementCS::qualifiers+='!ordered|!unique|ordered|unique')[V2:+] '}')[V1:?] ('{' '}')[V3:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypedMultiplicityRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group+ : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 8	/* ","? : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 9	/* ","? : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[71] = createParserRuleValue(71, "PathNameCS", -1,
 			createSerializationRules(
@@ -2047,7 +2047,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathElements+=FirstPathElementCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 6	/* "::" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "::" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedPathElements+=NextPathElementCS : [value] | [value] */
 		);
 		grammarRuleValues[72] = createParserRuleValue(72, "PatternExpCS", -1,
@@ -2055,8 +2055,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				52	/* PatternExpCS-0: (PatternExpCS::patternVariableName=UnrestrictedName)[V0:?] ':' PatternExpCS::ownedPatternType=TypeExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* patternVariableName=UnrestrictedName? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* patternVariableName=UnrestrictedName? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPatternType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[73] = createParserRuleValue(73, "PredicateCS", -1,
@@ -2065,7 +2065,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* ownedCondition=ExpCS : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[74] = createParserRuleValue(74, "PredicateOrAssignmentCS", -1,
 			createSerializationRules(
@@ -2073,14 +2073,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				157	/* PredicateOrAssignmentCS-1: (PredicateOrAssignmentCS::isDefault?='default')[V0:?] PredicateOrAssignmentCS::ownedTarget=ExpCS (PredicateOrAssignmentCS::isPartial?='+=' PredicateOrAssignmentCS::ownedInitExpression=ExpCS)[V1:?] ';' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* isDefault?="default"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isDefault?="default"? : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedTarget=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* ":=" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* isPartial?="+=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isPartial?="+=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[75] = createParserRuleValue(75, "PrefixedLetExpCS", 33 /* LetExpCS|PrefixedLetExpCS */,
 			createSerializationRules(
@@ -2090,7 +2090,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {PrefixExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnaryOperatorName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnaryOperatorName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedRight=PrefixedLetExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* LetExpCS : [value] | [value] */
 		);
@@ -2116,7 +2116,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {PrefixExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnaryOperatorName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnaryOperatorName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedRight=PrefixedPrimaryExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* PrimaryExpCS : [value] | [value] */
 		);
@@ -2171,34 +2171,34 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			createSerializationRules(
 				55	/* PrimitiveTypeCS-0: PrimitiveTypeRefCS::name=PrimitiveTypeIdentifier */
 			),
-			(0 << 16) | 12	/* name=PrimitiveTypeIdentifier : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* name=PrimitiveTypeIdentifier : [value] | [soft-space, value, soft-space] */
 		);
-		grammarRuleValues[80] = createDataTypeRuleValue(80, "PrimitiveTypeIdentifier", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[81] = createDataTypeRuleValue(81, "QVTbaseUnrestrictedName", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[82] = createDataTypeRuleValue(82, "QVTcoreUnrestrictedName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[80] = createDataTypeRuleValue(80, "PrimitiveTypeIdentifier", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[81] = createDataTypeRuleValue(81, "QVTbaseUnrestrictedName", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[82] = createDataTypeRuleValue(82, "QVTcoreUnrestrictedName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[83] = createParserRuleValue(83, "QualifiedPackageCS", -1,
 			createSerializationRules(
 				158	/* QualifiedPackageCS-0: 'package' (QualifiedPackageCS::ownedPathName=ScopeNameCS)[V0:?] NamedElementCS::name=UnrestrictedName (':' PackageCS::nsPrefix=UnrestrictedName)[V1:?] ('=' PackageCS::nsURI=URI)[V2:?] ';' */,
 				159	/* QualifiedPackageCS-1: 'package' (QualifiedPackageCS::ownedPathName=ScopeNameCS)[V0:?] NamedElementCS::name=UnrestrictedName (':' PackageCS::nsPrefix=UnrestrictedName)[V1:?] ('=' PackageCS::nsURI=URI)[V2:?] '{' (PackageCS::ownedClasses+=ClassCS|TransformationCS)[V3:*] (PackageOwnerCS::ownedPackages+=QualifiedPackageCS)[V4:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "package" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "package" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPathName=ScopeNameCS? : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* nsPrefix=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* nsPrefix=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* nsURI=URI : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* nsURI=URI : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives* : [value] | [value] */,
-			(0 << 16) | 5	/* ownedPackages+=QualifiedPackageCS : [value] | [half-new-line, value, half-new-line] */,
-			(0 << 16) | 5	/* ownedClasses+=(ClassCS|TransformationCS) : [value] | [half-new-line, value, half-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 6	/* ownedPackages+=QualifiedPackageCS : [value] | [half-new-line, value, half-new-line] */,
+			(0 << 16) | 6	/* ownedClasses+=(ClassCS|TransformationCS) : [value] | [half-new-line, value, half-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[84] = createParserRuleValue(84, "QueryCS", -1,
 			createSerializationRules(
@@ -2207,38 +2207,38 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				162	/* QueryCS-2: (QueryCS::isTransient?='transient')[V0:?] 'query' QueryCS::ownedPathName=ScopeNameCS NamedElementCS::name=UnrestrictedName '(' (QueryCS::ownedParameters+=ParamDeclarationCS (',' QueryCS::ownedParameters+=ParamDeclarationCS)[V2:*])[V1:?] ')' ':' TypedElementCS::ownedType=TypeExpCS '{' QueryCS::ownedExpression=ExpCS '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* isTransient?="transient"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "query" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isTransient?="transient"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "query" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPathName=ScopeNameCS : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParameters+=ParamDeclarationCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParameters+=ParamDeclarationCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedExpression=ExpCS : [value] | [value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */,
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "implementedby" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* implementation=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 13	/* "implementedby" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* implementation=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[85] = createParserRuleValue(85, "RealizedVariableCS", -1,
 			createSerializationRules(
 				163	/* RealizedVariableCS-0: 'realize' NamedElementCS::name=UnrestrictedName ':' TypedElementCS::ownedType=TypeExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "realize" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "realize" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[86] = createParserRuleValue(86, "ReferenceCS", -1,
@@ -2253,64 +2253,64 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Alternatives? : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition"? : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "property" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="definition" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="static"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "property" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* "#" : [value] | [no-space, value, no-space] */,
-			(0 << 16) | 12	/* referredOpposite=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 7	/* "#" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 13	/* referredOpposite=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypedMultiplicityRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* default=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* default=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group+ : [value] | [value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* qualifiers+="composes" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!composes" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="readonly" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!readonly" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="resolve" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!resolve" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="transient" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!transient" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="unsettable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!unsettable" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="volatile" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* qualifiers+="!volatile" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 8	/* ","? : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 13	/* qualifiers+="composes" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!composes" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!derived" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!ordered" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="readonly" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!readonly" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="resolve" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!resolve" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="transient" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!transient" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unique" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="unsettable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!unsettable" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="volatile" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* qualifiers+="!volatile" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 9	/* ","? : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives* : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "initial" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "initial" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* UnrestrictedName? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedDefaultExpressions+=SpecificationCS? : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* "derivation" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "derivation" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* UnrestrictedName? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedDefaultExpressions+=SpecificationCS? : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[87] = createParserRuleValue(87, "RoundBracketedClauseCS", -1,
 			createSerializationRules(
@@ -2318,13 +2318,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {RoundBracketedClauseCS} : [value] | [value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedArguments+=NavigatingArgCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedArguments+=(NavigatingCommaArgCS|NavigatingSemiArgCS|NavigatingBarArgCS)* : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
-		grammarRuleValues[88] = createDataTypeRuleValue(88, "SIGNED", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[88] = createDataTypeRuleValue(88, "SIGNED", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[89] = new TerminalRuleValue(89, "SIMPLE_ID");
 		grammarRuleValues[90] = new TerminalRuleValue(90, "SINGLE_QUOTED_STRING");
 		grammarRuleValues[91] = new TerminalRuleValue(91, "SL_COMMENT");
@@ -2334,10 +2334,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathElements+=FirstPathElementCS : [value] | [value] */,
-			(0 << 16) | 6	/* "::" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "::" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathElements+=NextPathElementCS : [value] | [value] */,
-			(0 << 16) | 6	/* "::" : [value] | [no-space, value, no-space] */
+			(0 << 16) | 7	/* "::" : [value] | [no-space, value, no-space] */
 		);
 		grammarRuleValues[93] = createParserRuleValue(93, "SelfExpCS", -1,
 			createSerializationRules(
@@ -2345,7 +2345,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {SelfExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* "self" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* "self" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[94] = createParserRuleValue(94, "ShadowPartCS", -1,
 			createSerializationRules(
@@ -2354,8 +2354,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* referredProperty=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* referredProperty=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=(ExpCS|PatternExpCS) : [value] | [value] */,
 			(0 << 16) | 0	/* ownedInitExpression=StringLiteralExpCS : [value] | [value] */
 		);
@@ -2376,23 +2376,23 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* input?="input" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* output?="output" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* via?="via" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* typedModel=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* input?="input" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* output?="output" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* via?="via" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* typedModel=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "iterates" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "iterates" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
-			(0 << 16) | 12	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 13	/* iterates+=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[97] = createParserRuleValue(97, "SpecificationCS", -1,
 			createSerializationRules(
@@ -2401,21 +2401,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 2	/* Alternatives : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* ownedExpression=ExpCS : [value] | [value] */,
-			(0 << 16) | 12	/* exprString=UNQUOTED_STRING : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* exprString=UNQUOTED_STRING : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[98] = createParserRuleValue(98, "SquareBracketedClauseCS", -1,
 			createSerializationRules(
 				61	/* SquareBracketedClauseCS-0: '[' SquareBracketedClauseCS::ownedTerms+=ExpCS (',' SquareBracketedClauseCS::ownedTerms+=ExpCS)[V0:*] ']' */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 6	/* "[" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "[" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedTerms+=ExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedTerms+=ExpCS : [value] | [value] */,
 			(0 << 16) | 1	/* "]" : [value] | [no-space, value] */
 		);
-		grammarRuleValues[99] = createDataTypeRuleValue(99, "StringLiteral", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[99] = createDataTypeRuleValue(99, "StringLiteral", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[100] = createParserRuleValue(100, "StringLiteralExpCS", -1,
 			createSerializationRules(
 				62	/* StringLiteralExpCS-0: (StringLiteralExpCS::segments+=StringLiteral)[V0:+] */
@@ -2447,43 +2447,43 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				128	/* StructuredClassCS-1: (StructuredClassCS::isAbstract?='abstract')[V0:?] 'class' NamedElementCS::name=UnrestrictedName (TemplateableElementCS::ownedSignature=TemplateSignatureCS)[V1:?] ('extends' StructuredClassCS::ownedSuperTypes+=TypedRefCS (',' StructuredClassCS::ownedSuperTypes+=TypedRefCS)[V3:*])[V2:?] (':' ClassCS::instanceClassName=SINGLE_QUOTED_STRING)[V4:?] ('{' (StructuredClassCS::isInterface?='interface')[V6:?] '}')[V5:?] '{' (StructuredClassCS::ownedOperations+=OperationCS)[V7:*] (StructuredClassCS::ownedProperties+=StructuralFeatureCS)[V8:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* isAbstract?="abstract"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* "class" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* isAbstract?="abstract"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "class" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSignature=TemplateSignatureCS? : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "extends" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "extends" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSuperTypes+=TypedRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSuperTypes+=TypedRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* instanceClassName=SINGLE_QUOTED_STRING : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
-			(0 << 16) | 12	/* isInterface?="interface"? : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 13	/* isInterface?="interface"? : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Alternatives* : [value] | [value] */,
 			(0 << 16) | 0	/* ownedOperations+=OperationCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedProperties+=StructuralFeatureCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[103] = createParserRuleValue(103, "TargetCS", -1,
 			createSerializationRules(
 				129	/* TargetCS-0: 'target' NamedElementCS::name=UnrestrictedName '{' (TargetCS::ownedTargetElements+=SimpleTargetElementCS|CompoundTargetElementCS)[V0:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "target" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 13	/* "target" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedTargetElements+=(SimpleTargetElementCS|CompoundTargetElementCS)* : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
-			(0 << 16) | 7	/* ";"? : [value] | [no-space, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";"? : [value] | [no-space, value, soft-new-line] */
 		);
 		grammarRuleValues[104] = createParserRuleValue(104, "TemplateBindingCS", -1,
 			createSerializationRules(
@@ -2492,7 +2492,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedSubstitutions+=TemplateParameterSubstitutionCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedSubstitutions+=TemplateParameterSubstitutionCS : [value] | [value] */,
 			(0 << 16) | 0	/* ownedMultiplicity=MultiplicityCS? : [value] | [value] */
 		);
@@ -2507,10 +2507,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				13	/* TemplateSignatureCS-0: '(' TemplateSignatureCS::ownedParameters+=TypeParameterCS (',' TemplateSignatureCS::ownedParameters+=TypeParameterCS)[V0:*] ')' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedParameters+=TypeParameterCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParameters+=TypeParameterCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
@@ -2521,50 +2521,50 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(4 << 16) | 0	/* ownedImports+=ImportCS* : [value, half-new-line] | [value] */,
 			(0 << 16) | 0	/* Alternatives* : [value] | [value] */,
-			(0 << 16) | 5	/* ownedPackages+=QualifiedPackageCS : [value] | [half-new-line, value, half-new-line] */,
-			(0 << 16) | 5	/* ownedTransformations+=TransformationCS : [value] | [half-new-line, value, half-new-line] */,
-			(0 << 16) | 5	/* ownedMappings+=MappingCS : [value] | [half-new-line, value, half-new-line] */,
-			(0 << 16) | 5	/* ownedQueries+=QueryCS : [value] | [half-new-line, value, half-new-line] */
+			(0 << 16) | 6	/* ownedPackages+=QualifiedPackageCS : [value] | [half-new-line, value, half-new-line] */,
+			(0 << 16) | 6	/* ownedTransformations+=TransformationCS : [value] | [half-new-line, value, half-new-line] */,
+			(0 << 16) | 6	/* ownedMappings+=MappingCS : [value] | [half-new-line, value, half-new-line] */,
+			(0 << 16) | 6	/* ownedQueries+=QueryCS : [value] | [half-new-line, value, half-new-line] */
 		);
 		grammarRuleValues[108] = createParserRuleValue(108, "TransformationCS", -1,
 			createSerializationRules(
 				166	/* TransformationCS-0: 'transformation' (AbstractTransformationCS::ownedPathName=ScopeNameCS)[V0:?] NamedElementCS::name=UnreservedName '{' (TransformationCS::ownedDirections+=DirectionCS ';')[V1:*] (AbstractTransformationCS::ownedTargets+=TargetCS)[V2:*] (TransformationCS::ownedProperties+=StructuralFeatureCS)[V3:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "transformation" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "transformation" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedPathName=ScopeNameCS? : [value] | [value] */,
-			(0 << 16) | 12	/* name=UnreservedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 13	/* name=UnreservedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
 			(0 << 16) | 0	/* ownedDirections+=DirectionCS : [value] | [value] */,
-			(0 << 16) | 7	/* ";" : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* ";" : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* ownedTargets+=TargetCS* : [value] | [value] */,
 			(0 << 16) | 0	/* ownedProperties+=StructuralFeatureCS* : [value] | [value] */,
-			(0 << 16) | 9	/* "}" : [value] | [pop, value, soft-new-line] */
+			(0 << 16) | 10	/* "}" : [value] | [pop, value, soft-new-line] */
 		);
 		grammarRuleValues[109] = createParserRuleValue(109, "TupleLiteralExpCS", -1,
 			createSerializationRules(
 				63	/* TupleLiteralExpCS-0: 'Tuple' '{' TupleLiteralExpCS::ownedParts+=TupleLiteralPartCS (',' TupleLiteralExpCS::ownedParts+=TupleLiteralPartCS)[V0:*] '}' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* "Tuple" : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 13	/* "Tuple" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedParts+=TupleLiteralPartCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 7	/* "," : [value] | [no-space, value, soft-new-line] */,
+			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-new-line] */,
 			(0 << 16) | 0	/* ownedParts+=TupleLiteralPartCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[110] = createParserRuleValue(110, "TupleLiteralPartCS", -1,
 			createSerializationRules(
 				64	/* TupleLiteralPartCS-0: NamedElementCS::name=UnrestrictedName (':' VariableCS::ownedType=TypeExpCS)[V0:?] '=' VariableCS::ownedInitExpression=ExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
-			(0 << 16) | 12	/* "=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
 		grammarRuleValues[111] = createParserRuleValue(111, "TuplePartCS", -1,
@@ -2572,8 +2572,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				65	/* TuplePartCS-0: NamedElementCS::name=UnrestrictedName ':' TypedElementCS::ownedType=TypeExpCS */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */
 		);
 		grammarRuleValues[112] = createParserRuleValue(112, "TupleTypeCS", -1,
@@ -2581,13 +2581,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				66	/* TupleTypeCS-0: TupleTypeCS::name='Tuple' ('(' (TupleTypeCS::ownedParts+=TuplePartCS (',' TupleTypeCS::ownedParts+=TuplePartCS)[V2:*])[V1:?] ')')[V0:?] */
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
-			(0 << 16) | 12	/* name="Tuple" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name="Tuple" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedParts+=TuplePartCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 8	/* "," : [value] | [no-space, value, soft-space] */,
+			(0 << 16) | 9	/* "," : [value] | [no-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedParts+=TuplePartCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
@@ -2657,21 +2657,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
 			(0 << 16) | 0	/* ownedCurlyBracketedClause=CurlyBracketedClauseCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 21	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
+			(0 << 16) | 22	/* "{" : [value] | [soft-space, value, push, soft-new-line] */,
 			(0 << 16) | 0	/* ownedPatternGuard=ExpCS : [value] | [value] */,
-			(0 << 16) | 13	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
+			(0 << 16) | 14	/* "}" : [value] | [pop, soft-new-line, value, soft-new-line] */
 		);
 		grammarRuleValues[119] = createParserRuleValue(119, "TypeParameterCS", -1,
 			createSerializationRules(
 				14	/* TypeParameterCS-0: NamedElementCS::name=UnrestrictedName ('extends' TypeParameterCS::ownedExtends+=TypedRefCS ('&&' TypeParameterCS::ownedExtends+=TypedRefCS)[V1:*])[V0:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "extends" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "extends" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedExtends+=TypedRefCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 12	/* "&&" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "&&" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedExtends+=TypedRefCS : [value] | [value] */
 		);
 		grammarRuleValues[120] = createParserRuleValue(120, "TypeRefCS", 80 /* CollectionTypeCS|MapTypeCS|PrimitiveTypeCS|TupleTypeCS|TypeLiteralCS|TypeRefCS|TypedRefCS|TypedTypeRefCS|WildcardTypeRefCS */,
@@ -2718,23 +2718,23 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathName=PathNameCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 6	/* "(" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "(" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedBinding=TemplateBindingCS : [value] | [value] */,
 			(0 << 16) | 1	/* ")" : [value] | [no-space, value] */
 		);
 		grammarRuleValues[124] = new TerminalRuleValue(124, "UNQUOTED_STRING");
-		grammarRuleValues[125] = createDataTypeRuleValue(125, "UPPER", 12 /* [soft-space, value, soft-space] */);
-		grammarRuleValues[126] = createDataTypeRuleValue(126, "URI", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[125] = createDataTypeRuleValue(125, "UPPER", 13 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[126] = createDataTypeRuleValue(126, "URI", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[127] = createParserRuleValue(127, "URIFirstPathElementCS", -1,
 			createSerializationRules(
 				79	/* URIFirstPathElementCS-0: PathElementCS::referredElement=URI */,
 				80	/* URIFirstPathElementCS-1: PathElementCS::referredElement=UnrestrictedName */
 			),
 			(0 << 16) | 0	/* Alternatives : [value] | [value] */,
-			(0 << 16) | 12	/* referredElement=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* referredElement=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {PathElementWithURICS} : [value] | [value] */,
-			(0 << 16) | 12	/* referredElement=URI : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* referredElement=URI : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[128] = createParserRuleValue(128, "URIPathNameCS", -1,
 			createSerializationRules(
@@ -2743,17 +2743,17 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathElements+=URIFirstPathElementCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 6	/* "::" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "::" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedPathElements+=NextPathElementCS : [value] | [value] */
 		);
-		grammarRuleValues[129] = createDataTypeRuleValue(129, "UnaryOperatorName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[129] = createDataTypeRuleValue(129, "UnaryOperatorName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[130] = createParserRuleValue(130, "UnlimitedNaturalLiteralExpCS", -1,
 			createSerializationRules(
 				82	/* UnlimitedNaturalLiteralExpCS-0: '*' */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
 			(0 << 16) | 0	/* {UnlimitedNaturalLiteralExpCS} : [value] | [value] */,
-			(0 << 16) | 12	/* "*" : [value] | [soft-space, value, soft-space] */
+			(0 << 16) | 13	/* "*" : [value] | [soft-space, value, soft-space] */
 		);
 		grammarRuleValues[131] = createParserRuleValue(131, "UnnamedDomainCS", -1,
 			createSerializationRules(
@@ -2769,15 +2769,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				168	/* UnrealizedVariableCS-0: NamedElementCS::name=UnrestrictedName (':' TypedElementCS::ownedType=TypeExpCS)[V0:?] (':=' UnrealizedVariableCS::ownedInitExpression=ExpCS)[V1:?] */
 			),
 			(0 << 16) | 2	/* Group : [value] | [org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport, value] */,
-			(0 << 16) | 12	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* name=UnrestrictedName : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedType=TypeExpCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* ":=" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* ":=" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedInitExpression=ExpCS : [value] | [value] */
 		);
-		grammarRuleValues[133] = createDataTypeRuleValue(133, "UnreservedName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[133] = createDataTypeRuleValue(133, "UnreservedName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[134] = createParserRuleValue(134, "UnreservedPathNameCS", -1,
 			createSerializationRules(
 				16	/* UnreservedPathNameCS-0: PathNameCS::ownedPathElements+=NextPathElementCS ('::' PathNameCS::ownedPathElements+=NextPathElementCS)[V0:*] */
@@ -2785,10 +2785,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* ownedPathElements+=NextPathElementCS : [value] | [value] */,
 			(0 << 16) | 0	/* Group* : [value] | [value] */,
-			(0 << 16) | 6	/* "::" : [value] | [no-space, value, no-space] */,
+			(0 << 16) | 7	/* "::" : [value] | [no-space, value, no-space] */,
 			(0 << 16) | 0	/* ownedPathElements+=NextPathElementCS : [value] | [value] */
 		);
-		grammarRuleValues[135] = createDataTypeRuleValue(135, "UnrestrictedName", 12 /* [soft-space, value, soft-space] */);
+		grammarRuleValues[135] = createDataTypeRuleValue(135, "UnrestrictedName", 13 /* [soft-space, value, soft-space] */);
 		grammarRuleValues[136] = new TerminalRuleValue(136, "WS");
 		grammarRuleValues[137] = createParserRuleValue(137, "WildcardTypeRefCS", -1,
 			createSerializationRules(
@@ -2796,9 +2796,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			(0 << 16) | 0	/* Group : [value] | [value] */,
 			(0 << 16) | 0	/* {WildcardTypeRefCS} : [value] | [value] */,
-			(0 << 16) | 12	/* "?" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "?" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* Group? : [value] | [value] */,
-			(0 << 16) | 12	/* "extends" : [value] | [soft-space, value, soft-space] */,
+			(0 << 16) | 13	/* "extends" : [value] | [soft-space, value, soft-space] */,
 			(0 << 16) | 0	/* ownedExtends=TypedRefCS : [value] | [value] */
 		);
 	}
@@ -4371,7 +4371,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				41		/* assert (|PathElementCS::referredElement| - 1) == 0 */
 			),
 			createSerializationSteps(
-				312		/* PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space */
+				313		/* PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, -1
@@ -4386,8 +4386,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				22		/* MultiplicityBoundsCS::lowerBound=LOWER || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				160		/* '..' || no-space value no-space */,
+				223		/* V00*2-steps || value */,
+				161		/* '..' || no-space value no-space */,
 				143		/* MultiplicityBoundsCS::upperBound=UPPER || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4402,13 +4402,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				27		/* assert (|MultiplicityBoundsCS::lowerBound| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				22		/* MultiplicityBoundsCS::lowerBound=LOWER || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				160		/* '..' || no-space value no-space */,
+				223		/* V00*2-steps || value */,
+				161		/* '..' || no-space value no-space */,
 				143		/* MultiplicityBoundsCS::upperBound=UPPER || soft-space value soft-space */,
-				214		/* '|?' || no-space value no-space */,
-				170		/* ']' || no-space value */
+				215		/* '|?' || no-space value no-space */,
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__LOWER_BOUND, true, GrammarCardinality.ONE),
@@ -4422,13 +4422,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				27		/* assert (|MultiplicityBoundsCS::lowerBound| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				22		/* MultiplicityBoundsCS::lowerBound=LOWER || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				160		/* '..' || no-space value no-space */,
+				223		/* V00*2-steps || value */,
+				161		/* '..' || no-space value no-space */,
 				143		/* MultiplicityBoundsCS::upperBound=UPPER || soft-space value soft-space */,
 				14		/* MultiplicityCS::isNullFree?='|1' || no-space value no-space */,
-				170		/* ']' || no-space value */
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.MULTIPLICITY_CS__IS_NULL_FREE, false,
@@ -4445,12 +4445,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				27		/* assert (|MultiplicityBoundsCS::lowerBound| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				22		/* MultiplicityBoundsCS::lowerBound=LOWER || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				160		/* '..' || no-space value no-space */,
+				223		/* V00*2-steps || value */,
+				161		/* '..' || no-space value no-space */,
 				143		/* MultiplicityBoundsCS::upperBound=UPPER || soft-space value soft-space */,
-				170		/* ']' || no-space value */
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__LOWER_BOUND, true, GrammarCardinality.ONE),
@@ -4463,10 +4463,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				29		/* assert (|MultiplicityStringCS::stringBounds.'*|+|?'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				139		/* MultiplicityStringCS::stringBounds='*|+|?' || soft-space value soft-space */,
-				214		/* '|?' || no-space value no-space */,
-				170		/* ']' || no-space value */
+				215		/* '|?' || no-space value no-space */,
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.MULTIPLICITY_STRING_CS__STRING_BOUNDS, false,
@@ -4480,10 +4480,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				29		/* assert (|MultiplicityStringCS::stringBounds.'*|+|?'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				139		/* MultiplicityStringCS::stringBounds='*|+|?' || soft-space value soft-space */,
 				14		/* MultiplicityCS::isNullFree?='|1' || no-space value no-space */,
-				170		/* ']' || no-space value */
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.MULTIPLICITY_CS__IS_NULL_FREE, false,
@@ -4500,9 +4500,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				29		/* assert (|MultiplicityStringCS::stringBounds.'*|+|?'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				139		/* MultiplicityStringCS::stringBounds='*|+|?' || soft-space value soft-space */,
-				170		/* ']' || no-space value */
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.MULTIPLICITY_STRING_CS__STRING_BOUNDS, false,
@@ -4529,7 +4529,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				41		/* assert (|PathElementCS::referredElement| - 1) == 0 */
 			),
 			createSerializationSteps(
-				311		/* PathElementCS::referredElement=UnreservedName || soft-space value soft-space */
+				312		/* PathElementCS::referredElement=UnreservedName || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, -1
@@ -4539,10 +4539,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		serializationRules[10] = createSerializationRule("PathNameCS-0", 71,
 			null,	// run-time resolution using SerializationSteps
 			createSerializationSteps(
-				293		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */,
-				223		/* V00*2-steps || value */,
-				162		/* '::' || no-space value no-space */,
-				294		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
+				294		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */,
+				224		/* V00*2-steps || value */,
+				163		/* '::' || no-space value no-space */,
+				295		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 23/* FirstPathElementCS,NextPathElementCS */,
@@ -4560,10 +4560,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				110		/* TemplateBindingCS::ownedSubstitutions+=TemplateParameterSubstitutionCS || value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				110		/* TemplateBindingCS::ownedSubstitutions+=TemplateParameterSubstitutionCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				76		/* TemplateBindingCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4597,13 +4597,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				135		/* assign V0 = (|TemplateSignatureCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				151		/* '(' || no-space value no-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				152		/* '(' || no-space value no-space */,
 				84		/* TemplateSignatureCS::ownedParameters+=TypeParameterCS || value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				84		/* TemplateSignatureCS::ownedParameters+=TypeParameterCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.TEMPLATE_SIGNATURE_CS__OWNED_PARAMETERS, 63/* TypeParameterCS */,
@@ -4620,12 +4620,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				189		/* assign V1 = (|TypeParameterCS::ownedExtends| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				180		/* 'extends' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				227		/* V00*5-steps || value */,
+				181		/* 'extends' || soft-space value soft-space */,
 				56		/* TypeParameterCS::ownedExtends+=TypedRefCS || value */,
-				233		/* V01*2-steps || value */,
+				234		/* V01*2-steps || value */,
 				149		/* '&&' || soft-space value soft-space */,
 				56		/* TypeParameterCS::ownedExtends+=TypedRefCS || value */
 			),
@@ -4647,10 +4647,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				97		/* TypedTypeRefCS::ownedPathName=PathNameCS || value */,
-				224		/* V00*3-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				225		/* V00*3-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				31		/* TypedTypeRefCS::ownedBinding=TemplateBindingCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.TYPED_TYPE_REF_CS__OWNED_BINDING, 50/* TemplateBindingCS */,
@@ -4667,10 +4667,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				130		/* assign V0 = (|PathNameCS::ownedPathElements| - 1) */
 			),
 			createSerializationSteps(
-				294		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */,
-				223		/* V00*2-steps || value */,
-				162		/* '::' || no-space value no-space */,
-				294		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
+				295		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */,
+				224		/* V00*2-steps || value */,
+				163		/* '::' || no-space value no-space */,
+				295		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 22/* NextPathElementCS */,
@@ -4685,9 +4685,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				179		/* assign V0 = |WildcardTypeRefCS::ownedExtends| */
 			),
 			createSerializationSteps(
-				166		/* '?' || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				180		/* 'extends' || soft-space value soft-space */,
+				167		/* '?' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				181		/* 'extends' || soft-space value soft-space */,
 				57		/* WildcardTypeRefCS::ownedExtends=TypedRefCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4719,10 +4719,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				126		/* VariableCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4742,15 +4742,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				180		/* assign V1 = (|CollectionLiteralExpCS::ownedParts| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				120		/* CollectionLiteralExpCS::ownedType=CollectionTypeCS || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				225		/* V00*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				226		/* V00*4-steps || value */,
 				85		/* CollectionLiteralExpCS::ownedParts+=CollectionLiteralPartCS || value */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				85		/* CollectionLiteralExpCS::ownedParts+=CollectionLiteralPartCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.COLLECTION_LITERAL_EXP_CS__OWNED_PARTS, 2/* CollectionLiteralPartCS */,
@@ -4770,10 +4770,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				6		/* assert (|CollectionLiteralPartCS::ownedExpression| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				49		/* CollectionLiteralPartCS::ownedExpression=ExpCS || value */,
-				222		/* V00*2-steps || value */,
-				160		/* '..' || no-space value no-space */,
+				223		/* V00*2-steps || value */,
+				161		/* '..' || no-space value no-space */,
 				71		/* CollectionLiteralPartCS::ownedLastExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4813,15 +4813,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				121		/* CollectionPatternCS::ownedType=CollectionTypeCS || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				227		/* V00*6-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				228		/* V00*6-steps || value */,
 				86		/* CollectionPatternCS::ownedParts+=PatternExpCS || value */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				86		/* CollectionPatternCS::ownedParts+=PatternExpCS || value */,
-				157		/* '++' || soft-space value soft-space */,
+				158		/* '++' || soft-space value soft-space */,
 				137		/* CollectionPatternCS::restVariableName=Identifier || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(EssentialOCLCSPackage.Literals.COLLECTION_PATTERN_CS__REST_VARIABLE_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -4844,12 +4844,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				23		/* CollectionTypeCS::name=CollectionTypeIdentifier || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				122		/* CollectionTypeCS::ownedType=TypeExpWithoutMultiplicityCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				36		/* CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(EssentialOCLCSPackage.Literals.COLLECTION_TYPE_CS__NAME, true, GrammarCardinality.ONE),
@@ -4869,13 +4869,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				182		/* assign V1 = (|CurlyBracketedClauseCS::ownedParts| - 1) */
 			),
 			createSerializationSteps(
-				212		/* '{' || soft-space value push soft-new-line */,
-				225		/* V00*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				226		/* V00*4-steps || value */,
 				87		/* CurlyBracketedClauseCS::ownedParts+=ShadowPartCS || value */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				87		/* CurlyBracketedClauseCS::ownedParts+=ShadowPartCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.CURLY_BRACKETED_CLAUSE_CS__OWNED_PARTS, 40/* ShadowPartCS */,
@@ -4892,10 +4892,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				15		/* assert (|IfThenExpCS::ownedCondition| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				177		/* 'elseif' || soft-new-line pop soft-space value push soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				178		/* 'elseif' || soft-new-line pop soft-space value push soft-space */,
 				39		/* IfThenExpCS::ownedCondition=ExpCS || value */,
-				203		/* 'then' || pop value push soft-space */,
+				204		/* 'then' || pop value push soft-space */,
 				118		/* IfThenExpCS::ownedThenExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -4917,10 +4917,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				18		/* assert (|InfixExpCS::ownedLeft| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				72		/* InfixExpCS::ownedLeft=PrefixedPrimaryExpCS || value */,
-				287		/* NamedElementCS::name=BinaryOperatorName || soft-space value soft-space */,
-				295		/* OperatorExpCS::ownedRight=ExpCS || value */
+				288		/* NamedElementCS::name=BinaryOperatorName || soft-space value soft-space */,
+				296		/* OperatorExpCS::ownedRight=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -4946,16 +4946,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				12		/* assert (|IfExpCS::ownedCondition| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				181		/* 'if' || soft-new-line value push soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				182		/* 'if' || soft-new-line value push soft-space */,
 				38		/* IfExpCS::ownedCondition=ExpCS|PatternExpCS || value */,
-				204		/* 'then' || pop soft-space value push soft-space */,
+				205		/* 'then' || pop soft-space value push soft-space */,
 				117		/* IfExpCS::ownedThenExpression=ExpCS || value */,
-				219		/* V00*1-steps || value */,
+				220		/* V00*1-steps || value */,
 				59		/* IfExpCS::ownedIfThenExpressions+=ElseIfThenExpCS || value */,
-				176		/* 'else' || soft-new-line pop value push soft-space */,
+				177		/* 'else' || soft-new-line pop value push soft-space */,
 				47		/* IfExpCS::ownedElseExpression=ExpCS || value */,
-				178		/* 'endif' || soft-new-line pop value soft-space */
+				179		/* 'endif' || soft-new-line pop value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.IF_EXP_CS__OWNED_CONDITION, 29/* ExpCS,PatternExpCS */,
@@ -4978,7 +4978,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				87		/* assert |ModelElementCS::ownedAnnotations| == 0 */
 			),
 			createSerializationSteps(
-				188		/* 'invalid' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
+				189		/* 'invalid' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
 			),
 			null);
 		// EssentialOCL::LambdaLiteralExpCS-0(essentialoclcs::LambdaLiteralExpCS): { "Lambda" "{" ownedExpressionCS=ExpCS "}" }
@@ -4989,11 +4989,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				20		/* assert (|LambdaLiteralExpCS::ownedExpressionCS| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				167		/* 'Lambda' || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				168		/* 'Lambda' || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				55		/* LambdaLiteralExpCS::ownedExpressionCS=ExpCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.LAMBDA_LITERAL_EXP_CS__OWNED_EXPRESSION_CS, 8/* ExpCS */,
@@ -5011,13 +5011,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				128		/* assign V0 = (|LetExpCS::ownedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				190		/* 'let' || soft-space value push */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				191		/* 'let' || soft-space value push */,
 				129		/* LetExpCS::ownedVariables+=LetVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				129		/* LetExpCS::ownedVariables+=LetVariableCS || value */,
-				186		/* 'in' || soft-space pop value soft-new-line */,
+				187		/* 'in' || soft-space pop value soft-new-line */,
 				61		/* LetExpCS::ownedInExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5041,14 +5041,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				107		/* LetVariableCS::ownedRoundBracketedClause=RoundBracketedClauseCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				126		/* VariableCS::ownedType=TypeExpCS || value */,
-				165		/* '=' || soft-space value soft-space */,
+				166		/* '=' || soft-space value soft-space */,
 				68		/* VariableCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5074,15 +5074,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				184		/* assign V1 = (|MapLiteralExpCS::ownedParts| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				123		/* MapLiteralExpCS::ownedType=MapTypeCS || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				225		/* V00*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				226		/* V00*4-steps || value */,
 				88		/* MapLiteralExpCS::ownedParts+=MapLiteralPartCS || value */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				88		/* MapLiteralExpCS::ownedParts+=MapLiteralPartCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.MAP_LITERAL_EXP_CS__OWNED_PARTS, 14/* MapLiteralPartCS */,
@@ -5102,9 +5102,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				23		/* assert (|MapLiteralPartCS::ownedKey| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				69		/* MapLiteralPartCS::ownedKey=ExpCS || value */,
-				209		/* 'with' || value */,
+				210		/* 'with' || value */,
 				127		/* MapLiteralPartCS::ownedValue=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5127,12 +5127,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				24		/* MapTypeCS::name='Map' || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				70		/* MapTypeCS::ownedKeyType=TypeExpCS || value */,
-				159		/* ',' || no-space value soft-space */,
+				160		/* ',' || no-space value soft-space */,
 				128		/* MapTypeCS::ownedValueType=TypeExpCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(EssentialOCLCSPackage.Literals.MAP_TYPE_CS__NAME, false,
@@ -5177,17 +5177,17 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				0		/* assert (|AbstractNameExpCS::ownedPathName| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				91		/* AbstractNameExpCS::ownedPathName=PathNameCS || value */,
-				219		/* V00*1-steps || value */,
+				220		/* V00*1-steps || value */,
 				109		/* AbstractNameExpCS::ownedSquareBracketedClauses+=SquareBracketedClauseCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				106		/* AbstractNameExpCS::ownedRoundBracketedClause=RoundBracketedClauseCS || value */,
-				237		/* V02*1-steps || value */,
+				238		/* V02*1-steps || value */,
 				42		/* AbstractNameExpCS::ownedCurlyBracketedClause=CurlyBracketedClauseCS || value */,
-				248		/* V03*2-steps || value */,
+				249		/* V03*2-steps || value */,
 				16		/* AbstractNameExpCS::isPre?='@' || soft-space value soft-space */,
-				196		/* 'pre' || soft-space value soft-space */
+				197		/* 'pre' || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(EssentialOCLCSPackage.Literals.ABSTRACT_NAME_EXP_CS__IS_PRE, false,
@@ -5218,8 +5218,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				34		/* assert (|NavigatingArgCS::ownedType| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				161		/* ':' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5242,15 +5242,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				33		/* assert (|NavigatingArgCS::ownedNameExpression| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				161		/* ':' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				222		/* V00*2-steps || value */,
-				209		/* 'with' || value */,
+				223		/* V00*2-steps || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5282,15 +5282,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				33		/* assert (|NavigatingArgCS::ownedNameExpression| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				232		/* V01*2-steps || value */,
-				209		/* 'with' || value */,
+				233		/* V01*2-steps || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				185		/* 'in' || soft-space value soft-space */,
+				186		/* 'in' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5321,12 +5321,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				33		/* assert (|NavigatingArgCS::ownedNameExpression| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				209		/* 'with' || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5373,14 +5373,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				200		/* assign V1 = |NavigatingArgCS::ownedInitExpression| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				131		/* NavigatingArgCS::prefix='|' || soft-space value soft-space */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				226		/* V00*5-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				227		/* V00*5-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5412,16 +5412,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				35		/* assert (|NavigatingArgCS::prefix.','| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				133		/* NavigatingArgCS::prefix=',' || no-space value soft-space */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				161		/* ':' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				222		/* V00*2-steps || value */,
-				209		/* 'with' || value */,
+				223		/* V00*2-steps || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5456,16 +5456,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				35		/* assert (|NavigatingArgCS::prefix.','| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				133		/* NavigatingArgCS::prefix=',' || no-space value soft-space */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				232		/* V01*2-steps || value */,
-				209		/* 'with' || value */,
+				233		/* V01*2-steps || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				185		/* 'in' || soft-space value soft-space */,
+				186		/* 'in' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5499,13 +5499,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				35		/* assert (|NavigatingArgCS::prefix.','| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				133		/* NavigatingArgCS::prefix=',' || no-space value soft-space */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				209		/* 'with' || value */,
+				210		/* 'with' || value */,
 				35		/* NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5534,7 +5534,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				35		/* assert (|NavigatingArgCS::prefix.','| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				133		/* NavigatingArgCS::prefix=',' || no-space value soft-space */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */
 			),
@@ -5560,14 +5560,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				200		/* assign V1 = |NavigatingArgCS::ownedInitExpression| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				132		/* NavigatingArgCS::prefix=';' || no-space value soft-new-line */,
 				78		/* NavigatingArgCS::ownedNameExpression=NavigatingArgExpCS || value */,
-				226		/* V00*5-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				227		/* V00*5-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				124		/* NavigatingArgCS::ownedType=TypeExpCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				63		/* NavigatingArgCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5592,10 +5592,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				38		/* assert (|NestedExpCS::ownedExpression| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				151		/* '(' || no-space value no-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				151		/* '(' || value no-space */,
 				53		/* NestedExpCS::ownedExpression=ExpCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.NESTED_EXP_CS__OWNED_EXPRESSION, 8/* ExpCS */,
@@ -5608,7 +5608,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				87		/* assert |ModelElementCS::ownedAnnotations| == 0 */
 			),
 			createSerializationSteps(
-				193		/* 'null' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
+				194		/* 'null' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
 			),
 			null);
 		// EssentialOCL::NumberLiteralExpCS-0(essentialoclcs::NumberLiteralExpCS): symbol=NUMBER_LITERAL
@@ -5632,10 +5632,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				161		/* assign V0 = |PatternExpCS::patternVariableName| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				130		/* PatternExpCS::patternVariableName=UnrestrictedName || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
 				99		/* PatternExpCS::ownedPatternType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5653,9 +5653,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				284		/* NamedElementCS::name=UnaryOperatorName || soft-space value soft-space */,
-				296		/* OperatorExpCS::ownedRight=PrefixedLetExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				285		/* NamedElementCS::name=UnaryOperatorName || soft-space value soft-space */,
+				297		/* OperatorExpCS::ownedRight=PrefixedLetExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -5672,9 +5672,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				284		/* NamedElementCS::name=UnaryOperatorName || soft-space value soft-space */,
-				297		/* OperatorExpCS::ownedRight=PrefixedPrimaryExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				285		/* NamedElementCS::name=UnaryOperatorName || soft-space value soft-space */,
+				298		/* OperatorExpCS::ownedRight=PrefixedPrimaryExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -5698,12 +5698,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		serializationRules[56] = createSerializationRule("RoundBracketedClauseCS-0", 87,
 			null,	// run-time resolution using SerializationSteps
 			createSerializationSteps(
-				151		/* '(' || no-space value no-space */,
-				224		/* V00*3-steps || value */,
-				290		/* RoundBracketedClauseCS::ownedArguments+=NavigatingArgCS || value */,
-				231		/* V01*1-steps || value */,
-				291		/* RoundBracketedClauseCS::ownedArguments+=NavigatingCommaArgCS|NavigatingSemiArgCS|NavigatingBarArgCS || value */,
-				152		/* ')' || no-space value */
+				152		/* '(' || no-space value no-space */,
+				225		/* V00*3-steps || value */,
+				291		/* RoundBracketedClauseCS::ownedArguments+=NavigatingArgCS || value */,
+				232		/* V01*1-steps || value */,
+				292		/* RoundBracketedClauseCS::ownedArguments+=NavigatingCommaArgCS|NavigatingSemiArgCS|NavigatingBarArgCS || value */,
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.ROUND_BRACKETED_CLAUSE_CS__OWNED_ARGUMENTS, 21/* NavigatingArgCS,NavigatingBarArgCS,NavigatingCommaArgCS,NavigatingSemiArgCS */,
@@ -5720,7 +5720,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				87		/* assert |ModelElementCS::ownedAnnotations| == 0 */
 			),
 			createSerializationSteps(
-				201		/* 'self' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
+				202		/* 'self' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
 			),
 			null);
 		// EssentialOCL::ShadowPartCS-0(essentialoclcs::ShadowPartCS): { referredProperty=UnrestrictedName "=" ownedInitExpression=(ExpCS|PatternExpCS) }
@@ -5732,9 +5732,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				52		/* assert (|ShadowPartCS::referredProperty| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				135		/* ShadowPartCS::referredProperty=UnrestrictedName || soft-space value soft-space */,
-				165		/* '=' || soft-space value soft-space */,
+				166		/* '=' || soft-space value soft-space */,
 				65		/* ShadowPartCS::ownedInitExpression=ExpCS|PatternExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5768,7 +5768,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				42		/* assert (|PathNameCS::ownedPathElements| - 1) == 0 */
 			),
 			createSerializationSteps(
-				293		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */
+				294		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 9/* FirstPathElementCS */,
@@ -5782,12 +5782,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				133		/* assign V0 = (|SquareBracketedClauseCS::ownedTerms| - 1) */
 			),
 			createSerializationSteps(
-				169		/* '[' || no-space value no-space */,
+				170		/* '[' || no-space value no-space */,
 				116		/* SquareBracketedClauseCS::ownedTerms+=ExpCS || value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				116		/* SquareBracketedClauseCS::ownedTerms+=ExpCS || value */,
-				170		/* ']' || no-space value */
+				171		/* ']' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.SQUARE_BRACKETED_CLAUSE_CS__OWNED_TERMS, 8/* ExpCS */,
@@ -5801,7 +5801,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				168		/* assign V0 = |StringLiteralExpCS::segments| */
 			),
 			createSerializationSteps(
-				221		/* V00*1-steps || value */,
+				222		/* V00*1-steps || value */,
 				138		/* StringLiteralExpCS::segments+=StringLiteral || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5815,14 +5815,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				136		/* assign V0 = (|TupleLiteralExpCS::ownedParts| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				168		/* 'Tuple' || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				169		/* 'Tuple' || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				89		/* TupleLiteralExpCS::ownedParts+=TupleLiteralPartCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
 				89		/* TupleLiteralExpCS::ownedParts+=TupleLiteralPartCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.TUPLE_LITERAL_EXP_CS__OWNED_PARTS, 56/* TupleLiteralPartCS */,
@@ -5842,12 +5842,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				126		/* VariableCS::ownedType=TypeExpCS || value */,
-				165		/* '=' || soft-space value soft-space */,
+				166		/* '=' || soft-space value soft-space */,
 				68		/* VariableCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5870,10 +5870,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -5893,14 +5893,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				26		/* TupleTypeCS::name='Tuple' || soft-space value soft-space */,
-				228		/* V00*7-steps || value */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				229		/* V00*7-steps || value */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				152		/* ')' || no-space value */
+				153		/* ')' || no-space value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.TUPLE_TYPE_CS__NAME, false,
@@ -5919,7 +5919,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				25		/* PrimitiveTypeRefCS::name=PrimitiveTypeIdentifier || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				219		/* V00*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5941,13 +5941,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				23		/* CollectionTypeCS::name=CollectionTypeIdentifier || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				122		/* CollectionTypeCS::ownedType=TypeExpWithoutMultiplicityCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				36		/* CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS || value */,
-				152		/* ')' || no-space value */,
-				237		/* V02*1-steps || value */,
+				153		/* ')' || no-space value */,
+				238		/* V02*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -5975,13 +5975,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				24		/* MapTypeCS::name='Map' || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				70		/* MapTypeCS::ownedKeyType=TypeExpCS || value */,
-				159		/* ',' || no-space value soft-space */,
+				160		/* ',' || no-space value soft-space */,
 				128		/* MapTypeCS::ownedValueType=TypeExpCS || value */,
-				152		/* ')' || no-space value */,
-				230		/* V01*1-steps || value */,
+				153		/* ')' || no-space value */,
+				231		/* V01*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6012,13 +6012,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				96		/* TypeNameExpCS::ownedPathName=PathNameCS || value */,
-				226		/* V00*5-steps || value */,
+				227		/* V00*5-steps || value */,
 				43		/* TypeNameExpCS::ownedCurlyBracketedClause=CurlyBracketedClauseCS || value */,
-				234		/* V01*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				235		/* V01*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				98		/* TypeNameExpCS::ownedPatternGuard=ExpCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				237		/* V02*1-steps || value */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				238		/* V02*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6049,16 +6049,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				121		/* CollectionPatternCS::ownedType=CollectionTypeCS || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				227		/* V00*6-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				228		/* V00*6-steps || value */,
 				86		/* CollectionPatternCS::ownedParts+=PatternExpCS || value */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				86		/* CollectionPatternCS::ownedParts+=PatternExpCS || value */,
-				157		/* '++' || soft-space value soft-space */,
+				158		/* '++' || soft-space value soft-space */,
 				137		/* CollectionPatternCS::restVariableName=Identifier || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				237		/* V02*1-steps || value */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				238		/* V02*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6086,15 +6086,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				26		/* TupleTypeCS::name='Tuple' || soft-space value soft-space */,
-				228		/* V00*7-steps || value */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				229		/* V00*7-steps || value */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				152		/* ')' || no-space value */,
-				245		/* V03*1-steps || value */,
+				153		/* ')' || no-space value */,
+				246		/* V03*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6133,7 +6133,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				25		/* PrimitiveTypeRefCS::name=PrimitiveTypeIdentifier || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				219		/* V00*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6155,13 +6155,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				23		/* CollectionTypeCS::name=CollectionTypeIdentifier || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				122		/* CollectionTypeCS::ownedType=TypeExpWithoutMultiplicityCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				36		/* CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS || value */,
-				152		/* ')' || no-space value */,
-				237		/* V02*1-steps || value */,
+				153		/* ')' || no-space value */,
+				238		/* V02*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6189,13 +6189,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				24		/* MapTypeCS::name='Map' || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				70		/* MapTypeCS::ownedKeyType=TypeExpCS || value */,
-				159		/* ',' || no-space value soft-space */,
+				160		/* ',' || no-space value soft-space */,
 				128		/* MapTypeCS::ownedValueType=TypeExpCS || value */,
-				152		/* ')' || no-space value */,
-				230		/* V01*1-steps || value */,
+				153		/* ')' || no-space value */,
+				231		/* V01*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6225,15 +6225,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				26		/* TupleTypeCS::name='Tuple' || soft-space value soft-space */,
-				228		/* V00*7-steps || value */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				229		/* V00*7-steps || value */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				152		/* ')' || no-space value */,
-				245		/* V03*1-steps || value */,
+				153		/* ')' || no-space value */,
+				246		/* V03*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -6260,12 +6260,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				96		/* TypeNameExpCS::ownedPathName=PathNameCS || value */,
-				226		/* V00*5-steps || value */,
+				227		/* V00*5-steps || value */,
 				43		/* TypeNameExpCS::ownedCurlyBracketedClause=CurlyBracketedClauseCS || value */,
-				234		/* V01*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				235		/* V01*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				98		/* TypeNameExpCS::ownedPatternGuard=ExpCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(EssentialOCLCSPackage.Literals.TYPE_NAME_EXP_CS__OWNED_CURLY_BRACKETED_CLAUSE, 4/* CurlyBracketedClauseCS */,
@@ -6284,7 +6284,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				41		/* assert (|PathElementCS::referredElement| - 1) == 0 */
 			),
 			createSerializationSteps(
-				310		/* PathElementCS::referredElement=URI || soft-space value soft-space */
+				311		/* PathElementCS::referredElement=URI || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, -1
@@ -6296,7 +6296,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				41		/* assert (|PathElementCS::referredElement| - 1) == 0 */
 			),
 			createSerializationSteps(
-				312		/* PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space */
+				313		/* PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, -1
@@ -6306,10 +6306,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		serializationRules[81] = createSerializationRule("URIPathNameCS-0", 128,
 			null,	// run-time resolution using SerializationSteps
 			createSerializationSteps(
-				292		/* PathNameCS::ownedPathElements+=URIFirstPathElementCS || value */,
-				223		/* V00*2-steps || value */,
-				162		/* '::' || no-space value no-space */,
-				294		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
+				293		/* PathNameCS::ownedPathElements+=URIFirstPathElementCS || value */,
+				224		/* V00*2-steps || value */,
+				163		/* '::' || no-space value no-space */,
+				295		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 68/* NextPathElementCS,URIFirstPathElementCS */,
@@ -6323,7 +6323,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				87		/* assert |ModelElementCS::ownedAnnotations| == 0 */
 			),
 			createSerializationSteps(
-				156		/* '*' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
+				157		/* '*' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */
 			),
 			null);
 		// QVTbase::AttributeCS-0(basecs::AttributeCS): { { qualifiers+="definition" qualifiers+="static"[?] } "attribute" name=UnrestrictedName { ":" ownedType=TypedMultiplicityRefCS }[?] { "=" default=SINGLE_QUOTED_STRING }[?] { "{" { qualifiers+={'!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile'} }[+] "}" }[?] ";" }
@@ -6342,24 +6342,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				261		/* assign V4 = |TypedElementCS::qualifiers.'!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6393,37 +6393,37 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				283		/* assign V8 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				266		/* V05*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				267		/* V06*1-steps || value */,
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				267		/* V05*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				268		/* V06*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				276		/* V07*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				277		/* V08*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				277		/* V07*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				278		/* V08*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6456,24 +6456,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				261		/* assign V4 = |TypedElementCS::qualifiers.'!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6507,37 +6507,37 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				283		/* assign V8 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				266		/* V05*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				267		/* V06*1-steps || value */,
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				267		/* V05*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				268		/* V06*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				276		/* V07*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				277		/* V08*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				277		/* V07*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				278		/* V08*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6568,21 +6568,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				250		/* assign V3 = |TypedElementCS::qualifiers.'!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				243		/* V02*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				247		/* V03*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				244		/* V02*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				248		/* V03*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6612,34 +6612,34 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				278		/* assign V7 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				171		/* 'attribute' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				232		/* V01*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				172		/* 'attribute' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				233		/* V01*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				243		/* V02*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				247		/* V03*1-steps || value */,
-				305		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				259		/* V04*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				260		/* V05*1-steps || value */,
+				244		/* V02*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				248		/* V03*1-steps || value */,
+				306		/* TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				260		/* V04*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				261		/* V05*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				271		/* V06*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				272		/* V07*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				272		/* V06*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				273		/* V07*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6662,11 +6662,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				146		/* assign V0 = |CompoundTargetElementCS::ownedTargetElements| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				219		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				220		/* V00*1-steps || value */,
 				113		/* CompoundTargetElementCS::ownedTargetElements+=SimpleTargetElementCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(QVTbaseCSPackage.Literals.COMPOUND_TARGET_ELEMENT_CS__OWNED_TARGET_ELEMENTS, 41/* SimpleTargetElementCS */,
@@ -6687,21 +6687,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				241		/* assign V3 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				250		/* V03*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				251		/* V03*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				147		/* '!serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6727,22 +6727,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				241		/* assign V3 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				250		/* V03*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				251		/* V03*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				147		/* '!serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6767,21 +6767,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				147		/* assign V0 = |DataTypeCS::isPrimitive.'primitive'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				250		/* V03*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				251		/* V03*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				18		/* DataTypeCS::isSerializable?='serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6809,22 +6809,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				147		/* assign V0 = |DataTypeCS::isPrimitive.'primitive'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				250		/* V03*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				251		/* V03*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				18		/* DataTypeCS::isSerializable?='serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6853,20 +6853,20 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				241		/* assign V3 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				248		/* V03*2-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				249		/* V03*2-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6892,21 +6892,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				241		/* assign V3 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				17		/* DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space */,
-				174		/* 'datatype' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				175		/* 'datatype' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				248		/* V03*2-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				249		/* V03*2-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6932,19 +6932,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				223		/* assign V2 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				242		/* V02*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				243		/* V02*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				147		/* '!serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -6968,22 +6968,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				223		/* assign V2 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				242		/* V02*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				243		/* V02*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				147		/* '!serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				246		/* V03*1-steps || value */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				247		/* V03*1-steps || value */,
 				73		/* EnumerationCS::ownedLiterals+=EnumerationLiteralCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7008,19 +7008,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				242		/* V02*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				243		/* V02*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				19		/* EnumerationCS::isSerializable?='serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7046,22 +7046,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				242		/* V02*3-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				243		/* V02*3-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				19		/* EnumerationCS::isSerializable?='serializable' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				246		/* V03*1-steps || value */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				247		/* V03*1-steps || value */,
 				73		/* EnumerationCS::ownedLiterals+=EnumerationLiteralCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7090,18 +7090,18 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				223		/* assign V2 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				241		/* V02*2-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7125,21 +7125,21 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				223		/* assign V2 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				179		/* 'enum' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				180		/* 'enum' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				246		/* V03*1-steps || value */,
+				241		/* V02*2-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				247		/* V03*1-steps || value */,
 				73		/* EnumerationCS::ownedLiterals+=EnumerationLiteralCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7160,13 +7160,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				191		/* 'literal' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				192		/* 'literal' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				145		/* EnumerationLiteralCS::value=SIGNED || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7181,14 +7181,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				191		/* 'literal' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				192		/* 'literal' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				145		/* EnumerationLiteralCS::value=SIGNED || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7203,12 +7203,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				288		/* NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				289		/* NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				145		/* EnumerationLiteralCS::value=SIGNED || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7223,13 +7223,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				288		/* NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				289		/* NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				145		/* EnumerationLiteralCS::value=SIGNED || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7260,36 +7260,36 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				285		/* assign V8 = |TypedElementCS::qualifiers.'!derived|!ordered|!unique|derived|ordered|unique'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				194		/* 'operation' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				195		/* 'operation' || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				243		/* V02*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				244		/* V02*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				265		/* V05*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				266		/* V05*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				269		/* V06*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				270		/* V06*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				275		/* V07*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				279		/* V08*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				276		/* V07*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				280		/* V08*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7338,43 +7338,43 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				285		/* assign V8 = |TypedElementCS::qualifiers.'!derived|!ordered|!unique|derived|ordered|unique'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				194		/* 'operation' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				195		/* 'operation' || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				243		/* V02*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				244		/* V02*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				265		/* V05*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				266		/* V05*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				269		/* V06*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				270		/* V06*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				275		/* V07*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				279		/* V08*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				282		/* V09*5-steps || value */,
-				172		/* 'body' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				236		/* V10*1-steps || value */,
+				276		/* V07*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				280		/* V08*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				283		/* V09*5-steps || value */,
+				173		/* 'body' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				237		/* V10*1-steps || value */,
 				32		/* OperationCS::ownedBodyExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7424,36 +7424,36 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				285		/* assign V8 = |TypedElementCS::qualifiers.'!derived|!ordered|!unique|derived|ordered|unique'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				194		/* 'operation' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				195		/* 'operation' || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				243		/* V02*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				244		/* V02*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				265		/* V05*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				266		/* V05*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				269		/* V06*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				270		/* V06*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				275		/* V07*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				279		/* V08*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				276		/* V07*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				280		/* V08*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7502,43 +7502,43 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				285		/* assign V8 = |TypedElementCS::qualifiers.'!derived|!ordered|!unique|derived|ordered|unique'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				194		/* 'operation' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				195		/* 'operation' || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				243		/* V02*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				244		/* V02*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				265		/* V05*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				266		/* V05*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				269		/* V06*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				270		/* V06*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				275		/* V07*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				279		/* V08*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				282		/* V09*5-steps || value */,
-				172		/* 'body' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				236		/* V10*1-steps || value */,
+				276		/* V07*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				280		/* V08*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				283		/* V09*5-steps || value */,
+				173		/* 'body' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				237		/* V10*1-steps || value */,
 				32		/* OperationCS::ownedBodyExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7586,33 +7586,33 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				216		/* assign V2 = (|OperationCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				194		/* 'operation' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				195		/* 'operation' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				248		/* V03*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				258		/* V04*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				249		/* V03*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				259		/* V04*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				263		/* V05*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				264		/* V05*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				270		/* V06*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				274		/* V07*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				271		/* V06*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				275		/* V07*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7657,40 +7657,40 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				216		/* assign V2 = (|OperationCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				194		/* 'operation' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				195		/* 'operation' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				82		/* OperationCS::ownedParameters+=ParameterCS || value */,
-				152		/* ')' || no-space value */,
-				248		/* V03*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				258		/* V04*5-steps || value */,
-				205		/* 'throws' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				249		/* V03*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				259		/* V04*5-steps || value */,
+				206		/* 'throws' || soft-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				263		/* V05*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				264		/* V05*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				48		/* OperationCS::ownedExceptions+=TypedRefCS || value */,
-				270		/* V06*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				274		/* V07*1-steps || value */,
-				306		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				280		/* V08*5-steps || value */,
-				172		/* 'body' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				281		/* V09*1-steps || value */,
+				271		/* V06*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				275		/* V07*1-steps || value */,
+				307		/* TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				281		/* V08*5-steps || value */,
+				173		/* 'body' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				282		/* V09*1-steps || value */,
 				32		/* OperationCS::ownedBodyExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7726,19 +7726,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				241		/* assign V3 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				235		/* V01*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				239		/* V02*1-steps || value */,
-				307		/* TypedElementCS::qualifiers+='!ordered|!unique|ordered|unique' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				248		/* V03*2-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				236		/* V01*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				240		/* V02*1-steps || value */,
+				308		/* TypedElementCS::qualifiers+='!ordered|!unique|ordered|unique' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				249		/* V03*2-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -7768,27 +7768,27 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				268		/* assign V5 = |TypedElementCS::qualifiers.'!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				248		/* V03*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				249		/* V03*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				257		/* V04*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				262		/* V05*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				258		/* V04*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				263		/* V05*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7827,40 +7827,40 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				287		/* assign V9 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				248		/* V03*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				249		/* V03*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				257		/* V04*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				262		/* V05*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				271		/* V06*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				272		/* V07*1-steps || value */,
+				258		/* V04*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				263		/* V05*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				272		/* V06*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				273		/* V07*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				280		/* V08*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				281		/* V09*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				281		/* V08*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				282		/* V09*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7898,27 +7898,27 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				268		/* assign V5 = |TypedElementCS::qualifiers.'!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				248		/* V03*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				249		/* V03*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				257		/* V04*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				262		/* V05*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				258		/* V04*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				263		/* V05*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -7957,40 +7957,40 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				287		/* assign V9 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				309		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
-				308		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				310		/* TypedElementCS::qualifiers+='static' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
+				309		/* TypedElementCS::qualifiers+='definition' || soft-space value soft-space */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				248		/* V03*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				249		/* V03*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				257		/* V04*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				262		/* V05*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				271		/* V06*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				272		/* V07*1-steps || value */,
+				258		/* V04*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				263		/* V05*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				272		/* V06*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				273		/* V07*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				280		/* V08*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				281		/* V09*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				281		/* V08*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				282		/* V09*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -8026,24 +8026,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				260		/* assign V4 = |TypedElementCS::qualifiers.'!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -8078,37 +8078,37 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				283		/* assign V8 = 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				197		/* 'property' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				198		/* 'property' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
 				148		/* '#' || no-space value no-space */,
 				134		/* ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				299		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				300		/* TypedElementCS::ownedType=TypedMultiplicityRefCS || value */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				0		/* StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				251		/* V03*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				254		/* V04*1-steps || value */,
-				304		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				266		/* V05*5-steps || value */,
-				175		/* 'derivation' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				267		/* V06*1-steps || value */,
+				252		/* V03*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				255		/* V04*1-steps || value */,
+				305		/* TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				267		/* V05*5-steps || value */,
+				176		/* 'derivation' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				268		/* V06*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				276		/* V07*5-steps || value */,
-				187		/* 'initial' || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				277		/* V08*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				277		/* V07*5-steps || value */,
+				188		/* 'initial' || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				278		/* V08*1-steps || value */,
 				44		/* StructuralFeatureCS::ownedDefaultExpressions+=SpecificationCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */,
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, false, GrammarCardinality.ZERO_OR_ONE),
@@ -8136,13 +8136,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				53		/* assert (|SimpleTargetElementCS::input.'input'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				5		/* SimpleTargetElementCS::input?='input' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__INPUT, false,
@@ -8166,19 +8166,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				219		/* assign V2 = (|SimpleTargetElementCS::iterates| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				5		/* SimpleTargetElementCS::input?='input' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				229		/* V00*8-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				235		/* V01*4-steps || value */,
+				230		/* V00*8-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				236		/* V01*4-steps || value */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__INPUT, false,
@@ -8200,13 +8200,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				54		/* assert (|SimpleTargetElementCS::output.'output'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				29		/* SimpleTargetElementCS::output?='output' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__OUTPUT, false,
@@ -8230,19 +8230,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				219		/* assign V2 = (|SimpleTargetElementCS::iterates| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				29		/* SimpleTargetElementCS::output?='output' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				229		/* V00*8-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				235		/* V01*4-steps || value */,
+				230		/* V00*8-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				236		/* V01*4-steps || value */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__OUTPUT, false,
@@ -8264,13 +8264,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				56		/* assert (|SimpleTargetElementCS::via.'via'| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				146		/* SimpleTargetElementCS::via?='via' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__VIA, false,
@@ -8294,19 +8294,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				219		/* assign V2 = (|SimpleTargetElementCS::iterates| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				146		/* SimpleTargetElementCS::via?='via' || soft-space value soft-space */,
 				142		/* SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space */,
-				229		/* V00*8-steps || value */,
-				189		/* 'iterates' || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				235		/* V01*4-steps || value */,
+				230		/* V00*8-steps || value */,
+				190		/* 'iterates' || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				236		/* V01*4-steps || value */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				21		/* SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__VIA, false,
@@ -8366,28 +8366,28 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				238		/* assign V3 = (|StructuredClassCS::ownedSuperTypes| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				8		/* StructuredClassCS::isAbstract?='abstract' || soft-space value soft-space */,
-				173		/* 'class' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				174		/* 'class' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				244		/* V02*5-steps || value */,
-				180		/* 'extends' || soft-space value soft-space */,
+				245		/* V02*5-steps || value */,
+				181		/* 'extends' || soft-space value soft-space */,
 				111		/* StructuredClassCS::ownedSuperTypes+=TypedRefCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				111		/* StructuredClassCS::ownedSuperTypes+=TypedRefCS || value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				264		/* V05*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				267		/* V06*1-steps || value */,
+				265		/* V05*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				268		/* V06*1-steps || value */,
 				13		/* StructuredClassCS::isInterface?='interface' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				164		/* ';' || no-space value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -8429,33 +8429,33 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				238		/* assign V3 = (|StructuredClassCS::ownedSuperTypes| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				8		/* StructuredClassCS::isAbstract?='abstract' || soft-space value soft-space */,
-				173		/* 'class' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				174		/* 'class' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
 				108		/* TemplateableElementCS::ownedSignature=TemplateSignatureCS || value */,
-				244		/* V02*5-steps || value */,
-				180		/* 'extends' || soft-space value soft-space */,
+				245		/* V02*5-steps || value */,
+				181		/* 'extends' || soft-space value soft-space */,
 				111		/* StructuredClassCS::ownedSuperTypes+=TypedRefCS || value */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				111		/* StructuredClassCS::ownedSuperTypes+=TypedRefCS || value */,
-				255		/* V04*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				256		/* V04*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				6		/* ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				264		/* V05*4-steps || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				267		/* V06*1-steps || value */,
+				265		/* V05*4-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				268		/* V06*1-steps || value */,
 				13		/* StructuredClassCS::isInterface?='interface' || soft-space value soft-space */,
-				215		/* '}' || pop soft-new-line value soft-new-line */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				273		/* V07*1-steps || value */,
+				217		/* '}' || pop soft-new-line value soft-new-line */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				274		/* V07*1-steps || value */,
 				80		/* StructuredClassCS::ownedOperations+=OperationCS || value */,
-				278		/* V08*1-steps || value */,
+				279		/* V08*1-steps || value */,
 				101		/* StructuredClassCS::ownedProperties+=StructuralFeatureCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, false, GrammarCardinality.ZERO_OR_ONE),
@@ -8488,13 +8488,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				202		/* 'target' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				219		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				203		/* 'target' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				220		/* V00*1-steps || value */,
 				114		/* TargetCS::ownedTargetElements+=SimpleTargetElementCS|CompoundTargetElementCS || value */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -8512,7 +8512,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				25		/* PrimitiveTypeRefCS::name=PrimitiveTypeIdentifier || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				219		/* V00*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8534,11 +8534,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				97		/* TypedTypeRefCS::ownedPathName=PathNameCS || value */,
-				224		/* V00*3-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				225		/* V00*3-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				31		/* TypedTypeRefCS::ownedBinding=TemplateBindingCS || value */,
-				152		/* ')' || no-space value */,
-				230		/* V01*1-steps || value */,
+				153		/* ')' || no-space value */,
+				231		/* V01*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8565,13 +8565,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				23		/* CollectionTypeCS::name=CollectionTypeIdentifier || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				122		/* CollectionTypeCS::ownedType=TypeExpWithoutMultiplicityCS || value */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				36		/* CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS || value */,
-				152		/* ')' || no-space value */,
-				237		/* V02*1-steps || value */,
+				153		/* ')' || no-space value */,
+				238		/* V02*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8599,13 +8599,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				24		/* MapTypeCS::name='Map' || soft-space value soft-space */,
-				226		/* V00*5-steps || value */,
-				151		/* '(' || no-space value no-space */,
+				227		/* V00*5-steps || value */,
+				152		/* '(' || no-space value no-space */,
 				70		/* MapTypeCS::ownedKeyType=TypeExpCS || value */,
-				159		/* ',' || no-space value soft-space */,
+				160		/* ',' || no-space value soft-space */,
 				128		/* MapTypeCS::ownedValueType=TypeExpCS || value */,
-				152		/* ')' || no-space value */,
-				230		/* V01*1-steps || value */,
+				153		/* ')' || no-space value */,
+				231		/* V01*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8635,15 +8635,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			),
 			createSerializationSteps(
 				26		/* TupleTypeCS::name='Tuple' || soft-space value soft-space */,
-				228		/* V00*7-steps || value */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				229		/* V00*7-steps || value */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				90		/* TupleTypeCS::ownedParts+=TuplePartCS || value */,
-				152		/* ')' || no-space value */,
-				245		/* V03*1-steps || value */,
+				153		/* ')' || no-space value */,
+				246		/* V03*1-steps || value */,
 				77		/* TypedRefCS::ownedMultiplicity=MultiplicityCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8667,8 +8667,8 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				100		/* assert |PatternCS::ownedUnrealizedVariables| == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
 				216		/* '}' || pop value soft-new-line */
 			),
 			null);
@@ -8683,9 +8683,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				141		/* assign V0 = |BottomPatternCS::ownedConstraints| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
-				221		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
+				222		/* V00*1-steps || value */,
 				41		/* BottomPatternCS::ownedConstraints+=PredicateOrAssignmentCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8706,14 +8706,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				131		/* assign V0 = (|PatternCS::ownedUnrealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				211		/* '{' || soft-new-line value push soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
-				213		/* '|' || soft-new-line pop value push */,
-				231		/* V01*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				212		/* '{' || soft-new-line value push soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				214		/* '|' || soft-new-line pop value push */,
+				232		/* V01*1-steps || value */,
 				41		/* BottomPatternCS::ownedConstraints+=PredicateOrAssignmentCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8738,14 +8738,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				43		/* assert (|PatternCS::ownedUnrealizedVariables| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				211		/* '{' || soft-new-line value push soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				212		/* '{' || soft-new-line value push soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
 				104		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value */,
-				213		/* '|' || soft-new-line pop value push */,
-				231		/* V01*1-steps || value */,
+				214		/* '|' || soft-new-line pop value push */,
+				232		/* V01*1-steps || value */,
 				41		/* BottomPatternCS::ownedConstraints+=PredicateOrAssignmentCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8773,14 +8773,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				4		/* assert (|BottomPatternCS::ownedRealizedVariables| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				211		/* '{' || soft-new-line value push soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				212		/* '{' || soft-new-line value push soft-new-line */,
 				104		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
-				213		/* '|' || soft-new-line pop value push */,
-				231		/* V01*1-steps || value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				214		/* '|' || soft-new-line pop value push */,
+				232		/* V01*1-steps || value */,
 				41		/* BottomPatternCS::ownedConstraints+=PredicateOrAssignmentCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8807,14 +8807,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				125		/* assign V0 = (|BottomPatternCS::ownedRealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				211		/* '{' || soft-new-line value push soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				212		/* '{' || soft-new-line value push soft-new-line */,
 				104		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
 				104		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value */,
-				213		/* '|' || soft-new-line pop value push */,
-				231		/* V01*1-steps || value */,
+				214		/* '|' || soft-new-line pop value push */,
+				232		/* V01*1-steps || value */,
 				41		/* BottomPatternCS::ownedConstraints+=PredicateOrAssignmentCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8837,12 +8837,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				131		/* assign V0 = (|PatternCS::ownedUnrealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
-				302		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || soft-new-line value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
+				303		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || soft-new-line value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8862,11 +8862,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				43		/* assert (|PatternCS::ownedUnrealizedVariables| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
 				105		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || soft-new-line value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8890,12 +8890,12 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				4		/* assert (|BottomPatternCS::ownedRealizedVariables| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
 				105		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || soft-new-line value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
-				300		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
+				301		/* PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8917,11 +8917,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				125		/* assign V0 = (|BottomPatternCS::ownedRealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				210		/* '{' || soft-new-line value push */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				211		/* '{' || soft-new-line value push */,
 				105		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || soft-new-line value */,
-				223		/* V00*2-steps || value */,
-				158		/* ',' || no-space value soft-new-line */,
+				224		/* V00*2-steps || value */,
+				159		/* ',' || no-space value soft-new-line */,
 				104		/* BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -8940,19 +8940,19 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				235		/* assign V3 = (|DirectionCS::uses| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
-				289		/* NamedElementCS::name=Identifier || soft-space value soft-space */,
-				184		/* 'imports' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
+				290		/* NamedElementCS::name=Identifier || soft-space value soft-space */,
+				185		/* 'imports' || soft-space value soft-space */,
 				4		/* DirectionCS::imports+=UnrestrictedName || soft-space value soft-space */,
-				233		/* V01*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				234		/* V01*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				4		/* DirectionCS::imports+=UnrestrictedName || soft-space value soft-space */,
-				244		/* V02*5-steps || value */,
-				207		/* 'uses' || soft-space value soft-space */,
+				245		/* V02*5-steps || value */,
+				208		/* 'uses' || soft-space value soft-space */,
 				144		/* DirectionCS::uses+=UnrestrictedName || soft-space value soft-space */,
-				249		/* V03*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				250		/* V03*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				144		/* DirectionCS::uses+=UnrestrictedName || soft-space value soft-space */
 			),
 			new @NonNull SerializationFeature [] {
@@ -8970,7 +8970,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				100		/* assert |PatternCS::ownedUnrealizedVariables| == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				150		/* '(' || soft-new-line value push */,
 				154		/* ')' || pop value soft-new-line */
 			),
@@ -8984,9 +8984,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				150		/* assign V0 = |GuardPatternCS::ownedPredicates| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				150		/* '(' || soft-new-line value push */,
-				221		/* V00*1-steps || value */,
+				222		/* V00*1-steps || value */,
 				100		/* GuardPatternCS::ownedPredicates+=PredicateCS || soft-new-line value */,
 				154		/* ')' || pop value soft-new-line */
 			),
@@ -9004,13 +9004,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				131		/* assign V0 = (|PatternCS::ownedUnrealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				150		/* '(' || soft-new-line value push */,
-				303		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
-				303		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value */,
-				153		/* ')' || soft-new-line pop value soft-new-line */
+				304		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
+				304		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value */,
+				155		/* ')' || soft-new-line pop value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 11/* GuardVariableCS */,
@@ -9027,15 +9027,15 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				131		/* assign V0 = (|PatternCS::ownedUnrealizedVariables| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				150		/* '(' || soft-new-line value push */,
-				217		/* 1*1-steps || soft-new-line value */,
-				301		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value */,
-				223		/* V00*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
-				301		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value */,
-				213		/* '|' || soft-new-line pop value push */,
-				231		/* V01*1-steps || value */,
+				218		/* 1*1-steps || soft-new-line value */,
+				302		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value */,
+				224		/* V00*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
+				302		/* PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value */,
+				214		/* '|' || soft-new-line pop value push */,
+				232		/* V01*1-steps || value */,
 				100		/* GuardPatternCS::ownedPredicates+=PredicateCS || soft-new-line value */,
 				154		/* ')' || pop value soft-new-line */
 			),
@@ -9059,10 +9059,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -9080,16 +9080,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				156		/* assign V0 = |NamedElementCS::name| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				183		/* 'import' || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				289		/* NamedElementCS::name=Identifier || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				184		/* 'import' || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				290		/* NamedElementCS::name=Identifier || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
 				93		/* ImportCS::ownedPathName=URIPathNameCS || value */,
-				232		/* V01*2-steps || value */,
+				233		/* V01*2-steps || value */,
 				9		/* ImportCS::isAll?='::' || no-space value no-space */,
-				155		/* '*' || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				156		/* '*' || soft-space value soft-space */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(BaseCSPackage.Literals.IMPORT_CS__IS_ALL, false,
@@ -9118,28 +9118,28 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				252		/* assign V4 = (|MappingCS::refines| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				7		/* MappingCS::isAbstract?='abstract' || soft-space value soft-space */,
-				192		/* 'map' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				185		/* 'in' || soft-space value soft-space */,
+				193		/* 'map' || soft-space value soft-space */,
+				231		/* V01*1-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				186		/* 'in' || soft-space value soft-space */,
 				62		/* MappingCS::ownedInPathName=PathNameCS || value */,
-				252		/* V03*5-steps || value */,
-				200		/* 'refines' || soft-space value soft-space */,
+				253		/* V03*5-steps || value */,
+				201		/* 'refines' || soft-space value soft-space */,
 				136		/* MappingCS::refines+=UnrestrictedName || soft-space value soft-space */,
-				256		/* V04*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				257		/* V04*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				136		/* MappingCS::refines+=UnrestrictedName || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				261		/* V05*1-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				262		/* V05*1-steps || value */,
 				46		/* MappingCS::ownedDomains+=NamedDomainCS || value */,
-				268		/* V06*2-steps || value */,
-				208		/* 'where' || soft-space value soft-space */,
+				269		/* V06*2-steps || value */,
+				209		/* 'where' || soft-space value soft-space */,
 				75		/* MappingCS::ownedMiddle=UnnamedDomainCS || value */,
-				273		/* V07*1-steps || value */,
+				274		/* V07*1-steps || value */,
 				37		/* MappingCS::ownedComposedMappings+=MappingCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -9177,10 +9177,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				148		/* assign V0 = |DomainCS::isCheck.'check'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				10		/* DomainCS::isCheck?='check' || soft-space value soft-space */,
-				230		/* V01*1-steps || value */,
+				231		/* V01*1-steps || value */,
 				12		/* DomainCS::isEnforce?='enforce' || soft-space value soft-space */,
 				1		/* DomainCS::direction=UnrestrictedName || soft-space value soft-space */,
 				58		/* AreaCS::ownedGuardPattern=GuardPatternCS || value */,
@@ -9213,10 +9213,10 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -9232,9 +9232,9 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				45		/* assert (|PredicateCS::ownedCondition| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				40		/* PredicateCS::ownedCondition=ExpCS || value */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(QVTcoreCSPackage.Literals.PREDICATE_CS__OWNED_CONDITION, 8/* ExpCS */,
@@ -9253,14 +9253,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				162		/* assign V0 = |PredicateOrAssignmentCS::isDefault.'default'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				11		/* PredicateOrAssignmentCS::isDefault?='default' || soft-space value soft-space */,
 				112		/* PredicateOrAssignmentCS::ownedTarget=ExpCS || value */,
-				232		/* V01*2-steps || value */,
-				163		/* ':=' || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				164		/* ':=' || soft-space value soft-space */,
 				64		/* PredicateOrAssignmentCS::ownedInitExpression=ExpCS || value */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, false,
@@ -9285,14 +9285,14 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				162		/* assign V0 = |PredicateOrAssignmentCS::isDefault.'default'| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				11		/* PredicateOrAssignmentCS::isDefault?='default' || soft-space value soft-space */,
 				112		/* PredicateOrAssignmentCS::ownedTarget=ExpCS || value */,
-				232		/* V01*2-steps || value */,
+				233		/* V01*2-steps || value */,
 				15		/* PredicateOrAssignmentCS::isPartial?='+=' || soft-space value soft-space */,
 				64		/* PredicateOrAssignmentCS::ownedInitExpression=ExpCS || value */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, false,
@@ -9321,18 +9321,18 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				163		/* assign V0 = |QualifiedPackageCS::ownedPathName| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				195		/* 'package' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				196		/* 'package' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				94		/* QualifiedPackageCS::ownedPathName=ScopeNameCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				27		/* PackageCS::nsPrefix=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				28		/* PackageCS::nsURI=URI || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -9357,23 +9357,23 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				163		/* assign V0 = |QualifiedPackageCS::ownedPathName| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				195		/* 'package' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				196		/* 'package' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				94		/* QualifiedPackageCS::ownedPathName=ScopeNameCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				232		/* V01*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				233		/* V01*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
 				27		/* PackageCS::nsPrefix=UnrestrictedName || soft-space value soft-space */,
-				240		/* V02*2-steps || value */,
-				165		/* '=' || soft-space value soft-space */,
+				241		/* V02*2-steps || value */,
+				166		/* '=' || soft-space value soft-space */,
 				28		/* PackageCS::nsURI=URI || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				246		/* V03*1-steps || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				247		/* V03*1-steps || value */,
 				34		/* PackageCS::ownedClasses+=ClassCS|TransformationCS || half-new-line value half-new-line */,
-				253		/* V04*1-steps || value */,
+				254		/* V04*1-steps || value */,
 				81		/* PackageOwnerCS::ownedPackages+=QualifiedPackageCS || half-new-line value half-new-line */,
-				215		/* '}' || pop soft-new-line value soft-new-line */
+				217		/* '}' || pop soft-new-line value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -9409,22 +9409,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				218		/* assign V2 = (|QueryCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				20		/* QueryCS::isTransient?='transient' || soft-space value soft-space */,
-				198		/* 'query' || soft-space value soft-space */,
+				199		/* 'query' || soft-space value soft-space */,
 				95		/* QueryCS::ownedPathName=ScopeNameCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				152		/* ')' || no-space value */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */,
-				164		/* ';' || no-space value soft-new-line */
+				153		/* ')' || no-space value */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */,
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTcoreCSPackage.Literals.QUERY_CS__IS_TRANSIENT, false,
@@ -9460,24 +9460,24 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				218		/* assign V2 = (|QueryCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				20		/* QueryCS::isTransient?='transient' || soft-space value soft-space */,
-				198		/* 'query' || soft-space value soft-space */,
+				199		/* 'query' || soft-space value soft-space */,
 				95		/* QueryCS::ownedPathName=ScopeNameCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				152		/* ')' || no-space value */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */,
-				182		/* 'implementedby' || soft-space value soft-space */,
+				153		/* ')' || no-space value */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */,
+				183		/* 'implementedby' || soft-space value soft-space */,
 				3		/* JavaImplementationCS::implementation=SINGLE_QUOTED_STRING || soft-space value soft-space */,
-				164		/* ';' || no-space value soft-new-line */
+				165		/* ';' || no-space value soft-new-line */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationEnumeratedAttribute(QVTcoreCSPackage.Literals.QUERY_CS__IS_TRANSIENT, false,
@@ -9516,22 +9516,22 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				218		/* assign V2 = (|QueryCS::ownedParameters| - 1) */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				219		/* V00*1-steps || value */,
 				20		/* QueryCS::isTransient?='transient' || soft-space value soft-space */,
-				198		/* 'query' || soft-space value soft-space */,
+				199		/* 'query' || soft-space value soft-space */,
 				95		/* QueryCS::ownedPathName=ScopeNameCS || value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				151		/* '(' || no-space value no-space */,
-				235		/* V01*4-steps || value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				152		/* '(' || no-space value no-space */,
+				236		/* V01*4-steps || value */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				241		/* V02*2-steps || value */,
-				159		/* ',' || no-space value soft-space */,
+				242		/* V02*2-steps || value */,
+				160		/* ',' || no-space value soft-space */,
 				83		/* QueryCS::ownedParameters+=ParamDeclarationCS || value */,
-				152		/* ')' || no-space value */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */,
-				212		/* '{' || soft-space value push soft-new-line */,
+				153		/* ')' || no-space value */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */,
+				213		/* '{' || soft-space value push soft-new-line */,
 				54		/* QueryCS::ownedExpression=ExpCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -9564,11 +9564,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				199		/* 'realize' || soft-space value soft-space */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				200		/* 'realize' || soft-space value soft-space */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
@@ -9580,11 +9580,11 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		serializationRules[164] = createSerializationRule("ScopeNameCS-0", 92,
 			null,	// run-time resolution using SerializationSteps
 			createSerializationSteps(
-				293		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */,
-				162		/* '::' || no-space value no-space */,
-				223		/* V00*2-steps || value */,
-				294		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */,
-				162		/* '::' || no-space value no-space */
+				294		/* PathNameCS::ownedPathElements+=FirstPathElementCS || value */,
+				163		/* '::' || no-space value no-space */,
+				224		/* V00*2-steps || value */,
+				295		/* PathNameCS::ownedPathElements+=NextPathElementCS || value */,
+				163		/* '::' || no-space value no-space */
 			),
 			new @NonNull SerializationFeature [] {
 				createSerializationReference(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 23/* FirstPathElementCS,NextPathElementCS */,
@@ -9608,16 +9608,16 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				166		/* assign V0 = |RootCS::ownedImports| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				220		/* V00*1-steps || value half-new-line */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				221		/* V00*1-steps || value half-new-line */,
 				60		/* RootCS::ownedImports+=ImportCS || value */,
-				231		/* V01*1-steps || value */,
+				232		/* V01*1-steps || value */,
 				81		/* PackageOwnerCS::ownedPackages+=QualifiedPackageCS || half-new-line value half-new-line */,
-				238		/* V02*1-steps || value */,
+				239		/* V02*1-steps || value */,
 				119		/* TopLevelCS::ownedTransformations+=TransformationCS || half-new-line value half-new-line */,
-				246		/* V03*1-steps || value */,
+				247		/* V03*1-steps || value */,
 				74		/* TopLevelCS::ownedMappings+=MappingCS || half-new-line value half-new-line */,
-				253		/* V04*1-steps || value */,
+				254		/* V04*1-steps || value */,
 				103		/* TopLevelCS::ownedQueries+=QueryCS || half-new-line value half-new-line */
 			),
 			new @NonNull SerializationFeature [] {
@@ -9655,18 +9655,18 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				140		/* assign V0 = |AbstractTransformationCS::ownedPathName| */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				206		/* 'transformation' || soft-space value soft-space */,
-				218		/* V00*1-steps || value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				207		/* 'transformation' || soft-space value soft-space */,
+				219		/* V00*1-steps || value */,
 				92		/* AbstractTransformationCS::ownedPathName=ScopeNameCS || value */,
-				285		/* NamedElementCS::name=UnreservedName || soft-space value soft-space */,
-				212		/* '{' || soft-space value push soft-new-line */,
-				233		/* V01*2-steps || value */,
+				286		/* NamedElementCS::name=UnreservedName || soft-space value soft-space */,
+				213		/* '{' || soft-space value push soft-new-line */,
+				234		/* V01*2-steps || value */,
 				45		/* TransformationCS::ownedDirections+=DirectionCS || value */,
-				164		/* ';' || no-space value soft-new-line */,
-				238		/* V02*1-steps || value */,
+				165		/* ';' || no-space value soft-new-line */,
+				239		/* V02*1-steps || value */,
 				115		/* AbstractTransformationCS::ownedTargets+=TargetCS || value */,
-				246		/* V03*1-steps || value */,
+				247		/* V03*1-steps || value */,
 				102		/* TransformationCS::ownedProperties+=StructuralFeatureCS || value */,
 				216		/* '}' || pop value soft-new-line */
 			),
@@ -9699,7 +9699,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				2		/* assert (|AreaCS::ownedGuardPattern| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
 				58		/* AreaCS::ownedGuardPattern=GuardPatternCS || value */,
 				33		/* AreaCS::ownedBottomPattern=BottomPatternCS || value */
 			),
@@ -9724,13 +9724,13 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 				30		/* assert (|NamedElementCS::name| - 1) == 0 */
 			),
 			createSerializationSteps(
-				283		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
-				286		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
-				222		/* V00*2-steps || value */,
-				161		/* ':' || soft-space value soft-space */,
-				298		/* TypedElementCS::ownedType=TypeExpCS || value */,
-				232		/* V01*2-steps || value */,
-				163		/* ':=' || soft-space value soft-space */,
+				284		/* wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value */,
+				287		/* NamedElementCS::name=UnrestrictedName || soft-space value soft-space */,
+				223		/* V00*2-steps || value */,
+				162		/* ':' || soft-space value soft-space */,
+				299		/* TypedElementCS::ownedType=TypeExpCS || value */,
+				233		/* V01*2-steps || value */,
+				164		/* ':=' || soft-space value soft-space */,
 				67		/* UnrealizedVariableCS::ownedInitExpression=ExpCS || value */
 			),
 			new @NonNull SerializationFeature [] {
@@ -9768,114 +9768,118 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 			SerializationSegment.HALF_NEW_LINE /* half-new-line */
 		};
 		serializationSegments[5] = new @NonNull SerializationSegment @NonNull [] {
+			SerializationSegment.VALUE /* value */,
+			SerializationSegment.NO_SPACE /* no-space */
+		};
+		serializationSegments[6] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.HALF_NEW_LINE /* half-new-line */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.HALF_NEW_LINE /* half-new-line */
 		};
-		serializationSegments[6] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[7] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.NO_SPACE /* no-space */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.NO_SPACE /* no-space */
 		};
-		serializationSegments[7] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[8] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.NO_SPACE /* no-space */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
-		serializationSegments[8] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[9] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.NO_SPACE /* no-space */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.SOFT_SPACE /* soft-space */
 		};
-		serializationSegments[9] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[10] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
-		serializationSegments[10] = new @NonNull SerializationSegment @NonNull [] {
-			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
-			SerializationSegment.VALUE /* value */,
-			SerializationSegment.PUSH /* push */
-		};
 		serializationSegments[11] = new @NonNull SerializationSegment @NonNull [] {
-			SerializationSegment.SOFT_SPACE /* soft-space */,
+			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */
 		};
 		serializationSegments[12] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_SPACE /* soft-space */,
 			SerializationSegment.VALUE /* value */,
-			SerializationSegment.SOFT_SPACE /* soft-space */
+			SerializationSegment.PUSH /* push */
 		};
 		serializationSegments[13] = new @NonNull SerializationSegment @NonNull [] {
+			SerializationSegment.SOFT_SPACE /* soft-space */,
+			SerializationSegment.VALUE /* value */,
+			SerializationSegment.SOFT_SPACE /* soft-space */
+		};
+		serializationSegments[14] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
-		serializationSegments[14] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[15] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */,
 			SerializationSegment.SOFT_SPACE /* soft-space */
-		};
-		serializationSegments[15] = new @NonNull SerializationSegment @NonNull [] {
-			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
-			SerializationSegment.POP /* pop */,
-			SerializationSegment.VALUE /* value */,
-			SerializationSegment.PUSH /* push */
 		};
 		serializationSegments[16] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
-			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
+			SerializationSegment.PUSH /* push */
 		};
 		serializationSegments[17] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
-			SerializationSegment.SOFT_SPACE /* soft-space */
+			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
 		serializationSegments[18] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
+			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
-			SerializationSegment.PUSH /* push */,
-			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
+			SerializationSegment.SOFT_SPACE /* soft-space */
 		};
 		serializationSegments[19] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */,
-			SerializationSegment.SOFT_SPACE /* soft-space */
+			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
 		serializationSegments[20] = new @NonNull SerializationSegment @NonNull [] {
-			SerializationSegment.SOFT_SPACE /* soft-space */,
-			SerializationSegment.POP /* pop */,
+			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.VALUE /* value */,
-			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
+			SerializationSegment.PUSH /* push */,
+			SerializationSegment.SOFT_SPACE /* soft-space */
 		};
 		serializationSegments[21] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_SPACE /* soft-space */,
+			SerializationSegment.POP /* pop */,
+			SerializationSegment.VALUE /* value */,
+			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
+		};
+		serializationSegments[22] = new @NonNull SerializationSegment @NonNull [] {
+			SerializationSegment.SOFT_SPACE /* soft-space */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */,
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */
 		};
-		serializationSegments[22] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[23] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.SOFT_SPACE /* soft-space */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */,
 			SerializationSegment.SOFT_SPACE /* soft-space */
 		};
-		serializationSegments[23] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[24] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.VALUE /* value */,
 			SerializationSegment.PUSH /* push */,
 			SerializationSegment.SOFT_SPACE /* soft-space */
 		};
-		serializationSegments[24] = new @NonNull SerializationSegment @NonNull [] {
+		serializationSegments[25] = new @NonNull SerializationSegment @NonNull [] {
 			SerializationSegment.SOFT_NEW_LINE /* soft-new-line */,
 			SerializationSegment.POP /* pop */,
 			SerializationSegment.SOFT_SPACE /* soft-space */,
@@ -9890,65 +9894,65 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 	 */
 	private void initSerializationSteps() {
 		// 0: StructuralFeatureCS::default=SINGLE_QUOTED_STRING || soft-space value soft-space
-		serializationSteps[0] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, 90 /*SINGLE_QUOTED_STRING*/, 12);
+		serializationSteps[0] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT, 90 /*SINGLE_QUOTED_STRING*/, 13);
 		// 1: DomainCS::direction=UnrestrictedName || soft-space value soft-space
-		serializationSteps[1] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DOMAIN_CS__DIRECTION, getCrossReference(QVTcoreCSPackage.Literals.DOMAIN_CS__DIRECTION, "UnrestrictedName"), 135, 12);
+		serializationSteps[1] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DOMAIN_CS__DIRECTION, getCrossReference(QVTcoreCSPackage.Literals.DOMAIN_CS__DIRECTION, "UnrestrictedName"), 135, 13);
 		// 2: SpecificationCS::exprString=UNQUOTED_STRING || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
 		serializationSteps[2] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.SPECIFICATION_CS__EXPR_STRING, 124 /*UNQUOTED_STRING*/, 2);
 		// 3: JavaImplementationCS::implementation=SINGLE_QUOTED_STRING || soft-space value soft-space
-		serializationSteps[3] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, getCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, "SINGLE_QUOTED_STRING"), 90, 12);
+		serializationSteps[3] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, getCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, "SINGLE_QUOTED_STRING"), 90, 13);
 		// 4: DirectionCS::imports+=UnrestrictedName || soft-space value soft-space
-		serializationSteps[4] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__IMPORTS, getCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__IMPORTS, "UnrestrictedName"), 135, 12);
+		serializationSteps[4] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__IMPORTS, getCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__IMPORTS, "UnrestrictedName"), 135, 13);
 		// 5: SimpleTargetElementCS::input?='input' || soft-space value soft-space
-		serializationSteps[5] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__INPUT, 18 /* 'input' */, 12);
+		serializationSteps[5] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__INPUT, 18 /* 'input' */, 13);
 		// 6: ClassCS::instanceClassName=SINGLE_QUOTED_STRING || soft-space value soft-space
-		serializationSteps[6] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, 90 /*SINGLE_QUOTED_STRING*/, 12);
+		serializationSteps[6] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.CLASS_CS__INSTANCE_CLASS_NAME, 90 /*SINGLE_QUOTED_STRING*/, 13);
 		// 7: MappingCS::isAbstract?='abstract' || soft-space value soft-space
-		serializationSteps[7] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.MAPPING_CS__IS_ABSTRACT, 12 /* 'abstract' */, 12);
+		serializationSteps[7] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.MAPPING_CS__IS_ABSTRACT, 12 /* 'abstract' */, 13);
 		// 8: StructuredClassCS::isAbstract?='abstract' || soft-space value soft-space
-		serializationSteps[8] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.STRUCTURED_CLASS_CS__IS_ABSTRACT, 12 /* 'abstract' */, 12);
+		serializationSteps[8] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.STRUCTURED_CLASS_CS__IS_ABSTRACT, 12 /* 'abstract' */, 13);
 		// 9: ImportCS::isAll?='::' || no-space value no-space
-		serializationSteps[9] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.IMPORT_CS__IS_ALL, 7 /* '::' */, 6);
+		serializationSteps[9] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.IMPORT_CS__IS_ALL, 7 /* '::' */, 7);
 		// 10: DomainCS::isCheck?='check' || soft-space value soft-space
-		serializationSteps[10] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.DOMAIN_CS__IS_CHECK, 13 /* 'check' */, 12);
+		serializationSteps[10] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.DOMAIN_CS__IS_CHECK, 13 /* 'check' */, 13);
 		// 11: PredicateOrAssignmentCS::isDefault?='default' || soft-space value soft-space
-		serializationSteps[11] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, 14 /* 'default' */, 12);
+		serializationSteps[11] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, 14 /* 'default' */, 13);
 		// 12: DomainCS::isEnforce?='enforce' || soft-space value soft-space
-		serializationSteps[12] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.DOMAIN_CS__IS_ENFORCE, 16 /* 'enforce' */, 12);
+		serializationSteps[12] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.DOMAIN_CS__IS_ENFORCE, 16 /* 'enforce' */, 13);
 		// 13: StructuredClassCS::isInterface?='interface' || soft-space value soft-space
-		serializationSteps[13] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.STRUCTURED_CLASS_CS__IS_INTERFACE, 19 /* 'interface' */, 12);
+		serializationSteps[13] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.STRUCTURED_CLASS_CS__IS_INTERFACE, 19 /* 'interface' */, 13);
 		// 14: MultiplicityCS::isNullFree?='|1' || no-space value no-space
-		serializationSteps[14] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.MULTIPLICITY_CS__IS_NULL_FREE, 27 /* '|1' */, 6);
+		serializationSteps[14] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.MULTIPLICITY_CS__IS_NULL_FREE, 27 /* '|1' */, 7);
 		// 15: PredicateOrAssignmentCS::isPartial?='+=' || soft-space value soft-space
-		serializationSteps[15] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL, 5 /* '+=' */, 12);
+		serializationSteps[15] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL, 5 /* '+=' */, 13);
 		// 16: AbstractNameExpCS::isPre?='@' || soft-space value soft-space
-		serializationSteps[16] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.ABSTRACT_NAME_EXP_CS__IS_PRE, 9 /* '@' */, 12);
+		serializationSteps[16] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.ABSTRACT_NAME_EXP_CS__IS_PRE, 9 /* '@' */, 13);
 		// 17: DataTypeCS::isPrimitive?='primitive' || soft-space value soft-space
-		serializationSteps[17] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.DATA_TYPE_CS__IS_PRIMITIVE, 21 /* 'primitive' */, 12);
+		serializationSteps[17] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.DATA_TYPE_CS__IS_PRIMITIVE, 21 /* 'primitive' */, 13);
 		// 18: DataTypeCS::isSerializable?='serializable' || soft-space value soft-space
-		serializationSteps[18] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.DATA_TYPE_CS__IS_SERIALIZABLE, 22 /* 'serializable' */, 12);
+		serializationSteps[18] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.DATA_TYPE_CS__IS_SERIALIZABLE, 22 /* 'serializable' */, 13);
 		// 19: EnumerationCS::isSerializable?='serializable' || soft-space value soft-space
-		serializationSteps[19] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.ENUMERATION_CS__IS_SERIALIZABLE, 22 /* 'serializable' */, 12);
+		serializationSteps[19] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.ENUMERATION_CS__IS_SERIALIZABLE, 22 /* 'serializable' */, 13);
 		// 20: QueryCS::isTransient?='transient' || soft-space value soft-space
-		serializationSteps[20] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.QUERY_CS__IS_TRANSIENT, 24 /* 'transient' */, 12);
+		serializationSteps[20] = createSerializationStepAssignKeyword(QVTcoreCSPackage.Literals.QUERY_CS__IS_TRANSIENT, 24 /* 'transient' */, 13);
 		// 21: SimpleTargetElementCS::iterates+=UnrestrictedName || soft-space value soft-space
-		serializationSteps[21] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__ITERATES, getCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__ITERATES, "UnrestrictedName"), 135, 12);
+		serializationSteps[21] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__ITERATES, getCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__ITERATES, "UnrestrictedName"), 135, 13);
 		// 22: MultiplicityBoundsCS::lowerBound=LOWER || soft-space value soft-space
-		serializationSteps[22] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__LOWER_BOUND, 41 /*LOWER*/, 12);
+		serializationSteps[22] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__LOWER_BOUND, 41 /*LOWER*/, 13);
 		// 23: CollectionTypeCS::name=CollectionTypeIdentifier || soft-space value soft-space
-		serializationSteps[23] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.COLLECTION_TYPE_CS__NAME, 11 /*CollectionTypeIdentifier*/, 12);
+		serializationSteps[23] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.COLLECTION_TYPE_CS__NAME, 11 /*CollectionTypeIdentifier*/, 13);
 		// 24: MapTypeCS::name='Map' || soft-space value soft-space
-		serializationSteps[24] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.MAP_TYPE_CS__NAME, 10 /* 'Map' */, 12);
+		serializationSteps[24] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.MAP_TYPE_CS__NAME, 10 /* 'Map' */, 13);
 		// 25: PrimitiveTypeRefCS::name=PrimitiveTypeIdentifier || soft-space value soft-space
-		serializationSteps[25] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PRIMITIVE_TYPE_REF_CS__NAME, 80 /*PrimitiveTypeIdentifier*/, 12);
+		serializationSteps[25] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PRIMITIVE_TYPE_REF_CS__NAME, 80 /*PrimitiveTypeIdentifier*/, 13);
 		// 26: TupleTypeCS::name='Tuple' || soft-space value soft-space
-		serializationSteps[26] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TUPLE_TYPE_CS__NAME, 11 /* 'Tuple' */, 12);
+		serializationSteps[26] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TUPLE_TYPE_CS__NAME, 11 /* 'Tuple' */, 13);
 		// 27: PackageCS::nsPrefix=UnrestrictedName || soft-space value soft-space
-		serializationSteps[27] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_CS__NS_PREFIX, 135 /*UnrestrictedName*/, 12);
+		serializationSteps[27] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_CS__NS_PREFIX, 135 /*UnrestrictedName*/, 13);
 		// 28: PackageCS::nsURI=URI || soft-space value soft-space
-		serializationSteps[28] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_CS__NS_URI, 126 /*URI*/, 12);
+		serializationSteps[28] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_CS__NS_URI, 126 /*URI*/, 13);
 		// 29: SimpleTargetElementCS::output?='output' || soft-space value soft-space
-		serializationSteps[29] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__OUTPUT, 20 /* 'output' */, 12);
+		serializationSteps[29] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__OUTPUT, 20 /* 'output' */, 13);
 		// 30: TemplateParameterSubstitutionCS::ownedActualParameter=TypeRefCS || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
 		serializationSteps[30] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS__OWNED_ACTUAL_PARAMETER, 120 /*TypeRefCS*/, 2);
 		// 31: TypedTypeRefCS::ownedBinding=TemplateBindingCS || value
@@ -9958,7 +9962,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 33: AreaCS::ownedBottomPattern=BottomPatternCS || value
 		serializationSteps[33] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.AREA_CS__OWNED_BOTTOM_PATTERN, 4 /*BottomPatternCS*/, 0);
 		// 34: PackageCS::ownedClasses+=ClassCS|TransformationCS || half-new-line value half-new-line
-		serializationSteps[34] = createSerializationStepAssigns(BaseCSPackage.Literals.PACKAGE_CS__OWNED_CLASSES, -1, new int[] { 5/*ClassCS*/,108/*TransformationCS*/}, 5);
+		serializationSteps[34] = createSerializationStepAssigns(BaseCSPackage.Literals.PACKAGE_CS__OWNED_CLASSES, -1, new int[] { 5/*ClassCS*/,108/*TransformationCS*/}, 6);
 		// 35: NavigatingArgCS::ownedCoIterator=CoIteratorVariableCS || value
 		serializationSteps[35] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__OWNED_CO_ITERATOR, 6 /*CoIteratorVariableCS*/, 0);
 		// 36: CollectionTypeCS::ownedCollectionMultiplicity=MultiplicityCS || value
@@ -10038,7 +10042,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 73: EnumerationCS::ownedLiterals+=EnumerationLiteralCS || value
 		serializationSteps[73] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.ENUMERATION_CS__OWNED_LITERALS, 21 /*EnumerationLiteralCS*/, 0);
 		// 74: TopLevelCS::ownedMappings+=MappingCS || half-new-line value half-new-line
-		serializationSteps[74] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_MAPPINGS, 50 /*MappingCS*/, 5);
+		serializationSteps[74] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_MAPPINGS, 50 /*MappingCS*/, 6);
 		// 75: MappingCS::ownedMiddle=UnnamedDomainCS || value
 		serializationSteps[75] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.MAPPING_CS__OWNED_MIDDLE, 131 /*UnnamedDomainCS*/, 0);
 		// 76: TemplateBindingCS::ownedMultiplicity=MultiplicityCS || value
@@ -10052,7 +10056,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 80: StructuredClassCS::ownedOperations+=OperationCS || value
 		serializationSteps[80] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.STRUCTURED_CLASS_CS__OWNED_OPERATIONS, 68 /*OperationCS*/, 0);
 		// 81: PackageOwnerCS::ownedPackages+=QualifiedPackageCS || half-new-line value half-new-line
-		serializationSteps[81] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_OWNER_CS__OWNED_PACKAGES, 83 /*QualifiedPackageCS*/, 5);
+		serializationSteps[81] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PACKAGE_OWNER_CS__OWNED_PACKAGES, 83 /*QualifiedPackageCS*/, 6);
 		// 82: OperationCS::ownedParameters+=ParameterCS || value
 		serializationSteps[82] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.OPERATION_CS__OWNED_PARAMETERS, 70 /*ParameterCS*/, 0);
 		// 83: QueryCS::ownedParameters+=ParamDeclarationCS || value
@@ -10096,7 +10100,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 102: TransformationCS::ownedProperties+=StructuralFeatureCS || value
 		serializationSteps[102] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TRANSFORMATION_CS__OWNED_PROPERTIES, 101 /*StructuralFeatureCS*/, 0);
 		// 103: TopLevelCS::ownedQueries+=QueryCS || half-new-line value half-new-line
-		serializationSteps[103] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_QUERIES, 84 /*QueryCS*/, 5);
+		serializationSteps[103] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_QUERIES, 84 /*QueryCS*/, 6);
 		// 104: BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || value
 		serializationSteps[104] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES, 85 /*RealizedVariableCS*/, 0);
 		// 105: BottomPatternCS::ownedRealizedVariables+=RealizedVariableCS || soft-new-line value
@@ -10128,7 +10132,7 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 118: IfThenExpCS::ownedThenExpression=ExpCS || value
 		serializationSteps[118] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.IF_THEN_EXP_CS__OWNED_THEN_EXPRESSION, 29 /*ExpCS*/, 0);
 		// 119: TopLevelCS::ownedTransformations+=TransformationCS || half-new-line value half-new-line
-		serializationSteps[119] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS, 108 /*TransformationCS*/, 5);
+		serializationSteps[119] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS, 108 /*TransformationCS*/, 6);
 		// 120: CollectionLiteralExpCS::ownedType=CollectionTypeCS || value
 		serializationSteps[120] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.COLLECTION_LITERAL_EXP_CS__OWNED_TYPE, 10 /*CollectionTypeCS*/, 0);
 		// 121: CollectionPatternCS::ownedType=CollectionTypeCS || value
@@ -10150,371 +10154,373 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 		// 129: LetExpCS::ownedVariables+=LetVariableCS || value
 		serializationSteps[129] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.LET_EXP_CS__OWNED_VARIABLES, 44 /*LetVariableCS*/, 0);
 		// 130: PatternExpCS::patternVariableName=UnrestrictedName || soft-space value soft-space
-		serializationSteps[130] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.PATTERN_EXP_CS__PATTERN_VARIABLE_NAME, 135 /*UnrestrictedName*/, 12);
+		serializationSteps[130] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.PATTERN_EXP_CS__PATTERN_VARIABLE_NAME, 135 /*UnrestrictedName*/, 13);
 		// 131: NavigatingArgCS::prefix='|' || soft-space value soft-space
-		serializationSteps[131] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 26 /* '|' */, 12);
+		serializationSteps[131] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 26 /* '|' */, 13);
 		// 132: NavigatingArgCS::prefix=';' || no-space value soft-new-line
-		serializationSteps[132] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 8 /* ';' */, 7);
+		serializationSteps[132] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 8 /* ';' */, 8);
 		// 133: NavigatingArgCS::prefix=',' || no-space value soft-space
-		serializationSteps[133] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 6 /* ',' */, 8);
+		serializationSteps[133] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__PREFIX, 6 /* ',' */, 9);
 		// 134: ReferenceCS::referredOpposite=UnrestrictedName || soft-space value soft-space
-		serializationSteps[134] = createSerializationStepCrossReference(BaseCSPackage.Literals.REFERENCE_CS__REFERRED_OPPOSITE, getCrossReference(BaseCSPackage.Literals.REFERENCE_CS__REFERRED_OPPOSITE, "UnrestrictedName"), 135, 12);
+		serializationSteps[134] = createSerializationStepCrossReference(BaseCSPackage.Literals.REFERENCE_CS__REFERRED_OPPOSITE, getCrossReference(BaseCSPackage.Literals.REFERENCE_CS__REFERRED_OPPOSITE, "UnrestrictedName"), 135, 13);
 		// 135: ShadowPartCS::referredProperty=UnrestrictedName || soft-space value soft-space
-		serializationSteps[135] = createSerializationStepCrossReference(EssentialOCLCSPackage.Literals.SHADOW_PART_CS__REFERRED_PROPERTY, getCrossReference(EssentialOCLCSPackage.Literals.SHADOW_PART_CS__REFERRED_PROPERTY, "UnrestrictedName"), 135, 12);
+		serializationSteps[135] = createSerializationStepCrossReference(EssentialOCLCSPackage.Literals.SHADOW_PART_CS__REFERRED_PROPERTY, getCrossReference(EssentialOCLCSPackage.Literals.SHADOW_PART_CS__REFERRED_PROPERTY, "UnrestrictedName"), 135, 13);
 		// 136: MappingCS::refines+=UnrestrictedName || soft-space value soft-space
-		serializationSteps[136] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.MAPPING_CS__REFINES, getCrossReference(QVTcoreCSPackage.Literals.MAPPING_CS__REFINES, "UnrestrictedName"), 135, 12);
+		serializationSteps[136] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.MAPPING_CS__REFINES, getCrossReference(QVTcoreCSPackage.Literals.MAPPING_CS__REFINES, "UnrestrictedName"), 135, 13);
 		// 137: CollectionPatternCS::restVariableName=Identifier || soft-space value soft-space
-		serializationSteps[137] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.COLLECTION_PATTERN_CS__REST_VARIABLE_NAME, 35 /*Identifier*/, 12);
+		serializationSteps[137] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.COLLECTION_PATTERN_CS__REST_VARIABLE_NAME, 35 /*Identifier*/, 13);
 		// 138: StringLiteralExpCS::segments+=StringLiteral || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
 		serializationSteps[138] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.STRING_LITERAL_EXP_CS__SEGMENTS, 99 /*StringLiteral*/, 2);
 		// 139: MultiplicityStringCS::stringBounds='*|+|?' || soft-space value soft-space
-		serializationSteps[139] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.MULTIPLICITY_STRING_CS__STRING_BOUNDS, 4 /* '*|+|?' */, 12);
+		serializationSteps[139] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.MULTIPLICITY_STRING_CS__STRING_BOUNDS, 4 /* '*|+|?' */, 13);
 		// 140: BooleanLiteralExpCS::symbol='false|true' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
 		serializationSteps[140] = createSerializationStepAssignKeyword(EssentialOCLCSPackage.Literals.BOOLEAN_LITERAL_EXP_CS__SYMBOL, 17 /* 'false|true' */, 2);
 		// 141: NumberLiteralExpCS::symbol=NUMBER_LITERAL || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
 		serializationSteps[141] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.NUMBER_LITERAL_EXP_CS__SYMBOL, 55 /*NUMBER_LITERAL*/, 2);
 		// 142: SimpleTargetElementCS::typedModel=UnrestrictedName || soft-space value soft-space
-		serializationSteps[142] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__TYPED_MODEL, getCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__TYPED_MODEL, "UnrestrictedName"), 135, 12);
+		serializationSteps[142] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__TYPED_MODEL, getCrossReference(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__TYPED_MODEL, "UnrestrictedName"), 135, 13);
 		// 143: MultiplicityBoundsCS::upperBound=UPPER || soft-space value soft-space
-		serializationSteps[143] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__UPPER_BOUND, 125 /*UPPER*/, 12);
+		serializationSteps[143] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS__UPPER_BOUND, 125 /*UPPER*/, 13);
 		// 144: DirectionCS::uses+=UnrestrictedName || soft-space value soft-space
-		serializationSteps[144] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__USES, getCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__USES, "UnrestrictedName"), 135, 12);
+		serializationSteps[144] = createSerializationStepCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__USES, getCrossReference(QVTcoreCSPackage.Literals.DIRECTION_CS__USES, "UnrestrictedName"), 135, 13);
 		// 145: EnumerationLiteralCS::value=SIGNED || soft-space value soft-space
-		serializationSteps[145] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.ENUMERATION_LITERAL_CS__VALUE, 88 /*SIGNED*/, 12);
+		serializationSteps[145] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.ENUMERATION_LITERAL_CS__VALUE, 88 /*SIGNED*/, 13);
 		// 146: SimpleTargetElementCS::via?='via' || soft-space value soft-space
-		serializationSteps[146] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__VIA, 25 /* 'via' */, 12);
+		serializationSteps[146] = createSerializationStepAssignKeyword(QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS__VIA, 25 /* 'via' */, 13);
 		// 147: '!serializable' || soft-space value soft-space
-		serializationSteps[147] = createSerializationStepKeyword("!serializable", 12);
+		serializationSteps[147] = createSerializationStepKeyword("!serializable", 13);
 		// 148: '#' || no-space value no-space
-		serializationSteps[148] = createSerializationStepKeyword("#", 6);
+		serializationSteps[148] = createSerializationStepKeyword("#", 7);
 		// 149: '&&' || soft-space value soft-space
-		serializationSteps[149] = createSerializationStepKeyword("&&", 12);
+		serializationSteps[149] = createSerializationStepKeyword("&&", 13);
 		// 150: '(' || soft-new-line value push
-		serializationSteps[150] = createSerializationStepKeyword("(", 10);
-		// 151: '(' || no-space value no-space
-		serializationSteps[151] = createSerializationStepKeyword("(", 6);
-		// 152: ')' || no-space value
-		serializationSteps[152] = createSerializationStepKeyword(")", 1);
-		// 153: ')' || soft-new-line pop value soft-new-line
-		serializationSteps[153] = createSerializationStepKeyword(")", 16);
+		serializationSteps[150] = createSerializationStepKeyword("(", 11);
+		// 151: '(' || value no-space
+		serializationSteps[151] = createSerializationStepKeyword("(", 5);
+		// 152: '(' || no-space value no-space
+		serializationSteps[152] = createSerializationStepKeyword("(", 7);
+		// 153: ')' || no-space value
+		serializationSteps[153] = createSerializationStepKeyword(")", 1);
 		// 154: ')' || pop value soft-new-line
-		serializationSteps[154] = createSerializationStepKeyword(")", 9);
-		// 155: '*' || soft-space value soft-space
-		serializationSteps[155] = createSerializationStepKeyword("*", 12);
-		// 156: '*' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
-		serializationSteps[156] = createSerializationStepKeyword("*", 2);
-		// 157: '++' || soft-space value soft-space
-		serializationSteps[157] = createSerializationStepKeyword("++", 12);
-		// 158: ',' || no-space value soft-new-line
-		serializationSteps[158] = createSerializationStepKeyword(",", 7);
-		// 159: ',' || no-space value soft-space
+		serializationSteps[154] = createSerializationStepKeyword(")", 10);
+		// 155: ')' || soft-new-line pop value soft-new-line
+		serializationSteps[155] = createSerializationStepKeyword(")", 17);
+		// 156: '*' || soft-space value soft-space
+		serializationSteps[156] = createSerializationStepKeyword("*", 13);
+		// 157: '*' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
+		serializationSteps[157] = createSerializationStepKeyword("*", 2);
+		// 158: '++' || soft-space value soft-space
+		serializationSteps[158] = createSerializationStepKeyword("++", 13);
+		// 159: ',' || no-space value soft-new-line
 		serializationSteps[159] = createSerializationStepKeyword(",", 8);
-		// 160: '..' || no-space value no-space
-		serializationSteps[160] = createSerializationStepKeyword("..", 6);
-		// 161: ':' || soft-space value soft-space
-		serializationSteps[161] = createSerializationStepKeyword(":", 12);
-		// 162: '::' || no-space value no-space
-		serializationSteps[162] = createSerializationStepKeyword("::", 6);
-		// 163: ':=' || soft-space value soft-space
-		serializationSteps[163] = createSerializationStepKeyword(":=", 12);
-		// 164: ';' || no-space value soft-new-line
-		serializationSteps[164] = createSerializationStepKeyword(";", 7);
-		// 165: '=' || soft-space value soft-space
-		serializationSteps[165] = createSerializationStepKeyword("=", 12);
-		// 166: '?' || soft-space value soft-space
-		serializationSteps[166] = createSerializationStepKeyword("?", 12);
-		// 167: 'Lambda' || soft-space value soft-space
-		serializationSteps[167] = createSerializationStepKeyword("Lambda", 12);
-		// 168: 'Tuple' || soft-space value soft-space
-		serializationSteps[168] = createSerializationStepKeyword("Tuple", 12);
-		// 169: '[' || no-space value no-space
-		serializationSteps[169] = createSerializationStepKeyword("[", 6);
-		// 170: ']' || no-space value
-		serializationSteps[170] = createSerializationStepKeyword("]", 1);
-		// 171: 'attribute' || soft-space value soft-space
-		serializationSteps[171] = createSerializationStepKeyword("attribute", 12);
-		// 172: 'body' || soft-space value soft-space
-		serializationSteps[172] = createSerializationStepKeyword("body", 12);
-		// 173: 'class' || soft-space value soft-space
-		serializationSteps[173] = createSerializationStepKeyword("class", 12);
-		// 174: 'datatype' || soft-space value soft-space
-		serializationSteps[174] = createSerializationStepKeyword("datatype", 12);
-		// 175: 'derivation' || soft-space value soft-space
-		serializationSteps[175] = createSerializationStepKeyword("derivation", 12);
-		// 176: 'else' || soft-new-line pop value push soft-space
-		serializationSteps[176] = createSerializationStepKeyword("else", 23);
-		// 177: 'elseif' || soft-new-line pop soft-space value push soft-space
-		serializationSteps[177] = createSerializationStepKeyword("elseif", 24);
-		// 178: 'endif' || soft-new-line pop value soft-space
-		serializationSteps[178] = createSerializationStepKeyword("endif", 17);
-		// 179: 'enum' || soft-space value soft-space
-		serializationSteps[179] = createSerializationStepKeyword("enum", 12);
-		// 180: 'extends' || soft-space value soft-space
-		serializationSteps[180] = createSerializationStepKeyword("extends", 12);
-		// 181: 'if' || soft-new-line value push soft-space
-		serializationSteps[181] = createSerializationStepKeyword("if", 19);
-		// 182: 'implementedby' || soft-space value soft-space
-		serializationSteps[182] = createSerializationStepKeyword("implementedby", 12);
-		// 183: 'import' || soft-space value soft-space
-		serializationSteps[183] = createSerializationStepKeyword("import", 12);
-		// 184: 'imports' || soft-space value soft-space
-		serializationSteps[184] = createSerializationStepKeyword("imports", 12);
-		// 185: 'in' || soft-space value soft-space
-		serializationSteps[185] = createSerializationStepKeyword("in", 12);
-		// 186: 'in' || soft-space pop value soft-new-line
-		serializationSteps[186] = createSerializationStepKeyword("in", 20);
-		// 187: 'initial' || soft-space value soft-space
-		serializationSteps[187] = createSerializationStepKeyword("initial", 12);
-		// 188: 'invalid' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
-		serializationSteps[188] = createSerializationStepKeyword("invalid", 2);
-		// 189: 'iterates' || soft-space value soft-space
-		serializationSteps[189] = createSerializationStepKeyword("iterates", 12);
-		// 190: 'let' || soft-space value push
-		serializationSteps[190] = createSerializationStepKeyword("let", 11);
-		// 191: 'literal' || soft-space value soft-space
-		serializationSteps[191] = createSerializationStepKeyword("literal", 12);
-		// 192: 'map' || soft-space value soft-space
-		serializationSteps[192] = createSerializationStepKeyword("map", 12);
-		// 193: 'null' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
-		serializationSteps[193] = createSerializationStepKeyword("null", 2);
-		// 194: 'operation' || soft-space value soft-space
-		serializationSteps[194] = createSerializationStepKeyword("operation", 12);
-		// 195: 'package' || soft-space value soft-space
-		serializationSteps[195] = createSerializationStepKeyword("package", 12);
-		// 196: 'pre' || soft-space value soft-space
-		serializationSteps[196] = createSerializationStepKeyword("pre", 12);
-		// 197: 'property' || soft-space value soft-space
-		serializationSteps[197] = createSerializationStepKeyword("property", 12);
-		// 198: 'query' || soft-space value soft-space
-		serializationSteps[198] = createSerializationStepKeyword("query", 12);
-		// 199: 'realize' || soft-space value soft-space
-		serializationSteps[199] = createSerializationStepKeyword("realize", 12);
-		// 200: 'refines' || soft-space value soft-space
-		serializationSteps[200] = createSerializationStepKeyword("refines", 12);
-		// 201: 'self' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
-		serializationSteps[201] = createSerializationStepKeyword("self", 2);
-		// 202: 'target' || soft-space value soft-space
-		serializationSteps[202] = createSerializationStepKeyword("target", 12);
-		// 203: 'then' || pop value push soft-space
-		serializationSteps[203] = createSerializationStepKeyword("then", 14);
-		// 204: 'then' || pop soft-space value push soft-space
-		serializationSteps[204] = createSerializationStepKeyword("then", 22);
-		// 205: 'throws' || soft-space value soft-space
-		serializationSteps[205] = createSerializationStepKeyword("throws", 12);
-		// 206: 'transformation' || soft-space value soft-space
-		serializationSteps[206] = createSerializationStepKeyword("transformation", 12);
-		// 207: 'uses' || soft-space value soft-space
-		serializationSteps[207] = createSerializationStepKeyword("uses", 12);
-		// 208: 'where' || soft-space value soft-space
-		serializationSteps[208] = createSerializationStepKeyword("where", 12);
-		// 209: 'with' || value
-		serializationSteps[209] = createSerializationStepKeyword("with", 0);
-		// 210: '{' || soft-new-line value push
-		serializationSteps[210] = createSerializationStepKeyword("{", 10);
-		// 211: '{' || soft-new-line value push soft-new-line
-		serializationSteps[211] = createSerializationStepKeyword("{", 18);
-		// 212: '{' || soft-space value push soft-new-line
-		serializationSteps[212] = createSerializationStepKeyword("{", 21);
-		// 213: '|' || soft-new-line pop value push
-		serializationSteps[213] = createSerializationStepKeyword("|", 15);
-		// 214: '|?' || no-space value no-space
-		serializationSteps[214] = createSerializationStepKeyword("|?", 6);
-		// 215: '}' || pop soft-new-line value soft-new-line
-		serializationSteps[215] = createSerializationStepKeyword("}", 13);
+		// 160: ',' || no-space value soft-space
+		serializationSteps[160] = createSerializationStepKeyword(",", 9);
+		// 161: '..' || no-space value no-space
+		serializationSteps[161] = createSerializationStepKeyword("..", 7);
+		// 162: ':' || soft-space value soft-space
+		serializationSteps[162] = createSerializationStepKeyword(":", 13);
+		// 163: '::' || no-space value no-space
+		serializationSteps[163] = createSerializationStepKeyword("::", 7);
+		// 164: ':=' || soft-space value soft-space
+		serializationSteps[164] = createSerializationStepKeyword(":=", 13);
+		// 165: ';' || no-space value soft-new-line
+		serializationSteps[165] = createSerializationStepKeyword(";", 8);
+		// 166: '=' || soft-space value soft-space
+		serializationSteps[166] = createSerializationStepKeyword("=", 13);
+		// 167: '?' || soft-space value soft-space
+		serializationSteps[167] = createSerializationStepKeyword("?", 13);
+		// 168: 'Lambda' || soft-space value soft-space
+		serializationSteps[168] = createSerializationStepKeyword("Lambda", 13);
+		// 169: 'Tuple' || soft-space value soft-space
+		serializationSteps[169] = createSerializationStepKeyword("Tuple", 13);
+		// 170: '[' || no-space value no-space
+		serializationSteps[170] = createSerializationStepKeyword("[", 7);
+		// 171: ']' || no-space value
+		serializationSteps[171] = createSerializationStepKeyword("]", 1);
+		// 172: 'attribute' || soft-space value soft-space
+		serializationSteps[172] = createSerializationStepKeyword("attribute", 13);
+		// 173: 'body' || soft-space value soft-space
+		serializationSteps[173] = createSerializationStepKeyword("body", 13);
+		// 174: 'class' || soft-space value soft-space
+		serializationSteps[174] = createSerializationStepKeyword("class", 13);
+		// 175: 'datatype' || soft-space value soft-space
+		serializationSteps[175] = createSerializationStepKeyword("datatype", 13);
+		// 176: 'derivation' || soft-space value soft-space
+		serializationSteps[176] = createSerializationStepKeyword("derivation", 13);
+		// 177: 'else' || soft-new-line pop value push soft-space
+		serializationSteps[177] = createSerializationStepKeyword("else", 24);
+		// 178: 'elseif' || soft-new-line pop soft-space value push soft-space
+		serializationSteps[178] = createSerializationStepKeyword("elseif", 25);
+		// 179: 'endif' || soft-new-line pop value soft-space
+		serializationSteps[179] = createSerializationStepKeyword("endif", 18);
+		// 180: 'enum' || soft-space value soft-space
+		serializationSteps[180] = createSerializationStepKeyword("enum", 13);
+		// 181: 'extends' || soft-space value soft-space
+		serializationSteps[181] = createSerializationStepKeyword("extends", 13);
+		// 182: 'if' || soft-new-line value push soft-space
+		serializationSteps[182] = createSerializationStepKeyword("if", 20);
+		// 183: 'implementedby' || soft-space value soft-space
+		serializationSteps[183] = createSerializationStepKeyword("implementedby", 13);
+		// 184: 'import' || soft-space value soft-space
+		serializationSteps[184] = createSerializationStepKeyword("import", 13);
+		// 185: 'imports' || soft-space value soft-space
+		serializationSteps[185] = createSerializationStepKeyword("imports", 13);
+		// 186: 'in' || soft-space value soft-space
+		serializationSteps[186] = createSerializationStepKeyword("in", 13);
+		// 187: 'in' || soft-space pop value soft-new-line
+		serializationSteps[187] = createSerializationStepKeyword("in", 21);
+		// 188: 'initial' || soft-space value soft-space
+		serializationSteps[188] = createSerializationStepKeyword("initial", 13);
+		// 189: 'invalid' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
+		serializationSteps[189] = createSerializationStepKeyword("invalid", 2);
+		// 190: 'iterates' || soft-space value soft-space
+		serializationSteps[190] = createSerializationStepKeyword("iterates", 13);
+		// 191: 'let' || soft-space value push
+		serializationSteps[191] = createSerializationStepKeyword("let", 12);
+		// 192: 'literal' || soft-space value soft-space
+		serializationSteps[192] = createSerializationStepKeyword("literal", 13);
+		// 193: 'map' || soft-space value soft-space
+		serializationSteps[193] = createSerializationStepKeyword("map", 13);
+		// 194: 'null' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
+		serializationSteps[194] = createSerializationStepKeyword("null", 2);
+		// 195: 'operation' || soft-space value soft-space
+		serializationSteps[195] = createSerializationStepKeyword("operation", 13);
+		// 196: 'package' || soft-space value soft-space
+		serializationSteps[196] = createSerializationStepKeyword("package", 13);
+		// 197: 'pre' || soft-space value soft-space
+		serializationSteps[197] = createSerializationStepKeyword("pre", 13);
+		// 198: 'property' || soft-space value soft-space
+		serializationSteps[198] = createSerializationStepKeyword("property", 13);
+		// 199: 'query' || soft-space value soft-space
+		serializationSteps[199] = createSerializationStepKeyword("query", 13);
+		// 200: 'realize' || soft-space value soft-space
+		serializationSteps[200] = createSerializationStepKeyword("realize", 13);
+		// 201: 'refines' || soft-space value soft-space
+		serializationSteps[201] = createSerializationStepKeyword("refines", 13);
+		// 202: 'self' || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
+		serializationSteps[202] = createSerializationStepKeyword("self", 2);
+		// 203: 'target' || soft-space value soft-space
+		serializationSteps[203] = createSerializationStepKeyword("target", 13);
+		// 204: 'then' || pop value push soft-space
+		serializationSteps[204] = createSerializationStepKeyword("then", 15);
+		// 205: 'then' || pop soft-space value push soft-space
+		serializationSteps[205] = createSerializationStepKeyword("then", 23);
+		// 206: 'throws' || soft-space value soft-space
+		serializationSteps[206] = createSerializationStepKeyword("throws", 13);
+		// 207: 'transformation' || soft-space value soft-space
+		serializationSteps[207] = createSerializationStepKeyword("transformation", 13);
+		// 208: 'uses' || soft-space value soft-space
+		serializationSteps[208] = createSerializationStepKeyword("uses", 13);
+		// 209: 'where' || soft-space value soft-space
+		serializationSteps[209] = createSerializationStepKeyword("where", 13);
+		// 210: 'with' || value
+		serializationSteps[210] = createSerializationStepKeyword("with", 0);
+		// 211: '{' || soft-new-line value push
+		serializationSteps[211] = createSerializationStepKeyword("{", 11);
+		// 212: '{' || soft-new-line value push soft-new-line
+		serializationSteps[212] = createSerializationStepKeyword("{", 19);
+		// 213: '{' || soft-space value push soft-new-line
+		serializationSteps[213] = createSerializationStepKeyword("{", 22);
+		// 214: '|' || soft-new-line pop value push
+		serializationSteps[214] = createSerializationStepKeyword("|", 16);
+		// 215: '|?' || no-space value no-space
+		serializationSteps[215] = createSerializationStepKeyword("|?", 7);
 		// 216: '}' || pop value soft-new-line
-		serializationSteps[216] = createSerializationStepKeyword("}", 9);
-		// 217: 1*1-steps || soft-new-line value
-		serializationSteps[217] = createSerializationStepSequence((-1/*V-1*/ << 4) | 0/*[1]*/, 1, 3);
-		// 218: V00*1-steps || value
-		serializationSteps[218] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[216] = createSerializationStepKeyword("}", 10);
+		// 217: '}' || pop soft-new-line value soft-new-line
+		serializationSteps[217] = createSerializationStepKeyword("}", 14);
+		// 218: 1*1-steps || soft-new-line value
+		serializationSteps[218] = createSerializationStepSequence((-1/*V-1*/ << 4) | 0/*[1]*/, 1, 3);
 		// 219: V00*1-steps || value
-		serializationSteps[219] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 1, 0);
-		// 220: V00*1-steps || value half-new-line
-		serializationSteps[220] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 1, 4);
-		// 221: V00*1-steps || value
-		serializationSteps[221] = createSerializationStepSequence((0/*V0*/ << 4) | 3/*[+]*/, 1, 0);
-		// 222: V00*2-steps || value
-		serializationSteps[222] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[219] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 1, 0);
+		// 220: V00*1-steps || value
+		serializationSteps[220] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 1, 0);
+		// 221: V00*1-steps || value half-new-line
+		serializationSteps[221] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 1, 4);
+		// 222: V00*1-steps || value
+		serializationSteps[222] = createSerializationStepSequence((0/*V0*/ << 4) | 3/*[+]*/, 1, 0);
 		// 223: V00*2-steps || value
-		serializationSteps[223] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 2, 0);
-		// 224: V00*3-steps || value
-		serializationSteps[224] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 3, 0);
-		// 225: V00*4-steps || value
-		serializationSteps[225] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 4, 0);
-		// 226: V00*5-steps || value
-		serializationSteps[226] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 5, 0);
-		// 227: V00*6-steps || value
-		serializationSteps[227] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 6, 0);
-		// 228: V00*7-steps || value
-		serializationSteps[228] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 7, 0);
-		// 229: V00*8-steps || value
-		serializationSteps[229] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 8, 0);
-		// 230: V01*1-steps || value
-		serializationSteps[230] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[223] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 2, 0);
+		// 224: V00*2-steps || value
+		serializationSteps[224] = createSerializationStepSequence((0/*V0*/ << 4) | 2/*[*]*/, 2, 0);
+		// 225: V00*3-steps || value
+		serializationSteps[225] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 3, 0);
+		// 226: V00*4-steps || value
+		serializationSteps[226] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 4, 0);
+		// 227: V00*5-steps || value
+		serializationSteps[227] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 5, 0);
+		// 228: V00*6-steps || value
+		serializationSteps[228] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 6, 0);
+		// 229: V00*7-steps || value
+		serializationSteps[229] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 7, 0);
+		// 230: V00*8-steps || value
+		serializationSteps[230] = createSerializationStepSequence((0/*V0*/ << 4) | 1/*[?]*/, 8, 0);
 		// 231: V01*1-steps || value
-		serializationSteps[231] = createSerializationStepSequence((1/*V1*/ << 4) | 2/*[*]*/, 1, 0);
-		// 232: V01*2-steps || value
-		serializationSteps[232] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[231] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 1, 0);
+		// 232: V01*1-steps || value
+		serializationSteps[232] = createSerializationStepSequence((1/*V1*/ << 4) | 2/*[*]*/, 1, 0);
 		// 233: V01*2-steps || value
-		serializationSteps[233] = createSerializationStepSequence((1/*V1*/ << 4) | 2/*[*]*/, 2, 0);
-		// 234: V01*3-steps || value
-		serializationSteps[234] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 3, 0);
-		// 235: V01*4-steps || value
-		serializationSteps[235] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 4, 0);
-		// 236: V10*1-steps || value
-		serializationSteps[236] = createSerializationStepSequence((10/*V10*/ << 4) | 1/*[?]*/, 1, 0);
-		// 237: V02*1-steps || value
-		serializationSteps[237] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[233] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 2, 0);
+		// 234: V01*2-steps || value
+		serializationSteps[234] = createSerializationStepSequence((1/*V1*/ << 4) | 2/*[*]*/, 2, 0);
+		// 235: V01*3-steps || value
+		serializationSteps[235] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 3, 0);
+		// 236: V01*4-steps || value
+		serializationSteps[236] = createSerializationStepSequence((1/*V1*/ << 4) | 1/*[?]*/, 4, 0);
+		// 237: V10*1-steps || value
+		serializationSteps[237] = createSerializationStepSequence((10/*V10*/ << 4) | 1/*[?]*/, 1, 0);
 		// 238: V02*1-steps || value
-		serializationSteps[238] = createSerializationStepSequence((2/*V2*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[238] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 1, 0);
 		// 239: V02*1-steps || value
-		serializationSteps[239] = createSerializationStepSequence((2/*V2*/ << 4) | 3/*[+]*/, 1, 0);
-		// 240: V02*2-steps || value
-		serializationSteps[240] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[239] = createSerializationStepSequence((2/*V2*/ << 4) | 2/*[*]*/, 1, 0);
+		// 240: V02*1-steps || value
+		serializationSteps[240] = createSerializationStepSequence((2/*V2*/ << 4) | 3/*[+]*/, 1, 0);
 		// 241: V02*2-steps || value
-		serializationSteps[241] = createSerializationStepSequence((2/*V2*/ << 4) | 2/*[*]*/, 2, 0);
-		// 242: V02*3-steps || value
-		serializationSteps[242] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 3, 0);
-		// 243: V02*4-steps || value
-		serializationSteps[243] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 4, 0);
-		// 244: V02*5-steps || value
-		serializationSteps[244] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 5, 0);
-		// 245: V03*1-steps || value
-		serializationSteps[245] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[241] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 2, 0);
+		// 242: V02*2-steps || value
+		serializationSteps[242] = createSerializationStepSequence((2/*V2*/ << 4) | 2/*[*]*/, 2, 0);
+		// 243: V02*3-steps || value
+		serializationSteps[243] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 3, 0);
+		// 244: V02*4-steps || value
+		serializationSteps[244] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 4, 0);
+		// 245: V02*5-steps || value
+		serializationSteps[245] = createSerializationStepSequence((2/*V2*/ << 4) | 1/*[?]*/, 5, 0);
 		// 246: V03*1-steps || value
-		serializationSteps[246] = createSerializationStepSequence((3/*V3*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[246] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 1, 0);
 		// 247: V03*1-steps || value
-		serializationSteps[247] = createSerializationStepSequence((3/*V3*/ << 4) | 3/*[+]*/, 1, 0);
-		// 248: V03*2-steps || value
-		serializationSteps[248] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[247] = createSerializationStepSequence((3/*V3*/ << 4) | 2/*[*]*/, 1, 0);
+		// 248: V03*1-steps || value
+		serializationSteps[248] = createSerializationStepSequence((3/*V3*/ << 4) | 3/*[+]*/, 1, 0);
 		// 249: V03*2-steps || value
-		serializationSteps[249] = createSerializationStepSequence((3/*V3*/ << 4) | 2/*[*]*/, 2, 0);
-		// 250: V03*3-steps || value
-		serializationSteps[250] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 3, 0);
-		// 251: V03*4-steps || value
-		serializationSteps[251] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 4, 0);
-		// 252: V03*5-steps || value
-		serializationSteps[252] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 5, 0);
-		// 253: V04*1-steps || value
-		serializationSteps[253] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[249] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 2, 0);
+		// 250: V03*2-steps || value
+		serializationSteps[250] = createSerializationStepSequence((3/*V3*/ << 4) | 2/*[*]*/, 2, 0);
+		// 251: V03*3-steps || value
+		serializationSteps[251] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 3, 0);
+		// 252: V03*4-steps || value
+		serializationSteps[252] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 4, 0);
+		// 253: V03*5-steps || value
+		serializationSteps[253] = createSerializationStepSequence((3/*V3*/ << 4) | 1/*[?]*/, 5, 0);
 		// 254: V04*1-steps || value
-		serializationSteps[254] = createSerializationStepSequence((4/*V4*/ << 4) | 3/*[+]*/, 1, 0);
-		// 255: V04*2-steps || value
-		serializationSteps[255] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[254] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 1, 0);
+		// 255: V04*1-steps || value
+		serializationSteps[255] = createSerializationStepSequence((4/*V4*/ << 4) | 3/*[+]*/, 1, 0);
 		// 256: V04*2-steps || value
-		serializationSteps[256] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 2, 0);
-		// 257: V04*4-steps || value
-		serializationSteps[257] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 4, 0);
-		// 258: V04*5-steps || value
-		serializationSteps[258] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 5, 0);
+		serializationSteps[256] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 2, 0);
+		// 257: V04*2-steps || value
+		serializationSteps[257] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 2, 0);
+		// 258: V04*4-steps || value
+		serializationSteps[258] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 4, 0);
 		// 259: V04*5-steps || value
-		serializationSteps[259] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 5, 0);
-		// 260: V05*1-steps || value
-		serializationSteps[260] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[259] = createSerializationStepSequence((4/*V4*/ << 4) | 1/*[?]*/, 5, 0);
+		// 260: V04*5-steps || value
+		serializationSteps[260] = createSerializationStepSequence((4/*V4*/ << 4) | 2/*[*]*/, 5, 0);
 		// 261: V05*1-steps || value
-		serializationSteps[261] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[261] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 1, 0);
 		// 262: V05*1-steps || value
-		serializationSteps[262] = createSerializationStepSequence((5/*V5*/ << 4) | 3/*[+]*/, 1, 0);
-		// 263: V05*2-steps || value
-		serializationSteps[263] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 2, 0);
-		// 264: V05*4-steps || value
-		serializationSteps[264] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 4, 0);
-		// 265: V05*5-steps || value
-		serializationSteps[265] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 5, 0);
+		serializationSteps[262] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 1, 0);
+		// 263: V05*1-steps || value
+		serializationSteps[263] = createSerializationStepSequence((5/*V5*/ << 4) | 3/*[+]*/, 1, 0);
+		// 264: V05*2-steps || value
+		serializationSteps[264] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 2, 0);
+		// 265: V05*4-steps || value
+		serializationSteps[265] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 4, 0);
 		// 266: V05*5-steps || value
-		serializationSteps[266] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 5, 0);
-		// 267: V06*1-steps || value
-		serializationSteps[267] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 1, 0);
-		// 268: V06*2-steps || value
-		serializationSteps[268] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 2, 0);
+		serializationSteps[266] = createSerializationStepSequence((5/*V5*/ << 4) | 1/*[?]*/, 5, 0);
+		// 267: V05*5-steps || value
+		serializationSteps[267] = createSerializationStepSequence((5/*V5*/ << 4) | 2/*[*]*/, 5, 0);
+		// 268: V06*1-steps || value
+		serializationSteps[268] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 1, 0);
 		// 269: V06*2-steps || value
-		serializationSteps[269] = createSerializationStepSequence((6/*V6*/ << 4) | 2/*[*]*/, 2, 0);
-		// 270: V06*4-steps || value
-		serializationSteps[270] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 4, 0);
-		// 271: V06*5-steps || value
-		serializationSteps[271] = createSerializationStepSequence((6/*V6*/ << 4) | 2/*[*]*/, 5, 0);
-		// 272: V07*1-steps || value
-		serializationSteps[272] = createSerializationStepSequence((7/*V7*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[269] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 2, 0);
+		// 270: V06*2-steps || value
+		serializationSteps[270] = createSerializationStepSequence((6/*V6*/ << 4) | 2/*[*]*/, 2, 0);
+		// 271: V06*4-steps || value
+		serializationSteps[271] = createSerializationStepSequence((6/*V6*/ << 4) | 1/*[?]*/, 4, 0);
+		// 272: V06*5-steps || value
+		serializationSteps[272] = createSerializationStepSequence((6/*V6*/ << 4) | 2/*[*]*/, 5, 0);
 		// 273: V07*1-steps || value
-		serializationSteps[273] = createSerializationStepSequence((7/*V7*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[273] = createSerializationStepSequence((7/*V7*/ << 4) | 1/*[?]*/, 1, 0);
 		// 274: V07*1-steps || value
-		serializationSteps[274] = createSerializationStepSequence((7/*V7*/ << 4) | 3/*[+]*/, 1, 0);
-		// 275: V07*4-steps || value
-		serializationSteps[275] = createSerializationStepSequence((7/*V7*/ << 4) | 1/*[?]*/, 4, 0);
-		// 276: V07*5-steps || value
-		serializationSteps[276] = createSerializationStepSequence((7/*V7*/ << 4) | 2/*[*]*/, 5, 0);
-		// 277: V08*1-steps || value
-		serializationSteps[277] = createSerializationStepSequence((8/*V8*/ << 4) | 1/*[?]*/, 1, 0);
+		serializationSteps[274] = createSerializationStepSequence((7/*V7*/ << 4) | 2/*[*]*/, 1, 0);
+		// 275: V07*1-steps || value
+		serializationSteps[275] = createSerializationStepSequence((7/*V7*/ << 4) | 3/*[+]*/, 1, 0);
+		// 276: V07*4-steps || value
+		serializationSteps[276] = createSerializationStepSequence((7/*V7*/ << 4) | 1/*[?]*/, 4, 0);
+		// 277: V07*5-steps || value
+		serializationSteps[277] = createSerializationStepSequence((7/*V7*/ << 4) | 2/*[*]*/, 5, 0);
 		// 278: V08*1-steps || value
-		serializationSteps[278] = createSerializationStepSequence((8/*V8*/ << 4) | 2/*[*]*/, 1, 0);
+		serializationSteps[278] = createSerializationStepSequence((8/*V8*/ << 4) | 1/*[?]*/, 1, 0);
 		// 279: V08*1-steps || value
-		serializationSteps[279] = createSerializationStepSequence((8/*V8*/ << 4) | 3/*[+]*/, 1, 0);
-		// 280: V08*5-steps || value
-		serializationSteps[280] = createSerializationStepSequence((8/*V8*/ << 4) | 2/*[*]*/, 5, 0);
-		// 281: V09*1-steps || value
-		serializationSteps[281] = createSerializationStepSequence((9/*V9*/ << 4) | 1/*[?]*/, 1, 0);
-		// 282: V09*5-steps || value
-		serializationSteps[282] = createSerializationStepSequence((9/*V9*/ << 4) | 2/*[*]*/, 5, 0);
-		// 283: wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
-		serializationSteps[283] = createSerializationStepWrapper(2);
-		// 284: NamedElementCS::name=UnaryOperatorName || soft-space value soft-space
-		serializationSteps[284] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 129 /*UnaryOperatorName*/, 12);
-		// 285: NamedElementCS::name=UnreservedName || soft-space value soft-space
-		serializationSteps[285] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 133 /*UnreservedName*/, 12);
-		// 286: NamedElementCS::name=UnrestrictedName || soft-space value soft-space
-		serializationSteps[286] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 135 /*UnrestrictedName*/, 12);
-		// 287: NamedElementCS::name=BinaryOperatorName || soft-space value soft-space
-		serializationSteps[287] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 2 /*BinaryOperatorName*/, 12);
-		// 288: NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space
-		serializationSteps[288] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 22 /*EnumerationLiteralName*/, 12);
-		// 289: NamedElementCS::name=Identifier || soft-space value soft-space
-		serializationSteps[289] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 35 /*Identifier*/, 12);
-		// 290: RoundBracketedClauseCS::ownedArguments+=NavigatingArgCS || value
-		serializationSteps[290] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.ROUND_BRACKETED_CLAUSE_CS__OWNED_ARGUMENTS, 58 /*NavigatingArgCS*/, 0);
-		// 291: RoundBracketedClauseCS::ownedArguments+=NavigatingCommaArgCS|NavigatingSemiArgCS|NavigatingBarArgCS || value
-		serializationSteps[291] = createSerializationStepAssigns(EssentialOCLCSPackage.Literals.ROUND_BRACKETED_CLAUSE_CS__OWNED_ARGUMENTS, -1, new int[] { 61/*NavigatingCommaArgCS*/,62/*NavigatingSemiArgCS*/,60/*NavigatingBarArgCS*/}, 0);
-		// 292: PathNameCS::ownedPathElements+=URIFirstPathElementCS || value
-		serializationSteps[292] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 127 /*URIFirstPathElementCS*/, 0);
-		// 293: PathNameCS::ownedPathElements+=FirstPathElementCS || value
-		serializationSteps[293] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 30 /*FirstPathElementCS*/, 0);
-		// 294: PathNameCS::ownedPathElements+=NextPathElementCS || value
-		serializationSteps[294] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 65 /*NextPathElementCS*/, 0);
-		// 295: OperatorExpCS::ownedRight=ExpCS || value
-		serializationSteps[295] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 29 /*ExpCS*/, 0);
-		// 296: OperatorExpCS::ownedRight=PrefixedLetExpCS || value
-		serializationSteps[296] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 75 /*PrefixedLetExpCS*/, 0);
-		// 297: OperatorExpCS::ownedRight=PrefixedPrimaryExpCS || value
-		serializationSteps[297] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 76 /*PrefixedPrimaryExpCS*/, 0);
-		// 298: TypedElementCS::ownedType=TypeExpCS || value
-		serializationSteps[298] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE, 113 /*TypeExpCS*/, 0);
-		// 299: TypedElementCS::ownedType=TypedMultiplicityRefCS || value
-		serializationSteps[299] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE, 121 /*TypedMultiplicityRefCS*/, 0);
-		// 300: PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value
-		serializationSteps[300] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 132 /*UnrealizedVariableCS*/, 0);
-		// 301: PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value
-		serializationSteps[301] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 32 /*GuardVariableCS*/, 0);
-		// 302: PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || soft-new-line value
-		serializationSteps[302] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 132 /*UnrealizedVariableCS*/, 3);
-		// 303: PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value
-		serializationSteps[303] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 32 /*GuardVariableCS*/, 3);
-		// 304: TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space
-		serializationSteps[304] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 0 /* '!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' */, 12);
-		// 305: TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space
-		serializationSteps[305] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 1 /* '!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' */, 12);
-		// 306: TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space
-		serializationSteps[306] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 2 /* '!derived|!ordered|!unique|derived|ordered|unique' */, 12);
-		// 307: TypedElementCS::qualifiers+='!ordered|!unique|ordered|unique' || soft-space value soft-space
-		serializationSteps[307] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 3 /* '!ordered|!unique|ordered|unique' */, 12);
-		// 308: TypedElementCS::qualifiers+='definition' || soft-space value soft-space
-		serializationSteps[308] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 15 /* 'definition' */, 12);
-		// 309: TypedElementCS::qualifiers+='static' || soft-space value soft-space
-		serializationSteps[309] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 23 /* 'static' */, 12);
-		// 310: PathElementCS::referredElement=URI || soft-space value soft-space
-		serializationSteps[310] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "URI"), 126, 12);
-		// 311: PathElementCS::referredElement=UnreservedName || soft-space value soft-space
-		serializationSteps[311] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "UnreservedName"), 133, 12);
-		// 312: PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space
-		serializationSteps[312] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "UnrestrictedName"), 135, 12);
+		serializationSteps[279] = createSerializationStepSequence((8/*V8*/ << 4) | 2/*[*]*/, 1, 0);
+		// 280: V08*1-steps || value
+		serializationSteps[280] = createSerializationStepSequence((8/*V8*/ << 4) | 3/*[+]*/, 1, 0);
+		// 281: V08*5-steps || value
+		serializationSteps[281] = createSerializationStepSequence((8/*V8*/ << 4) | 2/*[*]*/, 5, 0);
+		// 282: V09*1-steps || value
+		serializationSteps[282] = createSerializationStepSequence((9/*V9*/ << 4) | 1/*[?]*/, 1, 0);
+		// 283: V09*5-steps || value
+		serializationSteps[283] = createSerializationStepSequence((9/*V9*/ << 4) | 2/*[*]*/, 5, 0);
+		// 284: wrapper || org.eclipse.ocl.xtext.base.serializer.BaseCommentSegmentSupport value
+		serializationSteps[284] = createSerializationStepWrapper(2);
+		// 285: NamedElementCS::name=UnaryOperatorName || soft-space value soft-space
+		serializationSteps[285] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 129 /*UnaryOperatorName*/, 13);
+		// 286: NamedElementCS::name=UnreservedName || soft-space value soft-space
+		serializationSteps[286] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 133 /*UnreservedName*/, 13);
+		// 287: NamedElementCS::name=UnrestrictedName || soft-space value soft-space
+		serializationSteps[287] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 135 /*UnrestrictedName*/, 13);
+		// 288: NamedElementCS::name=BinaryOperatorName || soft-space value soft-space
+		serializationSteps[288] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 2 /*BinaryOperatorName*/, 13);
+		// 289: NamedElementCS::name=EnumerationLiteralName || soft-space value soft-space
+		serializationSteps[289] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 22 /*EnumerationLiteralName*/, 13);
+		// 290: NamedElementCS::name=Identifier || soft-space value soft-space
+		serializationSteps[290] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, 35 /*Identifier*/, 13);
+		// 291: RoundBracketedClauseCS::ownedArguments+=NavigatingArgCS || value
+		serializationSteps[291] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.ROUND_BRACKETED_CLAUSE_CS__OWNED_ARGUMENTS, 58 /*NavigatingArgCS*/, 0);
+		// 292: RoundBracketedClauseCS::ownedArguments+=NavigatingCommaArgCS|NavigatingSemiArgCS|NavigatingBarArgCS || value
+		serializationSteps[292] = createSerializationStepAssigns(EssentialOCLCSPackage.Literals.ROUND_BRACKETED_CLAUSE_CS__OWNED_ARGUMENTS, -1, new int[] { 61/*NavigatingCommaArgCS*/,62/*NavigatingSemiArgCS*/,60/*NavigatingBarArgCS*/}, 0);
+		// 293: PathNameCS::ownedPathElements+=URIFirstPathElementCS || value
+		serializationSteps[293] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 127 /*URIFirstPathElementCS*/, 0);
+		// 294: PathNameCS::ownedPathElements+=FirstPathElementCS || value
+		serializationSteps[294] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 30 /*FirstPathElementCS*/, 0);
+		// 295: PathNameCS::ownedPathElements+=NextPathElementCS || value
+		serializationSteps[295] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.PATH_NAME_CS__OWNED_PATH_ELEMENTS, 65 /*NextPathElementCS*/, 0);
+		// 296: OperatorExpCS::ownedRight=ExpCS || value
+		serializationSteps[296] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 29 /*ExpCS*/, 0);
+		// 297: OperatorExpCS::ownedRight=PrefixedLetExpCS || value
+		serializationSteps[297] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 75 /*PrefixedLetExpCS*/, 0);
+		// 298: OperatorExpCS::ownedRight=PrefixedPrimaryExpCS || value
+		serializationSteps[298] = createSerializationStepAssignedRuleCall(EssentialOCLCSPackage.Literals.OPERATOR_EXP_CS__OWNED_RIGHT, 76 /*PrefixedPrimaryExpCS*/, 0);
+		// 299: TypedElementCS::ownedType=TypeExpCS || value
+		serializationSteps[299] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE, 113 /*TypeExpCS*/, 0);
+		// 300: TypedElementCS::ownedType=TypedMultiplicityRefCS || value
+		serializationSteps[300] = createSerializationStepAssignedRuleCall(BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE, 121 /*TypedMultiplicityRefCS*/, 0);
+		// 301: PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || value
+		serializationSteps[301] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 132 /*UnrealizedVariableCS*/, 0);
+		// 302: PatternCS::ownedUnrealizedVariables+=GuardVariableCS || value
+		serializationSteps[302] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 32 /*GuardVariableCS*/, 0);
+		// 303: PatternCS::ownedUnrealizedVariables+=UnrealizedVariableCS || soft-new-line value
+		serializationSteps[303] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 132 /*UnrealizedVariableCS*/, 3);
+		// 304: PatternCS::ownedUnrealizedVariables+=GuardVariableCS || soft-new-line value
+		serializationSteps[304] = createSerializationStepAssignedRuleCall(QVTcoreCSPackage.Literals.PATTERN_CS__OWNED_UNREALIZED_VARIABLES, 32 /*GuardVariableCS*/, 3);
+		// 305: TypedElementCS::qualifiers+='!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' || soft-space value soft-space
+		serializationSteps[305] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 0 /* '!composes|!derived|!ordered|!readonly|!resolve|!transient|!unique|!unsettable|!volatile|composes|derived|ordered|readonly|resolve|transient|unique|unsettable|volatile' */, 13);
+		// 306: TypedElementCS::qualifiers+='!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' || soft-space value soft-space
+		serializationSteps[306] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 1 /* '!derived|!id|!ordered|!readonly|!transient|!unique|!unsettable|!volatile|derived|id|ordered|readonly|transient|unique|unsettable|volatile' */, 13);
+		// 307: TypedElementCS::qualifiers+='!derived|!ordered|!unique|derived|ordered|unique' || soft-space value soft-space
+		serializationSteps[307] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 2 /* '!derived|!ordered|!unique|derived|ordered|unique' */, 13);
+		// 308: TypedElementCS::qualifiers+='!ordered|!unique|ordered|unique' || soft-space value soft-space
+		serializationSteps[308] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 3 /* '!ordered|!unique|ordered|unique' */, 13);
+		// 309: TypedElementCS::qualifiers+='definition' || soft-space value soft-space
+		serializationSteps[309] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 15 /* 'definition' */, 13);
+		// 310: TypedElementCS::qualifiers+='static' || soft-space value soft-space
+		serializationSteps[310] = createSerializationStepAssignKeyword(BaseCSPackage.Literals.TYPED_ELEMENT_CS__QUALIFIERS, 23 /* 'static' */, 13);
+		// 311: PathElementCS::referredElement=URI || soft-space value soft-space
+		serializationSteps[311] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "URI"), 126, 13);
+		// 312: PathElementCS::referredElement=UnreservedName || soft-space value soft-space
+		serializationSteps[312] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "UnreservedName"), 133, 13);
+		// 313: PathElementCS::referredElement=UnrestrictedName || soft-space value soft-space
+		serializationSteps[313] = createSerializationStepCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, getCrossReference(BaseCSPackage.Literals.PATH_ELEMENT_CS__REFERRED_ELEMENT, "UnrestrictedName"), 135, 13);
 	}
 
 	/**
@@ -10522,25 +10528,25 @@ public class QVTcoreSerializationMetaData extends AbstractSerializationMetaData
 	 */
 	private void initSubstringSteps() {
 		// 0: '->' : [no-space, value, no-space]
-		substringSteps[0] = createSubstringStep("->", 6 /* no-space, value, no-space */);
+		substringSteps[0] = createSubstringStep("->", 7 /* no-space, value, no-space */);
 		// 1: '.' : [no-space, value, no-space]
-		substringSteps[1] = createSubstringStep(".", 6 /* no-space, value, no-space */);
+		substringSteps[1] = createSubstringStep(".", 7 /* no-space, value, no-space */);
 		// 2: '?->' : [no-space, value, no-space]
-		substringSteps[2] = createSubstringStep("?->", 6 /* no-space, value, no-space */);
+		substringSteps[2] = createSubstringStep("?->", 7 /* no-space, value, no-space */);
 		// 3: '?.' : [no-space, value, no-space]
-		substringSteps[3] = createSubstringStep("?.", 6 /* no-space, value, no-space */);
+		substringSteps[3] = createSubstringStep("?.", 7 /* no-space, value, no-space */);
 		// 4: 'else' : [soft-new-line, pop, value, push, soft-space]
-		substringSteps[4] = createSubstringStep("else", 23 /* soft-new-line, pop, value, push, soft-space */);
+		substringSteps[4] = createSubstringStep("else", 24 /* soft-new-line, pop, value, push, soft-space */);
 		// 5: 'endif' : [soft-new-line, pop, value, soft-space]
-		substringSteps[5] = createSubstringStep("endif", 17 /* soft-new-line, pop, value, soft-space */);
+		substringSteps[5] = createSubstringStep("endif", 18 /* soft-new-line, pop, value, soft-space */);
 		// 6: 'if' : [soft-new-line, value, push, soft-space]
-		substringSteps[6] = createSubstringStep("if", 19 /* soft-new-line, value, push, soft-space */);
+		substringSteps[6] = createSubstringStep("if", 20 /* soft-new-line, value, push, soft-space */);
 		// 7: 'in' : [soft-space, pop, value, soft-new-line]
-		substringSteps[7] = createSubstringStep("in", 20 /* soft-space, pop, value, soft-new-line */);
+		substringSteps[7] = createSubstringStep("in", 21 /* soft-space, pop, value, soft-new-line */);
 		// 8: 'let' : [soft-space, value, push]
-		substringSteps[8] = createSubstringStep("let", 11 /* soft-space, value, push */);
+		substringSteps[8] = createSubstringStep("let", 12 /* soft-space, value, push */);
 		// 9: 'then' : [pop, soft-space, value, push, soft-space]
-		substringSteps[9] = createSubstringStep("then", 22 /* pop, soft-space, value, push, soft-space */);
+		substringSteps[9] = createSubstringStep("then", 23 /* pop, soft-space, value, push, soft-space */);
 	}
 }
 
