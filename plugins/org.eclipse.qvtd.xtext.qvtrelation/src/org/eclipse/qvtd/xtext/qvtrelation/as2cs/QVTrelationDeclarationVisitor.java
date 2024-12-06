@@ -82,7 +82,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
@@ -332,7 +331,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		JavaClassCS csJavaClass = null;
 		String implementationClass = asFunction.getImplementationClass();
 		if (implementationClass != null) {
-			csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();
+			csJavaClass = BaseCSFactory.eINSTANCE.createJavaClassCS();
 			csJavaClass.setName(implementationClass);
 			ClassUtil.nonNullState(context.getCSResource()).getContents().add(csJavaClass);
 		}

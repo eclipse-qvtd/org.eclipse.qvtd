@@ -14,25 +14,25 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
-import org.eclipse.ocl.xtext.basecs.JavaClassCS;
-import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.PackageCSImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.CompoundTargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.DummyQVTbaseConstraintClass;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.SimpleTargetElementCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.TargetElementCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.util.QVTbaseCSValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,13 +59,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass javaClassCSEClass = null;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass javaImplementationCSEClass = null;
+	private EClass dummyQVTbaseConstraintClassEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +144,18 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		// Initialize created meta-data
 		theQVTbaseCSPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theQVTbaseCSPackage,
+			 new EValidator.Descriptor()
+			 {
+				 @Override
+				 public EValidator getEValidator()
+				 {
+					 return QVTbaseCSValidator.INSTANCE;
+				 }
+			 });
+
 		// Mark meta-data to indicate it can't be changed
 		theQVTbaseCSPackage.freeze();
 
@@ -219,31 +225,9 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getJavaClassCS()
+	public EClass getDummyQVTbaseConstraintClass()
 	{
-		return javaClassCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getJavaImplementationCS()
-	{
-		return javaImplementationCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getJavaImplementationCS_Implementation()
-	{
-		return (EReference)javaImplementationCSEClass.getEStructuralFeatures().get(0);
+		return dummyQVTbaseConstraintClassEClass;
 	}
 
 	/**
@@ -405,25 +389,22 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		compoundTargetElementCSEClass = createEClass(1);
 		createEReference(compoundTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		javaClassCSEClass = createEClass(2);
+		dummyQVTbaseConstraintClassEClass = createEClass(2);
 
-		javaImplementationCSEClass = createEClass(3);
-		createEReference(javaImplementationCSEClass, ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0);
-
-		qualifiedPackageCSEClass = createEClass(4);
+		qualifiedPackageCSEClass = createEClass(3);
 		createEReference(qualifiedPackageCSEClass, PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0);
 
-		simpleTargetElementCSEClass = createEClass(5);
+		simpleTargetElementCSEClass = createEClass(4);
 		createEReference(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		createEReference(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 		createEAttribute(simpleTargetElementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4);
 
-		targetCSEClass = createEClass(6);
+		targetCSEClass = createEClass(5);
 		createEReference(targetCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		targetElementCSEClass = createEClass(7);
+		targetElementCSEClass = createEClass(6);
 	}
 
 	/**
@@ -461,8 +442,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		// Add supertypes to classes
 		abstractTransformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
 		compoundTargetElementCSEClass.getESuperTypes().add(this.getTargetElementCS());
-		javaClassCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
-		javaImplementationCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
+		dummyQVTbaseConstraintClassEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		qualifiedPackageCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
 		simpleTargetElementCSEClass.getESuperTypes().add(this.getTargetElementCS());
 		targetCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
@@ -476,10 +456,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		initEClass(compoundTargetElementCSEClass, CompoundTargetElementCS.class, "CompoundTargetElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompoundTargetElementCS_OwnedTargetElements(), this.getSimpleTargetElementCS(), null, "ownedTargetElements", null, 0, -1, CompoundTargetElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(javaClassCSEClass, JavaClassCS.class, "JavaClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(javaImplementationCSEClass, JavaImplementationCS.class, "JavaImplementationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJavaImplementationCS_Implementation(), this.getJavaClassCS(), null, "implementation", null, 0, 1, JavaImplementationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(dummyQVTbaseConstraintClassEClass, DummyQVTbaseConstraintClass.class, "DummyQVTbaseConstraintClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(qualifiedPackageCSEClass, QualifiedPackageCS.class, "QualifiedPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQualifiedPackageCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, QualifiedPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -498,6 +475,28 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations()
+	{
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation
+		  (dummyQVTbaseConstraintClassEClass,
+		   source,
+		   new String[]
+		   {
+			   "constraints", "DummyConstraint"
+		   });
 	}
 
 } //QVTbaseCSPackageImpl

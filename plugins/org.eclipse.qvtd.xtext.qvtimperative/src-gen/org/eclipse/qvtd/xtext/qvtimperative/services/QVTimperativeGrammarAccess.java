@@ -1713,13 +1713,13 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		//QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
 		//        '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		//        ':' ownedType=TypeExpCS
-		//        (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
+		//        (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
 		@Override public ParserRule getRule() { return rule; }
 
 		//isTransient?='transient'? 'query' name=UnrestrictedName
 		//       '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		//       ':' ownedType=TypeExpCS
-		//       (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'))
+		//       (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';'))
 		public Group getGroup() { return cGroup; }
 
 		//isTransient?='transient'?
@@ -1773,7 +1773,7 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_7_0() { return cOwnedTypeTypeExpCSParserRuleCall_7_0; }
 
-		//(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'))
+		//(';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';'))
 		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
 		//';'
@@ -1794,16 +1794,16 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_8_1_2() { return cRightCurlyBracketKeyword_8_1_2; }
 
-		//('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';')
+		//('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';')
 		public Group getGroup_8_2() { return cGroup_8_2; }
 
 		//'implementedby'
 		public Keyword getImplementedbyKeyword_8_2_0() { return cImplementedbyKeyword_8_2_0; }
 
-		//implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING]
+		//implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING]
 		public Assignment getImplementationAssignment_8_2_1() { return cImplementationAssignment_8_2_1; }
 
-		//[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING]
+		//[base::JavaClassCS|SINGLE_QUOTED_STRING]
 		public CrossReference getImplementationJavaClassCSCrossReference_8_2_1_0() { return cImplementationJavaClassCSCrossReference_8_2_1_0; }
 
 		//SINGLE_QUOTED_STRING
@@ -2834,7 +2834,7 @@ public class QVTimperativeGrammarAccess extends AbstractElementFinder.AbstractGr
 	//QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName
 	//        '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 	//        ':' ownedType=TypeExpCS
-	//        (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[qvtbasecs::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
+	//        (';' | ('{' ownedExpression=ExpCS '}') | ('implementedby' implementation=[base::JavaClassCS|SINGLE_QUOTED_STRING] ';'));
 	public QueryCSElements getQueryCSAccess() {
 		return pQueryCS;
 	}

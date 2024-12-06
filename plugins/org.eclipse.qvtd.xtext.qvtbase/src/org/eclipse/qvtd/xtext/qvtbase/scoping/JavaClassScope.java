@@ -40,9 +40,9 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.scoping.AbstractJavaClassScope;
+import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.JavaClassCS;
 import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -197,7 +197,7 @@ public class JavaClassScope extends AbstractJavaClassScope
 			};
 			thread.start();
 			String name = "Try again once worker thread class path scan has completed.";
-			JavaClassCS csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();
+			JavaClassCS csJavaClass = BaseCSFactory.eINSTANCE.createJavaClassCS();
 			csJavaClass.setName(name);
 			results.add(EObjectDescription.create(name, csJavaClass));
 		}
@@ -216,7 +216,7 @@ public class JavaClassScope extends AbstractJavaClassScope
 		synchronized (name2class) {
 			csJavaClass = name2class.get(name);
 			if (csJavaClass == null) {
-				csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();
+				csJavaClass = BaseCSFactory.eINSTANCE.createJavaClassCS();
 				csJavaClass.setName(name);
 				name2class.put(name, csJavaClass);
 			}

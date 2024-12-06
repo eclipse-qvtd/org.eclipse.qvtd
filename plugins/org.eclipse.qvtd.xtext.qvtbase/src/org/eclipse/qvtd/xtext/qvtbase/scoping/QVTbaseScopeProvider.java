@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.xtext.base.scoping.AbstractJavaClassScope;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.xtext.scoping.IScope;
 
 /**
@@ -42,7 +42,7 @@ public class QVTbaseScopeProvider extends org.eclipse.ocl.xtext.essentialocl.sco
 			return IScope.NULLSCOPE;
 		}
 		EClass eReferenceType = reference.getEReferenceType();
-		if (eReferenceType == QVTbaseCSPackage.Literals.JAVA_CLASS_CS) {
+		if (eReferenceType == BaseCSPackage.Literals.JAVA_CLASS_CS) {
 			if (csResource instanceof BaseCSResource) {
 				AbstractJavaClassScope adapter = JavaClassScope.findAdapter((BaseCSResource)csResource);
 				if (adapter == null) {

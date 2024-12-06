@@ -24,8 +24,7 @@ public interface QVTbaseCSVisitor<R> extends org.eclipse.ocl.xtext.essentialoclc
 {
 	R visitAbstractTransformationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull AbstractTransformationCS object);
 	R visitCompoundTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull CompoundTargetElementCS object);
-	R visitJavaClassCS(org.eclipse.ocl.xtext.basecs.JavaClassCS object);
-	R visitJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS object);
+	R visitDummyQVTbaseConstraintClass(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull DummyQVTbaseConstraintClass object);
 	R visitQualifiedPackageCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull QualifiedPackageCS object);
 	R visitSimpleTargetElementCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull SimpleTargetElementCS object);
 	R visitTargetCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull TargetCS object);

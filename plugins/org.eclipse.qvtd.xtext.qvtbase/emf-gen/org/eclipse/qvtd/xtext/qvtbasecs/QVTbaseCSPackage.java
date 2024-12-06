@@ -82,7 +82,7 @@ public interface QVTbaseCSPackage extends EPackage
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getTargetElementCS()
 	 * @generated
 	 */
-	int TARGET_ELEMENT_CS = 7;
+	int TARGET_ELEMENT_CS = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.CompoundTargetElementCSImpl <em>Compound Target Element CS</em>}' class.
@@ -95,24 +95,14 @@ public interface QVTbaseCSPackage extends EPackage
 	int COMPOUND_TARGET_ELEMENT_CS = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.DummyQVTbaseConstraintClassImpl <em>Dummy QV Tbase Constraint Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.DummyQVTbaseConstraintClassImpl
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getDummyQVTbaseConstraintClass()
 	 * @generated
 	 */
-	int JAVA_CLASS_CS = 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
-	 * @generated
-	 */
-	int JAVA_IMPLEMENTATION_CS = 3;
+	int DUMMY_QV_TBASE_CONSTRAINT_CLASS = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.QualifiedPackageCSImpl <em>Qualified Package CS</em>}' class.
@@ -122,7 +112,7 @@ public interface QVTbaseCSPackage extends EPackage
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getQualifiedPackageCS()
 	 * @generated
 	 */
-	int QUALIFIED_PACKAGE_CS = 4;
+	int QUALIFIED_PACKAGE_CS = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.SimpleTargetElementCSImpl <em>Simple Target Element CS</em>}' class.
@@ -132,7 +122,7 @@ public interface QVTbaseCSPackage extends EPackage
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getSimpleTargetElementCS()
 	 * @generated
 	 */
-	int SIMPLE_TARGET_ELEMENT_CS = 5;
+	int SIMPLE_TARGET_ELEMENT_CS = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.TargetCSImpl <em>Target CS</em>}' class.
@@ -142,7 +132,7 @@ public interface QVTbaseCSPackage extends EPackage
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getTargetCS()
 	 * @generated
 	 */
-	int TARGET_CS = 6;
+	int TARGET_CS = 5;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS <em>Abstract Transformation CS</em>}'.
@@ -198,35 +188,14 @@ public interface QVTbaseCSPackage extends EPackage
 	EReference getCompoundTargetElementCS_OwnedTargetElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.xtext.basecs.JavaClassCS <em>Java Class CS</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.DummyQVTbaseConstraintClass <em>Dummy QV Tbase Constraint Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Java Class CS</em>'.
-	 * @see org.eclipse.ocl.xtext.basecs.JavaClassCS
+	 * @return the meta object for class '<em>Dummy QV Tbase Constraint Class</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.DummyQVTbaseConstraintClass
 	 * @generated
 	 */
-	EClass getJavaClassCS();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.xtext.basecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Java Implementation CS</em>'.
-	 * @see org.eclipse.ocl.xtext.basecs.JavaImplementationCS
-	 * @generated
-	 */
-	EClass getJavaImplementationCS();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.xtext.basecs.JavaImplementationCS#getImplementation <em>Implementation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Implementation</em>'.
-	 * @see org.eclipse.ocl.xtext.basecs.JavaImplementationCS#getImplementation()
-	 * @see #getJavaImplementationCS()
-	 * @generated
-	 */
-	EReference getJavaImplementationCS_Implementation();
+	EClass getDummyQVTbaseConstraintClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS <em>Qualified Package CS</em>}'.
@@ -413,32 +382,14 @@ public interface QVTbaseCSPackage extends EPackage
 		EReference COMPOUND_TARGET_ELEMENT_CS__OWNED_TARGET_ELEMENTS = eINSTANCE.getCompoundTargetElementCS_OwnedTargetElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.DummyQVTbaseConstraintClassImpl <em>Dummy QV Tbase Constraint Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.DummyQVTbaseConstraintClassImpl
+		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getDummyQVTbaseConstraintClass()
 		 * @generated
 		 */
-		EClass JAVA_CLASS_CS = eINSTANCE.getJavaClassCS();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
-		 * @generated
-		 */
-		EClass JAVA_IMPLEMENTATION_CS = eINSTANCE.getJavaImplementationCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Implementation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JAVA_IMPLEMENTATION_CS__IMPLEMENTATION = eINSTANCE.getJavaImplementationCS_Implementation();
+		EClass DUMMY_QV_TBASE_CONSTRAINT_CLASS = eINSTANCE.getDummyQVTbaseConstraintClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.QualifiedPackageCSImpl <em>Qualified Package CS</em>}' class.

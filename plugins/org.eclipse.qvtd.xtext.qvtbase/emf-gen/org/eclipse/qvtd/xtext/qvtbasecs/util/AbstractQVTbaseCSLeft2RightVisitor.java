@@ -52,12 +52,7 @@ public abstract class AbstractQVTbaseCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitJavaClassCS(org.eclipse.ocl.xtext.basecs.JavaClassCS csElement) {
-		return visitNamedElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Element visitJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS csElement) {
+	public @Nullable Element visitDummyQVTbaseConstraintClass(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull DummyQVTbaseConstraintClass csElement) {
 		return visitElementCS(csElement);
 	}
 

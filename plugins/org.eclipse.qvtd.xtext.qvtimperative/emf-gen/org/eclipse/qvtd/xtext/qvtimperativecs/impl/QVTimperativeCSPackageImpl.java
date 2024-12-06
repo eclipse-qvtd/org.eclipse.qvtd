@@ -1431,7 +1431,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		observableStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		queryCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getJavaImplementationCS());
+		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getJavaImplementationCS());
 		setStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		simpleParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		simpleParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());

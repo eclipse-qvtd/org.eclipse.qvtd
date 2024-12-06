@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
-import org.eclipse.ocl.xtext.basecs.JavaClassCS;
-import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.NamespaceCS;
@@ -121,24 +119,13 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 			}
 			case 2:
 			{
-				JavaClassCS javaClassCS = (JavaClassCS)theEObject;
-				T result = caseJavaClassCS(javaClassCS);
-				if (result == null) result = caseNamedElementCS(javaClassCS);
-				if (result == null) result = caseModelElementCS(javaClassCS);
-				if (result == null) result = casePivotableElementCS(javaClassCS);
-				if (result == null) result = caseElementCS(javaClassCS);
+				DummyQVTbaseConstraintClass dummyQVTbaseConstraintClass = (DummyQVTbaseConstraintClass)theEObject;
+				T result = caseDummyQVTbaseConstraintClass(dummyQVTbaseConstraintClass);
+				if (result == null) result = caseElementCS(dummyQVTbaseConstraintClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case 3:
-			{
-				JavaImplementationCS javaImplementationCS = (JavaImplementationCS)theEObject;
-				T result = caseJavaImplementationCS(javaImplementationCS);
-				if (result == null) result = caseElementCS(javaImplementationCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case 4:
 			{
 				QualifiedPackageCS qualifiedPackageCS = (QualifiedPackageCS)theEObject;
 				T result = caseQualifiedPackageCS(qualifiedPackageCS);
@@ -152,7 +139,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 5:
+			case 4:
 			{
 				SimpleTargetElementCS simpleTargetElementCS = (SimpleTargetElementCS)theEObject;
 				T result = caseSimpleTargetElementCS(simpleTargetElementCS);
@@ -163,7 +150,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 6:
+			case 5:
 			{
 				TargetCS targetCS = (TargetCS)theEObject;
 				T result = caseTargetCS(targetCS);
@@ -174,7 +161,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case 7:
+			case 6:
 			{
 				TargetElementCS targetElementCS = (TargetElementCS)theEObject;
 				T result = caseTargetElementCS(targetElementCS);
@@ -221,33 +208,17 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Java Class CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dummy QV Tbase Constraint Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Java Class CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dummy QV Tbase Constraint Class</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJavaClassCS(JavaClassCS object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Java Implementation CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Java Implementation CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJavaImplementationCS(JavaImplementationCS object)
+	public T caseDummyQVTbaseConstraintClass(DummyQVTbaseConstraintClass object)
 	{
 		return null;
 	}

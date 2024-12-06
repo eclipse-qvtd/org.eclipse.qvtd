@@ -381,7 +381,7 @@ public class QVTrelationGrammarResource extends AbstractGrammarResource
 						createGroup(
 							createKeyword("implementedby"),
 							createAssignment("implementation", "=", createCrossReference(
-								createTypeRef(MM_qvtbasecs, org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.Literals.JAVA_CLASS_CS), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING))),
+								createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.JAVA_CLASS_CS), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING))),
 							createKeyword(";")))));
 			PR_RelationCS.setAlternatives(
 				createGroup(

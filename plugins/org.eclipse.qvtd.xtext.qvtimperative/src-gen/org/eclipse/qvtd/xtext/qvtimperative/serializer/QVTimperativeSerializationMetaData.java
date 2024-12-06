@@ -4180,7 +4180,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 		// 63: |InfixExpCS::ownedLeft|
 		serializationMatchTerms[63] = createSerializationMatchTermEStructuralFeatureSize(EssentialOCLCSPackage.Literals.INFIX_EXP_CS__OWNED_LEFT);
 		// 64: |JavaImplementationCS::implementation|
-		serializationMatchTerms[64] = createSerializationMatchTermEStructuralFeatureSize(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION);
+		serializationMatchTerms[64] = createSerializationMatchTermEStructuralFeatureSize(BaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION);
 		// 65: |LambdaLiteralExpCS::ownedExpressionCS|
 		serializationMatchTerms[65] = createSerializationMatchTermEStructuralFeatureSize(EssentialOCLCSPackage.Literals.LAMBDA_LITERAL_EXP_CS__OWNED_EXPRESSION_CS);
 		// 66: |LetExpCS::isImplicit|
@@ -9844,7 +9844,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 					(27/*'transient'*/ << 4) | 1 /*[?]*/
 				),
 				createSerializationSimpleAttribute(BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME, true, GrammarCardinality.ONE),
-				createSerializationReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, -1
+				createSerializationReference(BaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, -1
 				),
 				createSerializationReference(QVTimperativeCSPackage.Literals.QUERY_CS__OWNED_PARAMETERS, 27/* ParamDeclarationCS */,
 					(84/*ParamDeclarationCS*/ << 4) | 2 /*[*]*/
@@ -10323,7 +10323,7 @@ public class QVTimperativeSerializationMetaData extends AbstractSerializationMet
 		// 3: MappingCS::firstPass=LOWER || soft-space value soft-space
 		serializationSteps[3] = createSerializationStepAssignedRuleCall(QVTimperativeCSPackage.Literals.MAPPING_CS__FIRST_PASS, 50 /*LOWER*/, 11);
 		// 4: JavaImplementationCS::implementation=SINGLE_QUOTED_STRING || soft-space value soft-space
-		serializationSteps[4] = createSerializationStepCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, getCrossReference(QVTbaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, "SINGLE_QUOTED_STRING"), 102, 11);
+		serializationSteps[4] = createSerializationStepCrossReference(BaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, getCrossReference(BaseCSPackage.Literals.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION, "SINGLE_QUOTED_STRING"), 102, 11);
 		// 5: DirectionCS::imports+=UnrestrictedName || soft-space value soft-space
 		serializationSteps[5] = createSerializationStepCrossReference(QVTimperativeCSPackage.Literals.DIRECTION_CS__IMPORTS, getCrossReference(QVTimperativeCSPackage.Literals.DIRECTION_CS__IMPORTS, "UnrestrictedName"), 149, 11);
 		// 6: SimpleTargetElementCS::input?='input' || soft-space value soft-space

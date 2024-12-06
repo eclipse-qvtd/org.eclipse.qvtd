@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.JavaClassCS;
 import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -386,7 +385,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == JavaImplementationCS.class) {
 			switch (derivedFeatureID) {
-				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0;
+				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return 2;
 				default: return -1;
 			}
 		}
@@ -402,7 +401,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == JavaImplementationCS.class) {
 			switch (baseFeatureID) {
-				case ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+				case 2: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

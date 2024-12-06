@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtbasecs;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.basecs.JavaClassCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,15 +39,6 @@ public interface QVTbaseCSFactory extends EFactory
 	 * @generated
 	 */
 	CompoundTargetElementCS createCompoundTargetElementCS();
-
-	/**
-	 * Returns a new object of class '<em>Java Class CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Java Class CS</em>'.
-	 * @generated
-	 */
-	@NonNull JavaClassCS createJavaClassCS();
 
 	/**
 	 * Returns a new object of class '<em>Qualified Package CS</em>'.
