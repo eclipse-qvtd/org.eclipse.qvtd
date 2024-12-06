@@ -14,5 +14,6 @@ package org.eclipse.qvtd.xtext.qvtrelation.scoping;
 
 import org.eclipse.qvtd.xtext.qvtbase.scoping.QVTbaseScopeProvider;
 
+@Deprecated /* @deprecated not used */
 public abstract class AbstractQVTrelationScopeProvider extends QVTbaseScopeProvider {
 }

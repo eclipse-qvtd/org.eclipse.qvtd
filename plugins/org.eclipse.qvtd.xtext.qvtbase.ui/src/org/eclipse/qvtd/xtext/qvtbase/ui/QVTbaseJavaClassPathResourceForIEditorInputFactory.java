@@ -12,8 +12,8 @@ package org.eclipse.qvtd.xtext.qvtbase.ui;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvtd.xtext.qvtbase.scoping.JavaClassScope;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
@@ -30,7 +30,9 @@ public class QVTbaseJavaClassPathResourceForIEditorInputFactory extends JavaClas
 		if ((csResource instanceof BaseCSResource) && (editorInput instanceof FileEditorInput)) {
 			IProject project = ((FileEditorInput)editorInput).getFile().getProject();
 			if (project != null) {
-				JavaClassScope.getAdapter((BaseCSResource) csResource, project);
+				BaseCSResource baseCSResource = (BaseCSResource)csResource;
+				@SuppressWarnings("unused") CS2AS cs2as = baseCSResource.getCS2AS(baseCSResource.getEnvironmentFactory());
+				//	JavaClassScope.getAdapter((BaseCSResource) csResource, project);
 			}
 		}
 		return csResource;

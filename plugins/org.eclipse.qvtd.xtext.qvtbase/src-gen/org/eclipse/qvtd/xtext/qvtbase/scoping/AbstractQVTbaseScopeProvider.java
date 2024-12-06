@@ -14,5 +14,6 @@ package org.eclipse.qvtd.xtext.qvtbase.scoping;
 
 import org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
 
+@Deprecated /* @deprecated not used */
 public abstract class AbstractQVTbaseScopeProvider extends EssentialOCLScopeProvider {
 }

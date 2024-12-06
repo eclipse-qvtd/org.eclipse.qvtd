@@ -40,7 +40,6 @@ import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.oclstdlib.scoping.JavaClassScope;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
@@ -204,12 +203,10 @@ public class QVTruntimeLibraryTests extends XtextTestCase
 		assert xtextResource != null;
 		ClassLoader classLoader = getClass().getClassLoader();
 		assert classLoader != null;
-		JavaClassScope.getAdapter(xtextResource, classLoader);
+		CS2AS cs2as = xtextResource.getCS2AS(ocl.getEnvironmentFactory());
 		// XXX	ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(null);
 		assertNoResourceErrors("Load failed", xtextResource);
-		CS2AS cs2as = xtextResource.findCS2AS();
-		assert cs2as != null;
 		Resource fileResource = cs2as.getASResource();
 		assertNoResourceErrors("File Model", fileResource);
 		assertNoUnresolvedProxies("File Model", fileResource);
