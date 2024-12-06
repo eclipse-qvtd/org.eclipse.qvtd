@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtbasecs;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.JavaClassCS;
 
 /**
  * <!-- begin-user-doc -->

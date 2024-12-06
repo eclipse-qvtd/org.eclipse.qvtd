@@ -95,20 +95,20 @@ public interface QVTbaseCSPackage extends EPackage
 	int COMPOUND_TARGET_ELEMENT_CS = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl
+	 * @see org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
 	 * @generated
 	 */
 	int JAVA_CLASS_CS = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl
+	 * @see org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl
 	 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
 	 * @generated
 	 */
@@ -198,31 +198,31 @@ public interface QVTbaseCSPackage extends EPackage
 	EReference getCompoundTargetElementCS_OwnedTargetElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS <em>Java Class CS</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.xtext.basecs.JavaClassCS <em>Java Class CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Java Class CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS
+	 * @see org.eclipse.ocl.xtext.basecs.JavaClassCS
 	 * @generated
 	 */
 	EClass getJavaClassCS();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.xtext.basecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Java Implementation CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
+	 * @see org.eclipse.ocl.xtext.basecs.JavaImplementationCS
 	 * @generated
 	 */
 	EClass getJavaImplementationCS();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS#getImplementation <em>Implementation</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.xtext.basecs.JavaImplementationCS#getImplementation <em>Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Implementation</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS#getImplementation()
+	 * @see org.eclipse.ocl.xtext.basecs.JavaImplementationCS#getImplementation()
 	 * @see #getJavaImplementationCS()
 	 * @generated
 	 */
@@ -413,20 +413,20 @@ public interface QVTbaseCSPackage extends EPackage
 		EReference COMPOUND_TARGET_ELEMENT_CS__OWNED_TARGET_ELEMENTS = eINSTANCE.getCompoundTargetElementCS_OwnedTargetElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl <em>Java Class CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaClassCSImpl
+		 * @see org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl
 		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaClassCS()
 		 * @generated
 		 */
 		EClass JAVA_CLASS_CS = eINSTANCE.getJavaClassCS();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl <em>Java Implementation CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.JavaImplementationCSImpl
+		 * @see org.eclipse.ocl.xtext.basecs.impl.JavaImplementationCSImpl
 		 * @see org.eclipse.qvtd.xtext.qvtbasecs.impl.QVTbaseCSPackageImpl#getJavaImplementationCS()
 		 * @generated
 		 */

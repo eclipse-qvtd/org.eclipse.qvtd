@@ -48,12 +48,12 @@ public abstract class AbstractNullQVTbaseCSVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS object) {
+	public R visitJavaClassCS(org.eclipse.ocl.xtext.basecs.JavaClassCS object) {
 		return null;
 	}
 
 	@Override
-	public R visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS object) {
+	public R visitJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS object) {
 		return null;
 	}
 

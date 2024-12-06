@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.JavaClassCS;
+import org.eclipse.ocl.xtext.basecs.impl.JavaClassCSImpl;
 import org.eclipse.qvtd.xtext.qvtbasecs.*;
 
 /**

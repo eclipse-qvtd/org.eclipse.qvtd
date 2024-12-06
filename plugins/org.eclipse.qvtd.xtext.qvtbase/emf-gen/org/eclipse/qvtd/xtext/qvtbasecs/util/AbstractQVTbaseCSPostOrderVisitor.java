@@ -52,12 +52,12 @@ public abstract class AbstractQVTbaseCSPostOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS csElement) {
+	public @Nullable Continuation<?> visitJavaClassCS(org.eclipse.ocl.xtext.basecs.JavaClassCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS csElement) {
+	public @Nullable Continuation<?> visitJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS csElement) {
 		return visitElementCS(csElement);
 	}
 

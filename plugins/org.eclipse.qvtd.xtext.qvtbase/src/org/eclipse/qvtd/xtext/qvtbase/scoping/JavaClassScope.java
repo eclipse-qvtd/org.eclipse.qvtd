@@ -40,8 +40,8 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.scoping.AbstractJavaClassScope;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
+import org.eclipse.ocl.xtext.basecs.JavaClassCS;
+import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -103,7 +103,7 @@ public class JavaClassScope extends AbstractJavaClassScope
 	/**
 	 * Map from known class names to their allocated EObjects.
 	 */
-	private final @NonNull Map<@NonNull String, @NonNull JavaClassCS> name2class = new HashMap<@NonNull String, @NonNull JavaClassCS>();
+	private final @NonNull Map<@NonNull String, org.eclipse.ocl.xtext.basecs.JavaClassCS> name2class = new HashMap<@NonNull String, org.eclipse.ocl.xtext.basecs.JavaClassCS>();
 
 	private boolean doneFullScan = false;
 
