@@ -187,7 +187,7 @@ public interface Rule extends NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='DomainNameIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;isUnique(name)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='domain-&gt;isUnique(name)'"
 	 * @generated
 	 */
 	boolean validateDomainNameIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -196,7 +196,7 @@ public interface Rule extends NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='AtLeastOneDomainIsCheckableOrEnforceable'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;notEmpty() implies domain-&gt;exists(isCheckable or isEnforceable)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='domain-&gt;notEmpty() implies domain-&gt;exists(isCheckable or isEnforceable)'"
 	 * @generated
 	 */
 	boolean validateAtLeastOneDomainIsCheckableOrEnforceable(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -205,7 +205,7 @@ public interface Rule extends NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NoOverridesCycle'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\toverridden-&gt;closure(overridden)-&gt;excludes(self)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='overridden-&gt;closure(overridden)-&gt;excludes(self)'"
 	 * @generated
 	 */
 	boolean validateNoOverridesCycle(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -214,7 +214,7 @@ public interface Rule extends NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='AbstractRuleIsOverridden'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tisAbstract implies overrides-&gt;notEmpty()\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='isAbstract implies overrides-&gt;notEmpty()'"
 	 * @generated
 	 */
 	boolean validateAbstractRuleIsOverridden(DiagnosticChain diagnostics, Map<Object, Object> context);

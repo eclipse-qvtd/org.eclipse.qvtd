@@ -66,8 +66,11 @@ public interface SharedVariable extends Variable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * * The type of a Let variable initializer expression conforms to the type of the Let variable.
+	 * <!-- end-model-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='CompatibleTypeForInitializer'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit &lt;&gt; null implies ownedInit.type?.conformsTo(type)\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit &lt;&gt; null implies ownedInit.type?.conformsTo(type)'"
 	 * @generated
 	 */
 	boolean validateCompatibleTypeForInitializer(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -75,8 +78,11 @@ public interface SharedVariable extends Variable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * * The nullity of a Let variable initializer expression is the nullity of the Let variable.
+	 * <!-- end-model-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='CompatibleNullityForInitializer'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit &lt;&gt; null implies ownedInit.isRequired = isRequired\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit &lt;&gt; null implies ownedInit.isRequired = isRequired'"
 	 * @generated
 	 */
 	boolean validateCompatibleNullityForInitializer(DiagnosticChain diagnostics, Map<Object, Object> context);

@@ -34,7 +34,7 @@ public interface RealizedVariable extends Variable {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NonDataTypeForType'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='not type.oclIsKindOf(ocl::DataType)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='not type.oclIsKindOf(ocl::DataType)'"
 	 * @generated
 	 */
 	boolean validateNonDataTypeForType(DiagnosticChain diagnostics, Map<Object, Object> context);

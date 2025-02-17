@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.qvtd.pivot.qvttemplate.*;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -83,51 +84,51 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTtemplateSwitch<@Nullable Adapter> modelSwitch =
 			new QVTtemplateSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
-			return createCollectionTemplateExpAdapter();
-		}
-		@Override
-		public Adapter caseObjectTemplateExp(ObjectTemplateExp object) {
-			return createObjectTemplateExpAdapter();
-		}
-		@Override
-		public Adapter casePropertyTemplateItem(PropertyTemplateItem object) {
-			return createPropertyTemplateItemAdapter();
-		}
-		@Override
-		public Adapter caseTemplateExp(TemplateExp object) {
-			return createTemplateExpAdapter();
-		}
-		@Override
-		public Adapter caseElement(Element object) {
-			return createElementAdapter();
-		}
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-		@Override
-		public Adapter caseTypedElement(TypedElement object) {
-			return createTypedElementAdapter();
-		}
-		@Override
-		public Adapter caseOCLExpression(OCLExpression object) {
-			return createOCLExpressionAdapter();
-		}
-		@Override
-		public Adapter caseLiteralExp(LiteralExp object) {
-			return createLiteralExpAdapter();
-		}
-		@Override
-		public Adapter caseReferringElement(ReferringElement object) {
-			return createReferringElementAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
+				return createCollectionTemplateExpAdapter();
+			}
+			@Override
+			public Adapter caseObjectTemplateExp(ObjectTemplateExp object) {
+				return createObjectTemplateExpAdapter();
+			}
+			@Override
+			public Adapter casePropertyTemplateItem(PropertyTemplateItem object) {
+				return createPropertyTemplateItemAdapter();
+			}
+			@Override
+			public Adapter caseTemplateExp(TemplateExp object) {
+				return createTemplateExpAdapter();
+			}
+			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseOCLExpression(OCLExpression object) {
+				return createOCLExpressionAdapter();
+			}
+			@Override
+			public Adapter caseLiteralExp(LiteralExp object) {
+				return createLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object) {
+				return createReferringElementAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

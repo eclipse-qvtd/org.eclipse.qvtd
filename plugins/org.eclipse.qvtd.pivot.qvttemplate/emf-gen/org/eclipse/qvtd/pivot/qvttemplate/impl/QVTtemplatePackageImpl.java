@@ -766,7 +766,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		  (getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tmember->forAll(type?.conformsTo(referredCollectionType.elementType))\n\n"
+			   "body", "member->forAll(type?.conformsTo(referredCollectionType.elementType))"
 		   });
 		addAnnotation
 		  (getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
@@ -778,19 +778,19 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		  (getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttype = referredCollectionType\n\n"
+			   "body", "type = referredCollectionType"
 		   });
 		addAnnotation
 		  (getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tpart->isUnique(resolvedProperty)\n\n"
+			   "body", "part->isUnique(resolvedProperty)"
 		   });
 		addAnnotation
 		  (getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttype = referredClass\n\n"
+			   "body", "type = referredClass"
 		   });
 		addAnnotation
 		  (getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),

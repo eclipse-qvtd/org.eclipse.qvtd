@@ -33,8 +33,11 @@ public interface GuardVariable extends Variable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * * A GuardVariable cannot have an initializer. Use a predicate.
+	 * <!-- end-model-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NoInitializer'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit = null\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedInit = null'"
 	 * @generated
 	 */
 	boolean validateNoInitializer(DiagnosticChain diagnostics, Map<Object, Object> context);

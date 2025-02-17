@@ -54,7 +54,7 @@ public interface RelationalTransformation extends Transformation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ContextTypeIsThisTransformation'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\townedContext &lt;&gt; null implies ownedContext.type = self\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedContext &lt;&gt; null implies ownedContext.type = self'"
 	 * @generated
 	 */
 	boolean validateContextTypeIsThisTransformation(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -63,7 +63,7 @@ public interface RelationalTransformation extends Transformation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='RulesAreRelations'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\trule-&gt;forAll(oclIsKindOf(Relation))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='rule-&gt;forAll(oclIsKindOf(Relation))'"
 	 * @generated
 	 */
 	boolean validateRulesAreRelations(DiagnosticChain diagnostics, Map<Object, Object> context);

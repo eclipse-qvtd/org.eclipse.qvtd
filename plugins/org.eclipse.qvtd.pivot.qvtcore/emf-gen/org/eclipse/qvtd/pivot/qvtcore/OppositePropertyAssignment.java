@@ -33,7 +33,7 @@ public interface OppositePropertyAssignment extends NavigationAssignment {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='targetProperty.opposite\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='targetProperty.opposite'"
 	 * @generated
 	 */
 	Property getReferredTargetProperty();
@@ -60,7 +60,7 @@ public interface OppositePropertyAssignment extends NavigationAssignment {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='OppositePropertyIsImplicit'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tgetReferredTargetProperty().isImplicit\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='getReferredTargetProperty().isImplicit'"
 	 * @generated
 	 */
 	boolean validateOppositePropertyIsImplicit(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -69,7 +69,7 @@ public interface OppositePropertyAssignment extends NavigationAssignment {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='TargetPropetyIsSlotProperty'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tslotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)'"
 	 * @generated
 	 */
 	boolean validateTargetPropetyIsSlotProperty(DiagnosticChain diagnostics, Map<Object, Object> context);

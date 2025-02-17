@@ -121,7 +121,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='IdentifiesIsAUsedPackageClass'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation&lt;&gt; null implies transformation.modelParameter.usedPackage-&gt;includes(identifies.owningPackage)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='transformation&lt;&gt; null implies transformation.modelParameter.usedPackage-&gt;includes(identifies.owningPackage)'"
 	 * @generated
 	 */
 	boolean validateIdentifiesIsAUsedPackageClass(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -148,7 +148,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='OppositePartsHaveOpposites'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\toppositePart-&gt;forAll(opposite &lt;&gt; null)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='oppositePart-&gt;forAll(opposite &lt;&gt; null)'"
 	 * @generated
 	 */
 	boolean validateOppositePartsHaveOpposites(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -157,7 +157,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='OppositePartsAreOppositeParts'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\toppositePart-&gt;forAll(self.identifies.conformsTo(type))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='oppositePart-&gt;forAll(self.identifies.conformsTo(type))'"
 	 * @generated
 	 */
 	boolean validateOppositePartsAreOppositeParts(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -166,7 +166,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='PartsAreParts'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tpart-&gt;forAll(self.identifies.conformsTo(owningClass))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='part-&gt;forAll(self.identifies.conformsTo(owningClass))'"
 	 * @generated
 	 */
 	boolean validatePartsAreParts(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -175,7 +175,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='PartsAreUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tpart-&gt;excludesAll(oppositePart.opposite)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='part-&gt;excludesAll(oppositePart.opposite)'"
 	 * @generated
 	 */
 	boolean validatePartsAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);

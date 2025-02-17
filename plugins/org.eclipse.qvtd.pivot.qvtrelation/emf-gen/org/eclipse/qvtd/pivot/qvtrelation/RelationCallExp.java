@@ -81,7 +81,7 @@ public interface RelationCallExp extends OCLExpression {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='MatchingArgumentCount'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tself.argument-&gt;size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable-&gt;size()\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='self.argument-&gt;size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable-&gt;size()'"
 	 * @generated
 	 */
 	boolean validateMatchingArgumentCount(DiagnosticChain diagnostics, Map<Object, Object> context);

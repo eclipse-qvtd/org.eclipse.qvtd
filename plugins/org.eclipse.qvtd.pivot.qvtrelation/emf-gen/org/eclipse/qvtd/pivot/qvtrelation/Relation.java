@@ -156,7 +156,7 @@ public interface Relation extends Rule {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='DomainsAreRelationDomains'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;forAll(oclIsKindOf(RelationDomain))\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='domain-&gt;forAll(oclIsKindOf(RelationDomain))'"
 	 * @generated
 	 */
 	boolean validateDomainsAreRelationDomains(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -165,7 +165,7 @@ public interface Relation extends Rule {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='TopRelationOverriddenByTopRelation'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\toverridden &lt;&gt; null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='overridden &lt;&gt; null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel'"
 	 * @generated
 	 */
 	boolean validateTopRelationOverriddenByTopRelation(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -174,7 +174,7 @@ public interface Relation extends Rule {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='TransformationIsRelationalTransformation'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation.oclIsKindOf(RelationalTransformation)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='transformation.oclIsKindOf(RelationalTransformation)'"
 	 * @generated
 	 */
 	boolean validateTransformationIsRelationalTransformation(DiagnosticChain diagnostics, Map<Object, Object> context);
