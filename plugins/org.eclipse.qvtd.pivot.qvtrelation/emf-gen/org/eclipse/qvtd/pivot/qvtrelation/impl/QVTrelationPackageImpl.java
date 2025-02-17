@@ -1390,7 +1390,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttransformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)\n\n"
+			   "body", "transformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)"
 		   });
 		addAnnotation
 		  (getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
@@ -1408,43 +1408,43 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\toppositePart->forAll(opposite <> null)\n\n"
+			   "body", "oppositePart->forAll(opposite <> null)"
 		   });
 		addAnnotation
 		  (getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\toppositePart->forAll(self.identifies.conformsTo(type))\n\n"
+			   "body", "oppositePart->forAll(self.identifies.conformsTo(type))"
 		   });
 		addAnnotation
 		  (getKey__ValidatePartsAreParts__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tpart->forAll(self.identifies.conformsTo(owningClass))\n\n"
+			   "body", "part->forAll(self.identifies.conformsTo(owningClass))"
 		   });
 		addAnnotation
 		  (getKey__ValidatePartsAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tpart->excludesAll(oppositePart.opposite)\n\n"
+			   "body", "part->excludesAll(oppositePart.opposite)"
 		   });
 		addAnnotation
 		  (getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->forAll(oclIsKindOf(RelationDomain))\n"
+			   "body", "domain->forAll(oclIsKindOf(RelationDomain))"
 		   });
 		addAnnotation
 		  (getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\toverridden <> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel\n\n"
+			   "body", "overridden <> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel"
 		   });
 		addAnnotation
 		  (getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttransformation.oclIsKindOf(RelationalTransformation)\n\n"
+			   "body", "transformation.oclIsKindOf(RelationalTransformation)"
 		   });
 		addAnnotation
 		  (getRelation__ValidateVariablesAreUnique__DiagnosticChain_Map(),
@@ -1456,7 +1456,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tself.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()\n"
+			   "body", "self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()"
 		   });
 		addAnnotation
 		  (getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(),
@@ -1474,37 +1474,37 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdefaultAssignment->isUnique(variable)\n\n"
+			   "body", "defaultAssignment->isUnique(variable)"
 		   });
 		addAnnotation
 		  (getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tvalueExp.type?.conformsTo(variable.type)\n\n"
+			   "body", "valueExp.type?.conformsTo(variable.type)"
 		   });
 		addAnnotation
 		  (getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedContext <> null implies ownedContext.type = self\n\n"
+			   "body", "ownedContext <> null implies ownedContext.type = self"
 		   });
 		addAnnotation
 		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\trule->forAll(oclIsKindOf(Relation))\n\n"
+			   "body", "rule->forAll(oclIsKindOf(Relation))"
 		   });
 		addAnnotation
 		  (getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)\n"
+			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedInit <> null implies ownedInit.isRequired = isRequired\n\n"
+			   "body", "ownedInit <> null implies ownedInit.isRequired = isRequired"
 		   });
 	}
 

@@ -1441,7 +1441,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttypedModel <> null implies name = typedModel.name\n\n"
+			   "body", "typedModel <> null implies name = typedModel.name"
 		   });
 		addAnnotation
 		  (getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
@@ -1453,43 +1453,43 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedParameters->forAll(oclIsKindOf(FunctionParameter))\n\n"
+			   "body", "ownedParameters->forAll(oclIsKindOf(FunctionParameter))"
 		   });
 		addAnnotation
 		  (getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tqueryExpression <> null implies queryExpression.type?.conformsTo(type)\n\n"
+			   "body", "queryExpression <> null implies queryExpression.type?.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\nconditionExpression.type = Boolean\n\n"
+			   "body", "conditionExpression.type = Boolean"
 		   });
 		addAnnotation
 		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->isUnique(name)\n\n"
+			   "body", "domain->isUnique(name)"
 		   });
 		addAnnotation
 		  (getRule__ValidateAtLeastOneDomainIsCheckableOrEnforceable__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->notEmpty() implies domain->exists(isCheckable or isEnforceable)\n\n"
+			   "body", "domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)"
 		   });
 		addAnnotation
 		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\toverridden->closure(overridden)->excludes(self)\n\n"
+			   "body", "overridden->closure(overridden)->excludes(self)"
 		   });
 		addAnnotation
 		  (getRule__ValidateAbstractRuleIsOverridden__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tisAbstract implies overrides->notEmpty()\n\n"
+			   "body", "isAbstract implies overrides->notEmpty()"
 		   });
 		addAnnotation
 		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
@@ -1501,7 +1501,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)\n\n"
+			   "body", "ownedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)"
 		   });
 		addAnnotation
 		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
@@ -1513,19 +1513,19 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		  (getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tmodelParameter->isUnique(name)\n\n"
+			   "body", "modelParameter->isUnique(name)"
 		   });
 		addAnnotation
 		  (getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\t_extends->closure(_extends)->excludes(self)\n\n"
+			   "body", "_extends->closure(_extends)->excludes(self)"
 		   });
 		addAnnotation
 		  (getTypedModel__ValidateExclusivePrimitiveThisTrace__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tif isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1\n\n"
+			   "body", "if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1"
 		   });
 	}
 

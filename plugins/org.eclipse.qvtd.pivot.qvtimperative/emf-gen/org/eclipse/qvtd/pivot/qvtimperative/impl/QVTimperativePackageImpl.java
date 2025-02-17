@@ -2186,55 +2186,55 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression.type?.conformsTo(targetVariable.type)\n\n"
+			   "body", "ownedExpression.type?.conformsTo(targetVariable.type)"
 		   });
 		addAnnotation
 		  (getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression <> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)\n\n"
+			   "body", "ownedExpression <> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression.type = Boolean\n\n"
+			   "body", "ownedExpression.type = Boolean"
 		   });
 		addAnnotation
 		  (getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not isCheck implies ownedExpression.type?.conformsTo(type)\n\n"
+			   "body", "not isCheck implies ownedExpression.type?.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getImperativeTransformation__ValidateAllRulesAreMappings__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "rule->forAll(oclIsKindOf(Mapping))\n"
+			   "body", "rule->forAll(oclIsKindOf(Mapping))"
 		   });
 		addAnnotation
 		  (getImperativeTransformation__ValidateUniqueTargetNames__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "rule->selectByKind(EntryPoint)->select(targetName <> null)->isUnique(targetName)\n\n"
+			   "body", "rule->selectByKind(EntryPoint)->select(targetName <> null)->isUnique(targetName)"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "name <> null\n"
+			   "body", "name <> null"
 		   });
 		addAnnotation
 		  (getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedMappingParameters->isUnique(name)\n"
+			   "body", "ownedMappingParameters->isUnique(name)"
 		   });
 		addAnnotation
 		  (getMapping__ValidateLocalVariableNamesAreUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)\n"
+			   "body", "ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)"
 		   });
 		addAnnotation
 		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
@@ -2246,31 +2246,31 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not (isInstall and isInvoke)\n"
+			   "body", "not (isInstall and isInvoke)"
 		   });
 		addAnnotation
 		  (getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedMappingParameterBindings->isUnique(boundVariable)\n\n"
+			   "body", "ownedMappingParameterBindings->isUnique(boundVariable)"
 		   });
 		addAnnotation
 		  (getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)\n\n"
+			   "body", "owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)"
 		   });
 		addAnnotation
 		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression <> null implies ownedExpression.type?.conformsTo(type)\n"
+			   "body", "ownedExpression <> null implies ownedExpression.type?.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not type.oclIsKindOf(ocl::DataType)\n"
+			   "body", "not type.oclIsKindOf(ocl::DataType)"
 		   });
 		addAnnotation
 		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
@@ -2294,31 +2294,31 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\nownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()\n\n"
+			   "body", "ownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()"
 		   });
 		addAnnotation
 		  (getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\nnot resolvedProperty.isReadOnly\n\n"
+			   "body", "not resolvedProperty.isReadOnly"
 		   });
 		addAnnotation
 		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "isCheck implies boundVariable.type?.conformsTo(value.type)\n"
+			   "body", "isCheck implies boundVariable.type?.conformsTo(value.type)"
 		   });
 		addAnnotation
 		  (getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not isCheck implies value.type?.conformsTo(boundVariable.type)\n\n"
+			   "body", "not isCheck implies value.type?.conformsTo(boundVariable.type)"
 		   });
 		addAnnotation
 		  (getStatement__JoinNames__EList(),
 		   source,
 		   new String[] {
-			   "body", "\'{\' + names/*->sortedBy(n | n)*/->iterate(n; s : String = \'\' | if s = \'\' then n else s + \';\' + n endif) + \'}\'\n\n\n"
+			   "body", "\'{\' + names/*->sortedBy(n | n)*/->iterate(n; s : String = \'\' | if s = \'\' then n else s + \';\' + n endif) + \'}\'"
 		   });
 	}
 

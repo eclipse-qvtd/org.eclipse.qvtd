@@ -80,7 +80,7 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='PartPropertyIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tpart-&gt;isUnique(resolvedProperty)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='part-&gt;isUnique(resolvedProperty)'"
 	 * @generated
 	 */
 	boolean validatePartPropertyIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -89,7 +89,7 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='TypeisObjectType'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttype = referredClass\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='type = referredClass'"
 	 * @generated
 	 */
 	boolean validateTypeisObjectType(DiagnosticChain diagnostics, Map<Object, Object> context);

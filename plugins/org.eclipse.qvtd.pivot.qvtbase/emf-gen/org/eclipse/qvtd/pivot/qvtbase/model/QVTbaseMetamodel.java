@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2022 Willink Transformations and others.
+ * Copyright (c) 2010, 2025 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -33,18 +33,22 @@ import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.BooleanType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Constraint;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Enumeration;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
+import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -52,7 +56,9 @@ import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -152,16 +158,32 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		INSTANCE = null;
 	}
 
-	protected QVTbaseMetamodel(@NonNull URI uri) {
-		super(uri, OCLASResourceFactory.getInstance());
-	}
-
 	protected static class LibraryContents extends AbstractContents
 	{
 		protected final @NonNull Package standardLibrary;
+		private final @NonNull Class booleanType;
+		private final @NonNull Class stringType;
 
 		protected LibraryContents(@NonNull Package standardLibrary) {
 			this.standardLibrary = standardLibrary;
+			this.booleanType = ClassUtil.nonNullState(standardLibrary.getOwnedClass("Boolean"));
+			this.stringType = ClassUtil.nonNullState(standardLibrary.getOwnedClass("String"));
+		}
+
+		/**
+		 * @since 1.23
+		 */
+		protected @NonNull Constraint createInvariant(@NonNull String name, @NonNull String body) {
+			Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+			StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
+			stringLiteral.setStringSymbol(body);
+			stringLiteral.setType(stringType);
+			expressionInOCL.setOwnedBody(stringLiteral);
+			expressionInOCL.setType(booleanType);
+			constraint.setName(name);
+			constraint.setOwnedSpecification(expressionInOCL);
+			return constraint;
 		}
 	}
 
@@ -189,6 +211,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	{
 		protected ReadOnly(@NonNull URI uri) {
 			super(uri);
+			setASonly(true);
 		}
 
 		/**
@@ -224,6 +247,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 
 		/**
+		 * Overridden to avoid computing proxies for the shared instance.
+		 *
+		 * @since 1.23
+		 */
+		@Override
+		public void preUnload(@NonNull EnvironmentFactoryInternal environmentFactory) {}
+
+		/**
 		 * Overridden to inhibit unloading of the shared instance.
 		 */
 		@Override
@@ -256,6 +287,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			installCollectionTypes();
 			installOperations();
 			installProperties();
+			installInvariants();
 			installTemplateBindings();
 			installComments();
 		}
@@ -993,6 +1025,54 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setOpposite(pr_TypedModel_dependsOn);
 		}
 
+		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant("NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");
+		private final @NonNull Constraint iv_Domain_TypedModelIsTransformationModelParameter = createInvariant("TypedModelIsTransformationModelParameter", "oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies\n\toclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)");
+		private final @NonNull Constraint iv_Function_ParametersAreFunctionParameter = createInvariant("ParametersAreFunctionParameter", "ownedParameters->forAll(oclIsKindOf(FunctionParameter))");
+		private final @NonNull Constraint iv_Function_ReturnTypeIsQueryType = createInvariant("ReturnTypeIsQueryType", "queryExpression <> null implies queryExpression.type?.conformsTo(type)");
+		private final @NonNull Constraint iv_Predicate_ConditionIsBoolean = createInvariant("ConditionIsBoolean", "conditionExpression.type = Boolean");
+		private final @NonNull Constraint iv_Rule_AbstractRuleIsOverridden = createInvariant("AbstractRuleIsOverridden", "isAbstract implies overrides->notEmpty()");
+		private final @NonNull Constraint iv_Rule_AtLeastOneDomainIsCheckableOrEnforceable = createInvariant("AtLeastOneDomainIsCheckableOrEnforceable", "domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)");
+		private final @NonNull Constraint iv_Rule_DomainNameIsUnique = createInvariant("DomainNameIsUnique", "domain->isUnique(name)");
+		private final @NonNull Constraint iv_Rule_NoOverridesCycle = createInvariant("NoOverridesCycle", "overridden->closure(overridden)->excludes(self)");
+		private final @NonNull Constraint iv_Rule_OverridingRuleOverridesAllDomains = createInvariant("OverridingRuleOverridesAllDomains", "overridden <> null implies\n\toverridden.domain->forAll(od | self.domain.name->includes(od.name))");
+		private final @NonNull Constraint iv_Transformation_ContextTypeIsTransformation = createInvariant("ContextTypeIsTransformation", "ownedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)");
+		private final @NonNull Constraint iv_Transformation_ExtendedTypedModelIsExtended = createInvariant("ExtendedTypedModelIsExtended", "_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)");
+		private final @NonNull Constraint iv_Transformation_ModelParameterIsUnique = createInvariant("ModelParameterIsUnique", "modelParameter->isUnique(name)");
+		private final @NonNull Constraint iv_Transformation_NoExtendsCycle = createInvariant("NoExtendsCycle", "_extends->closure(_extends)->excludes(self)");
+		private final @NonNull Constraint iv_TypedModel_ExclusivePrimitiveThisTrace = createInvariant("ExclusivePrimitiveThisTrace", "if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1");
+
+		private void installInvariants() {
+			List<Constraint> ownedInvariants;
+			Constraint constraint;
+
+			ownedInvariants = _Domain.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_Domain_NameIsTypedModelName);
+			ownedInvariants.add(constraint = iv_Domain_TypedModelIsTransformationModelParameter);
+
+			ownedInvariants = _Function.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_Function_ParametersAreFunctionParameter);
+			ownedInvariants.add(constraint = iv_Function_ReturnTypeIsQueryType);
+
+			ownedInvariants = _Predicate.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_Predicate_ConditionIsBoolean);
+
+			ownedInvariants = _Rule.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_Rule_AbstractRuleIsOverridden);
+			ownedInvariants.add(constraint = iv_Rule_AtLeastOneDomainIsCheckableOrEnforceable);
+			ownedInvariants.add(constraint = iv_Rule_DomainNameIsUnique);
+			ownedInvariants.add(constraint = iv_Rule_NoOverridesCycle);
+			ownedInvariants.add(constraint = iv_Rule_OverridingRuleOverridesAllDomains);
+
+			ownedInvariants = _Transformation.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_Transformation_ContextTypeIsTransformation);
+			ownedInvariants.add(constraint = iv_Transformation_ExtendedTypedModelIsExtended);
+			ownedInvariants.add(constraint = iv_Transformation_ModelParameterIsUnique);
+			ownedInvariants.add(constraint = iv_Transformation_NoExtendsCycle);
+
+			ownedInvariants = _TypedModel.getOwnedInvariants();
+			ownedInvariants.add(constraint = iv_TypedModel_ExclusivePrimitiveThisTrace);
+		}
+
 		private void installTemplateBindings() {
 			addBinding(_Bag_Domain_F, _Domain);
 			addBinding(_Bag_Function_F, _Function);
@@ -1051,5 +1131,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			installComment(pr_TypedModel_isTrace, "The TypedModel is for the execution trace. It may be added automatically.");
 			installComment(pr_TypedModel_iterates, "The set of typed models whose elements are also part of this TypedModel. An input TypedModel that iterates an output TypedModel specfies a fixed point iteration.");
 		}
+	}
+
+	protected QVTbaseMetamodel(@NonNull URI uri) {
+		super(uri, OCLASResourceFactory.getInstance());
 	}
 }

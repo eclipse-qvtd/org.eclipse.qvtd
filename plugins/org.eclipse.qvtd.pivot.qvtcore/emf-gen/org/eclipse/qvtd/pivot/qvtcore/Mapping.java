@@ -85,7 +85,7 @@ public interface Mapping extends Rule, Area {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='DomainsAreCoreDomains'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdomain-&gt;forAll(oclIsKindOf(CoreDomain))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='domain-&gt;forAll(oclIsKindOf(CoreDomain))'"
 	 * @generated
 	 */
 	boolean validateDomainsAreCoreDomains(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -94,7 +94,7 @@ public interface Mapping extends Rule, Area {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NestedNameIsNull'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\t_context &lt;&gt; null implies name = null\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='_context &lt;&gt; null implies name = null'"
 	 * @generated
 	 */
 	boolean validateNestedNameIsNull(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -103,7 +103,7 @@ public interface Mapping extends Rule, Area {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='RootNameIsNotNull'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation &lt;&gt; null implies name &lt;&gt; null\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='transformation &lt;&gt; null implies name &lt;&gt; null'"
 	 * @generated
 	 */
 	boolean validateRootNameIsNotNull(DiagnosticChain diagnostics, Map<Object, Object> context);

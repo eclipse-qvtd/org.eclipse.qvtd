@@ -1388,49 +1388,49 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedVariables->forAll(oclIsKindOf(BottomVariable))\n\n"
+			   "body", "ownedVariables->forAll(oclIsKindOf(BottomVariable))"
 		   });
 		addAnnotation
 		  (getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)\n"
+			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)"
 		   });
 		addAnnotation
 		  (getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\townedVariables->forAll(oclIsKindOf(GuardVariable))\n\n"
+			   "body", "ownedVariables->forAll(oclIsKindOf(GuardVariable))"
 		   });
 		addAnnotation
 		  (getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedInit = null\n\n"
+			   "body", "ownedInit = null"
 		   });
 		addAnnotation
 		  (getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tdomain->forAll(oclIsKindOf(CoreDomain))\n\n"
+			   "body", "domain->forAll(oclIsKindOf(CoreDomain))"
 		   });
 		addAnnotation
 		  (getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\t_context <> null implies name = null\n\n"
+			   "body", "_context <> null implies name = null"
 		   });
 		addAnnotation
 		  (getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttransformation <> null implies name <> null\n\n"
+			   "body", "transformation <> null implies name <> null"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__GetReferredTargetProperty(),
 		   source,
 		   new String[] {
-			   "body", "targetProperty.opposite\n\n"
+			   "body", "targetProperty.opposite"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
@@ -1448,19 +1448,19 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tgetReferredTargetProperty().isImplicit\n\n"
+			   "body", "getReferredTargetProperty().isImplicit"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tslotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+			   "body", "slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__GetReferredTargetProperty(),
 		   source,
 		   new String[] {
-			   "body", "targetProperty\n\n"
+			   "body", "targetProperty"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
@@ -1478,19 +1478,19 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tnot targetProperty.isImplicit\n\n"
+			   "body", "not targetProperty.isImplicit"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tslotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+			   "body", "slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)"
 		   });
 		addAnnotation
 		  (getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not type.oclIsKindOf(ocl::DataType)\n\n"
+			   "body", "not type.oclIsKindOf(ocl::DataType)"
 		   });
 		addAnnotation
 		  (getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),

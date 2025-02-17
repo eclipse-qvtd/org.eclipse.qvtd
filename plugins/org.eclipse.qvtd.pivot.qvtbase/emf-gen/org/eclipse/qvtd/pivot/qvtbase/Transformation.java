@@ -180,7 +180,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ContextTypeIsTransformation'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\townedContext &lt;&gt; null implies ownedContext.type.oclIsKindOf(Transformation)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedContext &lt;&gt; null implies ownedContext.type.oclIsKindOf(Transformation)'"
 	 * @generated
 	 */
 	boolean validateContextTypeIsTransformation(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -198,7 +198,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ModelParameterIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tmodelParameter-&gt;isUnique(name)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='modelParameter-&gt;isUnique(name)'"
 	 * @generated
 	 */
 	boolean validateModelParameterIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -207,7 +207,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NoExtendsCycle'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\t_extends-&gt;closure(_extends)-&gt;excludes(self)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='_extends-&gt;closure(_extends)-&gt;excludes(self)'"
 	 * @generated
 	 */
 	boolean validateNoExtendsCycle(DiagnosticChain diagnostics, Map<Object, Object> context);

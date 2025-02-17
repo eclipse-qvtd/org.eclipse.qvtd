@@ -62,7 +62,7 @@ public interface Function extends Operation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ParametersAreFunctionParameter'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\townedParameters-&gt;forAll(oclIsKindOf(FunctionParameter))\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ownedParameters-&gt;forAll(oclIsKindOf(FunctionParameter))'"
 	 * @generated
 	 */
 	boolean validateParametersAreFunctionParameter(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -71,7 +71,7 @@ public interface Function extends Operation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='ReturnTypeIsQueryType'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tqueryExpression &lt;&gt; null implies queryExpression.type?.conformsTo(type)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='queryExpression &lt;&gt; null implies queryExpression.type?.conformsTo(type)'"
 	 * @generated
 	 */
 	boolean validateReturnTypeIsQueryType(DiagnosticChain diagnostics, Map<Object, Object> context);

@@ -121,7 +121,7 @@ public interface RelationDomainAssignment extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='CompatibleTypeForValue'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tvalueExp.type?.conformsTo(variable.type)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='valueExp.type?.conformsTo(variable.type)'"
 	 * @generated
 	 */
 	boolean validateCompatibleTypeForValue(DiagnosticChain diagnostics, Map<Object, Object> context);

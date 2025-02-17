@@ -92,7 +92,7 @@ public interface RelationDomain extends Domain {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='RelationDomainAssignmentsAreUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\tdefaultAssignment-&gt;isUnique(variable)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='defaultAssignment-&gt;isUnique(variable)'"
 	 * @generated
 	 */
 	boolean validateRelationDomainAssignmentsAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
