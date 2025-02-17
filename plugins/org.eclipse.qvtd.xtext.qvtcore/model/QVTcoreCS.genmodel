@@ -16,7 +16,7 @@
   </genAnnotations>
   <foreignModel>QVTcoreCS.ecore</foreignModel>
   <genPackages prefix="QVTcoreCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
-      fileExtensions="qvtccs" ecorePackage="QVTcoreCS.ecore#/">
+      contentTypeIdentifier="org.eclipse.qvtd.qvtccs" fileExtensions="qvtccs" ecorePackage="QVTcoreCS.ecore#/">
     <genClasses image="false" ecoreClass="QVTcoreCS.ecore#//AreaCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//AreaCS/ownedGuardPattern"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//AreaCS/ownedBottomPattern"/>

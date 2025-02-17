@@ -37,7 +37,7 @@
         <details key="originalName" value="IdentifiesIsAUsedPackageClass"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;transformation&lt;> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)&#xA;&#xA;"/>
+        <details key="body" value="transformation&lt;> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -82,7 +82,7 @@
         <details key="originalName" value="OppositePartsHaveOpposites"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;oppositePart->forAll(opposite &lt;> null)&#xA;&#xA;"/>
+        <details key="body" value="oppositePart->forAll(opposite &lt;> null)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -97,7 +97,7 @@
         <details key="originalName" value="OppositePartsAreOppositeParts"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;oppositePart->forAll(self.identifies.conformsTo(type))&#xA;&#xA;"/>
+        <details key="body" value="oppositePart->forAll(self.identifies.conformsTo(type))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -112,7 +112,7 @@
         <details key="originalName" value="PartsAreParts"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;part->forAll(self.identifies.conformsTo(owningClass))&#xA;&#xA;"/>
+        <details key="body" value="part->forAll(self.identifies.conformsTo(owningClass))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -127,7 +127,7 @@
         <details key="originalName" value="PartsAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;part->excludesAll(oppositePart.opposite)&#xA;&#xA;"/>
+        <details key="body" value="part->excludesAll(oppositePart.opposite)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -166,7 +166,7 @@
         <details key="originalName" value="DomainsAreRelationDomains"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;domain->forAll(oclIsKindOf(RelationDomain))&#xA;"/>
+        <details key="body" value="domain->forAll(oclIsKindOf(RelationDomain))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -181,7 +181,7 @@
         <details key="originalName" value="TopRelationOverriddenByTopRelation"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;overridden &lt;> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel&#xA;&#xA;"/>
+        <details key="body" value="overridden &lt;> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -196,7 +196,7 @@
         <details key="originalName" value="TransformationIsRelationalTransformation"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;transformation.oclIsKindOf(RelationalTransformation)&#xA;&#xA;"/>
+        <details key="body" value="transformation.oclIsKindOf(RelationalTransformation)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -251,7 +251,7 @@
         <details key="originalName" value="MatchingArgumentCount"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()&#xA;"/>
+        <details key="body" value="self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -312,7 +312,7 @@
         <details key="originalName" value="RelationDomainAssignmentsAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;defaultAssignment->isUnique(variable)&#xA;&#xA;"/>
+        <details key="body" value="defaultAssignment->isUnique(variable)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -338,7 +338,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;valueExp.type?.conformsTo(variable.type)&#xA;&#xA;"/>
+        <details key="body" value="valueExp.type?.conformsTo(variable.type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -382,7 +382,7 @@
         <details key="originalName" value="ContextTypeIsThisTransformation"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type = self&#xA;&#xA;"/>
+        <details key="body" value="ownedContext &lt;> null implies ownedContext.type = self"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -397,7 +397,7 @@
         <details key="originalName" value="RulesAreRelations"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;rule->forAll(oclIsKindOf(Relation))&#xA;&#xA;"/>
+        <details key="body" value="rule->forAll(oclIsKindOf(Relation))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -418,7 +418,10 @@
         <details key="originalName" value="CompatibleTypeForInitializer"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedInit &lt;> null implies ownedInit.type?.conformsTo(type)&#xA;"/>
+        <details key="body" value="ownedInit &lt;> null implies ownedInit.type?.conformsTo(type)"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="* The type of a Let variable initializer expression conforms to the type of the Let variable."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -433,7 +436,10 @@
         <details key="originalName" value="CompatibleNullityForInitializer"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedInit &lt;> null implies ownedInit.isRequired = isRequired&#xA;&#xA;"/>
+        <details key="body" value="ownedInit &lt;> null implies ownedInit.isRequired = isRequired"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="* The nullity of a Let variable initializer expression is the nullity of the Let variable."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

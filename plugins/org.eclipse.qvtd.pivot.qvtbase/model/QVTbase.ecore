@@ -22,7 +22,7 @@
         <details key="originalName" value="NameIsTypedModelName"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;typedModel &lt;> null implies name = typedModel.name&#xA;&#xA;"/>
+        <details key="body" value="typedModel &lt;> null implies name = typedModel.name"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -73,7 +73,7 @@
         <details key="originalName" value="ParametersAreFunctionParameter"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;ownedParameters->forAll(oclIsKindOf(FunctionParameter))&#xA;&#xA;"/>
+        <details key="body" value="ownedParameters->forAll(oclIsKindOf(FunctionParameter))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -88,7 +88,7 @@
         <details key="originalName" value="ReturnTypeIsQueryType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type?.conformsTo(type)&#xA;&#xA;"/>
+        <details key="body" value="queryExpression &lt;> null implies queryExpression.type?.conformsTo(type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -125,7 +125,7 @@
         <details key="originalName" value="ConditionIsBoolean"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
+        <details key="body" value="conditionExpression.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -153,7 +153,7 @@
         <details key="originalName" value="DomainNameIsUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;domain->isUnique(name)&#xA;&#xA;"/>
+        <details key="body" value="domain->isUnique(name)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -168,7 +168,7 @@
         <details key="originalName" value="AtLeastOneDomainIsCheckableOrEnforceable"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)&#xA;&#xA;"/>
+        <details key="body" value="domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -183,7 +183,7 @@
         <details key="originalName" value="NoOverridesCycle"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;overridden->closure(overridden)->excludes(self)&#xA;&#xA;"/>
+        <details key="body" value="overridden->closure(overridden)->excludes(self)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -198,7 +198,7 @@
         <details key="originalName" value="AbstractRuleIsOverridden"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;isAbstract implies overrides->notEmpty()&#xA;&#xA;"/>
+        <details key="body" value="isAbstract implies overrides->notEmpty()"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -276,7 +276,7 @@
         <details key="originalName" value="ContextTypeIsTransformation"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;ownedContext &lt;> null implies ownedContext.type.oclIsKindOf(Transformation)&#xA;&#xA;"/>
+        <details key="body" value="ownedContext &lt;> null implies ownedContext.type.oclIsKindOf(Transformation)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -306,7 +306,7 @@
         <details key="originalName" value="ModelParameterIsUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;modelParameter->isUnique(name)&#xA;&#xA;"/>
+        <details key="body" value="modelParameter->isUnique(name)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -321,7 +321,7 @@
         <details key="originalName" value="NoExtendsCycle"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;_extends->closure(_extends)->excludes(self)&#xA;&#xA;"/>
+        <details key="body" value="_extends->closure(_extends)->excludes(self)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -364,7 +364,7 @@
         <details key="originalName" value="ExclusivePrimitiveThisTrace"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1&#xA;&#xA;"/>
+        <details key="body" value="if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif &lt;= 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

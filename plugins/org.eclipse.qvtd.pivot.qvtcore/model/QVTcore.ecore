@@ -42,7 +42,7 @@
         <details key="originalName" value="VariablesAreBottomVariables"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;ownedVariables->forAll(oclIsKindOf(BottomVariable))&#xA;&#xA;"/>
+        <details key="body" value="ownedVariables->forAll(oclIsKindOf(BottomVariable))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -71,7 +71,10 @@
         <details key="originalName" value="CompatibleTypeForInitializer"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedInit &lt;> null implies ownedInit.type?.conformsTo(type)&#xA;"/>
+        <details key="body" value="ownedInit &lt;> null implies ownedInit.type?.conformsTo(type)"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="* The type of a Let variable initializer expression conforms to the type of the Let variable."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -110,7 +113,7 @@
         <details key="originalName" value="VariablesAreGuardVariables"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;ownedVariables->forAll(oclIsKindOf(GuardVariable))&#xA;&#xA;"/>
+        <details key="body" value="ownedVariables->forAll(oclIsKindOf(GuardVariable))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -130,7 +133,10 @@
         <details key="originalName" value="NoInitializer"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedInit = null&#xA;&#xA;"/>
+        <details key="body" value="ownedInit = null"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="* A GuardVariable cannot have an initializer. Use a predicate."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -148,7 +154,7 @@
         <details key="originalName" value="DomainsAreCoreDomains"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;domain->forAll(oclIsKindOf(CoreDomain))&#xA;&#xA;"/>
+        <details key="body" value="domain->forAll(oclIsKindOf(CoreDomain))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -163,7 +169,7 @@
         <details key="originalName" value="NestedNameIsNull"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;_context &lt;> null implies name = null&#xA;&#xA;"/>
+        <details key="body" value="_context &lt;> null implies name = null"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -178,7 +184,7 @@
         <details key="originalName" value="RootNameIsNotNull"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;transformation &lt;> null implies name &lt;> null&#xA;&#xA;"/>
+        <details key="body" value="transformation &lt;> null implies name &lt;> null"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -220,7 +226,7 @@
       name="OppositePropertyAssignment" eSuperTypes="#T-qvtcore-NavigationAssignment">
     <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="targetProperty.opposite&#xA;&#xA;"/>
+        <details key="body" value="targetProperty.opposite"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="validateCompatibleTypeForPartialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -258,7 +264,7 @@
         <details key="originalName" value="OppositePropertyIsImplicit"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;getReferredTargetProperty().isImplicit&#xA;&#xA;"/>
+        <details key="body" value="getReferredTargetProperty().isImplicit"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -273,7 +279,7 @@
         <details key="originalName" value="TargetPropetyIsSlotProperty"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+        <details key="body" value="slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -288,7 +294,7 @@
       eSuperTypes="#T-qvtcore-NavigationAssignment">
     <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="targetProperty&#xA;&#xA;"/>
+        <details key="body" value="targetProperty"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="validateCompatibleTypeForPartialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -326,7 +332,7 @@
         <details key="originalName" value="PropertyIsNotImplicit"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;not targetProperty.isImplicit&#xA;&#xA;"/>
+        <details key="body" value="not targetProperty.isImplicit"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -341,7 +347,7 @@
         <details key="originalName" value="TargetPropertyIsSlotProperty"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+        <details key="body" value="slotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -359,7 +365,7 @@
         <details key="originalName" value="NonDataTypeForType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not type.oclIsKindOf(ocl::DataType)&#xA;&#xA;"/>
+        <details key="body" value="not type.oclIsKindOf(ocl::DataType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

@@ -16,7 +16,7 @@
   </genAnnotations>
   <foreignModel>QVTrelationCS.ecore</foreignModel>
   <genPackages prefix="QVTrelationCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
-      fileExtensions="qvtrcs" ecorePackage="QVTrelationCS.ecore#/">
+      contentTypeIdentifier="org.eclipse.qvtd.qvtrcs" fileExtensions="qvtrcs" ecorePackage="QVTrelationCS.ecore#/">
     <genClasses image="false" ecoreClass="QVTrelationCS.ecore#//AbstractDomainCS"/>
     <genClasses ecoreClass="QVTrelationCS.ecore#//CollectionTemplateCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//CollectionTemplateCS/ownedMemberIdentifiers"/>

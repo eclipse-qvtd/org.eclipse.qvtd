@@ -16,7 +16,7 @@
   </genAnnotations>
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
-      fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
+      contentTypeIdentifier="org.eclipse.qvtd.qvtics" fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
     <genClasses ecoreClass="QVTimperativeCS.ecore#//AddStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/ownedExpression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/targetVariable"/>

@@ -24,7 +24,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedExpression.type?.conformsTo(targetVariable.type)&#xA;&#xA;"/>
+        <details key="body" value="ownedExpression.type?.conformsTo(targetVariable.type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -82,7 +82,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedExpression &lt;> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)&#xA;&#xA;"/>
+        <details key="body" value="ownedExpression &lt;> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -122,7 +122,7 @@
         <details key="originalName" value="TypeIsBoolean"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedExpression.type = Boolean&#xA;&#xA;"/>
+        <details key="body" value="ownedExpression.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -159,7 +159,7 @@
         <details key="originalName" value="CompatibleTypeForUncheckedValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not isCheck implies ownedExpression.type?.conformsTo(type)&#xA;&#xA;"/>
+        <details key="body" value="not isCheck implies ownedExpression.type?.conformsTo(type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -261,7 +261,7 @@
         <details key="originalName" value="AllRulesAreMappings"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="rule->forAll(oclIsKindOf(Mapping))&#xA;"/>
+        <details key="body" value="rule->forAll(oclIsKindOf(Mapping))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -276,7 +276,7 @@
         <details key="originalName" value="UniqueTargetNames"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="rule->selectByKind(EntryPoint)->select(targetName &lt;> null)->isUnique(targetName)&#xA;&#xA;"/>
+        <details key="body" value="rule->selectByKind(EntryPoint)->select(targetName &lt;> null)->isUnique(targetName)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -331,7 +331,7 @@
         <details key="originalName" value="NameIsNotNull"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name &lt;> null&#xA;"/>
+        <details key="body" value="name &lt;> null"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -346,7 +346,7 @@
         <details key="originalName" value="MappingParameterNamesAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedMappingParameters->isUnique(name)&#xA;"/>
+        <details key="body" value="ownedMappingParameters->isUnique(name)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -361,7 +361,7 @@
         <details key="originalName" value="LocalVariableNamesAreUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)&#xA;"/>
+        <details key="body" value="ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -422,7 +422,7 @@
         <details key="originalName" value="NotBothInstallAndInvoke"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not (isInstall and isInvoke)&#xA;"/>
+        <details key="body" value="not (isInstall and isInvoke)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -437,7 +437,7 @@
         <details key="originalName" value="UniqueCallBindings"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedMappingParameterBindings->isUnique(boundVariable)&#xA;&#xA;"/>
+        <details key="body" value="ownedMappingParameterBindings->isUnique(boundVariable)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -478,14 +478,14 @@
         name="bindingNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
+        <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-referredNames"
         name="referredNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)&#xA;"/>
+        <details key="derivation" value="referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -538,7 +538,7 @@
         <details key="originalName" value="ParameterIsMappingParameter"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)&#xA;&#xA;"/>
+        <details key="body" value="owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -578,7 +578,7 @@
         <details key="originalName" value="CompatibleTypeForValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ownedExpression &lt;> null implies ownedExpression.type?.conformsTo(type)&#xA;"/>
+        <details key="body" value="ownedExpression &lt;> null implies ownedExpression.type?.conformsTo(type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -593,7 +593,7 @@
         <details key="originalName" value="NonDataTypeForType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not type.oclIsKindOf(ocl::DataType)&#xA;"/>
+        <details key="body" value="not type.oclIsKindOf(ocl::DataType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -726,7 +726,7 @@
         <details key="originalName" value="ValueDoesNotNavigateFromRealizedVariables"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;ownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()&#xA;&#xA;"/>
+        <details key="body" value="ownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -741,7 +741,7 @@
         <details key="originalName" value="TargetPropertyIsNotReadOnly"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;not resolvedProperty.isReadOnly&#xA;&#xA;"/>
+        <details key="body" value="not resolvedProperty.isReadOnly"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -779,7 +779,7 @@
         name="resolvedProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="if isOpposite then targetProperty.opposite else targetProperty endif&#xA;&#xA;"/>
+        <details key="derivation" value="if isOpposite then targetProperty.opposite else targetProperty endif"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -805,7 +805,7 @@
         <details key="originalName" value="CompatibleTypeForCheckedValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="isCheck implies boundVariable.type?.conformsTo(value.type)&#xA;"/>
+        <details key="body" value="isCheck implies boundVariable.type?.conformsTo(value.type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -820,7 +820,7 @@
         <details key="originalName" value="CompatibleTypeForUncheckedValue"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not isCheck implies value.type?.conformsTo(boundVariable.type)&#xA;&#xA;"/>
+        <details key="body" value="not isCheck implies value.type?.conformsTo(boundVariable.type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -861,7 +861,7 @@
     </eAnnotations>
     <eOperations name="joinNames" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="'{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'&#xA;&#xA;&#xA;"/>
+        <details key="body" value="'{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'"/>
       </eAnnotations>
       <eParameters name="names" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>

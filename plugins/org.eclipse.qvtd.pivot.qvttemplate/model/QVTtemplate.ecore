@@ -14,7 +14,7 @@
         <details key="originalName" value="MemberTypeisCollectionElementType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;member->forAll(type?.conformsTo(referredCollectionType.elementType))&#xA;&#xA;"/>
+        <details key="body" value="member->forAll(type?.conformsTo(referredCollectionType.elementType))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -44,7 +44,7 @@
         <details key="originalName" value="TypeisCollectionType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;type = referredCollectionType&#xA;&#xA;"/>
+        <details key="body" value="type = referredCollectionType"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -77,7 +77,7 @@
         <details key="originalName" value="PartPropertyIsUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;part->isUnique(resolvedProperty)&#xA;&#xA;"/>
+        <details key="body" value="part->isUnique(resolvedProperty)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -92,7 +92,7 @@
         <details key="originalName" value="TypeisObjectType"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;type = referredClass&#xA;&#xA;"/>
+        <details key="body" value="type = referredClass"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -193,7 +193,7 @@
         name="resolvedProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="&#xA;&#x9;if isOpposite then referredProperty.opposite else referredProperty endif&#xA;&#xA;"/>
+        <details key="derivation" value="if isOpposite then referredProperty.opposite else referredProperty endif"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
