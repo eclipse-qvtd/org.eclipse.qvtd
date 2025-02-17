@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtimperative;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.QVTimperativeScoping;
+import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
 import com.google.inject.Guice;
@@ -56,6 +57,7 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 		QVTimperativePivotStandaloneSetup.doSetup();
 		QVTimperativeCSPackage.eINSTANCE.getName();
 		QVTimperativeScoping.init();
+		QVTimperativeASResourceFactory.getInstance();
 		//		QVTimperativeCS2MonikerVisitor.FACTORY.getClass();
 	}
 

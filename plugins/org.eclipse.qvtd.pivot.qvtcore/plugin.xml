@@ -8,25 +8,12 @@
 
 <plugin>
 
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="qvtcas"
-            class="org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory"/>
-   </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTcore -->
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTcore"
             class="org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
             genModel="model/QVTcore.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTcore NOT -->
-      <!-- parser contentTypeIdentifier="org.eclipse.qvtd.qvtcore"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
-      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtcore"
-            class="org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
@@ -42,11 +29,6 @@
          </describer>
       </content-type>
    </extension>
-
-  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
-     <factory class="org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory"
-     	extension="qvtc" contentType="org.eclipse.qvtd.qvtcore"/>
-  </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtcas" type="text" />

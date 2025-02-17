@@ -7,25 +7,12 @@
 -->
 
 <plugin>
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="qvtias"
-            class="org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
-   </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTimperative -->
       <package
             uri="http://www.eclipse.org/qvt/2016/QVTimperative"
             class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
             genModel="model/QVTimperative.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTimperative NOT -->
-      <!--parser contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
-      <parser contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
-            class="org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
@@ -41,11 +28,6 @@
          </describer>
       </content-type>
    </extension>
-
-  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
-     <factory class="org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory"
-     	extension="qvti" contentType="org.eclipse.qvtd.qvtimperative"/>
-  </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated EvaluationStatus -->

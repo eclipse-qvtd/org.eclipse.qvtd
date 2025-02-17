@@ -20,8 +20,6 @@ import org.eclipse.ocl.pivot.labels.LabelGeneratorRegistry;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
 import org.eclipse.qvtd.runtime.labels.QVTiLabelGenerators;
 
 import com.google.inject.Guice;
@@ -48,8 +46,6 @@ public class QVTimperativePivotStandaloneSetup
 		QVTimperativeLibrary.lazyInstall();
 		QVTbasePivotStandaloneSetup.doSetup();
 		QVTimperativePivotScoping.init();
-		QVTimperativeASResourceFactory.getInstance();
-		QVTimperativeToStringVisitor.FACTORY.getClass();
 		QVTiLabelGenerators.initialize(LabelGeneratorRegistry.INSTANCE);
 	}
 

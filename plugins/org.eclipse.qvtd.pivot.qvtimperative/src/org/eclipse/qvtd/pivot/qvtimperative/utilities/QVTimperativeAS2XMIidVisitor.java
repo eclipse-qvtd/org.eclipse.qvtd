@@ -33,7 +33,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 {
 	public static final @NonNull String MAPPING_PREFIX = "m."; //$NON-NLS-1$
 
-	protected QVTimperativeAS2XMIidVisitor(@NonNull AS2XMIid context) {
+	public QVTimperativeAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}
 

@@ -30,13 +30,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
 import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 
 public class QVTimperativeCSResource extends QVTbaseCSResource
 {
+	/**
+	 * A QVTimperativeCSResourceLoadFactory supports creation of a BaseCSXMIResource that supports persistence of the CS model directly as XMI
+	 * rather than exploiting Xtext to serialize to / parse from a text file.
+	 */
+	public static class QVTimperativeCSResourceLoadFactory extends OCLCSResourceLoadFactory
+	{
+		public QVTimperativeCSResourceLoadFactory() {
+			super(QVTimperativeASResourceFactory.getInstance());
+		}
+	}
+
 	@Override
 	public @NonNull AS2CS createAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
@@ -59,7 +69,9 @@ public class QVTimperativeCSResource extends QVTbaseCSResource
 	}
 
 	@Override
+	@Deprecated /* @deprecated not used - Pass known EnvironmentFactory to avoid generally redundant deduction */
 	public @NonNull CS2AS getCS2AS() {
+		assert PivotUtilInternal.debugDeprecation(getClass().getName() + ".getCS2AS()");
 		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
 		if (environmentFactory == null) {
 			environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());

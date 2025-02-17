@@ -16,7 +16,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverLoc
 
 public class QVTimperativeASSaverLocateVisitor extends AbstractQVTimperativeASSaverLocateVisitor
 {
-	protected QVTimperativeASSaverLocateVisitor(@NonNull ASSaver context) {
+	public QVTimperativeASSaverLocateVisitor(@NonNull ASSaver context) {
 		super(context);
 	}
 }

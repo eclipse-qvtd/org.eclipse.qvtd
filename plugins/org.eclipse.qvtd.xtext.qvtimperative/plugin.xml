@@ -17,20 +17,6 @@
       </content-type>
   </extension>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.eclipse.org/qvt/2016/QVTimperativeCS"
-            class="org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
-            genModel="model/QVTimperativeCS.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTimperativeCS -->
-      <parser
-            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
-   </extension>
-
    <extension point="org.eclipse.core.contenttype.contentTypes">
       <!-- @generated QVTimperativeCS -->
       <content-type
@@ -45,6 +31,41 @@
          </describer>
       </content-type>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTimperative -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtias"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtics"
+            class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeCSResource$QVTimperativeCSResourceLoadFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/qvt/2016/QVTimperativeCS"
+            class="org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
+            genModel="model/QVTimperativeCS.genmodel"/>
+   </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"
+     	extension="qvti" contentType="org.eclipse.qvtd.qvtimperative"/>
+  </extension>
 
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvti" type="text" />
