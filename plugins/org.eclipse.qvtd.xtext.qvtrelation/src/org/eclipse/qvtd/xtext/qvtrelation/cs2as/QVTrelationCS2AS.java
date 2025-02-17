@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
-import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 

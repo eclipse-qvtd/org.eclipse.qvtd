@@ -15,14 +15,13 @@
 package org.eclipse.qvtd.xtext.qvtcorecs;
 
 import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +43,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * @model
  * @generated
  */
-public interface QueryCS extends TypedElementCS, org.eclipse.ocl.xtext.basecs.JavaImplementationCS {
+public interface QueryCS extends TypedElementCS, JavaImplementationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

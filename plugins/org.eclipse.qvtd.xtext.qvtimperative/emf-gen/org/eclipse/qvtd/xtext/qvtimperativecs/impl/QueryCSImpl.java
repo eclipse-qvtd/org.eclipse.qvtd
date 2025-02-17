@@ -30,16 +30,13 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.JavaClassCS;
+import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -80,7 +77,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.xtext.basecs.JavaClassCS implementation;
+	protected JavaClassCS implementation;
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
@@ -147,10 +144,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.xtext.basecs.JavaClassCS getImplementation() {
+	public JavaClassCS getImplementation() {
 		if (implementation != null && implementation.eIsProxy()) {
 			InternalEObject oldImplementation = (InternalEObject)implementation;
-			implementation = (org.eclipse.ocl.xtext.basecs.JavaClassCS)eResolveProxy(oldImplementation);
+			implementation = (JavaClassCS)eResolveProxy(oldImplementation);
 			if (implementation != oldImplementation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
@@ -164,7 +161,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.xtext.basecs.JavaClassCS basicGetImplementation() {
+	public JavaClassCS basicGetImplementation() {
 		return implementation;
 	}
 
@@ -174,8 +171,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public void setImplementation(org.eclipse.ocl.xtext.basecs.JavaClassCS newImplementation) {
-		org.eclipse.ocl.xtext.basecs.JavaClassCS oldImplementation = implementation;
+	public void setImplementation(JavaClassCS newImplementation) {
+		JavaClassCS oldImplementation = implementation;
 		implementation = newImplementation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
@@ -319,7 +316,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setImplementation((org.eclipse.ocl.xtext.basecs.JavaClassCS)newValue);
+				setImplementation((JavaClassCS)newValue);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
@@ -344,7 +341,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setImplementation((org.eclipse.ocl.xtext.basecs.JavaClassCS)null);
+				setImplementation((JavaClassCS)null);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
@@ -386,7 +383,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == org.eclipse.ocl.xtext.basecs.JavaImplementationCS.class) {
+		if (baseClass == JavaImplementationCS.class) {
 			switch (derivedFeatureID) {
 				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return 2;
 				default: return -1;
@@ -402,7 +399,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == org.eclipse.ocl.xtext.basecs.JavaImplementationCS.class) {
+		if (baseClass == JavaImplementationCS.class) {
 			switch (baseFeatureID) {
 				case 2: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;

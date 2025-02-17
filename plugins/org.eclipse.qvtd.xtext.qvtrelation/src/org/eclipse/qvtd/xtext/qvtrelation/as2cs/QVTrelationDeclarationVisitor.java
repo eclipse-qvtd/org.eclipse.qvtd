@@ -48,6 +48,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
+import org.eclipse.ocl.xtext.basecs.JavaClassCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
@@ -86,8 +87,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.TargetCS;
@@ -377,7 +376,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		JavaClassCS csJavaClass = null;
 		String implementationClass = asFunction.getImplementationClass();
 		if (implementationClass != null) {
-			csJavaClass = QVTbaseCSFactory.eINSTANCE.createJavaClassCS();
+			csJavaClass = BaseCSFactory.eINSTANCE.createJavaClassCS();
 			csJavaClass.setName(implementationClass);
 			ClassUtil.nonNullState(context.getCSResource()).getContents().add(csJavaClass);
 		}

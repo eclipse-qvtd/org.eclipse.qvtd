@@ -27,12 +27,12 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -239,11 +239,11 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 			URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
 			myQVT = new MyQVT(testProjectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 			JavaClasspath classpath = myQVT.getClasspath();
-			classpath.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
-			classpath.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
-			classpath.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
-			classpath.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
-			classpath.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+			classpath.addBundleForClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+			classpath.addBundleForClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+			classpath.addBundleForClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+			classpath.addBundleForClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+			classpath.addBundleForClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
 			myQVT.setCopyright(copyright);
 			//
 			//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
