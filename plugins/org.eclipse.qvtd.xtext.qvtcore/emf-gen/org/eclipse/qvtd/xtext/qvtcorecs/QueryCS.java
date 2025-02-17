@@ -44,7 +44,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * @model
  * @generated
  */
-public interface QueryCS extends TypedElementCS, JavaImplementationCS {
+public interface QueryCS extends TypedElementCS, org.eclipse.ocl.xtext.basecs.JavaImplementationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

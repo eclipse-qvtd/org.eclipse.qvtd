@@ -104,14 +104,9 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 				return createCompoundTargetElementCSAdapter();
 			}
 			@Override
-			public Adapter caseJavaClassCS(JavaClassCS object)
+			public Adapter caseDummyQVTbaseConstraintClass(DummyQVTbaseConstraintClass object)
 			{
-				return createJavaClassCSAdapter();
-			}
-			@Override
-			public Adapter caseJavaImplementationCS(JavaImplementationCS object)
-			{
-				return createJavaImplementationCSAdapter();
+				return createDummyQVTbaseConstraintClassAdapter();
 			}
 			@Override
 			public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
@@ -236,31 +231,16 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS <em>Java Class CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.DummyQVTbaseConstraintClass <em>Dummy QV Tbase Constraint Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.DummyQVTbaseConstraintClass
 	 * @generated
 	 */
-	public Adapter createJavaClassCSAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
-	 * @generated
-	 */
-	public Adapter createJavaImplementationCSAdapter()
+	public Adapter createDummyQVTbaseConstraintClassAdapter()
 	{
 		return null;
 	}

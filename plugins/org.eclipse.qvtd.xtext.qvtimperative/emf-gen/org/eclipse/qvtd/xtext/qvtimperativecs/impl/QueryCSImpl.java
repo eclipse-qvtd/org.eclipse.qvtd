@@ -80,7 +80,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected JavaClassCS implementation;
+	protected org.eclipse.ocl.xtext.basecs.JavaClassCS implementation;
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
@@ -147,10 +147,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public JavaClassCS getImplementation() {
+	public org.eclipse.ocl.xtext.basecs.JavaClassCS getImplementation() {
 		if (implementation != null && implementation.eIsProxy()) {
 			InternalEObject oldImplementation = (InternalEObject)implementation;
-			implementation = (JavaClassCS)eResolveProxy(oldImplementation);
+			implementation = (org.eclipse.ocl.xtext.basecs.JavaClassCS)eResolveProxy(oldImplementation);
 			if (implementation != oldImplementation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
@@ -164,7 +164,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JavaClassCS basicGetImplementation() {
+	public org.eclipse.ocl.xtext.basecs.JavaClassCS basicGetImplementation() {
 		return implementation;
 	}
 
@@ -174,8 +174,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public void setImplementation(JavaClassCS newImplementation) {
-		JavaClassCS oldImplementation = implementation;
+	public void setImplementation(org.eclipse.ocl.xtext.basecs.JavaClassCS newImplementation) {
+		org.eclipse.ocl.xtext.basecs.JavaClassCS oldImplementation = implementation;
 		implementation = newImplementation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
@@ -319,7 +319,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setImplementation((JavaClassCS)newValue);
+				setImplementation((org.eclipse.ocl.xtext.basecs.JavaClassCS)newValue);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
@@ -344,7 +344,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
-				setImplementation((JavaClassCS)null);
+				setImplementation((org.eclipse.ocl.xtext.basecs.JavaClassCS)null);
 				return;
 			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedParameters().clear();
@@ -386,9 +386,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == JavaImplementationCS.class) {
+		if (baseClass == org.eclipse.ocl.xtext.basecs.JavaImplementationCS.class) {
 			switch (derivedFeatureID) {
-				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0;
+				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return 2;
 				default: return -1;
 			}
 		}
@@ -402,9 +402,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == JavaImplementationCS.class) {
+		if (baseClass == org.eclipse.ocl.xtext.basecs.JavaImplementationCS.class) {
 			switch (baseFeatureID) {
-				case ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+				case 2: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

@@ -24,6 +24,28 @@
             genModel="model/QVTimperativeCS.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTimperativeCS -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTimperativeCS -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvtics"
+            id="org.eclipse.qvtd.qvtics"
+            name="%_UI_QVTimperativeCS_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2016/QVTimperativeCS"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvti" type="text" />
       <fileTypes extension="qvtics" type="text" />

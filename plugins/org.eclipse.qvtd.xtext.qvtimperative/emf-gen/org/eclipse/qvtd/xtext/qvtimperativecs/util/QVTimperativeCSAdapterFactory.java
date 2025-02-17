@@ -224,7 +224,7 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseJavaImplementationCS(JavaImplementationCS object) {
+			public Adapter caseJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS object) {
 				return createJavaImplementationCSAdapter();
 			}
 			@Override
@@ -654,13 +654,13 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.JavaImplementationCS <em>Java Implementation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS
+	 * @see org.eclipse.ocl.xtext.basecs.JavaImplementationCS
 	 * @generated
 	 */
 	public Adapter createJavaImplementationCSAdapter() {

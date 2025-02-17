@@ -41,15 +41,6 @@ public interface QVTbaseCSFactory extends EFactory
 	CompoundTargetElementCS createCompoundTargetElementCS();
 
 	/**
-	 * Returns a new object of class '<em>Java Class CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Java Class CS</em>'.
-	 * @generated
-	 */
-	@NonNull JavaClassCS createJavaClassCS();
-
-	/**
 	 * Returns a new object of class '<em>Qualified Package CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

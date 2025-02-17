@@ -52,12 +52,7 @@ public abstract class AbstractQVTbaseCSPreOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitJavaClassCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaClassCS csElement) {
-		return visitNamedElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitJavaImplementationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull JavaImplementationCS csElement) {
+	public @Nullable Continuation<?> visitDummyQVTbaseConstraintClass(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull DummyQVTbaseConstraintClass csElement) {
 		return visitElementCS(csElement);
 	}
 
