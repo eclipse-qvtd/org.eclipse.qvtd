@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2023 Willink Transformations and others.
+ * Copyright (c) 2015, 2025 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -333,7 +333,7 @@ public class QVTcoreGrammarResource extends AbstractGrammarResource
 						createGroup(
 							createKeyword("implementedby"),
 							createAssignment("implementation", "=", createCrossReference(
-								createTypeRef(MM_qvtbasecs, org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.Literals.JAVA_CLASS_CS), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING))),
+								createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.JAVA_CLASS_CS), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING))),
 							createKeyword(";")))));
 			PR_RealizedVariableCS.setAlternatives(
 				createGroup(
