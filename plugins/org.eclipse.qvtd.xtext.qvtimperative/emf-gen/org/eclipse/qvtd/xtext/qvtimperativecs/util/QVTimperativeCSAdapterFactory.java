@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
@@ -28,7 +29,6 @@ import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -224,7 +224,7 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS object) {
+			public Adapter caseJavaImplementationCS(JavaImplementationCS object) {
 				return createJavaImplementationCSAdapter();
 			}
 			@Override

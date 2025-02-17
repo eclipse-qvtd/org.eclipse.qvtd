@@ -38,8 +38,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -50,6 +48,8 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -249,8 +249,8 @@ public class CompilerUtil extends QVTscheduleUtil
 	 */
 	public static @NonNull JavaClasspath createDefaultQVTiClasspath() {
 		JavaClasspath classpath = JavaFileUtil.createDefaultOCLClasspath();
-		classpath.addClass(org.eclipse.qvtd.runtime.evaluation.Invocation.class);
-		classpath.addClass(org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent.class);
+		classpath.addBundleForClass(org.eclipse.qvtd.runtime.evaluation.Invocation.class);
+		classpath.addBundleForClass(org.eclipse.qvtd.runtime.qvtruntimelibrary.Extent.class);
 		return classpath;
 	}
 

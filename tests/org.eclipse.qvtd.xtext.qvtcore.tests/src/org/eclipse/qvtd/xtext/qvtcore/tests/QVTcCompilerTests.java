@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestFolder;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -108,7 +108,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		@Override
 		protected @NonNull JavaClasspath createClassProjectNames() {
 			JavaClasspath classpath = super.createClassProjectNames();
-			classpath.addClass(/*0,*/ getClass());
+			classpath.addBundleForClass(/*0,*/ getClass());
 			return classpath;
 		}
 
@@ -596,7 +596,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		TestFile refFile = testProject.copyFiles(testProjectManager, outputFolder, modelsOutURI, "SimpleRDBMSPeople_expected.xmi");
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txFile.getURI());
 		JavaClasspath classpath = myQVT.getClasspath();
-		classpath.addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
+		classpath.addBundleForClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");

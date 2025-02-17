@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.JavaImplementationCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * @model
  * @generated
  */
-public interface QueryCS extends TypedElementCS, org.eclipse.ocl.xtext.basecs.JavaImplementationCS {
+public interface QueryCS extends TypedElementCS, JavaImplementationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS}.

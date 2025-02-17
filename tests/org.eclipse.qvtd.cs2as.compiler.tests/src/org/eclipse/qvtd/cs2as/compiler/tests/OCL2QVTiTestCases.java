@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -197,7 +197,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			getTestProject().getOutputFile(JavaFileUtil.TEST_SRC_FOLDER_NAME).getFileString());
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-			classpath.addClass(getClass()/*getTestBundleName()*/);
+			classpath.addBundleForClass(getClass()/*getTestBundleName()*/);
 			cgParams.setClasspath(classpath);
 		}
 		cgParams.setClassLoader(getClass().getClassLoader());

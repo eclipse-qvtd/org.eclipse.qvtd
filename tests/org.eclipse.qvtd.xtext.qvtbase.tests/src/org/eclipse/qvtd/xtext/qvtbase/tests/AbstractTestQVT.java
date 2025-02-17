@@ -42,11 +42,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
-import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
+import org.eclipse.ocl.pivot.internal.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -226,10 +226,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
 			xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
 			if (e instanceof WrappedException) {
-				e = ((WrappedException)e).getCause();
+				e = e.getCause();
 			}
 			if (e instanceof Resource.IOWrappedException) {
-				e = ((Resource.IOWrappedException)e).getCause();
+				e = e.getCause();
 			}
 			LoadTestCase.fail(e.toString());
 		}
@@ -317,7 +317,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {
-		classpath.addClass(classpathClass);
+		classpath.addBundleForClass(classpathClass);
 	}
 
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
@@ -464,7 +464,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	 * @throws IOException
 	 */
 	protected @NonNull JavaClasspath createClassProjectNames() {
-		classpath.addClass(getClass()); //testProjectName);
+		classpath.addBundleForClass(getClass()); //testProjectName);
 		return classpath;
 	}
 

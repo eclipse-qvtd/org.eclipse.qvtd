@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
+import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 
 public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 
