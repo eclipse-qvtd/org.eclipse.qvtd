@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcore;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -52,6 +53,7 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 
 	public static void init() {
 		QVTcorePivotStandaloneSetup.doSetup();
+		QVTcoreASResourceFactory.getInstance();
 		QVTcoreCSPackage.eINSTANCE.getName();
 		//		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
 	}

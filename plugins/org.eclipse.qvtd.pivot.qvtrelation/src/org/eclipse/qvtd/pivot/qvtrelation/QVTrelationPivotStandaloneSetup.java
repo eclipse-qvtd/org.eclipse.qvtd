@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.scoping.QVTrelationPivotScoping;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
 
@@ -42,7 +41,6 @@ public class QVTrelationPivotStandaloneSetup //implements ISetup
 	public static void init() {
 		QVTtemplatePivotStandaloneSetup.doSetup();
 		QVTrelationPivotScoping.init();
-		QVTrelationASResourceFactory.getInstance();
 		QVTrelationToStringVisitor.FACTORY.getClass();
 	}
 
