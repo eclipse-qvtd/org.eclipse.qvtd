@@ -931,7 +931,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		predicateCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		predicateOrAssignmentCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		queryCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getJavaImplementationCS());
+		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getJavaImplementationCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());

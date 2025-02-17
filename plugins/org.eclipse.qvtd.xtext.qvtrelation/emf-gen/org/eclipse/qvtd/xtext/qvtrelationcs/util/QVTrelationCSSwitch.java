@@ -801,7 +801,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJavaImplementationCS(JavaImplementationCS object) {
+	public T caseJavaImplementationCS(org.eclipse.ocl.xtext.basecs.JavaImplementationCS object) {
 		return null;
 	}
 

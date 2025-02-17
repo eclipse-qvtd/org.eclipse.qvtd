@@ -33,7 +33,7 @@ import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
  * @model
  * @generated
  */
-public interface QueryCS extends TypedElementCS, JavaImplementationCS {
+public interface QueryCS extends TypedElementCS, org.eclipse.ocl.xtext.basecs.JavaImplementationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS}.
