@@ -208,6 +208,7 @@ public class DatumCaches
 	// Property datum analysis
 
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Type asType) {
+		assert !asType.eIsProxy();			// XXX
 		CompleteClass completeClass = completeModel.getCompleteClass(asType);
 		return getClassDatum(typedModel, completeClass);
 	}
@@ -510,6 +511,8 @@ public class DatumCaches
 			targetClassDatum = null;
 		}
 		assert property != oclContainerProperty;			// Use getOclContainerPropertyDatums() to return multiple candidates
+		assert !property.eIsProxy();			// XXX
+		assert !PivotUtil.getOwningClass(property).eIsProxy();			// XXX
 		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = getProperty2propertyDatum(sourceClassDatum, targetClassDatum);
 		PropertyDatum cachedPropertyDatum = property2propertyDatum.get(property);
 		if (cachedPropertyDatum != null) {
@@ -537,8 +540,14 @@ public class DatumCaches
 		// Lazily assign the opposite
 		Property oppositeProperty = property.getOpposite();
 		if (oppositeProperty != null) {
+			if (oppositeProperty.eIsProxy()) {			// XXX
+				oppositeProperty = property.getOpposite();
+			}
+			assert !oppositeProperty.eIsProxy();			// XXX
 			//	assert oppositeProperty != oclContainerProperty;
-			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(sourceClassDatum), PivotUtil.getOwningClass(oppositeProperty));
+			org.eclipse.ocl.pivot.Class oppositeOwningClass = PivotUtil.getOwningClass(oppositeProperty);
+			assert !oppositeOwningClass.eIsProxy();			// XXX
+			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(sourceClassDatum), oppositeOwningClass);
 			Map<@NonNull Property, @NonNull PropertyDatum> oppositeProperty2propertyDatum = getProperty2propertyDatum(oppositeClassDatum, null);
 			PropertyDatum oppositePropertyDatum = oppositeProperty2propertyDatum.get(oppositeProperty);
 			if (oppositePropertyDatum != null) {
