@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2022 Willink Transformations and others.
+ * Copyright (c) 2010, 2025 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -30,29 +30,43 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.AssociativityKind;
+import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.LambdaType;
 import org.eclipse.ocl.pivot.Library;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Precedence;
+import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.SelfType;
+import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 /**
@@ -186,6 +200,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	{
 		protected ReadOnly(@NonNull String asURI, @NonNull Model libraryModel) {
 			super(asURI, libraryModel);
+			setASonly(true);
 		}
 
 		/**
@@ -221,6 +236,14 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 
 		/**
+		 * Overridden to avoid computing proxies for the shared instance.
+		 *
+		 * @since 1.23
+		 */
+		@Override
+		public void preUnload(@NonNull EnvironmentFactoryInternal environmentFactory) {}
+
+		/**
 		 * Overridden to inhibit unloading of the shared instance.
 		 */
 		@Override
@@ -234,12 +257,17 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 	}
 
-	/**
-	 *	Construct a copy of the OCL Standard Library with specified resource URI,
-	 *  and package name, prefix and namespace URI.
-	 */
+	@Deprecated /* Provide externalURI */
 	public static @NonNull QVTruntimeLibrary create(@NonNull String asURI) {
 		Contents contents = new Contents(asURI);
+		return new QVTruntimeLibrary(asURI, contents.getModel());
+	}
+
+	/**
+	 * @since 1.23
+	 */
+	public static @NonNull QVTruntimeLibrary create(@NonNull String asURI, @NonNull String externalURI) {
+		Contents contents = new Contents(externalURI);
 		return new QVTruntimeLibrary(asURI, contents.getModel());
 	}
 
@@ -537,7 +565,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 
 		private final @NonNull Property pr_OclElement_extent_elements = createProperty("extent", _Extent);
 
-		private final @NonNull Property pr_Extent_elements = createProperty("elements", _OrderedSet_OclElement_T);
+		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_T);
 
 		private void installProperties() {
 			List<Property> ownedProperties;
@@ -579,16 +607,16 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 
 		private void installComments() {
-			installComment(op_PseudoOperations_collection, "The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_error, "The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_if, "The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_loop, "The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_mapPart, "The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_map, "The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_range, "The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_shadow, "The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_tuple, "The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_type, "The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_collection, "*\nThe PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_error, "*\nThe PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_if, "*\nThe PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_loop, "*\nThe PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_mapPart, "*\nThe PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_map, "*\nThe PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_range, "*\nThe PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_shadow, "*\nThe PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_tuple, "*\nThe PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_type, "*\nThe PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated\nas an Operation within QVTs.");
 		}
 	}
 }
