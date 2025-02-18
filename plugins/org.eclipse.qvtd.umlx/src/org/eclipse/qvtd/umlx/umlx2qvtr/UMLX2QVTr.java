@@ -25,9 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -375,6 +377,9 @@ public class UMLX2QVTr extends QVTrelationHelper
 	 * context.
 	 */
 	protected void install(@NonNull UMLXElement umlxElement, @NonNull Element qvtrElement) {
+		if (!(qvtrElement instanceof Model)) {
+			((ElementImpl)qvtrElement).setESObject(umlxElement);
+		}
 		Element oldQVTrElement = umlxElement2qvtrElement.put(umlxElement, qvtrElement);
 		assert oldQVTrElement == null;
 		for (@NonNull String comment : UMLXUtil.getComments(umlxElement)) {
