@@ -62,6 +62,13 @@
             genModel="model/QVTcoreCS.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTcoreCS -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtccs"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
   <extension point="org.eclipse.ocl.pivot.as_resource_factory">
      <factory class="org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreASResourceFactory"
      	extension="qvtc" contentType="org.eclipse.qvtd.qvtcore"/>

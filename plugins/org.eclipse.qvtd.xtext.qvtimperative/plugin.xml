@@ -62,6 +62,13 @@
             genModel="model/QVTimperativeCS.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTimperativeCS -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
   <extension point="org.eclipse.ocl.pivot.as_resource_factory">
      <factory class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"
      	extension="qvti" contentType="org.eclipse.qvtd.qvtimperative"/>
