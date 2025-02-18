@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -690,26 +691,34 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		Resource xtextResource = null;
+		CSResource xtextResource = null;
 		ASResource asResource;
 		// Load the transformation resource
+		ResourceSet asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
 		if (PivotUtilInternal.isASURI(transformationURI)) {
-			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+			asResource = (ASResource) asResourceSet.getResource(transformationURI, true);
 		}
 		else {
-			xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
+			xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
 			if (xtextResource == null) {
 				throw new IOException("Failed to load '" + transformationURI + "'");
-			}
-			if (!(xtextResource instanceof CSResource)) {
-				throw new IOException("Failed to load '" + transformationURI + "' as a CS representation of a QVTd transformation AS");
 			}
 			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 			if (csMessage != null) {
 				throw new IOException(csMessage);
 			}
-			ICS2AS cs2as = ((CSResource)xtextResource).getCS2AS(environmentFactory);
+			ICS2AS cs2as = xtextResource.getCS2AS(environmentFactory);
 			asResource = cs2as.getASResource();
+		}
+		if (!keepDebug) {
+			for (Resource resource : asResourceSet.getResources()) {
+				if (resource instanceof ASResource) {
+					ASResource asResource2 = (ASResource)resource;
+					//	if (asResource2.isSaveable()) {
+					asResource2.setASonly(true);
+					//	}
+				}
+			}
 		}
 		try {
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
@@ -728,7 +737,7 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		} finally {
 			if (!keepDebug && (xtextResource instanceof CSResource)) {
-				((CSResource)xtextResource).dispose();
+				xtextResource.dispose();
 			}
 		}
 		throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
@@ -756,6 +765,9 @@ public class QVTbaseUtil extends PivotUtil
 			// Load the transformation resource
 			if (PivotUtilInternal.isASURI(transformationURI)) {
 				asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+				if (!keepDebug) {
+					asResource.setASonly(true);
+				}
 			}
 			else {
 				xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
@@ -774,7 +786,7 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		} finally {
 			if (!keepDebug && (xtextResource instanceof CSResource)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned
-				//				((CSResource)xtextResource).dispose();
+				// XXX				((CSResource)xtextResource).dispose();
 			}
 		}
 		if (asResource == null) {

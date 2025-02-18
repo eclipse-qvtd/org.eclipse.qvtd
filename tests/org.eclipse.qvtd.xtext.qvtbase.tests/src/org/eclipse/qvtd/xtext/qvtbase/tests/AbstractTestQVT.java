@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -226,10 +227,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
 			xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
 			if (e instanceof WrappedException) {
-				e = e.getCause();
+				e = ((WrappedException)e).getCause();
 			}
 			if (e instanceof Resource.IOWrappedException) {
-				e = e.getCause();
+				e = ((Resource.IOWrappedException)e).getCause();
 			}
 			LoadTestCase.fail(e.toString());
 		}
@@ -237,8 +238,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
-		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
+		List<Resource> asResources = asResourceSet.getResources();
+		int oldResourceCount = asResources.size();
+		ASResource asResource = (ASResource)asResourceSet.getResource(inputURI, true);
 		assert asResource != null;
+		resolveAllandSetASonly(asResourceSet);
 		//		List<String> conversionErrors = new ArrayList<String>();
 		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 		//		Resource eResource = documentCS.eResource();
@@ -246,7 +251,19 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
 		//		xtextResource.getContents().add(documentCS);
-		return (ASResource) asResource;
+		return asResource;
+	}
+
+	public static void resolveAllandSetASonly(@NonNull ResourceSet resourceSet) {
+		EcoreUtil.resolveAll(resourceSet);
+		for (Resource resource : resourceSet.getResources()) {
+			if (resource instanceof ASResource) {
+				ASResource asResource = (ASResource)resource;
+				if (asResource.isSaveable()) {
+					asResource.setASonly(true);
+				}
+			}
+		}
 	}
 
 	/**
@@ -410,7 +427,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//			resourceSet = getResourceSet();
 		//		}
 		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
-		EcoreUtil.resolveAll(actualResourceSet);
+		resolveAllandSetASonly(actualResourceSet);
 		if (expectedURI != null) {
 			String actualFileStem = actualURI.trimFileExtension().lastSegment();
 			String expectedFileStem = expectedURI.trimFileExtension().lastSegment();
@@ -549,24 +566,29 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	@Override
 	public synchronized void dispose() {
-		if (loadedEPackages != null) {
-			for (@NonNull EPackage ePackage : loadedEPackages) {
-				EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+		try {
+			if (loadedEPackages != null) {
+				for (@NonNull EPackage ePackage : loadedEPackages) {
+					EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+				}
+			}
+			super.dispose();
+			if (executor != null) {
+				executor.dispose();
+			}
+			if (compilerChain != null) {
+				compilerChain.dispose();
+			}
+			/**
+			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
+			 * do not confuse subsequent tests that may want to use dynamic models.
+			 */
+			for (String nsURI : nsURIs) {
+				EPackage.Registry.INSTANCE.remove(nsURI);
 			}
 		}
-		super.dispose();
-		if (executor != null) {
-			executor.dispose();
-		}
-		if (compilerChain != null) {
-			compilerChain.dispose();
-		}
-		/**
-		 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
-		 * do not confuse subsequent tests that may want to use dynamic models.
-		 */
-		for (String nsURI : nsURIs) {
-			EPackage.Registry.INSTANCE.remove(nsURI);
+		catch (Throwable e) {			// Absorb dispose exception to allow an outer exception to propagate
+			e.printStackTrace();
 		}
 	}
 
@@ -604,10 +626,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Resource resource = resourceSet.getResource(uri, true);
 		assert resource != null;
 		PivotTestCase.assertNoResourceErrors("Load", resource);
-		EcoreUtil.resolveAll(resource);
+		resolveAllandSetASonly(resourceSet);
 		PivotTestCase.assertNoUnresolvedProxies("Resolve", resource);;
 		PivotTestCase.assertNoValidationErrors("Validate", resource);;
-		activate();
+		activate();									// re-active the TestQVT after the excursion for validation
 	}
 
 	protected XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
@@ -616,6 +638,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//	Load QVTiAS
 		//
 		OCL ocl = QVTbase.newInstance(getTestProjectManager());
+		//	System.out.println("\nocl-serialize " + NameUtil.debugSimpleName(ocl) + " : " + inputURI + " => " + serializedURI + "\n");
 		if (extraLocalPackageRegistryEntries != null) {
 			ocl.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
 		}
@@ -623,8 +646,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		XtextResource xtextResource = null;
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
-			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
-			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
+			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI + " loading " + inputURI, asResource);
+			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI + " loading " + inputURI, asResource);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			try {
 				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
@@ -643,11 +666,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 		}
 		finally {
+			//	System.out.println("\nocl-serialize-dispose1 " + NameUtil.debugSimpleName(ocl));
 			ocl.dispose();
+			//	System.out.println("ocl-serialize-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
 			ocl = null;
 		}
 
 		QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
+		//	System.out.println("\nqvti " + NameUtil.debugSimpleName(qvti) + "\n");
 		if (extraLocalPackageRegistryEntries != null) {
 			qvti.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
 		}
@@ -660,13 +686,15 @@ public abstract class AbstractTestQVT extends QVTimperative
 			LoadTestCase.assertNoValidationErrors("Loading " + serializedURI, asResource2);
 		}
 		finally {
+			//	System.out.println("\nqvti-dispose1 " + NameUtil.debugSimpleName(qvti));
 			qvti.dispose();
+			//	System.out.println("qvti-dispose2 " + NameUtil.debugSimpleName(qvti) + "\n");
 			qvti = null;
 		}
 		//	if (savedExecutor != null) {
 		//		ThreadLocalExecutor.setExecutor(savedExecutor);
 		//	}
-		activate();
+		activate();				// re-active the TestQVT after the excursion for serialization
 		return xtextResource;
 	}
 

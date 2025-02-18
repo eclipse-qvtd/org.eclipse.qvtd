@@ -10,13 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
-import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -44,14 +40,8 @@ public class QVTrLoadTests extends LoadTestCase
 	protected void doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @NonNull [] messages) throws Exception {
 		ClassLoader cl0 = getClass().getClassLoader();
 		assert cl0 != null;
-		OCL ocl = QVTrelation.newInstance(getTestProjectManager());
-		EnvironmentFactoryAdapter environmentFactoryAdapter = EnvironmentFactoryAdapter.find(ocl.getResourceSet());
-		assert environmentFactoryAdapter != null;
-		ImplementationManager implementationManager = environmentFactoryAdapter.getMetamodelManager().getImplementationManager();
-		@NonNull List<@NonNull ClassLoader> classLoaders = implementationManager.getClassLoaders();
-		if (!classLoaders.contains(cl0)) {
-			implementationManager.addClassLoader(cl0);
-		}
+		OCLInternal ocl = QVTrelation.newInstance(getTestProjectManager());
+		ocl.getMetamodelManager().addClassLoader(cl0);
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}

@@ -96,6 +96,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			ASResource qvtrResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
 			boolean wasUpdating = qvtrResource.setUpdating(true);
 			qvtrResource.setURI(getURI());
+			qvtrResource.setASonly(true);
 			qvtrResource.setUpdating(wasUpdating);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, qvtrResource);
@@ -137,7 +138,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			//					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
 			//				}
 			//			}
-			Resource qvtsResource = createResource(QVTschedulePackage.eCONTENT_TYPE);
+			ASResource qvtsResource = (ASResource) createResource(QVTschedulePackage.eCONTENT_TYPE);
+			qvtsResource.setASonly(true);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
@@ -180,13 +182,15 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 					saveResource(qvtsResource);
 				}
 				catch (CompilerChainException|AssertionError e) {
-					//
-					//	Save trace for debugging. Normally trace saved as part of GenModel creation.
-					//
-					URI ecoreURI = traceResource.getURI().trimFileExtension();
-					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
-					ecoreResource.save(null);
+					try {
+						//
+						//	Save trace for debugging. Normally trace saved as part of GenModel creation.
+						//
+						URI ecoreURI = traceResource.getURI().trimFileExtension();
+						XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, traceResource, ecoreURI, null);
+						ecoreResource.save(null);
+					}
+					catch (Throwable e2) {}			// Swallow nested exception so that JUnit reports the original.
 					throw e;
 				}
 				return multipleScheduleManager;
@@ -210,8 +214,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//	Create and Save Ecore variant of Trace Model
 				//
 				URI ecoreURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-				AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-				XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
+				XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, traceResource, ecoreURI, null);
 				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();
