@@ -33,7 +33,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTimperative -->
+      <!-- @generated QVTimperativeCS NOT -->
+      <!--parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
             class="org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeASResourceFactory"/>
@@ -60,13 +63,6 @@
             uri="http://www.eclipse.org/qvt/2016/QVTimperativeCS"
             class="org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
             genModel="model/QVTimperativeCS.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTimperativeCS -->
-      <parser
-            contentTypeIdentifier="org.eclipse.qvtd.qvtics"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
    </extension>
 
   <extension point="org.eclipse.ocl.pivot.as_resource_factory">

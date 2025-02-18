@@ -16,10 +16,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTimperative -->
-      <parser
+      <!-- @generated QVTimperative NOT -->
+      <!--parser
             contentTypeIdentifier="org.eclipse.qvtd.qvtimperative"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">

@@ -17,10 +17,29 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTcore -->
-      <parser
+      <!-- @generated QVTcore NOT -->
+      <!--parser
             contentTypeIdentifier="org.eclipse.qvtd.qvtcore"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTcore -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvtcas"
+            id="org.eclipse.qvtd.qvtcore"
+            name="%_UI_QVTcore_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTcore"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated NOT QVTcore -->
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
