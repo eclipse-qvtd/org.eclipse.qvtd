@@ -17,10 +17,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTrelation -->
-      <parser
+      <!-- @generated QVTrelation NOT -->
+      <!--parser
             contentTypeIdentifier="org.eclipse.qvtd.qvtrelation"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
