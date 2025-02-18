@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
@@ -30,7 +27,6 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -107,30 +103,6 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		return csPathName;
 	}
 
-	/**
-	 * QVTcoreAliasAnalysis revises AliasAnalysis to support only those names explicitly defined (as a consequence
-	 * of Unit AS elements).
-	 */
-	public static class QVTcoreAliasAnalysis extends AliasAnalysis
-	{
-		public static @NonNull QVTcoreAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			List<Adapter> eAdapters = resource.eAdapters();
-			for (Adapter adapter : eAdapters) {
-				if (adapter instanceof QVTcoreAliasAnalysis) {
-					QVTcoreAliasAnalysis aliasAnalysis = (QVTcoreAliasAnalysis)adapter;
-					if (aliasAnalysis.environmentFactory == environmentFactory) {
-						return aliasAnalysis;
-					}
-				}
-			}
-			return new QVTcoreAliasAnalysis(resource, environmentFactory);
-		}
-
-		public QVTcoreAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
-			super(resource, environmentFactory);
-		}
-	}
-
 	public QVTcoreDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
@@ -165,7 +137,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 
 	public void buildModel(@NonNull RootPackageCS csRootPackage, @NonNull Model asModel) {
 		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
-			if (!Orphanage.isTypeOrphanage(asPackage)) {
+			if (!Orphanage.isOrphanage(asPackage)) {
 				buildPackage(csRootPackage, null, asPackage);
 			}
 		}
@@ -265,24 +237,8 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	@Override
 	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<@NonNull Namespace, @NonNull List<@NonNull String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
-		QVTcoreAliasAnalysis aliasAdapter = QVTcoreAliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
-		List<EObject> contents = csResource.getContents();
-		if (contents.size() > 0) {
-			EObject root = contents.get(0);
-			if (root instanceof RootPackageCS) {
-				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
-					Element pivot = csImport.getPivot();
-					if (pivot instanceof Import) {
-						Import asImport = (Import)pivot;
-						String alias = asImport.getName();
-						Namespace asNamespace = asImport.getImportedNamespace();
-						if ((asNamespace != null) && (alias != null)) {
-							aliasAdapter.getAlias(asNamespace, alias);
-						}
-					}
-				}
-			}
-		}
+		AliasAnalysis aliasAdapter = AliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
+		aliasAdapter.computeCandidates(csResource);
 	}
 
 	protected void refreshOwnedInTransformation(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
