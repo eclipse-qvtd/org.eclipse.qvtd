@@ -117,6 +117,7 @@ public class UMLXParserContext extends AbstractExtendedParserContext
 		ASResource asResource = cs2as.getASResource();
 		assert asResource.getContents().size() == 1;
 		ExpressionInOCL asExpression = (ExpressionInOCL) asResource.getContents().get(0);
-		return PivotUtil.getOwnedBody(asExpression);
+		resource.dispose();
+		return PivotUtil.getOwnedBody(asExpression);						// XXX resource.dispose()
 	}
 }

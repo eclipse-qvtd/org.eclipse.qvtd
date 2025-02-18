@@ -76,8 +76,11 @@ public class QVTcSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
 		ocl2.dispose();
+		// XXX	ThreadLocalExecutor.resetEnvironmentFactory();
+		// XXX	ThreadLocalExecutor.attachEnvironmentFactory(ocl1.getEnvironmentFactory());
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedInputURI, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved, @NonNull String @Nullable [] messages) throws Exception {

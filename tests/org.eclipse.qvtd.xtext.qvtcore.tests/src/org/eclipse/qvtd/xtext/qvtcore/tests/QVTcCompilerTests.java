@@ -148,6 +148,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		//		BaseLinkingService.DEBUG_RETRY.setState(true);
+		//	ThreadLocalExecutor.THREAD_LOCAL_ENVIRONMENT_FACTORY.setState(true);
 		XtextCompilerUtil.doQVTcoreSetup();
 		XtextCompilerUtil.doQVTimperativeSetup();
 		super.setUp();
@@ -475,6 +476,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.checkOutput(getTestURI("SimpleRDBMSPeople_Interpreted.xmi"), getModelsURI("uml2rdbms/samples/SimpleRDBMSPeople_expected.xmi"), SimpleRDBMSNormalizer.INSTANCE);
 		}
 		finally {
+			myQVT.activate();
 			myQVT.dispose();
 			cleanup("http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS",
 				"http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML",
@@ -635,6 +637,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.checkOutput(getTestURI("SimpleGraphLower_Interpreted.xmi"), getModelsURI("upper2lower/samples/SimpleGraphLower_expected.xmi"), Upper2LowerNormalizer.INSTANCE);
 		}
 		finally {
+			myQVT.activate();
 			myQVT.dispose();
 			cleanup(SimplegraphPackage.eNS_URI,
 				Simplegraph2graphPackage.eNS_URI);

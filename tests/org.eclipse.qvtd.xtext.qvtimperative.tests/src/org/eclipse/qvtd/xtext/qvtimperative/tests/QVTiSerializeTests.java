@@ -62,8 +62,11 @@ public class QVTiSerializeTests extends LoadTestCase
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
-		ocl1.dispose();
 		ocl2.dispose();
+		// XXX	ThreadLocalExecutor.resetEnvironmentFactory();
+		// XXX	ThreadLocalExecutor.attachEnvironmentFactory(ocl1.getEnvironmentFactory());
+		ocl1.activate();
+		ocl1.dispose();
 	}
 
 	protected void doSerializeRoundTripFromAS(@NonNull URI inputURI) throws Exception {

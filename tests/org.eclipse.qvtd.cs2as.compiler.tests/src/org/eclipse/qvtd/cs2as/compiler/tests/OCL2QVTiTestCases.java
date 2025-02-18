@@ -726,8 +726,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	}
 
 	protected @NonNull ImperativeTransformation getTransformation(ResourceSet rSet, URI qvtiURI) {
-
-		Resource resource = rSet.getResource(qvtiURI, true);
+		ASResource resource = (ASResource)rSet.getResource(qvtiURI, true);
+		resource.setASonly(true);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
 				for (org.eclipse.ocl.pivot.Package pPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
