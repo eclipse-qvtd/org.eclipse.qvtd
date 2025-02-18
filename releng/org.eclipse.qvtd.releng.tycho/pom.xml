@@ -456,16 +456,6 @@
       </properties>
     </profile>
     <profile>
-      <id>interim</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <buildType>I</buildType>
-        <targetPlatform>targetPlatforms/interim</targetPlatform>
-      </properties>
-    </profile>
-    <profile>
       <id>milestone</id>
       <activation>
         <activeByDefault>false</activeByDefault>
