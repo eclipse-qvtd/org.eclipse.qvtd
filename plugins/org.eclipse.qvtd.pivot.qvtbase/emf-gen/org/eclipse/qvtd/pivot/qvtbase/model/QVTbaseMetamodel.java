@@ -30,25 +30,21 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
 import org.eclipse.ocl.pivot.BagType;
-import org.eclipse.ocl.pivot.BooleanType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Constraint;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Enumeration;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
-import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -58,7 +54,6 @@ import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -158,35 +153,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		INSTANCE = null;
 	}
 
-	protected static class LibraryContents extends AbstractContents
-	{
-		protected final @NonNull Package standardLibrary;
-		private final @NonNull Class booleanType;
-		private final @NonNull Class stringType;
-
-		protected LibraryContents(@NonNull Package standardLibrary) {
-			this.standardLibrary = standardLibrary;
-			this.booleanType = ClassUtil.nonNullState(standardLibrary.getOwnedClass("Boolean"));
-			this.stringType = ClassUtil.nonNullState(standardLibrary.getOwnedClass("String"));
-		}
-
-		/**
-		 * @since 1.23
-		 */
-		protected @NonNull Constraint createInvariant(@NonNull String name, @NonNull String body) {
-			Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
-			StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
-			stringLiteral.setStringSymbol(body);
-			stringLiteral.setType(stringType);
-			expressionInOCL.setOwnedBody(stringLiteral);
-			expressionInOCL.setType(booleanType);
-			constraint.setName(name);
-			constraint.setOwnedSpecification(expressionInOCL);
-			return constraint;
-		}
-	}
-
 	/**
 	 * The Loader shares the metamodel instance whenever this default metamodel
 	 * is loaded from the registry of known pivot metamodels.
@@ -268,7 +234,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 	}
 
-	private static class Contents extends LibraryContents
+	private static class Contents extends AbstractContents.AbstractMetamodelContents
 	{
 		private final @NonNull Model root;
 		private final @NonNull Package pivot;
@@ -1025,21 +991,21 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setOpposite(pr_TypedModel_dependsOn);
 		}
 
-		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant("NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");
-		private final @NonNull Constraint iv_Domain_TypedModelIsTransformationModelParameter = createInvariant("TypedModelIsTransformationModelParameter", "oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies\n\toclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)");
-		private final @NonNull Constraint iv_Function_ParametersAreFunctionParameter = createInvariant("ParametersAreFunctionParameter", "ownedParameters->forAll(oclIsKindOf(FunctionParameter))");
-		private final @NonNull Constraint iv_Function_ReturnTypeIsQueryType = createInvariant("ReturnTypeIsQueryType", "queryExpression <> null implies queryExpression.type?.conformsTo(type)");
-		private final @NonNull Constraint iv_Predicate_ConditionIsBoolean = createInvariant("ConditionIsBoolean", "conditionExpression.type = Boolean");
-		private final @NonNull Constraint iv_Rule_AbstractRuleIsOverridden = createInvariant("AbstractRuleIsOverridden", "isAbstract implies overrides->notEmpty()");
-		private final @NonNull Constraint iv_Rule_AtLeastOneDomainIsCheckableOrEnforceable = createInvariant("AtLeastOneDomainIsCheckableOrEnforceable", "domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)");
-		private final @NonNull Constraint iv_Rule_DomainNameIsUnique = createInvariant("DomainNameIsUnique", "domain->isUnique(name)");
-		private final @NonNull Constraint iv_Rule_NoOverridesCycle = createInvariant("NoOverridesCycle", "overridden->closure(overridden)->excludes(self)");
-		private final @NonNull Constraint iv_Rule_OverridingRuleOverridesAllDomains = createInvariant("OverridingRuleOverridesAllDomains", "overridden <> null implies\n\toverridden.domain->forAll(od | self.domain.name->includes(od.name))");
-		private final @NonNull Constraint iv_Transformation_ContextTypeIsTransformation = createInvariant("ContextTypeIsTransformation", "ownedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)");
-		private final @NonNull Constraint iv_Transformation_ExtendedTypedModelIsExtended = createInvariant("ExtendedTypedModelIsExtended", "_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)");
-		private final @NonNull Constraint iv_Transformation_ModelParameterIsUnique = createInvariant("ModelParameterIsUnique", "modelParameter->isUnique(name)");
-		private final @NonNull Constraint iv_Transformation_NoExtendsCycle = createInvariant("NoExtendsCycle", "_extends->closure(_extends)->excludes(self)");
-		private final @NonNull Constraint iv_TypedModel_ExclusivePrimitiveThisTrace = createInvariant("ExclusivePrimitiveThisTrace", "if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1");
+		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant(QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP, "NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");
+		private final @NonNull Constraint iv_Domain_TypedModelIsTransformationModelParameter = createInvariant(QVTbasePackage.Literals.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP, "TypedModelIsTransformationModelParameter", "oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies\n\toclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)");
+		private final @NonNull Constraint iv_Function_ParametersAreFunctionParameter = createInvariant(QVTbasePackage.Literals.FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP, "ParametersAreFunctionParameter", "ownedParameters->forAll(oclIsKindOf(FunctionParameter))");
+		private final @NonNull Constraint iv_Function_ReturnTypeIsQueryType = createInvariant(QVTbasePackage.Literals.FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP, "ReturnTypeIsQueryType", "queryExpression <> null implies queryExpression.type?.conformsTo(type)");
+		private final @NonNull Constraint iv_Predicate_ConditionIsBoolean = createInvariant(QVTbasePackage.Literals.PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP, "ConditionIsBoolean", "conditionExpression.type = Boolean");
+		private final @NonNull Constraint iv_Rule_AbstractRuleIsOverridden = createInvariant(QVTbasePackage.Literals.RULE___VALIDATE_ABSTRACT_RULE_IS_OVERRIDDEN__DIAGNOSTICCHAIN_MAP, "AbstractRuleIsOverridden", "isAbstract implies overrides->notEmpty()");
+		private final @NonNull Constraint iv_Rule_AtLeastOneDomainIsCheckableOrEnforceable = createInvariant(QVTbasePackage.Literals.RULE___VALIDATE_AT_LEAST_ONE_DOMAIN_IS_CHECKABLE_OR_ENFORCEABLE__DIAGNOSTICCHAIN_MAP, "AtLeastOneDomainIsCheckableOrEnforceable", "domain->notEmpty() implies domain->exists(isCheckable or isEnforceable)");
+		private final @NonNull Constraint iv_Rule_DomainNameIsUnique = createInvariant(QVTbasePackage.Literals.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP, "DomainNameIsUnique", "domain->isUnique(name)");
+		private final @NonNull Constraint iv_Rule_NoOverridesCycle = createInvariant(QVTbasePackage.Literals.RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP, "NoOverridesCycle", "overridden->closure(overridden)->excludes(self)");
+		private final @NonNull Constraint iv_Rule_OverridingRuleOverridesAllDomains = createInvariant(QVTbasePackage.Literals.RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP, "OverridingRuleOverridesAllDomains", "overridden <> null implies\n\toverridden.domain->forAll(od | self.domain.name->includes(od.name))");
+		private final @NonNull Constraint iv_Transformation_ContextTypeIsTransformation = createInvariant(QVTbasePackage.Literals.TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP, "ContextTypeIsTransformation", "ownedContext <> null implies ownedContext.type.oclIsKindOf(Transformation)");
+		private final @NonNull Constraint iv_Transformation_ExtendedTypedModelIsExtended = createInvariant(QVTbasePackage.Literals.TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP, "ExtendedTypedModelIsExtended", "_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)");
+		private final @NonNull Constraint iv_Transformation_ModelParameterIsUnique = createInvariant(QVTbasePackage.Literals.TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP, "ModelParameterIsUnique", "modelParameter->isUnique(name)");
+		private final @NonNull Constraint iv_Transformation_NoExtendsCycle = createInvariant(QVTbasePackage.Literals.TRANSFORMATION___VALIDATE_NO_EXTENDS_CYCLE__DIAGNOSTICCHAIN_MAP, "NoExtendsCycle", "_extends->closure(_extends)->excludes(self)");
+		private final @NonNull Constraint iv_TypedModel_ExclusivePrimitiveThisTrace = createInvariant(QVTbasePackage.Literals.TYPED_MODEL___VALIDATE_EXCLUSIVE_PRIMITIVE_THIS_TRACE__DIAGNOSTICCHAIN_MAP, "ExclusivePrimitiveThisTrace", "if isPrimitive then 1 else 0 endif + if isThis then 1 else 0 endif + if isTrace then 1 else 0 endif <= 1");
 
 		private void installInvariants() {
 			List<Constraint> ownedInvariants;
