@@ -18,6 +18,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -422,6 +423,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT4 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/qvtrelation/tests/newatl2qvtr/NewATL2QVTr");
 		}
+		EPackageRegistryImpl.INSTANCE.remove("http://_QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG/org/eclipse/qvtd/xtext/qvtrelation/tests/newatl2qvtr/NewATL2QVTr");
+		EPackageRegistryImpl.INSTANCE.remove("http://www.eclipse.org/gmt/2005/Problem-PrimitiveTypes");
+		EPackageRegistryImpl.INSTANCE.remove("http://www.eclipse.org/gmt/2005/Problem");
 	}
 
 	public void testQVTrCompiler_ATL2QVTr_reverse_CG() throws Exception {
@@ -948,6 +952,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2 = null;
 			cleanup("http://www.eclipse.org/qvtd-example/org/eclipse/ocl/pivot2/ecore2pivotRoot/Ecore2PivotRoot");
 		}
+		EPackageRegistryImpl.INSTANCE.remove("http://_QVTd_QVTrCompilerTests__testQVTrCompiler_Ecore2PivotRoot_CG/org/eclipse/ocl/pivot2/ecore2pivotRoot/Ecore2PivotRoot");
 	}
 
 	public void testQVTrCompiler_Families2Persons_CG() throws Exception {

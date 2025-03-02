@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -264,5 +265,6 @@ public class UMLXCompilerTests extends LoadTestCase
 					"http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/xtext/umlx/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine",
 					"http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/FlatStateMachine");
 		}
+		EPackageRegistryImpl.INSTANCE.remove("http://_QVTd_UMLXCompilerTests__testUMLXCompiler_HierarchicalStateMachine2FlatStateMachine_example_CG/org/eclipse/qvtd/xtext/umlx/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
 	}
 }

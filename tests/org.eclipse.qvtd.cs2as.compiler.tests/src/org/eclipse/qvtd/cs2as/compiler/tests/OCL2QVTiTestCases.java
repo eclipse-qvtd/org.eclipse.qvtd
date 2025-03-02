@@ -681,6 +681,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			EPackage.Registry.INSTANCE.remove(example5.sderived.SderivedPackage.eNS_URI);
 			EPackage.Registry.INSTANCE.remove(example5.tbase.TbasePackage.eNS_URI);
 			EPackage.Registry.INSTANCE.remove(example5.tderived.TderivedPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove("http://www.eclipse.org/qvt/2015/CS2AScg");
 		}
 	}
 

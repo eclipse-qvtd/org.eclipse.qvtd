@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.qvtd.text.TextModelPackage;
 import org.eclipse.qvtd.text.utilities.TextModelResourceFactoryImpl;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 
@@ -68,6 +69,12 @@ public class TextModelTests extends XtextTestCase
 		}
 		bufferedReader.close();
 		return s.toString();
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		TextModelPackage.eINSTANCE.getName();
+		super.setUp();
 	}
 
 	public void testText_BadIndents() throws Exception {

@@ -20,24 +20,36 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.pivot.tests.AbstractPivotTestCase;
+import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.annotations.PivotAnnotationsPackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.internal.ecore.annotations.AbstractEAnnotationConverter;
+import org.eclipse.ocl.pivot.internal.ecore.annotations.EAnnotationConverter;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -48,12 +60,18 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
 import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup;
@@ -323,6 +341,18 @@ public class PivotTestCase extends AbstractPivotTestCase
 
 	@Override
 	protected void setUp() throws Exception {
+		if (DEBUG_GC) {
+			PivotPackage.eINSTANCE.getName();
+			PivotAnnotationsPackage.eINSTANCE.getName();
+			OCLstdlibPackage.eINSTANCE.getName();
+			CGModelPackage.eINSTANCE.getName();
+			QVTbasePackage.eINSTANCE.getName();
+			QVTcorePackage.eINSTANCE.getName();
+			QVTimperativePackage.eINSTANCE.getName();
+			QVTrelationPackage.eINSTANCE.getName();
+			QVTtemplatePackage.eINSTANCE.getName();
+			QVTiCGModelPackage.eINSTANCE.getName();
+		}
 		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
 		Collections.sort(savedEPackageRegistry);
 		super.setUp();
