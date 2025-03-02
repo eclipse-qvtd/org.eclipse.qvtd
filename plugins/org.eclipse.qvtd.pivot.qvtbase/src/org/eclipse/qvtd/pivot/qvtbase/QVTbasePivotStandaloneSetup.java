@@ -14,6 +14,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.pivot.internal.ecore.annotations.EAnnotationConverter;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
@@ -46,6 +47,8 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 		QVTtracePackage.eINSTANCE.getClass();
 		PivotStandaloneSetup.doSetup();
 		QVTbasePivotScoping.init();
+		EAnnotationConverter.addDefaultEAnnotationConverter("http://www.eclipse.org/qvt");
+		// The conversion  of referredDomain to usage is in RootDomainUsageAnalysis.getAnnotatedUsage()
 	}
 
 	/**
