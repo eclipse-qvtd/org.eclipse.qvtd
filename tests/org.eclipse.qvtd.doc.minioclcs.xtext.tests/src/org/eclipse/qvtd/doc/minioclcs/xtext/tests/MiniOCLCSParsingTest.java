@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.doc.minioclcs.xtext.tests;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -21,6 +22,7 @@ import org.eclipse.qvtd.doc.MiniOCLCSStandaloneSetup;
 import org.eclipse.qvtd.doc.minioclcs.RootCS;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.xtext.XtextPackage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,11 +52,16 @@ public class MiniOCLCSParsingTest extends LoadTestCase
 	public void testSimpleMiniOCL_PackagesDef() {
 		RootCS result = parse("simple_packages.mocl");
 		assertNotNull(result);
+		EPackage.Registry.INSTANCE.remove("http://www.eclipse.org/qvtd/doc/MiniOCLCS");
 	}
 
 	@Test
 	public void testSimpleMiniOCL_Invariant() {
+		registerEPackage(XtextPackage.eINSTANCE);
 		RootCS result = parse("simple_invariants.mocl");
 		assertNotNull(result);
+		EPackage.Registry.INSTANCE.remove("http://www.eclipse.org/qvtd/doc/MiniOCL/1.0");
+		EPackage.Registry.INSTANCE.remove("http://www.eclipse.org/qvtd/doc/MiniOCLCS");
+		EPackage.Registry.INSTANCE.remove("http://www.eclipse.org/qvtd/doc/MiniOCL/Lookup/1.0");
 	}
 }

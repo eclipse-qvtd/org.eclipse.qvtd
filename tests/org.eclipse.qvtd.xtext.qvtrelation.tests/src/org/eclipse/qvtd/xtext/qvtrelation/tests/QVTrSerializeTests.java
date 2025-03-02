@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.internal.ecore.annotations.EAnnotationConverter;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -199,6 +200,11 @@ public class QVTrSerializeTests extends LoadTestCase
 	}
 
 	public void testQVTrSerialize_PetriNet2StateChart() throws Exception {
+		EAnnotationConverter.addDefaultEAnnotationConverter("gmf");
+		EAnnotationConverter.addDefaultEAnnotationConverter("gmf.compartment");
+		EAnnotationConverter.addDefaultEAnnotationConverter("gmf.diagram");
+		EAnnotationConverter.addDefaultEAnnotationConverter("gmf.link");
+		EAnnotationConverter.addDefaultEAnnotationConverter("gmf.node");
 		doSerializeRoundTripFromCS(getModelsURI("pn2sc/PetriNet2StateChart.qvtr"), null);
 	}
 

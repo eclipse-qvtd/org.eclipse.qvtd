@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.xml.XMLmodelPackage;
 import org.eclipse.qvtd.xml.utilities.XMLmodelResourceFactoryImpl;
 import org.eclipse.qvtd.xml.utilities.XMLmodelResourceImpl;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
@@ -98,6 +99,7 @@ public class XMLmodelTests extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		ATLPackage.eINSTANCE.getClass();
+		XMLmodelPackage.eINSTANCE.getName();
 		super.setUp();
 	}
 
