@@ -39,7 +39,7 @@
     <buildId>${buildType}${buildTimestamp}</buildId>
     <targetPlatform>targetPlatforms/unspecified</targetPlatform>
 
-    <tycho.scmUrl>scm:git:https://git.eclipse.org/c/mmt/org.eclipse.qvtd.git</tycho.scmUrl>
+    <tycho.scmUrl>scm:git:https://github.com/eclipse-qvtd/org.eclipse.qvtd</tycho.scmUrl>
     <!--executionEnvironment>J2SE-1.5</executionEnvironment>
     <source-java-version>1.5</source-java-version>
     <target-java-version>${source-java-version}</target-java-version-->
