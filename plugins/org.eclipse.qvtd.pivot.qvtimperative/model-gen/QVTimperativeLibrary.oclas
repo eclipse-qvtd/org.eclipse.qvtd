@@ -13,15 +13,15 @@
       <ownedOperations xmi:id="qtNKG" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" name="allObjects"
           type="#U6ALG"/>
       <ownedOperations xmi:id="Xv2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" name="objectsOfKind"
-          type="#uiPkW">
-        <ownedParameters xmi:id="gfwE+" isTypeof="true" name="type" type="#d+Hh6"/>
+          type="#eHkED">
+        <ownedParameters xmi:id="gfwE+" isTypeof="true" name="type" type="#NxGT6"/>
         <ownedSignature>
           <ownedParameters xmi:id="d+Hh6" name="TT"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="997Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" name="objectsOfType"
-          type="#UMaiV">
-        <ownedParameters xmi:id="uTKVP" isTypeof="true" name="type" type="#zB+MN"/>
+          type="#eHkED">
+        <ownedParameters xmi:id="uTKVP" isTypeof="true" name="type" type="#NxGT6"/>
         <ownedSignature>
           <ownedParameters xmi:id="zB+MN" name="TT"/>
         </ownedSignature>
@@ -32,19 +32,19 @@
     <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="&_1;#zfDWR"/>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ViIGS" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="#NxGT6" formal="&_1;#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" name="Collection" superClasses="&_1;#jbMkR">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="l9zll" name="Collection" superClasses="&_1;#jbMkR">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="eHkED" isNullFree="true" name="Set" superClasses="#Gd4BC">
       <ownedBindings>
-        <ownedSubstitutions actual="#d+Hh6" formal="&_1;#qs59R"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Ln+jk" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zB+MN" formal="&_1;#qs59R"/>
+        <ownedSubstitutions actual="#NxGT6" formal="&_1;#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SetType" xmi:id="U6ALG" isNullFree="true" name="Set" superClasses="#8PVIF">
@@ -52,14 +52,9 @@
         <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="uiPkW" isNullFree="true" name="Set" superClasses="#W4jhV">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Gd4BC" name="UniqueCollection" superClasses="#ViIGS">
       <ownedBindings>
-        <ownedSubstitutions actual="#d+Hh6" formal="&_1;#ODsm5"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="UMaiV" isNullFree="true" name="Set" superClasses="#8hufU">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zB+MN" formal="&_1;#ODsm5"/>
+        <ownedSubstitutions actual="#NxGT6" formal="&_1;#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" name="UniqueCollection" superClasses="#LVlMV">
@@ -67,15 +62,10 @@
         <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="W4jhV" name="UniqueCollection" superClasses="#l9zll">
-      <ownedBindings>
-        <ownedSubstitutions actual="#d+Hh6" formal="&_1;#jdfjE"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8hufU" name="UniqueCollection" superClasses="#Ln+jk">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zB+MN" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xmi:id="Xt1f+" name="$$">
+      <ownedSignature>
+        <ownedParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="NxGT6" name="$$0"/>
+      </ownedSignature>
     </ownedClasses>
   </ownedPackages>
 </pivot:Model>

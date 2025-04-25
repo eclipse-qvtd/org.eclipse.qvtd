@@ -224,7 +224,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				if (csArgument.getOwnedType() != null) {
 					context.addError(csArgument, "Unexpected type for expression");
 				}
-				OCLExpression arg = context.visitLeft2Right(OCLExpression.class, csArgument);
+				OCLExpression arg = revisit(OCLExpression.class, csArgument);
 				if (arg != null) {
 					pivotArguments.add(arg);
 				}
@@ -266,7 +266,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 						}
 					}
 					if (!isType) {
-						arg = context.visitLeft2Right(OCLExpression.class, csName);
+						arg = revisit(OCLExpression.class, csName);
 					}
 					if (arg != null) {
 						context.installPivotUsage(csArgument, arg);

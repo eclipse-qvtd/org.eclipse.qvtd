@@ -952,7 +952,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							}
 						}
 						if (and == null) {
-							throw new InvalidValueException("Null body for \'Set(T).select(Set.T[?] | Lambda T() : Boolean[1]) : Set(T)\'");
+							throw new InvalidValueException("Null body for \'Set(T).select(T[?] | Lambda $$0() : Boolean[1]) : Set($$0)\'");
 						}
 						//
 						if (and == ValueUtil.TRUE_VALUE) {

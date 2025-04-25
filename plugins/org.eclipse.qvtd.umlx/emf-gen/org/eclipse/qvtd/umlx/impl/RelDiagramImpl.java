@@ -351,7 +351,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 			 *             else
 			 *               Tuple{
 			 *                 status = status, message = let
-			 *                   repeatedNames : Set(String[*|?]) = allNames->select(n |
+			 *                   repeatedNames : Set(String) = allNames->select(n |
 			 *                     allNames->count(n) > 1)
 			 *                   ->asSet()
 			 *                 in
@@ -424,7 +424,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select(Sequence.T[?] | Lambda T() : Boolean[1]) : Sequence(T)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select(T[?] | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not == ValueUtil.TRUE_VALUE) {
@@ -458,7 +458,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not_0 == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select(Sequence.T[?] | Lambda T() : Boolean[1]) : Sequence(T)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select(T[?] | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not_0 == ValueUtil.TRUE_VALUE) {
@@ -508,7 +508,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						IF_status = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Thrown*/ @NonNull Accumulator accumulator_4 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
+						/*@Thrown*/ @NonNull Accumulator accumulator_4 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String_0);
 						@Nullable Iterator<Object> ITERATOR_n_0 = allNames.iterator();
 						/*@Thrown*/ @NonNull SequenceValue select_1;
 						while (true) {
@@ -529,20 +529,21 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						}
 						final /*@Thrown*/ @NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select_1);
 						/*@NonInvalid*/ @NonNull String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
-						@Nullable Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
+						@NonNull Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
 						/*@Thrown*/ @Nullable String iterate;
 						while (true) {
 							if (!ITERATOR_n_1.hasNext()) {
 								iterate = acc;
 								break;
 							}
-							/*@NonInvalid*/ @Nullable String n_1 = (@Nullable String)ITERATOR_n_1.next();
+							@SuppressWarnings("null")
+							/*@NonInvalid*/ @NonNull String n_1 = (@NonNull String)ITERATOR_n_1.next();
 							/**
 							 * acc + ' \'' + n + '\''
 							 */
 							final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
-							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
-							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
+							final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
+							final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
 							//
 							acc = sum_1;
 						}

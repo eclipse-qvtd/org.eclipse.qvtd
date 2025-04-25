@@ -710,7 +710,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 							accumulator_0.add(name_0);
 						}
 						final /*@Thrown*/ @NonNull SetValue namesSet = CollectionAsSetOperation.INSTANCE.evaluate(namesBag);
-						/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_PRIMid_String);
+						/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_PRIMid_String_0);
 						@Nullable Iterator<Object> ITERATOR_n = namesSet.iterator();
 						/*@Thrown*/ @NonNull SetValue select;
 						while (true) {

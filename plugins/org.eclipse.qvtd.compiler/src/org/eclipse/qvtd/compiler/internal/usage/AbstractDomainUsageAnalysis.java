@@ -465,8 +465,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		visit(object.getOwnedResult());
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
-		object.accept(visitor);
+		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
+		//		object.accept(visitor);
+		EnvironmentFactoryInternal environmentFactory = (@NonNull EnvironmentFactoryInternal) context;
+		Type selfType = object.getOwnedSource().getType();
+		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof TemplateableElement) {
@@ -474,8 +477,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				if (ownedSignature != null) {
 					for (TemplateParameter templateParameter : ownedSignature.getOwnedParameters()) {
 						if (templateParameter != null) {
-							Type templateParameterType = visitor.get(templateParameter);
-							DomainUsage templateParameterUsage = visit(templateParameterType);
+							Type normalizedTemplateParameter = visitor.get(templateParameter);
+							DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
 							setUsage(templateParameter, templateParameterUsage);
 						}
 					}
@@ -496,8 +499,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 		}
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
-		object.accept(visitor);
+		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
+		//		object.accept(visitor);
+		EnvironmentFactoryInternal environmentFactory = (@NonNull EnvironmentFactoryInternal) context;
+		Type selfType = object.getOwnedSource().getType();
+		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof TemplateableElement) {
@@ -505,8 +511,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				if (ownedSignature != null) {
 					for (TemplateParameter templateParameter : ownedSignature.getOwnedParameters()) {
 						if (templateParameter != null) {
-							Type templateParameterType = visitor.get(templateParameter);
-							DomainUsage templateParameterUsage = visit(templateParameterType);
+							Type normalizedTemplateParameter = visitor.get(templateParameter);
+							DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
 							setUsage(templateParameter, templateParameterUsage);
 						}
 					}
