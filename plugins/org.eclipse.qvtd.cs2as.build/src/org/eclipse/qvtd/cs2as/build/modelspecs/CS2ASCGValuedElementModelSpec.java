@@ -12,7 +12,7 @@ package org.eclipse.qvtd.cs2as.build.modelspecs;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec;
+import org.eclipse.ocl.build.modelspecs.CGValuedElementModelSpec;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 
 /**

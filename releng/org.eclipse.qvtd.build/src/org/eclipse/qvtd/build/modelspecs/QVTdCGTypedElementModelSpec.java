@@ -13,7 +13,7 @@ package org.eclipse.qvtd.build.modelspecs;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.build.modelspecs.CGTypedElementModelSpec;
+import org.eclipse.ocl.build.modelspecs.CGTypedElementModelSpec;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;

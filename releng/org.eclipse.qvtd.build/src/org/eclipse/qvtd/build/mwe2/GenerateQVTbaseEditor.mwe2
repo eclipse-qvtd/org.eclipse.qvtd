@@ -40,8 +40,8 @@ Workflow {
 		standaloneSetup = XtextGeneratorStandaloneSetup {
 			scanClasspath = false
 		}
-		configuration = org.eclipse.ocl.examples.build.fragments.MyDefaultGeneratorModule {
-			project = org.eclipse.ocl.examples.build.fragments.MyStandardProjectConfig {
+		configuration = org.eclipse.ocl.build.fragments.MyDefaultGeneratorModule {
+			project = org.eclipse.ocl.build.fragments.MyStandardProjectConfig {
 				activatorName = "QVTbaseActivator"
 				baseName = "${QVTbaseProjectName}"
 				rootPath = rootPath
@@ -79,12 +79,12 @@ Workflow {
  *******************************************************************************/"
 			}
 		}
-		language = org.eclipse.ocl.examples.build.fragments.MyStandardLanguage {
+		language = org.eclipse.ocl.build.fragments.MyStandardLanguage {
 			name = "${QVTbaseProjectName}.QVTbase"
 			fileExtensions = "qvtbase"
 			grammarUri = "platform:/resource/${QVTbaseProjectName}/src/org/eclipse/qvtd/xtext/qvtbase/QVTbase.xtext"
 			generator = null
-			serializer = org.eclipse.ocl.examples.build.fragments.DeclarativeSerializerFragmentXtend {
+			serializer = org.eclipse.ocl.build.fragments.DeclarativeSerializerFragmentXtend {
 				generateStub = true
 			}
 			validator = {
@@ -101,44 +101,44 @@ Workflow {
 					classSplitting = true
 				}
 			}
-			formatter = org.eclipse.ocl.examples.build.fragments.DeclarativeFormatterFragmentXtend {
+			formatter = org.eclipse.ocl.build.fragments.DeclarativeFormatterFragmentXtend {
 				generateStub = true
 			}
 			// EssentialOCL bindings 
-			fragment = org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment {}
+			fragment = org.eclipse.ocl.build.fragments.EssentialOCLFragment {}
 			// Support Markup and Hover text 
-			fragment = org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment {}
+			fragment = org.eclipse.ocl.build.fragments.MarkupHoverFragment {}
 			// *.xtextbin support on Xtext 2.3		
-			fragment = org.eclipse.ocl.examples.build.fragments.CompatibilityFragment {}
+			fragment = org.eclipse.ocl.build.fragments.CompatibilityFragment {}
 		}
 	}
-	component = org.eclipse.ocl.examples.build.xtend.GenerateGrammarXtend {
+	component = org.eclipse.ocl.build.xtend.GenerateGrammarXtend {
 		javaFolder = "${QVTbaseRuntimeProject}/src-gen"
 		javaPackageName = "${QVTbaseProjectName}"
 		grammarFileStem = "QVTbase"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.InjectCompatibilityAbstractInternalAntlrParser {
+	component = org.eclipse.ocl.build.utilities.InjectCompatibilityAbstractInternalAntlrParser {
 		fileName = "${QVTbaseRuntimeProject}/src-gen/org/eclipse/qvtd/xtext/qvtbase/parser/antlr/internal/InternalQVTbaseParser.java"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}/META-INF"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}/emf-gen"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}/src"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}/src-gen"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}.ui/META-INF"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}.ui/src"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTbaseRuntimeProject}.ui/src-gen"
 	}
 }

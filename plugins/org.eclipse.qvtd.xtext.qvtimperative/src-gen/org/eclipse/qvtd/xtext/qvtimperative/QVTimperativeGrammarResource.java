@@ -10,7 +10,7 @@
  *******************************************************************************
  * This code is 100% auto-generated
  * from: E:\GIT\org.eclipse.qvtd\releng..\..\plugins\org.eclipse.qvtd.xtext.qvtimperative\src-gen\org\eclipse\qvtd\xtext\qvtimperative\QVTimperative.xtextbin
- * by: org.eclipse.ocl.examples.build.xtend.generateGrammar.xtend
+ * by: org.eclipse.ocl.build.xtend.generateGrammar.xtend
  *
  * Do not edit it.
  *******************************************************************************/

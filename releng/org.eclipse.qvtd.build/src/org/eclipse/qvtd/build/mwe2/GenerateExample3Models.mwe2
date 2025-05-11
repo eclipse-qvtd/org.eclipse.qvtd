@@ -11,8 +11,8 @@
  *******************************************************************************/
 module org.eclipse.qvtd.build.mwe2.GenerateExample3Models
 
-import org.eclipse.ocl.examples.build.utilities.*
-import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.ocl.build.utilities.*
+import org.eclipse.ocl.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 

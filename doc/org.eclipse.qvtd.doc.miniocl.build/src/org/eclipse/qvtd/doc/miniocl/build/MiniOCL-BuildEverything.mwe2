@@ -3,8 +3,8 @@ module org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything
 Workflow {
 
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : rSet {}
-	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet }
-	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet }
+	bean = org.eclipse.ocl.build.utilities.ProjectMapSetup { resourceSet = rSet }
+	bean = org.eclipse.ocl.build.utilities.EcoreGenModelSetup { resourceSet = rSet }
 	
 	// We run the Xtext Generator
 	component = @org.eclipse.qvtd.doc.GenerateMiniOCLCS { }
@@ -23,24 +23,24 @@ Workflow {
 	}
 	
 	// We regenerate the CS model
-	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+	component = org.eclipse.ocl.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.minioclcs.xtext/model/generated/MiniOCLCS.genmodel"
 		clearResourceSet = false
 	}
 	
 	// We regenerate the AS model
-	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+	component = org.eclipse.ocl.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.genmodel"
 		clearResourceSet = false
 	}
 
-	component = org.eclipse.ocl.examples.build.xtend.GenerateASVisitors { resourceSet = rSet
+	component = org.eclipse.ocl.build.xtend.GenerateASVisitors { resourceSet = rSet
 		projectName = "org.eclipse.qvtd.doc.miniocl"
 		genModelFile = "model/MiniOCL.genmodel"
 	}
 	
 	// We regenerate the AS Lookup model
-	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+	component = org.eclipse.ocl.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.miniocl/model/Lookup.genmodel"
 		clearResourceSet = false
 	}
@@ -56,7 +56,7 @@ Workflow {
     
     // We generate the CS2AS infrastructure
 	
-    component = org.eclipse.ocl.examples.build.utilities.CopyAndRename {
+    component = org.eclipse.ocl.build.utilities.CopyAndRename {
     	script = "org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything"
     	fromProject = "../../plugins/org.eclipse.qvtd.runtime/src"
     	toProject = "../org.eclipse.qvtd.doc.minioclcs.xtext/src-gen"
@@ -104,7 +104,7 @@ Workflow {
     	}
     }
     
-     component = org.eclipse.ocl.examples.build.utilities.CopyAndRename {
+     component = org.eclipse.ocl.build.utilities.CopyAndRename {
     	script = "org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything"
     	fromProject = "../../plugins/org.eclipse.qvtd.cs2as.xtext.runtime/src"
     	toProject = "../org.eclipse.qvtd.doc.minioclcs.xtext/src-gen"
@@ -119,8 +119,8 @@ Workflow {
     }
 
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : rSet2 {}
-	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet2 }
-	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet2 }
+	bean = org.eclipse.ocl.build.utilities.ProjectMapSetup { resourceSet = rSet2 }
+	bean = org.eclipse.ocl.build.utilities.EcoreGenModelSetup { resourceSet = rSet2 }
   
 	component = org.eclipse.qvtd.cs2as.build.utilities.GenerateCGedQVTiTransformation {
 		debug = true 
