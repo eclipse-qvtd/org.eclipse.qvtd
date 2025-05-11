@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.cs2as.compiler.internal.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
-import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
+import org.eclipse.ocl.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.codegen.utilities.AbstractCGModelResourceFactory;
 
 /**
  * The <b>Resource Factory</b> associated with the package.

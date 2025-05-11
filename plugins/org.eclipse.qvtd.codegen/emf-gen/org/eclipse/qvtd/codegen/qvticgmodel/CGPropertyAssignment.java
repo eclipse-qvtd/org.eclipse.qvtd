@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -74,7 +74,7 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	 * @return the value of the '<em>Referred Property</em>' attribute.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_ReferredProperty()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Property" required="true"
+	 * @model dataType="org.eclipse.ocl.codegen.cgmodel.Property" required="true"
 	 * @generated
 	 */
 	Property getReferredProperty();

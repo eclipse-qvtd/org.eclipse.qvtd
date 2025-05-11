@@ -14,8 +14,8 @@
  */
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->

@@ -27,13 +27,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.impl.CGValuedElementImpl;
+import org.eclipse.ocl.codegen.cgmodel.impl.CGVariableImpl;
+import org.eclipse.ocl.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariablePart;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;

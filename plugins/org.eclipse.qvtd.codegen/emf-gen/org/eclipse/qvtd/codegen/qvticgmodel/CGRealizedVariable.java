@@ -11,8 +11,9 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+
+import org.eclipse.ocl.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.codegen.cgmodel.CGVariable;
 
 /**
  * <!-- begin-user-doc -->

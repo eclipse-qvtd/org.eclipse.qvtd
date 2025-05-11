@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.codegen.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
-import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
-import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
+import org.eclipse.ocl.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.codegen.utilities.AbstractCGModelResourceFactory;
+import org.eclipse.ocl.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
 
 /**

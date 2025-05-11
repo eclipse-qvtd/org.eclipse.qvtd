@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
+import org.eclipse.ocl.codegen.cgmodel.CGOppositePropertyCallExp;
 
 /**
  * <!-- begin-user-doc -->

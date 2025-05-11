@@ -12,9 +12,9 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
-import org.eclipse.ocl.examples.codegen.generator.GlobalContext;
-import org.eclipse.ocl.examples.codegen.generator.LocalContext;
+import org.eclipse.ocl.codegen.analyzer.AnalysisVisitor;
+import org.eclipse.ocl.codegen.generator.GlobalContext;
+import org.eclipse.ocl.codegen.generator.LocalContext;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;

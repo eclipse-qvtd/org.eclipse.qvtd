@@ -19,13 +19,12 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-
+import org.eclipse.ocl.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.*;
 
 /**
@@ -147,13 +146,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGElement <em>CG Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGElement <em>CG Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGElement
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGElement
 	 * @generated
 	 */
 	public Adapter createCGElementAdapter() {
@@ -161,13 +160,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement <em>CG Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGNamedElement <em>CG Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGNamedElement
 	 * @generated
 	 */
 	public Adapter createCGNamedElementAdapter() {
@@ -175,13 +174,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement <em>CG Typed Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGTypedElement <em>CG Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGTypedElement
 	 * @generated
 	 */
 	public Adapter createCGTypedElementAdapter() {
@@ -189,13 +188,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement <em>CG Valued Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGValuedElement <em>CG Valued Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGValuedElement
 	 * @generated
 	 */
 	public Adapter createCGValuedElementAdapter() {
@@ -203,13 +202,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp <em>CG Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGCallExp <em>CG Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGCallExp
 	 * @generated
 	 */
 	public Adapter createCGCallExpAdapter() {
@@ -217,13 +216,13 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp <em>CG Operation Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.codegen.cgmodel.CGOperationCallExp <em>CG Operation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp
+	 * @see org.eclipse.ocl.codegen.cgmodel.CGOperationCallExp
 	 * @generated
 	 */
 	public Adapter createCGOperationCallExpAdapter() {

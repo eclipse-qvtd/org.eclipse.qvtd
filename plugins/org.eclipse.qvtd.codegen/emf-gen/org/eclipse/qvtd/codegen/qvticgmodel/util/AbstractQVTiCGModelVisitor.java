@@ -23,7 +23,7 @@ package	org.eclipse.qvtd.codegen.qvticgmodel.util;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTiCGModelVisitor<R, C>
-	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractCGModelVisitor<R, C>
+	extends org.eclipse.ocl.codegen.cgmodel.util.AbstractCGModelVisitor<R, C>
 	implements QVTiCGModelVisitor<R>
 {
 	/**

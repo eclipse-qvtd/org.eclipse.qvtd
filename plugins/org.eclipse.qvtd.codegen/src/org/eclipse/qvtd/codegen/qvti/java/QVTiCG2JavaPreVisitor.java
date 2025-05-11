@@ -14,8 +14,8 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
-import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.codegen.cgmodel.CGElementId;
+import org.eclipse.ocl.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;

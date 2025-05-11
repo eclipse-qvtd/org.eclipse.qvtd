@@ -15,11 +15,11 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.ocl.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.codegen.cgmodel.CGTypeId;
+import org.eclipse.ocl.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;

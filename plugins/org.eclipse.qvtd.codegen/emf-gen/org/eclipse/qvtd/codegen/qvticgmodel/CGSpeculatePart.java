@@ -15,8 +15,7 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->

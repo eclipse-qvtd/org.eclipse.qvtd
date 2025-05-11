@@ -12,8 +12,8 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
-import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
+import org.eclipse.ocl.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.codegen.java.JavaDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;

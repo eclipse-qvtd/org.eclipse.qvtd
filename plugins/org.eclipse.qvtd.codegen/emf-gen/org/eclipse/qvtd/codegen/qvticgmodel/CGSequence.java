@@ -12,7 +12,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 public interface CGSequence extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement}.
+	 * The list contents are of type {@link org.eclipse.ocl.codegen.cgmodel.CGValuedElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Statements</em>' containment reference list isn't clear,

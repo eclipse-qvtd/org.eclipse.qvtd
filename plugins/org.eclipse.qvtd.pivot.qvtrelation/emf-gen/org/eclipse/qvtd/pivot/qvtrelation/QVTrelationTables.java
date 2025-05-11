@@ -17,7 +17,7 @@
  *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore
  * using:
  *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel
- *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
+ *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/

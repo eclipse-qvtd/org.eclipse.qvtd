@@ -13,7 +13,7 @@
  *   /org.eclipse.qvtd.cs2as.compiler.tests/models/BaseAndDerived/TargetBaseMM.ecore
  * using:
  *   /org.eclipse.qvtd.cs2as.compiler.tests/models/BaseAndDerived/TargetBaseMM.genmodel
- *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
+ *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/

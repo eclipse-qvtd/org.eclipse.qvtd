@@ -15,7 +15,7 @@ package org.eclipse.qvtd.cs2as.compiler.cgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.codegen.cgmodel.CGModelPackage;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage;
