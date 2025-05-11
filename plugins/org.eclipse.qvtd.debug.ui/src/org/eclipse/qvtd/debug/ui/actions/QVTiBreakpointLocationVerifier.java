@@ -13,8 +13,8 @@ package org.eclipse.qvtd.debug.ui.actions;
 
 import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.debug.vm.ui.actions.BreakpointLocationVerifier;
 import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
-import org.eclipse.ocl.examples.debug.vm.ui.actions.BreakpointLocationVerifier;
 import org.eclipse.qvtd.debug.launching.QVTiDebuggableRunnerFactory;
 import org.eclipse.ui.texteditor.ITextEditor;
 

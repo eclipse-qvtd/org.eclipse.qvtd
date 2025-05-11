@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.ui.launching.LaunchingUtils;
+import org.eclipse.ocl.debug.vm.ui.launching.LaunchingUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

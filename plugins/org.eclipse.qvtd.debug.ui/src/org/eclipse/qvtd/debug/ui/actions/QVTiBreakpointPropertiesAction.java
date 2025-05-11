@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
-import org.eclipse.ocl.examples.debug.vm.ui.actions.VMBreakpointPropertiesAction;
+import org.eclipse.ocl.debug.vm.ui.actions.VMBreakpointPropertiesAction;
 
 /**
  * Presents the standard properties dialog to configure the attributes of an OCL

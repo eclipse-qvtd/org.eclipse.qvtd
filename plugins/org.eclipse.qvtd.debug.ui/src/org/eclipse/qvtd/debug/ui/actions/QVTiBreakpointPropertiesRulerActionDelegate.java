@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
-import org.eclipse.ocl.examples.debug.vm.ui.actions.VMBreakpointPropertiesRulerActionDelegate;
+import org.eclipse.ocl.debug.vm.ui.actions.VMBreakpointPropertiesRulerActionDelegate;
 
 @Deprecated /* @deprecated Use VMBreakpointPropertiesHandler */
 public class QVTiBreakpointPropertiesRulerActionDelegate extends VMBreakpointPropertiesRulerActionDelegate {
