@@ -37,14 +37,14 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	  <handler commandId="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
-	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMEnableDisableBreakpointHandler"/>
+	    class="org.eclipse.ocl.debug.vm.ui.actions.VMEnableDisableBreakpointHandler"/>
 	  <handler commandId="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
-	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMToggleBreakpointHandler"/>
+	    class="org.eclipse.ocl.debug.vm.ui.actions.VMToggleBreakpointHandler"/>
 	  <handler commandId="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
-	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMBreakpointPropertiesHandler"/>
+	    class="org.eclipse.ocl.debug.vm.ui.actions.VMBreakpointPropertiesHandler"/>
 	  <!--handler commandId="org.eclipse.qvtd.debug.ui.RunToLineCommand"
 	    Since I have never used this for JDT, I cannot justofy spending time making it work for OCL
-	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMRunToLineHandler"/-->
+	    class="org.eclipse.ocl.debug.vm.ui.actions.VMRunToLineHandler"/-->
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 	  <menuContribution locationURI="popup:#QVTcoreRulerContext?after=additions">

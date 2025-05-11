@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.pages;
 
-import org.eclipse.ocl.examples.debug.vm.ui.pages.VMLineBreakpointPage;
+import org.eclipse.ocl.debug.vm.ui.pages.VMLineBreakpointPage;
 
 public class QVTiLineBreakpointPage extends VMLineBreakpointPage
 {
