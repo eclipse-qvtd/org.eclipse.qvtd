@@ -2,7 +2,7 @@ package org.eclipse.qvtd.build.xtend
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.ocl.examples.build.xtend.GenerateVisitorsXtend
+import org.eclipse.ocl.build.xtend.GenerateVisitorsXtend
 
  class GenerateUMLXVisitors extends GenerateVisitorsXtend
 {

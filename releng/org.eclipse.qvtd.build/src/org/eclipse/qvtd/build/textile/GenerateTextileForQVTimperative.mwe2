@@ -13,8 +13,8 @@
  *******************************************************************************/
 module GenerateTextileForQVTimperative
 
-import org.eclipse.ocl.examples.build.textile.*
-import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.build.textile.*
+import org.eclipse.ocl.build.utilities.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 

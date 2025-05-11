@@ -12,8 +12,8 @@
  *******************************************************************************/
 module org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models
 
-import org.eclipse.ocl.examples.build.utilities.*
-import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.ocl.build.utilities.*
+import org.eclipse.ocl.build.xtend.*
 import org.eclipse.qvtd.cs2as.build.modelspecs.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*

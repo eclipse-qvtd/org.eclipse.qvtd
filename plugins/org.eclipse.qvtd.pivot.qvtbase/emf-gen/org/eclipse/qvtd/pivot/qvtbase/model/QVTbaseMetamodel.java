@@ -10,8 +10,8 @@
  *******************************************************************************
  * This code is 100% auto-generated
  * from: /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- * by: org.eclipse.ocl.examples.build.xtend.GenerateOCLmetamodel.xtend
- * and: org.eclipse.ocl.examples.build.GeneratePivotMetamodel.mwe2
+ * by: org.eclipse.ocl.build.xtend.GenerateOCLmetamodel.xtend
+ * and: org.eclipse.ocl.build.GeneratePivotMetamodel.mwe2
  *
  * Do not edit it.
  *******************************************************************************/

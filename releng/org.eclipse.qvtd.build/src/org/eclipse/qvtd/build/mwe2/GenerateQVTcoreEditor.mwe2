@@ -42,8 +42,8 @@ Workflow {
 		standaloneSetup = XtextGeneratorStandaloneSetup {
 			scanClasspath = false
 		}
-		configuration = org.eclipse.ocl.examples.build.fragments.MyDefaultGeneratorModule {
-			project = org.eclipse.ocl.examples.build.fragments.MyStandardProjectConfig {
+		configuration = org.eclipse.ocl.build.fragments.MyDefaultGeneratorModule {
+			project = org.eclipse.ocl.build.fragments.MyStandardProjectConfig {
 				activatorName = "QVTcoreActivator"
 				baseName = "${QVTcoreProjectName}"
 				rootPath = rootPath
@@ -81,12 +81,12 @@ Workflow {
  *******************************************************************************/"
 			}
 		}
-		language = org.eclipse.ocl.examples.build.fragments.MyStandardLanguage {
+		language = org.eclipse.ocl.build.fragments.MyStandardLanguage {
 			name = "${QVTcoreProjectName}.QVTcore"
 			fileExtensions = "qvtc"
 			grammarUri = "platform:/resource/${QVTcoreProjectName}/src/org/eclipse/qvtd/xtext/qvtcore/QVTcore.xtext"
 			generator = null
-			serializer = org.eclipse.ocl.examples.build.fragments.DeclarativeSerializerFragmentXtend {
+			serializer = org.eclipse.ocl.build.fragments.DeclarativeSerializerFragmentXtend {
 				generateStub = true
 			}
 			validator = {
@@ -103,44 +103,44 @@ Workflow {
 					classSplitting = true
 				}
 			}
-			formatter = org.eclipse.ocl.examples.build.fragments.DeclarativeFormatterFragmentXtend {
+			formatter = org.eclipse.ocl.build.fragments.DeclarativeFormatterFragmentXtend {
 				generateStub = true
 			}
 			// EssentialOCL bindings 
-			fragment = org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment {}
+			fragment = org.eclipse.ocl.build.fragments.EssentialOCLFragment {}
 			// Support Markup and Hover text 
-			fragment = org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment {}
+			fragment = org.eclipse.ocl.build.fragments.MarkupHoverFragment {}
 			// *.xtextbin support on Xtext 2.3		
-			fragment = org.eclipse.ocl.examples.build.fragments.CompatibilityFragment {}
+			fragment = org.eclipse.ocl.build.fragments.CompatibilityFragment {}
 		}
 	}
-	component = org.eclipse.ocl.examples.build.xtend.GenerateGrammarXtend {
+	component = org.eclipse.ocl.build.xtend.GenerateGrammarXtend {
 		javaFolder = "${QVTcoreRuntimeProject}/src-gen"
 		javaPackageName = "${QVTcoreProjectName}"
 		grammarFileStem = "QVTcore"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.InjectCompatibilityAbstractInternalAntlrParser {
+	component = org.eclipse.ocl.build.utilities.InjectCompatibilityAbstractInternalAntlrParser {
 		fileName = "${QVTcoreRuntimeProject}/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcoreParser.java"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/META-INF"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/emf-gen"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/src"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/src-gen"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}.ui/META-INF"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}.ui/src"
 	}
-	component = org.eclipse.ocl.examples.build.utilities.ConvertToUnixLineEndings {
+	component = org.eclipse.ocl.build.utilities.ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}.ui/src-gen"
 	}
 }
