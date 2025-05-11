@@ -12,8 +12,8 @@
 package org.eclipse.qvtd.debug;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.VMBreakpoint;
-import org.eclipse.ocl.examples.debug.vm.data.VMNewBreakpointData;
+import org.eclipse.ocl.debug.vm.VMBreakpoint;
+import org.eclipse.ocl.debug.vm.data.VMNewBreakpointData;
 import org.eclipse.ocl.pivot.Element;
 
 public class QVTiBreakpoint extends VMBreakpoint

@@ -12,8 +12,8 @@ package org.eclipse.qvtd.debug.stepper;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.debug.vm.evaluator.IStepper;
 import org.eclipse.ocl.examples.debug.stepper.NonStepper;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.CompoundTargetElement;
 import org.eclipse.qvtd.pivot.qvtbase.Target;
 import org.eclipse.qvtd.pivot.qvtbase.TargetElement;

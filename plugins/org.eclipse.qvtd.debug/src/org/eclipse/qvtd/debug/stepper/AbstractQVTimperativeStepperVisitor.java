@@ -12,7 +12,7 @@ package	org.eclipse.qvtd.debug.stepper;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
+import org.eclipse.ocl.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 

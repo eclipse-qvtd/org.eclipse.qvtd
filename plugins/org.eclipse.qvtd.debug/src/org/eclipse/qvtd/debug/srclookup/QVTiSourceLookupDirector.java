@@ -12,7 +12,7 @@
 package org.eclipse.qvtd.debug.srclookup;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.srclookup.VMSourceLookupDirector;
+import org.eclipse.ocl.debug.vm.srclookup.VMSourceLookupDirector;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 
 public class QVTiSourceLookupDirector extends VMSourceLookupDirector

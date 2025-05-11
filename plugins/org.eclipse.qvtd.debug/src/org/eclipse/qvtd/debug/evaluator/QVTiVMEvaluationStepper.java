@@ -13,9 +13,9 @@ package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
-import org.eclipse.ocl.examples.debug.vm.evaluator.AbstractVMEvaluationStepper;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
+import org.eclipse.ocl.debug.vm.data.VMStackFrameData;
+import org.eclipse.ocl.debug.vm.evaluator.AbstractVMEvaluationStepper;
+import org.eclipse.ocl.debug.vm.evaluator.IVMContext;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;

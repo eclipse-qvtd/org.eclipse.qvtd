@@ -17,12 +17,12 @@ import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.UnitLocation;
-import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
-import org.eclipse.ocl.examples.debug.vm.VariableFinder;
-import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
-import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
-import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
+import org.eclipse.ocl.debug.vm.UnitLocation;
+import org.eclipse.ocl.debug.vm.VMVirtualMachine;
+import org.eclipse.ocl.debug.vm.VariableFinder;
+import org.eclipse.ocl.debug.vm.utils.ASTBindingHelper;
+import org.eclipse.ocl.debug.vm.utils.VMRuntimeException;
+import org.eclipse.ocl.debug.vm.utils.VMStackTraceBuilder;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -132,7 +132,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
-	public @NonNull Stack<org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment.StepperEntry> getStepperStack() {
+	public @NonNull Stack<org.eclipse.ocl.debug.vm.evaluator.VMEvaluationEnvironment.StepperEntry> getStepperStack() {
 		return stepperStack;
 	}
 
