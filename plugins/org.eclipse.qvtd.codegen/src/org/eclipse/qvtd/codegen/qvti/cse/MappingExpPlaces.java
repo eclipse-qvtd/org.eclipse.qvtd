@@ -14,11 +14,11 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
-import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
-import org.eclipse.ocl.examples.codegen.cse.LocalPlace;
+import org.eclipse.ocl.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cse.AbstractPlace;
+import org.eclipse.ocl.codegen.cse.ControlPlace;
+import org.eclipse.ocl.codegen.cse.LocalPlace;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 
 /**

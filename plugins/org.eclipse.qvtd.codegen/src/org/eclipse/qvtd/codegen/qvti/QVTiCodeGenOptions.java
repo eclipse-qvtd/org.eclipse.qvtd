@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.codegen.qvti;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
+import org.eclipse.ocl.codegen.generator.CodeGenOptions;
 
 public class QVTiCodeGenOptions extends CodeGenOptions
 {

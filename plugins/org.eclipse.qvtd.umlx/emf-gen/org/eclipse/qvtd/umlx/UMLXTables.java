@@ -13,7 +13,7 @@
  *   /org.eclipse.qvtd.umlx/model/UMLX.ecore
  * using:
  *   /org.eclipse.qvtd.umlx/model/UMLX.genmodel
- *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
+ *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/

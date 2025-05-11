@@ -11,8 +11,9 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
+import org.eclipse.ocl.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 public interface CGMappingExp extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Accumulators</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator}.
+	 * The list contents are of type {@link org.eclipse.ocl.codegen.cgmodel.CGAccumulator}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Accumulators</em>' containment reference list isn't clear,

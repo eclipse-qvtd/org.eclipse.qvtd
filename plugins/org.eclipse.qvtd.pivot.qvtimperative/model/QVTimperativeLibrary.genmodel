@@ -12,7 +12,7 @@
   </genAnnotations>
   <foreignModel>../model-gen/QVTimperativeLibrary.ecore</foreignModel>
   <modelPluginVariables>org.eclipse.ocl.pivot</modelPluginVariables>
-  <modelPluginVariables>org.eclipse.ocl.examples.codegen</modelPluginVariables>
+  <modelPluginVariables>org.eclipse.ocl.codegen</modelPluginVariables>
   <modelPluginVariables>org.eclipse.jdt.annotation</modelPluginVariables>
   <genPackages prefix="QVTimperativeLibrary" basePackage="org.eclipse.qvtd.pivot.qvtimperative"
       disposableProviderFactory="true" ecorePackage="../model-gen/QVTimperativeLibrary.ecore#/"/>

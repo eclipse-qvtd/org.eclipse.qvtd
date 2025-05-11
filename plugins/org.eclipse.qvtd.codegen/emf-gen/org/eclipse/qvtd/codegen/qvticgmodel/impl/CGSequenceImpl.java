@@ -25,13 +25,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.impl.CGValuedElementImpl;
+import org.eclipse.ocl.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 

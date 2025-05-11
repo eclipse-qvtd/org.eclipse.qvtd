@@ -12,8 +12,8 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->

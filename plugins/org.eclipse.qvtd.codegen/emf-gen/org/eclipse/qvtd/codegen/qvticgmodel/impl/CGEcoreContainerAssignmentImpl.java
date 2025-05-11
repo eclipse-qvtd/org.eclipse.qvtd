@@ -22,10 +22,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-
+import org.eclipse.ocl.codegen.cgmodel.impl.CGValuedElementImpl;
+import org.eclipse.ocl.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 

@@ -13,7 +13,7 @@
  *   /org.eclipse.qvtd.runtime/model-gen/QVTruntimeLibrary.ecore
  * using:
  *   /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel
- *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
+ *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/

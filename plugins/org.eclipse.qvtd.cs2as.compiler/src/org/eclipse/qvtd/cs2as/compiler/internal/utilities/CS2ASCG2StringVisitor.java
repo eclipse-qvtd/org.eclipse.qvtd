@@ -13,7 +13,7 @@ package org.eclipse.qvtd.cs2as.compiler.internal.utilities;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage;

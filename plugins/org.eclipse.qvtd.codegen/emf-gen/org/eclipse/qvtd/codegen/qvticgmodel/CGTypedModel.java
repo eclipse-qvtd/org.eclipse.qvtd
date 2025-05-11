@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGNamedElement;
 
 /**
  * <!-- begin-user-doc -->

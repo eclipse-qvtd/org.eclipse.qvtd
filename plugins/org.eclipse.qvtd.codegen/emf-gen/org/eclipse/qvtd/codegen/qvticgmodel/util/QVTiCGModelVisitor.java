@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface QVTiCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor<R>
+public interface QVTiCGModelVisitor<R> extends org.eclipse.ocl.codegen.cgmodel.util.CGModelVisitor<R>
 {
 	R visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object);
 	R visitCGConnectionVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionVariable object);

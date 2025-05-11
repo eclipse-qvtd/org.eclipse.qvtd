@@ -17,13 +17,12 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-
+import org.eclipse.ocl.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.codegen.cgmodel.CGNamedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.codegen.cgmodel.CGValuedElement;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.*;
 
 /**

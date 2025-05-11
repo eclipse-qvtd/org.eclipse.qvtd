@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
-	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNullCGModelVisitor<R, C> implements QVTiCGModelVisitor<R>
+	extends org.eclipse.ocl.codegen.cgmodel.util.AbstractNullCGModelVisitor<R, C> implements QVTiCGModelVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.
