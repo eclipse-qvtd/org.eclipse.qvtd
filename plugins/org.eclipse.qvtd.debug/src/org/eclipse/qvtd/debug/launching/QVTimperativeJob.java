@@ -28,8 +28,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.messages.VMMessages;
-import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
+import org.eclipse.ocl.debug.vm.messages.VMMessages;
+import org.eclipse.ocl.debug.vm.utils.StreamsProxy;
 
 /**
  * The QVTimperativeJob provides a Job that executes a QVTd transformation.

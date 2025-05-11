@@ -10,8 +10,8 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.debug.stepper;
 
+import org.eclipse.ocl.debug.vm.evaluator.IStepper;
 import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionBody;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 import org.eclipse.jdt.annotation.NonNull;

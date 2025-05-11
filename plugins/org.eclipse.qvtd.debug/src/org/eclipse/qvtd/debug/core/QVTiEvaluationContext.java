@@ -17,8 +17,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.core.EvaluationContext;
-import org.eclipse.ocl.examples.debug.vm.evaluator.VMContext;
+import org.eclipse.ocl.debug.vm.core.EvaluationContext;
+import org.eclipse.ocl.debug.vm.evaluator.VMContext;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 

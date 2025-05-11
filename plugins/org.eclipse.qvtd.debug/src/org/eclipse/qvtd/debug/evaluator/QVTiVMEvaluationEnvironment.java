@@ -13,9 +13,9 @@ package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.UnitLocation;
-import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
-import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
+import org.eclipse.ocl.debug.vm.UnitLocation;
+import org.eclipse.ocl.debug.vm.evaluator.VMEvaluationEnvironment;
+import org.eclipse.ocl.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationEnvironment;
 

@@ -13,7 +13,7 @@ package org.eclipse.qvtd.debug.vm;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
+import org.eclipse.ocl.debug.vm.ValidBreakpointLocator;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.OCLExpression;
