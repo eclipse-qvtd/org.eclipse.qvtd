@@ -12,8 +12,8 @@ package org.eclipse.qvtd.debug.stepper;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.debug.stepper.AbstractStepper;
 import org.eclipse.ocl.debug.vm.evaluator.VMEvaluationStepper;
-import org.eclipse.ocl.examples.debug.stepper.AbstractStepper;
 import org.eclipse.ocl.pivot.Element;
 
 public class PrePostStepper extends AbstractStepper
