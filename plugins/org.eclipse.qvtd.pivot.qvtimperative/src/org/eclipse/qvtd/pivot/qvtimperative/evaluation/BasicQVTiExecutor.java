@@ -353,7 +353,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	protected EvaluationVisitor.@NonNull EvaluationVisitorExtension createEvaluationVisitor() {
+	protected @NonNull EvaluationVisitor createEvaluationVisitor() {
 		IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
 		if (environmentFactory.isEvaluationTracingEnabled()) {
 			// decorate the evaluation visitor with tracing support
@@ -404,7 +404,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
+	protected @NonNull EvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		if (evaluationEnvironment instanceof QVTiEvaluationEnvironment) {
 			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject, caller);
 		}
@@ -414,7 +414,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	}
 
 	@Override
-	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createRootEvaluationEnvironment(@NonNull NamedElement executableObject) {
+	protected @NonNull EvaluationEnvironment createRootEvaluationEnvironment(@NonNull NamedElement executableObject) {
 		if (executableObject instanceof Transformation) {
 			return new QVTiRootEvaluationEnvironment(this, (Transformation) executableObject);
 		}
@@ -640,7 +640,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	protected @Nullable Object internalExecuteFunctionCallExpNested(@NonNull OperationCallExp operationCallExp,
 			@NonNull Function referredFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		//		PivotUtil.checkExpression(expressionInOCL);
-		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, (TypedElement)operationCallExp);
+		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, operationCallExp);
 		//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
 		List<Parameter> parameters = referredFunction.getOwnedParameters();
 		if (!parameters.isEmpty()) {
@@ -1006,7 +1006,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	@Override
 	public @Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
-		pushEvaluationEnvironment(entryPoint, (TypedElement)callExp);
+		pushEvaluationEnvironment(entryPoint, callExp);
 		try {
 			Interval rootInterval = getInvocationManager().getRootInterval();
 			mapping2interval.put(entryPoint, rootInterval);

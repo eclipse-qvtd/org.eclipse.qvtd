@@ -47,7 +47,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	}
 
 	@Override
-	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
+	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		return new QVTiVMNestedEvaluationEnvironment((QVTiVMEvaluationEnvironment) evaluationEnvironment, executableObject, caller, ++envId);
 	}
 

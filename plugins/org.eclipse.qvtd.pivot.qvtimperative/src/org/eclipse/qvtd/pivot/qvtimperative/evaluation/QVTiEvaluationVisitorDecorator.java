@@ -58,96 +58,10 @@ implements IQVTiEvaluationVisitor {
 	/**
 	 * Delegates to my decorated visitor.
 	 */
-	//	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
-	//		return delegate.evaluate(expressionInOCL);
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @NonNull CompleteEnvironment getCompleteEnvironment() {
-	//		return delegate.getCompleteEnvironment();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @NonNull EvaluationVisitor getEvaluator() {
-	//		return delegate.getEvaluator();
-	//	}
-
-	//	@Override
-	//	public @NonNull EvaluationVisitor getEvaluator() {
-	//		return delegate.getEvaluator();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @NonNull IdResolver getIdResolver() {
-	//		return delegate.getIdResolver();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @Nullable EvaluationLogger getLogger() {
-	//		return delegate.getLogger();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @NonNull MetamodelManager getMetamodelManager() {
-	//		return delegate.getMetamodelManager();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
 	@Override
 	public @Nullable Monitor getMonitor() {
 		return delegate.getMonitor();
 	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public @NonNull StandardLibrary getStandardLibrary() {
-	//		return delegate.getStandardLibrary();
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value) {
-	//		return delegate.getStaticTypeOf(value);
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value,
-	//			@NonNull Object... values) {
-	//		return delegate.getStaticTypeOf(value, values);
-	//	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value,
-	//			@NonNull Iterable<?> values) {
-	//		return delegate.getStaticTypeOf(value, values);
-	//	}
 
 	/**
 	 * Delegates to my decorated visitor.
@@ -164,14 +78,6 @@ implements IQVTiEvaluationVisitor {
 	public void setCanceled(boolean isCanceled) {
 		delegate.setCanceled(isCanceled);
 	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	//	@Override
-	//	public void setLogger(@Nullable EvaluationLogger logger) {
-	//		delegate.setLogger(logger);
-	//	}
 
 	/**
 	 * Delegates to my decorated visitor.

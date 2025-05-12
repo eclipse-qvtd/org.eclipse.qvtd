@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public interface QVTiEvaluationEnvironment extends EvaluationEnvironment.EvaluationEnvironmentExtension
+public interface QVTiEvaluationEnvironment extends EvaluationEnvironment
 {
 	@Override
 	@NonNull QVTiExecutor getExecutor();

@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -54,27 +53,8 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	}
 
 	@Override
-	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
-		return context.getEvaluationEnvironment();
-	}
-
-	/** @deprecated Use this or getExecutor() */
-	@Deprecated
-	@Override
-	public @NonNull EvaluationVisitor getEvaluator() {
-		return this;
-	}
-
-	@Override
 	public @NonNull Executor getExecutor() {
 		return context;
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return context.getMetamodelManager();
 	}
 
 	@Override
@@ -125,7 +105,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		Object result = super.visitVariable(vd);
 		Type declaredType = vd.getType();
 		//		String name = vd.getName();
-		EvaluationEnvironment env = getEvaluationEnvironment();
+		EvaluationEnvironment env = context.getEvaluationEnvironment();
 		env.replace(vd, declaredType);
 		//		env.replace(name, env.getValueOf(name), declaredType);
 
