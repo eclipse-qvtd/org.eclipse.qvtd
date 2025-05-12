@@ -27,10 +27,10 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.EntryPoint;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -186,7 +186,7 @@ public class EntryPointsAnalysis
 		return instancesClassAnalysis;
 	}
 
-	public @NonNull MetamodelManagerInternal getMetamodelManager() {
+	public @NonNull MetamodelManager getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
 

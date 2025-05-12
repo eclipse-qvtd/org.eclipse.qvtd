@@ -88,12 +88,12 @@ import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -2667,7 +2667,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return null;
 		}
 		if (!oppositeProperty.isIsComposite()) {
-			PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+			MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 			LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
 			if (!(libraryProperty instanceof OclElementOclContainerProperty)) {
 				return null;

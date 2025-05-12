@@ -49,7 +49,6 @@ import org.eclipse.ocl.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
@@ -57,6 +56,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.pivot.validation.ValidationRegistryAdapter;
@@ -369,7 +369,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
 			ResourceSet resourceSet = getResourceSet();
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-			MetamodelManagerInternal metamodelManager = getMetamodelManager();
+			MetamodelManager metamodelManager = getMetamodelManager();
 			getEnvironmentFactory().configureLoadFirstStrategy();
 			Resource genResource = resourceSet.getResource(genModelURI, true);
 			for (EObject eObject : genResource.getContents()) {

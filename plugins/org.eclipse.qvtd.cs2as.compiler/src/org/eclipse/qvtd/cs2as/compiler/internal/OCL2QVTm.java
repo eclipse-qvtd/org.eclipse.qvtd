@@ -59,9 +59,9 @@ import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
@@ -701,7 +701,7 @@ public class OCL2QVTm {
 	// will include an additional guard to ensure that only strictly instance of (oclTypeOf) the source type
 	// are considered. Therefor, any instance of a subtype won't ever be considered by this mapping
 	private void workaround495327(Operation op, Mapping mapping, CoreDomain leftDomain) {
-		PivotMetamodelManager mm = (PivotMetamodelManager) envFact.getMetamodelManager();
+		MetamodelManager mm = envFact.getMetamodelManager();
 		if (!mm.getFinalAnalysis().isFinal(op)) {
 			GuardPattern guard = mapping.getGuardPattern();
 			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);

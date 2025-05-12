@@ -26,13 +26,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.tests.TestProject;
 import org.eclipse.ocl.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -138,7 +138,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
 		ProjectManager projectManager = getTestProjectManager();
 		OCLInternal ocl = OCLInternal.newInstance(projectManager, null); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
-		MetamodelManagerInternal metamodelManager = ocl.getMetamodelManager();
+		MetamodelManager metamodelManager = ocl.getMetamodelManager();
 		ResourceSet asResourceSet = metamodelManager.getASResourceSet();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();

@@ -62,7 +62,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.FinalAnalysis;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -1430,7 +1429,7 @@ public class OperationDependencyAnalysis
 		this.domainUsageAnalysis = domainUsageAnalysis;
 		this.containmentAnalysis = containmentAnalysis;
 		//		this.scheduler = scheduler;
-		this.finalAnalysis = ((PivotMetamodelManager)metamodelManager).getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
+		this.finalAnalysis = metamodelManager.getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.oclVoidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclVoidType());
 		this.oclInvalidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclInvalidType());

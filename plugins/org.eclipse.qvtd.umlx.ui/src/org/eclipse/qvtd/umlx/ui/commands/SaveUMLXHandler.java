@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -114,7 +115,7 @@ public class SaveUMLXHandler extends AbstractHandler
 						URI oldURI = asResource.getURI();
 						try {
 							asResource.setURI(newURI);
-							PivotMetamodelManager metamodelManager = PivotMetamodelManager.getAdapter(asResource.getResourceSet());
+							MetamodelManager metamodelManager = PivotMetamodelManager.getAdapter(asResource.getResourceSet());
 							Resource umlxResource = resource.getResourceSet().createResource(newURI);
 							QVTr2UMLX qvtr2umlx = new QVTr2UMLX(metamodelManager.getEnvironmentFactory(), asResource, umlxResource);
 							qvtr2umlx.transform();
