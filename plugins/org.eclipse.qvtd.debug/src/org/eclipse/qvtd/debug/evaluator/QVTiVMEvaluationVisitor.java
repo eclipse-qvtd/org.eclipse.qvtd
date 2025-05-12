@@ -43,20 +43,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		nestedEvaluationVisitor.setUndecoratedVisitor(this);
 	}
 
-	/** @deprecated Evaluator no longer nests */
-	@Deprecated
-	@Override
-	public @NonNull EvaluationVisitor createNestedEvaluator() {
-		return evaluationVisitor.createNestedEvaluator();
-	}
-
-	/** @deprecated Evaluator no longer nests */
-	@Deprecated
-	@Override
-	public void dispose() {
-		evaluationVisitor.dispose();
-	}
-
 	@Override
 	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return evaluationVisitor.evaluate(body);

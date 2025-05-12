@@ -81,12 +81,6 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public @NonNull EvaluationVisitor createNestedEvaluator() {
-		return context.createNestedEvaluator();
-	}
-
 	@Override
 	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return context.evaluate(body);
@@ -144,12 +138,5 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	@Override
 	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
 		context.setUndecoratedVisitor(evaluationVisitor);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public void dispose() {
-		context.dispose();
 	}
 }
