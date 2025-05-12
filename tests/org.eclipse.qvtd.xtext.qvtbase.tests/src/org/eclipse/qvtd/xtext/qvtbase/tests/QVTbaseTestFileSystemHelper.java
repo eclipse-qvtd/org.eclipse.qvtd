@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.xtext.tests.TestFileSystemHelper;
 
 public class QVTbaseTestFileSystemHelper extends TestFileSystemHelper
 {

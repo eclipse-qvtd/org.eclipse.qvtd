@@ -31,11 +31,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.tests.TestFile;
-import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
-import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
-import org.eclipse.ocl.examples.xtext.tests.TestProject;
-import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LambdaType;
@@ -58,6 +53,11 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.tests.TestFile;
+import org.eclipse.ocl.xtext.tests.TestFileSystem;
+import org.eclipse.ocl.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.xtext.tests.TestProject;
+import org.eclipse.ocl.xtext.tests.TestUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -205,14 +205,14 @@ public class XtextTestCase extends PivotTestCase
 	//	}
 
 	protected static boolean hasCorrespondingPivot(@NonNull ModelElementCS csElement) {
-		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasCorrespondingPivot(csElement)) {
+		if (!org.eclipse.ocl.xtext.tests.XtextTestCase.hasCorrespondingPivot(csElement)) {
 			return false;
 		}
 		return true;
 	}
 
 	protected static boolean hasUniqueMoniker(@NonNull ModelElementCS csElement) {
-		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasUniqueMoniker(csElement)) {
+		if (!org.eclipse.ocl.xtext.tests.XtextTestCase.hasUniqueMoniker(csElement)) {
 			return false;
 		}
 		return true;

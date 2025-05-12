@@ -14,8 +14,8 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.xtext.tests.TestUtil;
 import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.tx.Families2Persons;
