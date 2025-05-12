@@ -47,12 +47,12 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -227,10 +227,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
 			xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
 			if (e instanceof WrappedException) {
-				e = ((WrappedException)e).getCause();
+				e = e.getCause();
 			}
 			if (e instanceof Resource.IOWrappedException) {
-				e = ((Resource.IOWrappedException)e).getCause();
+				e = e.getCause();
 			}
 			LoadTestCase.fail(e.toString());
 		}
@@ -834,7 +834,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
 		ResourceSet resourceSet = getResourceSet();
-		MetamodelManagerInternal metamodelManager = getMetamodelManager();
+		MetamodelManager metamodelManager = getMetamodelManager();
 		Resource csGenResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : csGenResource.getContents()) {
 			if (eObject instanceof GenModel) {

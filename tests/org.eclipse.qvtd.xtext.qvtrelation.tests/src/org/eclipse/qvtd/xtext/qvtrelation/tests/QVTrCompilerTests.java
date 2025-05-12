@@ -338,7 +338,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
 			txClass1 = myQVT1.buildTransformation("qvtr", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
@@ -481,7 +481,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
 			/*txClass1 =*/ myQVT1.buildTransformation("atl", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
@@ -895,7 +895,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
 			txClass1 = myQVT1.buildTransformation("as", false);
 			//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
 			//

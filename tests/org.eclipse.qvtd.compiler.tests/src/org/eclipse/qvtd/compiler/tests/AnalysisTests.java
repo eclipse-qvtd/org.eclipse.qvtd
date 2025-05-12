@@ -30,12 +30,12 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -74,7 +74,7 @@ public class AnalysisTests extends XtextTestCase
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		//
@@ -109,7 +109,7 @@ public class AnalysisTests extends XtextTestCase
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		//
@@ -173,7 +173,7 @@ public class AnalysisTests extends XtextTestCase
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		//
@@ -234,7 +234,7 @@ public class AnalysisTests extends XtextTestCase
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		CompleteClass oclElementClass = completeModel.getCompleteClass(standardLibrary.getOclElementType());
@@ -272,7 +272,7 @@ public class AnalysisTests extends XtextTestCase
 		OCLInternal ocl = OCLInternal.newInstance();
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
 		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));

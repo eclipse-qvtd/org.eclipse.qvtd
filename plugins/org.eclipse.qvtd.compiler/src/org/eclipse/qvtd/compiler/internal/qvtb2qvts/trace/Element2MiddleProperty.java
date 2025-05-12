@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -97,7 +97,7 @@ public abstract class Element2MiddleProperty implements Nameable
 			property.getOwnedAnnotations().add(domainAnnotation);
 		}
 		traceClass.getOwnedProperties().add(property);
-		PivotMetamodelManager metamodelManager = (PivotMetamodelManager)relation2middleType.getScheduleManager().getEnvironmentFactory().getMetamodelManager();
+		MetamodelManager metamodelManager = relation2middleType.getScheduleManager().getEnvironmentFactory().getMetamodelManager();
 		Model model = PivotUtil.getContainingModel(relation2middleType.getRule());
 		assert model != null;
 		org.eclipse.ocl.pivot.Package tracePackage = relation2middleType.getMiddleClass().getOwningPackage();
