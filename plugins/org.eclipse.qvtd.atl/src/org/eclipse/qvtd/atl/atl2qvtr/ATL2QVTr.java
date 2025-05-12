@@ -786,7 +786,7 @@ public class ATL2QVTr extends AbstractTransformer
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 			final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_LocatedElement, element);
 			final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
-			final LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+			final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 			final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, SET_CLSSid_OclElement, CLSSid_OclElement);
 			/**
 			 * Implementation of the iterator body.
@@ -6180,7 +6180,7 @@ public class ATL2QVTr extends AbstractTransformer
 													throw new InvalidEvaluationException("Null where non-null value required");
 												}
 												objectManager.getting(domapOclType, trace_ATL2QVTrPackage.Literals.IMAP_OCL_EXPRESSION__SUCCESS, false);
-												final /*@Thrown*/ @Nullable Boolean success_3 = ((ImapOclExpression)domapOclType).getSuccess();
+												final /*@Thrown*/ @Nullable Boolean success_3 = domapOclType.getSuccess();
 												final /*@Thrown*/ boolean eq_3 = success_3 == Boolean.FALSE;
 												/*@Thrown*/ @Nullable Boolean symbol_19;
 												if (eq_3) {

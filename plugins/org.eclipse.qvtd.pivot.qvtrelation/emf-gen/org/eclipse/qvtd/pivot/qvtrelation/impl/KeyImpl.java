@@ -36,7 +36,7 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
-import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
@@ -456,7 +456,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Class> superClasses_0 = identifies.getSuperClasses();
 							final /*@NonInvalid*/ @NonNull SetValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
 							final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticTypeOfValue(null, BOXED_superClasses_0);
-							final @NonNull LibraryIterationExtension IMPL_superClasses_2 = (LibraryIterationExtension)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+							final @NonNull LibraryIteration IMPL_superClasses_2 = (LibraryIteration)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 							final @NonNull Object ACC_superClasses_2 = IMPL_superClasses_2.createAccumulatorValue(executor, QVTrelationTables.SET_CLSSid_Class, QVTrelationTables.SET_CLSSid_Class);
 							/**
 							 * Implementation of the iterator body.
@@ -1032,7 +1032,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTransformation((RelationalTransformation)otherEnd, msgs);
+			return basicSetTransformation((RelationalTransformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1075,7 +1075,7 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getIdentifies();
-				return basicGetIdentifies();
+			return basicGetIdentifies();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getOppositePart();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
@@ -1097,18 +1097,18 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
-				getOppositePart().addAll((Collection<? extends Property>)newValue);
-				return;
+			getOppositePart().addAll((Collection<? extends Property>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
-				getPart().addAll((Collection<? extends Property>)newValue);
-				return;
+			getPart().addAll((Collection<? extends Property>)newValue);
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1123,16 +1123,16 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}

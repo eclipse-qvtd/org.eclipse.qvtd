@@ -36,7 +36,7 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
-import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionCountOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
@@ -730,7 +730,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 							}
 						}
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_multiNames_0 = executor.getStaticTypeOfValue(null, select);
-						final @NonNull LibraryIterationExtension IMPL_multiNames_0 = (LibraryIterationExtension)TYPE_multiNames_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
+						final @NonNull LibraryIteration IMPL_multiNames_0 = (LibraryIteration)TYPE_multiNames_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 						final @NonNull Object ACC_multiNames_0 = IMPL_multiNames_0.createAccumulatorValue(executor, QVTrelationTables.ORD_PRIMid_String, TypeId.STRING);
 						/**
 						 * Implementation of the iterator body.
@@ -894,21 +894,21 @@ public class RelationImpl extends RuleImpl implements Relation {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel((Boolean)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
-				getOperationalImpl().addAll((Collection<? extends RelationImplementation>)newValue);
-				return;
+			getOperationalImpl().addAll((Collection<? extends RelationImplementation>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
-				getVariable().addAll((Collection<? extends Variable>)newValue);
-				return;
+			getVariable().addAll((Collection<? extends Variable>)newValue);
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)newValue);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -923,19 +923,19 @@ public class RelationImpl extends RuleImpl implements Relation {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel(IS_TOP_LEVEL_EDEFAULT);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)null);
-				return;
+			return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
