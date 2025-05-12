@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
-import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesAllOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
@@ -394,7 +394,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return getRule();
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				if (resolve) return getExtends();
-				return basicGetExtends();
+			return basicGetExtends();
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				return getOwnedContext();
 		}
@@ -412,26 +412,26 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-				getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
-				return;
+			getOwnedTag().addAll((Collection<? extends Annotation>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-				getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
-				return;
+			getModelParameter().addAll((Collection<? extends TypedModel>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-				getOwnedTargets().addAll((Collection<? extends Target>)newValue);
-				return;
+			getOwnedTargets().addAll((Collection<? extends Target>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-				getRule().addAll((Collection<? extends Rule>)newValue);
-				return;
+			getRule().addAll((Collection<? extends Rule>)newValue);
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)newValue);
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -446,22 +446,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 		switch (featureID) {
 			case ClassImpl.CLASS_FEATURE_COUNT + 0:
 				getOwnedTag().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 1:
 				getModelParameter().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 2:
 				getOwnedTargets().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 3:
 				getRule().clear();
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 4:
 				setExtends((Transformation)null);
-				return;
+			return;
 			case ClassImpl.CLASS_FEATURE_COUNT + 5:
 				setOwnedContext((Parameter)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -895,7 +895,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 					final /*@NonInvalid*/ @Nullable Transformation extends1 = this.getExtends();
 					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, extends1);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
-					final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+					final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Transformation, QVTbaseTables.CLSSid_Transformation);
 					/**
 					 * Implementation of the iterator body.

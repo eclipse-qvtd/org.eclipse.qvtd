@@ -37,7 +37,7 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.OCLExpressionImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
-import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
@@ -347,7 +347,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTrelationTables.SET_CLSSid_RelationCallExp, this);
 						final /*@NonInvalid*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(oclAsSet);
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticTypeOfValue(null, asOrderedSet);
-						final @NonNull LibraryIterationExtension IMPL_closure_1 = (LibraryIterationExtension)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
+						final @NonNull LibraryIteration IMPL_closure_1 = (LibraryIteration)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
 						 * Implementation of the iterator body.
@@ -384,7 +384,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final /*@Thrown*/ @NonNull SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTrelationTables.SET_CLSSid_Pattern, CAUGHT_pattern);
 						final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet_0 = CollectionAsOrderedSetOperation.INSTANCE.evaluate(oclAsSet_0);
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticTypeOfValue(null, asOrderedSet_0);
-						final @NonNull LibraryIterationExtension IMPL_closure_0_0 = (LibraryIterationExtension)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
+						final @NonNull LibraryIteration IMPL_closure_0_0 = (LibraryIteration)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
 						 * Implementation of the iterator body.
@@ -717,7 +717,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				return getArgument();
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				if (resolve) return getReferredRelation();
-				return basicGetReferredRelation();
+			return basicGetReferredRelation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -733,11 +733,11 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 		switch (featureID) {
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0:
 				getArgument().clear();
-				getArgument().addAll((Collection<? extends OCLExpression>)newValue);
-				return;
+			getArgument().addAll((Collection<? extends OCLExpression>)newValue);
+			return;
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setReferredRelation((Relation)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -752,10 +752,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 		switch (featureID) {
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0:
 				getArgument().clear();
-				return;
+			return;
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setReferredRelation((Relation)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
