@@ -16,13 +16,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractMergedQVTimperativeVisitor;
 
@@ -92,27 +90,8 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	}
 
 	@Override
-	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
-		return context.getEvaluationEnvironment();
-	}
-
-	/** @deprected moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull EvaluationVisitor getEvaluator() {
-		return context.getEvaluator();
-	}
-
-	@Override
 	public @NonNull Executor getExecutor() {
 		return context.getExecutor();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return context.getMetamodelManager();
 	}
 
 	@Override
