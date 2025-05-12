@@ -56,7 +56,7 @@ extends AbstractClassesLookupFilter<Operation>
 		this.args =  args;
 		this.executor = executor;
 		this.idResolver = executor.getIdResolver();
-		this.evaluationCache = ((ExecutorInternal.ExecutorInternalExtension)executor).getEvaluationCache();
+		this.evaluationCache = ((ExecutorInternal)executor).getEvaluationCache();
 	}
 
 	@Override
