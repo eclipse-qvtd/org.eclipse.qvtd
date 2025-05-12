@@ -18,7 +18,6 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -110,9 +109,6 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	protected final @NonNull TransformationExecutor executor;
-	/** deprecated use executor */
-	@Deprecated
-	protected final @NonNull Evaluator evaluator;
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final RuntimeModelsManager.@NonNull Model @NonNull [] models;
 	//	protected final @NonNull Map<@Nullable String, @NonNull Integer> modelIndexes = new HashMap<>();
@@ -153,7 +149,6 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	protected AbstractTransformerInternal(@NonNull TransformationExecutor executor, int models) {
 		this.executor = executor;
-		this.evaluator = executor;
 		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
