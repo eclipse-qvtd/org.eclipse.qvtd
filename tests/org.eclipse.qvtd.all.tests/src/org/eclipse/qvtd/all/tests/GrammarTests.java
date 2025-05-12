@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.all.tests;
 
-import org.eclipse.ocl.examples.test.xtext.AbstractGrammarTests;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.xtext.oclstdlib.OCLstdlibStandaloneSetup;
+import org.eclipse.ocl.xtext.tests.xtext.AbstractGrammarTests;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtbase.tests.PivotTestCase.QVTTestHelper;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;

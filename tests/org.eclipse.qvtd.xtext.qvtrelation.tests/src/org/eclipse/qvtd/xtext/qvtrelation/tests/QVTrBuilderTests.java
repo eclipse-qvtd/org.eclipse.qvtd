@@ -16,9 +16,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.test.xtext.AbstractBuilderTests;
-import org.eclipse.ocl.examples.xtext.tests.TestFolder;
-import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.xtext.tests.TestFolder;
+import org.eclipse.ocl.xtext.tests.TestProject;
+import org.eclipse.ocl.xtext.tests.xtext.AbstractBuilderTests;
 import org.eclipse.ocl.pivot.utilities.OCL;
 
 /**

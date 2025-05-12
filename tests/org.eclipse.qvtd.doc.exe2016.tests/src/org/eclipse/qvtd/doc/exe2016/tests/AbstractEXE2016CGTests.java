@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.exe2016.tests;
 
-import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.xtext.tests.TestUtil;
 
 import junit.framework.TestCase;
 
