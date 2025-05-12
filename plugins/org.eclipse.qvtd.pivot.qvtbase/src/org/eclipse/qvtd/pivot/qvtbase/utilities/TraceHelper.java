@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory.EnvironmentFactoryExtension2;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -27,14 +26,14 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
  */
 public class TraceHelper
 {
-	protected final @NonNull EnvironmentFactoryExtension2 environmentFactory;
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	private org.eclipse.ocl.pivot.@Nullable Package tracePackage = null;
 	private org.eclipse.ocl.pivot.@Nullable Class dispatchClass = null;
 	private org.eclipse.ocl.pivot.@Nullable Class executionClass = null;
 	private org.eclipse.ocl.pivot.@Nullable Class traceElementClass = null;
 
 	public TraceHelper(@NonNull EnvironmentFactory environmentFactory) {
-		this.environmentFactory = (EnvironmentFactoryExtension2) environmentFactory;
+		this.environmentFactory = environmentFactory;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getDispatchClass() {
