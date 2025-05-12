@@ -11,26 +11,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.debug.vm.evaluator.VMEvaluationStepper;
 import org.eclipse.ocl.debug.vm.evaluator.VMEvaluationVisitor;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
@@ -44,7 +37,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	protected final @NonNull VMEvaluationStepper vmEvaluationStepper;
 
 	public QVTiVMEvaluationVisitor(@NonNull VMEvaluationStepper vmEvaluationStepper, @NonNull IQVTiEvaluationVisitor nestedEvaluationVisitor) {
-		super(((EvaluationVisitor.EvaluationVisitorExtension)nestedEvaluationVisitor).getExecutor());
+		super(nestedEvaluationVisitor.getExecutor());
 		this.evaluationVisitor = nestedEvaluationVisitor;
 		this.vmEvaluationStepper = vmEvaluationStepper;
 		nestedEvaluationVisitor.setUndecoratedVisitor(this);
@@ -67,20 +60,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	@Override
 	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return evaluationVisitor.evaluate(body);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull CompleteEnvironment getCompleteEnvironment() {
-		return context.getCompleteEnvironment();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public int getDiagnosticSeverity(int severityPreference, @Nullable Object resultValue) {
-		return context.getDiagnosticSeverity(severityPreference, resultValue);
 	}
 
 	@Override
@@ -108,29 +87,8 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	/** @deprecated moved to Evaluator */
 	@Deprecated
 	@Override
-	public @NonNull IdResolver getIdResolver() {
-		return context.getIdResolver();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @Nullable EvaluationLogger getLogger() {
-		return context.getLogger();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
 	public @NonNull MetamodelManager getMetamodelManager() {
 		return context.getMetamodelManager();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull ModelManager getModelManager() {
-		return context.getModelManager();
 	}
 
 	@Override
@@ -140,48 +98,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	public @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
-		return context.getRegexPattern(regex);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public int getSeverity(@Nullable Object validationKey) {
-		return context.getSeverity(validationKey);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull StandardLibrary getStandardLibrary() {
-		return context.getStandardLibrary();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value) {
-		return context.getStaticTypeOf(value);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object... values) {
-		return context.getStaticTypeOf(value, values);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value,	@NonNull Iterable<?> values) {
-		return context.getStaticTypeOf(value, values);
 	}
 
 	public @NonNull VMEvaluationEnvironment getVMEvaluationEnvironment() {
@@ -201,13 +117,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	@Override
 	public void setCanceled(boolean isCanceled) {
 		evaluationVisitor.setCanceled(isCanceled);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public void setLogger(@Nullable EvaluationLogger logger) {
-		context.setLogger(logger);
 	}
 
 	@Override

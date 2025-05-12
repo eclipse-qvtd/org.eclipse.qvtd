@@ -10,23 +10,16 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -128,21 +121,9 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 		return context.getMetamodelManager();
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public @NonNull ModelManager getModelManager() {
-		return context.getModelManager();
-	}
-
 	@Override
 	public @Nullable Monitor getMonitor() {
 		return context.getMonitor();
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public @NonNull StandardLibrary getStandardLibrary() {
-		return context.getStandardLibrary();
 	}
 
 	@Override
@@ -170,75 +151,5 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	@Override
 	public void dispose() {
 		context.dispose();
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull CompleteEnvironment getCompleteEnvironment() {
-		return context.getCompleteEnvironment();
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public int getDiagnosticSeverity(int severityPreference, @Nullable Object resultValue) {
-		return context.getDiagnosticSeverity(severityPreference, resultValue);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull IdResolver getIdResolver() {
-		return context.getIdResolver();
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @Nullable EvaluationLogger getLogger() {
-		return context.getLogger();
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
-		return context.getRegexPattern(regex);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public int getSeverity(@Nullable Object validationKey) {
-		return context.getSeverity(validationKey);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull Class getStaticTypeOf(@Nullable Object value) {
-		return context.getStaticTypeOf(value);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object @NonNull ... values) {
-		return context.getStaticTypeOf(value, values);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public @NonNull Class getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
-		return context.getStaticTypeOf(value, values);
-	}
-
-	/** @deprecated moved to Executor. */
-	@Deprecated
-	@Override
-	public void setLogger(@Nullable EvaluationLogger logger) {
-		context.setLogger(logger);
 	}
 }
