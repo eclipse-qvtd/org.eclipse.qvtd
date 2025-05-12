@@ -18,14 +18,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor.ExecutorExtension;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
  * A TransformationExecutor supervises the execution of an auto-generated transformation.
  *
  * @noimplement
  */
-public interface TransformationExecutor extends ExecutorExtension
+public interface TransformationExecutor extends Executor
 {
 	@Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI);
 	@NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI);
