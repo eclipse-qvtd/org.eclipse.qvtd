@@ -63,7 +63,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.util.AbstractExtendingPivotVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -427,7 +426,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		OCLExpression ownedBody = object.getOwnedBody();
 		if ((ownedBody == null) && (object.getBody() != null)) {
 			try {
-				ownedBody = ((EnvironmentFactoryInternalExtension)context).parseSpecification(object).getOwnedBody();		// FIXME why is this necessary
+				ownedBody = context.parseSpecification(object).getOwnedBody();		// FIXME why is this necessary
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -569,7 +568,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				return visit(object.getType());
 			}
 			try {
-				ExpressionInOCL parseSpecification = ((EnvironmentFactoryInternalExtension)context).parseSpecification(bodyExpression);
+				ExpressionInOCL parseSpecification = context.parseSpecification(bodyExpression);
 				return visit(parseSpecification);
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block

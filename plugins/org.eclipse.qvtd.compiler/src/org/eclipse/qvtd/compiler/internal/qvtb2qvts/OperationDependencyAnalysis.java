@@ -63,7 +63,7 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.FinalAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -1397,7 +1397,7 @@ public class OperationDependencyAnalysis
 		}
 	}
 
-	private final @NonNull EnvironmentFactoryInternalExtension environmentFactory;
+	private final @NonNull EnvironmentFactoryInternal environmentFactory;
 	private final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
@@ -1423,7 +1423,7 @@ public class OperationDependencyAnalysis
 	private final @NonNull Set<@NonNull OperationAnalysis> refining = new HashSet<>();
 
 	public OperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
-		this.environmentFactory = (EnvironmentFactoryInternalExtension) containmentAnalysis.getEnvironmentFactory();
+		this.environmentFactory = (EnvironmentFactoryInternal) containmentAnalysis.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);

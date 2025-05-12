@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -115,7 +115,7 @@ public class RuntimeConnectionTests extends TestCase
 	public static final class TestExecutor extends AbstractExecutor
 	{
 		public TestExecutor(@NonNull EnvironmentFactory environmentFactory) {
-			super((@NonNull EnvironmentFactoryInternalExtension) environmentFactory);
+			super((@NonNull EnvironmentFactoryInternal) environmentFactory);
 		}
 
 		@Override

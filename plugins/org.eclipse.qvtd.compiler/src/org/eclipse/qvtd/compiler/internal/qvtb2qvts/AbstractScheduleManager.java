@@ -37,7 +37,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -282,7 +282,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		assert  bodyExpression != null;
 		ExpressionInOCL specification;
 		try {
-			specification = ((EnvironmentFactoryInternalExtension)environmentFactory).parseSpecification(bodyExpression);
+			specification = environmentFactory.parseSpecification(bodyExpression);
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
 			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {

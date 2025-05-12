@@ -28,7 +28,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
@@ -56,7 +56,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName(VMVirtualMachine.PC_NAME);
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.NAMED_ELEMENT.getName());
-		pcVariable.setType(((EnvironmentFactoryInternalExtension)environmentFactory).getASClass(typeName));
+		pcVariable.setType(environmentFactory.getASClass(typeName));
 	}
 
 	@Override
