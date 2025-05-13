@@ -19,11 +19,11 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -111,13 +111,15 @@ public class SaveUMLXHandler extends AbstractHandler
 				@Override
 				public Object exec(@Nullable XtextResource resource) throws Exception {
 					if (resource instanceof BaseCSResource) {
-						Resource asResource = ((BaseCSResource)resource).getASResource();
+						BaseCSResource csResource = (BaseCSResource)resource;
+						@NonNull EnvironmentFactory environmentFactory = csResource.getEnvironmentFactory();
+						CS2AS cs2as = csResource.getCS2AS(environmentFactory);
+						ASResource asResource = cs2as.getASResource();
 						URI oldURI = asResource.getURI();
 						try {
 							asResource.setURI(newURI);
-							MetamodelManager metamodelManager = PivotMetamodelManager.getAdapter(asResource.getResourceSet());
 							Resource umlxResource = resource.getResourceSet().createResource(newURI);
-							QVTr2UMLX qvtr2umlx = new QVTr2UMLX(metamodelManager.getEnvironmentFactory(), asResource, umlxResource);
+							QVTr2UMLX qvtr2umlx = new QVTr2UMLX(environmentFactory, asResource, umlxResource);
 							qvtr2umlx.transform();
 							umlxResource.save(null);
 						} finally {
