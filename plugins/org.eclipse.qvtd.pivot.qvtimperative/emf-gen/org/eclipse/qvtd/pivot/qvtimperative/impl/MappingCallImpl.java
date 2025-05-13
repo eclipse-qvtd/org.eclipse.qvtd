@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.IdResolver.IdResolverExtension;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
@@ -303,7 +302,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
 		@SuppressWarnings("null")
 		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
-		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
+		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = idResolver.ecoreValueOfAll(String.class, sortedBy);
 		return (EList<String>)ECORE_sortedBy;
 	}
 
@@ -362,7 +361,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
 		@SuppressWarnings("null")
 		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
-		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = ((IdResolverExtension)idResolver).ecoreValueOfAll(String.class, sortedBy);
+		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = idResolver.ecoreValueOfAll(String.class, sortedBy);
 		return (EList<String>)ECORE_sortedBy;
 	}
 

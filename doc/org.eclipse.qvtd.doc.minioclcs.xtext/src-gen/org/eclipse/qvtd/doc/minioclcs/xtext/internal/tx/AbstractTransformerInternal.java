@@ -484,7 +484,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	protected final @NonNull TransformationExecutor executor;
-	protected final IdResolver.@NonNull IdResolverExtension idResolver;
+	protected final @NonNull IdResolver idResolver;
 	protected final @NonNull Model @NonNull [] models;
 	protected final @NonNull Map<@NonNull String, @NonNull Integer> modelIndexes = new HashMap<>();
 	protected final boolean debugAssignments = AbstractTransformer.ASSIGNMENTS.isActive();
@@ -544,7 +544,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	protected AbstractTransformerInternal(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		this.executor = executor;
-		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
+		this.idResolver = executor.getIdResolver();
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
 		this.evaluationCache = createEvaluationCache();

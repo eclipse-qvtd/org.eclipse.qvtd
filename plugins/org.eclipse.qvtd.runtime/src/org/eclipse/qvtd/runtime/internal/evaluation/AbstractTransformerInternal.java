@@ -109,7 +109,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	}
 
 	protected final @NonNull TransformationExecutor executor;
-	protected final IdResolver.@NonNull IdResolverExtension idResolver;
+	protected final @NonNull IdResolver idResolver;
 	protected final RuntimeModelsManager.@NonNull Model @NonNull [] models;
 	//	protected final @NonNull Map<@Nullable String, @NonNull Integer> modelIndexes = new HashMap<>();
 	protected final @NonNull RuntimeModelsManager modelsManager;
@@ -149,7 +149,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	protected AbstractTransformerInternal(@NonNull TransformationExecutor executor, int models) {
 		this.executor = executor;
-		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
+		this.idResolver = executor.getIdResolver();
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
 		this.evaluationCache = createEvaluationCache();

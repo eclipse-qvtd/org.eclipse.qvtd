@@ -151,7 +151,7 @@ public class MiniOCLUnqualifiedOperationLookupVisitor
                     accumulator.add(value);
                 }
             }
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ECORE_collect = idResolver.ecoreValueOfAll(Operation.class, collect);
             @SuppressWarnings("null")
             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner_0 = context.addElements(ECORE_collect);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();

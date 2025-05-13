@@ -3191,7 +3191,7 @@ public class ATL2QVTr extends AbstractTransformer
 									throw new InvalidEvaluationException("Null where non-null value required");
 								}
 								// mapping statements
-								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
+								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = idResolver.ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
 								t2qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
 								t2qvtrTypedModel.setTransformation(t2qvtrTransformation);
 								trace_6.setT1atlModule(Module);
@@ -3321,7 +3321,7 @@ public class ATL2QVTr extends AbstractTransformer
 									throw new InvalidEvaluationException("Null where non-null value required");
 								}
 								// mapping statements
-								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
+								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> ECORE_oclAsSet = idResolver.ecoreValueOfAll(org.eclipse.ocl.pivot.Package.class, oclAsSet);
 								t2qvtrTypedModel.getUsedPackage().addAll(ECORE_oclAsSet);
 								t2qvtrTypedModel.setTransformation(t2qvtrTransformation);
 								trace_7.setT1atlModule(Module);
