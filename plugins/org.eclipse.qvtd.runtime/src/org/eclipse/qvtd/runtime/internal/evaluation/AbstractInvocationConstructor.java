@@ -266,7 +266,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	}
 
 	protected final @NonNull Interval interval;
-	protected final IdResolver.@NonNull IdResolverExtension idResolver;
+	protected final @NonNull IdResolver idResolver;
 	protected final @NonNull String name;
 	protected final boolean isStrict;
 
@@ -320,7 +320,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	protected AbstractInvocationConstructor(@NonNull InvocationManager invocationManager, @NonNull String name, boolean isStrict, @NonNull Interval interval) {
 		this.interval = interval;
 		Executor executor = invocationManager.getExecutor();
-		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
+		this.idResolver = executor.getIdResolver();
 		this.name = name;
 		this.isStrict = isStrict;
 		invocationManager.addInvoker(this);

@@ -2208,7 +2208,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Package.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Package> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Package.class, asOrderedSet);
 					symbol_2.getOwnedPackages().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muRootCS__2__Root__ownedPackages = ValueUtil.TRUE_VALUE;
 					symbol_5 = muRootCS__2__Root__ownedPackages;
@@ -2291,7 +2291,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Package.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Package> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Package.class, asOrderedSet);
 					symbol_2.getOwnedPackages().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muPackageCS__2__Package__ownedPackages = ValueUtil.TRUE_VALUE;
 					symbol_5 = muPackageCS__2__Package__ownedPackages;
@@ -2487,7 +2487,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Class.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Class.class, asOrderedSet);
 					symbol_2.getOwnedClasses().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muPackageCS__2__Package__ownedClasses = ValueUtil.TRUE_VALUE;
 					symbol_5 = muPackageCS__2__Package__ownedClasses;
@@ -2571,7 +2571,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<Parameter> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Parameter.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<Parameter> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(Parameter.class, asOrderedSet);
 					symbol_2.getOwnedParameters().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muOperationCS__2__Operation__ownedParameters = ValueUtil.TRUE_VALUE;
 					symbol_5 = muOperationCS__2__Operation__ownedParameters;
@@ -2655,7 +2655,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Property> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Property.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Property> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Property.class, asOrderedSet);
 					symbol_2.getOwnedProperties().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muClassCS__2__Class__ownedProperties = ValueUtil.TRUE_VALUE;
 					symbol_5 = muClassCS__2__Class__ownedProperties;
@@ -2795,7 +2795,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
 					// mapping statements
-					final /*@Thrown*/ @NonNull List<Operation> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, asOrderedSet);
+					final /*@Thrown*/ @NonNull List<Operation> ECORE_asOrderedSet = idResolver.ecoreValueOfAll(Operation.class, asOrderedSet);
 					symbol_2.getOwnedOperations().addAll(ECORE_asOrderedSet);
 					final /*@Thrown*/ @Nullable Boolean muClassCS__2__Class__ownedOperations = ValueUtil.TRUE_VALUE;
 					symbol_5 = muClassCS__2__Class__ownedOperations;

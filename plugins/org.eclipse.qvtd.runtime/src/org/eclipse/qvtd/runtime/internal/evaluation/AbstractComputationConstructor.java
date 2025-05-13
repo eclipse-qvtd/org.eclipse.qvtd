@@ -23,7 +23,7 @@ import org.eclipse.qvtd.runtime.evaluation.Computation;
 
 public abstract class AbstractComputationConstructor implements Computation.Constructor
 {
-	protected final IdResolver.@NonNull IdResolverExtension idResolver;
+	protected final @NonNull IdResolver idResolver;
 
 	/**
 	 * Map from invocation hashCode to one or more computations with that hashCode. Single map entries use the
@@ -36,7 +36,7 @@ public abstract class AbstractComputationConstructor implements Computation.Cons
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	protected AbstractComputationConstructor(@NonNull IdResolver idResolver) {
-		this.idResolver = (IdResolver.IdResolverExtension)idResolver;
+		this.idResolver = idResolver;
 	}
 
 	@Override

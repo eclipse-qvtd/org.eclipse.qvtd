@@ -131,7 +131,7 @@ public class TargetUnqualifiedCLookupVisitor
 						accumulator.add(x);
 					}
 				}
-				final /*@Thrown*/ @NonNull List<C> ECORE_select = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(C.class, select);
+				final /*@Thrown*/ @NonNull List<C> ECORE_select = idResolver.ecoreValueOfAll(C.class, select);
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull LookupEnvironment inner = context.addElements(ECORE_select);
 				final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
