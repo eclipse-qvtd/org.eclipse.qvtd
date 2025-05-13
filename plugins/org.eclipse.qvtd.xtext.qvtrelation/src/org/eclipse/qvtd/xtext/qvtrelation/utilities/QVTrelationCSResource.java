@@ -19,9 +19,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -29,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtrelation.as2cs.QVTrelationAS2CS;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
@@ -66,17 +63,6 @@ public class QVTrelationCSResource extends QVTbaseCSResource
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {
 		return QVTrelationASResourceFactory.getInstance();
-	}
-
-	@Override
-	@Deprecated /* @deprecated not used - Pass known EnvironmentFactory to avoid generally redundant deduction */
-	public @NonNull CS2AS getCS2AS() {
-		assert PivotUtilInternal.debugDeprecation(getClass().getName() + ".getCS2AS()");
-		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
-		if (environmentFactory == null) {
-			environmentFactory = new QVTrEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());
-		}
-		return super.getCS2AS();
 	}
 
 	@Override
