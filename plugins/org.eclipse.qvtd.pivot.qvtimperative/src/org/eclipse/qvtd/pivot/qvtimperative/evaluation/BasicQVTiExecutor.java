@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -256,21 +255,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	/**
 	 * Model2ModelsManager supports OCL's global single model domain accesses by redirecting to QVTi's multiple models manager..
 	 */
-	private class Model2ModelsManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
+	private class Model2ModelsManager extends AbstractModelManager implements ModelManager
 	{
-		@Override
-		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-			return modelsManager.get(type);
-		}
-
 		@Override
 		public @Nullable Iterable<@NonNull ? extends Object> getInstances(org.eclipse.ocl.pivot.@NonNull Class type) {
 			return modelsManager.get(type);
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
-			return modelsManager.getOpposite(target2sourceProperty, sourceObject);
 		}
 	}
 

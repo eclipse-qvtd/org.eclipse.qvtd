@@ -13,8 +13,6 @@ package org.eclipse.qvtd.runtime.evaluation;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -22,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -44,17 +41,11 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	/**
 	 * Model2Model0Manager supports OCL's global single model domain accesses by redirecting to QVTi's models manager first model.
 	 */
-	private class Model2Model0Manager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
+	private class Model2Model0Manager extends AbstractModelManager implements ModelManager
 	{
 		@Override
-		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-			//	return transformer.getModelsManager().get(type);
-			return new IterableAsSet<@NonNull Object>(((AbstractTransformerInternal)transformer).get(type));
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
-			throw new UnsupportedOperationException();		// FIXME
+		public @NonNull Iterable<@NonNull ? extends Object> getInstances(org.eclipse.ocl.pivot.@NonNull Class type) {
+			return ((AbstractTransformerInternal)transformer).get(type);
 		}
 	}
 

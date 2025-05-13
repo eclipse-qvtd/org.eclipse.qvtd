@@ -19,10 +19,8 @@
 package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import java.lang.reflect.Constructor;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -38,16 +36,11 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
 	 * more streamlined QVTi accesses.
 	 */
-	private class WrappedModelManager extends AbstractModelManager implements ModelManager.ModelManagerExtension2
+	private class WrappedModelManager extends AbstractModelManager implements ModelManager
 	{
 		@Override
-		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-			return new IterableAsSet<@NonNull Object>(((AbstractTransformerInternal)transformer).get(type));
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
-			throw new UnsupportedOperationException();		// FIXME
+		public @NonNull Iterable<@NonNull ? extends Object> getInstances(org.eclipse.ocl.pivot.@NonNull Class type) {
+			return ((AbstractTransformerInternal)transformer).get(type);
 		}
 	}
 

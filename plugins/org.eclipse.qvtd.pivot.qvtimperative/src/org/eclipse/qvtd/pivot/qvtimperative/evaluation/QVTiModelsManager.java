@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.PropertyId;
@@ -210,11 +209,6 @@ public class QVTiModelsManager extends AbstractModelsManager
 	public Resource getModel(@NonNull TypedModel typedModel) {
 		QVTiTypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 		return typedModelInstance.getModel();
-	}
-
-	public @NonNull Iterable<@NonNull Object> getOpposite(@NonNull Property target2sourceProperty, @NonNull Object sourceObject) {
-		//	return modelsManager.getOpposite(target2sourceProperty, sourceObject);
-		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull EntryPointsAnalysis getTransformationAnalysis() {
