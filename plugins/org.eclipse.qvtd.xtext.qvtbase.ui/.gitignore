@@ -1,3 +1,4 @@
 /bin
 /plugin.xml_gen
 /target/
+/.polyglot.build.properties

@@ -5,7 +5,6 @@
     <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.atl.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
@@ -13,7 +12,6 @@
     <repository location="https://download.eclipse.org/releases/latest"/>
     <repository location="https://download.eclipse.org/mmt/atl/updates/releases/latest"/>
     <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
-    <repository location="https://ci.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/releng/org.eclipse.ocl.releng.build-site/target/repository"/>
     <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones"/>
     <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
   </location>
@@ -23,8 +21,10 @@
     <repository location="https://download.eclipse.org/epsilon/updates/1.5"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+    <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="https://ci.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/releng/org.eclipse.ocl.releng.build-site/target/repository"/>
+    <!--repository location="https://ci.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/releng/org.eclipse.ocl.releng.build-site/target/repository"/-->
+    <repository location="file:/E:/GIT/org.eclipse.ocl/releng/org.eclipse.ocl.releng.build-site/target/repository"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
