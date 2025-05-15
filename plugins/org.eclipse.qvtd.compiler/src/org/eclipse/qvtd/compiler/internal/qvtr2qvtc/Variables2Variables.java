@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -158,7 +159,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					RelationCallExp relationCallExp = (RelationCallExp)eContainer;
 					int argument = relationCallExp.getArgument().indexOf(eObject);
 					assert argument >= 0;
-					Relation referredRelation = ClassUtil.nonNullState(relationCallExp.getReferredRelation());
+					Relation referredRelation = ClassUtil.requireNonNull(relationCallExp.getReferredRelation());
 					List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(referredRelation);
 					assert argument < rootVariables.size();
 					VariableDeclaration rootVariable = rootVariables.get(argument);
@@ -271,10 +272,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		QVTr2QVTc qvtr2qvtc = transformationAnalysis.getQVTr2QVTc();
 		this.relationalTransformation2tracePackage = qvtr2qvtc.getRelationalTransformation2TracePackage(transformationAnalysis);
 		this.cEnforcedDomain = cEnforcedDomain;
-		this.cMapping = ClassUtil.nonNullState(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
-		this.cTransformation = ClassUtil.nonNullState(cMapping.getTransformation());
-		this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
-		this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
+		this.cMapping = ClassUtil.requireNonNull(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
+		this.cTransformation = ClassUtil.requireNonNull(cMapping.getTransformation());
+		this.cMiddleBottomPattern = ClassUtil.requireNonNull(cMapping.getBottomPattern());
+		this.cMiddleGuardPattern = ClassUtil.requireNonNull(cMapping.getGuardPattern());
 		//
 		this.cMiddleVariable = (traceClass != null) ? relationAnalysis.traceIsRealized() ? addCoreRealizedVariable("trace", traceClass) : addCoreGuardVariable("trace", traceClass) : null;
 
@@ -318,7 +319,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public @NonNull VariableDeclaration addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) throws CompilerChainException {
-		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, ClassUtil.nonNullState(mMember.getType()), mMember);
+		CoreVariable2Variable analysis = new CoreVariable2Variable(this, name, ClassUtil.requireNonNull(mMember.getType()), mMember);
 		VariableDeclaration cVariable = analysis.getCoreVariable();
 		addVariableAnalysis(analysis);
 		cMiddleGuardPattern.getOwnedVariables().add(cVariable);
@@ -501,7 +502,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	protected @NonNull Variable2Variable getCoreVariableAnalysis(@NonNull VariableDeclaration coreVariable) {
-		return ClassUtil.nonNullState(cVariable2analysis.get(coreVariable));
+		return ClassUtil.requireNonNull(cVariable2analysis.get(coreVariable));
 	}
 
 	public @NonNull BottomPattern getMiddleBottomPattern() {
@@ -513,7 +514,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public @NonNull VariableDeclaration getMiddleVariable() {
-		return ClassUtil.nonNullState(cMiddleVariable);
+		return ClassUtil.requireNonNull(cMiddleVariable);
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {
@@ -524,7 +525,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		String keyParameterName = keyParameter.getName();
 		for (@NonNull PropertyTemplateItem propertyTemplateItem : ClassUtil.nullFree(objectTemplateExp.getPart())) {
 			Property property = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
-			if (ClassUtil.safeEquals(property.getName(), keyParameterName)) {
+			if (Objects.equals(property.getName(), keyParameterName)) {
 				return propertyTemplateItem.getValue();
 			}
 		}
@@ -533,7 +534,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			PropertyTemplateItem containingPropertyTemplateItem = (PropertyTemplateItem)eContainer;
 			Property property = QVTrelationUtil.basicGetReferredProperty(containingPropertyTemplateItem);
 			Property oppositeProperty = property != null ? property.getOpposite() : null;
-			if ((oppositeProperty != null) && ClassUtil.safeEquals(oppositeProperty.getName(), keyParameterName)) {	// FIXME is this right wrt opposites ?
+			if ((oppositeProperty != null) && Objects.equals(oppositeProperty.getName(), keyParameterName)) {	// FIXME is this right wrt opposites ?
 				return containingPropertyTemplateItem.getObjContainer();
 			}
 		}

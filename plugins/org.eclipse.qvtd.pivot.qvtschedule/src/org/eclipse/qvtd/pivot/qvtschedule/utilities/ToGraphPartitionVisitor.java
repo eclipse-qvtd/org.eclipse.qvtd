@@ -237,7 +237,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 									role = targetPartition.getRole(targetNode);
 									targetGraphNode = targetNode;
 									if (!targetPartition.isHead(targetNode)) {
-										targetConnectionRole = ClassUtil.nonNullState(ConnectionRole.PREFERRED_NODE);
+										targetConnectionRole = ClassUtil.requireNonNull(ConnectionRole.PREFERRED_NODE);
 									}
 								}
 								else {

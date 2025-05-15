@@ -64,12 +64,12 @@ class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 
 	@Override
 	public @NonNull Property getStatusInterfaceProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
+		return ClassUtil.requireNonNull(basicGetRelation2SuccessProperty());
 	}
 
 	@Override
 	public @NonNull Property getStatusTraceProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
+		return ClassUtil.requireNonNull(basicGetRelation2SuccessProperty());
 	}
 
 	@Override

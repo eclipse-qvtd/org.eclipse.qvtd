@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -159,7 +159,7 @@ class Correlator
 		if (firstNode.getNodeRole() != secondNodeMerger.getNodeRole()) {
 			return false;
 		}
-		if (!ClassUtil.safeEquals(firstNode.getName(), secondNodeMerger.getName())) {		// FIXME stronger e.g. referredOperation
+		if (!Objects.equals(firstNode.getName(), secondNodeMerger.getName())) {		// FIXME stronger e.g. referredOperation
 			return false;
 		}
 		Map<@NonNull Node, @NonNull NodeMerger> nestedFirst2second = new HashMap<>(first2second);
@@ -169,7 +169,7 @@ class Correlator
 			if (firstEdge.isExpression()) {
 				boolean gotIt = false;
 				for (@NonNull Edge secondEdge : residualSecondArgumentEdges) {
-					if (ClassUtil.safeEquals(firstEdge.getName(), secondEdge.getName())) {
+					if (Objects.equals(firstEdge.getName(), secondEdge.getName())) {
 						if (!correlateComputation(firstEdge.getEdgeSource(), regionMerger.getNodeMerger(secondEdge.getEdgeSource()), nestedFirst2second)) {
 							return false;
 						}

@@ -142,7 +142,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 
 
 	public @NonNull MappingPartitioner getMappingPartitioner(@NonNull MappingRegion region) {
-		return ClassUtil.nonNullState(region2mappingPartitioner.get(region));
+		return ClassUtil.requireNonNull(region2mappingPartitioner.get(region));
 	}
 
 	@Override

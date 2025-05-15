@@ -9,6 +9,7 @@
 
 package example1.target.util;
 
+import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -16,12 +17,15 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class TargetExportedLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
 {
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
@@ -35,7 +39,7 @@ public class TargetExportedLookupVisitor
 
 	public TargetExportedLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 		this.importer_0 = importer;
 	}

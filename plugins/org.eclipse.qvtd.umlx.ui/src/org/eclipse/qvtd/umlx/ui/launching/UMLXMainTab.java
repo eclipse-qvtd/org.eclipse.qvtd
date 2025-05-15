@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -133,7 +134,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 		List<@NonNull TxTypedModelNode> inputModels = new ArrayList<>();
 		List<@NonNull TxTypedModelNode> outputModels = new ArrayList<>();
 		for (@NonNull TxTypedModelNode typedModel : ClassUtil.nullFree(txDiagram.getOwnedTxTypedModelNodes())) {
-			if (ClassUtil.safeEquals(typedModel.getName(), directionName)) {
+			if (Objects.equals(typedModel.getName(), directionName)) {
 				gatherOutputModels(outputModels, typedModel);
 			}
 		}

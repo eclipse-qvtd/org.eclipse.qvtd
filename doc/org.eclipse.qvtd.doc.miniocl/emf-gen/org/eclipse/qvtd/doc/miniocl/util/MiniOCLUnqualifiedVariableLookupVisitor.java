@@ -48,7 +48,7 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
     
     public MiniOCLUnqualifiedVariableLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
-        this.executor = ClassUtil.nonNull(context.getExecutor());
+        this.executor = ClassUtil.requireNonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
     }
     
@@ -78,7 +78,7 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitExpressionInOCL(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull ExpressionInOCL element) {
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull InvalidValueException inner = ClassUtil.nonNullState((InvalidValueException)OclAnyUnsupportedOperation.INSTANCE.evaluate(executor, TypeId.OCL_INVALID, context));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull InvalidValueException inner = ClassUtil.requireNonNull((InvalidValueException)OclAnyUnsupportedOperation.INSTANCE.evaluate(executor, TypeId.OCL_INVALID, context));
         final /*@Thrown*/ boolean hasFinalResult = ((Env4CG)inner).hasFinalResult();
         /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
         if (hasFinalResult) {

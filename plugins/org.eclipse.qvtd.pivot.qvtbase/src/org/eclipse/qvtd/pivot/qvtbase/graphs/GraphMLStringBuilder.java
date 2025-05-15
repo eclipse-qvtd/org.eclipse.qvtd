@@ -139,7 +139,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	}
 
 	//	private @NonNull String getNodeName(@NonNull GraphNode node) {
-	//		return ClassUtil.nonNullState(node2name.get(node));
+	//		return ClassUtil.requireNonNull(node2name.get(node));
 	//	}
 
 	@Override

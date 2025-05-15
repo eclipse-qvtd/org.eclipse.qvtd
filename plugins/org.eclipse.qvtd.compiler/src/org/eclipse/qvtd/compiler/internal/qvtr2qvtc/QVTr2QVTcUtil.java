@@ -38,27 +38,27 @@ public class QVTr2QVTcUtil
 	public static @NonNull Iterable<@NonNull Variable> getRelationDomainBindsTo(@NonNull RelationDomain rDomain) {
 		List<@NonNull Variable> bindsTo = new ArrayList<>();
 		for (@NonNull Pattern rPattern : ClassUtil.nullFree(rDomain.getPattern())) {
-			getRelationDomainBindsTo(bindsTo, ClassUtil.nonNullState(((DomainPattern)rPattern).getTemplateExpression()));
+			getRelationDomainBindsTo(bindsTo, ClassUtil.requireNonNull(((DomainPattern)rPattern).getTemplateExpression()));
 		}
 		return bindsTo;
 	}
 	private static void getRelationDomainBindsTo(@NonNull List<@NonNull Variable> bindsTo, @NonNull OCLExpression oclExpression) {
 		if (oclExpression instanceof ObjectTemplateExp) {
 			ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)oclExpression;
-			bindsTo.add(ClassUtil.nonNullState(objectTemplateExp.getBindsTo()));
+			bindsTo.add(ClassUtil.requireNonNull(objectTemplateExp.getBindsTo()));
 			for (@NonNull PropertyTemplateItem part : ClassUtil.nullFree(objectTemplateExp.getPart())) {
-				getRelationDomainBindsTo(bindsTo, ClassUtil.nonNullState(part.getValue()));
+				getRelationDomainBindsTo(bindsTo, ClassUtil.requireNonNull(part.getValue()));
 			}
 		}
 		else if (oclExpression instanceof CollectionTemplateExp) {
 			CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)oclExpression;
-			bindsTo.add(ClassUtil.nonNullState(collectionTemplateExp.getBindsTo()));
+			bindsTo.add(ClassUtil.requireNonNull(collectionTemplateExp.getBindsTo()));
 			for (@NonNull OCLExpression member : ClassUtil.nullFree(collectionTemplateExp.getMember())) {
 				if (member instanceof VariableExp) {
-					bindsTo.add((Variable)ClassUtil.nonNullState(((VariableExp)member).getReferredVariable()));
+					bindsTo.add((Variable)ClassUtil.requireNonNull(((VariableExp)member).getReferredVariable()));
 				}
 				else {
-					getRelationDomainBindsTo(bindsTo, ClassUtil.nonNullState(member));
+					getRelationDomainBindsTo(bindsTo, ClassUtil.requireNonNull(member));
 				}
 			}
 		}

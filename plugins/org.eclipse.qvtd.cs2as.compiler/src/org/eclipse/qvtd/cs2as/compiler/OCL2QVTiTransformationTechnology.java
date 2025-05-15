@@ -42,18 +42,18 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		if (logObject instanceof Log) {
 			log = (Log)logObject;
 		}
-		String lookupSolverClassName = (String) ClassUtil.nonNullState(parametersMap.get("lookupSolverClassName"));
-		String lookupResultItfName = (String) ClassUtil.nonNullState(parametersMap.get("lookupResultItfName"));
-		String javaFolder = (String) ClassUtil.nonNullState(parametersMap.get("javaFolder"));
-		String javaPackage = (String) ClassUtil.nonNullState(parametersMap.get("javaPackage"));
+		String lookupSolverClassName = (String) ClassUtil.requireNonNull(parametersMap.get("lookupSolverClassName"));
+		String lookupResultItfName = (String) ClassUtil.requireNonNull(parametersMap.get("lookupResultItfName"));
+		String javaFolder = (String) ClassUtil.requireNonNull(parametersMap.get("javaFolder"));
+		String javaPackage = (String) ClassUtil.requireNonNull(parametersMap.get("javaPackage"));
 		Boolean debug = (Boolean) parametersMap.get("debug");
 		//
 		String oclFileURI = (String) parametersMap.get("oclFileURI");
 		@SuppressWarnings("unchecked")
 		Map<String, String> packageRenames = (Map<String, String>) parametersMap.get("packageRenames");
 		@SuppressWarnings("unchecked")
-		List<String> extendedOclFileURIs = (List<String>) ClassUtil.nonNullState(parametersMap.get("extendedOclFileURIs"));
-		String traceabilityPropName = (String) ClassUtil.nonNullState(parametersMap.get("traceabilityPropName"));
+		List<String> extendedOclFileURIs = (List<String>) ClassUtil.requireNonNull(parametersMap.get("extendedOclFileURIs"));
+		String traceabilityPropName = (String) ClassUtil.requireNonNull(parametersMap.get("traceabilityPropName"));
 		//
 		URI oclDocURI = URI.createURI(oclFileURI);
 		URI[] extendedOclDocURIs = new URI[extendedOclFileURIs.size()];

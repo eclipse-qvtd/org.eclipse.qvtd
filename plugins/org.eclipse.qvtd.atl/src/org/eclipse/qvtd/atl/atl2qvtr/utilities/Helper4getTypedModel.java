@@ -38,6 +38,6 @@ public class Helper4getTypedModel extends AbstractTernaryOperation
 		if (asProperty == null) {
 			asProperty = executor.getStandardLibrary().getOclInvalidProperty();
 		} */
-		return ClassUtil.nonNullState(relation.getTransformation().getModelParameter().get(0));
+		return ClassUtil.requireNonNull(relation.getTransformation().getModelParameter().get(0));
 	}
 }

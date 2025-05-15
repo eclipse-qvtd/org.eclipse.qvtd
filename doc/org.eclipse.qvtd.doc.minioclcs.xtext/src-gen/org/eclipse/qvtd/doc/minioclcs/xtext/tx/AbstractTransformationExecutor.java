@@ -52,12 +52,12 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 			throws ReflectiveOperationException {
 		super(environmentFactory.getCompleteEnvironment());
 		this.environmentFactory = environmentFactory;
-		transformer = ClassUtil.nonNullState(txConstructor.newInstance(this));
+		transformer = ClassUtil.requireNonNull(txConstructor.newInstance(this));
 	}
 
 	protected AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass)
 			throws ReflectiveOperationException {
-		this(environmentFactory, ClassUtil.nonNullState(txClass.getConstructor(TransformationExecutor.class)));
+		this(environmentFactory, ClassUtil.requireNonNull(txClass.getConstructor(TransformationExecutor.class)));
 	}
 
 	@Override

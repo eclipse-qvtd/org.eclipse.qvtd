@@ -109,7 +109,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	protected @NonNull CGPackage createCGPackage() {
 		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
-		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
+		CGTransformation cgTransformation = (CGTransformation) ClassUtil.requireNonNull(transformation.accept(pivot2CGVisitor));
 		CGPackage cgPackage = null;
 		for (org.eclipse.ocl.pivot.Package asPackage = transformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
 			CGPackage cgPackage2 = createCGPackage(asPackage);
@@ -276,7 +276,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
 		File saveFile = new File(savePath);
-		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveFile);
+		saveSourceFiles(ClassUtil.requireNonNull(cgPackage), saveFile);
 		return saveFile;
 	}
 

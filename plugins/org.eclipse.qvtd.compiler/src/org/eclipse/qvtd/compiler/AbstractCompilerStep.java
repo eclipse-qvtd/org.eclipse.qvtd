@@ -33,7 +33,7 @@ public abstract class AbstractCompilerStep implements CompilerStep
 		this.compilerChain = compilerChain;
 		this.environmentFactory = compilerChain.getEnvironmentFactory();
 		this.stepName = stepName;
-		this.defaultFileExtension = ClassUtil.nonNullState(AbstractCompilerChain.getDefaultFileExtension(stepName));
+		this.defaultFileExtension = ClassUtil.requireNonNull(AbstractCompilerChain.getDefaultFileExtension(stepName));
 	}
 
 	@Override

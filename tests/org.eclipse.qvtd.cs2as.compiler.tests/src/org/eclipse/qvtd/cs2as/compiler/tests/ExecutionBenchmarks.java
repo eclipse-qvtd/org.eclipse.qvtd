@@ -159,7 +159,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	//			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 	//
 	//			Class<? extends TransformationExecutor> txClass = classescs2as_qvtm_qvtias_Manual.class;
-	//			Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+	//			Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.requireNonNull(txClass.getConstructor(Evaluator.class));
 	//
 	//			trackExample_CG(myQVT, txConstructor, baseURI, "model1", results);
 	//			trackExample_CG(myQVT, txConstructor, baseURI, "model2", results);
@@ -250,10 +250,10 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		TypedModelInstance outputTypedModelInstance = modelsManager.getTypedModelInstance("rightAS");
 
 		ResourceSet rSet = qvt.getResourceSet();
-		Resource inputResource = ClassUtil.nonNullState(rSet.getResource(csModelURI, true));
+		Resource inputResource = ClassUtil.requireNonNull(rSet.getResource(csModelURI, true));
 		inputTypedModelInstance.addInputResource(inputResource);
 		boolean success = tx.run();
-		Resource outputResource = ClassUtil.nonNullState(rSet.createResource(asModelURI));
+		Resource outputResource = ClassUtil.requireNonNull(rSet.createResource(asModelURI));
 		outputTypedModelInstance.addOutputResource(outputResource);
 		modelsManager.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		assertTrue(success);
@@ -274,10 +274,10 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		TypedModelInstance inputTypedModelInstance = modelsManager.getTypedModelInstance("leftCS");
 		TypedModelInstance outputTypedModelInstance = modelsManager.getTypedModelInstance("rightAS");
 		ResourceSet rSet = qvt.getResourceSet();
-		Resource inputResource = ClassUtil.nonNullState(rSet.getResource(csModelURI, true));
+		Resource inputResource = ClassUtil.requireNonNull(rSet.getResource(csModelURI, true));
 		inputTypedModelInstance.addInputResource(inputResource);
 		boolean success = testEvaluator.execute(null);
-		Resource outputResource = ClassUtil.nonNullState(rSet.createResource(asModelURI));
+		Resource outputResource = ClassUtil.requireNonNull(rSet.createResource(asModelURI));
 		outputTypedModelInstance.addOutputResource(outputResource);
 		modelsManager.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		testEvaluator.dispose();

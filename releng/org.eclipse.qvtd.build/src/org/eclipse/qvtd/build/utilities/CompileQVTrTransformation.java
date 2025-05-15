@@ -143,7 +143,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	 * the same as the bundle name. Override when this assumption is unjustified.
 	 */
 	protected @NonNull String getTestBundleName() {
-		return ClassUtil.nonNullState(getClass().getPackage().getName());
+		return ClassUtil.requireNonNull(getClass().getPackage().getName());
 	}
 	protected @NonNull URI getTestBundleURI() {
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {

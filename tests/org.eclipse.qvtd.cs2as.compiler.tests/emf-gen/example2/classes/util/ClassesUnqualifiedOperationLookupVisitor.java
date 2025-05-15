@@ -59,7 +59,7 @@ extends AbstractClassesCommonLookupVisitor
 
 	public ClassesUnqualifiedOperationLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
 
@@ -127,7 +127,7 @@ extends AbstractClassesCommonLookupVisitor
 					}
 				};
 				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_closure_0, oclAsSet, ACC_closure_0);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue closure = ClassUtil.requireNonNull((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
 				/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_Operation);
 				@Nullable Iterator<Object> ITERATOR__1_0 = closure.iterator();
 				/*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;

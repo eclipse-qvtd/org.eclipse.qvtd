@@ -20,7 +20,6 @@ package	org.eclipse.qvtd.pivot.qvtimperative.model;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -49,6 +48,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
@@ -261,7 +261,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
 	private QVTimperativeLibrary(@NonNull String asURI, @NonNull Model libraryModel) {
-		super(Objects.requireNonNull(URI.createURI(asURI)), OCLASResourceFactory.getInstance());
+		super(ClassUtil.requireNonNull(URI.createURI(asURI)), OCLASResourceFactory.getInstance());
 		assert PivotUtilInternal.isASURI(uri);
 		getContents().add(libraryModel);
 	}

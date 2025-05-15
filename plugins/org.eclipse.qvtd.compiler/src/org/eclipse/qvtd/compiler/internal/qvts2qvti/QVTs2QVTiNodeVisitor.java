@@ -446,7 +446,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @NonNull NumericLiteralExp visitNumericLiteralNode(@NonNull NumericLiteralNode node) {
-		Number numericValue = ClassUtil.nonNullState(node.getNumericValue());
+		Number numericValue = ClassUtil.requireNonNull(node.getNumericValue());
 		if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
 			return helper.createIntegerLiteralExp(numericValue);
 		}
@@ -501,7 +501,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @NonNull OCLExpression visitStringLiteralNode(@NonNull StringLiteralNode node) {
-		return helper.createStringLiteralExp(ClassUtil.nonNullState(node.getStringValue()));
+		return helper.createStringLiteralExp(ClassUtil.requireNonNull(node.getStringValue()));
 	}
 
 	@Override
@@ -511,6 +511,6 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @NonNull OCLExpression visitTypeLiteralNode(@NonNull TypeLiteralNode node) {
-		return helper.createTypeExp(ClassUtil.nonNullState(node.getTypeValue()));
+		return helper.createTypeExp(ClassUtil.requireNonNull(node.getTypeValue()));
 	}
 }

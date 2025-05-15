@@ -130,7 +130,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull BottomPattern getBottomPattern(@NonNull Area area) {
-		return ClassUtil.nonNullState(area.getBottomPattern());
+		return ClassUtil.requireNonNull(area.getBottomPattern());
 	}
 
 	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
@@ -165,7 +165,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull GuardPattern getGuardPattern(@NonNull Area area) {
-		return ClassUtil.nonNullState(area.getGuardPattern());
+		return ClassUtil.requireNonNull(area.getGuardPattern());
 	}
 
 	public static @NonNull Iterable<@NonNull Assignment> getOwnedAssignments(@NonNull BottomPattern bottomPattern) {
@@ -185,29 +185,29 @@ public class QVTcoreUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull OCLExpression getSlotExpression(@NonNull NavigationAssignment asNavigationAssignment) {
-		return ClassUtil.nonNullState(asNavigationAssignment.getSlotExpression());
+		return ClassUtil.requireNonNull(asNavigationAssignment.getSlotExpression());
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
 		if (asNavigationAssignment instanceof PropertyAssignment) {
-			return ClassUtil.nonNullState(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
+			return ClassUtil.requireNonNull(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
 		}
 		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
-			Property referredProperty = ClassUtil.nonNullState(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
+			Property referredProperty = ClassUtil.requireNonNull(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
 			if (referredProperty.eIsProxy() ) {
 				throw new IllegalStateException("Unresolved target property proxy '" + EcoreUtil.getURI(referredProperty) + "' at '" + EcoreUtil.getURI(asNavigationAssignment) + "'");
 			}
-			return ClassUtil.nonNullState(referredProperty.getOpposite());
+			return ClassUtil.requireNonNull(referredProperty.getOpposite());
 		}
 		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
 	}
 
 	public static @NonNull VariableDeclaration getTargetVariable(@NonNull VariableAssignment variableAssignment) {
-		return ClassUtil.nonNullState(variableAssignment.getTargetVariable());
+		return ClassUtil.requireNonNull(variableAssignment.getTargetVariable());
 	}
 
 	public static @NonNull OCLExpression getValue(@NonNull Assignment asAssignment) {
-		return ClassUtil.nonNullState(asAssignment.getValue());
+		return ClassUtil.requireNonNull(asAssignment.getValue());
 	}
 
 	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

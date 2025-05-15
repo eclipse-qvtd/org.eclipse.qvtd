@@ -162,7 +162,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	//	private @NonNull String getNodeName(@NonNull GraphNode node) {
-	//		return ClassUtil.nonNullState(node2name.get(node));
+	//		return ClassUtil.requireNonNull(node2name.get(node));
 	//	}
 
 	public void newLine() {

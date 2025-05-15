@@ -49,7 +49,7 @@ public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttrib
 				if (argumentTypedModel != null) {
 					for (EObject eObject = csRoundBracketedClause; eObject != null; eObject = eObject.eContainer()) {
 						if (eObject instanceof RelationCS) {
-							Relation invokingRelation = ClassUtil.nonNullState(PivotUtil.getPivot(Relation.class, (RelationCS)eObject));
+							Relation invokingRelation = ClassUtil.requireNonNull(PivotUtil.getPivot(Relation.class, (RelationCS)eObject));
 							RelationDomain asRelationDomain = QVTrelationUtil.basicGetRelationDomain(invokingRelation, argumentTypedModel);
 							if (asRelationDomain != null) {
 								for (@NonNull DomainPattern asPattern : QVTrelationUtil.getOwnedPatterns(asRelationDomain)) {

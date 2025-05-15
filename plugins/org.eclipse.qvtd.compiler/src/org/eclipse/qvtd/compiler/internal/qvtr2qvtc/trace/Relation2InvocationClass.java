@@ -69,7 +69,7 @@ public class Relation2InvocationClass extends AbstractRelation2MiddleType
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getInvocationInterface() {
-		return ClassUtil.nonNullState(relation2invocationInterface).getMiddleClass();
+		return ClassUtil.requireNonNull(relation2invocationInterface).getMiddleClass();
 	}
 
 	public @NonNull Relation2MiddleType getRelation2InvocationInterface() {

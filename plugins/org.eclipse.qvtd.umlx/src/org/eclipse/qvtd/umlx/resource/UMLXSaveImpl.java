@@ -58,7 +58,7 @@ public final class UMLXSaveImpl extends XMISaveImpl
 	 */
 	@Override
 	protected void init(XMLResource resource, Map<?, ?> options) {
-		XMLResource asResource = ClassUtil.nonNullState(resource);
+		XMLResource asResource = ClassUtil.requireNonNull(resource);
 		Map<@NonNull String, @Nullable Object> saveOptions = new HashMap<>();
 		if (options != null) {
 			for (Object key : options.keySet()) {

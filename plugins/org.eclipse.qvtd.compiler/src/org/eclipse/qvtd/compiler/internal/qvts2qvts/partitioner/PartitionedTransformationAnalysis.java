@@ -132,11 +132,11 @@ public class PartitionedTransformationAnalysis extends AbstractPartialRegionsAna
 	}
 
 	public @NonNull AbstractPartitionAnalysis<?> getPartitionAnalysis(@NonNull Partition partition) {
-		return ClassUtil.nonNullState(partition2partitionAnalysis.get(partition));
+		return ClassUtil.requireNonNull(partition2partitionAnalysis.get(partition));
 	}
 
 	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
-		return ClassUtil.nonNullState(rootPartitionAnalysis);
+		return ClassUtil.requireNonNull(rootPartitionAnalysis);
 	}
 
 	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {

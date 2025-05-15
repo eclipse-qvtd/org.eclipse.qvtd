@@ -130,7 +130,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
 		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
-		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		Resource inputResource = ClassUtil.requireNonNull(resourceSet.getResource(modelURI, true));
 		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
 		typedModelInstance.addInputResource(inputResource);
 		return inputResource;
@@ -145,7 +145,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 			resourceSet = environmentFactory.getResourceSet();
 		}
 		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
-		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		Resource outputResource = ClassUtil.requireNonNull(resourceSet.createResource(modelURI));
 		typedModelInstance.addOutputResource(outputResource);
 		return outputResource;
 	}
@@ -187,7 +187,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 	//			ImperativeTransformation transformation = entryPointsAnalysis.getTransformation();
 	//			initEntryPoint(QVTimperativeUtil.getDefaultEntryPoint(transformation));
 	//		}
-	//		return ClassUtil.nonNullState(entryPointAnalysis);
+	//		return ClassUtil.requireNonNull(entryPointAnalysis);
 	//	}
 
 	public @Nullable Map<@NonNull Object, Object> getExtentOpposites() {

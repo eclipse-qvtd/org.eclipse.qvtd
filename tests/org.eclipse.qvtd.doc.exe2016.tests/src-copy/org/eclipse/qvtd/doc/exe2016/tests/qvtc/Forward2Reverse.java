@@ -249,8 +249,8 @@ public class Forward2Reverse extends AbstractTransformer
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList list = element1.getList();
 			@SuppressWarnings("null")
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element source_0 = element1.getSource();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Element2Element_element1.get(source_0));
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull List2List middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_List2List_list1.get(list));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1 = ClassUtil.requireNonNull (OPPOSITE_OF_Element2Element_element1.get(source_0));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull List2List middle1_0 = ClassUtil.requireNonNull (OPPOSITE_OF_List2List_list1.get(list));
 			@SuppressWarnings("null")
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String name_0 = element1.getName();
 			final /*@Thrown*/ boolean symbol_0 = name.equals(name_0);
@@ -317,10 +317,10 @@ public class Forward2Reverse extends AbstractTransformer
 	 */
 	protected boolean MAP_m_Element2Element_Element_46p3(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element forwardElement)  {
 		try {
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Element2Element_element1.get(forwardElement));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1 = ClassUtil.requireNonNull (OPPOSITE_OF_Element2Element_element1.get(forwardElement));
 			@SuppressWarnings("null")
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element source_0 = forwardElement.getSource();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Element2Element_element1.get(source_0));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1_0 = ClassUtil.requireNonNull (OPPOSITE_OF_Element2Element_element1.get(source_0));
 			@SuppressWarnings("null")
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element element2 = middle1.getElement2();
 			@SuppressWarnings("null")
@@ -411,11 +411,11 @@ public class Forward2Reverse extends AbstractTransformer
 	protected boolean MAP_m_List2List_DoublyLinkedList_46p2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList_0)  {
 		try {
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable Element headElement = forwardList_0.getHeadElement();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull List2List middle1 = ClassUtil.nonNullState (OPPOSITE_OF_List2List_list1.get(forwardList_0));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull List2List middle1 = ClassUtil.requireNonNull (OPPOSITE_OF_List2List_list1.get(forwardList_0));
 			if (headElement == null) {
 				throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/exe2016tests/qvtc/forward2reverse/1.0/DoublyLinkList\'::Element::middle1\'");
 			}
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Element2Element_element1.get(headElement));
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.@org.eclipse.jdt.annotation.NonNull Element2Element middle1_0 = ClassUtil.requireNonNull (OPPOSITE_OF_Element2Element_element1.get(headElement));
 			@SuppressWarnings("null")
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList list2 = middle1.getList2();
 			@SuppressWarnings("null")

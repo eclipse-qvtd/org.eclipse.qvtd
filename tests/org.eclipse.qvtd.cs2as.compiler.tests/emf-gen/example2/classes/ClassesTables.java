@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2021 Willink Transformations and others.
+ * Copyright (c) 2014, 2025 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -11,7 +11,6 @@
  * This code is 100% auto-generated
  * from:
  *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/Classes.ecore
- *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/EnvExample2.ecore
  * using:
  *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/Classes.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -40,8 +39,7 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-
-import example2.classes.lookup.EnvironmentPackage;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 
 /**
  * ClassesTables provides the dispatch tables for the classes for use by the OCL dispatcher.
@@ -80,17 +78,17 @@ public class ClassesTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyCallExp = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("PropertyCallExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Root = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedElement = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("TypedElement", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_OperationCallExp);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_PropertyCallExp);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TypedElement = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_TypedElement);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Argument = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Argument);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_CallExp = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_CallExp);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Operation);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Package);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Parameter);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Property);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_Class, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_OperationCallExp, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_PropertyCallExp, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TypedElement = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_TypedElement, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Argument = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Argument, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_CallExp = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_CallExp, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Class, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Operation, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Package, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Parameter, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Property, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -301,7 +299,6 @@ public class ClassesTables extends AbstractTables
 			Fragments.init();
 		}
 
-
 		static {
 			Init.initEnd();
 		}
@@ -362,7 +359,6 @@ public class ClassesTables extends AbstractTables
 		public static final @NonNull ExecutorProperty _Class__TypedElement__type = new ExecutorPropertyWithImplementation("TypedElement", Types._Class, 5, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.TYPED_ELEMENT__TYPE));
 
 		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(ClassesPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
-		public static final @NonNull ExecutorProperty _NamedElement__LookupEnvironment__namedElements = new ExecutorPropertyWithImplementation("LookupEnvironment", Types._NamedElement, 1, new EcoreLibraryOppositeProperty(EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS));
 
 		public static final @NonNull ExecutorProperty _Operation__ownedExpressions = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS, Types._Operation, 0);
 		public static final @NonNull ExecutorProperty _Operation__ownedParameters = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS, Types._Operation, 1);
@@ -626,10 +622,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Argument__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -656,10 +657,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -688,10 +694,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Class__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -717,10 +728,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Element__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -747,10 +763,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -777,10 +798,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -808,10 +834,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Operation__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -840,10 +871,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -873,10 +909,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Package__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -904,10 +945,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -935,10 +981,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Property__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -967,10 +1018,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -998,10 +1054,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Root__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -1028,10 +1089,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -1057,10 +1123,15 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */

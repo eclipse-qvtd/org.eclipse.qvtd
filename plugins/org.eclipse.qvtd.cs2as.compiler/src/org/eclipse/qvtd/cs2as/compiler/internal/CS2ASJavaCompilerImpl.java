@@ -178,7 +178,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		public Boolean visitCGLookupCallExp(@NonNull CGLookupCallExp cgCall) {
 			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
 
-			CGValuedElement cgSource = ClassUtil.nonNullState(cgCall.getSource()); // FIXME to skip env() call. Remove env() call
+			CGValuedElement cgSource = ClassUtil.requireNonNull(cgCall.getSource()); // FIXME to skip env() call. Remove env() call
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgCall);
 			if (!js.appendLocalStatements(cgSource)) {
 				return false;
@@ -199,7 +199,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 			js.appendClassReference(null, resultClassName);
 			js.append("<");
-			js.appendClassReference(null, context.getUnboxedDescriptor(ClassUtil.nonNullState(cgCall.getTypeId().getElementId())));
+			js.appendClassReference(null, context.getUnboxedDescriptor(ClassUtil.requireNonNull(cgCall.getTypeId().getElementId())));
 			js.append(">");
 			js.append(" ");
 			js.append(resultSymbol);
@@ -218,7 +218,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				CGValuedElement cgArgument = cgArguments.get(i);
 				Parameter pParameter = pParameters.get(i);
 				CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-				UnboxedDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.nonNullState(cgTypeId.getElementId()));
+				UnboxedDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.requireNonNull(cgTypeId.getElementId()));
 				CGValuedElement argument = getExpression(cgArgument);
 				js.appendReferenceTo(parameterTypeDescriptor, argument);
 			}
@@ -508,7 +508,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 		File explicitClassPath = new File(new File(savePath).getParentFile(), JavaFileUtil.TEST_BIN_FOLDER_NAME);
 		explicitClassPath.mkdir();
-		return ClassUtil.nonNullState(compileTransformation(explicitClassPath, cg, params.getClasspath(), params.getClassLoader()));
+		return ClassUtil.requireNonNull(compileTransformation(explicitClassPath, cg, params.getClasspath(), params.getClassLoader()));
 	}
 
 	public void setLog(@Nullable Log log) {

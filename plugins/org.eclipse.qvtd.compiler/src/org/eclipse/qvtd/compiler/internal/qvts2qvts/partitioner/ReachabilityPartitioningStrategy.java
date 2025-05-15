@@ -100,7 +100,7 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 			super(strategy.mappingPartitioner);
 			this.strategy = strategy;
 			strategy.setCurrentPartitionFactory(this);
-			this.name = computeName(ClassUtil.nonNullState(reachabilityForest.getDisambiguator()));
+			this.name = computeName(ClassUtil.requireNonNull(reachabilityForest.getDisambiguator()));
 			this.reachabilityForest = reachabilityForest;
 			this.headNodes = headNodes;
 			this.novelNodes = novelNodes;
@@ -1050,12 +1050,12 @@ public class ReachabilityPartitioningStrategy extends AbstractPartitioningStrate
 
 	private @NonNull AbstractReachabilityPartitionFactory getPartitionFactory(@NonNull Edge edge) {
 		AbstractReachabilityPartitionFactory partitionFactory = edge2partitionFactory.get(edge);
-		return ClassUtil.nonNullState(partitionFactory);
+		return ClassUtil.requireNonNull(partitionFactory);
 	}
 
 	private @NonNull AbstractReachabilityPartitionFactory getPartitionFactory(@NonNull Node node) {
 		AbstractReachabilityPartitionFactory partitionFactory = node2partitionFactory.get(node);
-		return ClassUtil.nonNullState(partitionFactory);
+		return ClassUtil.requireNonNull(partitionFactory);
 	}
 
 	public @NonNull Region getRegion() {

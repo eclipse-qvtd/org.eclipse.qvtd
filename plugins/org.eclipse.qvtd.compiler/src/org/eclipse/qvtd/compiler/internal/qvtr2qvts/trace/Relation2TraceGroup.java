@@ -181,7 +181,7 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 	}
 
 	public @NonNull Relation2DispatchClass getRule2DispatchClass() {
-		return ClassUtil.nonNullState(relation2dispatchClass);
+		return ClassUtil.requireNonNull(relation2dispatchClass);
 		/*		if (relation2invocationClass != null) {
 			return relation2invocationClass;
 		}
@@ -206,7 +206,7 @@ public class Relation2TraceGroup extends Rule2TraceGroup
 	}
 
 	public @NonNull Relation2TraceClass getRule2TraceClass() {
-		return ClassUtil.nonNullState(relation2traceClass);
+		return ClassUtil.requireNonNull(relation2traceClass);
 	}
 
 	public @NonNull Relation2MiddleType getRule2TraceInterface() {

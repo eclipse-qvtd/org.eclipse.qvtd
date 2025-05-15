@@ -217,7 +217,7 @@ public class XtextCompilerUtil extends CompilerUtil
 
 	// FIXME move following clones to a Util class
 	private static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
-		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, null));
+		XtextResource xtextResource = ClassUtil.requireNonNull((XtextResource) resourceSet.createResource(outputURI, null));
 		ocl.as2cs(asResource, (CSResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);

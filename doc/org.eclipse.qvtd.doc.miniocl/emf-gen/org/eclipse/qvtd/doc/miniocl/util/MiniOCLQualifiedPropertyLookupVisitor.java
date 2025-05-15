@@ -38,7 +38,7 @@ public class MiniOCLQualifiedPropertyLookupVisitor
     
     public MiniOCLQualifiedPropertyLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
-        this.executor = ClassUtil.nonNull(context.getExecutor());
+        this.executor = ClassUtil.requireNonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
     }
     

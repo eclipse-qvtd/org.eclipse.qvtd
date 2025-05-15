@@ -66,19 +66,19 @@ public class QVTtemplateUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull OCLExpression getOwnedValue(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
-		return ClassUtil.nonNullState(rPropertyTemplateItem.getValue());
+		return ClassUtil.requireNonNull(rPropertyTemplateItem.getValue());
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getReferredClass(@NonNull ObjectTemplateExp rObjectTemplateExp) {
-		return ClassUtil.nonNullState(rObjectTemplateExp.getReferredClass());
+		return ClassUtil.requireNonNull(rObjectTemplateExp.getReferredClass());
 	}
 
 	public static @NonNull CollectionType getReferredCollectionType(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
-		return ClassUtil.nonNullState(rCollectionTemplateExp.getReferredCollectionType());
+		return ClassUtil.requireNonNull(rCollectionTemplateExp.getReferredCollectionType());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
-		Property property = ClassUtil.nonNullState(rPropertyTemplateItem.getReferredProperty());
+		Property property = ClassUtil.requireNonNull(rPropertyTemplateItem.getReferredProperty());
 		if (rPropertyTemplateItem.isIsOpposite()) {
 			property = getOpposite(property);
 		}
@@ -86,6 +86,6 @@ public class QVTtemplateUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Variable getRest(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
-		return ClassUtil.nonNullState(rCollectionTemplateExp.getRest());
+		return ClassUtil.requireNonNull(rCollectionTemplateExp.getRest());
 	}
 }

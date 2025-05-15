@@ -52,7 +52,7 @@ public class TypedModelConfiguration //implements Nameable
 	}
 
 	public @NonNull TypedModel getTypedModel() {
-		return ClassUtil.nonNullState(typedModel);
+		return ClassUtil.requireNonNull(typedModel);
 	}
 
 	public boolean isInput() {

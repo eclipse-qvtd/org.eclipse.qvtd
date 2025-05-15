@@ -51,7 +51,7 @@ public class MiniOCLExportedPropertyLookupVisitor
 
     public MiniOCLExportedPropertyLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
         super(context);
-        this.executor = ClassUtil.nonNull(context.getExecutor());
+        this.executor = ClassUtil.requireNonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
         this.importer = importer;
     }
@@ -95,7 +95,7 @@ public class MiniOCLExportedPropertyLookupVisitor
             }
         };
         final @NonNull  ExecutorSingleIterationManager MGR_superClasses_1 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_superClasses_1, oclAsSet, ACC_superClasses_1);
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue superClasses = ClassUtil.nonNullState((SetValue)IMPL_superClasses_1.evaluateIteration(MGR_superClasses_1));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue superClasses = ClassUtil.requireNonNull((SetValue)IMPL_superClasses_1.evaluateIteration(MGR_superClasses_1));
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ownedProperties = element.getOwnedProperties();
         @SuppressWarnings("null")

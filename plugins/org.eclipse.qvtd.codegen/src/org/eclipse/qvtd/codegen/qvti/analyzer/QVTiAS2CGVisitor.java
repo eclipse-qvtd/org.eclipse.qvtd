@@ -242,8 +242,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		 * the then-expression of an if, or the in-expression of a let.
 		 */
 		private void appendCheckedLetVariable(@NonNull VariableDeclaration asVariable, @NonNull OCLExpression asInit) {
-			Type sourceType = ClassUtil.nonNullState(asInit.getType());
-			Type targetType = ClassUtil.nonNullState(asVariable.getType());
+			Type sourceType = ClassUtil.requireNonNull(asInit.getType());
+			Type targetType = ClassUtil.requireNonNull(asVariable.getType());
 			boolean needsNullTest = !asInit.isIsRequired() && asVariable.isIsRequired();
 			boolean needsTypeCheck = !sourceType.conformsTo(standardLibrary, targetType);
 			//
@@ -481,8 +481,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	protected @NonNull CGValuedElement generateOppositePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull OppositePropertyCallExp asOppositePropertyCallExp) {
-		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
-		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
+		Property asOppositeProperty = ClassUtil.requireNonNull(asOppositePropertyCallExp.getReferredProperty());
+		Property asProperty = ClassUtil.requireNonNull(asOppositeProperty.getOpposite());
 		if (asOppositeProperty.isIsComposite()) {
 			return super.generateOppositePropertyCallExp(cgSource, asOppositePropertyCallExp);
 		}
@@ -505,7 +505,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	protected @NonNull CGValuedElement generatePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull PropertyCallExp element) {
-		Property asProperty = ClassUtil.nonNullModel(element.getReferredProperty());
+		Property asProperty = ClassUtil.requireNonNull(element.getReferredProperty());
 		boolean isRequired = asProperty.isIsRequired();
 		org.eclipse.ocl.pivot.Class asSourceClass = asProperty.getOwningClass();
 		boolean isThis = false;
@@ -577,7 +577,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	protected @NonNull String getFunctionInstanceName(@NonNull CGFunction cgFunction) {
-		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+		JavaLocalContext<@NonNull ?> functionContext = ClassUtil.requireNonNull(globalContext.getLocalContext(cgFunction));
 		Object instanceKey = cgFunction.getBody();
 		if (instanceKey == null) {
 			instanceKey = QVTiCGUtil.getAST(cgFunction).getImplementationClass();
@@ -636,8 +636,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
 			setAst(cgVariable, pNewStatement);
-			TypedModel asTypedModel = ClassUtil.nonNullState(pNewStatement.getReferredTypedModel());
-			CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+			TypedModel asTypedModel = ClassUtil.requireNonNull(pNewStatement.getReferredTypedModel());
+			CGTypedModel cgTypedModel = ClassUtil.requireNonNull(analyzer.getTypedModel(asTypedModel));
 			cgVariable.setTypedModel(cgTypedModel);
 			variablesStack.putVariable(pNewStatement, cgVariable);
 		}
@@ -646,12 +646,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {
 		if (pVariable instanceof GuardParameter) {
-			TypedModel referredTypedModel = ClassUtil.nonNullState(((GuardParameter)pVariable).getReferredTypedModel());
-			return ClassUtil.nonNullState(analyzer.getTypedModel(referredTypedModel));
+			TypedModel referredTypedModel = ClassUtil.requireNonNull(((GuardParameter)pVariable).getReferredTypedModel());
+			return ClassUtil.requireNonNull(analyzer.getTypedModel(referredTypedModel));
 		}
 		Transformation pTransformation = QVTimperativeUtil.getContainingTransformation(pVariable);
-		TypedModel asTypedModel = ClassUtil.nonNullState(pTransformation.getModelParameter(null));
-		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+		TypedModel asTypedModel = ClassUtil.requireNonNull(pTransformation.getModelParameter(null));
+		return ClassUtil.requireNonNull(analyzer.getTypedModel(asTypedModel));
 	}
 
 	@Override
@@ -706,7 +706,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert asVariable != null;
 		CGVariable cgVariable = getVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
+		setAst(cgVariableExp, ClassUtil.requireNonNull(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
@@ -845,7 +845,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgUncastVariableExp1.setRequired(cgUncastVariable.isRequired());
 			cgIsKindOfExp.setSource(cgUncastVariableExp1);
 
-			CGExecutorType cgExecutorType = analyzer.createExecutorType(ClassUtil.nonNullState(asVariable.getType()));
+			CGExecutorType cgExecutorType = analyzer.createExecutorType(ClassUtil.requireNonNull(asVariable.getType()));
 			cgIsKindOfExp.setExecutorType(cgExecutorType);
 			cgPredicate.setCondition(cgIsKindOfExp);
 			cgOuterLetExp.setIn(cgPredicate);
@@ -1063,7 +1063,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert asVariable != null;
 		CGVariable cgVariable = getVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
+		setAst(cgVariableExp, ClassUtil.requireNonNull(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
@@ -1116,7 +1116,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert asVariable != null;
 		CGVariable cgVariable = getVariable(asVariable);
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
-		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
+		setAst(cgVariableExp, ClassUtil.requireNonNull(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
 		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
@@ -1214,7 +1214,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
 			CGRealizedVariable CGRealizedVariable = getBodyBuilder().addRealizedVariable(asNewStatement);
-			CGExecutorType cgExecutorType = context.createExecutorType(ClassUtil.nonNullState(asNewStatement.getType()));
+			CGExecutorType cgExecutorType = context.createExecutorType(ClassUtil.requireNonNull(asNewStatement.getType()));
 			CGRealizedVariable.setExecutorType(cgExecutorType);
 			cgExecutorType.setTypeId(codeGenerator.getAnalyzer().getTypeId(asNewStatement.getTypeId()));			// FIXME promote
 			List<@NonNull NewStatementPart> asParts = new ArrayList<>(ClassUtil.nullFree(asNewStatement.getOwnedParts()));

@@ -132,7 +132,7 @@ public class TypedModelsConfiguration
 	}
 
 	public @NonNull TypedModelConfiguration getTypedModelConfiguration(@NonNull TypedModel typedModel) {
-		return ClassUtil.nonNullState(name2typedModelConfigurations.get(typedModel.getName()));
+		return ClassUtil.requireNonNull(name2typedModelConfigurations.get(typedModel.getName()));
 	}
 
 	public @NonNull Iterable<@NonNull TypedModel> getUnusedTypedModels() {

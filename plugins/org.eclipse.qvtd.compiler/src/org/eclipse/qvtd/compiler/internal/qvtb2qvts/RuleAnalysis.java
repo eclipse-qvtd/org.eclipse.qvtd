@@ -152,7 +152,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
 		Node node = region.getNode(typedElement);
 		if (node == null) {
-			node = createUnknownNode(ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = createUnknownNode(ClassUtil.requireNonNull(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;

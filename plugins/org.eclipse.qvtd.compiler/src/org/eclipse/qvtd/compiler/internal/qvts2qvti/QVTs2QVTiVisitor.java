@@ -393,7 +393,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	protected void gatherReservedPackageNames(@NonNull Set<@NonNull String> reservedNames, @NonNull Iterable<org.eclipse.ocl.pivot.Package> asPackages) {
 		for (org.eclipse.ocl.pivot.Package asPackage : asPackages) {
-			reservedNames.add(ClassUtil.nonNullState(asPackage.getName()));
+			reservedNames.add(ClassUtil.requireNonNull(asPackage.getName()));
 			gatherReservedClassNames(reservedNames, asPackage.getOwnedClasses());
 			gatherReservedPackageNames(reservedNames, asPackage.getOwnedPackages());
 		}
@@ -401,7 +401,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	protected void gatherReservedClassNames(@NonNull Set<@NonNull String> reservedNames, @NonNull Iterable<org.eclipse.ocl.pivot.Class> asClasses) {
 		for (org.eclipse.ocl.pivot.Class asClass : asClasses) {
-			reservedNames.add(ClassUtil.nonNullState(asClass.getName()));
+			reservedNames.add(ClassUtil.requireNonNull(asClass.getName()));
 		}
 	}
 
@@ -431,7 +431,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	public @NonNull Function getKeyFunction(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum2keyFunction.get(classDatum));
+		return ClassUtil.requireNonNull(classDatum2keyFunction.get(classDatum));
 	}
 
 	public @NonNull MetamodelManager getMetamodelManager() {
@@ -476,16 +476,16 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			reservedNames = reservedNames2 = new HashSet<>();
 			org.eclipse.ocl.pivot.Package standardLibraryPackage = getStandardLibrary().getOclAnyType().getOwningPackage();
 			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
-			reservedNames2.add(ClassUtil.nonNull(asTransformation.getName()));
+			reservedNames2.add(ClassUtil.requireNonNull(asTransformation.getName()));
 			for (TypedModel typedModel : asTransformation.getModelParameter()) {
-				reservedNames2.add(ClassUtil.nonNullState(typedModel.getName()));
+				reservedNames2.add(ClassUtil.requireNonNull(typedModel.getName()));
 				gatherReservedPackageNames(reservedNames2, typedModel.getUsedPackage());
 			}
 			for (Operation operation : asTransformation.getOwnedOperations()) {
-				reservedNames2.add(ClassUtil.nonNull(operation.getName()));
+				reservedNames2.add(ClassUtil.requireNonNull(operation.getName()));
 			}
 			for (Property property : asTransformation.getOwnedProperties()) {
-				reservedNames2.add(ClassUtil.nonNull(property.getName()));
+				reservedNames2.add(ClassUtil.requireNonNull(property.getName()));
 			}
 		}
 		return reservedNames2;

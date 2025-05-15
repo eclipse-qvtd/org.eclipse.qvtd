@@ -72,11 +72,11 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 	}
 
 	public @NonNull Transformation getCoreTransformation() {
-		return ClassUtil.nonNullState(coreTransformation);
+		return ClassUtil.requireNonNull(coreTransformation);
 	}
 
 	public @NonNull Relation2Mappings getRelation2Mappings(@NonNull RelationAnalysis relationAnalysis) {
-		return ClassUtil.nonNullState(relationAnalysis2relation2mapping.get(relationAnalysis));
+		return ClassUtil.requireNonNull(relationAnalysis2relation2mapping.get(relationAnalysis));
 	}
 
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage() {

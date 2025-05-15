@@ -92,7 +92,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 	private @Nullable Strategy strategy = null;
 
 	public RelationVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull VariableDeclaration rVariable) {
-		super(variablesAnalysis/*, ClassUtil.nonNullState(rVariable.getName())*/);
+		super(variablesAnalysis/*, ClassUtil.requireNonNull(rVariable.getName())*/);
 		assert !"this".equals(rVariable.getName());
 		this.rVariable = rVariable;
 		assert !(rVariable instanceof IteratorVariable);

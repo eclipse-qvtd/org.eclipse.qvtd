@@ -201,7 +201,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	@Override
 	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {
 		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = basicGetVariableDeclaration2TraceProperty(variable);
-		return ClassUtil.nonNullState(variableDeclaration2TraceProperty);
+		return ClassUtil.requireNonNull(variableDeclaration2TraceProperty);
 	}
 
 	@Override

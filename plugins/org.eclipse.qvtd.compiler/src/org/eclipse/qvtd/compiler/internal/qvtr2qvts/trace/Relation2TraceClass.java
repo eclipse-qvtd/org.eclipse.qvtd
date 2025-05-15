@@ -493,7 +493,7 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 	}
 
 	public @NonNull Invocation2TraceProperty getInvocation2TraceProperty(@NonNull InvocationAnalysis invocationAnalysis) {
-		return ClassUtil.nonNullState(ClassUtil.nonNullState(invocationAnalysis2relation2traceProperty).get(invocationAnalysis));
+		return ClassUtil.requireNonNull(ClassUtil.requireNonNull(invocationAnalysis2relation2traceProperty).get(invocationAnalysis));
 	}
 
 	/*	@Override

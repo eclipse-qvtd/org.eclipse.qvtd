@@ -97,7 +97,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	}
 
 	protected @NonNull ImperativeTransformation getTransformation(@NonNull ImperativeModel iModel, @NonNull Transformation asTransformation, @NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement) {
-		org.eclipse.ocl.pivot.Package asParentPackage = ClassUtil.nonNullState(asTransformation.getOwningPackage());
+		org.eclipse.ocl.pivot.Package asParentPackage = ClassUtil.requireNonNull(asTransformation.getOwningPackage());
 		org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
 		List<org.eclipse.ocl.pivot.@NonNull Class> iClasses = QVTimperativeUtil.Internal.getOwnedClassesList(iParentPackage);
 		String name = PivotUtil.getName(asTransformation);

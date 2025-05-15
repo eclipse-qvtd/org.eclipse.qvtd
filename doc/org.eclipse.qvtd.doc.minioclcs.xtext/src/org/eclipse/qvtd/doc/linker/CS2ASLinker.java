@@ -55,7 +55,7 @@ public class CS2ASLinker extends LazyLinker
 					CS2ASTransformationExecutor txExecutor= new CS2ASTransformationExecutor(ocl.getEnvironmentFactory(), MiniOCLCS2AS_qvtm_qvtcas.class);
 					tx = txExecutor.getTransformer();
 
-					tx.addRootObjects("leftCS", ClassUtil.nonNullState(eResource.getContents()));
+					tx.addRootObjects("leftCS", ClassUtil.requireNonNull(eResource.getContents()));
 					if (tx.run()) {
 						URI asModelURI = eResource.getURI().appendFileExtension("xmi");
 						Resource outputResource = rSet.getResource(asModelURI, false);

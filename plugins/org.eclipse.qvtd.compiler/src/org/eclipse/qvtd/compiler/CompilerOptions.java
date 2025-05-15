@@ -64,7 +64,7 @@ public interface CompilerOptions
 
 		public <T> @NonNull T get(@NonNull Key<T> optionsKey) {
 			@SuppressWarnings("unchecked")
-			T value = (T) ClassUtil.nonNullState(options.get(optionsKey));
+			T value = (T) ClassUtil.requireNonNull(options.get(optionsKey));
 			return value;
 		}
 

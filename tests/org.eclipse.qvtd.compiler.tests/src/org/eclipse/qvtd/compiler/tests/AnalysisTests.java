@@ -80,14 +80,14 @@ public class AnalysisTests extends XtextTestCase
 		//
 		String delphiNsUri = "http://www.xtext.org/example/delphi/Delphi";
 		String astmNsUri = "http://modelum.es/modernization/astm";
-		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
+		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
 		URI delphiURI = getProjectFileURI("models/Delphi.ecore");
-		ClassUtil.nonNullState(metamodelManager.loadResource(delphiURI, "", environmentFactory.getResourceSet()));
-		CompletePackage astmPackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(astmNsUri));
-		CompletePackage delphiPackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(delphiNsUri));
-		CompleteClass CSTraceClass = ClassUtil.nonNullState(delphiPackage.getOwnedCompleteClass("CSTrace"));
-		CompleteClass expressionClass = ClassUtil.nonNullState(delphiPackage.getOwnedCompleteClass("expression"));
-		CompleteClass VisitableClass = ClassUtil.nonNullState(astmPackage.getOwnedCompleteClass("Visitable"));
+		ClassUtil.requireNonNull(metamodelManager.loadResource(delphiURI, "", environmentFactory.getResourceSet()));
+		CompletePackage astmPackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(astmNsUri));
+		CompletePackage delphiPackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(delphiNsUri));
+		CompleteClass CSTraceClass = ClassUtil.requireNonNull(delphiPackage.getOwnedCompleteClass("CSTrace"));
+		CompleteClass expressionClass = ClassUtil.requireNonNull(delphiPackage.getOwnedCompleteClass("expression"));
+		CompleteClass VisitableClass = ClassUtil.requireNonNull(astmPackage.getOwnedCompleteClass("Visitable"));
 		//
 		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
 		//
@@ -113,27 +113,27 @@ public class AnalysisTests extends XtextTestCase
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		//
-		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
-		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
-		CompleteClass eAnnotationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
-		CompleteClass eAttributeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
-		CompleteClass eClassClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
-		CompleteClass eClassifierClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
-		CompleteClass eDataTypeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EDATA_TYPE.getName()));
-		CompleteClass eEnumClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM.getName()));
-		CompleteClass eEnumLiteralClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM_LITERAL.getName()));
-		CompleteClass eFactoryClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EFACTORY.getName()));
-		CompleteClass eGenericTypeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
-		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
-		CompleteClass eNamedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
-		CompleteClass eOperationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
-		CompleteClass ePackageClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPACKAGE.getName()));
-		CompleteClass eParameterClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPARAMETER.getName()));
-		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
-		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
-		CompleteClass eTypeParameterClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
-		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
+		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
+		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
+		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
+		CompleteClass eClassClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
+		CompleteClass eClassifierClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
+		CompleteClass eDataTypeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EDATA_TYPE.getName()));
+		CompleteClass eEnumClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM.getName()));
+		CompleteClass eEnumLiteralClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM_LITERAL.getName()));
+		CompleteClass eFactoryClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EFACTORY.getName()));
+		CompleteClass eGenericTypeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
+		CompleteClass eModelElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
+		CompleteClass eNamedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
+		CompleteClass eOperationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
+		CompleteClass ePackageClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPACKAGE.getName()));
+		CompleteClass eParameterClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPARAMETER.getName()));
+		CompleteClass eReferenceClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
+		CompleteClass eStructuralFeatureClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
+		CompleteClass eTypeParameterClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
+		CompleteClass eTypedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
 		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		//
@@ -177,32 +177,32 @@ public class AnalysisTests extends XtextTestCase
 		//
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		//
-		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
-		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
-		CompleteClass eAnnotationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
-		CompleteClass eClassClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
-		CompleteClass eClassifierClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
-		CompleteClass eGenericTypeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
-		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
-		CompleteClass eOperationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
-		CompleteClass ePackageClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPACKAGE.getName()));
-		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
-		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
-		CompleteClass eTypeParameterClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
-		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
+		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
+		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
+		CompleteClass eClassClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
+		CompleteClass eClassifierClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
+		CompleteClass eGenericTypeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
+		CompleteClass eModelElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
+		CompleteClass eOperationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
+		CompleteClass ePackageClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPACKAGE.getName()));
+		CompleteClass eReferenceClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
+		CompleteClass eStructuralFeatureClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
+		CompleteClass eTypeParameterClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
+		CompleteClass eTypedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
-		// EModelElement is not an EObject: Property eAnnotation__contents = ClassUtil.nonNullState(eAnnotationClass.getProperty(EcorePackage.Literals.EANNOTATION__CONTENTS.getName()));
-		Property eClass__eGenericSuperType = ClassUtil.nonNullState(eClassClass.getProperty(EcorePackage.Literals.ECLASS__EGENERIC_SUPER_TYPES.getName()));
-		Property eClass__eStructuralFeatures = ClassUtil.nonNullState(eClassClass.getProperty(EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES.getName()));
-		Property eGenericType__eLowerBound = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ELOWER_BOUND.getName()));
-		Property eGenericType__eTypeArguments = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ETYPE_ARGUMENTS.getName()));
-		Property eGenericType__eUpperBound = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__EUPPER_BOUND.getName()));
-		Property eModelElement__eAnnotations = ClassUtil.nonNullState(eModelElementClass.getProperty(EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS.getName()));
-		Property eOperation__eGenericExceptions = ClassUtil.nonNullState(eOperationClass.getProperty(EcorePackage.Literals.EOPERATION__EGENERIC_EXCEPTIONS.getName()));
-		Property ePackage__eClassifiers = ClassUtil.nonNullState(ePackageClass.getProperty(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS.getName()));
-		Property eTypedElement__eGenericType = ClassUtil.nonNullState(eTypedElementClass.getProperty(EcorePackage.Literals.ETYPED_ELEMENT__EGENERIC_TYPE.getName()));
-		Property eTypeParameter__eBounds = ClassUtil.nonNullState(eTypeParameterClass.getProperty(EcorePackage.Literals.ETYPE_PARAMETER__EBOUNDS.getName()));
+		// EModelElement is not an EObject: Property eAnnotation__contents = ClassUtil.requireNonNull(eAnnotationClass.getProperty(EcorePackage.Literals.EANNOTATION__CONTENTS.getName()));
+		Property eClass__eGenericSuperType = ClassUtil.requireNonNull(eClassClass.getProperty(EcorePackage.Literals.ECLASS__EGENERIC_SUPER_TYPES.getName()));
+		Property eClass__eStructuralFeatures = ClassUtil.requireNonNull(eClassClass.getProperty(EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES.getName()));
+		Property eGenericType__eLowerBound = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ELOWER_BOUND.getName()));
+		Property eGenericType__eTypeArguments = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ETYPE_ARGUMENTS.getName()));
+		Property eGenericType__eUpperBound = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__EUPPER_BOUND.getName()));
+		Property eModelElement__eAnnotations = ClassUtil.requireNonNull(eModelElementClass.getProperty(EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS.getName()));
+		Property eOperation__eGenericExceptions = ClassUtil.requireNonNull(eOperationClass.getProperty(EcorePackage.Literals.EOPERATION__EGENERIC_EXCEPTIONS.getName()));
+		Property ePackage__eClassifiers = ClassUtil.requireNonNull(ePackageClass.getProperty(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS.getName()));
+		Property eTypedElement__eGenericType = ClassUtil.requireNonNull(eTypedElementClass.getProperty(EcorePackage.Literals.ETYPED_ELEMENT__EGENERIC_TYPE.getName()));
+		Property eTypeParameter__eBounds = ClassUtil.requireNonNull(eTypeParameterClass.getProperty(EcorePackage.Literals.ETYPE_PARAMETER__EBOUNDS.getName()));
 		//
 		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		//
@@ -239,16 +239,16 @@ public class AnalysisTests extends XtextTestCase
 		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
 		CompleteClass oclElementClass = completeModel.getCompleteClass(standardLibrary.getOclElementType());
 		//
-		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
-		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
-		CompleteClass eAnnotationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
-		CompleteClass eAttributeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
-		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
-		CompleteClass eNamedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
-		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
-		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
-		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
+		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
+		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
+		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
+		CompleteClass eModelElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
+		CompleteClass eNamedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
+		CompleteClass eReferenceClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
+		CompleteClass eStructuralFeatureClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
+		CompleteClass eTypedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
 		InheritanceAnalysis inheritanceAnalysis = new InheritanceAnalysis(environmentFactory);
 		//
@@ -274,12 +274,12 @@ public class AnalysisTests extends XtextTestCase
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
-		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
-		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
-		CompleteClass eAttributeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
-		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
-		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
+		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
+		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
+		CompleteClass eReferenceClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
+		CompleteClass eStructuralFeatureClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
 		//
 		InheritanceAnalysis inheritanceAnalysis = new InheritanceAnalysis(environmentFactory);
 		//

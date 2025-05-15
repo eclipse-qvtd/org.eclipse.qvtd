@@ -484,7 +484,7 @@ public class MappingAnalysis extends RuleAnalysis
 		boolean isValid = false;
 		for (@NonNull OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp;) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp) expression;
-			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
+			expression = ClassUtil.requireNonNull(navigationCallExp.getOwnedSource());
 			if (expression instanceof VariableExp) {
 				isValid = true;
 				break;
@@ -497,7 +497,7 @@ public class MappingAnalysis extends RuleAnalysis
 			NavigationCallExp navigationCallExp = (NavigationCallExp) expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			assert referredProperty != null;
-			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
+			expression = ClassUtil.requireNonNull(navigationCallExp.getOwnedSource());
 			if (expression instanceof VariableExp) {
 				VariableDeclaration sourceVariable = ((VariableExp) expression).getReferredVariable();
 				assert sourceVariable != null;

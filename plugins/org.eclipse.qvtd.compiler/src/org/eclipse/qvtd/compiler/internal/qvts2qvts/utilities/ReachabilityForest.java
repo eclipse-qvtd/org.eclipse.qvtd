@@ -440,7 +440,7 @@ public class ReachabilityForest
 	}
 
 	public @NonNull Integer getCost(@NonNull Node node) {
-		return ClassUtil.nonNullState(node2cost.get(node));
+		return ClassUtil.requireNonNull(node2cost.get(node));
 	}
 
 	public @Nullable String getDisambiguator() {

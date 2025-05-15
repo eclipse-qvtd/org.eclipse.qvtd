@@ -199,8 +199,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				CompilerUtil.throwExceptionWithProblems(cg, e);
 				javaCodeSource = "";		// Never happens but suppresses JDT error.
 			}
-			String javaFilePath = ClassUtil.nonNullState(javaFileURI.toFileString());
-			String classFilePath = ClassUtil.nonNullState(classFileURI.toFileString());
+			String javaFilePath = ClassUtil.requireNonNull(javaFileURI.toFileString());
+			String classFilePath = ClassUtil.requireNonNull(classFileURI.toFileString());
 			new File(classFilePath).mkdirs();
 			File javaFile = cg.saveSourceFile(javaFilePath);		// use stream to avoid normalizing
 			compiled(javaFile);
@@ -241,7 +241,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				Iterable<@NonNull RuleRegion> activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
-				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
+				String rootName = ClassUtil.requireNonNull(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
 				RootRegion rootRegion = qvts2qvts.transform(activeRegions);
 				rootRegion.setReferredTransformation(asTransformation);

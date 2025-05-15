@@ -161,7 +161,7 @@ public class QVTmModelsMerger {
 			URI importedNSURI = URI.createURI(((Model) ns).getExternalURI());
 			String fileName1 = qvtmModelURI.trimFragment().trimFileExtension().trimFileExtension().lastSegment(); // xxx.qvtm.qvias
 			String fileName2 = importedNSURI.trimFragment().trimFileExtension().trimFileExtension(). lastSegment();	// xxx.ocl or xxx.ocl.oclas
-			return ClassUtil.nonNullState(fileName1).equals(fileName2);
+			return ClassUtil.requireNonNull(fileName1).equals(fileName2);
 		}
 		return false;
 	}

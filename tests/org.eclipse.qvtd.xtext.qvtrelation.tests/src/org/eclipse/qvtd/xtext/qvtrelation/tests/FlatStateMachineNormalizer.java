@@ -242,20 +242,20 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
-		EClass stateClass = (EClass) ClassUtil.nonNullState(ePackage.getEClassifier("State"));
-		EClass stateMachineClass = (EClass) ClassUtil.nonNullState(ePackage.getEClassifier("StateMachine"));
-		EClass transitionClass = (EClass) ClassUtil.nonNullState(ePackage.getEClassifier("Transition"));
+		EClass stateClass = (EClass) ClassUtil.requireNonNull(ePackage.getEClassifier("State"));
+		EClass stateMachineClass = (EClass) ClassUtil.requireNonNull(ePackage.getEClassifier("StateMachine"));
+		EClass transitionClass = (EClass) ClassUtil.requireNonNull(ePackage.getEClassifier("Transition"));
 		//
-		@NonNull EReference stateMachineOwnedStates = (EReference) ClassUtil.nonNullState(stateMachineClass.getEStructuralFeature("ownedStates"));
-		@NonNull EReference stateMachineOwnedTransitions = (EReference) ClassUtil.nonNullState(stateMachineClass.getEStructuralFeature("ownedTransitions"));
-		@NonNull EReference stateInTransitions = (EReference) ClassUtil.nonNullState(stateClass.getEStructuralFeature("inTransitions"));
-		@NonNull EReference stateOutTransitions = (EReference) ClassUtil.nonNullState(stateClass.getEStructuralFeature("outTransitions"));
-		@NonNull EReference transitionFromState = (EReference) ClassUtil.nonNullState(transitionClass.getEStructuralFeature("fromState"));
-		@NonNull EReference transitionToState = (EReference) ClassUtil.nonNullState(transitionClass.getEStructuralFeature("toState"));
+		@NonNull EReference stateMachineOwnedStates = (EReference) ClassUtil.requireNonNull(stateMachineClass.getEStructuralFeature("ownedStates"));
+		@NonNull EReference stateMachineOwnedTransitions = (EReference) ClassUtil.requireNonNull(stateMachineClass.getEStructuralFeature("ownedTransitions"));
+		@NonNull EReference stateInTransitions = (EReference) ClassUtil.requireNonNull(stateClass.getEStructuralFeature("inTransitions"));
+		@NonNull EReference stateOutTransitions = (EReference) ClassUtil.requireNonNull(stateClass.getEStructuralFeature("outTransitions"));
+		@NonNull EReference transitionFromState = (EReference) ClassUtil.requireNonNull(transitionClass.getEStructuralFeature("fromState"));
+		@NonNull EReference transitionToState = (EReference) ClassUtil.requireNonNull(transitionClass.getEStructuralFeature("toState"));
 		//
-		@NonNull EAttribute stateName = (EAttribute) ClassUtil.nonNullState(stateClass.getEStructuralFeature("name"));
-		@NonNull EAttribute stateMachineName = (EAttribute) ClassUtil.nonNullState(stateMachineClass.getEStructuralFeature("name"));
-		@NonNull EAttribute transitionName = (EAttribute) ClassUtil.nonNullState(transitionClass.getEStructuralFeature("name"));
+		@NonNull EAttribute stateName = (EAttribute) ClassUtil.requireNonNull(stateClass.getEStructuralFeature("name"));
+		@NonNull EAttribute stateMachineName = (EAttribute) ClassUtil.requireNonNull(stateMachineClass.getEStructuralFeature("name"));
+		@NonNull EAttribute transitionName = (EAttribute) ClassUtil.requireNonNull(transitionClass.getEStructuralFeature("name"));
 		StateComparator stateComparator = new StateComparator(stateClass, stateName);
 		TransitionComparator transitionComparator = new TransitionComparator(transitionClass, transitionName, transitionFromState, transitionToState, stateName);
 		StateMachineComparator stateMachineComparator = new StateMachineComparator(stateMachineClass, stateMachineName);
@@ -273,7 +273,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 		}
 		for (@NonNull EObject eObject : eObjects) {
 			EClass eClass = eObject.eClass();
-			AbstractNormalizer normalizer = ClassUtil.nonNullState(eClass2normalizer.get(eClass));
+			AbstractNormalizer normalizer = ClassUtil.requireNonNull(eClass2normalizer.get(eClass));
 			normalizer.normalize(eObject);
 		}
 		ECollections.sort(resource.getContents(), stateMachineComparator);

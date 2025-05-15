@@ -588,7 +588,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		DomainUsage savedUsage = pushSelfUsage(sourceUsage);
 		try {
-			Operation operation = ClassUtil.nonNullState(object.getReferredOperation());
+			Operation operation = ClassUtil.requireNonNull(object.getReferredOperation());
 			RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
 			OperationId operationId = operation.getOperationId();
 			//
@@ -682,8 +682,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
-		Property property = ClassUtil.nonNullState(object.getReferredProperty());
-		Property oppositeProperty = ClassUtil.nonNullState(property.getOpposite());
+		Property property = ClassUtil.requireNonNull(object.getReferredProperty());
+		Property oppositeProperty = ClassUtil.requireNonNull(property.getOpposite());
 		return doNavigationCallExp(oppositeProperty, object);
 	}
 
@@ -715,13 +715,13 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public @NonNull DomainUsage visitPropertyCallExp(@NonNull PropertyCallExp object) {
-		Property property = ClassUtil.nonNullState(object.getReferredProperty());
+		Property property = ClassUtil.requireNonNull(object.getReferredProperty());
 		return doNavigationCallExp(property, object);
 	}
 
 	@Override
 	public @NonNull DomainUsage visitSelfType(@NonNull SelfType object) {
-		return ClassUtil.nonNullState(selfUsage);
+		return ClassUtil.requireNonNull(selfUsage);
 	}
 
 	@Override

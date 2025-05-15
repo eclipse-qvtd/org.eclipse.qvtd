@@ -28,4 +28,10 @@ Workflow {
   component = @GenerateQVTrelationEditor {}
   component = @GenerateTextModels {}
   component = @GenerateXMLmodels {}
+  component = @GenerateExample1Models {}
+  component = @GenerateExample2Models {}
+  component = @GenerateExample3Models {}
+  component = @GenerateExample4Models {}
+  component = @GenerateExample5Models {}
+  component = @GenerateTestModels {}
 }

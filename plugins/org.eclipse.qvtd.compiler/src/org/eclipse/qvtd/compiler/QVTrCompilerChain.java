@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
@@ -49,7 +50,6 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -406,7 +406,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 							if (allUsedGenPackages != null) {
 								for (@NonNull GenPackage usedGenPackage : allUsedGenPackages) {
 									EPackage ecorePackage = usedGenPackage.getEcorePackage();
-									if ((ecorePackage != null) && ClassUtil.safeEquals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
+									if ((ecorePackage != null) && Objects.equals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
 										genPackage = usedGenPackage;
 										break;
 									}

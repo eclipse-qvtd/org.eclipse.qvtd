@@ -157,7 +157,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			URI javaURI2 = javaURI;
 			assert javaURI2 != null;
 			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI2);
-			String fileString = ClassUtil.nonNullState(normalizedURI.toFileString());
+			String fileString = ClassUtil.requireNonNull(normalizedURI.toFileString());
 			cg.saveSourceFile(fileString);
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
 			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
@@ -933,19 +933,19 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		Map<String, String> newOutputsMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
 		if (oldInputsMap != null) {
-			updateParametersGroup(ClassUtil.nonNullState(oldInputsGroup), SWT.NONE, oldInputsMap, null);
+			updateParametersGroup(ClassUtil.requireNonNull(oldInputsGroup), SWT.NONE, oldInputsMap, null);
 		}
 		if (newInputsMap != null) {
-			updateParametersGroup(ClassUtil.nonNullState(newInputsGroup), SWT.NONE, newInputsMap, null);
+			updateParametersGroup(ClassUtil.requireNonNull(newInputsGroup), SWT.NONE, newInputsMap, null);
 		}
 		if (oldOutputsMap != null) {
-			updateParametersGroup(ClassUtil.nonNullState(oldOutputsGroup), SWT.NONE, oldOutputsMap, null);
+			updateParametersGroup(ClassUtil.requireNonNull(oldOutputsGroup), SWT.NONE, oldOutputsMap, null);
 		}
 		if (newOutputsMap != null) {
-			updateParametersGroup(ClassUtil.nonNullState(newOutputsGroup), SWT.SAVE, newOutputsMap, null);
+			updateParametersGroup(ClassUtil.requireNonNull(newOutputsGroup), SWT.SAVE, newOutputsMap, null);
 		}
 		if (intermediatesMap != null) {
-			updateParametersGroup(ClassUtil.nonNullState(intermediatesGroup), SWT.SAVE, intermediatesMap, getIntermediateKeys());
+			updateParametersGroup(ClassUtil.requireNonNull(intermediatesGroup), SWT.SAVE, intermediatesMap, getIntermediateKeys());
 		}
 		//		for (Control child : oldInputsGroup.getChildren()) {
 		//			ParameterRow row = (ParameterRow)child;

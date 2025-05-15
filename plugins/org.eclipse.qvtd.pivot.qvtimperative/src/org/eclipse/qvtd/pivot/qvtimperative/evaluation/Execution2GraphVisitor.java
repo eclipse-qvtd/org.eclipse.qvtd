@@ -356,7 +356,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		GraphNode node = slot2node.get(object);
 		if (node == null) {
 			final EStructuralFeature eFeature = object.getEFeature();
-			String label = ClassUtil.nonNullState(eFeature.getName());
+			String label = ClassUtil.requireNonNull(eFeature.getName());
 			if (eFeature instanceof EReference) {
 				EReference eOpposite = ((EReference)eFeature).getEOpposite();
 				if (eOpposite != null) {

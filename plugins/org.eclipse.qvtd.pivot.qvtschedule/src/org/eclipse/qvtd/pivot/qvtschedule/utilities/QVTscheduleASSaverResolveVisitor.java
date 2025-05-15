@@ -25,7 +25,7 @@ public class QVTscheduleASSaverResolveVisitor extends AbstractQVTscheduleASSaver
 
 	@Override
 	public @Nullable Object visitClassDatum(@NonNull ClassDatum object) {
-		org.eclipse.ocl.pivot.Class referredClass = ClassUtil.nonNullState(object.getReferredClass());
+		org.eclipse.ocl.pivot.Class referredClass = ClassUtil.requireNonNull(object.getReferredClass());
 		org.eclipse.ocl.pivot.Class resolvedClass = context.resolveType(referredClass);
 		if (resolvedClass != referredClass) {
 			object.setReferredClass(resolvedClass);

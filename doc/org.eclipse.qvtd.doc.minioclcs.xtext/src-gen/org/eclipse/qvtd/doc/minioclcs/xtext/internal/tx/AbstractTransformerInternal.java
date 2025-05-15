@@ -682,9 +682,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 */
 	private @NonNull Set<@NonNull Integer> getClassIndexes(@NonNull EClass eClass) {
 		//	ClassId classId = IdManager.getClassId(eClass);
-		EPackage ePackage = ClassUtil.nonNullEMF(eClass.getEPackage());
+		EPackage ePackage = ClassUtil.requireNonNull(eClass.getEPackage());
 		PackageId packageId = IdManager.getPackageId(ePackage);
-		String className = ClassUtil.nonNullEMF(eClass.getName());		// FIXME Original name
+		String className = ClassUtil.requireNonNull(eClass.getName());		// FIXME Original name
 		ClassId classId = packageId.getClassId(className, eClass.getETypeParameters().size());
 		Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes2 = classId2classIndexes;
 		assert classId2classIndexes2 != null;
@@ -746,11 +746,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					if ((eReference.getEOpposite() == null) && !eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
 						//	PropertyId propertyId = IdManager.getPropertyId(eReference);
 						EClass eContainingClass = eReference.getEContainingClass();
-						EPackage ePackage = ClassUtil.nonNullEMF(eContainingClass.getEPackage());
+						EPackage ePackage = ClassUtil.requireNonNull(eContainingClass.getEPackage());
 						PackageId packageId = IdManager.getPackageId(ePackage);
-						String className = ClassUtil.nonNullEMF(eContainingClass.getName());				// FIXME Original name
+						String className = ClassUtil.requireNonNull(eContainingClass.getName());				// FIXME Original name
 						ClassId classId = packageId.getClassId(className, eContainingClass.getETypeParameters().size());
-						String propertyName = ClassUtil.nonNullEMF(eReference.getName());		// FIXME Original name
+						String propertyName = ClassUtil.requireNonNull(eReference.getName());		// FIXME Original name
 						PropertyId propertyId = classId.getPropertyId(propertyName);
 						Map<PropertyId, Integer> propertyId2propertyIndex2 = propertyId2propertyIndex;
 						assert propertyId2propertyIndex2 != null;

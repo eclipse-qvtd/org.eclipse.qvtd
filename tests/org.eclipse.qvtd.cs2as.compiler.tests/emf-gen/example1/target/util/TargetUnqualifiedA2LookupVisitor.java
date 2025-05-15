@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 
 public class TargetUnqualifiedA2LookupVisitor
@@ -47,7 +48,7 @@ public class TargetUnqualifiedA2LookupVisitor
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TRoot = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedA2LookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedA2LookupVisitor", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(CLSSid_A);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(CLSSid_A, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	protected final /*@Thrown*/ @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
@@ -55,7 +56,7 @@ public class TargetUnqualifiedA2LookupVisitor
 
 	public TargetUnqualifiedA2LookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
 

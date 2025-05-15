@@ -506,7 +506,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected @Nullable Node doOperationCallExp(@NonNull OperationCallExp operationCallExp, @Nullable Node sourceNode) {
 		boolean isRequired = operationCallExp.isIsRequired();
 		Operation referredOperation = QVTbaseUtil.getReferredOperation(operationCallExp);
-		String operationName = ClassUtil.nonNullState(referredOperation.getName());
+		String operationName = ClassUtil.requireNonNull(referredOperation.getName());
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (sourceNode == null) {
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -1331,7 +1331,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitIntegerLiteralExp(@NonNull IntegerLiteralExp integerLiteralExp) {
-		Number numberValue = ClassUtil.nonNullState(integerLiteralExp.getIntegerSymbol());
+		Number numberValue = ClassUtil.requireNonNull(integerLiteralExp.getIntegerSymbol());
 		Node operationNode = createNumericLiteralNode(numberValue, integerLiteralExp);
 		return operationNode;
 	}
@@ -1439,7 +1439,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitRealLiteralExp(@NonNull RealLiteralExp realLiteralExp) {
-		Number numberValue = ClassUtil.nonNullState(realLiteralExp.getRealSymbol());
+		Number numberValue = ClassUtil.requireNonNull(realLiteralExp.getRealSymbol());
 		Node operationNode = createNumericLiteralNode(numberValue, realLiteralExp);
 		return operationNode;
 	}
@@ -1467,7 +1467,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitStringLiteralExp(@NonNull StringLiteralExp stringLiteralExp) {
-		String stringValue = ClassUtil.nonNullState(stringLiteralExp.getStringSymbol());
+		String stringValue = ClassUtil.requireNonNull(stringLiteralExp.getStringSymbol());
 		Node operationNode = createStringLiteralNode(stringValue, stringLiteralExp);
 		return operationNode;
 	}

@@ -52,9 +52,9 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		super(vmExecutor, executableObject);
 		myCurrentIP = executableObject;
 		this.id = id;
-		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		pcVariable = ClassUtil.requireNonNull(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName(VMVirtualMachine.PC_NAME);
-		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.NAMED_ELEMENT.getName());
+		String typeName = ClassUtil.requireNonNull(PivotPackage.Literals.NAMED_ELEMENT.getName());
 		pcVariable.setType(environmentFactory.getASClass(typeName));
 	}
 

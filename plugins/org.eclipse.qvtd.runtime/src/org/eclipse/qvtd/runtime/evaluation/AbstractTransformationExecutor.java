@@ -58,19 +58,19 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 			throws ReflectiveOperationException {
 		super(environmentFactory.getCompleteEnvironment());
 		this.environmentFactory = environmentFactory;
-		transformer = ClassUtil.nonNullState(txConstructor.newInstance(this));
+		transformer = ClassUtil.requireNonNull(txConstructor.newInstance(this));
 	}
 
 	protected AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass)
 			throws ReflectiveOperationException {
-		this(environmentFactory, ClassUtil.nonNullState(txClass.getConstructor(TransformationExecutor.class)));
+		this(environmentFactory, ClassUtil.requireNonNull(txClass.getConstructor(TransformationExecutor.class)));
 	}
 
 	@Override
 	public @Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet = environmentFactory.getResourceSet();		// FIXME get package registrations in exteranl RespurcSet
 		PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
-		Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(modelURI, true));
+		Resource inputResource = ClassUtil.requireNonNull(resourceSet.getResource(modelURI, true));
 		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
 		typedModelInstance.addInputResource(inputResource);
 		return inputResource;
@@ -86,7 +86,7 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 			resourceSet = environmentFactory.getResourceSet();
 		}
 		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
-		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		Resource outputResource = ClassUtil.requireNonNull(resourceSet.createResource(modelURI));
 		typedModelInstance.addOutputResource(outputResource);
 		return outputResource;
 	}

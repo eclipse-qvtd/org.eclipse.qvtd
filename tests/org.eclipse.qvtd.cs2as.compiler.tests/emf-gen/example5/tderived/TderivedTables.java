@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2021 Willink Transformations and others.
+ * Copyright (c) 2014, 2025 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -38,6 +38,7 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImple
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 
 /**
  * TderivedTables provides the dispatch tables for the tderived for use by the OCL dispatcher.
@@ -67,7 +68,7 @@ public class TderivedTables extends AbstractTables
 	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetDerivedMM/1.0", null, TderivedPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ ClassId CLSSid_A2 = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("A2", 0);
 	public static final /*@NonInvalid*/ ClassId CLSSid_D = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("D", 0);
-	public static final /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_D = TypeId.ORDERED_SET.getSpecializedId(TderivedTables.CLSSid_D);
+	public static final /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_D = TypeId.ORDERED_SET.getSpecializedId(TderivedTables.CLSSid_D, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -171,7 +172,6 @@ public class TderivedTables extends AbstractTables
 			Init.initStart();
 			Fragments.init();
 		}
-
 
 		static {
 			Init.initEnd();
@@ -322,10 +322,15 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final ExecutorOperation /*@NonNull*/ [] _A2__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -353,10 +358,15 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final ExecutorOperation /*@NonNull*/ [] _B2__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
@@ -382,10 +392,15 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final ExecutorOperation /*@NonNull*/ [] _D__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
+			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclExtension /* oclExtension(OclStereotype[1]) */,
+			OCLstdlibTables.Operations._OclElement__0_oclExtensions /* oclExtensions() */,
+			OCLstdlibTables.Operations._OclElement__1_oclExtensions /* oclExtensions(OclStereotype[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
