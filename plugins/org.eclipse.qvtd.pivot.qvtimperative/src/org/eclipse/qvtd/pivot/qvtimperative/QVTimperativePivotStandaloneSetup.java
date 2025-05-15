@@ -11,12 +11,12 @@
 
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.LabelGeneratorRegistry;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
@@ -94,8 +94,7 @@ public class QVTimperativePivotStandaloneSetup
 			resourceFactoryRegistry.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		//		initializeResourceFactory(resourceFactoryRegistry);
-		if (!EPackage.Registry.INSTANCE.containsKey(QVTimperativePackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, QVTimperativePackage.eINSTANCE);
+		PivotStandaloneSetup.init(QVTimperativePackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);

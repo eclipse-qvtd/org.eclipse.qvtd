@@ -11,9 +11,9 @@
 
 package org.eclipse.qvtd.pivot.qvtrelation;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtrelation.scoping.QVTrelationPivotScoping;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePivotStandaloneSetup;
@@ -72,8 +72,7 @@ public class QVTrelationPivotStandaloneSetup //implements ISetup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(QVTrelationPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(QVTrelationPackage.eNS_URI, QVTrelationPackage.eINSTANCE);
+		PivotStandaloneSetup.init(QVTrelationPackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);
