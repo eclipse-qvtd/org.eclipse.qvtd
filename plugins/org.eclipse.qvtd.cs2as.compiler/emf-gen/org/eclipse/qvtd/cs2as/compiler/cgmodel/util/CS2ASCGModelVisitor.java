@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  *
  * This code is auto-generated
@@ -19,9 +19,6 @@ package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * @noimplement This interface is not intended to be implemented by clients.
- */
 public interface CS2ASCGModelVisitor<R> extends org.eclipse.ocl.codegen.cgmodel.util.CGModelVisitor<R>
 {
 	R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object);

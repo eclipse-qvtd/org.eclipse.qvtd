@@ -19,7 +19,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.qvtd.doc,
  org.eclipse.qvtd.doc.generator,
  org.eclipse.qvtd.doc.linker;x-internal:=true,
- org.eclipse.qvtd.doc.minioclcs;x-internal:=true,
+ org.eclipse.qvtd.doc.minioclcs,
  org.eclipse.qvtd.doc.minioclcs.impl;x-internal:=true,
  org.eclipse.qvtd.doc.minioclcs.util;x-internal:=true,
  org.eclipse.qvtd.doc.minioclcs.xtext._MiniOCLCS2AS_qvtm_qvtcas;x-internal:=true,

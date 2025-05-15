@@ -137,8 +137,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			//					CompilerUtil.addTranformationError(this, asTransformation, "Inconsistent TypedModels configuration\n" + s);
 			//				}
 			//			}
-			ASResource qvtsResource = (ASResource) createResource(QVTschedulePackage.eCONTENT_TYPE);
-			qvtsResource.setASonly(true);
+			XMLResource qvtsResource = (XMLResource) createResource(QVTschedulePackage.eCONTENT_TYPE);
+			//	qvtsResource.setASonly(true);
 			ScheduleModel scheduleModel = QVTscheduleFactory.eINSTANCE.createScheduleModel();
 			qvtsResource.getContents().add(scheduleModel);
 			CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
