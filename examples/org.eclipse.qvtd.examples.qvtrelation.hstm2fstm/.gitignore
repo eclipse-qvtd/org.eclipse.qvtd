@@ -2,3 +2,4 @@
 /src-gen/
 /test-gen/
 /target/
+/.polyglot.build.properties
