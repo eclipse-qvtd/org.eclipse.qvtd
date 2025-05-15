@@ -21,9 +21,6 @@ package	org.eclipse.qvtd.pivot.qvtschedule.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * @noimplement This interface is not intended to be implemented by clients.
- */
 public interface QVTscheduleVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
 	R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object);

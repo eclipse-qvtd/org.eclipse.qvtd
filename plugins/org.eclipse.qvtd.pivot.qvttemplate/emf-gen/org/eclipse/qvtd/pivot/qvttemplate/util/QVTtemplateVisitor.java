@@ -19,9 +19,6 @@ package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * @noimplement This interface is not intended to be implemented by clients.
- */
 public interface QVTtemplateVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
 	R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object);
