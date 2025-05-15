@@ -16,15 +16,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 
 public abstract class QVTbaseCSResource extends EssentialOCLCSResource
 {
 	@Override
 	public @NonNull URI getASURI(@NonNull URI csURI) {
-		assert !PivotUtilInternal.isASURI(csURI);
-		return PivotUtilInternal.appendASExtensionSuffix(csURI);
+		assert !PivotUtil.isASURI(csURI);
+		return PivotUtil.appendASExtensionSuffix(csURI);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public abstract class QVTbaseCSResource extends EssentialOCLCSResource
 	@Override
 	public void setURI(URI uri) {
 		assert uri != null;
-		if (PivotUtilInternal.isASURI(uri)) {				// XtextResourceFactory.createResource uses the wrong URI for an AS edit
-			uri = PivotUtilInternal.trimASExtensionSuffix(uri);
+		if (PivotUtil.isASURI(uri)) {				// XtextResourceFactory.createResource uses the wrong URI for an AS edit
+			uri = PivotUtil.trimASExtensionSuffix(uri);
 		}
 		super.setURI(uri);
 	}

@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -398,7 +397,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 				s.append(line);
 			}
 			OCLExpression asExpression = parserContext.parseExpression(eContainer, s.toString());
-			PivotUtilInternal.resetContainer(asExpression);
+			PivotUtil.resetContainer(asExpression);
 			return asExpression;
 		} catch (Exception e) {
 			throw new CompilerChainException(e);

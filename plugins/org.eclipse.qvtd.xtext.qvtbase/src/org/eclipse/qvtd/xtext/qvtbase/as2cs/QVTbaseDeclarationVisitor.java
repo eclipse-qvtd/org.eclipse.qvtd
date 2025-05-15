@@ -30,8 +30,8 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -218,7 +218,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitSimpleTargetElement(@NonNull SimpleTargetElement asSimpleTargetElement) {
 		SimpleTargetElementCS csSimpleTargetElement = context.refreshElement(SimpleTargetElementCS.class, QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS, asSimpleTargetElement);
-		PivotUtilInternal.refreshList(csSimpleTargetElement.getIterates(), asSimpleTargetElement.getIterates());
+		PivotUtil.refreshList(csSimpleTargetElement.getIterates(), asSimpleTargetElement.getIterates());
 		csSimpleTargetElement.setTypedModel(asSimpleTargetElement.getTypedModel());
 		switch (asSimpleTargetElement.getKind()) {
 			case INPUT: csSimpleTargetElement.setInput(true); break;

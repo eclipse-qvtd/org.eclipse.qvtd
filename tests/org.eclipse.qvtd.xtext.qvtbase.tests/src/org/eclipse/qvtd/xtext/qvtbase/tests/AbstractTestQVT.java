@@ -347,7 +347,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 	/*	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet;
-		if (PivotUtilInternal.isASURI(modelURI)) {
+		if (PivotUtil.isASURI(modelURI)) {
 			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
 		}
 		else {
@@ -420,7 +420,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	public @NonNull Resource checkOutput(@NonNull URI actualURI, @Nullable URI expectedURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 		deactivate();
 		ResourceSet actualResourceSet = createTestResourceSet();
-		//		if (PivotUtilInternal.isASURI(modelURI)) {
+		//		if (PivotUtil.isASURI(modelURI)) {
 		//			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
 		//		}
 		//		else {

@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -270,7 +269,7 @@ public class UMLXSerializeTests extends LoadTestCase
 		//
 		Pattern whenPattern = asRelation.getWhen();
 		for (OCLExpression whenExpression : whenExpressions) {
-			PivotUtilInternal.resetContainer(whenExpression);
+			PivotUtil.resetContainer(whenExpression);
 			Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			asPredicate.setConditionExpression(whenExpression);
 			if (whenPattern == null) {

@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -857,7 +856,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 
 	@Override
 	public void destroyed(@NonNull Object eObject) {
-		PivotUtilInternal.resetContainer((EObject) eObject);
+		PivotUtil.resetContainer((EObject) eObject);
 		object2feature2slotState.remove(eObject);
 	}
 

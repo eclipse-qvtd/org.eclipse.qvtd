@@ -28,9 +28,9 @@ import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
@@ -138,7 +138,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 
 	@Override
 	public void destroyed(@NonNull Object eObject) {
-		PivotUtilInternal.resetContainer((EObject) eObject);
+		PivotUtil.resetContainer((EObject) eObject);
 		object2objectState.remove(eObject);
 	}
 
@@ -169,7 +169,7 @@ public abstract class AbstractObjectManager<SS extends SlotState> implements Obj
 							upper = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
 						}
 						eOppositeReference2.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
-						if (!((NumberValue)upper).equals(ValueUtil.ONE_VALUE)) {
+						if (!upper.equals(ValueUtil.ONE_VALUE)) {
 							String uniqueValue = details.get("unique");
 							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE;
 							eOppositeReference2.setUnique(isUnique);

@@ -38,7 +38,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -110,7 +109,7 @@ public class QVTbaseUtil extends PivotUtil
 		}
 	}
 
-	public static class Internal extends PivotUtilInternal
+	public static class Internal extends PivotUtil
 	{
 		public static @NonNull List<@NonNull TypedModel> getModelParameterList(@NonNull Transformation asTransformation) {
 			return ClassUtil.nullFree(asTransformation.getModelParameter());
@@ -695,7 +694,7 @@ public class QVTbaseUtil extends PivotUtil
 		ASResource asResource;
 		// Load the transformation resource
 		ResourceSet asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
-		if (PivotUtilInternal.isASURI(transformationURI)) {
+		if (PivotUtil.isASURI(transformationURI)) {
 			asResource = (ASResource) asResourceSet.getResource(transformationURI, true);
 		}
 		else {
@@ -763,7 +762,7 @@ public class QVTbaseUtil extends PivotUtil
 		ASResource asResource;
 		try {
 			// Load the transformation resource
-			if (PivotUtilInternal.isASURI(transformationURI)) {
+			if (PivotUtil.isASURI(transformationURI)) {
 				asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 				if (!keepDebug) {
 					asResource.setASonly(true);

@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -606,9 +605,9 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
 		}
-		PivotUtilInternal.refreshList(csDirection.getMetamodelIds(), asTypedModel.getUsedPackage());
-		PivotUtilInternal.refreshList(csDirection.getDependsOn(), asTypedModel.getDependsOn());
-		PivotUtilInternal.refreshList(csDirection.getIterates(), asTypedModel.getIterates());
+		PivotUtil.refreshList(csDirection.getMetamodelIds(), asTypedModel.getUsedPackage());
+		PivotUtil.refreshList(csDirection.getDependsOn(), asTypedModel.getDependsOn());
+		PivotUtil.refreshList(csDirection.getIterates(), asTypedModel.getIterates());
 		return csDirection;
 	}
 }
