@@ -11,9 +11,9 @@
 
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleToStringVisitor;
@@ -73,8 +73,7 @@ public class QVTschedulePivotStandaloneSetup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(QVTschedulePackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, QVTschedulePackage.eINSTANCE);
+		PivotStandaloneSetup.init(QVTschedulePackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);
