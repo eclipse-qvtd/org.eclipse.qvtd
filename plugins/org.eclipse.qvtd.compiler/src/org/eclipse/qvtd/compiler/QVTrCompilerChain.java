@@ -216,7 +216,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, traceResource, ecoreURI, null);
 				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
-					saveOptions = XMIUtil.createSaveOptions();
+					saveOptions = XMIUtil.createSaveOptions(ecoreResource);
 				}
 				ecoreResource.save(saveOptions);
 				throwCompilerChainExceptionForErrors();

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -53,8 +54,15 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 		defaultSavingOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 	}
 
-	public DefaultCompilerOptions() {
-		setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+	// clone of FileLocator.getBundleFile avoiding a deprecation.
+	public static File getBundleFile(Bundle bundle) throws IOException {
+		return FileLocator.getBundleFileLocation(bundle).orElseThrow(
+			new Supplier<IOException>() {
+				@Override
+				public IOException get() {
+					return new IOException("Unable to locate the bundle file: " + bundle);
+				}
+			});
 	}
 
 	private static File getProjectFolder(@NonNull String projectName) throws IOException {
@@ -73,7 +81,7 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 		Bundle bundle = Platform.getBundle(projectName);
 		if (bundle != null) {
 			try {
-				File bundleFile = FileLocator.getBundleFile(bundle);
+				File bundleFile = getBundleFile(bundle);
 				if (bundleFile.isDirectory()) {
 					//	File outputPath = getOutputClassPath(bundleFile);
 					//	if (outputPath != null) {
@@ -91,6 +99,10 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 		//	if (path == null) {					// platform:/resource
 		//	}
 		return null;
+	}
+
+	public DefaultCompilerOptions() {
+		setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
 	}
 
 	public @NonNull Map<Object, Object> getSaveOptions() {

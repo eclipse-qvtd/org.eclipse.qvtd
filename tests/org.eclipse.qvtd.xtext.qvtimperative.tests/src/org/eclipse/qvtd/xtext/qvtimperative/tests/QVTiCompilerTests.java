@@ -24,7 +24,6 @@ import javax.tools.JavaFileObject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
@@ -306,7 +305,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			//  since template classes would come from the development project whereas referenced classes
 			//  would come from the run-time plugin. Ignore the project files.
 			//
-			File bundleFile = FileLocator.getBundleFile(bundle);
+			File bundleFile = DefaultCompilerOptions.getBundleFile(bundle);
 			if (bundleFile.isDirectory()) {
 				File outputPath = my_getOutputClassPath(bundleFile);
 				if (outputPath != null) {

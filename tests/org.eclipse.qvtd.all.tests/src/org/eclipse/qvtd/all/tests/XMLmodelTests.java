@@ -65,10 +65,10 @@ public class XMLmodelTests extends XtextTestCase
 		URI xmlURI = xmlFile.getURI();
 		URI outURI = outFile.getURI();
 		xmlResource.setURI(outURI);
-		xmlResource.save(XMIUtil.createSaveOptions());
+		xmlResource.save(XMIUtil.createSaveOptions(xmlResource));
 		Resource xmlResource2 = resourceSet.createResource(xmlURI);
 		xmlResource2.getContents().addAll(xmlResource.getContents());
-		xmlResource2.save(XMIUtil.createSaveOptions());
+		xmlResource2.save(XMIUtil.createSaveOptions(xmlResource2));
 		//
 		if (doCompare) {
 			ResourceSet resourceSet2 = new ResourceSetImpl();

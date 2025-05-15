@@ -279,7 +279,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			EClass eClass = (EClass)asClass.getESObject();
 			assert eClass != null;
 			String createMethodName = "create" + eClass.getName();
-			boolean canSetNonNull = false;
+			@SuppressWarnings("unused") boolean canSetNonNull = false;
 			EPackage ePackage = eClass.getEPackage();
 			String javaClass;
 			if (ePackage != null) {
@@ -2773,7 +2773,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
 				CGMapping cgMapping = (CGMapping)eObject;
-				Mapping asMapping = QVTiCGUtil.getAST(cgMapping);
+				@SuppressWarnings("unused") Mapping asMapping = QVTiCGUtil.getAST(cgMapping);
 				return getMappingName(cgMapping);		// + ".this"
 			}
 			if (eObject instanceof CGFunction) {
