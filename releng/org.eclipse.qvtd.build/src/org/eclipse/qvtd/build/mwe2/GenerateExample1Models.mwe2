@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  * 
  *******************************************************************************/
-module org.eclipse.qvtd.build.mwe2.GenerateExample1Models
+module GenerateExample1Models
 
 import org.eclipse.ocl.examples.autogen.*
 import org.eclipse.ocl.build.utilities.*

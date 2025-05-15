@@ -250,11 +250,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull ClassDatum getClassDatum(@NonNull Node node) {
-		return ClassUtil.nonNullState(node.getClassDatum());
+		return ClassUtil.requireNonNull(node.getClassDatum());
 	}
 
 	public static @NonNull ClassDatum getClassDatum(@NonNull NodeConnection connection) {
-		return ClassUtil.nonNullState(connection.getClassDatum());
+		return ClassUtil.requireNonNull(connection.getClassDatum());
 	}
 
 	public static @NonNull String getColor(@NonNull Role role) {
@@ -292,7 +292,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	} */
 
 	public static @NonNull RootRegion getContainingRootRegion(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getContainingRootRegion());
+		return ClassUtil.requireNonNull(region.getContainingRootRegion());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getDependencyNodes(@NonNull OperationRegion operationRegion) {
@@ -300,15 +300,15 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull Role getEdgeRole(@NonNull Edge edge) {
-		return ClassUtil.nonNullState(edge.getEdgeRole());
+		return ClassUtil.requireNonNull(edge.getEdgeRole());
 	}
 
 	public static @NonNull ClassDatum getElementalClassDatum(@NonNull CollectionClassDatum collectionClassDatum) {
-		return ClassUtil.nonNullState(collectionClassDatum.getElementalClassDatum());
+		return ClassUtil.requireNonNull(collectionClassDatum.getElementalClassDatum());
 	}
 
 	public static @NonNull EnumerationLiteral getEnumValue(@NonNull EnumLiteralNode node) {
-		return ClassUtil.nonNullState(node.getEnumValue());
+		return ClassUtil.requireNonNull(node.getEnumValue());
 	}
 
 	public static @NonNull Iterable<? extends @NonNull Partition> getExplicitPredecessors(@NonNull BasicPartition partition) {
@@ -348,7 +348,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull LoadingPartition getLoadingPartition(@NonNull LoadingRegion loadingRegion) {
-		return ClassUtil.nonNullState(loadingRegion.getLoadingPartition());
+		return ClassUtil.requireNonNull(loadingRegion.getLoadingPartition());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getMappingPartitions(@NonNull MappingRegion mappingRegion) {
@@ -368,11 +368,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull String getName(@NonNull Nameable nameable) {
-		return ClassUtil.nonNullState(nameable.getName());
+		return ClassUtil.requireNonNull(nameable.getName());
 	}
 
 	public static @NonNull Role getNodeRole(@NonNull Node node) {
-		return ClassUtil.nonNullState(node.getNodeRole());
+		return ClassUtil.requireNonNull(node.getNodeRole());
 	}
 
 	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @Nullable TypedElement typedElement, @NonNull Node... argNodes) {
@@ -416,11 +416,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull PropertyDatum getOpposite(@NonNull PropertyDatum propertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum.getOpposite());
+		return ClassUtil.requireNonNull(propertyDatum.getOpposite());
 	}
 
 	public static @NonNull NavigationEdge getOppositeEdge(@NonNull NavigationEdge navigationEdge) {
-		return ClassUtil.nonNullState(navigationEdge.getOppositeEdge());
+		return ClassUtil.requireNonNull(navigationEdge.getOppositeEdge());
 	}
 
 	public static @NonNull Iterable<@NonNull EdgeConnection> getOutgoingConnections(@NonNull NavigableEdge navigableEdge) {
@@ -448,7 +448,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull LoadingRegion getOwnedLoadingRegion(@NonNull RootRegion rootRegion) {
-		return ClassUtil.nonNullState(rootRegion.getOwnedLoadingRegion());
+		return ClassUtil.requireNonNull(rootRegion.getOwnedLoadingRegion());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getOwnedMappingPartitions(@NonNull CompositePartition composedPartition) {
@@ -476,23 +476,23 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull ClassDatum getOwningClassDatum(@NonNull PropertyDatum propertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum.getOwningClassDatum());
+		return ClassUtil.requireNonNull(propertyDatum.getOwningClassDatum());
 	}
 
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {
-		return ClassUtil.nonNullState(connectionEnd.getOwningRegion());
+		return ClassUtil.requireNonNull(connectionEnd.getOwningRegion());
 	}
 
 	public static @NonNull Region getOwningRegion(@NonNull Node node) {
-		return ClassUtil.nonNullState(node.getOwningRegion());
+		return ClassUtil.requireNonNull(node.getOwningRegion());
 	}
 
 	public static RootRegion getOwningRootRegion(@NonNull RootPartition rootPartition) {
-		return ClassUtil.nonNullState(rootPartition.getOwningRootRegion());
+		return ClassUtil.requireNonNull(rootPartition.getOwningRootRegion());
 	}
 
 	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull RootRegion rootRegion) {
-		return ClassUtil.nonNullState(rootRegion.getOwningScheduleModel());
+		return ClassUtil.requireNonNull(rootRegion.getOwningScheduleModel());
 	}
 
 	public static @NonNull Iterable<@NonNull Integer> getPasses(@NonNull Partition partition) {
@@ -588,43 +588,43 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	//	Commented out since getCompleteClass() is usually more appropriate.
 	//
 	//	public static org.eclipse.ocl.pivot.@NonNull Class getReferredClass(@NonNull ClassDatum classDatum) {
-	//		return ClassUtil.nonNullState(classDatum.getReferredClass());
+	//		return ClassUtil.requireNonNull(classDatum.getReferredClass());
 	//	}
 
 	public static @NonNull Operation getReferredOperation(@NonNull OperationCallNode operationCallNode) {
-		return ClassUtil.nonNullState(operationCallNode.getReferredOperation());		// FIXME should be declared as [1..1]
+		return ClassUtil.requireNonNull(operationCallNode.getReferredOperation());		// FIXME should be declared as [1..1]
 	}
 
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {
-		return ClassUtil.nonNullState(keyPartEdge.getReferredPart());
+		return ClassUtil.requireNonNull(keyPartEdge.getReferredPart());
 	}
 
 	public static @NonNull ShadowPart getReferredPart(@NonNull ShadowPartEdge shadowPartEdge) {
-		return ClassUtil.nonNullState(shadowPartEdge.getReferredPart());
+		return ClassUtil.requireNonNull(shadowPartEdge.getReferredPart());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull PropertyDatum propertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum.getReferredProperty());
+		return ClassUtil.requireNonNull(propertyDatum.getReferredProperty());
 	}
 
 	public static @NonNull Rule getReferredRule(@NonNull RuleRegion ruleRegion) {
-		return ClassUtil.nonNullState(ruleRegion.getReferredRule());
+		return ClassUtil.requireNonNull(ruleRegion.getReferredRule());
 	}
 
 	public static @NonNull Transformation getReferredTransformation(@NonNull RootRegion rootRegion) {
-		return ClassUtil.nonNullState(rootRegion.getReferredTransformation());
+		return ClassUtil.requireNonNull(rootRegion.getReferredTransformation());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+		return ClassUtil.requireNonNull(classDatum.getReferredTypedModel());
 	}
 
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
-		return ClassUtil.nonNullState(partition.getRegion());
+		return ClassUtil.requireNonNull(partition.getRegion());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull NavigationEdge navigationEdge) {
-		return ClassUtil.nonNullState(navigationEdge.getReferredProperty());
+		return ClassUtil.requireNonNull(navigationEdge.getReferredProperty());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {
@@ -650,7 +650,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull RootRegion getRootRegion(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getRootRegion());
+		return ClassUtil.requireNonNull(region.getRootRegion());
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
@@ -659,7 +659,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 				return (ScheduleModel)eObject;
 			}
 		}
-		return ClassUtil.nonNullState(null);
+		return ClassUtil.requireNonNull(null);
 	}
 
 	public static @NonNull List<@NonNull ConnectionEnd> getSourceEnds(@NonNull Connection connection) {
@@ -677,7 +677,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull Node getSourceNode(@NonNull Edge edge) {
-		return ClassUtil.nonNullState(edge.getSourceNode());
+		return ClassUtil.requireNonNull(edge.getSourceNode());
 	}
 
 	public static @NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum) {
@@ -690,11 +690,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull Node getTargetNode(@NonNull Edge edge) {
-		return ClassUtil.nonNullState(edge.getTargetNode());
+		return ClassUtil.requireNonNull(edge.getTargetNode());
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+		return ClassUtil.requireNonNull(classDatum.getReferredTypedModel());
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull Node node) {

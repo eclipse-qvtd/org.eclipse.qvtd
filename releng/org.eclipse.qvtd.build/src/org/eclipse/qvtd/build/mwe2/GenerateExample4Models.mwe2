@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  * 
  *******************************************************************************/
-module org.eclipse.qvtd.build.mwe2.GenerateExample4Models
+module GenerateExample4Models
 
 import org.eclipse.ocl.build.utilities.*
 import org.eclipse.ocl.build.xtend.*

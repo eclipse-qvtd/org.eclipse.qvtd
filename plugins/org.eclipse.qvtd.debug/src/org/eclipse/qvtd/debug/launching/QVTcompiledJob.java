@@ -102,7 +102,7 @@ public class QVTcompiledJob extends QVTimperativeJob
 				if (inName != null) {
 					URI inURI = URI.createURI(inMap.get(inName), true);
 					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Loading '" + inURI + "'", 1);
-					Resource inputResource = ClassUtil.nonNullState(resourceSet.getResource(inURI, true));
+					Resource inputResource = ClassUtil.requireNonNull(resourceSet.getResource(inURI, true));
 					TypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(inName);
 					typedModelInstance.addInputResource(inputResource);
 				}
@@ -137,7 +137,7 @@ public class QVTcompiledJob extends QVTimperativeJob
 				if (outName != null) { //&& !QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(outName)) {
 					URI outURI = URI.createURI(outMap.get(outName), true);
 					subMonitor.split(1, SubMonitor.SUPPRESS_NONE).beginTask("Creating '" + outURI + "'", 1);
-					Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(outURI));
+					Resource outputResource = ClassUtil.requireNonNull(resourceSet.createResource(outURI));
 					TypedModelInstance typedModelInstance = modelsManager.getTypedModelInstance(outName);
 					typedModelInstance.addOutputResource(outputResource);
 				}

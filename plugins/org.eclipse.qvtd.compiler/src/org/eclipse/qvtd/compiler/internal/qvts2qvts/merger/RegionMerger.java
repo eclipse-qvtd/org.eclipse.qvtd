@@ -214,7 +214,7 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected @NonNull NodeMerger getNodeMerger(@NonNull Node originalNode) {
-		return ClassUtil.nonNullState(originalNode2nodeMerger.get(originalNode));
+		return ClassUtil.requireNonNull(originalNode2nodeMerger.get(originalNode));
 	}
 
 	public @NonNull Map<@NonNull Node, @NonNull NodeMerger> getExtraNode2NodeMerger(@NonNull Map<@NonNull Node, @NonNull Node> extraNode2existingNode) {

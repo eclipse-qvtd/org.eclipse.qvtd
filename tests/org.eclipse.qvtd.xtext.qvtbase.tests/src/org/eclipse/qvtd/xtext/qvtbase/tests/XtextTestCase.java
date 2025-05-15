@@ -312,7 +312,7 @@ public class XtextTestCase extends PivotTestCase
 	 *
 	protected @NonNull URI getModelsURIWithExtension(@NonNull URI inputURI, @NonNull String fileExtension) throws Exception {
 		URI fileStem = inputURI.trimFileExtension().appendFileExtension(fileExtension);
-		return getModelsURI(ClassUtil.nonNullState(fileStem.lastSegment()));
+		return getModelsURI(ClassUtil.requireNonNull(fileStem.lastSegment()));
 	} */
 
 	protected @NonNull String getProjectName() {
@@ -331,7 +331,7 @@ public class XtextTestCase extends PivotTestCase
 	 * the same as the bundle name. Override when this assumption is unjustified.
 	 */
 	protected @NonNull String getTestBundleName() {
-		return ClassUtil.nonNullState(getClass().getPackage().getName());
+		return ClassUtil.requireNonNull(getClass().getPackage().getName());
 	}
 	protected @NonNull URI getTestBundleURI() {
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -421,7 +421,7 @@ public class XtextTestCase extends PivotTestCase
 		if (fileExtension != null) {
 			fileStem = fileStem.appendFileExtension(fileExtension);
 		}
-		String fileName = ClassUtil.nonNullState(fileStem.lastSegment());
+		String fileName = ClassUtil.requireNonNull(fileStem.lastSegment());
 		return getTestURI(fileName);
 	}
 

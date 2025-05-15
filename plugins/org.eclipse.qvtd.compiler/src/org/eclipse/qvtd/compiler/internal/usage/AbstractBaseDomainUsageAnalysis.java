@@ -144,8 +144,8 @@ public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsag
 	public @NonNull DomainUsage visitTypedModel(@NonNull TypedModel object) {
 		RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
 		if (rootAnalysis != this) {
-			return ClassUtil.nonNullState(rootAnalysis.basicGetUsage(object));
+			return ClassUtil.requireNonNull(rootAnalysis.basicGetUsage(object));
 		}
-		return ClassUtil.nonNullState(element2usage.get(object));
+		return ClassUtil.requireNonNull(element2usage.get(object));
 	}
 }

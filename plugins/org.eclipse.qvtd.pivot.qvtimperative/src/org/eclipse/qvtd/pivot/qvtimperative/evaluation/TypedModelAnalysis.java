@@ -96,7 +96,7 @@ public class TypedModelAnalysis
 		int [] @NonNull [] classIndex2allClassIndexes = new int [iMax] @NonNull [];
 		for (int i = 0; i < iMax; i++) {
 			CompleteClass instancesClass = sortedCompleteClasses.get(i);
-			List<@NonNull CompleteClass> superInstancesClasses = ClassUtil.nonNullState(instancesCompleteClassAnalysis.get(instancesClass));
+			List<@NonNull CompleteClass> superInstancesClasses = ClassUtil.requireNonNull(instancesCompleteClassAnalysis.get(instancesClass));
 			int j = 0;
 			int[] row = new int[superInstancesClasses.size()];
 			for (@NonNull CompleteClass superInstancesClass : superInstancesClasses) {

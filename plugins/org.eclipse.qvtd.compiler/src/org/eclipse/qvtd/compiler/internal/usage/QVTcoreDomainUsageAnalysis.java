@@ -70,7 +70,7 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 					assert slotExpression != null;
 					DomainUsage domainUsage = getUsage(PivotUtil.getType(slotExpression));
 					if (!isOutput(domainUsage) && !domainUsage.isMiddle()) {
-						Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
+						Property targetProperty = ClassUtil.requireNonNull(propertyAssignment.getTargetProperty());
 						//					System.out.println("Dirty " + targetProperty + " for " + eObject);
 						addDirtyProperty(targetProperty);
 					}

@@ -139,7 +139,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 
 	@Override
 	protected @NonNull String getProjectName() {
-		return ClassUtil.nonNullState(getClass().getPackage().getName().replace('.', '/'));
+		return ClassUtil.requireNonNull(getClass().getPackage().getName().replace('.', '/'));
 	}
 
 	public void testDebugger_Run_HSV2HSL() throws Exception {

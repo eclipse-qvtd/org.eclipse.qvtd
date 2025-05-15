@@ -1051,7 +1051,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	protected final @NonNull DomainUsage outputUsage;
 
 	public QVTiProductionConsumption(@NonNull CompilerStep compilerStep, @NonNull QVTimperativeDomainUsageAnalysis domainUsageAnalysis, @NonNull EntryPoint iEntryPoint) throws IOException {
-		super(ClassUtil.nonNullState(iEntryPoint.eResource()));
+		super(ClassUtil.requireNonNull(iEntryPoint.eResource()));
 		this.environmentFactory = compilerStep.getEnvironmentFactory();
 		this.compilerStep = compilerStep;
 		this.name = PivotUtil.getName(iEntryPoint);

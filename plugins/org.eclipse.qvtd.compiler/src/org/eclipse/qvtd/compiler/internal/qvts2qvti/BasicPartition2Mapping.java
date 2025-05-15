@@ -442,7 +442,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						// FIXME	assert !((PredicateEdge)edge).isPartial();
 						OCLExpression sourceExpression = getExpression(sourceNode);
 						if (!(targetNode instanceof BooleanLiteralNode)) {
-							String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
+							String edgeName = ClassUtil.requireNonNull(edge.getName()).trim();
 							if (edgeName.length() >= 2) {
 								edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
 							}
@@ -709,7 +709,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(guardNode);
 		Type variableType = guardNode.getClassDatum().getPrimaryClass();
-		TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
+		TypedModel iTypedModel = ClassUtil.requireNonNull(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		Property successProperty = null;
 
@@ -1050,7 +1050,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 				}
 				ClassDatum classDatum = node.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
-				TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
+				TypedModel iTypedModel = ClassUtil.requireNonNull(visitor.getQVTiTypedModel(pTypedModel));
 				NewStatement newStatement = helper.createNewStatement(getSafeName(node), iTypedModel, classDatum.getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
 				newStatement.setIsContained(node.isContained());

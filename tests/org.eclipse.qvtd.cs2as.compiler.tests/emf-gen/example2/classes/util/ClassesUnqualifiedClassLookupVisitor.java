@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 
 public class ClassesUnqualifiedClassLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
@@ -39,12 +40,13 @@ public class ClassesUnqualifiedClassLookupVisitor
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ClassesUnqualifiedClassLookupVisitor = PACKid_java_c_s_s_example2_classes_util.getClassId("ClassesUnqualifiedClassLookupVisitor", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Env4CG = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Env4CG", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Executor = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Executor", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	protected final /*@Thrown*/ @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
@@ -52,7 +54,7 @@ public class ClassesUnqualifiedClassLookupVisitor
 
 	public ClassesUnqualifiedClassLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
 
@@ -90,15 +92,15 @@ public class ClassesUnqualifiedClassLookupVisitor
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull LookupEnvironment inner = context.addElements(ownedClasses);
 			final /*@NonInvalid*/ boolean hasFinalResult_0 = inner.hasFinalResult();
-			/*@NonInvalid*/ @Nullable LookupEnvironment symbol_0;
+			/*@NonInvalid*/ @Nullable LookupEnvironment IF_hasFinalResult_0;
 			if (hasFinalResult_0) {
-				symbol_0 = inner;
+				IF_hasFinalResult_0 = inner;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv_Class = ClassesUnqualifiedClassLookupVisitor.this.parentEnv(element_0);
-				symbol_0 = parentEnv_Class;
+				IF_hasFinalResult_0 = parentEnv_Class;
 			}
-			return symbol_0;
+			return IF_hasFinalResult_0;
 		}
 
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@NonNull Package element_0) {

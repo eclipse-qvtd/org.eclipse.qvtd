@@ -192,12 +192,12 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 
 	@Override
 	public @NonNull Property getDispatchSuccessProperty() {		// FIXME the resolution in super classes requires an earlier getRelation2DispatchSuccessProperty
-		return ClassUtil.nonNullState(basicGetRelation2DispatchSuccessProperty()).getTraceProperty();
+		return ClassUtil.requireNonNull(basicGetRelation2DispatchSuccessProperty()).getTraceProperty();
 	}
 
 	@Override
 	public @NonNull Property getGlobalSuccessProperty() {		// FIXME the resolution in super classes requires an earlier getRelation2GlobalSuccessProperty
-		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
+		return ClassUtil.requireNonNull(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
 	}
 
 	@Override
@@ -260,7 +260,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 
 	@Override
 	public @NonNull Property getResultProperty() {
-		return ClassUtil.nonNullState(relation2resultProperty).getTraceProperty();
+		return ClassUtil.requireNonNull(relation2resultProperty).getTraceProperty();
 	}
 
 	@Override
@@ -319,7 +319,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	@Override
 	public final @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable) {
 		VariableDeclaration2TraceProperty variableDeclaration2TraceProperty = basicGetVariableDeclaration2TraceProperty(variable);
-		return ClassUtil.nonNullState(variableDeclaration2TraceProperty);
+		return ClassUtil.requireNonNull(variableDeclaration2TraceProperty);
 	}
 
 	public @NonNull VariableDeclaration2TraceProperty getVariableDeclaration2TraceProperty(@Nullable TypedModel typedModel, @NonNull VariableDeclaration variable, boolean unitOpposite) {

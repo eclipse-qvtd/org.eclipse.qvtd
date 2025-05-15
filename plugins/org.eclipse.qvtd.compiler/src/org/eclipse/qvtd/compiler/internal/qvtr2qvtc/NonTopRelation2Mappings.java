@@ -169,12 +169,12 @@ import com.google.common.collect.Iterables;
 
 	@Override
 	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhenRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
-		return ClassUtil.nonNullState(whenTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+		return ClassUtil.requireNonNull(whenTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
 	}
 
 	@Override
 	public @NonNull AbstractEnforceableRelationDomain2CoreMapping getWhereRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
-		return ClassUtil.nonNullState(whereTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+		return ClassUtil.requireNonNull(whereTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
 	}
 
 	@Override

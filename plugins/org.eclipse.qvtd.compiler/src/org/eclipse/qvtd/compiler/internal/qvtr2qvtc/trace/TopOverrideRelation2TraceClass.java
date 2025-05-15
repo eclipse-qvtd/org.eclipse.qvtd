@@ -129,7 +129,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusInterfaceProperty() {
 		Relation2TraceClass baseRelation2TraceClass2 = getBaseRelation2TraceClass();
 		if (baseRelation2TraceClass2 == this) {
-			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2SuccessProperty());
+			return ClassUtil.requireNonNull(relation2traceInterface.basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass2.getStatusInterfaceProperty();
@@ -140,7 +140,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusTraceProperty() {
 		Relation2TraceClass baseRelation2TraceClass2 = getBaseRelation2TraceClass();
 		if (baseRelation2TraceClass2 == this) {
-			return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
+			return ClassUtil.requireNonNull(basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass2.getStatusInterfaceProperty();

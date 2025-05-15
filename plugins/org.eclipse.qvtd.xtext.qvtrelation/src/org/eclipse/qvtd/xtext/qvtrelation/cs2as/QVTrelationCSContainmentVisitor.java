@@ -386,7 +386,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitKeyDeclCS(@NonNull KeyDeclCS csElement) {
-		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getOwnedPathName());
+		PathNameCS csPathName = ClassUtil.requireNonNull(csElement.getOwnedPathName());
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
 		for (PathNameCS csOppositePropertyId : csElement.getOwnedOppositePropertyIds()) {
 			if (csOppositePropertyId != null) {

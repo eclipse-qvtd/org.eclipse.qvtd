@@ -137,7 +137,7 @@ class NodeMerger
 	}
 
 	public @NonNull Node getMergedNode() {
-		return ClassUtil.nonNullState(mergedNode);
+		return ClassUtil.requireNonNull(mergedNode);
 	}
 
 	public @NonNull String getName() {

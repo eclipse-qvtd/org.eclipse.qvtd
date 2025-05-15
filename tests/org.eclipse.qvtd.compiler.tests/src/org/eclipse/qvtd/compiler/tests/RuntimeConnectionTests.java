@@ -220,7 +220,7 @@ public class RuntimeConnectionTests extends TestCase
 	}
 
 	public @NonNull String getTestName() {
-		return ClassUtil.nonNullState(super.getName());
+		return ClassUtil.requireNonNull(super.getName());
 	}
 
 	@Test

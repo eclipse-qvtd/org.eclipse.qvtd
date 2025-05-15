@@ -234,8 +234,8 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 	}
 
 	private void initializeKeyedVariable(@NonNull VariableDeclaration cKeyedVariable) {
-		TypedModel rEnforcedTypedModel2 = ClassUtil.nonNull(variableAnalysis.getrEnforcedTypedModel());
-		Key rKey2 = ClassUtil.nonNull(variableAnalysis.getrKey());
+		TypedModel rEnforcedTypedModel2 = ClassUtil.requireNonNull(variableAnalysis.getrEnforcedTypedModel());
+		Key rKey2 = ClassUtil.requireNonNull(variableAnalysis.getrKey());
 		Function function = variablesAnalysis.getRelationAnalysis().getTransformationAnalysis().getKeyFunction(rEnforcedTypedModel2, rKey2);
 		List<@NonNull OCLExpression> asArguments = new ArrayList<@NonNull OCLExpression>();
 		TemplateExp rTemplateExp = variableAnalysis.getrTemplateExp();
@@ -244,12 +244,12 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			for (@NonNull Parameter keyParameter : ClassUtil.nullFree(function.getOwnedParameters())) {
 				OCLExpression parameterExp = variablesAnalysis.getTemplateExp(objectTemplateExp, keyParameter);
 				if (parameterExp instanceof TemplateExp) {
-					VariableDeclaration rVariable = ClassUtil.nonNullState(((TemplateExp)parameterExp).getBindsTo());
+					VariableDeclaration rVariable = ClassUtil.requireNonNull(((TemplateExp)parameterExp).getBindsTo());
 					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}
 				else if (parameterExp instanceof VariableExp) {
-					VariableDeclaration rVariable = ClassUtil.nonNullState(((VariableExp)parameterExp).getReferredVariable());
+					VariableDeclaration rVariable = ClassUtil.requireNonNull(((VariableExp)parameterExp).getReferredVariable());
 					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
 					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
 				}

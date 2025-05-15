@@ -90,7 +90,7 @@ public class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 			//
 			LOG.info("Transforming " + oclFileURI + " to " + javaFolder + javaPackage);
 			//	throw new UnsupportedOperationException("Not available in Oxygen");
-			tx.execute(ClassUtil.nonNullState(resourceSet), modelMap, parametersMap);
+			tx.execute(ClassUtil.requireNonNull(resourceSet), modelMap, parametersMap);
 		} catch (TransformationException e) {
 			issues.addError(this, e.getMessage(), null, e.getCause(), null);
 		} catch (Exception e) {

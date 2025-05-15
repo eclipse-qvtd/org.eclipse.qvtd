@@ -112,7 +112,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public final @NonNull Element getOriginatingElement() {
 		Element typedElement = basicGetOriginatingElement();
-		return ClassUtil.nonNullState(typedElement);
+		return ClassUtil.requireNonNull(typedElement);
 	}
 
 	@Override

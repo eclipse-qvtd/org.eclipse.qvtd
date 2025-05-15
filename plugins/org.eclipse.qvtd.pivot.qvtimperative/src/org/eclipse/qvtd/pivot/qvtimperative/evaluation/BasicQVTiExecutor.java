@@ -461,12 +461,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 	@Override
 	public @NonNull Interval getInterval(@NonNull Mapping asMapping) {
 		Interval interval = mapping2interval.get(asMapping);
-		return ClassUtil.nonNullState(interval);
+		return ClassUtil.requireNonNull(interval);
 	}
 
 	@Override
 	public @NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
-		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
+		Mapping asMapping = ClassUtil.requireNonNull(mappingCall.getReferredMapping());
 		Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
 		if (mapping2invocationConstructor2 == null) {
 			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<>();
@@ -635,7 +635,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 		if (!parameters.isEmpty()) {
 			for (int i = 0; i < parameters.size(); i++) {
 				Object value = boxedSourceAndArgumentValues[i+1];
-				nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(parameters.get(i)), value);
+				nestedEvaluationEnvironment.add(ClassUtil.requireNonNull(parameters.get(i)), value);
 			}
 		}
 		try {
@@ -670,7 +670,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
-		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
+		Mapping asMapping = ClassUtil.requireNonNull(mappingCall.getReferredMapping());
 		if (modeFactory.isLazy()) {
 			if (!entryPointAnalysis.isHazardous(asMapping)) {
 				return internalExecuteMappingCallInternal(mappingCall, boundValues, undecoratedVisitor);
@@ -688,7 +688,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			try {
 				int index = 0;
 				for (@NonNull MappingParameterBinding binding : QVTimperativeUtil.getOwnedMappingParameterBindings(mappingCall)) {
-					MappingParameter boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
+					MappingParameter boundVariable = ClassUtil.requireNonNull(binding.getBoundVariable());
 					Object boundValue = boundValues[index++];
 					if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
 						if (!replace(boundVariable, boundValue, false)) {
@@ -1065,7 +1065,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			Type valueType = getIdResolver().getDynamicTypeOf(value);
 			//			Type valueType2 = getIdResolver().getStaticTypeOf(value);
 			//			Type valueType = valueType1;
-			Type variableType = ClassUtil.nonNullState(asVariable.getType());
+			Type variableType = ClassUtil.requireNonNull(asVariable.getType());
 			if (!valueType.conformsTo(getStandardLibrary(), variableType)) {
 				//				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
 				return false;
@@ -1082,7 +1082,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 
 	@Override
 	public void saveOutput(@NonNull String modelName, @NonNull URI uri) {
-		Resource outputResource = ClassUtil.nonNullState(environmentFactory.getResourceSet().createResource(uri));
+		Resource outputResource = ClassUtil.requireNonNull(environmentFactory.getResourceSet().createResource(uri));
 		TypedModelInstance typedModelInstance = getTypedModelInstance(modelName);
 		typedModelInstance.addOutputResource(outputResource);
 	}

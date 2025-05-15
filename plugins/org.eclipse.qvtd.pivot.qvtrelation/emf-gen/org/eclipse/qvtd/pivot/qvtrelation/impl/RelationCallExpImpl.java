@@ -717,7 +717,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				return getArgument();
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				if (resolve) return getReferredRelation();
-			return basicGetReferredRelation();
+				return basicGetReferredRelation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -733,11 +733,11 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 		switch (featureID) {
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0:
 				getArgument().clear();
-			getArgument().addAll((Collection<? extends OCLExpression>)newValue);
-			return;
+				getArgument().addAll((Collection<? extends OCLExpression>)newValue);
+				return;
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setReferredRelation((Relation)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -752,10 +752,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 		switch (featureID) {
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0:
 				getArgument().clear();
-			return;
+				return;
 			case OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setReferredRelation((Relation)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

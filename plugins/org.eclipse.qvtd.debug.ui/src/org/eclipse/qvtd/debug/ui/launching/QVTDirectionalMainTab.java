@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -63,7 +63,7 @@ public abstract class QVTDirectionalMainTab<TX extends Transformation> extends D
 		Iterable<@NonNull TypedModel> modelParameters = QVTbaseUtil.getModelParameters(transformation);
 		TypedModel traceModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 		for (@NonNull TypedModel typedModel : modelParameters) {
-			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace() && (typedModel != traceModel) && ClassUtil.safeEquals(typedModel.getName(), directionName)) {
+			if (!typedModel.isIsPrimitive() && !typedModel.isIsThis() && !typedModel.isIsTrace() && (typedModel != traceModel) && Objects.equals(typedModel.getName(), directionName)) {
 				gatherOutputModels(outputModels, typedModel);
 			}
 		}

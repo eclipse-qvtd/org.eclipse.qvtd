@@ -57,7 +57,7 @@ public abstract class AbstractDoublyLinkedListGenerator<@NonNull L extends EObje
 				setHeadElement(list, element);
 			}
 			if (n == nElements-1) {
-				setSource(ClassUtil.nonNullState(getHeadElement(list)), element);
+				setSource(ClassUtil.requireNonNull(getHeadElement(list)), element);
 			}
 			if (prevElement != null) {
 				setSource(element, prevElement);

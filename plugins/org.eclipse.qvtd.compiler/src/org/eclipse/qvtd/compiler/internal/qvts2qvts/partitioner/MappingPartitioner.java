@@ -494,7 +494,7 @@ public class MappingPartitioner implements Nameable
 	public @NonNull Node getTraceNode() {
 		List<@NonNull Node> traceNodes = getTraceNodes();
 		assert traceNodes.size() == 1;
-		return ClassUtil.nonNullState(traceNodes.get(0));
+		return ClassUtil.requireNonNull(traceNodes.get(0));
 	}
 
 	public @NonNull List<@NonNull Node> getTraceNodes() {

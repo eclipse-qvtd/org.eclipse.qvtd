@@ -696,7 +696,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	@Override
 	public @NonNull String getGraphName() {
-		return ClassUtil.nonNullState(name);
+		return ClassUtil.requireNonNull(name);
 	}
 
 	private int nextPartitionNumber = 0;			// FIXME legacy compatibility naming support

@@ -41,7 +41,7 @@ public class TraceHelper
 		if (dispatchClass2 == null) {
 			String className = QVTtracePackage.Literals.DISPATCH.getName();
 			Iterable<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = PivotUtil.getOwnedClasses(getTracePackage());
-			dispatchClass = dispatchClass2 = ClassUtil.nonNullState(NameUtil.getNameable(ownedClasses, className));
+			dispatchClass = dispatchClass2 = ClassUtil.requireNonNull(NameUtil.getNameable(ownedClasses, className));
 		}
 		return dispatchClass2;
 	}
@@ -51,7 +51,7 @@ public class TraceHelper
 		if (executionClass2 == null) {
 			String className = QVTtracePackage.Literals.EXECUTION.getName();
 			Iterable<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = PivotUtil.getOwnedClasses(getTracePackage());
-			executionClass = executionClass2 = ClassUtil.nonNullState(NameUtil.getNameable(ownedClasses, className));
+			executionClass = executionClass2 = ClassUtil.requireNonNull(NameUtil.getNameable(ownedClasses, className));
 		}
 		return executionClass2;
 	}
@@ -61,7 +61,7 @@ public class TraceHelper
 		if (traceElementClass2 == null) {
 			String className = QVTtracePackage.Literals.TRACE_ELEMENT.getName();
 			Iterable<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = PivotUtil.getOwnedClasses(getTracePackage());
-			traceElementClass = traceElementClass2 = ClassUtil.nonNullState(NameUtil.getNameable(ownedClasses, className));
+			traceElementClass = traceElementClass2 = ClassUtil.requireNonNull(NameUtil.getNameable(ownedClasses, className));
 		}
 		return traceElementClass2;
 	}
@@ -95,6 +95,6 @@ public class TraceHelper
 		// No cache - probably only accessed once.
 		String className = QVTtracePackage.Literals.TRANSFORMATION_EXECUTION.getName();
 		Iterable<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = PivotUtil.getOwnedClasses(getTracePackage());
-		return ClassUtil.nonNullState(NameUtil.getNameable(ownedClasses, className));
+		return ClassUtil.requireNonNull(NameUtil.getNameable(ownedClasses, className));
 	}
 }

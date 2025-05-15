@@ -46,31 +46,31 @@ public class QVTruntimeLibraryHelper
 
 	public QVTruntimeLibraryHelper() {
 		Model libModel = QVTruntimeLibrary.getDefaultModel();
-		org.eclipse.ocl.pivot.Package libPackage = ClassUtil.nonNullState(NameUtil.getNameable(libModel.getOwnedPackages(), "qvtruntimelibrary"));
-		org.eclipse.ocl.pivot.Class libClass = ClassUtil.nonNullState(NameUtil.getNameable(libPackage.getOwnedClasses(), "PseudoOperations"));
+		org.eclipse.ocl.pivot.Package libPackage = ClassUtil.requireNonNull(NameUtil.getNameable(libModel.getOwnedPackages(), "qvtruntimelibrary"));
+		org.eclipse.ocl.pivot.Class libClass = ClassUtil.requireNonNull(NameUtil.getNameable(libPackage.getOwnedClasses(), "PseudoOperations"));
 		Iterable<@NonNull Operation> ownedOperations = PivotUtil.getOwnedOperations(libClass);
-		this.collectionOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "collection"));
+		this.collectionOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "collection"));
 		//	this.collectionItemsParameter = PivotUtil.getOwnedParameter(collectionOperation, 0);
-		this.errorOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "error"));
+		this.errorOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "error"));
 		this.errorElementsParameter = PivotUtil.getOwnedParameter(errorOperation, 0);
-		this.ifOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "if"));
+		this.ifOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "if"));
 		this.ifConditionParameter = PivotUtil.getOwnedParameter(ifOperation, 0);
 		this.ifThenParameter = PivotUtil.getOwnedParameter(ifOperation, 1);
 		this.ifElseParameter = PivotUtil.getOwnedParameter(ifOperation, 2);
-		this.loopOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "loop"));
+		this.loopOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "loop"));
 		this.loopSourceParameter = PivotUtil.getOwnedParameter(loopOperation, 0);
 		this.loopIteratorsParameter = PivotUtil.getOwnedParameter(loopOperation, 1);
 		this.loopBodyParameter = PivotUtil.getOwnedParameter(loopOperation, 2);
-		this.mapOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "map"));
-		this.mapPartOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "mapPart"));
+		this.mapOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "map"));
+		this.mapPartOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "mapPart"));
 		this.mapPartKeyParameter = PivotUtil.getOwnedParameter(mapPartOperation, 0);
 		this.mapPartValueParameter = PivotUtil.getOwnedParameter(mapPartOperation, 1);
-		this.rangeOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "range"));
+		this.rangeOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "range"));
 		this.rangeFirstParameter = PivotUtil.getOwnedParameter(rangeOperation, 0);
 		this.rangeLastParameter = PivotUtil.getOwnedParameter(rangeOperation, 1);
-		this.shadowOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "shadow"));
-		this.tupleOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "tuple"));
-		this.typeOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "type"));
+		this.shadowOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "shadow"));
+		this.tupleOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "tuple"));
+		this.typeOperation = ClassUtil.requireNonNull(NameUtil.getNameable(ownedOperations, "type"));
 	}
 
 	//	public @NonNull Parameter getCollectionItemsParameter() {

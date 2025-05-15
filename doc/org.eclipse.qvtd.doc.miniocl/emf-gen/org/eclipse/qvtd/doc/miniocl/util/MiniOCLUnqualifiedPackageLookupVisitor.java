@@ -45,7 +45,7 @@ public class MiniOCLUnqualifiedPackageLookupVisitor
     
     public MiniOCLUnqualifiedPackageLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
-        this.executor = ClassUtil.nonNull(context.getExecutor());
+        this.executor = ClassUtil.requireNonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
     }
     

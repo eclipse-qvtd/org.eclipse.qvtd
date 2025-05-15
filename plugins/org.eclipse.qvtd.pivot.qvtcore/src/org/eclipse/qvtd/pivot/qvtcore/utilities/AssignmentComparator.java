@@ -97,9 +97,9 @@ public class AssignmentComparator implements Comparator<@NonNull Assignment>
 		for (@NonNull Assignment assignment : assignments) {
 			if (assignment instanceof VariableAssignment) {
 				VariableAssignment variableAssignment = (VariableAssignment)assignment;
-				VariableDeclaration variable = ClassUtil.nonNullState(variableAssignment.getTargetVariable());
+				VariableDeclaration variable = ClassUtil.requireNonNull(variableAssignment.getTargetVariable());
 				Set<@NonNull Variable> referencedVariables = new HashSet<@NonNull Variable>();
-				for (EObject eObject : new TreeIterable(ClassUtil.nonNullState(variableAssignment.getValue()), true)) {
+				for (EObject eObject : new TreeIterable(ClassUtil.requireNonNull(variableAssignment.getValue()), true)) {
 					if (eObject instanceof VariableExp) {
 						VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
 						if (referredVariable instanceof Variable) {

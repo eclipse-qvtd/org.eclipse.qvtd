@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.launching.QVTcLaunchConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -129,7 +129,7 @@ public abstract class DirectionalMainTab<TX> extends MainTab<TX> implements QVTc
 		int newIndex = -1;
 		int i = 0;
 		for (@NonNull String name : enforceableDirectionNamees) {
-			if (ClassUtil.safeEquals(name, oldText)) {
+			if (Objects.equals(name, oldText)) {
 				newIndex = i;
 			}
 			directionItems[i++] = name;

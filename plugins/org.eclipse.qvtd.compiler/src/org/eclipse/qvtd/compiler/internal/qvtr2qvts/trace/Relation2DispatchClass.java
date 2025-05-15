@@ -134,7 +134,7 @@ public class Relation2DispatchClass extends AbstractRelation2MiddleType
 	}
 
 	public @NonNull DispatchClass2TraceProperty getDispatchClass2TraceProperty(@NonNull Relation relation) {
-		return ClassUtil.nonNullState(relation2dispatchClass2traceProperty.get(relation));
+		return ClassUtil.requireNonNull(relation2dispatchClass2traceProperty.get(relation));
 	}
 
 	@Override

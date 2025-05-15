@@ -162,7 +162,7 @@ public class EntryPointsAnalysis
 	}
 
 	public @NonNull EntryPointAnalysis getEntryPointAnalysis(@NonNull EntryPoint entryPoint) {
-		return ClassUtil.nonNullState(entryPoint2entryPointAnalysis.get(entryPoint));
+		return ClassUtil.requireNonNull(entryPoint2entryPointAnalysis.get(entryPoint));
 	}
 
 	/**

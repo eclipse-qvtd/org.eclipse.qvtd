@@ -520,7 +520,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull TypedModel getModelParameter(@NonNull Transformation transformation, @Nullable String name) {
-		return ClassUtil.nonNullState(NameUtil.getNameable(transformation.getModelParameter(), name));
+		return ClassUtil.requireNonNull(NameUtil.getNameable(transformation.getModelParameter(), name));
 	}
 
 	public static @NonNull Iterable<@NonNull TypedModel> getModelParameters(@NonNull Transformation asTransformation) {
@@ -532,11 +532,11 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull OCLExpression getOwnedConditionExpression(@NonNull Predicate asPredicate) {
-		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
+		return ClassUtil.requireNonNull(asPredicate.getConditionExpression());
 	}
 
 	public static @NonNull Parameter getOwnedContext(@NonNull Transformation asTransformation) {
-		return ClassUtil.nonNullState(asTransformation.getOwnedContext());
+		return ClassUtil.requireNonNull(asTransformation.getOwnedContext());
 	}
 
 	public static @NonNull Iterable<@NonNull Domain> getOwnedDomains(@NonNull Rule asRule) {
@@ -556,7 +556,7 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Target getOwnedTarget(@NonNull Transformation transformation, @NonNull String targetName) {
-		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTargets(transformation), targetName));
+		return ClassUtil.requireNonNull(NameUtil.getNameable(getOwnedTargets(transformation), targetName));
 	}
 
 	public static @NonNull Iterable<@NonNull SimpleTargetElement> getOwnedTargetElements(@NonNull CompoundTargetElement asCompoundTargetElement) {
@@ -572,24 +572,24 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Transformation getOwningTransformation(@NonNull Rule asRule) {
-		return ClassUtil.nonNullState(asRule.getTransformation());
+		return ClassUtil.requireNonNull(asRule.getTransformation());
 	}
 
 	public static @NonNull Transformation getOwningTransformation(@NonNull TypedModel asTypedModel) {
-		return ClassUtil.nonNullState(asTypedModel.getTransformation());
+		return ClassUtil.requireNonNull(asTypedModel.getTransformation());
 	}
 
 	public static @NonNull TypedModel getPrimitiveTypedModel(@NonNull Transformation asTransformation) {
-		return ClassUtil.nonNullState(basicGetPrimitiveTypedModel(getModelParameters(asTransformation)));
+		return ClassUtil.requireNonNull(basicGetPrimitiveTypedModel(getModelParameters(asTransformation)));
 	}
 
 	public static @NonNull OCLExpression getQueryExpression(@NonNull Function asFunction) {
-		return ClassUtil.nonNullState(asFunction.getQueryExpression());
+		return ClassUtil.requireNonNull(asFunction.getQueryExpression());
 	}
 
 	// Overrides to return Variable rather than VariableDeclaration. Is this sound? It is certainly helpful to guarantee an ownedInit.
 	public static @NonNull VariableDeclaration getReferredVariable(@NonNull VariableExp asVariableExp) {
-		return ClassUtil.nonNullState(asVariableExp.getReferredVariable());
+		return ClassUtil.requireNonNull(asVariableExp.getReferredVariable());
 	}
 
 	public static @NonNull List<@NonNull Rule> getRule(@NonNull Transformation asTransformation) {
@@ -620,18 +620,18 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
-		return ClassUtil.nonNullState(asDomain.getTypedModel());
+		return ClassUtil.requireNonNull(asDomain.getTypedModel());
 	}
 
 	public static @NonNull TypedModel getTypedModel(@NonNull SimpleTargetElement asSimpleTargetElement) {
-		return ClassUtil.nonNullState(asSimpleTargetElement.getTypedModel());
+		return ClassUtil.requireNonNull(asSimpleTargetElement.getTypedModel());
 	}
 
 	public static int getTypedModelIndex(@Nullable TypedModel typedModel) {
 		if (typedModel == null) {
 			return 0;
 		}
-		Transformation transformation = ClassUtil.nonNullState(typedModel.getTransformation());
+		Transformation transformation = ClassUtil.requireNonNull(typedModel.getTransformation());
 		int index = transformation.getModelParameter().indexOf(typedModel);
 		assert index >= 0;
 		return 1+index;
@@ -703,7 +703,7 @@ public class QVTbaseUtil extends PivotUtil
 			if (xtextResource == null) {
 				throw new IOException("Failed to load '" + transformationURI + "'");
 			}
-			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.requireNonNull(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 			if (csMessage != null) {
 				throw new IOException(csMessage);
 			}
@@ -721,7 +721,7 @@ public class QVTbaseUtil extends PivotUtil
 			}
 		}
 		try {
-			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
+			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.requireNonNull(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
 			if (asMessage != null) {
 				throw new IOException(asMessage);
 			}
@@ -777,7 +777,7 @@ public class QVTbaseUtil extends PivotUtil
 				if (!(xtextResource instanceof CSResource)) {
 					throw new IOException("Failed to load '" + transformationURI + "' as a CS representation of a QVTd transformation AS");
 				}
-				String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+				String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.requireNonNull(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 				if (csMessage != null) {
 					throw new IOException(csMessage);
 				}

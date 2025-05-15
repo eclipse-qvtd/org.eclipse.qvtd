@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -63,7 +64,7 @@ public class Upper2LowerNormalizer implements ModelNormalizer
 				}
 				n1 = (String) ((EObject)o1.eGet(edgeSource)).eGet(nodeLabel);
 				n2 = (String) ((EObject)o2.eGet(edgeSource)).eGet(nodeLabel);
-				if (ClassUtil.safeEquals(n1, n2)) {
+				if (Objects.equals(n1, n2)) {
 					n1 = (String) ((EObject)o1.eGet(edgeTarget)).eGet(nodeLabel);
 					n2 = (String) ((EObject)o2.eGet(edgeTarget)).eGet(nodeLabel);
 				}

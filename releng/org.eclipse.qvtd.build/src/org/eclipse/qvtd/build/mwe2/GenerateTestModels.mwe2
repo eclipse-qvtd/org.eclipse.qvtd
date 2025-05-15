@@ -20,12 +20,6 @@ Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = ProjectMapSetup{ resourceSet = resourceSet}
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
-    
-    component = @org.eclipse.qvtd.build.mwe2.GenerateExample1Models {}
-    component = @org.eclipse.qvtd.build.mwe2.GenerateExample2Models {}
-    component = @org.eclipse.qvtd.build.mwe2.GenerateExample3Models {}
-    component = @org.eclipse.qvtd.build.mwe2.GenerateExample4Models {}
-    component = @org.eclipse.qvtd.build.mwe2.GenerateExample5Models {}
   
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/families2persons/Families2Persons.genmodel"

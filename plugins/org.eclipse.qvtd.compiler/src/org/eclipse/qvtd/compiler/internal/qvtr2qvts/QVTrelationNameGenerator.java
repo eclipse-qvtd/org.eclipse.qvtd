@@ -92,7 +92,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	//	}
 
 	//	public @NonNull String createKey2InstanceMappingName(org.eclipse.ocl.pivot.@NonNull Class identifiedClass, @NonNull TypedModel typedModel) {
-	//		String enforcedDomainName = ClassUtil.nonNullState(typedModel.getName());
+	//		String enforcedDomainName = ClassUtil.requireNonNull(typedModel.getName());
 	//		return "Key2" + identifiedClass.getName() + "_" + enforcedDomainName;
 	//	}
 

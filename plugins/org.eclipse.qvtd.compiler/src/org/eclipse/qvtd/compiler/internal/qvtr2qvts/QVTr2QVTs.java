@@ -131,7 +131,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 
 		protected @NonNull RelationAnalysis getRelationAnalysis() {
-			return ClassUtil.nonNullState(relationAnalysis);
+			return ClassUtil.requireNonNull(relationAnalysis);
 		}
 
 		protected @NonNull RuleRegion getRuleRegion() {
@@ -477,13 +477,13 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	}
 
 	protected @NonNull Import createImport(@NonNull Import iIn) {
-		Import iOut = createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
+		Import iOut = createImport(iIn.getName(), ClassUtil.requireNonNull(iIn.getImportedNamespace()));
 		addTrace(iIn, iOut);
 		return iOut;
 	}
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createPackage(org.eclipse.ocl.pivot.@NonNull Package pIn) {
-		org.eclipse.ocl.pivot.Package pOut = createPackage(ClassUtil.nonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
+		org.eclipse.ocl.pivot.Package pOut = createPackage(ClassUtil.requireNonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
 		addTrace(pIn, pOut);
 		return pOut;
 	}

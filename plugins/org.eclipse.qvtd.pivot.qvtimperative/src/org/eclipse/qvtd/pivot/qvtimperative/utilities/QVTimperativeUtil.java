@@ -147,7 +147,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getClassType(@NonNull TypedElement typedElement) {
-		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
+		return ClassUtil.requireNonNull((org.eclipse.ocl.pivot.Class)typedElement.getType());
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getCompileTimeContextClass(@NonNull ImperativeTransformation iTransformation) {
@@ -159,7 +159,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Mapping getContainingMapping(@Nullable EObject eObject) {
-		return ClassUtil.nonNullState(basicGetContainingMapping(eObject));
+		return ClassUtil.requireNonNull(basicGetContainingMapping(eObject));
 	}
 
 	public static @Nullable Statement getContainingStatement(@Nullable EObject eObject) {
@@ -172,7 +172,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull ImperativeTransformation getContainingTransformation(@Nullable EObject eObject) {
-		return ClassUtil.nonNullState(basicGetContainingTransformation(eObject));
+		return ClassUtil.requireNonNull(basicGetContainingTransformation(eObject));
 	}
 
 	/**
@@ -198,11 +198,11 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull String getName(@NonNull Mapping asMapping) {
-		return ClassUtil.nonNullState(asMapping.getName());
+		return ClassUtil.requireNonNull(asMapping.getName());
 	}
 
 	public static @NonNull String getName(@NonNull MappingParameter asParameter) {
-		return ClassUtil.nonNullState(asParameter.getName());
+		return ClassUtil.requireNonNull(asParameter.getName());
 	}
 
 	public static @NonNull Iterable<@NonNull Property> getObservedProperties(@NonNull ObservableStatement observableStatement) {
@@ -214,11 +214,11 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull OCLExpression getOwnedExpression(@NonNull NewStatementPart asNewStatementPart) {
-		return ClassUtil.nonNullState(asNewStatementPart.getOwnedExpression());
+		return ClassUtil.requireNonNull(asNewStatementPart.getOwnedExpression());
 	}
 
 	public static @NonNull OCLExpression getOwnedExpression(@NonNull SetStatement asSetStatement) {
-		return ClassUtil.nonNullState(asSetStatement.getOwnedExpression());
+		return ClassUtil.requireNonNull(asSetStatement.getOwnedExpression());
 	}
 
 	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedExpressions(@NonNull SpeculateStatement speculateStatement) {
@@ -226,7 +226,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
-		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
+		return ClassUtil.requireNonNull(NameUtil.getNameable(getOwnedMappings(transformation), name));
 	}
 
 	public static @NonNull Iterable<@NonNull MappingParameterBinding> getOwnedMappingParameterBindings(@NonNull MappingCall mappingCall) {
@@ -248,7 +248,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	//	public static @NonNull ImperativeTypedModel getOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
-	//		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTypedModels(transformation), name));
+	//		return ClassUtil.requireNonNull(NameUtil.getNameable(getOwnedTypedModels(transformation), name));
 	//	}
 
 	//	@SuppressWarnings("unchecked")
@@ -258,31 +258,31 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	//	}
 
 	public static @NonNull MappingCall getOwningMappingCall(@NonNull MappingParameterBinding mappingParameterBinding) {
-		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
+		return ClassUtil.requireNonNull(mappingParameterBinding.getOwningMappingCall());
 	}
 
 	public static @NonNull NewStatement getOwningNewStatement(@NonNull NewStatementPart newStatementPart) {
-		return ClassUtil.nonNullState(newStatementPart.getOwningNewStatement());
+		return ClassUtil.requireNonNull(newStatementPart.getOwningNewStatement());
 	}
 
 	public static @NonNull Mapping getReferredMapping(MappingCall asMappingCall) {
-		return ClassUtil.nonNullState(asMappingCall.getReferredMapping());
+		return ClassUtil.requireNonNull(asMappingCall.getReferredMapping());
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull NewStatementPart asNewStatementPart) {
-		return ClassUtil.nonNullState(asNewStatementPart.getReferredProperty());
+		return ClassUtil.requireNonNull(asNewStatementPart.getReferredProperty());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull GuardParameter asGuardParameter) {
-		return ClassUtil.nonNullState(asGuardParameter.getReferredTypedModel());
+		return ClassUtil.requireNonNull(asGuardParameter.getReferredTypedModel());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull NewStatement asNewStatement) {
-		return ClassUtil.nonNullState(asNewStatement.getReferredTypedModel());
+		return ClassUtil.requireNonNull(asNewStatement.getReferredTypedModel());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull SimpleParameter asSimpleParameter) {
-		return ClassUtil.nonNullState(asSimpleParameter.getReferredTypedModel());
+		return ClassUtil.requireNonNull(asSimpleParameter.getReferredTypedModel());
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getRuntimeContextClass(@NonNull ImperativeTransformation iTransformation) {
@@ -298,16 +298,16 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull Property getSuccessProperty(@NonNull GuardParameter asMappingParameter) {
-		return ClassUtil.nonNullState(asMappingParameter.getSuccessProperty());
+		return ClassUtil.requireNonNull(asMappingParameter.getSuccessProperty());
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
-		Property referredProperty = ClassUtil.nonNullState(asSetStatement.getTargetProperty());
+		Property referredProperty = ClassUtil.requireNonNull(asSetStatement.getTargetProperty());
 		if (asSetStatement.isIsOpposite()) {
 			if (referredProperty.eIsProxy() ) {
 				throw new IllegalStateException("Unresolved target property proxy '" + EcoreUtil.getURI(referredProperty) + "' at '" + EcoreUtil.getURI(asSetStatement) + "'");
 			}
-			return ClassUtil.nonNullState(referredProperty.getOpposite());
+			return ClassUtil.requireNonNull(referredProperty.getOpposite());
 		}
 		else {
 			return referredProperty;
@@ -315,7 +315,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull VariableDeclaration getTargetVariable(@NonNull SetStatement asSetStatement) {
-		return ClassUtil.nonNullState(asSetStatement.getTargetVariable());
+		return ClassUtil.requireNonNull(asSetStatement.getTargetVariable());
 	}
 
 	public static boolean isObserver(@NonNull Mapping asMapping) {

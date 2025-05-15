@@ -70,79 +70,79 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull Property getAST(@NonNull CGExecutorProperty cgProperty) {
-		return ClassUtil.nonNullState((Property)cgProperty.getAst());
+		return ClassUtil.requireNonNull((Property)cgProperty.getAst());
 	}
 
 	public static @NonNull Function getAST(@NonNull CGFunction cgFunction) {
-		return ClassUtil.nonNullState((Function)cgFunction.getAst());
+		return ClassUtil.requireNonNull((Function)cgFunction.getAst());
 	}
 
 	public static @NonNull VariableDeclaration getAST(@NonNull CGGuardVariable cgGuardVariable) {
-		return ClassUtil.nonNullState((VariableDeclaration)cgGuardVariable.getAst());
+		return ClassUtil.requireNonNull((VariableDeclaration)cgGuardVariable.getAst());
 	}
 
 	public static @NonNull Mapping getAST(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nonNullState((Mapping)cgMapping.getAst());
+		return ClassUtil.requireNonNull((Mapping)cgMapping.getAst());
 	}
 
 	public static @NonNull MappingCall getAST(@NonNull CGMappingCall cgMappingCall) {
-		return ClassUtil.nonNullState((MappingCall)cgMappingCall.getAst());
+		return ClassUtil.requireNonNull((MappingCall)cgMappingCall.getAst());
 	}
 
 	public static @NonNull SetStatement getAST(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState((SetStatement)cgPropertyAssignment.getAst());
+		return ClassUtil.requireNonNull((SetStatement)cgPropertyAssignment.getAst());
 	}
 
 	public static @NonNull NewStatement getAST(@NonNull CGRealizedVariable cgRealizedVariable) {
-		return ClassUtil.nonNullState((NewStatement)cgRealizedVariable.getAst());
+		return ClassUtil.requireNonNull((NewStatement)cgRealizedVariable.getAst());
 	}
 
 	public static @NonNull NewStatementPart getAST(@NonNull CGRealizedVariablePart cgRealizedVariablePart) {
-		return ClassUtil.nonNullState((NewStatementPart)cgRealizedVariablePart.getAst());
+		return ClassUtil.requireNonNull((NewStatementPart)cgRealizedVariablePart.getAst());
 	}
 
 	public static @NonNull ImperativeTransformation getAST(@NonNull CGTransformation cgTransformation) {
-		return ClassUtil.nonNullState((ImperativeTransformation)cgTransformation.getAst());
+		return ClassUtil.requireNonNull((ImperativeTransformation)cgTransformation.getAst());
 	}
 
 	public static @NonNull TypedModel getAST(@NonNull CGTypedModel cgTypedModel) {
-		return ClassUtil.nonNullState((TypedModel)cgTypedModel.getAst());
+		return ClassUtil.requireNonNull((TypedModel)cgTypedModel.getAst());
 	}
 
 	public static @NonNull VariableExp getAST(@NonNull CGVariableExp cgVariableExp) {
-		return ClassUtil.nonNullState((VariableExp)cgVariableExp.getAst());
+		return ClassUtil.requireNonNull((VariableExp)cgVariableExp.getAst());
 	}
 
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
-		return ClassUtil.nonNullState(cgMappingLoop.getBody());
+		return ClassUtil.requireNonNull(cgMappingLoop.getBody());
 	}
 
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {
-		return ClassUtil.nonNullState(basicGetContainingCGMapping(cgElement));
+		return ClassUtil.requireNonNull(basicGetContainingCGMapping(cgElement));
 	}
 
 	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGEcoreContainerAssignment cgContainerAssignment) {
-		return ClassUtil.nonNullState(cgContainerAssignment.getEStructuralFeature());
+		return ClassUtil.requireNonNull(cgContainerAssignment.getEStructuralFeature());
 	}
 
 	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getEStructuralFeature());
+		return ClassUtil.requireNonNull(cgPropertyAssignment.getEStructuralFeature());
 	}
 
 	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
-		return ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
+		return ClassUtil.requireNonNull(cgPropertyCallExp.getEStructuralFeature());
 	}
 
 	public static @NonNull CGValuedElement getIn(@NonNull CGLetExp cgLetExp) {	// FIXME move to CGUtil
-		return ClassUtil.nonNullState(cgLetExp.getIn());
+		return ClassUtil.requireNonNull(cgLetExp.getIn());
 	}
 
 	public static @NonNull String getName(@NonNull CGAccumulator cgAccumulator) {
-		return ClassUtil.nonNullState(cgAccumulator.getName());
+		return ClassUtil.requireNonNull(cgAccumulator.getName());
 	}
 
 	public static @NonNull String getName(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nonNullState(cgMapping.getName());
+		return ClassUtil.requireNonNull(cgMapping.getName());
 	}
 
 	public static @NonNull Iterable<@NonNull CGAccumulator> getOwnedAccumulators(@NonNull CGMappingExp cgMappingExp) {
@@ -162,11 +162,11 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull CGValuedElement getOwnedInitValue(@NonNull CGConnectionAssignment cgConnectionAssignment) {
-		return ClassUtil.nonNullState(cgConnectionAssignment.getOwnedInitValue());
+		return ClassUtil.requireNonNull(cgConnectionAssignment.getOwnedInitValue());
 	}
 
 	public static @NonNull CGValuedElement getOwnedInitValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedInitValue());
+		return ClassUtil.requireNonNull(cgPropertyAssignment.getOwnedInitValue());
 	}
 
 	public static @NonNull Iterable<@NonNull CGMappingCallBinding> getOwnedMappingCallBindings(@NonNull CGMappingCall cgMappingCall) {
@@ -182,7 +182,7 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull CGValuedElement getOwnedSlotValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedSlotValue());
+		return ClassUtil.requireNonNull(cgPropertyAssignment.getOwnedSlotValue());
 	}
 
 	public static @NonNull Iterable<@NonNull CGValuedElement> getOwnedStatements(@NonNull CGSequence cgSequence) {
@@ -194,11 +194,11 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull CGMapping getOwningMapping(@NonNull CGRealizedVariable cgRealizedVariable) {
-		return ClassUtil.nonNullState(cgRealizedVariable.getOwningMapping());
+		return ClassUtil.requireNonNull(cgRealizedVariable.getOwningMapping());
 	}
 
 	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
+		return ClassUtil.requireNonNull(cgMapping.getOwningTransformation());
 
 	}
 
@@ -207,7 +207,7 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull Property getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		return ClassUtil.nonNullState(cgPropertyAssignment.getReferredProperty());
+		return ClassUtil.requireNonNull(cgPropertyAssignment.getReferredProperty());
 	}
 
 	public static @NonNull CGMapping getRootMapping(@NonNull CGTransformation cgTransformation) {

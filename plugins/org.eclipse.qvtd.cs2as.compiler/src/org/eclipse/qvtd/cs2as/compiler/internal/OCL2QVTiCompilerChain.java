@@ -54,14 +54,14 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 				throw new CompilerChainException("Failed to parse " + oclDocURI);
 			}
 			ASResource asResource = qvti.cs2as(csResource);
-			this.oclASUri = ClassUtil.nonNullState(asResource.getURI());
+			this.oclASUri = ClassUtil.requireNonNull(asResource.getURI());
 			for (@NonNull URI extendedDocURI : extendedDocURIs) {
 				csResource = (CSResource) externalResourceSet.getResource(extendedDocURI, true);
 				if (csResource == null) {
 					throw new CompilerChainException("Failed to parse " + extendedDocURI);
 				}
 				asResource = qvti.cs2as(csResource);
-				this.extendedASUris.add(ClassUtil.nonNullState(asResource.getURI())); // We add the AS URI
+				this.extendedASUris.add(ClassUtil.requireNonNull(asResource.getURI())); // We add the AS URI
 			}
 			StringBuilder s = null;
 			for (/*@NonNull*/ Resource resource : externalResourceSet.getResources()) {

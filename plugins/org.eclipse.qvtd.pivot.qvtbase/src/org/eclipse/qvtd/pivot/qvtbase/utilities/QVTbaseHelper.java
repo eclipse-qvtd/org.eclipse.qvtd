@@ -64,8 +64,8 @@ public class QVTbaseHelper extends PivotHelper
 	}
 
 	public @NonNull FunctionParameter createFunctionParameter(@NonNull TypedElement typedElement) {
-		String name = ClassUtil.nonNullState(typedElement.getName());
-		Type type = ClassUtil.nonNullState(typedElement.getType());
+		String name = ClassUtil.requireNonNull(typedElement.getName());
+		Type type = ClassUtil.requireNonNull(typedElement.getType());
 		FunctionParameter asParameter = QVTbaseFactory.eINSTANCE.createFunctionParameter();
 		asParameter.setName(name);
 		setType(asParameter, type, typedElement.isIsRequired());
@@ -73,7 +73,7 @@ public class QVTbaseHelper extends PivotHelper
 	}
 
 	public @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSourceExpression, @NonNull String opName, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull OCLExpression asBody) {
-		Type asType = ClassUtil.nonNullState(asSourceExpression.getType());
+		Type asType = ClassUtil.requireNonNull(asSourceExpression.getType());
 		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asType);
 		int iteratorsCount = asIterators.size();
 		int bestMatches = -1;
@@ -86,7 +86,7 @@ public class QVTbaseHelper extends PivotHelper
 					int exactMatches = 0;
 					boolean gotOne = true;
 					for (int i = 0; i < iteratorsCount; i++) {
-						Type asParameterType = ClassUtil.nonNullState(asParameters.get(i).getType());
+						Type asParameterType = ClassUtil.requireNonNull(asParameters.get(i).getType());
 						if (asParameterType instanceof SelfType) {
 							Type asArgumentType = asIterators.get(i).getType();
 							if (asArgumentType.conformsTo(standardLibrary, asType) && asType.conformsTo(standardLibrary, asArgumentType)) {

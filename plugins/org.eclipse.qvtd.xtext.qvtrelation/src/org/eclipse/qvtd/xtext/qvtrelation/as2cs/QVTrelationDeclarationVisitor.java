@@ -333,7 +333,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if (implementationClass != null) {
 			csJavaClass = BaseCSFactory.eINSTANCE.createJavaClassCS();
 			csJavaClass.setName(implementationClass);
-			ClassUtil.nonNullState(context.getCSResource()).getContents().add(csJavaClass);
+			ClassUtil.requireNonNull(context.getCSResource()).getContents().add(csJavaClass);
 		}
 		csQuery.setImplementation(csJavaClass);
 		return csQuery;
@@ -446,7 +446,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		Property referredProperty = QVTrelationUtil.getReferredProperty(asPropertyTemplateItem);
 		if (asPropertyTemplateItem.isIsOpposite()) {
 			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-			context.refreshPathName(csPathName, ClassUtil.nonNullState(referredProperty.getOpposite()), null);
+			context.refreshPathName(csPathName, ClassUtil.requireNonNull(referredProperty.getOpposite()), null);
 			csPropertyTemplate.setOwnedOppositePropertyId(csPathName);
 			csPropertyTemplate.setPropertyId(null);
 		}

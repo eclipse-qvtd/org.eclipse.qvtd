@@ -206,13 +206,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	// FIXME move following clones to a Util class
 	public static @NonNull XtextResource as2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
-		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, csContentType));
+		XtextResource xtextResource = ClassUtil.requireNonNull((XtextResource) resourceSet.createResource(outputURI, csContentType));
 		ocl.as2cs(asResource, (CSResource) xtextResource);
 		LoadTestCase.assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
 		//
-		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
+		URI savedURI = ClassUtil.requireNonNull(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		asResource.setURI(savedURI);
@@ -354,7 +354,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			resourceSet = getResourceSet();
 		}
 		TypedModelInstance typedModelInstance = executor.getTypedModelInstance(modelName);
-		Resource outputResource = ClassUtil.nonNullState(resourceSet.createResource(modelURI));
+		Resource outputResource = ClassUtil.requireNonNull(resourceSet.createResource(modelURI));
 		typedModelInstance.addOutputResource(outputResource);
 		return outputResource;
 	} */
@@ -426,7 +426,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//		else {
 		//			resourceSet = getResourceSet();
 		//		}
-		Resource actualResource = ClassUtil.nonNullState(actualResourceSet.getResource(actualURI, true));
+		Resource actualResource = ClassUtil.requireNonNull(actualResourceSet.getResource(actualURI, true));
 		resolveAllandSetASonly(actualResourceSet);
 		if (expectedURI != null) {
 			String actualFileStem = actualURI.trimFileExtension().lastSegment();
@@ -519,7 +519,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		File explicitClassPath = new File(getJavaClassURI().toString() + "/");
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
-		OCL2JavaFileObject.saveClass(ClassUtil.nonNullState(explicitClassPath.toString()), qualifiedClassName, javaCodeSource);
+		OCL2JavaFileObject.saveClass(ClassUtil.requireNonNull(explicitClassPath.toString()), qualifiedClassName, javaCodeSource);
 		@SuppressWarnings("unchecked")
 		Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName/*, null*/);
 		if (txClass == null) {
@@ -733,7 +733,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull TransformationExecutor getExecutor() {
-		return ClassUtil.nonNullState(executor);
+		return ClassUtil.requireNonNull(executor);
 	}
 
 	@Deprecated /** @deprecated use known writeable area in caller */

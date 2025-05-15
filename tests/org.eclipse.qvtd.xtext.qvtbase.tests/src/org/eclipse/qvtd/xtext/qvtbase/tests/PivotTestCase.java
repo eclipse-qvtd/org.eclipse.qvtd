@@ -138,7 +138,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		Executor savedInterpretedExecutor = savedExecutor != null ? savedExecutor.basicGetInterpretedExecutor() : null;
 		try {
 			for (EObject eObject : resource.getContents()) {
-				assertNoValidationErrorsInternal(string, ClassUtil.nonNullEMF(eObject));
+				assertNoValidationErrorsInternal(string, ClassUtil.requireNonNull(eObject));
 			}
 		}
 		finally {
@@ -235,7 +235,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 		StringBuilder s2 = null;
 		for (String key : expected.keySet()) {
-			Integer count = ClassUtil.nonNullState(expected.get(key));
+			Integer count = ClassUtil.requireNonNull(expected.get(key));
 			while (count-- > 0) {
 				if (s2 == null) {
 					s2 = new StringBuilder();

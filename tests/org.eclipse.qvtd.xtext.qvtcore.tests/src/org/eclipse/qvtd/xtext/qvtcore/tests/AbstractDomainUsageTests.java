@@ -151,13 +151,13 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		asResource.setURI(pivotURI);
 
 		//	    CompleteOCLStandaloneSetup.doSetup();
-		//	    URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ocl", true));
-		//		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
+		//	    URI oclURI = ClassUtil.requireNonNull(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ocl", true));
+		//		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.requireNonNull(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
 		//		completeOCLEObjectValidator2.initialize();
-		//		PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), myQVT.getEnvironmentFactory());
-		//		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
-		//		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
-		//		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE));
+		//		PivotEObjectValidator.install(ClassUtil.requireNonNull(asResource.getResourceSet()), myQVT.getEnvironmentFactory());
+		//		PivotEObjectValidator.install(ClassUtil.requireNonNull(QVTbasePackage.eINSTANCE));
+		//		PivotEObjectValidator.install(ClassUtil.requireNonNull(QVTcoreBasePackage.eINSTANCE));
+		//		PivotEObjectValidator.install(ClassUtil.requireNonNull(QVTcorePackage.eINSTANCE));
 
 		//		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		//		System.out.println("asResource.getURI() = " + asResource.getURI());

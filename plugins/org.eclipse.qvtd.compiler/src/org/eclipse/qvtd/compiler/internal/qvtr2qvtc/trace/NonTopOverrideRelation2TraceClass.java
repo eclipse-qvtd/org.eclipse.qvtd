@@ -91,7 +91,7 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusInterfaceProperty() {
 		Relation2TraceClass baseRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(QVTrelationUtil.getBaseRelation(relation));
 		if (baseRelation2TraceClass == this) {
-			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2SuccessProperty());
+			return ClassUtil.requireNonNull(relation2traceInterface.basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass.getStatusInterfaceProperty();
@@ -102,7 +102,7 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusTraceProperty() {
 		Relation2TraceClass baseRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(QVTrelationUtil.getBaseRelation(relation));
 		if (baseRelation2TraceClass == this) {
-			return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
+			return ClassUtil.requireNonNull(basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass.getStatusInterfaceProperty();

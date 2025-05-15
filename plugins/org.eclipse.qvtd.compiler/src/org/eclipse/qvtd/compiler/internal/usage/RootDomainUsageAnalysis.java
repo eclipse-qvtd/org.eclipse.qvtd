@@ -566,7 +566,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	}
 
 	public @NonNull DomainUsage getMiddleUsage() {
-		return ClassUtil.nonNullState(middleUsage);
+		return ClassUtil.requireNonNull(middleUsage);
 	}
 
 	public @NonNull DomainUsage getNoneUsage() {
@@ -667,7 +667,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	}
 
 	public @NonNull TypedModel getTraceTypedModel() {
-		return ClassUtil.nonNullState(traceTypedModel);
+		return ClassUtil.requireNonNull(traceTypedModel);
 	}
 
 	public @NonNull Transformation getTransformation() {
@@ -696,7 +696,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		Operation operation = PivotUtil.getContainingOperation(element);
 		if (operation != null) {
 			DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
-			return ClassUtil.nonNullState(analyzeOperation.getUsage(element));
+			return ClassUtil.requireNonNull(analyzeOperation.getUsage(element));
 		}
 		else {
 			return super.getUsage(element);

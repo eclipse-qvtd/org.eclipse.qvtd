@@ -125,7 +125,7 @@ public class QVTrelationMultipleScheduleManager extends BasicScheduleManager imp
 
 	@Override
 	public @NonNull QVTrelationDirectedScheduleManager getDirectedScheduleManager(@NonNull RootRegion rootRegion) {
-		return ClassUtil.nonNullState(rootRegion2directedScheduleManager.get(rootRegion));
+		return ClassUtil.requireNonNull(rootRegion2directedScheduleManager.get(rootRegion));
 	}
 
 	@Override

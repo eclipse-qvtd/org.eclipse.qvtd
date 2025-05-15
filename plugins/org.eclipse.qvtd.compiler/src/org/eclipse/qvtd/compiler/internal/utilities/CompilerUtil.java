@@ -582,7 +582,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		if (fragment != null) {
 			uri = uri.appendFragment(fragment);
 		}
-		return ClassUtil.nonNullState((GenPackage)resourceSet.getEObject(uri, true));
+		return ClassUtil.requireNonNull((GenPackage)resourceSet.getEObject(uri, true));
 	}
 
 	public static void indent(@NonNull StringBuilder s, int depth) {

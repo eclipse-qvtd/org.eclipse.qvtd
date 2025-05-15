@@ -102,7 +102,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	public @NonNull SuccessEdge createLocalSuccess() {
 		List<@NonNull Node> traceNodes = getTraceNodes();
 		assert traceNodes.size() == 1;
-		Node traceNode = ClassUtil.nonNullState(traceNodes.get(0));
+		Node traceNode = ClassUtil.requireNonNull(traceNodes.get(0));
 		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)region);
 		RelationAnalysis relationAnalysis = (RelationAnalysis)transformationAnalysis.getRuleAnalysis(referredRule);
 		Relation2TraceGroup relation2traceGroup = relationAnalysis.getRule2TraceGroup();
@@ -143,7 +143,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	}
 
 	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
-		return ClassUtil.nonNullState(partitionAnalyses);
+		return ClassUtil.requireNonNull(partitionAnalyses);
 	}
 
 	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
@@ -156,7 +156,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis() {
-		return ClassUtil.nonNullState(ruleAnalysis);
+		return ClassUtil.requireNonNull(ruleAnalysis);
 	}
 
 	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {

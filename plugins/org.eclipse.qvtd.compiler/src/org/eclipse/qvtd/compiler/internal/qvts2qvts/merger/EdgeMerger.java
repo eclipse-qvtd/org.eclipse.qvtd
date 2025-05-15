@@ -78,7 +78,7 @@ class EdgeMerger
 	}
 
 	public @NonNull Edge getMergedEdge() {
-		return ClassUtil.nonNullState(mergedEdge);
+		return ClassUtil.requireNonNull(mergedEdge);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOriginalEdges() {

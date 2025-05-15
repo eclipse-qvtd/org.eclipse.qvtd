@@ -442,17 +442,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected @NonNull OperationRegion createOperationRegion(@NonNull AbstractScheduleManager scheduleManager, @NonNull OperationCallExp operationCallExp,
 			@NonNull ExpressionInOCL specification, @NonNull OperationDatum operationDatum) {
 		Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
-		String operationName = ClassUtil.nonNullState(operationDatum.toString());
+		String operationName = ClassUtil.requireNonNull(operationDatum.toString());
 		final OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
 		scheduleManager.getScheduleModel().getOwnedOperationRegions().add(operationRegion);
-		operationRegion.setReferredOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
+		operationRegion.setReferredOperation(ClassUtil.requireNonNull(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
 		OperationRegionHelper regionHelper = new OperationRegionHelper(scheduleManager, operationRegion);
 		//
 		Variable selfVariable = specification.getOwnedContext();
 		OCLExpression source = operationCallExp.getOwnedSource();
 		assert source != null;
-		Node selfNode = createOperationParameterNode(regionHelper, selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
+		Node selfNode = createOperationParameterNode(regionHelper, selfVariable, ClassUtil.requireNonNull(selfVariable.getName()), source);
 		parameter2node.put(selfVariable, selfNode);
 		Node dependencyNode;
 		dependencyNode = selfNode;
@@ -467,7 +467,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		int iSize = Math.min(ownedArguments.size(), ownedParameters.size());
 		for (int i = 0; i < iSize; i++) {
 			Variable parameter = ownedParameters.get(i);
-			Node parameterNode = createOperationParameterNode(regionHelper, parameter, ClassUtil.nonNullState(parameter.getName()), ClassUtil.nonNullState(ownedArguments.get(i)));
+			Node parameterNode = createOperationParameterNode(regionHelper, parameter, ClassUtil.requireNonNull(parameter.getName()), ClassUtil.requireNonNull(ownedArguments.get(i)));
 			parameter2node.put(parameter, parameterNode);
 		}
 		//
@@ -623,7 +623,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull ConnectionManager getConnectionManager() {
-		return ClassUtil.nonNullState(connectionManager);
+		return ClassUtil.requireNonNull(connectionManager);
 	}
 
 	public abstract @NonNull ContainmentAnalysis getContainmentAnalysis();
@@ -651,7 +651,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (operation != null) {
 			analysis = domainUsageAnalysis.getAnalysis(operation);
 		}
-		return ClassUtil.nonNullState(analysis.getUsage(element));
+		return ClassUtil.requireNonNull(analysis.getUsage(element));
 	}
 
 	public @NonNull DirectedDomainUsageAnalysis getDirectedDomainUsageAnalysis() {
@@ -720,7 +720,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull OriginalContentsAnalysis getOriginalContentsAnalysis() {
-		return ClassUtil.nonNullState(originalContentsAnalysis);
+		return ClassUtil.requireNonNull(originalContentsAnalysis);
 	}
 
 	@Override
@@ -797,7 +797,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	/*	public @NonNull Property getStatusProperty(@NonNull Node node) {
 		assert isMiddle(node);
 		CompleteClass completeClass = node.getCompleteClass();
-		return ClassUtil.nonNullState(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME));
+		return ClassUtil.requireNonNull(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME));
 	} */
 
 	@Override
@@ -1138,11 +1138,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	//	@Override
 	//	public @NonNull Partition wipGetPartition(@NonNull Region partitionedRegion) {
-	//		return ClassUtil.nonNullState(wip_region2partition.get(partitionedRegion));
+	//		return ClassUtil.requireNonNull(wip_region2partition.get(partitionedRegion));
 	//	}
 
 	//	@Override
 	//	public @NonNull Region wipGetRegion(@NonNull Partition partition) {
-	//		return ClassUtil.nonNullState(wip_partition2region.get(partition));
+	//		return ClassUtil.requireNonNull(wip_partition2region.get(partition));
 	//	}
 }

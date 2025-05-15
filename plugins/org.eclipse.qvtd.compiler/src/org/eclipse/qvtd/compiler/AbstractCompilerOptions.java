@@ -58,7 +58,7 @@ public abstract class AbstractCompilerOptions implements CompilerOptions
 
 	@Override
 	public <T> @NonNull T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey) {
-		StepOptions stepOptions = ClassUtil.nonNullState(options.get(stepKey));
+		StepOptions stepOptions = ClassUtil.requireNonNull(options.get(stepKey));
 		return stepOptions.get(optionKey);
 	}
 

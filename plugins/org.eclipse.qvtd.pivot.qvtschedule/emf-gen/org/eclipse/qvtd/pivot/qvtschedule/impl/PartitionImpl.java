@@ -542,7 +542,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	@Override
 	public @NonNull String getName() {
-		return ClassUtil.nonNullState(name);
+		return ClassUtil.requireNonNull(name);
 	}
 
 	@Override
@@ -649,6 +649,6 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	@Override
 	public @NonNull String toString() {
-		return ClassUtil.nonNullState(name);
+		return ClassUtil.requireNonNull(name);
 	}
 } //PartitionImpl

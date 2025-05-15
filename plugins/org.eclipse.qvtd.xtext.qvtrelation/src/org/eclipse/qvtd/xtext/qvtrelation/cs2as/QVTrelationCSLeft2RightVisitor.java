@@ -90,7 +90,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 
 		@Override
 		public @NonNull Type getSourceType() {
-			return ClassUtil.nonNullState(invocation.getTransformation());
+			return ClassUtil.requireNonNull(invocation.getTransformation());
 		}
 
 		@Override
@@ -258,7 +258,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 								isType = true;
 								NameExpCS csNameExp = (NameExpCS)csName;
 								PathNameCS csPathName = csNameExp.getOwnedPathName();
-								Type type = context.getConverter().lookupType(csNameExp, ClassUtil.nonNullState(csPathName));
+								Type type = context.getConverter().lookupType(csNameExp, ClassUtil.requireNonNull(csPathName));
 								if (type != null) {
 									arg = resolveTypeExp(csNameExp, type);
 								}

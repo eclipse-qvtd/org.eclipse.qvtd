@@ -1032,7 +1032,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetTransformation((RelationalTransformation)otherEnd, msgs);
+				return basicSetTransformation((RelationalTransformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1075,7 +1075,7 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getIdentifies();
-			return basicGetIdentifies();
+				return basicGetIdentifies();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getOppositePart();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
@@ -1097,18 +1097,18 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)newValue);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
-			getOppositePart().addAll((Collection<? extends Property>)newValue);
-			return;
+				getOppositePart().addAll((Collection<? extends Property>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
-			getPart().addAll((Collection<? extends Property>)newValue);
-			return;
+				getPart().addAll((Collection<? extends Property>)newValue);
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1123,16 +1123,16 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)null);
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
-			return;
+				return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

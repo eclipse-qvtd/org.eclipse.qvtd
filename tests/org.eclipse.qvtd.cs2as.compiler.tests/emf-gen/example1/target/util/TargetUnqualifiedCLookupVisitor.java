@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedCLookupVisitor
-	extends AbstractTargetCommonLookupVisitor
+extends AbstractTargetCommonLookupVisitor
 {
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
@@ -49,20 +49,21 @@ public class TargetUnqualifiedCLookupVisitor
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Env4CG = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Env4CG", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Executor = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Executor", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedCLookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedCLookupVisitor", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
-	protected final /*@Thrown*/ @NonNull Executor executor;
+	protected final  @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
 	protected /*@Thrown*/ @Nullable Object child_0;
 
 	public TargetUnqualifiedCLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
 
@@ -99,7 +100,7 @@ public class TargetUnqualifiedCLookupVisitor
 			final /*@NonInvalid*/ @NonNull List<C> ownsC = element_0.getOwnsC();
 			final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
 			final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsC, child_0).booleanValue();
-			/*@Thrown*/ @Nullable LookupEnvironment symbol_1;
+			/*@Thrown*/ @Nullable LookupEnvironment IF_includes;
 			if (includes) {
 				/*@Thrown*/ OrderedSetValue.@NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
 				@NonNull Iterator<Object> ITERATOR_x = BOXED_ownsC.iterator();
@@ -135,21 +136,21 @@ public class TargetUnqualifiedCLookupVisitor
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull LookupEnvironment inner = context.addElements(ECORE_select);
 				final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
-				/*@Thrown*/ @Nullable LookupEnvironment symbol_0;
+				/*@Thrown*/ @Nullable LookupEnvironment IF_hasFinalResult_0;
 				if (hasFinalResult_0) {
-					symbol_0 = inner;
+					IF_hasFinalResult_0 = inner;
 				}
 				else {
 					final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv_C = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
-					symbol_0 = parentEnv_C;
+					IF_hasFinalResult_0 = parentEnv_C;
 				}
-				symbol_1 = symbol_0;
+				IF_includes = IF_hasFinalResult_0;
 			}
 			else {
 				final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv_C_0 = TargetUnqualifiedCLookupVisitor.this.parentEnv(element_0);
-				symbol_1 = parentEnv_C_0;
+				IF_includes = parentEnv_C_0;
 			}
-			return symbol_1;
+			return IF_includes;
 		}
 
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull A2 element_0) {

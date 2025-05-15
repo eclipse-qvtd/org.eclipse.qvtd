@@ -63,7 +63,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<@N
 	}
 
 	public @NonNull RootRegion getRootRegion() {
-		return ClassUtil.nonNullState(rootRegion);
+		return ClassUtil.requireNonNull(rootRegion);
 	}
 
 	public void setRootRegion(@NonNull RootRegion rootRegion) {

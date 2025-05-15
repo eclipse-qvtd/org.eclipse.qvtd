@@ -117,7 +117,7 @@ public class OperationDependencyAnalysis
 		private final @NonNull Map<@NonNull Property, @NonNull NavigationDependencyStep> property2step = new HashMap<>();
 
 		protected DependencyStepFactory(@NonNull DomainUsage usage) {
-			this.usage = ClassUtil.nonNullState(usage);
+			this.usage = ClassUtil.requireNonNull(usage);
 		}
 
 		public @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
@@ -1214,7 +1214,7 @@ public class OperationDependencyAnalysis
 
 		//		@Override
 		//		public @NonNull DependencyPaths getResult(@NonNull AbstractOperationAnalysis invokingAnalysis) {
-		//			return ClassUtil.nonNullState(result);
+		//			return ClassUtil.requireNonNull(result);
 		//		}
 
 		/*		public void assignUnknownResult() {
@@ -1307,25 +1307,25 @@ public class OperationDependencyAnalysis
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
 				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
-				visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
+				visitor.addVariable(thisVariable, ClassUtil.requireNonNull(sourceAndArgumentPaths.get(0)));
 				ownedParameters = function.getOwnedParameters();
 				ownedBody = function.getQueryExpression();
 			}
 			else {
-				bodyExpression = ClassUtil.nonNullState(operation.getBodyExpression());
+				bodyExpression = ClassUtil.requireNonNull(operation.getBodyExpression());
 				ExpressionInOCL specification;
 				try {
 					specification = operationDependencyAnalysis.environmentFactory.parseSpecification(bodyExpression);
 				} catch (ParserException e) {
 					throw new IllegalStateException(e);
 				}
-				visitor.addVariable(ClassUtil.nonNullState(specification.getOwnedContext()), ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
+				visitor.addVariable(ClassUtil.requireNonNull(specification.getOwnedContext()), ClassUtil.requireNonNull(sourceAndArgumentPaths.get(0)));
 				ownedParameters = specification.getOwnedParameters();
 				ownedBody = specification.getOwnedBody();
 			}
 			int iMax = Math.min(ownedParameters.size(), sourceAndArgumentPaths.size()-1);
 			for (int i = 0; i < iMax; i++) {
-				visitor.addVariable(ClassUtil.nonNullState(ownedParameters.get(i)), ClassUtil.nonNullState(sourceAndArgumentPaths.get(i+1)));
+				visitor.addVariable(ClassUtil.requireNonNull(ownedParameters.get(i)), ClassUtil.requireNonNull(sourceAndArgumentPaths.get(i+1)));
 			}
 			BasicDependencyPaths analysisResult = visitor.analyze(ownedBody);
 			Collection<@NonNull OperationAnalysis> invokedFutureAnalyses2 = invokedFutureAnalyses;
@@ -1472,7 +1472,7 @@ public class OperationDependencyAnalysis
 			}
 		}
 		OperationDependencyPaths result2 = visitor.analyze(element);
-		return ClassUtil.nonNullState(result2);
+		return ClassUtil.requireNonNull(result2);
 	}
 
 	public @NonNull OperationDependencyPaths analyzeOperation(@NonNull OperationCallExp operationCallExp) {
@@ -1501,7 +1501,7 @@ public class OperationDependencyAnalysis
 
 	protected @NonNull ClassDependencyStep createClassDependencyStep(@NonNull Type type, @NonNull Element element) {
 		while (type instanceof CollectionType) {
-			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
+			type = ClassUtil.requireNonNull((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
 		}
 		DomainUsage usage1 = domainUsageAnalysis.basicGetUsage(type);
 		DomainUsage usage = usage1 != null ? usage1 : getUsage(element);
@@ -1518,7 +1518,7 @@ public class OperationDependencyAnalysis
 	}
 
 	public @NonNull BasicDependencyPaths createDependencyPaths(@NonNull TypedElement typedElement) {
-		org.eclipse.ocl.pivot.Class type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
+		org.eclipse.ocl.pivot.Class type = ClassUtil.requireNonNull((org.eclipse.ocl.pivot.Class)typedElement.getType());
 		return createDependencyPaths(createClassDependencyStep(type, typedElement));
 	}
 
@@ -1547,7 +1547,7 @@ public class OperationDependencyAnalysis
 	protected @NonNull ParameterDependencyStep createParameterDependencyStep(@NonNull VariableDeclaration parameter) {
 		Type type = parameter.getType();
 		while (type instanceof CollectionType) {
-			type = ClassUtil.nonNullState(((CollectionType)type).getElementType());
+			type = ClassUtil.requireNonNull(((CollectionType)type).getElementType());
 		}
 		assert type != null;
 		DomainUsage usage1 = domainUsageAnalysis.basicGetUsage(type);

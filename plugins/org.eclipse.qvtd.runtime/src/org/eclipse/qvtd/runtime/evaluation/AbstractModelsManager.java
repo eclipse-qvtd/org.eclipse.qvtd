@@ -88,7 +88,7 @@ public abstract class AbstractModelsManager implements ModelsManager
 
 	@Override
 	public @NonNull EReference @NonNull [] getPropertyIndex2eReference() {
-		return ClassUtil.nonNullState(propertyIndex2eReference);
+		return ClassUtil.requireNonNull(propertyIndex2eReference);
 	}
 
 	public void initOpposites(@NonNull PropertyId @NonNull [] propertyIndex2propertyId) {

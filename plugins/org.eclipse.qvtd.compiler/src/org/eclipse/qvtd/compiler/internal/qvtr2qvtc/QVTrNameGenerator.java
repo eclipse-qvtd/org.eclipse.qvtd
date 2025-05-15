@@ -105,7 +105,7 @@ public class QVTrNameGenerator
 	//	}
 
 	//	public @NonNull String createKey2InstanceMappingName(org.eclipse.ocl.pivot.@NonNull Class identifiedClass, @NonNull TypedModel typedModel) {
-	//		String rEnforcedDomainName = ClassUtil.nonNullState(typedModel.getName());
+	//		String rEnforcedDomainName = ClassUtil.requireNonNull(typedModel.getName());
 	//		return "Key2" + identifiedClass.getName() + "_" + rEnforcedDomainName;
 	//	}
 

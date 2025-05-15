@@ -237,7 +237,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	}
 
 	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
-		return ClassUtil.nonNullState(rootPartitionAnalysis);
+		return ClassUtil.requireNonNull(rootPartitionAnalysis);
 	}
 
 	//	public @NonNull Iterable<@NonNull RuleAnalysis> getRuleAnalyses() {
@@ -245,7 +245,7 @@ public abstract class AbstractTransformationAnalysis extends AbstractPartialRegi
 	//	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {
-		return ClassUtil.nonNullState(rule2ruleAnalysis.get(rule));
+		return ClassUtil.requireNonNull(rule2ruleAnalysis.get(rule));
 		/*		RuleAnalysis ruleAnalysis = rule2ruleAnalysis.get(rule);
 		if (ruleAnalysis != null) {
 			return ruleAnalysis;

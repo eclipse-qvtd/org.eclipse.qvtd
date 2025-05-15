@@ -761,13 +761,13 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
 
 	protected @NonNull Import createImport(@NonNull Import iIn) {
-		Import iOut = createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
+		Import iOut = createImport(iIn.getName(), ClassUtil.requireNonNull(iIn.getImportedNamespace()));
 		addTrace(iIn, iOut);
 		return iOut;
 	}
 
 	protected org.eclipse.ocl.pivot.@NonNull Package createPackage(org.eclipse.ocl.pivot.@NonNull Package pIn) {
-		org.eclipse.ocl.pivot.Package pOut = createPackage(ClassUtil.nonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
+		org.eclipse.ocl.pivot.Package pOut = createPackage(ClassUtil.requireNonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
 		addTrace(pIn, pOut);
 		return pOut;
 	}

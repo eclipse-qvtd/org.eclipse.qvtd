@@ -106,7 +106,7 @@ class SplitterAnalysis
 	 * Throws IllegalStateException for a computation node.
 	 */
 	public @NonNull Iterable<@NonNull SimpleGroup> getReachableSimpleGroups(@NonNull Node node) {
-		return ClassUtil.nonNullState(reachableNode2simpleGroups.get(node));
+		return ClassUtil.requireNonNull(reachableNode2simpleGroups.get(node));
 	}
 
 	public @NonNull Region getRegion() {

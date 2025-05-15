@@ -178,7 +178,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull Variable getBindsTo(@NonNull TemplateExp rTemplateExp) {
-		return ClassUtil.nonNullState(rTemplateExp.getBindsTo());
+		return ClassUtil.requireNonNull(rTemplateExp.getBindsTo());
 	}
 
 	public static @NonNull Predicate getContainingPredicate(@Nullable EObject eObject) {
@@ -213,7 +213,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
-		return ClassUtil.nonNullState(rKey.getIdentifies());
+		return ClassUtil.requireNonNull(rKey.getIdentifies());
 	}
 
 	public static @NonNull VariableDeclaration getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull VariableDeclaration overridingRootVariable) {
@@ -261,11 +261,11 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull TemplateExp getOwnedTemplateExpression(@NonNull DomainPattern rDomainPattern) {
-		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
+		return ClassUtil.requireNonNull(rDomainPattern.getTemplateExpression());
 	}
 
 	public static @NonNull OCLExpression getOwnedValue(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
-		return ClassUtil.nonNullState(rPropertyTemplateItem.getValue());
+		return ClassUtil.requireNonNull(rPropertyTemplateItem.getValue());
 	}
 
 	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull Relation rRelation) {
@@ -273,11 +273,11 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull ObjectTemplateExp getOwningObjectTemplateExp(@NonNull  PropertyTemplateItem rPropertyTemplateItem) {
-		return ClassUtil.nonNullState(rPropertyTemplateItem.getObjContainer());
+		return ClassUtil.requireNonNull(rPropertyTemplateItem.getObjContainer());
 	}
 
 	public static @NonNull Relation getReferredRelation(@NonNull RelationCallExp rInvocation) {
-		return ClassUtil.nonNullState(rInvocation.getReferredRelation());
+		return ClassUtil.requireNonNull(rInvocation.getReferredRelation());
 	}
 
 	/**
@@ -356,19 +356,19 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull Variable getTraceVariable(@NonNull Relation relation) {
-		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedVariables(relation), TRACE_CLASS_NAME));
+		return ClassUtil.requireNonNull(NameUtil.getNameable(getOwnedVariables(relation), TRACE_CLASS_NAME));
 	}
 
 	public static @NonNull RelationalTransformation getTransformation(@NonNull Relation rRelation) {
-		return (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
+		return (RelationalTransformation) ClassUtil.requireNonNull(rRelation.getTransformation());
 	}
 
 	public static @NonNull OCLExpression getValueExp(@NonNull RelationDomainAssignment relationDomainAssignment) {
-		return ClassUtil.nonNullState(relationDomainAssignment.getValueExp());
+		return ClassUtil.requireNonNull(relationDomainAssignment.getValueExp());
 	}
 
 	public static @NonNull VariableDeclaration getVariable(@NonNull RelationDomainAssignment relationDomainAssignment) {
-		return ClassUtil.nonNullState(relationDomainAssignment.getVariable());
+		return ClassUtil.requireNonNull(relationDomainAssignment.getVariable());
 	}
 
 	/**
@@ -379,11 +379,11 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	//	public static @NonNull Pattern getWhen(@NonNull Relation rRelation) {
-	//		return ClassUtil.nonNullState(rRelation.getWhen());
+	//		return ClassUtil.requireNonNull(rRelation.getWhen());
 	//	}
 
 	//	public static @NonNull Pattern getWhere(@NonNull Relation rRelation) {
-	//		return ClassUtil.nonNullState(rRelation.getWhere());
+	//		return ClassUtil.requireNonNull(rRelation.getWhere());
 	//	}
 
 	/**

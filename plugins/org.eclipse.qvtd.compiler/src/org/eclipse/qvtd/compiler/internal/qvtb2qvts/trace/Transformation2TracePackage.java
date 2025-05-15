@@ -367,7 +367,7 @@ public abstract class Transformation2TracePackage
 	}
 
 	/*	protected @NonNull Iterable<Relation2TraceClass.@NonNull Internal> getInvocation2TraceClasses(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
-		return ClassUtil.nonNullState(invocation2relation2traceClasses.get(rInvocation));
+		return ClassUtil.requireNonNull(invocation2relation2traceClasses.get(rInvocation));
 	} */
 
 	public @NonNull DomainUsageAnalysis getDomainUsageAnalysis() {

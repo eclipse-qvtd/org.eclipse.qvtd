@@ -150,12 +150,12 @@ public abstract class AbstractPartialRegionsAnalysis<@NonNull PRA extends Partia
 
 	@Override
 	public @NonNull PartialRegionClassAnalysis<@NonNull PRA> getClassAnalysis(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum2classAnalysis.get(classDatum));
+		return ClassUtil.requireNonNull(classDatum2classAnalysis.get(classDatum));
 	}
 
 	@Override
 	public @NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> getPropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
-		return ClassUtil.nonNullState(propertyDatum2actualPropertyAnalysis.get(propertyDatum));
+		return ClassUtil.requireNonNull(propertyDatum2actualPropertyAnalysis.get(propertyDatum));
 	}
 
 	@Override

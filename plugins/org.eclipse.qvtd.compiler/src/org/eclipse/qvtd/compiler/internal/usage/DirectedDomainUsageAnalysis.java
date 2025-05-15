@@ -269,15 +269,15 @@ public class DirectedDomainUsageAnalysis implements DomainUsageAnalysis.Root
 	}
 
 	public @NonNull DomainUsage getInputUsage() {
-		return ClassUtil.nonNullState(inputUsage);
+		return ClassUtil.requireNonNull(inputUsage);
 	}
 
 	public @NonNull DomainUsage getIntermediateUsage() {
-		return ClassUtil.nonNullState(intermediateUsage);
+		return ClassUtil.requireNonNull(intermediateUsage);
 	}
 
 	public @NonNull DomainUsage getOutputUsage() {
-		return ClassUtil.nonNullState(outputUsage);
+		return ClassUtil.requireNonNull(outputUsage);
 	}
 
 	@Override

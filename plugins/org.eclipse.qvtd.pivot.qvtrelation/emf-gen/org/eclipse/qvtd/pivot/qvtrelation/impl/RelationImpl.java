@@ -894,21 +894,21 @@ public class RelationImpl extends RuleImpl implements Relation {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel((Boolean)newValue);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
-			getOperationalImpl().addAll((Collection<? extends RelationImplementation>)newValue);
-			return;
+				getOperationalImpl().addAll((Collection<? extends RelationImplementation>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
-			getVariable().addAll((Collection<? extends Variable>)newValue);
-			return;
+				getVariable().addAll((Collection<? extends Variable>)newValue);
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)newValue);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)newValue);
-			return;
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -923,19 +923,19 @@ public class RelationImpl extends RuleImpl implements Relation {
 		switch (featureID) {
 			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel(IS_TOP_LEVEL_EDEFAULT);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)null);
-			return;
+				return;
 			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)null);
-			return;
+				return;
 		}
 		super.eUnset(featureID);
 	}

@@ -44,7 +44,7 @@ public class ClassesExportedOperationLookupVisitor
 
 	public ClassesExportedOperationLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
 		super(context);
-		this.executor = ClassUtil.nonNull(context.getExecutor());
+		this.executor = ClassUtil.requireNonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 		this.importer_0 = importer;
 	}

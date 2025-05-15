@@ -131,7 +131,7 @@ public class UMLXUtil
 	}
 
 	public static @NonNull RelPatternNode getInvokingRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
-		return ClassUtil.nonNullState(relInvocationEdge.getInvokingRelPatternNode());
+		return ClassUtil.requireNonNull(relInvocationEdge.getInvokingRelPatternNode());
 	}
 
 	public static @NonNull Iterable<@NonNull TxTypedModelNode> getIterates(@NonNull TxTypedModelNode txTypedModelNode) {
@@ -139,7 +139,7 @@ public class UMLXUtil
 	}
 
 	public static @NonNull String getName(@NonNull UMLXNamedElement umlxElement) {
-		return ClassUtil.nonNullState(umlxElement.getName());
+		return ClassUtil.requireNonNull(umlxElement.getName());
 	}
 
 	public static @NonNull Iterable<@NonNull RelPatternEdge> getOutgoing(@NonNull RelPatternNode relNode) {
@@ -199,43 +199,43 @@ public class UMLXUtil
 	}
 
 	public static @NonNull RelDiagram getOwningRelDiagram(@NonNull RelInvocationNode relInvocationNode) {
-		return ClassUtil.nonNullState(relInvocationNode.getOwningRelDiagram());
+		return ClassUtil.requireNonNull(relInvocationNode.getOwningRelDiagram());
 	}
 
 	public static @NonNull RelDomainNode getOwningRelDomainNode(@NonNull RelPatternNode relPatternNode) {
-		return ClassUtil.nonNullState(relPatternNode.getOwningRelDomainNode());
+		return ClassUtil.requireNonNull(relPatternNode.getOwningRelDomainNode());
 	}
 
 	public static @NonNull EClass getReferredEClass(@NonNull TxKeyNode txKeyNode) {
-		return ClassUtil.nonNullState(txKeyNode.getReferredEClass());
+		return ClassUtil.requireNonNull(txKeyNode.getReferredEClass());
 	}
 
 	public static @NonNull EClassifier getReferredEClassifier(@NonNull UMLXTypedElement umlxTypedElement) {
-		return ClassUtil.nonNullState(umlxTypedElement.getReferredEClassifier());
+		return ClassUtil.requireNonNull(umlxTypedElement.getReferredEClassifier());
 	}
 
 	public static @NonNull EPackage getReferredEPackage(@NonNull TxPackageNode txPackageNode) {
-		return ClassUtil.nonNullState(txPackageNode.getReferredEPackage());
+		return ClassUtil.requireNonNull(txPackageNode.getReferredEPackage());
 	}
 
 	public static @NonNull EStructuralFeature getReferredEStructuralFeature(@NonNull RelPatternEdge relPatternEdge) {
-		return ClassUtil.nonNullState(relPatternEdge.getReferredEStructuralFeature());
+		return ClassUtil.requireNonNull(relPatternEdge.getReferredEStructuralFeature());
 	}
 
 	public static @NonNull EStructuralFeature getReferredEStructuralFeature(@NonNull TxPartNode txPartNode) {
-		return ClassUtil.nonNullState(txPartNode.getReferredEStructuralFeature());
+		return ClassUtil.requireNonNull(txPartNode.getReferredEStructuralFeature());
 	}
 
 	public static @NonNull RelDiagram getReferredRelDiagram(@NonNull RelInvocationNode relInvocationNode) {
-		return ClassUtil.nonNullState(relInvocationNode.getReferredRelDiagram());
+		return ClassUtil.requireNonNull(relInvocationNode.getReferredRelDiagram());
 	}
 
 	public static @NonNull RelPatternNode getReferredRelPatternNode(@NonNull RelInvocationEdge relInvocationEdge) {
-		return ClassUtil.nonNullState(relInvocationEdge.getReferredRelPatternNode());
+		return ClassUtil.requireNonNull(relInvocationEdge.getReferredRelPatternNode());
 	}
 
 	public static @NonNull TxTypedModelNode getReferredTxTypedModelNode(@NonNull RelDomainNode relDomainNode) {
-		return ClassUtil.nonNullState(relDomainNode.getReferredTxTypedModelNode());
+		return ClassUtil.requireNonNull(relDomainNode.getReferredTxTypedModelNode());
 	}
 
 	private static @NonNull Iterable<@NonNull RelPatternNode> getRootPatternClassNodes(@NonNull RelDomainNode relDomainNode) {
@@ -244,11 +244,11 @@ public class UMLXUtil
 	}
 
 	public static @NonNull RelPatternNode getSource(@NonNull RelPatternEdge relPatternEdge) {
-		return ClassUtil.nonNullState(relPatternEdge.getSource());
+		return ClassUtil.requireNonNull(relPatternEdge.getSource());
 	}
 
 	public static @NonNull RelPatternNode getTarget(@NonNull RelPatternEdge relPatternEdge) {
-		return ClassUtil.nonNullState(relPatternEdge.getTarget());
+		return ClassUtil.requireNonNull(relPatternEdge.getTarget());
 	}
 
 	public static @NonNull List<@NonNull RelInvocationEdge> getSortedInvocationEdges(@NonNull RelInvocationNode relInvocationNode) {

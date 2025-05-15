@@ -125,7 +125,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
 		Type elementType = value.getType();
-		Type guardType = ClassUtil.nonNullState(variable.getType());
+		Type guardType = ClassUtil.requireNonNull(variable.getType());
 		mappingParameterBinding.setIsCheck(!elementType.conformsTo(standardLibrary, guardType));
 		return mappingParameterBinding;
 	}
@@ -141,7 +141,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		LoopParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createLoopParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.requireNonNull(variable.getType())));
 		return mappingParameterBinding;
 	}
 
@@ -214,7 +214,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		SimpleParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createSimpleParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.requireNonNull(variable.getType())));
 		return mappingParameterBinding;
 	}
 

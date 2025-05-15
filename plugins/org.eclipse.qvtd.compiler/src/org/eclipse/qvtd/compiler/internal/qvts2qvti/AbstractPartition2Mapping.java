@@ -267,14 +267,14 @@ public abstract class AbstractPartition2Mapping
 			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
-				return sourceNode.getNavigableTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty().getOpposite()));
+				return sourceNode.getNavigableTarget(ClassUtil.requireNonNull(propertyCallExp.getReferredProperty().getOpposite()));
 			}
 		}
 		if (qvtmElement instanceof PropertyCallExp) {
 			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
-				return sourceNode.getNavigableTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty()));
+				return sourceNode.getNavigableTarget(ClassUtil.requireNonNull(propertyCallExp.getReferredProperty()));
 			}
 		}
 		if (qvtmElement != null) {

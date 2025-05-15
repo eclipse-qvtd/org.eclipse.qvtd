@@ -138,8 +138,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 
 		public @NonNull Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws Exception {
-			URI cstURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension("xmi").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), cstName);
-			URI pivotURI = testProject.getOutputFile(ClassUtil.nonNullState(inputURI.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
+			URI cstURI = testProject.getOutputFile(ClassUtil.requireNonNull(inputURI.appendFileExtension("xmi").lastSegment())).getURI();//TestUtil.getFileURI(getClass(), cstName);
+			URI pivotURI = testProject.getOutputFile(ClassUtil.requireNonNull(inputURI.appendFileExtension(QVTimperativeUtil.QVTIAS_FILE_EXTENSION).lastSegment())).getURI();//TestUtil.getFileURI(getClass(), pivotName);
 			BaseCSResource xtextResource = (BaseCSResource) getResourceSet().getResource(inputURI, true);
 			assert xtextResource != null;
 			assertNoResourceErrors("Load failed", xtextResource);
@@ -154,7 +154,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			URI oclURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 			QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI);
+			CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.requireNonNull(QVTimperativePackage.eINSTANCE), oclURI);
 			//			CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
 			//			completeOCLEObjectValidator1.initialize();
 			completeOCLEObjectValidator2.initialize(environmentFactory);
@@ -162,10 +162,10 @@ public class QVTiCompilerTests extends LoadTestCase
 			ResourceSet asResourceSet = asResource.getResourceSet();
 			assert asResourceSet != null;
 			ValidationRegistryAdapter asValidationRegistry = ValidationRegistryAdapter.getAdapter(asResourceSet);
-			//	PivotEObjectValidator.install(ClassUtil.nonNullState(asResourceSet), environmentFactory);
-			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
-			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
+			//	PivotEObjectValidator.install(ClassUtil.requireNonNull(asResourceSet), environmentFactory);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.requireNonNull(QVTbasePackage.eINSTANCE), null);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.requireNonNull(QVTcorePackage.eINSTANCE), null);
+			PivotEObjectValidator.install(asValidationRegistry, ClassUtil.requireNonNull(QVTimperativePackage.eINSTANCE), null);
 
 			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 			if (asResource.isSaveable()) {
@@ -360,7 +360,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 
 		public @NonNull Resource loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
-			Resource inputResource = ClassUtil.nonNullState(getResourceSet().getResource(inputModelURI, true));
+			Resource inputResource = ClassUtil.requireNonNull(getResourceSet().getResource(inputModelURI, true));
 			tx.getTypedModelInstance(inputModelName).addInputResource(inputResource);
 			return inputResource;
 		}

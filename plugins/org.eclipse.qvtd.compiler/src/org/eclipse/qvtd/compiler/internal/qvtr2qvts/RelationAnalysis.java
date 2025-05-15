@@ -650,7 +650,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected @Nullable TemplateExp basicGetTemplateExp(@NonNull VariableDeclaration variable) {
-		return ClassUtil.nonNullState(variable2templateExp).get(variable);
+		return ClassUtil.requireNonNull(variable2templateExp).get(variable);
 	}
 
 	public @NonNull Set<@NonNull Node> computeTraceAndTraceComputationNodes() {
@@ -809,7 +809,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	private @NonNull RelationAnalysis getBaseRelationAnalysis() {
-		return ClassUtil.nonNullState(baseRelationAnalysis);
+		return ClassUtil.requireNonNull(baseRelationAnalysis);
 	}
 
 	public int getIncomingWhenInvocationCount() {
@@ -823,11 +823,11 @@ public class RelationAnalysis extends RuleAnalysis
 	@Override
 	public @NonNull InvocationAnalysis getInvocationAnalysis(@NonNull Node invokingNode) {
 		assert invokingNode2invocationAnalysis != null;
-		return ClassUtil.nonNullState(invokingNode2invocationAnalysis.get(invokingNode));
+		return ClassUtil.requireNonNull(invokingNode2invocationAnalysis.get(invokingNode));
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getKeyedOutputVariables() {
-		return ClassUtil.nonNullState(keyedOutputVariables);
+		return ClassUtil.requireNonNull(keyedOutputVariables);
 	}
 
 	@Override
@@ -871,7 +871,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getRealizedOutputVariables() {
-		return ClassUtil.nonNullState(realizedOutputVariables);
+		return ClassUtil.requireNonNull(realizedOutputVariables);
 	}
 
 	@Override
@@ -981,7 +981,7 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	//	protected @NonNull TemplateExp getTemplateExp(@NonNull VariableDeclaration variable) {
-	//		return ClassUtil.nonNullState(basicGetTemplateExp(variable));
+	//		return ClassUtil.requireNonNull(basicGetTemplateExp(variable));
 	//	}
 
 	public @NonNull TypedModel getTargetTypedModel() {
@@ -1003,11 +1003,11 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getNonTopWhenedOutputVariables() {
-		return ClassUtil.nonNullState(nonTopWhenedOutputVariables);
+		return ClassUtil.requireNonNull(nonTopWhenedOutputVariables);
 	}
 
 	protected @NonNull Set<@NonNull VariableDeclaration> getTopWhenedOutputVariables() {
-		return ClassUtil.nonNullState(topWhenedOutputVariables);
+		return ClassUtil.requireNonNull(topWhenedOutputVariables);
 	}
 
 	public boolean hasIncomingWhenInvocations() {
@@ -1644,7 +1644,7 @@ public class RelationAnalysis extends RuleAnalysis
 		boolean isValid = false;
 		for (@NonNull OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
-			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
+			expression = ClassUtil.requireNonNull(navigationCallExp.getOwnedSource());
 			if (expression instanceof VariableExp) {
 				isValid = true;
 				break;
@@ -1657,7 +1657,7 @@ public class RelationAnalysis extends RuleAnalysis
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			assert referredProperty != null;
-			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
+			expression = ClassUtil.requireNonNull(navigationCallExp.getOwnedSource());
 			if (expression instanceof VariableExp) {
 				VariableDeclaration sourceVariable = ((VariableExp)expression).getReferredVariable();
 				assert sourceVariable != null;

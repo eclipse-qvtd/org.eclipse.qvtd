@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 //				for (@NonNull DomainPattern rOtherDomainPattern : ClassUtil.nullFree(rOtherDomain.getPattern())) {
 //					List<@NonNull Variable> rOtherDomainVariables = ClassUtil.nullFree(rOtherDomainPattern.getBindsTo());
 //					TemplateExp rOtherTemplateExpression = rOtherDomainPattern.getTemplateExpression();
-//					Variable rOtherRootVariable = ClassUtil.nonNullState(rOtherTemplateExpression.getBindsTo());
+//					Variable rOtherRootVariable = ClassUtil.requireNonNull(rOtherTemplateExpression.getBindsTo());
 //					Set<@NonNull Variable> rOtherGuardDomainVariables = new HashSet<>(rOtherDomainVariables);
 //					rOtherGuardDomainVariables.retainAll(rWhenVariables);
 //					rOtherGuardDomainVariables.add(rOtherRootVariable);
@@ -125,7 +125,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 		} */
 
 		public @NonNull AbstractEnforceableRelationDomain2CoreMapping getTopRelationDomain2CoreMapping(@NonNull TypedModel rEnforcedTypedModel) {
-			return ClassUtil.nonNullState(topTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
+			return ClassUtil.requireNonNull(topTypedModel2relationDomain2coreMapping.get(rEnforcedTypedModel));
 		}
 
 		//		@Override

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
@@ -273,7 +274,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel relationTypedModel) {
-		return ClassUtil.nonNullState(relationalTypedModel2coreTypedModel.get(relationTypedModel));
+		return ClassUtil.requireNonNull(relationalTypedModel2coreTypedModel.get(relationTypedModel));
 	}
 
 	public @Nullable List<@NonNull Element> getGlobalTargets(@NonNull Element element) {
@@ -300,15 +301,15 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @NonNull RelationalTransformation2CoreTransformation getRelationalTransformation2CoreTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
-		return ClassUtil.nonNullState(transformationAnalysis2relationalTransformation2coreTransformation.get(transformationAnalysis));
+		return ClassUtil.requireNonNull(transformationAnalysis2relationalTransformation2coreTransformation.get(transformationAnalysis));
 	}
 
 	public @NonNull RelationalTransformation2TracePackage getRelationalTransformation2TracePackage(@NonNull TransformationAnalysis transformationAnalysis) {
-		return ClassUtil.nonNullState(transformationAnalysis2relationalTransformation2tracePackage.get(transformationAnalysis));
+		return ClassUtil.requireNonNull(transformationAnalysis2relationalTransformation2tracePackage.get(transformationAnalysis));
 	}
 
 	public @NonNull TypedModel getRelationTypedModel(@NonNull TypedModel coreTypedModel) {
-		return ClassUtil.nonNullState(coreTypedModel2relationalTypedModel.get(coreTypedModel));
+		return ClassUtil.requireNonNull(coreTypedModel2relationalTypedModel.get(coreTypedModel));
 	}
 
 	@Override
@@ -317,7 +318,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @NonNull TransformationAnalysis getTransformationAnalysis(@NonNull RelationalTransformation rTransformation) {
-		return ClassUtil.nonNullState(transformation2transformationAnalysis.get(rTransformation));
+		return ClassUtil.requireNonNull(transformation2transformationAnalysis.get(rTransformation));
 	}
 
 	private void getUsedGenPackageClosure(@NonNull ProblemHandler problemHandler, @NonNull Map<@NonNull String, @NonNull GenPackage> uri2genPackage, @NonNull Iterable<@NonNull ? extends GenPackage> genPackages) {
@@ -460,7 +461,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 						if (allUsedGenPackages != null) {
 							for (@NonNull GenPackage usedGenPackage : allUsedGenPackages) {
 								EPackage ecorePackage = usedGenPackage.getEcorePackage();
-								if ((ecorePackage != null) && ClassUtil.safeEquals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
+								if ((ecorePackage != null) && Objects.equals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
 									genPackage = usedGenPackage;
 									break;
 								}

@@ -196,22 +196,22 @@ public abstract class AbstractRegionAnalysis extends AbstractPartialRegionAnalys
 	}
 
 	public @NonNull SuccessEdge getGlobalSuccessEdge(@NonNull Node traceNode) {
-		return ClassUtil.nonNullState(traceNode2globalSuccessEdge.get(traceNode));
+		return ClassUtil.requireNonNull(traceNode2globalSuccessEdge.get(traceNode));
 	}
 
 	public @NonNull Node getGlobalSuccessNode(@NonNull Node traceNode) {
-		SuccessEdge successEdge = ClassUtil.nonNullState(traceNode2globalSuccessEdge.get(traceNode));
+		SuccessEdge successEdge = ClassUtil.requireNonNull(traceNode2globalSuccessEdge.get(traceNode));
 		return QVTscheduleUtil.getTargetNode(successEdge);
 	}
 
 	public @NonNull SuccessEdge getLocalSuccessEdge(@NonNull Node traceNode) {
 		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
-		return ClassUtil.nonNullState(traceNode2localSuccessEdge.get(traceNode));
+		return ClassUtil.requireNonNull(traceNode2localSuccessEdge.get(traceNode));
 	}
 
 	public @NonNull Node getLocalSuccessNode(@NonNull Node traceNode) {
 		//	System.out.println(NameUtil.debugSimpleName(this) + "\"" + getName() + "\" : " + NameUtil.debugSimpleName(traceNode));
-		SuccessEdge successEdge = ClassUtil.nonNullState(traceNode2localSuccessEdge.get(traceNode));
+		SuccessEdge successEdge = ClassUtil.requireNonNull(traceNode2localSuccessEdge.get(traceNode));
 		return QVTscheduleUtil.getTargetNode(successEdge);
 	}
 

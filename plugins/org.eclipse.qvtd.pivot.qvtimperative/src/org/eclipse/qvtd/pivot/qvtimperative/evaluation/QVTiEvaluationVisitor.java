@@ -98,7 +98,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	private @Nullable Object doConnectionAccumulation(@NonNull ConnectionVariable targetVariable, @NonNull OCLExpression valueExpression) {
 		try {
-			Object targetValue = ClassUtil.nonNullState(executor.getValueOf(targetVariable));
+			Object targetValue = ClassUtil.requireNonNull(executor.getValueOf(targetVariable));
 			Connection connectionCollection = (Connection) targetValue;
 			Object values = valueExpression.accept(undecoratedVisitor);
 			assert values != null;
@@ -292,7 +292,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				if (middleOpposite == null) {
 					throw new NotReadyValueException("Missing opposite value");
 				}
-				return ClassUtil.nonNullState(middleOpposite);
+				return ClassUtil.requireNonNull(middleOpposite);
 			}
 		}
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
@@ -454,7 +454,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (inValues instanceof Iterable<?>) {
 			List<LoopVariable> iterators = mappingLoop.getOwnedIterators();
 			if (iterators.size() > 0) {
-				LoopVariable iterator = ClassUtil.nonNullState(iterators.get(0));
+				LoopVariable iterator = ClassUtil.requireNonNull(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
 					if (!executor.replace(iterator, object, false)) {
 						return false;
@@ -543,7 +543,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				if (middleOpposite == null) {
 					throw new NotReadyValueException("Missing opposite value");
 				}
-				return ClassUtil.nonNullState(middleOpposite);
+				return ClassUtil.requireNonNull(middleOpposite);
 			}
 		}
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
