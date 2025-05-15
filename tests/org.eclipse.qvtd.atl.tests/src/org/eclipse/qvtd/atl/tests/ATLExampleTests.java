@@ -131,7 +131,7 @@ public class ATLExampleTests extends LoadTestCase
 			assert !contents.isEmpty() : "ATL's ANTLR cannot co-exist with Xext's ANTLR - run test separately";
 			Resource atlXmiResource = atlResource.getResourceSet().createResource(atlXMIURI);
 			atlXmiResource.getContents().addAll(contents);
-			atlXmiResource.save(XMIUtil.createSaveOptions());
+			atlXmiResource.save(XMIUtil.createSaveOptions(atlXmiResource));
 			contents.addAll(atlXmiResource.getContents());
 			String name = atlURI.trimFileExtension().lastSegment();
 			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), QVTrelationUtil.QVTRAS_FILE_EXTENSION);

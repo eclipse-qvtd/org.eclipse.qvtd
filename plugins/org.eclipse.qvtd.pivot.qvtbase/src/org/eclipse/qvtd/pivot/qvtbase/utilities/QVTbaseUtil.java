@@ -735,7 +735,7 @@ public class QVTbaseUtil extends PivotUtil
 				}
 			}
 		} finally {
-			if (!keepDebug && (xtextResource instanceof CSResource)) {
+			if (!keepDebug && (xtextResource != null)) {
 				xtextResource.dispose();
 			}
 		}

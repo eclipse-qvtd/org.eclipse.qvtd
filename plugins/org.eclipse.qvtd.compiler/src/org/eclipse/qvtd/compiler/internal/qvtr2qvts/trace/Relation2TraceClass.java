@@ -132,7 +132,7 @@ public class Relation2TraceClass extends AbstractRelation2MiddleType
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
 			Iterables.addAll(allHeadGroupNodes, headNodeGroup.getHeadNodes());
 		}
-		boolean compatibleRootVariable = true;
+		@SuppressWarnings("unused") boolean compatibleRootVariable = true;
 		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
 		for (@NonNull VariableDeclaration rootVariable : rootVariables) {
 			boolean foundHeadGroup = false;

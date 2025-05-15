@@ -70,7 +70,7 @@ public class BigMDE2016QVToTests extends TestCase
 			}
 			throw new Exception(s.toString() + txURI);
 		}
-		
+
 		ResourceSet resourceSet = new ResourceSetImpl();
 //		URI inURI = URI.createURI("src/org/eclipse/qvtd/doc/bigmde2016/tests/qvto/pim.simpleuml", true);
 //		logger.info("Loading '" + inURI + "'");
@@ -78,7 +78,7 @@ public class BigMDE2016QVToTests extends TestCase
 //		if (inResource.getErrors().size() > 0) {
 //			throw new Exception("Failed to load" + inURI);
 //		}
-		
+
        	QVToSimpleUMLGenerator generator = new QVToSimpleUMLGenerator();
         int[] tests = PrintAndLog.getTestSizes();
         for (int testSize : tests) {
@@ -91,9 +91,9 @@ public class BigMDE2016QVToTests extends TestCase
     		List<@NonNull ModelExtent> modelExtents = new ArrayList<@NonNull ModelExtent>();
 			modelExtents.add(new BasicModelExtent(generator.createSimpleUMLModel(nPackages, nClasses, nTypes, nProperties, nAssociations)));
 			modelExtents.add(new BasicModelExtent());
-		
-		
-	
+
+
+
 			StringBufferLog qvtoLog = new StringBufferLog();
 	//		logger.info("Executing transformation '" + uri + "'");
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
@@ -127,21 +127,21 @@ public class BigMDE2016QVToTests extends TestCase
 			outResource.getContents().addAll(modelExtents.get(modelExtents.size()-1).getContents());
 			int count = 0;
 			for (Object eObject1 : outResource.getContents()) {
-				for (EObject eObject2 : new TreeIterable((EObject)eObject1, true)) {
+				for (@SuppressWarnings("unused") EObject eObject2 : new TreeIterable((EObject)eObject1, true)) {
 					count++;
 				}
 			}
 			System.out.println(outResource.getContents().size() + " => " + count);
-			Map<Object, Object> options = XMIUtil.createSaveOptions();
+			Map<Object, Object> options = XMIUtil.createSaveOptions(outResource);
 			options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			options.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
 			options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 			outResource.save(options);
         }
-	
+
 		logger.dispose();
 	}
-	
+
 	@Test
 	public void testQVToCompiler_Families2Persons() throws Exception {
     	PrintAndLog logger = new PrintAndLog("results/" + getName());
@@ -166,7 +166,7 @@ public class BigMDE2016QVToTests extends TestCase
 			}
 			throw new Exception(s.toString() + txURI);
 		}
-		
+
 		ResourceSet resourceSet = new ResourceSetImpl();
 //		URI inURI = URI.createURI("src/org/eclipse/qvtd/doc/bigmde2016/tests/qvto/pim.simpleuml", true);
 //		logger.info("Loading '" + inURI + "'");
@@ -174,16 +174,16 @@ public class BigMDE2016QVToTests extends TestCase
 //		if (inResource.getErrors().size() > 0) {
 //			throw new Exception("Failed to load" + inURI);
 //		}
-		
-		
-		
+
+
+
         int[] tests = PrintAndLog.getTestSizes();
         for (int testSize : tests) {
 			List<@NonNull ? extends EObject> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
     		List<@NonNull ModelExtent> modelExtents = new ArrayList<@NonNull ModelExtent>();
 			modelExtents.add(new BasicModelExtent(rootObjects));
 			modelExtents.add(new BasicModelExtent());
-	
+
 			StringBufferLog qvtoLog = new StringBufferLog();
 	//		logger.info("Executing transformation '" + uri + "'");
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
@@ -217,9 +217,9 @@ public class BigMDE2016QVToTests extends TestCase
 //			XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
 			List<EObject> contents = modelExtents.get(modelExtents.size()-1).getContents();
 //			outResource.getContents().addAll(contents);
-			int count = 0;
+			@SuppressWarnings("unused") int count = 0;
 			for (Object eObject1 : contents) {
-				for (EObject eObject2 : new TreeIterable((EObject)eObject1, true)) {
+				for (@SuppressWarnings("unused") EObject eObject2 : new TreeIterable((EObject)eObject1, true)) {
 					count++;
 				}
 			}
@@ -230,7 +230,7 @@ public class BigMDE2016QVToTests extends TestCase
 //			options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 //			outResource.save(options);
         }
-	
+
 		logger.dispose();
 	}
 }

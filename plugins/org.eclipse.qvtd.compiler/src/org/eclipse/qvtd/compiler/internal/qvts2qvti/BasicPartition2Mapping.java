@@ -848,7 +848,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 										if (allCheckedPropertyDatums.contains(propertyDatum)) {
 											allCheckedPropertyDatumsContainsPropertyDatum = true;
 											// FIXME check timing
-											int earliestConsumption = mapping.getFirstPass();
+											@SuppressWarnings("unused") int earliestConsumption = mapping.getFirstPass();
 											//											connectionManager.get
 										}
 									}
@@ -1044,7 +1044,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					}
 					if (constructor == null) {
 						QVTs2QVTiNodeVisitor expressionCreator = new QVTs2QVTiNodeVisitor(this);
-						constructor = ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
+						constructor = node.getOriginatingElement().accept(expressionCreator);
 						addTrace(constructor, node);
 					}
 				}
