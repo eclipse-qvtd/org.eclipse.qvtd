@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -131,7 +130,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
 		if (pMapping != null) {
-			PivotUtilInternal.refreshList(pMapping.getSpecification(), csElement.getRefines());
+			PivotUtil.refreshList(pMapping.getSpecification(), csElement.getRefines());
 		}
 		return null;
 	}

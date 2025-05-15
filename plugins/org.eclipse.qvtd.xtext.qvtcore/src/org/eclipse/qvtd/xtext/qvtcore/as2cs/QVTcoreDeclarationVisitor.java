@@ -27,8 +27,8 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -405,7 +405,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setOwnedMiddle(csDomain);
 		context.refreshList(csMapping.getOwnedComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
-		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getSpecification());
+		PivotUtil.refreshList(csMapping.getRefines(), asMapping.getSpecification());
 		return csMapping;
 	}
 
@@ -509,9 +509,9 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
 		}
-		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
-		PivotUtilInternal.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
-		//	PivotUtilInternal.refreshList(csDirection.getUses(), asTypedModel.getIterates());
+		PivotUtil.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
+		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		//	PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getIterates());
 		return csDirection;
 	}
 

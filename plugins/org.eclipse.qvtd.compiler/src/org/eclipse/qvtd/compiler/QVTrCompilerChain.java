@@ -45,7 +45,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -306,7 +305,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @Nullable String genModelDirectory, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 			URI traceURI = asResource.getURI();
 			assert traceURI != null;
-			@NonNull URI ecoreURI = PivotUtilInternal.getNonASURI(traceURI);
+			@NonNull URI ecoreURI = PivotUtil.getNonASURI(traceURI);
 			URI trimFileExtension = traceURI.trimFileExtension();
 			String projectName = getProjectName(traceURI);
 			Resource genmodelResource = environmentFactory.getResourceSet().createResource(genModelURI);
@@ -465,7 +464,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull TypedModelsConfigurations typedModelsConfigurations) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
-		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
+		URI traceURI = PivotUtil.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI, PivotPackage.eCONTENT_TYPE);
 		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, typedModelsConfigurations);
 		//	ScheduleModel scheduleModel = scheduleManager.getScheduleModel();

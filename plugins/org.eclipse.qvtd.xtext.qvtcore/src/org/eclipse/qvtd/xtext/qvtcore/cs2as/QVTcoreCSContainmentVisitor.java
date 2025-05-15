@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
@@ -110,9 +109,9 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
-				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getUses());
-				//	PivotUtilInternal.refreshList(pTypedModel.getIterates(), csElement.getUses());
+				PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
+				PivotUtil.refreshList(pTypedModel.getDependsOn(), csElement.getUses());
+				//	PivotUtil.refreshList(pTypedModel.getIterates(), csElement.getUses());
 			}
 			return null;
 		}
@@ -172,7 +171,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 			List<Rule> asRules = asTransformation.getRule();
 			if (asMappings != null) {
-				PivotUtilInternal.refreshList(asRules, asMappings);
+				PivotUtil.refreshList(asRules, asMappings);
 			}
 			else {
 				asRules.clear();
@@ -200,7 +199,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
 			List<Operation> asOperations = asTransformation.getOwnedOperations();
 			if (asQueries != null) {
-				PivotUtilInternal.refreshList(asOperations, asQueries);
+				PivotUtil.refreshList(asOperations, asQueries);
 			}
 			else {
 				asOperations.clear();
@@ -383,7 +382,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		context.refreshPivotList(TypedModel.class, newModelParameters, csElement.getOwnedDirections());
 		newModelParameters.add(0, getHelper().createPrimitiveTypedModel());
 		newModelParameters.add(1, getHelper().createThisTypedModel());
-		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
+		PivotUtil.refreshList(asTransformation.getModelParameter(), newModelParameters);
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);

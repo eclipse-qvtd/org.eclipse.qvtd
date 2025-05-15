@@ -27,10 +27,10 @@ import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -742,7 +742,7 @@ class PatternForest
 		assert eContainer != null;
 		OCLExpression qvtrExpression = umlx2qvtr.parseContextualExpression(eContainer, Collections.singletonList(textExpression));
 		EReference eContainmentFeature = stringExpression.eContainmentFeature();
-		PivotUtilInternal.resetContainer(stringExpression);
+		PivotUtil.resetContainer(stringExpression);
 		eContainer.eSet(eContainmentFeature, qvtrExpression);
 		//				context.reinstall(relPatternExpressionNode, qvtrExpression);
 	}

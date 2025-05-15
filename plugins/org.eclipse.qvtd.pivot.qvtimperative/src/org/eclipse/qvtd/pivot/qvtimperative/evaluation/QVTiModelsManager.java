@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -138,7 +137,7 @@ public class QVTiModelsManager extends AbstractModelsManager
 
 	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet;
-		if (PivotUtilInternal.isASURI(modelURI)) {
+		if (PivotUtil.isASURI(modelURI)) {
 			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
 		}
 		else {

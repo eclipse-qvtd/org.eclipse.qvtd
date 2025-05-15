@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -137,8 +136,8 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 					}
 				}
 			}
-			PivotUtilInternal.refreshList(pBottomPattern.getAssignment(), pAssignments);
-			PivotUtilInternal.refreshList(pBottomPattern.getPredicate(), pPredicates);
+			PivotUtil.refreshList(pBottomPattern.getAssignment(), pAssignments);
+			PivotUtil.refreshList(pBottomPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}

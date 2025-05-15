@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -79,7 +78,7 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	@Override
 	public @NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI) {
 		ResourceSet resourceSet;
-		if (PivotUtilInternal.isASURI(modelURI)) {
+		if (PivotUtil.isASURI(modelURI)) {
 			resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();	// Need PivotSave to allocate xmi:ids
 		}
 		else {

@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
@@ -107,7 +106,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
+				PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 			}
 			return null;
 		}

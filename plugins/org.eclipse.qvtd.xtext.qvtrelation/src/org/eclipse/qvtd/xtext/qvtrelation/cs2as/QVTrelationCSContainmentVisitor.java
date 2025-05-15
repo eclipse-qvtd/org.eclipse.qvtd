@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -124,7 +123,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			Key pKey = PivotUtil.getPivot(Key.class, csElement);
 			if (pKey != null) {
 				pKey.setIdentifies(csElement.getClassId());
-				PivotUtilInternal.refreshList(pKey.getPart(), csElement.getPropertyIds());
+				PivotUtil.refreshList(pKey.getPart(), csElement.getPropertyIds());
 				List<Property> oppositePart = new ArrayList<>();
 				for (PathNameCS oppositePropertyId : csElement.getOwnedOppositePropertyIds()) {
 					Element element = oppositePropertyId.getReferredElement();
@@ -132,7 +131,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 						oppositePart.add((Property) element);
 					}
 				}
-				PivotUtilInternal.refreshList(pKey.getOppositePart(), oppositePart);
+				PivotUtil.refreshList(pKey.getOppositePart(), oppositePart);
 			}
 			return null;
 		}
@@ -157,9 +156,9 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 						newUsedPackages.add((org.eclipse.ocl.pivot.Package)metamodelId);
 					}
 				}
-				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), newUsedPackages);
-				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getDependsOn());
-				PivotUtilInternal.refreshList(pTypedModel.getIterates(), csElement.getIterates());
+				PivotUtil.refreshList(pTypedModel.getUsedPackage(), newUsedPackages);
+				PivotUtil.refreshList(pTypedModel.getDependsOn(), csElement.getDependsOn());
+				PivotUtil.refreshList(pTypedModel.getIterates(), csElement.getIterates());
 			}
 			return null;
 		}
@@ -361,10 +360,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 						rootVariables.add(asTemplate.getBindsTo());
 						//						gatherBoundVariables(boundVariables, asTemplate);
 					}
-					//					PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+					//					PivotUtil.refreshList(asPattern.getBindsTo(), boundVariables);
 				}
 			}
-			PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
+			PivotUtil.refreshList(pivotElement.getRootVariable(), rootVariables);
 		}
 		else {
 			pivotElement.getRootVariable().clear();
@@ -454,10 +453,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 						rootVariables.add(asTemplate.getBindsTo());
 						//						gatherBoundVariables(boundVariables, asTemplate);
 					}
-					//					PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+					//					PivotUtil.refreshList(asPattern.getBindsTo(), boundVariables);
 				}
 			}
-			PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
+			PivotUtil.refreshList(pivotElement.getRootVariable(), rootVariables);
 		}
 		else {
 			pivotElement.getRootVariable().clear();
@@ -554,7 +553,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 						processSpecialVariables(relationVariables, boundVariables, specialVariables, csTemplate);
 					}
 					if (asPattern != null) {
-						PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+						PivotUtil.refreshList(asPattern.getBindsTo(), boundVariables);
 					}
 				}
 			}
@@ -572,7 +571,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			traceClassVariable = getHelper().createTraceClassVariable(getTraceHelper());
 		}
 		relationVariables.add(traceClassVariable);
-		PivotUtilInternal.refreshList(pivotElement.getVariable(), relationVariables);
+		PivotUtil.refreshList(pivotElement.getVariable(), relationVariables);
 		pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhen()));
 		pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhere()));
 		pivotElement.setIsTopLevel(csElement.isIsTop());
@@ -635,7 +634,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			traceTypedModel = getHelper().createTraceTypedModel();
 			newPivotElements.add(traceTypedModel);
 		}
-		PivotUtilInternal.refreshList(modelParameters, newPivotElements);
+		PivotUtil.refreshList(modelParameters, newPivotElements);
 		context.refreshPivotList(Relation.class, asTransformation.getRule(), csElement.getOwnedRelations());
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());

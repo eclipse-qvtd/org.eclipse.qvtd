@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -80,7 +80,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
 			BasicPartition subPartition = subPartitionAnalysis.getPartition();
-			PivotUtilInternal.resetContainer(subPartition);
+			PivotUtil.resetContainer(subPartition);
 			mergedPartition.getOwnedMergedPartitions().add(subPartition);
 			mergedPartition.getExplicitPredecessors().addAll(subPartition.getExplicitPredecessors());
 			mergedPartition.getExplicitSuccessors().addAll(subPartition.getExplicitSuccessors());
