@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractQVTscheduleASSaverNormalizeVisitor;
@@ -41,7 +41,7 @@ public class QVTscheduleASSaverNormalizeVisitor extends AbstractQVTscheduleASSav
 		}
 	}
 
-	protected QVTscheduleASSaverNormalizeVisitor(@NonNull ASSaver context) {
+	protected QVTscheduleASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
 		super(context);
 	}
 

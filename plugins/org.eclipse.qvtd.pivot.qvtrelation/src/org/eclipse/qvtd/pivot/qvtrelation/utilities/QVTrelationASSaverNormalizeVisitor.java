@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -180,7 +180,7 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 		}
 	}
 
-	public QVTrelationASSaverNormalizeVisitor(@NonNull ASSaver context) {
+	public QVTrelationASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
 		super(context);
 	}
 

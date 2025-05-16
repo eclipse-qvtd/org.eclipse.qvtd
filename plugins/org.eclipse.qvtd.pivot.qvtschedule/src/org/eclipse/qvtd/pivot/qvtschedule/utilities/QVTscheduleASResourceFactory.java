@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
@@ -26,9 +26,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -71,23 +69,13 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	} */
 
 	@Override
-	public @NonNull AS2XMIidVisitor createAS2XMIidVisitor(@NonNull AS2XMIid as2id) {
-		return new QVTscheduleAS2XMIidVisitor(as2id);
-	}
-
-	@Override
-	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver asSaver) {
-		return new QVTscheduleASSaverLocateVisitor(asSaver);
-	}
-
-	@Override
-	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver saver) {
+	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull AbstractASSaver saver) {
 		return new QVTscheduleASSaverNormalizeVisitor(saver);
 	}
 
 	@Override
-	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
-		return new QVTscheduleASSaverResolveVisitor(asSaver);
+	public @NonNull AS2XMIidVisitor createAS2XMIidVisitor(@NonNull AS2XMIid as2id) {
+		return new QVTscheduleAS2XMIidVisitor(as2id);
 	}
 
 	@Override

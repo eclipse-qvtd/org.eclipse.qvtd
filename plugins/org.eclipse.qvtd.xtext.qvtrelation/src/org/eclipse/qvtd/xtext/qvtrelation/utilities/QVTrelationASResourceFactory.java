@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisit
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
@@ -37,9 +37,7 @@ import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
@@ -47,9 +45,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationAS2XMIidVisitor;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASSaverLocateVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASSaverNormalizeVisitor;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASSaverResolveVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationPrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationTemplateParameterSubstitutionVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
@@ -124,18 +120,8 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	}
 
 	@Override
-	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver asSaver) {
-		return new QVTrelationASSaverLocateVisitor(asSaver);
-	}
-
-	@Override
-	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver saver) {
+	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull AbstractASSaver saver) {
 		return new QVTrelationASSaverNormalizeVisitor(saver);
-	}
-
-	@Override
-	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
-		return new QVTrelationASSaverResolveVisitor(asSaver);
 	}
 
 	@Override
