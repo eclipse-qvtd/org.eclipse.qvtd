@@ -388,6 +388,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			assert iNewStatementPart != null;
 			sourceAndArgumentValues[i+1] = iNewStatementPart.getOwnedExpression().accept(undecoratedVisitor);
 		}
+		@SuppressWarnings("null")
 		@NonNull EObject element = (@NonNull EObject) getCachedEvaluationResult(newStatementOperation, iNewStatement, sourceAndArgumentValues);
 		return element;
 	}

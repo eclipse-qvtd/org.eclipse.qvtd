@@ -33,14 +33,14 @@ import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class OCL2QVTmUtil {
-	
+
 	public static Function<EObject, @NonNull Stream<@NonNull EObject>> getAllContents() {
 		return eObject -> {
 			Iterable<EObject> it = () -> eObject.eAllContents();
 			return StreamSupport.stream(it.spliterator(),false);
 		};
 	}
-	
+
 	public static Function<EObject, @NonNull Stream<@NonNull EObject>> getAllContentsIncludingSelf() {
 		return eObject -> {
 			List<EObject> allContents = new ArrayList<EObject>();
@@ -51,7 +51,7 @@ public class OCL2QVTmUtil {
 			return allContents.stream();
 		};
 	}
-	
+
 	public static Function<EObject, @NonNull Stream<@NonNull EObject>> getAllContainers() {
 		return eObject -> {
 			List<EObject> containers = new ArrayList<EObject>();
@@ -61,14 +61,14 @@ public class OCL2QVTmUtil {
 			return containers.stream();
 		};
 	}
-	
+
 	public static Function<ShadowExp, @NonNull Class> getExpressionContextType() {
 		return shadowExp -> {
 			return (Class) getContainingExpressionInOCL().apply(shadowExp)
 					.getOwnedContext().getType();
 		};
 	}
-	
+
 	public static Function<OCLExpression, @NonNull ExpressionInOCL> getContainingExpressionInOCL() {
 		return oclExp -> {
 			EObject container = oclExp.eContainer();
@@ -79,7 +79,7 @@ public class OCL2QVTmUtil {
 			return (ExpressionInOCL)container;
 		};
 	}
-	
+
 
 	public static Function<@NonNull String, @NonNull String> firstToLowerCase() {
 		return input -> {
@@ -91,7 +91,7 @@ public class OCL2QVTmUtil {
 			return new String(c);
 		};
 	}
-	
+
 	public static Function<@NonNull String, @NonNull String> firstToUpperCase() {
 		return input -> {
 			if (input.isEmpty()) {
@@ -102,30 +102,30 @@ public class OCL2QVTmUtil {
 			return new String(c);
 		};
 	}
-	
-	public static Function<@NonNull ShadowExp, @NonNull String> getCreationMappingName() { 
+
+	public static Function<@NonNull ShadowExp, @NonNull String> getCreationMappingName() {
 		return shadowExp -> {
 			return "c" + getExpressionContextType().apply(shadowExp).getName() + "_2_" + getShadowTypeName().apply(shadowExp);
 		};
 	}
-	
+
 	public static Function<@NonNull ShadowPart, @NonNull String> getUpdateMappingName() {
 		return shadowPart -> {
 			ShadowExp shadowExp = (ShadowExp)shadowPart.eContainer();
-		 	Property refProp = shadowPart.getReferredProperty();
-			return 'u' + getExpressionContextType().apply(shadowExp).getName() + "_2_" 
-		 			+ getShadowTypeName().apply(shadowExp) + '_' + refProp.getName(); 
+			Property refProp = shadowPart.getReferredProperty();
+			return 'u' + getExpressionContextType().apply(shadowExp).getName() + "_2_"
+			+ getShadowTypeName().apply(shadowExp) + '_' + refProp.getName();
 		};
 	}
-	
+
 	private static Function<@NonNull ShadowExp, @NonNull String> getShadowTypeName() {
-		return shadowExp -> { 
+		return shadowExp -> {
 			ExpressionInOCL expInOCL = getContainingExpressionInOCL().apply(shadowExp);
 			List<ShadowExp> sameTypeShadowExps = getAllContents().apply(expInOCL)
-				.filter(ShadowExp.class::isInstance)
-				.map(ShadowExp.class::cast)
-				.filter(x -> x.getType() == shadowExp.getType())
-				.collect(Collectors.toList());
+					.filter(ShadowExp.class::isInstance)
+					.map(ShadowExp.class::cast)
+					.filter(x -> x.getType() == shadowExp.getType())
+					.collect(Collectors.toList());
 			if (sameTypeShadowExps.size() > 1) { // If there are more shadow exps returning the same type:
 				return shadowExp.getType().getName() + "_" + sameTypeShadowExps.indexOf(shadowExp);
 			} else {
@@ -133,24 +133,24 @@ public class OCL2QVTmUtil {
 			}
 		};
 	}
-	
-	
+
+
 	public static Function<@NonNull Class, @NonNull Package>  getOwningPackage() {
 		return aClass -> {
 			return aClass.getOwningPackage();
 		};
 	}
-	
+
 	public static Function<@NonNull Class, @NonNull String>  getOwningPackageName() {
 		return aClass -> {
 			return getName().apply(getOwningPackage().apply(aClass));
 		};
 	}
-	
+
 	private static Function<@NonNull NamedElement, @NonNull String> getName() {
-		return namedElement -> { return namedElement == null ? "" : namedElement.getName(); };
+		return namedElement -> { return namedElement.getName(); };
 	}
-	
+
 	public static Function<@NonNull Class, @NonNull Set<@NonNull Class>> getSuperClasses() {
 		// FIXME ClassRelantionghip has cashes
 		return aClass -> {

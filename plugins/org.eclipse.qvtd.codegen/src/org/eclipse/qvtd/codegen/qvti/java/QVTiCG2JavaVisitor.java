@@ -2507,7 +2507,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			EntryPointsAnalysis entryPointsAnalysis = context.getEntryPointsAnalysis(transformation);
 			EntryPointAnalysis entryPointAnalysis = entryPointsAnalysis.getEntryPointAnalysis(asEntryPoint);
 			Iterable<@NonNull EAttribute> eAttributes = entryPointAnalysis.getSpeculatedEAttributes();
-			if ((eAttributes != null) && !Iterables.isEmpty(eAttributes)) {
+			if (!Iterables.isEmpty(eAttributes)) {
 				js.append("initSpeculatedEAttributes(");
 				boolean isFirst = true;
 				for (@NonNull EAttribute eAttribute : eAttributes) {
