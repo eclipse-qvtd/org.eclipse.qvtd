@@ -12,7 +12,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseASSaverNormalizeVisito
 
 public class QVTbaseASSaverNormalizeVisitor extends AbstractQVTbaseASSaverNormalizeVisitor
 {
-	public QVTbaseASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
+	public QVTbaseASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}
 

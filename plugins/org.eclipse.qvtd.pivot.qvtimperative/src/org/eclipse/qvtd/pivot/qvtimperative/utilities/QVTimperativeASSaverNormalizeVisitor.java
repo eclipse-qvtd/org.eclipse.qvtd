@@ -15,7 +15,7 @@ import java.util.Comparator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
@@ -51,7 +51,7 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 		}
 	}
 
-	public QVTimperativeASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
+	public QVTimperativeASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}
 
