@@ -708,7 +708,7 @@ public class OCL2QVTm {
 
 			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			PivotHelper helper = new PivotHelper(envFact);
-			VariableExp sourceExp = helper.createVariableExp(leftVar);
+			VariableExp sourceExp = PivotUtil.createVariableExp(leftVar);
 			TypeExp argTypeExp = new PivotHelper(envFact).createTypeExp(leftVar.getType());
 			//	TypeExp argTypeExp = createTypeExp(leftVar.getType());
 			predicate.setConditionExpression(helper.createOperationCallExp(sourceExp, getOclAnyOclIsTypeOfOp(), Collections.singletonList(argTypeExp)));

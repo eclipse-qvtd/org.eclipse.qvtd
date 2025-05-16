@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.IteratorVariable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
@@ -28,7 +29,7 @@ public class IteratorVariable2Variable extends AbstractVariable2Variable
 	protected IteratorVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull IteratorVariable rIteratorVariable) {
 		super(variablesAnalysis, QVTrelationUtil.getName(rIteratorVariable));
 		this.rIteratorVariable = rIteratorVariable;
-		this.cIteratorVariable = variablesAnalysis.createIteratorVariable(name, QVTrelationUtil.getType(rIteratorVariable), rIteratorVariable.isIsRequired());
+		this.cIteratorVariable = PivotUtil.createIteratorVariable(name, QVTrelationUtil.getType(rIteratorVariable), rIteratorVariable.isIsRequired());
 	}
 
 	@Override

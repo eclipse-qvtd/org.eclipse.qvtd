@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -55,7 +56,7 @@ public class Key2FunctionForIdentification
 		for (@NonNull Property keyProperty : QVTrelationUtil.getOwnedParts(rKey)) {
 			FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
 			asParameters.add(cParameter);
-			ShadowPart asShadowPart = helper.createShadowPart(keyProperty, helper.createVariableExp(cParameter));
+			ShadowPart asShadowPart = PivotUtil.createShadowPart(keyProperty, PivotUtil.createVariableExp(cParameter));
 			asShadowParts.add(asShadowPart);
 		}
 		//
@@ -65,7 +66,7 @@ public class Key2FunctionForIdentification
 			Property keyProperty = QVTrelationUtil.getOpposite(keyOppositeProperty);
 			FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
 			asParameters.add(cParameter);
-			ShadowPart asShadowPart = helper.createShadowPart(keyProperty, helper.createVariableExp(cParameter));
+			ShadowPart asShadowPart = PivotUtil.createShadowPart(keyProperty, PivotUtil.createVariableExp(cParameter));
 			asShadowParts.add(asShadowPart);
 		}
 		Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
@@ -84,13 +85,13 @@ public class Key2FunctionForIdentification
 					}
 				}
 				if (!gotIt) {
-					ShadowPart asShadowPart = helper.createShadowPart(asProperty, helper.createNullLiteralExp());
+					ShadowPart asShadowPart = PivotUtil.createShadowPart(asProperty, helper.createNullLiteralExp());
 					asShadowParts.add(asShadowPart);
 				}
 			}
 		}
 		Function cFunction = helper.createFunction(functionName, identifiedClass, true, asParameters);
-		OCLExpression asShadowExp = helper.createShadowExp(identifiedClass, asShadowParts);
+		OCLExpression asShadowExp = PivotUtil.createShadowExp(identifiedClass, asShadowParts);
 		cFunction.setQueryExpression(asShadowExp);
 		return cFunction;
 	}

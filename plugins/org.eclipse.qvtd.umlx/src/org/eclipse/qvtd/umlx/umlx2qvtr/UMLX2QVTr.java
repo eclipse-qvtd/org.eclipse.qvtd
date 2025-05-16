@@ -163,7 +163,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 								assert qvtrImport.getImportedNamespace() == asImportedPackage;
 							}
 							else {
-								qvtrImport = context.createImport(name, asImportedPackage);
+								qvtrImport = PivotUtil.createImport(name, asImportedPackage);
 								qvtrImports.add(qvtrImport);
 							}
 						}
