@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -40,7 +40,7 @@ public class QVTcoreASSaverNormalizeVisitor extends AbstractQVTcoreASSaverNormal
 		}
 	}
 
-	public QVTcoreASSaverNormalizeVisitor(@NonNull AbstractASSaver context) {
+	public QVTcoreASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}
 
