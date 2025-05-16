@@ -9,7 +9,6 @@ import org.eclipse.ocl.build.xtend.GenerateVisitorsXtend
 	override void generateVisitors(/*@NonNull*/ GenPackage genPackage) {
 		var EPackage ePackage = genPackage.getEcorePackage();
 		ePackage.generateAbstractExtendingVisitor();
-		ePackage.generateAbstractNonNullExtendingVisitor();
 		genPackage.generateVisitorInterface();
 		/* ePackage.generateDecorableVisitorInterface("org.eclipse.ocl.xtext.base.util.BaseCSVisitor"); */
 		ePackage.generateAbstractVisitor();
