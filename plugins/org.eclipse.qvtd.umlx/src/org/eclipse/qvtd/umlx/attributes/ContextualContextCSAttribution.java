@@ -37,17 +37,14 @@ public class ContextualContextCSAttribution extends org.eclipse.ocl.xtext.essent
 				if (eResource instanceof EssentialOCLCSResource) {
 					EssentialOCLCSResource csResource = (EssentialOCLCSResource)eResource;
 					ParserContext parserContext = csResource.getParserContext();
-					if (parserContext != null) {
-						Element asContext = parserContext.getElementContext();
-						if ((asContext != null) && (asContext.eResource() != null) && !(asContext instanceof InvalidType)) {
-							environmentView.computeLookups(asContext, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
-						}
-						if (!environmentView.hasFinalResult()) {
-							return scopeView.getParent();
-						}
-						return scopeView.getParent();
-
+					Element asContext = parserContext.getElementContext();
+					if ((asContext != null) && (asContext.eResource() != null) && !(asContext instanceof InvalidType)) {
+						environmentView.computeLookups(asContext, null); //PivotUtil.getPivot(Element.class, scopeView.getChild());
 					}
+					if (!environmentView.hasFinalResult()) {
+						return scopeView.getParent();
+					}
+					return scopeView.getParent();
 				}
 			}
 		}

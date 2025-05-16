@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedCLookupVisitor
-extends AbstractTargetCommonLookupVisitor
+	extends AbstractTargetCommonLookupVisitor
 {
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
@@ -57,7 +57,7 @@ extends AbstractTargetCommonLookupVisitor
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedCLookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedCLookupVisitor", 0);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
-	protected final  @NonNull Executor executor;
+	protected final /*@Thrown*/ @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
 	protected /*@Thrown*/ @Nullable Object child_0;
 
@@ -132,7 +132,7 @@ extends AbstractTargetCommonLookupVisitor
 						accumulator.add(x);
 					}
 				}
-				final /*@Thrown*/ @NonNull List<C> ECORE_select = idResolver.ecoreValueOfAll(C.class, select);
+				final /*@Thrown*/ @NonNull List<C> ECORE_select = ((IdResolver)idResolver).ecoreValueOfAll(C.class, select);
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull LookupEnvironment inner = context.addElements(ECORE_select);
 				final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();

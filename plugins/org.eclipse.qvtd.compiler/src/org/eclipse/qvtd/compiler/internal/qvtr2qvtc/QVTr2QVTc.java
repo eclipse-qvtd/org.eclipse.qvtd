@@ -650,7 +650,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				//					getURI(relationPackage, s);
 				//					uri = s.toString();
 				//				}
-				//				org.eclipse.ocl.pivot.Package nestingTracePackage = helper.createPackage(ClassUtil.nonNull(relationPackage.getName()), relationPackage.getNsPrefix(), uri);
+				//				org.eclipse.ocl.pivot.Package nestingTracePackage = helper.createPackage(ClassUtil.requireNonNull(relationPackage.getName()), relationPackage.getNsPrefix(), uri);
 				//				nestingTracePackage.getOwnedPackages().addAll(nestedTracePackages);
 				if (nestingTracePackages == null) {
 					nestingTracePackages = new ArrayList<>();
