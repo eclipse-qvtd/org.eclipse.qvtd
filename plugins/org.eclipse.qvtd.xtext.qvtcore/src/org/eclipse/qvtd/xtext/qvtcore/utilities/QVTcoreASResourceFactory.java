@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisit
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASSaver;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
@@ -37,9 +37,7 @@ import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
@@ -48,9 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreAS2XMIidVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverLocateVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverNormalizeVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverResolveVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcorePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreTemplateParameterSubstitutionVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
@@ -124,18 +120,8 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 	}
 
 	@Override
-	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver asSaver) {
-		return new QVTcoreASSaverLocateVisitor(asSaver);
-	}
-
-	@Override
-	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver saver) {
+	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull AbstractASSaver saver) {
 		return new QVTcoreASSaverNormalizeVisitor(saver);
-	}
-
-	@Override
-	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
-		return new QVTcoreASSaverResolveVisitor(asSaver);
 	}
 
 	@Override
