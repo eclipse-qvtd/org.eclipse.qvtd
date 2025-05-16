@@ -42,6 +42,6 @@ Workflow {
     	genModelFile = "model/UMLX.genmodel"
     }
 	component = ConvertToUnixLineEndings {
-		directory = "org.eclipse.qvtd.umlx/emf-gen"
+		directory = "../../plugins/org.eclipse.qvtd.umlx/emf-gen"
 	}
 }

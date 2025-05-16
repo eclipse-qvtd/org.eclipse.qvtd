@@ -45,6 +45,6 @@ Workflow {
     }
     
 //	component = ConvertToUnixLineEndings {
-//		directory = "org.eclipse.qvtd.atl/emf-gen"
+//		directory = "../../plugins/org.eclipse.qvtd.atl/emf-gen"
 //	}
 }

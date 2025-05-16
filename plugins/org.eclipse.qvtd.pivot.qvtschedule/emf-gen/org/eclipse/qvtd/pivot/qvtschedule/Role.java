@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-model-doc -->
  * Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing
  * certainty, allowing the earlier to be chosen by a merge.
- * 
+ *
  * NEW = REALIZED || SPECULATION
  * OLD = CONSTANT || LOADED || PREDICATED || SPECULATED
  * <!-- end-model-doc -->

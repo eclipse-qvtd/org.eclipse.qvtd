@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.text;
@@ -121,7 +121,7 @@ public interface StringNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Optional character whose occurrence within text and endText is to be interpreted as a non-breaking-space. (All characters within indent, prefix, separator and suffix are non-breaking.) 
+	 * Optional character whose occurrence within text and endText is to be interpreted as a non-breaking-space. (All characters within indent, prefix, separator and suffix are non-breaking.)
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Non Breaking Space</em>' attribute.
 	 * @see #setNonBreakingSpace(char)

@@ -24,6 +24,6 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xml/model/XMLmodel.genmodel"
     }
 	component = ConvertToUnixLineEndings {
-		directory = "org.eclipse.qvtd.xml/emf-gen"
+		directory = "../../plugins/org.eclipse.qvtd.xml/emf-gen"
 	}
 }
