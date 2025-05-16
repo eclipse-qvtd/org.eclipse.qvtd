@@ -49,6 +49,6 @@ Workflow {
     	genModelFile = "model/Schedule.genmodel"
     } */
 	component = ConvertToUnixLineEndings {
-		directory = "org.eclipse.qvtd.pivot.qvtschedule/emf-gen"
+		directory = "../../plugins/org.eclipse.qvtd.pivot.qvtschedule/emf-gen"
 	}
 }

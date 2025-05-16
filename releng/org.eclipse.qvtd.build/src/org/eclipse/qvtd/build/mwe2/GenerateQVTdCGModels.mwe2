@@ -46,6 +46,6 @@ Workflow {
     	baseGenModelFile = "model/cgmodel.genmodel"
     }
 	component = ConvertToUnixLineEndings {
-		directory = "org.eclipse.qvtd.codegen/emf-gen"
+		directory = "../../plugins/org.eclipse.qvtd.codegen/emf-gen"
 	}
 }
