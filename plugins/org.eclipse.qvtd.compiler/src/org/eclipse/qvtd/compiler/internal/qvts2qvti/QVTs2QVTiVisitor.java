@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -266,7 +267,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 				Property keyProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
 				FunctionParameter cParameter = qvts2qvti.createFunctionParameter(keyProperty);
 				asParameters.add(cParameter);
-				ShadowPart asShadowPart = qvts2qvti.createShadowPart(keyProperty, qvts2qvti.createVariableExp(cParameter));
+				ShadowPart asShadowPart = PivotUtil.createShadowPart(keyProperty, PivotUtil.createVariableExp(cParameter));
 				asShadowParts.add(asShadowPart);
 			}
 			Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
@@ -291,7 +292,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			QVTbaseUtil.getContextVariable(getStandardLibrary(), iTransformation);
 			Function asFunction = qvts2qvti.createFunction(functionName, primaryClass, true, asParameters);
 			iTransformation.getOwnedOperations().add(asFunction);
-			OCLExpression asShadowExp = qvts2qvti.createShadowExp(primaryClass, asShadowParts);
+			OCLExpression asShadowExp = PivotUtil.createShadowExp(primaryClass, asShadowParts);
 			asFunction.setQueryExpression(asShadowExp);
 			classDatum2keyFunction.put(classDatum, asFunction);
 		}

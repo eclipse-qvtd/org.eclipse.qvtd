@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
@@ -57,7 +58,7 @@ public class CoreVariable2Variable extends AbstractVariable2Variable
 			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
 		}
 		//		if (isPartial == isPartial2) {
-		VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
+		VariableExp cSlotVariableExp = PivotUtil.createVariableExp(cVariable2);
 		NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression, isPartial);
 		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
 		variablesAnalysis.assertNewAssignment(cMiddleBottomAssignments, cAssignment);

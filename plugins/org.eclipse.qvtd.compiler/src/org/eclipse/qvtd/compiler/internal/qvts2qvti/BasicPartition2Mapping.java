@@ -354,7 +354,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					speculatedEdges.add(speculatedEdge);
 					OCLExpression sourceExp = createVariableExp(sourceNode);
 					Property successProperty = QVTscheduleUtil.getReferredProperty(speculatedEdge);
-					OCLExpression propertyCallExp = helper.createPropertyCallExp(sourceExp, successProperty);
+					OCLExpression propertyCallExp = PivotUtil.createPropertyCallExp(sourceExp, successProperty);
 					addTrace(propertyCallExp, edge);
 					if (targetNode instanceof BooleanLiteralNode) {
 						if (!((BooleanLiteralNode)targetNode).isBooleanValue()) {
@@ -386,7 +386,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
 							String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
 							DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
-							sourceExp = helper.createVariableExp(castStatement);
+							sourceExp = PivotUtil.createVariableExp(castStatement);
 						}
 						OCLExpression source2targetExp = createCallExp(sourceExp, property);
 						addTrace(source2targetExp, edge);
@@ -681,7 +681,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		StandardLibrary standardLibrary = getStandardLibrary();
 		Transformation iTransformation = visitor.getImperativeTransformation();
 		VariableDeclaration contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, iTransformation);
-		return helper.createVariableExp(contextVariable);
+		return PivotUtil.createVariableExp(contextVariable);
 	}
 
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
@@ -1118,7 +1118,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 			variable = createDeclareStatement(node, targetExpression);
 		}
-		return helper.createVariableExp(variable);
+		return PivotUtil.createVariableExp(variable);
 	}
 
 	@Override

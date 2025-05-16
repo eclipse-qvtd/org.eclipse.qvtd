@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.LetVariable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
@@ -28,7 +29,7 @@ public class LetVariable2Variable extends AbstractVariable2Variable
 	protected LetVariable2Variable(@NonNull Variables2Variables variablesAnalysis, @NonNull LetVariable rLetVariable) {
 		super(variablesAnalysis, rLetVariable);
 		this.rLetVariable = rLetVariable;
-		this.cLetVariable = variablesAnalysis.createLetVariable(name, QVTrelationUtil.getType(rLetVariable), rLetVariable.isIsRequired());
+		this.cLetVariable = PivotUtil.createLetVariable(name, QVTrelationUtil.getType(rLetVariable), rLetVariable.isIsRequired());
 	}
 
 	@Override

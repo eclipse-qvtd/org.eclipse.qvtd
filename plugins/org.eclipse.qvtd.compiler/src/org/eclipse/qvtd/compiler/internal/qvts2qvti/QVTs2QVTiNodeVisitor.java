@@ -148,7 +148,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		List<@NonNull Variable> variables = new ArrayList<>(iterators.size());
 		for (int i = 0; i < iterators.size(); i++) {
 			Parameter iterator = iterators.get(i);
-			Variable variable = helper.createIteratorVariable(PivotUtil.getName(iterator), sourceType, sourceExp.isIsRequired());
+			Variable variable = PivotUtil.createIteratorVariable(PivotUtil.getName(iterator), sourceType, sourceExp.isIsRequired());
 			variables.add(variable);
 		}
 		//
@@ -365,7 +365,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 					collectionLiteralPart = (CollectionLiteralPart)typedElement;
 				}
 				else {
-					collectionLiteralPart = helper.createCollectionItem((OCLExpression) typedElement);
+					collectionLiteralPart = PivotUtil.createCollectionItem((OCLExpression) typedElement);
 				}
 				part2index.put(collectionLiteralPart, index);
 				context.addTrace(collectionLiteralPart, expNode);
@@ -381,7 +381,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				return i1 - i2;
 			}
 		});
-		return helper.createCollectionLiteralExp(asType, asParts);
+		return PivotUtil.createCollectionLiteralExp(asType, asParts);
 	}
 
 	@Override
@@ -391,7 +391,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @NonNull OCLExpression visitEnumLiteralNode(@NonNull EnumLiteralNode node) {
-		return helper.createEnumLiteralExp(QVTscheduleUtil.getEnumValue(node));
+		return PivotUtil.createEnumLiteralExp(QVTscheduleUtil.getEnumValue(node));
 	}
 
 	@Override
@@ -490,13 +490,13 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 				ShadowPart referredPart = QVTscheduleUtil.getReferredPart(shadowPartEdge);
 				Property referredProperty = PivotUtil.getReferredProperty(referredPart);
 				Node sourceNode = QVTscheduleUtil.getSourceNode(shadowPartEdge);
-				ShadowPart shadowPart = helper.createShadowPart(referredProperty, getExpressionInternal(sourceNode));
+				ShadowPart shadowPart = PivotUtil.createShadowPart(referredProperty, getExpressionInternal(sourceNode));
 				asParts.add(shadowPart);
 				context.addTrace(shadowPart, shadowPartEdge);
 			}
 		};
 		org.eclipse.ocl.pivot.@NonNull Class asClass = node.getClassDatum().getPrimaryClass();
-		return helper.createShadowExp(asClass, asParts);
+		return PivotUtil.createShadowExp(asClass, asParts);
 	}
 
 	@Override

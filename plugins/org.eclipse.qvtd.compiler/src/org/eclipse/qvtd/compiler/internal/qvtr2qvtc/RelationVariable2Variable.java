@@ -83,7 +83,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
 		}
 		//		if (isPartial == isPartial2) {
-		VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
+		VariableExp cSlotVariableExp = PivotUtil.createVariableExp(cVariable2);
 		NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression, isPartial);
 		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
 		variablesAnalysis.assertNewAssignment(cMiddleBottomAssignments, cAssignment);
@@ -246,12 +246,12 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 				if (parameterExp instanceof TemplateExp) {
 					VariableDeclaration rVariable = ClassUtil.requireNonNull(((TemplateExp)parameterExp).getBindsTo());
 					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
-					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
+					asArguments.add(PivotUtil.createVariableExp(cVariable));
 				}
 				else if (parameterExp instanceof VariableExp) {
 					VariableDeclaration rVariable = ClassUtil.requireNonNull(((VariableExp)parameterExp).getReferredVariable());
 					VariableDeclaration cVariable = variablesAnalysis.getCoreVariable(rVariable);
-					asArguments.add(variablesAnalysis.createVariableExp(cVariable));
+					asArguments.add(PivotUtil.createVariableExp(cVariable));
 				}
 				else {
 					throw new IllegalStateException(NLS.bind("Missing ''{1}'' value for ''{0}'' key.", rKey2.getIdentifies().getName(), keyParameter.getName()));
@@ -260,7 +260,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			}
 		}
 		VariableDeclaration cThisVariable = variablesAnalysis.getCoreThisVariable();
-		OCLExpression asConstructor = variablesAnalysis.createOperationCallExp(variablesAnalysis.createVariableExp(cThisVariable), function, asArguments);
+		OCLExpression asConstructor = variablesAnalysis.createOperationCallExp(PivotUtil.createVariableExp(cThisVariable), function, asArguments);
 		//			addConditionPredicate(cMiddleBottomPattern, createVariableExp(cKeyedVariable), asConstructor);
 		@NonNull VariableAssignment cVariableAssignment = variablesAnalysis.createVariableAssignment(cKeyedVariable, asConstructor);
 		variablesAnalysis.getMiddleBottomPattern().getAssignment().add(cVariableAssignment);

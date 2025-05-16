@@ -606,7 +606,7 @@ class PatternForest
 					qvtrCollectionTemplateExp.getMember().add(umlx2qvtr.createNullLiteralExp());
 				}
 				if (qvtrTarget instanceof Variable) {
-					qvtrTarget = umlx2qvtr.createVariableExp((Variable)qvtrTarget);
+					qvtrTarget = PivotUtil.createVariableExp((Variable)qvtrTarget);
 				}
 				if (javaIndex < qvtrCollectionTemplateExp.getMember().size()) {
 					qvtrCollectionTemplateExp.getMember().set(javaIndex, (OCLExpression)qvtrTarget);
@@ -622,7 +622,7 @@ class PatternForest
 				qvtrTarget = ((TemplateExp)qvtrTarget).getBindsTo();
 			}
 			if (qvtrTarget instanceof VariableDeclaration) {
-				qvtrTarget = umlx2qvtr.createVariableExp((VariableDeclaration)qvtrTarget);
+				qvtrTarget = PivotUtil.createVariableExp((VariableDeclaration)qvtrTarget);
 			}
 			ObjectTemplateExp qvtrObjectTemplateExp = (ObjectTemplateExp) qvtrSourceExpression;
 			Property asProperty = metamodelManager.getASOfEcore(Property.class, eStructuralFeature);
@@ -757,7 +757,7 @@ class PatternForest
 				qvtrElement = ((TemplateExp)qvtrElement).getBindsTo();
 			}
 			if (qvtrElement instanceof Variable) {
-				qvtrElement = umlx2qvtr.createVariableExp((Variable)qvtrElement);
+				qvtrElement = PivotUtil.createVariableExp((Variable)qvtrElement);
 			}
 			assert qvtrElement != null;
 			qvtrArguments.add((OCLExpression)qvtrElement);

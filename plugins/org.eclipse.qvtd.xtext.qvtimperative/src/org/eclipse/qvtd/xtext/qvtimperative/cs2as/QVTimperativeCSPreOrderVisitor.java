@@ -338,7 +338,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 				}
 			}
 		}
-		helper.refreshList(asElement.getObservedProperties(), properties);
+		PivotUtil.refreshList(asElement.getObservedProperties(), properties);
 	}
 
 	@Override
