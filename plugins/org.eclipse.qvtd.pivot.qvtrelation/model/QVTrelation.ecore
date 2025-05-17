@@ -52,7 +52,7 @@
         <details key="originalName" value="NoSuperKeys"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#x9;&#x9;&#x9;-- see Bugzilla 512532 discussion&#xA;&#x9;transformation &lt;> null implies&#xA;&#x9;let superClasses = identifies.superClasses->closure(superClasses) in&#xA;&#x9;let otherKeys = transformation?.ownedKey?->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludesAll(superClasses)&#xA;&#xA;"/>
+        <details key="body" value="&#x9;&#x9;&#x9;-- see Bugzilla 512532 discussion&#xA;&#x9;transformation &lt;> null implies&#xA;&#x9;let superClasses = identifies.superClasses->closure(superClasses) in&#xA;&#x9;let otherKeys = transformation?.ownedKeys?->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludesAll(superClasses)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -67,7 +67,7 @@
         <details key="originalName" value="IdentifiesIsUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;transformation &lt;> null implies&#xA;&#x9;let otherKeys = transformation?.ownedKey?->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludes(identifies)&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;transformation &lt;> null implies&#xA;&#x9;let otherKeys = transformation?.ownedKeys?->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludes(identifies)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -157,7 +157,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-Key-transformation"
         name="transformation" eType="#T-qvtrelation-RelationalTransformation" transient="true"
-        eOpposite="#F-qvtrelation-RelationalTransformation-ownedKey"/>
+        eOpposite="#F-qvtrelation-RelationalTransformation-ownedKeys"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-Relation" name="Relation"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule">
@@ -407,8 +407,8 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-RelationalTransformation-ownedKey"
-        name="ownedKey" ordered="false" upperBound="-1" eType="#T-qvtrelation-Key"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-RelationalTransformation-ownedKeys"
+        name="ownedKeys" ordered="false" upperBound="-1" eType="#T-qvtrelation-Key"
         containment="true" eOpposite="#F-qvtrelation-Key-transformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-SharedVariable" name="SharedVariable"

@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey <em>Owned Key</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationalTransformation()
@@ -33,22 +33,22 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public interface RelationalTransformation extends Transformation {
 	/**
-	 * Returns the value of the '<em><b>Owned Key</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtrelation.Key}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getTransformation <em>Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Key</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Keys</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Key</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationalTransformation_OwnedKey()
+	 * @return the value of the '<em>Owned Keys</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationalTransformation_OwnedKeys()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#getTransformation
 	 * @model opposite="transformation" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Key> getOwnedKey();
+	EList<Key> getOwnedKeys();
 
 	/**
 	 * <!-- begin-user-doc -->

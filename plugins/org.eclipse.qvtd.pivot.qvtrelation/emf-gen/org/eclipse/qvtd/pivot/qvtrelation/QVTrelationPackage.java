@@ -577,15 +577,15 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getRelationalTransformation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey <em>Owned Key</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKeys <em>Owned Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Key</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey()
+	 * @return the meta object for the containment reference list '<em>Owned Keys</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKeys()
 	 * @see #getRelationalTransformation()
 	 * @generated
 	 */
-	EReference getRelationalTransformation_OwnedKey();
+	EReference getRelationalTransformation_OwnedKeys();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateContextTypeIsThisTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Context Type Is This Transformation</em>}' operation.
@@ -1083,12 +1083,12 @@ public interface QVTrelationPackage extends EPackage {
 		EClass RELATIONAL_TRANSFORMATION = eINSTANCE.getRelationalTransformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Key</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Keys</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATIONAL_TRANSFORMATION__OWNED_KEY = eINSTANCE.getRelationalTransformation_OwnedKey();
+		EReference RELATIONAL_TRANSFORMATION__OWNED_KEYS = eINSTANCE.getRelationalTransformation_OwnedKeys();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Context Type Is This Transformation</b></em>' operation.

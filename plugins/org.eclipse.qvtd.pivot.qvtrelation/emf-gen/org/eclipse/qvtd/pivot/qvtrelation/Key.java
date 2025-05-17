@@ -82,7 +82,7 @@ public interface Key extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Transformation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey <em>Owned Key</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKeys <em>Owned Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transformation</em>' container reference isn't clear,
@@ -92,8 +92,8 @@ public interface Key extends Element {
 	 * @return the value of the '<em>Transformation</em>' container reference.
 	 * @see #setTransformation(RelationalTransformation)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Transformation()
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey
-	 * @model opposite="ownedKey"
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKeys
+	 * @model opposite="ownedKeys"
 	 * @generated
 	 */
 	RelationalTransformation getTransformation();
@@ -130,7 +130,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='NoSuperKeys'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation &lt;&gt; null implies\n\tlet superClasses = identifies.superClasses-&gt;closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludesAll(superClasses)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation &lt;&gt; null implies\n\tlet superClasses = identifies.superClasses-&gt;closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKeys?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludesAll(superClasses)\n\n'"
 	 * @generated
 	 */
 	boolean validateNoSuperKeys(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -139,7 +139,7 @@ public interface Key extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/uml2/2.0.0/UML originalName='IdentifiesIsUnique'"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation &lt;&gt; null implies\n\tlet otherKeys = transformation?.ownedKey?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludes(identifies)\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='\n\ttransformation &lt;&gt; null implies\n\tlet otherKeys = transformation?.ownedKeys?-&gt;excluding(self) in\n\totherKeys.identifies-&gt;excludes(identifies)\n\n'"
 	 * @generated
 	 */
 	boolean validateIdentifiesIsUnique(DiagnosticChain diagnostics, Map<Object, Object> context);

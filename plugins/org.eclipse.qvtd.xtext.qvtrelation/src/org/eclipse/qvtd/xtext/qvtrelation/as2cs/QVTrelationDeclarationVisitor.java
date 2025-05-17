@@ -562,7 +562,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			modelParameters.remove(traceTypedModel);
 		}
 		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
-		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
+		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKeys(), null));
 		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
 		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
 		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));

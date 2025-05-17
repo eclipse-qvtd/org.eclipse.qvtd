@@ -58,7 +58,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationalTransformationImpl#getOwnedKey <em>Owned Key</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationalTransformationImpl#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,15 +81,14 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	 */
 	public static final int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 2;
 	/**
-	 * The cached value of the '{@link #getOwnedKey() <em>Owned Key</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedKeys() <em>Owned Keys</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedKey()
+	 * @see #getOwnedKeys()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Key> ownedKey;
-
+	protected EList<Key> ownedKeys;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,11 +114,11 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	 * @generated
 	 */
 	@Override
-	public EList<Key> getOwnedKey() {
-		if (ownedKey == null) {
-			ownedKey = new EObjectContainmentWithInverseEList<Key>(Key.class, this, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+	public EList<Key> getOwnedKeys() {
+		if (ownedKeys == null) {
+			ownedKeys = new EObjectContainmentWithInverseEList<Key>(Key.class, this, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		}
-		return ownedKey;
+		return ownedKeys;
 	}
 
 	/**
@@ -284,7 +283,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedKey()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedKeys()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -298,7 +297,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				return ((InternalEList<?>)getOwnedKey()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedKeys()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -312,7 +311,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				return getOwnedKey();
+				return getOwnedKeys();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,8 +326,8 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				getOwnedKey().clear();
-				getOwnedKey().addAll((Collection<? extends Key>)newValue);
+				getOwnedKeys().clear();
+				getOwnedKeys().addAll((Collection<? extends Key>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -343,7 +342,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				getOwnedKey().clear();
+				getOwnedKeys().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -358,7 +357,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
-				return ownedKey != null && !ownedKey.isEmpty();
+				return ownedKeys != null && !ownedKeys.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

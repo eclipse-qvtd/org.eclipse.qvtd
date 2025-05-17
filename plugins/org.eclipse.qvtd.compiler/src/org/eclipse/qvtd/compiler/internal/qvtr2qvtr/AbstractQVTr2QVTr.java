@@ -325,7 +325,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 			context.addTrace(tIn, tOut);
 			tOut.setName(tIn.getName());
 			tOut.setOwnedContext(create(tIn.getOwnedContext()));
-			createAll(tIn.getOwnedKey(), tOut.getOwnedKey());
+			createAll(tIn.getOwnedKeys(), tOut.getOwnedKeys());
 			createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
 			createAll(tIn.getModelParameter(), tOut.getModelParameter());
 			createAll(tIn.getRule(), tOut.getRule());
@@ -644,7 +644,7 @@ public abstract class AbstractQVTr2QVTr extends QVTrelationHelper
 		public @NonNull RelationalTransformation visitRelationalTransformation(@NonNull RelationalTransformation tOut) {
 			RelationalTransformation tIn = context.equivalentSource(tOut);
 			updateChild(tOut.getOwnedContext());
-			updateAllChildren(tOut.getOwnedKey());
+			updateAllChildren(tOut.getOwnedKeys());
 			updateAllChildren(tOut.getOwnedOperations());
 			updateAllChildren(tOut.getModelParameter());
 			updateAllChildren(tOut.getRule());

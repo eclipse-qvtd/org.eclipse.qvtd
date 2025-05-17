@@ -409,7 +409,7 @@ public class QVTrelationTables extends AbstractTables
 		public static final @NonNull ExecutorProperty _RelationImplementation__inDirectionOf = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, Types._RelationImplementation, 1);
 		public static final @NonNull ExecutorProperty _RelationImplementation__relation = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__RELATION, Types._RelationImplementation, 2);
 
-		public static final @NonNull ExecutorProperty _RelationalTransformation__ownedKey = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION__OWNED_KEY, Types._RelationalTransformation, 0);
+		public static final @NonNull ExecutorProperty _RelationalTransformation__ownedKeys = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION__OWNED_KEYS, Types._RelationalTransformation, 0);
 
 		public static final @NonNull ExecutorProperty _SharedVariable__typedModel = new EcoreExecutorProperty(QVTrelationPackage.Literals.SHARED_VARIABLE__TYPED_MODEL, Types._SharedVariable, 0);
 		static {
@@ -1295,7 +1295,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTbaseTables.Properties._Transformation__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._Class__ownedInvariants,
-			QVTrelationTables.Properties._RelationalTransformation__ownedKey,
+			QVTrelationTables.Properties._RelationalTransformation__ownedKeys,
 			PivotTables.Properties._Class__ownedOperations,
 			PivotTables.Properties._Class__ownedProperties,
 			PivotTables.Properties._TemplateableElement__ownedSignature,
