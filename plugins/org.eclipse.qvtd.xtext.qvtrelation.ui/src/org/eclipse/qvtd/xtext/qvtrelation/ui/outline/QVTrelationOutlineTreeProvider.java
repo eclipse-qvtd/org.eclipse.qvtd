@@ -116,7 +116,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 				createNode(parentNode, asTypedModel);
 			}
 		}
-		for (Key asKey : ele.getOwnedKey()) {
+		for (Key asKey : ele.getOwnedKeys()) {
 			createNode(parentNode, asKey);
 		}
 		for (Operation asOperation : ele.getOwnedOperations()) {

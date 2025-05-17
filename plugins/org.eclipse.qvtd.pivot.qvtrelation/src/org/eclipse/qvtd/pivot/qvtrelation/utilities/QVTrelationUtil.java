@@ -222,11 +222,11 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull Iterable<@NonNull Key> getOwnedKey(@NonNull RelationalTransformation rTransformation) {
-		return ClassUtil.nullFree(rTransformation.getOwnedKey());
+		return ClassUtil.nullFree(rTransformation.getOwnedKeys());
 	}
 
 	public static @NonNull List<@NonNull Key> getOwnedKeysList(@NonNull RelationalTransformation rRelationalTransformation) {
-		return ClassUtil.nullFree(rRelationalTransformation.getOwnedKey());
+		return ClassUtil.nullFree(rRelationalTransformation.getOwnedKeys());
 	}
 
 	public static @NonNull Iterable<@NonNull Property> getOwnedOppositeParts(@NonNull Key rKey) {	// FIXME merge into a getNormalizedParts

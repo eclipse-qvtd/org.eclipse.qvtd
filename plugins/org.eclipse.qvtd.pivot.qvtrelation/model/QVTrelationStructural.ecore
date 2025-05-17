@@ -126,7 +126,7 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T.qvtrelation.RelationalTransformation"
       name="RelationalTransformation" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="p.qvtrelation.RelationalTransformation.ownedKey"
-        name="ownedKey" ordered="false" upperBound="-1" eType="#T.qvtrelation.Key"
+        name="ownedKeys" ordered="false" upperBound="-1" eType="#T.qvtrelation.Key"
         containment="true" eOpposite="#p.qvtrelation.Key.transformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T.qvtrelation.SharedVariable" name="SharedVariable"

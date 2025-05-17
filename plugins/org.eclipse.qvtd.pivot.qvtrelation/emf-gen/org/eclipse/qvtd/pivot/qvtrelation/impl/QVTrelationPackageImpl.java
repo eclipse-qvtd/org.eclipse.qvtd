@@ -691,7 +691,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationalTransformation_OwnedKey() {
+	public EReference getRelationalTransformation_OwnedKeys() {
 		return (EReference)relationalTransformationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -916,7 +916,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getKey_Identifies(), thePivotPackage.getClass_(), null, "identifies", null, 1, 1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKey_OppositePart(), thePivotPackage.getProperty(), null, "oppositePart", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getKey_Part(), thePivotPackage.getProperty(), null, "part", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getKey_Transformation(), this.getRelationalTransformation(), this.getRelationalTransformation_OwnedKey(), "transformation", null, 0, 1, Key.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKey_Transformation(), this.getRelationalTransformation(), this.getRelationalTransformation_OwnedKeys(), "transformation", null, 0, 1, Key.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIdentifiesIsNotAbstract", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1100,7 +1100,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(relationModelEClass, RelationModel.class, "RelationModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(relationalTransformationEClass, RelationalTransformation.class, "RelationalTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationalTransformation_OwnedKey(), this.getKey(), this.getKey_Transformation(), "ownedKey", null, 0, -1, RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRelationalTransformation_OwnedKeys(), this.getKey(), this.getKey_Transformation(), "ownedKeys", null, 0, -1, RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		op = initEOperation(getRelationalTransformation__ValidateContextTypeIsThisTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateContextTypeIsThisTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1396,13 +1396,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation <> null implies\n\tlet superClasses = identifies.superClasses->closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludesAll(superClasses)\n\n"
+			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation <> null implies\n\tlet superClasses = identifies.superClasses->closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKeys?->excluding(self) in\n\totherKeys.identifies->excludesAll(superClasses)\n\n"
 		   });
 		addAnnotation
 		  (getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttransformation <> null implies\n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludes(identifies)\n\n"
+			   "body", "\n\ttransformation <> null implies\n\tlet otherKeys = transformation?.ownedKeys?->excluding(self) in\n\totherKeys.identifies->excludes(identifies)\n\n"
 		   });
 		addAnnotation
 		  (getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
