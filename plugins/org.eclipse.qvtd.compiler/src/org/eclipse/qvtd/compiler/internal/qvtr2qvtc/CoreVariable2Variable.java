@@ -53,7 +53,7 @@ public class CoreVariable2Variable extends AbstractVariable2Variable
 	@Override
 	public void addNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression, @Nullable Boolean isPartial) throws CompilerChainException {
 		Variable cVariable2 = getCoreVariable();
-		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.Internal.getOwnedAssignmentsList(variablesAnalysis.getMiddleBottomPattern());
+		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.getOwnedAssignmentsList(variablesAnalysis.getMiddleBottomPattern());
 		if (isPartial == null) {
 			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
 		}

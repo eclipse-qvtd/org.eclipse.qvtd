@@ -220,7 +220,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 
 	public @NonNull SpeculateStatement createSpeculateStatement(@NonNull Iterable<@NonNull OCLExpression> speculateExpressions) {
 		SpeculateStatement asSpeculateStatement = QVTimperativeFactory.eINSTANCE.createSpeculateStatement();
-		Iterables.addAll(QVTimperativeUtil.Internal.getOwnedExpressionsList(asSpeculateStatement), speculateExpressions);
+		Iterables.addAll(QVTimperativeUtil.getOwnedExpressionsList(asSpeculateStatement), speculateExpressions);
 		return asSpeculateStatement;
 	}
 

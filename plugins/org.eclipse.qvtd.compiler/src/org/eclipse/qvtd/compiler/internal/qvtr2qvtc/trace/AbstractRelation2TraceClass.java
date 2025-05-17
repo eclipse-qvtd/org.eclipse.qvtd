@@ -180,7 +180,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 					//					getInvocation2TraceProperty(invocationPropertyName, rInvocation);
 				}
 				else {
-					List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
+					List<@NonNull OCLExpression> rArguments = QVTrelationUtil.getOwnedArgumentsList(rInvocation);
 					for (int i = 0; i < rArguments.size(); i++) {
 						OCLExpression rArgument = rArguments.get(i);
 						if (rArgument instanceof VariableExp) {
@@ -326,7 +326,7 @@ abstract class AbstractRelation2TraceClass extends AbstractRelation2MiddleType i
 		//
 		//	Only a single root variable in each of just two domains gurantees just one trace per root variable.
 		//
-		List<@NonNull Domain> rDomains = QVTrelationUtil.Internal.getOwnedDomainsList(relation);
+		List<@NonNull Domain> rDomains = QVTrelationUtil.getOwnedDomainsList(relation);
 		if (rDomains.size() > 2) {
 			return true;
 		}

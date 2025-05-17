@@ -122,7 +122,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull Key createKey(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull Iterable<@NonNull Property> asProperties) {
 		Key asKey = QVTrelationFactory.eINSTANCE.createKey();
 		asKey.setIdentifies(asClass);
-		Iterables.addAll(QVTrelationUtil.Internal.getOwnedPartsList(asKey), asProperties);
+		Iterables.addAll(QVTrelationUtil.getOwnedPartsList(asKey), asProperties);
 		return asKey;
 	}
 
@@ -147,14 +147,14 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull Relation createRelation(@NonNull String name, @NonNull Iterable<@NonNull RelationDomain> asRelationDomains) {
 		Relation asRelation = QVTrelationFactory.eINSTANCE.createRelation();
 		asRelation.setName(name);
-		Iterables.addAll(QVTrelationUtil.Internal.getOwnedDomainsList(asRelation), asRelationDomains);
+		Iterables.addAll(QVTrelationUtil.getOwnedDomainsList(asRelation), asRelationDomains);
 		return asRelation;
 	}
 
 	public @NonNull RelationCallExp createRelationCallExp(@NonNull Relation asRelation, @NonNull List<? extends @NonNull OCLExpression> asArguments) {
 		RelationCallExp asRelationCallExp = QVTrelationFactory.eINSTANCE.createRelationCallExp();
 		asRelationCallExp.setReferredRelation(asRelation);
-		Iterables.addAll(QVTrelationUtil.Internal.getOwnedArgumentsList(asRelationCallExp), asArguments);
+		Iterables.addAll(QVTrelationUtil.getOwnedArgumentsList(asRelationCallExp), asArguments);
 		setType(asRelationCallExp, environmentFactory.getStandardLibrary().getBooleanType(), true);;
 		return asRelationCallExp;
 	}
@@ -169,7 +169,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		RelationalTransformation asRelationalTransformation = QVTrelationFactory.eINSTANCE.createRelationalTransformation();
 		asRelationalTransformation.setName(name);
-		Iterables.addAll(QVTrelationUtil.Internal.getModelParameterList(asRelationalTransformation), asTypedModels);
+		Iterables.addAll(QVTrelationUtil.getModelParameterList(asRelationalTransformation), asTypedModels);
 		asRelationalTransformation.getSuperClasses().add(standardLibrary.getOclElementType());
 		return asRelationalTransformation;
 	}

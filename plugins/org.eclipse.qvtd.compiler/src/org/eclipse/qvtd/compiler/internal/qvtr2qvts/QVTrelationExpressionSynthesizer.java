@@ -68,7 +68,7 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		//
 		Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
 		List<@NonNull VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(invokedRelation);
-		List<@NonNull OCLExpression> ownedArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(relationCallExp);
+		List<@NonNull OCLExpression> ownedArguments = QVTrelationUtil.getOwnedArgumentsList(relationCallExp);
 		int size = rootVariables.size();
 		assert size == ownedArguments.size();
 		for (int i = 0; i < size; i++) {

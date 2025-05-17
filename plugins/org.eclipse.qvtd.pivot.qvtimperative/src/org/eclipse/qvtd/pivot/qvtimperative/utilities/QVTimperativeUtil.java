@@ -61,13 +61,6 @@ import com.google.common.collect.Iterables;
 
 public class QVTimperativeUtil extends QVTbaseUtil
 {
-	public static class Internal extends QVTbaseUtil.Internal
-	{
-		public static @NonNull List<@NonNull OCLExpression> getOwnedExpressionsList(@NonNull SpeculateStatement asSpeculateStatement) {
-			return ClassUtil.nullFree(asSpeculateStatement.getOwnedExpressions());
-		}
-	}
-
 	public static final class MappingParameterBindingComparator implements Comparator<@NonNull MappingParameterBinding>
 	{
 		public static final @NonNull MappingParameterBindingComparator INSTANCE = new MappingParameterBindingComparator();
@@ -223,6 +216,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedExpressions(@NonNull SpeculateStatement speculateStatement) {
 		return ClassUtil.nullFree(speculateStatement.getOwnedExpressions());
+	}
+
+	public static @NonNull List<@NonNull OCLExpression> getOwnedExpressionsList(@NonNull SpeculateStatement asSpeculateStatement) {
+		return ClassUtil.nullFree(asSpeculateStatement.getOwnedExpressions());
 	}
 
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {

@@ -88,7 +88,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 		}
 
 		private org.eclipse.ocl.pivot.@NonNull Package getPackage(org.eclipse.ocl.pivot.@Nullable Package asParentPackage, @NonNull String name) {
-			List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = (asParentPackage != null ? QVTbaseUtil.Internal.getOwnedPackagesList(asParentPackage) : QVTbaseUtil.Internal.getOwnedPackagesList(qvtrModel));
+			List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = (asParentPackage != null ? QVTbaseUtil.getOwnedPackagesList(asParentPackage) : QVTbaseUtil.getOwnedPackagesList(qvtrModel));
 			org.eclipse.ocl.pivot.Package qvtrPackage = NameUtil.getNameable(asPackages, name);
 			if (qvtrPackage ==  null) {
 				@NonNull String nsURI = "http:/fixme";		// FIXME
@@ -133,12 +133,12 @@ public class UMLX2QVTr extends QVTrelationHelper
 				asPackage = getPackage(null, "");
 			}
 			//			Collections.sort(qvtrKeys, NameUtil.NAMEABLE_COMPARATOR);
-			Iterables.addAll(QVTrelationUtil.Internal.getOwnedKeysList(qvtrRelationalTransformation), qvtrKeys);
-			QVTbaseUtil.Internal.getOwnedClassesList(asPackage).add(qvtrRelationalTransformation);
+			Iterables.addAll(QVTrelationUtil.getOwnedKeysList(qvtrRelationalTransformation), qvtrKeys);
+			QVTbaseUtil.getOwnedClassesList(asPackage).add(qvtrRelationalTransformation);
 			//
 			List<@NonNull Rule> allRelationsList = new ArrayList<>();
 			createAll(UMLXUtil.getOwnedRelDiagrams(txDiagram), allRelationsList);
-			createAll(UMLXUtil.getOwnedTxQueryNodes(txDiagram), QVTbaseUtil.Internal.getOwnedOperationsList(qvtrRelationalTransformation));
+			createAll(UMLXUtil.getOwnedTxQueryNodes(txDiagram), QVTbaseUtil.getOwnedOperationsList(qvtrRelationalTransformation));
 			//
 			for (@NonNull TxTypedModelNode txTypedModelNode : UMLXUtil.getOwnedTxTypedModelNodes(txDiagram)) {
 				TypedModel asTypedModel = context.getQVTrElement(TypedModel.class, txTypedModelNode);
@@ -152,7 +152,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 				}
 			}
 			//			Collections.sort(allRelationsList, NameUtil.NAMEABLE_COMPARATOR);
-			List<@NonNull Import> qvtrImports = QVTrelationUtil.Internal.getOwnedImportsList(qvtrModel);
+			List<@NonNull Import> qvtrImports = QVTrelationUtil.getOwnedImportsList(qvtrModel);
 			for (@NonNull TxPackageNode txPackageNode : UMLXUtil.getOwnedTxPackageNodes(txDiagram)) {
 				for (@NonNull String name : UMLXUtil.getImportAliases(txPackageNode)) {
 					try {
@@ -174,7 +174,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 				}
 			}
 			//
-			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
+			Iterables.addAll(QVTrelationUtil.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
 			QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), qvtrRelationalTransformation);
 			qvtrRelationalTransformation.getModelParameter().add(context.createTraceTypedModel());
 			if (QVTbaseUtil.basicGetPrimitiveTypedModel(qvtrRelationalTransformation) == null) {

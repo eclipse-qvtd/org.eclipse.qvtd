@@ -1250,7 +1250,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitCollectionLiteralExp(@NonNull CollectionLiteralExp collectionLiteralExp) {
-		List<@NonNull CollectionLiteralPart> ownedParts = QVTbaseUtil.Internal.getOwnedPartsList(collectionLiteralExp);
+		List<@NonNull CollectionLiteralPart> ownedParts = QVTbaseUtil.getOwnedPartsList(collectionLiteralExp);
 		int iSize = ownedParts.size();
 		@NonNull Node [] partNodes = new @NonNull Node[iSize];
 		@NonNull CollectionLiteralPart [] collectionParts = new @NonNull CollectionLiteralPart[iSize];
@@ -1367,7 +1367,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitMapLiteralExp(@NonNull MapLiteralExp mapLiteralExp) {
-		List<@NonNull MapLiteralPart> ownedParts = QVTbaseUtil.Internal.getOwnedPartsList(mapLiteralExp);
+		List<@NonNull MapLiteralPart> ownedParts = QVTbaseUtil.getOwnedPartsList(mapLiteralExp);
 		int iSize = ownedParts.size();
 		@NonNull Node [] partNodes = new @NonNull Node[iSize];
 		@NonNull MapLiteralPart [] mapParts = new @NonNull MapLiteralPart[iSize];
@@ -1446,7 +1446,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitShadowExp(@NonNull ShadowExp shadowExp) {
-		List<@NonNull ShadowPart> ownedParts = QVTbaseUtil.Internal.getOwnedPartsList(shadowExp);
+		List<@NonNull ShadowPart> ownedParts = QVTbaseUtil.getOwnedPartsList(shadowExp);
 		int iSize = ownedParts.size();
 		@NonNull Node [] partNodes = new @NonNull Node[iSize];
 		@NonNull ShadowPart [] shadowParts = new @NonNull ShadowPart[iSize];
@@ -1474,7 +1474,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @NonNull Node visitTupleLiteralExp(@NonNull TupleLiteralExp tupleLiteralExp) {
-		List<@NonNull TupleLiteralPart> ownedParts = QVTbaseUtil.Internal.getOwnedPartsList(tupleLiteralExp);
+		List<@NonNull TupleLiteralPart> ownedParts = QVTbaseUtil.getOwnedPartsList(tupleLiteralExp);
 		int iSize = ownedParts.size();
 		@NonNull Node [] partNodes = new @NonNull Node[iSize];
 		@NonNull TupleLiteralPart [] tupleParts = new @NonNull TupleLiteralPart[iSize];

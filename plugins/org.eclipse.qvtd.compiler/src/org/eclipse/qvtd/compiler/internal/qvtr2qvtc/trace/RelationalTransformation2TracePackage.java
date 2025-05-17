@@ -143,7 +143,7 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class createClass(@NonNull Relation2MiddleType relation2middleType, @NonNull String className) {
-		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTrelationUtil.Internal.getOwnedClassesList(tracePackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTrelationUtil.getOwnedClassesList(tracePackage);
 		String uniqueName = QVTrNameGenerator.getUniqueName(name2relation2middleType, className, relation2middleType);
 		org.eclipse.ocl.pivot.Class traceClass = PivotUtil.createClass(uniqueName);
 		traceClasses.add(traceClass);
@@ -498,7 +498,7 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 		for (@NonNull Relation2MiddleType relation2middleType : relation2middleTypes) {
 			relation2middleType.synthesize();
 		}
-		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedClassesList(tracePackage));
+		CompilerUtil.normalizeNameables(QVTrelationUtil.getOwnedClassesList(tracePackage));
 		return tracePackage;
 	}
 }

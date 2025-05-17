@@ -46,7 +46,7 @@ public class QVTtemplateASSaverNormalizeVisitor extends AbstractQVTtemplateASSav
 
 	@Override
 	public @Nullable Object visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
-		ClassUtil.sort(QVTtemplateUtil.Internal.getOwnedPartsList(object), PropertyTemplateItemComparator.INSTANCE);
+		ClassUtil.sort(QVTtemplateUtil.getOwnedPartsList(object), PropertyTemplateItemComparator.INSTANCE);
 		return null;
 	}
 }

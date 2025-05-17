@@ -212,7 +212,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		for (@NonNull VariableDeclaration2TraceProperty variableDeclaration2traceProperty : variable2variableDeclaration2traceProperty.values()) {
 			variableDeclaration2traceProperty.synthesize();
 		}
-		CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedPropertiesList(middleClass));
+		CompilerUtil.normalizeNameables(QVTrelationUtil.getOwnedPropertiesList(middleClass));
 	}
 
 	@Override

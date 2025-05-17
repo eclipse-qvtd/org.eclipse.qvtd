@@ -540,7 +540,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					externalURI = externalURI.replace(".qvtr", ".qvtcas");
 				}
 				coreModel.setExternalURI(externalURI);
-				transformToCoreTransformationHierarchy(QVTrelationUtil.Internal.getOwnedPackagesList(coreModel), QVTrelationUtil.getOwnedPackages(relationModel));
+				transformToCoreTransformationHierarchy(QVTrelationUtil.getOwnedPackagesList(coreModel), QVTrelationUtil.getOwnedPackages(relationModel));
 			}
 		}
 		List<@NonNull TransformationAnalysis> transformationAnalyses = new ArrayList<>(transformation2transformationAnalysis.values());
@@ -589,11 +589,11 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					//					CompilerUtil.normalizeNameables(QVTrelationUtil.getRule(cTransformation)));
 				}
 			}
-			CompilerUtil.normalizeNameables(QVTrelationUtil.Internal.getOwnedClassesList(corePackage));
+			CompilerUtil.normalizeNameables(QVTrelationUtil.getOwnedClassesList(corePackage));
 			//
 			//	Recurse to establish callable names in nested packages.
 			//
-			transformToCoreTransformationHierarchy(QVTrelationUtil.Internal.getOwnedPackagesList(corePackage), QVTrelationUtil.getOwnedPackages(relationPackage));
+			transformToCoreTransformationHierarchy(QVTrelationUtil.getOwnedPackagesList(corePackage), QVTrelationUtil.getOwnedPackages(relationPackage));
 		}
 	}
 
@@ -635,7 +635,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 					nestedTracePackages.add(nestedTracePackage);
 				}
 			}
-			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages2 = transformToTracePackageHierarchy(QVTrelationUtil.Internal.getOwnedPackagesList(relationPackage));
+			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages2 = transformToTracePackageHierarchy(QVTrelationUtil.getOwnedPackagesList(relationPackage));
 			if (nestedTracePackages2 != null) {
 				if (nestedTracePackages == null) {
 					nestedTracePackages = new ArrayList<>();

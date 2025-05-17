@@ -127,7 +127,7 @@ public abstract class Transformation2TracePackage
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class createClass(@NonNull Transformation transformation, @NonNull String className) {
-		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTbaseUtil.Internal.getOwnedClassesList(tracePackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTbaseUtil.getOwnedClassesList(tracePackage);
 		String uniqueName = NameGenerator.getUniqueName(name2rule2middleType, className, transformation);
 		org.eclipse.ocl.pivot.Class traceClass = PivotUtil.createClass(uniqueName);
 		traceClasses.add(traceClass);
@@ -137,7 +137,7 @@ public abstract class Transformation2TracePackage
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class createClass(@NonNull Rule2MiddleType rule2middleType, @NonNull String className) {
-		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTbaseUtil.Internal.getOwnedClassesList(tracePackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> traceClasses = QVTbaseUtil.getOwnedClassesList(tracePackage);
 		String uniqueName = NameGenerator.getUniqueName(name2rule2middleType, className, rule2middleType);
 		org.eclipse.ocl.pivot.Class traceClass = PivotUtil.createClass(uniqueName);
 		traceClasses.add(traceClass);
@@ -484,9 +484,9 @@ public abstract class Transformation2TracePackage
 		for (@NonNull Rule2TraceGroup relation2traceGroup : getOrderedRule2TraceGroups()) {
 			relation2traceGroup.synthesizeTraceModel();
 		}
-		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedClassesList(tracePackage));
+		CompilerUtil.normalizeNameables(QVTbaseUtil.getOwnedClassesList(tracePackage));
 		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTbaseUtil.getOwnedClasses(tracePackage)) {
-			CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedPropertiesList(traceClass));
+			CompilerUtil.normalizeNameables(QVTbaseUtil.getOwnedPropertiesList(traceClass));
 		}
 		return tracePackage;
 	} */

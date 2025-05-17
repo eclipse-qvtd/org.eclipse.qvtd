@@ -26,18 +26,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
 public class QVTtemplateUtil extends QVTbaseUtil
 {
-
-	public static class Internal extends QVTbaseUtil.Internal
-	{
-		public static @NonNull List<@NonNull OCLExpression> getOwnedMembersList(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
-			return ClassUtil.nullFree(rCollectionTemplateExp.getMember());
-		}
-
-		public static @NonNull List<@NonNull PropertyTemplateItem> getOwnedPartsList(@NonNull ObjectTemplateExp rObjectTemplateExp) {
-			return ClassUtil.nullFree(rObjectTemplateExp.getPart());
-		}
-	}
-
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
 
 	public static @Nullable PropertyTemplateItem basicGetPart(@NonNull ObjectTemplateExp rObjectTemplateExp, @NonNull Property asProperty) {
@@ -61,7 +49,15 @@ public class QVTtemplateUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(rCollectionTemplateExp.getMember());
 	}
 
+	public static @NonNull List<@NonNull OCLExpression> getOwnedMembersList(@NonNull CollectionTemplateExp rCollectionTemplateExp) {
+		return ClassUtil.nullFree(rCollectionTemplateExp.getMember());
+	}
+
 	public static @NonNull Iterable<@NonNull PropertyTemplateItem> getOwnedParts(@NonNull ObjectTemplateExp rObjectTemplateExp) {
+		return ClassUtil.nullFree(rObjectTemplateExp.getPart());
+	}
+
+	public static @NonNull List<@NonNull PropertyTemplateItem> getOwnedPartsList(@NonNull ObjectTemplateExp rObjectTemplateExp) {
 		return ClassUtil.nullFree(rObjectTemplateExp.getPart());
 	}
 

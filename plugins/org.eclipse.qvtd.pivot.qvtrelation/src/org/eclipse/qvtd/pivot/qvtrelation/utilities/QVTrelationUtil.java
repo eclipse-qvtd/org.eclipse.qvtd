@@ -57,37 +57,6 @@ import com.google.common.collect.Iterables;
 
 public class QVTrelationUtil extends QVTtemplateUtil
 {
-	public static class Internal extends QVTtemplateUtil.Internal
-	{
-		public static @NonNull List<@NonNull Variable> getBindsToList(@NonNull DomainPattern rDomainPattern) {
-			return ClassUtil.nullFree(rDomainPattern.getBindsTo());
-		}
-
-		public static @NonNull List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
-			return ClassUtil.nullFree(rInvocation.getArgument());
-		}
-
-		public static @NonNull List<@NonNull Domain> getOwnedDomainsList(@NonNull Relation rRelation) {
-			return ClassUtil.nullFree(rRelation.getDomain());
-		}
-
-		public static @NonNull List<@NonNull Key> getOwnedKeysList(@NonNull RelationalTransformation rRelationalTransformation) {
-			return ClassUtil.nullFree(rRelationalTransformation.getOwnedKey());
-		}
-
-		public static @NonNull List<@NonNull Property> getOwnedPartsList(@NonNull Key rKey) {
-			return ClassUtil.nullFree(rKey.getPart());
-		}
-
-		public static @NonNull List<@NonNull Rule> getOwnedRelationsList(@NonNull RelationalTransformation rRelationalTransformation) {
-			return ClassUtil.nullFree(rRelationalTransformation.getRule());
-		}
-
-		public static @NonNull List<@NonNull Variable> getOwnedVariablesList(@NonNull Relation rRelation) {
-			return ClassUtil.nullFree(rRelation.getVariable());
-		}
-	}
-
 	public static final class KeyComparator implements Comparator<@NonNull Key>
 	{
 		public static final @NonNull KeyComparator INSTANCE = new KeyComparator();
@@ -181,6 +150,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.requireNonNull(rTemplateExp.getBindsTo());
 	}
 
+	public static @NonNull List<@NonNull Variable> getBindsToList(@NonNull DomainPattern rDomainPattern) {
+		return ClassUtil.nullFree(rDomainPattern.getBindsTo());
+	}
+
 	public static @NonNull Predicate getContainingPredicate(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Predicate) {
@@ -236,12 +209,24 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nullFree(rInvocation.getArgument());
 	}
 
+	public static @NonNull List<@NonNull OCLExpression> getOwnedArgumentsList(@NonNull RelationCallExp rInvocation) {
+		return ClassUtil.nullFree(rInvocation.getArgument());
+	}
+
 	public static @NonNull Iterable<@NonNull RelationDomain> getOwnedDomains(@NonNull Relation rRelation) {
 		return Iterables.filter(ClassUtil.nullFree(rRelation.getDomain()), RelationDomain.class);
 	}
 
+	public static @NonNull List<@NonNull Domain> getOwnedDomainsList(@NonNull Relation rRelation) {
+		return ClassUtil.nullFree(rRelation.getDomain());
+	}
+
 	public static @NonNull Iterable<@NonNull Key> getOwnedKey(@NonNull RelationalTransformation rTransformation) {
 		return ClassUtil.nullFree(rTransformation.getOwnedKey());
+	}
+
+	public static @NonNull List<@NonNull Key> getOwnedKeysList(@NonNull RelationalTransformation rRelationalTransformation) {
+		return ClassUtil.nullFree(rRelationalTransformation.getOwnedKey());
 	}
 
 	public static @NonNull Iterable<@NonNull Property> getOwnedOppositeParts(@NonNull Key rKey) {	// FIXME merge into a getNormalizedParts
@@ -249,6 +234,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull Iterable<@NonNull Property> getOwnedParts(@NonNull Key rKey) {
+		return ClassUtil.nullFree(rKey.getPart());
+	}
+
+	public static @NonNull List<@NonNull Property> getOwnedPartsList(@NonNull Key rKey) {
 		return ClassUtil.nullFree(rKey.getPart());
 	}
 
@@ -260,6 +249,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return Iterables.filter(ClassUtil.nullFree(rTransformation.getRule()), Relation.class);
 	}
 
+	public static @NonNull List<@NonNull Rule> getOwnedRelationsList(@NonNull RelationalTransformation rRelationalTransformation) {
+		return ClassUtil.nullFree(rRelationalTransformation.getRule());
+	}
+
 	public static @NonNull TemplateExp getOwnedTemplateExpression(@NonNull DomainPattern rDomainPattern) {
 		return ClassUtil.requireNonNull(rDomainPattern.getTemplateExpression());
 	}
@@ -269,6 +262,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	}
 
 	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull Relation rRelation) {
+		return ClassUtil.nullFree(rRelation.getVariable());
+	}
+
+	public static @NonNull List<@NonNull Variable> getOwnedVariablesList(@NonNull Relation rRelation) {
 		return ClassUtil.nullFree(rRelation.getVariable());
 	}
 
@@ -450,7 +447,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			EObject eObject = tit.next();
 			if (eObject instanceof RelationalTransformation) {
 				RelationalTransformation asTransformation = (RelationalTransformation)eObject;
-				List<@NonNull TypedModel> modelParameters = Internal.getModelParameterList(asTransformation);
+				List<@NonNull TypedModel> modelParameters = getModelParameterList(asTransformation);
 				TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
 				if (traceTypedModel == null) {
 					if (helper == null) {

@@ -216,7 +216,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		public Element visitObjectTemplateExp(@NonNull ObjectTemplateExp oteIn) {
 			RelationAnalysis relationAnalysis2 = getRelationAnalysis();
 			Variable templateVariable = QVTrelationUtil.getBindsTo(oteIn);
-			List<@NonNull PropertyTemplateItem> propertyTemplateItems = QVTrelationUtil.Internal.getOwnedPartsList(oteIn);
+			List<@NonNull PropertyTemplateItem> propertyTemplateItems = QVTrelationUtil.getOwnedPartsList(oteIn);
 			if (relationAnalysis2.isKeyedRealization(templateVariable)) {
 				RelationalTransformationAnalysis transformationAnalysis = relationAnalysis2.getTransformationAnalysis();
 				org.eclipse.qvtd.pivot.qvtrelation.Key key = transformationAnalysis.getKeyForType(QVTrelationUtil.getType(templateVariable));
@@ -642,9 +642,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 				}
 			}
 			org.eclipse.ocl.pivot.Package tracePackage = transformation2tracePackage.getTracePackage();
-			CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedClassesList(tracePackage));
+			CompilerUtil.normalizeNameables(QVTbaseUtil.getOwnedClassesList(tracePackage));
 			for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTbaseUtil.getOwnedClasses(tracePackage)) {
-				CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedPropertiesList(traceClass));
+				CompilerUtil.normalizeNameables(QVTbaseUtil.getOwnedPropertiesList(traceClass));
 			}
 
 			TypedModel traceTypedModel = directedScheduleManager.getTraceTypedModel();
