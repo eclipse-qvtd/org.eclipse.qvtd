@@ -159,7 +159,7 @@ public class QVTbaseHelper extends PivotHelper
 	public @NonNull TypedModel createTypedModel(@NonNull String name, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> usedPackages) {
 		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		asTypedModel.setName(name);
-		Iterables.addAll(QVTbaseUtil.Internal.getUsedPackagesList(asTypedModel), usedPackages);
+		Iterables.addAll(QVTbaseUtil.getUsedPackagesList(asTypedModel), usedPackages);
 		return asTypedModel;
 	}
 

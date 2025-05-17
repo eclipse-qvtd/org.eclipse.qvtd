@@ -187,14 +187,14 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 	@Override
 	public @Nullable Object visitDomainPattern(@NonNull DomainPattern object) {
 		@SuppressWarnings("null") Comparator<@NonNull Nameable> nameableComparator = NameUtil.NAMEABLE_COMPARATOR;
-		ClassUtil.sort(QVTrelationUtil.Internal.getBindsToList(object), nameableComparator);
+		ClassUtil.sort(QVTrelationUtil.getBindsToList(object), nameableComparator);
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitRelation(@NonNull Relation object) {
 		// Domain Ordering is significant
-		List<@NonNull Variable> ownedVariablesList = QVTrelationUtil.Internal.getOwnedVariablesList(object);
+		List<@NonNull Variable> ownedVariablesList = QVTrelationUtil.getOwnedVariablesList(object);
 		if (ownedVariablesList.size() > 1) {
 			ClassUtil.sort(ownedVariablesList, new VariablesComparator(ownedVariablesList));
 			int iNext = 1;
@@ -206,14 +206,14 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 		}
 		Pattern asWhen = object.getWhen();
 		if (asWhen != null) {
-			List<@NonNull Predicate> asPredicates = QVTrelationUtil.Internal.getPredicatesList(asWhen);
+			List<@NonNull Predicate> asPredicates = QVTrelationUtil.getPredicatesList(asWhen);
 			if (asPredicates.size() > 1) {
 				ClassUtil.sort(asPredicates, PredicateComparator.INSTANCE);
 			}
 		}
 		Pattern asWhere = object.getWhere();
 		if (asWhere != null) {
-			List<@NonNull Predicate> asPredicates = QVTrelationUtil.Internal.getPredicatesList(asWhere);
+			List<@NonNull Predicate> asPredicates = QVTrelationUtil.getPredicatesList(asWhere);
 			if (asPredicates.size() > 1) {
 				ClassUtil.sort(asPredicates, PredicateComparator.INSTANCE);
 			}
@@ -233,7 +233,7 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 	@Override
 	public @Nullable Object visitRelationalTransformation(@NonNull RelationalTransformation object) {
 		@SuppressWarnings("null") Comparator<@NonNull Nameable> nonNullNameableComparator = NameUtil.NAMEABLE_COMPARATOR;
-		ClassUtil.sort(QVTrelationUtil.Internal.getOwnedRelationsList(object), nonNullNameableComparator);
+		ClassUtil.sort(QVTrelationUtil.getOwnedRelationsList(object), nonNullNameableComparator);
 		return super.visitRelationalTransformation(object);
 	}
 }

@@ -126,7 +126,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		Iteration referredIteration = (Iteration)QVTscheduleUtil.getReferredOperation(node);
 		OCLExpression sourceExp = null;
 		OCLExpression bodyExp = null;
-		List<@NonNull Parameter> iterators = QVTbaseUtil.Internal.getOwnedIteratorsList(referredIteration);
+		List<@NonNull Parameter> iterators = QVTbaseUtil.getOwnedIteratorsList(referredIteration);
 		//
 		//	Synthesize source expression
 		//
@@ -198,7 +198,7 @@ public class QVTs2QVTiNodeVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 	protected @NonNull OperationCallExp doOperationCallNode(@NonNull OperationCallNode node) {
 		Operation referredOperation = QVTscheduleUtil.getReferredOperation(node);
 		OCLExpression sourceExp = null;
-		List<@NonNull Parameter> parameters = QVTbaseUtil.Internal.getOwnedParametersList(referredOperation);
+		List<@NonNull Parameter> parameters = QVTbaseUtil.getOwnedParametersList(referredOperation);
 		List<@Nullable OCLExpression> argExps = new ArrayList<>(parameters.size());
 		for (int i = 0; i < parameters.size(); i++) {
 			argExps.add(null);

@@ -60,13 +60,6 @@ import com.google.common.collect.Iterables;
 
 public class QVTcoreUtil extends QVTbaseUtil
 {
-	public static class Internal extends QVTbaseUtil.Internal
-	{
-		public static @NonNull List<@NonNull Assignment> getOwnedAssignmentsList(@NonNull BottomPattern mBottomPattern) {
-			return ClassUtil.nullFree(mBottomPattern.getAssignment());
-		}
-	}
-
 	protected static class PatternVariableComparator implements Comparator<@NonNull VariableDeclaration>
 	{
 		private final @NonNull Map<@NonNull VariableDeclaration, @Nullable List<@NonNull VariableDeclaration>> def2refs;
@@ -172,6 +165,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return ClassUtil.nullFree(bottomPattern.getAssignment());
 	}
 
+	public static @NonNull List<@NonNull Assignment> getOwnedAssignmentsList(@NonNull BottomPattern mBottomPattern) {
+		return ClassUtil.nullFree(mBottomPattern.getAssignment());
+	}
+
 	public static @NonNull Iterable<@NonNull CoreDomain> getOwnedDomains(@NonNull Mapping mapping) {
 		return Iterables.filter(ClassUtil.nullFree(mapping.getDomain()), CoreDomain.class);
 	}
@@ -190,10 +187,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 
 	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
 		if (asNavigationAssignment instanceof PropertyAssignment) {
-			return ClassUtil.requireNonNull(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
+			return ClassUtil.requireNonNull(asNavigationAssignment.getTargetProperty());
 		}
 		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
-			Property referredProperty = ClassUtil.requireNonNull(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
+			Property referredProperty = ClassUtil.requireNonNull(asNavigationAssignment.getTargetProperty());
 			if (referredProperty.eIsProxy() ) {
 				throw new IllegalStateException("Unresolved target property proxy '" + EcoreUtil.getURI(referredProperty) + "' at '" + EcoreUtil.getURI(asNavigationAssignment) + "'");
 			}
@@ -245,8 +242,8 @@ public class QVTcoreUtil extends QVTbaseUtil
 			EObject eObject = tit.next();
 			if (eObject instanceof Transformation) {
 				Transformation asTransformation = (Transformation)eObject;
-				List<@NonNull TypedModel> modelParameters = Internal.getModelParameterList(asTransformation);
-				TypedModel primitiveTypedModel = QVTbaseUtil.basicGetPrimitiveTypedModel(modelParameters);
+				List<@NonNull TypedModel> modelParameters = getModelParameterList(asTransformation);
+				TypedModel primitiveTypedModel = basicGetPrimitiveTypedModel(modelParameters);
 				if (primitiveTypedModel == null) {
 					if (helper == null) {
 						helper = new QVTcoreHelper(environmentFactory);

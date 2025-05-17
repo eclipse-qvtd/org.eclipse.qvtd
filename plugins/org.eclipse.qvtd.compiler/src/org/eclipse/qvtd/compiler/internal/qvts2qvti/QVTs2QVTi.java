@@ -74,10 +74,10 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
 		if (asParentPackage != null) {
 			org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
-			iPackages = QVTimperativeUtil.Internal.getOwnedPackagesList(iParentPackage);
+			iPackages = QVTimperativeUtil.getOwnedPackagesList(iParentPackage);
 		}
 		else {
-			iPackages = QVTimperativeUtil.Internal.getOwnedPackagesList(iModel);
+			iPackages = QVTimperativeUtil.getOwnedPackagesList(iModel);
 		}
 		String name = PivotUtil.getName(asPackage);
 		org.eclipse.ocl.pivot.Package iPackage = NameUtil.getNameable(iPackages, name);
@@ -99,7 +99,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	protected @NonNull ImperativeTransformation getTransformation(@NonNull ImperativeModel iModel, @NonNull Transformation asTransformation, @NonNull Map<@NonNull Element, @NonNull Element> asElement2iElement) {
 		org.eclipse.ocl.pivot.Package asParentPackage = ClassUtil.requireNonNull(asTransformation.getOwningPackage());
 		org.eclipse.ocl.pivot.@NonNull Package iParentPackage = getPackage(iModel, asParentPackage);
-		List<org.eclipse.ocl.pivot.@NonNull Class> iClasses = QVTimperativeUtil.Internal.getOwnedClassesList(iParentPackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> iClasses = QVTimperativeUtil.getOwnedClassesList(iParentPackage);
 		String name = PivotUtil.getName(asTransformation);
 		org.eclipse.ocl.pivot.Class iTransformation = NameUtil.getNameable(iClasses, name);
 		if ((iTransformation == null) || !(iTransformation instanceof ImperativeTransformation)) {

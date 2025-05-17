@@ -2442,7 +2442,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
 		Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
 		ImperativeTransformation asTransformation = QVTiCGUtil.getAST(cgTransformation);
-		List<@NonNull TypedModel> asTypedModels = QVTimperativeUtil.Internal.getModelParameterList(asTransformation);
+		List<@NonNull TypedModel> asTypedModels = QVTimperativeUtil.getModelParameterList(asTransformation);
 		for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
 			TypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
 			asTypedModel2cgTypedModel.put(asTypedModel, cgTypedModel);

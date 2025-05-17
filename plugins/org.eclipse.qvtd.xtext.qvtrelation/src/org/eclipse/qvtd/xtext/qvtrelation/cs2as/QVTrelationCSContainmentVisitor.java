@@ -614,7 +614,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		RelationalTransformation asTransformation = refreshNamedElement(RelationalTransformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(Key.class, asTransformation.getOwnedKey(), csElement.getOwnedKeyDecls());
-		List<@NonNull TypedModel> modelParameters = QVTrelationUtil.Internal.getModelParameterList(asTransformation);
+		List<@NonNull TypedModel> modelParameters = QVTrelationUtil.getModelParameterList(asTransformation);
 		List<@NonNull TypedModel> newPivotElements = context.getNewPivotElements(TypedModel.class, csElement.getOwnedModelDecls());
 		TypedModel primitiveTypedModel = null;
 		TypedModel traceTypedModel = null;

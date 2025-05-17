@@ -78,7 +78,7 @@ public class RelationVariable2Variable extends AbstractVariable2Variable
 			}
 		}
 		VariableDeclaration cVariable2 = getCoreVariable();
-		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.Internal.getOwnedAssignmentsList(variablesAnalysis.getMiddleBottomPattern());
+		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.getOwnedAssignmentsList(variablesAnalysis.getMiddleBottomPattern());
 		if (isPartial == null) {
 			isPartial = targetProperty.isIsMany() && !(cExpression.getType() instanceof CollectionType);
 		}

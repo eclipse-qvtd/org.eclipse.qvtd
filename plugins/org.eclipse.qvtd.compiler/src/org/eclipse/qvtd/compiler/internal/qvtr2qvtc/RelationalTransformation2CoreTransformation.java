@@ -166,7 +166,7 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 		for (@NonNull Relation2Mappings relation2mapping : relationAnalysis2relation2mapping.values()) {
 			relation2mapping.synthesize();
 		}
-		CompilerUtil.normalizeNameables(QVTbaseUtil.Internal.getOwnedOperationsList(cTransformation));
+		CompilerUtil.normalizeNameables(QVTbaseUtil.getOwnedOperationsList(cTransformation));
 		CompilerUtil.normalizeNameables(QVTbaseUtil.getRule(cTransformation));
 	}
 

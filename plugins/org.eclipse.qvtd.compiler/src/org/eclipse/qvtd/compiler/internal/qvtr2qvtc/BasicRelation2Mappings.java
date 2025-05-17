@@ -185,7 +185,7 @@ import com.google.common.collect.Sets;
 				 * ve1:T1{tp = ve2:Collection{a++b}}		=>   a := a;
 				 */
 				Map<@NonNull OCLExpression, @NonNull VariableDeclaration> rMember2mVariable = new HashMap<>();
-				List<@NonNull OCLExpression> rMembers = QVTrelationUtil.Internal.getOwnedMembersList(cte);
+				List<@NonNull OCLExpression> rMembers = QVTrelationUtil.getOwnedMembersList(cte);
 				for (@NonNull OCLExpression rMember : rMembers) {
 					VariableDeclaration mVariable;
 					if (rMember instanceof TemplateExp) {
@@ -914,7 +914,7 @@ import com.google.common.collect.Sets;
 			 * ve1:T1{tp = ve2:Collection{a++b}}		=>   a := a;
 			 */
 			Map<@NonNull OCLExpression, @NonNull VariableDeclaration> rMember2mVariable = new HashMap<>();
-			List<@NonNull OCLExpression> rMembers = QVTrelationUtil.Internal.getOwnedMembersList(cte);
+			List<@NonNull OCLExpression> rMembers = QVTrelationUtil.getOwnedMembersList(cte);
 			for (@NonNull OCLExpression rMember : rMembers) {
 				VariableDeclaration mVariable;
 				if (rMember instanceof TemplateExp) {
@@ -1270,7 +1270,7 @@ import com.google.common.collect.Sets;
 		protected @NonNull VariableDeclaration mapRelationCallExp(@NonNull RelationCallExp rInvocation) throws CompilerChainException {
 			Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);
 			RelationAnalysis rInvokedRelationAnalysis = transformationAnalysis.getRelationAnalysis(rInvokedRelation);
-			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
+			List<@NonNull OCLExpression> rArguments = QVTrelationUtil.getOwnedArgumentsList(rInvocation);
 			List<@NonNull VariableDeclaration> rParameters = rInvokedRelationAnalysis.getRootVariables();
 			int iSize = rArguments.size();
 			assert iSize == rParameters.size();
@@ -1426,7 +1426,7 @@ import com.google.common.collect.Sets;
 							Relation2TraceClass invokedRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(rInvokedRelation);
 							Relation2MiddleType invokedRelation2InvocationClass = invokedRelation2TraceClass.getRelation2InvocationClass();
 							Type invocationClass/*tc*/ = invokedRelation2TraceClass.getInvocationClass();
-							List<@NonNull OCLExpression> rArguments = QVTrelationUtil.Internal.getOwnedArgumentsList(rInvocation);
+							List<@NonNull OCLExpression> rArguments = QVTrelationUtil.getOwnedArgumentsList(rInvocation);
 							String invokedName = "where_" + invocationClass.getName()/* + vdId*/;
 							VariableDeclaration cInvocationVariable/*vd*/ = variablesAnalysis.addCoreRealizedVariable(invokedName, invocationClass);	// FIXME
 							//						Property cInvocationProperty2/*pep*/ = relationalTransformation2tracePackage.getTraceProperty(rInvocation);

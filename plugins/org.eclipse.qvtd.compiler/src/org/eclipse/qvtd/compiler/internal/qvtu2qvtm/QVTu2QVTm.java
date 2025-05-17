@@ -311,7 +311,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			BottomPattern mBottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 			mArea.setBottomPattern(mBottomPattern);
 			createVisitor.createAll(bottomPredicates, mBottomPattern.getPredicate());
-			synthesizeNavigationAssignments(QVTcoreUtil.Internal.getOwnedAssignmentsList(mBottomPattern));
+			synthesizeNavigationAssignments(QVTcoreUtil.getOwnedAssignmentsList(mBottomPattern));
 			if (variableName2mergedVariables != null) {
 				for (@NonNull MergedVariable mergedVariable : variableName2mergedVariables.values()) {		// FIXME Change to alphabetical sort
 					mergedVariable.synthesize(mMapping, mArea);

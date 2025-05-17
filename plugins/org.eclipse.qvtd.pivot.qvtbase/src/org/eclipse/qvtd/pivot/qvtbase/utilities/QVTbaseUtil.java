@@ -109,25 +109,6 @@ public class QVTbaseUtil extends PivotUtil
 		}
 	}
 
-	public static class Internal extends PivotUtil
-	{
-		public static @NonNull List<@NonNull TypedModel> getModelParameterList(@NonNull Transformation asTransformation) {
-			return ClassUtil.nullFree(asTransformation.getModelParameter());
-		}
-
-		public static @NonNull List<@NonNull Rule> getOverridesList(@NonNull Rule asRule) {
-			return ClassUtil.nullFree(asRule.getOverrides());
-		}
-
-		public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
-			return ClassUtil.nullFree(asPattern.getPredicate());
-		}
-
-		public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {
-			return ClassUtil.nullFree(asTypedModel.getUsedPackage());
-		}
-	}
-
 	/**
 	 * Return the base rule iff this rule participates in an override hierarchy.
 	 * Returns null for a non-heirarchy participant.
@@ -526,8 +507,17 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
 
+	public static @NonNull List<@NonNull TypedModel> getModelParameterList(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getModelParameter());
+	}
+
 	public static @NonNull Iterable<@NonNull Rule> getOverrides(@NonNull Rule asRule) {
 		return ClassUtil.nullFree(asRule.getOverrides());
+	}
+
+
+	public static @NonNull List<@NonNull Predicate> getPredicatesList(@NonNull Pattern asPattern) {
+		return ClassUtil.nullFree(asPattern.getPredicate());
 	}
 
 	public static @NonNull OCLExpression getOwnedConditionExpression(@NonNull Predicate asPredicate) {
@@ -576,6 +566,10 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull Transformation getOwningTransformation(@NonNull TypedModel asTypedModel) {
 		return ClassUtil.requireNonNull(asTypedModel.getTransformation());
+	}
+
+	public static @NonNull List<@NonNull Rule> getOverridesList(@NonNull Rule asRule) {
+		return ClassUtil.nullFree(asRule.getOverrides());
 	}
 
 	public static @NonNull TypedModel getPrimitiveTypedModel(@NonNull Transformation asTransformation) {
@@ -645,6 +639,10 @@ public class QVTbaseUtil extends PivotUtil
 	}
 
 	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackages(@NonNull TypedModel asTypedModel) {
+		return ClassUtil.nullFree(asTypedModel.getUsedPackage());
+	}
+
+	public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {
 		return ClassUtil.nullFree(asTypedModel.getUsedPackage());
 	}
 
