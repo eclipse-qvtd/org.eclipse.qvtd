@@ -10,13 +10,17 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
 public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
@@ -49,6 +53,14 @@ public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 
 	public @Nullable CreateStrategy getCreateStrategy() {
 		return createStrategy;
+	}
+
+	@Override
+	protected @NonNull Model getMetamodel(@NonNull EPackage ePackage) {
+		if (ePackage == QVTbasePackage.eINSTANCE) {
+			return QVTbaseMetamodel.getDefaultModel();
+		}
+		return super.getMetamodel(ePackage);
 	}
 
 	public @Nullable CreateStrategy setCreateStrategy(@Nullable CreateStrategy createStrategy) {

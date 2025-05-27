@@ -1063,8 +1063,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			}
 		}
 		else if (checkType) {
-			Type valueType = getIdResolver().getDynamicTypeOf(value);
-			//			Type valueType2 = getIdResolver().getStaticTypeOf(value);
+			Type valueType = getIdResolver().getDynamicClassOf(value);
+			//			Type valueType2 = getIdResolver().getStaticClassOf(value);
 			//			Type valueType = valueType1;
 			Type variableType = ClassUtil.requireNonNull(asVariable.getType());
 			if (!valueType.conformsTo(getStandardLibrary(), variableType)) {

@@ -346,7 +346,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Pattern = idResolver.getClass(QVTrelationTables.CLSSid_Pattern, null);
 						final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTrelationTables.SET_CLSSid_RelationCallExp, this);
 						final /*@NonInvalid*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(oclAsSet);
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticTypeOfValue(null, asOrderedSet);
+						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticClassOf(asOrderedSet);
 						final @NonNull LibraryIteration IMPL_closure_1 = (LibraryIteration)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
@@ -383,7 +383,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						}
 						final /*@Thrown*/ @NonNull SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTrelationTables.SET_CLSSid_Pattern, CAUGHT_pattern);
 						final /*@Thrown*/ @NonNull OrderedSetValue asOrderedSet_0 = CollectionAsOrderedSetOperation.INSTANCE.evaluate(oclAsSet_0);
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticTypeOfValue(null, asOrderedSet_0);
+						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0_0 = executor.getStaticClassOf(asOrderedSet_0);
 						final @NonNull LibraryIteration IMPL_closure_0_0 = (LibraryIteration)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
