@@ -283,7 +283,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			accumulator_0.add(name);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
+		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticClassOf(asSet);
 		final @NonNull LibraryIteration IMPL_sortedBy_0 = (LibraryIteration)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**
@@ -342,7 +342,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			accumulator.add(name);
 		}
 		final /*@Thrown*/ @NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticTypeOfValue(null, asSet);
+		final org.eclipse.ocl.pivot.@NonNull Class TYPE_sortedBy_0 = executor.getStaticClassOf(asSet);
 		final @NonNull LibraryIteration IMPL_sortedBy_0 = (LibraryIteration)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**

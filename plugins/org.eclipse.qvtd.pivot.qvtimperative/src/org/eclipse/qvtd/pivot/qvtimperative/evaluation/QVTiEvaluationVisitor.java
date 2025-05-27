@@ -158,7 +158,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				if (valueOrValues == null) {
 					return null;
 				}
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
 				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
 					boundValues[index++] = valueOrValues;
 				}
@@ -180,7 +180,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				if (valueOrValues == null) {
 					return null;
 				}
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
 				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
 					boundValues[index++] = valueOrValues;
 				}
@@ -207,7 +207,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 				//				}
 				//				else {
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
 				if (!simpleParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
 					boundValues[index++] = valueOrValues;
 				}
@@ -356,7 +356,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			initValue = ownedExpression.accept(undecoratedVisitor);
 			if (asStatement.isIsCheck()) {
 				Type guardType = asStatement.getType();
-				Type valueType = idResolver.getDynamicTypeOf(initValue);
+				Type valueType = idResolver.getDynamicClassOf(initValue);
 				if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
 					// The initialization fails, the guard is not met
 					return false;

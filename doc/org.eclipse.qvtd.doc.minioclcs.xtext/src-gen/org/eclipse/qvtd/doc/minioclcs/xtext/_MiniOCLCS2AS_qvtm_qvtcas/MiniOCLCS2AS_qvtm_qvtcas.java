@@ -4697,7 +4697,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 												}
 												final /*@Thrown*/ @Nullable String pName_1 = aPathElementCS.getElementName();
 												final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, type);
-												final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_1 = executor.getStaticTypeOfValue(null, oclAsSet);
+												final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_1 = executor.getStaticClassOf(oclAsSet);
 												final @NonNull LibraryIteration IMPL_superClasses_1 = (LibraryIteration)TYPE_superClasses_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 												final @NonNull Object ACC_superClasses_1 = IMPL_superClasses_1.createAccumulatorValue(executor, SET_CLSSid_Class, ORD_CLSSid_Class);
 												/**
@@ -5004,7 +5004,7 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 								}
 								final /*@Thrown*/ @Nullable String pName_1 = aPathElementCS.getElementName();
 								final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, type);
-								final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_1 = executor.getStaticTypeOfValue(null, oclAsSet);
+								final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_1 = executor.getStaticClassOf(oclAsSet);
 								final @NonNull LibraryIteration IMPL_superClasses_1 = (LibraryIteration)TYPE_superClasses_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 								final @NonNull Object ACC_superClasses_1 = IMPL_superClasses_1.createAccumulatorValue(executor, SET_CLSSid_Class, ORD_CLSSid_Class);
 								/**

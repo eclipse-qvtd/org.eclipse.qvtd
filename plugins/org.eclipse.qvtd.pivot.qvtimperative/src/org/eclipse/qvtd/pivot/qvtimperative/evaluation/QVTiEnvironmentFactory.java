@@ -60,6 +60,14 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 		return new QVTimperativeFlowAnalysis(this, contextExpression);
 	}
 
+/*	@Override
+	protected org.eclipse.ocl.pivot.@NonNull Package getMetapackage(@NonNull EPackage ePackage) {
+		if (ePackage == QVTimperativePackage.eINSTANCE) {
+			return QVTimperativeTables.PACKAGE;
+		}
+		return super.getMetapackage(ePackage);
+	} */
+
 	public boolean keepDebug() {
 		return false;
 	}

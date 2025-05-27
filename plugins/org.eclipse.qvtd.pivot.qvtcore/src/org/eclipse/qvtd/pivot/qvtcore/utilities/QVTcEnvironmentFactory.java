@@ -44,6 +44,22 @@ public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
 		return new QVTcoreFlowAnalysis(this, contextExpression);
 	}
 
+	/*	@Override
+	protected @NonNull Model getMetamodel(@NonNull EPackage ePackage) {
+		if (ePackage == QVTcorePackage.eINSTANCE) {
+			return QVTbaseMetamodel.getDefaultModel();
+		}
+		return super.getMetamodel(ePackage);
+	} */
+
+	/*	@Override
+	protected org.eclipse.ocl.pivot.@NonNull Package getMetapackage(@NonNull EPackage ePackage) {
+		if (ePackage == QVTcorePackage.eINSTANCE) {
+			return QVTcoreTables.PACKAGE;
+		}
+		return super.getMetapackage(ePackage);
+	} */
+
 	public boolean keepDebug() {
 		return false;
 	}

@@ -729,7 +729,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 								accumulator_1.add(n);
 							}
 						}
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_multiNames_0 = executor.getStaticTypeOfValue(null, select);
+						final org.eclipse.ocl.pivot.@NonNull Class TYPE_multiNames_0 = executor.getStaticClassOf(select);
 						final @NonNull LibraryIteration IMPL_multiNames_0 = (LibraryIteration)TYPE_multiNames_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 						final @NonNull Object ACC_multiNames_0 = IMPL_multiNames_0.createAccumulatorValue(executor, QVTrelationTables.ORD_PRIMid_String, TypeId.STRING);
 						/**

@@ -284,7 +284,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull EClass oclAsType = (@NonNull EClass)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, referredEClass, TYP_ecore_c_c_EClass_0);
 					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
-					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
+					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticClassOf(oclAsSet);
 					final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 					/**

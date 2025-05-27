@@ -105,7 +105,7 @@ extends AbstractClassesCommonLookupVisitor
 			}
 			else {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, element_0);
-				final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
+				final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_closure_0 = executor.getStaticClassOf(oclAsSet);
 				final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, SET_CLSSid_Class, CLSSid_Class);
 				/**

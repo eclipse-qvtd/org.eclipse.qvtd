@@ -455,7 +455,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 							final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Class> superClasses_0 = identifies.getSuperClasses();
 							final /*@NonInvalid*/ @NonNull SetValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
-							final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticTypeOfValue(null, BOXED_superClasses_0);
+							final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticClassOf(BOXED_superClasses_0);
 							final @NonNull LibraryIteration IMPL_superClasses_2 = (LibraryIteration)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 							final @NonNull Object ACC_superClasses_2 = IMPL_superClasses_2.createAccumulatorValue(executor, QVTrelationTables.SET_CLSSid_Class, QVTrelationTables.SET_CLSSid_Class);
 							/**

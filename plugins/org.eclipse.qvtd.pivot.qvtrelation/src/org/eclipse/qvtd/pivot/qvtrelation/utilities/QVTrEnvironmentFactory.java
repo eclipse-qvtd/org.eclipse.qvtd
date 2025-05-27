@@ -44,6 +44,14 @@ public class QVTrEnvironmentFactory extends QVTbaseEnvironmentFactory
 		return new QVTrelationFlowAnalysis(this, contextExpression);
 	}
 
+	/*	@Override
+	protected org.eclipse.ocl.pivot.@NonNull Package getMetapackage(@NonNull EPackage ePackage) {
+		if (ePackage == QVTrelationPackage.eINSTANCE) {
+			return QVTrelationTables.PACKAGE;
+		}
+		return super.getMetapackage(ePackage);
+	} */
+
 	public boolean keepDebug() {
 		return false;
 	}
