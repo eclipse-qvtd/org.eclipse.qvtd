@@ -359,7 +359,7 @@ public abstract class Transformation2TracePackage
 	 * Return the type of a Bag of traceClass for use as the indeterminate opposite property of a trace property.
 	 */
 	public org.eclipse.ocl.pivot.@NonNull Class getBagType(org.eclipse.ocl.pivot.@NonNull Class traceClass) {
-		return scheduleManager.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null);
+		return scheduleManager.getStandardLibrary().getBagType(traceClass, true, null, null);
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getBooleanType() {
@@ -382,7 +382,8 @@ public abstract class Transformation2TracePackage
 	 * Return the Rule2TraceGroup mappings in a deterministic least overridden first alphabetical order.
 	 */
 	protected @NonNull Iterable<@NonNull Rule2TraceGroup> getOrderedRule2TraceGroups() {
-		List<@NonNull Rule2TraceGroup> relation2traceGroups = Lists.newArrayList(rule2rule2traceGroup.values());
+		@SuppressWarnings("null")
+		@NonNull List<@NonNull Rule2TraceGroup> relation2traceGroups = Lists.newArrayList(rule2rule2traceGroup.values());
 		Collections.sort(relation2traceGroups, OverrideDepthComparator.INSTANCE);
 		return relation2traceGroups;
 	}
