@@ -22,7 +22,7 @@ package org.eclipse.qvtd.umlx;
 import java.lang.String;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.TemplateParameters;
+import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
@@ -43,8 +43,8 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImple
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 // import org.eclipse.qvtd.umlx.UMLXPackage;
@@ -402,7 +402,7 @@ public class UMLXTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _RelPatternNode__isExpression = new ExecutorOperation("isExpression", TypeUtil.EMPTY_PARAMETER_TYPES, Types._RelPatternNode,
+		public static final @NonNull ExecutorOperation _RelPatternNode__isExpression = new ExecutorOperation("isExpression", ParameterTypes.EMPTY_LIST, Types._RelPatternNode,
 			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
