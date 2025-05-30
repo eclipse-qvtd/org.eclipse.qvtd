@@ -23,7 +23,6 @@ package org.eclipse.qvtd.doc.miniocl.lookup;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
-import org.eclipse.ocl.pivot.TemplateParameters;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -43,10 +42,9 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.pivot.utilities.TypeUtil;
+import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLTables;
-import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentTables;
 
 /**
  * EnvironmentTables provides the dispatch tables for the lookup for use by the OCL dispatcher.
@@ -182,8 +180,8 @@ public class EnvironmentTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_0_addElements_NE__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("Collection", EnvironmentTables.TypeParameters.__LookupEnvironment__0_addElements_NE));
-		public static final @NonNull ParameterTypes _NamedElement = TypeUtil.createParameterTypes(MiniOCLTables.Types._NamedElement);
+		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_0_addElements_NE__ = new ParameterTypes(new ExecutorSpecializedType("Collection", EnvironmentTables.TypeParameters.__LookupEnvironment__0_addElements_NE));
+		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(MiniOCLTables.Types._NamedElement);
 
 		static {
 			Init.initEnd();
@@ -208,13 +206,13 @@ public class EnvironmentTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _Env4CG__getExecutor = new ExecutorOperation("getExecutor", TypeUtil.EMPTY_PARAMETER_TYPES, Types._Env4CG,
+		public static final @NonNull ExecutorOperation _Env4CG__getExecutor = new ExecutorOperation("getExecutor", ParameterTypes.EMPTY_LIST, Types._Env4CG,
 			0, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", TypeUtil.EMPTY_PARAMETER_TYPES, Types._Env4CG,
+		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", ParameterTypes.EMPTY_LIST, Types._Env4CG,
 			1, TemplateParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _LookupEnvironment__0_addElements = new ExecutorOperation("addElements", Parameters._Collection__LookupEnvironment_0_addElements_NE__, Types._LookupEnvironment,
-			0, TypeUtil.createTemplateParameters(TypeParameters.__LookupEnvironment__0_addElements_NE), null);
+			0, new TemplateParameters(TypeParameters.__LookupEnvironment__0_addElements_NE), null);
 		public static final @NonNull ExecutorOperation _LookupEnvironment__1_addElements = new ExecutorOperation("addElements", Parameters._NamedElement, Types._LookupEnvironment,
 			1, TemplateParameters.EMPTY_LIST, null);
 

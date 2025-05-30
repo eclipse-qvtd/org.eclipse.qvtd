@@ -25,8 +25,8 @@ package org.eclipse.qvtd.pivot.qvtcore;
 
 import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotTables;
-import org.eclipse.ocl.pivot.TemplateParameters;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.EnumerationId;
@@ -49,8 +49,8 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImple
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -383,13 +383,13 @@ public class QVTcoreTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _CorePattern__getArea = new ExecutorOperation("getArea", TypeUtil.EMPTY_PARAMETER_TYPES, Types._CorePattern,
+		public static final @NonNull ExecutorOperation _CorePattern__getArea = new ExecutorOperation("getArea", ParameterTypes.EMPTY_LIST, Types._CorePattern,
 			0, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull ExecutorOperation _OppositePropertyAssignment__getReferredTargetProperty = new ExecutorOperation("getReferredTargetProperty", TypeUtil.EMPTY_PARAMETER_TYPES, Types._OppositePropertyAssignment,
+		public static final @NonNull ExecutorOperation _OppositePropertyAssignment__getReferredTargetProperty = new ExecutorOperation("getReferredTargetProperty", ParameterTypes.EMPTY_LIST, Types._OppositePropertyAssignment,
 			0, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull ExecutorOperation _PropertyAssignment__getReferredTargetProperty = new ExecutorOperation("getReferredTargetProperty", TypeUtil.EMPTY_PARAMETER_TYPES, Types._PropertyAssignment,
+		public static final @NonNull ExecutorOperation _PropertyAssignment__getReferredTargetProperty = new ExecutorOperation("getReferredTargetProperty", ParameterTypes.EMPTY_LIST, Types._PropertyAssignment,
 			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
