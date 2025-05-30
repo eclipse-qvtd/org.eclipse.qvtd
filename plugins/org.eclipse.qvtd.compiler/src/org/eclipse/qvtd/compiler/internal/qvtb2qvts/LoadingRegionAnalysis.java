@@ -17,8 +17,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -86,11 +86,11 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 				}
 			}
 		}
-		CompleteEnvironment completeEnvironment = scheduleManager.getEnvironmentFactory().getCompleteEnvironment();
+		StandardLibrary standardLibrary = scheduleManager.getStandardLibrary();
 		ClassDatum consumedClassDatum = /*getCastTarget(consumerNode)*/QVTscheduleUtil.getClassDatum(consumerNode);
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatum.getPrimaryClass();
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(consumedClassDatum);
-		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
+		CollectionType childCollectionType = standardLibrary.getSetType(elementType, true,  null, null);
 		ClassDatum childrenClassDatum = scheduleManager.getClassDatum(typedModel, childCollectionType);
 		//
 		//	Create / re-use the appropriate containment pattern.

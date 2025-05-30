@@ -29,6 +29,8 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -36,6 +38,7 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.values.CollectionTypeArguments;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -365,8 +368,9 @@ public class UMLX2QVTr extends QVTrelationHelper
 		org.eclipse.ocl.pivot.Class asClass = metamodelManager.getASOfEcore(org.eclipse.ocl.pivot.Class.class, eClassifier);
 		assert asClass != null;
 		if (umlxTypedElement.isIsMany()) {
-			asClass = metamodelManager.getCollectionType(umlxTypedElement.isIsOrdered(), umlxTypedElement.isIsUnique(), asClass,
-				umlxTypedElement.isIsNullFree(), null, null);
+			CollectionTypeId genericCollectionTypeId = IdManager.getCollectionTypeId(umlxTypedElement.isIsOrdered(), umlxTypedElement.isIsUnique());
+			CollectionTypeArguments typeArguments = new CollectionTypeArguments(genericCollectionTypeId, asClass, umlxTypedElement.isIsNullFree(), null, null);
+			asClass = standardLibrary.getCollectionType(typeArguments);
 		}
 		return asClass;
 	}

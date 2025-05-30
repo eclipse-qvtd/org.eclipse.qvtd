@@ -366,7 +366,7 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 	 * Return the type of a Bag of traceClass for use as the indeterminate opposite property of a trace property.
 	 */
 	protected org.eclipse.ocl.pivot.@NonNull Class getBagType(org.eclipse.ocl.pivot.@NonNull Class traceClass) {
-		return qvtr2qvtc.getEnvironmentFactory().getCompleteEnvironment().getBagType(traceClass, true, null, null);
+		return qvtr2qvtc.getStandardLibrary().getBagType(traceClass, true, null, null);
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Class getBooleanType() {
