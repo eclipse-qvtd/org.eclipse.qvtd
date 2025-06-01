@@ -180,10 +180,10 @@ public class QVTrSerializeTests extends LoadTestCase
 
 	public void testQVTrSerialize_Keys() throws Exception {
 		doSerializeRoundTripFromCS(getModelsURI("misc/Keys.qvtr"), new @NonNull String[] {
-			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies}'",
-			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies, QVTRelation::Key::part}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name}'",
-			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::NamedElement {EMOF::NamedElement::name}'"
+			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies : EMOF::Class[1]}'",
+			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies : EMOF::Class[1], QVTRelation::Key::part : Set(EMOF::Property)}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String[?]}'",
+			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::NamedElement {EMOF::NamedElement::name : String[?]}'"
 		});
 	}
 

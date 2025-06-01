@@ -1,63 +1,403 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qvti:ImperativeModel [
+<!ENTITY _0 "HSV2HSL.qvtm.qvtcas">
+<!ENTITY _1 "HSLTree.ecore.oclas">
+<!ENTITY _2 "HSV2HSL.ecore.oclas">
+<!ENTITY _3 "HSVTree.ecore.oclas">
+<!ENTITY _4 "http://www.eclipse.org/ocl/2015/Library.oclas">
+<!ENTITY _5 "http://www.eclipse.org/ocl/2015/Pivot.oclas">
+]>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTcCompilerTests__testQVTcCompiler_HSVToHSL_CG/HSV2HSL.qvtias"
-    name="HSV2HSL.qvtias" xmiidVersion="1">
-  <ownedImports importedNamespace="#6Fh3I" name="mm_MM" xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Package HSV2HSL.qvtm.qvtcas#//@ownedPackages.1" name="mm_$$MM" xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Package HSLTree.ecore.oclas#Zl9l7" name="mm_HSLTreeMM"
-      xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Package HSV2HSL.ecore.oclas#U,KF8" name="mm_HSV2HSLMM"
-      xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Package HSVTree.ecore.oclas#jRMJ8" name="mm_HSVTreeMM"
-      xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Library http://www.eclipse.org/ocl/2015/Library.oclas#S673I" name="mm_oclMM" xmiidVersion="1"/>
+    xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTcCompilerTests__testQVTcCompiler_HSVToHSL/HSV2HSL" name="HSV2HSL"
+    xmiidVersion="1">
+  <ownedImports importedNamespace="pivot:Package &_0;#6Fh3I" name="mm_MM" xmiidVersion="1"/>
+  <ownedImports importedNamespace="#6Fh3I" name="mm_MM_1" xmiidVersion="1"/>
+  <ownedImports importedNamespace="pivot:Package &_1;#Zl9l7" name="mm_HSLTreeMM" xmiidVersion="1"/>
+  <ownedImports importedNamespace="pivot:Package &_2;#U,KF8" name="mm_HSV2HSLMM" xmiidVersion="1"/>
+  <ownedImports importedNamespace="pivot:Package &_3;#jRMJ8" name="mm_HSVTreeMM" xmiidVersion="1"/>
+  <ownedImports importedNamespace="pivot:Library &_4;#S673I" name="mm_oclMM" xmiidVersion="1"/>
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="xreyG" name="hsv2hsl">
       <modelParameter isPrimitive="true" name="$primitive$"/>
-      <modelParameter isThis="true" name="$this$"/>
-      <modelParameter xmi:id="4h0Qn" name="hsv" usedPackage="HSVTree.ecore.oclas#jRMJ8"/>
-      <modelParameter xmi:id="uh0Qn" name="hsl" usedPackage="HSLTree.ecore.oclas#Zl9l7"/>
-      <modelParameter xmi:id="C1IOn" isTrace="true" name="middle" usedPackage="HSV2HSL.ecore.oclas#U,KF8"/>
-      <ownedContext xmi:id="feaPR" name="this" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="Nsy3r" name="hsv2rgb" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-        <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-          <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                    <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                      <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                        <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                          <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                                    <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-                                      <ownedParts name="value" referredProperty="http://www.eclipse.org/ocl/2015/Pivot.oclas#qDlX6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                        <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                            <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#30Qn7" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          </ownedArguments>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                            <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                                <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#Nlf,h" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
+      <modelParameter isThis="true" name="$this$" usedPackage="&_0;#6Fh3I"/>
+      <modelParameter xmi:id="4h0Qn" name="hsv" usedPackage="&_3;#jRMJ8"/>
+      <modelParameter xmi:id="uh0Qn" name="hsl" usedPackage="&_1;#Zl9l7"/>
+      <modelParameter xmi:id="C1IOn" isTrace="true" name="middle" usedPackage="&_2;#U,KF8"/>
+      <ownedContext xmi:id="feaPR" name="this" type="#xreyG"/>
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="Nsy3r" name="hsv2rgb" type="pivot:DataType &_2;#23CR,">
+        <bodyExpression xsi:type="qvtb:FunctionBody">
+          <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                    <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                      <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                        <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                          <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                    <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                      <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                        <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
+                                          <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType &_2;#23CR,">
+                                            <ownedParts xmi:id="ihMO3" name="value" referredProperty="&_5;#qDlX6" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                              <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                                    type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                  <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#FsNab" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                </ownedArguments>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ"
+                                                    type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                  <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ"
+                                                      type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                                        type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                      <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#zyTam" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                    </ownedArguments>
+                                                    <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ"
+                                                        type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                      <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                                                      <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                                          type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                        <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#5l3Dr" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                      </ownedSource>
+                                                    </ownedSource>
+                                                  </ownedSource>
+                                                </ownedSource>
+                                              </ownedInit>
+                                            </ownedParts>
+                                          </ownedIn>
+                                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="FsNab" name="b" type="pivot:PrimitiveType &_4;#tYtCd">
+                                            <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G" type="pivot:PrimitiveType &_4;#tYtCd">
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                    type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:PropertyCallExp" name="b" referredProperty="#9lIn6" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                                  </ownedSource>
+                                                </ownedArguments>
+                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                              </ownedSource>
+                                            </ownedInit>
+                                          </ownedVariable>
+                                        </ownedIn>
+                                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="zyTam" name="g" type="pivot:PrimitiveType &_4;#tYtCd">
+                                          <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G" type="pivot:PrimitiveType &_4;#tYtCd">
+                                            <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                  type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:PropertyCallExp" name="g" referredProperty="#CmIn6" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                                </ownedSource>
                                               </ownedArguments>
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                                  <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#bKhq6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            </ownedSource>
+                                          </ownedInit>
+                                        </ownedVariable>
+                                      </ownedIn>
+                                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="5l3Dr" name="r" type="pivot:PrimitiveType &_4;#tYtCd">
+                                        <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G" type="pivot:PrimitiveType &_4;#tYtCd">
+                                          <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:PropertyCallExp" name="r" referredProperty="#NmIn6" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                              </ownedSource>
+                                            </ownedArguments>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          </ownedSource>
+                                        </ownedInit>
+                                      </ownedVariable>
+                                    </ownedIn>
+                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="30Qn7" name="t" type="#,5eVD">
+                                      <ownedInit xsi:type="pivot:IfExp" type="#,5eVD">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY" type="pivot:BooleanType &_4;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                        </ownedCondition>
+                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
+                                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY"
+                                              type="pivot:BooleanType &_4;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          </ownedCondition>
+                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
+                                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY"
+                                                type="pivot:BooleanType &_4;#XEMMs">
+                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="180" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            </ownedCondition>
+                                            <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
+                                              <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY"
+                                                  type="pivot:BooleanType &_4;#XEMMs">
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="240" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                              </ownedCondition>
+                                              <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
+                                                <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY"
+                                                    type="pivot:BooleanType &_4;#XEMMs">
+                                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="300" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                  <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                </ownedCondition>
+                                                <ownedElse xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                                  <ownedParts xmi:id="j2Bxr" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                  <ownedParts xmi:id="Y2Bxr" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                  <ownedParts xmi:id="T2Bxr" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                </ownedElse>
+                                                <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                                  <ownedParts xmi:id="HBKcy" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                  <ownedParts xmi:id="8AKcy" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                  <ownedParts xmi:id="3AKcy" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedParts>
+                                                </ownedThen>
+                                              </ownedElse>
+                                              <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                                <ownedParts xmi:id="ZIAV1" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                </ownedParts>
+                                                <ownedParts xmi:id="OIAV1" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                </ownedParts>
+                                                <ownedParts xmi:id="JIAV1" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                </ownedParts>
+                                              </ownedThen>
+                                            </ownedElse>
+                                            <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                              <ownedParts xmi:id="T7SmQ" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              </ownedParts>
+                                              <ownedParts xmi:id="I7SmQ" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              </ownedParts>
+                                              <ownedParts xmi:id="D7SmQ" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              </ownedParts>
+                                            </ownedThen>
+                                          </ownedElse>
+                                          <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                            <ownedParts xmi:id="VKyxE" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedParts>
+                                            <ownedParts xmi:id="KKyxE" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedParts>
+                                            <ownedParts xmi:id="FKyxE" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedParts>
+                                          </ownedThen>
+                                        </ownedElse>
+                                        <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
+                                          <ownedParts xmi:id=",Pbeh" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                          </ownedParts>
+                                          <ownedParts xmi:id="0Pbeh" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                          </ownedParts>
+                                          <ownedParts xmi:id="vPbeh" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                          </ownedParts>
+                                        </ownedThen>
+                                      </ownedInit>
+                                    </ownedVariable>
+                                  </ownedIn>
+                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Nlf,h" name="m" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                      <ownedArguments xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                      <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                    </ownedInit>
+                                  </ownedVariable>
+                                </ownedIn>
+                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="bKhq6" name="x" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                  <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="&_4;#ApdgA" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                        <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" name="hh2" referredVariable="#Bee48" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                        </ownedSource>
+                                      </ownedArguments>
+                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                    </ownedArguments>
+                                    <ownedSource xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                  </ownedInit>
+                                </ownedVariable>
+                              </ownedIn>
+                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Bee48" name="hh2" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="floor" referredOperation="&_4;#aXIUG" type="pivot:PrimitiveType &_4;#tYtCd">
+                                      <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#f3Rbg" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                    </ownedArguments>
+                                    <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#f3Rbg" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                  </ownedArguments>
+                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                </ownedInit>
+                              </ownedVariable>
+                            </ownedIn>
+                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="f3Rbg" name="hh1" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#mA+ir" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                              </ownedInit>
+                            </ownedVariable>
+                          </ownedIn>
+                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="VkaTV" name="c" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#Js71L" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            </ownedInit>
+                          </ownedVariable>
+                        </ownedIn>
+                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="DgrFl" name="v" type="pivot:PrimitiveType &_4;#Nr4QF">
+                          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                              <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            </ownedCondition>
+                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                            <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            </ownedThen>
+                          </ownedInit>
+                        </ownedVariable>
+                      </ownedIn>
+                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Js71L" name="s" type="pivot:PrimitiveType &_4;#Nr4QF">
+                        <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                          </ownedCondition>
+                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                          <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                          </ownedThen>
+                        </ownedInit>
+                      </ownedVariable>
+                    </ownedIn>
+                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="HI2yD" name="h" type="pivot:PrimitiveType &_4;#tYtCd">
+                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#tYtCd">
+                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                          <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                        </ownedCondition>
+                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                        <ownedThen xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G" type="pivot:PrimitiveType &_4;#tYtCd">
+                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                        </ownedThen>
+                      </ownedInit>
+                    </ownedVariable>
+                  </ownedIn>
+                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="dJ,jM" isRequired="false" name="vopt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                    <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                        <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+                      </ownedSource>
+                    </ownedInit>
+                  </ownedVariable>
+                </ownedIn>
+                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="rTd02" isRequired="false" name="sopt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                      <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+                    </ownedSource>
+                  </ownedInit>
+                </ownedVariable>
+              </ownedIn>
+              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Rwrm0" isRequired="false" name="hopt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                    <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+                  </ownedSource>
+                </ownedInit>
+              </ownedVariable>
+            </ownedIn>
+            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="vG0X7" name="hsv" type="#4nGDi">
+              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="&_4;#wLSrH" type="#4nGDi">
+                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#nJUTI" type="pivot:DataType &_3;#HhgZ,"/>
+              </ownedInit>
+            </ownedVariable>
+          </ownedBody>
+          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#nJUTI" type="pivot:DataType &_3;#HhgZ,"/>
+        </bodyExpression>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="nJUTI" name="color" type="pivot:DataType &_3;#HhgZ,"/>
+      </ownedOperations>
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="AH5Tc" name="rgb2hsl" type="pivot:DataType &_1;#bFKYN">
+        <bodyExpression xsi:type="qvtb:FunctionBody">
+          <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                    <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                      <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                        <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                          <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
+                                    <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType &_1;#bFKYN">
+                                      <ownedParts xmi:id=",IyqG" name="value" referredProperty="&_5;#qDlX6" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                        <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                              type="pivot:PrimitiveType &_4;#AlwVZ">
+                                            <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G"
+                                                type="pivot:PrimitiveType &_4;#tYtCd">
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#Ec0h," type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                              </ownedSource>
+                                            </ownedSource>
+                                          </ownedArguments>
+                                          <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                            <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                                  type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G"
+                                                    type="pivot:PrimitiveType &_4;#tYtCd">
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV"
+                                                      type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#m5zx+" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                  </ownedSource>
+                                                </ownedSource>
+                                              </ownedArguments>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#pK7dJ" type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_4;#aIlbs"
+                                                    type="pivot:PrimitiveType &_4;#AlwVZ">
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_4;#cNx+G"
+                                                      type="pivot:PrimitiveType &_4;#tYtCd">
+                                                    <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#ozgCx" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedSource>
                                                 </ownedSource>
                                               </ownedSource>
                                             </ownedSource>
@@ -65,587 +405,260 @@
                                         </ownedInit>
                                       </ownedParts>
                                     </ownedIn>
-                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="30Qn7" name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                      <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#f3Rbg" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:PropertyCallExp" name="b" referredProperty="#9lIn6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#Bee48" type="#,5eVD"/>
-                                            </ownedSource>
+                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="m5zx+" name="s" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#dKEtV" type="pivot:BooleanType &_4;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                        </ownedCondition>
+                                        <ownedElse xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="&_4;#ApdgA"
+                                                type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV"
+                                                    type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#Ec0h," type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                </ownedSource>
+                                              </ownedSource>
+                                            </ownedArguments>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
                                           </ownedArguments>
-                                          <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                        </ownedSource>
+                                          <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                        </ownedElse>
+                                        <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
                                       </ownedInit>
                                     </ownedVariable>
                                   </ownedIn>
-                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Nlf,h" name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                    <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                      <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#f3Rbg" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          <ownedSource xsi:type="pivot:PropertyCallExp" name="g" referredProperty="#CmIn6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#Bee48" type="#,5eVD"/>
+                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="ozgCx" name="h" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                      <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#dKEtV" type="pivot:BooleanType &_4;#XEMMs">
+                                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                        <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                      </ownedCondition>
+                                      <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="&_4;#FufYU"
+                                            type="pivot:BooleanType &_4;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" name=">=" referredOperation="&_4;#6crvY" type="pivot:BooleanType &_4;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                          </ownedArguments>
+                                          <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#dKEtV" type="pivot:BooleanType &_4;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_4;#Nr4QF"/>
                                           </ownedSource>
-                                        </ownedArguments>
-                                        <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      </ownedSource>
+                                        </ownedCondition>
+                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                          <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="&_4;#FufYU"
+                                              type="pivot:BooleanType &_4;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_4;#3+qvY"
+                                                type="pivot:BooleanType &_4;#XEMMs">
+                                              <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedArguments>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#dKEtV" type="pivot:BooleanType &_4;#XEMMs">
+                                              <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedSource>
+                                          </ownedCondition>
+                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#dKEtV"
+                                                type="pivot:BooleanType &_4;#XEMMs">
+                                              <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                            </ownedCondition>
+                                            <ownedElse xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                  type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="4" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV"
+                                                    type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI"
+                                                      type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV"
+                                                      type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedSource>
+                                                </ownedSource>
+                                              </ownedArguments>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            </ownedElse>
+                                            <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                  type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV"
+                                                    type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI"
+                                                      type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV"
+                                                      type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                    <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  </ownedSource>
+                                                </ownedSource>
+                                              </ownedArguments>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            </ownedThen>
+                                          </ownedElse>
+                                          <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV"
+                                                type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="6" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV"
+                                                    type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                  <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                </ownedSource>
+                                              </ownedSource>
+                                            </ownedArguments>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                          </ownedThen>
+                                        </ownedElse>
+                                        <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_4;#BJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                              </ownedSource>
+                                            </ownedSource>
+                                          </ownedArguments>
+                                          <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                        </ownedThen>
+                                      </ownedElse>
+                                      <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
                                     </ownedInit>
                                   </ownedVariable>
                                 </ownedIn>
-                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="bKhq6" name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                  <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                    <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#f3Rbg" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        <ownedSource xsi:type="pivot:PropertyCallExp" name="r" referredProperty="#NmIn6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#Bee48" type="#,5eVD"/>
-                                        </ownedSource>
-                                      </ownedArguments>
-                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    </ownedSource>
+                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="SAAOI" name="delta" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                  <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_4;#EJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#edqQ8" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_4;#Nr4QF"/>
                                   </ownedInit>
                                 </ownedVariable>
                               </ownedIn>
-                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Bee48" name="t" type="#,5eVD">
-                                <ownedInit xsi:type="pivot:IfExp" type="#,5eVD">
-                                  <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                  </ownedCondition>
-                                  <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                    <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    </ownedCondition>
-                                    <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                      <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="180" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                        <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      </ownedCondition>
-                                      <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="240" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                        </ownedCondition>
-                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="300" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                            <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          </ownedCondition>
-                                          <ownedElse xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                            <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                            <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                            <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                          </ownedElse>
-                                          <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                            <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                            <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                            <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedParts>
-                                          </ownedThen>
-                                        </ownedElse>
-                                        <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                          <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          </ownedParts>
-                                          <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          </ownedParts>
-                                          <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          </ownedParts>
-                                        </ownedThen>
-                                      </ownedElse>
-                                      <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                        <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        </ownedParts>
-                                        <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        </ownedParts>
-                                        <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        </ownedParts>
-                                      </ownedThen>
-                                    </ownedElse>
-                                    <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                      <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedParts>
-                                      <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedParts>
-                                      <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedParts>
-                                    </ownedThen>
-                                  </ownedElse>
-                                  <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                    <ownedParts name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                    </ownedParts>
-                                    <ownedParts name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#VkaTV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                    </ownedParts>
-                                    <ownedParts name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                    </ownedParts>
-                                  </ownedThen>
-                                </ownedInit>
-                              </ownedVariable>
-                            </ownedIn>
-                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="f3Rbg" name="m" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                <ownedArguments xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#dJ,jM" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                              </ownedInit>
-                            </ownedVariable>
-                          </ownedIn>
-                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="VkaTV" name="x" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                            <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ApdgA"
-                                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                  <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="hh2" referredVariable="#DgrFl" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
+                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Ec0h," name="l" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_4;#CJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#edqQ8" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_4;#Nr4QF"/>
                                   </ownedSource>
-                                </ownedArguments>
-                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                              </ownedArguments>
-                              <ownedSource xsi:type="pivot:VariableExp" name="c" referredVariable="#HI2yD" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                            </ownedInit>
-                          </ownedVariable>
-                        </ownedIn>
-                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="DgrFl" name="hh2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                          <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                            <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedArguments xsi:type="pivot:OperationCallExp" name="floor" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aXIUG"
-                                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#Js71L" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                              </ownedArguments>
-                              <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#Js71L" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                            </ownedArguments>
-                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                          </ownedInit>
-                        </ownedVariable>
-                      </ownedIn>
-                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Js71L" name="hh1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#mA+ir"
-                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                          <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#Rwrm0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                        </ownedInit>
-                      </ownedVariable>
-                    </ownedIn>
-                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="HI2yD" name="c" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#rTd02" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                        <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#dJ,jM" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                      </ownedInit>
-                    </ownedVariable>
-                  </ownedIn>
-                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="dJ,jM" name="v" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                          <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
-                        </ownedSource>
-                      </ownedSource>
-                    </ownedInit>
-                  </ownedVariable>
-                </ownedIn>
-                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="rTd02" name="s" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                  <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                        <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
-                      </ownedSource>
-                    </ownedSource>
-                  </ownedInit>
-                </ownedVariable>
-              </ownedIn>
-              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Rwrm0" name="h" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                      <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
-                    </ownedSource>
-                  </ownedSource>
-                </ownedInit>
-              </ownedVariable>
-            </ownedIn>
-            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="vG0X7" name="hsv" type="#4nGDi">
-              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#wLSrH"
-                  type="#4nGDi">
-                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#nJUTI" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,"/>
-              </ownedInit>
-            </ownedVariable>
-          </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="HSV2HSL.qvtm.qvtcas#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#nJUTI" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,"/>
-        </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="nJUTI" name="color" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,"/>
-      </ownedOperations>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="AH5Tc" name="rgb2hsl" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-        <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-          <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-              <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                  <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                    <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                      <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                        <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                          <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                            <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                              <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-                                <ownedParts name="value" referredProperty="http://www.eclipse.org/ocl/2015/Pivot.oclas#qDlX6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                  <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                      <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#K9yJH" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                        </ownedSource>
-                                      </ownedSource>
-                                    </ownedArguments>
-                                    <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                      <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                                      <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                        <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#Ec0h," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                            </ownedSource>
-                                          </ownedSource>
-                                        </ownedArguments>
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                          <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aIlbs"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#cNx+G"
-                                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd">
-                                              <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#edqQ8" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedSource>
-                                          </ownedSource>
-                                        </ownedSource>
-                                      </ownedSource>
-                                    </ownedSource>
-                                  </ownedInit>
-                                </ownedParts>
-                              </ownedIn>
-                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Ec0h," name="s" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                  <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#UJEtV"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                  </ownedCondition>
-                                  <ownedElse xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ApdgA"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#K9yJH" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          </ownedSource>
-                                        </ownedSource>
-                                      </ownedArguments>
-                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    </ownedArguments>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                  </ownedElse>
-                                  <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
                                 </ownedInit>
                               </ownedVariable>
                             </ownedIn>
-                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="edqQ8" name="h" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#UJEtV"
-                                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                  <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                </ownedCondition>
-                                <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                  <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#8sfYU"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name=">=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#6crvY"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                      <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                    </ownedArguments>
-                                    <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#UJEtV"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                      <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#WrnZO" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                    </ownedSource>
-                                  </ownedCondition>
-                                  <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                    <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#8sfYU"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#3+qvY"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                        <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedArguments>
-                                      <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#UJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                        <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#WrnZO" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedSource>
-                                    </ownedCondition>
-                                    <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#UJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-                                        <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#WrnZO" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                      </ownedCondition>
-                                      <ownedElse xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="4" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedSource>
-                                          </ownedSource>
-                                        </ownedArguments>
-                                        <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      </ownedElse>
-                                      <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            </ownedSource>
-                                          </ownedSource>
-                                        </ownedArguments>
-                                        <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      </ownedThen>
-                                    </ownedElse>
-                                    <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="6" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          </ownedSource>
-                                        </ownedSource>
-                                      </ownedArguments>
-                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                    </ownedThen>
-                                  </ownedElse>
-                                  <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#BJEtV"
-                                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                      <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                        <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#A9V+w" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                                        </ownedSource>
-                                      </ownedSource>
-                                    </ownedArguments>
-                                    <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                                  </ownedThen>
-                                </ownedElse>
-                                <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
+                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="edqQ8" name="cMin" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedInit xsi:type="pivot:OperationCallExp" name="min" referredOperation="&_4;#phetV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                <ownedSource xsi:type="pivot:OperationCallExp" name="min" referredOperation="&_4;#phetV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                  <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                </ownedSource>
                               </ownedInit>
                             </ownedVariable>
                           </ownedIn>
-                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="A9V+w" name="delta" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                            <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#EJEtV"
-                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#cyaaY" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#WrnZO" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
+                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="A9V+w" name="cMax" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedInit xsi:type="pivot:OperationCallExp" name="max" referredOperation="&_4;#7detV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:OperationCallExp" name="max" referredOperation="&_4;#7detV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                                <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                              </ownedSource>
                             </ownedInit>
                           </ownedVariable>
                         </ownedIn>
-                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="K9yJH" name="l" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                          <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                            <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#CJEtV"
-                                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                              <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#cyaaY" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#WrnZO" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                            </ownedSource>
+                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="K9yJH" name="b" type="pivot:PrimitiveType &_4;#Nr4QF">
+                          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                              <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            </ownedCondition>
+                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                            <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            </ownedThen>
                           </ownedInit>
                         </ownedVariable>
                       </ownedIn>
-                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="cyaaY" name="cMin" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedInit xsi:type="pivot:OperationCallExp" name="min" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#phetV"
-                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                          <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                          <ownedSource xsi:type="pivot:OperationCallExp" name="min" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#phetV"
-                              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                            <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                            <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                          </ownedSource>
+                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="cyaaY" name="g" type="pivot:PrimitiveType &_4;#Nr4QF">
+                        <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                          </ownedCondition>
+                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                          <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                            <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                          </ownedThen>
                         </ownedInit>
                       </ownedVariable>
                     </ownedIn>
-                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="WrnZO" name="cMax" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedInit xsi:type="pivot:OperationCallExp" name="max" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#7detV"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#Y4o1R" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                        <ownedSource xsi:type="pivot:OperationCallExp" name="max" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#7detV"
-                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                          <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#CURZ5" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                          <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#0qS,2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                        </ownedSource>
+                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="WrnZO" name="r" type="pivot:PrimitiveType &_4;#Nr4QF">
+                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_4;#Nr4QF">
+                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_4;#inEtV" type="pivot:BooleanType &_4;#XEMMs">
+                          <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                        </ownedCondition>
+                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                        <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_4;#GJEtV" type="pivot:PrimitiveType &_4;#Nr4QF">
+                          <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+                        </ownedThen>
                       </ownedInit>
                     </ownedVariable>
                   </ownedIn>
-                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Y4o1R" name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                        <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                            type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                          <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
-                        </ownedSource>
-                      </ownedSource>
-                    </ownedInit>
-                  </ownedVariable>
-                </ownedIn>
-                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="CURZ5" name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                  <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
+                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Y4o1R" isRequired="false" name="bopt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                    <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType &_4;#tYtCd"/>
                         <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                       </ownedSource>
+                    </ownedInit>
+                  </ownedVariable>
+                </ownedIn>
+                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="CURZ5" isRequired="false" name="gopt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                      <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                     </ownedSource>
                   </ownedInit>
                 </ownedVariable>
               </ownedIn>
-              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="0qS,2" name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#GJEtV"
-                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                  <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ukNde"
-                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF">
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#ArMlL"
-                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#tYtCd"/>
-                      <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
-                    </ownedSource>
+              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="0qS,2" isRequired="false" name="ropt" type="pivot:PrimitiveType &_4;#Nr4QF">
+                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_4;#ukNde" type="pivot:PrimitiveType &_4;#Nr4QF">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_4;#ArMlL" type="pivot:PrimitiveType &_4;#AlwVZ">
+                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_4;#tYtCd"/>
+                    <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                   </ownedSource>
                 </ownedInit>
               </ownedVariable>
             </ownedIn>
             <ownedVariable xsi:type="pivot:LetVariable" xmi:id="OD,JG" name="rgb" type="#4nGDi">
-              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#wLSrH"
-                  type="#4nGDi">
-                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
-                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#Optl4" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
+              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="&_4;#wLSrH" type="#4nGDi">
+                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_4;#AlwVZ"/>
+                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#Optl4" type="pivot:DataType &_2;#23CR,"/>
               </ownedInit>
             </ownedVariable>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="HSV2HSL.qvtm.qvtcas#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#Optl4" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#Optl4" type="pivot:DataType &_2;#23CR,"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="Optl4" name="color" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="Optl4" name="color" type="pivot:DataType &_2;#23CR,"/>
       </ownedOperations>
-      <rule xsi:type="qvti:EntryPoint" inputTypedModels="#4h0Qn" outputTypedModels="#uh0Qn" firstPass="0" name="r_HSV2HSL__load__">
-        <ownedMappingParameters xsi:type="qvti:AppendParameter" xmi:id="oD4sk" name="ji_HSVNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
-        <ownedStatements xsi:type="qvti:BufferStatement" xmi:id="LLp+C" firstPass="1" name="jm_HSVNode2HSLNode" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+      <rule xsi:type="qvti:EntryPoint" firstPass="0" inputTypedModels="#4h0Qn" name="r_HSV2HSL__load__" outputTypedModels="#uh0Qn">
+        <ownedMappingParameters xsi:type="qvti:AppendParameter" xmi:id="oD4sk" name="ji_HSVNode" type="pivot:Class &_3;#pzNqy"/>
+        <ownedStatements xsi:type="qvti:BufferStatement" xmi:id="LLp+C" firstPass="1" name="jm_HSVNode2HSLNode" type="pivot:Class &_2;#ndQkv"/>
         <ownedStatements xsi:type="qvti:MappingCall" isInstall="true" referredMapping="#PHHmK">
           <ownedMappingParameterBindings xsi:type="qvti:GuardParameterBinding" boundVariable="#,33wY" value="#oD4sk"/>
           <ownedMappingParameterBindings xsi:type="qvti:AppendParameterBinding" boundVariable="#0eLhy" value="#LLp+C"/>
@@ -664,233 +677,201 @@
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="PHHmK" firstPass="1" isStrict="true" name="mHSV2HSLRecursion__local__">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id=",33wY" name="hsvNode" referredTypedModel="#4h0Qn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
-        <ownedMappingParameters xsi:type="qvti:AppendParameter" xmi:id="0eLhy" name="jm_HSVNode2HSLNode" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:DeclareStatement" name="hsv1" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="HSVTree.ecore.oclas#oqvX4"
-              type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id=",33wY" name="hsvNode" referredTypedModel="#4h0Qn" type="pivot:Class &_3;#pzNqy"/>
+        <ownedMappingParameters xsi:type="qvti:AppendParameter" xmi:id="0eLhy" name="jm_HSVNode2HSLNode" type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" name="hsv1" type="pivot:DataType &_3;#HhgZ,">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_3;#oqvX4" type="pivot:DataType &_3;#HhgZ,">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="rAB+C" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="HSVTree.ecore.oclas#oBOk4"
-              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="rAB+C" name="name" type="pivot:PrimitiveType &_4;#AlwVZ">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_3;#oBOk4" type="pivot:PrimitiveType &_4;#AlwVZ">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" name="hsvParent" type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="HSVTree.ecore.oclas#H6GC9"
-              type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" name="hsvParent" type="pivot:Class &_3;#pzNqy">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="&_3;#H6GC9" type="pivot:Class &_3;#pzNqy">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="X77,R" isContained="true" name="middleNode" referredTypedModel="#C1IOn"
-            type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#ujlgi"
-            targetVariable="#X77,R">
-          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#rAB+C" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+            type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#ujlgi" targetVariable="#X77,R">
+          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#rAB+C" type="pivot:PrimitiveType &_4;#AlwVZ"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#uMHUi"
-            targetVariable="#X77,R">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#uMHUi" targetVariable="#X77,R">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#,33wY" type="pivot:Class &_3;#pzNqy"/>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:AddStatement" targetVariable="#0eLhy">
-          <ownedExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#X77,R" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+          <ownedExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#X77,R" type="pivot:Class &_2;#ndQkv"/>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="oXD06" firstPass="1" isStrict="true" name="mHSV2HSLRoot">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="UimLn" name="hsvRoot" referredTypedModel="#4h0Qn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="UimLn" name="hsvRoot" referredTypedModel="#4h0Qn" type="pivot:Class &_3;#pzNqy"/>
         <ownedStatements xsi:type="qvti:CheckStatement">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#SYOvl"
-              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
-            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH"/>
-            <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="HSVTree.ecore.oclas#H6GC9"
-                type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-              <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_4;#bZOvl" type="pivot:BooleanType &_4;#XEMMs">
+            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
+            <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="&_3;#H6GC9" type="pivot:Class &_3;#pzNqy">
+              <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class &_3;#pzNqy"/>
             </ownedSource>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="bIrXR" name="hsv1" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="HSVTree.ecore.oclas#oqvX4"
-              type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="bIrXR" name="hsv1" type="pivot:DataType &_3;#HhgZ,">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_3;#oqvX4" type="pivot:DataType &_3;#HhgZ,">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="gfSYR" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="HSVTree.ecore.oclas#oBOk4"
-              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="gfSYR" name="name" type="pivot:PrimitiveType &_4;#AlwVZ">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_3;#oBOk4" type="pivot:PrimitiveType &_4;#AlwVZ">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="gelZU" name="hsv2rgb1" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-            <ownedArguments xsi:type="pivot:VariableExp" name="hsv1" referredVariable="#bIrXR" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,"/>
-            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="gelZU" name="hsv2rgb1" type="pivot:DataType &_2;#23CR,">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
+            <ownedArguments xsi:type="pivot:VariableExp" name="hsv1" referredVariable="#bIrXR" type="pivot:DataType &_3;#HhgZ,"/>
+            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="qdgQG" name="rgb2hsl1" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-            <ownedArguments xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#gelZU" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
-            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="qdgQG" name="rgb2hsl1" type="pivot:DataType &_1;#bFKYN">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
+            <ownedArguments xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#gelZU" type="pivot:DataType &_2;#23CR,"/>
+            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="Y6+CZ" name="hslRoot" referredTypedModel="#uh0Qn" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="slqag" name="middleRoot" referredTypedModel="#C1IOn" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#sYCAH"
-            targetVariable="#Y6+CZ">
-          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#gfSYR" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="Y6+CZ" name="hslRoot" referredTypedModel="#uh0Qn" type="pivot:Class &_1;#9roFA"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="slqag" name="middleRoot" referredTypedModel="#C1IOn" type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#sYCAH" targetVariable="#Y6+CZ">
+          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#gfSYR" type="pivot:PrimitiveType &_4;#AlwVZ"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#ujlgi"
-            targetVariable="#slqag">
-          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#gfSYR" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#ujlgi" targetVariable="#slqag">
+          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#gfSYR" type="pivot:PrimitiveType &_4;#AlwVZ"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#wcJUi"
-            targetVariable="#slqag">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#gelZU" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#wcJUi" targetVariable="#slqag">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#gelZU" type="pivot:DataType &_2;#23CR,"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#iBkzG"
-            targetVariable="#Y6+CZ">
-          <ownedExpression xsi:type="pivot:VariableExp" name="rgb2hsl1" referredVariable="#qdgQG" type="pivot:DataType HSLTree.ecore.oclas#bFKYN"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#iBkzG" targetVariable="#Y6+CZ">
+          <ownedExpression xsi:type="pivot:VariableExp" name="rgb2hsl1" referredVariable="#qdgQG" type="pivot:DataType &_1;#bFKYN"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#LR7dL"
-            targetVariable="#Y6+CZ">
-          <ownedExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#LR7dL" targetVariable="#Y6+CZ">
+          <ownedExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#kMHUi"
-            targetVariable="#slqag">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#Y6+CZ" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#kMHUi" targetVariable="#slqag">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#Y6+CZ" type="pivot:Class &_1;#9roFA"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#uMHUi"
-            targetVariable="#slqag">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#uMHUi" targetVariable="#slqag">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#UimLn" type="pivot:Class &_3;#pzNqy"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#Nce+m"
-            targetVariable="#slqag">
-          <ownedExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#Nce+m" targetVariable="#slqag">
+          <ownedExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_4;#7u3MH"/>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="R8cVU" firstPass="2" name="mHSV2HSLRecursion__global__">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="D4j03" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="H9taj" name="hsvNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="HSV2HSL.ecore.oclas#uMHUi"
-              type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#D4j03" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="D4j03" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="H9taj" name="hsvNode" type="pivot:Class &_3;#pzNqy">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_2;#uMHUi" type="pivot:Class &_3;#pzNqy">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#D4j03" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="vsQJx" name="hsvParent" type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="HSVTree.ecore.oclas#H6GC9"
-              type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#H9taj" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="vsQJx" name="hsvParent" type="pivot:Class &_3;#pzNqy">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="&_3;#H6GC9" type="pivot:Class &_3;#pzNqy">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#H9taj" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="5BhwK" name="middleParent" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv">
-          <ownedExpression xsi:type="pivot:OppositePropertyCallExp" isRequired="false" name="middle" referredProperty="HSV2HSL.ecore.oclas#uMHUi"
-              type="pivot:Class HSV2HSL.ecore.oclas#ndQkv">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvParent" referredVariable="#vsQJx" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="5BhwK" name="middleParent" type="pivot:Class &_2;#ndQkv">
+          <ownedExpression xsi:type="pivot:OppositePropertyCallExp" isRequired="false" name="middle" referredProperty="&_2;#uMHUi" type="pivot:Class &_2;#ndQkv">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvParent" referredVariable="#vsQJx" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#Nce+m"
-            targetVariable="#D4j03">
-          <ownedExpression xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#5BhwK" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#Nce+m" targetVariable="#D4j03">
+          <ownedExpression xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#5BhwK" type="pivot:Class &_2;#ndQkv"/>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="S9a9r" firstPass="3" isStrict="true" name="mHSV2HSLRecursion__speculated__">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="AF6cw" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="EKEDc" name="hsvNode" type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="HSV2HSL.ecore.oclas#uMHUi"
-              type="pivot:Class HSVTree.ecore.oclas#pzNqy">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#AF6cw" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="AF6cw" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="EKEDc" name="hsvNode" type="pivot:Class &_3;#pzNqy">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_2;#uMHUi" type="pivot:Class &_3;#pzNqy">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#AF6cw" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="iOm1T" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="HSV2HSL.ecore.oclas#ujlgi"
-              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#AF6cw" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="iOm1T" name="name" type="pivot:PrimitiveType &_4;#AlwVZ">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_2;#ujlgi" type="pivot:PrimitiveType &_4;#AlwVZ">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#AF6cw" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="d3+0T" name="hsv1" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="HSVTree.ecore.oclas#oqvX4"
-              type="pivot:DataType HSVTree.ecore.oclas#HhgZ,">
-            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#EKEDc" type="pivot:Class HSVTree.ecore.oclas#pzNqy"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="d3+0T" name="hsv1" type="pivot:DataType &_3;#HhgZ,">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_3;#oqvX4" type="pivot:DataType &_3;#HhgZ,">
+            <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#EKEDc" type="pivot:Class &_3;#pzNqy"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="iN52W" name="hsv2rgb1" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,">
-            <ownedArguments xsi:type="pivot:VariableExp" name="hsv1" referredVariable="#d3+0T" type="pivot:DataType HSVTree.ecore.oclas#HhgZ,"/>
-            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="iN52W" name="hsv2rgb1" type="pivot:DataType &_2;#23CR,">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
+            <ownedArguments xsi:type="pivot:VariableExp" name="hsv1" referredVariable="#d3+0T" type="pivot:DataType &_3;#HhgZ,"/>
+            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="sM0tI" name="rgb2hsl1" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType HSLTree.ecore.oclas#bFKYN">
-            <ownedArguments xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#iN52W" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
-            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="qvtb:Transformation HSV2HSL.qvtm.qvtcas#xreyG"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="sM0tI" name="rgb2hsl1" type="pivot:DataType &_1;#bFKYN">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
+            <ownedArguments xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#iN52W" type="pivot:DataType &_2;#23CR,"/>
+            <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="6d1fb" isContained="true" name="hslNode" referredTypedModel="#uh0Qn" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#sYCAH"
-            targetVariable="#6d1fb">
-          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#iOm1T" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="6d1fb" isContained="true" name="hslNode" referredTypedModel="#uh0Qn" type="pivot:Class &_1;#9roFA"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#sYCAH" targetVariable="#6d1fb">
+          <ownedExpression xsi:type="pivot:VariableExp" name="name" referredVariable="#iOm1T" type="pivot:PrimitiveType &_4;#AlwVZ"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#wcJUi"
-            targetVariable="#AF6cw">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#iN52W" type="pivot:DataType HSV2HSL.ecore.oclas#23CR,"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#wcJUi" targetVariable="#AF6cw">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hsv2rgb1" referredVariable="#iN52W" type="pivot:DataType &_2;#23CR,"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#iBkzG"
-            targetVariable="#6d1fb">
-          <ownedExpression xsi:type="pivot:VariableExp" name="rgb2hsl1" referredVariable="#sM0tI" type="pivot:DataType HSLTree.ecore.oclas#bFKYN"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#iBkzG" targetVariable="#6d1fb">
+          <ownedExpression xsi:type="pivot:VariableExp" name="rgb2hsl1" referredVariable="#sM0tI" type="pivot:DataType &_1;#bFKYN"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HSL.ecore.oclas#kMHUi"
-            targetVariable="#AF6cw">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#6d1fb" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_2;#kMHUi" targetVariable="#AF6cw">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#6d1fb" type="pivot:Class &_1;#9roFA"/>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="FG,4Z" firstPass="4" name="mHSV2HSLRecursion__edge4__parent__">
-        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="naasf" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="hzVvK" name="hslNode" type="pivot:Class HSLTree.ecore.oclas#9roFA">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsl" referredProperty="HSV2HSL.ecore.oclas#kMHUi"
-              type="pivot:Class HSLTree.ecore.oclas#9roFA">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#naasf" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="naasf" name="middleNode" referredTypedModel="#C1IOn" type="pivot:Class &_2;#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="hzVvK" name="hslNode" type="pivot:Class &_1;#9roFA">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsl" referredProperty="&_2;#kMHUi" type="pivot:Class &_1;#9roFA">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#naasf" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="dkXoy" name="middleParent" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="HSV2HSL.ecore.oclas#Nce+m"
-              type="pivot:Class HSV2HSL.ecore.oclas#ndQkv">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#naasf" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="dkXoy" name="middleParent" type="pivot:Class &_2;#ndQkv">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="&_2;#Nce+m" type="pivot:Class &_2;#ndQkv">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#naasf" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="JNiBI" name="hslParent" type="pivot:Class HSLTree.ecore.oclas#9roFA">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsl" referredProperty="HSV2HSL.ecore.oclas#kMHUi"
-              type="pivot:Class HSLTree.ecore.oclas#9roFA">
-            <ownedSource xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#dkXoy" type="pivot:Class HSV2HSL.ecore.oclas#ndQkv"/>
+        <ownedStatements xsi:type="qvti:DeclareStatement" xmi:id="JNiBI" name="hslParent" type="pivot:Class &_1;#9roFA">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="hsl" referredProperty="&_2;#kMHUi" type="pivot:Class &_1;#9roFA">
+            <ownedSource xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#dkXoy" type="pivot:Class &_2;#ndQkv"/>
           </ownedExpression>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSLTree.ecore.oclas#LR7dL"
-            targetVariable="#hzVvK">
-          <ownedExpression xsi:type="pivot:VariableExp" name="hslParent" referredVariable="#JNiBI" type="pivot:Class HSLTree.ecore.oclas#9roFA"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="&_1;#LR7dL" targetVariable="#hzVvK">
+          <ownedExpression xsi:type="pivot:VariableExp" name="hslParent" referredVariable="#JNiBI" type="pivot:Class &_1;#9roFA"/>
         </ownedStatements>
       </rule>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="QkRyc" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="QkRyc" name="Collection" superClasses="&_4;#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+        <ownedSubstitutions actual="pivot:PrimitiveType &_4;#AlwVZ" formal="&_4;#qs59R"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="d0GJT" name="OrderedCollection" superClasses="#QkRyc">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ" formal="http://www.eclipse.org/ocl/2015/Library.oclas#feFHs"/>
+        <ownedSubstitutions actual="pivot:PrimitiveType &_4;#AlwVZ" formal="&_4;#feFHs"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SequenceType" xmi:id="4nGDi" isNullFree="true" name="Sequence" superClasses="#d0GJT">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ" formal="http://www.eclipse.org/ocl/2015/Library.oclas#l1i6D"/>
+        <ownedSubstitutions actual="pivot:PrimitiveType &_4;#AlwVZ" formal="&_4;#l1i6D"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:TupleType" xmi:id=",5eVD" name="Tuple" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#,qHxF">
-      <ownedProperties xmi:id="9lIn6" name="b" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-      <ownedProperties xmi:id="CmIn6" name="g" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
-      <ownedProperties xmi:id="NmIn6" name="r" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Nr4QF"/>
+    <ownedClasses xsi:type="pivot:TupleType" xmi:id=",5eVD" name="Tuple" superClasses="&_4;#,qHxF">
+      <ownedProperties xmi:id="9lIn6" name="b" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+      <ownedProperties xmi:id="CmIn6" name="g" type="pivot:PrimitiveType &_4;#Nr4QF"/>
+      <ownedProperties xmi:id="NmIn6" name="r" type="pivot:PrimitiveType &_4;#Nr4QF"/>
     </ownedClasses>
   </ownedPackages>
 </qvti:ImperativeModel>

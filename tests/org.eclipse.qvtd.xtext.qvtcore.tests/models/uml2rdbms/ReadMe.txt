@@ -1,0 +1,1 @@
+SimpleUML2RDBMS.qvtcas is the result of saving the concrete AS syntax of SimpleUML2RDBMS.saved.qvtc in the QVTc editor.

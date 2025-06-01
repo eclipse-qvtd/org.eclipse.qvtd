@@ -1,0 +1,50 @@
+import 'Families.ecore';
+import 'Persons.ecore';
+
+transformation Families2Persons(Families:Families, Persons:Persons)
+{
+	top relation Member2Female
+	{
+		checkonly domain Families s : Families::Member[1];
+		enforce domain Persons t : Persons::Female[1] {
+			fullName = s.firstName + ' ' + this.familyName(s)
+		};
+		when {
+			this.isFemale(s);
+		}
+	}
+
+	top relation Member2Male
+	{
+		checkonly domain Families s : Families::Member[1];
+		enforce domain Persons t : Persons::Male[1] {
+			fullName = s.firstName + ' ' + this.familyName(s)
+		};
+		when {
+			not this.isFemale(s);
+		}
+	}
+
+	query familyName(_'self' : Families::Member[1]) : String[1]
+	{
+		if not _'self'.familyFather.oclIsUndefined() then _'self'.familyFather.lastName
+		else
+			if not _'self'.familyMother.oclIsUndefined() then _'self'.familyMother.lastName
+			else
+				if not _'self'.familySon.oclIsUndefined() then _'self'.familySon.lastName
+				else _'self'.familyDaughter.lastName
+				endif
+			endif
+		endif
+	}
+
+	query isFemale(_'self' : Families::Member[1]) : Boolean[1]
+	{
+		if not _'self'.familyMother.oclIsUndefined() then true
+		else
+			if not _'self'.familyDaughter.oclIsUndefined() then true
+			else false
+			endif
+		endif
+	}
+}

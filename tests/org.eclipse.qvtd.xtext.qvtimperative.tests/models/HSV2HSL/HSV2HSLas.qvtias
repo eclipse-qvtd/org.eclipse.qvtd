@@ -8,7 +8,7 @@
 ]>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    xmi:id="AAAAA" name="HSV2HSL.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/models/HSV2HSL/HSV2HSL.qvti"
+    xmi:id="AAAAA" name="HSV2HSL.serialized.qvti" externalURI="platform:/resource/_QVTd_QVTiSerializeTests__testQVTiSerialize_HSV2HSL_qvti/HSV2HSL.serialized.qvti"
     xmiidVersion="1">
   <ownedImports importedNamespace="pivot:Package &_0;#jRMJ8" xmiidVersion="1"/>
   <ownedImports importedNamespace="pivot:Package &_1;#Zl9l7" xmiidVersion="1"/>
@@ -49,7 +49,7 @@
       <rule xsi:type="qvti:Mapping" xmi:id="3ZRnf" name="HSV2MiddleRoot">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="nLgSs" name="hsvRoot" type="pivot:Class &_0;#pzNqy" referredTypedModel="#4h0Qn"/>
         <ownedStatements xsi:type="qvti:CheckStatement">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:BooleanType &_3;#XEMMs" referredOperation="&_3;#SYOvl">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:BooleanType &_3;#XEMMs" referredOperation="&_3;#bZOvl">
             <ownedSource xsi:type="pivot:PropertyCallExp" name="parent" isRequired="false" type="pivot:Class &_0;#pzNqy" referredProperty="&_0;#H6GC9">
               <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" type="pivot:Class &_0;#pzNqy" referredVariable="#nLgSs"/>
             </ownedSource>

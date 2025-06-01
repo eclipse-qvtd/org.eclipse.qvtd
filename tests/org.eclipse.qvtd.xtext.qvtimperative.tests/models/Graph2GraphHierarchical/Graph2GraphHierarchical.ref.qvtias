@@ -8,7 +8,7 @@
 ]>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    xmi:id="AAAAA" name="Graph2GraphHierarchical.ref.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/models/Graph2GraphHierarchical/Graph2GraphHierarchical.ref.qvti"
+    xmi:id="AAAAA" name="Graph2GraphHierarchical.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/models/Graph2GraphHierarchical/Graph2GraphHierarchical.qvti"
     xmiidVersion="1">
   <ownedImports name="SimpleGraph" importedNamespace="pivot:Package &_0;#WB+u0" xmiidVersion="1"/>
   <ownedImports name="SimpleGraph2Graph" importedNamespace="pivot:Package &_1;#yu1tv" xmiidVersion="1"/>
@@ -56,15 +56,15 @@
               <value xsi:type="pivot:VariableExp" name="middleG2G" isRequired="false" type="pivot:Class &_1;#Zyjl6" referredVariable="#VahbY"/>
             </ownedMappingParameterBindings>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#zDbsT" referredIteration="&_2;#1ky8V">
+          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#zDbsT" referredIteration="&_2;#+ly8V">
             <ownedSource xsi:type="pivot:PropertyCallExp" name="element" type="#zDbsT" referredProperty="&_0;#BD5Ic">
               <ownedSource xsi:type="pivot:VariableExp" name="g1" type="pivot:Class &_0;#xjTL2" referredVariable="#K8F0O"/>
             </ownedSource>
+            <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="L,,KT" name="e" type="pivot:Class &_0;#f6xKy" representedParameter="&_2;#Ps0ux"/>
             <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
               <ownedSource xsi:type="pivot:VariableExp" name="e" type="pivot:Class &_0;#f6xKy" referredVariable="#L,,KT"/>
               <ownedArguments xsi:type="pivot:TypeExp" name="Node" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_0;#lnINy"/>
             </ownedBody>
-            <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="L,,KT" name="e" type="pivot:Class &_0;#f6xKy" representedParameter="&_2;#qfiux"/>
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#tfyMH">
@@ -107,15 +107,15 @@
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#7pVQ8">
             <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#437Af" value="#hZS24"/>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#ZrEOf" referredIteration="&_2;#1ky8V">
+          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#ZrEOf" referredIteration="&_2;#+ly8V">
             <ownedSource xsi:type="pivot:PropertyCallExp" name="element2Element" type="#ZrEOf" referredProperty="&_1;#zQObi">
               <ownedSource xsi:type="pivot:VariableExp" name="g2Gmiddle" type="pivot:Class &_1;#Zyjl6" referredVariable="#J,yti"/>
             </ownedSource>
+            <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="WeKFI" name="e2e" type="pivot:Class &_1;#1rf9," representedParameter="&_2;#Ps0ux"/>
             <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
               <ownedSource xsi:type="pivot:VariableExp" name="e2e" type="pivot:Class &_1;#1rf9," referredVariable="#WeKFI"/>
               <ownedArguments xsi:type="pivot:TypeExp" name="Node2Node" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_1;#hIQt,"/>
             </ownedBody>
-            <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="WeKFI" name="e2e" type="pivot:Class &_1;#1rf9," representedParameter="&_2;#qfiux"/>
           </ownedExpression>
         </ownedStatements>
       </rule>
@@ -142,9 +142,29 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="ibWOU" name="Set" superClasses="#KxqLT" isNullFree="true">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XcIh+" name="Collection" superClasses="&_2;#jbMkR">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#ODsm5"/>
+        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Z26Pj" name="Collection" superClasses="&_2;#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="9DyCK" name="Collection" superClasses="&_2;#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ks930" name="OrderedCollection" superClasses="#XcIh+">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#feFHs"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KUnZA" name="OrderedCollection" superClasses="#9DyCK">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#feFHs"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="zDbsT" name="OrderedSet" superClasses="#ks930 #IX4cu" isNullFree="true">
@@ -157,14 +177,9 @@
         <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#53+C2"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KxqLT" name="UniqueCollection" superClasses="#Z26Pj">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="ibWOU" name="Set" superClasses="#KxqLT" isNullFree="true">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#jdfjE"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ks930" name="OrderedCollection" superClasses="#XcIh+">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#feFHs"/>
+        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="IX4cu" name="UniqueCollection" superClasses="#XcIh+">
@@ -172,29 +187,14 @@
         <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KUnZA" name="OrderedCollection" superClasses="#9DyCK">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KxqLT" name="UniqueCollection" superClasses="#Z26Pj">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#feFHs"/>
+        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#jdfjE"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="u+h+5" name="UniqueCollection" superClasses="#9DyCK">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#jdfjE"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Z26Pj" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#qs59R"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XcIh+" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#qs59R"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="9DyCK" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#qs59R"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>
