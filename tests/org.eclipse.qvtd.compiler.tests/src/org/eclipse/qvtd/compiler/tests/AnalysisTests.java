@@ -351,7 +351,7 @@ public class AnalysisTests extends XtextTestCase
 		OCLExpression exp2 = ((OperationCallExp)exp1).getOwnedSource();
 		OCLExpression exp3 = ((OperationCallExp)exp2).getOwnedSource();
 		OCLExpression exp4 = ((OperationCallExp)exp3).getOwnedSource();
-		OCLExpression exp5 = ((LoopExp)exp4).getOwnedBody();
+		OCLExpression exp5 = ((LoopExp)exp4).getFirstOwnedBody();
 		analyze = operationDependencyAnalysis.analyze((OperationCallExp)exp5);
 		//
 		expectedReturns = new HashSet<>();

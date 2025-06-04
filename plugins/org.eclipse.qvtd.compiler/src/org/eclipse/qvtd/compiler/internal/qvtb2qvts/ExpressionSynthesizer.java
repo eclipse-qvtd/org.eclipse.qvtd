@@ -455,7 +455,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			conditionalExpressionSynthesizer.createIteratedEdge(sourceNode, iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
-		Node bodyNode = conditionalExpressionSynthesizer.synthesize(loopExp.getOwnedBody());
+		Node bodyNode = conditionalExpressionSynthesizer.synthesize(loopExp.getFirstOwnedBody());
 		argNodes[0] = bodyNode;
 		Iteration referredIteration = QVTbaseUtil.getReferredIteration(loopExp);
 		Node accumulateNode = findOperationNode(referredIteration, argNodes);

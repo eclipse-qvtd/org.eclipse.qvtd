@@ -463,7 +463,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 		}
 		visit(object.getOwnedResult());
-		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
+		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getFirstOwnedBody());
 		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
 		//		object.accept(visitor);
 		EnvironmentFactoryInternal environmentFactory = (@NonNull EnvironmentFactoryInternal) context;

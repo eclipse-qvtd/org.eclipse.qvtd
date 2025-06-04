@@ -155,7 +155,7 @@ public class IsConstantExpressionVisitor extends AbstractExtendingQVTcoreVisitor
 		}
 		Iterable<@NonNull Variable> ownedIterators = PivotUtil.getOwnedIterators(loopExp);
 		Iterables.addAll(myConstants, ownedIterators);
-		return isConstant(ownedIterators) && isConstant(loopExp.getOwnedBody());
+		return isConstant(ownedIterators) && isConstant(loopExp.getFirstOwnedBody());
 	}
 
 	@Override

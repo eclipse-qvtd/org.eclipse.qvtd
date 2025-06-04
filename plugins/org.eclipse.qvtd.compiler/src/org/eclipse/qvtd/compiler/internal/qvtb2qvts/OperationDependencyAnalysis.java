@@ -876,7 +876,7 @@ public class OperationDependencyAnalysis
 			for (@SuppressWarnings("null")@NonNull Variable iterator : loopExp.getOwnedIterators()) {
 				nestedAnalyzer.addVariable(iterator, sourcePaths);
 			}
-			return addHidden(nestedAnalyzer.analyze(loopExp.getOwnedBody()), sourcePaths);
+			return addHidden(nestedAnalyzer.analyze(loopExp.getFirstOwnedBody()), sourcePaths);
 		}
 
 		@Override
