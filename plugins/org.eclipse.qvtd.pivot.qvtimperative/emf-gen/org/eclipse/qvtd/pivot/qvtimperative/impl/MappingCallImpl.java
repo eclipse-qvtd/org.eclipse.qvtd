@@ -287,9 +287,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final @NonNull LibraryIteration IMPL_sortedBy_0 = (LibraryIteration)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**
-		 * Implementation of the iterator body.
+		 * Implementation of the iteration evaluation body.
 		 */
-		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
+		final @NonNull AbstractBinaryOperation BODY0_sortedBy_1 = new AbstractBinaryOperation() {
 			/**
 			 * n
 			 */
@@ -299,7 +299,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				return CAST_null;
 			}
 		};
-		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
+		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY0_sortedBy_1, asSet, ACC_sortedBy_0);
 		@SuppressWarnings("null")
 		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
 		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = idResolver.ecoreValueOfAll(String.class, sortedBy);
@@ -346,9 +346,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final @NonNull LibraryIteration IMPL_sortedBy_0 = (LibraryIteration)TYPE_sortedBy_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 		final @NonNull Object ACC_sortedBy_0 = IMPL_sortedBy_0.createAccumulatorValue(executor, QVTimperativeTables.ORD_PRIMid_String, TypeId.STRING);
 		/**
-		 * Implementation of the iterator body.
+		 * Implementation of the iteration evaluation body.
 		 */
-		final @NonNull AbstractBinaryOperation BODY_sortedBy_0 = new AbstractBinaryOperation() {
+		final @NonNull AbstractBinaryOperation BODY0_sortedBy_1 = new AbstractBinaryOperation() {
 			/**
 			 * n
 			 */
@@ -358,7 +358,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				return CAST_null;
 			}
 		};
-		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY_sortedBy_0, asSet, ACC_sortedBy_0);
+		final @NonNull ExecutorSingleIterationManager MGR_sortedBy_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.ORD_PRIMid_String, BODY0_sortedBy_1, asSet, ACC_sortedBy_0);
 		@SuppressWarnings("null")
 		final /*@Thrown*/ @NonNull OrderedSetValue sortedBy = (@NonNull OrderedSetValue)IMPL_sortedBy_0.evaluateIteration(MGR_sortedBy_0);
 		final /*@Thrown*/ @NonNull List<String> ECORE_sortedBy = idResolver.ecoreValueOfAll(String.class, sortedBy);

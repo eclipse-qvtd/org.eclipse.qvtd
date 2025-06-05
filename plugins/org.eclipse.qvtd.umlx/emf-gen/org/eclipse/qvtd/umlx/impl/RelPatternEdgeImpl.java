@@ -893,9 +893,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 							final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 							/**
-							 * Implementation of the iterator body.
+							 * Implementation of the iteration evaluation body.
 							 */
-							final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+							final @NonNull AbstractBinaryOperation BODY0_closure_1 = new AbstractBinaryOperation() {
 								/**
 								 * eSuperTypes
 								 */
@@ -911,7 +911,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									return BOXED_eSuperTypes;
 								}
 							};
-							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
+							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY0_closure_1, oclAsSet, ACC_closure_0);
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
@@ -1015,9 +1015,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 							final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 							/**
-							 * Implementation of the iterator body.
+							 * Implementation of the iteration evaluation body.
 							 */
-							final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+							final @NonNull AbstractBinaryOperation BODY0_closure_1 = new AbstractBinaryOperation() {
 								/**
 								 * eSuperTypes
 								 */
@@ -1033,7 +1033,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									return BOXED_eSuperTypes;
 								}
 							};
-							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0, oclAsSet, ACC_closure_0);
+							final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY0_closure_1, oclAsSet, ACC_closure_0);
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 							if (referredEStructuralFeature == null) {
@@ -1554,9 +1554,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								final @NonNull LibraryIteration IMPL_closure_1 = (LibraryIteration)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 								final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 								/**
-								 * Implementation of the iterator body.
+								 * Implementation of the iteration evaluation body.
 								 */
-								final @NonNull AbstractBinaryOperation BODY_closure_1 = new AbstractBinaryOperation() {
+								final @NonNull AbstractBinaryOperation BODY0_closure_2 = new AbstractBinaryOperation() {
 									/**
 									 * eSuperTypes
 									 */
@@ -1572,7 +1572,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 										return BOXED_eSuperTypes;
 									}
 								};
-								final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_1, oclAsSet, ACC_closure_1);
+								final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY0_closure_2, oclAsSet, ACC_closure_1);
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
 								if (CAUGHT_targetEClass instanceof InvalidValueException) {
@@ -1599,9 +1599,9 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									final @NonNull LibraryIteration IMPL_closure_0_0 = (LibraryIteration)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 									final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
 									/**
-									 * Implementation of the iterator body.
+									 * Implementation of the iteration evaluation body.
 									 */
-									final @NonNull AbstractBinaryOperation BODY_closure_0_0 = new AbstractBinaryOperation() {
+									final @NonNull AbstractBinaryOperation BODY0_closure_0_1 = new AbstractBinaryOperation() {
 										/**
 										 * eSuperTypes
 										 */
@@ -1617,7 +1617,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 											return BOXED_eSuperTypes_0;
 										}
 									};
-									final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY_closure_0_0, oclAsSet_0, ACC_closure_0_0);
+									final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY0_closure_0_1, oclAsSet_0, ACC_closure_0_0);
 									@SuppressWarnings("null")
 									final /*@Thrown*/ @NonNull SetValue closure_0 = (@NonNull SetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
 									if (CAUGHT_sourceEClass instanceof InvalidValueException) {

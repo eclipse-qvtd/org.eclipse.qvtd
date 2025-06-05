@@ -350,9 +350,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull LibraryIteration IMPL_closure_1 = (LibraryIteration)TYPE_closure_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_1 = IMPL_closure_1.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
-						 * Implementation of the iterator body.
+						 * Implementation of the iteration evaluation body.
 						 */
-						final @NonNull AbstractBinaryOperation BODY_closure_1 = new AbstractBinaryOperation() {
+						final @NonNull AbstractBinaryOperation BODY0_closure_2 = new AbstractBinaryOperation() {
 							/**
 							 * e.oclContainer()
 							 */
@@ -365,7 +365,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								return oclContainer;
 							}
 						};
-						final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_1, asOrderedSet, ACC_closure_1);
+						final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY0_closure_2, asOrderedSet, ACC_closure_1);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure = (@NonNull OrderedSetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
 						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_qvtbase_c_c_Pattern);
@@ -387,9 +387,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull LibraryIteration IMPL_closure_0_0 = (LibraryIteration)TYPE_closure_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__closure);
 						final @NonNull Object ACC_closure_0_0 = IMPL_closure_0_0.createAccumulatorValue(executor, QVTrelationTables.ORD_CLSSid_OclElement, QVTrelationTables.CLSSid_OclElement);
 						/**
-						 * Implementation of the iterator body.
+						 * Implementation of the iteration evaluation body.
 						 */
-						final @NonNull AbstractBinaryOperation BODY_closure_0_0 = new AbstractBinaryOperation() {
+						final @NonNull AbstractBinaryOperation BODY0_closure_0_1 = new AbstractBinaryOperation() {
 							/**
 							 * e.oclContainer()
 							 */
@@ -402,7 +402,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								return oclContainer_0;
 							}
 						};
-						final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY_closure_0_0, asOrderedSet_0, ACC_closure_0_0);
+						final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY0_closure_0_1, asOrderedSet_0, ACC_closure_0_0);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure_0 = (@NonNull OrderedSetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
 						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_qvtrelation_c_c_Relation_0);

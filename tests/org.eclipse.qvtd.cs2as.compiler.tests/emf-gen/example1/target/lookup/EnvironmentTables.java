@@ -81,7 +81,7 @@ public class EnvironmentTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Executor = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Executor", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NamedElement = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("NamedElement", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_TMPLid_ = TypeId.COLLECTION.getSpecializedId(IdManager.getTemplateParameterId(0), true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_TMPLid_ = TypeId.COLLECTION.getSpecializedId(IdManager.getTemplateParameterId(0), false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_LookupEnvironment = TypeId.BAG.getSpecializedId(EnvironmentTables.CLSSid_LookupEnvironment, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(EnvironmentTables.CLSSid_NamedElement, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_NamedElement_0 = TypeId.ORDERED_SET.getSpecializedId(EnvironmentTables.CLSSid_NamedElement, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
@@ -397,7 +397,7 @@ public class EnvironmentTables extends AbstractTables
 
 		private static final @NonNull ExecutorOperation @NonNull [] _LookupEnvironment__LookupEnvironment = {
 			EnvironmentTables.Operations._LookupEnvironment__addElement /* addElement(NamedElement[?]) */,
-			EnvironmentTables.Operations._LookupEnvironment__addElements /* addElements(NE)(Collection(NE)) */
+			EnvironmentTables.Operations._LookupEnvironment__addElements /* addElements(NE)(Collection(NE[*|?])) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LookupEnvironment__Env4CG = {
 			EnvironmentTables.Operations._Env4CG__getExecutor /* getExecutor() */,

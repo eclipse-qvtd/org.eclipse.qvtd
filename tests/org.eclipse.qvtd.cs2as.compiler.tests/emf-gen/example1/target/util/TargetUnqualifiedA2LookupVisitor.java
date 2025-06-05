@@ -91,7 +91,7 @@ public class TargetUnqualifiedA2LookupVisitor
 			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull TRoot element_0 = (/*@NonInvalid*/ @NonNull TRoot)sourceAndArgumentValues[0];
 			final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv_A2 = TargetUnqualifiedA2LookupVisitor.this.parentEnv(element_0);
 			if (parentEnv_A2 == null) {
-				throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
+				throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE[*|?])) : lookup::LookupEnvironment[1]\'");
 			}
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull List<A> ownedA = element_0.getOwnedA();

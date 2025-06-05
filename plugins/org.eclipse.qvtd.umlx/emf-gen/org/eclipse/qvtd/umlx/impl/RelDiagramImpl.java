@@ -424,7 +424,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select(T[?] | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not == ValueUtil.TRUE_VALUE) {
@@ -458,7 +458,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not_0 == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select(T[?] | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not_0 == ValueUtil.TRUE_VALUE) {

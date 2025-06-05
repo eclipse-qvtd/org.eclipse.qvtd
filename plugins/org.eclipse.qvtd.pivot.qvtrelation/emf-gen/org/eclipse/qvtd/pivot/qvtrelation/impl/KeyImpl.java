@@ -459,9 +459,9 @@ public class KeyImpl extends ElementImpl implements Key {
 							final @NonNull LibraryIteration IMPL_superClasses_2 = (LibraryIteration)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 							final @NonNull Object ACC_superClasses_2 = IMPL_superClasses_2.createAccumulatorValue(executor, QVTrelationTables.SET_CLSSid_Class, QVTrelationTables.SET_CLSSid_Class);
 							/**
-							 * Implementation of the iterator body.
+							 * Implementation of the iteration evaluation body.
 							 */
-							final @NonNull AbstractBinaryOperation BODY_superClasses_2 = new AbstractBinaryOperation() {
+							final @NonNull AbstractBinaryOperation BODY0_superClasses_3 = new AbstractBinaryOperation() {
 								/**
 								 * superClasses
 								 */
@@ -476,7 +476,7 @@ public class KeyImpl extends ElementImpl implements Key {
 									return BOXED_superClasses_1;
 								}
 							};
-							final @NonNull ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
+							final @NonNull ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY0_superClasses_3, BOXED_superClasses_0, ACC_superClasses_2);
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull SetValue superClasses = (@NonNull SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2);
 							final /*@NonInvalid*/ @NonNull Object ownedKeys = transformation == null;

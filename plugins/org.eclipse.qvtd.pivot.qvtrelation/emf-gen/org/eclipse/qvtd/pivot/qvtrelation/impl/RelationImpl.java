@@ -733,9 +733,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 						final @NonNull LibraryIteration IMPL_multiNames_0 = (LibraryIteration)TYPE_multiNames_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
 						final @NonNull Object ACC_multiNames_0 = IMPL_multiNames_0.createAccumulatorValue(executor, QVTrelationTables.ORD_PRIMid_String, TypeId.STRING);
 						/**
-						 * Implementation of the iterator body.
+						 * Implementation of the iteration evaluation body.
 						 */
-						final @NonNull AbstractBinaryOperation BODY_multiNames_0 = new AbstractBinaryOperation() {
+						final @NonNull AbstractBinaryOperation BODY0_multiNames_1 = new AbstractBinaryOperation() {
 							/**
 							 * n
 							 */
@@ -745,7 +745,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 								return CAST_null;
 							}
 						};
-						final @NonNull ExecutorSingleIterationManager MGR_multiNames_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_PRIMid_String, BODY_multiNames_0, select, ACC_multiNames_0);
+						final @NonNull ExecutorSingleIterationManager MGR_multiNames_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_PRIMid_String, BODY0_multiNames_1, select, ACC_multiNames_0);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue multiNames = (@NonNull OrderedSetValue)IMPL_multiNames_0.evaluateIteration(MGR_multiNames_0);
 						/*@NonInvalid*/ @NonNull String acc = QVTrelationTables.STR_;

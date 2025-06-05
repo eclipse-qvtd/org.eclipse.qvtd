@@ -432,7 +432,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			IF_isOpposite = targetProperty_0;
 		}
 		if (IF_isOpposite == null) {
-			throw new InvalidValueException("Null body for \'qvtimperative::SetStatement::resolvedProperty\'");
+			throw new InvalidValueException("Null body for \'qvtimperative::SetStatement::resolvedProperty : Property[1]\'");
 		}
 		return IF_isOpposite;
 	}
@@ -854,9 +854,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTimperativeTables.SET_CLSSid_OclElement, QVTimperativeTables.SET_CLSSid_OclElement);
 					/**
-					 * Implementation of the iterator body.
+					 * Implementation of the iteration evaluation body.
 					 */
-					final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+					final @NonNull AbstractBinaryOperation BODY0_closure_1 = new AbstractBinaryOperation() {
 						/**
 						 * e.oclContents()
 						 */
@@ -869,7 +869,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							return oclContents;
 						}
 					};
-					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
+					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY0_closure_1, oclAsSet, ACC_closure_0);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 					final /*@Thrown*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
@@ -953,7 +953,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							}
 						}
 						if (and == null) {
-							throw new InvalidValueException("Null body for \'Set(T).select(T[?] | Lambda $$0() : Boolean[1]) : Set($$0)\'");
+							throw new InvalidValueException("Null body for \'Set(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Set($$0)\'");
 						}
 						//
 						if (and == ValueUtil.TRUE_VALUE) {
