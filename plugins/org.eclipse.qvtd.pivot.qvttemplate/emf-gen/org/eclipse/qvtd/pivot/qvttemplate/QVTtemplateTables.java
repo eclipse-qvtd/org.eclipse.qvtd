@@ -94,7 +94,7 @@ public class QVTtemplateTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_OCLExpression, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_PropertyTemplateItem = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_PropertyTemplateItem, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTtemplateTables.PARTid_, QVTtemplateTables.PARTid__0);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(QVTtemplateTables.PARTid_, QVTtemplateTables.PARTid__0);
 
 	/**
 	 *	The type parameters for templated types and operations.

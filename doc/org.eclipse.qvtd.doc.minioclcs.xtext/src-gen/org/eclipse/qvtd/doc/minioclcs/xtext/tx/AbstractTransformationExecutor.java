@@ -50,7 +50,7 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 
 	private AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Constructor<? extends Transformer> txConstructor)
 			throws ReflectiveOperationException {
-		super(environmentFactory.getCompleteEnvironment());
+		super(environmentFactory.getStandardLibrary());
 		this.environmentFactory = environmentFactory;
 		transformer = ClassUtil.requireNonNull(txConstructor.newInstance(this));
 	}

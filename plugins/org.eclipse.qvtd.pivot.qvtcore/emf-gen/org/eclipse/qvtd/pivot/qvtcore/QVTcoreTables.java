@@ -126,7 +126,7 @@ public class QVTcoreTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Mapping = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_Mapping, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RealizedVariable = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_RealizedVariable, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_VariableDeclaration = TypeId.SET.getSpecializedId(QVTcoreTables.CLSSid_VariableDeclaration, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTcoreTables.PARTid__0, QVTcoreTables.PARTid_);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(QVTcoreTables.PARTid__0, QVTcoreTables.PARTid_);
 
 	/**
 	 *	The type parameters for templated types and operations.

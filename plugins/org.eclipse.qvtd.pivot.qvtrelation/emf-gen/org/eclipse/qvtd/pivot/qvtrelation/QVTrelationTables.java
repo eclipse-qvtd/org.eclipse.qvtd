@@ -148,7 +148,7 @@ public class QVTrelationTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelationImplementation = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_RelationImplementation, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Rule = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Rule, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedId(QVTrelationTables.CLSSid_Variable, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTrelationTables.PARTid_, QVTrelationTables.PARTid__0);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(QVTrelationTables.PARTid_, QVTrelationTables.PARTid__0);
 
 	/**
 	 *	The type parameters for templated types and operations.

@@ -139,7 +139,7 @@ public class UMLXTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EClass = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_EClass, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelPatternNode = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", UMLXTables.PARTid__0, UMLXTables.PARTid_);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(UMLXTables.PARTid__0, UMLXTables.PARTid_);
 
 	/**
 	 *	The type parameters for templated types and operations.

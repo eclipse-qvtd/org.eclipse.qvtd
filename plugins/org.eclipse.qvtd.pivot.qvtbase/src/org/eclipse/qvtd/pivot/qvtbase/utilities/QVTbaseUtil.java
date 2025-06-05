@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -426,12 +425,12 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the context variable for a TypedModel, creating it if not yet available.
 	 */
-	public static @NonNull Parameter getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
+	public static @NonNull Parameter getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull TypedModel typedModel) {
 		Parameter ownedContext = typedModel.getOwnedContext();
 		if (ownedContext == null) {
 			ownedContext = PivotFactory.eINSTANCE.createParameter();
 			ownedContext.setName(typedModel.getName());
-			ownedContext.setType(standardLibrary.getLibraryType("Model"));
+			ownedContext.setType(standardLibrary.basicGetLibraryClass("Model"));
 			//        	ownedContext.setTypeValue(typedModel);
 			ownedContext.setIsRequired(true);
 			typedModel.setOwnedContext(ownedContext);

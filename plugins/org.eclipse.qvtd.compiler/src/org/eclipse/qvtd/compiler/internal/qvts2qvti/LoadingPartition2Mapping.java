@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -170,7 +169,7 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 	}
 
 	protected @NonNull Iteration getSelectIteration() {
-		org.eclipse.ocl.pivot.Class collectionType = ((StandardLibraryInternal)visitor.getStandardLibrary()).getSetType();
+		org.eclipse.ocl.pivot.Class collectionType = visitor.getStandardLibrary().getSetType();
 		Operation selectIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "select");
 		assert selectIteration != null;
 		return (Iteration) selectIteration;

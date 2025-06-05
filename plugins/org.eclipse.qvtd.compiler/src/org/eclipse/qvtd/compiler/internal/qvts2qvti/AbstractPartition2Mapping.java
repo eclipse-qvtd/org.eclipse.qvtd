@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -39,7 +40,6 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -286,15 +286,15 @@ public abstract class AbstractPartition2Mapping
 	}
 
 	protected @NonNull Operation getObjectsOfKindOperation() {
-		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
-		Type modelType = standardLibrary.getLibraryType("Model");
+		StandardLibrary standardLibrary = visitor.getStandardLibrary();
+		Type modelType = standardLibrary.getLibraryClass("Model");
 		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
 		Operation objectsOfKindOperation = environmentFactory.getIdResolver().getOperation(objectsOfKindOperationId);
 		return objectsOfKindOperation;
 	}
 
 	protected @NonNull Operation getOclIsKindOfOperation() {
-		org.eclipse.ocl.pivot.Class oclAnyType = ((StandardLibraryInternal)visitor.getStandardLibrary()).getOclAnyType();
+		org.eclipse.ocl.pivot.Class oclAnyType = visitor.getStandardLibrary().getOclAnyType();
 		Operation oclIsKindOfOperation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclIsKindOf");
 		assert oclIsKindOfOperation != null;
 		return oclIsKindOfOperation;
@@ -305,8 +305,8 @@ public abstract class AbstractPartition2Mapping
 	//	}
 
 	protected @NonNull Operation getRootObjectsOperation() {
-		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
-		Type modelType = standardLibrary.getLibraryType("Model");
+		StandardLibrary standardLibrary = visitor.getStandardLibrary();
+		Type modelType = standardLibrary.getLibraryClass("Model");
 		OperationId rootObjectsOperationId = modelType.getTypeId().getOperationId(1, "rootObjects", IdManager.getParametersId());
 		Operation rootObjectsOperation = environmentFactory.getIdResolver().getOperation(rootObjectsOperationId);
 		return rootObjectsOperation;
@@ -333,7 +333,7 @@ public abstract class AbstractPartition2Mapping
 	}
 
 	protected @NonNull Operation getSelectByKindOperation() {
-		org.eclipse.ocl.pivot.Class collectionType = ((StandardLibraryInternal)visitor.getStandardLibrary()).getCollectionType();
+		org.eclipse.ocl.pivot.Class collectionType = visitor.getStandardLibrary().getCollectionType();
 		Operation selectByKindOperation = NameUtil.getNameable(collectionType.getOwnedOperations(), "selectByKind");
 		assert selectByKindOperation != null;
 		return selectByKindOperation;

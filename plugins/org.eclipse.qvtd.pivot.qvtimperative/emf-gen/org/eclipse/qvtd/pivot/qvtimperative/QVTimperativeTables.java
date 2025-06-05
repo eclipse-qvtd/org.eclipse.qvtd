@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import java.lang.String;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
@@ -165,7 +164,7 @@ public class QVTimperativeTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Rule = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_Rule, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_VariableDeclaration = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableDeclaration, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_VariableExp = TypeId.SET.getSpecializedId(QVTimperativeTables.CLSSid_VariableExp, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTimperativeTables.PARTid_, QVTimperativeTables.PARTid__0);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(QVTimperativeTables.PARTid_, QVTimperativeTables.PARTid__0);
 
 	/**
 	 *	The type parameters for templated types and operations.
