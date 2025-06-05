@@ -114,7 +114,7 @@ public class QVTiCGUtil extends CGUtil
 	}
 
 	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
-		return ClassUtil.requireNonNull(cgMappingLoop.getBody());
+		return ClassUtil.requireNonNull(cgMappingLoop.getBodies().get(0));
 	}
 
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {

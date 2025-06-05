@@ -254,7 +254,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			//				rewriteAsCaught(cgElement.getBody());
 			//			}
 			//			else {
-			rewriteAsThrown(cgElement.getBody());
+			rewriteAsThrown(cgElement.getBodies().get(0));
 			//			}
 			cgElement.setCaught(false);
 			return false;

@@ -1190,7 +1190,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asMappingStatement);
 			cgMappingStatements.add(cgMappingStatement);
 		}
-		cgMappingLoop.setBody(cgSequence);
+		assert cgMappingLoop.getBodies().isEmpty();
+		cgMappingLoop.getBodies().add(cgSequence);
 		return cgMappingLoop;
 	}
 
