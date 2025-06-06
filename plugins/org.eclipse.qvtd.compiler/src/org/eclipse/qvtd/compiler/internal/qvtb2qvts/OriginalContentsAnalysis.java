@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis.PartialRegionAnalysis;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 public class OriginalContentsAnalysis
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull StandardLibrary standardLibrary;
 	protected final @NonNull Property oclContainerProperty;
 	private final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
@@ -91,6 +93,7 @@ public class OriginalContentsAnalysis
 
 	public OriginalContentsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
+		this.standardLibrary = scheduleManager.getStandardLibrary();
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 		this.transformationAnalysis = scheduleManager.getTransformationAnalysis();
 	}
@@ -394,11 +397,11 @@ public class OriginalContentsAnalysis
 				else {
 					Node targetNode = realizedEdge.getEdgeTarget();
 					ClassDatum realizedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-					if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClassDatum, elementalTargetClassDatum)) {
+					if (QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, realizedClassDatum, elementalTargetClassDatum)) {
 						matches = true;
 					}
 					else if (realizedClassDatum.isCollectionType()) {
-						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)realizedClassDatum), elementalTargetClassDatum)) {
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)realizedClassDatum), elementalTargetClassDatum)) {
 							matches = true;
 						}
 					}

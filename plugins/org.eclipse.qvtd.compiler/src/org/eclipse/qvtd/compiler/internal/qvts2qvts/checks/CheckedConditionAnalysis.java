@@ -223,7 +223,7 @@ public class CheckedConditionAnalysis
 			Integer targetCost = reachabilityForest.getCost(targetNode);
 			if (sourceCost < targetCost) {
 				ClassDatum targetNodeClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-				if (!QVTscheduleUtil.conformsTo(edgeTargetCompleteClass, targetNodeClassDatum)) {
+				if (!QVTscheduleUtil.conformsTo(scheduleManager.getStandardLibrary(), edgeTargetCompleteClass, targetNodeClassDatum)) {
 					context.add(new CastEdgeCheckedCondition(navigationEdge));
 					//					return null;
 				}
@@ -279,7 +279,7 @@ public class CheckedConditionAnalysis
 				Type initializerType = QVTbaseUtil.getType(typedElement);
 				CompleteClass initializerCompleteClass = completeModel.getCompleteClass(initializerType);
 				ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(operationNode);
-				if (!QVTscheduleUtil.conformsTo(initializerCompleteClass, targetClassDatum)) {
+				if (!QVTscheduleUtil.conformsTo(scheduleManager.getStandardLibrary(), initializerCompleteClass, targetClassDatum)) {
 					context.add(new CastInitializerCheckedCondition(operationNode));
 				}
 			}

@@ -49,6 +49,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.RealLiteralExp;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralPart;
@@ -1078,7 +1079,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//	ClassDatum requiredClassDatum = environmentFactory.getCompleteModel().getCompleteClass(castType);
 		ClassDatum predicatedClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
 		boolean sourceIsRequired = sourceNode.isRequired();
-		if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum) && (sourceIsRequired || !castIsRequired)) {
+		StandardLibrary standardLibrary = scheduleManager.getStandardLibrary();
+		if (QVTscheduleUtil.conformsTo(standardLibrary, predicatedClassDatum, castClassDatum) && (sourceIsRequired || !castIsRequired)) {
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
@@ -1086,7 +1088,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			if (edge instanceof CastEdge) {
 				Node targetNode = edge.getEdgeTarget();
 				predicatedClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
-				if (QVTscheduleUtil.conformsTo(predicatedClassDatum, castClassDatum)) {
+				if (QVTscheduleUtil.conformsTo(standardLibrary, predicatedClassDatum, castClassDatum)) {
 					targetNode.addOriginatingElement(operationCallExp);
 					return targetNode;										// Re-use a pre-existing class
 				}
@@ -1343,7 +1345,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		assert initNode != null;
 		ClassDatum actualClassDatum = QVTscheduleUtil.getClassDatum(initNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(ownedVariable);
-		if (QVTscheduleUtil.conformsTo(actualClassDatum, variableClassDatum)) {
+		StandardLibrary standardLibrary = scheduleManager.getStandardLibrary();
+		if (QVTscheduleUtil.conformsTo(standardLibrary, actualClassDatum, variableClassDatum)) {
 			context.getRegion().addVariableNode(ownedVariable, initNode);
 			initNode.setOriginatingVariable(ownedVariable);
 		}

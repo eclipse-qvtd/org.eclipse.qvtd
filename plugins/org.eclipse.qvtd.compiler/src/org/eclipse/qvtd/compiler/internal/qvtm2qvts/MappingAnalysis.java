@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -191,8 +192,9 @@ public class MappingAnalysis extends RuleAnalysis
 			CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 			// Type targetType =
 			// propertyType;//environmentFactory.getCompleteModel().getCompleteClass(propertyType);
-			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
-				if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
+				if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
 					// See Bug 577546 where this is a dodgy downcast case.
 					// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
 					// if
@@ -568,7 +570,7 @@ public class MappingAnalysis extends RuleAnalysis
 		 */
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
-		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
+		if (!QVTscheduleUtil.conformsTo(standardLibrary, initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(Utility.getRequiredUtility(variable), variable);
 			rootExpressionSynthesizer.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;

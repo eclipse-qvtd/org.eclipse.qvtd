@@ -26,7 +26,7 @@ public class Helper4getCommonType extends AbstractTernaryOperation
 		org.eclipse.ocl.pivot.Class asType2 = (org.eclipse.ocl.pivot.Class)argumentValue;
 		assert (asType1 != null);
 		assert (asType2 != null);
-		org.eclipse.ocl.pivot.Class asCommonType = (org.eclipse.ocl.pivot.Class)asType1.getCommonType(executor.getIdResolver(), asType2);
+		org.eclipse.ocl.pivot.Class asCommonType = executor.getStandardLibrary().getCommonType(asType1, asType2);
 		return asCommonType;
 	}
 }

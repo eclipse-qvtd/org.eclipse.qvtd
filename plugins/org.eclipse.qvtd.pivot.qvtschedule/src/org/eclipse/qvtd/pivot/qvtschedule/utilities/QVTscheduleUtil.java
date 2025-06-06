@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -127,17 +128,17 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	/**
 	 * Return true if there may be a dynamic type conforming to both the firstType and secondType static types.
 	 */
-	public static boolean conformantWith(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+	public static boolean conformantWith(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
 		//	if (conformsTo(thisClassDatum, thatClassDatum)) {
 		//		return true;
 		//	}
 		//	if (conformsTo(thatClassDatum, thisClassDatum)) {
 		//		return true;
 		//	}
-		if (conformsToClassOrBehavioralClass(thisClassDatum, thatClassDatum)) {
+		if (conformsToClassOrBehavioralClass(standardLibrary, thisClassDatum, thatClassDatum)) {
 			return true;
 		}
-		if (conformsToClassOrBehavioralClass(thatClassDatum, thisClassDatum)) {
+		if (conformsToClassOrBehavioralClass(standardLibrary, thatClassDatum, thisClassDatum)) {
 			return true;
 		}
 		return false;
@@ -149,7 +150,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 * If the ClassDatum is a multi-CompleteClass there must be a CompleteClass, not necessarily the same CompleteClass, of thisClassDatum's CompleteClasses
 	 * that conforms to each of thatClassDatum's CompleteClasses.
 	 */
-	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+	public static boolean conformsTo(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
 		if (thisClassDatum == thatClassDatum) {
 			return true;
 		}
@@ -158,7 +159,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return false;
 		}
 		for (CompleteClass thatCompleteClass : thoseCompleteClasses) {
-			if (!conformsTo(thisClassDatum, thatCompleteClass)) {
+			if (!conformsTo(standardLibrary, thisClassDatum, thatCompleteClass)) {
 				return false;
 			}
 		}
@@ -170,34 +171,34 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	 *
 	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatCompleteClass.
 	 */
-	public static boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
+	public static boolean conformsTo(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
 		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
 		if (theseCompleteClasses == null) {
 			return false;
 		}
 		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (thisCompleteClass.conformsTo(thatCompleteClass)) {
+			if (standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean conformsTo(@NonNull CompleteClass thisCompleteClass, @NonNull ClassDatum thatClassDatum) {
+	public static boolean conformsTo(@NonNull StandardLibrary standardLibrary, @NonNull CompleteClass thisCompleteClass, @NonNull ClassDatum thatClassDatum) {
 		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
 		if (thoseCompleteClasses == null) {
 			return false;
 		}
 		for (@NonNull CompleteClass thatCompleteClass : thoseCompleteClasses) {
-			if (!thisCompleteClass.conformsTo(thatCompleteClass)) {
+			if (!standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
-		if (thisCompleteClass.conformsTo(thatCompleteClass)) {
+	public static boolean conformsToClassOrBehavioralClass(@NonNull StandardLibrary standardLibrary, @NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
+		if (standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
 			return true;
 		}
 		org.eclipse.ocl.pivot.Class behavioralClass = thatCompleteClass.getBehavioralClass();
@@ -205,29 +206,29 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return false;
 		}
 		// See Bug 577546 (and Bug 574431) This is a dodgy downcast case.
-		return thisCompleteClass.conformsTo(behavioralClass);
+		return standardLibrary.conformsTo(thisCompleteClass, behavioralClass);
 	}
 
-	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
+	public static boolean conformsToClassOrBehavioralClass(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {
 		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
 		if (theseCompleteClasses == null) {
 			return false;
 		}
 		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (conformsToClassOrBehavioralClass(thisCompleteClass, thatCompleteClass)) {
+			if (conformsToClassOrBehavioralClass(standardLibrary, thisCompleteClass, thatCompleteClass)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean conformsToClassOrBehavioralClass(@NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
+	public static boolean conformsToClassOrBehavioralClass(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull ClassDatum thatClassDatum) {
 		List<@NonNull CompleteClass> thoseCompleteClasses = thatClassDatum.basicGetCompleteClasses();
 		if (thoseCompleteClasses == null) {
 			return false;
 		}
 		for (@NonNull CompleteClass thatCompleteClass : thoseCompleteClasses) {
-			if (!conformsToClassOrBehavioralClass(thisClassDatum, thatCompleteClass)) {
+			if (!conformsToClassOrBehavioralClass(standardLibrary, thisClassDatum, thatCompleteClass)) {
 				return false;
 			}
 		}

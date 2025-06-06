@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.OriginalContentsAnalysis;
@@ -72,6 +73,7 @@ public class ConnectionManager
 	public static final @NonNull List<@NonNull Partition> EMPTY_PARTITION_LIST = Collections.emptyList();
 
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull StandardLibrary standardLibrary;
 	protected final @NonNull LoadingRegionAnalysis loadingRegionAnalysis;
 
 	/**
@@ -106,6 +108,7 @@ public class ConnectionManager
 	public ConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager scheduleManager, @NonNull LoadingRegionAnalysis loadingRegionAnalysis) {
 		//	super(qvtm2qvts.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
+		this.standardLibrary = scheduleManager.getStandardLibrary();
 		this.loadingRegionAnalysis = loadingRegionAnalysis;
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
 		StandardLibraryHelper standardLibraryHelper = scheduleManager.getStandardLibraryHelper();
@@ -223,9 +226,9 @@ public class ConnectionManager
 								realizedSourceClassDatum = secondClassDatum;
 								realizedTargetClassDatum = firstClassDatum;
 							}
-							boolean conformingSources = QVTscheduleUtil.conformantWith(predicatedSourceClassDatum, realizedSourceClassDatum);
+							boolean conformingSources = QVTscheduleUtil.conformantWith(standardLibrary, predicatedSourceClassDatum, realizedSourceClassDatum);
 							boolean conformingTargets;
-							conformingTargets = QVTscheduleUtil.conformantWith(predicatedTargetClassDatum, realizedTargetClassDatum);
+							conformingTargets = QVTscheduleUtil.conformantWith(standardLibrary, predicatedTargetClassDatum, realizedTargetClassDatum);
 							if (conformingSources && conformingTargets) {
 								if (attributeConnectionSourceEdges == null) {
 									attributeConnectionSourceEdges = new ArrayList<>();
@@ -321,14 +324,14 @@ public class ConnectionManager
 					ClassDatum producedElementalSourceClassDatum = scheduleManager.getElementalClassDatum(producedSourceClassDatum);
 					ClassDatum consumedElementalSourceClassDatum = scheduleManager.getElementalClassDatum(consumedSourceClassDatum);
 					// FIXME This was irregular. Was changing to elemental throughout ok ? testOCL2QVTi_Source2Target_CG is a demanding test
-					if (QVTscheduleUtil.conformsTo(producedElementalSourceClassDatum, consumedElementalSourceClassDatum)
-							|| (!producedSource.isRealized() && QVTscheduleUtil.conformsTo(consumedElementalSourceClassDatum, producedElementalSourceClassDatum))) {
+					if (QVTscheduleUtil.conformsTo(standardLibrary, producedElementalSourceClassDatum, consumedElementalSourceClassDatum)
+							|| (!producedSource.isRealized() && QVTscheduleUtil.conformsTo(standardLibrary, consumedElementalSourceClassDatum, producedElementalSourceClassDatum))) {
 						ClassDatum producedTargetClassDatum = QVTscheduleUtil.getClassDatum(producedTarget);
 						ClassDatum consumedTargetClassDatum = QVTscheduleUtil.getClassDatum(consumedTarget);
 						ClassDatum producedElementalTargetClassDatum = scheduleManager.getElementalClassDatum(producedTargetClassDatum);
 						ClassDatum consumedElementalTargetClassDatum = scheduleManager.getElementalClassDatum(consumedTargetClassDatum);
-						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(producedElementalTargetClassDatum, consumedElementalTargetClassDatum)
-								|| (!producedTarget.isRealized() && QVTscheduleUtil.conformsToClassOrBehavioralClass(consumedElementalTargetClassDatum, producedElementalTargetClassDatum))) {
+						if (QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, producedElementalTargetClassDatum, consumedElementalTargetClassDatum)
+								|| (!producedTarget.isRealized() && QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, consumedElementalTargetClassDatum, producedElementalTargetClassDatum))) {
 							if (thoseEdges == null) {
 								thoseEdges = new UniqueList<>();
 							}

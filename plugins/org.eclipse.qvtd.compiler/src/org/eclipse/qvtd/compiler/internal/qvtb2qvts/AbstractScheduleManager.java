@@ -373,10 +373,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Type type = PivotUtil.getType(property);
 		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
 		ClassDatum propertyClassDatum = getClassDatum(typedModel, completeClass);
-		if (!QVTscheduleUtil.conformsTo(targetClassDatum, propertyClassDatum)) {
+		StandardLibrary standardLibrary = getStandardLibrary();
+		if (!QVTscheduleUtil.conformsTo(standardLibrary, targetClassDatum, propertyClassDatum)) {
 			if (propertyClassDatum instanceof CollectionClassDatum) {
 				ClassDatum elementClassDatum = QVTscheduleUtil.getElementalClassDatum((CollectionClassDatum)propertyClassDatum);
-				if (QVTscheduleUtil.conformsTo(targetClassDatum, elementClassDatum)) {
+				if (QVTscheduleUtil.conformsTo(standardLibrary, targetClassDatum, elementClassDatum)) {
 					return true;
 				}
 			}

@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -65,6 +66,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Rule rule;
 	protected final @NonNull ExpressionSynthesizer rootExpressionSynthesizer;
+	protected final @NonNull StandardLibrary standardLibrary;
 
 	private @Nullable Rule2TraceGroup relation2traceGroup = null;
 
@@ -78,6 +80,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		this.rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 		this.transformationAnalysis = transformationAnalysis;
 		this.rootExpressionSynthesizer = scheduleManager.createRootExpressionSynthesizer(this);
+		this.standardLibrary = transformationAnalysis.getStandardLibrary();
 		//		assert !rule.isIsAbstract() == scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
@@ -222,10 +225,11 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		List<@NonNull CompleteClass> sortedCompleteClasses = new ArrayList<>(allCompleteClasses);
 		Collections.sort(sortedCompleteClasses, DeepestFirstCompleteClassInheritanceComparator.INSTANCE);
 		List<@NonNull CompleteClass> newCompleteClasses = new ArrayList<>();
+		StandardLibrary standardLibrary = transformationAnalysis.getStandardLibrary();
 		for (@NonNull CompleteClass sortedCompleteClass : sortedCompleteClasses) {
 			boolean isRequired = true;
 			for (@NonNull CompleteClass newCompleteClass : newCompleteClasses) {
-				if (newCompleteClass.conformsTo(sortedCompleteClass)) {
+				if (standardLibrary.conformsTo(newCompleteClass, sortedCompleteClass)) {
 					isRequired = false;
 					break;
 				}

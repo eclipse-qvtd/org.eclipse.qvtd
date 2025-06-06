@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.analysis;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -43,6 +44,7 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 		Property oppositeProperty = referredProperty.getOpposite();
 		// Many oppositePropertyDatum do not exist - too lazy / problematic symmetry
 		//	PropertyDatum oppositePropertyDatum = oppositeProperty != null ? scheduleManager.getOppositePropertyDatum(propertyDatum) : null;
+		StandardLibrary standardLibrary = basePropertyAnalysis.getClassAnalysis().getScheduleManager().getStandardLibrary();
 		for (@NonNull ActualPartialRegionPropertyAnalysis<@NonNull PRA> actualPropertyAnalysis : basePropertyAnalysis.propertyDatum2propertyAnalysis.values()) {
 			PropertyDatum actualPropertyDatum = actualPropertyAnalysis.getPropertyDatum();
 			ClassDatum actualOwningClassDatum = QVTscheduleUtil.getOwningClassDatum(actualPropertyDatum);
@@ -54,12 +56,12 @@ public abstract class ActualPartialRegionPropertyAnalysis<@NonNull PRA extends P
 			//
 			boolean isCompatible = false;
 			if (actualProperty == oppositeProperty) {
-				isCompatible = QVTscheduleUtil.conformsTo(owningClassDatum, actualOwningClassDatum);		// FIXME target
+				isCompatible = QVTscheduleUtil.conformsTo(standardLibrary, owningClassDatum, actualOwningClassDatum);		// FIXME target
 			}
 			else {
 				assert actualProperty == referredProperty : "Inconsistent producer property " + actualProperty;
-				if (QVTscheduleUtil.conformsTo(actualOwningClassDatum, owningClassDatum)) {
-					isCompatible = (targetClassDatum == null) || (actualTargetClassDatum == null) || QVTscheduleUtil.conformsTo(actualTargetClassDatum, targetClassDatum);
+				if (QVTscheduleUtil.conformsTo(standardLibrary, actualOwningClassDatum, owningClassDatum)) {
+					isCompatible = (targetClassDatum == null) || (actualTargetClassDatum == null) || QVTscheduleUtil.conformsTo(standardLibrary, actualTargetClassDatum, targetClassDatum);
 				}
 			}
 			if (isCompatible) {

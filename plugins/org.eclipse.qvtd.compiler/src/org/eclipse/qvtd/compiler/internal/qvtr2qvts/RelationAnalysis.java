@@ -947,7 +947,7 @@ public class RelationAnalysis extends RuleAnalysis
 		} */
 		ClassDatum initClassDatum = QVTscheduleUtil.getClassDatum(bestInitNode);
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
-		if (!QVTscheduleUtil.conformsTo(initClassDatum, variableClassDatum)) {
+		if (!QVTscheduleUtil.conformsTo(standardLibrary, initClassDatum, variableClassDatum)) {
 			Node castNode = createOldNode(Utility.getRequiredUtility(variable), variable);
 			expressionSynthesizer2.createCastEdge(bestInitNode, variableClassDatum, castNode);
 			bestInitNode = castNode;

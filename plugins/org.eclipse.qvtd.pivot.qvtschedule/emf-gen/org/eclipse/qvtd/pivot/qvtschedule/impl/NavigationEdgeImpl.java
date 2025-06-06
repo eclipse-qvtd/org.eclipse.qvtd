@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -214,7 +215,8 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void setPartial(boolean newPartial) {
 		if (eContainer() != null) {				// null while loading from XML
-			checkIsPartial(newPartial);
+			StandardLibrary standardLibrary = PivotUtil.getExecutor(this).getStandardLibrary();
+			checkIsPartial(standardLibrary, newPartial);
 		}
 		setPartialGen(newPartial);
 	}
@@ -431,16 +433,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
-	private void checkIsPartial(boolean isPartial) {
+	private void checkIsPartial(@NonNull StandardLibrary standardLibrary, boolean isPartial) {
 		Node targetNode = QVTscheduleUtil.getTargetNode(this);
 		ClassDatum targetClassDatum = QVTscheduleUtil.getClassDatum(targetNode);
 		Property property = QVTscheduleUtil.getReferredProperty(this);
 		boolean isComputedPartial = false;
 		Type propertyTargetType = PivotUtil.getType(property);
-		if (!conformsTo(targetClassDatum, propertyTargetType)) {
+		if (!conformsTo(standardLibrary, targetClassDatum, propertyTargetType)) {
 			if (propertyTargetType instanceof CollectionType) {
 				Type elementType = PivotUtil.getElementType(((CollectionType)propertyTargetType));
-				if (conformsTo(targetClassDatum, elementType)) {
+				if (conformsTo(standardLibrary, targetClassDatum, elementType)) {
 					isComputedPartial = true;
 				}
 			}
@@ -453,15 +455,15 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	 *
 	 * If the ClassDatum is a multi-CompleteClass it is sufficient that any one of thisClassDatum's CompleteClasses conforms to thatType.
 	 *
-	 * This provate version of QVTscheduleUtil.comformsTo worksound the lack of access to a scheduleManager tyo create the property's CompleteClass.
+	 * This private version of QVTscheduleUtil.comformsTo worksaround the lack of access to a scheduleManager to create the property's CompleteClass.
 	 */
-	private boolean conformsTo(@NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
+	private boolean conformsTo(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull Type thatType) {
 		List<@NonNull CompleteClass> theseCompleteClasses = thisClassDatum.basicGetCompleteClasses();
 		if (theseCompleteClasses == null) {
 			return false;
 		}
 		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (thisCompleteClass.conformsTo(thatType)) {
+			if (standardLibrary.conformsTo(thisCompleteClass, thatType)) {
 				return true;
 			}
 		}

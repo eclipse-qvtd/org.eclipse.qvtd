@@ -77,7 +77,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 		public CreateVisitor(@NonNull UMLX2QVTr context, @NonNull RelationModel qvtrModel) {
 			super(context);
-			this.environmentFactory = (EnvironmentFactoryInternal) context.getEnvironmentFactory();
+			this.environmentFactory = context.getEnvironmentFactory();
 			this.qvtrModel = qvtrModel;
 		}
 
@@ -343,11 +343,6 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 	public @NonNull Variable createTraceClassVariable() {
 		return createTraceClassVariable(traceHelper);
-	}
-
-	@Override
-	public @NonNull EnvironmentFactory getEnvironmentFactory() {
-		return environmentFactory;
 	}
 
 	protected <T extends Element> @NonNull T getQVTrElement(@NonNull Class<T> qvtrClass, @NonNull UMLXElement umlxElement) {

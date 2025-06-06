@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -678,6 +679,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			assert !variables2.contains(variable);
 			variables2.add(variable);
 			EnvironmentFactory environmentFactory = createVisitor.getContext().getEnvironmentFactory();
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 			Type type = variable.getType();
 			assert type != null;
 			CompleteClass completeType = environmentFactory.getCompleteModel().getCompleteClass(type);
@@ -685,11 +687,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			if (mergedType2 == null) {
 				mergedType = mergedType2 = completeType;
 			}
-			else if (completeType.conformsTo(mergedType2)) {
+			else if (standardLibrary.conformsTo(completeType, mergedType2)) {
 				mergedType = mergedType2 = completeType;
 			}
 			else {
-				assert mergedType2.conformsTo(completeType);
+				assert standardLibrary.conformsTo(mergedType2, completeType);
 			}
 		}
 

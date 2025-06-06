@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -235,6 +236,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 	 */
 	private class BasePropertyAnalysis implements Nameable
 	{
+		protected final @NonNull StandardLibrary standardLibrary;
+
 		/**
 		 * The base/normalized/primary property for the edge production/consumption.
 		 */
@@ -268,7 +271,8 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		 */
 		protected final @NonNull Map<@NonNull Set<@NonNull AccessAnalysis>, @NonNull ConnectionAnalysis> producingAnalyses2connectionAnalysis = new HashMap<>();
 
-		public BasePropertyAnalysis(@NonNull Property baseProperty) {
+		public BasePropertyAnalysis(@NonNull StandardLibrary standardLibrary, @NonNull Property baseProperty) {
+			this.standardLibrary = standardLibrary;
 			this.baseProperty = baseProperty;
 			StringBuilder s = new StringBuilder();
 			s.append(baseProperty.getOwningClass().getName());
@@ -515,10 +519,10 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 
 		private boolean isConforming(@NonNull CompleteClass producingSourceClass, @NonNull Property producingProperty, @NonNull CompleteClass producingTargetClass,
 				@NonNull CompleteClass consumingSourceClass, @NonNull Property consumingProperty, @NonNull CompleteClass consumingTargetClass) {
-			boolean conformingSource = QVTscheduleUtil.conformsToClassOrBehavioralClass(producingSourceClass, consumingSourceClass)
-					|| QVTscheduleUtil.conformsToClassOrBehavioralClass(consumingSourceClass, producingSourceClass);
-			boolean conformingTarget = QVTscheduleUtil.conformsToClassOrBehavioralClass(producingTargetClass, consumingTargetClass)
-					|| QVTscheduleUtil.conformsToClassOrBehavioralClass(consumingTargetClass, producingTargetClass);
+			boolean conformingSource = QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, producingSourceClass, consumingSourceClass)
+					|| QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, consumingSourceClass, producingSourceClass);
+			boolean conformingTarget = QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, producingTargetClass, consumingTargetClass)
+					|| QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, consumingTargetClass, producingTargetClass);
 			return conformingSource && conformingTarget;
 		}
 
@@ -1125,7 +1129,7 @@ public class QVTiProductionConsumption extends AbstractExtendingQVTimperativeVis
 		Property baseProperty = QVTscheduleUtil.getPrimaryProperty(property);
 		BasePropertyAnalysis basePropertyAnalysis = property2basePropertyAnalysis.get(baseProperty);
 		if (basePropertyAnalysis == null) {
-			basePropertyAnalysis = new BasePropertyAnalysis(baseProperty);
+			basePropertyAnalysis = new BasePropertyAnalysis(environmentFactory.getStandardLibrary(), baseProperty);
 			property2basePropertyAnalysis.put(baseProperty, basePropertyAnalysis);
 		}
 		return basePropertyAnalysis;

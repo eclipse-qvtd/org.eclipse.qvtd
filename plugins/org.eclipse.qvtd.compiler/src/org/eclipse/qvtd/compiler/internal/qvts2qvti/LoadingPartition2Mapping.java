@@ -176,16 +176,16 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 	}
 
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
-		Type commonType = null;
+		org.eclipse.ocl.pivot.Class commonType = null;
 		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(rootConnection)) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 			for (@NonNull CompleteClass completeClass : QVTscheduleUtil.getCompleteClasses(classDatum)) {	// ??? never multiple
-				Type nodeType = completeClass.getPrimaryClass();
+				org.eclipse.ocl.pivot.Class nodeType = completeClass.getPrimaryClass();
 				if (commonType == null) {
 					commonType = nodeType;
 				}
 				else {
-					commonType = commonType.getCommonType(idResolver, nodeType);
+					commonType = idResolver.getStandardLibrary().getCommonType(commonType, nodeType);
 				}
 			}
 		}

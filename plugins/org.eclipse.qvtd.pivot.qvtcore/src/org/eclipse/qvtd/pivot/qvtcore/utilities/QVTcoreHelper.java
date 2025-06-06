@@ -69,7 +69,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isPartial) {
 		CompleteClass slotClass = getCompleteClass(QVTcoreUtil.getType(asSlotExpression));
 		CompleteClass propertyClass = getCompleteClass(QVTcoreUtil.getOwningClass(asProperty));
-		assert slotClass.conformsTo(propertyClass);
+		assert standardLibrary.conformsTo(slotClass, propertyClass);
 		NavigationAssignment asNavigationAssignment;
 		if (asProperty.isIsImplicit()) {
 			OppositePropertyAssignment asPropertyAssignment = QVTcoreFactory.eINSTANCE.createOppositePropertyAssignment();
