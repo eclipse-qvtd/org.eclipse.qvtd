@@ -396,7 +396,7 @@ import com.google.common.collect.Sets;
 				org.eclipse.ocl.pivot.Class firstRootType = QVTrelationUtil.getClass(firstRootVariable);
 				org.eclipse.ocl.pivot.Class firstOverridingRootType = QVTrelationUtil.getClass(firstOverridingRootVariable);
 				VariableDeclaration cFirstRootVariable = variablesAnalysis.getCoreVariable(firstRootVariable);
-				if (firstOverridingRootType.conformsTo(standardLibrary, firstRootType)) {									// If override can override at all
+				if (standardLibrary.conformsTo(firstOverridingRootType, firstRootType)) {									// If override can override at all
 					OCLExpression predicateBody = null;
 					Property traceProperty = relation2TraceClass.getTraceProperty(firstRootVariable);
 					Property inverseTraceProperty = QVTrelationUtil.getOpposite(traceProperty);
@@ -436,7 +436,7 @@ import com.google.common.collect.Sets;
 						OCLExpression overridingStatusExpression = createNavigationCallExp(createVariableExp(iteratorVariable2), statusProperty);
 						OCLExpression forAllBody = createOperationCallExp(overridingStatusExpression, "=", createBooleanLiteralExp(false));
 						predicateBody = createIteratorExp(overridingTraceExp2, "forAll", Collections.singletonList(iteratorVariable2), forAllBody);
-						if (!firstRootType.conformsTo(standardLibrary, firstOverridingRootType)) {							// If override has a derived type match
+						if (!standardLibrary.conformsTo(firstRootType, firstOverridingRootType)) {							// If override has a derived type match
 							OCLExpression overrideIsConformantExp = createOperationCallExp(createVariableExp(cFirstRootVariable), "oclIsKindOf", createTypeExp(firstOverridingRootType));
 							predicateBody = createOperationCallExp(createOperationCallExp(overrideIsConformantExp, "not"), "or", predicateBody);
 						}

@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
@@ -99,7 +100,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 
 	public @NonNull DeclareStatement createDeclareStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
 		DeclareStatement asVariableStatement = QVTimperativeFactory.eINSTANCE.createDeclareStatement();
-		asVariableStatement.setIsCheck(!initExpression.getType().conformsTo(standardLibrary, asType));
+		asVariableStatement.setIsCheck(!standardLibrary.conformsTo(initExpression.getType(), asType));
 		asVariableStatement.setOwnedExpression(initExpression);
 		asVariableStatement.setName(name);
 		setType(asVariableStatement, asType, isRequired);
@@ -126,7 +127,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		mappingParameterBinding.setValue(value);
 		Type elementType = value.getType();
 		Type guardType = ClassUtil.requireNonNull(variable.getType());
-		mappingParameterBinding.setIsCheck(!elementType.conformsTo(standardLibrary, guardType));
+		mappingParameterBinding.setIsCheck(!standardLibrary.conformsTo(elementType, guardType));
 		return mappingParameterBinding;
 	}
 
@@ -141,7 +142,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		LoopParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createLoopParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.requireNonNull(variable.getType())));
+		mappingParameterBinding.setIsCheck(!standardLibrary.conformsTo(value.getType(), ClassUtil.requireNonNull(variable.getType())));
 		return mappingParameterBinding;
 	}
 
@@ -214,7 +215,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		SimpleParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createSimpleParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.requireNonNull(variable.getType())));
+		mappingParameterBinding.setIsCheck(!standardLibrary.conformsTo(value.getType(), PivotUtil.getType(variable)));
 		return mappingParameterBinding;
 	}
 

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -160,7 +161,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 					return null;
 				}
 				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
-				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+				if (!guardParameterBinding.isIsCheck() || standardLibrary.conformsTo(valueType, varType)) {
 					boundValues[index++] = valueOrValues;
 				}
 				else {
@@ -182,7 +183,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 					return null;
 				}
 				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
-				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+				if (!guardParameterBinding.isIsCheck() || standardLibrary.conformsTo(valueType, varType)) {
 					boundValues[index++] = valueOrValues;
 				}
 				else {
@@ -209,7 +210,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				//				}
 				//				else {
 				Type valueType = idResolver.getDynamicClassOf(valueOrValues);
-				if (!simpleParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+				if (!simpleParameterBinding.isIsCheck() || standardLibrary.conformsTo(valueType, varType)) {
 					boundValues[index++] = valueOrValues;
 				}
 				else {
@@ -358,7 +359,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (asStatement.isIsCheck()) {
 				Type guardType = asStatement.getType();
 				Type valueType = idResolver.getDynamicClassOf(initValue);
-				if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
+				if ((guardType == null) || !standardLibrary.conformsTo(valueType, guardType)) {
 					// The initialization fails, the guard is not met
 					return false;
 				}

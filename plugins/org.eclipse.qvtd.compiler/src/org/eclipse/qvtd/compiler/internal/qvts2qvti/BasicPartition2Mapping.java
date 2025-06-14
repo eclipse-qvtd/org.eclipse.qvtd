@@ -382,7 +382,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						OCLExpression sourceExp = createVariableExp(sourceNode);
 						Type sourceType = sourceExp.getType();
 						Type requiredType = property.getOwningClass();
-						if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
+						if ((requiredType != null) && !getMetamodelManager().getStandardLibrary().conformsTo(sourceType, requiredType)) {
 							String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
 							DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
 							sourceExp = PivotUtil.createVariableExp(castStatement);

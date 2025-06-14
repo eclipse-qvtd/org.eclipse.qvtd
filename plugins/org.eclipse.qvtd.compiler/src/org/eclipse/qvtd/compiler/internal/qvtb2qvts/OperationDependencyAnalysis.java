@@ -401,11 +401,11 @@ public class OperationDependencyAnalysis
 					org.eclipse.ocl.pivot.Class endClass = oldReturnPath.get(size-1).getElementalType();
 					org.eclipse.ocl.pivot.Class sourceClass = propertyDependencyStep.getProperty().getOwningClass();
 					assert sourceClass != null;
-					if (endClass.conformsTo(standardLibrary, sourceClass)) {
+					if (standardLibrary.conformsTo(endClass, sourceClass)) {
 						newReturnPath = new ArrayList<>(oldReturnPath);
 						newReturnPath.add(propertyDependencyStep);
 					}
-					else if (sourceClass.conformsTo(standardLibrary, endClass)) {
+					else if (standardLibrary.conformsTo(sourceClass, endClass)) {
 						if (oldReturnPath.size() == 1) {
 							ClassDependencyStep newClassDependencyStep = operationDependencyAnalysis.createClassDependencyStep(sourceClass, oldReturnPath.get(0).getElement());
 							newReturnPath = new ArrayList<>();

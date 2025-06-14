@@ -245,7 +245,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			Type sourceType = ClassUtil.requireNonNull(asInit.getType());
 			Type targetType = ClassUtil.requireNonNull(asVariable.getType());
 			boolean needsNullTest = !asInit.isIsRequired() && asVariable.isIsRequired();
-			boolean needsTypeCheck = !sourceType.conformsTo(standardLibrary, targetType);
+			boolean needsTypeCheck = !standardLibrary.conformsTo(sourceType, targetType);
 			//
 			CGValuedElement cgInit = doVisit(CGValuedElement.class, asInit);
 

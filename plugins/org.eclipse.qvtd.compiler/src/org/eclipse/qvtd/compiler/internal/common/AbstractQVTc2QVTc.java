@@ -522,10 +522,10 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			}
 			Type eType = eOut.getType();
 			StandardLibrary standardLibrary = context.getEnvironmentFactory().getStandardLibrary();
-			if (eType.conformsTo(standardLibrary, toType)) {
+			if (standardLibrary.conformsTo(eType, toType)) {
 				return eOut;
 			}
-			assert (toType.conformsTo(standardLibrary, eType));
+			assert (standardLibrary.conformsTo(toType, eType));
 			return helper.createOperationCallExp(eOut, "oclAsType", helper.createTypeExp(toType));
 		}
 

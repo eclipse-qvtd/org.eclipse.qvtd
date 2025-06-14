@@ -89,17 +89,17 @@ public class QVTbaseHelper extends PivotHelper
 						Type asParameterType = ClassUtil.requireNonNull(asParameters.get(i).getType());
 						if (asParameterType instanceof SelfType) {
 							Type asArgumentType = asIterators.get(i).getType();
-							if (asArgumentType.conformsTo(standardLibrary, asType) && asType.conformsTo(standardLibrary, asArgumentType)) {
+							if (standardLibrary.conformsTo(asArgumentType, asType) && standardLibrary.conformsTo(asType, asArgumentType)) {
 								exactMatches++;
 							}
 						}
 						else {
 							Type asArgumentType = asIterators.get(i).getType();
-							if (!asArgumentType.conformsTo(standardLibrary, asParameterType)) {
+							if (!standardLibrary.conformsTo(asArgumentType, asParameterType)) {
 								gotOne = false;
 								break;
 							}
-							if (asParameterType.conformsTo(standardLibrary, asArgumentType)) {
+							if (standardLibrary.conformsTo(asParameterType, asArgumentType)) {
 								exactMatches++;
 							}
 						}

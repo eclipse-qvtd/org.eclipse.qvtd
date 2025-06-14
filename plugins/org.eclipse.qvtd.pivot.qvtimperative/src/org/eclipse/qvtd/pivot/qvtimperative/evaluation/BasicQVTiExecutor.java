@@ -1067,7 +1067,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 			//			Type valueType2 = getIdResolver().getStaticClassOf(value);
 			//			Type valueType = valueType1;
 			Type variableType = ClassUtil.requireNonNull(asVariable.getType());
-			if (!valueType.conformsTo(getStandardLibrary(), variableType)) {
+			if (!getStandardLibrary().conformsTo(valueType, variableType)) {
 				//				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
 				return false;
 			}
