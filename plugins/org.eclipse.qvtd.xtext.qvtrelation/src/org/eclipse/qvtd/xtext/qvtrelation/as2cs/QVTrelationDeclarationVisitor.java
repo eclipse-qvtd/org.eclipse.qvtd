@@ -368,7 +368,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		Type asType = PivotUtil.getType(asObjectTemplateExp);
 		TypedRefCS csTypeRef = null;
 		@SuppressWarnings("null") @NonNull EClass eClass = asType.eClass();
-		BaseReferenceVisitor expressionVisitor = context.getExpressionVisitor(eClass, null);
+		BaseReferenceVisitor expressionVisitor = context.getExpressionVisitor(eClass);
 		if (expressionVisitor == null) {
 			logger.warn("Unsupported reference " + asType.eClass().getName());
 		}

@@ -474,7 +474,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 		if (type != null) {
 			PivotUtil.debugWellContainedness(type);
-			TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type, null);
+			TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type);
 			csVariable.setOwnedType(typeRef);
 		}
 		else {

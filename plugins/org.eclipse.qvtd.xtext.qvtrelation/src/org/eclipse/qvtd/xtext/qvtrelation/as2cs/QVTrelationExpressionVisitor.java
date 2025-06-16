@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.TemplateBinding;
 import org.eclipse.ocl.pivot.TemplateParameterSubstitution;
@@ -36,8 +34,8 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 {
 	public static final Logger logger = Logger.getLogger(QVTrelationExpressionVisitor.class);
 
-	public QVTrelationExpressionVisitor(@NonNull AS2CSConversion context, @Nullable Namespace scope) {
-		super(context, scope);
+	public QVTrelationExpressionVisitor(@NonNull AS2CSConversion context) {
+		super(context);
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 					Type actual = templateParameterSubstitution.getActual();
 					if (actual != null) {
 						TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
-						TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual, null);
+						TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual);
 						csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
 						csParameterSubstitutions.add(csTemplateParameterSubstitution);
 						csTemplateParameterSubstitution.setPivot(templateParameterSubstitution);
