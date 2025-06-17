@@ -356,42 +356,58 @@ public class RelationImpl extends RuleImpl implements Relation {
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
-				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							throw (InvalidValueException)accumulator;
-						}
-						break;
-					}
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
-					/**
-					 * oclIsKindOf(RelationDomain)
-					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
-					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain).booleanValue();
-					//
-					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately
+					final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == ValueUtil.TRUE_VALUE) {
+								result = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
+						}
+						/*@NonInvalid*/ @Nullable Domain _1 = (@Nullable Domain)ITERATOR__1.next();
+						/**
+						 * oclIsKindOf(RelationDomain)
+						 */
+						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain).booleanValue();
+							CAUGHT_oclIsKindOf = oclIsKindOf;
+						}
+						catch (Exception e) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						}
+						//
+						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+							result = ValueUtil.FALSE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+							;															// Carry on
+						}
+						else if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_oclIsKindOf;									// Cache an exception failure
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+						}
 					}
-					else if (oclIsKindOf) {				// Normal successful body evaluation result
-						;															// Carry on
-					}
-					else {															// Impossible badly typed result
-						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -623,9 +639,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			 *           else
 			 *             Tuple{
 			 *               message = let
-			 *                 namesBag : Bag(String[*|?]) = variable->collect(name)
+			 *                 namesBag : Bag(String) = variable->collect(name)
 			 *               in
-			 *                 let namesSet : Set(String[*|?]) = namesBag->asSet()
+			 *                 let namesSet : Set(String) = namesBag->asSet()
 			 *                 in
 			 *                   let
 			 *                     multiNames : OrderedSet(String) = namesSet->select(n |
@@ -665,19 +681,21 @@ public class RelationImpl extends RuleImpl implements Relation {
 					final /*@NonInvalid*/ @NonNull List<Variable> variable = this.getVariable();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Variable, variable);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_Variable);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
 					/*@Thrown*/ boolean status;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							status = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Variable _1 = (@NonNull Variable)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Variable _1 = (@Nullable Variable)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							status = false;
@@ -693,24 +711,26 @@ public class RelationImpl extends RuleImpl implements Relation {
 					}
 					else {
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_PRIMid_String);
-						@NonNull Iterator<Object> ITERATOR__1_0 = BOXED_variable.iterator();
+						@Nullable Iterator<Object> ITERATOR__1_0 = BOXED_variable.iterator();
 						/*@Thrown*/ @NonNull BagValue namesBag;
 						while (true) {
 							if (!ITERATOR__1_0.hasNext()) {
 								namesBag = accumulator_0;
 								break;
 							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull Variable _1_0 = (@NonNull Variable)ITERATOR__1_0.next();
+							/*@NonInvalid*/ @Nullable Variable _1_0 = (@Nullable Variable)ITERATOR__1_0.next();
 							/**
 							 * name
 							 */
-							final /*@NonInvalid*/ @Nullable String name_0 = _1_0.getName();
+							if (_1_0 == null) {
+								throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							}
+							final /*@Thrown*/ @Nullable String name_0 = _1_0.getName();
 							//
 							accumulator_0.add(name_0);
 						}
 						final /*@Thrown*/ @NonNull SetValue namesSet = CollectionAsSetOperation.INSTANCE.evaluate(namesBag);
-						/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_PRIMid_String_0);
+						/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_PRIMid_String);
 						@Nullable Iterator<Object> ITERATOR_n = namesSet.iterator();
 						/*@Thrown*/ @NonNull SetValue select;
 						while (true) {
@@ -749,35 +769,34 @@ public class RelationImpl extends RuleImpl implements Relation {
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue multiNames = (@NonNull OrderedSetValue)IMPL_multiNames_0.evaluateIteration(MGR_multiNames_0);
 						/*@NonInvalid*/ @NonNull String acc = QVTrelationTables.STR_;
-						@NonNull Iterator<Object> ITERATOR_b = multiNames.iterator();
+						@Nullable Iterator<Object> ITERATOR_b = multiNames.iterator();
 						/*@Thrown*/ @Nullable String iterate;
 						while (true) {
 							if (!ITERATOR_b.hasNext()) {
 								iterate = acc;
 								break;
 							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull String b = (@NonNull String)ITERATOR_b.next();
+							/*@NonInvalid*/ @Nullable String b = (@Nullable String)ITERATOR_b.next();
 							/**
 							 *
 							 * let s : String[1] = if b <> null then '"' + b + '"' else 'null' endif
 							 * in if acc <> '' then acc + ',' + s else s endif
 							 */
-							final /*@NonInvalid*/ boolean ne = true;
-							/*@NonInvalid*/ @NonNull String s;
+							final /*@NonInvalid*/ boolean ne = b != null;
+							/*@Thrown*/ @NonNull String s;
 							if (ne) {
-								final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTrelationTables.STR__34, b);
-								final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTrelationTables.STR__34);
+								final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTrelationTables.STR__34, b);
+								final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTrelationTables.STR__34);
 								s = sum_0;
 							}
 							else {
 								s = QVTrelationTables.STR_null;
 							}
 							final /*@NonInvalid*/ boolean ne_0 = !acc.equals(QVTrelationTables.STR_);
-							/*@NonInvalid*/ @NonNull String IF_ne_0;
+							/*@Thrown*/ @NonNull String IF_ne_0;
 							if (ne_0) {
 								final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(acc, QVTrelationTables.STR__44);
-								final /*@NonInvalid*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, s);
+								final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, s);
 								IF_ne_0 = sum_2;
 							}
 							else {

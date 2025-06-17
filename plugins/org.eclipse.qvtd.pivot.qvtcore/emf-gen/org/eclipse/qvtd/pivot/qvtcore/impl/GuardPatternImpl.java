@@ -184,42 +184,58 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
-				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedVariables.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							throw (InvalidValueException)accumulator;
-						}
-						break;
-					}
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull VariableDeclaration _1 = (@NonNull VariableDeclaration)ITERATOR__1.next();
-					/**
-					 * oclIsKindOf(GuardVariable)
-					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_GuardVariable = idResolver.getClass(QVTcoreTables.CLSSid_GuardVariable, null);
-					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_GuardVariable).booleanValue();
-					//
-					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately
+					final /*@NonInvalid*/ @NonNull List<VariableDeclaration> ownedVariables = this.getOwnedVariables();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedVariables = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_VariableDeclaration, ownedVariables);
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedVariables.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == ValueUtil.TRUE_VALUE) {
+								result = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
+						}
+						/*@NonInvalid*/ @Nullable VariableDeclaration _1 = (@Nullable VariableDeclaration)ITERATOR__1.next();
+						/**
+						 * oclIsKindOf(GuardVariable)
+						 */
+						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_GuardVariable = idResolver.getClass(QVTcoreTables.CLSSid_GuardVariable, null);
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_GuardVariable).booleanValue();
+							CAUGHT_oclIsKindOf = oclIsKindOf;
+						}
+						catch (Exception e) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						}
+						//
+						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+							result = ValueUtil.FALSE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+							;															// Carry on
+						}
+						else if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_oclIsKindOf;									// Cache an exception failure
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+						}
 					}
-					else if (oclIsKindOf) {				// Normal successful body evaluation result
-						;															// Carry on
-					}
-					else {															// Impossible badly typed result
-						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

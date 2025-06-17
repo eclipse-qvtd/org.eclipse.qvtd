@@ -20,6 +20,7 @@ package	org.eclipse.qvtd.runtime.model;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.URI;
@@ -28,18 +29,29 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.AssociativityKind;
+import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.LambdaType;
 import org.eclipse.ocl.pivot.Library;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Precedence;
+import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.SelfType;
+import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
@@ -49,11 +61,15 @@ import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 /**
@@ -225,7 +241,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		/**
 		 * Overridden to avoid computing proxies for the shared instance.
 		 *
-		 * @since 1.23
+		 * @since 7.0
 		 */
 		@Override
 		public void preUnload(@NonNull EnvironmentFactoryInternal environmentFactory) {}
@@ -244,16 +260,10 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 	}
 
-	@Deprecated /* Provide externalURI */
-	public static @NonNull QVTruntimeLibrary create(@NonNull String asURI) {
-		Contents contents = new Contents(asURI);
-		return new QVTruntimeLibrary(asURI, contents.getModel());
-	}
-
 	/**
 	 *	Construct a copy of the OCL Standard Library with specified AS resource URI,
 	 *  and external URI.
-	 * @since 1.23
+	 * @since 7.0
 	 */
 	public static @NonNull QVTruntimeLibrary create(@NonNull String asURI, @NonNull String externalURI) {
 		Contents contents = new Contents(externalURI);
@@ -309,7 +319,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		public @NonNull Model getModel() {
 			return model;
 		}
-
+		
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
 		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
@@ -336,7 +346,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter _OrderedSet_T = getTemplateParameter(_OrderedSet, 0);
 		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
-
+		
 		private void installPackages() {
 			model.getOwnedPackages().add(ocl);
 			model.getOwnedPackages().add(qvtruntimelibrary);
@@ -344,14 +354,14 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			model.getOwnedImports().add(createImport(null, _ocl));
 			model.getOwnedImports().add(createImport("ocl", _pivot));
 		}
-
+		
 		private final @NonNull Class _OclElement = createClass("OclElement");
-
+		
 		private final @NonNull Class _Extent = createClass(QVTruntimeLibraryPackage.Literals.EXTENT);
 		private final @NonNull Class _Model = createClass(QVTruntimeLibraryPackage.Literals.MODEL);
 		private final @NonNull Class _PseudoOperations = createClass("PseudoOperations");
 		private final @NonNull Class _Transformation = createClass(QVTruntimeLibraryPackage.Literals.TRANSFORMATION);
-
+		
 		private final @NonNull TemplateParameter tp_PseudoOperations_collection_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_error_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_if_T = createTemplateParameter("T");
@@ -363,7 +373,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter tp_PseudoOperations_shadow_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_tuple_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_type_V = createTemplateParameter("V");
-
+		
 		private final @NonNull CollectionType _Collection_$$0_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_CollectionItem_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Element_F = createCollectionType(_Collection);
@@ -371,7 +381,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _Collection_Property_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_TupleLiteralPart_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _OrderedCollection_OclElement_F = createCollectionType(_OrderedCollection);
-		private final @NonNull OrderedSetType _OrderedSet_OclElement_T = createOrderedSetType(_OrderedSet);
+		private final @NonNull OrderedSetType _OrderedSet_OclElement_F = createOrderedSetType(_OrderedSet);
 		private final @NonNull SetType _Set_$$0_F = createSetType(_Set);
 		private final @NonNull SetType _Set_CollectionItem_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Element_F = createSetType(_Set);
@@ -383,16 +393,16 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _UniqueCollection_OclElement_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Property_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_TupleLiteralPart_F = createCollectionType(_UniqueCollection);
-
+		
 		private void installClassTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			Class type;
-
+		
 			ownedClasses = ocl.getOwnedClasses();
 			type = _OclElement;
 			ownedClasses.add(type);
-
+		
 			ownedClasses = qvtruntimelibrary.getOwnedClasses();
 			type = _Extent;
 			superClasses = type.getSuperClasses();
@@ -411,12 +421,12 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
 		}
-
+		
 		private void installCollectionTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			CollectionType type;
-
+		
 			ownedClasses = orphanPackage.getOwnedClasses();
 			type = _Collection_$$0_F;
 			superClasses = type.getSuperClasses();
@@ -446,8 +456,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_OclElement_F);
 			ownedClasses.add(type);
-			type = _OrderedSet_OclElement_T;
-			type.setIsNullFree(true);
+			type = _OrderedSet_OclElement_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_OclElement_F);
 			superClasses.add(_UniqueCollection_OclElement_F);
@@ -497,7 +506,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			superClasses.add(_Collection_TupleLiteralPart_F);
 			ownedClasses.add(type);
 		}
-
+		
 		private final @NonNull Operation op_PseudoOperations_collection = createOperation("collection", _CollectionLiteralExp, null, null, tp_PseudoOperations_collection_T);
 		private final @NonNull Operation op_PseudoOperations_error = createOperation("error", _OclVoid, null, null, tp_PseudoOperations_error_T);
 		private final @NonNull Operation op_PseudoOperations_if = createOperation("if", $$0, null, null, tp_PseudoOperations_if_T);
@@ -508,86 +517,92 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull Operation op_PseudoOperations_shadow = createOperation("shadow", _ShadowExp, null, null, tp_PseudoOperations_shadow_T);
 		private final @NonNull Operation op_PseudoOperations_tuple = createOperation("tuple", _TupleLiteralExp, null, null, tp_PseudoOperations_tuple_T);
 		private final @NonNull Operation op_PseudoOperations_type = createOperation("type", _TypeExp, null, null, tp_PseudoOperations_type_V);
-
+		
 		private void installOperations() {
 			List<Operation> ownedOperations;
 			List<Parameter> ownedParameters;
 			Operation operation;
 			Parameter parameter;
-
+		
 			ownedOperations = _PseudoOperations.getOwnedOperations();
 			ownedOperations.add(operation = op_PseudoOperations_collection);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("items", _Set_CollectionItem_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_error);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("elements", _Set_Element_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_if);
-			operation.setIsRequired(false);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("condition", $$0, false));
 			ownedParameters.add(parameter = createParameter("then", $$0, false));
 			ownedParameters.add(parameter = createParameter("else", $$0, false));
 			ownedOperations.add(operation = op_PseudoOperations_loop);
-			operation.setIsRequired(false);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("source", _OCLExpression, true));
 			ownedParameters.add(parameter = createParameter("iterators", _Set_$$0_F, true));
 			ownedParameters.add(parameter = createParameter("body", _OCLExpression, true));
 			ownedOperations.add(operation = op_PseudoOperations_mapPart);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("key", $$0, false));
 			ownedParameters.add(parameter = createParameter("value", $$1, false));
 			ownedOperations.add(operation = op_PseudoOperations_map);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_Property_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_range);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("first", $$0, false));
 			ownedParameters.add(parameter = createParameter("last", $$0, false));
 			ownedOperations.add(operation = op_PseudoOperations_shadow);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_Property_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_tuple);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_TupleLiteralPart_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_type);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("type", $$0, false));
 		}
-
-
+		
+		
 		private final @NonNull Property pr_OclElement_extent_elements = createProperty("extent", _Extent);
-
-		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_T);
-
+		
+		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_F);
+		
 		private void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
-
+		
 			ownedProperties = _OclElement.getOwnedProperties();
 			ownedProperties.add(property = pr_OclElement_extent_elements);
 			property.setIsImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Extent_elements);
-
+		
 			ownedProperties = _Extent.getOwnedProperties();
 			ownedProperties.add(property = pr_Extent_elements);
+			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_OclElement_extent_elements);
 		}
-
+		
 		private void installTemplateBindings() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_CollectionItem_F, _CollectionItem);
@@ -596,7 +611,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			addBinding(_Collection_Property_F, _Property);
 			addBinding(_Collection_TupleLiteralPart_F, _TupleLiteralPart);
 			addBinding(_OrderedCollection_OclElement_F, _OclElement);
-			addBinding(_OrderedSet_OclElement_T, _OclElement);
+			addBinding(_OrderedSet_OclElement_F, _OclElement);
 			addBinding(_Set_$$0_F, $$0);
 			addBinding(_Set_CollectionItem_F, _CollectionItem);
 			addBinding(_Set_Element_F, _Element);
@@ -609,7 +624,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			addBinding(_UniqueCollection_Property_F, _Property);
 			addBinding(_UniqueCollection_TupleLiteralPart_F, _TupleLiteralPart);
 		}
-
+		
 		private void installComments() {
 			installComment(op_PseudoOperations_collection, "*\nThe PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_error, "*\nThe PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated\nas an Operation within QVTs.");

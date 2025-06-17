@@ -97,8 +97,8 @@ public class QVTrLoadTests extends LoadTestCase
 		doLoad_Concrete(getModelsURI("misc/Keys.qvtr"), new @NonNull String[] {		// FIXME delete once Bug 512532 resolved
 			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies : EMOF::Class[1]}'",
 			"The 'Key::IdentifiesIsUnique' constraint is violated for 'key QVTRelation::Key {QVTRelation::Key::identifies : EMOF::Class[1], QVTRelation::Key::part : Set(EMOF::Property)}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String[?]}'",
-			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::NamedElement {EMOF::NamedElement::name : String[?]}'"
+			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String}'",
+			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::NamedElement {EMOF::NamedElement::name : String}'"
 		});
 	}
 
@@ -123,9 +123,9 @@ public class QVTrLoadTests extends LoadTestCase
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/model/RelToCore.qvtr", true);
 		URI pivotURI = getTestURI("RelToCore.qvtras");
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {		// FIXME delete once Bug 512532 resolved
-			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name : String[?]}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String[?]}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name : String[?]}'",
+			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name : String}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name : String}'",
 			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'"
 		});
 	}
@@ -135,9 +135,9 @@ public class QVTrLoadTests extends LoadTestCase
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/model/SimplerRelToCore.qvtr", true);
 		URI pivotURI = getTestURI("SimplerRelToCore.qvtras");
 		doLoad_Concrete(inputURI, pivotURI, new @NonNull String[] {		// FIXME delete once Bug 512532 resolved
-			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name : String[?]}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String[?]}'",
-			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name : String[?]}'",
+			"The 'Key::IdentifiesIsNotAbstract' constraint is violated for 'key EMOF::Type {EMOF::NamedElement::name : String}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key EMOF::Class {EMOF::NamedElement::name : String}'",
+			"The 'Key::NoSuperKeys' constraint is violated for 'key QVTBase::Transformation {EMOF::NamedElement::name : String}'",
 			"The 'RelationCallExp::WhereInvocationIsANonTopRelation' constraint is violated for 'RelationalTransformationToMappingTransformation(rt, mt)'",
 			"The 'Rule::AbstractRuleIsOverridden' constraint is violated for 'relation RExpToMExp'"
 		});

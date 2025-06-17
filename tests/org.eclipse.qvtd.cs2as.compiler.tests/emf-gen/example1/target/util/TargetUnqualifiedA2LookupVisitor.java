@@ -48,7 +48,7 @@ public class TargetUnqualifiedA2LookupVisitor
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TRoot = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedA2LookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedA2LookupVisitor", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(CLSSid_A, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(CLSSid_A, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	protected final /*@Thrown*/ @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
@@ -91,7 +91,7 @@ public class TargetUnqualifiedA2LookupVisitor
 			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull TRoot element_0 = (/*@NonInvalid*/ @NonNull TRoot)sourceAndArgumentValues[0];
 			final /*@NonInvalid*/ @Nullable LookupEnvironment parentEnv_A2 = TargetUnqualifiedA2LookupVisitor.this.parentEnv(element_0);
 			if (parentEnv_A2 == null) {
-				throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE[*|?])) : lookup::LookupEnvironment[1]\'");
+				throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
 			}
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull List<A> ownedA = element_0.getOwnedA();

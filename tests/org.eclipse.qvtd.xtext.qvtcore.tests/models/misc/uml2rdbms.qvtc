@@ -10,9 +10,7 @@ transformation umlRdbms {
 
 -- utility functions for flattening
 query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
-	cls.general->collect(gen|if gen.oclIsKindOf(SimpleUML::Class)
-			then getAllSupers(gen.oclAsType(SimpleUML::Class)) else null endif)->
-		including(cls)->asSet()
+	cls.general->selectByKind(SimpleUML::Class)->collect(gen | getAllSupers(gen))->including(cls)->asSet()
 }
 
 query umlRdbms::getAllAttributes(cls : SimpleUML::Class) : Set(SimpleUML::Attribute) {

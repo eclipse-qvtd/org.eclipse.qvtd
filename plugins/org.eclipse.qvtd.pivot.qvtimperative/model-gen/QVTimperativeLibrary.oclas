@@ -10,24 +10,24 @@
   <ownedPackages xsi:type="pivot:Library" xmi:id="MwsHK" URI="http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" name="qvtruntimelibrary"
       nsPrefix="qvtrtlib">
     <ownedClasses xmi:id="qeoBC" name="Model" superClasses="&_1;#zfDWR">
-      <ownedOperations xmi:id="qtNKG" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" name="allObjects"
-          type="#U6ALG"/>
-      <ownedOperations xmi:id="Xv2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" name="objectsOfKind"
-          type="#eHkED">
-        <ownedParameters xmi:id="gfwE+" isTypeof="true" name="type" type="#NxGT6"/>
+      <ownedOperations xmi:id="qtNKG" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" isRequired="true"
+          name="allObjects" type="#P7ALG"/>
+      <ownedOperations xmi:id="gw2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" isRequired="true"
+          name="objectsOfKind" type="#ZIkED">
+        <ownedParameters xmi:id="FsCF+" isTypeof="true" name="type" type="#NxGT6"/>
         <ownedSignature>
-          <ownedParameters xmi:id="d+Hh6" name="TT"/>
+          <ownedParameters xmi:id="uoaD," name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="997Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" name="objectsOfType"
-          type="#eHkED">
-        <ownedParameters xmi:id="uTKVP" isTypeof="true" name="type" type="#NxGT6"/>
+      <ownedOperations xmi:id="G,7Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" isRequired="true"
+          name="objectsOfType" type="#ZIkED">
+        <ownedParameters xmi:id="TgcVP" isTypeof="true" name="type" type="#NxGT6"/>
         <ownedSignature>
-          <ownedParameters xmi:id="zB+MN" name="TT"/>
+          <ownedParameters xmi:id="EsQvR" name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="Jk12r" implementationClass="org.eclipse.qvtd.runtime.library.model.RootObjectsOperation" name="rootObjects"
-          type="#U6ALG"/>
+      <ownedOperations xmi:id="Jk12r" implementationClass="org.eclipse.qvtd.runtime.library.model.RootObjectsOperation" isRequired="true"
+          name="rootObjects" type="#P7ALG"/>
     </ownedClasses>
     <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="&_1;#zfDWR"/>
   </ownedPackages>
@@ -42,12 +42,12 @@
         <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#qs59R"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="eHkED" isNullFree="true" name="Set" superClasses="#Gd4BC">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="ZIkED" name="Set" superClasses="#Gd4BC">
       <ownedBindings>
         <ownedSubstitutions actual="#NxGT6" formal="&_1;#ODsm5"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="U6ALG" isNullFree="true" name="Set" superClasses="#8PVIF">
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="P7ALG" name="Set" superClasses="#8PVIF">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#ODsm5"/>
       </ownedBindings>

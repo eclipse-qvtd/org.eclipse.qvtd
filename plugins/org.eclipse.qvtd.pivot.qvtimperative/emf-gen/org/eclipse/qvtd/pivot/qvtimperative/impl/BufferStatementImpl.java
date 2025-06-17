@@ -16,9 +16,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Iterator;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
+import org.eclipse.ocl.pivot.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -374,7 +375,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public String joinNames(final EList<String> names) {
 		/**
-		 * '{' + names->iterate(n; s : String[1] = '' |
+		 * '{' + names?->iterate(n; s : String[1] = '' |
 		 *   if (s = '')
 		 *   then n
 		 *   else s + ';' + n
@@ -384,9 +385,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
+		final /*@Thrown*/ @NonNull OrderedSetValue safe_iterate_sources = (@Nullable OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_names, (Object)null);
 		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
-		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
-		/*@NonInvalid*/ @Nullable String iterate;
+		@NonNull Iterator<Object> ITERATOR_n = safe_iterate_sources.iterator();
+		/*@Thrown*/ @Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;

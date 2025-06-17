@@ -860,20 +860,22 @@ public class RelPatternNodeImpl extends RelNodeImpl implements RelPatternNode {
 									final /*@Thrown*/ @NonNull List<TxPackageNode> usedTxPackageNodes = txTypedModelNode.getUsedTxPackageNodes();
 									final /*@Thrown*/ @NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
 									/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_EPackage);
-									@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
+									@Nullable Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
 									/*@Thrown*/ @NonNull SequenceValue collect_0;
 									while (true) {
 										if (!ITERATOR__1.hasNext()) {
 											collect_0 = accumulator;
 											break;
 										}
-										@SuppressWarnings("null")
-										/*@NonInvalid*/ @NonNull TxPackageNode _1 = (@NonNull TxPackageNode)ITERATOR__1.next();
+										/*@NonInvalid*/ @Nullable TxPackageNode _1 = (@Nullable TxPackageNode)ITERATOR__1.next();
 										/**
 										 * referredEPackage
 										 */
+										if (_1 == null) {
+											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxPackageNode::referredEPackage\'");
+										}
 										@SuppressWarnings("null")
-										final /*@NonInvalid*/ @NonNull EPackage referredEPackage = _1.getReferredEPackage();
+										final /*@Thrown*/ @NonNull EPackage referredEPackage = _1.getReferredEPackage();
 										//
 										accumulator.add(referredEPackage);
 									}

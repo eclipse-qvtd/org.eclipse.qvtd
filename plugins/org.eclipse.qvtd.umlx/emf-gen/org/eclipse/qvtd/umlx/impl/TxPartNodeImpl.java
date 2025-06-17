@@ -286,7 +286,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 					final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, UMLXTables.SET_CLSSid_EClass, oclAsType);
 					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticClassOf(oclAsSet);
 					final @NonNull LibraryIteration IMPL_closure_0 = (LibraryIteration)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass, UMLXTables.ORD_CLSSid_EClass);
+					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, UMLXTables.SET_CLSSid_EClass_0, UMLXTables.ORD_CLSSid_EClass);
 					/**
 					 * Implementation of the iteration evaluation body.
 					 */
@@ -306,7 +306,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 							return BOXED_eSuperTypes;
 						}
 					};
-					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass, BODY0_closure_1, oclAsSet, ACC_closure_0);
+					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, UMLXTables.SET_CLSSid_EClass_0, BODY0_closure_1, oclAsSet, ACC_closure_0);
 					@SuppressWarnings("null")
 					final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 					@SuppressWarnings("null")

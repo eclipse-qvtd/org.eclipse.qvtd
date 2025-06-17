@@ -177,7 +177,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return false;
 		}
 		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
+			if (thisCompleteClass.conformsTo(standardLibrary, thatCompleteClass)) {
 				return true;
 			}
 		}
@@ -190,7 +190,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return false;
 		}
 		for (@NonNull CompleteClass thatCompleteClass : thoseCompleteClasses) {
-			if (!standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
+			if (!thisCompleteClass.conformsTo(standardLibrary, thatCompleteClass)) {
 				return false;
 			}
 		}
@@ -198,7 +198,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static boolean conformsToClassOrBehavioralClass(@NonNull StandardLibrary standardLibrary, @NonNull CompleteClass thisCompleteClass, @NonNull CompleteClass thatCompleteClass) {
-		if (standardLibrary.conformsTo(thisCompleteClass, thatCompleteClass)) {
+		if (thisCompleteClass.conformsTo(standardLibrary, thatCompleteClass)) {
 			return true;
 		}
 		org.eclipse.ocl.pivot.Class behavioralClass = thatCompleteClass.getBehavioralClass();
@@ -206,7 +206,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return false;
 		}
 		// See Bug 577546 (and Bug 574431) This is a dodgy downcast case.
-		return standardLibrary.conformsTo(thisCompleteClass, behavioralClass);
+		return thisCompleteClass.conformsTo(standardLibrary, behavioralClass);
 	}
 
 	public static boolean conformsToClassOrBehavioralClass(@NonNull StandardLibrary standardLibrary, @NonNull ClassDatum thisClassDatum, @NonNull CompleteClass thatCompleteClass) {

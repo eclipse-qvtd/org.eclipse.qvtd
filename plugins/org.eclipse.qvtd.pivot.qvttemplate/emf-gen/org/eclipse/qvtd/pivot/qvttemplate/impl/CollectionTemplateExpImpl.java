@@ -267,7 +267,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 					final /*@NonInvalid*/ @NonNull List<OCLExpression> member = this.getMember();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
 					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
@@ -282,16 +282,25 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 							}
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull OCLExpression _1 = (@NonNull OCLExpression)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable OCLExpression _1 = (@Nullable OCLExpression)ITERATOR__1.next();
 						/**
 						 *
 						 * type?.conformsTo(referredCollectionType.elementType)
 						 */
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
-							final /*@NonInvalid*/ @Nullable Type type = _1.getType();
-							final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+							if (_1 == null) {
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
+							}
+							final /*@Thrown*/ @Nullable Type type = _1.getType();
+							/*@Caught*/ @Nullable Object CAUGHT_type;
+							try {
+								CAUGHT_type = type;
+							}
+							catch (Exception e) {
+								CAUGHT_type = ValueUtil.createInvalidValue(e);
+							}
+							final /*@NonInvalid*/ @NonNull Object conformsTo = CAUGHT_type == null;
 							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
 							if (conformsTo == Boolean.TRUE) {
 								safe_conformsTo_source = null;

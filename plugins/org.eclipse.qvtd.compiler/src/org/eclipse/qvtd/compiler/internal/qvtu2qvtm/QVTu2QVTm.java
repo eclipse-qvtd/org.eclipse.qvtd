@@ -687,11 +687,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			if (mergedType2 == null) {
 				mergedType = mergedType2 = completeType;
 			}
-			else if (standardLibrary.conformsTo(completeType, mergedType2)) {
+			else if (completeType.conformsTo(standardLibrary, mergedType2)) {
 				mergedType = mergedType2 = completeType;
 			}
 			else {
-				assert standardLibrary.conformsTo(mergedType2, completeType);
+				assert mergedType2.conformsTo(standardLibrary, completeType);
 			}
 		}
 

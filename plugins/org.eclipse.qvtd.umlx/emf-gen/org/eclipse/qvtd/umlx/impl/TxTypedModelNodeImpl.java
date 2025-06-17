@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
@@ -377,34 +378,43 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<TxPackageNode> usedTxPackageNodes = this.getUsedTxPackageNodes();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
-				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPackageNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
-				/*@NonInvalid*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
-						break;
-					}
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull TxPackageNode _1 = (@NonNull TxPackageNode)ITERATOR__1.next();
-					/**
-					 * referredEPackage
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull EPackage referredEPackage = _1.getReferredEPackage();
-					//
-					if (accumulator.includes(referredEPackage) == ValueUtil.TRUE_VALUE) {
-						result = false;
-						break;			// Abort after second find
+					final /*@NonInvalid*/ @NonNull List<TxPackageNode> usedTxPackageNodes = this.getUsedTxPackageNodes();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_usedTxPackageNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPackageNode, usedTxPackageNodes);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPackageNode);
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_usedTxPackageNodes.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = true;
+							break;
+						}
+						/*@NonInvalid*/ @Nullable TxPackageNode _1 = (@Nullable TxPackageNode)ITERATOR__1.next();
+						/**
+						 * referredEPackage
+						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxPackageNode::referredEPackage\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull EPackage referredEPackage = _1.getReferredEPackage();
+						//
+						if (accumulator.includes(referredEPackage) == ValueUtil.TRUE_VALUE) {
+							result = false;
+							break;			// Abort after second find
+						}
+						else {
+							accumulator.add(referredEPackage);
+						}
 					}
-					else {
-						accumulator.add(referredEPackage);
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

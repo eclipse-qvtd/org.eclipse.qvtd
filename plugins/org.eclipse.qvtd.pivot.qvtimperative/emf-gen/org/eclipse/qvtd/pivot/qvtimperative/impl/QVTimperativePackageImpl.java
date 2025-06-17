@@ -2013,8 +2013,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createUMLAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
 		createPivotAnnotations();
-		// http://www.eclipse.org/OCL/Collection
-		createCollectionAnnotations();
 	}
 
 	/**
@@ -2318,23 +2316,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getStatement__JoinNames__EList(),
 		   source,
 		   new String[] {
-			   "body", "\'{\' + names/*->sortedBy(n | n)*/->iterate(n; s : String = \'\' | if s = \'\' then n else s + \';\' + n endif) + \'}\'"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Collection</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createCollectionAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Collection";
-		addAnnotation
-		  (getNewStatement_OwnedParts(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
+			   "body", "\'{\' + names/*->sortedBy(n | n)*/?->iterate(n; s : String = \'\' | if s = \'\' then n else s + \';\' + n endif) + \'}\'"
 		   });
 	}
 

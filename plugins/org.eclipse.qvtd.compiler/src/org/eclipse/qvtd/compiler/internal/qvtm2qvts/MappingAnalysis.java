@@ -194,7 +194,7 @@ public class MappingAnalysis extends RuleAnalysis
 			// propertyType;//environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
-				if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, valueClassDatum, targetCompleteClass)) { // Allow value to be physical or behavioral
+				if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(standardLibrary, valueClassDatum, targetCompleteClass)) { // XXX debugging
 					// See Bug 577546 where this is a dodgy downcast case.
 					// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
 					// if

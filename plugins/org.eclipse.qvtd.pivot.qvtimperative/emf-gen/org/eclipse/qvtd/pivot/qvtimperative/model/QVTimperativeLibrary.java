@@ -29,16 +29,31 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.AssociativityKind;
+import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.LambdaType;
 import org.eclipse.ocl.pivot.Library;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Precedence;
+import org.eclipse.ocl.pivot.PrimitiveType;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.SelfType;
+import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TupleType;
+import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
@@ -51,6 +66,8 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 /**
@@ -222,7 +239,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		/**
 		 * Overridden to avoid computing proxies for the shared instance.
 		 *
-		 * @since 1.23
+		 * @since 7.0
 		 */
 		@Override
 		public void preUnload(@NonNull EnvironmentFactoryInternal environmentFactory) {}
@@ -241,16 +258,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		}
 	}
 
-	@Deprecated /* Provide externalURI */
-	public static @NonNull QVTimperativeLibrary create(@NonNull String asURI) {
-		Contents contents = new Contents(asURI);
-		return new QVTimperativeLibrary(asURI, contents.getModel());
-	}
-
 	/**
 	 *	Construct a copy of the OCL Standard Library with specified AS resource URI,
 	 *  and external URI.
-	 * @since 1.23
+	 * @since 7.0
 	 */
 	public static @NonNull QVTimperativeLibrary create(@NonNull String asURI, @NonNull String externalURI) {
 		Contents contents = new Contents(externalURI);
@@ -328,8 +339,8 @@ public class QVTimperativeLibrary extends ASResourceImpl
 
 		private final @NonNull CollectionType _Collection_$$0_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_OclElement_F = createCollectionType(_Collection);
-		private final @NonNull SetType _Set_$$0_T = createSetType(_Set);
-		private final @NonNull SetType _Set_OclElement_T = createSetType(_Set);
+		private final @NonNull SetType _Set_$$0_F = createSetType(_Set);
+		private final @NonNull SetType _Set_OclElement_F = createSetType(_Set);
 		private final @NonNull CollectionType _UniqueCollection_$$0_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_OclElement_F = createCollectionType(_UniqueCollection);
 
@@ -363,13 +374,11 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
-			type = _Set_$$0_T;
-			type.setIsNullFree(true);
+			type = _Set_$$0_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_$$0_F);
 			ownedClasses.add(type);
-			type = _Set_OclElement_T;
-			type.setIsNullFree(true);
+			type = _Set_OclElement_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_OclElement_F);
 			ownedClasses.add(type);
@@ -383,10 +392,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			ownedClasses.add(type);
 		}
 
-		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_T, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
-		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_$$0_T, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
-		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_$$0_T, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
-		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement_T, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_F, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_$$0_F, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
+		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_$$0_F, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
+		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement_F, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
 
 		private void installOperations() {
 			List<Operation> ownedOperations;
@@ -396,22 +405,26 @@ public class QVTimperativeLibrary extends ASResourceImpl
 
 			ownedOperations = _Model.getOwnedOperations();
 			ownedOperations.add(operation = op_Model_allObjects);
+			operation.setIsRequired(true);
 			ownedOperations.add(operation = op_Model_objectsOfKind);
+			operation.setIsRequired(true);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", $$0, true));
+			ownedParameters.add(parameter = createParameter("type", $$0, false));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_objectsOfType);
+			operation.setIsRequired(true);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", $$0, true));
+			ownedParameters.add(parameter = createParameter("type", $$0, false));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_rootObjects);
+			operation.setIsRequired(true);
 		}
 
 		private void installTemplateBindings() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_OclElement_F, _OclElement);
-			addBinding(_Set_$$0_T, $$0);
-			addBinding(_Set_OclElement_T, _OclElement);
+			addBinding(_Set_$$0_F, $$0);
+			addBinding(_Set_OclElement_F, _OclElement);
 			addBinding(_UniqueCollection_$$0_F, $$0);
 			addBinding(_UniqueCollection_OclElement_F, _OclElement);
 		}

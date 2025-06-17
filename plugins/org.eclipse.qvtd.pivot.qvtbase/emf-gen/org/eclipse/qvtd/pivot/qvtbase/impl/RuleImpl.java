@@ -414,19 +414,21 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Domain _1 = (@Nullable Domain)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;
@@ -498,7 +500,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						/*@Caught*/ @Nullable Object CAUGHT_exists;
 						try {
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
-							@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+							@Nullable Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 							/*@Thrown*/ @Nullable Boolean exists;
 							while (true) {
 								if (!ITERATOR__1.hasNext()) {
@@ -513,37 +515,72 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 									}
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+								/*@NonInvalid*/ @Nullable Domain _1 = (@Nullable Domain)ITERATOR__1.next();
 								/**
 								 * isCheckable or isEnforceable
 								 */
-								final /*@NonInvalid*/ boolean isCheckable = _1.isIsCheckable();
-								final /*@NonInvalid*/ @Nullable Boolean or;
-								if (isCheckable) {
-									or = ValueUtil.TRUE_VALUE;
-								}
-								else {
-									final /*@NonInvalid*/ boolean isEnforceable = _1.isIsEnforceable();
-									if (isEnforceable) {
+								/*@Caught*/ @Nullable Object CAUGHT_or;
+								try {
+									/*@Caught*/ @NonNull Object CAUGHT_isCheckable;
+									try {
+										if (_1 == null) {
+											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Domain::isCheckable\'");
+										}
+										final /*@Thrown*/ boolean isCheckable = _1.isIsCheckable();
+										CAUGHT_isCheckable = isCheckable;
+									}
+									catch (Exception e) {
+										CAUGHT_isCheckable = ValueUtil.createInvalidValue(e);
+									}
+									final /*@Thrown*/ @Nullable Boolean or;
+									if (CAUGHT_isCheckable == ValueUtil.TRUE_VALUE) {
 										or = ValueUtil.TRUE_VALUE;
 									}
 									else {
-										or = ValueUtil.FALSE_VALUE;
+										/*@Caught*/ @NonNull Object CAUGHT_isEnforceable;
+										try {
+											if (_1 == null) {
+												throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Domain::isEnforceable\'");
+											}
+											final /*@Thrown*/ boolean isEnforceable = _1.isIsEnforceable();
+											CAUGHT_isEnforceable = isEnforceable;
+										}
+										catch (Exception e) {
+											CAUGHT_isEnforceable = ValueUtil.createInvalidValue(e);
+										}
+										if (CAUGHT_isEnforceable == ValueUtil.TRUE_VALUE) {
+											or = ValueUtil.TRUE_VALUE;
+										}
+										else {
+											if (CAUGHT_isCheckable instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_isCheckable;
+											}
+											if (CAUGHT_isEnforceable instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_isEnforceable;
+											}
+											or = ValueUtil.FALSE_VALUE;
+										}
 									}
+									CAUGHT_or = or;
+								}
+								catch (Exception e) {
+									CAUGHT_or = ValueUtil.createInvalidValue(e);
 								}
 								//
-								if (or == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+								if (CAUGHT_or == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
 									exists = ValueUtil.TRUE_VALUE;
 									break;														// Stop immediately
 								}
-								else if (or == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+								else if (CAUGHT_or == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
 									;															// Carry on
 								}
-								else if (or == null) {								// Abnormal null body evaluation result
+								else if (CAUGHT_or == null) {								// Abnormal null body evaluation result
 									if (accumulator == ValueUtil.FALSE_VALUE) {
 										accumulator = null;										// Cache a null failure
 									}
+								}
+								else if (CAUGHT_or instanceof InvalidValueException) {		// Abnormal exception evaluation result
+									accumulator = CAUGHT_or;									// Cache an exception failure
 								}
 								else {															// Impossible badly typed result
 									accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
@@ -770,7 +807,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 							final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-							@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
+							@Nullable Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
 							/*@Thrown*/ @Nullable Boolean forAll;
 							while (true) {
 								if (!ITERATOR_od.hasNext()) {
@@ -782,8 +819,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 									}
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull Domain od = (@NonNull Domain)ITERATOR_od.next();
+								/*@NonInvalid*/ @Nullable Domain od = (@Nullable Domain)ITERATOR_od.next();
 								/**
 								 * self.domain.name->includes(od.name)
 								 */
@@ -793,23 +829,28 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 									final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
 									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
 									/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
-									@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
+									@Nullable Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
 									/*@Thrown*/ @NonNull SequenceValue collect;
 									while (true) {
 										if (!ITERATOR__1.hasNext()) {
 											collect = accumulator_0;
 											break;
 										}
-										@SuppressWarnings("null")
-										/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+										/*@NonInvalid*/ @Nullable Domain _1 = (@Nullable Domain)ITERATOR__1.next();
 										/**
 										 * name
 										 */
-										final /*@NonInvalid*/ @Nullable String name = _1.getName();
+										if (_1 == null) {
+											throw new InvalidValueException("Null source for \'NamedElement::name\'");
+										}
+										final /*@Thrown*/ @Nullable String name = _1.getName();
 										//
 										accumulator_0.add(name);
 									}
-									final /*@NonInvalid*/ @Nullable String name_0 = od.getName();
+									if (od == null) {
+										throw new InvalidValueException("Null source for \'NamedElement::name\'");
+									}
+									final /*@Thrown*/ @Nullable String name_0 = od.getName();
 									final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, name_0).booleanValue();
 									CAUGHT_includes = includes;
 								}

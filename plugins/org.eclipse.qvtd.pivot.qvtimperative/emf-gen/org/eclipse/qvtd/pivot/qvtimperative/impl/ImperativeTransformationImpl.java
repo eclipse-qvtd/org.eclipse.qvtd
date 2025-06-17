@@ -187,41 +187,57 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
-				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == ValueUtil.TRUE_VALUE) {
+								result = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
 						}
-						else {
-							throw (InvalidValueException)accumulator;
+						/*@NonInvalid*/ @Nullable Rule _1 = (@Nullable Rule)ITERATOR__1.next();
+						/**
+						 * oclIsKindOf(Mapping)
+						 */
+						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+						try {
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
+							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
-						break;
+						catch (Exception e) {
+							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+						}
+						//
+						if (CAUGHT_oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+							result = ValueUtil.FALSE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (CAUGHT_oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+							;															// Carry on
+						}
+						else if (CAUGHT_oclIsKindOf instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_oclIsKindOf;									// Cache an exception failure
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+						}
 					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
-					/**
-					 * oclIsKindOf(Mapping)
-					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
-					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
-					//
-					if (!oclIsKindOf) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately
-					}
-					else if (oclIsKindOf) {				// Normal successful body evaluation result
-						;															// Carry on
-					}
-					else {															// Impossible badly typed result
-						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

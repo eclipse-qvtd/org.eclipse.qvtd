@@ -339,8 +339,8 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		
 		private final @NonNull CollectionType _Collection_$$0_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_OclElement_F = createCollectionType(_Collection);
-		private final @NonNull SetType _Set_$$0_T = createSetType(_Set);
-		private final @NonNull SetType _Set_OclElement_T = createSetType(_Set);
+		private final @NonNull SetType _Set_$$0_F = createSetType(_Set);
+		private final @NonNull SetType _Set_OclElement_F = createSetType(_Set);
 		private final @NonNull CollectionType _UniqueCollection_$$0_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_OclElement_F = createCollectionType(_UniqueCollection);
 		
@@ -374,13 +374,11 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
-			type = _Set_$$0_T;
-			type.setIsNullFree(true);
+			type = _Set_$$0_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_$$0_F);
 			ownedClasses.add(type);
-			type = _Set_OclElement_T;
-			type.setIsNullFree(true);
+			type = _Set_OclElement_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_OclElement_F);
 			ownedClasses.add(type);
@@ -394,10 +392,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			ownedClasses.add(type);
 		}
 		
-		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_T, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
-		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_$$0_T, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
-		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_$$0_T, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
-		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement_T, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement_F, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_$$0_F, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
+		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_$$0_F, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
+		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement_F, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
 		
 		private void installOperations() {
 			List<Operation> ownedOperations;
@@ -407,22 +405,26 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		
 			ownedOperations = _Model.getOwnedOperations();
 			ownedOperations.add(operation = op_Model_allObjects);
+			operation.setIsRequired(true);
 			ownedOperations.add(operation = op_Model_objectsOfKind);
+			operation.setIsRequired(true);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", $$0, true));
+			ownedParameters.add(parameter = createParameter("type", $$0, false));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_objectsOfType);
+			operation.setIsRequired(true);
 			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("type", $$0, true));
+			ownedParameters.add(parameter = createParameter("type", $$0, false));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_rootObjects);
+			operation.setIsRequired(true);
 		}
 		
 		private void installTemplateBindings() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_OclElement_F, _OclElement);
-			addBinding(_Set_$$0_T, $$0);
-			addBinding(_Set_OclElement_T, _OclElement);
+			addBinding(_Set_$$0_F, $$0);
+			addBinding(_Set_OclElement_F, _OclElement);
 			addBinding(_UniqueCollection_$$0_F, $$0);
 			addBinding(_UniqueCollection_OclElement_F, _OclElement);
 		}

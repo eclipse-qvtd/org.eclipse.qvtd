@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -206,34 +207,43 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part = this.getPart();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
-				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
-				/*@NonInvalid*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
-						break;
-					}
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull PropertyTemplateItem _1 = (@NonNull PropertyTemplateItem)ITERATOR__1.next();
-					/**
-					 * resolvedProperty
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();
-					//
-					if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
-						result = false;
-						break;			// Abort after second find
+					final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part = this.getPart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = true;
+							break;
+						}
+						/*@NonInvalid*/ @Nullable PropertyTemplateItem _1 = (@Nullable PropertyTemplateItem)ITERATOR__1.next();
+						/**
+						 * resolvedProperty
+						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTtemplate\'::PropertyTemplateItem::resolvedProperty\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();
+						//
+						if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
+							result = false;
+							break;			// Abort after second find
+						}
+						else {
+							accumulator.add(resolvedProperty);
+						}
 					}
-					else {
-						accumulator.add(resolvedProperty);
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTtemplateTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTtemplateTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

@@ -240,15 +240,14 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					final /*@NonInvalid*/ @NonNull List<Domain> domain = referredRelation.getDomain();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_RelationDomain);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 					/*@Thrown*/ @NonNull SequenceValue collect_0;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect_0 = accumulator;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Domain _1 = (@Nullable Domain)ITERATOR__1.next();
 						/**
 						 * oclAsType(RelationDomain)
 						 */
@@ -522,7 +521,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final /*@NonInvalid*/ @NonNull List<OCLExpression> argument = this.getArgument();
 						final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
 						/*@Thrown*/ @Nullable Object accumulator = ValueUtil.FALSE_VALUE;
-						@NonNull Iterator<Object> ITERATOR__1 = BOXED_argument.iterator();
+						@Nullable Iterator<Object> ITERATOR__1 = BOXED_argument.iterator();
 						/*@Thrown*/ @Nullable Boolean exists;
 						while (true) {
 							if (!ITERATOR__1.hasNext()) {
@@ -537,8 +536,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								}
 								break;
 							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull OCLExpression _1 = (@NonNull OCLExpression)ITERATOR__1.next();
+							/*@NonInvalid*/ @Nullable OCLExpression _1 = (@Nullable OCLExpression)ITERATOR__1.next();
 							/**
 							 *
 							 * type.oclIsKindOf(DataType) and
@@ -549,7 +547,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTrelationTables.CLSSid_DataType, null);
-									final /*@NonInvalid*/ @Nullable Type type = _1.getType();
+									if (_1 == null) {
+										throw new InvalidValueException("Null source for \'TypedElement::type\'");
+									}
+									final /*@Thrown*/ @Nullable Type type = _1.getType();
 									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 									CAUGHT_oclIsKindOf = oclIsKindOf;
 								}
@@ -566,7 +567,10 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 										/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
 										try {
 											final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
-											final /*@NonInvalid*/ @Nullable Type type_0 = _1.getType();
+											if (_1 == null) {
+												throw new InvalidValueException("Null source for \'TypedElement::type\'");
+											}
+											final /*@Thrown*/ @Nullable Type type_0 = _1.getType();
 											final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();
 											CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 										}

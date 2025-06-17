@@ -455,7 +455,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = let requiredType : Class[?] = resolvedProperty.owningClass
+			 *         result : OclAny[?] = let requiredType : Class[?] = resolvedProperty.owningClass
 			 *         in
 			 *           let actualType : Type[?] = targetVariable.type
 			 *           in
@@ -529,7 +529,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							safe_name_source_0 = name_2;
 						}
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
+						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid__0, sum_1, safe_conformsTo_source);
 						IF_eq = TUP_;
 					}
 					CAUGHT_IF_eq = IF_eq;
@@ -565,7 +565,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = if isPartial
+			 *         result : OclAny[?] = if isPartial
 			 *         then
 			 *           let
 			 *             requiredType : Type[1] = resolvedProperty.type.oclAsType(CollectionType).elementType
@@ -643,7 +643,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
 							final /*@Thrown*/ @Nullable String name_1 = requiredType.getName();
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
-							final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
+							final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid__0, sum_1, safe_conformsTo_source);
 							IF_eq = TUP_;
 						}
 						result = IF_eq;
@@ -684,7 +684,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = if not isPartial
+			 *         result : OclAny[?] = if not isPartial
 			 *         then
 			 *           let requiredType : Type[?] = resolvedProperty.type
 			 *           in
@@ -780,7 +780,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 								safe_name_source_0 = name_2;
 							}
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-							final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
+							final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid__0, sum_1, safe_conformsTo_source);
 							IF_eq = TUP_;
 						}
 						result = IF_eq;
@@ -953,7 +953,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							}
 						}
 						if (and == null) {
-							throw new InvalidValueException("Null body for \'Set(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Set($$0)\'");
+							throw new InvalidValueException("Null body for \'Set(T).select($$0 | Lambda $$0() : Boolean[1]) : Set($$0)\'");
 						}
 						//
 						if (and == ValueUtil.TRUE_VALUE) {

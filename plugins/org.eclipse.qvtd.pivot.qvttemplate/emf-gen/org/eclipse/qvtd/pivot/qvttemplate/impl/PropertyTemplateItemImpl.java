@@ -625,7 +625,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						}
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, safe_name_source_0);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid__0, sum_1, status);
 						IF_eq = TUP_;
 					}
 					CAUGHT_IF_eq = IF_eq;
@@ -903,7 +903,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@Thrown*/ @Nullable String name_1 = elementType.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_1);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid__0, sum_1, status);
 						IF_eq = TUP_;
 					}
 					CAUGHT_IF_eq = IF_eq;
@@ -1151,7 +1151,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@Thrown*/ @Nullable String name_0 = elementType_0.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid_, sum_1, status);
+						final /*@Thrown*/ @NonNull TupleValue TUP_ = ValueUtil.createTupleOfEach(QVTtemplateTables.TUPLid__0, sum_1, status);
 						IF_eq = TUP_;
 					}
 					CAUGHT_IF_eq = IF_eq;

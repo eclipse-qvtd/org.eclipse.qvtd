@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.RelDiagram;
@@ -297,19 +298,21 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 					final /*@NonInvalid*/ @NonNull List<TxQueryNode> ownedTxQueryNodes = this.getOwnedTxQueryNodes();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxQueryNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxQueryNode, ownedTxQueryNodes);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxQueryNode);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxQueryNodes.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedTxQueryNodes.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull TxQueryNode _1 = (@NonNull TxQueryNode)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable TxQueryNode _1 = (@Nullable TxQueryNode)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;
@@ -371,19 +374,21 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 					final /*@NonInvalid*/ @NonNull List<RelDiagram> ownedRelDiagrams = this.getOwnedRelDiagrams();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedRelDiagrams = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelDiagram, ownedRelDiagrams);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_RelDiagram);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedRelDiagrams.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedRelDiagrams.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull RelDiagram _1 = (@NonNull RelDiagram)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable RelDiagram _1 = (@Nullable RelDiagram)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;
@@ -487,19 +492,21 @@ public class TxDiagramImpl extends UMLXNamedElementImpl implements TxDiagram {
 					final /*@NonInvalid*/ @NonNull List<TxTypedModelNode> ownedTxTypedModelNodes = this.getOwnedTxTypedModelNodes();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxTypedModelNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxTypedModelNode, ownedTxTypedModelNodes);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxTypedModelNode);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxTypedModelNodes.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedTxTypedModelNodes.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull TxTypedModelNode _1 = (@NonNull TxTypedModelNode)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable TxTypedModelNode _1 = (@Nullable TxTypedModelNode)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;

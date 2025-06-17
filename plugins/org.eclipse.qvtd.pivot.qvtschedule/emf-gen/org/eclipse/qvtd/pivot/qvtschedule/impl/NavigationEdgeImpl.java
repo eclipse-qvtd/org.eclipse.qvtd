@@ -294,12 +294,12 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				if (resolve) return getOppositeEdge();
-				return basicGetOppositeEdge();
+			return basicGetOppositeEdge();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return isPartial();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredProperty();
-				return basicGetReferredProperty();
+			return basicGetReferredProperty();
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 12:
 				return isSecondary();
 		}
@@ -316,16 +316,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setOppositeEdge((NavigationEdge)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial((Boolean)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)newValue);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 12:
 				setSecondary((Boolean)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -340,16 +340,16 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		switch (featureID) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setOppositeEdge((NavigationEdge)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial(PARTIAL_EDEFAULT);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)null);
-				return;
+			return;
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 12:
 				setSecondary(SECONDARY_EDEFAULT);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -463,7 +463,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			return false;
 		}
 		for (@NonNull CompleteClass thisCompleteClass : theseCompleteClasses) {
-			if (standardLibrary.conformsTo(thisCompleteClass, thatType)) {
+			if (thisCompleteClass.conformsTo(standardLibrary, thatType)) {
 				return true;
 			}
 		}
@@ -530,6 +530,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		}
 		if (partial) {
 			String multiplicityString = PivotUtil.getMultiplicity(source2targetProperty2);
+			if (multiplicityString.length() == 0) {
+				multiplicityString = "[1]";
+			}
 			return super.getLabel() + "\\n" + multiplicityString.substring(0, 1) + "1 of " + multiplicityString.substring(1);
 		}
 		else {

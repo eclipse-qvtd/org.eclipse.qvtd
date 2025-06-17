@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -37,6 +38,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
@@ -247,34 +249,43 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<TxPartNode> ownedTxPartNodes = this.getOwnedTxPartNodes();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxPartNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPartNode, ownedTxPartNodes);
-				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPartNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxPartNodes.iterator();
-				/*@NonInvalid*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
-						break;
-					}
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull TxPartNode _1 = (@NonNull TxPartNode)ITERATOR__1.next();
-					/**
-					 * referredEStructuralFeature
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull EStructuralFeature referredEStructuralFeature = _1.getReferredEStructuralFeature();
-					//
-					if (accumulator.includes(referredEStructuralFeature) == ValueUtil.TRUE_VALUE) {
-						result = false;
-						break;			// Abort after second find
+					final /*@NonInvalid*/ @NonNull List<TxPartNode> ownedTxPartNodes = this.getOwnedTxPartNodes();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxPartNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxPartNode, ownedTxPartNodes);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxPartNode);
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedTxPartNodes.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = true;
+							break;
+						}
+						/*@NonInvalid*/ @Nullable TxPartNode _1 = (@Nullable TxPartNode)ITERATOR__1.next();
+						/**
+						 * referredEStructuralFeature
+						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxPartNode::referredEStructuralFeature\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull EStructuralFeature referredEStructuralFeature = _1.getReferredEStructuralFeature();
+						//
+						if (accumulator.includes(referredEStructuralFeature) == ValueUtil.TRUE_VALUE) {
+							result = false;
+							break;			// Abort after second find
+						}
+						else {
+							accumulator.add(referredEStructuralFeature);
+						}
 					}
-					else {
-						accumulator.add(referredEStructuralFeature);
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

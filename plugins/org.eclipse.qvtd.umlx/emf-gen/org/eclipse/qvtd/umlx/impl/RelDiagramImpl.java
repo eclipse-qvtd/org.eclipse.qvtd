@@ -340,7 +340,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 			 *     else
 			 *       let
 			 *         result : OclAny[1] = let
-			 *           allNames : Sequence(String[*|?]) = ownedRelDomainNodes.ownedRelPatternNodes->select(
+			 *           allNames : Sequence(String) = ownedRelDomainNodes.ownedRelPatternNodes->select(
 			 *             not isExpression())
 			 *           ->select(not isAnon).name
 			 *         in
@@ -377,46 +377,60 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 					final /*@NonInvalid*/ @NonNull List<RelDomainNode> ownedRelDomainNodes = this.getOwnedRelDomainNodes();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedRelDomainNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelDomainNode, ownedRelDomainNodes);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedRelDomainNodes.iterator();
-					/*@NonInvalid*/ @NonNull SequenceValue collect;
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedRelDomainNodes.iterator();
+					/*@Thrown*/ @NonNull SequenceValue collect;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect = accumulator;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull RelDomainNode _1 = (@NonNull RelDomainNode)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable RelDomainNode _1 = (@Nullable RelDomainNode)ITERATOR__1.next();
 						/**
 						 * ownedRelPatternNodes
 						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelDomainNode::ownedRelPatternNodes\'");
+						}
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull List<RelPatternNode> ownedRelPatternNodes = _1.getOwnedRelPatternNodes();
-						final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedRelPatternNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelPatternNode, ownedRelPatternNodes);
+						final /*@Thrown*/ @NonNull List<RelPatternNode> ownedRelPatternNodes = _1.getOwnedRelPatternNodes();
+						final /*@Thrown*/ @NonNull OrderedSetValue BOXED_ownedRelPatternNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_RelPatternNode, ownedRelPatternNodes);
 						//
 						for (Object value : BOXED_ownedRelPatternNodes.flatten().getElements()) {
 							accumulator.add(value);
 						}
 					}
 					/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
-					@NonNull Iterator<Object> ITERATOR__1_0 = collect.iterator();
+					@Nullable Iterator<Object> ITERATOR__1_0 = collect.iterator();
 					/*@Thrown*/ @NonNull SequenceValue select_0;
 					while (true) {
 						if (!ITERATOR__1_0.hasNext()) {
 							select_0 = accumulator_0;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull RelPatternNode _1_0 = (@NonNull RelPatternNode)ITERATOR__1_0.next();
+						/*@NonInvalid*/ @Nullable RelPatternNode _1_0 = (@Nullable RelPatternNode)ITERATOR__1_0.next();
 						/**
 						 * not isExpression()
 						 */
-						final /*@NonInvalid*/ boolean isExpression = _1_0.isExpression();
-						final /*@NonInvalid*/ @Nullable Boolean not;
-						if (!isExpression) {
+						/*@Caught*/ @NonNull Object CAUGHT_isExpression;
+						try {
+							if (_1_0 == null) {
+								throw new InvalidValueException("Null source for \'umlx::RelPatternNode::isExpression() : Boolean\'");
+							}
+							final /*@Thrown*/ boolean isExpression = _1_0.isExpression();
+							CAUGHT_isExpression = isExpression;
+						}
+						catch (Exception e) {
+							CAUGHT_isExpression = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_isExpression instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_isExpression;
+						}
+						final /*@Thrown*/ @Nullable Boolean not;
+						if (CAUGHT_isExpression == ValueUtil.FALSE_VALUE) {
 							not = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							if (isExpression) {
+							if (CAUGHT_isExpression == ValueUtil.TRUE_VALUE) {
 								not = ValueUtil.FALSE_VALUE;
 							}
 							else {
@@ -424,7 +438,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Sequence($$0)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select($$0 | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not == ValueUtil.TRUE_VALUE) {
@@ -432,25 +446,37 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						}
 					}
 					/*@Thrown*/ @NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_CLSSid_RelPatternNode);
-					@NonNull Iterator<Object> ITERATOR__1_1 = select_0.iterator();
+					@Nullable Iterator<Object> ITERATOR__1_1 = select_0.iterator();
 					/*@Thrown*/ @NonNull SequenceValue select;
 					while (true) {
 						if (!ITERATOR__1_1.hasNext()) {
 							select = accumulator_1;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull RelPatternNode _1_1 = (@NonNull RelPatternNode)ITERATOR__1_1.next();
+						/*@NonInvalid*/ @Nullable RelPatternNode _1_1 = (@Nullable RelPatternNode)ITERATOR__1_1.next();
 						/**
 						 * not isAnon
 						 */
-						final /*@NonInvalid*/ boolean isAnon = _1_1.isIsAnon();
-						final /*@NonInvalid*/ @Nullable Boolean not_0;
-						if (!isAnon) {
+						/*@Caught*/ @NonNull Object CAUGHT_isAnon;
+						try {
+							if (_1_1 == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelPatternNode::isAnon\'");
+							}
+							final /*@Thrown*/ boolean isAnon = _1_1.isIsAnon();
+							CAUGHT_isAnon = isAnon;
+						}
+						catch (Exception e) {
+							CAUGHT_isAnon = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_isAnon instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_isAnon;
+						}
+						final /*@Thrown*/ @Nullable Boolean not_0;
+						if (CAUGHT_isAnon == ValueUtil.FALSE_VALUE) {
 							not_0 = ValueUtil.TRUE_VALUE;
 						}
 						else {
-							if (isAnon) {
+							if (CAUGHT_isAnon == ValueUtil.TRUE_VALUE) {
 								not_0 = ValueUtil.FALSE_VALUE;
 							}
 							else {
@@ -458,7 +484,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 							}
 						}
 						if (not_0 == null) {
-							throw new InvalidValueException("Null body for \'Sequence(T).select($$0[?] | Lambda $$0[1]() : Boolean[1]) : Sequence($$0)\'");
+							throw new InvalidValueException("Null body for \'Sequence(T).select($$0 | Lambda $$0() : Boolean[1]) : Sequence($$0)\'");
 						}
 						//
 						if (not_0 == ValueUtil.TRUE_VALUE) {
@@ -466,19 +492,21 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						}
 					}
 					/*@Thrown*/ @NonNull Accumulator accumulator_2 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
-					@NonNull Iterator<Object> ITERATOR__1_2 = select.iterator();
+					@Nullable Iterator<Object> ITERATOR__1_2 = select.iterator();
 					/*@Thrown*/ @NonNull SequenceValue allNames;
 					while (true) {
 						if (!ITERATOR__1_2.hasNext()) {
 							allNames = accumulator_2;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull RelPatternNode _1_2 = (@NonNull RelPatternNode)ITERATOR__1_2.next();
+						/*@NonInvalid*/ @Nullable RelPatternNode _1_2 = (@Nullable RelPatternNode)ITERATOR__1_2.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1_2.getName();
+						if (_1_2 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1_2.getName();
 						//
 						accumulator_2.add(name);
 					}
@@ -508,7 +536,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						IF_status = ValueUtil.TRUE_VALUE;
 					}
 					else {
-						/*@Thrown*/ @NonNull Accumulator accumulator_4 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String_0);
+						/*@Thrown*/ @NonNull Accumulator accumulator_4 = ValueUtil.createSequenceAccumulatorValue(UMLXTables.SEQ_PRIMid_String);
 						@Nullable Iterator<Object> ITERATOR_n_0 = allNames.iterator();
 						/*@Thrown*/ @NonNull SequenceValue select_1;
 						while (true) {
@@ -529,21 +557,20 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						}
 						final /*@Thrown*/ @NonNull SetValue repeatedNames = CollectionAsSetOperation.INSTANCE.evaluate(select_1);
 						/*@NonInvalid*/ @NonNull String acc = UMLXTables.STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c;
-						@NonNull Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
+						@Nullable Iterator<Object> ITERATOR_n_1 = repeatedNames.iterator();
 						/*@Thrown*/ @Nullable String iterate;
 						while (true) {
 							if (!ITERATOR_n_1.hasNext()) {
 								iterate = acc;
 								break;
 							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull String n_1 = (@NonNull String)ITERATOR_n_1.next();
+							/*@NonInvalid*/ @Nullable String n_1 = (@Nullable String)ITERATOR_n_1.next();
 							/**
 							 * acc + ' \'' + n + '\''
 							 */
 							final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(acc, UMLXTables.STR__32_39);
-							final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
-							final /*@NonInvalid*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
+							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n_1);
+							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, UMLXTables.STR__39);
 							//
 							acc = sum_1;
 						}

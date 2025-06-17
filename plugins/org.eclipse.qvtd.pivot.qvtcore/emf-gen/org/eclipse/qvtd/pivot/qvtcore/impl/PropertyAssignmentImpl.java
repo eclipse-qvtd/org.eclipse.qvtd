@@ -128,7 +128,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = if isPartial
+			 *         result : OclAny[?] = if isPartial
 			 *         then
 			 *           let
 			 *             propertyType : Type[1] = getReferredTargetProperty()
@@ -304,7 +304,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : OclAny[1] = if not isPartial
+			 *         result : OclAny[?] = if not isPartial
 			 *         then
 			 *           let propertyType : Type[?] = getReferredTargetProperty().type
 			 *           in

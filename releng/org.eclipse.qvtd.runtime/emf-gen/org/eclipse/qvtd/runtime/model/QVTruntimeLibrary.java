@@ -381,7 +381,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _Collection_Property_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_TupleLiteralPart_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _OrderedCollection_OclElement_F = createCollectionType(_OrderedCollection);
-		private final @NonNull OrderedSetType _OrderedSet_OclElement_T = createOrderedSetType(_OrderedSet);
+		private final @NonNull OrderedSetType _OrderedSet_OclElement_F = createOrderedSetType(_OrderedSet);
 		private final @NonNull SetType _Set_$$0_F = createSetType(_Set);
 		private final @NonNull SetType _Set_CollectionItem_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Element_F = createSetType(_Set);
@@ -456,8 +456,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_OclElement_F);
 			ownedClasses.add(type);
-			type = _OrderedSet_OclElement_T;
-			type.setIsNullFree(true);
+			type = _OrderedSet_OclElement_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_OclElement_F);
 			superClasses.add(_UniqueCollection_OclElement_F);
@@ -527,50 +526,56 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		
 			ownedOperations = _PseudoOperations.getOwnedOperations();
 			ownedOperations.add(operation = op_PseudoOperations_collection);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("items", _Set_CollectionItem_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_error);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("elements", _Set_Element_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_if);
-			operation.setIsRequired(false);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("condition", $$0, false));
 			ownedParameters.add(parameter = createParameter("then", $$0, false));
 			ownedParameters.add(parameter = createParameter("else", $$0, false));
 			ownedOperations.add(operation = op_PseudoOperations_loop);
-			operation.setIsRequired(false);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("source", _OCLExpression, true));
 			ownedParameters.add(parameter = createParameter("iterators", _Set_$$0_F, true));
 			ownedParameters.add(parameter = createParameter("body", _OCLExpression, true));
 			ownedOperations.add(operation = op_PseudoOperations_mapPart);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("key", $$0, false));
 			ownedParameters.add(parameter = createParameter("value", $$1, false));
 			ownedOperations.add(operation = op_PseudoOperations_map);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_Property_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_range);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("first", $$0, false));
 			ownedParameters.add(parameter = createParameter("last", $$0, false));
 			ownedOperations.add(operation = op_PseudoOperations_shadow);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_Property_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_tuple);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_TupleLiteralPart_F, true));
 			ownedOperations.add(operation = op_PseudoOperations_type);
+			operation.setIsRequired(true);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("type", $$0, false));
@@ -579,7 +584,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		
 		private final @NonNull Property pr_OclElement_extent_elements = createProperty("extent", _Extent);
 		
-		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_T);
+		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_F);
 		
 		private void installProperties() {
 			List<Property> ownedProperties;
@@ -588,12 +593,12 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			ownedProperties = _OclElement.getOwnedProperties();
 			ownedProperties.add(property = pr_OclElement_extent_elements);
 			property.setIsImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Extent_elements);
 		
 			ownedProperties = _Extent.getOwnedProperties();
 			ownedProperties.add(property = pr_Extent_elements);
+			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_OclElement_extent_elements);
 		}
@@ -606,7 +611,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			addBinding(_Collection_Property_F, _Property);
 			addBinding(_Collection_TupleLiteralPart_F, _TupleLiteralPart);
 			addBinding(_OrderedCollection_OclElement_F, _OclElement);
-			addBinding(_OrderedSet_OclElement_T, _OclElement);
+			addBinding(_OrderedSet_OclElement_F, _OclElement);
 			addBinding(_Set_$$0_F, $$0);
 			addBinding(_Set_CollectionItem_F, _CollectionItem);
 			addBinding(_Set_Element_F, _Element);

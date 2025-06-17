@@ -229,7 +229,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		for (@NonNull CompleteClass sortedCompleteClass : sortedCompleteClasses) {
 			boolean isRequired = true;
 			for (@NonNull CompleteClass newCompleteClass : newCompleteClasses) {
-				if (standardLibrary.conformsTo(newCompleteClass, sortedCompleteClass)) {
+				if (newCompleteClass.conformsTo(standardLibrary, sortedCompleteClass)) {
 					isRequired = false;
 					break;
 				}

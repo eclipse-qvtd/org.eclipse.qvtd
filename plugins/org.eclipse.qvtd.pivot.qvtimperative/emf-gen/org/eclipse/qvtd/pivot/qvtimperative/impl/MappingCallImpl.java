@@ -50,6 +50,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.BagValue.Accumulator;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -248,20 +249,22 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final /*@NonInvalid*/ @NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
 		/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_CLSSid_MappingParameter);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
-		/*@NonInvalid*/ @NonNull SequenceValue collect_0;
+		@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
+		/*@Thrown*/ @NonNull SequenceValue collect_0;
 		while (true) {
 			if (!ITERATOR__1.hasNext()) {
 				collect_0 = accumulator;
 				break;
 			}
-			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITERATOR__1.next();
+			/*@NonInvalid*/ @Nullable MappingParameterBinding _1 = (@Nullable MappingParameterBinding)ITERATOR__1.next();
 			/**
 			 * boundVariable
 			 */
+			if (_1 == null) {
+				throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/QVTimperative\'::MappingParameterBinding::boundVariable\'");
+			}
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
+			final /*@Thrown*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
 			//
 			accumulator.add(boundVariable);
 		}
@@ -325,19 +328,21 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
 		final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 		/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+		@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
 		/*@Thrown*/ @NonNull BagValue collect;
 		while (true) {
 			if (!ITERATOR__1.hasNext()) {
 				collect = accumulator;
 				break;
 			}
-			@SuppressWarnings("null")
-			/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
+			/*@NonInvalid*/ @Nullable MappingParameter _1 = (@Nullable MappingParameter)ITERATOR__1.next();
 			/**
 			 * name
 			 */
-			final /*@NonInvalid*/ @Nullable String name = _1.getName();
+			if (_1 == null) {
+				throw new InvalidValueException("Null source for \'NamedElement::name\'");
+			}
+			final /*@Thrown*/ @Nullable String name = _1.getName();
 			//
 			accumulator.add(name);
 		}
@@ -552,34 +557,43 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
-				/*@NonInvalid*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
-						break;
-					}
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull MappingParameterBinding _1 = (@NonNull MappingParameterBinding)ITERATOR__1.next();
-					/**
-					 * boundVariable
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
-					//
-					if (accumulator.includes(boundVariable) == ValueUtil.TRUE_VALUE) {
-						result = false;
-						break;			// Abort after second find
+					final /*@NonInvalid*/ @NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = true;
+							break;
+						}
+						/*@NonInvalid*/ @Nullable MappingParameterBinding _1 = (@Nullable MappingParameterBinding)ITERATOR__1.next();
+						/**
+						 * boundVariable
+						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/QVTimperative\'::MappingParameterBinding::boundVariable\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
+						//
+						if (accumulator.includes(boundVariable) == ValueUtil.TRUE_VALUE) {
+							result = false;
+							break;			// Abort after second find
+						}
+						else {
+							accumulator.add(boundVariable);
+						}
 					}
-					else {
-						accumulator.add(boundVariable);
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

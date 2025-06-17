@@ -45,6 +45,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
@@ -635,19 +636,21 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 					final /*@NonInvalid*/ @NonNull List<TxParameterNode> ownedTxParameterNodes = this.getOwnedTxParameterNodes();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxParameterNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxParameterNode, ownedTxParameterNodes);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxParameterNode);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull TxParameterNode _1 = (@NonNull TxParameterNode)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable TxParameterNode _1 = (@Nullable TxParameterNode)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;

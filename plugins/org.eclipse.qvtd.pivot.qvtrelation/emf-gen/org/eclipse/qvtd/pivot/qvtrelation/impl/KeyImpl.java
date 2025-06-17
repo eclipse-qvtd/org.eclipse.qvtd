@@ -349,20 +349,22 @@ public class KeyImpl extends ElementImpl implements Key {
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
 							/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
-							@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
+							@Nullable Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
 							/*@Thrown*/ @NonNull SequenceValue collect;
 							while (true) {
 								if (!ITERATOR__1.hasNext()) {
 									collect = accumulator;
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
+								/*@NonInvalid*/ @Nullable TypedModel _1 = (@Nullable TypedModel)ITERATOR__1.next();
 								/**
 								 * usedPackage
 								 */
-								final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
-								final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
+								if (_1 == null) {
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
+								}
+								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
+								final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
 								//
 								for (Object value : BOXED_usedPackage.flatten().getElements()) {
 									accumulator.add(value);
@@ -497,20 +499,22 @@ public class KeyImpl extends ElementImpl implements Key {
 							final /*@Thrown*/ @NonNull SetValue safe_excluding_sources = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_ownedKeys_source, (Object)null);
 							final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_excluding_sources, this);
 							/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-							@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
+							@Nullable Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
 							/*@Thrown*/ @NonNull BagValue collect;
 							while (true) {
 								if (!ITERATOR__1_0.hasNext()) {
 									collect = accumulator;
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull Key _1_0 = (@NonNull Key)ITERATOR__1_0.next();
+								/*@NonInvalid*/ @Nullable Key _1_0 = (@Nullable Key)ITERATOR__1_0.next();
 								/**
 								 * identifies
 								 */
+								if (_1_0 == null) {
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
+								}
 								@SuppressWarnings("null")
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = _1_0.getIdentifies();
+								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = _1_0.getIdentifies();
 								//
 								accumulator.add(identifies_0);
 							}
@@ -611,20 +615,22 @@ public class KeyImpl extends ElementImpl implements Key {
 							final /*@Thrown*/ @NonNull SetValue safe_excluding_sources = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_ownedKeys_source, (Object)null);
 							final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_excluding_sources, this);
 							/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-							@NonNull Iterator<Object> ITERATOR__1 = otherKeys.iterator();
+							@Nullable Iterator<Object> ITERATOR__1 = otherKeys.iterator();
 							/*@Thrown*/ @NonNull BagValue collect;
 							while (true) {
 								if (!ITERATOR__1.hasNext()) {
 									collect = accumulator;
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull Key _1 = (@NonNull Key)ITERATOR__1.next();
+								/*@NonInvalid*/ @Nullable Key _1 = (@Nullable Key)ITERATOR__1.next();
 								/**
 								 * identifies
 								 */
+								if (_1 == null) {
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
+								}
 								@SuppressWarnings("null")
-								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
+								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
 								//
 								accumulator.add(identifies);
 							}
@@ -693,42 +699,61 @@ public class KeyImpl extends ElementImpl implements Key {
 				IF_le = true;
 			}
 			else {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
-				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@NonInvalid*/ @Nullable Boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						if (accumulator == ValueUtil.TRUE_VALUE) {
-							result = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							throw (InvalidValueException)accumulator;
-						}
-						break;
-					}
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
-					/**
-					 * opposite <> null
-					 */
-					final /*@NonInvalid*/ @Nullable Property opposite = _1.getOpposite();
-					final /*@NonInvalid*/ boolean ne = opposite != null;
-					//
-					if (!ne) {					// Normal unsuccessful body evaluation result
-						result = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately
+					final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == ValueUtil.TRUE_VALUE) {
+								result = ValueUtil.TRUE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
+						}
+						/*@NonInvalid*/ @Nullable Property _1 = (@Nullable Property)ITERATOR__1.next();
+						/**
+						 * opposite <> null
+						 */
+						/*@Caught*/ @NonNull Object CAUGHT_ne;
+						try {
+							if (_1 == null) {
+								throw new InvalidValueException("Null source for \'Property::opposite\'");
+							}
+							final /*@Thrown*/ @Nullable Property opposite = _1.getOpposite();
+							final /*@Thrown*/ boolean ne = opposite != null;
+							CAUGHT_ne = ne;
+						}
+						catch (Exception e) {
+							CAUGHT_ne = ValueUtil.createInvalidValue(e);
+						}
+						//
+						if (CAUGHT_ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+							result = ValueUtil.FALSE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (CAUGHT_ne == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+							;															// Carry on
+						}
+						else if (CAUGHT_ne instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_ne;									// Cache an exception failure
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+						}
 					}
-					else if (ne) {				// Normal successful body evaluation result
-						;															// Carry on
-					}
-					else {															// Impossible badly typed result
-						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;
@@ -777,7 +802,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
 					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
@@ -789,8 +814,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							}
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Property _1 = (@Nullable Property)ITERATOR__1.next();
 						/**
 						 * self.identifies.conformsTo(type)
 						 */
@@ -798,7 +822,10 @@ public class KeyImpl extends ElementImpl implements Key {
 						try {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
-							final /*@NonInvalid*/ @Nullable Type type = _1.getType();
+							if (_1 == null) {
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
+							}
+							final /*@Thrown*/ @Nullable Type type = _1.getType();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, identifies, type).booleanValue();
 							CAUGHT_conformsTo = conformsTo;
 						}
@@ -874,7 +901,7 @@ public class KeyImpl extends ElementImpl implements Key {
 					final /*@NonInvalid*/ @NonNull List<Property> part = this.getPart();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
 					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
@@ -886,8 +913,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							}
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Property _1 = (@Nullable Property)ITERATOR__1.next();
 						/**
 						 * self.identifies.conformsTo(owningClass)
 						 */
@@ -895,7 +921,10 @@ public class KeyImpl extends ElementImpl implements Key {
 						try {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = _1.getOwningClass();
+							if (_1 == null) {
+								throw new InvalidValueException("Null source for \'Property::owningClass\'");
+							}
+							final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = _1.getOwningClass();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, identifies, owningClass).booleanValue();
 							CAUGHT_conformsTo = conformsTo;
 						}
@@ -973,19 +1002,21 @@ public class KeyImpl extends ElementImpl implements Key {
 					final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 					/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Property);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
 					/*@Thrown*/ @NonNull BagValue collect;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect = accumulator;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable Property _1 = (@Nullable Property)ITERATOR__1.next();
 						/**
 						 * opposite
 						 */
-						final /*@NonInvalid*/ @Nullable Property opposite = _1.getOpposite();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'Property::opposite\'");
+						}
+						final /*@Thrown*/ @Nullable Property opposite = _1.getOpposite();
 						//
 						accumulator.add(opposite);
 					}

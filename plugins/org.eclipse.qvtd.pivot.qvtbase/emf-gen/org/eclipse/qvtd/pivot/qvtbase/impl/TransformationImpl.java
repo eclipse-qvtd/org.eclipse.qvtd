@@ -671,7 +671,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = extends1.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
 							/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-							@NonNull Iterator<Object> ITERATOR_etm = BOXED_modelParameter.iterator();
+							@Nullable Iterator<Object> ITERATOR_etm = BOXED_modelParameter.iterator();
 							/*@Thrown*/ @Nullable Boolean forAll;
 							while (true) {
 								if (!ITERATOR_etm.hasNext()) {
@@ -683,66 +683,85 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 									}
 									break;
 								}
-								@SuppressWarnings("null")
-								/*@NonInvalid*/ @NonNull TypedModel etm = (@NonNull TypedModel)ITERATOR_etm.next();
+								/*@NonInvalid*/ @Nullable TypedModel etm = (@Nullable TypedModel)ITERATOR_etm.next();
 								/**
 								 *
 								 * self.modelParameter->select(name = etm.name)
 								 * .usedPackage->includesAll(etm.usedPackage)
 								 */
-								final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
-								final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
-								/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
-								@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter_0.iterator();
-								/*@NonInvalid*/ @NonNull OrderedSetValue select;
-								while (true) {
-									if (!ITERATOR__1.hasNext()) {
-										select = accumulator_0;
-										break;
+								/*@Caught*/ @NonNull Object CAUGHT_includesAll;
+								try {
+									if (etm == null) {
+										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
 									}
-									@SuppressWarnings("null")
-									/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
-									/**
-									 * name = etm.name
-									 */
-									final /*@NonInvalid*/ @Nullable String name = _1.getName();
-									final /*@NonInvalid*/ @Nullable String name_0 = etm.getName();
-									final /*@NonInvalid*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
-									//
-									if (eq) {
-										accumulator_0.add(_1);
+									final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
+									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
+									/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
+									@Nullable Iterator<Object> ITERATOR__1 = BOXED_modelParameter_0.iterator();
+									/*@Thrown*/ @NonNull OrderedSetValue select;
+									while (true) {
+										if (!ITERATOR__1.hasNext()) {
+											select = accumulator_0;
+											break;
+										}
+										/*@NonInvalid*/ @Nullable TypedModel _1 = (@Nullable TypedModel)ITERATOR__1.next();
+										/**
+										 * name = etm.name
+										 */
+										if (_1 == null) {
+											throw new InvalidValueException("Null source for \'NamedElement::name\'");
+										}
+										final /*@Thrown*/ @Nullable String name = _1.getName();
+										final /*@Thrown*/ @Nullable String name_0 = etm.getName();
+										final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
+										//
+										if (eq == ValueUtil.TRUE_VALUE) {
+											accumulator_0.add(_1);
+										}
 									}
+									/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_CLSSid_Package);
+									@Nullable Iterator<Object> ITERATOR__1_0 = select.iterator();
+									/*@Thrown*/ @NonNull SequenceValue collect;
+									while (true) {
+										if (!ITERATOR__1_0.hasNext()) {
+											collect = accumulator_1;
+											break;
+										}
+										/*@NonInvalid*/ @Nullable TypedModel _1_0 = (@Nullable TypedModel)ITERATOR__1_0.next();
+										/**
+										 * usedPackage
+										 */
+										if (_1_0 == null) {
+											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
+										}
+										final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1_0.getUsedPackage();
+										final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage);
+										//
+										for (Object value : BOXED_usedPackage.flatten().getElements()) {
+											accumulator_1.add(value);
+										}
+									}
+									final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage_0 = etm.getUsedPackage();
+									final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage_0 = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage_0);
+									if (BOXED_usedPackage_0 instanceof InvalidValueException) {
+										throw (InvalidValueException)BOXED_usedPackage_0;
+									}
+									final /*@Thrown*/ boolean includesAll = CollectionIncludesAllOperation.INSTANCE.evaluate(collect, BOXED_usedPackage_0).booleanValue();
+									CAUGHT_includesAll = includesAll;
 								}
-								/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_CLSSid_Package);
-								@NonNull Iterator<Object> ITERATOR__1_0 = select.iterator();
-								/*@NonInvalid*/ @NonNull SequenceValue collect;
-								while (true) {
-									if (!ITERATOR__1_0.hasNext()) {
-										collect = accumulator_1;
-										break;
-									}
-									@SuppressWarnings("null")
-									/*@NonInvalid*/ @NonNull TypedModel _1_0 = (@NonNull TypedModel)ITERATOR__1_0.next();
-									/**
-									 * usedPackage
-									 */
-									final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1_0.getUsedPackage();
-									final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage);
-									//
-									for (Object value : BOXED_usedPackage.flatten().getElements()) {
-										accumulator_1.add(value);
-									}
+								catch (Exception e) {
+									CAUGHT_includesAll = ValueUtil.createInvalidValue(e);
 								}
-								final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage_0 = etm.getUsedPackage();
-								final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage_0 = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage_0);
-								final /*@NonInvalid*/ boolean includesAll = CollectionIncludesAllOperation.INSTANCE.evaluate(collect, BOXED_usedPackage_0).booleanValue();
 								//
-								if (!includesAll) {					// Normal unsuccessful body evaluation result
+								if (CAUGHT_includesAll == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
 									forAll = ValueUtil.FALSE_VALUE;
 									break;														// Stop immediately
 								}
-								else if (includesAll) {				// Normal successful body evaluation result
+								else if (CAUGHT_includesAll == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
 									;															// Carry on
+								}
+								else if (CAUGHT_includesAll instanceof InvalidValueException) {		// Abnormal exception evaluation result
+									accumulator = CAUGHT_includesAll;									// Cache an exception failure
 								}
 								else {															// Impossible badly typed result
 									accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
@@ -819,19 +838,21 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 					final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter = this.getModelParameter();
 					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
 					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable TypedModel _1 = (@Nullable TypedModel)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;

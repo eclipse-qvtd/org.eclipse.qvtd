@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
@@ -23,6 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
@@ -82,7 +84,7 @@ public abstract class StatementImpl extends NamedElementImpl implements Statemen
 	@Override
 	public String joinNames(final EList<String> names) {
 		/**
-		 * '{' + names->iterate(n; s : String[1] = '' |
+		 * '{' + names?->iterate(n; s : String[1] = '' |
 		 *   if (s = '')
 		 *   then n
 		 *   else s + ';' + n
@@ -92,9 +94,10 @@ public abstract class StatementImpl extends NamedElementImpl implements Statemen
 		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
 		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
+		final /*@Thrown*/ @NonNull OrderedSetValue safe_iterate_sources = (@Nullable OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_names, (Object)null);
 		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
-		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
-		/*@NonInvalid*/ @Nullable String iterate;
+		@NonNull Iterator<Object> ITERATOR_n = safe_iterate_sources.iterator();
+		/*@Thrown*/ @Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;

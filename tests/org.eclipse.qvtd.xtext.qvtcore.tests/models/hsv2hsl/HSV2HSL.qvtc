@@ -106,7 +106,7 @@ query hsv2hsl::hsv2rgb(color : HSVTree::HSV[1]) : HSV2HSL::RGB[1]
 	let hh2 : Real = 2 * (hh1 - hh1.floor()) in
 	let x : Real = c * (1 - (hh2 - 1).abs()) in
 	let m : Real = v -c in
-	let t : Tuple(r:Real,g:Real,b:Real) =
+	let t : Tuple(r:Real[1],g:Real[1],b:Real[1]) =
 	if h < 60 then Tuple{r=c,g=x,b=0.0}
 	elseif h < 120 then Tuple{r=x,g=c,b=0.0}
 	elseif h < 180 then Tuple{r=0.0,g=c,b=x}

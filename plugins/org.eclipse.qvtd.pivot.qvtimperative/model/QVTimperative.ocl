@@ -93,7 +93,7 @@ inv CompatibleTypeForCheckedValue: isCheck implies boundVariable.type?.conformsT
 inv CompatibleTypeForUncheckedValue: not isCheck implies value.type?.conformsTo(boundVariable.type)
 
 context Statement
-def: joinNames(names : OrderedSet(String)) : String = '{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
+def: joinNames(names : OrderedSet(String)) : String[1] = '{' + names/*->sortedBy(n | n)*/?->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
 
 
 endpackage

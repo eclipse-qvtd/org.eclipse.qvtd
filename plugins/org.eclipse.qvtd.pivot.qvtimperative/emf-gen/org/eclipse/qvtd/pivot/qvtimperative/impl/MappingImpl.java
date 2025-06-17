@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
@@ -362,19 +363,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
 					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
-					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable MappingParameter _1 = (@Nullable MappingParameter)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;
@@ -445,19 +448,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 					final /*@NonInvalid*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
 					final /*@NonInvalid*/ @NonNull SetValue union = (@Nullable SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
 					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
-					@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
+					@Nullable Iterator<Object> ITERATOR__1 = union.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							result = true;
 							break;
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull VariableDeclaration _1 = (@NonNull VariableDeclaration)ITERATOR__1.next();
+						/*@NonInvalid*/ @Nullable VariableDeclaration _1 = (@Nullable VariableDeclaration)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+						}
+						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = false;

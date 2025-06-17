@@ -55,7 +55,7 @@ public class TargetUnqualifiedBLookupVisitor
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedBLookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedBLookupVisitor", 0);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 
 	protected final /*@Thrown*/ @NonNull Executor executor;
 	protected final /*@Thrown*/ @NonNull IdResolver idResolver;
@@ -103,19 +103,18 @@ public class TargetUnqualifiedBLookupVisitor
 			/*@Thrown*/ @Nullable LookupEnvironment IF_includes;
 			if (includes) {
 				/*@Thrown*/ OrderedSetValue.@NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
-				@NonNull Iterator<Object> ITERATOR_x = BOXED_ownsB.iterator();
+				@Nullable Iterator<Object> ITERATOR_x = BOXED_ownsB.iterator();
 				/*@Thrown*/ @NonNull OrderedSetValue select;
 				while (true) {
 					if (!ITERATOR_x.hasNext()) {
 						select = accumulator;
 						break;
 					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull B x = (@NonNull B)ITERATOR_x.next();
+					/*@NonInvalid*/ @Nullable B x = (@Nullable B)ITERATOR_x.next();
 					/**
 					 * _'<' : Boolean[1]
 					 */
-					final /*@NonInvalid*/ @Nullable IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, x);
+					final /*@Thrown*/ @Nullable IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownsB, x);
 					if (indexOf == null) {
 						throw new InvalidValueException("Null \'\'OclComparable\'\' rather than \'\'OclVoid\'\' value required");
 					}

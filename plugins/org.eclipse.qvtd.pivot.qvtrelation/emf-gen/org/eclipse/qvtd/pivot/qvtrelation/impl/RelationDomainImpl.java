@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -38,6 +39,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
@@ -205,33 +207,42 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 				IF_le = true;
 			}
 			else {
-				final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
-				final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
-				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
-				/*@NonInvalid*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = true;
-						break;
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
+					@Nullable Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = true;
+							break;
+						}
+						/*@NonInvalid*/ @Nullable RelationDomainAssignment _1 = (@Nullable RelationDomainAssignment)ITERATOR__1.next();
+						/**
+						 * variable
+						 */
+						if (_1 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationDomainAssignment::variable\'");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull VariableDeclaration variable = _1.getVariable();
+						//
+						if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
+							result = false;
+							break;			// Abort after second find
+						}
+						else {
+							accumulator.add(variable);
+						}
 					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull RelationDomainAssignment _1 = (@NonNull RelationDomainAssignment)ITERATOR__1.next();
-					/**
-					 * variable
-					 */
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull VariableDeclaration variable = _1.getVariable();
-					//
-					if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
-						result = false;
-						break;			// Abort after second find
-					}
-					else {
-						accumulator.add(variable);
-					}
+					CAUGHT_result = result;
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				IF_le = logDiagnostic;
 			}
 			return IF_le;

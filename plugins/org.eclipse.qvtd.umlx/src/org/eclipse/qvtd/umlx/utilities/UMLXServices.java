@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2ASReferenceSwitch;
+import org.eclipse.ocl.pivot.internal.utilities.OppositePropertyDetails;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -137,9 +137,9 @@ public class UMLXServices
 		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
 		if (oppositeRole != null) {
 			EMap<String, String> details = oppositeRole.getDetails();
-			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			String oppositeName = details.get(OppositePropertyDetails.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
 			if (oppositeName != null) {
-				String lowerValue = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_LOWER_KEY);
+				String lowerValue = details.get(OppositePropertyDetails.PROPERTY_OPPOSITE_ROLE_LOWER_KEY);
 				IntegerValue one = ValueUtil.ONE_VALUE;
 				IntegerValue lower = lowerValue != null ? ValueUtil.integerValueOf(lowerValue) : one;
 				if (lower.isInvalid()) {
@@ -176,7 +176,7 @@ public class UMLXServices
 		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
 		if (oppositeRole != null) {
 			EMap<String, String> details = oppositeRole.getDetails();
-			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			String oppositeName = details.get(OppositePropertyDetails.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
 			if (oppositeName != null) {
 				return oppositeName;
 			}
@@ -202,9 +202,9 @@ public class UMLXServices
 		EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0);
 		if (oppositeRole != null) {
 			EMap<String, String> details = oppositeRole.getDetails();
-			String oppositeName = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
+			String oppositeName = details.get(OppositePropertyDetails.PROPERTY_OPPOSITE_ROLE_NAME_KEY);
 			if (oppositeName != null) {
-				String upperValue = details.get(Ecore2ASReferenceSwitch.PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
+				String upperValue = details.get(OppositePropertyDetails.PROPERTY_OPPOSITE_ROLE_UPPER_KEY);
 				UnlimitedNaturalValue unlimitedOne = ValueUtil.UNLIMITED_ONE_VALUE;
 				UnlimitedNaturalValue upper = upperValue != null ? ValueUtil.unlimitedNaturalValueOf(upperValue) : unlimitedOne;
 				if (upper.isInvalid()) {
