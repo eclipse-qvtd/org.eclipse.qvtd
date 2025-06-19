@@ -143,7 +143,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain qvtr qvtrFunction : Function {
 				ownedParameters = qvtrParameter : FunctionParameter {
 					name = 'self',
-					type = getType(atlContext.context_)
+					type = getType(atlContext.context_),
+					isRequired = true
 				}
 			};
 			where {
@@ -195,7 +196,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		top relation mapInPattern {
 			atlModule : atlMM::Module;
 			qvtrTypedModel : qvtbMM::TypedModel;
-			atlModel : atloclMM::OclModel = atlPattern.elements.type->selectByKind(atloclMM::OclModelElement)->any(true).model;
+			atlModel : atloclMM::OclModel = atlPattern.elements?.type->selectByKind(atloclMM::OclModelElement)->any(true).model;
 			enforce domain atl atlPattern : InPattern {
 				rule = atlRule : MatchedRule{
 --					module = atlModule
@@ -402,6 +403,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				bindsTo = qvtrVariable : TemplateVariable{
 					name = elementName,
 					type = getType(atlElement.type),
+					isRequired = true,
 					Relation = qvtrRelation,
 					RelationDomain = qvtrDomain : RelationDomain{
 --FIXME					rule = qvtrRelation,
@@ -490,7 +492,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};	   
 			enforce domain qvtr qvtrExpression : BooleanLiteralExp {
 				booleanSymbol = symbol,
-				type = pivotMM::Boolean
+				type = pivotMM::Boolean,
+				isRequired = true
 			};
 		}
 		
@@ -526,7 +529,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};	   
 			enforce domain qvtr qvtrExpression : IntegerLiteralExp {
 				integerSymbol = symbol,
-				type = pivotMM::Integer
+				type = pivotMM::Integer,
+				isRequired = true
 			};
 		}
 		
@@ -552,11 +556,13 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				ownedSource = qvtrSource : VariableExp{
 					referredVariable = qvtrThisVariable,
 					type = qvtrThisVariable.type,
+					isRequired = qvtrThisVariable.isRequired,
 					name = qvtrThisVariable.name			-- debug/readability aid
 				},
 				ownedArguments = qvtrSourceArgument : OCLExpression{},
 				referredOperation = qvtrOperation,
 				type = qvtrOperation.type,
+				isRequired = qvtrOperation.isRequired,
 				name = propertyName			-- debug/readability aid
 			};
 			when {
@@ -582,6 +588,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredProperty = qvtrProperty,
 				type = qvtrProperty.type,
+				isRequired = qvtrProperty.isRequired,
 				name = propertyName			-- debug/readability aid
 			}
 			default_values {
@@ -590,6 +597,25 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			when {
 				atlAttributes->isEmpty();
 				mapOclExpression(atlSource, qvtrSource);
+			}
+		}
+		
+		/**
+		 *  atl::VariableExp with 'null' name <=> ocl::NullLiteralExp
+		 */
+		top relation mapNullLiteralExp overrides mapOclExpression {
+			varName : String;
+			enforce domain atl atlExpression : VariableExp {
+				referredVariable = atlVariable : VariableDeclaration{
+					varName = varName
+				}
+			};	   
+			enforce domain qvtr qvtrExpression : NullLiteralExp {
+				type = pivotMM::VoidType,
+				isRequired = false
+			};
+			where {
+				varName = 'null';
 			}
 		}
 		
@@ -623,11 +649,13 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				ownedSource = qvtrSource : VariableExp{
 					referredVariable = qvtrThisVariable,
 					type = qvtrThisVariable.type,
+					isRequired = qvtrThisVariable.isRequired,
 					name = qvtrThisVariable.name			-- debug/readability aid
 				},
 				ownedArguments = qvtrSourceArgument : OCLExpression{},
 				referredOperation = qvtrOperation,
 				type = qvtrOperation.type,
+				isRequired = qvtrOperation.isRequired,
 				name = operationName			-- debug/readability aid
 			};
 			when {
@@ -653,6 +681,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredOperation = qvtrOperation,
 				type = qvtrOperation.type,
+				isRequired = qvtrOperation.isRequired,
 				name = operationName			-- debug/readability aid
 			}
 			default_values {
@@ -698,6 +727,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredOperation = qvtrOperation,
 				type = qvtrOperation.type,
+				isRequired = qvtrOperation.isRequired,
 				name = operationName			-- debug/readability aid
 			};
 			when {
@@ -716,7 +746,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};	   
 			enforce domain qvtr qvtrExpression : RealLiteralExp {
 				realSymbol = symbol,
-				type = pivotMM::Real
+				type = pivotMM::Real,
+				isRequired = true
 			};
 		} */
 		
@@ -730,7 +761,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			};	   
 			enforce domain qvtr qvtrExpression : StringLiteralExp {
 				stringSymbol = symbol,
-				type = pivotMM::String
+				type = pivotMM::String,
+				isRequired = true
 			};
 		}
 		
@@ -743,7 +775,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		}
 		
 		/**
-		 *  atl::VariableExp <=> ocl::VariableExp
+		 *  atl::VariableExp with non-'null' name <=> ocl::VariableExp
 		 */
 		top relation mapVariableExp overrides mapOclExpression {
 			varName : String;
@@ -757,6 +789,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 --				type = getType(atlExpression.referredVariable)
 			};
 			where {
+				varName <> 'null';
 				mapVariableExp_referredVariable(atlExpression, qvtrExpression);
 			}
 		}
@@ -778,6 +811,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain qvtr qvtrExpression : VariableExp {
 				referredVariable = qvtrVariable : VariableDeclaration{},
 				type = qvtrVariable.type, -- getType(atlHelper.definition.context_.context_),
+				isRequired = qvtrVariable.isRequired,
 				name = 'self'
 			};
 			when {
@@ -791,6 +825,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain qvtr qvtrExpression : VariableExp {
 				referredVariable = qvtrVariable : VariableDeclaration{},
 				type = qvtrVariable.type,
+				isRequired = qvtrVariable.isRequired,
 				name = qvtrVariable.name			-- debug/readability aid
 			};
 			when {

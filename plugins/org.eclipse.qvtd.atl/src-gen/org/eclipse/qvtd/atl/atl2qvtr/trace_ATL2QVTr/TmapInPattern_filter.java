@@ -21,7 +21,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 import org.eclipse.qvtd.runtime.qvttrace.Execution;
 
@@ -34,15 +33,14 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlExpression <em>T1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlPattern <em>T1atl Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlRule <em>T1atl Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2p <em>T2p</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrDomain <em>T2qvtr Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrExpression <em>T2qvtr Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2w <em>T2w</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getWmapInPattern <em>Wmap In Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlExpression <em>T3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlPattern <em>T3atl Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlRule <em>T3atl Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrExpression <em>T4qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrPattern <em>T4qvtr Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrPredicate <em>T4qvtr Predicate</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  * </ul>
@@ -53,248 +51,225 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  */
 public interface TmapInPattern_filter extends Execution {
 	/**
-	 * Returns the value of the '<em><b>T1atl Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>T1atl Expression</em>' reference isn't clear,
+	 * If the meaning of the '<em>S0global</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Expression</em>' reference.
-	 * @see #setT1atlExpression(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T1atlExpression()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	OclExpression getT1atlExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlExpression <em>T1atl Expression</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Expression</em>' reference.
-	 * @see #getT1atlExpression()
-	 * @generated
-	 */
-	void setT1atlExpression(OclExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>T1atl Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #setT1atlPattern(InPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T1atlPattern()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	InPattern getT1atlPattern();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlPattern <em>T1atl Pattern</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Pattern</em>' reference.
-	 * @see #getT1atlPattern()
-	 * @generated
-	 */
-	void setT1atlPattern(InPattern value);
-
-	/**
-	 * Returns the value of the '<em><b>T1atl Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Rule</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Rule</em>' reference.
-	 * @see #setT1atlRule(MatchedRule)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T1atlRule()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	MatchedRule getT1atlRule();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT1atlRule <em>T1atl Rule</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Rule</em>' reference.
-	 * @see #getT1atlRule()
-	 * @generated
-	 */
-	void setT1atlRule(MatchedRule value);
-
-	/**
-	 * Returns the value of the '<em><b>T2p</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2p</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2p</em>' reference.
-	 * @see #setT2p(Predicate)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T2p()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	Predicate getT2p();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2p <em>T2p</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2p</em>' reference.
-	 * @see #getT2p()
-	 * @generated
-	 */
-	void setT2p(Predicate value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Domain</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #setT2qvtrDomain(RelationDomain)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T2qvtrDomain()
-	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	RelationDomain getT2qvtrDomain();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrDomain <em>T2qvtr Domain</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Domain</em>' reference.
-	 * @see #getT2qvtrDomain()
-	 * @generated
-	 */
-	void setT2qvtrDomain(RelationDomain value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Expression</em>' reference.
-	 * @see #setT2qvtrExpression(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T2qvtrExpression()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	OCLExpression getT2qvtrExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrExpression <em>T2qvtr Expression</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Expression</em>' reference.
-	 * @see #getT2qvtrExpression()
-	 * @generated
-	 */
-	void setT2qvtrExpression(OCLExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>T2qvtr Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2qvtr Relation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #setT2qvtrRelation(Relation)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T2qvtrRelation()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	Relation getT2qvtrRelation();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2qvtrRelation <em>T2qvtr Relation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2qvtr Relation</em>' reference.
-	 * @see #getT2qvtrRelation()
-	 * @generated
-	 */
-	void setT2qvtrRelation(Relation value);
-
-	/**
-	 * Returns the value of the '<em><b>T2w</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2w</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2w</em>' reference.
-	 * @see #setT2w(Pattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T2w()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	Pattern getT2w();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT2w <em>T2w</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2w</em>' reference.
-	 * @see #getT2w()
-	 * @generated
-	 */
-	void setT2w(Pattern value);
-
-	/**
-	 * Returns the value of the '<em><b>Wmap In Pattern</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wmap In Pattern</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Wmap In Pattern</em>' reference.
-	 * @see #setWmapInPattern(TmapInPattern)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_WmapInPattern()
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_S0global()
 	 * @model
 	 * @generated
 	 */
-	TmapInPattern getWmapInPattern();
+	Boolean getS0global();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getWmapInPattern <em>Wmap In Pattern</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getS0global <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Wmap In Pattern</em>' reference.
-	 * @see #getWmapInPattern()
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
 	 * @generated
 	 */
-	void setWmapInPattern(TmapInPattern value);
+	void setS0global(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T3atl Expression</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Expression</em>' reference.
+	 * @see #setT3atlExpression(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T3atlExpression()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	OclExpression getT3atlExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlExpression <em>T3atl Expression</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Expression</em>' reference.
+	 * @see #getT3atlExpression()
+	 * @generated
+	 */
+	void setT3atlExpression(OclExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Pattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T3atl Pattern</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #setT3atlPattern(InPattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T3atlPattern()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	InPattern getT3atlPattern();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlPattern <em>T3atl Pattern</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Pattern</em>' reference.
+	 * @see #getT3atlPattern()
+	 * @generated
+	 */
+	void setT3atlPattern(InPattern value);
+
+	/**
+	 * Returns the value of the '<em><b>T3atl Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T3atl Rule</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T3atl Rule</em>' reference.
+	 * @see #setT3atlRule(MatchedRule)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T3atlRule()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
+	 * @generated
+	 */
+	MatchedRule getT3atlRule();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT3atlRule <em>T3atl Rule</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T3atl Rule</em>' reference.
+	 * @see #getT3atlRule()
+	 * @generated
+	 */
+	void setT3atlRule(MatchedRule value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T4qvtr Expression</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Expression</em>' reference.
+	 * @see #setT4qvtrExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T4qvtrExpression()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	OCLExpression getT4qvtrExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrExpression <em>T4qvtr Expression</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Expression</em>' reference.
+	 * @see #getT4qvtrExpression()
+	 * @generated
+	 */
+	void setT4qvtrExpression(OCLExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Pattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T4qvtr Pattern</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Pattern</em>' reference.
+	 * @see #setT4qvtrPattern(Pattern)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T4qvtrPattern()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	Pattern getT4qvtrPattern();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrPattern <em>T4qvtr Pattern</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Pattern</em>' reference.
+	 * @see #getT4qvtrPattern()
+	 * @generated
+	 */
+	void setT4qvtrPattern(Pattern value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Predicate</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T4qvtr Predicate</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Predicate</em>' reference.
+	 * @see #setT4qvtrPredicate(Predicate)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T4qvtrPredicate()
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='TmapInPattern_filter'"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	Predicate getT4qvtrPredicate();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrPredicate <em>T4qvtr Predicate</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Predicate</em>' reference.
+	 * @see #getT4qvtrPredicate()
+	 * @generated
+	 */
+	void setT4qvtrPredicate(Predicate value);
+
+	/**
+	 * Returns the value of the '<em><b>T4qvtr Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T4qvtr Relation</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #setT4qvtrRelation(Relation)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_T4qvtrRelation()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	Relation getT4qvtrRelation();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter#getT4qvtrRelation <em>T4qvtr Relation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T4qvtr Relation</em>' reference.
+	 * @see #getT4qvtrRelation()
+	 * @generated
+	 */
+	void setT4qvtrRelation(Relation value);
 
 	/**
 	 * Returns the value of the '<em><b>Wmap Matched Rule</b></em>' reference.
@@ -307,7 +282,7 @@ public interface TmapInPattern_filter extends Execution {
 	 * @return the value of the '<em>Wmap Matched Rule</em>' reference.
 	 * @see #setWmapMatchedRule(TmapMatchedRule)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_WmapMatchedRule()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	TmapMatchedRule getWmapMatchedRule();
@@ -333,7 +308,7 @@ public interface TmapInPattern_filter extends Execution {
 	 * @return the value of the '<em>Wmap Ocl Expression</em>' reference.
 	 * @see #setWmapOclExpression(DmapOclExpression)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapInPattern_filter_WmapOclExpression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DmapOclExpression getWmapOclExpression();

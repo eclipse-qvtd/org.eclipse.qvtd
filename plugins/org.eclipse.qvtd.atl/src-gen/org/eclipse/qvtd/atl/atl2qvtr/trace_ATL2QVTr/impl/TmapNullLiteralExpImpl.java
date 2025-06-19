@@ -20,8 +20,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
+
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression;
-import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBooleanExp;
+import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNullLiteralExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
@@ -29,64 +31,75 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tmap Boolean Exp</b></em>'.
+ * An implementation of the model object '<em><b>Tmap Null Literal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBooleanExpImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBooleanExpImpl#isT1symbol <em>T1symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapNullLiteralExpImpl#getDispatcher <em>Dispatcher</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapNullLiteralExpImpl#getT1varName <em>T1var Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapNullLiteralExpImpl#getT3atlVariable <em>T3atl Variable</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBooleanExp {
+public class TmapNullLiteralExpImpl extends ImapOclExpressionImpl implements TmapNullLiteralExp {
 	/**
-	 * The number of structural features of the '<em>Tmap Boolean Exp</em>' class.
+	 * The number of structural features of the '<em>Tmap Null Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_BOOLEAN_EXP_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2;
+	public static final int TMAP_NULL_LITERAL_EXP_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of operations of the '<em>Tmap Boolean Exp</em>' class.
+	 * The number of operations of the '<em>Tmap Null Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_BOOLEAN_EXP_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+	public static final int TMAP_NULL_LITERAL_EXP_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
 
 
 	/**
-	 * The default value of the '{@link #isT1symbol() <em>T1symbol</em>}' attribute.
+	 * The default value of the '{@link #getT1varName() <em>T1var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isT1symbol()
+	 * @see #getT1varName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean T1SYMBOL_EDEFAULT = false;
+	protected static final String T1VAR_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isT1symbol() <em>T1symbol</em>}' attribute.
+	 * The cached value of the '{@link #getT1varName() <em>T1var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isT1symbol()
+	 * @see #getT1varName()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean t1symbol = T1SYMBOL_EDEFAULT;
+	protected String t1varName = T1VAR_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getT3atlVariable() <em>T3atl Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT3atlVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected VariableDeclaration t3atlVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TmapBooleanExpImpl() {
+	protected TmapNullLiteralExpImpl() {
 		super();
 	}
 
@@ -97,7 +110,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return trace_ATL2QVTrPackage.Literals.TMAP_BOOLEAN_EXP;
+		return trace_ATL2QVTrPackage.Literals.TMAP_NULL_LITERAL_EXP;
 	}
 
 	/**
@@ -135,7 +148,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -149,8 +162,8 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 * @generated
 	 */
 	@Override
-	public boolean isT1symbol() {
-		return t1symbol;
+	public String getT1varName() {
+		return t1varName;
 	}
 
 	/**
@@ -159,11 +172,51 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 * @generated
 	 */
 	@Override
-	public void setT1symbol(boolean newT1symbol) {
-		boolean oldT1symbol = t1symbol;
-		t1symbol = newT1symbol;
+	public void setT1varName(String newT1varName) {
+		String oldT1varName = t1varName;
+		t1varName = newT1varName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1symbol, t1symbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1varName, t1varName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public VariableDeclaration getT3atlVariable() {
+		if (t3atlVariable != null && t3atlVariable.eIsProxy()) {
+			InternalEObject oldT3atlVariable = t3atlVariable;
+			t3atlVariable = (VariableDeclaration)eResolveProxy(oldT3atlVariable);
+			if (t3atlVariable != oldT3atlVariable) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
+			}
+		}
+		return t3atlVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableDeclaration basicGetT3atlVariable() {
+		return t3atlVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT3atlVariable(VariableDeclaration newT3atlVariable) {
+		VariableDeclaration oldT3atlVariable = t3atlVariable;
+		t3atlVariable = newT3atlVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlVariable, t3atlVariable));
 	}
 
 	/**
@@ -205,7 +258,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapOclExpression.class, msgs);
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -221,7 +274,10 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return isT1symbol();
+				return getT1varName();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				if (resolve) return getT3atlVariable();
+				return basicGetT3atlVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,7 +294,10 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 				setDispatcher((DmapOclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1symbol((Boolean)newValue);
+				setT1varName((String)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				setT3atlVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -256,7 +315,10 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 				setDispatcher((DmapOclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1symbol(T1SYMBOL_EDEFAULT);
+				setT1varName(T1VAR_NAME_EDEFAULT);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				setT3atlVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -273,7 +335,9 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1symbol != T1SYMBOL_EDEFAULT;
+				return T1VAR_NAME_EDEFAULT == null ? t1varName != null : !T1VAR_NAME_EDEFAULT.equals(t1varName);
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
+				return t3atlVariable != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -288,11 +352,11 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t1symbol: ");
-		result.append(t1symbol);
+		result.append(" (t1varName: ");
+		result.append(t1varName);
 		result.append(')');
 		return result.toString();
 	}
 
 
-} //TmapBooleanExpImpl
+} //TmapNullLiteralExpImpl

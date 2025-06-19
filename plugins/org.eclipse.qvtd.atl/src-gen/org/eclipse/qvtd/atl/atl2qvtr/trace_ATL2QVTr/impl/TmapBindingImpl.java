@@ -42,13 +42,14 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT0propertyName <em>T0property Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT1atlBinding <em>T1atl Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT1atlExpression <em>T1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT1atlOutPatternElement <em>T1atl Out Pattern Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT2qvtrExpression <em>T2qvtr Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT2qvtrPart <em>T2qvtr Part</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT2qvtrTemplate <em>T2qvtr Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT1propertyName <em>T1property Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT3atlBinding <em>T3atl Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT3atlExpression <em>T3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT3atlOutPatternElement <em>T3atl Out Pattern Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT4qvtrExpression <em>T4qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT4qvtrPart <em>T4qvtr Part</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getT4qvtrTemplate <em>T4qvtr Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapBindingImpl#getWmapSimpleOutPatternElement <em>Wmap Simple Out Pattern Element</em>}</li>
  * </ul>
@@ -63,7 +64,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_BINDING_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 9;
+	public static final int TMAP_BINDING_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of operations of the '<em>Tmap Binding</em>' class.
@@ -76,84 +77,104 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 
 
 	/**
-	 * The default value of the '{@link #getT0propertyName() <em>T0property Name</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0propertyName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0PROPERTY_NAME_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0propertyName() <em>T0property Name</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0propertyName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0propertyName = T0PROPERTY_NAME_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlBinding() <em>T1atl Binding</em>}' reference.
+	 * The default value of the '{@link #getT1propertyName() <em>T1property Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlBinding()
+	 * @see #getT1propertyName()
 	 * @generated
 	 * @ordered
 	 */
-	protected Binding t1atlBinding;
+	protected static final String T1PROPERTY_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT1atlExpression() <em>T1atl Expression</em>}' reference.
+	 * The cached value of the '{@link #getT1propertyName() <em>T1property Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlExpression()
+	 * @see #getT1propertyName()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression t1atlExpression;
+	protected String t1propertyName = T1PROPERTY_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlOutPatternElement() <em>T1atl Out Pattern Element</em>}' reference.
+	 * The cached value of the '{@link #getT3atlBinding() <em>T3atl Binding</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlOutPatternElement()
+	 * @see #getT3atlBinding()
 	 * @generated
 	 * @ordered
 	 */
-	protected SimpleOutPatternElement t1atlOutPatternElement;
+	protected Binding t3atlBinding;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrExpression() <em>T2qvtr Expression</em>}' reference.
+	 * The cached value of the '{@link #getT3atlExpression() <em>T3atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrExpression()
+	 * @see #getT3atlExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression t2qvtrExpression;
+	protected OclExpression t3atlExpression;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrPart() <em>T2qvtr Part</em>}' reference.
+	 * The cached value of the '{@link #getT3atlOutPatternElement() <em>T3atl Out Pattern Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrPart()
+	 * @see #getT3atlOutPatternElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected PropertyTemplateItem t2qvtrPart;
+	protected SimpleOutPatternElement t3atlOutPatternElement;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrTemplate() <em>T2qvtr Template</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrExpression() <em>T4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrTemplate()
+	 * @see #getT4qvtrExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ObjectTemplateExp t2qvtrTemplate;
+	protected OCLExpression t4qvtrExpression;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrPart() <em>T4qvtr Part</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrPart()
+	 * @generated
+	 * @ordered
+	 */
+	protected PropertyTemplateItem t4qvtrPart;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrTemplate() <em>T4qvtr Template</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected ObjectTemplateExp t4qvtrTemplate;
 
 	/**
 	 * The cached value of the '{@link #getWmapOclExpression() <em>Wmap Ocl Expression</em>}' reference.
@@ -200,8 +221,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public String getT0propertyName() {
-		return t0propertyName;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -210,11 +231,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT0propertyName(String newT0propertyName) {
-		String oldT0propertyName = t0propertyName;
-		t0propertyName = newT0propertyName;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT0propertyName, t0propertyName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -223,16 +244,39 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public Binding getT1atlBinding() {
-		if (t1atlBinding != null && t1atlBinding.eIsProxy()) {
-			InternalEObject oldT1atlBinding = t1atlBinding;
-			t1atlBinding = (Binding)eResolveProxy(oldT1atlBinding);
-			if (t1atlBinding != oldT1atlBinding) {
+	public String getT1propertyName() {
+		return t1propertyName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT1propertyName(String newT1propertyName) {
+		String oldT1propertyName = t1propertyName;
+		t1propertyName = newT1propertyName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1propertyName, t1propertyName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Binding getT3atlBinding() {
+		if (t3atlBinding != null && t3atlBinding.eIsProxy()) {
+			InternalEObject oldT3atlBinding = t3atlBinding;
+			t3atlBinding = (Binding)eResolveProxy(oldT3atlBinding);
+			if (t3atlBinding != oldT3atlBinding) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlBinding, t1atlBinding));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlBinding, t3atlBinding));
 			}
 		}
-		return t1atlBinding;
+		return t3atlBinding;
 	}
 
 	/**
@@ -240,8 +284,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Binding basicGetT1atlBinding() {
-		return t1atlBinding;
+	public Binding basicGetT3atlBinding() {
+		return t3atlBinding;
 	}
 
 	/**
@@ -250,11 +294,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT1atlBinding(Binding newT1atlBinding) {
-		Binding oldT1atlBinding = t1atlBinding;
-		t1atlBinding = newT1atlBinding;
+	public void setT3atlBinding(Binding newT3atlBinding) {
+		Binding oldT3atlBinding = t3atlBinding;
+		t3atlBinding = newT3atlBinding;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlBinding, t1atlBinding));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlBinding, t3atlBinding));
 	}
 
 	/**
@@ -263,16 +307,16 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public OclExpression getT1atlExpression() {
-		if (t1atlExpression != null && t1atlExpression.eIsProxy()) {
-			InternalEObject oldT1atlExpression = t1atlExpression;
-			t1atlExpression = (OclExpression)eResolveProxy(oldT1atlExpression);
-			if (t1atlExpression != oldT1atlExpression) {
+	public OclExpression getT3atlExpression() {
+		if (t3atlExpression != null && t3atlExpression.eIsProxy()) {
+			InternalEObject oldT3atlExpression = t3atlExpression;
+			t3atlExpression = (OclExpression)eResolveProxy(oldT3atlExpression);
+			if (t3atlExpression != oldT3atlExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlExpression, t1atlExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlExpression, t3atlExpression));
 			}
 		}
-		return t1atlExpression;
+		return t3atlExpression;
 	}
 
 	/**
@@ -280,8 +324,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression basicGetT1atlExpression() {
-		return t1atlExpression;
+	public OclExpression basicGetT3atlExpression() {
+		return t3atlExpression;
 	}
 
 	/**
@@ -290,11 +334,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT1atlExpression(OclExpression newT1atlExpression) {
-		OclExpression oldT1atlExpression = t1atlExpression;
-		t1atlExpression = newT1atlExpression;
+	public void setT3atlExpression(OclExpression newT3atlExpression) {
+		OclExpression oldT3atlExpression = t3atlExpression;
+		t3atlExpression = newT3atlExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlExpression, t1atlExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlExpression, t3atlExpression));
 	}
 
 	/**
@@ -303,16 +347,16 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public SimpleOutPatternElement getT1atlOutPatternElement() {
-		if (t1atlOutPatternElement != null && t1atlOutPatternElement.eIsProxy()) {
-			InternalEObject oldT1atlOutPatternElement = t1atlOutPatternElement;
-			t1atlOutPatternElement = (SimpleOutPatternElement)eResolveProxy(oldT1atlOutPatternElement);
-			if (t1atlOutPatternElement != oldT1atlOutPatternElement) {
+	public SimpleOutPatternElement getT3atlOutPatternElement() {
+		if (t3atlOutPatternElement != null && t3atlOutPatternElement.eIsProxy()) {
+			InternalEObject oldT3atlOutPatternElement = t3atlOutPatternElement;
+			t3atlOutPatternElement = (SimpleOutPatternElement)eResolveProxy(oldT3atlOutPatternElement);
+			if (t3atlOutPatternElement != oldT3atlOutPatternElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPatternElement, t1atlOutPatternElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlOutPatternElement, t3atlOutPatternElement));
 			}
 		}
-		return t1atlOutPatternElement;
+		return t3atlOutPatternElement;
 	}
 
 	/**
@@ -320,8 +364,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleOutPatternElement basicGetT1atlOutPatternElement() {
-		return t1atlOutPatternElement;
+	public SimpleOutPatternElement basicGetT3atlOutPatternElement() {
+		return t3atlOutPatternElement;
 	}
 
 	/**
@@ -330,11 +374,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT1atlOutPatternElement(SimpleOutPatternElement newT1atlOutPatternElement) {
-		SimpleOutPatternElement oldT1atlOutPatternElement = t1atlOutPatternElement;
-		t1atlOutPatternElement = newT1atlOutPatternElement;
+	public void setT3atlOutPatternElement(SimpleOutPatternElement newT3atlOutPatternElement) {
+		SimpleOutPatternElement oldT3atlOutPatternElement = t3atlOutPatternElement;
+		t3atlOutPatternElement = newT3atlOutPatternElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlOutPatternElement, t1atlOutPatternElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlOutPatternElement, t3atlOutPatternElement));
 	}
 
 	/**
@@ -343,16 +387,16 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getT2qvtrExpression() {
-		if (t2qvtrExpression != null && t2qvtrExpression.eIsProxy()) {
-			InternalEObject oldT2qvtrExpression = (InternalEObject)t2qvtrExpression;
-			t2qvtrExpression = (OCLExpression)eResolveProxy(oldT2qvtrExpression);
-			if (t2qvtrExpression != oldT2qvtrExpression) {
+	public OCLExpression getT4qvtrExpression() {
+		if (t4qvtrExpression != null && t4qvtrExpression.eIsProxy()) {
+			InternalEObject oldT4qvtrExpression = (InternalEObject)t4qvtrExpression;
+			t4qvtrExpression = (OCLExpression)eResolveProxy(oldT4qvtrExpression);
+			if (t4qvtrExpression != oldT4qvtrExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrExpression, t2qvtrExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrExpression, t4qvtrExpression));
 			}
 		}
-		return t2qvtrExpression;
+		return t4qvtrExpression;
 	}
 
 	/**
@@ -360,8 +404,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression basicGetT2qvtrExpression() {
-		return t2qvtrExpression;
+	public OCLExpression basicGetT4qvtrExpression() {
+		return t4qvtrExpression;
 	}
 
 	/**
@@ -370,11 +414,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrExpression(OCLExpression newT2qvtrExpression) {
-		OCLExpression oldT2qvtrExpression = t2qvtrExpression;
-		t2qvtrExpression = newT2qvtrExpression;
+	public void setT4qvtrExpression(OCLExpression newT4qvtrExpression) {
+		OCLExpression oldT4qvtrExpression = t4qvtrExpression;
+		t4qvtrExpression = newT4qvtrExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrExpression, t2qvtrExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrExpression, t4qvtrExpression));
 	}
 
 	/**
@@ -383,16 +427,16 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public PropertyTemplateItem getT2qvtrPart() {
-		if (t2qvtrPart != null && t2qvtrPart.eIsProxy()) {
-			InternalEObject oldT2qvtrPart = (InternalEObject)t2qvtrPart;
-			t2qvtrPart = (PropertyTemplateItem)eResolveProxy(oldT2qvtrPart);
-			if (t2qvtrPart != oldT2qvtrPart) {
+	public PropertyTemplateItem getT4qvtrPart() {
+		if (t4qvtrPart != null && t4qvtrPart.eIsProxy()) {
+			InternalEObject oldT4qvtrPart = (InternalEObject)t4qvtrPart;
+			t4qvtrPart = (PropertyTemplateItem)eResolveProxy(oldT4qvtrPart);
+			if (t4qvtrPart != oldT4qvtrPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrPart, t2qvtrPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrPart, t4qvtrPart));
 			}
 		}
-		return t2qvtrPart;
+		return t4qvtrPart;
 	}
 
 	/**
@@ -400,8 +444,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyTemplateItem basicGetT2qvtrPart() {
-		return t2qvtrPart;
+	public PropertyTemplateItem basicGetT4qvtrPart() {
+		return t4qvtrPart;
 	}
 
 	/**
@@ -410,11 +454,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrPart(PropertyTemplateItem newT2qvtrPart) {
-		PropertyTemplateItem oldT2qvtrPart = t2qvtrPart;
-		t2qvtrPart = newT2qvtrPart;
+	public void setT4qvtrPart(PropertyTemplateItem newT4qvtrPart) {
+		PropertyTemplateItem oldT4qvtrPart = t4qvtrPart;
+		t4qvtrPart = newT4qvtrPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrPart, t2qvtrPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrPart, t4qvtrPart));
 	}
 
 	/**
@@ -423,16 +467,16 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public ObjectTemplateExp getT2qvtrTemplate() {
-		if (t2qvtrTemplate != null && t2qvtrTemplate.eIsProxy()) {
-			InternalEObject oldT2qvtrTemplate = (InternalEObject)t2qvtrTemplate;
-			t2qvtrTemplate = (ObjectTemplateExp)eResolveProxy(oldT2qvtrTemplate);
-			if (t2qvtrTemplate != oldT2qvtrTemplate) {
+	public ObjectTemplateExp getT4qvtrTemplate() {
+		if (t4qvtrTemplate != null && t4qvtrTemplate.eIsProxy()) {
+			InternalEObject oldT4qvtrTemplate = (InternalEObject)t4qvtrTemplate;
+			t4qvtrTemplate = (ObjectTemplateExp)eResolveProxy(oldT4qvtrTemplate);
+			if (t4qvtrTemplate != oldT4qvtrTemplate) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTemplate, t2qvtrTemplate));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrTemplate, t4qvtrTemplate));
 			}
 		}
-		return t2qvtrTemplate;
+		return t4qvtrTemplate;
 	}
 
 	/**
@@ -440,8 +484,8 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ObjectTemplateExp basicGetT2qvtrTemplate() {
-		return t2qvtrTemplate;
+	public ObjectTemplateExp basicGetT4qvtrTemplate() {
+		return t4qvtrTemplate;
 	}
 
 	/**
@@ -450,11 +494,11 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrTemplate(ObjectTemplateExp newT2qvtrTemplate) {
-		ObjectTemplateExp oldT2qvtrTemplate = t2qvtrTemplate;
-		t2qvtrTemplate = newT2qvtrTemplate;
+	public void setT4qvtrTemplate(ObjectTemplateExp newT4qvtrTemplate) {
+		ObjectTemplateExp oldT4qvtrTemplate = t4qvtrTemplate;
+		t4qvtrTemplate = newT4qvtrTemplate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTemplate, t2qvtrTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrTemplate, t4qvtrTemplate));
 	}
 
 	/**
@@ -469,7 +513,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -494,7 +538,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -509,7 +553,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 			wmapSimpleOutPatternElement = (TmapSimpleOutPatternElement)eResolveProxy(oldWmapSimpleOutPatternElement);
 			if (wmapSimpleOutPatternElement != oldWmapSimpleOutPatternElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapSimpleOutPatternElement, wmapSimpleOutPatternElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapSimpleOutPatternElement, wmapSimpleOutPatternElement));
 			}
 		}
 		return wmapSimpleOutPatternElement;
@@ -534,7 +578,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 		TmapSimpleOutPatternElement oldWmapSimpleOutPatternElement = wmapSimpleOutPatternElement;
 		wmapSimpleOutPatternElement = newWmapSimpleOutPatternElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapSimpleOutPatternElement, wmapSimpleOutPatternElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapSimpleOutPatternElement, wmapSimpleOutPatternElement));
 	}
 
 	/**
@@ -546,29 +590,31 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getT0propertyName();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1atlBinding();
-				return basicGetT1atlBinding();
+				return getT1propertyName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlExpression();
-				return basicGetT1atlExpression();
+				if (resolve) return getT3atlBinding();
+				return basicGetT3atlBinding();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlOutPatternElement();
-				return basicGetT1atlOutPatternElement();
+				if (resolve) return getT3atlExpression();
+				return basicGetT3atlExpression();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT2qvtrExpression();
-				return basicGetT2qvtrExpression();
+				if (resolve) return getT3atlOutPatternElement();
+				return basicGetT3atlOutPatternElement();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				if (resolve) return getT2qvtrPart();
-				return basicGetT2qvtrPart();
+				if (resolve) return getT4qvtrExpression();
+				return basicGetT4qvtrExpression();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				if (resolve) return getT2qvtrTemplate();
-				return basicGetT2qvtrTemplate();
+				if (resolve) return getT4qvtrPart();
+				return basicGetT4qvtrPart();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
+				if (resolve) return getT4qvtrTemplate();
+				return basicGetT4qvtrTemplate();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				if (resolve) return getWmapSimpleOutPatternElement();
 				return basicGetWmapSimpleOutPatternElement();
 		}
@@ -584,30 +630,33 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0propertyName((String)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlBinding((Binding)newValue);
+				setT1propertyName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlExpression((OclExpression)newValue);
+				setT3atlBinding((Binding)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlOutPatternElement((SimpleOutPatternElement)newValue);
+				setT3atlExpression((OclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrExpression((OCLExpression)newValue);
+				setT3atlOutPatternElement((SimpleOutPatternElement)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrPart((PropertyTemplateItem)newValue);
+				setT4qvtrExpression((OCLExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrTemplate((ObjectTemplateExp)newValue);
+				setT4qvtrPart((PropertyTemplateItem)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setWmapOclExpression((DmapOclExpression)newValue);
+				setT4qvtrTemplate((ObjectTemplateExp)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				setWmapOclExpression((DmapOclExpression)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setWmapSimpleOutPatternElement((TmapSimpleOutPatternElement)newValue);
 				return;
 		}
@@ -623,30 +672,33 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0propertyName(T0PROPERTY_NAME_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlBinding((Binding)null);
+				setT1propertyName(T1PROPERTY_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlExpression((OclExpression)null);
+				setT3atlBinding((Binding)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlOutPatternElement((SimpleOutPatternElement)null);
+				setT3atlExpression((OclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrExpression((OCLExpression)null);
+				setT3atlOutPatternElement((SimpleOutPatternElement)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrPart((PropertyTemplateItem)null);
+				setT4qvtrExpression((OCLExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrTemplate((ObjectTemplateExp)null);
+				setT4qvtrPart((PropertyTemplateItem)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setWmapOclExpression((DmapOclExpression)null);
+				setT4qvtrTemplate((ObjectTemplateExp)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				setWmapOclExpression((DmapOclExpression)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setWmapSimpleOutPatternElement((TmapSimpleOutPatternElement)null);
 				return;
 		}
@@ -662,22 +714,24 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return T0PROPERTY_NAME_EDEFAULT == null ? t0propertyName != null : !T0PROPERTY_NAME_EDEFAULT.equals(t0propertyName);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1atlBinding != null;
+				return T1PROPERTY_NAME_EDEFAULT == null ? t1propertyName != null : !T1PROPERTY_NAME_EDEFAULT.equals(t1propertyName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlExpression != null;
+				return t3atlBinding != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlOutPatternElement != null;
+				return t3atlExpression != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t2qvtrExpression != null;
+				return t3atlOutPatternElement != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return t2qvtrPart != null;
+				return t4qvtrExpression != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return t2qvtrTemplate != null;
+				return t4qvtrPart != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				return wmapOclExpression != null;
+				return t4qvtrTemplate != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
+				return wmapOclExpression != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				return wmapSimpleOutPatternElement != null;
 		}
 		return super.eIsSet(featureID);
@@ -693,8 +747,10 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0propertyName: ");
-		result.append(t0propertyName);
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(", t1propertyName: ");
+		result.append(t1propertyName);
 		result.append(')');
 		return result.toString();
 	}

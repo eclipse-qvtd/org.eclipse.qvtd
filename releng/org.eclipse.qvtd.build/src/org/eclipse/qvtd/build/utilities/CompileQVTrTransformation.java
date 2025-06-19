@@ -194,7 +194,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	}
 
 	protected @NonNull String getTestProjectName() {
-		return "QVTd_" + getClass().getSimpleName() + "__" + getTestName();
+		return "_QVTd_" + getClass().getSimpleName() + "__" + getTestName();
 	}
 
 	protected @NonNull String getTestName() {

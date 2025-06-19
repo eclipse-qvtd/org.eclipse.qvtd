@@ -2626,6 +2626,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append("();\n");
 				js.popIndentation();
 				js.append("}\n");
+				js.append("assert " + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + " != null;\n");
 				js.append("return " + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + ";\n");
 				js.popIndentation();
 				js.append("}\n");

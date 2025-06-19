@@ -44,15 +44,16 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT0elementName <em>T0element Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT1atlElement <em>T1atl Element</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT1atlPattern <em>T1atl Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT1atlRule <em>T1atl Rule</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT2qvtrDomain <em>T2qvtr Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT2qvtrPattern <em>T2qvtr Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT2qvtrTemplate <em>T2qvtr Template</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT1elementName <em>T1element Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT3atlElement <em>T3atl Element</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT3atlPattern <em>T3atl Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT3atlRule <em>T3atl Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT4qvtrDomain <em>T4qvtr Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT4qvtrPattern <em>T4qvtr Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT4qvtrRelation <em>T4qvtr Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT4qvtrTemplate <em>T4qvtr Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getWmapInPattern <em>Wmap In Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getWmapMatchedRule <em>Wmap Matched Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapSimpleInPatternElementImpl#getWmapVariable <em>Wmap Variable</em>}</li>
@@ -68,7 +69,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 12;
+	public static final int TMAP_SIMPLE_IN_PATTERN_ELEMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of operations of the '<em>Tmap Simple In Pattern Element</em>' class.
@@ -81,104 +82,124 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 
 
 	/**
-	 * The default value of the '{@link #getT0elementName() <em>T0element Name</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0elementName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String T0ELEMENT_NAME_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT0elementName() <em>T0element Name</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT0elementName()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected String t0elementName = T0ELEMENT_NAME_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlElement() <em>T1atl Element</em>}' reference.
+	 * The default value of the '{@link #getT1elementName() <em>T1element Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlElement()
+	 * @see #getT1elementName()
 	 * @generated
 	 * @ordered
 	 */
-	protected SimpleInPatternElement t1atlElement;
+	protected static final String T1ELEMENT_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT1atlPattern() <em>T1atl Pattern</em>}' reference.
+	 * The cached value of the '{@link #getT1elementName() <em>T1element Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlPattern()
+	 * @see #getT1elementName()
 	 * @generated
 	 * @ordered
 	 */
-	protected InPattern t1atlPattern;
+	protected String t1elementName = T1ELEMENT_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlRule() <em>T1atl Rule</em>}' reference.
+	 * The cached value of the '{@link #getT3atlElement() <em>T3atl Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlRule()
+	 * @see #getT3atlElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected MatchedRule t1atlRule;
+	protected SimpleInPatternElement t3atlElement;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrDomain() <em>T2qvtr Domain</em>}' reference.
+	 * The cached value of the '{@link #getT3atlPattern() <em>T3atl Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrDomain()
+	 * @see #getT3atlPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationDomain t2qvtrDomain;
+	protected InPattern t3atlPattern;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrPattern() <em>T2qvtr Pattern</em>}' reference.
+	 * The cached value of the '{@link #getT3atlRule() <em>T3atl Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrPattern()
+	 * @see #getT3atlRule()
 	 * @generated
 	 * @ordered
 	 */
-	protected DomainPattern t2qvtrPattern;
+	protected MatchedRule t3atlRule;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrRelation() <em>T2qvtr Relation</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrDomain() <em>T4qvtr Domain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrRelation()
+	 * @see #getT4qvtrDomain()
 	 * @generated
 	 * @ordered
 	 */
-	protected Relation t2qvtrRelation;
+	protected RelationDomain t4qvtrDomain;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrTemplate() <em>T2qvtr Template</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrPattern() <em>T4qvtr Pattern</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrTemplate()
+	 * @see #getT4qvtrPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected ObjectTemplateExp t2qvtrTemplate;
+	protected DomainPattern t4qvtrPattern;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrVariable() <em>T2qvtr Variable</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrRelation() <em>T4qvtr Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrVariable()
+	 * @see #getT4qvtrRelation()
 	 * @generated
 	 * @ordered
 	 */
-	protected TemplateVariable t2qvtrVariable;
+	protected Relation t4qvtrRelation;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrTemplate() <em>T4qvtr Template</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected ObjectTemplateExp t4qvtrTemplate;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrVariable() <em>T4qvtr Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected TemplateVariable t4qvtrVariable;
 
 	/**
 	 * The cached value of the '{@link #getWmapInPattern() <em>Wmap In Pattern</em>}' reference.
@@ -235,8 +256,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public String getT0elementName() {
-		return t0elementName;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -245,11 +266,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT0elementName(String newT0elementName) {
-		String oldT0elementName = t0elementName;
-		t0elementName = newT0elementName;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT0elementName, t0elementName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -258,16 +279,39 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public SimpleInPatternElement getT1atlElement() {
-		if (t1atlElement != null && t1atlElement.eIsProxy()) {
-			InternalEObject oldT1atlElement = t1atlElement;
-			t1atlElement = (SimpleInPatternElement)eResolveProxy(oldT1atlElement);
-			if (t1atlElement != oldT1atlElement) {
+	public String getT1elementName() {
+		return t1elementName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT1elementName(String newT1elementName) {
+		String oldT1elementName = t1elementName;
+		t1elementName = newT1elementName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1elementName, t1elementName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SimpleInPatternElement getT3atlElement() {
+		if (t3atlElement != null && t3atlElement.eIsProxy()) {
+			InternalEObject oldT3atlElement = t3atlElement;
+			t3atlElement = (SimpleInPatternElement)eResolveProxy(oldT3atlElement);
+			if (t3atlElement != oldT3atlElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlElement, t1atlElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlElement, t3atlElement));
 			}
 		}
-		return t1atlElement;
+		return t3atlElement;
 	}
 
 	/**
@@ -275,8 +319,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleInPatternElement basicGetT1atlElement() {
-		return t1atlElement;
+	public SimpleInPatternElement basicGetT3atlElement() {
+		return t3atlElement;
 	}
 
 	/**
@@ -285,11 +329,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT1atlElement(SimpleInPatternElement newT1atlElement) {
-		SimpleInPatternElement oldT1atlElement = t1atlElement;
-		t1atlElement = newT1atlElement;
+	public void setT3atlElement(SimpleInPatternElement newT3atlElement) {
+		SimpleInPatternElement oldT3atlElement = t3atlElement;
+		t3atlElement = newT3atlElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlElement, t1atlElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlElement, t3atlElement));
 	}
 
 	/**
@@ -298,16 +342,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public InPattern getT1atlPattern() {
-		if (t1atlPattern != null && t1atlPattern.eIsProxy()) {
-			InternalEObject oldT1atlPattern = t1atlPattern;
-			t1atlPattern = (InPattern)eResolveProxy(oldT1atlPattern);
-			if (t1atlPattern != oldT1atlPattern) {
+	public InPattern getT3atlPattern() {
+		if (t3atlPattern != null && t3atlPattern.eIsProxy()) {
+			InternalEObject oldT3atlPattern = t3atlPattern;
+			t3atlPattern = (InPattern)eResolveProxy(oldT3atlPattern);
+			if (t3atlPattern != oldT3atlPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlPattern, t1atlPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlPattern, t3atlPattern));
 			}
 		}
-		return t1atlPattern;
+		return t3atlPattern;
 	}
 
 	/**
@@ -315,8 +359,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InPattern basicGetT1atlPattern() {
-		return t1atlPattern;
+	public InPattern basicGetT3atlPattern() {
+		return t3atlPattern;
 	}
 
 	/**
@@ -325,11 +369,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT1atlPattern(InPattern newT1atlPattern) {
-		InPattern oldT1atlPattern = t1atlPattern;
-		t1atlPattern = newT1atlPattern;
+	public void setT3atlPattern(InPattern newT3atlPattern) {
+		InPattern oldT3atlPattern = t3atlPattern;
+		t3atlPattern = newT3atlPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlPattern, t1atlPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT3atlPattern, t3atlPattern));
 	}
 
 	/**
@@ -338,16 +382,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public MatchedRule getT1atlRule() {
-		if (t1atlRule != null && t1atlRule.eIsProxy()) {
-			InternalEObject oldT1atlRule = t1atlRule;
-			t1atlRule = (MatchedRule)eResolveProxy(oldT1atlRule);
-			if (t1atlRule != oldT1atlRule) {
+	public MatchedRule getT3atlRule() {
+		if (t3atlRule != null && t3atlRule.eIsProxy()) {
+			InternalEObject oldT3atlRule = t3atlRule;
+			t3atlRule = (MatchedRule)eResolveProxy(oldT3atlRule);
+			if (t3atlRule != oldT3atlRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlRule, t1atlRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlRule, t3atlRule));
 			}
 		}
-		return t1atlRule;
+		return t3atlRule;
 	}
 
 	/**
@@ -355,8 +399,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MatchedRule basicGetT1atlRule() {
-		return t1atlRule;
+	public MatchedRule basicGetT3atlRule() {
+		return t3atlRule;
 	}
 
 	/**
@@ -365,11 +409,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT1atlRule(MatchedRule newT1atlRule) {
-		MatchedRule oldT1atlRule = t1atlRule;
-		t1atlRule = newT1atlRule;
+	public void setT3atlRule(MatchedRule newT3atlRule) {
+		MatchedRule oldT3atlRule = t3atlRule;
+		t3atlRule = newT3atlRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlRule, t1atlRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT3atlRule, t3atlRule));
 	}
 
 	/**
@@ -378,16 +422,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public RelationDomain getT2qvtrDomain() {
-		if (t2qvtrDomain != null && t2qvtrDomain.eIsProxy()) {
-			InternalEObject oldT2qvtrDomain = (InternalEObject)t2qvtrDomain;
-			t2qvtrDomain = (RelationDomain)eResolveProxy(oldT2qvtrDomain);
-			if (t2qvtrDomain != oldT2qvtrDomain) {
+	public RelationDomain getT4qvtrDomain() {
+		if (t4qvtrDomain != null && t4qvtrDomain.eIsProxy()) {
+			InternalEObject oldT4qvtrDomain = (InternalEObject)t4qvtrDomain;
+			t4qvtrDomain = (RelationDomain)eResolveProxy(oldT4qvtrDomain);
+			if (t4qvtrDomain != oldT4qvtrDomain) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrDomain, t2qvtrDomain));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrDomain, t4qvtrDomain));
 			}
 		}
-		return t2qvtrDomain;
+		return t4qvtrDomain;
 	}
 
 	/**
@@ -395,8 +439,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationDomain basicGetT2qvtrDomain() {
-		return t2qvtrDomain;
+	public RelationDomain basicGetT4qvtrDomain() {
+		return t4qvtrDomain;
 	}
 
 	/**
@@ -405,11 +449,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrDomain(RelationDomain newT2qvtrDomain) {
-		RelationDomain oldT2qvtrDomain = t2qvtrDomain;
-		t2qvtrDomain = newT2qvtrDomain;
+	public void setT4qvtrDomain(RelationDomain newT4qvtrDomain) {
+		RelationDomain oldT4qvtrDomain = t4qvtrDomain;
+		t4qvtrDomain = newT4qvtrDomain;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrDomain, t2qvtrDomain));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT4qvtrDomain, t4qvtrDomain));
 	}
 
 	/**
@@ -418,16 +462,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public DomainPattern getT2qvtrPattern() {
-		if (t2qvtrPattern != null && t2qvtrPattern.eIsProxy()) {
-			InternalEObject oldT2qvtrPattern = (InternalEObject)t2qvtrPattern;
-			t2qvtrPattern = (DomainPattern)eResolveProxy(oldT2qvtrPattern);
-			if (t2qvtrPattern != oldT2qvtrPattern) {
+	public DomainPattern getT4qvtrPattern() {
+		if (t4qvtrPattern != null && t4qvtrPattern.eIsProxy()) {
+			InternalEObject oldT4qvtrPattern = (InternalEObject)t4qvtrPattern;
+			t4qvtrPattern = (DomainPattern)eResolveProxy(oldT4qvtrPattern);
+			if (t4qvtrPattern != oldT4qvtrPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrPattern, t2qvtrPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrPattern, t4qvtrPattern));
 			}
 		}
-		return t2qvtrPattern;
+		return t4qvtrPattern;
 	}
 
 	/**
@@ -435,8 +479,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DomainPattern basicGetT2qvtrPattern() {
-		return t2qvtrPattern;
+	public DomainPattern basicGetT4qvtrPattern() {
+		return t4qvtrPattern;
 	}
 
 	/**
@@ -445,11 +489,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrPattern(DomainPattern newT2qvtrPattern) {
-		DomainPattern oldT2qvtrPattern = t2qvtrPattern;
-		t2qvtrPattern = newT2qvtrPattern;
+	public void setT4qvtrPattern(DomainPattern newT4qvtrPattern) {
+		DomainPattern oldT4qvtrPattern = t4qvtrPattern;
+		t4qvtrPattern = newT4qvtrPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrPattern, t2qvtrPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT4qvtrPattern, t4qvtrPattern));
 	}
 
 	/**
@@ -458,16 +502,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public Relation getT2qvtrRelation() {
-		if (t2qvtrRelation != null && t2qvtrRelation.eIsProxy()) {
-			InternalEObject oldT2qvtrRelation = (InternalEObject)t2qvtrRelation;
-			t2qvtrRelation = (Relation)eResolveProxy(oldT2qvtrRelation);
-			if (t2qvtrRelation != oldT2qvtrRelation) {
+	public Relation getT4qvtrRelation() {
+		if (t4qvtrRelation != null && t4qvtrRelation.eIsProxy()) {
+			InternalEObject oldT4qvtrRelation = (InternalEObject)t4qvtrRelation;
+			t4qvtrRelation = (Relation)eResolveProxy(oldT4qvtrRelation);
+			if (t4qvtrRelation != oldT4qvtrRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrRelation, t4qvtrRelation));
 			}
 		}
-		return t2qvtrRelation;
+		return t4qvtrRelation;
 	}
 
 	/**
@@ -475,8 +519,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetT2qvtrRelation() {
-		return t2qvtrRelation;
+	public Relation basicGetT4qvtrRelation() {
+		return t4qvtrRelation;
 	}
 
 	/**
@@ -485,11 +529,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrRelation(Relation newT2qvtrRelation) {
-		Relation oldT2qvtrRelation = t2qvtrRelation;
-		t2qvtrRelation = newT2qvtrRelation;
+	public void setT4qvtrRelation(Relation newT4qvtrRelation) {
+		Relation oldT4qvtrRelation = t4qvtrRelation;
+		t4qvtrRelation = newT4qvtrRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrRelation, t2qvtrRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT4qvtrRelation, t4qvtrRelation));
 	}
 
 	/**
@@ -498,16 +542,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public ObjectTemplateExp getT2qvtrTemplate() {
-		if (t2qvtrTemplate != null && t2qvtrTemplate.eIsProxy()) {
-			InternalEObject oldT2qvtrTemplate = (InternalEObject)t2qvtrTemplate;
-			t2qvtrTemplate = (ObjectTemplateExp)eResolveProxy(oldT2qvtrTemplate);
-			if (t2qvtrTemplate != oldT2qvtrTemplate) {
+	public ObjectTemplateExp getT4qvtrTemplate() {
+		if (t4qvtrTemplate != null && t4qvtrTemplate.eIsProxy()) {
+			InternalEObject oldT4qvtrTemplate = (InternalEObject)t4qvtrTemplate;
+			t4qvtrTemplate = (ObjectTemplateExp)eResolveProxy(oldT4qvtrTemplate);
+			if (t4qvtrTemplate != oldT4qvtrTemplate) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTemplate, t2qvtrTemplate));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT4qvtrTemplate, t4qvtrTemplate));
 			}
 		}
-		return t2qvtrTemplate;
+		return t4qvtrTemplate;
 	}
 
 	/**
@@ -515,8 +559,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ObjectTemplateExp basicGetT2qvtrTemplate() {
-		return t2qvtrTemplate;
+	public ObjectTemplateExp basicGetT4qvtrTemplate() {
+		return t4qvtrTemplate;
 	}
 
 	/**
@@ -525,11 +569,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrTemplate(ObjectTemplateExp newT2qvtrTemplate) {
-		ObjectTemplateExp oldT2qvtrTemplate = t2qvtrTemplate;
-		t2qvtrTemplate = newT2qvtrTemplate;
+	public void setT4qvtrTemplate(ObjectTemplateExp newT4qvtrTemplate) {
+		ObjectTemplateExp oldT4qvtrTemplate = t4qvtrTemplate;
+		t4qvtrTemplate = newT4qvtrTemplate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrTemplate, t2qvtrTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT4qvtrTemplate, t4qvtrTemplate));
 	}
 
 	/**
@@ -538,16 +582,16 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public TemplateVariable getT2qvtrVariable() {
-		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
-			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
-			t2qvtrVariable = (TemplateVariable)eResolveProxy(oldT2qvtrVariable);
-			if (t2qvtrVariable != oldT2qvtrVariable) {
+	public TemplateVariable getT4qvtrVariable() {
+		if (t4qvtrVariable != null && t4qvtrVariable.eIsProxy()) {
+			InternalEObject oldT4qvtrVariable = (InternalEObject)t4qvtrVariable;
+			t4qvtrVariable = (TemplateVariable)eResolveProxy(oldT4qvtrVariable);
+			if (t4qvtrVariable != oldT4qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT4qvtrVariable, t4qvtrVariable));
 			}
 		}
-		return t2qvtrVariable;
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -555,8 +599,8 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateVariable basicGetT2qvtrVariable() {
-		return t2qvtrVariable;
+	public TemplateVariable basicGetT4qvtrVariable() {
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -565,11 +609,11 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrVariable(TemplateVariable newT2qvtrVariable) {
-		TemplateVariable oldT2qvtrVariable = t2qvtrVariable;
-		t2qvtrVariable = newT2qvtrVariable;
+	public void setT4qvtrVariable(TemplateVariable newT4qvtrVariable) {
+		TemplateVariable oldT4qvtrVariable = t4qvtrVariable;
+		t4qvtrVariable = newT4qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT4qvtrVariable, t4qvtrVariable));
 	}
 
 	/**
@@ -584,7 +628,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 			wmapInPattern = (TmapInPattern)eResolveProxy(oldWmapInPattern);
 			if (wmapInPattern != oldWmapInPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapInPattern, wmapInPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapInPattern, wmapInPattern));
 			}
 		}
 		return wmapInPattern;
@@ -609,7 +653,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 		TmapInPattern oldWmapInPattern = wmapInPattern;
 		wmapInPattern = newWmapInPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldWmapInPattern, wmapInPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapInPattern, wmapInPattern));
 	}
 
 	/**
@@ -624,7 +668,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 			wmapMatchedRule = (TmapMatchedRule)eResolveProxy(oldWmapMatchedRule);
 			if (wmapMatchedRule != oldWmapMatchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapMatchedRule, wmapMatchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapMatchedRule, wmapMatchedRule));
 			}
 		}
 		return wmapMatchedRule;
@@ -649,7 +693,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapMatchedRule, wmapMatchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapMatchedRule, wmapMatchedRule));
 	}
 
 	/**
@@ -664,7 +708,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 			wmapVariable = (TmapVariable)eResolveProxy(oldWmapVariable);
 			if (wmapVariable != oldWmapVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapVariable, wmapVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapVariable, wmapVariable));
 			}
 		}
 		return wmapVariable;
@@ -689,7 +733,7 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 		TmapVariable oldWmapVariable = wmapVariable;
 		wmapVariable = newWmapVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapVariable, wmapVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapVariable, wmapVariable));
 	}
 
 	/**
@@ -701,38 +745,40 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getT0elementName();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1atlElement();
-				return basicGetT1atlElement();
+				return getT1elementName();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlPattern();
-				return basicGetT1atlPattern();
+				if (resolve) return getT3atlElement();
+				return basicGetT3atlElement();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT1atlRule();
-				return basicGetT1atlRule();
+				if (resolve) return getT3atlPattern();
+				return basicGetT3atlPattern();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				if (resolve) return getT2qvtrDomain();
-				return basicGetT2qvtrDomain();
+				if (resolve) return getT3atlRule();
+				return basicGetT3atlRule();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				if (resolve) return getT2qvtrPattern();
-				return basicGetT2qvtrPattern();
+				if (resolve) return getT4qvtrDomain();
+				return basicGetT4qvtrDomain();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				if (resolve) return getT2qvtrRelation();
-				return basicGetT2qvtrRelation();
+				if (resolve) return getT4qvtrPattern();
+				return basicGetT4qvtrPattern();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				if (resolve) return getT2qvtrTemplate();
-				return basicGetT2qvtrTemplate();
+				if (resolve) return getT4qvtrRelation();
+				return basicGetT4qvtrRelation();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
-				if (resolve) return getT2qvtrVariable();
-				return basicGetT2qvtrVariable();
+				if (resolve) return getT4qvtrTemplate();
+				return basicGetT4qvtrTemplate();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
+				if (resolve) return getT4qvtrVariable();
+				return basicGetT4qvtrVariable();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				if (resolve) return getWmapInPattern();
 				return basicGetWmapInPattern();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				if (resolve) return getWmapMatchedRule();
 				return basicGetWmapMatchedRule();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				if (resolve) return getWmapVariable();
 				return basicGetWmapVariable();
 		}
@@ -748,39 +794,42 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0elementName((String)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlElement((SimpleInPatternElement)newValue);
+				setT1elementName((String)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlPattern((InPattern)newValue);
+				setT3atlElement((SimpleInPatternElement)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlRule((MatchedRule)newValue);
+				setT3atlPattern((InPattern)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrDomain((RelationDomain)newValue);
+				setT3atlRule((MatchedRule)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrPattern((DomainPattern)newValue);
+				setT4qvtrDomain((RelationDomain)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrRelation((Relation)newValue);
+				setT4qvtrPattern((DomainPattern)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setT2qvtrTemplate((ObjectTemplateExp)newValue);
+				setT4qvtrRelation((Relation)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
-				setT2qvtrVariable((TemplateVariable)newValue);
+				setT4qvtrTemplate((ObjectTemplateExp)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
-				setWmapInPattern((TmapInPattern)newValue);
+				setT4qvtrVariable((TemplateVariable)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
-				setWmapMatchedRule((TmapMatchedRule)newValue);
+				setWmapInPattern((TmapInPattern)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
+				setWmapMatchedRule((TmapMatchedRule)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapVariable((TmapVariable)newValue);
 				return;
 		}
@@ -796,39 +845,42 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT0elementName(T0ELEMENT_NAME_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlElement((SimpleInPatternElement)null);
+				setT1elementName(T1ELEMENT_NAME_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlPattern((InPattern)null);
+				setT3atlElement((SimpleInPatternElement)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT1atlRule((MatchedRule)null);
+				setT3atlPattern((InPattern)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setT2qvtrDomain((RelationDomain)null);
+				setT3atlRule((MatchedRule)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				setT2qvtrPattern((DomainPattern)null);
+				setT4qvtrDomain((RelationDomain)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				setT2qvtrRelation((Relation)null);
+				setT4qvtrPattern((DomainPattern)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				setT2qvtrTemplate((ObjectTemplateExp)null);
+				setT4qvtrRelation((Relation)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
-				setT2qvtrVariable((TemplateVariable)null);
+				setT4qvtrTemplate((ObjectTemplateExp)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
-				setWmapInPattern((TmapInPattern)null);
+				setT4qvtrVariable((TemplateVariable)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
-				setWmapMatchedRule((TmapMatchedRule)null);
+				setWmapInPattern((TmapInPattern)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
+				setWmapMatchedRule((TmapMatchedRule)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapVariable((TmapVariable)null);
 				return;
 		}
@@ -844,28 +896,30 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return T0ELEMENT_NAME_EDEFAULT == null ? t0elementName != null : !T0ELEMENT_NAME_EDEFAULT.equals(t0elementName);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1atlElement != null;
+				return T1ELEMENT_NAME_EDEFAULT == null ? t1elementName != null : !T1ELEMENT_NAME_EDEFAULT.equals(t1elementName);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlPattern != null;
+				return t3atlElement != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t1atlRule != null;
+				return t3atlPattern != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return t2qvtrDomain != null;
+				return t3atlRule != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
-				return t2qvtrPattern != null;
+				return t4qvtrDomain != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
-				return t2qvtrRelation != null;
+				return t4qvtrPattern != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
-				return t2qvtrTemplate != null;
+				return t4qvtrRelation != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
-				return t2qvtrVariable != null;
+				return t4qvtrTemplate != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
-				return wmapInPattern != null;
+				return t4qvtrVariable != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
-				return wmapMatchedRule != null;
+				return wmapInPattern != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
+				return wmapMatchedRule != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				return wmapVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -881,8 +935,10 @@ public class TmapSimpleInPatternElementImpl extends ExecutionImpl implements Tma
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (t0elementName: ");
-		result.append(t0elementName);
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(", t1elementName: ");
+		result.append(t1elementName);
 		result.append(')');
 		return result.toString();
 	}

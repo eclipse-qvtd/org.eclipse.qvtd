@@ -35,6 +35,7 @@ import org.eclipse.ocl.xtext.tests.TestProject;
 import org.eclipse.ocl.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.complete.PartialPackages;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
@@ -316,6 +317,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.atl");
 		testFileSystemHelper.addExportedPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr");
+		//
+		//	Activity 1: Compile newATL2QVTr/NewATL2QVTr.qvtr
+		//			to org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class and friends
+		//
 		Class<? extends Transformer> txClass1 = null;
 		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
 		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
@@ -351,6 +356,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT1 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();
+		//
+		//	Activity 2: Use org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class and friends
+		//		to transform families2persons/Families2Persons.atl
+		//		into platform:/resource/_QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG/Families2Persons_CG.qvtras
+		//		checking against families2persons/Families2Persons_expected.qvtras
+		//
 		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
 		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
@@ -378,9 +389,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT2 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();
+		//
+		//	Activity 3: Compile platform:/resource/_QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG/Families2Persons_CG.qvtras
+		//			to _Families2Persons/Families2Persons.class and friends
+		//
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
-		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
+		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different package prefix
 		myQVT3.setKeepOldJavaFiles();
 		JavaClasspath classpath3 = myQVT3.getClasspath();
 		classpath3.addBundleForClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
@@ -404,6 +419,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT3 = null;
 		}
 		ThreadLocalExecutor.resetEnvironmentFactory();
+		//
+		//	Activity 4: Use _Families2Persons/Families2Persons.class
+		//		to transform families2persons/samples/Families.xmi
+		//		into Persons_CG.xmi
+		//		checking against families2persons/samples/Persons_expected.xmi
+		//
 		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
 		try {
 			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
@@ -836,7 +857,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//	System.out.println("ocl-dispose2 " + NameUtil.debugSimpleName(ocl) + "\n");
 			ocl = null;
 		}
-		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr"));
+		MyQVT myQVT = createQVT("Ecore2PivotRoot", getModelsURI("ecore2pivotRoot/Ecore2PivotRoot.qvtr"));
 		//	System.out.println("\nqvt " + NameUtil.debugSimpleName(myQVT) + " : ecore2pivotRoot/Ecore2PivotRoot.qvtr\n");
 		//	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		URI asURI2 = getTestURI("Families.ecore.oclas");
@@ -878,6 +899,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		PartialPackages.PARTIAL_PACKAGES.setState(true);
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;

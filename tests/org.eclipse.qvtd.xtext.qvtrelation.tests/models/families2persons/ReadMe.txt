@@ -6,7 +6,9 @@ Tests in the org.eclipse.qvtd.atl.tests plugin use only ATL ANTLR and so can dro
 
 To update /org.eclipse.qvtd.xtext.qvtrelation.tests/models/families2persons/Families2Persons_expected.qvtras
 replace it by /org.eclipse.qvtd.atl.tests/models/families2persons/Families2Persons_expected.qvtras
-then fix the externalURI and trim all platform:/resource//org.eclipse.qvtd.atl.tests/models/families2persons
+then fix the externalURI and trim all platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons
 
 Or if necessary create replacement Families2Persons_expected.qvtras by saving the AS from
 /org.eclipse.qvtd.atl.tests/models/families2persons/Families2Persons.saved.qvtr
+
+BEWARE: Families2Persons.atl is cloned between org.eclipse.qvtd.atl.tests and org.eclipse.qvtd.xtext.qvtrelation.tests

@@ -34,9 +34,9 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getSuccess <em>Success</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getT1atlVariable <em>T1atl Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getT3atlVariable <em>T3atl Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableImpl#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,44 +62,44 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 
 
 	/**
-	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean SUCCESS_EDEFAULT = null;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSuccess() <em>Success</em>}' attribute.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuccess()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean success = SUCCESS_EDEFAULT;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
+	 * The cached value of the '{@link #getT3atlVariable() <em>T3atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlVariable()
+	 * @see #getT3atlVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected LocatedElement t1atlVariable;
+	protected LocatedElement t3atlVariable;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrVariable() <em>T2qvtr Variable</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrVariable() <em>T4qvtr Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrVariable()
+	 * @see #getT4qvtrVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableDeclaration t2qvtrVariable;
+	protected VariableDeclaration t4qvtrVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,8 +126,8 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public Boolean getSuccess() {
-		return success;
+	public Boolean getS0global() {
+		return s0global;
 	}
 
 	/**
@@ -136,11 +136,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public void setSuccess(Boolean newSuccess) {
-		Boolean oldSuccess = success;
-		success = newSuccess;
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
 	}
 
 	/**
@@ -149,16 +149,16 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public LocatedElement getT1atlVariable() {
-		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = t1atlVariable;
-			t1atlVariable = (LocatedElement)eResolveProxy(oldT1atlVariable);
-			if (t1atlVariable != oldT1atlVariable) {
+	public LocatedElement getT3atlVariable() {
+		if (t3atlVariable != null && t3atlVariable.eIsProxy()) {
+			InternalEObject oldT3atlVariable = t3atlVariable;
+			t3atlVariable = (LocatedElement)eResolveProxy(oldT3atlVariable);
+			if (t3atlVariable != oldT3atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlVariable, t3atlVariable));
 			}
 		}
-		return t1atlVariable;
+		return t3atlVariable;
 	}
 
 	/**
@@ -166,8 +166,8 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LocatedElement basicGetT1atlVariable() {
-		return t1atlVariable;
+	public LocatedElement basicGetT3atlVariable() {
+		return t3atlVariable;
 	}
 
 	/**
@@ -176,11 +176,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public void setT1atlVariable(LocatedElement newT1atlVariable) {
-		LocatedElement oldT1atlVariable = t1atlVariable;
-		t1atlVariable = newT1atlVariable;
+	public void setT3atlVariable(LocatedElement newT3atlVariable) {
+		LocatedElement oldT3atlVariable = t3atlVariable;
+		t3atlVariable = newT3atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlVariable, t3atlVariable));
 	}
 
 	/**
@@ -189,16 +189,16 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public VariableDeclaration getT2qvtrVariable() {
-		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
-			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
-			t2qvtrVariable = (VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
-			if (t2qvtrVariable != oldT2qvtrVariable) {
+	public VariableDeclaration getT4qvtrVariable() {
+		if (t4qvtrVariable != null && t4qvtrVariable.eIsProxy()) {
+			InternalEObject oldT4qvtrVariable = (InternalEObject)t4qvtrVariable;
+			t4qvtrVariable = (VariableDeclaration)eResolveProxy(oldT4qvtrVariable);
+			if (t4qvtrVariable != oldT4qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT4qvtrVariable, t4qvtrVariable));
 			}
 		}
-		return t2qvtrVariable;
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -206,8 +206,8 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration basicGetT2qvtrVariable() {
-		return t2qvtrVariable;
+	public VariableDeclaration basicGetT4qvtrVariable() {
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -216,11 +216,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrVariable(VariableDeclaration newT2qvtrVariable) {
-		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
-		t2qvtrVariable = newT2qvtrVariable;
+	public void setT4qvtrVariable(VariableDeclaration newT4qvtrVariable) {
+		VariableDeclaration oldT4qvtrVariable = t4qvtrVariable;
+		t4qvtrVariable = newT4qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT4qvtrVariable, t4qvtrVariable));
 	}
 
 	/**
@@ -232,13 +232,13 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return getSuccess();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1atlVariable();
-				return basicGetT1atlVariable();
+				if (resolve) return getT3atlVariable();
+				return basicGetT3atlVariable();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT2qvtrVariable();
-				return basicGetT2qvtrVariable();
+				if (resolve) return getT4qvtrVariable();
+				return basicGetT4qvtrVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -252,13 +252,13 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess((Boolean)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlVariable((LocatedElement)newValue);
+				setT3atlVariable((LocatedElement)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrVariable((VariableDeclaration)newValue);
+				setT4qvtrVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -273,13 +273,13 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setSuccess(SUCCESS_EDEFAULT);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlVariable((LocatedElement)null);
+				setT3atlVariable((LocatedElement)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrVariable((VariableDeclaration)null);
+				setT4qvtrVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,11 +294,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1atlVariable != null;
+				return t3atlVariable != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t2qvtrVariable != null;
+				return t4qvtrVariable != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -313,8 +313,8 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (success: ");
-		result.append(success);
+		result.append(" (s0global: ");
+		result.append(s0global);
 		result.append(')');
 		return result.toString();
 	}

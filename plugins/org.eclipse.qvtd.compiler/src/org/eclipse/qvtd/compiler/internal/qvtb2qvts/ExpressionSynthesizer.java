@@ -31,13 +31,13 @@ import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
+import org.eclipse.ocl.pivot.IterableType;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.MapLiteralExp;
 import org.eclipse.ocl.pivot.MapLiteralPart;
-import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.NumericLiteralExp;
@@ -59,11 +59,15 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.values.CollectionTypeArguments;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -337,6 +341,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createNumericLiteralNode(utility, numberValue, numericLiteralExp);
 	}
 
+	// FIXME sourceAndArgumentNodes ignored
 	protected @NonNull Node createOperationCallNode(@NonNull CallExp callExp, @NonNull Operation operation, @NonNull Node @NonNull [] sourceAndArgumentNodes) {
 		Node reusedNode = findOperationNode(operation, sourceAndArgumentNodes);
 		assert reusedNode == null;
@@ -345,6 +350,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		Node operationNode = context.createOperationCallNode(utility, nameHint, operation, callExp, sourceAndArgumentNodes);
 		return operationNode;
 	}
+	// FIXME sourceAndArgumentNodes ignored
 	protected @NonNull Node createOperationCallNode2(@NonNull String nameHint, @NonNull Role nodeRole, @NonNull Operation operation, @NonNull ClassDatum classDatum, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
 		Node operationNode = context.createOperationCallNode2(nodeRole, utility, nameHint, operation, classDatum, sourceAndArgumentNodes);
 		return operationNode;
@@ -617,35 +623,48 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		}
 	}
 
+	protected @NonNull Node doSafeIteration(@NonNull CallExp callExp, @NonNull Node sourceNode) {
+		assert callExp.isIsSafe();
+		CollectionType unsafeType = (CollectionType)QVTbaseUtil.getType(QVTbaseUtil.getOwnedSource(callExp));
+		Type elementType = PivotUtil.getElementType(unsafeType);
+		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+		CollectionTypeId genericTypeId = unsafeType.getTypeId().getGeneralizedId();
+		IntegerValue lowerValue = unsafeType.getLowerValue();
+		UnlimitedNaturalValue upperValue = unsafeType.getUpperValue();
+		CollectionTypeArguments typeArguments = new CollectionTypeArguments(genericTypeId, elementType, true, lowerValue, upperValue);
+		CollectionType safeType = standardLibrary.getCollectionType(typeArguments);
+		ClassDatum unsafeClassDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+		ClassDatum safeClassDatum = scheduleManager.getClassDatum(QVTscheduleUtil.getReferredTypedModel(unsafeClassDatum), safeType);
+		//
+		Operation excludingOperation = standardLibraryHelper.getCollectionExcludingOperation();
+		Node nullNode = createNullLiteralNode();
+		Node excludingNode = createOperationCallNode2("safe-excluding", QVTscheduleUtil.getNodeRole(sourceNode), excludingOperation, safeClassDatum, sourceNode, nullNode);
+		createOperationSelfEdge(sourceNode, QVTbaseUtil.getType(QVTbaseUtil.getOwnedSource(callExp)), excludingNode);
+		createOperationParameterEdge(nullNode, QVTbaseUtil.getOwnedParameter(excludingOperation, 0), -1, excludingNode);
+		return excludingNode;
+	}
+
 	protected @NonNull Node doSafeNavigation(@NonNull CallExp callExp, @NonNull Node sourceNode, @NonNull Node navigationNode) {
 		assert callExp.isIsSafe();
 		Type unsafeType = callExp.getType();
-		assert !(unsafeType instanceof MapType);
-		if (unsafeType instanceof CollectionType)  {
-			Operation excludingOperation = standardLibraryHelper.getCollectionExcludingOperation();
-			Node nullNode = createNullLiteralNode();
-			Node excludingNode = createOperationCallNode2("safe"+navigationNode.getName(), QVTscheduleUtil.getNodeRole(navigationNode), excludingOperation, QVTscheduleUtil.getClassDatum(navigationNode), navigationNode, nullNode);
-			return excludingNode;
-		}
-		else {
-			Operation equalsOperation = standardLibraryHelper.getOclAnyEqualsOperation();
-			Node nullNode1 = createNullLiteralNode();
-			Node isNonNullNode = createOperationCallNode2("equals"/*"isSafe"+navigationNode.getName()*/, QVTscheduleUtil.getNodeRole(navigationNode), equalsOperation, scheduleManager.getBooleanClassDatum(), sourceNode, nullNode1);
-			createOperationSelfEdge(sourceNode, QVTbaseUtil.getType(QVTbaseUtil.getOwnedSource(callExp)), isNonNullNode);
-			createOperationParameterEdge(nullNode1, QVTbaseUtil.getOwnedParameter(equalsOperation, 0), -1, isNonNullNode);
-			Node nullNode2 = createNullLiteralNode();
-			Operation ifOperation = qvtbaseLibraryHelper.getIfOperation();
-			@NonNull Node [] sourceAndArgumentNodes = new @NonNull Node[] { isNonNullNode, navigationNode, nullNode2 };
-			String nodeName = QVTbaseUtil.getName(ifOperation);
-			Node ifNode = context.createIfNode2(utility, nodeName, QVTscheduleUtil.getClassDatum(navigationNode), sourceAndArgumentNodes);
-			Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
-			Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
-			Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
-			createOperationParameterEdge(isNonNullNode, conditionParameter, -1, ifNode);
-			createOperationParameterEdge(nullNode2, thenParameter, -1, ifNode);
-			createOperationParameterEdge(navigationNode, elseParameter, -1, ifNode);
-			return ifNode;
-		}
+		assert !(unsafeType instanceof IterableType);
+		Operation equalsOperation = standardLibraryHelper.getOclAnyEqualsOperation();
+		Node nullNode1 = createNullLiteralNode();
+		Node isNonNullNode = createOperationCallNode2("equals"/*"isSafe"+navigationNode.getName()*/, QVTscheduleUtil.getNodeRole(navigationNode), equalsOperation, scheduleManager.getBooleanClassDatum(), sourceNode, nullNode1);
+		createOperationSelfEdge(sourceNode, QVTbaseUtil.getType(QVTbaseUtil.getOwnedSource(callExp)), isNonNullNode);
+		createOperationParameterEdge(nullNode1, QVTbaseUtil.getOwnedParameter(equalsOperation, 0), -1, isNonNullNode);
+		Node nullNode2 = createNullLiteralNode();
+		Operation ifOperation = qvtbaseLibraryHelper.getIfOperation();
+		@NonNull Node [] sourceAndArgumentNodes = new @NonNull Node[] { isNonNullNode, navigationNode, nullNode2 };
+		String nodeName = QVTbaseUtil.getName(ifOperation);
+		Node ifNode = context.createIfNode2(utility, nodeName, QVTscheduleUtil.getClassDatum(navigationNode), sourceAndArgumentNodes);
+		Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
+		Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
+		Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
+		createOperationParameterEdge(isNonNullNode, conditionParameter, -1, ifNode);
+		createOperationParameterEdge(nullNode2, thenParameter, -1, ifNode);
+		createOperationParameterEdge(navigationNode, elseParameter, -1, ifNode);
+		return ifNode;
 	}
 
 	// FIXME switch to OPeration argument
@@ -1360,11 +1379,11 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	@Override
 	public @NonNull Node visitLoopExp(@NonNull LoopExp loopExp) {
 		Node sourceNode = synthesize(loopExp.getOwnedSource());
-		Node loopNode = doLoopExp(loopExp, sourceNode);
 		boolean isSafe = loopExp.isIsSafe();
 		if (isSafe) {
-			loopNode = doSafeNavigation(loopExp, sourceNode, loopNode);
+			sourceNode = doSafeIteration(loopExp, sourceNode);
 		}
+		Node loopNode = doLoopExp(loopExp, sourceNode);
 		return loopNode;
 	}
 

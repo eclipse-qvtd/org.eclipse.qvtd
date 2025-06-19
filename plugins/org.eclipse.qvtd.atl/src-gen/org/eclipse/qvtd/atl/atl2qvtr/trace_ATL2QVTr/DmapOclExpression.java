@@ -25,13 +25,14 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD1atlExpression <em>D1atl Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD2qvtrExpression <em>D2qvtr Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD3atlExpression <em>D3atl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD4qvtrExpression <em>D4qvtr Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapBooleanExp <em>Domap Boolean Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapIfExp <em>Domap If Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapIntegerExp <em>Domap Integer Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapNavigationOrAttributeCallExp_Helper <em>Domap Navigation Or Attribute Call Exp Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapNavigationOrAttributeCallExp_Property <em>Domap Navigation Or Attribute Call Exp Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapNullLiteralExp <em>Domap Null Literal Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOclType <em>Domap Ocl Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOperationCallExp_Helper <em>Domap Operation Call Exp Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapOperationCallExp_Operation <em>Domap Operation Call Exp Operation</em>}</li>
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapStringExp <em>Domap String Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapVariableExp <em>Domap Variable Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getResult <em>Result</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getS0global <em>S0global</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression()
@@ -47,60 +49,60 @@ import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
  */
 public interface DmapOclExpression extends Dispatch {
 	/**
-	 * Returns the value of the '<em><b>D1atl Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>D3atl Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>D1atl Expression</em>' reference isn't clear,
+	 * If the meaning of the '<em>D3atl Expression</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D1atl Expression</em>' reference.
-	 * @see #setD1atlExpression(OclExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_D1atlExpression()
+	 * @return the value of the '<em>D3atl Expression</em>' reference.
+	 * @see #setD3atlExpression(OclExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_D3atlExpression()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapOclExpression'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
 	 * @generated
 	 */
-	OclExpression getD1atlExpression();
+	OclExpression getD3atlExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD1atlExpression <em>D1atl Expression</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD3atlExpression <em>D3atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D1atl Expression</em>' reference.
-	 * @see #getD1atlExpression()
+	 * @param value the new value of the '<em>D3atl Expression</em>' reference.
+	 * @see #getD3atlExpression()
 	 * @generated
 	 */
-	void setD1atlExpression(OclExpression value);
+	void setD3atlExpression(OclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>D2qvtr Expression</b></em>' reference.
+	 * Returns the value of the '<em><b>D4qvtr Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>D2qvtr Expression</em>' reference isn't clear,
+	 * If the meaning of the '<em>D4qvtr Expression</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>D2qvtr Expression</em>' reference.
-	 * @see #setD2qvtrExpression(OCLExpression)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_D2qvtrExpression()
+	 * @return the value of the '<em>D4qvtr Expression</em>' reference.
+	 * @see #setD4qvtrExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_D4qvtrExpression()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='DmapOclExpression'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	OCLExpression getD2qvtrExpression();
+	OCLExpression getD4qvtrExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD2qvtrExpression <em>D2qvtr Expression</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getD4qvtrExpression <em>D4qvtr Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>D2qvtr Expression</em>' reference.
-	 * @see #getD2qvtrExpression()
+	 * @param value the new value of the '<em>D4qvtr Expression</em>' reference.
+	 * @see #getD4qvtrExpression()
 	 * @generated
 	 */
-	void setD2qvtrExpression(OCLExpression value);
+	void setD4qvtrExpression(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Domap Boolean Exp</b></em>' containment reference.
@@ -246,6 +248,35 @@ public interface DmapOclExpression extends Dispatch {
 	 * @generated
 	 */
 	void setDomapNavigationOrAttributeCallExp_Property(TmapNavigationOrAttributeCallExp_Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Domap Null Literal Exp</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNullLiteralExp#getDispatcher <em>Dispatcher</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Domap Null Literal Exp</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Domap Null Literal Exp</em>' containment reference.
+	 * @see #setDomapNullLiteralExp(TmapNullLiteralExp)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_DomapNullLiteralExp()
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNullLiteralExp#getDispatcher
+	 * @model opposite="dispatcher" containment="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='middle'"
+	 * @generated
+	 */
+	TmapNullLiteralExp getDomapNullLiteralExp();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getDomapNullLiteralExp <em>Domap Null Literal Exp</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domap Null Literal Exp</em>' containment reference.
+	 * @see #getDomapNullLiteralExp()
+	 * @generated
+	 */
+	void setDomapNullLiteralExp(TmapNullLiteralExp value);
 
 	/**
 	 * Returns the value of the '<em><b>Domap Ocl Type</b></em>' containment reference.
@@ -446,5 +477,31 @@ public interface DmapOclExpression extends Dispatch {
 	 * @generated
 	 */
 	void setResult(ImapOclExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>S0global</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>S0global</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>S0global</em>' attribute.
+	 * @see #setS0global(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getDmapOclExpression_S0global()
+	 * @model
+	 * @generated
+	 */
+	Boolean getS0global();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression#getS0global <em>S0global</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>S0global</em>' attribute.
+	 * @see #getS0global()
+	 * @generated
+	 */
+	void setS0global(Boolean value);
 
 } // DmapOclExpression

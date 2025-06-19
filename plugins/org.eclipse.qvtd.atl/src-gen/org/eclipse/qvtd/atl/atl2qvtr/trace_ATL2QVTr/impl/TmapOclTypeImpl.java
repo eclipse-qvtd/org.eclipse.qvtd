@@ -114,7 +114,7 @@ public class TmapOclTypeImpl extends ImapOclExpressionImpl implements TmapOclTyp
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -161,7 +161,7 @@ public class TmapOclTypeImpl extends ImapOclExpressionImpl implements TmapOclTyp
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 7, DmapOclExpression.class, msgs);
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 8, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

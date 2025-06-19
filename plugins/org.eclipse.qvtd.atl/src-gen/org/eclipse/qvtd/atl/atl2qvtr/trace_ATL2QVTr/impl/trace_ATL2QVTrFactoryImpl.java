@@ -83,21 +83,23 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 			case 19: return createTmapModule();
 			case 20: return createTmapNavigationOrAttributeCallExp_Helper();
 			case 21: return createTmapNavigationOrAttributeCallExp_Property();
-			case 22: return createTmapOclMetamodel();
-			case 23: return createTmapOclModel_IN();
-			case 24: return createTmapOclModel_OUT();
-			case 25: return createTmapOclType();
-			case 26: return createTmapOperationCallExp_Helper();
-			case 27: return createTmapOperationCallExp_Operation();
-			case 28: return createTmapOperationCallExp_argument();
-			case 29: return createTmapOperatorCallExp();
-			case 30: return createTmapSimpleInPatternElement();
-			case 31: return createTmapSimpleOutPatternElement();
-			case 32: return createTmapStringExp();
-			case 33: return createTmapVariable();
-			case 34: return createTmapVariableExp();
-			case 35: return createTmapVariableExp_referredVariable_Helper();
-			case 36: return createTmapVariableExp_referredVariable_VariableDeclaration();
+			case 22: return createTmapNullLiteralExp();
+			case 23: return createTmapOclMetamodel();
+			case 24: return createTmapOclModel_IN();
+			case 25: return createTmapOclModel_OUT();
+			case 26: return createTmapOclType();
+			case 27: return createTmapOperationCallExp_Helper();
+			case 28: return createTmapOperationCallExp_Operation();
+			case 29: return createTmapOperationCallExp_argument();
+			case 30: return createTmapOperatorCallExp();
+			case 31: return createTmapSimpleInPatternElement();
+			case 32: return createTmapSimpleOutPatternElement();
+			case 33: return createTmapStringExp();
+			case 34: return createTmapVariable();
+			case 35: return createTmapVariableExp();
+			case 36: return createTmapVariableExp_referredVariable_Helper();
+			case 37: return createTmapVariableExp_referredVariable_VariableDeclaration();
+			case 38: return createTxATL2QVTr();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -318,6 +320,17 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public TmapNullLiteralExp createTmapNullLiteralExp() {
+		TmapNullLiteralExpImpl tmapNullLiteralExp = new TmapNullLiteralExpImpl();
+		return tmapNullLiteralExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public TmapOclMetamodel createTmapOclMetamodel() {
 		TmapOclMetamodelImpl tmapOclMetamodel = new TmapOclMetamodelImpl();
 		return tmapOclMetamodel;
@@ -475,6 +488,17 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	public TmapVariableExp_referredVariable_VariableDeclaration createTmapVariableExp_referredVariable_VariableDeclaration() {
 		TmapVariableExp_referredVariable_VariableDeclarationImpl tmapVariableExp_referredVariable_VariableDeclaration = new TmapVariableExp_referredVariable_VariableDeclarationImpl();
 		return tmapVariableExp_referredVariable_VariableDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TxATL2QVTr createTxATL2QVTr() {
+		TxATL2QVTrImpl txATL2QVTr = new TxATL2QVTrImpl();
+		return txATL2QVTr;
 	}
 
 	/**

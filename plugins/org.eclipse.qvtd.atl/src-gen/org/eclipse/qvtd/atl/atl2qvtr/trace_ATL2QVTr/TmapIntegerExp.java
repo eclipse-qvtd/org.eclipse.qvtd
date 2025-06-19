@@ -22,7 +22,7 @@ import java.math.BigInteger;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp#getT0symbol <em>T0symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp#getT1symbol <em>T1symbol</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIntegerExp()
@@ -59,30 +59,30 @@ public interface TmapIntegerExp extends ImapOclExpression {
 	void setDispatcher(DmapOclExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>T0symbol</b></em>' attribute.
+	 * Returns the value of the '<em><b>T1symbol</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>T0symbol</em>' attribute isn't clear,
+	 * If the meaning of the '<em>T1symbol</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T0symbol</em>' attribute.
-	 * @see #setT0symbol(BigInteger)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIntegerExp_T0symbol()
+	 * @return the value of the '<em>T1symbol</em>' attribute.
+	 * @see #setT1symbol(BigInteger)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapIntegerExp_T1symbol()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='$primitive$'"
 	 * @generated
 	 */
-	BigInteger getT0symbol();
+	BigInteger getT1symbol();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp#getT0symbol <em>T0symbol</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp#getT1symbol <em>T1symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T0symbol</em>' attribute.
-	 * @see #getT0symbol()
+	 * @param value the new value of the '<em>T1symbol</em>' attribute.
+	 * @see #getT1symbol()
 	 * @generated
 	 */
-	void setT0symbol(BigInteger value);
+	void setT1symbol(BigInteger value);
 
 } // TmapIntegerExp

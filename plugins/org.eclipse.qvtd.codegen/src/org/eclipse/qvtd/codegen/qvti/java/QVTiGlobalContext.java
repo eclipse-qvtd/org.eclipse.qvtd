@@ -42,7 +42,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 	public static final @NonNull String TRANSFORMATION_EXECUTION_NAME = "transformationExecution";
 
 	/**
-	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
+	 * Map from an oppositeProperty that requires a cache to the global name of that cache.
 	 */
 	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
 

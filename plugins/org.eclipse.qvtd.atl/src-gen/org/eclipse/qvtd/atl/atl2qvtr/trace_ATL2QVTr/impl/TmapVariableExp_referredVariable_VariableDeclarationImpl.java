@@ -40,8 +40,9 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getT1atlVariable <em>T1atl Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getT3atlVariable <em>T3atl Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getT4qvtrVariable <em>T4qvtr Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_VariableDeclarationImpl#getS0local <em>S0local</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,7 +55,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 3;
+	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION_FEATURE_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Tmap Variable Exp referred Variable Variable Declaration</em>' class.
@@ -67,24 +68,44 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 
 
 	/**
-	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
+	 * The cached value of the '{@link #getT3atlVariable() <em>T3atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlVariable()
+	 * @see #getT3atlVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected PatternElement t1atlVariable;
+	protected PatternElement t3atlVariable;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrVariable() <em>T2qvtr Variable</em>}' reference.
+	 * The cached value of the '{@link #getT4qvtrVariable() <em>T4qvtr Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrVariable()
+	 * @see #getT4qvtrVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableDeclaration t2qvtrVariable;
+	protected VariableDeclaration t4qvtrVariable;
+
+	/**
+	 * The default value of the '{@link #getS0local() <em>S0local</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0local()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean S0LOCAL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getS0local() <em>S0local</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getS0local()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean s0local = S0LOCAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,16 +175,16 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 */
 	@Override
-	public PatternElement getT1atlVariable() {
-		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = t1atlVariable;
-			t1atlVariable = (PatternElement)eResolveProxy(oldT1atlVariable);
-			if (t1atlVariable != oldT1atlVariable) {
+	public PatternElement getT3atlVariable() {
+		if (t3atlVariable != null && t3atlVariable.eIsProxy()) {
+			InternalEObject oldT3atlVariable = t3atlVariable;
+			t3atlVariable = (PatternElement)eResolveProxy(oldT3atlVariable);
+			if (t3atlVariable != oldT3atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlVariable, t3atlVariable));
 			}
 		}
-		return t1atlVariable;
+		return t3atlVariable;
 	}
 
 	/**
@@ -171,8 +192,8 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PatternElement basicGetT1atlVariable() {
-		return t1atlVariable;
+	public PatternElement basicGetT3atlVariable() {
+		return t3atlVariable;
 	}
 
 	/**
@@ -181,11 +202,11 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 */
 	@Override
-	public void setT1atlVariable(PatternElement newT1atlVariable) {
-		PatternElement oldT1atlVariable = t1atlVariable;
-		t1atlVariable = newT1atlVariable;
+	public void setT3atlVariable(PatternElement newT3atlVariable) {
+		PatternElement oldT3atlVariable = t3atlVariable;
+		t3atlVariable = newT3atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlVariable, t3atlVariable));
 	}
 
 	/**
@@ -194,16 +215,16 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 */
 	@Override
-	public VariableDeclaration getT2qvtrVariable() {
-		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
-			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
-			t2qvtrVariable = (VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
-			if (t2qvtrVariable != oldT2qvtrVariable) {
+	public VariableDeclaration getT4qvtrVariable() {
+		if (t4qvtrVariable != null && t4qvtrVariable.eIsProxy()) {
+			InternalEObject oldT4qvtrVariable = (InternalEObject)t4qvtrVariable;
+			t4qvtrVariable = (VariableDeclaration)eResolveProxy(oldT4qvtrVariable);
+			if (t4qvtrVariable != oldT4qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrVariable, t4qvtrVariable));
 			}
 		}
-		return t2qvtrVariable;
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -211,8 +232,8 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration basicGetT2qvtrVariable() {
-		return t2qvtrVariable;
+	public VariableDeclaration basicGetT4qvtrVariable() {
+		return t4qvtrVariable;
 	}
 
 	/**
@@ -221,11 +242,34 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrVariable(VariableDeclaration newT2qvtrVariable) {
-		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
-		t2qvtrVariable = newT2qvtrVariable;
+	public void setT4qvtrVariable(VariableDeclaration newT4qvtrVariable) {
+		VariableDeclaration oldT4qvtrVariable = t4qvtrVariable;
+		t4qvtrVariable = newT4qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrVariable, t4qvtrVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Boolean getS0local() {
+		return s0local;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0local(Boolean newS0local) {
+		Boolean oldS0local = s0local;
+		s0local = newS0local;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldS0local, s0local));
 	}
 
 	/**
@@ -283,11 +327,13 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT1atlVariable();
-				return basicGetT1atlVariable();
+				if (resolve) return getT3atlVariable();
+				return basicGetT3atlVariable();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT2qvtrVariable();
-				return basicGetT2qvtrVariable();
+				if (resolve) return getT4qvtrVariable();
+				return basicGetT4qvtrVariable();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				return getS0local();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,10 +350,13 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 				setDispatcher((DmapVariableExp_referredVariable)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlVariable((PatternElement)newValue);
+				setT3atlVariable((PatternElement)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrVariable((VariableDeclaration)newValue);
+				setT4qvtrVariable((VariableDeclaration)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				setS0local((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -325,10 +374,13 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 				setDispatcher((DmapVariableExp_referredVariable)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT1atlVariable((PatternElement)null);
+				setT3atlVariable((PatternElement)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrVariable((VariableDeclaration)null);
+				setT4qvtrVariable((VariableDeclaration)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				setS0local(S0LOCAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -345,11 +397,29 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getDispatcher() != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t1atlVariable != null;
+				return t3atlVariable != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t2qvtrVariable != null;
+				return t4qvtrVariable != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				return S0LOCAL_EDEFAULT == null ? s0local != null : !S0LOCAL_EDEFAULT.equals(s0local);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0local: ");
+		result.append(s0local);
+		result.append(')');
+		return result.toString();
 	}
 
 

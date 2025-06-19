@@ -36,10 +36,11 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT1atlArgument <em>T1atl Argument</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT1atlParent <em>T1atl Parent</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT2qvtrArgument <em>T2qvtr Argument</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT2qvtrParent <em>T2qvtr Parent</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getS0global <em>S0global</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT3atlArgument <em>T3atl Argument</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT3atlParent <em>T3atl Parent</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT4qvtrArgument <em>T4qvtr Argument</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getT4qvtrParent <em>T4qvtr Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapOperationCallExp_argumentImpl#getWmapOclExpression1 <em>Wmap Ocl Expression1</em>}</li>
  * </ul>
@@ -54,7 +55,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TMAP_OPERATION_CALL_EXP_ARGUMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 6;
+	public static final int TMAP_OPERATION_CALL_EXP_ARGUMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Tmap Operation Call Exp argument</em>' class.
@@ -67,44 +68,64 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 
 
 	/**
-	 * The cached value of the '{@link #getT1atlArgument() <em>T1atl Argument</em>}' reference.
+	 * The default value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlArgument()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected OclExpression t1atlArgument;
+	protected static final Boolean S0GLOBAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getT1atlParent() <em>T1atl Parent</em>}' reference.
+	 * The cached value of the '{@link #getS0global() <em>S0global</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT1atlParent()
+	 * @see #getS0global()
 	 * @generated
 	 * @ordered
 	 */
-	protected OperationCallExp t1atlParent;
+	protected Boolean s0global = S0GLOBAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrArgument() <em>T2qvtr Argument</em>}' reference.
+	 * The cached value of the '{@link #getT3atlArgument() <em>T3atl Argument</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrArgument()
+	 * @see #getT3atlArgument()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression t2qvtrArgument;
+	protected OclExpression t3atlArgument;
 
 	/**
-	 * The cached value of the '{@link #getT2qvtrParent() <em>T2qvtr Parent</em>}' reference.
+	 * The cached value of the '{@link #getT3atlParent() <em>T3atl Parent</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getT2qvtrParent()
+	 * @see #getT3atlParent()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.OperationCallExp t2qvtrParent;
+	protected OperationCallExp t3atlParent;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrArgument() <em>T4qvtr Argument</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrArgument()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression t4qvtrArgument;
+
+	/**
+	 * The cached value of the '{@link #getT4qvtrParent() <em>T4qvtr Parent</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT4qvtrParent()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.eclipse.ocl.pivot.OperationCallExp t4qvtrParent;
 
 	/**
 	 * The cached value of the '{@link #getWmapOclExpression() <em>Wmap Ocl Expression</em>}' reference.
@@ -151,16 +172,39 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public OclExpression getT1atlArgument() {
-		if (t1atlArgument != null && t1atlArgument.eIsProxy()) {
-			InternalEObject oldT1atlArgument = t1atlArgument;
-			t1atlArgument = (OclExpression)eResolveProxy(oldT1atlArgument);
-			if (t1atlArgument != oldT1atlArgument) {
+	public Boolean getS0global() {
+		return s0global;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setS0global(Boolean newS0global) {
+		Boolean oldS0global = s0global;
+		s0global = newS0global;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldS0global, s0global));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OclExpression getT3atlArgument() {
+		if (t3atlArgument != null && t3atlArgument.eIsProxy()) {
+			InternalEObject oldT3atlArgument = t3atlArgument;
+			t3atlArgument = (OclExpression)eResolveProxy(oldT3atlArgument);
+			if (t3atlArgument != oldT3atlArgument) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlArgument, t1atlArgument));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlArgument, t3atlArgument));
 			}
 		}
-		return t1atlArgument;
+		return t3atlArgument;
 	}
 
 	/**
@@ -168,8 +212,8 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclExpression basicGetT1atlArgument() {
-		return t1atlArgument;
+	public OclExpression basicGetT3atlArgument() {
+		return t3atlArgument;
 	}
 
 	/**
@@ -178,11 +222,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setT1atlArgument(OclExpression newT1atlArgument) {
-		OclExpression oldT1atlArgument = t1atlArgument;
-		t1atlArgument = newT1atlArgument;
+	public void setT3atlArgument(OclExpression newT3atlArgument) {
+		OclExpression oldT3atlArgument = t3atlArgument;
+		t3atlArgument = newT3atlArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlArgument, t1atlArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT3atlArgument, t3atlArgument));
 	}
 
 	/**
@@ -191,16 +235,16 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public OperationCallExp getT1atlParent() {
-		if (t1atlParent != null && t1atlParent.eIsProxy()) {
-			InternalEObject oldT1atlParent = t1atlParent;
-			t1atlParent = (OperationCallExp)eResolveProxy(oldT1atlParent);
-			if (t1atlParent != oldT1atlParent) {
+	public OperationCallExp getT3atlParent() {
+		if (t3atlParent != null && t3atlParent.eIsProxy()) {
+			InternalEObject oldT3atlParent = t3atlParent;
+			t3atlParent = (OperationCallExp)eResolveProxy(oldT3atlParent);
+			if (t3atlParent != oldT3atlParent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlParent, t1atlParent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlParent, t3atlParent));
 			}
 		}
-		return t1atlParent;
+		return t3atlParent;
 	}
 
 	/**
@@ -208,8 +252,8 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperationCallExp basicGetT1atlParent() {
-		return t1atlParent;
+	public OperationCallExp basicGetT3atlParent() {
+		return t3atlParent;
 	}
 
 	/**
@@ -218,11 +262,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setT1atlParent(OperationCallExp newT1atlParent) {
-		OperationCallExp oldT1atlParent = t1atlParent;
-		t1atlParent = newT1atlParent;
+	public void setT3atlParent(OperationCallExp newT3atlParent) {
+		OperationCallExp oldT3atlParent = t3atlParent;
+		t3atlParent = newT3atlParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlParent, t1atlParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT3atlParent, t3atlParent));
 	}
 
 	/**
@@ -231,16 +275,16 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getT2qvtrArgument() {
-		if (t2qvtrArgument != null && t2qvtrArgument.eIsProxy()) {
-			InternalEObject oldT2qvtrArgument = (InternalEObject)t2qvtrArgument;
-			t2qvtrArgument = (OCLExpression)eResolveProxy(oldT2qvtrArgument);
-			if (t2qvtrArgument != oldT2qvtrArgument) {
+	public OCLExpression getT4qvtrArgument() {
+		if (t4qvtrArgument != null && t4qvtrArgument.eIsProxy()) {
+			InternalEObject oldT4qvtrArgument = (InternalEObject)t4qvtrArgument;
+			t4qvtrArgument = (OCLExpression)eResolveProxy(oldT4qvtrArgument);
+			if (t4qvtrArgument != oldT4qvtrArgument) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrArgument, t2qvtrArgument));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrArgument, t4qvtrArgument));
 			}
 		}
-		return t2qvtrArgument;
+		return t4qvtrArgument;
 	}
 
 	/**
@@ -248,8 +292,8 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression basicGetT2qvtrArgument() {
-		return t2qvtrArgument;
+	public OCLExpression basicGetT4qvtrArgument() {
+		return t4qvtrArgument;
 	}
 
 	/**
@@ -258,11 +302,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrArgument(OCLExpression newT2qvtrArgument) {
-		OCLExpression oldT2qvtrArgument = t2qvtrArgument;
-		t2qvtrArgument = newT2qvtrArgument;
+	public void setT4qvtrArgument(OCLExpression newT4qvtrArgument) {
+		OCLExpression oldT4qvtrArgument = t4qvtrArgument;
+		t4qvtrArgument = newT4qvtrArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrArgument, t2qvtrArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT4qvtrArgument, t4qvtrArgument));
 	}
 
 	/**
@@ -271,16 +315,16 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.pivot.OperationCallExp getT2qvtrParent() {
-		if (t2qvtrParent != null && t2qvtrParent.eIsProxy()) {
-			InternalEObject oldT2qvtrParent = (InternalEObject)t2qvtrParent;
-			t2qvtrParent = (org.eclipse.ocl.pivot.OperationCallExp)eResolveProxy(oldT2qvtrParent);
-			if (t2qvtrParent != oldT2qvtrParent) {
+	public org.eclipse.ocl.pivot.OperationCallExp getT4qvtrParent() {
+		if (t4qvtrParent != null && t4qvtrParent.eIsProxy()) {
+			InternalEObject oldT4qvtrParent = (InternalEObject)t4qvtrParent;
+			t4qvtrParent = (org.eclipse.ocl.pivot.OperationCallExp)eResolveProxy(oldT4qvtrParent);
+			if (t4qvtrParent != oldT4qvtrParent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrParent, t2qvtrParent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT4qvtrParent, t4qvtrParent));
 			}
 		}
-		return t2qvtrParent;
+		return t4qvtrParent;
 	}
 
 	/**
@@ -288,8 +332,8 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.OperationCallExp basicGetT2qvtrParent() {
-		return t2qvtrParent;
+	public org.eclipse.ocl.pivot.OperationCallExp basicGetT4qvtrParent() {
+		return t4qvtrParent;
 	}
 
 	/**
@@ -298,11 +342,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setT2qvtrParent(org.eclipse.ocl.pivot.OperationCallExp newT2qvtrParent) {
-		org.eclipse.ocl.pivot.OperationCallExp oldT2qvtrParent = t2qvtrParent;
-		t2qvtrParent = newT2qvtrParent;
+	public void setT4qvtrParent(org.eclipse.ocl.pivot.OperationCallExp newT4qvtrParent) {
+		org.eclipse.ocl.pivot.OperationCallExp oldT4qvtrParent = t4qvtrParent;
+		t4qvtrParent = newT4qvtrParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrParent, t2qvtrParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT4qvtrParent, t4qvtrParent));
 	}
 
 	/**
@@ -317,7 +361,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -342,7 +386,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -357,7 +401,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			wmapOclExpression1 = (DmapOclExpression)eResolveProxy(oldWmapOclExpression1);
 			if (wmapOclExpression1 != oldWmapOclExpression1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression1, wmapOclExpression1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapOclExpression1, wmapOclExpression1));
 			}
 		}
 		return wmapOclExpression1;
@@ -382,7 +426,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		DmapOclExpression oldWmapOclExpression1 = wmapOclExpression1;
 		wmapOclExpression1 = newWmapOclExpression1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression1, wmapOclExpression1));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapOclExpression1, wmapOclExpression1));
 	}
 
 	/**
@@ -394,21 +438,23 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				if (resolve) return getT1atlArgument();
-				return basicGetT1atlArgument();
+				return getS0global();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				if (resolve) return getT1atlParent();
-				return basicGetT1atlParent();
+				if (resolve) return getT3atlArgument();
+				return basicGetT3atlArgument();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				if (resolve) return getT2qvtrArgument();
-				return basicGetT2qvtrArgument();
+				if (resolve) return getT3atlParent();
+				return basicGetT3atlParent();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				if (resolve) return getT2qvtrParent();
-				return basicGetT2qvtrParent();
+				if (resolve) return getT4qvtrArgument();
+				return basicGetT4qvtrArgument();
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
+				if (resolve) return getT4qvtrParent();
+				return basicGetT4qvtrParent();
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getWmapOclExpression1();
 				return basicGetWmapOclExpression1();
 		}
@@ -424,21 +470,24 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT1atlArgument((OclExpression)newValue);
+				setS0global((Boolean)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlParent((OperationCallExp)newValue);
+				setT3atlArgument((OclExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrArgument((OCLExpression)newValue);
+				setT3atlParent((OperationCallExp)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)newValue);
+				setT4qvtrArgument((OCLExpression)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setWmapOclExpression((DmapOclExpression)newValue);
+				setT4qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)newValue);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				setWmapOclExpression((DmapOclExpression)newValue);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapOclExpression1((DmapOclExpression)newValue);
 				return;
 		}
@@ -454,21 +503,24 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				setT1atlArgument((OclExpression)null);
+				setS0global(S0GLOBAL_EDEFAULT);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				setT1atlParent((OperationCallExp)null);
+				setT3atlArgument((OclExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				setT2qvtrArgument((OCLExpression)null);
+				setT3atlParent((OperationCallExp)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				setT2qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)null);
+				setT4qvtrArgument((OCLExpression)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				setWmapOclExpression((DmapOclExpression)null);
+				setT4qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)null);
 				return;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				setWmapOclExpression((DmapOclExpression)null);
+				return;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapOclExpression1((DmapOclExpression)null);
 				return;
 		}
@@ -484,19 +536,37 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
-				return t1atlArgument != null;
+				return S0GLOBAL_EDEFAULT == null ? s0global != null : !S0GLOBAL_EDEFAULT.equals(s0global);
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
-				return t1atlParent != null;
+				return t3atlArgument != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
-				return t2qvtrArgument != null;
+				return t3atlParent != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
-				return t2qvtrParent != null;
+				return t4qvtrArgument != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
-				return wmapOclExpression != null;
+				return t4qvtrParent != null;
 			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
+				return wmapOclExpression != null;
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return wmapOclExpression1 != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (s0global: ");
+		result.append(s0global);
+		result.append(')');
+		return result.toString();
 	}
 
 

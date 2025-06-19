@@ -1,186 +1,200 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE qvtr:RelationModel [
-<!ENTITY _0 "Families.ecore.oclas">
-<!ENTITY _1 "Persons.ecore.oclas">
-<!ENTITY _2 "http://www.eclipse.org/ocl/2015/Library.oclas">
+<!ENTITY _0 "http://www.eclipse.org/ocl/2015/Library.oclas">
+<!ENTITY _1 "Families.ecore.oclas">
+<!ENTITY _2 "Persons.ecore.oclas">
 <!ENTITY _3 "../../../org.eclipse.qvtd.runtime/model/QVTtrace.ecore.oclas">
 ]>
 <qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtr="http://www.eclipse.org/qvt/2015/QVTrelation" xmlns:qvtt="http://www.eclipse.org/qvt/2015/QVTtemplate"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2015/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
-    xmi:id="AAAAA" name="Families2Persons.saved.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families2Persons.saved.qvtr"
+    xmi:id="AAAAA" name="Families2Persons_CG" externalURI="platform:/resource/_QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG/Families2Persons_CG"
     xmiidVersion="1">
-  <ownedImports importedNamespace="pivot:Model &_0;#AAAAA" xmiidVersion="1"/>
-  <ownedImports importedNamespace="pivot:Model &_1;#AAAAA" xmiidVersion="1"/>
   <ownedPackages xmi:id="6Fh3I" name="">
-    <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="lSZ2I" name="Families2Persons" superClasses="&_2;#zfDWR">
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="Gr4OV" name="familyName" type="pivot:PrimitiveType &_2;#AlwVZ">
+    <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="lSZ2I" name="Families2Persons">
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="Gr4OV" name="familyName" type="pivot:PrimitiveType &_0;#AlwVZ">
         <bodyExpression xsi:type="qvtb:FunctionBody">
-          <ownedBody xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_2;#AlwVZ">
-            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#aSwFn">
-                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#31gsl">
-                  <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+          <ownedBody xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_0;#AlwVZ">
+            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                  referredOperation="&_0;#aSwFn">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" type="pivot:Class &_1;#151KI" referredProperty="&_1;#31gsl">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
                 </ownedSource>
               </ownedSource>
             </ownedCondition>
-            <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_2;#AlwVZ">
-              <ownedCondition xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-                <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#aSwFn">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#eLUay">
-                    <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+            <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_0;#AlwVZ">
+              <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                    referredOperation="&_0;#aSwFn">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" type="pivot:Class &_1;#151KI" referredProperty="&_1;#eLUay">
+                    <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
                   </ownedSource>
                 </ownedSource>
               </ownedCondition>
-              <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_2;#AlwVZ">
-                <ownedCondition xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#aSwFn">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#lstD1">
-                      <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+              <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_0;#AlwVZ">
+                <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                      referredOperation="&_0;#aSwFn">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" type="pivot:Class &_1;#151KI" referredProperty="&_1;#lstD1">
+                      <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
                     </ownedSource>
                   </ownedSource>
                 </ownedCondition>
-                <ownedElse xsi:type="pivot:PropertyCallExp" name="lastName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#6dF3q">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" isRequired="false" type="pivot:Class &_0;#151KI"
-                      referredProperty="&_0;#j4ucQ">
-                    <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
-                  </ownedSource>
+                <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_0;#AlwVZ">
+                  <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+                    <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                        referredOperation="&_0;#aSwFn">
+                      <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" type="pivot:Class &_1;#151KI" referredProperty="&_1;#j4ucQ">
+                        <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
+                      </ownedSource>
+                    </ownedSource>
+                  </ownedCondition>
+                  <ownedElse xsi:type="pivot:StringLiteralExp" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" stringSymbol=""/>
+                  <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ"
+                      referredProperty="&_1;#6dF3q">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" type="pivot:Class &_1;#151KI" referredProperty="&_1;#j4ucQ">
+                      <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
+                    </ownedSource>
+                  </ownedThen>
                 </ownedElse>
-                <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#6dF3q">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#lstD1">
-                    <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+                <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredProperty="&_1;#6dF3q">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" type="pivot:Class &_1;#151KI" referredProperty="&_1;#lstD1">
+                    <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
                   </ownedSource>
                 </ownedThen>
               </ownedElse>
-              <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#6dF3q">
-                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#eLUay">
-                  <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+              <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredProperty="&_1;#6dF3q">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" type="pivot:Class &_1;#151KI" referredProperty="&_1;#eLUay">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
                 </ownedSource>
               </ownedThen>
             </ownedElse>
-            <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#6dF3q">
-              <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#31gsl">
-                <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#lcaR4"/>
+            <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredProperty="&_1;#6dF3q">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" type="pivot:Class &_1;#151KI" referredProperty="&_1;#31gsl">
+                <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#lcaR4"/>
               </ownedSource>
             </ownedThen>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" type="#lSZ2I" representedParameter="#DqXtJ"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="self" type="pivot:Class &_0;#r2YVU" representedParameter="#lcaR4"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" name="this" isRequired="true" type="#lSZ2I" representedParameter="#DqXtJ"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" representedParameter="#lcaR4"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="lcaR4" name="self" type="pivot:Class &_0;#r2YVU"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="lcaR4" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU"/>
       </ownedOperations>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="N,BoB" name="isFemale" type="pivot:BooleanType &_2;#XEMMs">
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="N,BoB" name="isFemale" type="pivot:BooleanType &_0;#XEMMs">
         <bodyExpression xsi:type="qvtb:FunctionBody">
-          <ownedBody xsi:type="pivot:IfExp" type="pivot:BooleanType &_2;#XEMMs">
-            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#aSwFn">
-                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" isRequired="false" type="pivot:Class &_0;#151KI" referredProperty="&_0;#eLUay">
-                  <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#QQAbF"/>
+          <ownedBody xsi:type="pivot:IfExp" type="pivot:BooleanType &_0;#XEMMs">
+            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                  referredOperation="&_0;#aSwFn">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" type="pivot:Class &_1;#151KI" referredProperty="&_1;#eLUay">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#QQAbF"/>
                 </ownedSource>
               </ownedSource>
             </ownedCondition>
-            <ownedElse xsi:type="pivot:IfExp" type="pivot:BooleanType &_2;#XEMMs">
-              <ownedCondition xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-                <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#aSwFn">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" isRequired="false" type="pivot:Class &_0;#151KI"
-                      referredProperty="&_0;#j4ucQ">
-                    <ownedSource xsi:type="pivot:VariableExp" name="self" type="pivot:Class &_0;#r2YVU" referredVariable="#QQAbF"/>
+            <ownedElse xsi:type="pivot:IfExp" type="pivot:BooleanType &_0;#XEMMs">
+              <ownedCondition xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" isRequired="true" type="pivot:BooleanType &_0;#XEMMs"
+                    referredOperation="&_0;#aSwFn">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" type="pivot:Class &_1;#151KI" referredProperty="&_1;#j4ucQ">
+                    <ownedSource xsi:type="pivot:VariableExp" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#QQAbF"/>
                   </ownedSource>
                 </ownedSource>
               </ownedCondition>
-              <ownedElse xsi:type="pivot:BooleanLiteralExp" type="pivot:BooleanType &_2;#XEMMs" booleanSymbol="false"/>
-              <ownedThen xsi:type="pivot:BooleanLiteralExp" type="pivot:BooleanType &_2;#XEMMs" booleanSymbol="true"/>
+              <ownedElse xsi:type="pivot:BooleanLiteralExp" isRequired="true" type="pivot:BooleanType &_0;#XEMMs" booleanSymbol="false"/>
+              <ownedThen xsi:type="pivot:BooleanLiteralExp" isRequired="true" type="pivot:BooleanType &_0;#XEMMs" booleanSymbol="true"/>
             </ownedElse>
-            <ownedThen xsi:type="pivot:BooleanLiteralExp" type="pivot:BooleanType &_2;#XEMMs" booleanSymbol="true"/>
+            <ownedThen xsi:type="pivot:BooleanLiteralExp" isRequired="true" type="pivot:BooleanType &_0;#XEMMs" booleanSymbol="true"/>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" type="#lSZ2I" representedParameter="#DqXtJ"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="self" type="pivot:Class &_0;#r2YVU" representedParameter="#QQAbF"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" name="this" isRequired="true" type="#lSZ2I" representedParameter="#DqXtJ"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU" representedParameter="#QQAbF"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="QQAbF" name="self" type="pivot:Class &_0;#r2YVU"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="QQAbF" name="self" isRequired="true" type="pivot:Class &_1;#r2YVU"/>
       </ownedOperations>
-      <modelParameter xmi:id="SnToR" name="$primitive$" isPrimitive="true"/>
-      <modelParameter xmi:id="z2sgS" name="Families" usedPackage="&_0;#ci1p7"/>
-      <modelParameter xmi:id="v4ega" name="Persons" usedPackage="&_1;#YknpD"/>
       <modelParameter xmi:id="mAGsf" name="middle" isTrace="true"/>
-      <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" name="Member2Female" isTopLevel="true">
-        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" typedModel="#z2sgS" rootVariable="#8tM8f">
-          <pattern bindsTo="#8tM8f">
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_0;#r2YVU" bindsTo="#8tM8f" referredClass="&_0;#r2YVU"/>
-          </pattern>
-        </domain>
-        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="true" typedModel="#v4ega" rootVariable="#9tM8f">
-          <pattern bindsTo="#9tM8f">
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_1;#pzC6s" bindsTo="#9tM8f" referredClass="&_1;#pzC6s">
-              <part referredProperty="&_1;#8tc+u">
-                <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#pK7dJ">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#pK7dJ">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#yTUBO">
-                      <ownedSource xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#8tM8f"/>
-                    </ownedSource>
-                    <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType &_2;#AlwVZ" stringSymbol=" "/>
-                  </ownedSource>
-                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="#Gr4OV">
-                    <ownedSource xsi:type="pivot:VariableExp" name="this" type="#lSZ2I" referredVariable="#DqXtJ"/>
-                    <ownedArguments xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#8tM8f"/>
-                  </ownedArguments>
-                </value>
-              </part>
-            </templateExpression>
-          </pattern>
-        </domain>
-        <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" type="pivot:Class &_0;#r2YVU"/>
-        <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class &_1;#pzC6s"/>
-        <variable xsi:type="qvtr:SharedVariable" name="trace" type="pivot:Class &_3;#MdKgS" isImplicit="true"/>
-        <when>
-          <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" type="pivot:BooleanType &_2;#XEMMs" referredOperation="#N,BoB">
-              <ownedSource xsi:type="pivot:VariableExp" name="this" type="#lSZ2I" referredVariable="#DqXtJ"/>
-              <ownedArguments xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#8tM8f"/>
-            </conditionExpression>
-          </predicate>
-        </when>
-      </rule>
+      <modelParameter xmi:id="z2sgS" name="Families" usedPackage="&_1;#ci1p7"/>
+      <modelParameter xmi:id="v4ega" name="Persons" usedPackage="&_2;#YknpD"/>
       <rule xsi:type="qvtr:Relation" xmi:id="ifoLA" name="Member2Male" isTopLevel="true">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" typedModel="#z2sgS" rootVariable="#50ALF">
-          <pattern bindsTo="#50ALF">
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_0;#r2YVU" bindsTo="#50ALF" referredClass="&_0;#r2YVU"/>
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_1;#r2YVU" bindsTo="#50ALF" referredClass="&_1;#r2YVU"/>
           </pattern>
         </domain>
-        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="true" typedModel="#v4ega" rootVariable="#60ALF">
-          <pattern bindsTo="#60ALF">
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_1;#q+x1v" bindsTo="#60ALF" referredClass="&_1;#q+x1v">
-              <part referredProperty="&_1;#8tc+u">
-                <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#pK7dJ">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#pK7dJ">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#yTUBO">
-                      <ownedSource xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#50ALF"/>
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" typedModel="#v4ega" rootVariable="#60ALF">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_2;#q+x1v" bindsTo="#60ALF" referredClass="&_2;#q+x1v">
+              <part referredProperty="&_2;#8tc+u">
+                <value xsi:type="pivot:OperationCallExp" name="+" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="&_0;#pK7dJ">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="&_0;#pK7dJ">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ"
+                        referredProperty="&_1;#yTUBO">
+                      <ownedSource xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#50ALF"/>
                     </ownedSource>
-                    <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType &_2;#AlwVZ" stringSymbol=" "/>
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" stringSymbol=" "/>
                   </ownedSource>
-                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="#Gr4OV">
-                    <ownedSource xsi:type="pivot:VariableExp" name="this" type="#lSZ2I" referredVariable="#DqXtJ"/>
-                    <ownedArguments xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#50ALF"/>
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="#Gr4OV">
+                    <ownedSource xsi:type="pivot:VariableExp" name="this" isRequired="true" type="#lSZ2I" referredVariable="#DqXtJ"/>
+                    <ownedArguments xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#50ALF"/>
                   </ownedArguments>
                 </value>
               </part>
             </templateExpression>
           </pattern>
         </domain>
-        <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" type="pivot:Class &_0;#r2YVU"/>
-        <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class &_1;#q+x1v"/>
         <variable xsi:type="qvtr:SharedVariable" name="trace" type="pivot:Class &_3;#MdKgS" isImplicit="true"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class &_2;#q+x1v"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU"/>
         <when>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#DH5kA">
-              <ownedSource xsi:type="pivot:OperationCallExp" name="isFemale" type="pivot:BooleanType &_2;#XEMMs" referredOperation="#N,BoB">
-                <ownedSource xsi:type="pivot:VariableExp" name="this" type="#lSZ2I" referredVariable="#DqXtJ"/>
-                <ownedArguments xsi:type="pivot:VariableExp" name="s" type="pivot:Class &_0;#r2YVU" referredVariable="#50ALF"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:BooleanType &_0;#XEMMs" referredOperation="&_0;#DH5kA">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="isFemale" type="pivot:BooleanType &_0;#XEMMs" referredOperation="#N,BoB">
+                <ownedSource xsi:type="pivot:VariableExp" name="this" isRequired="true" type="#lSZ2I" referredVariable="#DqXtJ"/>
+                <ownedArguments xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#50ALF"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
         </when>
       </rule>
-      <ownedContext xmi:id="DqXtJ" name="this" type="#lSZ2I"/>
+      <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" name="Member2Female" isTopLevel="true">
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" typedModel="#z2sgS" rootVariable="#8tM8f">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_1;#r2YVU" bindsTo="#8tM8f" referredClass="&_1;#r2YVU"/>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" typedModel="#v4ega" rootVariable="#9tM8f">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class &_2;#pzC6s" bindsTo="#9tM8f" referredClass="&_2;#pzC6s">
+              <part referredProperty="&_2;#8tc+u">
+                <value xsi:type="pivot:OperationCallExp" name="+" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="&_0;#pK7dJ">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="&_0;#pK7dJ">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ"
+                        referredProperty="&_1;#yTUBO">
+                      <ownedSource xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#8tM8f"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" type="pivot:PrimitiveType &_0;#AlwVZ" stringSymbol=" "/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" type="pivot:PrimitiveType &_0;#AlwVZ" referredOperation="#Gr4OV">
+                    <ownedSource xsi:type="pivot:VariableExp" name="this" isRequired="true" type="#lSZ2I" referredVariable="#DqXtJ"/>
+                    <ownedArguments xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#8tM8f"/>
+                  </ownedArguments>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable xsi:type="qvtr:SharedVariable" name="trace" type="pivot:Class &_3;#MdKgS" isImplicit="true"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class &_2;#pzC6s"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" type="pivot:BooleanType &_0;#XEMMs" referredOperation="#N,BoB">
+              <ownedSource xsi:type="pivot:VariableExp" name="this" isRequired="true" type="#lSZ2I" referredVariable="#DqXtJ"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="s" isRequired="true" type="pivot:Class &_1;#r2YVU" referredVariable="#8tM8f"/>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+      <ownedContext xmi:id="DqXtJ" name="this" isRequired="true" type="#lSZ2I"/>
     </ownedClasses>
   </ownedPackages>
 </qvtr:RelationModel>

@@ -138,7 +138,7 @@ public class UMLXTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode_0 = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EClass = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_EClass, true, ValueUtil.ONE_VALUE, ValueUtil.ONE_VALUE);
-	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EClass_0 = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_EClass, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EClass_0 = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_EClass, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelPatternNode = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelPatternNode_0 = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_RelPatternNode, true, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId(UMLXTables.PARTid__0, UMLXTables.PARTid_);

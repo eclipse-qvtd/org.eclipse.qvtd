@@ -201,6 +201,15 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	TmapNavigationOrAttributeCallExp_Property createTmapNavigationOrAttributeCallExp_Property();
 
 	/**
+	 * Returns a new object of class '<em>Tmap Null Literal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tmap Null Literal Exp</em>'.
+	 * @generated
+	 */
+	TmapNullLiteralExp createTmapNullLiteralExp();
+
+	/**
 	 * Returns a new object of class '<em>Tmap Ocl Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -334,6 +343,15 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	 * @generated
 	 */
 	TmapVariableExp_referredVariable_VariableDeclaration createTmapVariableExp_referredVariable_VariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Tx ATL2QV Tr</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tx ATL2QV Tr</em>'.
+	 * @generated
+	 */
+	TxATL2QVTr createTxATL2QVTr();
 
 	/**
 	 * Returns the package supported by this factory.
