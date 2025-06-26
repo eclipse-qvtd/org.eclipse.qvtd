@@ -1,352 +1,310 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qvtc:CoreModel [
+<!ENTITY _0 "SimpleGraph.ecore.oclas">
+<!ENTITY _1 "SimpleGraph2Graph.ecore.oclas">
+<!ENTITY _2 "http://www.eclipse.org/ocl/2015/Library.oclas">
+]>
 <qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
-    name="Upper2Lower.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests/upper2lower/Upper2Lower.qvtc">
-  <ownedImports name="SimpleGraph" importedNamespace="pivot:Package SimpleGraph.ecore.oclas#P.simplegraph"/>
-  <ownedImports name="SimpleGraph2Graph" importedNamespace="pivot:Package SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
-  <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..Upper2Lower" name="Upper2Lower" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <modelParameter xmi:id="qT..Upper2Lower.upperGraph" name="upperGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
-      <modelParameter xmi:id="qT..Upper2Lower.lowerGraph" name="lowerGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
-      <modelParameter usedPackage="SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..Upper2Lower.graph2graph" name="graph2graph">
+    xmi:id="AAAAA" name="Upper2Lower.saved.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/models/upper2lower/Upper2Lower.saved.qvtc"
+    xmiidVersion="1">
+  <ownedImports name="SimpleGraph" importedNamespace="pivot:Package &_0;#WB+u0" xmiidVersion="1"/>
+  <ownedImports name="SimpleGraph2Graph" importedNamespace="pivot:Package &_1;#yu1tv" xmiidVersion="1"/>
+  <ownedPackages xmi:id="6Fh3I" name="">
+    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="I1WgQ" name="Upper2Lower" superClasses="&_2;#zfDWR">
+      <modelParameter xmi:id="pvDDa" name="$primitive$" isPrimitive="true"/>
+      <modelParameter xmi:id="KRoJs" name="$this$" usedPackage="#6Fh3I" isThis="true"/>
+      <modelParameter xmi:id="0ZRpD" name="upperGraph" usedPackage="&_0;#WB+u0"/>
+      <modelParameter xmi:id="1d+8v" name="lowerGraph" usedPackage="&_0;#WB+u0"/>
+      <modelParameter xmi:id="siIJo" usedPackage="&_1;#yu1tv" isTrace="true"/>
+      <rule xsi:type="qvtc:Mapping" xmi:id="+oeI," name="graph2graph">
         <ownedComments body="Don't use realize keywords on the two initial domains indicates that both models must exist and at least have the root node defined?"/>
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..Upper2Lower.upperGraph">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#0ZRpD">
           <guardPattern/>
           <bottomPattern>
-            <realizedVariable xmi:id="qV..Upper2Lower.graph2graph.upperGraph.bottom.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <realizedVariable xmi:id="HNT64" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2"/>
           </bottomPattern>
         </domain>
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.lowerGraph">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#1d+8v">
           <guardPattern/>
           <bottomPattern>
-            <realizedVariable xmi:id="qV..Upper2Lower.graph2graph.lowerGraph.bottom.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph">
+            <realizedVariable xmi:id="RRnJ0" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2">
               <ownedComments body="Enforced domains should at least have one realized variable?"/>
             </realizedVariable>
           </bottomPattern>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.upperGraph.bottom.g1"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#w92SM">
+            <value xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#HNT64"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.lowerGraph.bottom.g2"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#x92SM">
+            <value xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#RRnJ0"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
           </assignment>
-          <realizedVariable xmi:id="qV..Upper2Lower.graph2graph.bottom.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph">
+          <realizedVariable xmi:id="RXUTw" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6">
             <ownedComments body="Although in the example is not realized, all middle model variables should be realized&#xA;or does the middle model is also expected to have at least the initial element?"/>
           </realizedVariable>
         </bottomPattern>
-        <local>
+        <local xmi:id="dZJAp">
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-              <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
-                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                    referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.upperGraph.bottom.g1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#YF4RW">
+              <value xsi:type="pivot:OperationCallExp" name="toLowerCase" type="pivot:PrimitiveType &_2;#AlwVZ" isSafe="true" referredOperation="&_2;#LAZcO">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#Qx+c,">
+                  <ownedSource xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#HNT64"/>
                 </ownedSource>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-              <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
-                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                    referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.lowerGraph.bottom.g2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#YF4RW">
+              <value xsi:type="pivot:OperationCallExp" name="toUpperCase" type="pivot:PrimitiveType &_2;#AlwVZ" isSafe="true" referredOperation="&_2;#sUwb6">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#Qx+c,">
+                  <ownedSource xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#RRnJ0"/>
                 </ownedSource>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#Qx+c,">
+              <value xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#YF4RW">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.upperGraph.bottom.g1"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#HNT64"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.graph2graph.bottom.g2g"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#Qx+c,">
+              <value xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#YF4RW">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#RXUTw"/>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.lowerGraph.bottom.g2"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#RRnJ0"/>
             </assignment>
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..Upper2Lower.node2node" name="node2node">
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..Upper2Lower.upperGraph">
+      <rule xsi:type="qvtc:Mapping" xmi:id="GO9gu" name="node2node">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#0ZRpD">
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="9gqAE" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2"/>
           </guardPattern>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.node2node.upperGraph.guard.g1"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.upperGraph.bottom.n1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#JojvI">
+              <value xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#9gqAE"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#Im,fP"/>
             </assignment>
-            <realizedVariable xmi:id="qV..Upper2Lower.node2node.upperGraph.bottom.n1" name="n1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <realizedVariable xmi:id="Im,fP" name="n1" isRequired="true" type="pivot:Class &_0;#lnINy"/>
           </bottomPattern>
         </domain>
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.lowerGraph">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#1d+8v">
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="Hl+P," name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2"/>
           </guardPattern>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.guard.g2"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.bottom.n2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#JojvI">
+              <value xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#Hl+P,"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#SqTvK"/>
             </assignment>
-            <realizedVariable xmi:id="qV..Upper2Lower.node2node.lowerGraph.bottom.n2" name="n2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <realizedVariable xmi:id="SqTvK" name="n2" isRequired="true" type="pivot:Class &_0;#lnINy"/>
           </bottomPattern>
         </domain>
         <guardPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.node2node.guard.g2g"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="graph1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#w92SM">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#njm41"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.node2node.upperGraph.guard.g1"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#9gqAE"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.node2node.guard.g2g"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="graph2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#x92SM">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#njm41"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.guard.g2"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#Hl+P,"/>
             </conditionExpression>
           </predicate>
-          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.node2node.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="njm41" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph" referredVariable="#qV..Upper2Lower.node2node.guard.g2g"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#s5iQL">
+            <value xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#njm41"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.upperGraph.bottom.n1"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#ki+DI">
+            <value xsi:type="pivot:VariableExp" name="n1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#Im,fP"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.bottom.n2"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#li+DI">
+            <value xsi:type="pivot:VariableExp" name="n2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#SqTvK"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
           </assignment>
-          <realizedVariable xmi:id="qV..Upper2Lower.node2node.bottom.n2n" name="n2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+          <realizedVariable xmi:id="nO9XB" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt,"/>
         </bottomPattern>
-        <local>
+        <local xmi:id="Fq,fi">
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-              <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
-                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                    referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.upperGraph.bottom.n1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#pUV7H">
+              <value xsi:type="pivot:OperationCallExp" name="toLowerCase" type="pivot:PrimitiveType &_2;#AlwVZ" isSafe="true" referredOperation="&_2;#LAZcO">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#d3cju">
+                  <ownedSource xsi:type="pivot:VariableExp" name="n1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#Im,fP"/>
                 </ownedSource>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                  referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-              <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
-                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                    referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.bottom.n2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#pUV7H">
+              <value xsi:type="pivot:OperationCallExp" name="toUpperCase" type="pivot:PrimitiveType &_2;#AlwVZ" isSafe="true" referredOperation="&_2;#sUwb6">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#d3cju">
+                  <ownedSource xsi:type="pivot:VariableExp" name="n2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#SqTvK"/>
                 </ownedSource>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                  referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#d3cju">
+              <value xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#pUV7H">
+                <ownedSource xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.upperGraph.bottom.n1"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#Im,fP"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.node2node.bottom.n2n"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#d3cju">
+              <value xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#pUV7H">
+                <ownedSource xsi:type="pivot:VariableExp" name="n2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#nO9XB"/>
               </value>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.bottom.n2"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="n2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#SqTvK"/>
             </assignment>
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..Upper2Lower.edge2edge" name="edge2edge">
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.upperGraph">
+      <rule xsi:type="qvtc:Mapping" xmi:id="mBXHg" name="edge2edge">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#0ZRpD">
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.g1" name="g1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.sn1" name="sn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.upperGraph.guard.tn1" name="tn1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="dyZ,Y" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="p00,Y" name="sn1" isRequired="true" type="pivot:Class &_0;#lnINy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qD1,Y" name="tn1" isRequired="true" type="pivot:Class &_0;#lnINy"/>
           </guardPattern>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.g1"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.bottom.e1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#JojvI">
+              <value xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#dyZ,Y"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e1" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#Rzuek"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Edge.source">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.sn1"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.bottom.e1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#TPmCi">
+              <value xsi:type="pivot:VariableExp" name="sn1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#p00,Y"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e1" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#Rzuek"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Edge.target">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.tn1"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.bottom.e1"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#J1G+i">
+              <value xsi:type="pivot:VariableExp" name="tn1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#qD1,Y"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e1" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#Rzuek"/>
             </assignment>
-            <realizedVariable xmi:id="qV..Upper2Lower.edge2edge.upperGraph.bottom.e1" name="e1" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge"/>
+            <realizedVariable xmi:id="Rzuek" name="e1" isRequired="true" type="pivot:Class &_0;#gmEMy"/>
           </bottomPattern>
         </domain>
-        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..Upper2Lower.lowerGraph">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#1d+8v">
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.g2" name="g2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.sn2" name="sn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2" name="tn2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="n2tOU" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="z4IPU" name="sn2" isRequired="true" type="pivot:Class &_0;#lnINy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="0HJPU" name="tn2" isRequired="true" type="pivot:Class &_0;#lnINy"/>
           </guardPattern>
           <bottomPattern>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.g2"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.bottom.e2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#JojvI">
+              <value xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#n2tOU"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e2" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#b3Cuf"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Edge.source">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.sn2"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.bottom.e2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#TPmCi">
+              <value xsi:type="pivot:VariableExp" name="sn2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#z4IPU"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e2" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#b3Cuf"/>
             </assignment>
-            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Edge.target">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2"/>
-              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.bottom.e2"/>
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_0;#J1G+i">
+              <value xsi:type="pivot:VariableExp" name="tn2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#0HJPU"/>
+              <slotExpression xsi:type="pivot:VariableExp" name="e2" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#b3Cuf"/>
             </assignment>
-            <realizedVariable xmi:id="qV..Upper2Lower.edge2edge.lowerGraph.bottom.e2" name="e2" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge"/>
+            <realizedVariable xmi:id="b3Cuf" name="e2" isRequired="true" type="pivot:Class &_0;#gmEMy"/>
           </bottomPattern>
         </domain>
         <guardPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.g2g"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="graph1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#w92SM">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#Hz+kb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.g1"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="g1" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#dyZ,Y"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.g2g"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="graph2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#x92SM">
+                <ownedSource xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#Hz+kb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.g2"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="g2" isRequired="true" type="pivot:Class &_0;#xjTL2" referredVariable="#n2tOU"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.sn2n"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="owner" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredProperty="&_1;#s5iQL">
+                <ownedSource xsi:type="pivot:VariableExp" name="sn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#C3Eyb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#qV..Upper2Lower.edge2edge.guard.g2g"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#Hz+kb"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.sn2n"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="node1" isRequired="true" type="pivot:Class &_0;#lnINy" referredProperty="&_1;#ki+DI">
+                <ownedSource xsi:type="pivot:VariableExp" name="sn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#C3Eyb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.sn1"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="sn1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#p00,Y"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.sn2n"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="node2" isRequired="true" type="pivot:Class &_0;#lnINy" referredProperty="&_1;#li+DI">
+                <ownedSource xsi:type="pivot:VariableExp" name="sn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#C3Eyb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.sn2"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="sn2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#z4IPU"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.tn2n"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="node1" isRequired="true" type="pivot:Class &_0;#lnINy" referredProperty="&_1;#ki+DI">
+                <ownedSource xsi:type="pivot:VariableExp" name="tn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#hIMyb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.guard.tn1"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="tn1" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#qD1,Y"/>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                    referredVariable="#qV..Upper2Lower.edge2edge.guard.tn2n"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#bZOvl">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="node2" isRequired="true" type="pivot:Class &_0;#lnINy" referredProperty="&_1;#li+DI">
+                <ownedSource xsi:type="pivot:VariableExp" name="tn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#hIMyb"/>
               </ownedSource>
-              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.guard.tn2"/>
+              <ownedArguments xsi:type="pivot:VariableExp" name="tn2" isRequired="true" type="pivot:Class &_0;#lnINy" referredVariable="#0HJPU"/>
             </conditionExpression>
           </predicate>
-          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.g2g" name="g2g" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
-          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.sn2n" name="sn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
-          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="qV..Upper2Lower.edge2edge.guard.tn2n" name="tn2n" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="Hz+kb" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="C3Eyb" name="sn2n" isRequired="true" type="pivot:Class &_1;#hIQt,"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="hIMyb" name="tn2n" isRequired="true" type="pivot:Class &_1;#hIQt,"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph" referredVariable="#qV..Upper2Lower.edge2edge.guard.g2g"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"
-                referredVariable="#qV..Upper2Lower.edge2edge.bottom.e2e"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#s5iQL">
+            <value xsi:type="pivot:VariableExp" name="g2g" isRequired="true" type="pivot:Class &_1;#Zyjl6" referredVariable="#Hz+kb"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx" referredVariable="#1WTEn"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Edge2Edge.edge1">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.upperGraph.bottom.e1"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"
-                referredVariable="#qV..Upper2Lower.edge2edge.bottom.e2e"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#pmsMZ">
+            <value xsi:type="pivot:VariableExp" name="e1" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#Rzuek"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx" referredVariable="#1WTEn"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Edge2Edge.edge2">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Edge" referredVariable="#qV..Upper2Lower.edge2edge.lowerGraph.bottom.e2"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"
-                referredVariable="#qV..Upper2Lower.edge2edge.bottom.e2e"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#qmsMZ">
+            <value xsi:type="pivot:VariableExp" name="e2" isRequired="true" type="pivot:Class &_0;#gmEMy" referredVariable="#b3Cuf"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx" referredVariable="#1WTEn"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Edge2Edge.source">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node" referredVariable="#qV..Upper2Lower.edge2edge.guard.sn2n"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"
-                referredVariable="#qV..Upper2Lower.edge2edge.bottom.e2e"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#weOBe">
+            <value xsi:type="pivot:VariableExp" name="sn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#C3Eyb"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx" referredVariable="#1WTEn"/>
           </assignment>
-          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Edge2Edge.target">
-            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node" referredVariable="#qV..Upper2Lower.edge2edge.guard.tn2n"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"
-                referredVariable="#qV..Upper2Lower.edge2edge.bottom.e2e"/>
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#mEv8e">
+            <value xsi:type="pivot:VariableExp" name="tn2n" isRequired="true" type="pivot:Class &_1;#hIQt," referredVariable="#hIMyb"/>
+            <slotExpression xsi:type="pivot:VariableExp" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx" referredVariable="#1WTEn"/>
           </assignment>
-          <realizedVariable xmi:id="qV..Upper2Lower.edge2edge.bottom.e2e" name="e2e" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"/>
+          <realizedVariable xmi:id="1WTEn" name="e2e" isRequired="true" type="pivot:Class &_1;#B8pTx"/>
         </bottomPattern>
       </rule>
-      <ownedContext xsi:type="pivot:Parameter" xmi:id="qV..Upper2Lower.this" name="this" type="#T..Upper2Lower"/>
+      <ownedContext xmi:id="ayHIS" name="this" isRequired="true" type="#I1WgQ"/>
     </ownedClasses>
   </ownedPackages>
 </qvtc:CoreModel>

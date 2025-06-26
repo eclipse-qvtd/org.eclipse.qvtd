@@ -38,7 +38,6 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2MonikerVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2XMIidVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverNormalizeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
@@ -104,12 +103,6 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	@Override
 	public @NonNull AS2MonikerVisitor createAS2MonikerVisitor(@NonNull AS2Moniker as2moniker) {
 		return new QVTimperativeAS2MonikerVisitor(as2moniker);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public org.eclipse.ocl.pivot.utilities.@NonNull AS2XMIidVisitor createAS2XMIidVisitor(org.eclipse.ocl.pivot.internal.utilities.@NonNull AS2XMIid as2id) {
-		return new QVTimperativeAS2XMIidVisitor(as2id);
 	}
 
 	@Override
