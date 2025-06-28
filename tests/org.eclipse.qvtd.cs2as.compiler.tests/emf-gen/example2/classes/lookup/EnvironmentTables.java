@@ -97,10 +97,6 @@ public class EnvironmentTables extends AbstractTables
 		}
 
 		public static final @NonNull ExecutorTypeParameter $$0 = new ExecutorTypeParameter(0, "$$0");
-		@Deprecated /* @deprecated use normalized name 2 */
-		public static final @NonNull ExecutorTypeParameter _0_NE = $$0;
-		@Deprecated /* @deprecated use normalized name 3 */
-		public static final @NonNull ExecutorTypeParameter __LookupEnvironment__addElements_NE = _0_NE;
 
 		static {
 			Init.initEnd();
@@ -190,10 +186,8 @@ public class EnvironmentTables extends AbstractTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(new ExecutorSpecializedType(TypeId.COLLECTION, TypeParameters._0_NE));
+		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(new ExecutorSpecializedType(TypeId.COLLECTION, TypeParameters.$$0));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(ClassesTables.Types._NamedElement);
-		@Deprecated /* @deprecated use normalized name 1 */
-		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_addElements_NE__ = _Collection__NE__;
 
 		static {
 			Init.initEnd();
@@ -226,7 +220,7 @@ public class EnvironmentTables extends AbstractTables
 		public static final @NonNull ExecutorOperation _LookupEnvironment__addElement = new ExecutorOperation("addElement", Parameters._NamedElement, Types._LookupEnvironment,
 			0, TemplateParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _LookupEnvironment__addElements = new ExecutorOperation("addElements", Parameters._Collection__NE__, Types._LookupEnvironment,
-			1, new TemplateParameters(TypeParameters._0_NE), null);
+			1, new TemplateParameters(TypeParameters.$$0), null);
 
 		static {
 			Init.initEnd();
