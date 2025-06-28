@@ -69,7 +69,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	private/* @LazyNonNull*/ String javaSourceCode = null;
 
 	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
-		super(environmentFactory);
+		super(environmentFactory, null);
 		QVTiCG2StringVisitor.FACTORY.getClass();
 		this.transformation = transformation;
 		this.cgAnalyzer = new QVTiAnalyzer(this);
