@@ -97,9 +97,9 @@ public class EnvironmentTables extends AbstractTables
 		}
 
 		public static final @NonNull ExecutorTypeParameter $$0 = new ExecutorTypeParameter(0, "$$0");
-		@Deprecated /* @deprecated use normalized name */
+		@Deprecated /* @deprecated use normalized name 2 */
 		public static final @NonNull ExecutorTypeParameter _0_NE = $$0;
-		@Deprecated /* @deprecated use normalized name */
+		@Deprecated /* @deprecated use normalized name 3 */
 		public static final @NonNull ExecutorTypeParameter __LookupEnvironment__addElements_NE = _0_NE;
 
 		static {
@@ -192,7 +192,7 @@ public class EnvironmentTables extends AbstractTables
 
 		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(new ExecutorSpecializedType(TypeId.COLLECTION, TypeParameters._0_NE));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(ClassesTables.Types._NamedElement);
-		@Deprecated /* @deprecated use normalized name */
+		@Deprecated /* @deprecated use normalized name 1 */
 		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_addElements_NE__ = _Collection__NE__;
 
 		static {
@@ -347,7 +347,6 @@ public class EnvironmentTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Env4CG__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -380,7 +379,6 @@ public class EnvironmentTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Executor__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -420,7 +418,6 @@ public class EnvironmentTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LookupEnvironment__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,

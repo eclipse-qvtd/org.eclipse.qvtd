@@ -412,7 +412,6 @@ public class QVTtemplateTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -462,7 +461,6 @@ public class QVTtemplateTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -506,7 +504,6 @@ public class QVTtemplateTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyTemplateItem__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -552,7 +549,6 @@ public class QVTtemplateTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances(Integer[?]) */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
