@@ -43,7 +43,6 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImple
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
-import org.eclipse.qvtd.doc.miniocl.MiniOCLTables;
 
 /**
  * MiniOCLTables provides the dispatch tables for the miniocl for use by the OCL dispatcher.
@@ -1218,7 +1217,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1251,7 +1249,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1284,7 +1281,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Class__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1315,7 +1311,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionItem__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1345,7 +1340,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionKind__OclElement = {
-			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1354,7 +1348,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionKind__OclEnumeration = {
-			OCLstdlibTables.Operations._OclEnumeration__allInstances /* allInstances() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
@@ -1382,7 +1375,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1413,7 +1405,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralPart__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1445,7 +1436,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRange__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1477,7 +1467,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Constraint__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1506,7 +1495,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Element__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1536,7 +1524,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionInOCL__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1569,7 +1556,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Feature__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1600,7 +1586,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Import__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1632,7 +1617,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _IntegerLiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1667,7 +1651,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _IterateExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1701,7 +1684,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _IteratorExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1733,7 +1715,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LetExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1765,7 +1746,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1798,7 +1778,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LoopExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1829,7 +1808,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1860,7 +1838,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1892,7 +1869,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1923,7 +1899,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _OCLExpression__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1954,7 +1929,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _OpaqueExpression__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -1987,7 +1961,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Operation__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2020,7 +1993,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2053,7 +2025,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Package__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2084,7 +2055,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2118,7 +2088,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _PrimitiveLiteralExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2151,7 +2120,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Property__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2184,7 +2152,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2215,7 +2182,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Root__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2245,7 +2211,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2276,7 +2241,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Variable__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2308,7 +2272,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _VariableExp__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
@@ -2338,7 +2301,6 @@ public class MiniOCLTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
