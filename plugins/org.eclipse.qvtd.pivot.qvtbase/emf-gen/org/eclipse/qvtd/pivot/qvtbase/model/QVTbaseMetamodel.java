@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.AnyType;
 import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteStandardLibrary;
 import org.eclipse.ocl.pivot.Constraint;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Enumeration;
@@ -47,7 +48,6 @@ import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
@@ -84,7 +84,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	 */
 	public static final @NonNull URI PIVOT_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2015/QVTbase" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
-	public static @NonNull Package create(@NonNull StandardLibraryInternal standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
+	public static @NonNull Package create(@NonNull CompleteStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		QVTbaseMetamodel resource = new ReadOnly(PIVOT_AS_URI);
 		Package standardLibraryPackage = standardLibrary.getOclAnyType().getOwningPackage();
 		assert standardLibraryPackage != null;

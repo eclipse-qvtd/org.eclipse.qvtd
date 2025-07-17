@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.TemplateableElement;
@@ -435,7 +434,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			setMiddleUsage(0);
 		}
 		analyzeProperties();
-		type2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
+		type2usage.put(standardLibrary.getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		VariableDeclaration ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getThisUsage());

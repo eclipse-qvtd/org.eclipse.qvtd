@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
+import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 // import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryTables;
@@ -51,7 +51,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	/**
 	 *	The library of all packages and types.
 	 */
-	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
+	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
 	 *	The type parameters for templated types and operations.
