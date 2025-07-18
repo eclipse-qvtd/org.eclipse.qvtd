@@ -25,7 +25,11 @@ package org.eclipse.qvtd.pivot.qvtrelation;
 
 import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -34,14 +38,6 @@ import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
@@ -66,14 +62,14 @@ public class QVTrelationTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(QVTrelationPackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTrelationPackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -178,19 +174,19 @@ public class QVTrelationTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _DomainPattern = new EcoreExecutorType(QVTrelationPackage.Literals.DOMAIN_PATTERN, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Key = new EcoreExecutorType(QVTrelationPackage.Literals.KEY, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Relation = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationCallExp = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION_CALL_EXP, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationDomain = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION_DOMAIN, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationDomainAssignment = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationImplementation = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationModel = new EcoreExecutorType(QVTrelationPackage.Literals.RELATION_MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelationalTransformation = new EcoreExecutorType(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _SharedVariable = new EcoreExecutorType(QVTrelationPackage.Literals.SHARED_VARIABLE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TemplateVariable = new EcoreExecutorType(QVTrelationPackage.Literals.TEMPLATE_VARIABLE, PACKAGE, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _DomainPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.DOMAIN_PATTERN, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Key = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.KEY, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Relation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_CALL_EXP, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomainAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationImplementation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_IMPLEMENTATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationalTransformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SharedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.SHARED_VARIABLE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, PACKAGE, null, 0);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_DomainPattern,
 			_Key,
 			_Relation,
@@ -208,7 +204,7 @@ public class QVTrelationTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -227,88 +223,88 @@ public class QVTrelationTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _DomainPattern__DomainPattern = new ExecutorFragment(Types._DomainPattern, QVTrelationTables.Types._DomainPattern);
-		private static final @NonNull ExecutorFragment _DomainPattern__Element = new ExecutorFragment(Types._DomainPattern, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _DomainPattern__OclAny = new ExecutorFragment(Types._DomainPattern, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _DomainPattern__OclElement = new ExecutorFragment(Types._DomainPattern, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _DomainPattern__Pattern = new ExecutorFragment(Types._DomainPattern, QVTbaseTables.Types._Pattern);
+		private static final @NonNull FlatFragment _DomainPattern__DomainPattern = LIBRARY.createFragment(Types._DomainPattern, QVTrelationTables.Types._DomainPattern);
+		private static final @NonNull FlatFragment _DomainPattern__Element = LIBRARY.createFragment(Types._DomainPattern, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _DomainPattern__OclAny = LIBRARY.createFragment(Types._DomainPattern, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _DomainPattern__OclElement = LIBRARY.createFragment(Types._DomainPattern, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _DomainPattern__Pattern = LIBRARY.createFragment(Types._DomainPattern, QVTbaseTables.Types._Pattern);
 
-		private static final @NonNull ExecutorFragment _Key__Element = new ExecutorFragment(Types._Key, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Key__Key = new ExecutorFragment(Types._Key, QVTrelationTables.Types._Key);
-		private static final @NonNull ExecutorFragment _Key__OclAny = new ExecutorFragment(Types._Key, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Key__OclElement = new ExecutorFragment(Types._Key, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Key__Element = LIBRARY.createFragment(Types._Key, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Key__Key = LIBRARY.createFragment(Types._Key, QVTrelationTables.Types._Key);
+		private static final @NonNull FlatFragment _Key__OclAny = LIBRARY.createFragment(Types._Key, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Key__OclElement = LIBRARY.createFragment(Types._Key, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _Relation__Element = new ExecutorFragment(Types._Relation, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Relation__NamedElement = new ExecutorFragment(Types._Relation, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Relation__OclAny = new ExecutorFragment(Types._Relation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Relation__OclElement = new ExecutorFragment(Types._Relation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Relation__Relation = new ExecutorFragment(Types._Relation, QVTrelationTables.Types._Relation);
-		private static final @NonNull ExecutorFragment _Relation__Rule = new ExecutorFragment(Types._Relation, QVTbaseTables.Types._Rule);
+		private static final @NonNull FlatFragment _Relation__Element = LIBRARY.createFragment(Types._Relation, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Relation__NamedElement = LIBRARY.createFragment(Types._Relation, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Relation__OclAny = LIBRARY.createFragment(Types._Relation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Relation__OclElement = LIBRARY.createFragment(Types._Relation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Relation__Relation = LIBRARY.createFragment(Types._Relation, QVTrelationTables.Types._Relation);
+		private static final @NonNull FlatFragment _Relation__Rule = LIBRARY.createFragment(Types._Relation, QVTbaseTables.Types._Rule);
 
-		private static final @NonNull ExecutorFragment _RelationCallExp__Element = new ExecutorFragment(Types._RelationCallExp, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationCallExp__NamedElement = new ExecutorFragment(Types._RelationCallExp, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RelationCallExp__OCLExpression = new ExecutorFragment(Types._RelationCallExp, PivotTables.Types._OCLExpression);
-		private static final @NonNull ExecutorFragment _RelationCallExp__OclAny = new ExecutorFragment(Types._RelationCallExp, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationCallExp__OclElement = new ExecutorFragment(Types._RelationCallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationCallExp__RelationCallExp = new ExecutorFragment(Types._RelationCallExp, QVTrelationTables.Types._RelationCallExp);
-		private static final @NonNull ExecutorFragment _RelationCallExp__TypedElement = new ExecutorFragment(Types._RelationCallExp, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _RelationCallExp__Element = LIBRARY.createFragment(Types._RelationCallExp, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationCallExp__NamedElement = LIBRARY.createFragment(Types._RelationCallExp, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RelationCallExp__OCLExpression = LIBRARY.createFragment(Types._RelationCallExp, PivotTables.Types._OCLExpression);
+		private static final @NonNull FlatFragment _RelationCallExp__OclAny = LIBRARY.createFragment(Types._RelationCallExp, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationCallExp__OclElement = LIBRARY.createFragment(Types._RelationCallExp, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationCallExp__RelationCallExp = LIBRARY.createFragment(Types._RelationCallExp, QVTrelationTables.Types._RelationCallExp);
+		private static final @NonNull FlatFragment _RelationCallExp__TypedElement = LIBRARY.createFragment(Types._RelationCallExp, PivotTables.Types._TypedElement);
 
-		private static final @NonNull ExecutorFragment _RelationDomain__Domain = new ExecutorFragment(Types._RelationDomain, QVTbaseTables.Types._Domain);
-		private static final @NonNull ExecutorFragment _RelationDomain__Element = new ExecutorFragment(Types._RelationDomain, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationDomain__NamedElement = new ExecutorFragment(Types._RelationDomain, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RelationDomain__OclAny = new ExecutorFragment(Types._RelationDomain, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationDomain__OclElement = new ExecutorFragment(Types._RelationDomain, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationDomain__ReferringElement = new ExecutorFragment(Types._RelationDomain, PivotTables.Types._ReferringElement);
-		private static final @NonNull ExecutorFragment _RelationDomain__RelationDomain = new ExecutorFragment(Types._RelationDomain, QVTrelationTables.Types._RelationDomain);
+		private static final @NonNull FlatFragment _RelationDomain__Domain = LIBRARY.createFragment(Types._RelationDomain, QVTbaseTables.Types._Domain);
+		private static final @NonNull FlatFragment _RelationDomain__Element = LIBRARY.createFragment(Types._RelationDomain, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationDomain__NamedElement = LIBRARY.createFragment(Types._RelationDomain, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RelationDomain__OclAny = LIBRARY.createFragment(Types._RelationDomain, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationDomain__OclElement = LIBRARY.createFragment(Types._RelationDomain, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationDomain__ReferringElement = LIBRARY.createFragment(Types._RelationDomain, PivotTables.Types._ReferringElement);
+		private static final @NonNull FlatFragment _RelationDomain__RelationDomain = LIBRARY.createFragment(Types._RelationDomain, QVTrelationTables.Types._RelationDomain);
 
-		private static final @NonNull ExecutorFragment _RelationDomainAssignment__Element = new ExecutorFragment(Types._RelationDomainAssignment, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationDomainAssignment__OclAny = new ExecutorFragment(Types._RelationDomainAssignment, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationDomainAssignment__OclElement = new ExecutorFragment(Types._RelationDomainAssignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationDomainAssignment__RelationDomainAssignment = new ExecutorFragment(Types._RelationDomainAssignment, QVTrelationTables.Types._RelationDomainAssignment);
+		private static final @NonNull FlatFragment _RelationDomainAssignment__Element = LIBRARY.createFragment(Types._RelationDomainAssignment, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationDomainAssignment__OclAny = LIBRARY.createFragment(Types._RelationDomainAssignment, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationDomainAssignment__OclElement = LIBRARY.createFragment(Types._RelationDomainAssignment, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationDomainAssignment__RelationDomainAssignment = LIBRARY.createFragment(Types._RelationDomainAssignment, QVTrelationTables.Types._RelationDomainAssignment);
 
-		private static final @NonNull ExecutorFragment _RelationImplementation__Element = new ExecutorFragment(Types._RelationImplementation, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationImplementation__OclAny = new ExecutorFragment(Types._RelationImplementation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationImplementation__OclElement = new ExecutorFragment(Types._RelationImplementation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationImplementation__RelationImplementation = new ExecutorFragment(Types._RelationImplementation, QVTrelationTables.Types._RelationImplementation);
+		private static final @NonNull FlatFragment _RelationImplementation__Element = LIBRARY.createFragment(Types._RelationImplementation, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationImplementation__OclAny = LIBRARY.createFragment(Types._RelationImplementation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationImplementation__OclElement = LIBRARY.createFragment(Types._RelationImplementation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationImplementation__RelationImplementation = LIBRARY.createFragment(Types._RelationImplementation, QVTrelationTables.Types._RelationImplementation);
 
-		private static final @NonNull ExecutorFragment _RelationModel__BaseModel = new ExecutorFragment(Types._RelationModel, QVTbaseTables.Types._BaseModel);
-		private static final @NonNull ExecutorFragment _RelationModel__Element = new ExecutorFragment(Types._RelationModel, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationModel__Model = new ExecutorFragment(Types._RelationModel, PivotTables.Types._Model);
-		private static final @NonNull ExecutorFragment _RelationModel__NamedElement = new ExecutorFragment(Types._RelationModel, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RelationModel__Namespace = new ExecutorFragment(Types._RelationModel, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _RelationModel__OclAny = new ExecutorFragment(Types._RelationModel, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationModel__OclElement = new ExecutorFragment(Types._RelationModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationModel__RelationModel = new ExecutorFragment(Types._RelationModel, QVTrelationTables.Types._RelationModel);
+		private static final @NonNull FlatFragment _RelationModel__BaseModel = LIBRARY.createFragment(Types._RelationModel, QVTbaseTables.Types._BaseModel);
+		private static final @NonNull FlatFragment _RelationModel__Element = LIBRARY.createFragment(Types._RelationModel, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationModel__Model = LIBRARY.createFragment(Types._RelationModel, PivotTables.Types._Model);
+		private static final @NonNull FlatFragment _RelationModel__NamedElement = LIBRARY.createFragment(Types._RelationModel, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RelationModel__Namespace = LIBRARY.createFragment(Types._RelationModel, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _RelationModel__OclAny = LIBRARY.createFragment(Types._RelationModel, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationModel__OclElement = LIBRARY.createFragment(Types._RelationModel, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationModel__RelationModel = LIBRARY.createFragment(Types._RelationModel, QVTrelationTables.Types._RelationModel);
 
-		private static final @NonNull ExecutorFragment _RelationalTransformation__Class = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._Class);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__Element = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__NamedElement = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__Namespace = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__OclAny = new ExecutorFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__OclElement = new ExecutorFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__OclType = new ExecutorFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__RelationalTransformation = new ExecutorFragment(Types._RelationalTransformation, QVTrelationTables.Types._RelationalTransformation);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__TemplateableElement = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._TemplateableElement);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__Transformation = new ExecutorFragment(Types._RelationalTransformation, QVTbaseTables.Types._Transformation);
-		private static final @NonNull ExecutorFragment _RelationalTransformation__Type = new ExecutorFragment(Types._RelationalTransformation, PivotTables.Types._Type);
+		private static final @NonNull FlatFragment _RelationalTransformation__Class = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._Class);
+		private static final @NonNull FlatFragment _RelationalTransformation__Element = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RelationalTransformation__NamedElement = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RelationalTransformation__Namespace = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _RelationalTransformation__OclAny = LIBRARY.createFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelationalTransformation__OclElement = LIBRARY.createFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelationalTransformation__OclType = LIBRARY.createFragment(Types._RelationalTransformation, OCLstdlibTables.Types._OclType);
+		private static final @NonNull FlatFragment _RelationalTransformation__RelationalTransformation = LIBRARY.createFragment(Types._RelationalTransformation, QVTrelationTables.Types._RelationalTransformation);
+		private static final @NonNull FlatFragment _RelationalTransformation__TemplateableElement = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._TemplateableElement);
+		private static final @NonNull FlatFragment _RelationalTransformation__Transformation = LIBRARY.createFragment(Types._RelationalTransformation, QVTbaseTables.Types._Transformation);
+		private static final @NonNull FlatFragment _RelationalTransformation__Type = LIBRARY.createFragment(Types._RelationalTransformation, PivotTables.Types._Type);
 
-		private static final @NonNull ExecutorFragment _SharedVariable__Element = new ExecutorFragment(Types._SharedVariable, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _SharedVariable__NamedElement = new ExecutorFragment(Types._SharedVariable, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _SharedVariable__OclAny = new ExecutorFragment(Types._SharedVariable, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _SharedVariable__OclElement = new ExecutorFragment(Types._SharedVariable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _SharedVariable__SharedVariable = new ExecutorFragment(Types._SharedVariable, QVTrelationTables.Types._SharedVariable);
-		private static final @NonNull ExecutorFragment _SharedVariable__TypedElement = new ExecutorFragment(Types._SharedVariable, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _SharedVariable__Variable = new ExecutorFragment(Types._SharedVariable, PivotTables.Types._Variable);
-		private static final @NonNull ExecutorFragment _SharedVariable__VariableDeclaration = new ExecutorFragment(Types._SharedVariable, PivotTables.Types._VariableDeclaration);
+		private static final @NonNull FlatFragment _SharedVariable__Element = LIBRARY.createFragment(Types._SharedVariable, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _SharedVariable__NamedElement = LIBRARY.createFragment(Types._SharedVariable, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _SharedVariable__OclAny = LIBRARY.createFragment(Types._SharedVariable, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _SharedVariable__OclElement = LIBRARY.createFragment(Types._SharedVariable, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _SharedVariable__SharedVariable = LIBRARY.createFragment(Types._SharedVariable, QVTrelationTables.Types._SharedVariable);
+		private static final @NonNull FlatFragment _SharedVariable__TypedElement = LIBRARY.createFragment(Types._SharedVariable, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _SharedVariable__Variable = LIBRARY.createFragment(Types._SharedVariable, PivotTables.Types._Variable);
+		private static final @NonNull FlatFragment _SharedVariable__VariableDeclaration = LIBRARY.createFragment(Types._SharedVariable, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull ExecutorFragment _TemplateVariable__Element = new ExecutorFragment(Types._TemplateVariable, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TemplateVariable__NamedElement = new ExecutorFragment(Types._TemplateVariable, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _TemplateVariable__OclAny = new ExecutorFragment(Types._TemplateVariable, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TemplateVariable__OclElement = new ExecutorFragment(Types._TemplateVariable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TemplateVariable__TemplateVariable = new ExecutorFragment(Types._TemplateVariable, QVTrelationTables.Types._TemplateVariable);
-		private static final @NonNull ExecutorFragment _TemplateVariable__TypedElement = new ExecutorFragment(Types._TemplateVariable, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _TemplateVariable__Variable = new ExecutorFragment(Types._TemplateVariable, PivotTables.Types._Variable);
-		private static final @NonNull ExecutorFragment _TemplateVariable__VariableDeclaration = new ExecutorFragment(Types._TemplateVariable, PivotTables.Types._VariableDeclaration);
+		private static final @NonNull FlatFragment _TemplateVariable__Element = LIBRARY.createFragment(Types._TemplateVariable, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TemplateVariable__NamedElement = LIBRARY.createFragment(Types._TemplateVariable, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _TemplateVariable__OclAny = LIBRARY.createFragment(Types._TemplateVariable, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TemplateVariable__OclElement = LIBRARY.createFragment(Types._TemplateVariable, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TemplateVariable__TemplateVariable = LIBRARY.createFragment(Types._TemplateVariable, QVTrelationTables.Types._TemplateVariable);
+		private static final @NonNull FlatFragment _TemplateVariable__TypedElement = LIBRARY.createFragment(Types._TemplateVariable, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _TemplateVariable__Variable = LIBRARY.createFragment(Types._TemplateVariable, PivotTables.Types._Variable);
+		private static final @NonNull FlatFragment _TemplateVariable__VariableDeclaration = LIBRARY.createFragment(Types._TemplateVariable, PivotTables.Types._VariableDeclaration);
 
 		static {
 			Init.initEnd();
@@ -379,39 +375,39 @@ public class QVTrelationTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _DomainPattern__relationDomain = new EcoreExecutorProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__RELATION_DOMAIN, Types._DomainPattern, 0);
-		public static final @NonNull ExecutorProperty _DomainPattern__templateExpression = new EcoreExecutorProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, Types._DomainPattern, 1);
+		public static final @NonNull Property _DomainPattern__relationDomain = LIBRARY.createProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__RELATION_DOMAIN, Types._DomainPattern, 0);
+		public static final @NonNull Property _DomainPattern__templateExpression = LIBRARY.createProperty(QVTrelationPackage.Literals.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, Types._DomainPattern, 1);
 
-		public static final @NonNull ExecutorProperty _Key__identifies = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__IDENTIFIES, Types._Key, 0);
-		public static final @NonNull ExecutorProperty _Key__oppositePart = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__OPPOSITE_PART, Types._Key, 1);
-		public static final @NonNull ExecutorProperty _Key__part = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__PART, Types._Key, 2);
-		public static final @NonNull ExecutorProperty _Key__transformation = new EcoreExecutorProperty(QVTrelationPackage.Literals.KEY__TRANSFORMATION, Types._Key, 3);
+		public static final @NonNull Property _Key__identifies = LIBRARY.createProperty(QVTrelationPackage.Literals.KEY__IDENTIFIES, Types._Key, 0);
+		public static final @NonNull Property _Key__oppositePart = LIBRARY.createProperty(QVTrelationPackage.Literals.KEY__OPPOSITE_PART, Types._Key, 1);
+		public static final @NonNull Property _Key__part = LIBRARY.createProperty(QVTrelationPackage.Literals.KEY__PART, Types._Key, 2);
+		public static final @NonNull Property _Key__transformation = LIBRARY.createProperty(QVTrelationPackage.Literals.KEY__TRANSFORMATION, Types._Key, 3);
 
-		public static final @NonNull ExecutorProperty _Relation__isTopLevel = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__IS_TOP_LEVEL, Types._Relation, 0);
-		public static final @NonNull ExecutorProperty _Relation__operationalImpl = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__OPERATIONAL_IMPL, Types._Relation, 1);
-		public static final @NonNull ExecutorProperty _Relation__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__VARIABLE, Types._Relation, 2);
-		public static final @NonNull ExecutorProperty _Relation__when = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHEN, Types._Relation, 3);
-		public static final @NonNull ExecutorProperty _Relation__where = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION__WHERE, Types._Relation, 4);
-		public static final @NonNull ExecutorProperty _Relation__relationCallExp__referredRelation = new ExecutorPropertyWithImplementation("relationCallExp", Types._Relation, 5, new EcoreLibraryOppositeProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION));
+		public static final @NonNull Property _Relation__isTopLevel = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION__IS_TOP_LEVEL, Types._Relation, 0);
+		public static final @NonNull Property _Relation__operationalImpl = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION__OPERATIONAL_IMPL, Types._Relation, 1);
+		public static final @NonNull Property _Relation__variable = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION__VARIABLE, Types._Relation, 2);
+		public static final @NonNull Property _Relation__when = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION__WHEN, Types._Relation, 3);
+		public static final @NonNull Property _Relation__where = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION__WHERE, Types._Relation, 4);
+		public static final @NonNull Property _Relation__relationCallExp__referredRelation = LIBRARY.createOppositeProperty("relationCallExp", Types._Relation, 5, QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION);
 
-		public static final @NonNull ExecutorProperty _RelationCallExp__argument = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT, Types._RelationCallExp, 0);
-		public static final @NonNull ExecutorProperty _RelationCallExp__referredRelation = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION, Types._RelationCallExp, 1);
+		public static final @NonNull Property _RelationCallExp__argument = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__ARGUMENT, Types._RelationCallExp, 0);
+		public static final @NonNull Property _RelationCallExp__referredRelation = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_CALL_EXP__REFERRED_RELATION, Types._RelationCallExp, 1);
 
-		public static final @NonNull ExecutorProperty _RelationDomain__defaultAssignment = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, Types._RelationDomain, 0);
-		public static final @NonNull ExecutorProperty _RelationDomain__pattern = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__PATTERN, Types._RelationDomain, 1);
-		public static final @NonNull ExecutorProperty _RelationDomain__rootVariable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__ROOT_VARIABLE, Types._RelationDomain, 2);
+		public static final @NonNull Property _RelationDomain__defaultAssignment = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, Types._RelationDomain, 0);
+		public static final @NonNull Property _RelationDomain__pattern = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__PATTERN, Types._RelationDomain, 1);
+		public static final @NonNull Property _RelationDomain__rootVariable = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN__ROOT_VARIABLE, Types._RelationDomain, 2);
 
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__owner = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__OWNER, Types._RelationDomainAssignment, 0);
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__valueExp = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, Types._RelationDomainAssignment, 1);
-		public static final @NonNull ExecutorProperty _RelationDomainAssignment__variable = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, Types._RelationDomainAssignment, 2);
+		public static final @NonNull Property _RelationDomainAssignment__owner = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__OWNER, Types._RelationDomainAssignment, 0);
+		public static final @NonNull Property _RelationDomainAssignment__valueExp = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, Types._RelationDomainAssignment, 1);
+		public static final @NonNull Property _RelationDomainAssignment__variable = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, Types._RelationDomainAssignment, 2);
 
-		public static final @NonNull ExecutorProperty _RelationImplementation__impl = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IMPL, Types._RelationImplementation, 0);
-		public static final @NonNull ExecutorProperty _RelationImplementation__inDirectionOf = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, Types._RelationImplementation, 1);
-		public static final @NonNull ExecutorProperty _RelationImplementation__relation = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__RELATION, Types._RelationImplementation, 2);
+		public static final @NonNull Property _RelationImplementation__impl = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IMPL, Types._RelationImplementation, 0);
+		public static final @NonNull Property _RelationImplementation__inDirectionOf = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, Types._RelationImplementation, 1);
+		public static final @NonNull Property _RelationImplementation__relation = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATION_IMPLEMENTATION__RELATION, Types._RelationImplementation, 2);
 
-		public static final @NonNull ExecutorProperty _RelationalTransformation__ownedKeys = new EcoreExecutorProperty(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION__OWNED_KEYS, Types._RelationalTransformation, 0);
+		public static final @NonNull Property _RelationalTransformation__ownedKeys = LIBRARY.createProperty(QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION__OWNED_KEYS, Types._RelationalTransformation, 0);
 
-		public static final @NonNull ExecutorProperty _SharedVariable__typedModel = new EcoreExecutorProperty(QVTrelationPackage.Literals.SHARED_VARIABLE__TYPED_MODEL, Types._SharedVariable, 0);
+		public static final @NonNull Property _SharedVariable__typedModel = LIBRARY.createProperty(QVTrelationPackage.Literals.SHARED_VARIABLE__TYPED_MODEL, Types._SharedVariable, 0);
 		static {
 			Init.initEnd();
 		}
@@ -431,7 +427,7 @@ public class QVTrelationTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _DomainPattern =
+		private static final @NonNull FlatFragment @NonNull [] _DomainPattern =
 			{
 				Fragments._DomainPattern__OclAny /* 0 */,
 				Fragments._DomainPattern__OclElement /* 1 */,
@@ -441,7 +437,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __DomainPattern = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Key =
+		private static final @NonNull FlatFragment @NonNull [] _Key =
 			{
 				Fragments._Key__OclAny /* 0 */,
 				Fragments._Key__OclElement /* 1 */,
@@ -450,7 +446,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Key = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Relation =
+		private static final @NonNull FlatFragment @NonNull [] _Relation =
 			{
 				Fragments._Relation__OclAny /* 0 */,
 				Fragments._Relation__OclElement /* 1 */,
@@ -461,7 +457,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Relation = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationCallExp =
+		private static final @NonNull FlatFragment @NonNull [] _RelationCallExp =
 			{
 				Fragments._RelationCallExp__OclAny /* 0 */,
 				Fragments._RelationCallExp__OclElement /* 1 */,
@@ -473,7 +469,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationCallExp = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationDomain =
+		private static final @NonNull FlatFragment @NonNull [] _RelationDomain =
 			{
 				Fragments._RelationDomain__OclAny /* 0 */,
 				Fragments._RelationDomain__OclElement /* 1 */,
@@ -485,7 +481,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationDomain = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationDomainAssignment =
+		private static final @NonNull FlatFragment @NonNull [] _RelationDomainAssignment =
 			{
 				Fragments._RelationDomainAssignment__OclAny /* 0 */,
 				Fragments._RelationDomainAssignment__OclElement /* 1 */,
@@ -494,7 +490,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationDomainAssignment = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationImplementation =
+		private static final @NonNull FlatFragment @NonNull [] _RelationImplementation =
 			{
 				Fragments._RelationImplementation__OclAny /* 0 */,
 				Fragments._RelationImplementation__OclElement /* 1 */,
@@ -503,7 +499,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationImplementation = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationModel =
+		private static final @NonNull FlatFragment @NonNull [] _RelationModel =
 			{
 				Fragments._RelationModel__OclAny /* 0 */,
 				Fragments._RelationModel__OclElement /* 1 */,
@@ -516,7 +512,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationModel = { 1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelationalTransformation =
+		private static final @NonNull FlatFragment @NonNull [] _RelationalTransformation =
 			{
 				Fragments._RelationalTransformation__OclAny /* 0 */,
 				Fragments._RelationalTransformation__OclElement /* 1 */,
@@ -532,7 +528,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelationalTransformation = { 1,1,2,2,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _SharedVariable =
+		private static final @NonNull FlatFragment @NonNull [] _SharedVariable =
 			{
 				Fragments._SharedVariable__OclAny /* 0 */,
 				Fragments._SharedVariable__OclElement /* 1 */,
@@ -545,7 +541,7 @@ public class QVTrelationTables extends AbstractTables
 			};
 		private static final int @NonNull [] __SharedVariable = { 1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TemplateVariable =
+		private static final @NonNull FlatFragment @NonNull [] _TemplateVariable =
 			{
 				Fragments._TemplateVariable__OclAny /* 0 */,
 				Fragments._TemplateVariable__OclElement /* 1 */,
@@ -592,12 +588,12 @@ public class QVTrelationTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainPattern__DomainPattern = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainPattern__Element = {
+		private static final @NonNull Operation @NonNull [] _DomainPattern__DomainPattern = {};
+		private static final @NonNull Operation @NonNull [] _DomainPattern__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainPattern__OclAny = {
+		private static final @NonNull Operation @NonNull [] _DomainPattern__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -614,7 +610,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainPattern__OclElement = {
+		private static final @NonNull Operation @NonNull [] _DomainPattern__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -627,14 +623,14 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainPattern__Pattern = {};
+		private static final @NonNull Operation @NonNull [] _DomainPattern__Pattern = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Key__Key = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Key__Element = {
+		private static final @NonNull Operation @NonNull [] _Key__Key = {};
+		private static final @NonNull Operation @NonNull [] _Key__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Key__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Key__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -651,7 +647,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Key__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Key__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -665,13 +661,13 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__Relation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__Element = {
+		private static final @NonNull Operation @NonNull [] _Relation__Relation = {};
+		private static final @NonNull Operation @NonNull [] _Relation__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Relation__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Relation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -688,7 +684,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Relation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -701,19 +697,19 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Relation__Rule = {};
+		private static final @NonNull Operation @NonNull [] _Relation__Rule = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__RelationCallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__RelationCallExp = {};
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__OCLExpression = {
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__OCLExpression = {
 			PivotTables.Operations._OCLExpression__isNonNull /* isNonNull() */,
 			PivotTables.Operations._OCLExpression__isNull /* isNull() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -730,7 +726,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -743,18 +739,18 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationCallExp__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _RelationCallExp__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__RelationDomain = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__Domain = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationDomain__RelationDomain = {};
+		private static final @NonNull Operation @NonNull [] _RelationDomain__Domain = {};
+		private static final @NonNull Operation @NonNull [] _RelationDomain__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationDomain__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelationDomain__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -771,7 +767,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationDomain__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -784,16 +780,16 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomain__ReferringElement = {
+		private static final @NonNull Operation @NonNull [] _RelationDomain__ReferringElement = {
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomainAssignment__RelationDomainAssignment = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomainAssignment__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationDomainAssignment__RelationDomainAssignment = {};
+		private static final @NonNull Operation @NonNull [] _RelationDomainAssignment__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomainAssignment__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationDomainAssignment__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -810,7 +806,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationDomainAssignment__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationDomainAssignment__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -824,12 +820,12 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationImplementation__RelationImplementation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationImplementation__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationImplementation__RelationImplementation = {};
+		private static final @NonNull Operation @NonNull [] _RelationImplementation__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationImplementation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationImplementation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -846,7 +842,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationImplementation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationImplementation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -860,16 +856,16 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__RelationModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__BaseModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationModel__RelationModel = {};
+		private static final @NonNull Operation @NonNull [] _RelationModel__BaseModel = {};
+		private static final @NonNull Operation @NonNull [] _RelationModel__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationModel__Model = {};
+		private static final @NonNull Operation @NonNull [] _RelationModel__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelationModel__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _RelationModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -886,7 +882,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationModel__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationModel__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -900,17 +896,17 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__RelationalTransformation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__Class = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__RelationalTransformation = {};
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__Class = {
 			PivotTables.Operations._Class__allInstances /* allInstances() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__Element = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -927,7 +923,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -940,15 +936,15 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__OclType = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__TemplateableElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__Transformation = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__TemplateableElement = {};
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__Transformation = {
 			QVTbaseTables.Operations._Transformation__getFunction /* getFunction(String[1]) */,
 			QVTbaseTables.Operations._Transformation__getModelParameter /* getModelParameter(String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelationalTransformation__Type = {
+		private static final @NonNull Operation @NonNull [] _RelationalTransformation__Type = {
 			PivotTables.Operations._Type__conformsTo /* conformsTo(Type[?]) */,
 			PivotTables.Operations._Type__flattenedType /* flattenedType() */,
 			PivotTables.Operations._Type__isClass /* isClass() */,
@@ -956,13 +952,13 @@ public class QVTrelationTables extends AbstractTables
 			PivotTables.Operations._Type__specializeIn /* specializeIn(CallExp[1],Type[1]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__SharedVariable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__Element = {
+		private static final @NonNull Operation @NonNull [] _SharedVariable__SharedVariable = {};
+		private static final @NonNull Operation @NonNull [] _SharedVariable__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__OclAny = {
+		private static final @NonNull Operation @NonNull [] _SharedVariable__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _SharedVariable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -979,7 +975,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__OclElement = {
+		private static final @NonNull Operation @NonNull [] _SharedVariable__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -992,19 +988,19 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _SharedVariable__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__Variable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SharedVariable__VariableDeclaration = {};
+		private static final @NonNull Operation @NonNull [] _SharedVariable__Variable = {};
+		private static final @NonNull Operation @NonNull [] _SharedVariable__VariableDeclaration = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__TemplateVariable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__Element = {
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__TemplateVariable = {};
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1021,7 +1017,7 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1034,11 +1030,11 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__Variable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateVariable__VariableDeclaration = {};
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__Variable = {};
+		private static final @NonNull Operation @NonNull [] _TemplateVariable__VariableDeclaration = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -1145,7 +1141,7 @@ public class QVTrelationTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _DomainPattern = {
+		private static final @NonNull Property @NonNull [] _DomainPattern = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Pattern__bindsTo,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1158,7 +1154,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._DomainPattern__templateExpression
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Key = {
+		private static final @NonNull Property @NonNull [] _Key = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTrelationTables.Properties._Key__identifies,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1171,7 +1167,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._Key__transformation
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Relation = {
+		private static final @NonNull Property @NonNull [] _Relation = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Rule__domain,
 			QVTbaseTables.Properties._Rule__isAbstract,
@@ -1192,7 +1188,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._Relation__where
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationCallExp = {
+		private static final @NonNull Property @NonNull [] _RelationCallExp = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTrelationTables.Properties._RelationCallExp__argument,
 			PivotTables.Properties._TypedElement__isMany,
@@ -1208,7 +1204,7 @@ public class QVTrelationTables extends AbstractTables
 			PivotTables.Properties._OCLExpression__typeValue
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationDomain = {
+		private static final @NonNull Property @NonNull [] _RelationDomain = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTrelationTables.Properties._RelationDomain__defaultAssignment,
 			QVTbaseTables.Properties._Domain__isCheckable,
@@ -1225,7 +1221,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTbaseTables.Properties._Domain__typedModel
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationDomainAssignment = {
+		private static final @NonNull Property @NonNull [] _RelationDomainAssignment = {
 			PivotTables.Properties._Element__annotatingComments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1237,7 +1233,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._RelationDomainAssignment__variable
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationImplementation = {
+		private static final @NonNull Property @NonNull [] _RelationImplementation = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTrelationTables.Properties._RelationImplementation__impl,
 			QVTrelationTables.Properties._RelationImplementation__inDirectionOf,
@@ -1249,7 +1245,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._RelationImplementation__relation
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationModel = {
+		private static final @NonNull Property @NonNull [] _RelationModel = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Model__externalURI,
 			PivotTables.Properties._NamedElement__name,
@@ -1264,7 +1260,7 @@ public class QVTrelationTables extends AbstractTables
 			PivotTables.Properties._Model__xmiidVersion
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelationalTransformation = {
+		private static final @NonNull Property @NonNull [] _RelationalTransformation = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Class__extenders,
 			QVTbaseTables.Properties._Transformation__extends,
@@ -1296,7 +1292,7 @@ public class QVTrelationTables extends AbstractTables
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SharedVariable = {
+		private static final @NonNull Property @NonNull [] _SharedVariable = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Variable__isImplicit,
 			PivotTables.Properties._TypedElement__isMany,
@@ -1314,7 +1310,7 @@ public class QVTrelationTables extends AbstractTables
 			QVTrelationTables.Properties._SharedVariable__typedModel
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TemplateVariable = {
+		private static final @NonNull Property @NonNull [] _TemplateVariable = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Variable__isImplicit,
 			PivotTables.Properties._TypedElement__isMany,

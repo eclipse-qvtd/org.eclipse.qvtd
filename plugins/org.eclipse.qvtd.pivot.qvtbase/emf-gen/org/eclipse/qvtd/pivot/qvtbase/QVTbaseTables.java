@@ -24,8 +24,15 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Enumeration;
+import org.eclipse.ocl.pivot.EnumerationLiteral;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatClass;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.EnumerationId;
@@ -33,17 +40,6 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumeration;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumerationLiteral;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.types.TemplateParameters;
@@ -66,14 +62,14 @@ public class QVTbaseTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(QVTbasePackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTbasePackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -156,23 +152,23 @@ public class QVTbaseTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _BaseModel = new EcoreExecutorType(QVTbasePackage.Literals.BASE_MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CompoundTargetElement = new EcoreExecutorType(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Domain = new EcoreExecutorType(QVTbasePackage.Literals.DOMAIN, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Function = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _FunctionBody = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION_BODY, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _FunctionParameter = new EcoreExecutorType(QVTbasePackage.Literals.FUNCTION_PARAMETER, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Pattern = new EcoreExecutorType(QVTbasePackage.Literals.PATTERN, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Predicate = new EcoreExecutorType(QVTbasePackage.Literals.PREDICATE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Rule = new EcoreExecutorType(QVTbasePackage.Literals.RULE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _SimpleTargetElement = new EcoreExecutorType(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Target = new EcoreExecutorType(QVTbasePackage.Literals.TARGET, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TargetElement = new EcoreExecutorType(QVTbasePackage.Literals.TARGET_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorEnumeration _TargetElementKind = new EcoreExecutorEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Transformation = new EcoreExecutorType(QVTbasePackage.Literals.TRANSFORMATION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TypedModel = new EcoreExecutorType(QVTbasePackage.Literals.TYPED_MODEL, PACKAGE, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BaseModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.BASE_MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CompoundTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Domain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.DOMAIN, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Function = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionBody = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_BODY, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionParameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_PARAMETER, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Pattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PATTERN, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Predicate = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PREDICATE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Rule = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.RULE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SimpleTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Target = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final @NonNull Enumeration _TargetElementKind = LIBRARY.createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND, PACKAGE);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TRANSFORMATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TYPED_MODEL, PACKAGE, null, 0);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_BaseModel,
 			_CompoundTargetElement,
 			_Domain,
@@ -194,7 +190,7 @@ public class QVTbaseTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -213,112 +209,112 @@ public class QVTbaseTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _BaseModel__BaseModel = new ExecutorFragment(Types._BaseModel, QVTbaseTables.Types._BaseModel);
-		private static final @NonNull ExecutorFragment _BaseModel__Element = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _BaseModel__Model = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Model);
-		private static final @NonNull ExecutorFragment _BaseModel__NamedElement = new ExecutorFragment(Types._BaseModel, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _BaseModel__Namespace = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _BaseModel__OclAny = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _BaseModel__OclElement = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _BaseModel__BaseModel = LIBRARY.createFragment(Types._BaseModel, QVTbaseTables.Types._BaseModel);
+		private static final @NonNull FlatFragment _BaseModel__Element = LIBRARY.createFragment(Types._BaseModel, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _BaseModel__Model = LIBRARY.createFragment(Types._BaseModel, PivotTables.Types._Model);
+		private static final @NonNull FlatFragment _BaseModel__NamedElement = LIBRARY.createFragment(Types._BaseModel, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _BaseModel__Namespace = LIBRARY.createFragment(Types._BaseModel, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _BaseModel__OclAny = LIBRARY.createFragment(Types._BaseModel, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _BaseModel__OclElement = LIBRARY.createFragment(Types._BaseModel, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _CompoundTargetElement__CompoundTargetElement = new ExecutorFragment(Types._CompoundTargetElement, QVTbaseTables.Types._CompoundTargetElement);
-		private static final @NonNull ExecutorFragment _CompoundTargetElement__Element = new ExecutorFragment(Types._CompoundTargetElement, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CompoundTargetElement__OclAny = new ExecutorFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CompoundTargetElement__OclElement = new ExecutorFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CompoundTargetElement__TargetElement = new ExecutorFragment(Types._CompoundTargetElement, QVTbaseTables.Types._TargetElement);
+		private static final @NonNull FlatFragment _CompoundTargetElement__CompoundTargetElement = LIBRARY.createFragment(Types._CompoundTargetElement, QVTbaseTables.Types._CompoundTargetElement);
+		private static final @NonNull FlatFragment _CompoundTargetElement__Element = LIBRARY.createFragment(Types._CompoundTargetElement, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CompoundTargetElement__OclAny = LIBRARY.createFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CompoundTargetElement__OclElement = LIBRARY.createFragment(Types._CompoundTargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CompoundTargetElement__TargetElement = LIBRARY.createFragment(Types._CompoundTargetElement, QVTbaseTables.Types._TargetElement);
 
-		private static final @NonNull ExecutorFragment _Domain__Domain = new ExecutorFragment(Types._Domain, QVTbaseTables.Types._Domain);
-		private static final @NonNull ExecutorFragment _Domain__Element = new ExecutorFragment(Types._Domain, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Domain__NamedElement = new ExecutorFragment(Types._Domain, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Domain__OclAny = new ExecutorFragment(Types._Domain, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Domain__OclElement = new ExecutorFragment(Types._Domain, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Domain__ReferringElement = new ExecutorFragment(Types._Domain, PivotTables.Types._ReferringElement);
+		private static final @NonNull FlatFragment _Domain__Domain = LIBRARY.createFragment(Types._Domain, QVTbaseTables.Types._Domain);
+		private static final @NonNull FlatFragment _Domain__Element = LIBRARY.createFragment(Types._Domain, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Domain__NamedElement = LIBRARY.createFragment(Types._Domain, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Domain__OclAny = LIBRARY.createFragment(Types._Domain, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Domain__OclElement = LIBRARY.createFragment(Types._Domain, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Domain__ReferringElement = LIBRARY.createFragment(Types._Domain, PivotTables.Types._ReferringElement);
 
-		private static final @NonNull ExecutorFragment _Function__Element = new ExecutorFragment(Types._Function, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Function__Feature = new ExecutorFragment(Types._Function, PivotTables.Types._Feature);
-		private static final @NonNull ExecutorFragment _Function__Function = new ExecutorFragment(Types._Function, QVTbaseTables.Types._Function);
-		private static final @NonNull ExecutorFragment _Function__NamedElement = new ExecutorFragment(Types._Function, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Function__Namespace = new ExecutorFragment(Types._Function, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _Function__OclAny = new ExecutorFragment(Types._Function, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Function__OclElement = new ExecutorFragment(Types._Function, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Function__Operation = new ExecutorFragment(Types._Function, PivotTables.Types._Operation);
-		private static final @NonNull ExecutorFragment _Function__TemplateableElement = new ExecutorFragment(Types._Function, PivotTables.Types._TemplateableElement);
-		private static final @NonNull ExecutorFragment _Function__TypedElement = new ExecutorFragment(Types._Function, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _Function__Element = LIBRARY.createFragment(Types._Function, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Function__Feature = LIBRARY.createFragment(Types._Function, PivotTables.Types._Feature);
+		private static final @NonNull FlatFragment _Function__Function = LIBRARY.createFragment(Types._Function, QVTbaseTables.Types._Function);
+		private static final @NonNull FlatFragment _Function__NamedElement = LIBRARY.createFragment(Types._Function, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Function__Namespace = LIBRARY.createFragment(Types._Function, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Function__OclAny = LIBRARY.createFragment(Types._Function, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Function__OclElement = LIBRARY.createFragment(Types._Function, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Function__Operation = LIBRARY.createFragment(Types._Function, PivotTables.Types._Operation);
+		private static final @NonNull FlatFragment _Function__TemplateableElement = LIBRARY.createFragment(Types._Function, PivotTables.Types._TemplateableElement);
+		private static final @NonNull FlatFragment _Function__TypedElement = LIBRARY.createFragment(Types._Function, PivotTables.Types._TypedElement);
 
-		private static final @NonNull ExecutorFragment _FunctionBody__Element = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _FunctionBody__ExpressionInOCL = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._ExpressionInOCL);
-		private static final @NonNull ExecutorFragment _FunctionBody__FunctionBody = new ExecutorFragment(Types._FunctionBody, QVTbaseTables.Types._FunctionBody);
-		private static final @NonNull ExecutorFragment _FunctionBody__LanguageExpression = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._LanguageExpression);
-		private static final @NonNull ExecutorFragment _FunctionBody__NamedElement = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _FunctionBody__OclAny = new ExecutorFragment(Types._FunctionBody, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _FunctionBody__OclElement = new ExecutorFragment(Types._FunctionBody, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _FunctionBody__TypedElement = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _FunctionBody__ValueSpecification = new ExecutorFragment(Types._FunctionBody, PivotTables.Types._ValueSpecification);
+		private static final @NonNull FlatFragment _FunctionBody__Element = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _FunctionBody__ExpressionInOCL = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._ExpressionInOCL);
+		private static final @NonNull FlatFragment _FunctionBody__FunctionBody = LIBRARY.createFragment(Types._FunctionBody, QVTbaseTables.Types._FunctionBody);
+		private static final @NonNull FlatFragment _FunctionBody__LanguageExpression = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._LanguageExpression);
+		private static final @NonNull FlatFragment _FunctionBody__NamedElement = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _FunctionBody__OclAny = LIBRARY.createFragment(Types._FunctionBody, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _FunctionBody__OclElement = LIBRARY.createFragment(Types._FunctionBody, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _FunctionBody__TypedElement = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _FunctionBody__ValueSpecification = LIBRARY.createFragment(Types._FunctionBody, PivotTables.Types._ValueSpecification);
 
-		private static final @NonNull ExecutorFragment _FunctionParameter__Element = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _FunctionParameter__FunctionParameter = new ExecutorFragment(Types._FunctionParameter, QVTbaseTables.Types._FunctionParameter);
-		private static final @NonNull ExecutorFragment _FunctionParameter__NamedElement = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _FunctionParameter__OclAny = new ExecutorFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _FunctionParameter__OclElement = new ExecutorFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _FunctionParameter__Parameter = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Parameter);
-		private static final @NonNull ExecutorFragment _FunctionParameter__TypedElement = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _FunctionParameter__VariableDeclaration = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._VariableDeclaration);
+		private static final @NonNull FlatFragment _FunctionParameter__Element = LIBRARY.createFragment(Types._FunctionParameter, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _FunctionParameter__FunctionParameter = LIBRARY.createFragment(Types._FunctionParameter, QVTbaseTables.Types._FunctionParameter);
+		private static final @NonNull FlatFragment _FunctionParameter__NamedElement = LIBRARY.createFragment(Types._FunctionParameter, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _FunctionParameter__OclAny = LIBRARY.createFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _FunctionParameter__OclElement = LIBRARY.createFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _FunctionParameter__Parameter = LIBRARY.createFragment(Types._FunctionParameter, PivotTables.Types._Parameter);
+		private static final @NonNull FlatFragment _FunctionParameter__TypedElement = LIBRARY.createFragment(Types._FunctionParameter, PivotTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _FunctionParameter__VariableDeclaration = LIBRARY.createFragment(Types._FunctionParameter, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull ExecutorFragment _Pattern__Element = new ExecutorFragment(Types._Pattern, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Pattern__OclAny = new ExecutorFragment(Types._Pattern, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Pattern__OclElement = new ExecutorFragment(Types._Pattern, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Pattern__Pattern = new ExecutorFragment(Types._Pattern, QVTbaseTables.Types._Pattern);
+		private static final @NonNull FlatFragment _Pattern__Element = LIBRARY.createFragment(Types._Pattern, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Pattern__OclAny = LIBRARY.createFragment(Types._Pattern, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Pattern__OclElement = LIBRARY.createFragment(Types._Pattern, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Pattern__Pattern = LIBRARY.createFragment(Types._Pattern, QVTbaseTables.Types._Pattern);
 
-		private static final @NonNull ExecutorFragment _Predicate__Element = new ExecutorFragment(Types._Predicate, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Predicate__OclAny = new ExecutorFragment(Types._Predicate, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Predicate__OclElement = new ExecutorFragment(Types._Predicate, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Predicate__Predicate = new ExecutorFragment(Types._Predicate, QVTbaseTables.Types._Predicate);
+		private static final @NonNull FlatFragment _Predicate__Element = LIBRARY.createFragment(Types._Predicate, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Predicate__OclAny = LIBRARY.createFragment(Types._Predicate, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Predicate__OclElement = LIBRARY.createFragment(Types._Predicate, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Predicate__Predicate = LIBRARY.createFragment(Types._Predicate, QVTbaseTables.Types._Predicate);
 
-		private static final @NonNull ExecutorFragment _Rule__Element = new ExecutorFragment(Types._Rule, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Rule__NamedElement = new ExecutorFragment(Types._Rule, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Rule__OclAny = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Rule__OclElement = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Rule__Rule = new ExecutorFragment(Types._Rule, QVTbaseTables.Types._Rule);
+		private static final @NonNull FlatFragment _Rule__Element = LIBRARY.createFragment(Types._Rule, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Rule__NamedElement = LIBRARY.createFragment(Types._Rule, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Rule__OclAny = LIBRARY.createFragment(Types._Rule, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Rule__OclElement = LIBRARY.createFragment(Types._Rule, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Rule__Rule = LIBRARY.createFragment(Types._Rule, QVTbaseTables.Types._Rule);
 
-		private static final @NonNull ExecutorFragment _SimpleTargetElement__Element = new ExecutorFragment(Types._SimpleTargetElement, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _SimpleTargetElement__OclAny = new ExecutorFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _SimpleTargetElement__OclElement = new ExecutorFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _SimpleTargetElement__SimpleTargetElement = new ExecutorFragment(Types._SimpleTargetElement, QVTbaseTables.Types._SimpleTargetElement);
-		private static final @NonNull ExecutorFragment _SimpleTargetElement__TargetElement = new ExecutorFragment(Types._SimpleTargetElement, QVTbaseTables.Types._TargetElement);
+		private static final @NonNull FlatFragment _SimpleTargetElement__Element = LIBRARY.createFragment(Types._SimpleTargetElement, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _SimpleTargetElement__OclAny = LIBRARY.createFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _SimpleTargetElement__OclElement = LIBRARY.createFragment(Types._SimpleTargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _SimpleTargetElement__SimpleTargetElement = LIBRARY.createFragment(Types._SimpleTargetElement, QVTbaseTables.Types._SimpleTargetElement);
+		private static final @NonNull FlatFragment _SimpleTargetElement__TargetElement = LIBRARY.createFragment(Types._SimpleTargetElement, QVTbaseTables.Types._TargetElement);
 
-		private static final @NonNull ExecutorFragment _Target__Element = new ExecutorFragment(Types._Target, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Target__NamedElement = new ExecutorFragment(Types._Target, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Target__OclAny = new ExecutorFragment(Types._Target, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Target__OclElement = new ExecutorFragment(Types._Target, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Target__Target = new ExecutorFragment(Types._Target, QVTbaseTables.Types._Target);
+		private static final @NonNull FlatFragment _Target__Element = LIBRARY.createFragment(Types._Target, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Target__NamedElement = LIBRARY.createFragment(Types._Target, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Target__OclAny = LIBRARY.createFragment(Types._Target, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Target__OclElement = LIBRARY.createFragment(Types._Target, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Target__Target = LIBRARY.createFragment(Types._Target, QVTbaseTables.Types._Target);
 
-		private static final @NonNull ExecutorFragment _TargetElement__Element = new ExecutorFragment(Types._TargetElement, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TargetElement__OclAny = new ExecutorFragment(Types._TargetElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TargetElement__OclElement = new ExecutorFragment(Types._TargetElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TargetElement__TargetElement = new ExecutorFragment(Types._TargetElement, QVTbaseTables.Types._TargetElement);
+		private static final @NonNull FlatFragment _TargetElement__Element = LIBRARY.createFragment(Types._TargetElement, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TargetElement__OclAny = LIBRARY.createFragment(Types._TargetElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TargetElement__OclElement = LIBRARY.createFragment(Types._TargetElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TargetElement__TargetElement = LIBRARY.createFragment(Types._TargetElement, QVTbaseTables.Types._TargetElement);
 
-		private static final @NonNull ExecutorFragment _TargetElementKind__OclAny = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TargetElementKind__OclElement = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TargetElementKind__OclEnumeration = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclEnumeration);
-		private static final @NonNull ExecutorFragment _TargetElementKind__OclType = new ExecutorFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _TargetElementKind__TargetElementKind = new ExecutorFragment(Types._TargetElementKind, QVTbaseTables.Types._TargetElementKind);
+		private static final @NonNull FlatFragment _TargetElementKind__OclAny = LIBRARY.createFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TargetElementKind__OclElement = LIBRARY.createFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TargetElementKind__OclEnumeration = LIBRARY.createFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull FlatFragment _TargetElementKind__OclType = LIBRARY.createFragment(Types._TargetElementKind, OCLstdlibTables.Types._OclType);
+		private static final @NonNull FlatFragment _TargetElementKind__TargetElementKind = LIBRARY.createFragment(Types._TargetElementKind, QVTbaseTables.Types._TargetElementKind);
 
-		private static final @NonNull ExecutorFragment _Transformation__Class = new ExecutorFragment(Types._Transformation, PivotTables.Types._Class);
-		private static final @NonNull ExecutorFragment _Transformation__Element = new ExecutorFragment(Types._Transformation, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Transformation__NamedElement = new ExecutorFragment(Types._Transformation, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Transformation__Namespace = new ExecutorFragment(Types._Transformation, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _Transformation__OclAny = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Transformation__OclElement = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Transformation__OclType = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _Transformation__TemplateableElement = new ExecutorFragment(Types._Transformation, PivotTables.Types._TemplateableElement);
-		private static final @NonNull ExecutorFragment _Transformation__Transformation = new ExecutorFragment(Types._Transformation, QVTbaseTables.Types._Transformation);
-		private static final @NonNull ExecutorFragment _Transformation__Type = new ExecutorFragment(Types._Transformation, PivotTables.Types._Type);
+		private static final @NonNull FlatFragment _Transformation__Class = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._Class);
+		private static final @NonNull FlatFragment _Transformation__Element = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Transformation__NamedElement = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Transformation__Namespace = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Transformation__OclAny = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Transformation__OclElement = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Transformation__OclType = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclType);
+		private static final @NonNull FlatFragment _Transformation__TemplateableElement = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._TemplateableElement);
+		private static final @NonNull FlatFragment _Transformation__Transformation = LIBRARY.createFragment(Types._Transformation, QVTbaseTables.Types._Transformation);
+		private static final @NonNull FlatFragment _Transformation__Type = LIBRARY.createFragment(Types._Transformation, PivotTables.Types._Type);
 
-		private static final @NonNull ExecutorFragment _TypedModel__Element = new ExecutorFragment(Types._TypedModel, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TypedModel__NamedElement = new ExecutorFragment(Types._TypedModel, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _TypedModel__OclAny = new ExecutorFragment(Types._TypedModel, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TypedModel__OclElement = new ExecutorFragment(Types._TypedModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TypedModel__TypedModel = new ExecutorFragment(Types._TypedModel, QVTbaseTables.Types._TypedModel);
+		private static final @NonNull FlatFragment _TypedModel__Element = LIBRARY.createFragment(Types._TypedModel, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TypedModel__NamedElement = LIBRARY.createFragment(Types._TypedModel, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _TypedModel__OclAny = LIBRARY.createFragment(Types._TypedModel, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TypedModel__OclElement = LIBRARY.createFragment(Types._TypedModel, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TypedModel__TypedModel = LIBRARY.createFragment(Types._TypedModel, QVTbaseTables.Types._TypedModel);
 
 		static {
 			Init.initEnd();
@@ -368,9 +364,9 @@ public class QVTbaseTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _Transformation__getFunction = new ExecutorOperation("getFunction", Parameters._String, Types._Transformation,
+		public static final @NonNull Operation _Transformation__getFunction = LIBRARY.createOperation("getFunction", Parameters._String, Types._Transformation,
 			0, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull ExecutorOperation _Transformation__getModelParameter = new ExecutorOperation("getModelParameter", Parameters._String, Types._Transformation,
+		public static final @NonNull Operation _Transformation__getModelParameter = LIBRARY.createOperation("getModelParameter", Parameters._String, Types._Transformation,
 			1, TemplateParameters.EMPTY_LIST, null);
 
 		static {
@@ -397,59 +393,59 @@ public class QVTbaseTables extends AbstractTables
 		}
 
 
-		public static final @NonNull ExecutorProperty _CompoundTargetElement__ownedTargetElements = new EcoreExecutorProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, Types._CompoundTargetElement, 0);
+		public static final @NonNull Property _CompoundTargetElement__ownedTargetElements = LIBRARY.createProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, Types._CompoundTargetElement, 0);
 
-		public static final @NonNull ExecutorProperty _Domain__isCheckable = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, Types._Domain, 0);
-		public static final @NonNull ExecutorProperty _Domain__isEnforceable = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, Types._Domain, 1);
-		public static final @NonNull ExecutorProperty _Domain__rule = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__RULE, Types._Domain, 2);
-		public static final @NonNull ExecutorProperty _Domain__typedModel = new EcoreExecutorProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL, Types._Domain, 3);
+		public static final @NonNull Property _Domain__isCheckable = LIBRARY.createProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, Types._Domain, 0);
+		public static final @NonNull Property _Domain__isEnforceable = LIBRARY.createProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, Types._Domain, 1);
+		public static final @NonNull Property _Domain__rule = LIBRARY.createProperty(QVTbasePackage.Literals.DOMAIN__RULE, Types._Domain, 2);
+		public static final @NonNull Property _Domain__typedModel = LIBRARY.createProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL, Types._Domain, 3);
 
-		public static final @NonNull ExecutorProperty _Function__queryExpression = new EcoreExecutorProperty(QVTbasePackage.Literals.FUNCTION__QUERY_EXPRESSION, Types._Function, 0);
+		public static final @NonNull Property _Function__queryExpression = LIBRARY.createProperty(QVTbasePackage.Literals.FUNCTION__QUERY_EXPRESSION, Types._Function, 0);
 
-		public static final @NonNull ExecutorProperty _Pattern__bindsTo = new EcoreExecutorProperty(QVTbasePackage.Literals.PATTERN__BINDS_TO, Types._Pattern, 0);
-		public static final @NonNull ExecutorProperty _Pattern__predicate = new EcoreExecutorProperty(QVTbasePackage.Literals.PATTERN__PREDICATE, Types._Pattern, 1);
+		public static final @NonNull Property _Pattern__bindsTo = LIBRARY.createProperty(QVTbasePackage.Literals.PATTERN__BINDS_TO, Types._Pattern, 0);
+		public static final @NonNull Property _Pattern__predicate = LIBRARY.createProperty(QVTbasePackage.Literals.PATTERN__PREDICATE, Types._Pattern, 1);
 
-		public static final @NonNull ExecutorProperty _Predicate__conditionExpression = new EcoreExecutorProperty(QVTbasePackage.Literals.PREDICATE__CONDITION_EXPRESSION, Types._Predicate, 0);
-		public static final @NonNull ExecutorProperty _Predicate__pattern = new EcoreExecutorProperty(QVTbasePackage.Literals.PREDICATE__PATTERN, Types._Predicate, 1);
+		public static final @NonNull Property _Predicate__conditionExpression = LIBRARY.createProperty(QVTbasePackage.Literals.PREDICATE__CONDITION_EXPRESSION, Types._Predicate, 0);
+		public static final @NonNull Property _Predicate__pattern = LIBRARY.createProperty(QVTbasePackage.Literals.PREDICATE__PATTERN, Types._Predicate, 1);
 
-		public static final @NonNull ExecutorProperty _Rule__domain = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__DOMAIN, Types._Rule, 0);
-		public static final @NonNull ExecutorProperty _Rule__isAbstract = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, Types._Rule, 1);
-		public static final @NonNull ExecutorProperty _Rule__overridden = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, Types._Rule, 2);
-		public static final @NonNull ExecutorProperty _Rule__overrides = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OVERRIDES, Types._Rule, 3);
-		public static final @NonNull ExecutorProperty _Rule__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__OWNED_CONTEXT, Types._Rule, 4);
-		public static final @NonNull ExecutorProperty _Rule__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 5);
+		public static final @NonNull Property _Rule__domain = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__DOMAIN, Types._Rule, 0);
+		public static final @NonNull Property _Rule__isAbstract = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__IS_ABSTRACT, Types._Rule, 1);
+		public static final @NonNull Property _Rule__overridden = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__OVERRIDDEN, Types._Rule, 2);
+		public static final @NonNull Property _Rule__overrides = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__OVERRIDES, Types._Rule, 3);
+		public static final @NonNull Property _Rule__ownedContext = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__OWNED_CONTEXT, Types._Rule, 4);
+		public static final @NonNull Property _Rule__transformation = LIBRARY.createProperty(QVTbasePackage.Literals.RULE__TRANSFORMATION, Types._Rule, 5);
 
-		public static final @NonNull ExecutorProperty _SimpleTargetElement__iterates = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, Types._SimpleTargetElement, 0);
-		public static final @NonNull ExecutorProperty _SimpleTargetElement__kind = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, Types._SimpleTargetElement, 1);
-		public static final @NonNull ExecutorProperty _SimpleTargetElement__typedModel = new EcoreExecutorProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL, Types._SimpleTargetElement, 2);
-		public static final @NonNull ExecutorProperty _SimpleTargetElement__CompoundTargetElement__ownedTargetElements = new ExecutorPropertyWithImplementation("CompoundTargetElement", Types._SimpleTargetElement, 3, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS));
+		public static final @NonNull Property _SimpleTargetElement__iterates = LIBRARY.createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES, Types._SimpleTargetElement, 0);
+		public static final @NonNull Property _SimpleTargetElement__kind = LIBRARY.createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__KIND, Types._SimpleTargetElement, 1);
+		public static final @NonNull Property _SimpleTargetElement__typedModel = LIBRARY.createProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL, Types._SimpleTargetElement, 2);
+		public static final @NonNull Property _SimpleTargetElement__CompoundTargetElement__ownedTargetElements = LIBRARY.createOppositeProperty("CompoundTargetElement", Types._SimpleTargetElement, 3, QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS);
 
-		public static final @NonNull ExecutorProperty _Target__ownedTargetElements = new EcoreExecutorProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS, Types._Target, 0);
-		public static final @NonNull ExecutorProperty _Target__owningTransformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TARGET__OWNING_TRANSFORMATION, Types._Target, 1);
+		public static final @NonNull Property _Target__ownedTargetElements = LIBRARY.createProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS, Types._Target, 0);
+		public static final @NonNull Property _Target__owningTransformation = LIBRARY.createProperty(QVTbasePackage.Literals.TARGET__OWNING_TRANSFORMATION, Types._Target, 1);
 
-		public static final @NonNull ExecutorProperty _TargetElement__Target__ownedTargetElements = new ExecutorPropertyWithImplementation("Target", Types._TargetElement, 0, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS));
+		public static final @NonNull Property _TargetElement__Target__ownedTargetElements = LIBRARY.createOppositeProperty("Target", Types._TargetElement, 0, QVTbasePackage.Literals.TARGET__OWNED_TARGET_ELEMENTS);
 
-		public static final @NonNull ExecutorProperty _Transformation__extends = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, Types._Transformation, 0);
-		public static final @NonNull ExecutorProperty _Transformation__modelParameter = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, Types._Transformation, 1);
-		public static final @NonNull ExecutorProperty _Transformation__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, Types._Transformation, 2);
-		public static final @NonNull ExecutorProperty _Transformation__ownedTag = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, Types._Transformation, 3);
-		public static final @NonNull ExecutorProperty _Transformation__ownedTargets = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TARGETS, Types._Transformation, 4);
-		public static final @NonNull ExecutorProperty _Transformation__rule = new EcoreExecutorProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, Types._Transformation, 5);
-		public static final @NonNull ExecutorProperty _Transformation__extendedBy__extends = new ExecutorPropertyWithImplementation("extendedBy", Types._Transformation, 6, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS));
+		public static final @NonNull Property _Transformation__extends = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, Types._Transformation, 0);
+		public static final @NonNull Property _Transformation__modelParameter = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, Types._Transformation, 1);
+		public static final @NonNull Property _Transformation__ownedContext = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, Types._Transformation, 2);
+		public static final @NonNull Property _Transformation__ownedTag = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, Types._Transformation, 3);
+		public static final @NonNull Property _Transformation__ownedTargets = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TARGETS, Types._Transformation, 4);
+		public static final @NonNull Property _Transformation__rule = LIBRARY.createProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, Types._Transformation, 5);
+		public static final @NonNull Property _Transformation__extendedBy__extends = LIBRARY.createOppositeProperty("extendedBy", Types._Transformation, 6, QVTbasePackage.Literals.TRANSFORMATION__EXTENDS);
 
-		public static final @NonNull ExecutorProperty _TypedModel__dependsOn = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, Types._TypedModel, 0);
-		public static final @NonNull ExecutorProperty _TypedModel__isPrimitive = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, Types._TypedModel, 1);
-		public static final @NonNull ExecutorProperty _TypedModel__isThis = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, Types._TypedModel, 2);
-		public static final @NonNull ExecutorProperty _TypedModel__isTrace = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, Types._TypedModel, 3);
-		public static final @NonNull ExecutorProperty _TypedModel__iterates = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES, Types._TypedModel, 4);
-		public static final @NonNull ExecutorProperty _TypedModel__ownedContext = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, Types._TypedModel, 5);
-		public static final @NonNull ExecutorProperty _TypedModel__transformation = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, Types._TypedModel, 6);
-		public static final @NonNull ExecutorProperty _TypedModel__usedPackage = new EcoreExecutorProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, Types._TypedModel, 7);
-		public static final @NonNull ExecutorProperty _TypedModel__Domain__typedModel = new ExecutorPropertyWithImplementation("Domain", Types._TypedModel, 8, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.DOMAIN__TYPED_MODEL));
-		public static final @NonNull ExecutorProperty _TypedModel__SimpleTargetElement__iterates = new ExecutorPropertyWithImplementation("SimpleTargetElement", Types._TypedModel, 9, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES));
-		public static final @NonNull ExecutorProperty _TypedModel__SimpleTargetElement__typedModel = new ExecutorPropertyWithImplementation("SimpleTargetElement", Types._TypedModel, 10, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL));
-		public static final @NonNull ExecutorProperty _TypedModel__TypedModel__iterates = new ExecutorPropertyWithImplementation("TypedModel", Types._TypedModel, 11, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES));
-		public static final @NonNull ExecutorProperty _TypedModel__dependent__dependsOn = new ExecutorPropertyWithImplementation("dependent", Types._TypedModel, 12, new EcoreLibraryOppositeProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON));
+		public static final @NonNull Property _TypedModel__dependsOn = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, Types._TypedModel, 0);
+		public static final @NonNull Property _TypedModel__isPrimitive = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_PRIMITIVE, Types._TypedModel, 1);
+		public static final @NonNull Property _TypedModel__isThis = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_THIS, Types._TypedModel, 2);
+		public static final @NonNull Property _TypedModel__isTrace = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__IS_TRACE, Types._TypedModel, 3);
+		public static final @NonNull Property _TypedModel__iterates = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__ITERATES, Types._TypedModel, 4);
+		public static final @NonNull Property _TypedModel__ownedContext = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, Types._TypedModel, 5);
+		public static final @NonNull Property _TypedModel__transformation = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, Types._TypedModel, 6);
+		public static final @NonNull Property _TypedModel__usedPackage = LIBRARY.createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, Types._TypedModel, 7);
+		public static final @NonNull Property _TypedModel__Domain__typedModel = LIBRARY.createOppositeProperty("Domain", Types._TypedModel, 8, QVTbasePackage.Literals.DOMAIN__TYPED_MODEL);
+		public static final @NonNull Property _TypedModel__SimpleTargetElement__iterates = LIBRARY.createOppositeProperty("SimpleTargetElement", Types._TypedModel, 9, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__ITERATES);
+		public static final @NonNull Property _TypedModel__SimpleTargetElement__typedModel = LIBRARY.createOppositeProperty("SimpleTargetElement", Types._TypedModel, 10, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT__TYPED_MODEL);
+		public static final @NonNull Property _TypedModel__TypedModel__iterates = LIBRARY.createOppositeProperty("TypedModel", Types._TypedModel, 11, QVTbasePackage.Literals.TYPED_MODEL__ITERATES);
+		public static final @NonNull Property _TypedModel__dependent__dependsOn = LIBRARY.createOppositeProperty("dependent", Types._TypedModel, 12, QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON);
 		static {
 			Init.initEnd();
 		}
@@ -469,7 +465,7 @@ public class QVTbaseTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _BaseModel =
+		private static final @NonNull FlatFragment @NonNull [] _BaseModel =
 			{
 				Fragments._BaseModel__OclAny /* 0 */,
 				Fragments._BaseModel__OclElement /* 1 */,
@@ -481,7 +477,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __BaseModel = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CompoundTargetElement =
+		private static final @NonNull FlatFragment @NonNull [] _CompoundTargetElement =
 			{
 				Fragments._CompoundTargetElement__OclAny /* 0 */,
 				Fragments._CompoundTargetElement__OclElement /* 1 */,
@@ -491,7 +487,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CompoundTargetElement = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Domain =
+		private static final @NonNull FlatFragment @NonNull [] _Domain =
 			{
 				Fragments._Domain__OclAny /* 0 */,
 				Fragments._Domain__OclElement /* 1 */,
@@ -502,7 +498,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Domain = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Function =
+		private static final @NonNull FlatFragment @NonNull [] _Function =
 			{
 				Fragments._Function__OclAny /* 0 */,
 				Fragments._Function__OclElement /* 1 */,
@@ -517,7 +513,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Function = { 1,1,1,2,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _FunctionBody =
+		private static final @NonNull FlatFragment @NonNull [] _FunctionBody =
 			{
 				Fragments._FunctionBody__OclAny /* 0 */,
 				Fragments._FunctionBody__OclElement /* 1 */,
@@ -531,7 +527,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __FunctionBody = { 1,1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _FunctionParameter =
+		private static final @NonNull FlatFragment @NonNull [] _FunctionParameter =
 			{
 				Fragments._FunctionParameter__OclAny /* 0 */,
 				Fragments._FunctionParameter__OclElement /* 1 */,
@@ -544,7 +540,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __FunctionParameter = { 1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Pattern =
+		private static final @NonNull FlatFragment @NonNull [] _Pattern =
 			{
 				Fragments._Pattern__OclAny /* 0 */,
 				Fragments._Pattern__OclElement /* 1 */,
@@ -553,7 +549,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Pattern = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Predicate =
+		private static final @NonNull FlatFragment @NonNull [] _Predicate =
 			{
 				Fragments._Predicate__OclAny /* 0 */,
 				Fragments._Predicate__OclElement /* 1 */,
@@ -562,7 +558,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Predicate = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Rule =
+		private static final @NonNull FlatFragment @NonNull [] _Rule =
 			{
 				Fragments._Rule__OclAny /* 0 */,
 				Fragments._Rule__OclElement /* 1 */,
@@ -572,7 +568,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Rule = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _SimpleTargetElement =
+		private static final @NonNull FlatFragment @NonNull [] _SimpleTargetElement =
 			{
 				Fragments._SimpleTargetElement__OclAny /* 0 */,
 				Fragments._SimpleTargetElement__OclElement /* 1 */,
@@ -582,7 +578,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __SimpleTargetElement = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Target =
+		private static final @NonNull FlatFragment @NonNull [] _Target =
 			{
 				Fragments._Target__OclAny /* 0 */,
 				Fragments._Target__OclElement /* 1 */,
@@ -592,7 +588,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Target = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TargetElement =
+		private static final @NonNull FlatFragment @NonNull [] _TargetElement =
 			{
 				Fragments._TargetElement__OclAny /* 0 */,
 				Fragments._TargetElement__OclElement /* 1 */,
@@ -601,7 +597,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TargetElement = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TargetElementKind =
+		private static final @NonNull FlatFragment @NonNull [] _TargetElementKind =
 			{
 				Fragments._TargetElementKind__OclAny /* 0 */,
 				Fragments._TargetElementKind__OclElement /* 1 */,
@@ -611,7 +607,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TargetElementKind = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
+		private static final @NonNull FlatFragment @NonNull [] _Transformation =
 			{
 				Fragments._Transformation__OclAny /* 0 */,
 				Fragments._Transformation__OclElement /* 1 */,
@@ -626,7 +622,7 @@ public class QVTbaseTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Transformation = { 1,1,2,2,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TypedModel =
+		private static final @NonNull FlatFragment @NonNull [] _TypedModel =
 			{
 				Fragments._TypedModel__OclAny /* 0 */,
 				Fragments._TypedModel__OclElement /* 1 */,
@@ -674,15 +670,15 @@ public class QVTbaseTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__BaseModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Element = {
+		private static final @NonNull Operation @NonNull [] _BaseModel__BaseModel = {};
+		private static final @NonNull Operation @NonNull [] _BaseModel__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__OclAny = {
+		private static final @NonNull Operation @NonNull [] _BaseModel__Model = {};
+		private static final @NonNull Operation @NonNull [] _BaseModel__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _BaseModel__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _BaseModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -699,7 +695,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__OclElement = {
+		private static final @NonNull Operation @NonNull [] _BaseModel__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -713,12 +709,12 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__CompoundTargetElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__Element = {
+		private static final @NonNull Operation @NonNull [] _CompoundTargetElement__CompoundTargetElement = {};
+		private static final @NonNull Operation @NonNull [] _CompoundTargetElement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CompoundTargetElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -735,7 +731,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CompoundTargetElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -748,15 +744,15 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompoundTargetElement__TargetElement = {};
+		private static final @NonNull Operation @NonNull [] _CompoundTargetElement__TargetElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Domain = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Element = {
+		private static final @NonNull Operation @NonNull [] _Domain__Domain = {};
+		private static final @NonNull Operation @NonNull [] _Domain__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Domain__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Domain__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -773,7 +769,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Domain__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -786,19 +782,19 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__ReferringElement = {
+		private static final @NonNull Operation @NonNull [] _Domain__ReferringElement = {
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Function = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Element = {
+		private static final @NonNull Operation @NonNull [] _Function__Function = {};
+		private static final @NonNull Operation @NonNull [] _Function__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Feature = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Function__Feature = {};
+		private static final @NonNull Operation @NonNull [] _Function__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Function__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _Function__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -815,7 +811,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Function__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -828,21 +824,21 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Operation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__TemplateableElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _Function__Operation = {};
+		private static final @NonNull Operation @NonNull [] _Function__TemplateableElement = {};
+		private static final @NonNull Operation @NonNull [] _Function__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__FunctionBody = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__Element = {
+		private static final @NonNull Operation @NonNull [] _FunctionBody__FunctionBody = {};
+		private static final @NonNull Operation @NonNull [] _FunctionBody__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__ExpressionInOCL = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__LanguageExpression = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__OclAny = {
+		private static final @NonNull Operation @NonNull [] _FunctionBody__ExpressionInOCL = {};
+		private static final @NonNull Operation @NonNull [] _FunctionBody__LanguageExpression = {};
+		private static final @NonNull Operation @NonNull [] _FunctionBody__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _FunctionBody__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -859,7 +855,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__OclElement = {
+		private static final @NonNull Operation @NonNull [] _FunctionBody__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -872,10 +868,10 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _FunctionBody__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionBody__ValueSpecification = {
+		private static final @NonNull Operation @NonNull [] _FunctionBody__ValueSpecification = {
 			PivotTables.Operations._ValueSpecification__booleanValue /* booleanValue() */,
 			PivotTables.Operations._ValueSpecification__integerValue /* integerValue() */,
 			PivotTables.Operations._ValueSpecification__isComputable /* isComputable() */,
@@ -884,13 +880,13 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Operations._ValueSpecification__unlimitedValue /* unlimitedValue() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__FunctionParameter = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__Element = {
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__FunctionParameter = {};
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__OclAny = {
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -907,7 +903,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__OclElement = {
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -920,18 +916,18 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__Parameter = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__TypedElement = {
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__Parameter = {};
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__VariableDeclaration = {};
+		private static final @NonNull Operation @NonNull [] _FunctionParameter__VariableDeclaration = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__Pattern = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__Element = {
+		private static final @NonNull Operation @NonNull [] _Pattern__Pattern = {};
+		private static final @NonNull Operation @NonNull [] _Pattern__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Pattern__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -948,7 +944,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Pattern__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -962,12 +958,12 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__Predicate = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__Element = {
+		private static final @NonNull Operation @NonNull [] _Predicate__Predicate = {};
+		private static final @NonNull Operation @NonNull [] _Predicate__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Predicate__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -984,7 +980,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Predicate__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -998,13 +994,13 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Rule = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Element = {
+		private static final @NonNull Operation @NonNull [] _Rule__Rule = {};
+		private static final @NonNull Operation @NonNull [] _Rule__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Rule__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Rule__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1021,7 +1017,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Rule__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1035,12 +1031,12 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__SimpleTargetElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__Element = {
+		private static final @NonNull Operation @NonNull [] _SimpleTargetElement__SimpleTargetElement = {};
+		private static final @NonNull Operation @NonNull [] _SimpleTargetElement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _SimpleTargetElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1057,7 +1053,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _SimpleTargetElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1070,15 +1066,15 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SimpleTargetElement__TargetElement = {};
+		private static final @NonNull Operation @NonNull [] _SimpleTargetElement__TargetElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Target__Target = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Target__Element = {
+		private static final @NonNull Operation @NonNull [] _Target__Target = {};
+		private static final @NonNull Operation @NonNull [] _Target__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Target__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Target__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Target__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Target__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1095,7 +1091,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Target__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Target__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1109,12 +1105,12 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__TargetElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__Element = {
+		private static final @NonNull Operation @NonNull [] _TargetElement__TargetElement = {};
+		private static final @NonNull Operation @NonNull [] _TargetElement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TargetElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1131,7 +1127,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TargetElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1145,8 +1141,8 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__TargetElementKind = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TargetElementKind__TargetElementKind = {};
+		private static final @NonNull Operation @NonNull [] _TargetElementKind__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1163,7 +1159,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TargetElementKind__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1176,25 +1172,25 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclEnumeration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TargetElementKind__OclType = {
+		private static final @NonNull Operation @NonNull [] _TargetElementKind__OclEnumeration = {};
+		private static final @NonNull Operation @NonNull [] _TargetElementKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Transformation = {
+		private static final @NonNull Operation @NonNull [] _Transformation__Transformation = {
 			QVTbaseTables.Operations._Transformation__getFunction /* getFunction(String[1]) */,
 			QVTbaseTables.Operations._Transformation__getModelParameter /* getModelParameter(String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Class = {
+		private static final @NonNull Operation @NonNull [] _Transformation__Class = {
 			PivotTables.Operations._Class__allInstances /* allInstances() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Element = {
+		private static final @NonNull Operation @NonNull [] _Transformation__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Transformation__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Transformation__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _Transformation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1211,7 +1207,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Transformation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1224,11 +1220,11 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclType = {
+		private static final @NonNull Operation @NonNull [] _Transformation__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__TemplateableElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Type = {
+		private static final @NonNull Operation @NonNull [] _Transformation__TemplateableElement = {};
+		private static final @NonNull Operation @NonNull [] _Transformation__Type = {
 			PivotTables.Operations._Type__conformsTo /* conformsTo(Type[?]) */,
 			PivotTables.Operations._Type__flattenedType /* flattenedType() */,
 			PivotTables.Operations._Type__isClass /* isClass() */,
@@ -1236,13 +1232,13 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Operations._Type__specializeIn /* specializeIn(CallExp[1],Type[1]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__TypedModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__Element = {
+		private static final @NonNull Operation @NonNull [] _TypedModel__TypedModel = {};
+		private static final @NonNull Operation @NonNull [] _TypedModel__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TypedModel__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TypedModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1259,7 +1255,7 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TypedModel__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1402,7 +1398,7 @@ public class QVTbaseTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _BaseModel = {
+		private static final @NonNull Property @NonNull [] _BaseModel = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Model__externalURI,
 			PivotTables.Properties._NamedElement__name,
@@ -1417,7 +1413,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._Model__xmiidVersion
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CompoundTargetElement = {
+		private static final @NonNull Property @NonNull [] _CompoundTargetElement = {
 			PivotTables.Properties._Element__annotatingComments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1427,7 +1423,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._CompoundTargetElement__ownedTargetElements
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Domain = {
+		private static final @NonNull Property @NonNull [] _Domain = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Domain__isCheckable,
 			QVTbaseTables.Properties._Domain__isEnforceable,
@@ -1441,7 +1437,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Domain__typedModel
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Function = {
+		private static final @NonNull Property @NonNull [] _Function = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Operation__bodyExpression,
 			PivotTables.Properties._Feature__implementation,
@@ -1474,7 +1470,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _FunctionBody = {
+		private static final @NonNull Property @NonNull [] _FunctionBody = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._LanguageExpression__body,
 			PivotTables.Properties._TypedElement__isMany,
@@ -1494,7 +1490,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _FunctionParameter = {
+		private static final @NonNull Property @NonNull [] _FunctionParameter = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
@@ -1510,7 +1506,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Pattern = {
+		private static final @NonNull Property @NonNull [] _Pattern = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Pattern__bindsTo,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1521,7 +1517,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Pattern__predicate
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Predicate = {
+		private static final @NonNull Property @NonNull [] _Predicate = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Predicate__conditionExpression,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1532,7 +1528,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Predicate__pattern
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Rule = {
+		private static final @NonNull Property @NonNull [] _Rule = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Rule__domain,
 			QVTbaseTables.Properties._Rule__isAbstract,
@@ -1548,7 +1544,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Rule__transformation
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SimpleTargetElement = {
+		private static final @NonNull Property @NonNull [] _SimpleTargetElement = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._SimpleTargetElement__iterates,
 			QVTbaseTables.Properties._SimpleTargetElement__kind,
@@ -1560,7 +1556,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._SimpleTargetElement__typedModel
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Target = {
+		private static final @NonNull Property @NonNull [] _Target = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1572,7 +1568,7 @@ public class QVTbaseTables extends AbstractTables
 			QVTbaseTables.Properties._Target__owningTransformation
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TargetElement = {
+		private static final @NonNull Property @NonNull [] _TargetElement = {
 			PivotTables.Properties._Element__annotatingComments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1581,12 +1577,12 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._Element__ownedExtensions
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TargetElementKind = {
+		private static final @NonNull Property @NonNull [] _TargetElementKind = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Transformation = {
+		private static final @NonNull Property @NonNull [] _Transformation = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Class__extenders,
 			QVTbaseTables.Properties._Transformation__extends,
@@ -1617,7 +1613,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TypedModel = {
+		private static final @NonNull Property @NonNull [] _TypedModel = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._TypedModel__dependsOn,
 			QVTbaseTables.Properties._TypedModel__isPrimitive,
@@ -1673,10 +1669,10 @@ public class QVTbaseTables extends AbstractTables
 			FragmentProperties.init();
 		}
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__INPUT = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"), Types._TargetElementKind, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__VIA = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("VIA"), Types._TargetElementKind, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TargetElementKind__OUTPUT = new EcoreExecutorEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("OUTPUT"), Types._TargetElementKind, 2);
-		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _TargetElementKind = {
+		public static final @NonNull EnumerationLiteral _TargetElementKind__INPUT = LIBRARY.createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"), Types._TargetElementKind, 0);
+		public static final @NonNull EnumerationLiteral _TargetElementKind__VIA = LIBRARY.createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("VIA"), Types._TargetElementKind, 1);
+		public static final @NonNull EnumerationLiteral _TargetElementKind__OUTPUT = LIBRARY.createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("OUTPUT"), Types._TargetElementKind, 2);
+		private static final @NonNull EnumerationLiteral @NonNull [] _TargetElementKind = {
 			_TargetElementKind__INPUT,
 			_TargetElementKind__VIA,
 			_TargetElementKind__OUTPUT
@@ -1686,7 +1682,7 @@ public class QVTbaseTables extends AbstractTables
 		 *	Install the enumeration literals in the enumerations.
 		 */
 		static {
-			Types._TargetElementKind.initLiterals(_TargetElementKind);
+			LIBRARY.initLiterals(Types._TargetElementKind, _TargetElementKind);
 
 			Init.initEnd();
 		}

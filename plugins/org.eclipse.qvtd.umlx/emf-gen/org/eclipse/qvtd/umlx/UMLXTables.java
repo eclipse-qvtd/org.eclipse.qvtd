@@ -22,7 +22,12 @@ package org.eclipse.qvtd.umlx;
 import java.lang.String;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatClass;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
@@ -32,15 +37,6 @@ import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.types.TemplateParameters;
@@ -63,14 +59,14 @@ public class UMLXTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(UMLXPackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(UMLXPackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -171,28 +167,28 @@ public class UMLXTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _RelDiagram = new EcoreExecutorType(UMLXPackage.Literals.REL_DIAGRAM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelDomainNode = new EcoreExecutorType(UMLXPackage.Literals.REL_DOMAIN_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelEdge = new EcoreExecutorType(UMLXPackage.Literals.REL_EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _RelInvocationEdge = new EcoreExecutorType(UMLXPackage.Literals.REL_INVOCATION_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelInvocationNode = new EcoreExecutorType(UMLXPackage.Literals.REL_INVOCATION_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelNode = new EcoreExecutorType(UMLXPackage.Literals.REL_NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _RelPatternEdge = new EcoreExecutorType(UMLXPackage.Literals.REL_PATTERN_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RelPatternNode = new EcoreExecutorType(UMLXPackage.Literals.REL_PATTERN_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxDiagram = new EcoreExecutorType(UMLXPackage.Literals.TX_DIAGRAM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxKeyNode = new EcoreExecutorType(UMLXPackage.Literals.TX_KEY_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxNode = new EcoreExecutorType(UMLXPackage.Literals.TX_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxPackageNode = new EcoreExecutorType(UMLXPackage.Literals.TX_PACKAGE_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxParameterNode = new EcoreExecutorType(UMLXPackage.Literals.TX_PARAMETER_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxPartNode = new EcoreExecutorType(UMLXPackage.Literals.TX_PART_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxQueryNode = new EcoreExecutorType(UMLXPackage.Literals.TX_QUERY_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TxTypedModelNode = new EcoreExecutorType(UMLXPackage.Literals.TX_TYPED_MODEL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _UMLXElement = new EcoreExecutorType(UMLXPackage.Literals.UMLX_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _UMLXModel = new EcoreExecutorType(UMLXPackage.Literals.UMLX_MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _UMLXNamedElement = new EcoreExecutorType(UMLXPackage.Literals.UMLX_NAMED_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _UMLXTypedElement = new EcoreExecutorType(UMLXPackage.Literals.UMLX_TYPED_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DIAGRAM, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDomainNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DOMAIN_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_DIAGRAM, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxKeyNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_KEY_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPackageNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PACKAGE_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxParameterNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PARAMETER_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPartNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PART_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxQueryNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_QUERY_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxTypedModelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_TYPED_MODEL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXNamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_NAMED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXTypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_TYPED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_RelDiagram,
 			_RelDomainNode,
 			_RelEdge,
@@ -219,7 +215,7 @@ public class UMLXTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -238,125 +234,125 @@ public class UMLXTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _RelDiagram__OclAny = new ExecutorFragment(Types._RelDiagram, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelDiagram__OclElement = new ExecutorFragment(Types._RelDiagram, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelDiagram__RelDiagram = new ExecutorFragment(Types._RelDiagram, UMLXTables.Types._RelDiagram);
-		private static final @NonNull ExecutorFragment _RelDiagram__UMLXElement = new ExecutorFragment(Types._RelDiagram, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _RelDiagram__UMLXNamedElement = new ExecutorFragment(Types._RelDiagram, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _RelDiagram__OclAny = LIBRARY.createFragment(Types._RelDiagram, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelDiagram__OclElement = LIBRARY.createFragment(Types._RelDiagram, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelDiagram__RelDiagram = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._RelDiagram);
+		private static final @NonNull FlatFragment _RelDiagram__UMLXElement = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._UMLXNamedElement);
 
-		private static final @NonNull ExecutorFragment _RelDomainNode__OclAny = new ExecutorFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelDomainNode__OclElement = new ExecutorFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelDomainNode__RelDomainNode = new ExecutorFragment(Types._RelDomainNode, UMLXTables.Types._RelDomainNode);
-		private static final @NonNull ExecutorFragment _RelDomainNode__RelNode = new ExecutorFragment(Types._RelDomainNode, UMLXTables.Types._RelNode);
-		private static final @NonNull ExecutorFragment _RelDomainNode__UMLXElement = new ExecutorFragment(Types._RelDomainNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelDomainNode__OclAny = LIBRARY.createFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelDomainNode__OclElement = LIBRARY.createFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelDomainNode__RelDomainNode = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._RelDomainNode);
+		private static final @NonNull FlatFragment _RelDomainNode__RelNode = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._RelNode);
+		private static final @NonNull FlatFragment _RelDomainNode__UMLXElement = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelEdge__OclAny = new ExecutorFragment(Types._RelEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelEdge__OclElement = new ExecutorFragment(Types._RelEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelEdge__RelEdge = new ExecutorFragment(Types._RelEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull ExecutorFragment _RelEdge__UMLXElement = new ExecutorFragment(Types._RelEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelEdge__OclAny = LIBRARY.createFragment(Types._RelEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelEdge__OclElement = LIBRARY.createFragment(Types._RelEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelEdge__RelEdge = LIBRARY.createFragment(Types._RelEdge, UMLXTables.Types._RelEdge);
+		private static final @NonNull FlatFragment _RelEdge__UMLXElement = LIBRARY.createFragment(Types._RelEdge, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelInvocationEdge__OclAny = new ExecutorFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelInvocationEdge__OclElement = new ExecutorFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelInvocationEdge__RelEdge = new ExecutorFragment(Types._RelInvocationEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull ExecutorFragment _RelInvocationEdge__RelInvocationEdge = new ExecutorFragment(Types._RelInvocationEdge, UMLXTables.Types._RelInvocationEdge);
-		private static final @NonNull ExecutorFragment _RelInvocationEdge__UMLXElement = new ExecutorFragment(Types._RelInvocationEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelInvocationEdge__OclAny = LIBRARY.createFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelInvocationEdge__OclElement = LIBRARY.createFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelInvocationEdge__RelEdge = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._RelEdge);
+		private static final @NonNull FlatFragment _RelInvocationEdge__RelInvocationEdge = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._RelInvocationEdge);
+		private static final @NonNull FlatFragment _RelInvocationEdge__UMLXElement = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelInvocationNode__OclAny = new ExecutorFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelInvocationNode__OclElement = new ExecutorFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelInvocationNode__RelInvocationNode = new ExecutorFragment(Types._RelInvocationNode, UMLXTables.Types._RelInvocationNode);
-		private static final @NonNull ExecutorFragment _RelInvocationNode__RelNode = new ExecutorFragment(Types._RelInvocationNode, UMLXTables.Types._RelNode);
-		private static final @NonNull ExecutorFragment _RelInvocationNode__UMLXElement = new ExecutorFragment(Types._RelInvocationNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelInvocationNode__OclAny = LIBRARY.createFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelInvocationNode__OclElement = LIBRARY.createFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelInvocationNode__RelInvocationNode = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._RelInvocationNode);
+		private static final @NonNull FlatFragment _RelInvocationNode__RelNode = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._RelNode);
+		private static final @NonNull FlatFragment _RelInvocationNode__UMLXElement = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelNode__OclAny = new ExecutorFragment(Types._RelNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelNode__OclElement = new ExecutorFragment(Types._RelNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelNode__RelNode = new ExecutorFragment(Types._RelNode, UMLXTables.Types._RelNode);
-		private static final @NonNull ExecutorFragment _RelNode__UMLXElement = new ExecutorFragment(Types._RelNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelNode__OclAny = LIBRARY.createFragment(Types._RelNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelNode__OclElement = LIBRARY.createFragment(Types._RelNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelNode__RelNode = LIBRARY.createFragment(Types._RelNode, UMLXTables.Types._RelNode);
+		private static final @NonNull FlatFragment _RelNode__UMLXElement = LIBRARY.createFragment(Types._RelNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelPatternEdge__OclAny = new ExecutorFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelPatternEdge__OclElement = new ExecutorFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelPatternEdge__RelEdge = new ExecutorFragment(Types._RelPatternEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull ExecutorFragment _RelPatternEdge__RelPatternEdge = new ExecutorFragment(Types._RelPatternEdge, UMLXTables.Types._RelPatternEdge);
-		private static final @NonNull ExecutorFragment _RelPatternEdge__UMLXElement = new ExecutorFragment(Types._RelPatternEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelPatternEdge__OclAny = LIBRARY.createFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelPatternEdge__OclElement = LIBRARY.createFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelPatternEdge__RelEdge = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._RelEdge);
+		private static final @NonNull FlatFragment _RelPatternEdge__RelPatternEdge = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._RelPatternEdge);
+		private static final @NonNull FlatFragment _RelPatternEdge__UMLXElement = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _RelPatternNode__OclAny = new ExecutorFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RelPatternNode__OclElement = new ExecutorFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RelPatternNode__RelNode = new ExecutorFragment(Types._RelPatternNode, UMLXTables.Types._RelNode);
-		private static final @NonNull ExecutorFragment _RelPatternNode__RelPatternNode = new ExecutorFragment(Types._RelPatternNode, UMLXTables.Types._RelPatternNode);
-		private static final @NonNull ExecutorFragment _RelPatternNode__UMLXElement = new ExecutorFragment(Types._RelPatternNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _RelPatternNode__UMLXNamedElement = new ExecutorFragment(Types._RelPatternNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull ExecutorFragment _RelPatternNode__UMLXTypedElement = new ExecutorFragment(Types._RelPatternNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _RelPatternNode__OclAny = LIBRARY.createFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RelPatternNode__OclElement = LIBRARY.createFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RelPatternNode__RelNode = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._RelNode);
+		private static final @NonNull FlatFragment _RelPatternNode__RelPatternNode = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._RelPatternNode);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXNamedElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXTypedElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXTypedElement);
 
-		private static final @NonNull ExecutorFragment _TxDiagram__OclAny = new ExecutorFragment(Types._TxDiagram, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxDiagram__OclElement = new ExecutorFragment(Types._TxDiagram, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxDiagram__TxDiagram = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._TxDiagram);
-		private static final @NonNull ExecutorFragment _TxDiagram__UMLXElement = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _TxDiagram__UMLXNamedElement = new ExecutorFragment(Types._TxDiagram, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxDiagram__OclAny = LIBRARY.createFragment(Types._TxDiagram, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxDiagram__OclElement = LIBRARY.createFragment(Types._TxDiagram, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxDiagram__TxDiagram = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._TxDiagram);
+		private static final @NonNull FlatFragment _TxDiagram__UMLXElement = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._UMLXNamedElement);
 
-		private static final @NonNull ExecutorFragment _TxKeyNode__OclAny = new ExecutorFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxKeyNode__OclElement = new ExecutorFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxKeyNode__TxKeyNode = new ExecutorFragment(Types._TxKeyNode, UMLXTables.Types._TxKeyNode);
-		private static final @NonNull ExecutorFragment _TxKeyNode__TxNode = new ExecutorFragment(Types._TxKeyNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxKeyNode__UMLXElement = new ExecutorFragment(Types._TxKeyNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxKeyNode__OclAny = LIBRARY.createFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxKeyNode__OclElement = LIBRARY.createFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxKeyNode__TxKeyNode = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._TxKeyNode);
+		private static final @NonNull FlatFragment _TxKeyNode__TxNode = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxKeyNode__UMLXElement = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _TxNode__OclAny = new ExecutorFragment(Types._TxNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxNode__OclElement = new ExecutorFragment(Types._TxNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxNode__TxNode = new ExecutorFragment(Types._TxNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxNode__UMLXElement = new ExecutorFragment(Types._TxNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxNode__OclAny = LIBRARY.createFragment(Types._TxNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxNode__OclElement = LIBRARY.createFragment(Types._TxNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxNode__TxNode = LIBRARY.createFragment(Types._TxNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxNode__UMLXElement = LIBRARY.createFragment(Types._TxNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _TxPackageNode__OclAny = new ExecutorFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxPackageNode__OclElement = new ExecutorFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxPackageNode__TxNode = new ExecutorFragment(Types._TxPackageNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxPackageNode__TxPackageNode = new ExecutorFragment(Types._TxPackageNode, UMLXTables.Types._TxPackageNode);
-		private static final @NonNull ExecutorFragment _TxPackageNode__UMLXElement = new ExecutorFragment(Types._TxPackageNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxPackageNode__OclAny = LIBRARY.createFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxPackageNode__OclElement = LIBRARY.createFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxPackageNode__TxNode = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxPackageNode__TxPackageNode = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._TxPackageNode);
+		private static final @NonNull FlatFragment _TxPackageNode__UMLXElement = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _TxParameterNode__OclAny = new ExecutorFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxParameterNode__OclElement = new ExecutorFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxParameterNode__TxNode = new ExecutorFragment(Types._TxParameterNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxParameterNode__TxParameterNode = new ExecutorFragment(Types._TxParameterNode, UMLXTables.Types._TxParameterNode);
-		private static final @NonNull ExecutorFragment _TxParameterNode__UMLXElement = new ExecutorFragment(Types._TxParameterNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _TxParameterNode__UMLXNamedElement = new ExecutorFragment(Types._TxParameterNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull ExecutorFragment _TxParameterNode__UMLXTypedElement = new ExecutorFragment(Types._TxParameterNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _TxParameterNode__OclAny = LIBRARY.createFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxParameterNode__OclElement = LIBRARY.createFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxParameterNode__TxNode = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxParameterNode__TxParameterNode = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._TxParameterNode);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXTypedElement);
 
-		private static final @NonNull ExecutorFragment _TxPartNode__OclAny = new ExecutorFragment(Types._TxPartNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxPartNode__OclElement = new ExecutorFragment(Types._TxPartNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxPartNode__TxNode = new ExecutorFragment(Types._TxPartNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxPartNode__TxPartNode = new ExecutorFragment(Types._TxPartNode, UMLXTables.Types._TxPartNode);
-		private static final @NonNull ExecutorFragment _TxPartNode__UMLXElement = new ExecutorFragment(Types._TxPartNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxPartNode__OclAny = LIBRARY.createFragment(Types._TxPartNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxPartNode__OclElement = LIBRARY.createFragment(Types._TxPartNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxPartNode__TxNode = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxPartNode__TxPartNode = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._TxPartNode);
+		private static final @NonNull FlatFragment _TxPartNode__UMLXElement = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _TxQueryNode__OclAny = new ExecutorFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxQueryNode__OclElement = new ExecutorFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxQueryNode__TxNode = new ExecutorFragment(Types._TxQueryNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxQueryNode__TxQueryNode = new ExecutorFragment(Types._TxQueryNode, UMLXTables.Types._TxQueryNode);
-		private static final @NonNull ExecutorFragment _TxQueryNode__UMLXElement = new ExecutorFragment(Types._TxQueryNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _TxQueryNode__UMLXNamedElement = new ExecutorFragment(Types._TxQueryNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull ExecutorFragment _TxQueryNode__UMLXTypedElement = new ExecutorFragment(Types._TxQueryNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _TxQueryNode__OclAny = LIBRARY.createFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxQueryNode__OclElement = LIBRARY.createFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxQueryNode__TxNode = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxQueryNode__TxQueryNode = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._TxQueryNode);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXTypedElement);
 
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__OclAny = new ExecutorFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__OclElement = new ExecutorFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__TxNode = new ExecutorFragment(Types._TxTypedModelNode, UMLXTables.Types._TxNode);
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__TxTypedModelNode = new ExecutorFragment(Types._TxTypedModelNode, UMLXTables.Types._TxTypedModelNode);
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__UMLXElement = new ExecutorFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _TxTypedModelNode__UMLXNamedElement = new ExecutorFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxTypedModelNode__OclAny = LIBRARY.createFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TxTypedModelNode__OclElement = LIBRARY.createFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TxTypedModelNode__TxNode = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._TxNode);
+		private static final @NonNull FlatFragment _TxTypedModelNode__TxTypedModelNode = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._TxTypedModelNode);
+		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXElement = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXNamedElement);
 
-		private static final @NonNull ExecutorFragment _UMLXElement__OclAny = new ExecutorFragment(Types._UMLXElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _UMLXElement__OclElement = new ExecutorFragment(Types._UMLXElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _UMLXElement__UMLXElement = new ExecutorFragment(Types._UMLXElement, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXElement__OclAny = LIBRARY.createFragment(Types._UMLXElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _UMLXElement__OclElement = LIBRARY.createFragment(Types._UMLXElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _UMLXElement__UMLXElement = LIBRARY.createFragment(Types._UMLXElement, UMLXTables.Types._UMLXElement);
 
-		private static final @NonNull ExecutorFragment _UMLXModel__OclAny = new ExecutorFragment(Types._UMLXModel, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _UMLXModel__OclElement = new ExecutorFragment(Types._UMLXModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _UMLXModel__UMLXElement = new ExecutorFragment(Types._UMLXModel, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _UMLXModel__UMLXModel = new ExecutorFragment(Types._UMLXModel, UMLXTables.Types._UMLXModel);
+		private static final @NonNull FlatFragment _UMLXModel__OclAny = LIBRARY.createFragment(Types._UMLXModel, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _UMLXModel__OclElement = LIBRARY.createFragment(Types._UMLXModel, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _UMLXModel__UMLXElement = LIBRARY.createFragment(Types._UMLXModel, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXModel__UMLXModel = LIBRARY.createFragment(Types._UMLXModel, UMLXTables.Types._UMLXModel);
 
-		private static final @NonNull ExecutorFragment _UMLXNamedElement__OclAny = new ExecutorFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _UMLXNamedElement__OclElement = new ExecutorFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _UMLXNamedElement__UMLXElement = new ExecutorFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _UMLXNamedElement__UMLXNamedElement = new ExecutorFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _UMLXNamedElement__OclAny = LIBRARY.createFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _UMLXNamedElement__OclElement = LIBRARY.createFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXNamedElement);
 
-		private static final @NonNull ExecutorFragment _UMLXTypedElement__OclAny = new ExecutorFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _UMLXTypedElement__OclElement = new ExecutorFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _UMLXTypedElement__UMLXElement = new ExecutorFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXElement);
-		private static final @NonNull ExecutorFragment _UMLXTypedElement__UMLXNamedElement = new ExecutorFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull ExecutorFragment _UMLXTypedElement__UMLXTypedElement = new ExecutorFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__OclAny = LIBRARY.createFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _UMLXTypedElement__OclElement = LIBRARY.createFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXTypedElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXTypedElement);
 
 		static {
 			Init.initEnd();
@@ -404,7 +400,7 @@ public class UMLXTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _RelPatternNode__isExpression = new ExecutorOperation("isExpression", ParameterTypes.EMPTY_LIST, Types._RelPatternNode,
+		public static final @NonNull Operation _RelPatternNode__isExpression = LIBRARY.createOperation("isExpression", ParameterTypes.EMPTY_LIST, Types._RelPatternNode,
 			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
@@ -430,92 +426,92 @@ public class UMLXTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _RelDiagram__isAbstract = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_ABSTRACT, Types._RelDiagram, 0);
-		public static final @NonNull ExecutorProperty _RelDiagram__isTop = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, Types._RelDiagram, 1);
-		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelDomainNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, Types._RelDiagram, 2);
-		public static final @NonNull ExecutorProperty _RelDiagram__ownedRelInvocationNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, Types._RelDiagram, 3);
-		public static final @NonNull ExecutorProperty _RelDiagram__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 4);
-		public static final @NonNull ExecutorProperty _RelDiagram__RelInvocationNode__referredRelDiagram = new ExecutorPropertyWithImplementation("RelInvocationNode", Types._RelDiagram, 5, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM));
+		public static final @NonNull Property _RelDiagram__isAbstract = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_ABSTRACT, Types._RelDiagram, 0);
+		public static final @NonNull Property _RelDiagram__isTop = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, Types._RelDiagram, 1);
+		public static final @NonNull Property _RelDiagram__ownedRelDomainNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, Types._RelDiagram, 2);
+		public static final @NonNull Property _RelDiagram__ownedRelInvocationNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, Types._RelDiagram, 3);
+		public static final @NonNull Property _RelDiagram__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 4);
+		public static final @NonNull Property _RelDiagram__RelInvocationNode__referredRelDiagram = LIBRARY.createOppositeProperty("RelInvocationNode", Types._RelDiagram, 5, UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM);
 
-		public static final @NonNull ExecutorProperty _RelDomainNode__isEnforced = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, Types._RelDomainNode, 0);
-		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 1);
-		public static final @NonNull ExecutorProperty _RelDomainNode__ownedRelPatternNodes = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, Types._RelDomainNode, 2);
-		public static final @NonNull ExecutorProperty _RelDomainNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDomainNode, 3);
-		public static final @NonNull ExecutorProperty _RelDomainNode__referredTxTypedModelNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._RelDomainNode, 4);
+		public static final @NonNull Property _RelDomainNode__isEnforced = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, Types._RelDomainNode, 0);
+		public static final @NonNull Property _RelDomainNode__ownedRelPatternEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 1);
+		public static final @NonNull Property _RelDomainNode__ownedRelPatternNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, Types._RelDomainNode, 2);
+		public static final @NonNull Property _RelDomainNode__owningRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDomainNode, 3);
+		public static final @NonNull Property _RelDomainNode__referredTxTypedModelNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._RelDomainNode, 4);
 
-		public static final @NonNull ExecutorProperty _RelInvocationEdge__invokingRelPatternNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, Types._RelInvocationEdge, 0);
-		public static final @NonNull ExecutorProperty _RelInvocationEdge__owningRelInvocationNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, Types._RelInvocationEdge, 1);
-		public static final @NonNull ExecutorProperty _RelInvocationEdge__referredRelPatternNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, Types._RelInvocationEdge, 2);
+		public static final @NonNull Property _RelInvocationEdge__invokingRelPatternNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, Types._RelInvocationEdge, 0);
+		public static final @NonNull Property _RelInvocationEdge__owningRelInvocationNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, Types._RelInvocationEdge, 1);
+		public static final @NonNull Property _RelInvocationEdge__referredRelPatternNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, Types._RelInvocationEdge, 2);
 
-		public static final @NonNull ExecutorProperty _RelInvocationNode__isThen = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__IS_THEN, Types._RelInvocationNode, 0);
-		public static final @NonNull ExecutorProperty _RelInvocationNode__ownedRelInvocationEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, Types._RelInvocationNode, 1);
-		public static final @NonNull ExecutorProperty _RelInvocationNode__owningRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelInvocationNode, 2);
-		public static final @NonNull ExecutorProperty _RelInvocationNode__referredRelDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelInvocationNode, 3);
+		public static final @NonNull Property _RelInvocationNode__isThen = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__IS_THEN, Types._RelInvocationNode, 0);
+		public static final @NonNull Property _RelInvocationNode__ownedRelInvocationEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, Types._RelInvocationNode, 1);
+		public static final @NonNull Property _RelInvocationNode__owningRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelInvocationNode, 2);
+		public static final @NonNull Property _RelInvocationNode__referredRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelInvocationNode, 3);
 
-		public static final @NonNull ExecutorProperty _RelPatternEdge__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelPatternEdge, 0);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__referredEStructuralFeature = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, Types._RelPatternEdge, 1);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__source = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE, Types._RelPatternEdge, 2);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__sourceIndex = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE_INDEX, Types._RelPatternEdge, 3);
-		public static final @NonNull ExecutorProperty _RelPatternEdge__target = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternEdge, 4);
+		public static final @NonNull Property _RelPatternEdge__owningRelDomainNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelPatternEdge, 0);
+		public static final @NonNull Property _RelPatternEdge__referredEStructuralFeature = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, Types._RelPatternEdge, 1);
+		public static final @NonNull Property _RelPatternEdge__source = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE, Types._RelPatternEdge, 2);
+		public static final @NonNull Property _RelPatternEdge__sourceIndex = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE_INDEX, Types._RelPatternEdge, 3);
+		public static final @NonNull Property _RelPatternEdge__target = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternEdge, 4);
 
-		public static final @NonNull ExecutorProperty _RelPatternNode__incoming = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INCOMING, Types._RelPatternNode, 0);
-		public static final @NonNull ExecutorProperty _RelPatternNode__initExpressionLines = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INIT_EXPRESSION_LINES, Types._RelPatternNode, 1);
-		public static final @NonNull ExecutorProperty _RelPatternNode__invokingRelInvocationEdges = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, Types._RelPatternNode, 2);
-		public static final @NonNull ExecutorProperty _RelPatternNode__isAnon = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ANON, Types._RelPatternNode, 3);
-		public static final @NonNull ExecutorProperty _RelPatternNode__isRoot = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, Types._RelPatternNode, 4);
-		public static final @NonNull ExecutorProperty _RelPatternNode__outgoing = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, Types._RelPatternNode, 5);
-		public static final @NonNull ExecutorProperty _RelPatternNode__owningRelDomainNode = new EcoreExecutorProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 6);
-		public static final @NonNull ExecutorProperty _RelPatternNode__RelInvocationEdge__referredRelPatternNode = new ExecutorPropertyWithImplementation("RelInvocationEdge", Types._RelPatternNode, 7, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE));
+		public static final @NonNull Property _RelPatternNode__incoming = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INCOMING, Types._RelPatternNode, 0);
+		public static final @NonNull Property _RelPatternNode__initExpressionLines = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INIT_EXPRESSION_LINES, Types._RelPatternNode, 1);
+		public static final @NonNull Property _RelPatternNode__invokingRelInvocationEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, Types._RelPatternNode, 2);
+		public static final @NonNull Property _RelPatternNode__isAnon = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ANON, Types._RelPatternNode, 3);
+		public static final @NonNull Property _RelPatternNode__isRoot = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, Types._RelPatternNode, 4);
+		public static final @NonNull Property _RelPatternNode__outgoing = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, Types._RelPatternNode, 5);
+		public static final @NonNull Property _RelPatternNode__owningRelDomainNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 6);
+		public static final @NonNull Property _RelPatternNode__RelInvocationEdge__referredRelPatternNode = LIBRARY.createOppositeProperty("RelInvocationEdge", Types._RelPatternNode, 7, UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE);
 
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedRelDiagrams = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxKeyNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, Types._TxDiagram, 1);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, Types._TxDiagram, 2);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxQueryNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_QUERY_NODES, Types._TxDiagram, 3);
-		public static final @NonNull ExecutorProperty _TxDiagram__ownedTxTypedModelNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, Types._TxDiagram, 4);
-		public static final @NonNull ExecutorProperty _TxDiagram__package = new EcoreExecutorProperty(UMLXPackage.Literals.TX_DIAGRAM__PACKAGE, Types._TxDiagram, 5);
-		public static final @NonNull ExecutorProperty _TxDiagram__UMLXModel__ownedTxDiagrams = new ExecutorPropertyWithImplementation("UMLXModel", Types._TxDiagram, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS));
+		public static final @NonNull Property _TxDiagram__ownedRelDiagrams = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
+		public static final @NonNull Property _TxDiagram__ownedTxKeyNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, Types._TxDiagram, 1);
+		public static final @NonNull Property _TxDiagram__ownedTxPackageNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, Types._TxDiagram, 2);
+		public static final @NonNull Property _TxDiagram__ownedTxQueryNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_QUERY_NODES, Types._TxDiagram, 3);
+		public static final @NonNull Property _TxDiagram__ownedTxTypedModelNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, Types._TxDiagram, 4);
+		public static final @NonNull Property _TxDiagram__package = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__PACKAGE, Types._TxDiagram, 5);
+		public static final @NonNull Property _TxDiagram__UMLXModel__ownedTxDiagrams = LIBRARY.createOppositeProperty("UMLXModel", Types._TxDiagram, 6, UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS);
 
-		public static final @NonNull ExecutorProperty _TxKeyNode__ownedTxPartNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, Types._TxKeyNode, 0);
-		public static final @NonNull ExecutorProperty _TxKeyNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxKeyNode, 1);
-		public static final @NonNull ExecutorProperty _TxKeyNode__referredEClass = new EcoreExecutorProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, Types._TxKeyNode, 2);
+		public static final @NonNull Property _TxKeyNode__ownedTxPartNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, Types._TxKeyNode, 0);
+		public static final @NonNull Property _TxKeyNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxKeyNode, 1);
+		public static final @NonNull Property _TxKeyNode__referredEClass = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, Types._TxKeyNode, 2);
 
-		public static final @NonNull ExecutorProperty _TxPackageNode__importAliases = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__IMPORT_ALIASES, Types._TxPackageNode, 0);
-		public static final @NonNull ExecutorProperty _TxPackageNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM, Types._TxPackageNode, 1);
-		public static final @NonNull ExecutorProperty _TxPackageNode__referredEPackage = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 2);
-		public static final @NonNull ExecutorProperty _TxPackageNode__TxTypedModelNode__usedTxPackageNodes = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxPackageNode, 3, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES));
+		public static final @NonNull Property _TxPackageNode__importAliases = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__IMPORT_ALIASES, Types._TxPackageNode, 0);
+		public static final @NonNull Property _TxPackageNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM, Types._TxPackageNode, 1);
+		public static final @NonNull Property _TxPackageNode__referredEPackage = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 2);
+		public static final @NonNull Property _TxPackageNode__TxTypedModelNode__usedTxPackageNodes = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxPackageNode, 3, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
 
-		public static final @NonNull ExecutorProperty _TxParameterNode__owningTxQueryNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE, Types._TxParameterNode, 0);
+		public static final @NonNull Property _TxParameterNode__owningTxQueryNode = LIBRARY.createProperty(UMLXPackage.Literals.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE, Types._TxParameterNode, 0);
 
-		public static final @NonNull ExecutorProperty _TxPartNode__isOpposite = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__IS_OPPOSITE, Types._TxPartNode, 0);
-		public static final @NonNull ExecutorProperty _TxPartNode__owningTxKeyNode = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__OWNING_TX_KEY_NODE, Types._TxPartNode, 1);
-		public static final @NonNull ExecutorProperty _TxPartNode__referredEStructuralFeature = new EcoreExecutorProperty(UMLXPackage.Literals.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, Types._TxPartNode, 2);
+		public static final @NonNull Property _TxPartNode__isOpposite = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__IS_OPPOSITE, Types._TxPartNode, 0);
+		public static final @NonNull Property _TxPartNode__owningTxKeyNode = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__OWNING_TX_KEY_NODE, Types._TxPartNode, 1);
+		public static final @NonNull Property _TxPartNode__referredEStructuralFeature = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, Types._TxPartNode, 2);
 
-		public static final @NonNull ExecutorProperty _TxQueryNode__initExpressionLines = new EcoreExecutorProperty(UMLXPackage.Literals.TX_QUERY_NODE__INIT_EXPRESSION_LINES, Types._TxQueryNode, 0);
-		public static final @NonNull ExecutorProperty _TxQueryNode__ownedTxParameterNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES, Types._TxQueryNode, 1);
-		public static final @NonNull ExecutorProperty _TxQueryNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNING_TX_DIAGRAM, Types._TxQueryNode, 2);
+		public static final @NonNull Property _TxQueryNode__initExpressionLines = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__INIT_EXPRESSION_LINES, Types._TxQueryNode, 0);
+		public static final @NonNull Property _TxQueryNode__ownedTxParameterNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES, Types._TxQueryNode, 1);
+		public static final @NonNull Property _TxQueryNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNING_TX_DIAGRAM, Types._TxQueryNode, 2);
 
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__check = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__dependsOns = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, Types._TxTypedModelNode, 1);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__enforce = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 2);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__iterates = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES, Types._TxTypedModelNode, 3);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__owningTxDiagram = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 4);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__usedTxPackageNodes = new EcoreExecutorProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 5);
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = new ExecutorPropertyWithImplementation("RelDomainNode", Types._TxTypedModelNode, 6, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE));
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__TxTypedModelNode__dependsOns = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxTypedModelNode, 7, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS));
-		public static final @NonNull ExecutorProperty _TxTypedModelNode__TxTypedModelNode__iterates = new ExecutorPropertyWithImplementation("TxTypedModelNode", Types._TxTypedModelNode, 8, new EcoreLibraryOppositeProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES));
+		public static final @NonNull Property _TxTypedModelNode__check = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
+		public static final @NonNull Property _TxTypedModelNode__dependsOns = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, Types._TxTypedModelNode, 1);
+		public static final @NonNull Property _TxTypedModelNode__enforce = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 2);
+		public static final @NonNull Property _TxTypedModelNode__iterates = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES, Types._TxTypedModelNode, 3);
+		public static final @NonNull Property _TxTypedModelNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 4);
+		public static final @NonNull Property _TxTypedModelNode__usedTxPackageNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 5);
+		public static final @NonNull Property _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = LIBRARY.createOppositeProperty("RelDomainNode", Types._TxTypedModelNode, 6, UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE);
+		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__dependsOns = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxTypedModelNode, 7, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS);
+		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__iterates = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxTypedModelNode, 8, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES);
 
-		public static final @NonNull ExecutorProperty _UMLXElement__comments = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_ELEMENT__COMMENTS, Types._UMLXElement, 0);
+		public static final @NonNull Property _UMLXElement__comments = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_ELEMENT__COMMENTS, Types._UMLXElement, 0);
 
-		public static final @NonNull ExecutorProperty _UMLXModel__ownedTxDiagrams = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS, Types._UMLXModel, 0);
+		public static final @NonNull Property _UMLXModel__ownedTxDiagrams = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS, Types._UMLXModel, 0);
 
-		public static final @NonNull ExecutorProperty _UMLXNamedElement__name = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_NAMED_ELEMENT__NAME, Types._UMLXNamedElement, 0);
+		public static final @NonNull Property _UMLXNamedElement__name = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_NAMED_ELEMENT__NAME, Types._UMLXNamedElement, 0);
 
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__isMany = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_MANY, Types._UMLXTypedElement, 0);
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__isNullFree = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_NULL_FREE, Types._UMLXTypedElement, 1);
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__isOrdered = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_ORDERED, Types._UMLXTypedElement, 2);
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__isRequired = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_REQUIRED, Types._UMLXTypedElement, 3);
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__isUnique = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_UNIQUE, Types._UMLXTypedElement, 4);
-		public static final @NonNull ExecutorProperty _UMLXTypedElement__referredEClassifier = new EcoreExecutorProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, Types._UMLXTypedElement, 5);
+		public static final @NonNull Property _UMLXTypedElement__isMany = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_MANY, Types._UMLXTypedElement, 0);
+		public static final @NonNull Property _UMLXTypedElement__isNullFree = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_NULL_FREE, Types._UMLXTypedElement, 1);
+		public static final @NonNull Property _UMLXTypedElement__isOrdered = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_ORDERED, Types._UMLXTypedElement, 2);
+		public static final @NonNull Property _UMLXTypedElement__isRequired = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_REQUIRED, Types._UMLXTypedElement, 3);
+		public static final @NonNull Property _UMLXTypedElement__isUnique = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_UNIQUE, Types._UMLXTypedElement, 4);
+		public static final @NonNull Property _UMLXTypedElement__referredEClassifier = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, Types._UMLXTypedElement, 5);
 		static {
 			Init.initEnd();
 		}
@@ -535,7 +531,7 @@ public class UMLXTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelDiagram =
+		private static final @NonNull FlatFragment @NonNull [] _RelDiagram =
 			{
 				Fragments._RelDiagram__OclAny /* 0 */,
 				Fragments._RelDiagram__OclElement /* 1 */,
@@ -545,7 +541,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelDiagram = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelDomainNode =
+		private static final @NonNull FlatFragment @NonNull [] _RelDomainNode =
 			{
 				Fragments._RelDomainNode__OclAny /* 0 */,
 				Fragments._RelDomainNode__OclElement /* 1 */,
@@ -555,7 +551,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelDomainNode = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelEdge =
+		private static final @NonNull FlatFragment @NonNull [] _RelEdge =
 			{
 				Fragments._RelEdge__OclAny /* 0 */,
 				Fragments._RelEdge__OclElement /* 1 */,
@@ -564,7 +560,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelEdge = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelInvocationEdge =
+		private static final @NonNull FlatFragment @NonNull [] _RelInvocationEdge =
 			{
 				Fragments._RelInvocationEdge__OclAny /* 0 */,
 				Fragments._RelInvocationEdge__OclElement /* 1 */,
@@ -574,7 +570,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelInvocationEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelInvocationNode =
+		private static final @NonNull FlatFragment @NonNull [] _RelInvocationNode =
 			{
 				Fragments._RelInvocationNode__OclAny /* 0 */,
 				Fragments._RelInvocationNode__OclElement /* 1 */,
@@ -584,7 +580,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelInvocationNode = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelNode =
+		private static final @NonNull FlatFragment @NonNull [] _RelNode =
 			{
 				Fragments._RelNode__OclAny /* 0 */,
 				Fragments._RelNode__OclElement /* 1 */,
@@ -593,7 +589,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelNode = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelPatternEdge =
+		private static final @NonNull FlatFragment @NonNull [] _RelPatternEdge =
 			{
 				Fragments._RelPatternEdge__OclAny /* 0 */,
 				Fragments._RelPatternEdge__OclElement /* 1 */,
@@ -603,7 +599,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelPatternEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RelPatternNode =
+		private static final @NonNull FlatFragment @NonNull [] _RelPatternNode =
 			{
 				Fragments._RelPatternNode__OclAny /* 0 */,
 				Fragments._RelPatternNode__OclElement /* 1 */,
@@ -615,7 +611,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RelPatternNode = { 1,1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxDiagram =
+		private static final @NonNull FlatFragment @NonNull [] _TxDiagram =
 			{
 				Fragments._TxDiagram__OclAny /* 0 */,
 				Fragments._TxDiagram__OclElement /* 1 */,
@@ -625,7 +621,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxDiagram = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxKeyNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxKeyNode =
 			{
 				Fragments._TxKeyNode__OclAny /* 0 */,
 				Fragments._TxKeyNode__OclElement /* 1 */,
@@ -635,7 +631,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxKeyNode = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxNode =
 			{
 				Fragments._TxNode__OclAny /* 0 */,
 				Fragments._TxNode__OclElement /* 1 */,
@@ -644,7 +640,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxNode = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxPackageNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxPackageNode =
 			{
 				Fragments._TxPackageNode__OclAny /* 0 */,
 				Fragments._TxPackageNode__OclElement /* 1 */,
@@ -654,7 +650,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxPackageNode = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxParameterNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxParameterNode =
 			{
 				Fragments._TxParameterNode__OclAny /* 0 */,
 				Fragments._TxParameterNode__OclElement /* 1 */,
@@ -666,7 +662,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxParameterNode = { 1,1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxPartNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxPartNode =
 			{
 				Fragments._TxPartNode__OclAny /* 0 */,
 				Fragments._TxPartNode__OclElement /* 1 */,
@@ -676,7 +672,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxPartNode = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxQueryNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxQueryNode =
 			{
 				Fragments._TxQueryNode__OclAny /* 0 */,
 				Fragments._TxQueryNode__OclElement /* 1 */,
@@ -688,7 +684,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxQueryNode = { 1,1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TxTypedModelNode =
+		private static final @NonNull FlatFragment @NonNull [] _TxTypedModelNode =
 			{
 				Fragments._TxTypedModelNode__OclAny /* 0 */,
 				Fragments._TxTypedModelNode__OclElement /* 1 */,
@@ -699,7 +695,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TxTypedModelNode = { 1,1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _UMLXElement =
+		private static final @NonNull FlatFragment @NonNull [] _UMLXElement =
 			{
 				Fragments._UMLXElement__OclAny /* 0 */,
 				Fragments._UMLXElement__OclElement /* 1 */,
@@ -707,7 +703,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __UMLXElement = { 1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _UMLXModel =
+		private static final @NonNull FlatFragment @NonNull [] _UMLXModel =
 			{
 				Fragments._UMLXModel__OclAny /* 0 */,
 				Fragments._UMLXModel__OclElement /* 1 */,
@@ -716,7 +712,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __UMLXModel = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _UMLXNamedElement =
+		private static final @NonNull FlatFragment @NonNull [] _UMLXNamedElement =
 			{
 				Fragments._UMLXNamedElement__OclAny /* 0 */,
 				Fragments._UMLXNamedElement__OclElement /* 1 */,
@@ -725,7 +721,7 @@ public class UMLXTables extends AbstractTables
 			};
 		private static final int @NonNull [] __UMLXNamedElement = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _UMLXTypedElement =
+		private static final @NonNull FlatFragment @NonNull [] _UMLXTypedElement =
 			{
 				Fragments._UMLXTypedElement__OclAny /* 0 */,
 				Fragments._UMLXTypedElement__OclElement /* 1 */,
@@ -778,8 +774,8 @@ public class UMLXTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDiagram__RelDiagram = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDiagram__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelDiagram__RelDiagram = {};
+		private static final @NonNull Operation @NonNull [] _RelDiagram__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -796,7 +792,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDiagram__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelDiagram__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -809,11 +805,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDiagram__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDiagram__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelDiagram__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelDiagram__UMLXNamedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDomainNode__RelDomainNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDomainNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelDomainNode__RelDomainNode = {};
+		private static final @NonNull Operation @NonNull [] _RelDomainNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -830,7 +826,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDomainNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelDomainNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -843,11 +839,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDomainNode__RelNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelDomainNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelDomainNode__RelNode = {};
+		private static final @NonNull Operation @NonNull [] _RelDomainNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelEdge__RelEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelEdge__RelEdge = {};
+		private static final @NonNull Operation @NonNull [] _RelEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -864,7 +860,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -877,10 +873,10 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelEdge__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelEdge__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationEdge__RelInvocationEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelInvocationEdge__RelInvocationEdge = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -897,7 +893,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelInvocationEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -910,11 +906,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationEdge__RelEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationEdge__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationEdge__RelEdge = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationEdge__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationNode__RelInvocationNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelInvocationNode__RelInvocationNode = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -931,7 +927,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelInvocationNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -944,11 +940,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationNode__RelNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelInvocationNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationNode__RelNode = {};
+		private static final @NonNull Operation @NonNull [] _RelInvocationNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelNode__RelNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelNode__RelNode = {};
+		private static final @NonNull Operation @NonNull [] _RelNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -965,7 +961,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -978,10 +974,10 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternEdge__RelPatternEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelPatternEdge__RelPatternEdge = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -998,7 +994,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelPatternEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1011,13 +1007,13 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternEdge__RelEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternEdge__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternEdge__RelEdge = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternEdge__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__RelPatternNode = {
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__RelPatternNode = {
 			UMLXTables.Operations._RelPatternNode__isExpression /* isExpression() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1034,7 +1030,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1047,13 +1043,13 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__RelNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__UMLXNamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RelPatternNode__UMLXTypedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__RelNode = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RelPatternNode__UMLXTypedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__TxDiagram = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxDiagram__TxDiagram = {};
+		private static final @NonNull Operation @NonNull [] _TxDiagram__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1070,7 +1066,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxDiagram__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1083,11 +1079,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxDiagram__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxDiagram__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxDiagram__UMLXNamedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__TxKeyNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxKeyNode__TxKeyNode = {};
+		private static final @NonNull Operation @NonNull [] _TxKeyNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1104,7 +1100,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxKeyNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1117,11 +1113,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxKeyNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxKeyNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxKeyNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1138,7 +1134,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1151,10 +1147,10 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPackageNode__TxPackageNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPackageNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxPackageNode__TxPackageNode = {};
+		private static final @NonNull Operation @NonNull [] _TxPackageNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1171,7 +1167,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPackageNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxPackageNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1184,11 +1180,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPackageNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPackageNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxPackageNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxPackageNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__TxParameterNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__TxParameterNode = {};
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1205,7 +1201,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1218,13 +1214,13 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__UMLXNamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxParameterNode__UMLXTypedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxParameterNode__UMLXTypedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPartNode__TxPartNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPartNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxPartNode__TxPartNode = {};
+		private static final @NonNull Operation @NonNull [] _TxPartNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1241,7 +1237,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPartNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxPartNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1254,11 +1250,11 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPartNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxPartNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxPartNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxPartNode__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__TxQueryNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__TxQueryNode = {};
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1275,7 +1271,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1288,13 +1284,13 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__UMLXNamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxQueryNode__UMLXTypedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxQueryNode__UMLXTypedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__TxTypedModelNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__TxTypedModelNode = {};
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1311,7 +1307,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1324,12 +1320,12 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__TxNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TxTypedModelNode__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__TxNode = {};
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _TxTypedModelNode__UMLXNamedElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXElement__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _UMLXElement__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1346,7 +1342,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _UMLXElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1360,8 +1356,8 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXModel__UMLXModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXModel__OclAny = {
+		private static final @NonNull Operation @NonNull [] _UMLXModel__UMLXModel = {};
+		private static final @NonNull Operation @NonNull [] _UMLXModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1378,7 +1374,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXModel__OclElement = {
+		private static final @NonNull Operation @NonNull [] _UMLXModel__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1391,10 +1387,10 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXModel__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXModel__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXNamedElement__UMLXNamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXNamedElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _UMLXNamedElement__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXNamedElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1411,7 +1407,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXNamedElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _UMLXNamedElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1424,10 +1420,10 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXNamedElement__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXNamedElement__UMLXElement = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXTypedElement__UMLXTypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXTypedElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _UMLXTypedElement__UMLXTypedElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXTypedElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1444,7 +1440,7 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXTypedElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _UMLXTypedElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1457,8 +1453,8 @@ public class UMLXTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXTypedElement__UMLXElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UMLXTypedElement__UMLXNamedElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXTypedElement__UMLXElement = {};
+		private static final @NonNull Operation @NonNull [] _UMLXTypedElement__UMLXNamedElement = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -1602,7 +1598,7 @@ public class UMLXTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelDiagram = {
+		private static final @NonNull Property @NonNull [] _RelDiagram = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelDiagram__isAbstract,
 			UMLXTables.Properties._RelDiagram__isTop,
@@ -1614,7 +1610,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._RelDiagram__owningTxDiagram
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelDomainNode = {
+		private static final @NonNull Property @NonNull [] _RelDomainNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelDomainNode__isEnforced,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1625,13 +1621,13 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._RelDomainNode__referredTxTypedModelNode
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelEdge = {
+		private static final @NonNull Property @NonNull [] _RelEdge = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelInvocationEdge = {
+		private static final @NonNull Property @NonNull [] _RelInvocationEdge = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelInvocationEdge__invokingRelPatternNode,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1640,7 +1636,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._RelInvocationEdge__referredRelPatternNode
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelInvocationNode = {
+		private static final @NonNull Property @NonNull [] _RelInvocationNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelInvocationNode__isThen,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1650,13 +1646,13 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._RelInvocationNode__referredRelDiagram
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelNode = {
+		private static final @NonNull Property @NonNull [] _RelNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelPatternEdge = {
+		private static final @NonNull Property @NonNull [] _RelPatternEdge = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1667,7 +1663,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._RelPatternEdge__target
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RelPatternNode = {
+		private static final @NonNull Property @NonNull [] _RelPatternNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._RelPatternNode__incoming,
 			UMLXTables.Properties._RelPatternNode__initExpressionLines,
@@ -1687,7 +1683,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxDiagram = {
+		private static final @NonNull Property @NonNull [] _TxDiagram = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1700,7 +1696,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._TxDiagram__package
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxKeyNode = {
+		private static final @NonNull Property @NonNull [] _TxKeyNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1709,13 +1705,13 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._TxKeyNode__referredEClass
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxNode = {
+		private static final @NonNull Property @NonNull [] _TxNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxPackageNode = {
+		private static final @NonNull Property @NonNull [] _TxPackageNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxPackageNode__importAliases,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1724,7 +1720,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._TxPackageNode__referredEPackage
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxParameterNode = {
+		private static final @NonNull Property @NonNull [] _TxParameterNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._UMLXTypedElement__isMany,
 			UMLXTables.Properties._UMLXTypedElement__isNullFree,
@@ -1738,7 +1734,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxPartNode = {
+		private static final @NonNull Property @NonNull [] _TxPartNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxPartNode__isOpposite,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -1747,7 +1743,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._TxPartNode__referredEStructuralFeature
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxQueryNode = {
+		private static final @NonNull Property @NonNull [] _TxQueryNode = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxQueryNode__initExpressionLines,
 			UMLXTables.Properties._UMLXTypedElement__isMany,
@@ -1763,7 +1759,7 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TxTypedModelNode = {
+		private static final @NonNull Property @NonNull [] _TxTypedModelNode = {
 			UMLXTables.Properties._TxTypedModelNode__check,
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._TxTypedModelNode__dependsOns,
@@ -1776,27 +1772,27 @@ public class UMLXTables extends AbstractTables
 			UMLXTables.Properties._TxTypedModelNode__usedTxPackageNodes
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _UMLXElement = {
+		private static final @NonNull Property @NonNull [] _UMLXElement = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _UMLXModel = {
+		private static final @NonNull Property @NonNull [] _UMLXModel = {
 			UMLXTables.Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			UMLXTables.Properties._UMLXModel__ownedTxDiagrams
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _UMLXNamedElement = {
+		private static final @NonNull Property @NonNull [] _UMLXNamedElement = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _UMLXTypedElement = {
+		private static final @NonNull Property @NonNull [] _UMLXTypedElement = {
 			UMLXTables.Properties._UMLXElement__comments,
 			UMLXTables.Properties._UMLXTypedElement__isMany,
 			UMLXTables.Properties._UMLXTypedElement__isNullFree,

@@ -22,20 +22,16 @@ package example2.classes;
 // import example2.classes.ClassesPackage;
 // import example2.classes.ClassesTables;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatClass;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
@@ -54,14 +50,14 @@ public class ClassesTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(ClassesPackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(ClassesPackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -118,23 +114,23 @@ public class ClassesTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _Argument = new EcoreExecutorType(ClassesPackage.Literals.ARGUMENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CallExp = new EcoreExecutorType(ClassesPackage.Literals.CALL_EXP, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Class = new EcoreExecutorType(ClassesPackage.Literals.CLASS, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Element = new EcoreExecutorType(ClassesPackage.Literals.ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _NamedElement = new EcoreExecutorType(ClassesPackage.Literals.NAMED_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Namespace = new EcoreExecutorType(ClassesPackage.Literals.NAMESPACE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Operation = new EcoreExecutorType(ClassesPackage.Literals.OPERATION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _OperationCallExp = new EcoreExecutorType(ClassesPackage.Literals.OPERATION_CALL_EXP, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Package = new EcoreExecutorType(ClassesPackage.Literals.PACKAGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Parameter = new EcoreExecutorType(ClassesPackage.Literals.PARAMETER, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Property = new EcoreExecutorType(ClassesPackage.Literals.PROPERTY, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _PropertyCallExp = new EcoreExecutorType(ClassesPackage.Literals.PROPERTY_CALL_EXP, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Root = new EcoreExecutorType(ClassesPackage.Literals.ROOT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TypedElement = new EcoreExecutorType(ClassesPackage.Literals.TYPED_ELEMENT, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Visitable = new EcoreExecutorType(ClassesPackage.Literals.VISITABLE, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Argument = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ARGUMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CALL_EXP, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Class = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CLASS, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Element = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Namespace = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMESPACE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Operation = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION_CALL_EXP, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Package = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PACKAGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Parameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PARAMETER, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Property = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY_CALL_EXP, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Root = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ROOT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.TYPED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Visitable = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.VISITABLE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Argument,
 			_CallExp,
 			_Class,
@@ -156,7 +152,7 @@ public class ClassesTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -175,106 +171,106 @@ public class ClassesTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _Argument__Argument = new ExecutorFragment(Types._Argument, ClassesTables.Types._Argument);
-		private static final @NonNull ExecutorFragment _Argument__Element = new ExecutorFragment(Types._Argument, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Argument__NamedElement = new ExecutorFragment(Types._Argument, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Argument__OclAny = new ExecutorFragment(Types._Argument, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Argument__OclElement = new ExecutorFragment(Types._Argument, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Argument__Visitable = new ExecutorFragment(Types._Argument, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Argument__Argument = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Argument);
+		private static final @NonNull FlatFragment _Argument__Element = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Argument__NamedElement = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Argument__OclAny = LIBRARY.createFragment(Types._Argument, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Argument__OclElement = LIBRARY.createFragment(Types._Argument, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Argument__Visitable = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _CallExp__CallExp = new ExecutorFragment(Types._CallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull ExecutorFragment _CallExp__Element = new ExecutorFragment(Types._CallExp, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CallExp__OclAny = new ExecutorFragment(Types._CallExp, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CallExp__OclElement = new ExecutorFragment(Types._CallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CallExp__TypedElement = new ExecutorFragment(Types._CallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _CallExp__Visitable = new ExecutorFragment(Types._CallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _CallExp__CallExp = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._CallExp);
+		private static final @NonNull FlatFragment _CallExp__Element = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _CallExp__OclAny = LIBRARY.createFragment(Types._CallExp, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CallExp__OclElement = LIBRARY.createFragment(Types._CallExp, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CallExp__TypedElement = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _CallExp__Visitable = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Class__Class = new ExecutorFragment(Types._Class, ClassesTables.Types._Class);
-		private static final @NonNull ExecutorFragment _Class__Element = new ExecutorFragment(Types._Class, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Class__NamedElement = new ExecutorFragment(Types._Class, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Class__OclAny = new ExecutorFragment(Types._Class, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Class__OclElement = new ExecutorFragment(Types._Class, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Class__Visitable = new ExecutorFragment(Types._Class, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Class__Class = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Class);
+		private static final @NonNull FlatFragment _Class__Element = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Class__NamedElement = LIBRARY.createFragment(Types._Class, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Class__OclAny = LIBRARY.createFragment(Types._Class, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Class__OclElement = LIBRARY.createFragment(Types._Class, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Class__Visitable = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Element__Element = new ExecutorFragment(Types._Element, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Element__OclAny = new ExecutorFragment(Types._Element, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Element__OclElement = new ExecutorFragment(Types._Element, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Element__Visitable = new ExecutorFragment(Types._Element, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Element__Element = LIBRARY.createFragment(Types._Element, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Element__OclAny = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Element__OclElement = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Element__Visitable = LIBRARY.createFragment(Types._Element, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _NamedElement__Element = new ExecutorFragment(Types._NamedElement, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NamedElement__NamedElement = new ExecutorFragment(Types._NamedElement, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _NamedElement__OclAny = new ExecutorFragment(Types._NamedElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NamedElement__OclElement = new ExecutorFragment(Types._NamedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NamedElement__Visitable = new ExecutorFragment(Types._NamedElement, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _NamedElement__Element = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _NamedElement__OclAny = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NamedElement__OclElement = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _NamedElement__Visitable = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Namespace__Element = new ExecutorFragment(Types._Namespace, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Namespace__Namespace = new ExecutorFragment(Types._Namespace, ClassesTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _Namespace__OclAny = new ExecutorFragment(Types._Namespace, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Namespace__OclElement = new ExecutorFragment(Types._Namespace, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Namespace__Visitable = new ExecutorFragment(Types._Namespace, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Namespace__Element = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Namespace__Namespace = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Namespace__OclAny = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Namespace__OclElement = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Namespace__Visitable = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Operation__Element = new ExecutorFragment(Types._Operation, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Operation__NamedElement = new ExecutorFragment(Types._Operation, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Operation__OclAny = new ExecutorFragment(Types._Operation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Operation__OclElement = new ExecutorFragment(Types._Operation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Operation__Operation = new ExecutorFragment(Types._Operation, ClassesTables.Types._Operation);
-		private static final @NonNull ExecutorFragment _Operation__TypedElement = new ExecutorFragment(Types._Operation, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _Operation__Visitable = new ExecutorFragment(Types._Operation, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Operation__Element = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Operation__NamedElement = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Operation__OclAny = LIBRARY.createFragment(Types._Operation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Operation__OclElement = LIBRARY.createFragment(Types._Operation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Operation__Operation = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Operation);
+		private static final @NonNull FlatFragment _Operation__TypedElement = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _Operation__Visitable = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _OperationCallExp__CallExp = new ExecutorFragment(Types._OperationCallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull ExecutorFragment _OperationCallExp__Element = new ExecutorFragment(Types._OperationCallExp, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationCallExp__OclAny = new ExecutorFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationCallExp__OclElement = new ExecutorFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationCallExp__OperationCallExp = new ExecutorFragment(Types._OperationCallExp, ClassesTables.Types._OperationCallExp);
-		private static final @NonNull ExecutorFragment _OperationCallExp__TypedElement = new ExecutorFragment(Types._OperationCallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _OperationCallExp__Visitable = new ExecutorFragment(Types._OperationCallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _OperationCallExp__CallExp = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._CallExp);
+		private static final @NonNull FlatFragment _OperationCallExp__Element = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationCallExp__OclAny = LIBRARY.createFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationCallExp__OclElement = LIBRARY.createFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationCallExp__OperationCallExp = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._OperationCallExp);
+		private static final @NonNull FlatFragment _OperationCallExp__TypedElement = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _OperationCallExp__Visitable = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Package__Element = new ExecutorFragment(Types._Package, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Package__NamedElement = new ExecutorFragment(Types._Package, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Package__Namespace = new ExecutorFragment(Types._Package, ClassesTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _Package__OclAny = new ExecutorFragment(Types._Package, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Package__OclElement = new ExecutorFragment(Types._Package, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Package__Package = new ExecutorFragment(Types._Package, ClassesTables.Types._Package);
-		private static final @NonNull ExecutorFragment _Package__Visitable = new ExecutorFragment(Types._Package, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Package__Element = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Package__NamedElement = LIBRARY.createFragment(Types._Package, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Package__Namespace = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Package__OclAny = LIBRARY.createFragment(Types._Package, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Package__OclElement = LIBRARY.createFragment(Types._Package, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Package__Package = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Package);
+		private static final @NonNull FlatFragment _Package__Visitable = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Parameter__Element = new ExecutorFragment(Types._Parameter, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Parameter__NamedElement = new ExecutorFragment(Types._Parameter, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Parameter__OclAny = new ExecutorFragment(Types._Parameter, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Parameter__OclElement = new ExecutorFragment(Types._Parameter, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Parameter__Parameter = new ExecutorFragment(Types._Parameter, ClassesTables.Types._Parameter);
-		private static final @NonNull ExecutorFragment _Parameter__Visitable = new ExecutorFragment(Types._Parameter, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Parameter__Element = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Parameter__NamedElement = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Parameter__OclAny = LIBRARY.createFragment(Types._Parameter, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Parameter__OclElement = LIBRARY.createFragment(Types._Parameter, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Parameter__Parameter = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Parameter);
+		private static final @NonNull FlatFragment _Parameter__Visitable = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Property__Element = new ExecutorFragment(Types._Property, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Property__NamedElement = new ExecutorFragment(Types._Property, ClassesTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Property__OclAny = new ExecutorFragment(Types._Property, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Property__OclElement = new ExecutorFragment(Types._Property, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Property__Property = new ExecutorFragment(Types._Property, ClassesTables.Types._Property);
-		private static final @NonNull ExecutorFragment _Property__TypedElement = new ExecutorFragment(Types._Property, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _Property__Visitable = new ExecutorFragment(Types._Property, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Property__Element = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Property__NamedElement = LIBRARY.createFragment(Types._Property, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Property__OclAny = LIBRARY.createFragment(Types._Property, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Property__OclElement = LIBRARY.createFragment(Types._Property, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Property__Property = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Property);
+		private static final @NonNull FlatFragment _Property__TypedElement = LIBRARY.createFragment(Types._Property, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _Property__Visitable = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _PropertyCallExp__CallExp = new ExecutorFragment(Types._PropertyCallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__Element = new ExecutorFragment(Types._PropertyCallExp, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__OclAny = new ExecutorFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__OclElement = new ExecutorFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__PropertyCallExp = new ExecutorFragment(Types._PropertyCallExp, ClassesTables.Types._PropertyCallExp);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__TypedElement = new ExecutorFragment(Types._PropertyCallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _PropertyCallExp__Visitable = new ExecutorFragment(Types._PropertyCallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _PropertyCallExp__CallExp = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._CallExp);
+		private static final @NonNull FlatFragment _PropertyCallExp__Element = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _PropertyCallExp__OclAny = LIBRARY.createFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _PropertyCallExp__OclElement = LIBRARY.createFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _PropertyCallExp__PropertyCallExp = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._PropertyCallExp);
+		private static final @NonNull FlatFragment _PropertyCallExp__TypedElement = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _PropertyCallExp__Visitable = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Root__Element = new ExecutorFragment(Types._Root, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Root__OclAny = new ExecutorFragment(Types._Root, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Root__OclElement = new ExecutorFragment(Types._Root, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Root__Root = new ExecutorFragment(Types._Root, ClassesTables.Types._Root);
-		private static final @NonNull ExecutorFragment _Root__Visitable = new ExecutorFragment(Types._Root, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Root__Element = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Root__OclAny = LIBRARY.createFragment(Types._Root, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Root__OclElement = LIBRARY.createFragment(Types._Root, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Root__Root = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Root);
+		private static final @NonNull FlatFragment _Root__Visitable = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _TypedElement__Element = new ExecutorFragment(Types._TypedElement, ClassesTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TypedElement__OclAny = new ExecutorFragment(Types._TypedElement, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TypedElement__OclElement = new ExecutorFragment(Types._TypedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TypedElement__TypedElement = new ExecutorFragment(Types._TypedElement, ClassesTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _TypedElement__Visitable = new ExecutorFragment(Types._TypedElement, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _TypedElement__Element = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _TypedElement__OclAny = LIBRARY.createFragment(Types._TypedElement, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TypedElement__OclElement = LIBRARY.createFragment(Types._TypedElement, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TypedElement__TypedElement = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._TypedElement);
+		private static final @NonNull FlatFragment _TypedElement__Visitable = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._Visitable);
 
-		private static final @NonNull ExecutorFragment _Visitable__OclAny = new ExecutorFragment(Types._Visitable, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Visitable__OclElement = new ExecutorFragment(Types._Visitable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Visitable__Visitable = new ExecutorFragment(Types._Visitable, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Visitable__OclAny = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Visitable__OclElement = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Visitable__Visitable = LIBRARY.createFragment(Types._Visitable, ClassesTables.Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -345,44 +341,44 @@ public class ClassesTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _Argument__OperationCallExp__ownedArguments = new ExecutorPropertyWithImplementation("OperationCallExp", Types._Argument, 0, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS));
+		public static final @NonNull Property _Argument__OperationCallExp__ownedArguments = LIBRARY.createOppositeProperty("OperationCallExp", Types._Argument, 0, ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
 
-		public static final @NonNull ExecutorProperty _CallExp__ownedCallExp = new EcoreExecutorProperty(ClassesPackage.Literals.CALL_EXP__OWNED_CALL_EXP, Types._CallExp, 0);
-		public static final @NonNull ExecutorProperty _CallExp__owningSource = new EcoreExecutorProperty(ClassesPackage.Literals.CALL_EXP__OWNING_SOURCE, Types._CallExp, 1);
-		public static final @NonNull ExecutorProperty _CallExp__Operation__ownedExpressions = new ExecutorPropertyWithImplementation("Operation", Types._CallExp, 2, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS));
+		public static final @NonNull Property _CallExp__ownedCallExp = LIBRARY.createProperty(ClassesPackage.Literals.CALL_EXP__OWNED_CALL_EXP, Types._CallExp, 0);
+		public static final @NonNull Property _CallExp__owningSource = LIBRARY.createProperty(ClassesPackage.Literals.CALL_EXP__OWNING_SOURCE, Types._CallExp, 1);
+		public static final @NonNull Property _CallExp__Operation__ownedExpressions = LIBRARY.createOppositeProperty("Operation", Types._CallExp, 2, ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS);
 
-		public static final @NonNull ExecutorProperty _Class__ownedOperations = new EcoreExecutorProperty(ClassesPackage.Literals.CLASS__OWNED_OPERATIONS, Types._Class, 0);
-		public static final @NonNull ExecutorProperty _Class__ownedProperties = new EcoreExecutorProperty(ClassesPackage.Literals.CLASS__OWNED_PROPERTIES, Types._Class, 1);
-		public static final @NonNull ExecutorProperty _Class__superClass = new EcoreExecutorProperty(ClassesPackage.Literals.CLASS__SUPER_CLASS, Types._Class, 2);
-		public static final @NonNull ExecutorProperty _Class__Class__superClass = new ExecutorPropertyWithImplementation("Class", Types._Class, 3, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.CLASS__SUPER_CLASS));
-		public static final @NonNull ExecutorProperty _Class__Package__ownedClasses = new ExecutorPropertyWithImplementation("Package", Types._Class, 4, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.PACKAGE__OWNED_CLASSES));
-		public static final @NonNull ExecutorProperty _Class__TypedElement__type = new ExecutorPropertyWithImplementation("TypedElement", Types._Class, 5, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.TYPED_ELEMENT__TYPE));
+		public static final @NonNull Property _Class__ownedOperations = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__OWNED_OPERATIONS, Types._Class, 0);
+		public static final @NonNull Property _Class__ownedProperties = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__OWNED_PROPERTIES, Types._Class, 1);
+		public static final @NonNull Property _Class__superClass = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__SUPER_CLASS, Types._Class, 2);
+		public static final @NonNull Property _Class__Class__superClass = LIBRARY.createOppositeProperty("Class", Types._Class, 3, ClassesPackage.Literals.CLASS__SUPER_CLASS);
+		public static final @NonNull Property _Class__Package__ownedClasses = LIBRARY.createOppositeProperty("Package", Types._Class, 4, ClassesPackage.Literals.PACKAGE__OWNED_CLASSES);
+		public static final @NonNull Property _Class__TypedElement__type = LIBRARY.createOppositeProperty("TypedElement", Types._Class, 5, ClassesPackage.Literals.TYPED_ELEMENT__TYPE);
 
-		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(ClassesPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
+		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(ClassesPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
 
-		public static final @NonNull ExecutorProperty _Operation__ownedExpressions = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS, Types._Operation, 0);
-		public static final @NonNull ExecutorProperty _Operation__ownedParameters = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS, Types._Operation, 1);
-		public static final @NonNull ExecutorProperty _Operation__Class__ownedOperations = new ExecutorPropertyWithImplementation("Class", Types._Operation, 2, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.CLASS__OWNED_OPERATIONS));
-		public static final @NonNull ExecutorProperty _Operation__OperationCallExp__referredOperation = new ExecutorPropertyWithImplementation("OperationCallExp", Types._Operation, 3, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION));
+		public static final @NonNull Property _Operation__ownedExpressions = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS, Types._Operation, 0);
+		public static final @NonNull Property _Operation__ownedParameters = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS, Types._Operation, 1);
+		public static final @NonNull Property _Operation__Class__ownedOperations = LIBRARY.createOppositeProperty("Class", Types._Operation, 2, ClassesPackage.Literals.CLASS__OWNED_OPERATIONS);
+		public static final @NonNull Property _Operation__OperationCallExp__referredOperation = LIBRARY.createOppositeProperty("OperationCallExp", Types._Operation, 3, ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION);
 
-		public static final @NonNull ExecutorProperty _OperationCallExp__ownedArguments = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS, Types._OperationCallExp, 0);
-		public static final @NonNull ExecutorProperty _OperationCallExp__referredOperation = new EcoreExecutorProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, Types._OperationCallExp, 1);
+		public static final @NonNull Property _OperationCallExp__ownedArguments = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS, Types._OperationCallExp, 0);
+		public static final @NonNull Property _OperationCallExp__referredOperation = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, Types._OperationCallExp, 1);
 
-		public static final @NonNull ExecutorProperty _Package__ownedClasses = new EcoreExecutorProperty(ClassesPackage.Literals.PACKAGE__OWNED_CLASSES, Types._Package, 0);
-		public static final @NonNull ExecutorProperty _Package__ownedPackages = new EcoreExecutorProperty(ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES, Types._Package, 1);
-		public static final @NonNull ExecutorProperty _Package__Package__ownedPackages = new ExecutorPropertyWithImplementation("Package", Types._Package, 2, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES));
-		public static final @NonNull ExecutorProperty _Package__Root__ownedPackages = new ExecutorPropertyWithImplementation("Root", Types._Package, 3, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.ROOT__OWNED_PACKAGES));
+		public static final @NonNull Property _Package__ownedClasses = LIBRARY.createProperty(ClassesPackage.Literals.PACKAGE__OWNED_CLASSES, Types._Package, 0);
+		public static final @NonNull Property _Package__ownedPackages = LIBRARY.createProperty(ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES, Types._Package, 1);
+		public static final @NonNull Property _Package__Package__ownedPackages = LIBRARY.createOppositeProperty("Package", Types._Package, 2, ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES);
+		public static final @NonNull Property _Package__Root__ownedPackages = LIBRARY.createOppositeProperty("Root", Types._Package, 3, ClassesPackage.Literals.ROOT__OWNED_PACKAGES);
 
-		public static final @NonNull ExecutorProperty _Parameter__Operation__ownedParameters = new ExecutorPropertyWithImplementation("Operation", Types._Parameter, 0, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS));
+		public static final @NonNull Property _Parameter__Operation__ownedParameters = LIBRARY.createOppositeProperty("Operation", Types._Parameter, 0, ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS);
 
-		public static final @NonNull ExecutorProperty _Property__Class__ownedProperties = new ExecutorPropertyWithImplementation("Class", Types._Property, 0, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.CLASS__OWNED_PROPERTIES));
-		public static final @NonNull ExecutorProperty _Property__PropertyCallExp__referredProperty = new ExecutorPropertyWithImplementation("PropertyCallExp", Types._Property, 1, new EcoreLibraryOppositeProperty(ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY));
+		public static final @NonNull Property _Property__Class__ownedProperties = LIBRARY.createOppositeProperty("Class", Types._Property, 0, ClassesPackage.Literals.CLASS__OWNED_PROPERTIES);
+		public static final @NonNull Property _Property__PropertyCallExp__referredProperty = LIBRARY.createOppositeProperty("PropertyCallExp", Types._Property, 1, ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 
-		public static final @NonNull ExecutorProperty _PropertyCallExp__referredProperty = new EcoreExecutorProperty(ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._PropertyCallExp, 0);
+		public static final @NonNull Property _PropertyCallExp__referredProperty = LIBRARY.createProperty(ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._PropertyCallExp, 0);
 
-		public static final @NonNull ExecutorProperty _Root__ownedPackages = new EcoreExecutorProperty(ClassesPackage.Literals.ROOT__OWNED_PACKAGES, Types._Root, 0);
+		public static final @NonNull Property _Root__ownedPackages = LIBRARY.createProperty(ClassesPackage.Literals.ROOT__OWNED_PACKAGES, Types._Root, 0);
 
-		public static final @NonNull ExecutorProperty _TypedElement__type = new EcoreExecutorProperty(ClassesPackage.Literals.TYPED_ELEMENT__TYPE, Types._TypedElement, 0);
+		public static final @NonNull Property _TypedElement__type = LIBRARY.createProperty(ClassesPackage.Literals.TYPED_ELEMENT__TYPE, Types._TypedElement, 0);
 		static {
 			Init.initEnd();
 		}
@@ -402,7 +398,7 @@ public class ClassesTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Argument =
+		private static final @NonNull FlatFragment @NonNull [] _Argument =
 			{
 				Fragments._Argument__OclAny /* 0 */,
 				Fragments._Argument__OclElement /* 1 */,
@@ -413,7 +409,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Argument = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CallExp =
+		private static final @NonNull FlatFragment @NonNull [] _CallExp =
 			{
 				Fragments._CallExp__OclAny /* 0 */,
 				Fragments._CallExp__OclElement /* 1 */,
@@ -424,7 +420,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CallExp = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Class =
+		private static final @NonNull FlatFragment @NonNull [] _Class =
 			{
 				Fragments._Class__OclAny /* 0 */,
 				Fragments._Class__OclElement /* 1 */,
@@ -435,7 +431,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Class = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Element =
+		private static final @NonNull FlatFragment @NonNull [] _Element =
 			{
 				Fragments._Element__OclAny /* 0 */,
 				Fragments._Element__OclElement /* 1 */,
@@ -444,7 +440,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Element = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NamedElement =
+		private static final @NonNull FlatFragment @NonNull [] _NamedElement =
 			{
 				Fragments._NamedElement__OclAny /* 0 */,
 				Fragments._NamedElement__OclElement /* 1 */,
@@ -454,7 +450,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NamedElement = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Namespace =
+		private static final @NonNull FlatFragment @NonNull [] _Namespace =
 			{
 				Fragments._Namespace__OclAny /* 0 */,
 				Fragments._Namespace__OclElement /* 1 */,
@@ -464,7 +460,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Namespace = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Operation =
+		private static final @NonNull FlatFragment @NonNull [] _Operation =
 			{
 				Fragments._Operation__OclAny /* 0 */,
 				Fragments._Operation__OclElement /* 1 */,
@@ -476,7 +472,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Operation = { 1,1,1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationCallExp =
+		private static final @NonNull FlatFragment @NonNull [] _OperationCallExp =
 			{
 				Fragments._OperationCallExp__OclAny /* 0 */,
 				Fragments._OperationCallExp__OclElement /* 1 */,
@@ -488,7 +484,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationCallExp = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Package =
+		private static final @NonNull FlatFragment @NonNull [] _Package =
 			{
 				Fragments._Package__OclAny /* 0 */,
 				Fragments._Package__OclElement /* 1 */,
@@ -500,7 +496,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Package = { 1,1,1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Parameter =
+		private static final @NonNull FlatFragment @NonNull [] _Parameter =
 			{
 				Fragments._Parameter__OclAny /* 0 */,
 				Fragments._Parameter__OclElement /* 1 */,
@@ -511,7 +507,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Parameter = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Property =
+		private static final @NonNull FlatFragment @NonNull [] _Property =
 			{
 				Fragments._Property__OclAny /* 0 */,
 				Fragments._Property__OclElement /* 1 */,
@@ -523,7 +519,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Property = { 1,1,1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _PropertyCallExp =
+		private static final @NonNull FlatFragment @NonNull [] _PropertyCallExp =
 			{
 				Fragments._PropertyCallExp__OclAny /* 0 */,
 				Fragments._PropertyCallExp__OclElement /* 1 */,
@@ -535,7 +531,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __PropertyCallExp = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Root =
+		private static final @NonNull FlatFragment @NonNull [] _Root =
 			{
 				Fragments._Root__OclAny /* 0 */,
 				Fragments._Root__OclElement /* 1 */,
@@ -545,7 +541,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Root = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TypedElement =
+		private static final @NonNull FlatFragment @NonNull [] _TypedElement =
 			{
 				Fragments._TypedElement__OclAny /* 0 */,
 				Fragments._TypedElement__OclElement /* 1 */,
@@ -555,7 +551,7 @@ public class ClassesTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TypedElement = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Visitable =
+		private static final @NonNull FlatFragment @NonNull [] _Visitable =
 			{
 				Fragments._Visitable__OclAny /* 0 */,
 				Fragments._Visitable__OclElement /* 1 */,
@@ -601,10 +597,10 @@ public class ClassesTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__Argument = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Argument__Argument = {};
+		private static final @NonNull Operation @NonNull [] _Argument__Element = {};
+		private static final @NonNull Operation @NonNull [] _Argument__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Argument__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -621,7 +617,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Argument__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -634,11 +630,11 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Argument__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Argument__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__CallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CallExp__CallExp = {};
+		private static final @NonNull Operation @NonNull [] _CallExp__Element = {};
+		private static final @NonNull Operation @NonNull [] _CallExp__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -655,7 +651,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CallExp__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -668,13 +664,13 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CallExp__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _CallExp__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _CallExp__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__Class = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Class__Class = {};
+		private static final @NonNull Operation @NonNull [] _Class__Element = {};
+		private static final @NonNull Operation @NonNull [] _Class__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Class__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -691,7 +687,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Class__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -704,10 +700,10 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Class__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Class__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Element__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Element__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Element__Element = {};
+		private static final @NonNull Operation @NonNull [] _Element__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -724,7 +720,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Element__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Element__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -737,11 +733,11 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Element__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Element__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NamedElement__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _NamedElement__Element = {};
+		private static final @NonNull Operation @NonNull [] _NamedElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -758,7 +754,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NamedElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -771,11 +767,11 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _NamedElement__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Namespace__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _Namespace__Element = {};
+		private static final @NonNull Operation @NonNull [] _Namespace__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -792,7 +788,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Namespace__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -805,12 +801,12 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Namespace__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__Operation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Operation__Operation = {};
+		private static final @NonNull Operation @NonNull [] _Operation__Element = {};
+		private static final @NonNull Operation @NonNull [] _Operation__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Operation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -827,7 +823,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Operation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -840,13 +836,13 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Operation__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Operation__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _Operation__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__OperationCallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__CallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__OperationCallExp = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__CallExp = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__Element = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -863,7 +859,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -876,14 +872,14 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallExp__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallExp__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__Package = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Package__Package = {};
+		private static final @NonNull Operation @NonNull [] _Package__Element = {};
+		private static final @NonNull Operation @NonNull [] _Package__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Package__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _Package__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -900,7 +896,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Package__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -913,12 +909,12 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Package__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Package__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__Parameter = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Parameter__Parameter = {};
+		private static final @NonNull Operation @NonNull [] _Parameter__Element = {};
+		private static final @NonNull Operation @NonNull [] _Parameter__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Parameter__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -935,7 +931,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Parameter__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -948,12 +944,12 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Parameter__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Parameter__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__Property = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Property__Property = {};
+		private static final @NonNull Operation @NonNull [] _Property__Element = {};
+		private static final @NonNull Operation @NonNull [] _Property__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Property__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -970,7 +966,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Property__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -983,13 +979,13 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Property__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Property__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _Property__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__PropertyCallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__CallExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__OclAny = {
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__PropertyCallExp = {};
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__CallExp = {};
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__Element = {};
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1006,7 +1002,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__OclElement = {
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1019,12 +1015,12 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyCallExp__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _PropertyCallExp__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Root__Root = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Root__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Root__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Root__Root = {};
+		private static final @NonNull Operation @NonNull [] _Root__Element = {};
+		private static final @NonNull Operation @NonNull [] _Root__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1041,7 +1037,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Root__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Root__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1054,11 +1050,11 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Root__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Root__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__TypedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__Element = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TypedElement__TypedElement = {};
+		private static final @NonNull Operation @NonNull [] _TypedElement__Element = {};
+		private static final @NonNull Operation @NonNull [] _TypedElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1075,7 +1071,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TypedElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1088,10 +1084,10 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedElement__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _TypedElement__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__Visitable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Visitable__Visitable = {};
+		private static final @NonNull Operation @NonNull [] _Visitable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -1108,7 +1104,7 @@ public class ClassesTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Visitable__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -1245,13 +1241,13 @@ public class ClassesTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Argument = {
+		private static final @NonNull Property @NonNull [] _Argument = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CallExp = {
+		private static final @NonNull Property @NonNull [] _CallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._CallExp__ownedCallExp,
@@ -1259,7 +1255,7 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Class = {
+		private static final @NonNull Property @NonNull [] _Class = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1268,23 +1264,23 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._Class__superClass
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Element = {
+		private static final @NonNull Property @NonNull [] _Element = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NamedElement = {
+		private static final @NonNull Property @NonNull [] _NamedElement = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Namespace = {
+		private static final @NonNull Property @NonNull [] _Namespace = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Operation = {
+		private static final @NonNull Property @NonNull [] _Operation = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1293,7 +1289,7 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationCallExp = {
+		private static final @NonNull Property @NonNull [] _OperationCallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._OperationCallExp__ownedArguments,
@@ -1303,7 +1299,7 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Package = {
+		private static final @NonNull Property @NonNull [] _Package = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1311,20 +1307,20 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._Package__ownedPackages
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Parameter = {
+		private static final @NonNull Property @NonNull [] _Parameter = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Property = {
+		private static final @NonNull Property @NonNull [] _Property = {
 			ClassesTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _PropertyCallExp = {
+		private static final @NonNull Property @NonNull [] _PropertyCallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._CallExp__ownedCallExp,
@@ -1333,19 +1329,19 @@ public class ClassesTables extends AbstractTables
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Root = {
+		private static final @NonNull Property @NonNull [] _Root = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._Root__ownedPackages
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TypedElement = {
+		private static final @NonNull Property @NonNull [] _TypedElement = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			ClassesTables.Properties._TypedElement__type
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Visitable = {
+		private static final @NonNull Property @NonNull [] _Visitable = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};

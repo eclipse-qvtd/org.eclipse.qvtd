@@ -54,8 +54,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 		@Override
 		public int compare(@NonNull CompleteClass o1, @NonNull CompleteClass o2) {
-			int d1 = o1.getCompleteInheritance().getDepth();
-			int d2 = o2.getCompleteInheritance().getDepth();
+			int d1 = o1.getFlatClass().getDepth();
+			int d2 = o2.getFlatClass().getDepth();
 			if (d1 != d2) {
 				return d2 - d1;		// Largest first
 			}

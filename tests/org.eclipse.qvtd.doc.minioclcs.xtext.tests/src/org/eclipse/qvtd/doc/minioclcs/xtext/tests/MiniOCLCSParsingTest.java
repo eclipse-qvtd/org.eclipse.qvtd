@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.qvtd.doc.MiniOCLCSStandaloneSetup;
-import org.eclipse.qvtd.doc.minioclcs.RootCS;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.xtext.XtextPackage;

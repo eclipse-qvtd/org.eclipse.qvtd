@@ -20,12 +20,10 @@
 package org.eclipse.qvtd.runtime.qvtruntimelibrary;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
@@ -44,14 +42,14 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(QVTruntimeLibraryPackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTruntimeLibraryPackage.eINSTANCE, null);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -81,11 +79,11 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _Extent = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.EXTENT, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Model = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Transformation = new EcoreExecutorType(QVTruntimeLibraryPackage.Literals.TRANSFORMATION, PACKAGE, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Extent = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.EXTENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Model = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.TRANSFORMATION, PACKAGE, null, 0);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Extent,
 			_Model,
 			_Transformation
@@ -95,7 +93,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -114,17 +112,17 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _Extent__Extent = new ExecutorFragment(Types._Extent, QVTruntimeLibraryTables.Types._Extent);
-		private static final @NonNull ExecutorFragment _Extent__OclAny = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Extent__OclElement = new ExecutorFragment(Types._Extent, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Extent__Extent = LIBRARY.createFragment(Types._Extent, QVTruntimeLibraryTables.Types._Extent);
+		private static final @NonNull FlatFragment _Extent__OclAny = LIBRARY.createFragment(Types._Extent, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Extent__OclElement = LIBRARY.createFragment(Types._Extent, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _Model__Model = new ExecutorFragment(Types._Model, QVTruntimeLibraryTables.Types._Model);
-		private static final @NonNull ExecutorFragment _Model__OclAny = new ExecutorFragment(Types._Model, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Model__OclElement = new ExecutorFragment(Types._Model, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Model__Model = LIBRARY.createFragment(Types._Model, QVTruntimeLibraryTables.Types._Model);
+		private static final @NonNull FlatFragment _Model__OclAny = LIBRARY.createFragment(Types._Model, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Model__OclElement = LIBRARY.createFragment(Types._Model, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull ExecutorFragment _Transformation__OclAny = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Transformation__OclElement = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Transformation__Transformation = new ExecutorFragment(Types._Transformation, QVTruntimeLibraryTables.Types._Transformation);
+		private static final @NonNull FlatFragment _Transformation__OclAny = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Transformation__OclElement = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Transformation__Transformation = LIBRARY.createFragment(Types._Transformation, QVTruntimeLibraryTables.Types._Transformation);
 
 		static {
 			Init.initEnd();
@@ -195,7 +193,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _Extent__elements = new EcoreExecutorProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, Types._Extent, 0);
+		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, Types._Extent, 0);
 		static {
 			Init.initEnd();
 		}
@@ -215,7 +213,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Extent =
+		private static final @NonNull FlatFragment @NonNull [] _Extent =
 			{
 				Fragments._Extent__OclAny /* 0 */,
 				Fragments._Extent__OclElement /* 1 */,
@@ -223,7 +221,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Extent = { 1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Model =
+		private static final @NonNull FlatFragment @NonNull [] _Model =
 			{
 				Fragments._Model__OclAny /* 0 */,
 				Fragments._Model__OclElement /* 1 */,
@@ -231,7 +229,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Model = { 1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
+		private static final @NonNull FlatFragment @NonNull [] _Transformation =
 			{
 				Fragments._Transformation__OclAny /* 0 */,
 				Fragments._Transformation__OclElement /* 1 */,
@@ -265,8 +263,8 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__Extent = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Extent__Extent = {};
+		private static final @NonNull Operation @NonNull [] _Extent__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -283,7 +281,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Extent__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Extent__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -297,8 +295,8 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Model__Model = {};
+		private static final @NonNull Operation @NonNull [] _Model__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -315,7 +313,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Model__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Model__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -329,8 +327,8 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Transformation = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Transformation__Transformation = {};
+		private static final @NonNull Operation @NonNull [] _Transformation__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -347,7 +345,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Transformation__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -395,18 +393,18 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Extent = {
+		private static final @NonNull Property @NonNull [] _Extent = {
 			QVTruntimeLibraryTables.Properties._Extent__elements,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Model = {
+		private static final @NonNull Property @NonNull [] _Model = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Transformation = {
+		private static final @NonNull Property @NonNull [] _Transformation = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};

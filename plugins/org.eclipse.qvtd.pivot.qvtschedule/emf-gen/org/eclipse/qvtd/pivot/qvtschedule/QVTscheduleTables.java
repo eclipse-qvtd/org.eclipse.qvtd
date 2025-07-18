@@ -25,7 +25,14 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Enumeration;
+import org.eclipse.ocl.pivot.EnumerationLiteral;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatClass;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
@@ -34,17 +41,6 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumeration;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorEnumerationLiteral;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
@@ -66,14 +62,14 @@ public class QVTscheduleTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final @NonNull EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(QVTschedulePackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTschedulePackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -211,88 +207,88 @@ public class QVTscheduleTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final @NonNull EcoreExecutorType _AbstractDatum = new EcoreExecutorType(QVTschedulePackage.Literals.ABSTRACT_DATUM, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _ArgumentEdge = new EcoreExecutorType(QVTschedulePackage.Literals.ARGUMENT_EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _BasicPartition = new EcoreExecutorType(QVTschedulePackage.Literals.BASIC_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _BooleanLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CastEdge = new EcoreExecutorType(QVTschedulePackage.Literals.CAST_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ClassDatum = new EcoreExecutorType(QVTschedulePackage.Literals.CLASS_DATUM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Cluster = new EcoreExecutorType(QVTschedulePackage.Literals.CLUSTER, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CollectionClassDatum = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CollectionLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CollectionPartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_PART_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CollectionRangeNode = new EcoreExecutorType(QVTschedulePackage.Literals.COLLECTION_RANGE_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ComposedNode = new EcoreExecutorType(QVTschedulePackage.Literals.COMPOSED_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CompositePartition = new EcoreExecutorType(QVTschedulePackage.Literals.COMPOSITE_PARTITION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _Connection = new EcoreExecutorType(QVTschedulePackage.Literals.CONNECTION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _ConnectionEnd = new EcoreExecutorType(QVTschedulePackage.Literals.CONNECTION_END, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorEnumeration _ConnectionRole = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.CONNECTION_ROLE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CyclicMappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _CyclicPartition = new EcoreExecutorType(QVTschedulePackage.Literals.CYCLIC_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _DependencyEdge = new EcoreExecutorType(QVTschedulePackage.Literals.DEPENDENCY_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _DependencyNode = new EcoreExecutorType(QVTschedulePackage.Literals.DEPENDENCY_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _DispatchRegion = new EcoreExecutorType(QVTschedulePackage.Literals.DISPATCH_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Edge = new EcoreExecutorType(QVTschedulePackage.Literals.EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _EdgeConnection = new EcoreExecutorType(QVTschedulePackage.Literals.EDGE_CONNECTION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _EnumLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.ENUM_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ErrorNode = new EcoreExecutorType(QVTschedulePackage.Literals.ERROR_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ExpressionEdge = new EcoreExecutorType(QVTschedulePackage.Literals.EXPRESSION_EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _IfNode = new EcoreExecutorType(QVTschedulePackage.Literals.IF_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _IncludesEdge = new EcoreExecutorType(QVTschedulePackage.Literals.INCLUDES_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _InputNode = new EcoreExecutorType(QVTschedulePackage.Literals.INPUT_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _IteratedEdge = new EcoreExecutorType(QVTschedulePackage.Literals.ITERATED_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _IteratorNode = new EcoreExecutorType(QVTschedulePackage.Literals.ITERATOR_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _KeyPartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.KEY_PART_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _KeyedValueNode = new EcoreExecutorType(QVTschedulePackage.Literals.KEYED_VALUE_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _LoadingPartition = new EcoreExecutorType(QVTschedulePackage.Literals.LOADING_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _LoadingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.LOADING_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _MapLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.MAP_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _MapPartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.MAP_PART_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _MapPartNode = new EcoreExecutorType(QVTschedulePackage.Literals.MAP_PART_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _MappingNode = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _MappingPartition = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_PARTITION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _MappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_REGION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _MergedPartition = new EcoreExecutorType(QVTschedulePackage.Literals.MERGED_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _NavigableEdge = new EcoreExecutorType(QVTschedulePackage.Literals.NAVIGABLE_EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _NavigationEdge = new EcoreExecutorType(QVTschedulePackage.Literals.NAVIGATION_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Node = new EcoreExecutorType(QVTschedulePackage.Literals.NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _NodeConnection = new EcoreExecutorType(QVTschedulePackage.Literals.NODE_CONNECTION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _NonPartition = new EcoreExecutorType(QVTschedulePackage.Literals.NON_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _NullLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.NULL_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Number = new EcoreExecutorType("Number", PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _NumericLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _OperationCallNode = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_CALL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _OperationNode = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _OperationParameterEdge = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _OperationRegion = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _OperationSelfEdge = new EcoreExecutorType(QVTschedulePackage.Literals.OPERATION_SELF_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Partition = new EcoreExecutorType(QVTschedulePackage.Literals.PARTITION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _PatternTypedNode = new EcoreExecutorType(QVTschedulePackage.Literals.PATTERN_TYPED_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _PatternVariableNode = new EcoreExecutorType(QVTschedulePackage.Literals.PATTERN_VARIABLE_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _PredicateEdge = new EcoreExecutorType(QVTschedulePackage.Literals.PREDICATE_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _PropertyDatum = new EcoreExecutorType(QVTschedulePackage.Literals.PROPERTY_DATUM, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RecursionEdge = new EcoreExecutorType(QVTschedulePackage.Literals.RECURSION_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Region = new EcoreExecutorType(QVTschedulePackage.Literals.REGION, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorEnumeration _Role = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.ROLE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RootPartition = new EcoreExecutorType(QVTschedulePackage.Literals.ROOT_PARTITION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RootRegion = new EcoreExecutorType(QVTschedulePackage.Literals.ROOT_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _RuleRegion = new EcoreExecutorType(QVTschedulePackage.Literals.RULE_REGION, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ScheduleModel = new EcoreExecutorType(QVTschedulePackage.Literals.SCHEDULE_MODEL, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ShadowNode = new EcoreExecutorType(QVTschedulePackage.Literals.SHADOW_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _ShadowPartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.SHADOW_PART_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _StringLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.STRING_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _SuccessEdge = new EcoreExecutorType(QVTschedulePackage.Literals.SUCCESS_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _SuccessNode = new EcoreExecutorType(QVTschedulePackage.Literals.SUCCESS_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Symbolable = new EcoreExecutorType(QVTschedulePackage.Literals.SYMBOLABLE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _TupleLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.TUPLE_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TuplePartEdge = new EcoreExecutorType(QVTschedulePackage.Literals.TUPLE_PART_EDGE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _TypeLiteralNode = new EcoreExecutorType(QVTschedulePackage.Literals.TYPE_LITERAL_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _UnknownNode = new EcoreExecutorType(QVTschedulePackage.Literals.UNKNOWN_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorEnumeration _Utility = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.UTILITY, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _VariableNode = new EcoreExecutorType(QVTschedulePackage.Literals.VARIABLE_NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
-		public static final @NonNull EcoreExecutorType _VerdictRegion = new EcoreExecutorType(QVTschedulePackage.Literals.VERDICT_REGION, PACKAGE, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _AbstractDatum = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ABSTRACT_DATUM, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ArgumentEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ARGUMENT_EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BasicPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.BASIC_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BooleanLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CastEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CAST_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ClassDatum = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CLASS_DATUM, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Cluster = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CLUSTER, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionClassDatum = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COLLECTION_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionPartEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COLLECTION_PART_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionRangeNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COLLECTION_RANGE_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ComposedNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COMPOSED_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CompositePartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.COMPOSITE_PARTITION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Connection = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CONNECTION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ConnectionEnd = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CONNECTION_END, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final @NonNull Enumeration _ConnectionRole = LIBRARY.createEnumeration(QVTschedulePackage.Literals.CONNECTION_ROLE, PACKAGE);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CyclicMappingRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CyclicPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.CYCLIC_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _DependencyEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.DEPENDENCY_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _DependencyNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.DEPENDENCY_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _DispatchRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.DISPATCH_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Edge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _EdgeConnection = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.EDGE_CONNECTION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _EnumLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ENUM_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ErrorNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ERROR_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ExpressionEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.EXPRESSION_EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _IfNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.IF_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _IncludesEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.INCLUDES_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _InputNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.INPUT_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _IteratedEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ITERATED_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _IteratorNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ITERATOR_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _KeyPartEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.KEY_PART_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _KeyedValueNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.KEYED_VALUE_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _LoadingPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.LOADING_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _LoadingRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.LOADING_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MapLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAP_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MapPartEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAP_PART_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MapPartNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAP_PART_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MappingNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAPPING_NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MappingPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAPPING_PARTITION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MappingRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MAPPING_REGION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _MergedPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.MERGED_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NavigableEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NAVIGABLE_EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NavigationEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NAVIGATION_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Node = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NodeConnection = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NODE_CONNECTION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NonPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NON_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NullLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NULL_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Number = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NUMBER, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NumericLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationCallNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.OPERATION_CALL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.OPERATION_NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationParameterEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.OPERATION_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationSelfEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.OPERATION_SELF_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Partition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.PARTITION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PatternTypedNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.PATTERN_TYPED_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PatternVariableNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.PATTERN_VARIABLE_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PredicateEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.PREDICATE_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyDatum = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.PROPERTY_DATUM, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RecursionEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.RECURSION_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Region = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.REGION, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final @NonNull Enumeration _Role = LIBRARY.createEnumeration(QVTschedulePackage.Literals.ROLE, PACKAGE);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RootPartition = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ROOT_PARTITION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RootRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.ROOT_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RuleRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.RULE_REGION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ScheduleModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SCHEDULE_MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ShadowNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SHADOW_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ShadowPartEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SHADOW_PART_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _StringLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.STRING_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SuccessEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SUCCESS_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SuccessNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SUCCESS_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Symbolable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.SYMBOLABLE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TupleLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.TUPLE_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TuplePartEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.TUPLE_PART_EDGE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TypeLiteralNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.TYPE_LITERAL_NODE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UnknownNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.UNKNOWN_NODE, PACKAGE, null, 0);
+		public static final @NonNull Enumeration _Utility = LIBRARY.createEnumeration(QVTschedulePackage.Literals.UTILITY, PACKAGE);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _VariableNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.VARIABLE_NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _VerdictRegion = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTschedulePackage.Literals.VERDICT_REGION, PACKAGE, null, 0);
 
-		private static final @NonNull EcoreExecutorType @NonNull [] types = {
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_AbstractDatum,
 			_ArgumentEdge,
 			_BasicPartition,
@@ -379,7 +375,7 @@ public class QVTscheduleTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -398,615 +394,615 @@ public class QVTscheduleTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull ExecutorFragment _AbstractDatum__AbstractDatum = new ExecutorFragment(Types._AbstractDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull ExecutorFragment _AbstractDatum__Element = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _AbstractDatum__NamedElement = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _AbstractDatum__OclAny = new ExecutorFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _AbstractDatum__OclElement = new ExecutorFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _ArgumentEdge__ArgumentEdge = new ExecutorFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _ArgumentEdge__Edge = new ExecutorFragment(Types._ArgumentEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _ArgumentEdge__Element = new ExecutorFragment(Types._ArgumentEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ArgumentEdge__ExpressionEdge = new ExecutorFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _ArgumentEdge__OclAny = new ExecutorFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ArgumentEdge__OclElement = new ExecutorFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _BasicPartition__BasicPartition = new ExecutorFragment(Types._BasicPartition, QVTscheduleTables.Types._BasicPartition);
-		private static final @NonNull ExecutorFragment _BasicPartition__Element = new ExecutorFragment(Types._BasicPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _BasicPartition__MappingPartition = new ExecutorFragment(Types._BasicPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _BasicPartition__NamedElement = new ExecutorFragment(Types._BasicPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _BasicPartition__OclAny = new ExecutorFragment(Types._BasicPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _BasicPartition__OclElement = new ExecutorFragment(Types._BasicPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _BasicPartition__Partition = new ExecutorFragment(Types._BasicPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__BooleanLiteralNode = new ExecutorFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._BooleanLiteralNode);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__ConnectionEnd = new ExecutorFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__Element = new ExecutorFragment(Types._BooleanLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__MappingNode = new ExecutorFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__Node = new ExecutorFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__OclAny = new ExecutorFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__OclElement = new ExecutorFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _BooleanLiteralNode__OperationNode = new ExecutorFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _CastEdge__CastEdge = new ExecutorFragment(Types._CastEdge, QVTscheduleTables.Types._CastEdge);
-		private static final @NonNull ExecutorFragment _CastEdge__Edge = new ExecutorFragment(Types._CastEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _CastEdge__Element = new ExecutorFragment(Types._CastEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CastEdge__OclAny = new ExecutorFragment(Types._CastEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CastEdge__OclElement = new ExecutorFragment(Types._CastEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _ClassDatum__AbstractDatum = new ExecutorFragment(Types._ClassDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull ExecutorFragment _ClassDatum__ClassDatum = new ExecutorFragment(Types._ClassDatum, QVTscheduleTables.Types._ClassDatum);
-		private static final @NonNull ExecutorFragment _ClassDatum__Element = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ClassDatum__NamedElement = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _ClassDatum__OclAny = new ExecutorFragment(Types._ClassDatum, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ClassDatum__OclElement = new ExecutorFragment(Types._ClassDatum, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _Cluster__Cluster = new ExecutorFragment(Types._Cluster, QVTscheduleTables.Types._Cluster);
-		private static final @NonNull ExecutorFragment _Cluster__Element = new ExecutorFragment(Types._Cluster, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Cluster__NamedElement = new ExecutorFragment(Types._Cluster, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Cluster__OclAny = new ExecutorFragment(Types._Cluster, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Cluster__OclElement = new ExecutorFragment(Types._Cluster, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Cluster__Symbolable = new ExecutorFragment(Types._Cluster, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__AbstractDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__ClassDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._ClassDatum);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__CollectionClassDatum = new ExecutorFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._CollectionClassDatum);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__Element = new ExecutorFragment(Types._CollectionClassDatum, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__NamedElement = new ExecutorFragment(Types._CollectionClassDatum, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__OclAny = new ExecutorFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CollectionClassDatum__OclElement = new ExecutorFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__CollectionLiteralNode = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._CollectionLiteralNode);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__ConnectionEnd = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__Element = new ExecutorFragment(Types._CollectionLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__MappingNode = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__Node = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__OclAny = new ExecutorFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__OclElement = new ExecutorFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CollectionLiteralNode__OperationNode = new ExecutorFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__ArgumentEdge = new ExecutorFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__CollectionPartEdge = new ExecutorFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._CollectionPartEdge);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__Edge = new ExecutorFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__Element = new ExecutorFragment(Types._CollectionPartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__ExpressionEdge = new ExecutorFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__OclAny = new ExecutorFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CollectionPartEdge__OclElement = new ExecutorFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__CollectionRangeNode = new ExecutorFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._CollectionRangeNode);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__ConnectionEnd = new ExecutorFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__Element = new ExecutorFragment(Types._CollectionRangeNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__MappingNode = new ExecutorFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__Node = new ExecutorFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__OclAny = new ExecutorFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__OclElement = new ExecutorFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CollectionRangeNode__OperationNode = new ExecutorFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _ComposedNode__ComposedNode = new ExecutorFragment(Types._ComposedNode, QVTscheduleTables.Types._ComposedNode);
-		private static final @NonNull ExecutorFragment _ComposedNode__ConnectionEnd = new ExecutorFragment(Types._ComposedNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _ComposedNode__Element = new ExecutorFragment(Types._ComposedNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ComposedNode__Node = new ExecutorFragment(Types._ComposedNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _ComposedNode__OclAny = new ExecutorFragment(Types._ComposedNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ComposedNode__OclElement = new ExecutorFragment(Types._ComposedNode, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _CompositePartition__CompositePartition = new ExecutorFragment(Types._CompositePartition, QVTscheduleTables.Types._CompositePartition);
-		private static final @NonNull ExecutorFragment _CompositePartition__Element = new ExecutorFragment(Types._CompositePartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CompositePartition__NamedElement = new ExecutorFragment(Types._CompositePartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _CompositePartition__OclAny = new ExecutorFragment(Types._CompositePartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CompositePartition__OclElement = new ExecutorFragment(Types._CompositePartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CompositePartition__Partition = new ExecutorFragment(Types._CompositePartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _Connection__Connection = new ExecutorFragment(Types._Connection, QVTscheduleTables.Types._Connection);
-		private static final @NonNull ExecutorFragment _Connection__Element = new ExecutorFragment(Types._Connection, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Connection__OclAny = new ExecutorFragment(Types._Connection, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Connection__OclElement = new ExecutorFragment(Types._Connection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Connection__Symbolable = new ExecutorFragment(Types._Connection, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _ConnectionEnd__ConnectionEnd = new ExecutorFragment(Types._ConnectionEnd, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _ConnectionEnd__OclAny = new ExecutorFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ConnectionEnd__OclElement = new ExecutorFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _ConnectionRole__ConnectionRole = new ExecutorFragment(Types._ConnectionRole, QVTscheduleTables.Types._ConnectionRole);
-		private static final @NonNull ExecutorFragment _ConnectionRole__OclAny = new ExecutorFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ConnectionRole__OclElement = new ExecutorFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _ConnectionRole__OclEnumeration = new ExecutorFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclEnumeration);
-		private static final @NonNull ExecutorFragment _ConnectionRole__OclType = new ExecutorFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclType);
-
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__CyclicMappingRegion = new ExecutorFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._CyclicMappingRegion);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__Element = new ExecutorFragment(Types._CyclicMappingRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__MappingRegion = new ExecutorFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._MappingRegion);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__NamedElement = new ExecutorFragment(Types._CyclicMappingRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__OclAny = new ExecutorFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__OclElement = new ExecutorFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__Region = new ExecutorFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _CyclicMappingRegion__Symbolable = new ExecutorFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _CyclicPartition__CompositePartition = new ExecutorFragment(Types._CyclicPartition, QVTscheduleTables.Types._CompositePartition);
-		private static final @NonNull ExecutorFragment _CyclicPartition__CyclicPartition = new ExecutorFragment(Types._CyclicPartition, QVTscheduleTables.Types._CyclicPartition);
-		private static final @NonNull ExecutorFragment _CyclicPartition__Element = new ExecutorFragment(Types._CyclicPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CyclicPartition__MappingPartition = new ExecutorFragment(Types._CyclicPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _CyclicPartition__NamedElement = new ExecutorFragment(Types._CyclicPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _CyclicPartition__OclAny = new ExecutorFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _CyclicPartition__OclElement = new ExecutorFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CyclicPartition__Partition = new ExecutorFragment(Types._CyclicPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _DependencyEdge__DependencyEdge = new ExecutorFragment(Types._DependencyEdge, QVTscheduleTables.Types._DependencyEdge);
-		private static final @NonNull ExecutorFragment _DependencyEdge__Edge = new ExecutorFragment(Types._DependencyEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _DependencyEdge__Element = new ExecutorFragment(Types._DependencyEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _DependencyEdge__OclAny = new ExecutorFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _DependencyEdge__OclElement = new ExecutorFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _DependencyNode__ConnectionEnd = new ExecutorFragment(Types._DependencyNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _DependencyNode__DependencyNode = new ExecutorFragment(Types._DependencyNode, QVTscheduleTables.Types._DependencyNode);
-		private static final @NonNull ExecutorFragment _DependencyNode__Element = new ExecutorFragment(Types._DependencyNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _DependencyNode__Node = new ExecutorFragment(Types._DependencyNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _DependencyNode__OclAny = new ExecutorFragment(Types._DependencyNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _DependencyNode__OclElement = new ExecutorFragment(Types._DependencyNode, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _DispatchRegion__DispatchRegion = new ExecutorFragment(Types._DispatchRegion, QVTscheduleTables.Types._DispatchRegion);
-		private static final @NonNull ExecutorFragment _DispatchRegion__Element = new ExecutorFragment(Types._DispatchRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _DispatchRegion__MappingRegion = new ExecutorFragment(Types._DispatchRegion, QVTscheduleTables.Types._MappingRegion);
-		private static final @NonNull ExecutorFragment _DispatchRegion__NamedElement = new ExecutorFragment(Types._DispatchRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _DispatchRegion__OclAny = new ExecutorFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _DispatchRegion__OclElement = new ExecutorFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _DispatchRegion__Region = new ExecutorFragment(Types._DispatchRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _DispatchRegion__RuleRegion = new ExecutorFragment(Types._DispatchRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull ExecutorFragment _DispatchRegion__Symbolable = new ExecutorFragment(Types._DispatchRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _Edge__Edge = new ExecutorFragment(Types._Edge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _Edge__Element = new ExecutorFragment(Types._Edge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Edge__OclAny = new ExecutorFragment(Types._Edge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Edge__OclElement = new ExecutorFragment(Types._Edge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _EdgeConnection__Connection = new ExecutorFragment(Types._EdgeConnection, QVTscheduleTables.Types._Connection);
-		private static final @NonNull ExecutorFragment _EdgeConnection__EdgeConnection = new ExecutorFragment(Types._EdgeConnection, QVTscheduleTables.Types._EdgeConnection);
-		private static final @NonNull ExecutorFragment _EdgeConnection__Element = new ExecutorFragment(Types._EdgeConnection, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _EdgeConnection__OclAny = new ExecutorFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _EdgeConnection__OclElement = new ExecutorFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _EdgeConnection__Symbolable = new ExecutorFragment(Types._EdgeConnection, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__ConnectionEnd = new ExecutorFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__Element = new ExecutorFragment(Types._EnumLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__EnumLiteralNode = new ExecutorFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._EnumLiteralNode);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__MappingNode = new ExecutorFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__Node = new ExecutorFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__OclAny = new ExecutorFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__OclElement = new ExecutorFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _EnumLiteralNode__OperationNode = new ExecutorFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _ErrorNode__ConnectionEnd = new ExecutorFragment(Types._ErrorNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _ErrorNode__Element = new ExecutorFragment(Types._ErrorNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ErrorNode__ErrorNode = new ExecutorFragment(Types._ErrorNode, QVTscheduleTables.Types._ErrorNode);
-		private static final @NonNull ExecutorFragment _ErrorNode__MappingNode = new ExecutorFragment(Types._ErrorNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _ErrorNode__Node = new ExecutorFragment(Types._ErrorNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _ErrorNode__OclAny = new ExecutorFragment(Types._ErrorNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ErrorNode__OclElement = new ExecutorFragment(Types._ErrorNode, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _ExpressionEdge__Edge = new ExecutorFragment(Types._ExpressionEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _ExpressionEdge__Element = new ExecutorFragment(Types._ExpressionEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ExpressionEdge__ExpressionEdge = new ExecutorFragment(Types._ExpressionEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _ExpressionEdge__OclAny = new ExecutorFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ExpressionEdge__OclElement = new ExecutorFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _IfNode__ConnectionEnd = new ExecutorFragment(Types._IfNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _IfNode__Element = new ExecutorFragment(Types._IfNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _IfNode__IfNode = new ExecutorFragment(Types._IfNode, QVTscheduleTables.Types._IfNode);
-		private static final @NonNull ExecutorFragment _IfNode__MappingNode = new ExecutorFragment(Types._IfNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _IfNode__Node = new ExecutorFragment(Types._IfNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _IfNode__OclAny = new ExecutorFragment(Types._IfNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _IfNode__OclElement = new ExecutorFragment(Types._IfNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _IfNode__OperationNode = new ExecutorFragment(Types._IfNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _IncludesEdge__Edge = new ExecutorFragment(Types._IncludesEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _IncludesEdge__Element = new ExecutorFragment(Types._IncludesEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _IncludesEdge__ExpressionEdge = new ExecutorFragment(Types._IncludesEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _IncludesEdge__IncludesEdge = new ExecutorFragment(Types._IncludesEdge, QVTscheduleTables.Types._IncludesEdge);
-		private static final @NonNull ExecutorFragment _IncludesEdge__OclAny = new ExecutorFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _IncludesEdge__OclElement = new ExecutorFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _InputNode__ConnectionEnd = new ExecutorFragment(Types._InputNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _InputNode__Element = new ExecutorFragment(Types._InputNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _InputNode__InputNode = new ExecutorFragment(Types._InputNode, QVTscheduleTables.Types._InputNode);
-		private static final @NonNull ExecutorFragment _InputNode__Node = new ExecutorFragment(Types._InputNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _InputNode__OclAny = new ExecutorFragment(Types._InputNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _InputNode__OclElement = new ExecutorFragment(Types._InputNode, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _IteratedEdge__Edge = new ExecutorFragment(Types._IteratedEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _IteratedEdge__Element = new ExecutorFragment(Types._IteratedEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _IteratedEdge__IteratedEdge = new ExecutorFragment(Types._IteratedEdge, QVTscheduleTables.Types._IteratedEdge);
-		private static final @NonNull ExecutorFragment _IteratedEdge__OclAny = new ExecutorFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _IteratedEdge__OclElement = new ExecutorFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _IteratorNode__ConnectionEnd = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _IteratorNode__Element = new ExecutorFragment(Types._IteratorNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _IteratorNode__IteratorNode = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._IteratorNode);
-		private static final @NonNull ExecutorFragment _IteratorNode__MappingNode = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _IteratorNode__Node = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _IteratorNode__OclAny = new ExecutorFragment(Types._IteratorNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _IteratorNode__OclElement = new ExecutorFragment(Types._IteratorNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _IteratorNode__VariableNode = new ExecutorFragment(Types._IteratorNode, QVTscheduleTables.Types._VariableNode);
-
-		private static final @NonNull ExecutorFragment _KeyPartEdge__ConnectionEnd = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__Edge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__Element = new ExecutorFragment(Types._KeyPartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__KeyPartEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._KeyPartEdge);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__NavigableEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__NavigationEdge = new ExecutorFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigationEdge);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__OclAny = new ExecutorFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _KeyPartEdge__OclElement = new ExecutorFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _KeyedValueNode__ConnectionEnd = new ExecutorFragment(Types._KeyedValueNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__Element = new ExecutorFragment(Types._KeyedValueNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__KeyedValueNode = new ExecutorFragment(Types._KeyedValueNode, QVTscheduleTables.Types._KeyedValueNode);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__MappingNode = new ExecutorFragment(Types._KeyedValueNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__Node = new ExecutorFragment(Types._KeyedValueNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__OclAny = new ExecutorFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__OclElement = new ExecutorFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _KeyedValueNode__OperationNode = new ExecutorFragment(Types._KeyedValueNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _LoadingPartition__Element = new ExecutorFragment(Types._LoadingPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _LoadingPartition__LoadingPartition = new ExecutorFragment(Types._LoadingPartition, QVTscheduleTables.Types._LoadingPartition);
-		private static final @NonNull ExecutorFragment _LoadingPartition__MappingPartition = new ExecutorFragment(Types._LoadingPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _LoadingPartition__NamedElement = new ExecutorFragment(Types._LoadingPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _LoadingPartition__OclAny = new ExecutorFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _LoadingPartition__OclElement = new ExecutorFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _LoadingPartition__Partition = new ExecutorFragment(Types._LoadingPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _LoadingRegion__Element = new ExecutorFragment(Types._LoadingRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _LoadingRegion__LoadingRegion = new ExecutorFragment(Types._LoadingRegion, QVTscheduleTables.Types._LoadingRegion);
-		private static final @NonNull ExecutorFragment _LoadingRegion__NamedElement = new ExecutorFragment(Types._LoadingRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _LoadingRegion__OclAny = new ExecutorFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _LoadingRegion__OclElement = new ExecutorFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _LoadingRegion__Region = new ExecutorFragment(Types._LoadingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _LoadingRegion__Symbolable = new ExecutorFragment(Types._LoadingRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _MapLiteralNode__ConnectionEnd = new ExecutorFragment(Types._MapLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__Element = new ExecutorFragment(Types._MapLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__MapLiteralNode = new ExecutorFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MapLiteralNode);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__MappingNode = new ExecutorFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__Node = new ExecutorFragment(Types._MapLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__OclAny = new ExecutorFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__OclElement = new ExecutorFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _MapLiteralNode__OperationNode = new ExecutorFragment(Types._MapLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _MapPartEdge__ArgumentEdge = new ExecutorFragment(Types._MapPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _MapPartEdge__Edge = new ExecutorFragment(Types._MapPartEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _MapPartEdge__Element = new ExecutorFragment(Types._MapPartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MapPartEdge__ExpressionEdge = new ExecutorFragment(Types._MapPartEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _MapPartEdge__MapPartEdge = new ExecutorFragment(Types._MapPartEdge, QVTscheduleTables.Types._MapPartEdge);
-		private static final @NonNull ExecutorFragment _MapPartEdge__OclAny = new ExecutorFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MapPartEdge__OclElement = new ExecutorFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _MapPartNode__ConnectionEnd = new ExecutorFragment(Types._MapPartNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _MapPartNode__Element = new ExecutorFragment(Types._MapPartNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MapPartNode__MapPartNode = new ExecutorFragment(Types._MapPartNode, QVTscheduleTables.Types._MapPartNode);
-		private static final @NonNull ExecutorFragment _MapPartNode__MappingNode = new ExecutorFragment(Types._MapPartNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _MapPartNode__Node = new ExecutorFragment(Types._MapPartNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _MapPartNode__OclAny = new ExecutorFragment(Types._MapPartNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MapPartNode__OclElement = new ExecutorFragment(Types._MapPartNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _MapPartNode__OperationNode = new ExecutorFragment(Types._MapPartNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _MappingNode__ConnectionEnd = new ExecutorFragment(Types._MappingNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _MappingNode__Element = new ExecutorFragment(Types._MappingNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MappingNode__MappingNode = new ExecutorFragment(Types._MappingNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _MappingNode__Node = new ExecutorFragment(Types._MappingNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _MappingNode__OclAny = new ExecutorFragment(Types._MappingNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MappingNode__OclElement = new ExecutorFragment(Types._MappingNode, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _MappingPartition__Element = new ExecutorFragment(Types._MappingPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MappingPartition__MappingPartition = new ExecutorFragment(Types._MappingPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _MappingPartition__NamedElement = new ExecutorFragment(Types._MappingPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _MappingPartition__OclAny = new ExecutorFragment(Types._MappingPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MappingPartition__OclElement = new ExecutorFragment(Types._MappingPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _MappingPartition__Partition = new ExecutorFragment(Types._MappingPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _MappingRegion__Element = new ExecutorFragment(Types._MappingRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MappingRegion__MappingRegion = new ExecutorFragment(Types._MappingRegion, QVTscheduleTables.Types._MappingRegion);
-		private static final @NonNull ExecutorFragment _MappingRegion__NamedElement = new ExecutorFragment(Types._MappingRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _MappingRegion__OclAny = new ExecutorFragment(Types._MappingRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MappingRegion__OclElement = new ExecutorFragment(Types._MappingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _MappingRegion__Region = new ExecutorFragment(Types._MappingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _MappingRegion__Symbolable = new ExecutorFragment(Types._MappingRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _MergedPartition__BasicPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._BasicPartition);
-		private static final @NonNull ExecutorFragment _MergedPartition__Element = new ExecutorFragment(Types._MergedPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _MergedPartition__MappingPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _MergedPartition__MergedPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._MergedPartition);
-		private static final @NonNull ExecutorFragment _MergedPartition__NamedElement = new ExecutorFragment(Types._MergedPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _MergedPartition__OclAny = new ExecutorFragment(Types._MergedPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _MergedPartition__OclElement = new ExecutorFragment(Types._MergedPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _MergedPartition__Partition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _NavigableEdge__ConnectionEnd = new ExecutorFragment(Types._NavigableEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _NavigableEdge__Edge = new ExecutorFragment(Types._NavigableEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _NavigableEdge__Element = new ExecutorFragment(Types._NavigableEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NavigableEdge__NavigableEdge = new ExecutorFragment(Types._NavigableEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull ExecutorFragment _NavigableEdge__OclAny = new ExecutorFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NavigableEdge__OclElement = new ExecutorFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _NavigationEdge__ConnectionEnd = new ExecutorFragment(Types._NavigationEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _NavigationEdge__Edge = new ExecutorFragment(Types._NavigationEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _NavigationEdge__Element = new ExecutorFragment(Types._NavigationEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NavigationEdge__NavigableEdge = new ExecutorFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull ExecutorFragment _NavigationEdge__NavigationEdge = new ExecutorFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigationEdge);
-		private static final @NonNull ExecutorFragment _NavigationEdge__OclAny = new ExecutorFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NavigationEdge__OclElement = new ExecutorFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _Node__ConnectionEnd = new ExecutorFragment(Types._Node, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _Node__Element = new ExecutorFragment(Types._Node, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Node__Node = new ExecutorFragment(Types._Node, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _Node__OclAny = new ExecutorFragment(Types._Node, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Node__OclElement = new ExecutorFragment(Types._Node, OCLstdlibTables.Types._OclElement);
-
-		private static final @NonNull ExecutorFragment _NodeConnection__Connection = new ExecutorFragment(Types._NodeConnection, QVTscheduleTables.Types._Connection);
-		private static final @NonNull ExecutorFragment _NodeConnection__Element = new ExecutorFragment(Types._NodeConnection, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NodeConnection__NodeConnection = new ExecutorFragment(Types._NodeConnection, QVTscheduleTables.Types._NodeConnection);
-		private static final @NonNull ExecutorFragment _NodeConnection__OclAny = new ExecutorFragment(Types._NodeConnection, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NodeConnection__OclElement = new ExecutorFragment(Types._NodeConnection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NodeConnection__Symbolable = new ExecutorFragment(Types._NodeConnection, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _NonPartition__Element = new ExecutorFragment(Types._NonPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NonPartition__MappingPartition = new ExecutorFragment(Types._NonPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull ExecutorFragment _NonPartition__NamedElement = new ExecutorFragment(Types._NonPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _NonPartition__NonPartition = new ExecutorFragment(Types._NonPartition, QVTscheduleTables.Types._NonPartition);
-		private static final @NonNull ExecutorFragment _NonPartition__OclAny = new ExecutorFragment(Types._NonPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NonPartition__OclElement = new ExecutorFragment(Types._NonPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NonPartition__Partition = new ExecutorFragment(Types._NonPartition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _NullLiteralNode__ConnectionEnd = new ExecutorFragment(Types._NullLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__Element = new ExecutorFragment(Types._NullLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__MappingNode = new ExecutorFragment(Types._NullLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__Node = new ExecutorFragment(Types._NullLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__NullLiteralNode = new ExecutorFragment(Types._NullLiteralNode, QVTscheduleTables.Types._NullLiteralNode);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__OclAny = new ExecutorFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__OclElement = new ExecutorFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NullLiteralNode__OperationNode = new ExecutorFragment(Types._NullLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _Number__Number = new ExecutorFragment(Types._Number, QVTscheduleTables.Types._Number);
-		private static final @NonNull ExecutorFragment _Number__OclAny = new ExecutorFragment(Types._Number, OCLstdlibTables.Types._OclAny);
-
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__ConnectionEnd = new ExecutorFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__Element = new ExecutorFragment(Types._NumericLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__MappingNode = new ExecutorFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__Node = new ExecutorFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__NumericLiteralNode = new ExecutorFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._NumericLiteralNode);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__OclAny = new ExecutorFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__OclElement = new ExecutorFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NumericLiteralNode__OperationNode = new ExecutorFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _OperationCallNode__ConnectionEnd = new ExecutorFragment(Types._OperationCallNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _OperationCallNode__Element = new ExecutorFragment(Types._OperationCallNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationCallNode__MappingNode = new ExecutorFragment(Types._OperationCallNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _OperationCallNode__Node = new ExecutorFragment(Types._OperationCallNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _OperationCallNode__OclAny = new ExecutorFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationCallNode__OclElement = new ExecutorFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationCallNode__OperationCallNode = new ExecutorFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationCallNode);
-		private static final @NonNull ExecutorFragment _OperationCallNode__OperationNode = new ExecutorFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _OperationNode__ConnectionEnd = new ExecutorFragment(Types._OperationNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _OperationNode__Element = new ExecutorFragment(Types._OperationNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationNode__MappingNode = new ExecutorFragment(Types._OperationNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _OperationNode__Node = new ExecutorFragment(Types._OperationNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _OperationNode__OclAny = new ExecutorFragment(Types._OperationNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationNode__OclElement = new ExecutorFragment(Types._OperationNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationNode__OperationNode = new ExecutorFragment(Types._OperationNode, QVTscheduleTables.Types._OperationNode);
-
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__ArgumentEdge = new ExecutorFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__Edge = new ExecutorFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__Element = new ExecutorFragment(Types._OperationParameterEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__ExpressionEdge = new ExecutorFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__OclAny = new ExecutorFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__OclElement = new ExecutorFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationParameterEdge__OperationParameterEdge = new ExecutorFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._OperationParameterEdge);
-
-		private static final @NonNull ExecutorFragment _OperationRegion__Element = new ExecutorFragment(Types._OperationRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationRegion__NamedElement = new ExecutorFragment(Types._OperationRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _OperationRegion__OclAny = new ExecutorFragment(Types._OperationRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationRegion__OclElement = new ExecutorFragment(Types._OperationRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationRegion__OperationRegion = new ExecutorFragment(Types._OperationRegion, QVTscheduleTables.Types._OperationRegion);
-		private static final @NonNull ExecutorFragment _OperationRegion__Region = new ExecutorFragment(Types._OperationRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _OperationRegion__Symbolable = new ExecutorFragment(Types._OperationRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__ArgumentEdge = new ExecutorFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__Edge = new ExecutorFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__Element = new ExecutorFragment(Types._OperationSelfEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__ExpressionEdge = new ExecutorFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__OclAny = new ExecutorFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__OclElement = new ExecutorFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _OperationSelfEdge__OperationSelfEdge = new ExecutorFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._OperationSelfEdge);
-
-		private static final @NonNull ExecutorFragment _Partition__Element = new ExecutorFragment(Types._Partition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Partition__NamedElement = new ExecutorFragment(Types._Partition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Partition__OclAny = new ExecutorFragment(Types._Partition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Partition__OclElement = new ExecutorFragment(Types._Partition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Partition__Partition = new ExecutorFragment(Types._Partition, QVTscheduleTables.Types._Partition);
-
-		private static final @NonNull ExecutorFragment _PatternTypedNode__ConnectionEnd = new ExecutorFragment(Types._PatternTypedNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__Element = new ExecutorFragment(Types._PatternTypedNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__MappingNode = new ExecutorFragment(Types._PatternTypedNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__Node = new ExecutorFragment(Types._PatternTypedNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__OclAny = new ExecutorFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__OclElement = new ExecutorFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _PatternTypedNode__PatternTypedNode = new ExecutorFragment(Types._PatternTypedNode, QVTscheduleTables.Types._PatternTypedNode);
-
-		private static final @NonNull ExecutorFragment _PatternVariableNode__ConnectionEnd = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__Element = new ExecutorFragment(Types._PatternVariableNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__MappingNode = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__Node = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__OclAny = new ExecutorFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__OclElement = new ExecutorFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__PatternVariableNode = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._PatternVariableNode);
-		private static final @NonNull ExecutorFragment _PatternVariableNode__VariableNode = new ExecutorFragment(Types._PatternVariableNode, QVTscheduleTables.Types._VariableNode);
-
-		private static final @NonNull ExecutorFragment _PredicateEdge__Edge = new ExecutorFragment(Types._PredicateEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _PredicateEdge__Element = new ExecutorFragment(Types._PredicateEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _PredicateEdge__OclAny = new ExecutorFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _PredicateEdge__OclElement = new ExecutorFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _PredicateEdge__PredicateEdge = new ExecutorFragment(Types._PredicateEdge, QVTscheduleTables.Types._PredicateEdge);
-
-		private static final @NonNull ExecutorFragment _PropertyDatum__AbstractDatum = new ExecutorFragment(Types._PropertyDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull ExecutorFragment _PropertyDatum__Element = new ExecutorFragment(Types._PropertyDatum, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _PropertyDatum__NamedElement = new ExecutorFragment(Types._PropertyDatum, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _PropertyDatum__OclAny = new ExecutorFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _PropertyDatum__OclElement = new ExecutorFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _PropertyDatum__PropertyDatum = new ExecutorFragment(Types._PropertyDatum, QVTscheduleTables.Types._PropertyDatum);
-
-		private static final @NonNull ExecutorFragment _RecursionEdge__Edge = new ExecutorFragment(Types._RecursionEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _RecursionEdge__Element = new ExecutorFragment(Types._RecursionEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RecursionEdge__OclAny = new ExecutorFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RecursionEdge__OclElement = new ExecutorFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RecursionEdge__RecursionEdge = new ExecutorFragment(Types._RecursionEdge, QVTscheduleTables.Types._RecursionEdge);
-
-		private static final @NonNull ExecutorFragment _Region__Element = new ExecutorFragment(Types._Region, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Region__NamedElement = new ExecutorFragment(Types._Region, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _Region__OclAny = new ExecutorFragment(Types._Region, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Region__OclElement = new ExecutorFragment(Types._Region, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Region__Region = new ExecutorFragment(Types._Region, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _Region__Symbolable = new ExecutorFragment(Types._Region, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _Role__OclAny = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Role__OclElement = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Role__OclEnumeration = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclEnumeration);
-		private static final @NonNull ExecutorFragment _Role__OclType = new ExecutorFragment(Types._Role, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _Role__Role = new ExecutorFragment(Types._Role, QVTscheduleTables.Types._Role);
-
-		private static final @NonNull ExecutorFragment _RootPartition__CompositePartition = new ExecutorFragment(Types._RootPartition, QVTscheduleTables.Types._CompositePartition);
-		private static final @NonNull ExecutorFragment _RootPartition__Element = new ExecutorFragment(Types._RootPartition, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RootPartition__NamedElement = new ExecutorFragment(Types._RootPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RootPartition__OclAny = new ExecutorFragment(Types._RootPartition, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RootPartition__OclElement = new ExecutorFragment(Types._RootPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RootPartition__Partition = new ExecutorFragment(Types._RootPartition, QVTscheduleTables.Types._Partition);
-		private static final @NonNull ExecutorFragment _RootPartition__RootPartition = new ExecutorFragment(Types._RootPartition, QVTscheduleTables.Types._RootPartition);
-
-		private static final @NonNull ExecutorFragment _RootRegion__Element = new ExecutorFragment(Types._RootRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RootRegion__NamedElement = new ExecutorFragment(Types._RootRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RootRegion__OclAny = new ExecutorFragment(Types._RootRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RootRegion__OclElement = new ExecutorFragment(Types._RootRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RootRegion__Region = new ExecutorFragment(Types._RootRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _RootRegion__RootRegion = new ExecutorFragment(Types._RootRegion, QVTscheduleTables.Types._RootRegion);
-		private static final @NonNull ExecutorFragment _RootRegion__Symbolable = new ExecutorFragment(Types._RootRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _RuleRegion__Element = new ExecutorFragment(Types._RuleRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RuleRegion__MappingRegion = new ExecutorFragment(Types._RuleRegion, QVTscheduleTables.Types._MappingRegion);
-		private static final @NonNull ExecutorFragment _RuleRegion__NamedElement = new ExecutorFragment(Types._RuleRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _RuleRegion__OclAny = new ExecutorFragment(Types._RuleRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _RuleRegion__OclElement = new ExecutorFragment(Types._RuleRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _RuleRegion__Region = new ExecutorFragment(Types._RuleRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _RuleRegion__RuleRegion = new ExecutorFragment(Types._RuleRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull ExecutorFragment _RuleRegion__Symbolable = new ExecutorFragment(Types._RuleRegion, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _ScheduleModel__Element = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ScheduleModel__Model = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._Model);
-		private static final @NonNull ExecutorFragment _ScheduleModel__NamedElement = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _ScheduleModel__Namespace = new ExecutorFragment(Types._ScheduleModel, PivotTables.Types._Namespace);
-		private static final @NonNull ExecutorFragment _ScheduleModel__OclAny = new ExecutorFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ScheduleModel__OclElement = new ExecutorFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _ScheduleModel__ScheduleModel = new ExecutorFragment(Types._ScheduleModel, QVTscheduleTables.Types._ScheduleModel);
-
-		private static final @NonNull ExecutorFragment _ShadowNode__ConnectionEnd = new ExecutorFragment(Types._ShadowNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _ShadowNode__Element = new ExecutorFragment(Types._ShadowNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ShadowNode__MappingNode = new ExecutorFragment(Types._ShadowNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _ShadowNode__Node = new ExecutorFragment(Types._ShadowNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _ShadowNode__OclAny = new ExecutorFragment(Types._ShadowNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ShadowNode__OclElement = new ExecutorFragment(Types._ShadowNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _ShadowNode__OperationNode = new ExecutorFragment(Types._ShadowNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull ExecutorFragment _ShadowNode__ShadowNode = new ExecutorFragment(Types._ShadowNode, QVTscheduleTables.Types._ShadowNode);
-
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__ArgumentEdge = new ExecutorFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__Edge = new ExecutorFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__Element = new ExecutorFragment(Types._ShadowPartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__ExpressionEdge = new ExecutorFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__OclAny = new ExecutorFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__OclElement = new ExecutorFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _ShadowPartEdge__ShadowPartEdge = new ExecutorFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ShadowPartEdge);
-
-		private static final @NonNull ExecutorFragment _StringLiteralNode__ConnectionEnd = new ExecutorFragment(Types._StringLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__Element = new ExecutorFragment(Types._StringLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__MappingNode = new ExecutorFragment(Types._StringLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__Node = new ExecutorFragment(Types._StringLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__OclAny = new ExecutorFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__OclElement = new ExecutorFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__OperationNode = new ExecutorFragment(Types._StringLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull ExecutorFragment _StringLiteralNode__StringLiteralNode = new ExecutorFragment(Types._StringLiteralNode, QVTscheduleTables.Types._StringLiteralNode);
-
-		private static final @NonNull ExecutorFragment _SuccessEdge__ConnectionEnd = new ExecutorFragment(Types._SuccessEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _SuccessEdge__Edge = new ExecutorFragment(Types._SuccessEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _SuccessEdge__Element = new ExecutorFragment(Types._SuccessEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _SuccessEdge__NavigableEdge = new ExecutorFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull ExecutorFragment _SuccessEdge__NavigationEdge = new ExecutorFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigationEdge);
-		private static final @NonNull ExecutorFragment _SuccessEdge__OclAny = new ExecutorFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _SuccessEdge__OclElement = new ExecutorFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _SuccessEdge__SuccessEdge = new ExecutorFragment(Types._SuccessEdge, QVTscheduleTables.Types._SuccessEdge);
-
-		private static final @NonNull ExecutorFragment _SuccessNode__ConnectionEnd = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _SuccessNode__Element = new ExecutorFragment(Types._SuccessNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _SuccessNode__MappingNode = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _SuccessNode__Node = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _SuccessNode__OclAny = new ExecutorFragment(Types._SuccessNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _SuccessNode__OclElement = new ExecutorFragment(Types._SuccessNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _SuccessNode__SuccessNode = new ExecutorFragment(Types._SuccessNode, QVTscheduleTables.Types._SuccessNode);
-
-		private static final @NonNull ExecutorFragment _Symbolable__OclAny = new ExecutorFragment(Types._Symbolable, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Symbolable__OclElement = new ExecutorFragment(Types._Symbolable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Symbolable__Symbolable = new ExecutorFragment(Types._Symbolable, QVTscheduleTables.Types._Symbolable);
-
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__ConnectionEnd = new ExecutorFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__Element = new ExecutorFragment(Types._TupleLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__MappingNode = new ExecutorFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__Node = new ExecutorFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__OclAny = new ExecutorFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__OclElement = new ExecutorFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__OperationNode = new ExecutorFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull ExecutorFragment _TupleLiteralNode__TupleLiteralNode = new ExecutorFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._TupleLiteralNode);
-
-		private static final @NonNull ExecutorFragment _TuplePartEdge__ArgumentEdge = new ExecutorFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__Edge = new ExecutorFragment(Types._TuplePartEdge, QVTscheduleTables.Types._Edge);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__Element = new ExecutorFragment(Types._TuplePartEdge, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__ExpressionEdge = new ExecutorFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__OclAny = new ExecutorFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__OclElement = new ExecutorFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TuplePartEdge__TuplePartEdge = new ExecutorFragment(Types._TuplePartEdge, QVTscheduleTables.Types._TuplePartEdge);
-
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__ConnectionEnd = new ExecutorFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__Element = new ExecutorFragment(Types._TypeLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__MappingNode = new ExecutorFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__Node = new ExecutorFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__OclAny = new ExecutorFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__OclElement = new ExecutorFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__OperationNode = new ExecutorFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull ExecutorFragment _TypeLiteralNode__TypeLiteralNode = new ExecutorFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._TypeLiteralNode);
-
-		private static final @NonNull ExecutorFragment _UnknownNode__ConnectionEnd = new ExecutorFragment(Types._UnknownNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _UnknownNode__Element = new ExecutorFragment(Types._UnknownNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _UnknownNode__MappingNode = new ExecutorFragment(Types._UnknownNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _UnknownNode__Node = new ExecutorFragment(Types._UnknownNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _UnknownNode__OclAny = new ExecutorFragment(Types._UnknownNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _UnknownNode__OclElement = new ExecutorFragment(Types._UnknownNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _UnknownNode__UnknownNode = new ExecutorFragment(Types._UnknownNode, QVTscheduleTables.Types._UnknownNode);
-
-		private static final @NonNull ExecutorFragment _Utility__OclAny = new ExecutorFragment(Types._Utility, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _Utility__OclElement = new ExecutorFragment(Types._Utility, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Utility__OclEnumeration = new ExecutorFragment(Types._Utility, OCLstdlibTables.Types._OclEnumeration);
-		private static final @NonNull ExecutorFragment _Utility__OclType = new ExecutorFragment(Types._Utility, OCLstdlibTables.Types._OclType);
-		private static final @NonNull ExecutorFragment _Utility__Utility = new ExecutorFragment(Types._Utility, QVTscheduleTables.Types._Utility);
-
-		private static final @NonNull ExecutorFragment _VariableNode__ConnectionEnd = new ExecutorFragment(Types._VariableNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull ExecutorFragment _VariableNode__Element = new ExecutorFragment(Types._VariableNode, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _VariableNode__MappingNode = new ExecutorFragment(Types._VariableNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull ExecutorFragment _VariableNode__Node = new ExecutorFragment(Types._VariableNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull ExecutorFragment _VariableNode__OclAny = new ExecutorFragment(Types._VariableNode, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _VariableNode__OclElement = new ExecutorFragment(Types._VariableNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _VariableNode__VariableNode = new ExecutorFragment(Types._VariableNode, QVTscheduleTables.Types._VariableNode);
-
-		private static final @NonNull ExecutorFragment _VerdictRegion__Element = new ExecutorFragment(Types._VerdictRegion, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _VerdictRegion__MappingRegion = new ExecutorFragment(Types._VerdictRegion, QVTscheduleTables.Types._MappingRegion);
-		private static final @NonNull ExecutorFragment _VerdictRegion__NamedElement = new ExecutorFragment(Types._VerdictRegion, PivotTables.Types._NamedElement);
-		private static final @NonNull ExecutorFragment _VerdictRegion__OclAny = new ExecutorFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _VerdictRegion__OclElement = new ExecutorFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _VerdictRegion__Region = new ExecutorFragment(Types._VerdictRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull ExecutorFragment _VerdictRegion__RuleRegion = new ExecutorFragment(Types._VerdictRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull ExecutorFragment _VerdictRegion__Symbolable = new ExecutorFragment(Types._VerdictRegion, QVTscheduleTables.Types._Symbolable);
-		private static final @NonNull ExecutorFragment _VerdictRegion__VerdictRegion = new ExecutorFragment(Types._VerdictRegion, QVTscheduleTables.Types._VerdictRegion);
+		private static final @NonNull FlatFragment _AbstractDatum__AbstractDatum = LIBRARY.createFragment(Types._AbstractDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _AbstractDatum__Element = LIBRARY.createFragment(Types._AbstractDatum, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _AbstractDatum__NamedElement = LIBRARY.createFragment(Types._AbstractDatum, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _AbstractDatum__OclAny = LIBRARY.createFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _AbstractDatum__OclElement = LIBRARY.createFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _ArgumentEdge__ArgumentEdge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _ArgumentEdge__Edge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ArgumentEdge__Element = LIBRARY.createFragment(Types._ArgumentEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ArgumentEdge__ExpressionEdge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ArgumentEdge__OclAny = LIBRARY.createFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ArgumentEdge__OclElement = LIBRARY.createFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _BasicPartition__BasicPartition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._BasicPartition);
+		private static final @NonNull FlatFragment _BasicPartition__Element = LIBRARY.createFragment(Types._BasicPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _BasicPartition__MappingPartition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _BasicPartition__NamedElement = LIBRARY.createFragment(Types._BasicPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _BasicPartition__OclAny = LIBRARY.createFragment(Types._BasicPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _BasicPartition__OclElement = LIBRARY.createFragment(Types._BasicPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _BasicPartition__Partition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _BooleanLiteralNode__BooleanLiteralNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._BooleanLiteralNode);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__Element = LIBRARY.createFragment(Types._BooleanLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__MappingNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__Node = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__OclAny = LIBRARY.createFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__OclElement = LIBRARY.createFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__OperationNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _CastEdge__CastEdge = LIBRARY.createFragment(Types._CastEdge, QVTscheduleTables.Types._CastEdge);
+		private static final @NonNull FlatFragment _CastEdge__Edge = LIBRARY.createFragment(Types._CastEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _CastEdge__Element = LIBRARY.createFragment(Types._CastEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CastEdge__OclAny = LIBRARY.createFragment(Types._CastEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CastEdge__OclElement = LIBRARY.createFragment(Types._CastEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _ClassDatum__AbstractDatum = LIBRARY.createFragment(Types._ClassDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _ClassDatum__ClassDatum = LIBRARY.createFragment(Types._ClassDatum, QVTscheduleTables.Types._ClassDatum);
+		private static final @NonNull FlatFragment _ClassDatum__Element = LIBRARY.createFragment(Types._ClassDatum, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ClassDatum__NamedElement = LIBRARY.createFragment(Types._ClassDatum, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _ClassDatum__OclAny = LIBRARY.createFragment(Types._ClassDatum, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ClassDatum__OclElement = LIBRARY.createFragment(Types._ClassDatum, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _Cluster__Cluster = LIBRARY.createFragment(Types._Cluster, QVTscheduleTables.Types._Cluster);
+		private static final @NonNull FlatFragment _Cluster__Element = LIBRARY.createFragment(Types._Cluster, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Cluster__NamedElement = LIBRARY.createFragment(Types._Cluster, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Cluster__OclAny = LIBRARY.createFragment(Types._Cluster, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Cluster__OclElement = LIBRARY.createFragment(Types._Cluster, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Cluster__Symbolable = LIBRARY.createFragment(Types._Cluster, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _CollectionClassDatum__AbstractDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__ClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._ClassDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__CollectionClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._CollectionClassDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__Element = LIBRARY.createFragment(Types._CollectionClassDatum, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CollectionClassDatum__NamedElement = LIBRARY.createFragment(Types._CollectionClassDatum, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _CollectionClassDatum__OclAny = LIBRARY.createFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CollectionClassDatum__OclElement = LIBRARY.createFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _CollectionLiteralNode__CollectionLiteralNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._CollectionLiteralNode);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__Element = LIBRARY.createFragment(Types._CollectionLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__MappingNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__Node = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__OclAny = LIBRARY.createFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__OclElement = LIBRARY.createFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__OperationNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _CollectionPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__CollectionPartEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._CollectionPartEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__Edge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__Element = LIBRARY.createFragment(Types._CollectionPartEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CollectionPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__OclAny = LIBRARY.createFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CollectionPartEdge__OclElement = LIBRARY.createFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _CollectionRangeNode__CollectionRangeNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._CollectionRangeNode);
+		private static final @NonNull FlatFragment _CollectionRangeNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _CollectionRangeNode__Element = LIBRARY.createFragment(Types._CollectionRangeNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CollectionRangeNode__MappingNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _CollectionRangeNode__Node = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _CollectionRangeNode__OclAny = LIBRARY.createFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CollectionRangeNode__OclElement = LIBRARY.createFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CollectionRangeNode__OperationNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _ComposedNode__ComposedNode = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._ComposedNode);
+		private static final @NonNull FlatFragment _ComposedNode__ConnectionEnd = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ComposedNode__Element = LIBRARY.createFragment(Types._ComposedNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ComposedNode__Node = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ComposedNode__OclAny = LIBRARY.createFragment(Types._ComposedNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ComposedNode__OclElement = LIBRARY.createFragment(Types._ComposedNode, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _CompositePartition__CompositePartition = LIBRARY.createFragment(Types._CompositePartition, QVTscheduleTables.Types._CompositePartition);
+		private static final @NonNull FlatFragment _CompositePartition__Element = LIBRARY.createFragment(Types._CompositePartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CompositePartition__NamedElement = LIBRARY.createFragment(Types._CompositePartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _CompositePartition__OclAny = LIBRARY.createFragment(Types._CompositePartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CompositePartition__OclElement = LIBRARY.createFragment(Types._CompositePartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CompositePartition__Partition = LIBRARY.createFragment(Types._CompositePartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _Connection__Connection = LIBRARY.createFragment(Types._Connection, QVTscheduleTables.Types._Connection);
+		private static final @NonNull FlatFragment _Connection__Element = LIBRARY.createFragment(Types._Connection, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Connection__OclAny = LIBRARY.createFragment(Types._Connection, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Connection__OclElement = LIBRARY.createFragment(Types._Connection, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Connection__Symbolable = LIBRARY.createFragment(Types._Connection, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _ConnectionEnd__ConnectionEnd = LIBRARY.createFragment(Types._ConnectionEnd, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ConnectionEnd__OclAny = LIBRARY.createFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ConnectionEnd__OclElement = LIBRARY.createFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _ConnectionRole__ConnectionRole = LIBRARY.createFragment(Types._ConnectionRole, QVTscheduleTables.Types._ConnectionRole);
+		private static final @NonNull FlatFragment _ConnectionRole__OclAny = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ConnectionRole__OclElement = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _ConnectionRole__OclEnumeration = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull FlatFragment _ConnectionRole__OclType = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclType);
+
+		private static final @NonNull FlatFragment _CyclicMappingRegion__CyclicMappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._CyclicMappingRegion);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__Element = LIBRARY.createFragment(Types._CyclicMappingRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__MappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__NamedElement = LIBRARY.createFragment(Types._CyclicMappingRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__OclAny = LIBRARY.createFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__OclElement = LIBRARY.createFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__Region = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__Symbolable = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _CyclicPartition__CompositePartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._CompositePartition);
+		private static final @NonNull FlatFragment _CyclicPartition__CyclicPartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._CyclicPartition);
+		private static final @NonNull FlatFragment _CyclicPartition__Element = LIBRARY.createFragment(Types._CyclicPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _CyclicPartition__MappingPartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _CyclicPartition__NamedElement = LIBRARY.createFragment(Types._CyclicPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _CyclicPartition__OclAny = LIBRARY.createFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _CyclicPartition__OclElement = LIBRARY.createFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _CyclicPartition__Partition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _DependencyEdge__DependencyEdge = LIBRARY.createFragment(Types._DependencyEdge, QVTscheduleTables.Types._DependencyEdge);
+		private static final @NonNull FlatFragment _DependencyEdge__Edge = LIBRARY.createFragment(Types._DependencyEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _DependencyEdge__Element = LIBRARY.createFragment(Types._DependencyEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _DependencyEdge__OclAny = LIBRARY.createFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _DependencyEdge__OclElement = LIBRARY.createFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _DependencyNode__ConnectionEnd = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _DependencyNode__DependencyNode = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._DependencyNode);
+		private static final @NonNull FlatFragment _DependencyNode__Element = LIBRARY.createFragment(Types._DependencyNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _DependencyNode__Node = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _DependencyNode__OclAny = LIBRARY.createFragment(Types._DependencyNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _DependencyNode__OclElement = LIBRARY.createFragment(Types._DependencyNode, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _DispatchRegion__DispatchRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._DispatchRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__Element = LIBRARY.createFragment(Types._DispatchRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _DispatchRegion__MappingRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__NamedElement = LIBRARY.createFragment(Types._DispatchRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _DispatchRegion__OclAny = LIBRARY.createFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _DispatchRegion__OclElement = LIBRARY.createFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _DispatchRegion__Region = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _DispatchRegion__RuleRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._RuleRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__Symbolable = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _Edge__Edge = LIBRARY.createFragment(Types._Edge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _Edge__Element = LIBRARY.createFragment(Types._Edge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Edge__OclAny = LIBRARY.createFragment(Types._Edge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Edge__OclElement = LIBRARY.createFragment(Types._Edge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _EdgeConnection__Connection = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._Connection);
+		private static final @NonNull FlatFragment _EdgeConnection__EdgeConnection = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._EdgeConnection);
+		private static final @NonNull FlatFragment _EdgeConnection__Element = LIBRARY.createFragment(Types._EdgeConnection, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _EdgeConnection__OclAny = LIBRARY.createFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _EdgeConnection__OclElement = LIBRARY.createFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _EdgeConnection__Symbolable = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _EnumLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _EnumLiteralNode__Element = LIBRARY.createFragment(Types._EnumLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _EnumLiteralNode__EnumLiteralNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._EnumLiteralNode);
+		private static final @NonNull FlatFragment _EnumLiteralNode__MappingNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _EnumLiteralNode__Node = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _EnumLiteralNode__OclAny = LIBRARY.createFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _EnumLiteralNode__OclElement = LIBRARY.createFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _EnumLiteralNode__OperationNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _ErrorNode__ConnectionEnd = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ErrorNode__Element = LIBRARY.createFragment(Types._ErrorNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ErrorNode__ErrorNode = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._ErrorNode);
+		private static final @NonNull FlatFragment _ErrorNode__MappingNode = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _ErrorNode__Node = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ErrorNode__OclAny = LIBRARY.createFragment(Types._ErrorNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ErrorNode__OclElement = LIBRARY.createFragment(Types._ErrorNode, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _ExpressionEdge__Edge = LIBRARY.createFragment(Types._ExpressionEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ExpressionEdge__Element = LIBRARY.createFragment(Types._ExpressionEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ExpressionEdge__ExpressionEdge = LIBRARY.createFragment(Types._ExpressionEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ExpressionEdge__OclAny = LIBRARY.createFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ExpressionEdge__OclElement = LIBRARY.createFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _IfNode__ConnectionEnd = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _IfNode__Element = LIBRARY.createFragment(Types._IfNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _IfNode__IfNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._IfNode);
+		private static final @NonNull FlatFragment _IfNode__MappingNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _IfNode__Node = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _IfNode__OclAny = LIBRARY.createFragment(Types._IfNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _IfNode__OclElement = LIBRARY.createFragment(Types._IfNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _IfNode__OperationNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _IncludesEdge__Edge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _IncludesEdge__Element = LIBRARY.createFragment(Types._IncludesEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _IncludesEdge__ExpressionEdge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _IncludesEdge__IncludesEdge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._IncludesEdge);
+		private static final @NonNull FlatFragment _IncludesEdge__OclAny = LIBRARY.createFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _IncludesEdge__OclElement = LIBRARY.createFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _InputNode__ConnectionEnd = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _InputNode__Element = LIBRARY.createFragment(Types._InputNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _InputNode__InputNode = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._InputNode);
+		private static final @NonNull FlatFragment _InputNode__Node = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _InputNode__OclAny = LIBRARY.createFragment(Types._InputNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _InputNode__OclElement = LIBRARY.createFragment(Types._InputNode, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _IteratedEdge__Edge = LIBRARY.createFragment(Types._IteratedEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _IteratedEdge__Element = LIBRARY.createFragment(Types._IteratedEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _IteratedEdge__IteratedEdge = LIBRARY.createFragment(Types._IteratedEdge, QVTscheduleTables.Types._IteratedEdge);
+		private static final @NonNull FlatFragment _IteratedEdge__OclAny = LIBRARY.createFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _IteratedEdge__OclElement = LIBRARY.createFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _IteratorNode__ConnectionEnd = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _IteratorNode__Element = LIBRARY.createFragment(Types._IteratorNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _IteratorNode__IteratorNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._IteratorNode);
+		private static final @NonNull FlatFragment _IteratorNode__MappingNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _IteratorNode__Node = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _IteratorNode__OclAny = LIBRARY.createFragment(Types._IteratorNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _IteratorNode__OclElement = LIBRARY.createFragment(Types._IteratorNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _IteratorNode__VariableNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._VariableNode);
+
+		private static final @NonNull FlatFragment _KeyPartEdge__ConnectionEnd = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _KeyPartEdge__Edge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _KeyPartEdge__Element = LIBRARY.createFragment(Types._KeyPartEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _KeyPartEdge__KeyPartEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._KeyPartEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__NavigableEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__NavigationEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__OclAny = LIBRARY.createFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _KeyPartEdge__OclElement = LIBRARY.createFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _KeyedValueNode__ConnectionEnd = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _KeyedValueNode__Element = LIBRARY.createFragment(Types._KeyedValueNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _KeyedValueNode__KeyedValueNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._KeyedValueNode);
+		private static final @NonNull FlatFragment _KeyedValueNode__MappingNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _KeyedValueNode__Node = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _KeyedValueNode__OclAny = LIBRARY.createFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _KeyedValueNode__OclElement = LIBRARY.createFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _KeyedValueNode__OperationNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _LoadingPartition__Element = LIBRARY.createFragment(Types._LoadingPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _LoadingPartition__LoadingPartition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._LoadingPartition);
+		private static final @NonNull FlatFragment _LoadingPartition__MappingPartition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _LoadingPartition__NamedElement = LIBRARY.createFragment(Types._LoadingPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _LoadingPartition__OclAny = LIBRARY.createFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _LoadingPartition__OclElement = LIBRARY.createFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _LoadingPartition__Partition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _LoadingRegion__Element = LIBRARY.createFragment(Types._LoadingRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _LoadingRegion__LoadingRegion = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._LoadingRegion);
+		private static final @NonNull FlatFragment _LoadingRegion__NamedElement = LIBRARY.createFragment(Types._LoadingRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _LoadingRegion__OclAny = LIBRARY.createFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _LoadingRegion__OclElement = LIBRARY.createFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _LoadingRegion__Region = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _LoadingRegion__Symbolable = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _MapLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MapLiteralNode__Element = LIBRARY.createFragment(Types._MapLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MapLiteralNode__MapLiteralNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MapLiteralNode);
+		private static final @NonNull FlatFragment _MapLiteralNode__MappingNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _MapLiteralNode__Node = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MapLiteralNode__OclAny = LIBRARY.createFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MapLiteralNode__OclElement = LIBRARY.createFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _MapLiteralNode__OperationNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _MapPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__Edge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _MapPartEdge__Element = LIBRARY.createFragment(Types._MapPartEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MapPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__MapPartEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._MapPartEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__OclAny = LIBRARY.createFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MapPartEdge__OclElement = LIBRARY.createFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _MapPartNode__ConnectionEnd = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MapPartNode__Element = LIBRARY.createFragment(Types._MapPartNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MapPartNode__MapPartNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._MapPartNode);
+		private static final @NonNull FlatFragment _MapPartNode__MappingNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _MapPartNode__Node = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MapPartNode__OclAny = LIBRARY.createFragment(Types._MapPartNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MapPartNode__OclElement = LIBRARY.createFragment(Types._MapPartNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _MapPartNode__OperationNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _MappingNode__ConnectionEnd = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MappingNode__Element = LIBRARY.createFragment(Types._MappingNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MappingNode__MappingNode = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _MappingNode__Node = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MappingNode__OclAny = LIBRARY.createFragment(Types._MappingNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MappingNode__OclElement = LIBRARY.createFragment(Types._MappingNode, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _MappingPartition__Element = LIBRARY.createFragment(Types._MappingPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MappingPartition__MappingPartition = LIBRARY.createFragment(Types._MappingPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _MappingPartition__NamedElement = LIBRARY.createFragment(Types._MappingPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _MappingPartition__OclAny = LIBRARY.createFragment(Types._MappingPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MappingPartition__OclElement = LIBRARY.createFragment(Types._MappingPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _MappingPartition__Partition = LIBRARY.createFragment(Types._MappingPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _MappingRegion__Element = LIBRARY.createFragment(Types._MappingRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MappingRegion__MappingRegion = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _MappingRegion__NamedElement = LIBRARY.createFragment(Types._MappingRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _MappingRegion__OclAny = LIBRARY.createFragment(Types._MappingRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MappingRegion__OclElement = LIBRARY.createFragment(Types._MappingRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _MappingRegion__Region = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _MappingRegion__Symbolable = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _MergedPartition__BasicPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._BasicPartition);
+		private static final @NonNull FlatFragment _MergedPartition__Element = LIBRARY.createFragment(Types._MergedPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _MergedPartition__MappingPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _MergedPartition__MergedPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._MergedPartition);
+		private static final @NonNull FlatFragment _MergedPartition__NamedElement = LIBRARY.createFragment(Types._MergedPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _MergedPartition__OclAny = LIBRARY.createFragment(Types._MergedPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _MergedPartition__OclElement = LIBRARY.createFragment(Types._MergedPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _MergedPartition__Partition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _NavigableEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NavigableEdge__Edge = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _NavigableEdge__Element = LIBRARY.createFragment(Types._NavigableEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NavigableEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull FlatFragment _NavigableEdge__OclAny = LIBRARY.createFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NavigableEdge__OclElement = LIBRARY.createFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _NavigationEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NavigationEdge__Edge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _NavigationEdge__Element = LIBRARY.createFragment(Types._NavigationEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NavigationEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull FlatFragment _NavigationEdge__NavigationEdge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _NavigationEdge__OclAny = LIBRARY.createFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NavigationEdge__OclElement = LIBRARY.createFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _Node__ConnectionEnd = LIBRARY.createFragment(Types._Node, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _Node__Element = LIBRARY.createFragment(Types._Node, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Node__Node = LIBRARY.createFragment(Types._Node, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _Node__OclAny = LIBRARY.createFragment(Types._Node, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Node__OclElement = LIBRARY.createFragment(Types._Node, OCLstdlibTables.Types._OclElement);
+
+		private static final @NonNull FlatFragment _NodeConnection__Connection = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._Connection);
+		private static final @NonNull FlatFragment _NodeConnection__Element = LIBRARY.createFragment(Types._NodeConnection, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NodeConnection__NodeConnection = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._NodeConnection);
+		private static final @NonNull FlatFragment _NodeConnection__OclAny = LIBRARY.createFragment(Types._NodeConnection, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NodeConnection__OclElement = LIBRARY.createFragment(Types._NodeConnection, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _NodeConnection__Symbolable = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _NonPartition__Element = LIBRARY.createFragment(Types._NonPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NonPartition__MappingPartition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _NonPartition__NamedElement = LIBRARY.createFragment(Types._NonPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _NonPartition__NonPartition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._NonPartition);
+		private static final @NonNull FlatFragment _NonPartition__OclAny = LIBRARY.createFragment(Types._NonPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NonPartition__OclElement = LIBRARY.createFragment(Types._NonPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _NonPartition__Partition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _NullLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NullLiteralNode__Element = LIBRARY.createFragment(Types._NullLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NullLiteralNode__MappingNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _NullLiteralNode__Node = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _NullLiteralNode__NullLiteralNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._NullLiteralNode);
+		private static final @NonNull FlatFragment _NullLiteralNode__OclAny = LIBRARY.createFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NullLiteralNode__OclElement = LIBRARY.createFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _NullLiteralNode__OperationNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _Number__Number = LIBRARY.createFragment(Types._Number, QVTscheduleTables.Types._Number);
+		private static final @NonNull FlatFragment _Number__OclAny = LIBRARY.createFragment(Types._Number, OCLstdlibTables.Types._OclAny);
+
+		private static final @NonNull FlatFragment _NumericLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NumericLiteralNode__Element = LIBRARY.createFragment(Types._NumericLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _NumericLiteralNode__MappingNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _NumericLiteralNode__Node = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _NumericLiteralNode__NumericLiteralNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._NumericLiteralNode);
+		private static final @NonNull FlatFragment _NumericLiteralNode__OclAny = LIBRARY.createFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _NumericLiteralNode__OclElement = LIBRARY.createFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _NumericLiteralNode__OperationNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _OperationCallNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _OperationCallNode__Element = LIBRARY.createFragment(Types._OperationCallNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationCallNode__MappingNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _OperationCallNode__Node = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _OperationCallNode__OclAny = LIBRARY.createFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationCallNode__OclElement = LIBRARY.createFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationCallNode__OperationCallNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationCallNode);
+		private static final @NonNull FlatFragment _OperationCallNode__OperationNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _OperationNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _OperationNode__Element = LIBRARY.createFragment(Types._OperationNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationNode__MappingNode = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _OperationNode__Node = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _OperationNode__OclAny = LIBRARY.createFragment(Types._OperationNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationNode__OclElement = LIBRARY.createFragment(Types._OperationNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationNode__OperationNode = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._OperationNode);
+
+		private static final @NonNull FlatFragment _OperationParameterEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__Edge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__Element = LIBRARY.createFragment(Types._OperationParameterEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationParameterEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__OclAny = LIBRARY.createFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationParameterEdge__OclElement = LIBRARY.createFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationParameterEdge__OperationParameterEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._OperationParameterEdge);
+
+		private static final @NonNull FlatFragment _OperationRegion__Element = LIBRARY.createFragment(Types._OperationRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationRegion__NamedElement = LIBRARY.createFragment(Types._OperationRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _OperationRegion__OclAny = LIBRARY.createFragment(Types._OperationRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationRegion__OclElement = LIBRARY.createFragment(Types._OperationRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationRegion__OperationRegion = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._OperationRegion);
+		private static final @NonNull FlatFragment _OperationRegion__Region = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _OperationRegion__Symbolable = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _OperationSelfEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__Edge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__Element = LIBRARY.createFragment(Types._OperationSelfEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationSelfEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__OclAny = LIBRARY.createFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _OperationSelfEdge__OclElement = LIBRARY.createFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _OperationSelfEdge__OperationSelfEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._OperationSelfEdge);
+
+		private static final @NonNull FlatFragment _Partition__Element = LIBRARY.createFragment(Types._Partition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Partition__NamedElement = LIBRARY.createFragment(Types._Partition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Partition__OclAny = LIBRARY.createFragment(Types._Partition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Partition__OclElement = LIBRARY.createFragment(Types._Partition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Partition__Partition = LIBRARY.createFragment(Types._Partition, QVTscheduleTables.Types._Partition);
+
+		private static final @NonNull FlatFragment _PatternTypedNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _PatternTypedNode__Element = LIBRARY.createFragment(Types._PatternTypedNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _PatternTypedNode__MappingNode = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _PatternTypedNode__Node = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _PatternTypedNode__OclAny = LIBRARY.createFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _PatternTypedNode__OclElement = LIBRARY.createFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _PatternTypedNode__PatternTypedNode = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._PatternTypedNode);
+
+		private static final @NonNull FlatFragment _PatternVariableNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _PatternVariableNode__Element = LIBRARY.createFragment(Types._PatternVariableNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _PatternVariableNode__MappingNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _PatternVariableNode__Node = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _PatternVariableNode__OclAny = LIBRARY.createFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _PatternVariableNode__OclElement = LIBRARY.createFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _PatternVariableNode__PatternVariableNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._PatternVariableNode);
+		private static final @NonNull FlatFragment _PatternVariableNode__VariableNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._VariableNode);
+
+		private static final @NonNull FlatFragment _PredicateEdge__Edge = LIBRARY.createFragment(Types._PredicateEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _PredicateEdge__Element = LIBRARY.createFragment(Types._PredicateEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _PredicateEdge__OclAny = LIBRARY.createFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _PredicateEdge__OclElement = LIBRARY.createFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _PredicateEdge__PredicateEdge = LIBRARY.createFragment(Types._PredicateEdge, QVTscheduleTables.Types._PredicateEdge);
+
+		private static final @NonNull FlatFragment _PropertyDatum__AbstractDatum = LIBRARY.createFragment(Types._PropertyDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _PropertyDatum__Element = LIBRARY.createFragment(Types._PropertyDatum, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _PropertyDatum__NamedElement = LIBRARY.createFragment(Types._PropertyDatum, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _PropertyDatum__OclAny = LIBRARY.createFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _PropertyDatum__OclElement = LIBRARY.createFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _PropertyDatum__PropertyDatum = LIBRARY.createFragment(Types._PropertyDatum, QVTscheduleTables.Types._PropertyDatum);
+
+		private static final @NonNull FlatFragment _RecursionEdge__Edge = LIBRARY.createFragment(Types._RecursionEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _RecursionEdge__Element = LIBRARY.createFragment(Types._RecursionEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RecursionEdge__OclAny = LIBRARY.createFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RecursionEdge__OclElement = LIBRARY.createFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RecursionEdge__RecursionEdge = LIBRARY.createFragment(Types._RecursionEdge, QVTscheduleTables.Types._RecursionEdge);
+
+		private static final @NonNull FlatFragment _Region__Element = LIBRARY.createFragment(Types._Region, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _Region__NamedElement = LIBRARY.createFragment(Types._Region, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Region__OclAny = LIBRARY.createFragment(Types._Region, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Region__OclElement = LIBRARY.createFragment(Types._Region, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Region__Region = LIBRARY.createFragment(Types._Region, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _Region__Symbolable = LIBRARY.createFragment(Types._Region, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _Role__OclAny = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Role__OclElement = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Role__OclEnumeration = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull FlatFragment _Role__OclType = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclType);
+		private static final @NonNull FlatFragment _Role__Role = LIBRARY.createFragment(Types._Role, QVTscheduleTables.Types._Role);
+
+		private static final @NonNull FlatFragment _RootPartition__CompositePartition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._CompositePartition);
+		private static final @NonNull FlatFragment _RootPartition__Element = LIBRARY.createFragment(Types._RootPartition, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RootPartition__NamedElement = LIBRARY.createFragment(Types._RootPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RootPartition__OclAny = LIBRARY.createFragment(Types._RootPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RootPartition__OclElement = LIBRARY.createFragment(Types._RootPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RootPartition__Partition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _RootPartition__RootPartition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._RootPartition);
+
+		private static final @NonNull FlatFragment _RootRegion__Element = LIBRARY.createFragment(Types._RootRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RootRegion__NamedElement = LIBRARY.createFragment(Types._RootRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RootRegion__OclAny = LIBRARY.createFragment(Types._RootRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RootRegion__OclElement = LIBRARY.createFragment(Types._RootRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RootRegion__Region = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _RootRegion__RootRegion = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._RootRegion);
+		private static final @NonNull FlatFragment _RootRegion__Symbolable = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _RuleRegion__Element = LIBRARY.createFragment(Types._RuleRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _RuleRegion__MappingRegion = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _RuleRegion__NamedElement = LIBRARY.createFragment(Types._RuleRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _RuleRegion__OclAny = LIBRARY.createFragment(Types._RuleRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _RuleRegion__OclElement = LIBRARY.createFragment(Types._RuleRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _RuleRegion__Region = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _RuleRegion__RuleRegion = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._RuleRegion);
+		private static final @NonNull FlatFragment _RuleRegion__Symbolable = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _ScheduleModel__Element = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ScheduleModel__Model = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Model);
+		private static final @NonNull FlatFragment _ScheduleModel__NamedElement = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _ScheduleModel__Namespace = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Namespace);
+		private static final @NonNull FlatFragment _ScheduleModel__OclAny = LIBRARY.createFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ScheduleModel__OclElement = LIBRARY.createFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _ScheduleModel__ScheduleModel = LIBRARY.createFragment(Types._ScheduleModel, QVTscheduleTables.Types._ScheduleModel);
+
+		private static final @NonNull FlatFragment _ShadowNode__ConnectionEnd = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ShadowNode__Element = LIBRARY.createFragment(Types._ShadowNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ShadowNode__MappingNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _ShadowNode__Node = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ShadowNode__OclAny = LIBRARY.createFragment(Types._ShadowNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ShadowNode__OclElement = LIBRARY.createFragment(Types._ShadowNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _ShadowNode__OperationNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _ShadowNode__ShadowNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._ShadowNode);
+
+		private static final @NonNull FlatFragment _ShadowPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__Edge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__Element = LIBRARY.createFragment(Types._ShadowPartEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _ShadowPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__OclAny = LIBRARY.createFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _ShadowPartEdge__OclElement = LIBRARY.createFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _ShadowPartEdge__ShadowPartEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ShadowPartEdge);
+
+		private static final @NonNull FlatFragment _StringLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _StringLiteralNode__Element = LIBRARY.createFragment(Types._StringLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _StringLiteralNode__MappingNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _StringLiteralNode__Node = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _StringLiteralNode__OclAny = LIBRARY.createFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _StringLiteralNode__OclElement = LIBRARY.createFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _StringLiteralNode__OperationNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _StringLiteralNode__StringLiteralNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._StringLiteralNode);
+
+		private static final @NonNull FlatFragment _SuccessEdge__ConnectionEnd = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _SuccessEdge__Edge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _SuccessEdge__Element = LIBRARY.createFragment(Types._SuccessEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _SuccessEdge__NavigableEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull FlatFragment _SuccessEdge__NavigationEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _SuccessEdge__OclAny = LIBRARY.createFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _SuccessEdge__OclElement = LIBRARY.createFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _SuccessEdge__SuccessEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._SuccessEdge);
+
+		private static final @NonNull FlatFragment _SuccessNode__ConnectionEnd = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _SuccessNode__Element = LIBRARY.createFragment(Types._SuccessNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _SuccessNode__MappingNode = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _SuccessNode__Node = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _SuccessNode__OclAny = LIBRARY.createFragment(Types._SuccessNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _SuccessNode__OclElement = LIBRARY.createFragment(Types._SuccessNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _SuccessNode__SuccessNode = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._SuccessNode);
+
+		private static final @NonNull FlatFragment _Symbolable__OclAny = LIBRARY.createFragment(Types._Symbolable, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Symbolable__OclElement = LIBRARY.createFragment(Types._Symbolable, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Symbolable__Symbolable = LIBRARY.createFragment(Types._Symbolable, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull FlatFragment _TupleLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _TupleLiteralNode__Element = LIBRARY.createFragment(Types._TupleLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TupleLiteralNode__MappingNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _TupleLiteralNode__Node = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _TupleLiteralNode__OclAny = LIBRARY.createFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TupleLiteralNode__OclElement = LIBRARY.createFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TupleLiteralNode__OperationNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _TupleLiteralNode__TupleLiteralNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._TupleLiteralNode);
+
+		private static final @NonNull FlatFragment _TuplePartEdge__ArgumentEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _TuplePartEdge__Edge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _TuplePartEdge__Element = LIBRARY.createFragment(Types._TuplePartEdge, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TuplePartEdge__ExpressionEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _TuplePartEdge__OclAny = LIBRARY.createFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TuplePartEdge__OclElement = LIBRARY.createFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TuplePartEdge__TuplePartEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._TuplePartEdge);
+
+		private static final @NonNull FlatFragment _TypeLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _TypeLiteralNode__Element = LIBRARY.createFragment(Types._TypeLiteralNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _TypeLiteralNode__MappingNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _TypeLiteralNode__Node = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _TypeLiteralNode__OclAny = LIBRARY.createFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _TypeLiteralNode__OclElement = LIBRARY.createFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _TypeLiteralNode__OperationNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _TypeLiteralNode__TypeLiteralNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._TypeLiteralNode);
+
+		private static final @NonNull FlatFragment _UnknownNode__ConnectionEnd = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _UnknownNode__Element = LIBRARY.createFragment(Types._UnknownNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _UnknownNode__MappingNode = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _UnknownNode__Node = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _UnknownNode__OclAny = LIBRARY.createFragment(Types._UnknownNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _UnknownNode__OclElement = LIBRARY.createFragment(Types._UnknownNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _UnknownNode__UnknownNode = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._UnknownNode);
+
+		private static final @NonNull FlatFragment _Utility__OclAny = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _Utility__OclElement = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _Utility__OclEnumeration = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclEnumeration);
+		private static final @NonNull FlatFragment _Utility__OclType = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclType);
+		private static final @NonNull FlatFragment _Utility__Utility = LIBRARY.createFragment(Types._Utility, QVTscheduleTables.Types._Utility);
+
+		private static final @NonNull FlatFragment _VariableNode__ConnectionEnd = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _VariableNode__Element = LIBRARY.createFragment(Types._VariableNode, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _VariableNode__MappingNode = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._MappingNode);
+		private static final @NonNull FlatFragment _VariableNode__Node = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _VariableNode__OclAny = LIBRARY.createFragment(Types._VariableNode, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _VariableNode__OclElement = LIBRARY.createFragment(Types._VariableNode, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _VariableNode__VariableNode = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._VariableNode);
+
+		private static final @NonNull FlatFragment _VerdictRegion__Element = LIBRARY.createFragment(Types._VerdictRegion, PivotTables.Types._Element);
+		private static final @NonNull FlatFragment _VerdictRegion__MappingRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _VerdictRegion__NamedElement = LIBRARY.createFragment(Types._VerdictRegion, PivotTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _VerdictRegion__OclAny = LIBRARY.createFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull FlatFragment _VerdictRegion__OclElement = LIBRARY.createFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull FlatFragment _VerdictRegion__Region = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._Region);
+		private static final @NonNull FlatFragment _VerdictRegion__RuleRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._RuleRegion);
+		private static final @NonNull FlatFragment _VerdictRegion__Symbolable = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _VerdictRegion__VerdictRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._VerdictRegion);
 
 		static {
 			Init.initEnd();
@@ -1078,233 +1074,233 @@ public class QVTscheduleTables extends AbstractTables
 		}
 
 
-		public static final @NonNull ExecutorProperty _BasicPartition__constantEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES, Types._BasicPartition, 0);
-		public static final @NonNull ExecutorProperty _BasicPartition__constantNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES, Types._BasicPartition, 1);
-		public static final @NonNull ExecutorProperty _BasicPartition__constantSuccessFalseNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, Types._BasicPartition, 2);
-		public static final @NonNull ExecutorProperty _BasicPartition__constantSuccessTrueNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, Types._BasicPartition, 3);
-		public static final @NonNull ExecutorProperty _BasicPartition__explicitPredecessors = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__EXPLICIT_PREDECESSORS, Types._BasicPartition, 4);
-		public static final @NonNull ExecutorProperty _BasicPartition__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES, Types._BasicPartition, 5);
-		public static final @NonNull ExecutorProperty _BasicPartition__loadedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES, Types._BasicPartition, 6);
-		public static final @NonNull ExecutorProperty _BasicPartition__loadedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES, Types._BasicPartition, 7);
-		public static final @NonNull ExecutorProperty _BasicPartition__owningMergedPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__OWNING_MERGED_PARTITION, Types._BasicPartition, 8);
-		public static final @NonNull ExecutorProperty _BasicPartition__predicatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, Types._BasicPartition, 9);
-		public static final @NonNull ExecutorProperty _BasicPartition__predicatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, Types._BasicPartition, 10);
-		public static final @NonNull ExecutorProperty _BasicPartition__realizedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, Types._BasicPartition, 11);
-		public static final @NonNull ExecutorProperty _BasicPartition__realizedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, Types._BasicPartition, 12);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, Types._BasicPartition, 13);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, Types._BasicPartition, 14);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculationNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, Types._BasicPartition, 15);
+		public static final @NonNull Property _BasicPartition__constantEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES, Types._BasicPartition, 0);
+		public static final @NonNull Property _BasicPartition__constantNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES, Types._BasicPartition, 1);
+		public static final @NonNull Property _BasicPartition__constantSuccessFalseNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, Types._BasicPartition, 2);
+		public static final @NonNull Property _BasicPartition__constantSuccessTrueNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, Types._BasicPartition, 3);
+		public static final @NonNull Property _BasicPartition__explicitPredecessors = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__EXPLICIT_PREDECESSORS, Types._BasicPartition, 4);
+		public static final @NonNull Property _BasicPartition__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES, Types._BasicPartition, 5);
+		public static final @NonNull Property _BasicPartition__loadedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES, Types._BasicPartition, 6);
+		public static final @NonNull Property _BasicPartition__loadedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES, Types._BasicPartition, 7);
+		public static final @NonNull Property _BasicPartition__owningMergedPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__OWNING_MERGED_PARTITION, Types._BasicPartition, 8);
+		public static final @NonNull Property _BasicPartition__predicatedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, Types._BasicPartition, 9);
+		public static final @NonNull Property _BasicPartition__predicatedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, Types._BasicPartition, 10);
+		public static final @NonNull Property _BasicPartition__realizedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, Types._BasicPartition, 11);
+		public static final @NonNull Property _BasicPartition__realizedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, Types._BasicPartition, 12);
+		public static final @NonNull Property _BasicPartition__speculatedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, Types._BasicPartition, 13);
+		public static final @NonNull Property _BasicPartition__speculatedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, Types._BasicPartition, 14);
+		public static final @NonNull Property _BasicPartition__speculationNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, Types._BasicPartition, 15);
 
-		public static final @NonNull ExecutorProperty _BooleanLiteralNode__booleanValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, Types._BooleanLiteralNode, 0);
+		public static final @NonNull Property _BooleanLiteralNode__booleanValue = LIBRARY.createProperty(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, Types._BooleanLiteralNode, 0);
 
-		public static final @NonNull ExecutorProperty _CastEdge__referredClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM, Types._CastEdge, 0);
+		public static final @NonNull Property _CastEdge__referredClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM, Types._CastEdge, 0);
 
-		public static final @NonNull ExecutorProperty _ClassDatum__completeClasses = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASSES, Types._ClassDatum, 0);
-		public static final @NonNull ExecutorProperty _ClassDatum__ownedPropertyDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNED_PROPERTY_DATUMS, Types._ClassDatum, 1);
-		public static final @NonNull ExecutorProperty _ClassDatum__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNING_SCHEDULE_MODEL, Types._ClassDatum, 2);
-		public static final @NonNull ExecutorProperty _ClassDatum__referredClass = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, Types._ClassDatum, 3);
-		public static final @NonNull ExecutorProperty _ClassDatum__referredTypedModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_TYPED_MODEL, Types._ClassDatum, 4);
-		public static final @NonNull ExecutorProperty _ClassDatum__superClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS, Types._ClassDatum, 5);
-		public static final @NonNull ExecutorProperty _ClassDatum__CastEdge__referredClassDatum = new ExecutorPropertyWithImplementation("CastEdge", Types._ClassDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM));
-		public static final @NonNull ExecutorProperty _ClassDatum__ClassDatum__superClassDatums = new ExecutorPropertyWithImplementation("ClassDatum", Types._ClassDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS));
-		public static final @NonNull ExecutorProperty _ClassDatum__CollectionClassDatum__elementalClassDatum = new ExecutorPropertyWithImplementation("CollectionClassDatum", Types._ClassDatum, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM));
-		public static final @NonNull ExecutorProperty _ClassDatum__KeyedValueNode__classDatumValue = new ExecutorPropertyWithImplementation("KeyedValueNode", Types._ClassDatum, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE));
-		public static final @NonNull ExecutorProperty _ClassDatum__Node__classDatum = new ExecutorPropertyWithImplementation("Node", Types._ClassDatum, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM));
-		public static final @NonNull ExecutorProperty _ClassDatum__NodeConnection__classDatum = new ExecutorPropertyWithImplementation("NodeConnection", Types._ClassDatum, 11, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM));
-		public static final @NonNull ExecutorProperty _ClassDatum__PropertyDatum__targetClassDatum = new ExecutorPropertyWithImplementation("PropertyDatum", Types._ClassDatum, 12, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM));
+		public static final @NonNull Property _ClassDatum__completeClasses = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASSES, Types._ClassDatum, 0);
+		public static final @NonNull Property _ClassDatum__ownedPropertyDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNED_PROPERTY_DATUMS, Types._ClassDatum, 1);
+		public static final @NonNull Property _ClassDatum__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNING_SCHEDULE_MODEL, Types._ClassDatum, 2);
+		public static final @NonNull Property _ClassDatum__referredClass = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, Types._ClassDatum, 3);
+		public static final @NonNull Property _ClassDatum__referredTypedModel = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_TYPED_MODEL, Types._ClassDatum, 4);
+		public static final @NonNull Property _ClassDatum__superClassDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS, Types._ClassDatum, 5);
+		public static final @NonNull Property _ClassDatum__CastEdge__referredClassDatum = LIBRARY.createOppositeProperty("CastEdge", Types._ClassDatum, 6, QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__ClassDatum__superClassDatums = LIBRARY.createOppositeProperty("ClassDatum", Types._ClassDatum, 7, QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS);
+		public static final @NonNull Property _ClassDatum__CollectionClassDatum__elementalClassDatum = LIBRARY.createOppositeProperty("CollectionClassDatum", Types._ClassDatum, 8, QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__KeyedValueNode__classDatumValue = LIBRARY.createOppositeProperty("KeyedValueNode", Types._ClassDatum, 9, QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE);
+		public static final @NonNull Property _ClassDatum__Node__classDatum = LIBRARY.createOppositeProperty("Node", Types._ClassDatum, 10, QVTschedulePackage.Literals.NODE__CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__NodeConnection__classDatum = LIBRARY.createOppositeProperty("NodeConnection", Types._ClassDatum, 11, QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__PropertyDatum__targetClassDatum = LIBRARY.createOppositeProperty("PropertyDatum", Types._ClassDatum, 12, QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM);
 
-		public static final @NonNull ExecutorProperty _Cluster__depth = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__DEPTH, Types._Cluster, 0);
-		public static final @NonNull ExecutorProperty _Cluster__memberEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, Types._Cluster, 1);
-		public static final @NonNull ExecutorProperty _Cluster__memberNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_NODES, Types._Cluster, 2);
-		public static final @NonNull ExecutorProperty _Cluster__owningRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__OWNING_REGION, Types._Cluster, 3);
-		public static final @NonNull ExecutorProperty _Cluster__precedingClusters = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__PRECEDING_CLUSTERS, Types._Cluster, 4);
-		public static final @NonNull ExecutorProperty _Cluster__succeedingClusters = new EcoreExecutorProperty(QVTschedulePackage.Literals.CLUSTER__SUCCEEDING_CLUSTERS, Types._Cluster, 5);
+		public static final @NonNull Property _Cluster__depth = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__DEPTH, Types._Cluster, 0);
+		public static final @NonNull Property _Cluster__memberEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, Types._Cluster, 1);
+		public static final @NonNull Property _Cluster__memberNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_NODES, Types._Cluster, 2);
+		public static final @NonNull Property _Cluster__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__OWNING_REGION, Types._Cluster, 3);
+		public static final @NonNull Property _Cluster__precedingClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__PRECEDING_CLUSTERS, Types._Cluster, 4);
+		public static final @NonNull Property _Cluster__succeedingClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__SUCCEEDING_CLUSTERS, Types._Cluster, 5);
 
-		public static final @NonNull ExecutorProperty _CollectionClassDatum__elementalClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM, Types._CollectionClassDatum, 0);
+		public static final @NonNull Property _CollectionClassDatum__elementalClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM, Types._CollectionClassDatum, 0);
 
-		public static final @NonNull ExecutorProperty _CollectionPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.COLLECTION_PART_EDGE__REFERRED_PART, Types._CollectionPartEdge, 0);
+		public static final @NonNull Property _CollectionPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.COLLECTION_PART_EDGE__REFERRED_PART, Types._CollectionPartEdge, 0);
 
-		public static final @NonNull ExecutorProperty _CompositePartition__ownedMappingPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, Types._CompositePartition, 0);
+		public static final @NonNull Property _CompositePartition__ownedMappingPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, Types._CompositePartition, 0);
 
-		public static final @NonNull ExecutorProperty _Connection__commonPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION, Types._Connection, 0);
-		public static final @NonNull ExecutorProperty _Connection__connectionRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._Connection, 1);
-		public static final @NonNull ExecutorProperty _Connection__intermediatePartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS, Types._Connection, 2);
-		public static final @NonNull ExecutorProperty _Connection__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__NAME, Types._Connection, 3);
-		public static final @NonNull ExecutorProperty _Connection__owningRootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__OWNING_ROOT_REGION, Types._Connection, 4);
-		public static final @NonNull ExecutorProperty _Connection__sourceEnds = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, Types._Connection, 5);
+		public static final @NonNull Property _Connection__commonPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION, Types._Connection, 0);
+		public static final @NonNull Property _Connection__connectionRole = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._Connection, 1);
+		public static final @NonNull Property _Connection__intermediatePartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS, Types._Connection, 2);
+		public static final @NonNull Property _Connection__name = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__NAME, Types._Connection, 3);
+		public static final @NonNull Property _Connection__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__OWNING_ROOT_REGION, Types._Connection, 4);
+		public static final @NonNull Property _Connection__sourceEnds = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, Types._Connection, 5);
 
-		public static final @NonNull ExecutorProperty _ConnectionEnd__Connection__sourceEnds = new ExecutorPropertyWithImplementation("Connection", Types._ConnectionEnd, 0, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS));
+		public static final @NonNull Property _ConnectionEnd__Connection__sourceEnds = LIBRARY.createOppositeProperty("Connection", Types._ConnectionEnd, 0, QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS);
 
-		public static final @NonNull ExecutorProperty _CyclicMappingRegion__elementRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS, Types._CyclicMappingRegion, 0);
+		public static final @NonNull Property _CyclicMappingRegion__elementRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS, Types._CyclicMappingRegion, 0);
 
-		public static final @NonNull ExecutorProperty _DispatchRegion__referredRuleRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION, Types._DispatchRegion, 0);
+		public static final @NonNull Property _DispatchRegion__referredRuleRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION, Types._DispatchRegion, 0);
 
-		public static final @NonNull ExecutorProperty _Edge__cluster = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__CLUSTER, Types._Edge, 0);
-		public static final @NonNull ExecutorProperty _Edge__edgeRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE, Types._Edge, 1);
-		public static final @NonNull ExecutorProperty _Edge__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__NAME, Types._Edge, 2);
-		public static final @NonNull ExecutorProperty _Edge__owningRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__OWNING_REGION, Types._Edge, 3);
-		public static final @NonNull ExecutorProperty _Edge__sourceNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Edge, 4);
-		public static final @NonNull ExecutorProperty _Edge__targetNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Edge, 5);
-		public static final @NonNull ExecutorProperty _Edge__utility = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE__UTILITY, Types._Edge, 6);
-		public static final @NonNull ExecutorProperty _Edge__BasicPartition__constantEdges = new ExecutorPropertyWithImplementation("BasicPartition", Types._Edge, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES));
-		public static final @NonNull ExecutorProperty _Edge__BasicPartition__loadedEdges = new ExecutorPropertyWithImplementation("BasicPartition", Types._Edge, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES));
-		public static final @NonNull ExecutorProperty _Edge__BasicPartition__predicatedEdges = new ExecutorPropertyWithImplementation("BasicPartition", Types._Edge, 9, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES));
-		public static final @NonNull ExecutorProperty _Edge__BasicPartition__realizedEdges = new ExecutorPropertyWithImplementation("BasicPartition", Types._Edge, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES));
-		public static final @NonNull ExecutorProperty _Edge__BasicPartition__speculatedEdges = new ExecutorPropertyWithImplementation("BasicPartition", Types._Edge, 11, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES));
+		public static final @NonNull Property _Edge__cluster = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__CLUSTER, Types._Edge, 0);
+		public static final @NonNull Property _Edge__edgeRole = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE, Types._Edge, 1);
+		public static final @NonNull Property _Edge__name = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__NAME, Types._Edge, 2);
+		public static final @NonNull Property _Edge__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__OWNING_REGION, Types._Edge, 3);
+		public static final @NonNull Property _Edge__sourceNode = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Edge, 4);
+		public static final @NonNull Property _Edge__targetNode = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Edge, 5);
+		public static final @NonNull Property _Edge__utility = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__UTILITY, Types._Edge, 6);
+		public static final @NonNull Property _Edge__BasicPartition__constantEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 7, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__loadedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 8, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__predicatedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 9, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__realizedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 10, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__speculatedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 11, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES);
 
-		public static final @NonNull ExecutorProperty _EdgeConnection__mandatoryTargetEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES, Types._EdgeConnection, 0);
-		public static final @NonNull ExecutorProperty _EdgeConnection__preferredTargetEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES, Types._EdgeConnection, 1);
-		public static final @NonNull ExecutorProperty _EdgeConnection__referredProperty = new EcoreExecutorProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__REFERRED_PROPERTY, Types._EdgeConnection, 2);
-		public static final @NonNull ExecutorProperty _EdgeConnection__NavigableEdge__incomingConnection = new ExecutorPropertyWithImplementation("NavigableEdge", Types._EdgeConnection, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION));
-		public static final @NonNull ExecutorProperty _EdgeConnection__NavigableEdge__outgoingConnections = new ExecutorPropertyWithImplementation("NavigableEdge", Types._EdgeConnection, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS));
+		public static final @NonNull Property _EdgeConnection__mandatoryTargetEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES, Types._EdgeConnection, 0);
+		public static final @NonNull Property _EdgeConnection__preferredTargetEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES, Types._EdgeConnection, 1);
+		public static final @NonNull Property _EdgeConnection__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__REFERRED_PROPERTY, Types._EdgeConnection, 2);
+		public static final @NonNull Property _EdgeConnection__NavigableEdge__incomingConnection = LIBRARY.createOppositeProperty("NavigableEdge", Types._EdgeConnection, 3, QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION);
+		public static final @NonNull Property _EdgeConnection__NavigableEdge__outgoingConnections = LIBRARY.createOppositeProperty("NavigableEdge", Types._EdgeConnection, 4, QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
 
-		public static final @NonNull ExecutorProperty _EnumLiteralNode__enumValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.ENUM_LITERAL_NODE__ENUM_VALUE, Types._EnumLiteralNode, 0);
+		public static final @NonNull Property _EnumLiteralNode__enumValue = LIBRARY.createProperty(QVTschedulePackage.Literals.ENUM_LITERAL_NODE__ENUM_VALUE, Types._EnumLiteralNode, 0);
 
-		public static final @NonNull ExecutorProperty _KeyPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART, Types._KeyPartEdge, 0);
+		public static final @NonNull Property _KeyPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART, Types._KeyPartEdge, 0);
 
-		public static final @NonNull ExecutorProperty _KeyedValueNode__classDatumValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, Types._KeyedValueNode, 0);
+		public static final @NonNull Property _KeyedValueNode__classDatumValue = LIBRARY.createProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, Types._KeyedValueNode, 0);
 
-		public static final @NonNull ExecutorProperty _LoadingPartition__referredLoadingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_PARTITION__REFERRED_LOADING_REGION, Types._LoadingPartition, 0);
-		public static final @NonNull ExecutorProperty _LoadingPartition__RootPartition__loadingPartition = new ExecutorPropertyWithImplementation("RootPartition", Types._LoadingPartition, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION));
+		public static final @NonNull Property _LoadingPartition__referredLoadingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_PARTITION__REFERRED_LOADING_REGION, Types._LoadingPartition, 0);
+		public static final @NonNull Property _LoadingPartition__RootPartition__loadingPartition = LIBRARY.createOppositeProperty("RootPartition", Types._LoadingPartition, 1, QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION);
 
-		public static final @NonNull ExecutorProperty _LoadingRegion__loadingPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__LOADING_PARTITION, Types._LoadingRegion, 0);
-		public static final @NonNull ExecutorProperty _LoadingRegion__owningRootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_ROOT_REGION, Types._LoadingRegion, 1);
-		public static final @NonNull ExecutorProperty _LoadingRegion__targetName = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__TARGET_NAME, Types._LoadingRegion, 2);
+		public static final @NonNull Property _LoadingRegion__loadingPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__LOADING_PARTITION, Types._LoadingRegion, 0);
+		public static final @NonNull Property _LoadingRegion__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_ROOT_REGION, Types._LoadingRegion, 1);
+		public static final @NonNull Property _LoadingRegion__targetName = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__TARGET_NAME, Types._LoadingRegion, 2);
 
-		public static final @NonNull ExecutorProperty _MapPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAP_PART_EDGE__REFERRED_PART, Types._MapPartEdge, 0);
+		public static final @NonNull Property _MapPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.MAP_PART_EDGE__REFERRED_PART, Types._MapPartEdge, 0);
 
-		public static final @NonNull ExecutorProperty _MappingPartition__explicitSuccessors = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__EXPLICIT_SUCCESSORS, Types._MappingPartition, 0);
-		public static final @NonNull ExecutorProperty _MappingPartition__owningCompositePartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, Types._MappingPartition, 1);
-		public static final @NonNull ExecutorProperty _MappingPartition__referedMappingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REFERED_MAPPING_REGION, Types._MappingPartition, 2);
-		public static final @NonNull ExecutorProperty _MappingPartition__region = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REGION, Types._MappingPartition, 3);
+		public static final @NonNull Property _MappingPartition__explicitSuccessors = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__EXPLICIT_SUCCESSORS, Types._MappingPartition, 0);
+		public static final @NonNull Property _MappingPartition__owningCompositePartition = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, Types._MappingPartition, 1);
+		public static final @NonNull Property _MappingPartition__referedMappingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REFERED_MAPPING_REGION, Types._MappingPartition, 2);
+		public static final @NonNull Property _MappingPartition__region = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REGION, Types._MappingPartition, 3);
 
-		public static final @NonNull ExecutorProperty _MappingRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, Types._MappingRegion, 0);
-		public static final @NonNull ExecutorProperty _MappingRegion__mappingPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__MAPPING_PARTITIONS, Types._MappingRegion, 1);
-		public static final @NonNull ExecutorProperty _MappingRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULE_MODEL, Types._MappingRegion, 2);
-		public static final @NonNull ExecutorProperty _MappingRegion__CyclicMappingRegion__elementRegions = new ExecutorPropertyWithImplementation("CyclicMappingRegion", Types._MappingRegion, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS));
+		public static final @NonNull Property _MappingRegion__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, Types._MappingRegion, 0);
+		public static final @NonNull Property _MappingRegion__mappingPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__MAPPING_PARTITIONS, Types._MappingRegion, 1);
+		public static final @NonNull Property _MappingRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULE_MODEL, Types._MappingRegion, 2);
+		public static final @NonNull Property _MappingRegion__CyclicMappingRegion__elementRegions = LIBRARY.createOppositeProperty("CyclicMappingRegion", Types._MappingRegion, 3, QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
 
-		public static final @NonNull ExecutorProperty _MergedPartition__ownedMergedPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, Types._MergedPartition, 0);
+		public static final @NonNull Property _MergedPartition__ownedMergedPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, Types._MergedPartition, 0);
 
-		public static final @NonNull ExecutorProperty _NavigableEdge__incomingConnection = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION, Types._NavigableEdge, 0);
-		public static final @NonNull ExecutorProperty _NavigableEdge__outgoingConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS, Types._NavigableEdge, 1);
-		public static final @NonNull ExecutorProperty _NavigableEdge__EdgeConnection__mandatoryTargetEdges = new ExecutorPropertyWithImplementation("EdgeConnection", Types._NavigableEdge, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES));
-		public static final @NonNull ExecutorProperty _NavigableEdge__EdgeConnection__preferredTargetEdges = new ExecutorPropertyWithImplementation("EdgeConnection", Types._NavigableEdge, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES));
+		public static final @NonNull Property _NavigableEdge__incomingConnection = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION, Types._NavigableEdge, 0);
+		public static final @NonNull Property _NavigableEdge__outgoingConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS, Types._NavigableEdge, 1);
+		public static final @NonNull Property _NavigableEdge__EdgeConnection__mandatoryTargetEdges = LIBRARY.createOppositeProperty("EdgeConnection", Types._NavigableEdge, 2, QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES);
+		public static final @NonNull Property _NavigableEdge__EdgeConnection__preferredTargetEdges = LIBRARY.createOppositeProperty("EdgeConnection", Types._NavigableEdge, 3, QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES);
 
-		public static final @NonNull ExecutorProperty _NavigationEdge__oppositeEdge = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE, Types._NavigationEdge, 0);
-		public static final @NonNull ExecutorProperty _NavigationEdge__partial = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__PARTIAL, Types._NavigationEdge, 1);
-		public static final @NonNull ExecutorProperty _NavigationEdge__referredProperty = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__REFERRED_PROPERTY, Types._NavigationEdge, 2);
-		public static final @NonNull ExecutorProperty _NavigationEdge__secondary = new EcoreExecutorProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__SECONDARY, Types._NavigationEdge, 3);
-		public static final @NonNull ExecutorProperty _NavigationEdge__NavigationEdge__oppositeEdge = new ExecutorPropertyWithImplementation("NavigationEdge", Types._NavigationEdge, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE));
+		public static final @NonNull Property _NavigationEdge__oppositeEdge = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE, Types._NavigationEdge, 0);
+		public static final @NonNull Property _NavigationEdge__partial = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__PARTIAL, Types._NavigationEdge, 1);
+		public static final @NonNull Property _NavigationEdge__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__REFERRED_PROPERTY, Types._NavigationEdge, 2);
+		public static final @NonNull Property _NavigationEdge__secondary = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__SECONDARY, Types._NavigationEdge, 3);
+		public static final @NonNull Property _NavigationEdge__NavigationEdge__oppositeEdge = LIBRARY.createOppositeProperty("NavigationEdge", Types._NavigationEdge, 4, QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE);
 
-		public static final @NonNull ExecutorProperty _Node__classDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM, Types._Node, 0);
-		public static final @NonNull ExecutorProperty _Node__cluster = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__CLUSTER, Types._Node, 1);
-		public static final @NonNull ExecutorProperty _Node__incomingConnection = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION, Types._Node, 2);
-		public static final @NonNull ExecutorProperty _Node__incomingEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__INCOMING_EDGES, Types._Node, 3);
-		public static final @NonNull ExecutorProperty _Node__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__NAME, Types._Node, 4);
-		public static final @NonNull ExecutorProperty _Node__nodeRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Node, 5);
-		public static final @NonNull ExecutorProperty _Node__outgoingConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS, Types._Node, 6);
-		public static final @NonNull ExecutorProperty _Node__outgoingEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, Types._Node, 7);
-		public static final @NonNull ExecutorProperty _Node__owningRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__OWNING_REGION, Types._Node, 8);
-		public static final @NonNull ExecutorProperty _Node__utility = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE__UTILITY, Types._Node, 9);
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__constantNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 10, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__constantSuccessFalseNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 11, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__constantSuccessTrueNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 12, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__headNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 13, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__loadedNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 14, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__predicatedNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 15, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__realizedNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 16, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__speculatedNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 17, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES));
-		public static final @NonNull ExecutorProperty _Node__BasicPartition__speculationNodes = new ExecutorPropertyWithImplementation("BasicPartition", Types._Node, 18, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES));
-		public static final @NonNull ExecutorProperty _Node__MappingRegion__headNodes = new ExecutorPropertyWithImplementation("MappingRegion", Types._Node, 19, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES));
-		public static final @NonNull ExecutorProperty _Node__NodeConnection__mandatoryTargetNodes = new ExecutorPropertyWithImplementation("NodeConnection", Types._Node, 20, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES));
-		public static final @NonNull ExecutorProperty _Node__NodeConnection__passedTargetNodes = new ExecutorPropertyWithImplementation("NodeConnection", Types._Node, 21, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES));
-		public static final @NonNull ExecutorProperty _Node__NodeConnection__preferredTargetNodes = new ExecutorPropertyWithImplementation("NodeConnection", Types._Node, 22, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES));
-		public static final @NonNull ExecutorProperty _Node__OperationRegion__dependencyNodes = new ExecutorPropertyWithImplementation("OperationRegion", Types._Node, 23, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES));
-		public static final @NonNull ExecutorProperty _Node__OperationRegion__headNodes = new ExecutorPropertyWithImplementation("OperationRegion", Types._Node, 24, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES));
-		public static final @NonNull ExecutorProperty _Node__OperationRegion__resultNode = new ExecutorPropertyWithImplementation("OperationRegion", Types._Node, 25, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE));
+		public static final @NonNull Property _Node__classDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM, Types._Node, 0);
+		public static final @NonNull Property _Node__cluster = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__CLUSTER, Types._Node, 1);
+		public static final @NonNull Property _Node__incomingConnection = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION, Types._Node, 2);
+		public static final @NonNull Property _Node__incomingEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__INCOMING_EDGES, Types._Node, 3);
+		public static final @NonNull Property _Node__name = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__NAME, Types._Node, 4);
+		public static final @NonNull Property _Node__nodeRole = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Node, 5);
+		public static final @NonNull Property _Node__outgoingConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS, Types._Node, 6);
+		public static final @NonNull Property _Node__outgoingEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, Types._Node, 7);
+		public static final @NonNull Property _Node__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OWNING_REGION, Types._Node, 8);
+		public static final @NonNull Property _Node__utility = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__UTILITY, Types._Node, 9);
+		public static final @NonNull Property _Node__BasicPartition__constantNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 10, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES);
+		public static final @NonNull Property _Node__BasicPartition__constantSuccessFalseNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 11, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES);
+		public static final @NonNull Property _Node__BasicPartition__constantSuccessTrueNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 12, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES);
+		public static final @NonNull Property _Node__BasicPartition__headNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 13, QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES);
+		public static final @NonNull Property _Node__BasicPartition__loadedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 14, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__predicatedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 15, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__realizedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 16, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__speculatedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 17, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__speculationNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 18, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES);
+		public static final @NonNull Property _Node__MappingRegion__headNodes = LIBRARY.createOppositeProperty("MappingRegion", Types._Node, 19, QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES);
+		public static final @NonNull Property _Node__NodeConnection__mandatoryTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 20, QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES);
+		public static final @NonNull Property _Node__NodeConnection__passedTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 21, QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES);
+		public static final @NonNull Property _Node__NodeConnection__preferredTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 22, QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES);
+		public static final @NonNull Property _Node__OperationRegion__dependencyNodes = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 23, QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES);
+		public static final @NonNull Property _Node__OperationRegion__headNodes = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 24, QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES);
+		public static final @NonNull Property _Node__OperationRegion__resultNode = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 25, QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE);
 
-		public static final @NonNull ExecutorProperty _NodeConnection__classDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM, Types._NodeConnection, 0);
-		public static final @NonNull ExecutorProperty _NodeConnection__mandatoryTargetNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES, Types._NodeConnection, 1);
-		public static final @NonNull ExecutorProperty _NodeConnection__passedTargetNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES, Types._NodeConnection, 2);
-		public static final @NonNull ExecutorProperty _NodeConnection__preferredTargetNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES, Types._NodeConnection, 3);
-		public static final @NonNull ExecutorProperty _NodeConnection__Node__incomingConnection = new ExecutorPropertyWithImplementation("Node", Types._NodeConnection, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION));
-		public static final @NonNull ExecutorProperty _NodeConnection__Node__outgoingConnections = new ExecutorPropertyWithImplementation("Node", Types._NodeConnection, 5, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS));
-		public static final @NonNull ExecutorProperty _NodeConnection__Partition__intermediateConnections = new ExecutorPropertyWithImplementation("Partition", Types._NodeConnection, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS));
-		public static final @NonNull ExecutorProperty _NodeConnection__Partition__rootConnections = new ExecutorPropertyWithImplementation("Partition", Types._NodeConnection, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS));
+		public static final @NonNull Property _NodeConnection__classDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM, Types._NodeConnection, 0);
+		public static final @NonNull Property _NodeConnection__mandatoryTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES, Types._NodeConnection, 1);
+		public static final @NonNull Property _NodeConnection__passedTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES, Types._NodeConnection, 2);
+		public static final @NonNull Property _NodeConnection__preferredTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES, Types._NodeConnection, 3);
+		public static final @NonNull Property _NodeConnection__Node__incomingConnection = LIBRARY.createOppositeProperty("Node", Types._NodeConnection, 4, QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION);
+		public static final @NonNull Property _NodeConnection__Node__outgoingConnections = LIBRARY.createOppositeProperty("Node", Types._NodeConnection, 5, QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS);
+		public static final @NonNull Property _NodeConnection__Partition__intermediateConnections = LIBRARY.createOppositeProperty("Partition", Types._NodeConnection, 6, QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS);
+		public static final @NonNull Property _NodeConnection__Partition__rootConnections = LIBRARY.createOppositeProperty("Partition", Types._NodeConnection, 7, QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS);
 
-		public static final @NonNull ExecutorProperty _NumericLiteralNode__numericValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE__NUMERIC_VALUE, Types._NumericLiteralNode, 0);
+		public static final @NonNull Property _NumericLiteralNode__numericValue = LIBRARY.createProperty(QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE__NUMERIC_VALUE, Types._NumericLiteralNode, 0);
 
-		public static final @NonNull ExecutorProperty _OperationCallNode__referredOperation = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_CALL_NODE__REFERRED_OPERATION, Types._OperationCallNode, 0);
+		public static final @NonNull Property _OperationCallNode__referredOperation = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_CALL_NODE__REFERRED_OPERATION, Types._OperationCallNode, 0);
 
-		public static final @NonNull ExecutorProperty _OperationParameterEdge__parameterIndex = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX, Types._OperationParameterEdge, 0);
-		public static final @NonNull ExecutorProperty _OperationParameterEdge__referredParameter = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, Types._OperationParameterEdge, 1);
+		public static final @NonNull Property _OperationParameterEdge__parameterIndex = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX, Types._OperationParameterEdge, 0);
+		public static final @NonNull Property _OperationParameterEdge__referredParameter = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, Types._OperationParameterEdge, 1);
 
-		public static final @NonNull ExecutorProperty _OperationRegion__dependencyNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, Types._OperationRegion, 0);
-		public static final @NonNull ExecutorProperty _OperationRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, Types._OperationRegion, 1);
-		public static final @NonNull ExecutorProperty _OperationRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__OWNING_SCHEDULE_MODEL, Types._OperationRegion, 2);
-		public static final @NonNull ExecutorProperty _OperationRegion__referredOperation = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, Types._OperationRegion, 3);
-		public static final @NonNull ExecutorProperty _OperationRegion__resultNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 4);
+		public static final @NonNull Property _OperationRegion__dependencyNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, Types._OperationRegion, 0);
+		public static final @NonNull Property _OperationRegion__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, Types._OperationRegion, 1);
+		public static final @NonNull Property _OperationRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__OWNING_SCHEDULE_MODEL, Types._OperationRegion, 2);
+		public static final @NonNull Property _OperationRegion__referredOperation = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, Types._OperationRegion, 3);
+		public static final @NonNull Property _OperationRegion__resultNode = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 4);
 
-		public static final @NonNull ExecutorProperty _OperationSelfEdge__referredType = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_SELF_EDGE__REFERRED_TYPE, Types._OperationSelfEdge, 0);
+		public static final @NonNull Property _OperationSelfEdge__referredType = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_SELF_EDGE__REFERRED_TYPE, Types._OperationSelfEdge, 0);
 
-		public static final @NonNull ExecutorProperty _Partition__intermediateConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS, Types._Partition, 0);
-		public static final @NonNull ExecutorProperty _Partition__passes = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__PASSES, Types._Partition, 1);
-		public static final @NonNull ExecutorProperty _Partition__rootConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS, Types._Partition, 2);
-		public static final @NonNull ExecutorProperty _Partition__Connection__commonPartition = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION));
-		public static final @NonNull ExecutorProperty _Partition__Connection__intermediatePartitions = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS));
+		public static final @NonNull Property _Partition__intermediateConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS, Types._Partition, 0);
+		public static final @NonNull Property _Partition__passes = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__PASSES, Types._Partition, 1);
+		public static final @NonNull Property _Partition__rootConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS, Types._Partition, 2);
+		public static final @NonNull Property _Partition__Connection__commonPartition = LIBRARY.createOppositeProperty("Connection", Types._Partition, 3, QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION);
+		public static final @NonNull Property _Partition__Connection__intermediatePartitions = LIBRARY.createOppositeProperty("Connection", Types._Partition, 4, QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS);
 
-		public static final @NonNull ExecutorProperty _PredicateEdge__partial = new EcoreExecutorProperty(QVTschedulePackage.Literals.PREDICATE_EDGE__PARTIAL, Types._PredicateEdge, 0);
+		public static final @NonNull Property _PredicateEdge__partial = LIBRARY.createProperty(QVTschedulePackage.Literals.PREDICATE_EDGE__PARTIAL, Types._PredicateEdge, 0);
 
-		public static final @NonNull ExecutorProperty _PropertyDatum__key = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, Types._PropertyDatum, 0);
-		public static final @NonNull ExecutorProperty _PropertyDatum__opposite = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
-		public static final @NonNull ExecutorProperty _PropertyDatum__owningClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._PropertyDatum, 2);
-		public static final @NonNull ExecutorProperty _PropertyDatum__referredProperty = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__REFERRED_PROPERTY, Types._PropertyDatum, 3);
-		public static final @NonNull ExecutorProperty _PropertyDatum__superPropertyDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS, Types._PropertyDatum, 4);
-		public static final @NonNull ExecutorProperty _PropertyDatum__targetClassDatum = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM, Types._PropertyDatum, 5);
-		public static final @NonNull ExecutorProperty _PropertyDatum__KeyPartEdge__referredPart = new ExecutorPropertyWithImplementation("KeyPartEdge", Types._PropertyDatum, 6, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART));
-		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__opposite = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 7, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE));
-		public static final @NonNull ExecutorProperty _PropertyDatum__PropertyDatum__superPropertyDatums = new ExecutorPropertyWithImplementation("PropertyDatum", Types._PropertyDatum, 8, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS));
+		public static final @NonNull Property _PropertyDatum__key = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, Types._PropertyDatum, 0);
+		public static final @NonNull Property _PropertyDatum__opposite = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
+		public static final @NonNull Property _PropertyDatum__owningClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._PropertyDatum, 2);
+		public static final @NonNull Property _PropertyDatum__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__REFERRED_PROPERTY, Types._PropertyDatum, 3);
+		public static final @NonNull Property _PropertyDatum__superPropertyDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS, Types._PropertyDatum, 4);
+		public static final @NonNull Property _PropertyDatum__targetClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM, Types._PropertyDatum, 5);
+		public static final @NonNull Property _PropertyDatum__KeyPartEdge__referredPart = LIBRARY.createOppositeProperty("KeyPartEdge", Types._PropertyDatum, 6, QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART);
+		public static final @NonNull Property _PropertyDatum__PropertyDatum__opposite = LIBRARY.createOppositeProperty("PropertyDatum", Types._PropertyDatum, 7, QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE);
+		public static final @NonNull Property _PropertyDatum__PropertyDatum__superPropertyDatums = LIBRARY.createOppositeProperty("PropertyDatum", Types._PropertyDatum, 8, QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS);
 
-		public static final @NonNull ExecutorProperty _RecursionEdge__primary = new EcoreExecutorProperty(QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, Types._RecursionEdge, 0);
+		public static final @NonNull Property _RecursionEdge__primary = LIBRARY.createProperty(QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, Types._RecursionEdge, 0);
 
-		public static final @NonNull ExecutorProperty _Region__ownedClusters = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_CLUSTERS, Types._Region, 0);
-		public static final @NonNull ExecutorProperty _Region__ownedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_EDGES, Types._Region, 1);
-		public static final @NonNull ExecutorProperty _Region__ownedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_NODES, Types._Region, 2);
-		public static final @NonNull ExecutorProperty _Region__rootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__ROOT_REGION, Types._Region, 3);
-		public static final @NonNull ExecutorProperty _Region__MappingPartition__region = new ExecutorPropertyWithImplementation("MappingPartition", Types._Region, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REGION));
+		public static final @NonNull Property _Region__ownedClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_CLUSTERS, Types._Region, 0);
+		public static final @NonNull Property _Region__ownedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_EDGES, Types._Region, 1);
+		public static final @NonNull Property _Region__ownedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_NODES, Types._Region, 2);
+		public static final @NonNull Property _Region__rootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__ROOT_REGION, Types._Region, 3);
+		public static final @NonNull Property _Region__MappingPartition__region = LIBRARY.createOppositeProperty("MappingPartition", Types._Region, 4, QVTschedulePackage.Literals.MAPPING_PARTITION__REGION);
 
-		public static final @NonNull ExecutorProperty _RootPartition__loadingPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION, Types._RootPartition, 0);
-		public static final @NonNull ExecutorProperty _RootPartition__owningRootRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_PARTITION__OWNING_ROOT_REGION, Types._RootPartition, 1);
+		public static final @NonNull Property _RootPartition__loadingPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION, Types._RootPartition, 0);
+		public static final @NonNull Property _RootPartition__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_PARTITION__OWNING_ROOT_REGION, Types._RootPartition, 1);
 
-		public static final @NonNull ExecutorProperty _RootRegion__activeRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__ACTIVE_REGIONS, Types._RootRegion, 0);
-		public static final @NonNull ExecutorProperty _RootRegion__ownedConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_CONNECTIONS, Types._RootRegion, 1);
-		public static final @NonNull ExecutorProperty _RootRegion__ownedLoadingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_LOADING_REGION, Types._RootRegion, 2);
-		public static final @NonNull ExecutorProperty _RootRegion__ownedRootPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_ROOT_PARTITION, Types._RootRegion, 3);
-		public static final @NonNull ExecutorProperty _RootRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNING_SCHEDULE_MODEL, Types._RootRegion, 4);
-		public static final @NonNull ExecutorProperty _RootRegion__referredTransformation = new EcoreExecutorProperty(QVTschedulePackage.Literals.ROOT_REGION__REFERRED_TRANSFORMATION, Types._RootRegion, 5);
+		public static final @NonNull Property _RootRegion__activeRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__ACTIVE_REGIONS, Types._RootRegion, 0);
+		public static final @NonNull Property _RootRegion__ownedConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_CONNECTIONS, Types._RootRegion, 1);
+		public static final @NonNull Property _RootRegion__ownedLoadingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_LOADING_REGION, Types._RootRegion, 2);
+		public static final @NonNull Property _RootRegion__ownedRootPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_ROOT_PARTITION, Types._RootRegion, 3);
+		public static final @NonNull Property _RootRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNING_SCHEDULE_MODEL, Types._RootRegion, 4);
+		public static final @NonNull Property _RootRegion__referredTransformation = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__REFERRED_TRANSFORMATION, Types._RootRegion, 5);
 
-		public static final @NonNull ExecutorProperty _RuleRegion__referredRule = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, Types._RuleRegion, 0);
-		public static final @NonNull ExecutorProperty _RuleRegion__DispatchRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("DispatchRegion", Types._RuleRegion, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION));
-		public static final @NonNull ExecutorProperty _RuleRegion__VerdictRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("VerdictRegion", Types._RuleRegion, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION));
+		public static final @NonNull Property _RuleRegion__referredRule = LIBRARY.createProperty(QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, Types._RuleRegion, 0);
+		public static final @NonNull Property _RuleRegion__DispatchRegion__referredRuleRegion = LIBRARY.createOppositeProperty("DispatchRegion", Types._RuleRegion, 1, QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION);
+		public static final @NonNull Property _RuleRegion__VerdictRegion__referredRuleRegion = LIBRARY.createOppositeProperty("VerdictRegion", Types._RuleRegion, 2, QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION);
 
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 0);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, Types._ScheduleModel, 1);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedOperationRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, Types._ScheduleModel, 2);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedRootRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, Types._ScheduleModel, 3);
+		public static final @NonNull Property _ScheduleModel__ownedClassDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 0);
+		public static final @NonNull Property _ScheduleModel__ownedMappingRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, Types._ScheduleModel, 1);
+		public static final @NonNull Property _ScheduleModel__ownedOperationRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, Types._ScheduleModel, 2);
+		public static final @NonNull Property _ScheduleModel__ownedRootRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, Types._ScheduleModel, 3);
 
-		public static final @NonNull ExecutorProperty _ShadowPartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.SHADOW_PART_EDGE__REFERRED_PART, Types._ShadowPartEdge, 0);
+		public static final @NonNull Property _ShadowPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.SHADOW_PART_EDGE__REFERRED_PART, Types._ShadowPartEdge, 0);
 
-		public static final @NonNull ExecutorProperty _StringLiteralNode__stringValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.STRING_LITERAL_NODE__STRING_VALUE, Types._StringLiteralNode, 0);
+		public static final @NonNull Property _StringLiteralNode__stringValue = LIBRARY.createProperty(QVTschedulePackage.Literals.STRING_LITERAL_NODE__STRING_VALUE, Types._StringLiteralNode, 0);
 
-		public static final @NonNull ExecutorProperty _Symbolable__symbolName = new EcoreExecutorProperty(QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, Types._Symbolable, 0);
+		public static final @NonNull Property _Symbolable__symbolName = LIBRARY.createProperty(QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, Types._Symbolable, 0);
 
-		public static final @NonNull ExecutorProperty _TuplePartEdge__referredPart = new EcoreExecutorProperty(QVTschedulePackage.Literals.TUPLE_PART_EDGE__REFERRED_PART, Types._TuplePartEdge, 0);
+		public static final @NonNull Property _TuplePartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.TUPLE_PART_EDGE__REFERRED_PART, Types._TuplePartEdge, 0);
 
-		public static final @NonNull ExecutorProperty _TypeLiteralNode__typeValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.TYPE_LITERAL_NODE__TYPE_VALUE, Types._TypeLiteralNode, 0);
+		public static final @NonNull Property _TypeLiteralNode__typeValue = LIBRARY.createProperty(QVTschedulePackage.Literals.TYPE_LITERAL_NODE__TYPE_VALUE, Types._TypeLiteralNode, 0);
 
-		public static final @NonNull ExecutorProperty _VariableNode__referredVariable = new EcoreExecutorProperty(QVTschedulePackage.Literals.VARIABLE_NODE__REFERRED_VARIABLE, Types._VariableNode, 0);
+		public static final @NonNull Property _VariableNode__referredVariable = LIBRARY.createProperty(QVTschedulePackage.Literals.VARIABLE_NODE__REFERRED_VARIABLE, Types._VariableNode, 0);
 
-		public static final @NonNull ExecutorProperty _VerdictRegion__referredRuleRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION, Types._VerdictRegion, 0);
+		public static final @NonNull Property _VerdictRegion__referredRuleRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION, Types._VerdictRegion, 0);
 		static {
 			Init.initEnd();
 		}
@@ -1324,7 +1320,7 @@ public class QVTscheduleTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment @NonNull [] _AbstractDatum =
+		private static final @NonNull FlatFragment @NonNull [] _AbstractDatum =
 			{
 				Fragments._AbstractDatum__OclAny /* 0 */,
 				Fragments._AbstractDatum__OclElement /* 1 */,
@@ -1334,7 +1330,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __AbstractDatum = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ArgumentEdge =
+		private static final @NonNull FlatFragment @NonNull [] _ArgumentEdge =
 			{
 				Fragments._ArgumentEdge__OclAny /* 0 */,
 				Fragments._ArgumentEdge__OclElement /* 1 */,
@@ -1345,7 +1341,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ArgumentEdge = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _BasicPartition =
+		private static final @NonNull FlatFragment @NonNull [] _BasicPartition =
 			{
 				Fragments._BasicPartition__OclAny /* 0 */,
 				Fragments._BasicPartition__OclElement /* 1 */,
@@ -1357,7 +1353,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __BasicPartition = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _BooleanLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _BooleanLiteralNode =
 			{
 				Fragments._BooleanLiteralNode__OclAny /* 0 */,
 				Fragments._BooleanLiteralNode__OclElement /* 1 */,
@@ -1370,7 +1366,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __BooleanLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CastEdge =
+		private static final @NonNull FlatFragment @NonNull [] _CastEdge =
 			{
 				Fragments._CastEdge__OclAny /* 0 */,
 				Fragments._CastEdge__OclElement /* 1 */,
@@ -1380,7 +1376,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CastEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ClassDatum =
+		private static final @NonNull FlatFragment @NonNull [] _ClassDatum =
 			{
 				Fragments._ClassDatum__OclAny /* 0 */,
 				Fragments._ClassDatum__OclElement /* 1 */,
@@ -1391,7 +1387,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ClassDatum = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Cluster =
+		private static final @NonNull FlatFragment @NonNull [] _Cluster =
 			{
 				Fragments._Cluster__OclAny /* 0 */,
 				Fragments._Cluster__OclElement /* 1 */,
@@ -1402,7 +1398,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Cluster = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CollectionClassDatum =
+		private static final @NonNull FlatFragment @NonNull [] _CollectionClassDatum =
 			{
 				Fragments._CollectionClassDatum__OclAny /* 0 */,
 				Fragments._CollectionClassDatum__OclElement /* 1 */,
@@ -1414,7 +1410,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CollectionClassDatum = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CollectionLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _CollectionLiteralNode =
 			{
 				Fragments._CollectionLiteralNode__OclAny /* 0 */,
 				Fragments._CollectionLiteralNode__OclElement /* 1 */,
@@ -1427,7 +1423,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CollectionLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CollectionPartEdge =
+		private static final @NonNull FlatFragment @NonNull [] _CollectionPartEdge =
 			{
 				Fragments._CollectionPartEdge__OclAny /* 0 */,
 				Fragments._CollectionPartEdge__OclElement /* 1 */,
@@ -1439,7 +1435,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CollectionPartEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CollectionRangeNode =
+		private static final @NonNull FlatFragment @NonNull [] _CollectionRangeNode =
 			{
 				Fragments._CollectionRangeNode__OclAny /* 0 */,
 				Fragments._CollectionRangeNode__OclElement /* 1 */,
@@ -1452,7 +1448,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CollectionRangeNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ComposedNode =
+		private static final @NonNull FlatFragment @NonNull [] _ComposedNode =
 			{
 				Fragments._ComposedNode__OclAny /* 0 */,
 				Fragments._ComposedNode__OclElement /* 1 */,
@@ -1463,7 +1459,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ComposedNode = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CompositePartition =
+		private static final @NonNull FlatFragment @NonNull [] _CompositePartition =
 			{
 				Fragments._CompositePartition__OclAny /* 0 */,
 				Fragments._CompositePartition__OclElement /* 1 */,
@@ -1474,7 +1470,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CompositePartition = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Connection =
+		private static final @NonNull FlatFragment @NonNull [] _Connection =
 			{
 				Fragments._Connection__OclAny /* 0 */,
 				Fragments._Connection__OclElement /* 1 */,
@@ -1484,7 +1480,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Connection = { 1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ConnectionEnd =
+		private static final @NonNull FlatFragment @NonNull [] _ConnectionEnd =
 			{
 				Fragments._ConnectionEnd__OclAny /* 0 */,
 				Fragments._ConnectionEnd__OclElement /* 1 */,
@@ -1492,7 +1488,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ConnectionEnd = { 1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ConnectionRole =
+		private static final @NonNull FlatFragment @NonNull [] _ConnectionRole =
 			{
 				Fragments._ConnectionRole__OclAny /* 0 */,
 				Fragments._ConnectionRole__OclElement /* 1 */,
@@ -1502,7 +1498,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ConnectionRole = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CyclicMappingRegion =
+		private static final @NonNull FlatFragment @NonNull [] _CyclicMappingRegion =
 			{
 				Fragments._CyclicMappingRegion__OclAny /* 0 */,
 				Fragments._CyclicMappingRegion__OclElement /* 1 */,
@@ -1515,7 +1511,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CyclicMappingRegion = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _CyclicPartition =
+		private static final @NonNull FlatFragment @NonNull [] _CyclicPartition =
 			{
 				Fragments._CyclicPartition__OclAny /* 0 */,
 				Fragments._CyclicPartition__OclElement /* 1 */,
@@ -1528,7 +1524,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __CyclicPartition = { 1,1,1,1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _DependencyEdge =
+		private static final @NonNull FlatFragment @NonNull [] _DependencyEdge =
 			{
 				Fragments._DependencyEdge__OclAny /* 0 */,
 				Fragments._DependencyEdge__OclElement /* 1 */,
@@ -1538,7 +1534,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __DependencyEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _DependencyNode =
+		private static final @NonNull FlatFragment @NonNull [] _DependencyNode =
 			{
 				Fragments._DependencyNode__OclAny /* 0 */,
 				Fragments._DependencyNode__OclElement /* 1 */,
@@ -1549,7 +1545,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __DependencyNode = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _DispatchRegion =
+		private static final @NonNull FlatFragment @NonNull [] _DispatchRegion =
 			{
 				Fragments._DispatchRegion__OclAny /* 0 */,
 				Fragments._DispatchRegion__OclElement /* 1 */,
@@ -1563,7 +1559,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __DispatchRegion = { 1,1,2,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Edge =
+		private static final @NonNull FlatFragment @NonNull [] _Edge =
 			{
 				Fragments._Edge__OclAny /* 0 */,
 				Fragments._Edge__OclElement /* 1 */,
@@ -1572,7 +1568,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Edge = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _EdgeConnection =
+		private static final @NonNull FlatFragment @NonNull [] _EdgeConnection =
 			{
 				Fragments._EdgeConnection__OclAny /* 0 */,
 				Fragments._EdgeConnection__OclElement /* 1 */,
@@ -1583,7 +1579,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __EdgeConnection = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _EnumLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _EnumLiteralNode =
 			{
 				Fragments._EnumLiteralNode__OclAny /* 0 */,
 				Fragments._EnumLiteralNode__OclElement /* 1 */,
@@ -1596,7 +1592,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __EnumLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ErrorNode =
+		private static final @NonNull FlatFragment @NonNull [] _ErrorNode =
 			{
 				Fragments._ErrorNode__OclAny /* 0 */,
 				Fragments._ErrorNode__OclElement /* 1 */,
@@ -1608,7 +1604,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ErrorNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ExpressionEdge =
+		private static final @NonNull FlatFragment @NonNull [] _ExpressionEdge =
 			{
 				Fragments._ExpressionEdge__OclAny /* 0 */,
 				Fragments._ExpressionEdge__OclElement /* 1 */,
@@ -1618,7 +1614,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ExpressionEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _IfNode =
+		private static final @NonNull FlatFragment @NonNull [] _IfNode =
 			{
 				Fragments._IfNode__OclAny /* 0 */,
 				Fragments._IfNode__OclElement /* 1 */,
@@ -1631,7 +1627,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __IfNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _IncludesEdge =
+		private static final @NonNull FlatFragment @NonNull [] _IncludesEdge =
 			{
 				Fragments._IncludesEdge__OclAny /* 0 */,
 				Fragments._IncludesEdge__OclElement /* 1 */,
@@ -1642,7 +1638,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __IncludesEdge = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _InputNode =
+		private static final @NonNull FlatFragment @NonNull [] _InputNode =
 			{
 				Fragments._InputNode__OclAny /* 0 */,
 				Fragments._InputNode__OclElement /* 1 */,
@@ -1653,7 +1649,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __InputNode = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _IteratedEdge =
+		private static final @NonNull FlatFragment @NonNull [] _IteratedEdge =
 			{
 				Fragments._IteratedEdge__OclAny /* 0 */,
 				Fragments._IteratedEdge__OclElement /* 1 */,
@@ -1663,7 +1659,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __IteratedEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _IteratorNode =
+		private static final @NonNull FlatFragment @NonNull [] _IteratorNode =
 			{
 				Fragments._IteratorNode__OclAny /* 0 */,
 				Fragments._IteratorNode__OclElement /* 1 */,
@@ -1676,7 +1672,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __IteratorNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _KeyPartEdge =
+		private static final @NonNull FlatFragment @NonNull [] _KeyPartEdge =
 			{
 				Fragments._KeyPartEdge__OclAny /* 0 */,
 				Fragments._KeyPartEdge__OclElement /* 1 */,
@@ -1689,7 +1685,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __KeyPartEdge = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _KeyedValueNode =
+		private static final @NonNull FlatFragment @NonNull [] _KeyedValueNode =
 			{
 				Fragments._KeyedValueNode__OclAny /* 0 */,
 				Fragments._KeyedValueNode__OclElement /* 1 */,
@@ -1702,7 +1698,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __KeyedValueNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _LoadingPartition =
+		private static final @NonNull FlatFragment @NonNull [] _LoadingPartition =
 			{
 				Fragments._LoadingPartition__OclAny /* 0 */,
 				Fragments._LoadingPartition__OclElement /* 1 */,
@@ -1714,7 +1710,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __LoadingPartition = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _LoadingRegion =
+		private static final @NonNull FlatFragment @NonNull [] _LoadingRegion =
 			{
 				Fragments._LoadingRegion__OclAny /* 0 */,
 				Fragments._LoadingRegion__OclElement /* 1 */,
@@ -1726,7 +1722,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __LoadingRegion = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MapLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _MapLiteralNode =
 			{
 				Fragments._MapLiteralNode__OclAny /* 0 */,
 				Fragments._MapLiteralNode__OclElement /* 1 */,
@@ -1739,7 +1735,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MapLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MapPartEdge =
+		private static final @NonNull FlatFragment @NonNull [] _MapPartEdge =
 			{
 				Fragments._MapPartEdge__OclAny /* 0 */,
 				Fragments._MapPartEdge__OclElement /* 1 */,
@@ -1751,7 +1747,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MapPartEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MapPartNode =
+		private static final @NonNull FlatFragment @NonNull [] _MapPartNode =
 			{
 				Fragments._MapPartNode__OclAny /* 0 */,
 				Fragments._MapPartNode__OclElement /* 1 */,
@@ -1764,7 +1760,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MapPartNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MappingNode =
+		private static final @NonNull FlatFragment @NonNull [] _MappingNode =
 			{
 				Fragments._MappingNode__OclAny /* 0 */,
 				Fragments._MappingNode__OclElement /* 1 */,
@@ -1775,7 +1771,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MappingNode = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MappingPartition =
+		private static final @NonNull FlatFragment @NonNull [] _MappingPartition =
 			{
 				Fragments._MappingPartition__OclAny /* 0 */,
 				Fragments._MappingPartition__OclElement /* 1 */,
@@ -1786,7 +1782,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MappingPartition = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MappingRegion =
+		private static final @NonNull FlatFragment @NonNull [] _MappingRegion =
 			{
 				Fragments._MappingRegion__OclAny /* 0 */,
 				Fragments._MappingRegion__OclElement /* 1 */,
@@ -1798,7 +1794,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MappingRegion = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _MergedPartition =
+		private static final @NonNull FlatFragment @NonNull [] _MergedPartition =
 			{
 				Fragments._MergedPartition__OclAny /* 0 */,
 				Fragments._MergedPartition__OclElement /* 1 */,
@@ -1811,7 +1807,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __MergedPartition = { 1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NavigableEdge =
+		private static final @NonNull FlatFragment @NonNull [] _NavigableEdge =
 			{
 				Fragments._NavigableEdge__OclAny /* 0 */,
 				Fragments._NavigableEdge__OclElement /* 1 */,
@@ -1822,7 +1818,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NavigableEdge = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NavigationEdge =
+		private static final @NonNull FlatFragment @NonNull [] _NavigationEdge =
 			{
 				Fragments._NavigationEdge__OclAny /* 0 */,
 				Fragments._NavigationEdge__OclElement /* 1 */,
@@ -1834,7 +1830,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NavigationEdge = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Node =
+		private static final @NonNull FlatFragment @NonNull [] _Node =
 			{
 				Fragments._Node__OclAny /* 0 */,
 				Fragments._Node__OclElement /* 1 */,
@@ -1844,7 +1840,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Node = { 1,1,2,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NodeConnection =
+		private static final @NonNull FlatFragment @NonNull [] _NodeConnection =
 			{
 				Fragments._NodeConnection__OclAny /* 0 */,
 				Fragments._NodeConnection__OclElement /* 1 */,
@@ -1855,7 +1851,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NodeConnection = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NonPartition =
+		private static final @NonNull FlatFragment @NonNull [] _NonPartition =
 			{
 				Fragments._NonPartition__OclAny /* 0 */,
 				Fragments._NonPartition__OclElement /* 1 */,
@@ -1867,7 +1863,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NonPartition = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NullLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _NullLiteralNode =
 			{
 				Fragments._NullLiteralNode__OclAny /* 0 */,
 				Fragments._NullLiteralNode__OclElement /* 1 */,
@@ -1880,14 +1876,14 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NullLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Number =
+		private static final @NonNull FlatFragment @NonNull [] _Number =
 			{
 				Fragments._Number__OclAny /* 0 */,
 				Fragments._Number__Number /* 1 */
 			};
 		private static final int @NonNull [] __Number = { 1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _NumericLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _NumericLiteralNode =
 			{
 				Fragments._NumericLiteralNode__OclAny /* 0 */,
 				Fragments._NumericLiteralNode__OclElement /* 1 */,
@@ -1900,7 +1896,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __NumericLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationCallNode =
+		private static final @NonNull FlatFragment @NonNull [] _OperationCallNode =
 			{
 				Fragments._OperationCallNode__OclAny /* 0 */,
 				Fragments._OperationCallNode__OclElement /* 1 */,
@@ -1913,7 +1909,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationCallNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationNode =
+		private static final @NonNull FlatFragment @NonNull [] _OperationNode =
 			{
 				Fragments._OperationNode__OclAny /* 0 */,
 				Fragments._OperationNode__OclElement /* 1 */,
@@ -1925,7 +1921,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationParameterEdge =
+		private static final @NonNull FlatFragment @NonNull [] _OperationParameterEdge =
 			{
 				Fragments._OperationParameterEdge__OclAny /* 0 */,
 				Fragments._OperationParameterEdge__OclElement /* 1 */,
@@ -1937,7 +1933,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationParameterEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationRegion =
+		private static final @NonNull FlatFragment @NonNull [] _OperationRegion =
 			{
 				Fragments._OperationRegion__OclAny /* 0 */,
 				Fragments._OperationRegion__OclElement /* 1 */,
@@ -1949,7 +1945,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationRegion = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _OperationSelfEdge =
+		private static final @NonNull FlatFragment @NonNull [] _OperationSelfEdge =
 			{
 				Fragments._OperationSelfEdge__OclAny /* 0 */,
 				Fragments._OperationSelfEdge__OclElement /* 1 */,
@@ -1961,7 +1957,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __OperationSelfEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Partition =
+		private static final @NonNull FlatFragment @NonNull [] _Partition =
 			{
 				Fragments._Partition__OclAny /* 0 */,
 				Fragments._Partition__OclElement /* 1 */,
@@ -1971,7 +1967,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Partition = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _PatternTypedNode =
+		private static final @NonNull FlatFragment @NonNull [] _PatternTypedNode =
 			{
 				Fragments._PatternTypedNode__OclAny /* 0 */,
 				Fragments._PatternTypedNode__OclElement /* 1 */,
@@ -1983,7 +1979,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __PatternTypedNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _PatternVariableNode =
+		private static final @NonNull FlatFragment @NonNull [] _PatternVariableNode =
 			{
 				Fragments._PatternVariableNode__OclAny /* 0 */,
 				Fragments._PatternVariableNode__OclElement /* 1 */,
@@ -1996,7 +1992,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __PatternVariableNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _PredicateEdge =
+		private static final @NonNull FlatFragment @NonNull [] _PredicateEdge =
 			{
 				Fragments._PredicateEdge__OclAny /* 0 */,
 				Fragments._PredicateEdge__OclElement /* 1 */,
@@ -2006,7 +2002,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __PredicateEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _PropertyDatum =
+		private static final @NonNull FlatFragment @NonNull [] _PropertyDatum =
 			{
 				Fragments._PropertyDatum__OclAny /* 0 */,
 				Fragments._PropertyDatum__OclElement /* 1 */,
@@ -2017,7 +2013,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __PropertyDatum = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RecursionEdge =
+		private static final @NonNull FlatFragment @NonNull [] _RecursionEdge =
 			{
 				Fragments._RecursionEdge__OclAny /* 0 */,
 				Fragments._RecursionEdge__OclElement /* 1 */,
@@ -2027,7 +2023,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RecursionEdge = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Region =
+		private static final @NonNull FlatFragment @NonNull [] _Region =
 			{
 				Fragments._Region__OclAny /* 0 */,
 				Fragments._Region__OclElement /* 1 */,
@@ -2038,7 +2034,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Region = { 1,1,2,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Role =
+		private static final @NonNull FlatFragment @NonNull [] _Role =
 			{
 				Fragments._Role__OclAny /* 0 */,
 				Fragments._Role__OclElement /* 1 */,
@@ -2048,7 +2044,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Role = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RootPartition =
+		private static final @NonNull FlatFragment @NonNull [] _RootPartition =
 			{
 				Fragments._RootPartition__OclAny /* 0 */,
 				Fragments._RootPartition__OclElement /* 1 */,
@@ -2060,7 +2056,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RootPartition = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RootRegion =
+		private static final @NonNull FlatFragment @NonNull [] _RootRegion =
 			{
 				Fragments._RootRegion__OclAny /* 0 */,
 				Fragments._RootRegion__OclElement /* 1 */,
@@ -2072,7 +2068,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RootRegion = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _RuleRegion =
+		private static final @NonNull FlatFragment @NonNull [] _RuleRegion =
 			{
 				Fragments._RuleRegion__OclAny /* 0 */,
 				Fragments._RuleRegion__OclElement /* 1 */,
@@ -2085,7 +2081,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __RuleRegion = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ScheduleModel =
+		private static final @NonNull FlatFragment @NonNull [] _ScheduleModel =
 			{
 				Fragments._ScheduleModel__OclAny /* 0 */,
 				Fragments._ScheduleModel__OclElement /* 1 */,
@@ -2097,7 +2093,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ScheduleModel = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ShadowNode =
+		private static final @NonNull FlatFragment @NonNull [] _ShadowNode =
 			{
 				Fragments._ShadowNode__OclAny /* 0 */,
 				Fragments._ShadowNode__OclElement /* 1 */,
@@ -2110,7 +2106,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ShadowNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _ShadowPartEdge =
+		private static final @NonNull FlatFragment @NonNull [] _ShadowPartEdge =
 			{
 				Fragments._ShadowPartEdge__OclAny /* 0 */,
 				Fragments._ShadowPartEdge__OclElement /* 1 */,
@@ -2122,7 +2118,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __ShadowPartEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _StringLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _StringLiteralNode =
 			{
 				Fragments._StringLiteralNode__OclAny /* 0 */,
 				Fragments._StringLiteralNode__OclElement /* 1 */,
@@ -2135,7 +2131,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __StringLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _SuccessEdge =
+		private static final @NonNull FlatFragment @NonNull [] _SuccessEdge =
 			{
 				Fragments._SuccessEdge__OclAny /* 0 */,
 				Fragments._SuccessEdge__OclElement /* 1 */,
@@ -2148,7 +2144,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __SuccessEdge = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _SuccessNode =
+		private static final @NonNull FlatFragment @NonNull [] _SuccessNode =
 			{
 				Fragments._SuccessNode__OclAny /* 0 */,
 				Fragments._SuccessNode__OclElement /* 1 */,
@@ -2160,7 +2156,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __SuccessNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Symbolable =
+		private static final @NonNull FlatFragment @NonNull [] _Symbolable =
 			{
 				Fragments._Symbolable__OclAny /* 0 */,
 				Fragments._Symbolable__OclElement /* 1 */,
@@ -2168,7 +2164,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Symbolable = { 1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TupleLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _TupleLiteralNode =
 			{
 				Fragments._TupleLiteralNode__OclAny /* 0 */,
 				Fragments._TupleLiteralNode__OclElement /* 1 */,
@@ -2181,7 +2177,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TupleLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TuplePartEdge =
+		private static final @NonNull FlatFragment @NonNull [] _TuplePartEdge =
 			{
 				Fragments._TuplePartEdge__OclAny /* 0 */,
 				Fragments._TuplePartEdge__OclElement /* 1 */,
@@ -2193,7 +2189,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TuplePartEdge = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _TypeLiteralNode =
+		private static final @NonNull FlatFragment @NonNull [] _TypeLiteralNode =
 			{
 				Fragments._TypeLiteralNode__OclAny /* 0 */,
 				Fragments._TypeLiteralNode__OclElement /* 1 */,
@@ -2206,7 +2202,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __TypeLiteralNode = { 1,1,2,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _UnknownNode =
+		private static final @NonNull FlatFragment @NonNull [] _UnknownNode =
 			{
 				Fragments._UnknownNode__OclAny /* 0 */,
 				Fragments._UnknownNode__OclElement /* 1 */,
@@ -2218,7 +2214,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __UnknownNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _Utility =
+		private static final @NonNull FlatFragment @NonNull [] _Utility =
 			{
 				Fragments._Utility__OclAny /* 0 */,
 				Fragments._Utility__OclElement /* 1 */,
@@ -2228,7 +2224,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __Utility = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _VariableNode =
+		private static final @NonNull FlatFragment @NonNull [] _VariableNode =
 			{
 				Fragments._VariableNode__OclAny /* 0 */,
 				Fragments._VariableNode__OclElement /* 1 */,
@@ -2240,7 +2236,7 @@ public class QVTscheduleTables extends AbstractTables
 			};
 		private static final int @NonNull [] __VariableNode = { 1,1,2,1,1,1 };
 
-		private static final @NonNull ExecutorFragment @NonNull [] _VerdictRegion =
+		private static final @NonNull FlatFragment @NonNull [] _VerdictRegion =
 			{
 				Fragments._VerdictRegion__OclAny /* 0 */,
 				Fragments._VerdictRegion__OclElement /* 1 */,
@@ -2357,13 +2353,13 @@ public class QVTscheduleTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__AbstractDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__Element = {
+		private static final @NonNull Operation @NonNull [] _AbstractDatum__AbstractDatum = {};
+		private static final @NonNull Operation @NonNull [] _AbstractDatum__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__OclAny = {
+		private static final @NonNull Operation @NonNull [] _AbstractDatum__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _AbstractDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2380,7 +2376,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__OclElement = {
+		private static final @NonNull Operation @NonNull [] _AbstractDatum__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2394,14 +2390,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2418,7 +2414,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ArgumentEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ArgumentEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2432,14 +2428,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__BasicPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _BasicPartition__BasicPartition = {};
+		private static final @NonNull Operation @NonNull [] _BasicPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _BasicPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _BasicPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _BasicPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2456,7 +2452,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _BasicPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2469,17 +2465,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BasicPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _BasicPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__BooleanLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__BooleanLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2496,7 +2492,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2509,15 +2505,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BooleanLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _BooleanLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CastEdge__CastEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CastEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CastEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _CastEdge__CastEdge = {};
+		private static final @NonNull Operation @NonNull [] _CastEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _CastEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CastEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CastEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2534,7 +2530,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CastEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CastEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2548,14 +2544,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__ClassDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__AbstractDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__Element = {
+		private static final @NonNull Operation @NonNull [] _ClassDatum__ClassDatum = {};
+		private static final @NonNull Operation @NonNull [] _ClassDatum__AbstractDatum = {};
+		private static final @NonNull Operation @NonNull [] _ClassDatum__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ClassDatum__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _ClassDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2572,7 +2568,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ClassDatum__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2586,13 +2582,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__Cluster = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__Element = {
+		private static final @NonNull Operation @NonNull [] _Cluster__Cluster = {};
+		private static final @NonNull Operation @NonNull [] _Cluster__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Cluster__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Cluster__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2609,7 +2605,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Cluster__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2622,17 +2618,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Cluster__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _Cluster__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__CollectionClassDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__AbstractDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__ClassDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__Element = {
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__CollectionClassDatum = {};
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__AbstractDatum = {};
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__ClassDatum = {};
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2649,7 +2645,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionClassDatum__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CollectionClassDatum__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2663,15 +2659,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__CollectionLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__CollectionLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2688,7 +2684,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2701,17 +2697,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__CollectionPartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__CollectionPartEdge = {};
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2728,7 +2724,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionPartEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CollectionPartEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2742,15 +2738,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__CollectionRangeNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__Element = {
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__CollectionRangeNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2767,7 +2763,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2780,16 +2776,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionRangeNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _CollectionRangeNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__ComposedNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__Element = {
+		private static final @NonNull Operation @NonNull [] _ComposedNode__ComposedNode = {};
+		private static final @NonNull Operation @NonNull [] _ComposedNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _ComposedNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ComposedNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _ComposedNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2806,7 +2802,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ComposedNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ComposedNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2820,13 +2816,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__CompositePartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__Element = {
+		private static final @NonNull Operation @NonNull [] _CompositePartition__CompositePartition = {};
+		private static final @NonNull Operation @NonNull [] _CompositePartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CompositePartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _CompositePartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2843,7 +2839,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CompositePartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2856,14 +2852,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CompositePartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _CompositePartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Connection__Connection = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Connection__Element = {
+		private static final @NonNull Operation @NonNull [] _Connection__Connection = {};
+		private static final @NonNull Operation @NonNull [] _Connection__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Connection__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Connection__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2880,7 +2876,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Connection__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Connection__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2893,10 +2889,10 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Connection__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _Connection__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionEnd__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionEnd__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ConnectionEnd__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _ConnectionEnd__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2913,7 +2909,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionEnd__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ConnectionEnd__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2927,8 +2923,8 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionRole__ConnectionRole = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionRole__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ConnectionRole__ConnectionRole = {};
+		private static final @NonNull Operation @NonNull [] _ConnectionRole__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2945,7 +2941,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionRole__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ConnectionRole__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -2958,19 +2954,19 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionRole__OclEnumeration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionRole__OclType = {
+		private static final @NonNull Operation @NonNull [] _ConnectionRole__OclEnumeration = {};
+		private static final @NonNull Operation @NonNull [] _ConnectionRole__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__CyclicMappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__CyclicMappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__MappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__MappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -2987,7 +2983,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3000,18 +2996,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicMappingRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _CyclicMappingRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__CyclicPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__CompositePartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__CyclicPartition = {};
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__CompositePartition = {};
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3028,7 +3024,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3041,15 +3037,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CyclicPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _CyclicPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyEdge__DependencyEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _DependencyEdge__DependencyEdge = {};
+		private static final @NonNull Operation @NonNull [] _DependencyEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _DependencyEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _DependencyEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3066,7 +3062,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _DependencyEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3080,14 +3076,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__DependencyNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__Element = {
+		private static final @NonNull Operation @NonNull [] _DependencyNode__DependencyNode = {};
+		private static final @NonNull Operation @NonNull [] _DependencyNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _DependencyNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _DependencyNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _DependencyNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3104,7 +3100,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _DependencyNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3118,14 +3114,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__DispatchRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__DispatchRegion = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__MappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__MappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3142,7 +3138,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3155,16 +3151,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__RuleRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DispatchRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__RuleRegion = {};
+		private static final @NonNull Operation @NonNull [] _DispatchRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Edge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Edge__Element = {
+		private static final @NonNull Operation @NonNull [] _Edge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _Edge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Edge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Edge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3181,7 +3177,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Edge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Edge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3195,13 +3191,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__EdgeConnection = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__Connection = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__Element = {
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__EdgeConnection = {};
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__Connection = {};
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__OclAny = {
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3218,7 +3214,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__OclElement = {
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3231,17 +3227,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EdgeConnection__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _EdgeConnection__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__EnumLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__EnumLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3258,7 +3254,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3271,17 +3267,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnumLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _EnumLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__ErrorNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__Element = {
+		private static final @NonNull Operation @NonNull [] _ErrorNode__ErrorNode = {};
+		private static final @NonNull Operation @NonNull [] _ErrorNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _ErrorNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ErrorNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _ErrorNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _ErrorNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3298,7 +3294,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ErrorNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ErrorNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3312,13 +3308,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _ExpressionEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _ExpressionEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _ExpressionEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ExpressionEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3335,7 +3331,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ExpressionEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ExpressionEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3349,15 +3345,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__IfNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__Element = {
+		private static final @NonNull Operation @NonNull [] _IfNode__IfNode = {};
+		private static final @NonNull Operation @NonNull [] _IfNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _IfNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _IfNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _IfNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _IfNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3374,7 +3370,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _IfNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3387,16 +3383,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IfNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _IfNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__IncludesEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__IncludesEdge = {};
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3413,7 +3409,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IncludesEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _IncludesEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3427,14 +3423,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__InputNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__Element = {
+		private static final @NonNull Operation @NonNull [] _InputNode__InputNode = {};
+		private static final @NonNull Operation @NonNull [] _InputNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _InputNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _InputNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _InputNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3451,7 +3447,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _InputNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _InputNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3465,13 +3461,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratedEdge__IteratedEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratedEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratedEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _IteratedEdge__IteratedEdge = {};
+		private static final @NonNull Operation @NonNull [] _IteratedEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _IteratedEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratedEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _IteratedEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3488,7 +3484,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratedEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _IteratedEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3502,15 +3498,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__IteratorNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__Element = {
+		private static final @NonNull Operation @NonNull [] _IteratorNode__IteratorNode = {};
+		private static final @NonNull Operation @NonNull [] _IteratorNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _IteratorNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _IteratorNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _IteratorNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _IteratorNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3527,7 +3523,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _IteratorNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3540,18 +3536,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _IteratorNode__VariableNode = {};
+		private static final @NonNull Operation @NonNull [] _IteratorNode__VariableNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__KeyPartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__KeyPartEdge = {};
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__NavigableEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__NavigationEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__NavigableEdge = {};
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__NavigationEdge = {};
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3568,7 +3564,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyPartEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _KeyPartEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3582,15 +3578,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__KeyedValueNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__Element = {
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__KeyedValueNode = {};
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3607,7 +3603,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3620,16 +3616,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _KeyedValueNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _KeyedValueNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__LoadingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__LoadingPartition = {};
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3646,7 +3642,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3659,15 +3655,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _LoadingPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__LoadingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__LoadingRegion = {};
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3684,7 +3680,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3697,18 +3693,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _LoadingRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _LoadingRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__MapLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__MapLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3725,7 +3721,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3738,17 +3734,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _MapLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__MapPartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__MapPartEdge = {};
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3765,7 +3761,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MapPartEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3779,15 +3775,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__MapPartNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__Element = {
+		private static final @NonNull Operation @NonNull [] _MapPartNode__MapPartNode = {};
+		private static final @NonNull Operation @NonNull [] _MapPartNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _MapPartNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MapPartNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _MapPartNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _MapPartNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3804,7 +3800,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MapPartNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3817,16 +3813,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MapPartNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _MapPartNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__Element = {
+		private static final @NonNull Operation @NonNull [] _MappingNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _MappingNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _MappingNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MappingNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _MappingNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3843,7 +3839,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MappingNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3857,13 +3853,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _MappingPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _MappingPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MappingPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _MappingPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3880,7 +3876,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MappingPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3893,15 +3889,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _MappingPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__MappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _MappingRegion__MappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _MappingRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MappingRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _MappingRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3918,7 +3914,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MappingRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3931,18 +3927,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _MappingRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _MappingRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__MergedPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__BasicPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _MergedPartition__MergedPartition = {};
+		private static final @NonNull Operation @NonNull [] _MergedPartition__BasicPartition = {};
+		private static final @NonNull Operation @NonNull [] _MergedPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _MergedPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _MergedPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _MergedPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3959,7 +3955,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _MergedPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -3972,16 +3968,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _MergedPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__NavigableEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__NavigableEdge = {};
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -3998,7 +3994,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigableEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NavigableEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4012,15 +4008,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__NavigationEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__NavigationEdge = {};
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__NavigableEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__NavigableEdge = {};
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4037,7 +4033,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NavigationEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4051,13 +4047,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Node__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Node__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Node__Element = {
+		private static final @NonNull Operation @NonNull [] _Node__Node = {};
+		private static final @NonNull Operation @NonNull [] _Node__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _Node__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Node__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Node__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4074,7 +4070,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Node__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Node__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4088,13 +4084,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__NodeConnection = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__Connection = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__Element = {
+		private static final @NonNull Operation @NonNull [] _NodeConnection__NodeConnection = {};
+		private static final @NonNull Operation @NonNull [] _NodeConnection__Connection = {};
+		private static final @NonNull Operation @NonNull [] _NodeConnection__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NodeConnection__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4111,7 +4107,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NodeConnection__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4124,16 +4120,16 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NodeConnection__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _NodeConnection__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__NonPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _NonPartition__NonPartition = {};
+		private static final @NonNull Operation @NonNull [] _NonPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__MappingPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NonPartition__MappingPartition = {};
+		private static final @NonNull Operation @NonNull [] _NonPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _NonPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4150,7 +4146,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NonPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4163,17 +4159,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NonPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _NonPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__NullLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__NullLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4190,7 +4186,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4203,10 +4199,10 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NullLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _NullLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Number__Number = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Number__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Number__Number = {};
+		private static final @NonNull Operation @NonNull [] _Number__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4224,15 +4220,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__NumericLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__NumericLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4249,7 +4245,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4262,17 +4258,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NumericLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _NumericLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__OperationCallNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__Element = {
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__OperationCallNode = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4289,7 +4285,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4302,17 +4298,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationCallNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _OperationCallNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__OperationNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__Element = {
+		private static final @NonNull Operation @NonNull [] _OperationNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _OperationNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _OperationNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _OperationNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _OperationNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4329,7 +4325,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4343,15 +4339,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__OperationParameterEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__OperationParameterEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4368,7 +4364,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationParameterEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationParameterEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4382,13 +4378,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__OperationRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _OperationRegion__OperationRegion = {};
+		private static final @NonNull Operation @NonNull [] _OperationRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _OperationRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4405,7 +4401,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4418,18 +4414,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _OperationRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _OperationRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__OperationSelfEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__OperationSelfEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4446,7 +4442,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OperationSelfEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _OperationSelfEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4460,13 +4456,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Partition__Partition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Partition__Element = {
+		private static final @NonNull Operation @NonNull [] _Partition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _Partition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Partition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Partition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Partition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Partition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4483,7 +4479,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Partition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Partition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4497,15 +4493,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__PatternTypedNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__Element = {
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__PatternTypedNode = {};
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4522,7 +4518,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternTypedNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _PatternTypedNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4536,15 +4532,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__PatternVariableNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__Element = {
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__PatternVariableNode = {};
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4561,7 +4557,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4574,15 +4570,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PatternVariableNode__VariableNode = {};
+		private static final @NonNull Operation @NonNull [] _PatternVariableNode__VariableNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__PredicateEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _PredicateEdge__PredicateEdge = {};
+		private static final @NonNull Operation @NonNull [] _PredicateEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _PredicateEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _PredicateEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4599,7 +4595,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PredicateEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _PredicateEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4613,14 +4609,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__PropertyDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__AbstractDatum = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__Element = {
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__PropertyDatum = {};
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__AbstractDatum = {};
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__OclAny = {
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4637,7 +4633,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__OclElement = {
+		private static final @NonNull Operation @NonNull [] _PropertyDatum__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4651,13 +4647,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RecursionEdge__RecursionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RecursionEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RecursionEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _RecursionEdge__RecursionEdge = {};
+		private static final @NonNull Operation @NonNull [] _RecursionEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _RecursionEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RecursionEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RecursionEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4674,7 +4670,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RecursionEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RecursionEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4688,13 +4684,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__Element = {
+		private static final @NonNull Operation @NonNull [] _Region__Region = {};
+		private static final @NonNull Operation @NonNull [] _Region__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Region__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _Region__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4711,7 +4707,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Region__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4724,10 +4720,10 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Region__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _Region__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__Role = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Role__Role = {};
+		private static final @NonNull Operation @NonNull [] _Role__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4744,7 +4740,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Role__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4757,19 +4753,19 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclEnumeration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Role__OclType = {
+		private static final @NonNull Operation @NonNull [] _Role__OclEnumeration = {};
+		private static final @NonNull Operation @NonNull [] _Role__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__RootPartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__CompositePartition = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__Element = {
+		private static final @NonNull Operation @NonNull [] _RootPartition__RootPartition = {};
+		private static final @NonNull Operation @NonNull [] _RootPartition__CompositePartition = {};
+		private static final @NonNull Operation @NonNull [] _RootPartition__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RootPartition__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RootPartition__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4786,7 +4782,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RootPartition__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4799,15 +4795,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootPartition__Partition = {};
+		private static final @NonNull Operation @NonNull [] _RootPartition__Partition = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__RootRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _RootRegion__RootRegion = {};
+		private static final @NonNull Operation @NonNull [] _RootRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RootRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RootRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4824,7 +4820,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RootRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4837,17 +4833,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RootRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _RootRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _RootRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__RuleRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _RuleRegion__RuleRegion = {};
+		private static final @NonNull Operation @NonNull [] _RuleRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__MappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _RuleRegion__MappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _RuleRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _RuleRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4864,7 +4860,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _RuleRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4877,18 +4873,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RuleRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _RuleRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _RuleRegion__Symbolable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__ScheduleModel = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__Element = {
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__ScheduleModel = {};
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__Namespace = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__Model = {};
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__Namespace = {};
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4905,7 +4901,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ScheduleModel__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ScheduleModel__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4919,15 +4915,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__ShadowNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__Element = {
+		private static final @NonNull Operation @NonNull [] _ShadowNode__ShadowNode = {};
+		private static final @NonNull Operation @NonNull [] _ShadowNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _ShadowNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ShadowNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _ShadowNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _ShadowNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4944,7 +4940,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ShadowNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4957,17 +4953,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _ShadowNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__ShadowPartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__ShadowPartEdge = {};
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -4984,7 +4980,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ShadowPartEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _ShadowPartEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -4998,15 +4994,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__StringLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__StringLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5023,7 +5019,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5036,18 +5032,18 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _StringLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _StringLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__SuccessEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__SuccessEdge = {};
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__NavigableEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__NavigationEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__NavigableEdge = {};
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__NavigationEdge = {};
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5064,7 +5060,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _SuccessEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5078,15 +5074,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__SuccessNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Element = {
+		private static final @NonNull Operation @NonNull [] _SuccessNode__SuccessNode = {};
+		private static final @NonNull Operation @NonNull [] _SuccessNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _SuccessNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _SuccessNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _SuccessNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _SuccessNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5103,7 +5099,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SuccessNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _SuccessNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5117,8 +5113,8 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Symbolable__Symbolable = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Symbolable__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Symbolable__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _Symbolable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5135,7 +5131,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Symbolable__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Symbolable__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5149,15 +5145,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__TupleLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__TupleLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5174,7 +5170,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5187,17 +5183,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TupleLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _TupleLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__TuplePartEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__ArgumentEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__Edge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__Element = {
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__TuplePartEdge = {};
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__ArgumentEdge = {};
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__Edge = {};
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__ExpressionEdge = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__ExpressionEdge = {};
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5214,7 +5210,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TuplePartEdge__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TuplePartEdge__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5228,15 +5224,15 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__TypeLiteralNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__Element = {
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__TypeLiteralNode = {};
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5253,7 +5249,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5266,17 +5262,17 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypeLiteralNode__OperationNode = {};
+		private static final @NonNull Operation @NonNull [] _TypeLiteralNode__OperationNode = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__UnknownNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__Element = {
+		private static final @NonNull Operation @NonNull [] _UnknownNode__UnknownNode = {};
+		private static final @NonNull Operation @NonNull [] _UnknownNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _UnknownNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _UnknownNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _UnknownNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _UnknownNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5293,7 +5289,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _UnknownNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _UnknownNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5307,8 +5303,8 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Utility__Utility = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Utility__OclAny = {
+		private static final @NonNull Operation @NonNull [] _Utility__Utility = {};
+		private static final @NonNull Operation @NonNull [] _Utility__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5325,7 +5321,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Utility__OclElement = {
+		private static final @NonNull Operation @NonNull [] _Utility__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5338,20 +5334,20 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Utility__OclEnumeration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Utility__OclType = {
+		private static final @NonNull Operation @NonNull [] _Utility__OclEnumeration = {};
+		private static final @NonNull Operation @NonNull [] _Utility__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType[?]) */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__VariableNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__ConnectionEnd = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__Element = {
+		private static final @NonNull Operation @NonNull [] _VariableNode__VariableNode = {};
+		private static final @NonNull Operation @NonNull [] _VariableNode__ConnectionEnd = {};
+		private static final @NonNull Operation @NonNull [] _VariableNode__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__MappingNode = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__Node = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__OclAny = {
+		private static final @NonNull Operation @NonNull [] _VariableNode__MappingNode = {};
+		private static final @NonNull Operation @NonNull [] _VariableNode__Node = {};
+		private static final @NonNull Operation @NonNull [] _VariableNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5368,7 +5364,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableNode__OclElement = {
+		private static final @NonNull Operation @NonNull [] _VariableNode__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5382,14 +5378,14 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__VerdictRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__Element = {
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__VerdictRegion = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__MappingRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__NamedElement = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__OclAny = {
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__MappingRegion = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__NamedElement = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -5406,7 +5402,7 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__OclElement = {
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -5419,9 +5415,9 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__Region = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__RuleRegion = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _VerdictRegion__Symbolable = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__Region = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__RuleRegion = {};
+		private static final @NonNull Operation @NonNull [] _VerdictRegion__Symbolable = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -6055,7 +6051,7 @@ public class QVTscheduleTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty @NonNull [] _AbstractDatum = {
+		private static final @NonNull Property @NonNull [] _AbstractDatum = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -6065,7 +6061,7 @@ public class QVTscheduleTables extends AbstractTables
 			PivotTables.Properties._Element__ownedExtensions
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ArgumentEdge = {
+		private static final @NonNull Property @NonNull [] _ArgumentEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6081,7 +6077,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _BasicPartition = {
+		private static final @NonNull Property @NonNull [] _BasicPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._BasicPartition__constantEdges,
 			QVTscheduleTables.Properties._BasicPartition__constantNodes,
@@ -6114,7 +6110,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._BasicPartition__speculationNodes
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _BooleanLiteralNode = {
+		private static final @NonNull Property @NonNull [] _BooleanLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._BooleanLiteralNode__booleanValue,
 			QVTscheduleTables.Properties._Node__classDatum,
@@ -6134,7 +6130,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CastEdge = {
+		private static final @NonNull Property @NonNull [] _CastEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6151,7 +6147,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ClassDatum = {
+		private static final @NonNull Property @NonNull [] _ClassDatum = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._ClassDatum__completeClasses,
 			PivotTables.Properties._NamedElement__name,
@@ -6167,7 +6163,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._ClassDatum__superClassDatums
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Cluster = {
+		private static final @NonNull Property @NonNull [] _Cluster = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Cluster__depth,
 			QVTscheduleTables.Properties._Cluster__memberEdges,
@@ -6184,7 +6180,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CollectionClassDatum = {
+		private static final @NonNull Property @NonNull [] _CollectionClassDatum = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._ClassDatum__completeClasses,
 			QVTscheduleTables.Properties._CollectionClassDatum__elementalClassDatum,
@@ -6201,7 +6197,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._ClassDatum__superClassDatums
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CollectionLiteralNode = {
+		private static final @NonNull Property @NonNull [] _CollectionLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6220,7 +6216,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CollectionPartEdge = {
+		private static final @NonNull Property @NonNull [] _CollectionPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6237,7 +6233,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CollectionRangeNode = {
+		private static final @NonNull Property @NonNull [] _CollectionRangeNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6256,7 +6252,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ComposedNode = {
+		private static final @NonNull Property @NonNull [] _ComposedNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6275,7 +6271,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CompositePartition = {
+		private static final @NonNull Property @NonNull [] _CompositePartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
@@ -6289,7 +6285,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Connection = {
+		private static final @NonNull Property @NonNull [] _Connection = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Connection__commonPartition,
 			QVTscheduleTables.Properties._Connection__connectionRole,
@@ -6305,17 +6301,17 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ConnectionEnd = {
+		private static final @NonNull Property @NonNull [] _ConnectionEnd = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ConnectionRole = {
+		private static final @NonNull Property @NonNull [] _ConnectionRole = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CyclicMappingRegion = {
+		private static final @NonNull Property @NonNull [] _CyclicMappingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._CyclicMappingRegion__elementRegions,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
@@ -6334,7 +6330,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _CyclicPartition = {
+		private static final @NonNull Property @NonNull [] _CyclicPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
@@ -6352,7 +6348,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _DependencyEdge = {
+		private static final @NonNull Property @NonNull [] _DependencyEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6368,7 +6364,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _DependencyNode = {
+		private static final @NonNull Property @NonNull [] _DependencyNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6387,7 +6383,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _DispatchRegion = {
+		private static final @NonNull Property @NonNull [] _DispatchRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
@@ -6407,7 +6403,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Edge = {
+		private static final @NonNull Property @NonNull [] _Edge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6423,7 +6419,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _EdgeConnection = {
+		private static final @NonNull Property @NonNull [] _EdgeConnection = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Connection__commonPartition,
 			QVTscheduleTables.Properties._Connection__connectionRole,
@@ -6442,7 +6438,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _EnumLiteralNode = {
+		private static final @NonNull Property @NonNull [] _EnumLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6462,7 +6458,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ErrorNode = {
+		private static final @NonNull Property @NonNull [] _ErrorNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6481,7 +6477,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ExpressionEdge = {
+		private static final @NonNull Property @NonNull [] _ExpressionEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6497,7 +6493,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _IfNode = {
+		private static final @NonNull Property @NonNull [] _IfNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6516,7 +6512,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _IncludesEdge = {
+		private static final @NonNull Property @NonNull [] _IncludesEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6532,7 +6528,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _InputNode = {
+		private static final @NonNull Property @NonNull [] _InputNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6551,7 +6547,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _IteratedEdge = {
+		private static final @NonNull Property @NonNull [] _IteratedEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6567,7 +6563,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _IteratorNode = {
+		private static final @NonNull Property @NonNull [] _IteratorNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6587,7 +6583,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _KeyPartEdge = {
+		private static final @NonNull Property @NonNull [] _KeyPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6610,7 +6606,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _KeyedValueNode = {
+		private static final @NonNull Property @NonNull [] _KeyedValueNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._KeyedValueNode__classDatumValue,
@@ -6630,7 +6626,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _LoadingPartition = {
+		private static final @NonNull Property @NonNull [] _LoadingPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
@@ -6648,7 +6644,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _LoadingRegion = {
+		private static final @NonNull Property @NonNull [] _LoadingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._LoadingRegion__loadingPartition,
 			PivotTables.Properties._NamedElement__name,
@@ -6666,7 +6662,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._LoadingRegion__targetName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MapLiteralNode = {
+		private static final @NonNull Property @NonNull [] _MapLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6685,7 +6681,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MapPartEdge = {
+		private static final @NonNull Property @NonNull [] _MapPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6702,7 +6698,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MapPartNode = {
+		private static final @NonNull Property @NonNull [] _MapPartNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6721,7 +6717,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MappingNode = {
+		private static final @NonNull Property @NonNull [] _MappingNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6740,7 +6736,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MappingPartition = {
+		private static final @NonNull Property @NonNull [] _MappingPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
@@ -6757,7 +6753,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MappingRegion = {
+		private static final @NonNull Property @NonNull [] _MappingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
@@ -6775,7 +6771,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MergedPartition = {
+		private static final @NonNull Property @NonNull [] _MergedPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._BasicPartition__constantEdges,
 			QVTscheduleTables.Properties._BasicPartition__constantNodes,
@@ -6809,7 +6805,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._BasicPartition__speculationNodes
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NavigableEdge = {
+		private static final @NonNull Property @NonNull [] _NavigableEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6827,7 +6823,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NavigationEdge = {
+		private static final @NonNull Property @NonNull [] _NavigationEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -6849,7 +6845,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Node = {
+		private static final @NonNull Property @NonNull [] _Node = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6868,7 +6864,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NodeConnection = {
+		private static final @NonNull Property @NonNull [] _NodeConnection = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._NodeConnection__classDatum,
 			QVTscheduleTables.Properties._Connection__commonPartition,
@@ -6888,7 +6884,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NonPartition = {
+		private static final @NonNull Property @NonNull [] _NonPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
@@ -6905,7 +6901,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NullLiteralNode = {
+		private static final @NonNull Property @NonNull [] _NullLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6924,9 +6920,9 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Number = {};
+		private static final @NonNull Property @NonNull [] _Number = {};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _NumericLiteralNode = {
+		private static final @NonNull Property @NonNull [] _NumericLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6946,7 +6942,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationCallNode = {
+		private static final @NonNull Property @NonNull [] _OperationCallNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6966,7 +6962,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationNode = {
+		private static final @NonNull Property @NonNull [] _OperationNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -6985,7 +6981,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationParameterEdge = {
+		private static final @NonNull Property @NonNull [] _OperationParameterEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7003,7 +6999,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationRegion = {
+		private static final @NonNull Property @NonNull [] _OperationRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._OperationRegion__dependencyNodes,
 			QVTscheduleTables.Properties._OperationRegion__headNodes,
@@ -7023,7 +7019,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _OperationSelfEdge = {
+		private static final @NonNull Property @NonNull [] _OperationSelfEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7040,7 +7036,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Partition = {
+		private static final @NonNull Property @NonNull [] _Partition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
@@ -7053,7 +7049,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _PatternTypedNode = {
+		private static final @NonNull Property @NonNull [] _PatternTypedNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7072,7 +7068,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _PatternVariableNode = {
+		private static final @NonNull Property @NonNull [] _PatternVariableNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7092,7 +7088,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _PredicateEdge = {
+		private static final @NonNull Property @NonNull [] _PredicateEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7109,7 +7105,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _PropertyDatum = {
+		private static final @NonNull Property @NonNull [] _PropertyDatum = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._PropertyDatum__key,
 			PivotTables.Properties._NamedElement__name,
@@ -7125,7 +7121,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._PropertyDatum__targetClassDatum
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RecursionEdge = {
+		private static final @NonNull Property @NonNull [] _RecursionEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7142,7 +7138,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Region = {
+		private static final @NonNull Property @NonNull [] _Region = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -7157,12 +7153,12 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Role = {
+		private static final @NonNull Property @NonNull [] _Role = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RootPartition = {
+		private static final @NonNull Property @NonNull [] _RootPartition = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Partition__intermediateConnections,
 			QVTscheduleTables.Properties._RootPartition__loadingPartition,
@@ -7178,7 +7174,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Partition__rootConnections
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RootRegion = {
+		private static final @NonNull Property @NonNull [] _RootRegion = {
 			QVTscheduleTables.Properties._RootRegion__activeRegions,
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
@@ -7199,7 +7195,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _RuleRegion = {
+		private static final @NonNull Property @NonNull [] _RuleRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
@@ -7218,7 +7214,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ScheduleModel = {
+		private static final @NonNull Property @NonNull [] _ScheduleModel = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Model__externalURI,
 			PivotTables.Properties._NamedElement__name,
@@ -7237,7 +7233,7 @@ public class QVTscheduleTables extends AbstractTables
 			PivotTables.Properties._Model__xmiidVersion
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ShadowNode = {
+		private static final @NonNull Property @NonNull [] _ShadowNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7256,7 +7252,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _ShadowPartEdge = {
+		private static final @NonNull Property @NonNull [] _ShadowPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7273,7 +7269,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _StringLiteralNode = {
+		private static final @NonNull Property @NonNull [] _StringLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7293,7 +7289,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SuccessEdge = {
+		private static final @NonNull Property @NonNull [] _SuccessEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7315,7 +7311,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _SuccessNode = {
+		private static final @NonNull Property @NonNull [] _SuccessNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7334,13 +7330,13 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Symbolable = {
+		private static final @NonNull Property @NonNull [] _Symbolable = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TupleLiteralNode = {
+		private static final @NonNull Property @NonNull [] _TupleLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7359,7 +7355,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TuplePartEdge = {
+		private static final @NonNull Property @NonNull [] _TuplePartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Edge__cluster,
 			QVTscheduleTables.Properties._Edge__edgeRole,
@@ -7376,7 +7372,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Edge__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _TypeLiteralNode = {
+		private static final @NonNull Property @NonNull [] _TypeLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7396,7 +7392,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _UnknownNode = {
+		private static final @NonNull Property @NonNull [] _UnknownNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7415,12 +7411,12 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _Utility = {
+		private static final @NonNull Property @NonNull [] _Utility = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _VariableNode = {
+		private static final @NonNull Property @NonNull [] _VariableNode = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._Node__classDatum,
 			QVTscheduleTables.Properties._Node__cluster,
@@ -7440,7 +7436,7 @@ public class QVTscheduleTables extends AbstractTables
 			QVTscheduleTables.Properties._Node__utility
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _VerdictRegion = {
+		private static final @NonNull Property @NonNull [] _VerdictRegion = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
@@ -7563,13 +7559,13 @@ public class QVTscheduleTables extends AbstractTables
 			FragmentProperties.init();
 		}
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__MANDATORY_EDGE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("MANDATORY_EDGE"), Types._ConnectionRole, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__MANDATORY_NODE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("MANDATORY_NODE"), Types._ConnectionRole, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__PASSED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PASSED"), Types._ConnectionRole, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__PREFERRED_EDGE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PREFERRED_EDGE"), Types._ConnectionRole, 3);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__PREFERRED_NODE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PREFERRED_NODE"), Types._ConnectionRole, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _ConnectionRole__UNDEFINED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("UNDEFINED"), Types._ConnectionRole, 5);
-		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _ConnectionRole = {
+		public static final @NonNull EnumerationLiteral _ConnectionRole__MANDATORY_EDGE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("MANDATORY_EDGE"), Types._ConnectionRole, 0);
+		public static final @NonNull EnumerationLiteral _ConnectionRole__MANDATORY_NODE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("MANDATORY_NODE"), Types._ConnectionRole, 1);
+		public static final @NonNull EnumerationLiteral _ConnectionRole__PASSED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PASSED"), Types._ConnectionRole, 2);
+		public static final @NonNull EnumerationLiteral _ConnectionRole__PREFERRED_EDGE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PREFERRED_EDGE"), Types._ConnectionRole, 3);
+		public static final @NonNull EnumerationLiteral _ConnectionRole__PREFERRED_NODE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("PREFERRED_NODE"), Types._ConnectionRole, 4);
+		public static final @NonNull EnumerationLiteral _ConnectionRole__UNDEFINED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.CONNECTION_ROLE.getEEnumLiteral("UNDEFINED"), Types._ConnectionRole, 5);
+		private static final @NonNull EnumerationLiteral @NonNull [] _ConnectionRole = {
 			_ConnectionRole__MANDATORY_EDGE,
 			_ConnectionRole__MANDATORY_NODE,
 			_ConnectionRole__PASSED,
@@ -7578,16 +7574,16 @@ public class QVTscheduleTables extends AbstractTables
 			_ConnectionRole__UNDEFINED
 		};
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT"), Types._Role, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT_SUCCESS_FALSE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_FALSE"), Types._Role, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT_SUCCESS_TRUE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_TRUE"), Types._Role, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__LOADED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("LOADED"), Types._Role, 3);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__REALIZED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("REALIZED"), Types._Role, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__PREDICATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("PREDICATED"), Types._Role, 5);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATION = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATION"), Types._Role, 6);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATED"), Types._Role, 7);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__OTHER = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("OTHER"), Types._Role, 8);
-		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _Role = {
+		public static final @NonNull EnumerationLiteral _Role__CONSTANT = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT"), Types._Role, 0);
+		public static final @NonNull EnumerationLiteral _Role__CONSTANT_SUCCESS_FALSE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_FALSE"), Types._Role, 1);
+		public static final @NonNull EnumerationLiteral _Role__CONSTANT_SUCCESS_TRUE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_TRUE"), Types._Role, 2);
+		public static final @NonNull EnumerationLiteral _Role__LOADED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("LOADED"), Types._Role, 3);
+		public static final @NonNull EnumerationLiteral _Role__REALIZED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("REALIZED"), Types._Role, 4);
+		public static final @NonNull EnumerationLiteral _Role__PREDICATED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("PREDICATED"), Types._Role, 5);
+		public static final @NonNull EnumerationLiteral _Role__SPECULATION = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATION"), Types._Role, 6);
+		public static final @NonNull EnumerationLiteral _Role__SPECULATED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATED"), Types._Role, 7);
+		public static final @NonNull EnumerationLiteral _Role__OTHER = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("OTHER"), Types._Role, 8);
+		private static final @NonNull EnumerationLiteral @NonNull [] _Role = {
 			_Role__CONSTANT,
 			_Role__CONSTANT_SUCCESS_FALSE,
 			_Role__CONSTANT_SUCCESS_TRUE,
@@ -7599,17 +7595,17 @@ public class QVTscheduleTables extends AbstractTables
 			_Role__OTHER
 		};
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__DISPATCH = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("DISPATCH"), Types._Utility, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__TRACE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("TRACE"), Types._Utility, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__SUCCESS = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("SUCCESS"), Types._Utility, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__DEPENDENCY = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("DEPENDENCY"), Types._Utility, 3);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__COMPOSED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("COMPOSED"), Types._Utility, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__NON_NULL_MATCHED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NON_NULL_MATCHED"), Types._Utility, 5);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__NULLABLE_MATCHED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NULLABLE_MATCHED"), Types._Utility, 6);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__NON_NULL_CONDITIONAL = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NON_NULL_CONDITIONAL"), Types._Utility, 7);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__NULLABLE_CONDITIONAL = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NULLABLE_CONDITIONAL"), Types._Utility, 8);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Utility__NOT_KNOWN = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NOT_KNOWN"), Types._Utility, 9);
-		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _Utility = {
+		public static final @NonNull EnumerationLiteral _Utility__DISPATCH = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("DISPATCH"), Types._Utility, 0);
+		public static final @NonNull EnumerationLiteral _Utility__TRACE = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("TRACE"), Types._Utility, 1);
+		public static final @NonNull EnumerationLiteral _Utility__SUCCESS = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("SUCCESS"), Types._Utility, 2);
+		public static final @NonNull EnumerationLiteral _Utility__DEPENDENCY = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("DEPENDENCY"), Types._Utility, 3);
+		public static final @NonNull EnumerationLiteral _Utility__COMPOSED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("COMPOSED"), Types._Utility, 4);
+		public static final @NonNull EnumerationLiteral _Utility__NON_NULL_MATCHED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NON_NULL_MATCHED"), Types._Utility, 5);
+		public static final @NonNull EnumerationLiteral _Utility__NULLABLE_MATCHED = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NULLABLE_MATCHED"), Types._Utility, 6);
+		public static final @NonNull EnumerationLiteral _Utility__NON_NULL_CONDITIONAL = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NON_NULL_CONDITIONAL"), Types._Utility, 7);
+		public static final @NonNull EnumerationLiteral _Utility__NULLABLE_CONDITIONAL = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NULLABLE_CONDITIONAL"), Types._Utility, 8);
+		public static final @NonNull EnumerationLiteral _Utility__NOT_KNOWN = LIBRARY.createEnumerationLiteral(QVTschedulePackage.Literals.UTILITY.getEEnumLiteral("NOT_KNOWN"), Types._Utility, 9);
+		private static final @NonNull EnumerationLiteral @NonNull [] _Utility = {
 			_Utility__DISPATCH,
 			_Utility__TRACE,
 			_Utility__SUCCESS,
@@ -7626,9 +7622,9 @@ public class QVTscheduleTables extends AbstractTables
 		 *	Install the enumeration literals in the enumerations.
 		 */
 		static {
-			Types._ConnectionRole.initLiterals(_ConnectionRole);
-			Types._Role.initLiterals(_Role);
-			Types._Utility.initLiterals(_Utility);
+			LIBRARY.initLiterals(Types._ConnectionRole, _ConnectionRole);
+			LIBRARY.initLiterals(Types._Role, _Role);
+			LIBRARY.initLiterals(Types._Utility, _Utility);
 
 			Init.initEnd();
 		}

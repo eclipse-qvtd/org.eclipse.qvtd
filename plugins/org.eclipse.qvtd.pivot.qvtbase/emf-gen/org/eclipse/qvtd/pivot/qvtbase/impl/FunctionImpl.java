@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteInheritance;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
@@ -29,6 +28,7 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.flat.FlatClass;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
@@ -373,7 +373,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	}
 
 	@Override
-	public @Nullable CompleteInheritance getInheritance(@NonNull StandardLibrary standardLibrary) {
+	public @Nullable FlatClass getFlatClass(@NonNull StandardLibrary standardLibrary) {
 		return null;
 	}
 

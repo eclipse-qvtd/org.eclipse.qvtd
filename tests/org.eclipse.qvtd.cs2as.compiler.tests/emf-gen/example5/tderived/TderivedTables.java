@@ -22,19 +22,15 @@ package example5.tderived;
 import example5.tbase.TbaseTables;
 // import example5.tderived.TderivedPackage;
 // import example5.tderived.TderivedTables;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
-import org.eclipse.ocl.pivot.internal.library.ecore.EcoreLibraryOppositeProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
-import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
@@ -53,14 +49,14 @@ public class TderivedTables extends AbstractTables
 	}
 
 	/**
-	 *	The package descriptor for the package.
-	 */
-	public static final EcoreExecutorPackage PACKAGE = new EcoreExecutorPackage(TderivedPackage.eINSTANCE);
-
-	/**
 	 *	The library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	The package descriptor for the package.
+	 */
+	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TderivedPackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -98,11 +94,11 @@ public class TderivedTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final EcoreExecutorType _A2 = new EcoreExecutorType(TderivedPackage.Literals.A2, PACKAGE, 0);
-		public static final EcoreExecutorType _B2 = new EcoreExecutorType(TderivedPackage.Literals.B2, PACKAGE, 0);
-		public static final EcoreExecutorType _D = new EcoreExecutorType(TderivedPackage.Literals.D, PACKAGE, 0);
+		public static final org.eclipse.ocl.pivot.Class _A2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.A2, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _B2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.B2, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _D = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.D, PACKAGE, null, 0);
 
-		private static final EcoreExecutorType /*@NonNull*/ [] types = {
+		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] types = {
 			_A2,
 			_B2,
 			_D
@@ -112,7 +108,7 @@ public class TderivedTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			PACKAGE.init(LIBRARY, types);
+			LIBRARY.initPackage(PACKAGE, types);
 			Init.initEnd();
 		}
 
@@ -131,24 +127,24 @@ public class TderivedTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final ExecutorFragment _A2__A = new ExecutorFragment(Types._A2, TbaseTables.Types._A);
-		private static final ExecutorFragment _A2__A2 = new ExecutorFragment(Types._A2, TderivedTables.Types._A2);
-		private static final ExecutorFragment _A2__Element = new ExecutorFragment(Types._A2, TbaseTables.Types._Element);
-		private static final ExecutorFragment _A2__NamedElement = new ExecutorFragment(Types._A2, TbaseTables.Types._NamedElement);
-		private static final ExecutorFragment _A2__OclAny = new ExecutorFragment(Types._A2, OCLstdlibTables.Types._OclAny);
-		private static final ExecutorFragment _A2__OclElement = new ExecutorFragment(Types._A2, OCLstdlibTables.Types._OclElement);
+		private static final FlatFragment _A2__A = LIBRARY.createFragment(Types._A2, TbaseTables.Types._A);
+		private static final FlatFragment _A2__A2 = LIBRARY.createFragment(Types._A2, TderivedTables.Types._A2);
+		private static final FlatFragment _A2__Element = LIBRARY.createFragment(Types._A2, TbaseTables.Types._Element);
+		private static final FlatFragment _A2__NamedElement = LIBRARY.createFragment(Types._A2, TbaseTables.Types._NamedElement);
+		private static final FlatFragment _A2__OclAny = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclAny);
+		private static final FlatFragment _A2__OclElement = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclElement);
 
-		private static final ExecutorFragment _B2__B = new ExecutorFragment(Types._B2, TbaseTables.Types._B);
-		private static final ExecutorFragment _B2__B2 = new ExecutorFragment(Types._B2, TderivedTables.Types._B2);
-		private static final ExecutorFragment _B2__Element = new ExecutorFragment(Types._B2, TbaseTables.Types._Element);
-		private static final ExecutorFragment _B2__NamedElement = new ExecutorFragment(Types._B2, TbaseTables.Types._NamedElement);
-		private static final ExecutorFragment _B2__OclAny = new ExecutorFragment(Types._B2, OCLstdlibTables.Types._OclAny);
-		private static final ExecutorFragment _B2__OclElement = new ExecutorFragment(Types._B2, OCLstdlibTables.Types._OclElement);
+		private static final FlatFragment _B2__B = LIBRARY.createFragment(Types._B2, TbaseTables.Types._B);
+		private static final FlatFragment _B2__B2 = LIBRARY.createFragment(Types._B2, TderivedTables.Types._B2);
+		private static final FlatFragment _B2__Element = LIBRARY.createFragment(Types._B2, TbaseTables.Types._Element);
+		private static final FlatFragment _B2__NamedElement = LIBRARY.createFragment(Types._B2, TbaseTables.Types._NamedElement);
+		private static final FlatFragment _B2__OclAny = LIBRARY.createFragment(Types._B2, OCLstdlibTables.Types._OclAny);
+		private static final FlatFragment _B2__OclElement = LIBRARY.createFragment(Types._B2, OCLstdlibTables.Types._OclElement);
 
-		private static final ExecutorFragment _D__D = new ExecutorFragment(Types._D, TderivedTables.Types._D);
-		private static final ExecutorFragment _D__Element = new ExecutorFragment(Types._D, TbaseTables.Types._Element);
-		private static final ExecutorFragment _D__OclAny = new ExecutorFragment(Types._D, OCLstdlibTables.Types._OclAny);
-		private static final ExecutorFragment _D__OclElement = new ExecutorFragment(Types._D, OCLstdlibTables.Types._OclElement);
+		private static final FlatFragment _D__D = LIBRARY.createFragment(Types._D, TderivedTables.Types._D);
+		private static final FlatFragment _D__Element = LIBRARY.createFragment(Types._D, TbaseTables.Types._Element);
+		private static final FlatFragment _D__OclAny = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclAny);
+		private static final FlatFragment _D__OclElement = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclElement);
 
 		static {
 			Init.initEnd();
@@ -219,11 +215,11 @@ public class TderivedTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final ExecutorProperty _A2__ownsD = new EcoreExecutorProperty(TderivedPackage.Literals.A2__OWNS_D, Types._A2, 0);
+		public static final Property _A2__ownsD = LIBRARY.createProperty(TderivedPackage.Literals.A2__OWNS_D, Types._A2, 0);
 
-		public static final ExecutorProperty _B2__anotherName = new EcoreExecutorProperty(TderivedPackage.Literals.B2__ANOTHER_NAME, Types._B2, 0);
+		public static final Property _B2__anotherName = LIBRARY.createProperty(TderivedPackage.Literals.B2__ANOTHER_NAME, Types._B2, 0);
 
-		public static final ExecutorProperty _D__A2__ownsD = new ExecutorPropertyWithImplementation("A2", Types._D, 0, new EcoreLibraryOppositeProperty(TderivedPackage.Literals.A2__OWNS_D));
+		public static final Property _D__A2__ownsD = LIBRARY.createOppositeProperty("A2", Types._D, 0, TderivedPackage.Literals.A2__OWNS_D);
 		static {
 			Init.initEnd();
 		}
@@ -243,7 +239,7 @@ public class TderivedTables extends AbstractTables
 			Properties.init();
 		}
 
-		private static final ExecutorFragment /*@NonNull*/ [] _A2 =
+		private static final FlatFragment /*@NonNull*/ [] _A2 =
 			{
 				Fragments._A2__OclAny /* 0 */,
 				Fragments._A2__OclElement /* 1 */,
@@ -254,7 +250,7 @@ public class TderivedTables extends AbstractTables
 			};
 		private static final int /*@NonNull*/ [] __A2 = { 1,1,1,1,1,1 };
 
-		private static final ExecutorFragment /*@NonNull*/ [] _B2 =
+		private static final FlatFragment /*@NonNull*/ [] _B2 =
 			{
 				Fragments._B2__OclAny /* 0 */,
 				Fragments._B2__OclElement /* 1 */,
@@ -265,7 +261,7 @@ public class TderivedTables extends AbstractTables
 			};
 		private static final int /*@NonNull*/ [] __B2 = { 1,1,1,1,1,1 };
 
-		private static final ExecutorFragment /*@NonNull*/ [] _D =
+		private static final FlatFragment /*@NonNull*/ [] _D =
 			{
 				Fragments._D__OclAny /* 0 */,
 				Fragments._D__OclElement /* 1 */,
@@ -300,11 +296,11 @@ public class TderivedTables extends AbstractTables
 			TypeFragments.init();
 		}
 
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__A2 = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__A = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__Element = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__NamedElement = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__OclAny = {
+		private static final Operation /*@NonNull*/ [] _A2__A2 = {};
+		private static final Operation /*@NonNull*/ [] _A2__A = {};
+		private static final Operation /*@NonNull*/ [] _A2__Element = {};
+		private static final Operation /*@NonNull*/ [] _A2__NamedElement = {};
+		private static final Operation /*@NonNull*/ [] _A2__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -321,7 +317,7 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final ExecutorOperation /*@NonNull*/ [] _A2__OclElement = {
+		private static final Operation /*@NonNull*/ [] _A2__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -335,11 +331,11 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__B2 = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__B = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__Element = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__NamedElement = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__OclAny = {
+		private static final Operation /*@NonNull*/ [] _B2__B2 = {};
+		private static final Operation /*@NonNull*/ [] _B2__B = {};
+		private static final Operation /*@NonNull*/ [] _B2__Element = {};
+		private static final Operation /*@NonNull*/ [] _B2__NamedElement = {};
+		private static final Operation /*@NonNull*/ [] _B2__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -356,7 +352,7 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final ExecutorOperation /*@NonNull*/ [] _B2__OclElement = {
+		private static final Operation /*@NonNull*/ [] _B2__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -370,9 +366,9 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 
-		private static final ExecutorOperation /*@NonNull*/ [] _D__D = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _D__Element = {};
-		private static final ExecutorOperation /*@NonNull*/ [] _D__OclAny = {
+		private static final Operation /*@NonNull*/ [] _D__D = {};
+		private static final Operation /*@NonNull*/ [] _D__Element = {};
+		private static final Operation /*@NonNull*/ [] _D__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -389,7 +385,7 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final ExecutorOperation /*@NonNull*/ [] _D__OclElement = {
+		private static final Operation /*@NonNull*/ [] _D__OclElement = {
 			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclElement__0_oclBase /* oclBase() */,
 			OCLstdlibTables.Operations._OclElement__1_oclBase /* oclBase(OclType[1]) */,
@@ -444,7 +440,7 @@ public class TderivedTables extends AbstractTables
 			FragmentOperations.init();
 		}
 
-		private static final ExecutorProperty /*@NonNull*/ [] _A2 = {
+		private static final Property /*@NonNull*/ [] _A2 = {
 			TbaseTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -452,7 +448,7 @@ public class TderivedTables extends AbstractTables
 			TderivedTables.Properties._A2__ownsD
 		};
 
-		private static final ExecutorProperty /*@NonNull*/ [] _B2 = {
+		private static final Property /*@NonNull*/ [] _B2 = {
 			TderivedTables.Properties._B2__anotherName,
 			TbaseTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
@@ -460,7 +456,7 @@ public class TderivedTables extends AbstractTables
 			TbaseTables.Properties._B__ownsC
 		};
 
-		private static final ExecutorProperty /*@NonNull*/ [] _D = {
+		private static final Property /*@NonNull*/ [] _D = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
