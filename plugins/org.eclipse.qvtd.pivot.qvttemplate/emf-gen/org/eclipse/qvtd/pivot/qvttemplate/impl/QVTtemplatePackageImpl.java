@@ -613,6 +613,8 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/OCL/ASMetamodel
+		createASMetamodelAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
@@ -621,6 +623,21 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		createPivotAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/ASMetamodel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createASMetamodelAnnotations() {
+		String source = "http://www.eclipse.org/OCL/ASMetamodel";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**

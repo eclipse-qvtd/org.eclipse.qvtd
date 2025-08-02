@@ -94,9 +94,9 @@ public class TderivedTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.Class _A2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.A2, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _B2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.B2, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _D = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.D, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _A2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.A2, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _B2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.B2, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _D = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.D, null, 0);
 
 		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] types = {
 			_A2,

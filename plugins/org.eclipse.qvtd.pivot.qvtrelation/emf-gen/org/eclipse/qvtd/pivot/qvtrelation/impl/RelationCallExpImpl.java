@@ -251,9 +251,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						/**
 						 * oclAsType(RelationDomain)
 						 */
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
 						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull RelationDomain oclAsType = (@NonNull RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain_0);
+						final /*@Thrown*/ @NonNull RelationDomain oclAsType = (@NonNull RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_RelationDomain_0);
 						//
 						accumulator.add(oclAsType);
 					}
@@ -313,9 +313,9 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 *     else
 			 *       let
 			 *         result : Boolean[?] = let
-			 *           pattern : qvtbase::Pattern[1] = self->asOrderedSet()
+			 *           pattern : Pattern[1] = self->asOrderedSet()
 			 *           ->closure(e | e.oclContainer())
-			 *           ->selectByKind(qvtbase::Pattern)
+			 *           ->selectByKind(Pattern)
 			 *           ->first()
 			 *         in
 			 *           let
@@ -342,7 +342,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				try {
 					/*@Caught*/ @Nullable Object CAUGHT_pattern;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Pattern = idResolver.getClass(QVTrelationTables.CLSSid_Pattern, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Pattern = idResolver.getClass(QVTrelationTables.CLSSid_Pattern, null);
 						final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTrelationTables.SET_CLSSid_RelationCallExp, this);
 						final /*@NonInvalid*/ @NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(oclAsSet);
 						final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_1 = executor.getStaticClassOf(asOrderedSet);
@@ -367,7 +367,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull ExecutorSingleIterationManager MGR_closure_1 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY0_closure_2, asOrderedSet, ACC_closure_1);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure = (@NonNull OrderedSetValue)IMPL_closure_1.evaluateIteration(MGR_closure_1);
-						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_qvtbase_c_c_Pattern);
+						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_Pattern);
 						final /*@Thrown*/ @Nullable Pattern pattern = (@Nullable Pattern)OrderedCollectionFirstOperation.INSTANCE.evaluate(selectByKind);
 						CAUGHT_pattern = pattern;
 					}
@@ -376,7 +376,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					}
 					/*@Caught*/ @Nullable Object CAUGHT_relation;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation_0 = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Relation_0 = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
 						if (CAUGHT_pattern instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_pattern;
 						}
@@ -404,7 +404,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						final @NonNull ExecutorSingleIterationManager MGR_closure_0_0 = new ExecutorSingleIterationManager(executor, QVTrelationTables.ORD_CLSSid_OclElement, BODY0_closure_0_1, asOrderedSet_0, ACC_closure_0_0);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull OrderedSetValue closure_0 = (@NonNull OrderedSetValue)IMPL_closure_0_0.evaluateIteration(MGR_closure_0_0);
-						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_qvtrelation_c_c_Relation_0);
+						final /*@Thrown*/ @NonNull OrderedSetValue selectByKind_0 = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure_0, TYP_Relation_0);
 						final /*@Thrown*/ @Nullable Relation relation = (@Nullable Relation)OrderedCollectionFirstOperation.INSTANCE.evaluate(selectByKind_0);
 						CAUGHT_relation = relation;
 					}
@@ -414,7 +414,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					/*@Caught*/ @NonNull Object CAUGHT_eq;
 					try {
 						if (CAUGHT_relation == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Relation::where\'");
+							throw new InvalidValueException("Null source for \'Relation::where\'");
 						}
 						if (CAUGHT_relation instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_relation;

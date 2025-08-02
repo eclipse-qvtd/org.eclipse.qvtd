@@ -114,21 +114,21 @@ public class ClassesTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Argument = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ARGUMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CALL_EXP, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Class = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CLASS, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Element = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Namespace = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMESPACE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Operation = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION_CALL_EXP, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Package = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PACKAGE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Parameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PARAMETER, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Property = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY_CALL_EXP, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Root = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ROOT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.TYPED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Visitable = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.VISITABLE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Argument = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ARGUMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CALL_EXP, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Class = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.CLASS, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Element = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Namespace = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.NAMESPACE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Operation = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OperationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.OPERATION_CALL_EXP, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Package = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Parameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PARAMETER, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Property = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.PROPERTY_CALL_EXP, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Root = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.ROOT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.TYPED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Visitable = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.VISITABLE, null, 0 | FlatClass.ABSTRACT);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Argument,

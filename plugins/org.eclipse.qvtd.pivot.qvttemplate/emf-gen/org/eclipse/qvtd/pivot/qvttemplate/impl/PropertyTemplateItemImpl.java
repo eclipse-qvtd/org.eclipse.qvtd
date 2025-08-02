@@ -321,7 +321,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			IF_isOpposite = referredProperty_0;
 		}
 		if (IF_isOpposite == null) {
-			throw new InvalidValueException("Null body for \'qvttemplate::PropertyTemplateItem::resolvedProperty : Property[1]\'");
+			throw new InvalidValueException("Null body for \'PropertyTemplateItem::resolvedProperty : Property[1]\'");
 		}
 		return IF_isOpposite;
 	}

@@ -14,7 +14,11 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
+ *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
+ *   /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -37,7 +41,6 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.EnumerationId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
@@ -46,7 +49,6 @@ import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
-// import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 // import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 
 /**
@@ -69,36 +71,35 @@ public class QVTbaseTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTbasePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTbasePackage.eINSTANCE, IdManager.METAMODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Annotation = QVTbaseTables.PACKid_$metamodel$.getClassId("Annotation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BooleanType = QVTbaseTables.PACKid_$metamodel$.getClassId("BooleanType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTbaseTables.PACKid_$metamodel$.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompoundTargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("CompoundTargetElement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Function = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Function", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_FunctionParameter = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("FunctionParameter", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CompoundTargetElement = QVTbaseTables.PACKid_$metamodel$.getClassId("CompoundTargetElement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTbaseTables.PACKid_$metamodel$.getClassId("Domain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Function = QVTbaseTables.PACKid_$metamodel$.getClassId("Function", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_FunctionParameter = QVTbaseTables.PACKid_$metamodel$.getClassId("FunctionParameter", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTbaseTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTbaseTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = QVTbaseTables.PACKid_$metamodel$.getClassId("Package", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = QVTbaseTables.PACKid_$metamodel$.getClassId("Parameter", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ParameterVariable = QVTbaseTables.PACKid_$metamodel$.getClassId("ParameterVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Predicate = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Predicate", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleTargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("SimpleTargetElement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Target = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Target", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetElement = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TargetElement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTbaseTables.PACKid_$metamodel$.getClassId("Pattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Predicate = QVTbaseTables.PACKid_$metamodel$.getClassId("Predicate", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTbaseTables.PACKid_$metamodel$.getClassId("Rule", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleTargetElement = QVTbaseTables.PACKid_$metamodel$.getClassId("SimpleTargetElement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Target = QVTbaseTables.PACKid_$metamodel$.getClassId("Target", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetElement = QVTbaseTables.PACKid_$metamodel$.getClassId("TargetElement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTbaseTables.PACKid_$metamodel$.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTbaseTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTbaseTables.PACKid_$metamodel$.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTbaseTables.PACKid_$metamodel$.getClassId("Variable", 0);
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_TargetElementKind = QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getEnumerationId("TargetElementKind");
+	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_TargetElementKind = QVTbaseTables.PACKid_$metamodel$.getEnumerationId("TargetElementKind");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_1 = ValueUtil.integerValueOf("1");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
@@ -152,21 +153,21 @@ public class QVTbaseTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _BaseModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.BASE_MODEL, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CompoundTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Domain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.DOMAIN, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Function = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionBody = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_BODY, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionParameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_PARAMETER, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Pattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PATTERN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Predicate = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PREDICATE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Rule = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.RULE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _SimpleTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Target = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final @NonNull Enumeration _TargetElementKind = LIBRARY.createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND, PACKAGE);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TRANSFORMATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TYPED_MODEL, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BaseModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.BASE_MODEL, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CompoundTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Domain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.DOMAIN, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Function = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionBody = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_BODY, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _FunctionParameter = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.FUNCTION_PARAMETER, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Pattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PATTERN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Predicate = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.PREDICATE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Rule = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.RULE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SimpleTargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.SIMPLE_TARGET_ELEMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Target = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TargetElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TARGET_ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final @NonNull Enumeration _TargetElementKind = LIBRARY.createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TRANSFORMATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TYPED_MODEL, null, 0);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_BaseModel,

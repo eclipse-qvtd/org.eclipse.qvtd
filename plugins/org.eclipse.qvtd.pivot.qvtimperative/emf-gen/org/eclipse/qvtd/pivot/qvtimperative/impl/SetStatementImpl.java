@@ -432,7 +432,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			IF_isOpposite = targetProperty_0;
 		}
 		if (IF_isOpposite == null) {
-			throw new InvalidValueException("Null body for \'qvtimperative::SetStatement::resolvedProperty : Property[1]\'");
+			throw new InvalidValueException("Null body for \'SetStatement::resolvedProperty : Property[1]\'");
 		}
 		return IF_isOpposite;
 	}
@@ -886,9 +886,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						/**
 						 * referredVariable.oclIsKindOf(NewStatement)
 						 */
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_NewStatement = idResolver.getClass(QVTimperativeTables.CLSSid_NewStatement, null);
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_NewStatement = idResolver.getClass(QVTimperativeTables.CLSSid_NewStatement, null);
 						final /*@NonInvalid*/ @Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
-						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_qvtimperative_c_c_NewStatement).booleanValue();
+						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_NewStatement).booleanValue();
 						//
 						if (oclIsKindOf == ValueUtil.TRUE_VALUE) {
 							accumulator.add(_1);

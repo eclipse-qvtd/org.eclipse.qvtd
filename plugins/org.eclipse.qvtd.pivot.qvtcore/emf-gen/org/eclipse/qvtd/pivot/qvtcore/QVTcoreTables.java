@@ -14,7 +14,13 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
+ *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore
+ *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore
+ *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -38,7 +44,6 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.EnumerationId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
@@ -49,9 +54,7 @@ import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
-// import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 // import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 
 /**
@@ -74,38 +77,36 @@ public class QVTcoreTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE, IdManager.METAMODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTcore", null, QVTcorePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Area = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Area", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Assignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Assignment", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomPattern = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomPattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Area = QVTcoreTables.PACKid_$metamodel$.getClassId("Area", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Assignment = QVTcoreTables.PACKid_$metamodel$.getClassId("Assignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomPattern = QVTcoreTables.PACKid_$metamodel$.getClassId("BottomPattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("BottomVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTcoreTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTcoreTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CoreDomain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("CoreDomain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CoreDomain = QVTcoreTables.PACKid_$metamodel$.getClassId("CoreDomain", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTcoreTables.PACKid_$metamodel$.getClassId("DataType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnforcementOperation = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("EnforcementOperation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardPattern = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("GuardPattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("GuardVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Mapping", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTcoreTables.PACKid_$metamodel$.getClassId("Domain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnforcementOperation = QVTcoreTables.PACKid_$metamodel$.getClassId("EnforcementOperation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardPattern = QVTcoreTables.PACKid_$metamodel$.getClassId("GuardPattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("GuardVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTcoreTables.PACKid_$metamodel$.getClassId("Mapping", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTcoreTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp = QVTcoreTables.PACKid_$metamodel$.getClassId("OperationCallExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OppositePropertyAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("OppositePropertyAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OppositePropertyAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("OppositePropertyAssignment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTcoreTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("PropertyAssignment", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RealizedVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("RealizedVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("PropertyAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RealizedVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("RealizedVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTcoreTables.PACKid_$metamodel$.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTcoreTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("VariableAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("VariableAssignment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTcoreTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_EnforcementMode = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getEnumerationId("EnforcementMode");
+	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_EnforcementMode = QVTcoreTables.PACKid_$metamodel$.getEnumerationId("EnforcementMode");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull PartId PARTid_ = IdManager.getPartId(1, "status", TypeId.BOOLEAN, false);
 	public static final /*@NonInvalid*/ @NonNull PartId PARTid__0 = IdManager.getPartId(0, "message", TypeId.STRING, true);
@@ -152,23 +153,23 @@ public class QVTcoreTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Area = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.AREA, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Assignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.ASSIGNMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _BottomPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.BOTTOM_PATTERN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _BottomVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.BOTTOM_VARIABLE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CoreDomain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_DOMAIN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CoreModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_MODEL, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CorePattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_PATTERN, PACKAGE, null, 0);
-		public static final @NonNull Enumeration _EnforcementMode = LIBRARY.createEnumeration(QVTcorePackage.Literals.ENFORCEMENT_MODE, PACKAGE);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _EnforcementOperation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.ENFORCEMENT_OPERATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _GuardPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.GUARD_PATTERN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _GuardVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.GUARD_VARIABLE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Mapping = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.MAPPING, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _NavigationAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _OppositePropertyAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RealizedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.REALIZED_VARIABLE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _VariableAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Area = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.AREA, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Assignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.ASSIGNMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BottomPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.BOTTOM_PATTERN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _BottomVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.BOTTOM_VARIABLE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CoreDomain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_DOMAIN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CoreModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_MODEL, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CorePattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.CORE_PATTERN, null, 0);
+		public static final @NonNull Enumeration _EnforcementMode = LIBRARY.createEnumeration(QVTcorePackage.Literals.ENFORCEMENT_MODE);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _EnforcementOperation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.ENFORCEMENT_OPERATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _GuardPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.GUARD_PATTERN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _GuardVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.GUARD_VARIABLE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Mapping = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.MAPPING, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _NavigationAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _OppositePropertyAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RealizedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.REALIZED_VARIABLE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _VariableAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, null, 0);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Area,

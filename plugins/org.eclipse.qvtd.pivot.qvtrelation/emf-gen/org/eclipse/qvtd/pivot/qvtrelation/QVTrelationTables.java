@@ -14,7 +14,17 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
+ *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
+ *   platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
+ *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore
+ *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore
+ *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore
+ *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -33,7 +43,6 @@ import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
@@ -43,11 +52,8 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
-// import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 // import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 
 /**
  * QVTrelationTables provides the dispatch tables for the qvtrelation for use by the OCL dispatcher.
@@ -69,41 +75,38 @@ public class QVTrelationTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTrelationPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTrelationPackage.eINSTANCE, IdManager.METAMODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTrelation", null, QVTrelationPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_PRIMid_String = TypeId.BAG.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTrelationTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTrelationTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTrelationTables.PACKid_$metamodel$.getClassId("DataType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DomainPattern = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("DomainPattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Key = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("Key", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTrelationTables.PACKid_$metamodel$.getClassId("Domain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DomainPattern = QVTrelationTables.PACKid_$metamodel$.getClassId("DomainPattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Key = QVTrelationTables.PACKid_$metamodel$.getClassId("Key", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTrelationTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTrelationTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Operation = QVTrelationTables.PACKid_$metamodel$.getClassId("Operation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = QVTrelationTables.PACKid_$metamodel$.getClassId("Package", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = QVTrelationTables.PACKid_$metamodel$.getClassId("Parameter", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Pattern = QVTrelationTables.PACKid_$metamodel$.getClassId("Pattern", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTrelationTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Relation = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("Relation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationCallExp = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("RelationCallExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationDomain = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("RelationDomain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationDomainAssignment = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("RelationDomainAssignment", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationImplementation = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("RelationImplementation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationalTransformation = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("RelationalTransformation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SharedVariable = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation.getClassId("SharedVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Relation = QVTrelationTables.PACKid_$metamodel$.getClassId("Relation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationCallExp = QVTrelationTables.PACKid_$metamodel$.getClassId("RelationCallExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationDomain = QVTrelationTables.PACKid_$metamodel$.getClassId("RelationDomain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationDomainAssignment = QVTrelationTables.PACKid_$metamodel$.getClassId("RelationDomainAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationImplementation = QVTrelationTables.PACKid_$metamodel$.getClassId("RelationImplementation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelationalTransformation = QVTrelationTables.PACKid_$metamodel$.getClassId("RelationalTransformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTrelationTables.PACKid_$metamodel$.getClassId("Rule", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SharedVariable = QVTrelationTables.PACKid_$metamodel$.getClassId("SharedVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTrelationTables.PACKid_$metamodel$.getClassId("TemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTrelationTables.PACKid_$metamodel$.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTrelationTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTrelationTables.PACKid_$metamodel$.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTrelationTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTrelationTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
@@ -174,17 +177,17 @@ public class QVTrelationTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _DomainPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.DOMAIN_PATTERN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Key = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.KEY, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Relation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_CALL_EXP, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomainAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationImplementation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_IMPLEMENTATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_MODEL, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationalTransformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _SharedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.SHARED_VARIABLE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _DomainPattern = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.DOMAIN_PATTERN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Key = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.KEY, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Relation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationCallExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_CALL_EXP, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomain = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationDomainAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationImplementation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_IMPLEMENTATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATION_MODEL, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelationalTransformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _SharedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.SHARED_VARIABLE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, null, 0);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_DomainPattern,

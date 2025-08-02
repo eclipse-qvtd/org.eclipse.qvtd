@@ -112,9 +112,9 @@ public class EnvironmentTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Env4CG = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.ENV4_CG, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Executor = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.EXECUTOR, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _LookupEnvironment = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Env4CG = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.ENV4_CG, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Executor = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.EXECUTOR, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _LookupEnvironment = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT, null, 0);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Env4CG,

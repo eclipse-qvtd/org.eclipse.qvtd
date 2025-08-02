@@ -14,7 +14,11 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
+ *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
+ *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
+ *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
+ *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -34,7 +38,6 @@ import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
@@ -44,7 +47,6 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
-// import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 // import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
 
 /**
@@ -67,22 +69,21 @@ public class QVTtemplateTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE, IdManager.METAMODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BooleanType = QVTtemplateTables.PACKid_$metamodel$.getClassId("BooleanType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTtemplateTables.PACKid_$metamodel$.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionTemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("CollectionTemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionTemplateExp = QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionTemplateExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTtemplateTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ObjectTemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("ObjectTemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ObjectTemplateExp = QVTtemplateTables.PACKid_$metamodel$.getClassId("ObjectTemplateExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTtemplateTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyTemplateItem = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("PropertyTemplateItem", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyTemplateItem = QVTtemplateTables.PACKid_$metamodel$.getClassId("PropertyTemplateItem", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTtemplateTables.PACKid_$metamodel$.getClassId("TemplateExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTtemplateTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTtemplateTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
@@ -124,10 +125,10 @@ public class QVTtemplateTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionTemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _ObjectTemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyTemplateItem = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.TEMPLATE_EXP, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _CollectionTemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _ObjectTemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyTemplateItem = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.TEMPLATE_EXP, null, 0 | FlatClass.ABSTRACT);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_CollectionTemplateExp,

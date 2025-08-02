@@ -167,26 +167,26 @@ public class UMLXTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DIAGRAM, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDomainNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DOMAIN_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_EDGE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_EDGE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_NODE, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_EDGE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_DIAGRAM, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxKeyNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_KEY_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPackageNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PACKAGE_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxParameterNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PARAMETER_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPartNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PART_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxQueryNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_QUERY_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _TxTypedModelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_TYPED_MODEL_NODE, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_MODEL, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXNamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_NAMED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXTypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_TYPED_ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DIAGRAM, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelDomainNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_DOMAIN_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_EDGE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_EDGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelInvocationNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_INVOCATION_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_NODE, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternEdge = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_EDGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _RelPatternNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.REL_PATTERN_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxDiagram = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_DIAGRAM, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxKeyNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_KEY_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPackageNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PACKAGE_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxParameterNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PARAMETER_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxPartNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_PART_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxQueryNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_QUERY_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _TxTypedModelNode = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.TX_TYPED_MODEL_NODE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_MODEL, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXNamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_NAMED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXTypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_TYPED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_RelDiagram,

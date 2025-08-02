@@ -524,7 +524,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 									/*@Caught*/ @NonNull Object CAUGHT_isCheckable;
 									try {
 										if (_1 == null) {
-											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Domain::isCheckable\'");
+											throw new InvalidValueException("Null source for \'Domain::isCheckable\'");
 										}
 										final /*@Thrown*/ boolean isCheckable = _1.isIsCheckable();
 										CAUGHT_isCheckable = isCheckable;
@@ -540,7 +540,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 										/*@Caught*/ @NonNull Object CAUGHT_isEnforceable;
 										try {
 											if (_1 == null) {
-												throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Domain::isEnforceable\'");
+												throw new InvalidValueException("Null source for \'Domain::isEnforceable\'");
 											}
 											final /*@Thrown*/ boolean isEnforceable = _1.isIsEnforceable();
 											CAUGHT_isEnforceable = isEnforceable;
@@ -673,7 +673,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 							final /*@NonInvalid*/ @Nullable Rule CAST_null = (Rule)_1;
 							if (CAST_null == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overridden\'");
+								throw new InvalidValueException("Null source for \'Rule::overridden\'");
 							}
 							final /*@Thrown*/ @Nullable Rule overridden_0 = CAST_null.getOverridden();
 							return overridden_0;
@@ -801,7 +801,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						/*@Caught*/ @Nullable Object CAUGHT_forAll;
 						try {
 							if (overridden == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
+								throw new InvalidValueException("Null source for \'Rule::domain\'");
 							}
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();

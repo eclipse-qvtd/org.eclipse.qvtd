@@ -79,9 +79,9 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Extent = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.EXTENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Model = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.MODEL, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.TRANSFORMATION, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Extent = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.EXTENT, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Model = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.MODEL, null, 0);
+		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTruntimeLibraryPackage.Literals.TRANSFORMATION, null, 0);
 
 		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
 			_Extent,

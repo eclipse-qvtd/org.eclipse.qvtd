@@ -97,12 +97,12 @@ public class TbaseTables extends AbstractTables
 			TypeParameters.init();
 		}
 
-		public static final org.eclipse.ocl.pivot.Class _A = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.A, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _B = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.B, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _C = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.C, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _Element = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.ELEMENT, PACKAGE, null, 0 | FlatClass.ABSTRACT);
-		public static final org.eclipse.ocl.pivot.Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.NAMED_ELEMENT, PACKAGE, null, 0);
-		public static final org.eclipse.ocl.pivot.Class _TRoot = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.TROOT, PACKAGE, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _A = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.A, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _B = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.B, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _C = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.C, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _Element = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.ELEMENT, null, 0 | FlatClass.ABSTRACT);
+		public static final org.eclipse.ocl.pivot.Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.NAMED_ELEMENT, null, 0);
+		public static final org.eclipse.ocl.pivot.Class _TRoot = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.TROOT, null, 0);
 
 		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] types = {
 			_A,
