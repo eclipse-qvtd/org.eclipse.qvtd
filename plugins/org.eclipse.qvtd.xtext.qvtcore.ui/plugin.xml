@@ -20,7 +20,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="qvtc,qvtcas"
@@ -33,7 +33,7 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -42,7 +42,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.qvtd.xtext.qvtcore.QVTcore.validate">
          <activeWhen>
             <reference
@@ -76,21 +76,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <!--page
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
             name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page-->
         <page
             category="org.eclipse.qvtd.preferences.SyntaxColoringPreferencePage"
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.coloring"
             name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
         </page>
         <page
             category="org.eclipse.qvtd.preferences.TemplatePreferencePage"
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtcore.QVTcore.templates"
             name="%MF_QVTcore">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtcore.ui.keyword_QVTcore"/>
@@ -137,7 +137,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -152,13 +152,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.resource.IResourceFactory"
 			type="qvtc">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="qvtc">
         </resourceServiceProvider>
     </extension>
@@ -175,7 +175,7 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
@@ -208,7 +208,7 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            class="org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
             markerType="org.eclipse.qvtd.xtext.qvtcore.ui.Marker">
             <attribute
                 name="FIXABLE_KEY"

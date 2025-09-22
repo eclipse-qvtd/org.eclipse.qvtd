@@ -20,7 +20,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="qvtr,qvtras"
@@ -33,7 +33,7 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -42,7 +42,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.validate">
          <activeWhen>
             <reference
@@ -66,21 +66,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <!--page
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
             name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page-->
         <page
             category="org.eclipse.qvtd.preferences.SyntaxColoringPreferencePage"
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.coloring"
             name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
         </page>
         <page
             category="org.eclipse.qvtd.preferences.TemplatePreferencePage"
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.templates"
             name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
@@ -89,7 +89,7 @@
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"
             name="%MF_QVTrelation">
             <keywordReference id="org.eclipse.qvtd.xtext.qvtrelation.ui.keyword_QVTrelation"/>
@@ -140,7 +140,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -155,13 +155,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.resource.IResourceFactory"
 			type="qvtr">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="qvtr">
         </resourceServiceProvider>
     </extension>
@@ -190,7 +190,7 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
@@ -223,7 +223,7 @@
     <extension
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
             markerType="org.eclipse.qvtd.xtext.qvtrelation.ui.Marker">
             <attribute
                 name="FIXABLE_KEY"
