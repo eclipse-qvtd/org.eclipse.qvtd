@@ -34,8 +34,8 @@ public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 	private @Nullable CreateStrategy createStrategy = null;
 
 	public QVTbaseEnvironmentFactory(@NonNull ProjectManager projectManager,
-			@Nullable ResourceSet externalResourceSet, @Nullable CreateStrategy createStrategy) {
-		super(projectManager, externalResourceSet, null);
+			@Nullable ResourceSet userResourceSet, @Nullable CreateStrategy createStrategy) {
+		super(projectManager, userResourceSet);
 		this.createStrategy = createStrategy;
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTruntimeLibrary.STDLIB_URI);
 	}
