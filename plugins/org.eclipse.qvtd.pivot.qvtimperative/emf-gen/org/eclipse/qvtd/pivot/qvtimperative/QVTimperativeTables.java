@@ -30,7 +30,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import java.lang.String;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
@@ -78,7 +77,7 @@ public class QVTimperativeTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE, IdManager.METAMODEL);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE, IdManager.METAMODEL_ID);
 
 	/**
 	 *	Constants used by auto-generated code.

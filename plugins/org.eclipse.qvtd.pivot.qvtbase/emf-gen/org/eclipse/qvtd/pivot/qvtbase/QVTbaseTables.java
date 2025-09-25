@@ -71,7 +71,7 @@ public class QVTbaseTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTbasePackage.eINSTANCE, IdManager.METAMODEL);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTbasePackage.eINSTANCE, IdManager.METAMODEL_ID);
 
 	/**
 	 *	Constants used by auto-generated code.
