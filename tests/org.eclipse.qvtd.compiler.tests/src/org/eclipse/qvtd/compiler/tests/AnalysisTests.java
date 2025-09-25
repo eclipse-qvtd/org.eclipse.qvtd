@@ -115,7 +115,7 @@ public class AnalysisTests extends XtextTestCase
 		//
 		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
 		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.basicGetCompletePackageForURI(ecoreNsUri));
 		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
 		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
 		CompleteClass eClassClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
@@ -179,7 +179,7 @@ public class AnalysisTests extends XtextTestCase
 		//
 		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
 		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.basicGetCompletePackageForURI(ecoreNsUri));
 		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
 		CompleteClass eClassClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
 		CompleteClass eClassifierClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
@@ -241,7 +241,7 @@ public class AnalysisTests extends XtextTestCase
 		//
 		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
 		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.basicGetCompletePackageForURI(ecoreNsUri));
 		CompleteClass eAnnotationClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
 		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
 		CompleteClass eModelElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
@@ -276,7 +276,7 @@ public class AnalysisTests extends XtextTestCase
 		//
 		String ecoreNsUri = ClassUtil.requireNonNull(EcorePackage.eNS_URI);
 		ClassUtil.requireNonNull(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
-		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompletePackage ecorePackage = ClassUtil.requireNonNull(completeModel.basicGetCompletePackageForURI(ecoreNsUri));
 		CompleteClass eAttributeClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
 		CompleteClass eReferenceClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
 		CompleteClass eStructuralFeatureClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
@@ -321,7 +321,7 @@ public class AnalysisTests extends XtextTestCase
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		//		CompleteClass oclElementClass = completeModel.getCompleteClass(standardLibrary.getOclElementType());
-		CompletePackage companyPackage = completeModel.getCompletePackageByURI("http://org.eclipse.qvtd.compiler.tests.companies/Company");
+		CompletePackage companyPackage = completeModel.basicGetCompletePackageForURI("http://org.eclipse.qvtd.compiler.tests.companies/Company");
 		CompleteClass employeeClass = companyPackage.getOwnedCompleteClass("Employee");
 		//
 		CompleteClass companyClass = companyPackage.getOwnedCompleteClass("Company");
