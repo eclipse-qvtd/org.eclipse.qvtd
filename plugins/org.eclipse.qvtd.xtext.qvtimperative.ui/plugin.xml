@@ -20,7 +20,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactoryOverload:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactoryOverload:org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="qvti,qvtias"
