@@ -175,7 +175,7 @@
       <ownedProperties xmi:id="YwYCh" isImplicit="true" isRequired="true" name="Pattern" opposite="#056L0" type="#pJjNZ"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
     <ownedClasses xsi:type="pivot:BagType" xmi:id="9+o+H" name="Bag" superClasses="#TaRAX">
       <ownedBindings>
         <ownedSubstitutions actual="#7pR2u" formal="&_1;#k2OA6"/>

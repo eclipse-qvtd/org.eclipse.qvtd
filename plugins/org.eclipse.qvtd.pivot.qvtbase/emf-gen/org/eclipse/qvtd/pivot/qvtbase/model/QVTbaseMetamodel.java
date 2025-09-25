@@ -45,7 +45,6 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
-import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
@@ -53,7 +52,6 @@ import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
-
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
@@ -239,9 +237,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		protected Contents(@NonNull Package standardLibraryPackage, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibraryPackage);
 			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
-			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL_ID, PivotPackage.eINSTANCE);
-			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", IdManager.METAMODEL_ID, QVTbasePackage.eINSTANCE);
-			orphanPackage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
+			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", null, PivotPackage.eINSTANCE);
+			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
+			orphanPackage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
 			installPackages();
 			installClassTypes();
 			installEnumerations();

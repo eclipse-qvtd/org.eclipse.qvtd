@@ -77,13 +77,13 @@ public class QVTimperativeTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE, IdManager.METAMODEL_ID);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", "ecore", EcorePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_PRIMid_String = TypeId.BAG.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AddStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("AddStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AppendParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("AppendParameterBinding", 0);

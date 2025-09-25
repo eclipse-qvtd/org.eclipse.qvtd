@@ -27,7 +27,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate;
 
-import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -69,7 +68,7 @@ public class QVTtemplateTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE, IdManager.METAMODEL_ID);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.

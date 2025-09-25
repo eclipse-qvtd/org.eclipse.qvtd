@@ -29,7 +29,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcore;
 
-import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Enumeration;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
@@ -77,7 +76,7 @@ public class QVTcoreTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE, IdManager.METAMODEL_ID);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE, null);
 
 	/**
 	 *	Constants used by auto-generated code.
