@@ -51,7 +51,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EntryPointsAnalysis;
 
@@ -266,7 +265,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			cgPackage = cgPackage.getPackages().get(0);
 			appendSegmentName(s, cgPackage);
 		}
-		s.append(QVTbaseUtil.getName(transformation));
+		s.append(transformation.getName());
 		return s.toString();
 	}
 
