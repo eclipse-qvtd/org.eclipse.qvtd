@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
+import org.eclipse.ocl.pivot.internal.CompleteStandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -45,7 +45,7 @@ public abstract class LoadTestCase extends XtextTestCase
 
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
 		OCL ocl = createOCL();
-		((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
+		ocl.getEnvironmentFactory().setSafeNavigationValidationSeverity(severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, QVTimperativeUtil.QVTIAS_FILE_EXTENSION);
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
@@ -101,7 +101,7 @@ public abstract class LoadTestCase extends XtextTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		StandardLibraryContribution.REGISTRY.remove(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
+		StandardLibraryContribution.REGISTRY.remove(CompleteStandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
 	}
 }
