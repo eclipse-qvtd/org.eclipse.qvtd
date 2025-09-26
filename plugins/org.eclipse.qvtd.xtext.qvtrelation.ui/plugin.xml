@@ -20,7 +20,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.qvtd.xtext.qvtrelation.QVTrelationEditor"
+              class="org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationExecutableExtensionFactoryOverload:org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="qvtr,qvtras"
