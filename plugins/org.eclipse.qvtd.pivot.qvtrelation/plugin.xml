@@ -41,4 +41,8 @@
       <fileTypes extension="qvtras" type="text" />
    </extension>
 
+  <extension point="org.eclipse.ocl.pivot.complete_package_id">
+     <mapping completePackageId="$metamodel$" packageURI="http://www.eclipse.org/qvt/2015/QVTrelation"/>
+  </extension>
+
 </plugin>
