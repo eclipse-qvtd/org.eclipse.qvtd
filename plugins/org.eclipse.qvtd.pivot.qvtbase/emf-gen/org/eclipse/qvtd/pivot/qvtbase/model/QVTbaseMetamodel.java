@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteStandardLibrary;
 import org.eclipse.ocl.pivot.Constraint;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Enumeration;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.Model;
@@ -52,6 +53,8 @@ import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
@@ -84,6 +87,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		Contents contents = new Contents(standardLibraryPackage, name, nsPrefix, nsURI);
 		Model model = contents.getModel();
 		resource.getContents().add(model);
+		resource.setSaveable(false);
 		@SuppressWarnings("null")@NonNull Package pkge = model.getOwnedPackages().get(0);
 		return pkge;
 	}
@@ -193,7 +197,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 
 		/**
-		 * Overridden to trivialise loading of the shared instance.
+		 * Overridden to trivialize loading of the shared instance.
 		 */
 		@Override
 		public void load(Map<?, ?> options) throws IOException {
@@ -230,16 +234,16 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	private static class Contents extends AbstractContents.AbstractMetamodelContents
 	{
 		private final @NonNull Model root;
-		private final @NonNull Package pivot;
-		private final @NonNull Package qvtbase;
-		private final @NonNull Package orphanPackage;
+		private final org.eclipse.ocl.pivot.@NonNull Package qvtbase;
+		private final org.eclipse.ocl.pivot.@NonNull Package local_orphanage;
+		private final org.eclipse.ocl.pivot.@NonNull Package local_pivot;
 
 		protected Contents(@NonNull Package standardLibraryPackage, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibraryPackage);
 			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
-			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", null, PivotPackage.eINSTANCE);
 			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
-			orphanPackage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
+			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
+			local_pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", null, PivotPackage.eINSTANCE);
 			installPackages();
 			installClassTypes();
 			installEnumerations();
@@ -255,29 +259,28 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			return root;
 		}
 
-		private final @NonNull Package _ocl = standardLibraryPackage;
-		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
-		private final @NonNull BagType _Bag = getBagType(_ocl, "Bag");
-		private final @NonNull Class _Boolean = getBooleanType(_ocl, "Boolean");
-		private final @NonNull Class _Class = getClass(_pivot, "Class");
-		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
-		private final @NonNull Class _Element = getClass(_pivot, "Element");
-		private final @NonNull Class _ExpressionInOCL = getClass(_pivot, "ExpressionInOCL");
-		private final @NonNull Class _Integer = getPrimitiveType(_ocl, "Integer");
-		private final @NonNull Class _Model = getClass(_pivot, "Model");
-		private final @NonNull Class _NamedElement = getClass(_pivot, "NamedElement");
-		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
-		private final @NonNull Class _OclElement = getClass(_ocl, "OclElement");
-		private final @NonNull Class _OclEnumeration = getClass(_ocl, "OclEnumeration");
-		private final @NonNull Class _Operation = getClass(_pivot, "Operation");
-		private final @NonNull CollectionType _OrderedCollection = getCollectionType(_ocl, "OrderedCollection");
-		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(_ocl, "OrderedSet");
-		private final @NonNull Class _Real = getPrimitiveType(_ocl, "Real");
-		private final @NonNull Class _ReferringElement = getClass(_pivot, "ReferringElement");
-		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
-		private final @NonNull Class _String = getPrimitiveType(_ocl, "String");
-		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
-		private final @NonNull Class _UnlimitedNatural = getPrimitiveType(_ocl, "UnlimitedNatural");
+		private final org.eclipse.ocl.pivot.@NonNull Package pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
+		private final @NonNull BagType _Bag = getBagType(standardLibraryPackage, "Bag");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Boolean = getBooleanType(standardLibraryPackage, "Boolean");
+		private final @NonNull Class _Class = getClass(pivot, "Class");
+		private final @NonNull CollectionType _Collection = getCollectionType(standardLibraryPackage, "Collection");
+		private final @NonNull Class _Element = getClass(pivot, "Element");
+		private final @NonNull Class _ExpressionInOCL = getClass(pivot, "ExpressionInOCL");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Integer = getPrimitiveType(standardLibraryPackage, "Integer");
+		private final @NonNull Class _Model = getClass(pivot, "Model");
+		private final @NonNull Class _NamedElement = getClass(pivot, "NamedElement");
+		private final @NonNull AnyType _OclAny = getAnyType(standardLibraryPackage, "OclAny");
+		private final @NonNull Class _OclElement = getClass(standardLibraryPackage, "OclElement");
+		private final @NonNull Class _OclEnumeration = getClass(standardLibraryPackage, "OclEnumeration");
+		private final @NonNull Class _Operation = getClass(pivot, "Operation");
+		private final @NonNull CollectionType _OrderedCollection = getCollectionType(standardLibraryPackage, "OrderedCollection");
+		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(standardLibraryPackage, "OrderedSet");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Real = getPrimitiveType(standardLibraryPackage, "Real");
+		private final @NonNull Class _ReferringElement = getClass(pivot, "ReferringElement");
+		private final @NonNull SetType _Set = getSetType(standardLibraryPackage, "Set");
+		private final org.eclipse.ocl.pivot.@NonNull Class _String = getPrimitiveType(standardLibraryPackage, "String");
+		private final @NonNull CollectionType _UniqueCollection = getCollectionType(standardLibraryPackage, "UniqueCollection");
+		private final org.eclipse.ocl.pivot.@NonNull Class _UnlimitedNatural = getPrimitiveType(standardLibraryPackage, "UnlimitedNatural");
 		private final @NonNull TemplateParameter _Bag_T = getTemplateParameter(_Bag, 0);
 		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
 		private final @NonNull TemplateParameter _OrderedCollection_T = getTemplateParameter(_OrderedCollection, 0);
@@ -286,18 +289,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
 
 		private void installPackages() {
-			root.getOwnedPackages().add(pivot);
+			root.getOwnedPackages().add(local_orphanage);
+			local_orphanage.getOwnedPackages().add(local_pivot);
 			root.getOwnedPackages().add(qvtbase);
-			root.getOwnedPackages().add(orphanPackage);
-			root.getOwnedImports().add(createImport(null, _ocl));
+			root.getOwnedImports().add(createImport(null, standardLibraryPackage));
 		}
-
-		private final @NonNull Class _Annotation = createClass("Annotation");
-		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
-		private final @NonNull Class _Package = createClass("Package");
-		private final @NonNull Class _Parameter = createClass("Parameter");
-		private final @NonNull Class _ParameterVariable = createClass("ParameterVariable");
-		private final @NonNull Class _Variable = createClass("Variable");
 
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
 		private final @NonNull Class _CompoundTargetElement = createClass(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT);
@@ -313,6 +309,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _TargetElement = createClass(QVTbasePackage.Literals.TARGET_ELEMENT);
 		private final @NonNull Class _Transformation = createClass(QVTbasePackage.Literals.TRANSFORMATION);
 		private final @NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
+
+		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
+		private final @NonNull Class _ParameterVariable = createClass("ParameterVariable");
+		private final @NonNull Class _Parameter = createClass("Parameter");
+		private final @NonNull Class _Package = createClass("Package");
+		private final @NonNull Class _Annotation = createClass("Annotation");
+		private final @NonNull Class _Variable = createClass("Variable");
 
 		private final @NonNull Enumeration _TargetElementKind = createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND);
 		private final @NonNull EnumerationLiteral el__TargetElementKind_INPUT = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"));
@@ -368,32 +371,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			Class type;
-
-			ownedClasses = pivot.getOwnedClasses();
-			type = _Annotation;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _OCLExpression;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _Package;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _Parameter;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _ParameterVariable;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _Variable;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
 
 			ownedClasses = qvtbase.getOwnedClasses();
 			type = _BaseModel;
@@ -456,6 +433,32 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_NamedElement);
 			ownedClasses.add(type);
+
+			ownedClasses = local_pivot.getOwnedClasses();
+			type = _OCLExpression;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _ParameterVariable;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _Parameter;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _Package;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _Annotation;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _Variable;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
 		}
 
 		private void installEnumerations() {
@@ -478,7 +481,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			List<Class> superClasses;
 			CollectionType type;
 
-			ownedClasses = orphanPackage.getOwnedClasses();
+			ownedClasses = local_orphanage.getOwnedClasses();
 			type = _Bag_Domain_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain_F);
@@ -689,15 +692,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 
 
-		private final @NonNull Property pr_Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
-		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function_F);
-		private final @NonNull Property pr_OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
-		private final @NonNull Property pr_Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel_F);
-		private final @NonNull Property pr_Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
-		private final @NonNull Property pr_Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
-		private final @NonNull Property pr_ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
-		private final @NonNull Property pr_Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
-
 		private final @NonNull Property pr_CompoundTargetElement_ownedTargetElements = createProperty(QVTbasePackage.Literals.COMPOUND_TARGET_ELEMENT__OWNED_TARGET_ELEMENTS, _OrderedSet_SimpleTargetElement_F_L2);
 		private final @NonNull Property pr_Domain_isCheckable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, _Boolean);
 		private final @NonNull Property pr_Domain_isEnforceable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, _Boolean);
@@ -742,56 +736,18 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_TypedModel_TypedModel_iterates = createProperty("TypedModel", _Bag_TypedModel_F);
 		private final @NonNull Property pr_TypedModel_dependent_dependsOn = createProperty("dependent", _TypedModel);
 
+		private final @NonNull Property _OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
+		private final @NonNull Property _OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function_F);
+		private final @NonNull Property _ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
+		private final @NonNull Property _Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
+		private final @NonNull Property _Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
+		private final @NonNull Property _Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel_F);
+		private final @NonNull Property _Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
+		private final @NonNull Property _Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
+
 		private void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
-
-			ownedProperties = _Annotation.getOwnedProperties();
-			ownedProperties.add(property = pr_Annotation_Transformation_ownedTag);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Transformation_ownedTag);
-
-			ownedProperties = _OCLExpression.getOwnedProperties();
-			ownedProperties.add(property = pr_OCLExpression_Function_queryExpression);
-			property.setIsImplicit(true);
-			property.setIsRequired(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Function_queryExpression);
-			ownedProperties.add(property = pr_OCLExpression_predicate_conditionExpression);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Predicate_conditionExpression);
-
-			ownedProperties = _Package.getOwnedProperties();
-			ownedProperties.add(property = pr_Package_TypedModel_usedPackage);
-			property.setIsImplicit(true);
-			property.setIsRequired(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_TypedModel_usedPackage);
-
-			ownedProperties = _Parameter.getOwnedProperties();
-			ownedProperties.add(property = pr_Parameter_Transformation_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Transformation_ownedContext);
-			ownedProperties.add(property = pr_Parameter_TypedModel_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_TypedModel_ownedContext);
-
-			ownedProperties = _ParameterVariable.getOwnedProperties();
-			ownedProperties.add(property = pr_ParameterVariable_Rule_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Rule_ownedContext);
-
-			ownedProperties = _Variable.getOwnedProperties();
-			ownedProperties.add(property = pr_Variable_Pattern_bindsTo);
-			property.setIsImplicit(true);
-			property.setIsRequired(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Pattern_bindsTo);
 
 			ownedProperties = _CompoundTargetElement.getOwnedProperties();
 			ownedProperties.add(property = pr_CompoundTargetElement_ownedTargetElements);
@@ -823,13 +779,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsDerived(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
-			property.setOpposite(pr_OCLExpression_Function_queryExpression);
+			property.setOpposite(_OCLExpression_Function_queryExpression);
 
 			ownedProperties = _Pattern.getOwnedProperties();
 			ownedProperties.add(property = pr_Pattern_bindsTo);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Variable_Pattern_bindsTo);
+			property.setOpposite(_Variable_Pattern_bindsTo);
 			ownedProperties.add(property = pr_Pattern_predicate);
 			property.setIsComposite(true);
 			property.setIsRequired(true);
@@ -841,7 +797,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_OCLExpression_predicate_conditionExpression);
+			property.setOpposite(_OCLExpression_predicate_conditionExpression);
 			ownedProperties.add(property = pr_Predicate_pattern);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
@@ -868,7 +824,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_Rule_ownedContext);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_ParameterVariable_Rule_ownedContext);
+			property.setOpposite(_ParameterVariable_Rule_ownedContext);
 			ownedProperties.add(property = pr_Rule_transformation);
 			property.setIsTransient(true);
 			property.setOpposite(pr_Transformation_rule);
@@ -920,12 +876,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_Transformation_ownedContext);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Parameter_Transformation_ownedContext);
+			property.setOpposite(_Parameter_Transformation_ownedContext);
 			ownedProperties.add(property = pr_Transformation_ownedTag);
 			property.setIsComposite(true);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Annotation_Transformation_ownedTag);
+			property.setOpposite(_Annotation_Transformation_ownedTag);
 			ownedProperties.add(property = pr_Transformation_ownedTargets);
 			property.setIsComposite(true);
 			property.setIsRequired(true);
@@ -965,7 +921,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_TypedModel_ownedContext);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Parameter_TypedModel_ownedContext);
+			property.setOpposite(_Parameter_TypedModel_ownedContext);
 			ownedProperties.add(property = pr_TypedModel_transformation);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
@@ -974,7 +930,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedProperties.add(property = pr_TypedModel_usedPackage);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Package_TypedModel_usedPackage);
+			property.setOpposite(_Package_TypedModel_usedPackage);
 			ownedProperties.add(property = pr_TypedModel_Domain_typedModel);
 			property.setIsImplicit(true);
 			property.setIsRequired(true);
@@ -999,6 +955,53 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_dependsOn);
+
+			ownedProperties = _OCLExpression.getOwnedProperties();
+			ownedProperties.add(property = _OCLExpression_predicate_conditionExpression);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Predicate_conditionExpression);
+			ownedProperties.add(property = _OCLExpression_Function_queryExpression);
+			property.setIsImplicit(true);
+			property.setIsRequired(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Function_queryExpression);
+
+			ownedProperties = _ParameterVariable.getOwnedProperties();
+			ownedProperties.add(property = _ParameterVariable_Rule_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Rule_ownedContext);
+
+			ownedProperties = _Parameter.getOwnedProperties();
+			ownedProperties.add(property = _Parameter_TypedModel_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_ownedContext);
+			ownedProperties.add(property = _Parameter_Transformation_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transformation_ownedContext);
+
+			ownedProperties = _Package.getOwnedProperties();
+			ownedProperties.add(property = _Package_TypedModel_usedPackage);
+			property.setIsImplicit(true);
+			property.setIsRequired(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_TypedModel_usedPackage);
+
+			ownedProperties = _Annotation.getOwnedProperties();
+			ownedProperties.add(property = _Annotation_Transformation_ownedTag);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transformation_ownedTag);
+
+			ownedProperties = _Variable.getOwnedProperties();
+			ownedProperties.add(property = _Variable_Pattern_bindsTo);
+			property.setIsImplicit(true);
+			property.setIsRequired(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pattern_bindsTo);
 		}
 
 		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant(QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP, "NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");

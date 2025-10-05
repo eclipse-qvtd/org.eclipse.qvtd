@@ -18,9 +18,6 @@
  *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore
  *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
  *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore
- *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore
  *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel
@@ -54,6 +51,7 @@ import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 // import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 
@@ -77,7 +75,7 @@ public class QVTimperativeTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTimperativePackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -279,52 +277,52 @@ public class QVTimperativeTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _AddStatement__AddStatement = LIBRARY.createFragment(Types._AddStatement, QVTimperativeTables.Types._AddStatement);
+		private static final @NonNull FlatFragment _AddStatement__AddStatement = LIBRARY.createFragment(Types._AddStatement, Types._AddStatement);
 		private static final @NonNull FlatFragment _AddStatement__Element = LIBRARY.createFragment(Types._AddStatement, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _AddStatement__MappingStatement = LIBRARY.createFragment(Types._AddStatement, QVTimperativeTables.Types._MappingStatement);
+		private static final @NonNull FlatFragment _AddStatement__MappingStatement = LIBRARY.createFragment(Types._AddStatement, Types._MappingStatement);
 		private static final @NonNull FlatFragment _AddStatement__NamedElement = LIBRARY.createFragment(Types._AddStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _AddStatement__ObservableStatement = LIBRARY.createFragment(Types._AddStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _AddStatement__ObservableStatement = LIBRARY.createFragment(Types._AddStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _AddStatement__OclAny = LIBRARY.createFragment(Types._AddStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _AddStatement__OclElement = LIBRARY.createFragment(Types._AddStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _AddStatement__Statement = LIBRARY.createFragment(Types._AddStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _AddStatement__Statement = LIBRARY.createFragment(Types._AddStatement, Types._Statement);
 
-		private static final @NonNull FlatFragment _AppendParameter__AppendParameter = LIBRARY.createFragment(Types._AppendParameter, QVTimperativeTables.Types._AppendParameter);
-		private static final @NonNull FlatFragment _AppendParameter__ConnectionVariable = LIBRARY.createFragment(Types._AppendParameter, QVTimperativeTables.Types._ConnectionVariable);
+		private static final @NonNull FlatFragment _AppendParameter__AppendParameter = LIBRARY.createFragment(Types._AppendParameter, Types._AppendParameter);
+		private static final @NonNull FlatFragment _AppendParameter__ConnectionVariable = LIBRARY.createFragment(Types._AppendParameter, Types._ConnectionVariable);
 		private static final @NonNull FlatFragment _AppendParameter__Element = LIBRARY.createFragment(Types._AppendParameter, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _AppendParameter__MappingParameter = LIBRARY.createFragment(Types._AppendParameter, QVTimperativeTables.Types._MappingParameter);
+		private static final @NonNull FlatFragment _AppendParameter__MappingParameter = LIBRARY.createFragment(Types._AppendParameter, Types._MappingParameter);
 		private static final @NonNull FlatFragment _AppendParameter__NamedElement = LIBRARY.createFragment(Types._AppendParameter, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _AppendParameter__OclAny = LIBRARY.createFragment(Types._AppendParameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _AppendParameter__OclElement = LIBRARY.createFragment(Types._AppendParameter, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _AppendParameter__TypedElement = LIBRARY.createFragment(Types._AppendParameter, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _AppendParameter__VariableDeclaration = LIBRARY.createFragment(Types._AppendParameter, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull FlatFragment _AppendParameterBinding__AppendParameterBinding = LIBRARY.createFragment(Types._AppendParameterBinding, QVTimperativeTables.Types._AppendParameterBinding);
+		private static final @NonNull FlatFragment _AppendParameterBinding__AppendParameterBinding = LIBRARY.createFragment(Types._AppendParameterBinding, Types._AppendParameterBinding);
 		private static final @NonNull FlatFragment _AppendParameterBinding__Element = LIBRARY.createFragment(Types._AppendParameterBinding, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _AppendParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._AppendParameterBinding, QVTimperativeTables.Types._MappingParameterBinding);
+		private static final @NonNull FlatFragment _AppendParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._AppendParameterBinding, Types._MappingParameterBinding);
 		private static final @NonNull FlatFragment _AppendParameterBinding__OclAny = LIBRARY.createFragment(Types._AppendParameterBinding, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _AppendParameterBinding__OclElement = LIBRARY.createFragment(Types._AppendParameterBinding, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _BufferStatement__BufferStatement = LIBRARY.createFragment(Types._BufferStatement, QVTimperativeTables.Types._BufferStatement);
-		private static final @NonNull FlatFragment _BufferStatement__ConnectionVariable = LIBRARY.createFragment(Types._BufferStatement, QVTimperativeTables.Types._ConnectionVariable);
+		private static final @NonNull FlatFragment _BufferStatement__BufferStatement = LIBRARY.createFragment(Types._BufferStatement, Types._BufferStatement);
+		private static final @NonNull FlatFragment _BufferStatement__ConnectionVariable = LIBRARY.createFragment(Types._BufferStatement, Types._ConnectionVariable);
 		private static final @NonNull FlatFragment _BufferStatement__Element = LIBRARY.createFragment(Types._BufferStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _BufferStatement__NamedElement = LIBRARY.createFragment(Types._BufferStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _BufferStatement__ObservableStatement = LIBRARY.createFragment(Types._BufferStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _BufferStatement__ObservableStatement = LIBRARY.createFragment(Types._BufferStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _BufferStatement__OclAny = LIBRARY.createFragment(Types._BufferStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _BufferStatement__OclElement = LIBRARY.createFragment(Types._BufferStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _BufferStatement__Statement = LIBRARY.createFragment(Types._BufferStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _BufferStatement__Statement = LIBRARY.createFragment(Types._BufferStatement, Types._Statement);
 		private static final @NonNull FlatFragment _BufferStatement__TypedElement = LIBRARY.createFragment(Types._BufferStatement, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _BufferStatement__VariableDeclaration = LIBRARY.createFragment(Types._BufferStatement, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull FlatFragment _BufferStatement__VariableStatement = LIBRARY.createFragment(Types._BufferStatement, QVTimperativeTables.Types._VariableStatement);
+		private static final @NonNull FlatFragment _BufferStatement__VariableStatement = LIBRARY.createFragment(Types._BufferStatement, Types._VariableStatement);
 
-		private static final @NonNull FlatFragment _CheckStatement__CheckStatement = LIBRARY.createFragment(Types._CheckStatement, QVTimperativeTables.Types._CheckStatement);
+		private static final @NonNull FlatFragment _CheckStatement__CheckStatement = LIBRARY.createFragment(Types._CheckStatement, Types._CheckStatement);
 		private static final @NonNull FlatFragment _CheckStatement__Element = LIBRARY.createFragment(Types._CheckStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CheckStatement__NamedElement = LIBRARY.createFragment(Types._CheckStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _CheckStatement__ObservableStatement = LIBRARY.createFragment(Types._CheckStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _CheckStatement__ObservableStatement = LIBRARY.createFragment(Types._CheckStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _CheckStatement__OclAny = LIBRARY.createFragment(Types._CheckStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CheckStatement__OclElement = LIBRARY.createFragment(Types._CheckStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CheckStatement__Statement = LIBRARY.createFragment(Types._CheckStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _CheckStatement__Statement = LIBRARY.createFragment(Types._CheckStatement, Types._Statement);
 
-		private static final @NonNull FlatFragment _ConnectionVariable__ConnectionVariable = LIBRARY.createFragment(Types._ConnectionVariable, QVTimperativeTables.Types._ConnectionVariable);
+		private static final @NonNull FlatFragment _ConnectionVariable__ConnectionVariable = LIBRARY.createFragment(Types._ConnectionVariable, Types._ConnectionVariable);
 		private static final @NonNull FlatFragment _ConnectionVariable__Element = LIBRARY.createFragment(Types._ConnectionVariable, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _ConnectionVariable__NamedElement = LIBRARY.createFragment(Types._ConnectionVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _ConnectionVariable__OclAny = LIBRARY.createFragment(Types._ConnectionVariable, OCLstdlibTables.Types._OclAny);
@@ -332,28 +330,28 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull FlatFragment _ConnectionVariable__TypedElement = LIBRARY.createFragment(Types._ConnectionVariable, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _ConnectionVariable__VariableDeclaration = LIBRARY.createFragment(Types._ConnectionVariable, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull FlatFragment _DeclareStatement__DeclareStatement = LIBRARY.createFragment(Types._DeclareStatement, QVTimperativeTables.Types._DeclareStatement);
+		private static final @NonNull FlatFragment _DeclareStatement__DeclareStatement = LIBRARY.createFragment(Types._DeclareStatement, Types._DeclareStatement);
 		private static final @NonNull FlatFragment _DeclareStatement__Element = LIBRARY.createFragment(Types._DeclareStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _DeclareStatement__NamedElement = LIBRARY.createFragment(Types._DeclareStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _DeclareStatement__ObservableStatement = LIBRARY.createFragment(Types._DeclareStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _DeclareStatement__ObservableStatement = LIBRARY.createFragment(Types._DeclareStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _DeclareStatement__OclAny = LIBRARY.createFragment(Types._DeclareStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _DeclareStatement__OclElement = LIBRARY.createFragment(Types._DeclareStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _DeclareStatement__Statement = LIBRARY.createFragment(Types._DeclareStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _DeclareStatement__Statement = LIBRARY.createFragment(Types._DeclareStatement, Types._Statement);
 		private static final @NonNull FlatFragment _DeclareStatement__TypedElement = LIBRARY.createFragment(Types._DeclareStatement, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _DeclareStatement__VariableDeclaration = LIBRARY.createFragment(Types._DeclareStatement, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull FlatFragment _DeclareStatement__VariableStatement = LIBRARY.createFragment(Types._DeclareStatement, QVTimperativeTables.Types._VariableStatement);
+		private static final @NonNull FlatFragment _DeclareStatement__VariableStatement = LIBRARY.createFragment(Types._DeclareStatement, Types._VariableStatement);
 
 		private static final @NonNull FlatFragment _EntryPoint__Element = LIBRARY.createFragment(Types._EntryPoint, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _EntryPoint__EntryPoint = LIBRARY.createFragment(Types._EntryPoint, QVTimperativeTables.Types._EntryPoint);
-		private static final @NonNull FlatFragment _EntryPoint__Mapping = LIBRARY.createFragment(Types._EntryPoint, QVTimperativeTables.Types._Mapping);
+		private static final @NonNull FlatFragment _EntryPoint__EntryPoint = LIBRARY.createFragment(Types._EntryPoint, Types._EntryPoint);
+		private static final @NonNull FlatFragment _EntryPoint__Mapping = LIBRARY.createFragment(Types._EntryPoint, Types._Mapping);
 		private static final @NonNull FlatFragment _EntryPoint__NamedElement = LIBRARY.createFragment(Types._EntryPoint, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _EntryPoint__OclAny = LIBRARY.createFragment(Types._EntryPoint, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _EntryPoint__OclElement = LIBRARY.createFragment(Types._EntryPoint, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _EntryPoint__Rule = LIBRARY.createFragment(Types._EntryPoint, QVTbaseTables.Types._Rule);
 
 		private static final @NonNull FlatFragment _GuardParameter__Element = LIBRARY.createFragment(Types._GuardParameter, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _GuardParameter__GuardParameter = LIBRARY.createFragment(Types._GuardParameter, QVTimperativeTables.Types._GuardParameter);
-		private static final @NonNull FlatFragment _GuardParameter__MappingParameter = LIBRARY.createFragment(Types._GuardParameter, QVTimperativeTables.Types._MappingParameter);
+		private static final @NonNull FlatFragment _GuardParameter__GuardParameter = LIBRARY.createFragment(Types._GuardParameter, Types._GuardParameter);
+		private static final @NonNull FlatFragment _GuardParameter__MappingParameter = LIBRARY.createFragment(Types._GuardParameter, Types._MappingParameter);
 		private static final @NonNull FlatFragment _GuardParameter__NamedElement = LIBRARY.createFragment(Types._GuardParameter, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _GuardParameter__OclAny = LIBRARY.createFragment(Types._GuardParameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _GuardParameter__OclElement = LIBRARY.createFragment(Types._GuardParameter, OCLstdlibTables.Types._OclElement);
@@ -361,14 +359,14 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull FlatFragment _GuardParameter__VariableDeclaration = LIBRARY.createFragment(Types._GuardParameter, PivotTables.Types._VariableDeclaration);
 
 		private static final @NonNull FlatFragment _GuardParameterBinding__Element = LIBRARY.createFragment(Types._GuardParameterBinding, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _GuardParameterBinding__GuardParameterBinding = LIBRARY.createFragment(Types._GuardParameterBinding, QVTimperativeTables.Types._GuardParameterBinding);
-		private static final @NonNull FlatFragment _GuardParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._GuardParameterBinding, QVTimperativeTables.Types._MappingParameterBinding);
+		private static final @NonNull FlatFragment _GuardParameterBinding__GuardParameterBinding = LIBRARY.createFragment(Types._GuardParameterBinding, Types._GuardParameterBinding);
+		private static final @NonNull FlatFragment _GuardParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._GuardParameterBinding, Types._MappingParameterBinding);
 		private static final @NonNull FlatFragment _GuardParameterBinding__OclAny = LIBRARY.createFragment(Types._GuardParameterBinding, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _GuardParameterBinding__OclElement = LIBRARY.createFragment(Types._GuardParameterBinding, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _ImperativeModel__BaseModel = LIBRARY.createFragment(Types._ImperativeModel, QVTbaseTables.Types._BaseModel);
 		private static final @NonNull FlatFragment _ImperativeModel__Element = LIBRARY.createFragment(Types._ImperativeModel, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ImperativeModel__ImperativeModel = LIBRARY.createFragment(Types._ImperativeModel, QVTimperativeTables.Types._ImperativeModel);
+		private static final @NonNull FlatFragment _ImperativeModel__ImperativeModel = LIBRARY.createFragment(Types._ImperativeModel, Types._ImperativeModel);
 		private static final @NonNull FlatFragment _ImperativeModel__Model = LIBRARY.createFragment(Types._ImperativeModel, PivotTables.Types._Model);
 		private static final @NonNull FlatFragment _ImperativeModel__NamedElement = LIBRARY.createFragment(Types._ImperativeModel, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _ImperativeModel__Namespace = LIBRARY.createFragment(Types._ImperativeModel, PivotTables.Types._Namespace);
@@ -377,7 +375,7 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull FlatFragment _ImperativeTransformation__Class = LIBRARY.createFragment(Types._ImperativeTransformation, PivotTables.Types._Class);
 		private static final @NonNull FlatFragment _ImperativeTransformation__Element = LIBRARY.createFragment(Types._ImperativeTransformation, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ImperativeTransformation__ImperativeTransformation = LIBRARY.createFragment(Types._ImperativeTransformation, QVTimperativeTables.Types._ImperativeTransformation);
+		private static final @NonNull FlatFragment _ImperativeTransformation__ImperativeTransformation = LIBRARY.createFragment(Types._ImperativeTransformation, Types._ImperativeTransformation);
 		private static final @NonNull FlatFragment _ImperativeTransformation__NamedElement = LIBRARY.createFragment(Types._ImperativeTransformation, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _ImperativeTransformation__Namespace = LIBRARY.createFragment(Types._ImperativeTransformation, PivotTables.Types._Namespace);
 		private static final @NonNull FlatFragment _ImperativeTransformation__OclAny = LIBRARY.createFragment(Types._ImperativeTransformation, OCLstdlibTables.Types._OclAny);
@@ -388,13 +386,13 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull FlatFragment _ImperativeTransformation__Type = LIBRARY.createFragment(Types._ImperativeTransformation, PivotTables.Types._Type);
 
 		private static final @NonNull FlatFragment _LoopParameterBinding__Element = LIBRARY.createFragment(Types._LoopParameterBinding, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _LoopParameterBinding__LoopParameterBinding = LIBRARY.createFragment(Types._LoopParameterBinding, QVTimperativeTables.Types._LoopParameterBinding);
-		private static final @NonNull FlatFragment _LoopParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._LoopParameterBinding, QVTimperativeTables.Types._MappingParameterBinding);
+		private static final @NonNull FlatFragment _LoopParameterBinding__LoopParameterBinding = LIBRARY.createFragment(Types._LoopParameterBinding, Types._LoopParameterBinding);
+		private static final @NonNull FlatFragment _LoopParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._LoopParameterBinding, Types._MappingParameterBinding);
 		private static final @NonNull FlatFragment _LoopParameterBinding__OclAny = LIBRARY.createFragment(Types._LoopParameterBinding, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _LoopParameterBinding__OclElement = LIBRARY.createFragment(Types._LoopParameterBinding, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _LoopVariable__Element = LIBRARY.createFragment(Types._LoopVariable, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _LoopVariable__LoopVariable = LIBRARY.createFragment(Types._LoopVariable, QVTimperativeTables.Types._LoopVariable);
+		private static final @NonNull FlatFragment _LoopVariable__LoopVariable = LIBRARY.createFragment(Types._LoopVariable, Types._LoopVariable);
 		private static final @NonNull FlatFragment _LoopVariable__NamedElement = LIBRARY.createFragment(Types._LoopVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _LoopVariable__OclAny = LIBRARY.createFragment(Types._LoopVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _LoopVariable__OclElement = LIBRARY.createFragment(Types._LoopVariable, OCLstdlibTables.Types._OclElement);
@@ -402,32 +400,32 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull FlatFragment _LoopVariable__VariableDeclaration = LIBRARY.createFragment(Types._LoopVariable, PivotTables.Types._VariableDeclaration);
 
 		private static final @NonNull FlatFragment _Mapping__Element = LIBRARY.createFragment(Types._Mapping, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _Mapping__Mapping = LIBRARY.createFragment(Types._Mapping, QVTimperativeTables.Types._Mapping);
+		private static final @NonNull FlatFragment _Mapping__Mapping = LIBRARY.createFragment(Types._Mapping, Types._Mapping);
 		private static final @NonNull FlatFragment _Mapping__NamedElement = LIBRARY.createFragment(Types._Mapping, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Mapping__OclAny = LIBRARY.createFragment(Types._Mapping, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Mapping__OclElement = LIBRARY.createFragment(Types._Mapping, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _Mapping__Rule = LIBRARY.createFragment(Types._Mapping, QVTbaseTables.Types._Rule);
 
 		private static final @NonNull FlatFragment _MappingCall__Element = LIBRARY.createFragment(Types._MappingCall, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingCall__MappingCall = LIBRARY.createFragment(Types._MappingCall, QVTimperativeTables.Types._MappingCall);
-		private static final @NonNull FlatFragment _MappingCall__MappingStatement = LIBRARY.createFragment(Types._MappingCall, QVTimperativeTables.Types._MappingStatement);
+		private static final @NonNull FlatFragment _MappingCall__MappingCall = LIBRARY.createFragment(Types._MappingCall, Types._MappingCall);
+		private static final @NonNull FlatFragment _MappingCall__MappingStatement = LIBRARY.createFragment(Types._MappingCall, Types._MappingStatement);
 		private static final @NonNull FlatFragment _MappingCall__NamedElement = LIBRARY.createFragment(Types._MappingCall, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MappingCall__OclAny = LIBRARY.createFragment(Types._MappingCall, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingCall__OclElement = LIBRARY.createFragment(Types._MappingCall, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _MappingCall__ReferringElement = LIBRARY.createFragment(Types._MappingCall, PivotTables.Types._ReferringElement);
-		private static final @NonNull FlatFragment _MappingCall__Statement = LIBRARY.createFragment(Types._MappingCall, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _MappingCall__Statement = LIBRARY.createFragment(Types._MappingCall, Types._Statement);
 
 		private static final @NonNull FlatFragment _MappingLoop__Element = LIBRARY.createFragment(Types._MappingLoop, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingLoop__MappingLoop = LIBRARY.createFragment(Types._MappingLoop, QVTimperativeTables.Types._MappingLoop);
-		private static final @NonNull FlatFragment _MappingLoop__MappingStatement = LIBRARY.createFragment(Types._MappingLoop, QVTimperativeTables.Types._MappingStatement);
+		private static final @NonNull FlatFragment _MappingLoop__MappingLoop = LIBRARY.createFragment(Types._MappingLoop, Types._MappingLoop);
+		private static final @NonNull FlatFragment _MappingLoop__MappingStatement = LIBRARY.createFragment(Types._MappingLoop, Types._MappingStatement);
 		private static final @NonNull FlatFragment _MappingLoop__NamedElement = LIBRARY.createFragment(Types._MappingLoop, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _MappingLoop__ObservableStatement = LIBRARY.createFragment(Types._MappingLoop, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _MappingLoop__ObservableStatement = LIBRARY.createFragment(Types._MappingLoop, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _MappingLoop__OclAny = LIBRARY.createFragment(Types._MappingLoop, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingLoop__OclElement = LIBRARY.createFragment(Types._MappingLoop, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MappingLoop__Statement = LIBRARY.createFragment(Types._MappingLoop, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _MappingLoop__Statement = LIBRARY.createFragment(Types._MappingLoop, Types._Statement);
 
 		private static final @NonNull FlatFragment _MappingParameter__Element = LIBRARY.createFragment(Types._MappingParameter, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingParameter__MappingParameter = LIBRARY.createFragment(Types._MappingParameter, QVTimperativeTables.Types._MappingParameter);
+		private static final @NonNull FlatFragment _MappingParameter__MappingParameter = LIBRARY.createFragment(Types._MappingParameter, Types._MappingParameter);
 		private static final @NonNull FlatFragment _MappingParameter__NamedElement = LIBRARY.createFragment(Types._MappingParameter, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MappingParameter__OclAny = LIBRARY.createFragment(Types._MappingParameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingParameter__OclElement = LIBRARY.createFragment(Types._MappingParameter, OCLstdlibTables.Types._OclElement);
@@ -435,85 +433,85 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull FlatFragment _MappingParameter__VariableDeclaration = LIBRARY.createFragment(Types._MappingParameter, PivotTables.Types._VariableDeclaration);
 
 		private static final @NonNull FlatFragment _MappingParameterBinding__Element = LIBRARY.createFragment(Types._MappingParameterBinding, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._MappingParameterBinding, QVTimperativeTables.Types._MappingParameterBinding);
+		private static final @NonNull FlatFragment _MappingParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._MappingParameterBinding, Types._MappingParameterBinding);
 		private static final @NonNull FlatFragment _MappingParameterBinding__OclAny = LIBRARY.createFragment(Types._MappingParameterBinding, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingParameterBinding__OclElement = LIBRARY.createFragment(Types._MappingParameterBinding, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _MappingStatement__Element = LIBRARY.createFragment(Types._MappingStatement, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingStatement__MappingStatement = LIBRARY.createFragment(Types._MappingStatement, QVTimperativeTables.Types._MappingStatement);
+		private static final @NonNull FlatFragment _MappingStatement__MappingStatement = LIBRARY.createFragment(Types._MappingStatement, Types._MappingStatement);
 		private static final @NonNull FlatFragment _MappingStatement__NamedElement = LIBRARY.createFragment(Types._MappingStatement, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MappingStatement__OclAny = LIBRARY.createFragment(Types._MappingStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingStatement__OclElement = LIBRARY.createFragment(Types._MappingStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MappingStatement__Statement = LIBRARY.createFragment(Types._MappingStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _MappingStatement__Statement = LIBRARY.createFragment(Types._MappingStatement, Types._Statement);
 
 		private static final @NonNull FlatFragment _NewStatement__Element = LIBRARY.createFragment(Types._NewStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _NewStatement__NamedElement = LIBRARY.createFragment(Types._NewStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _NewStatement__NewStatement = LIBRARY.createFragment(Types._NewStatement, QVTimperativeTables.Types._NewStatement);
-		private static final @NonNull FlatFragment _NewStatement__ObservableStatement = LIBRARY.createFragment(Types._NewStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _NewStatement__NewStatement = LIBRARY.createFragment(Types._NewStatement, Types._NewStatement);
+		private static final @NonNull FlatFragment _NewStatement__ObservableStatement = LIBRARY.createFragment(Types._NewStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _NewStatement__OclAny = LIBRARY.createFragment(Types._NewStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NewStatement__OclElement = LIBRARY.createFragment(Types._NewStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NewStatement__Statement = LIBRARY.createFragment(Types._NewStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _NewStatement__Statement = LIBRARY.createFragment(Types._NewStatement, Types._Statement);
 		private static final @NonNull FlatFragment _NewStatement__TypedElement = LIBRARY.createFragment(Types._NewStatement, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _NewStatement__VariableDeclaration = LIBRARY.createFragment(Types._NewStatement, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull FlatFragment _NewStatement__VariableStatement = LIBRARY.createFragment(Types._NewStatement, QVTimperativeTables.Types._VariableStatement);
+		private static final @NonNull FlatFragment _NewStatement__VariableStatement = LIBRARY.createFragment(Types._NewStatement, Types._VariableStatement);
 
 		private static final @NonNull FlatFragment _NewStatementPart__Element = LIBRARY.createFragment(Types._NewStatementPart, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _NewStatementPart__NamedElement = LIBRARY.createFragment(Types._NewStatementPart, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _NewStatementPart__NewStatementPart = LIBRARY.createFragment(Types._NewStatementPart, QVTimperativeTables.Types._NewStatementPart);
+		private static final @NonNull FlatFragment _NewStatementPart__NewStatementPart = LIBRARY.createFragment(Types._NewStatementPart, Types._NewStatementPart);
 		private static final @NonNull FlatFragment _NewStatementPart__OclAny = LIBRARY.createFragment(Types._NewStatementPart, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NewStatementPart__OclElement = LIBRARY.createFragment(Types._NewStatementPart, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _ObservableStatement__Element = LIBRARY.createFragment(Types._ObservableStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _ObservableStatement__NamedElement = LIBRARY.createFragment(Types._ObservableStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _ObservableStatement__ObservableStatement = LIBRARY.createFragment(Types._ObservableStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _ObservableStatement__ObservableStatement = LIBRARY.createFragment(Types._ObservableStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _ObservableStatement__OclAny = LIBRARY.createFragment(Types._ObservableStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ObservableStatement__OclElement = LIBRARY.createFragment(Types._ObservableStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _ObservableStatement__Statement = LIBRARY.createFragment(Types._ObservableStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _ObservableStatement__Statement = LIBRARY.createFragment(Types._ObservableStatement, Types._Statement);
 
 		private static final @NonNull FlatFragment _SetStatement__Element = LIBRARY.createFragment(Types._SetStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _SetStatement__NamedElement = LIBRARY.createFragment(Types._SetStatement, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _SetStatement__ObservableStatement = LIBRARY.createFragment(Types._SetStatement, QVTimperativeTables.Types._ObservableStatement);
+		private static final @NonNull FlatFragment _SetStatement__ObservableStatement = LIBRARY.createFragment(Types._SetStatement, Types._ObservableStatement);
 		private static final @NonNull FlatFragment _SetStatement__OclAny = LIBRARY.createFragment(Types._SetStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SetStatement__OclElement = LIBRARY.createFragment(Types._SetStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SetStatement__SetStatement = LIBRARY.createFragment(Types._SetStatement, QVTimperativeTables.Types._SetStatement);
-		private static final @NonNull FlatFragment _SetStatement__Statement = LIBRARY.createFragment(Types._SetStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _SetStatement__SetStatement = LIBRARY.createFragment(Types._SetStatement, Types._SetStatement);
+		private static final @NonNull FlatFragment _SetStatement__Statement = LIBRARY.createFragment(Types._SetStatement, Types._Statement);
 
 		private static final @NonNull FlatFragment _SimpleParameter__Element = LIBRARY.createFragment(Types._SimpleParameter, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _SimpleParameter__MappingParameter = LIBRARY.createFragment(Types._SimpleParameter, QVTimperativeTables.Types._MappingParameter);
+		private static final @NonNull FlatFragment _SimpleParameter__MappingParameter = LIBRARY.createFragment(Types._SimpleParameter, Types._MappingParameter);
 		private static final @NonNull FlatFragment _SimpleParameter__NamedElement = LIBRARY.createFragment(Types._SimpleParameter, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _SimpleParameter__OclAny = LIBRARY.createFragment(Types._SimpleParameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SimpleParameter__OclElement = LIBRARY.createFragment(Types._SimpleParameter, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SimpleParameter__SimpleParameter = LIBRARY.createFragment(Types._SimpleParameter, QVTimperativeTables.Types._SimpleParameter);
+		private static final @NonNull FlatFragment _SimpleParameter__SimpleParameter = LIBRARY.createFragment(Types._SimpleParameter, Types._SimpleParameter);
 		private static final @NonNull FlatFragment _SimpleParameter__TypedElement = LIBRARY.createFragment(Types._SimpleParameter, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _SimpleParameter__VariableDeclaration = LIBRARY.createFragment(Types._SimpleParameter, PivotTables.Types._VariableDeclaration);
 
 		private static final @NonNull FlatFragment _SimpleParameterBinding__Element = LIBRARY.createFragment(Types._SimpleParameterBinding, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _SimpleParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._SimpleParameterBinding, QVTimperativeTables.Types._MappingParameterBinding);
+		private static final @NonNull FlatFragment _SimpleParameterBinding__MappingParameterBinding = LIBRARY.createFragment(Types._SimpleParameterBinding, Types._MappingParameterBinding);
 		private static final @NonNull FlatFragment _SimpleParameterBinding__OclAny = LIBRARY.createFragment(Types._SimpleParameterBinding, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SimpleParameterBinding__OclElement = LIBRARY.createFragment(Types._SimpleParameterBinding, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SimpleParameterBinding__SimpleParameterBinding = LIBRARY.createFragment(Types._SimpleParameterBinding, QVTimperativeTables.Types._SimpleParameterBinding);
+		private static final @NonNull FlatFragment _SimpleParameterBinding__SimpleParameterBinding = LIBRARY.createFragment(Types._SimpleParameterBinding, Types._SimpleParameterBinding);
 
 		private static final @NonNull FlatFragment _SpeculateStatement__Element = LIBRARY.createFragment(Types._SpeculateStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _SpeculateStatement__NamedElement = LIBRARY.createFragment(Types._SpeculateStatement, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _SpeculateStatement__OclAny = LIBRARY.createFragment(Types._SpeculateStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SpeculateStatement__OclElement = LIBRARY.createFragment(Types._SpeculateStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SpeculateStatement__SpeculateStatement = LIBRARY.createFragment(Types._SpeculateStatement, QVTimperativeTables.Types._SpeculateStatement);
-		private static final @NonNull FlatFragment _SpeculateStatement__Statement = LIBRARY.createFragment(Types._SpeculateStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _SpeculateStatement__SpeculateStatement = LIBRARY.createFragment(Types._SpeculateStatement, Types._SpeculateStatement);
+		private static final @NonNull FlatFragment _SpeculateStatement__Statement = LIBRARY.createFragment(Types._SpeculateStatement, Types._Statement);
 
 		private static final @NonNull FlatFragment _Statement__Element = LIBRARY.createFragment(Types._Statement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Statement__NamedElement = LIBRARY.createFragment(Types._Statement, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Statement__OclAny = LIBRARY.createFragment(Types._Statement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Statement__OclElement = LIBRARY.createFragment(Types._Statement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Statement__Statement = LIBRARY.createFragment(Types._Statement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _Statement__Statement = LIBRARY.createFragment(Types._Statement, Types._Statement);
 
 		private static final @NonNull FlatFragment _VariableStatement__Element = LIBRARY.createFragment(Types._VariableStatement, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _VariableStatement__NamedElement = LIBRARY.createFragment(Types._VariableStatement, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _VariableStatement__OclAny = LIBRARY.createFragment(Types._VariableStatement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _VariableStatement__OclElement = LIBRARY.createFragment(Types._VariableStatement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _VariableStatement__Statement = LIBRARY.createFragment(Types._VariableStatement, QVTimperativeTables.Types._Statement);
+		private static final @NonNull FlatFragment _VariableStatement__Statement = LIBRARY.createFragment(Types._VariableStatement, Types._Statement);
 		private static final @NonNull FlatFragment _VariableStatement__TypedElement = LIBRARY.createFragment(Types._VariableStatement, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _VariableStatement__VariableDeclaration = LIBRARY.createFragment(Types._VariableStatement, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull FlatFragment _VariableStatement__VariableStatement = LIBRARY.createFragment(Types._VariableStatement, QVTimperativeTables.Types._VariableStatement);
+		private static final @NonNull FlatFragment _VariableStatement__VariableStatement = LIBRARY.createFragment(Types._VariableStatement, Types._VariableStatement);
 
 		static {
 			Init.initEnd();
@@ -563,8 +561,8 @@ public class QVTimperativeTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _Statement__joinNames = LIBRARY.createOperation("joinNames", Parameters._OrderedSet__String__, Types._Statement,
-			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull Operation _Statement__joinNames = LIBRARY.createOperation(Types._Statement, "joinNames", Parameters._OrderedSet__String__, OCLstdlibTables.Types._String,
+			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
 		static {
 			Init.initEnd();
@@ -589,98 +587,182 @@ public class QVTimperativeTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _AddStatement__isEnforcedUnique = LIBRARY.createProperty(QVTimperativePackage.Literals.ADD_STATEMENT__IS_ENFORCED_UNIQUE, Types._AddStatement, 0);
-		public static final @NonNull Property _AddStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.ADD_STATEMENT__OWNED_EXPRESSION, Types._AddStatement, 1);
-		public static final @NonNull Property _AddStatement__targetVariable = LIBRARY.createProperty(QVTimperativePackage.Literals.ADD_STATEMENT__TARGET_VARIABLE, Types._AddStatement, 2);
+		public static final @NonNull Property _AddStatement__isEnforcedUnique = LIBRARY.createProperty(Types._AddStatement, QVTimperativePackage.Literals.ADD_STATEMENT__IS_ENFORCED_UNIQUE, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _AddStatement__ownedExpression = LIBRARY.createProperty(Types._AddStatement, QVTimperativePackage.Literals.ADD_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _AddStatement__targetVariable = LIBRARY.createProperty(Types._AddStatement, QVTimperativePackage.Literals.ADD_STATEMENT__TARGET_VARIABLE, Types._ConnectionVariable, 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _AppendParameterBinding__value = LIBRARY.createProperty(QVTimperativePackage.Literals.APPEND_PARAMETER_BINDING__VALUE, Types._AppendParameterBinding, 0);
+		public static final @NonNull Property _AppendParameterBinding__value = LIBRARY.createProperty(Types._AppendParameterBinding, QVTimperativePackage.Literals.APPEND_PARAMETER_BINDING__VALUE, Types._ConnectionVariable, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _BufferStatement__firstPass = LIBRARY.createProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__FIRST_PASS, Types._BufferStatement, 0);
-		public static final @NonNull Property _BufferStatement__lastPass = LIBRARY.createProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__LAST_PASS, Types._BufferStatement, 1);
-		public static final @NonNull Property _BufferStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__OWNED_EXPRESSION, Types._BufferStatement, 2);
+		public static final @NonNull Property _BufferStatement__firstPass = LIBRARY.createProperty(Types._BufferStatement, QVTimperativePackage.Literals.BUFFER_STATEMENT__FIRST_PASS, OCLstdlibTables.Types._Integer, 0 | IsResolveProxies);
+		public static final @NonNull Property _BufferStatement__lastPass = LIBRARY.createProperty(Types._BufferStatement, QVTimperativePackage.Literals.BUFFER_STATEMENT__LAST_PASS, OCLstdlibTables.Types._Integer, 1 | IsResolveProxies);
+		public static final @NonNull Property _BufferStatement__ownedExpression = LIBRARY.createProperty(Types._BufferStatement, QVTimperativePackage.Literals.BUFFER_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 2 | IsComposite | IsResolveProxies);
 
-		public static final @NonNull Property _CheckStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.CHECK_STATEMENT__OWNED_EXPRESSION, Types._CheckStatement, 0);
+		public static final @NonNull Property _CheckStatement__ownedExpression = LIBRARY.createProperty(Types._CheckStatement, QVTimperativePackage.Literals.CHECK_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _ConnectionVariable__isStrict = LIBRARY.createProperty(QVTimperativePackage.Literals.CONNECTION_VARIABLE__IS_STRICT, Types._ConnectionVariable, 0);
-		public static final @NonNull Property _ConnectionVariable__AddStatement__targetVariable = LIBRARY.createOppositeProperty("AddStatement", Types._ConnectionVariable, 1, QVTimperativePackage.Literals.ADD_STATEMENT__TARGET_VARIABLE);
-		public static final @NonNull Property _ConnectionVariable__AppendParameterBinding__value = LIBRARY.createOppositeProperty("AppendParameterBinding", Types._ConnectionVariable, 2, QVTimperativePackage.Literals.APPEND_PARAMETER_BINDING__VALUE);
-		public static final @NonNull Property _ConnectionVariable__GuardParameterBinding__value = LIBRARY.createOppositeProperty("GuardParameterBinding", Types._ConnectionVariable, 3, QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE);
+		public static final @NonNull Property _ConnectionVariable__isStrict = LIBRARY.createProperty(Types._ConnectionVariable, QVTimperativePackage.Literals.CONNECTION_VARIABLE__IS_STRICT, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ConnectionVariable__AddStatement__targetVariable = LIBRARY.createOppositeProperty(Types._ConnectionVariable, "AddStatement", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._AddStatement), 1 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.ADD_STATEMENT__TARGET_VARIABLE);
+		public static final @NonNull Property _ConnectionVariable__AppendParameterBinding__value = LIBRARY.createOppositeProperty(Types._ConnectionVariable, "AppendParameterBinding", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._AppendParameterBinding), 2 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.APPEND_PARAMETER_BINDING__VALUE);
+		public static final @NonNull Property _ConnectionVariable__GuardParameterBinding__value = LIBRARY.createOppositeProperty(Types._ConnectionVariable, "GuardParameterBinding", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._GuardParameterBinding), 3 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE);
 
-		public static final @NonNull Property _DeclareStatement__isCheck = LIBRARY.createProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__IS_CHECK, Types._DeclareStatement, 0);
-		public static final @NonNull Property _DeclareStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.DECLARE_STATEMENT__OWNED_EXPRESSION, Types._DeclareStatement, 1);
+		public static final @NonNull Property _DeclareStatement__isCheck = LIBRARY.createProperty(Types._DeclareStatement, QVTimperativePackage.Literals.DECLARE_STATEMENT__IS_CHECK, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _DeclareStatement__ownedExpression = LIBRARY.createProperty(Types._DeclareStatement, QVTimperativePackage.Literals.DECLARE_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 1 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _EntryPoint__inputTypedModels = LIBRARY.createProperty(QVTimperativePackage.Literals.ENTRY_POINT__INPUT_TYPED_MODELS, Types._EntryPoint, 0);
-		public static final @NonNull Property _EntryPoint__outputTypedModels = LIBRARY.createProperty(QVTimperativePackage.Literals.ENTRY_POINT__OUTPUT_TYPED_MODELS, Types._EntryPoint, 1);
-		public static final @NonNull Property _EntryPoint__targetName = LIBRARY.createProperty(QVTimperativePackage.Literals.ENTRY_POINT__TARGET_NAME, Types._EntryPoint, 2);
+		public static final @NonNull Property _EntryPoint__inputTypedModels = LIBRARY.createProperty(Types._EntryPoint, QVTimperativePackage.Literals.ENTRY_POINT__INPUT_TYPED_MODELS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, QVTbaseTables.Types._TypedModel), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _EntryPoint__outputTypedModels = LIBRARY.createProperty(Types._EntryPoint, QVTimperativePackage.Literals.ENTRY_POINT__OUTPUT_TYPED_MODELS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, QVTbaseTables.Types._TypedModel), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _EntryPoint__targetName = LIBRARY.createProperty(Types._EntryPoint, QVTimperativePackage.Literals.ENTRY_POINT__TARGET_NAME, OCLstdlibTables.Types._String, 2 | IsResolveProxies);
 
-		public static final @NonNull Property _GuardParameter__referredTypedModel = LIBRARY.createProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, Types._GuardParameter, 0);
-		public static final @NonNull Property _GuardParameter__successProperty = LIBRARY.createProperty(QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, Types._GuardParameter, 1);
+		public static final @NonNull Property _GuardParameter__referredTypedModel = LIBRARY.createProperty(Types._GuardParameter, QVTimperativePackage.Literals.GUARD_PARAMETER__REFERRED_TYPED_MODEL, QVTbaseTables.Types._TypedModel, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _GuardParameter__successProperty = LIBRARY.createProperty(Types._GuardParameter, QVTimperativePackage.Literals.GUARD_PARAMETER__SUCCESS_PROPERTY, PivotTables.Types._Property, 1 | IsResolveProxies);
 
-		public static final @NonNull Property _GuardParameterBinding__isCheck = LIBRARY.createProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__IS_CHECK, Types._GuardParameterBinding, 0);
-		public static final @NonNull Property _GuardParameterBinding__value = LIBRARY.createProperty(QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE, Types._GuardParameterBinding, 1);
+		public static final @NonNull Property _GuardParameterBinding__isCheck = LIBRARY.createProperty(Types._GuardParameterBinding, QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__IS_CHECK, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _GuardParameterBinding__value = LIBRARY.createProperty(Types._GuardParameterBinding, QVTimperativePackage.Literals.GUARD_PARAMETER_BINDING__VALUE, Types._ConnectionVariable, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _ImperativeTransformation__contextType = LIBRARY.createProperty(QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE, Types._ImperativeTransformation, 0);
+		public static final @NonNull Property _ImperativeTransformation__contextType = LIBRARY.createProperty(Types._ImperativeTransformation, QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION__CONTEXT_TYPE, PivotTables.Types._Class, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _LoopParameterBinding__isCheck = LIBRARY.createProperty(QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__IS_CHECK, Types._LoopParameterBinding, 0);
-		public static final @NonNull Property _LoopParameterBinding__value = LIBRARY.createProperty(QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE, Types._LoopParameterBinding, 1);
+		public static final @NonNull Property _LoopParameterBinding__isCheck = LIBRARY.createProperty(Types._LoopParameterBinding, QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__IS_CHECK, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LoopParameterBinding__value = LIBRARY.createProperty(Types._LoopParameterBinding, QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE, Types._LoopVariable, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _LoopVariable__owningMappingLoop = LIBRARY.createProperty(QVTimperativePackage.Literals.LOOP_VARIABLE__OWNING_MAPPING_LOOP, Types._LoopVariable, 0);
-		public static final @NonNull Property _LoopVariable__LoopParameterBinding__value = LIBRARY.createOppositeProperty("LoopParameterBinding", Types._LoopVariable, 1, QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE);
+		public static final @NonNull Property _LoopVariable__owningMappingLoop = LIBRARY.createProperty(Types._LoopVariable, QVTimperativePackage.Literals.LOOP_VARIABLE__OWNING_MAPPING_LOOP, Types._MappingLoop, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LoopVariable__LoopParameterBinding__value = LIBRARY.createOppositeProperty(Types._LoopVariable, "LoopParameterBinding", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._LoopParameterBinding), 1 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE);
 
-		public static final @NonNull Property _Mapping__firstPass = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING__FIRST_PASS, Types._Mapping, 0);
-		public static final @NonNull Property _Mapping__isStrict = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING__IS_STRICT, Types._Mapping, 1);
-		public static final @NonNull Property _Mapping__lastPass = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING__LAST_PASS, Types._Mapping, 2);
-		public static final @NonNull Property _Mapping__ownedMappingParameters = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING__OWNED_MAPPING_PARAMETERS, Types._Mapping, 3);
-		public static final @NonNull Property _Mapping__ownedStatements = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS, Types._Mapping, 4);
-		public static final @NonNull Property _Mapping__MappingCall__referredMapping = LIBRARY.createOppositeProperty("MappingCall", Types._Mapping, 5, QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING);
+		public static final @NonNull Property _Mapping__firstPass = LIBRARY.createProperty(Types._Mapping, QVTimperativePackage.Literals.MAPPING__FIRST_PASS, OCLstdlibTables.Types._Integer, 0 | IsResolveProxies);
+		public static final @NonNull Property _Mapping__isStrict = LIBRARY.createProperty(Types._Mapping, QVTimperativePackage.Literals.MAPPING__IS_STRICT, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__lastPass = LIBRARY.createProperty(Types._Mapping, QVTimperativePackage.Literals.MAPPING__LAST_PASS, OCLstdlibTables.Types._Integer, 2 | IsResolveProxies);
+		public static final @NonNull Property _Mapping__ownedMappingParameters = LIBRARY.createProperty(Types._Mapping, QVTimperativePackage.Literals.MAPPING__OWNED_MAPPING_PARAMETERS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._MappingParameter), 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__ownedStatements = LIBRARY.createProperty(Types._Mapping, QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Statement), 4 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__MappingCall__referredMapping = LIBRARY.createOppositeProperty(Types._Mapping, "MappingCall", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._MappingCall), 5 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING);
 
-		public static final @NonNull Property _MappingCall__bindingNames = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__BINDING_NAMES, Types._MappingCall, 0);
-		public static final @NonNull Property _MappingCall__isInstall = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, Types._MappingCall, 1);
-		public static final @NonNull Property _MappingCall__isInvoke = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, Types._MappingCall, 2);
-		public static final @NonNull Property _MappingCall__ownedMappingParameterBindings = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, Types._MappingCall, 3);
-		public static final @NonNull Property _MappingCall__referredMapping = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING, Types._MappingCall, 4);
-		public static final @NonNull Property _MappingCall__referredNames = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_NAMES, Types._MappingCall, 5);
+		public static final @NonNull Property _MappingCall__bindingNames = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__BINDING_NAMES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 0 | IsDerived | IsReadOnly | IsRequired | IsResolveProxies | IsTransient | IsVolatile);
+		public static final @NonNull Property _MappingCall__isInstall = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingCall__isInvoke = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, OCLstdlibTables.Types._Boolean, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingCall__ownedMappingParameterBindings = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingParameterBinding), 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingCall__referredMapping = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING, Types._Mapping, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingCall__referredNames = LIBRARY.createProperty(Types._MappingCall, QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_NAMES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 5 | IsDerived | IsReadOnly | IsRequired | IsResolveProxies | IsTransient | IsVolatile);
 
-		public static final @NonNull Property _MappingLoop__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_EXPRESSION, Types._MappingLoop, 0);
-		public static final @NonNull Property _MappingLoop__ownedIterators = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_ITERATORS, Types._MappingLoop, 1);
-		public static final @NonNull Property _MappingLoop__ownedMappingStatements = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS, Types._MappingLoop, 2);
+		public static final @NonNull Property _MappingLoop__ownedExpression = LIBRARY.createProperty(Types._MappingLoop, QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingLoop__ownedIterators = LIBRARY.createProperty(Types._MappingLoop, QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_ITERATORS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._LoopVariable), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingLoop__ownedMappingStatements = LIBRARY.createProperty(Types._MappingLoop, QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingStatement), 2 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _MappingParameter__owningMapping = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER__OWNING_MAPPING, Types._MappingParameter, 0);
-		public static final @NonNull Property _MappingParameter__MappingParameterBinding__boundVariable = LIBRARY.createOppositeProperty("MappingParameterBinding", Types._MappingParameter, 1, QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE);
+		public static final @NonNull Property _MappingParameter__owningMapping = LIBRARY.createProperty(Types._MappingParameter, QVTimperativePackage.Literals.MAPPING_PARAMETER__OWNING_MAPPING, Types._Mapping, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingParameter__MappingParameterBinding__boundVariable = LIBRARY.createOppositeProperty(Types._MappingParameter, "MappingParameterBinding", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._MappingParameterBinding), 1 | IsImplicit | IsRequired | IsResolveProxies, QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE);
 
-		public static final @NonNull Property _MappingParameterBinding__boundVariable = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE, Types._MappingParameterBinding, 0);
-		public static final @NonNull Property _MappingParameterBinding__owningMappingCall = LIBRARY.createProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL, Types._MappingParameterBinding, 1);
+		public static final @NonNull Property _MappingParameterBinding__boundVariable = LIBRARY.createProperty(Types._MappingParameterBinding, QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE, Types._MappingParameter, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingParameterBinding__owningMappingCall = LIBRARY.createProperty(Types._MappingParameterBinding, QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL, Types._MappingCall, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _MappingStatement__MappingLoop__ownedMappingStatements = LIBRARY.createOppositeProperty("MappingLoop", Types._MappingStatement, 0, QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS);
+		public static final @NonNull Property _MappingStatement__MappingLoop__ownedMappingStatements = LIBRARY.createOppositeProperty(Types._MappingStatement, "MappingLoop", Types._MappingLoop, 0 | IsImplicit | IsResolveProxies, QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS);
 
-		public static final @NonNull Property _NewStatement__isContained = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT__IS_CONTAINED, Types._NewStatement, 0);
-		public static final @NonNull Property _NewStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_EXPRESSION, Types._NewStatement, 1);
-		public static final @NonNull Property _NewStatement__ownedParts = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_PARTS, Types._NewStatement, 2);
-		public static final @NonNull Property _NewStatement__referredTypedModel = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, Types._NewStatement, 3);
+		public static final @NonNull Property _NewStatement__isContained = LIBRARY.createProperty(Types._NewStatement, QVTimperativePackage.Literals.NEW_STATEMENT__IS_CONTAINED, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NewStatement__ownedExpression = LIBRARY.createProperty(Types._NewStatement, QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 1 | IsComposite | IsResolveProxies);
+		public static final @NonNull Property _NewStatement__ownedParts = LIBRARY.createProperty(Types._NewStatement, QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_PARTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._NewStatementPart), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NewStatement__referredTypedModel = LIBRARY.createProperty(Types._NewStatement, QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, QVTbaseTables.Types._TypedModel, 3 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _NewStatementPart__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNED_EXPRESSION, Types._NewStatementPart, 0);
-		public static final @NonNull Property _NewStatementPart__owningNewStatement = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNING_NEW_STATEMENT, Types._NewStatementPart, 1);
-		public static final @NonNull Property _NewStatementPart__referredProperty = LIBRARY.createProperty(QVTimperativePackage.Literals.NEW_STATEMENT_PART__REFERRED_PROPERTY, Types._NewStatementPart, 2);
+		public static final @NonNull Property _NewStatementPart__ownedExpression = LIBRARY.createProperty(Types._NewStatementPart, QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NewStatementPart__owningNewStatement = LIBRARY.createProperty(Types._NewStatementPart, QVTimperativePackage.Literals.NEW_STATEMENT_PART__OWNING_NEW_STATEMENT, Types._NewStatement, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NewStatementPart__referredProperty = LIBRARY.createProperty(Types._NewStatementPart, QVTimperativePackage.Literals.NEW_STATEMENT_PART__REFERRED_PROPERTY, PivotTables.Types._Property, 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _ObservableStatement__observedProperties = LIBRARY.createProperty(QVTimperativePackage.Literals.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES, Types._ObservableStatement, 0);
+		public static final @NonNull Property _ObservableStatement__observedProperties = LIBRARY.createProperty(Types._ObservableStatement, QVTimperativePackage.Literals.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._Property), 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _SetStatement__isNotify = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_NOTIFY, Types._SetStatement, 0);
-		public static final @NonNull Property _SetStatement__isOpposite = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_OPPOSITE, Types._SetStatement, 1);
-		public static final @NonNull Property _SetStatement__isPartial = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__IS_PARTIAL, Types._SetStatement, 2);
-		public static final @NonNull Property _SetStatement__ownedExpression = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__OWNED_EXPRESSION, Types._SetStatement, 3);
-		public static final @NonNull Property _SetStatement__resolvedProperty = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__RESOLVED_PROPERTY, Types._SetStatement, 4);
-		public static final @NonNull Property _SetStatement__targetProperty = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_PROPERTY, Types._SetStatement, 5);
-		public static final @NonNull Property _SetStatement__targetVariable = LIBRARY.createProperty(QVTimperativePackage.Literals.SET_STATEMENT__TARGET_VARIABLE, Types._SetStatement, 6);
+		public static final @NonNull Property _SetStatement__isNotify = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__IS_NOTIFY, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SetStatement__isOpposite = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__IS_OPPOSITE, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SetStatement__isPartial = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__IS_PARTIAL, OCLstdlibTables.Types._Boolean, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SetStatement__ownedExpression = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__OWNED_EXPRESSION, PivotTables.Types._OCLExpression, 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SetStatement__resolvedProperty = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__RESOLVED_PROPERTY, PivotTables.Types._Property, 4 | IsDerived | IsReadOnly | IsRequired | IsTransient | IsVolatile);
+		public static final @NonNull Property _SetStatement__targetProperty = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__TARGET_PROPERTY, PivotTables.Types._Property, 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SetStatement__targetVariable = LIBRARY.createProperty(Types._SetStatement, QVTimperativePackage.Literals.SET_STATEMENT__TARGET_VARIABLE, PivotTables.Types._VariableDeclaration, 6 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _SimpleParameter__referredTypedModel = LIBRARY.createProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER__REFERRED_TYPED_MODEL, Types._SimpleParameter, 0);
+		public static final @NonNull Property _SimpleParameter__referredTypedModel = LIBRARY.createProperty(Types._SimpleParameter, QVTimperativePackage.Literals.SIMPLE_PARAMETER__REFERRED_TYPED_MODEL, QVTbaseTables.Types._TypedModel, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _SimpleParameterBinding__isCheck = LIBRARY.createProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__IS_CHECK, Types._SimpleParameterBinding, 0);
-		public static final @NonNull Property _SimpleParameterBinding__value = LIBRARY.createProperty(QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__VALUE, Types._SimpleParameterBinding, 1);
+		public static final @NonNull Property _SimpleParameterBinding__isCheck = LIBRARY.createProperty(Types._SimpleParameterBinding, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__IS_CHECK, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _SimpleParameterBinding__value = LIBRARY.createProperty(Types._SimpleParameterBinding, QVTimperativePackage.Literals.SIMPLE_PARAMETER_BINDING__VALUE, PivotTables.Types._OCLExpression, 1 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _SpeculateStatement__ownedExpressions = LIBRARY.createProperty(QVTimperativePackage.Literals.SPECULATE_STATEMENT__OWNED_EXPRESSIONS, Types._SpeculateStatement, 0);
+		public static final @NonNull Property _SpeculateStatement__ownedExpressions = LIBRARY.createProperty(Types._SpeculateStatement, QVTimperativePackage.Literals.SPECULATE_STATEMENT__OWNED_EXPRESSIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, PivotTables.Types._OCLExpression), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _Statement__Mapping__ownedStatements = LIBRARY.createOppositeProperty("Mapping", Types._Statement, 0, QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS);
+		public static final @NonNull Property _Statement__Mapping__ownedStatements = LIBRARY.createOppositeProperty(Types._Statement, "Mapping", Types._Mapping, 0 | IsImplicit | IsResolveProxies, QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS);
+
 		static {
+			_AddStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "AddStatement", _AddStatement__ownedExpression));
+			_AddStatement__targetVariable.setOpposite(_ConnectionVariable__AddStatement__targetVariable);
+
+			_AppendParameterBinding__value.setOpposite(_ConnectionVariable__AppendParameterBinding__value);
+
+			_BufferStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "BufferStatement", _BufferStatement__ownedExpression));
+
+			_CheckStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "CheckStatement", _CheckStatement__ownedExpression));
+
+			_ConnectionVariable__isStrict.setDefaultValueString("false");
+			_ConnectionVariable__AddStatement__targetVariable.setOpposite(_AddStatement__targetVariable);
+			_ConnectionVariable__AppendParameterBinding__value.setOpposite(_AppendParameterBinding__value);
+			_ConnectionVariable__GuardParameterBinding__value.setOpposite(_GuardParameterBinding__value);
+
+			_DeclareStatement__isCheck.setDefaultValueString("false");
+			_DeclareStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "DeclareStatement", _DeclareStatement__ownedExpression));
+
+			_EntryPoint__inputTypedModels.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "EntryPoint", _EntryPoint__inputTypedModels));
+			_EntryPoint__outputTypedModels.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "EntryPoint", _EntryPoint__outputTypedModels));
+
+			_GuardParameter__referredTypedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "GuardParameter", _GuardParameter__referredTypedModel));
+			_GuardParameter__successProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "GuardParameter", _GuardParameter__successProperty));
+
+			_GuardParameterBinding__isCheck.setDefaultValueString("false");
+			_GuardParameterBinding__value.setOpposite(_ConnectionVariable__GuardParameterBinding__value);
+
+			_ImperativeTransformation__contextType.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "ImperativeTransformation", _ImperativeTransformation__contextType));
+
+			_LoopParameterBinding__isCheck.setDefaultValueString("false");
+			_LoopParameterBinding__value.setOpposite(_LoopVariable__LoopParameterBinding__value);
+
+			_LoopVariable__owningMappingLoop.setOpposite(_MappingLoop__ownedIterators);
+			_LoopVariable__LoopParameterBinding__value.setOpposite(_LoopParameterBinding__value);
+
+			_Mapping__isStrict.setDefaultValueString("false");
+			_Mapping__ownedMappingParameters.setOpposite(_MappingParameter__owningMapping);
+			_Mapping__ownedStatements.setOpposite(_Statement__Mapping__ownedStatements);
+			_Mapping__MappingCall__referredMapping.setOpposite(_MappingCall__referredMapping);
+
+			_MappingCall__isInstall.setDefaultValueString("false");
+			_MappingCall__isInvoke.setDefaultValueString("false");
+			_MappingCall__ownedMappingParameterBindings.setOpposite(_MappingParameterBinding__owningMappingCall);
+			_MappingCall__referredMapping.setOpposite(_Mapping__MappingCall__referredMapping);
+
+			_MappingLoop__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "MappingLoop", _MappingLoop__ownedExpression));
+			_MappingLoop__ownedIterators.setOpposite(_LoopVariable__owningMappingLoop);
+			_MappingLoop__ownedMappingStatements.setOpposite(_MappingStatement__MappingLoop__ownedMappingStatements);
+
+			_MappingParameter__owningMapping.setOpposite(_Mapping__ownedMappingParameters);
+			_MappingParameter__MappingParameterBinding__boundVariable.setOpposite(_MappingParameterBinding__boundVariable);
+
+			_MappingParameterBinding__boundVariable.setOpposite(_MappingParameter__MappingParameterBinding__boundVariable);
+			_MappingParameterBinding__owningMappingCall.setOpposite(_MappingCall__ownedMappingParameterBindings);
+
+			_MappingStatement__MappingLoop__ownedMappingStatements.setOpposite(_MappingLoop__ownedMappingStatements);
+
+			_NewStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "NewStatement", _NewStatement__ownedExpression));
+			_NewStatement__ownedParts.setOpposite(_NewStatementPart__owningNewStatement);
+			_NewStatement__referredTypedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "NewStatement", _NewStatement__referredTypedModel));
+
+			_NewStatementPart__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "NewStatementPart", _NewStatementPart__ownedExpression));
+			_NewStatementPart__owningNewStatement.setOpposite(_NewStatement__ownedParts);
+			_NewStatementPart__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "NewStatementPart", _NewStatementPart__referredProperty));
+
+			_ObservableStatement__observedProperties.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "ObservableStatement", _ObservableStatement__observedProperties));
+
+			_SetStatement__isNotify.setDefaultValueString("false");
+			_SetStatement__isOpposite.setDefaultValueString("false");
+			_SetStatement__isPartial.setDefaultValueString("false");
+			_SetStatement__ownedExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SetStatement", _SetStatement__ownedExpression));
+			_SetStatement__resolvedProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "SetStatement", _SetStatement__resolvedProperty));
+			_SetStatement__targetProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "SetStatement", _SetStatement__targetProperty));
+			_SetStatement__targetVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "SetStatement", _SetStatement__targetVariable));
+
+			_SimpleParameter__referredTypedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "SimpleParameter", _SimpleParameter__referredTypedModel));
+
+			_SimpleParameterBinding__isCheck.setDefaultValueString("false");
+			_SimpleParameterBinding__value.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SimpleParameterBinding", _SimpleParameterBinding__value));
+
+			_SpeculateStatement__ownedExpressions.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SpeculateStatement", _SpeculateStatement__ownedExpressions));
+
+			_Statement__Mapping__ownedStatements.setOpposite(_Mapping__ownedStatements);
+
 			Init.initEnd();
 		}
 
@@ -1142,7 +1224,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _AddStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _AppendParameter__AppendParameter = {};
@@ -1264,7 +1346,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _BufferStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 		private static final @NonNull Operation @NonNull [] _BufferStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -1310,7 +1392,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _CheckStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _ConnectionVariable__ConnectionVariable = {};
@@ -1392,7 +1474,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _DeclareStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 		private static final @NonNull Operation @NonNull [] _DeclareStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -1771,7 +1853,7 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
 		private static final @NonNull Operation @NonNull [] _MappingCall__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _MappingLoop__MappingLoop = {};
@@ -1813,7 +1895,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _MappingLoop__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _MappingParameter__MappingParameter = {};
@@ -1930,7 +2012,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _MappingStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _NewStatement__NewStatement = {};
@@ -1971,7 +2053,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _NewStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 		private static final @NonNull Operation @NonNull [] _NewStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -2053,7 +2135,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _ObservableStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _SetStatement__SetStatement = {};
@@ -2094,7 +2176,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _SetStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _SimpleParameter__SimpleParameter = {};
@@ -2213,11 +2295,11 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _SpeculateStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 
 		private static final @NonNull Operation @NonNull [] _Statement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 		private static final @NonNull Operation @NonNull [] _Statement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -2292,7 +2374,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull Operation @NonNull [] _VariableStatement__Statement = {
-			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+			Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
 		};
 		private static final @NonNull Operation @NonNull [] _VariableStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -2559,60 +2641,60 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _AddStatement = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._AddStatement__isEnforcedUnique,
+			Properties._AddStatement__isEnforcedUnique,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._AddStatement__ownedExpression,
+			Properties._AddStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._AddStatement__targetVariable
+			Properties._AddStatement__targetVariable
 		};
 
 		private static final @NonNull Property @NonNull [] _AppendParameter = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
-			QVTimperativeTables.Properties._ConnectionVariable__isStrict,
+			Properties._ConnectionVariable__isStrict,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameter__owningMapping,
+			Properties._MappingParameter__owningMapping,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
 
 		private static final @NonNull Property @NonNull [] _AppendParameterBinding = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
+			Properties._MappingParameterBinding__boundVariable,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
-			QVTimperativeTables.Properties._AppendParameterBinding__value
+			Properties._MappingParameterBinding__owningMappingCall,
+			Properties._AppendParameterBinding__value
 		};
 
 		private static final @NonNull Property @NonNull [] _BufferStatement = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._BufferStatement__firstPass,
+			Properties._BufferStatement__firstPass,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
-			QVTimperativeTables.Properties._ConnectionVariable__isStrict,
-			QVTimperativeTables.Properties._BufferStatement__lastPass,
+			Properties._ConnectionVariable__isStrict,
+			Properties._BufferStatement__lastPass,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._BufferStatement__ownedExpression,
+			Properties._BufferStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
@@ -2621,12 +2703,12 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _CheckStatement = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._CheckStatement__ownedExpression,
+			Properties._CheckStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions
 		};
 
@@ -2634,7 +2716,7 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
-			QVTimperativeTables.Properties._ConnectionVariable__isStrict,
+			Properties._ConnectionVariable__isStrict,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -2647,16 +2729,16 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _DeclareStatement = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._DeclareStatement__isCheck,
+			Properties._DeclareStatement__isCheck,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._DeclareStatement__ownedExpression,
+			Properties._DeclareStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
@@ -2665,24 +2747,24 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _EntryPoint = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Rule__domain,
-			QVTimperativeTables.Properties._Mapping__firstPass,
-			QVTimperativeTables.Properties._EntryPoint__inputTypedModels,
+			Properties._Mapping__firstPass,
+			Properties._EntryPoint__inputTypedModels,
 			QVTbaseTables.Properties._Rule__isAbstract,
-			QVTimperativeTables.Properties._Mapping__isStrict,
-			QVTimperativeTables.Properties._Mapping__lastPass,
+			Properties._Mapping__isStrict,
+			Properties._Mapping__lastPass,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTimperativeTables.Properties._EntryPoint__outputTypedModels,
+			Properties._EntryPoint__outputTypedModels,
 			QVTbaseTables.Properties._Rule__overridden,
 			QVTbaseTables.Properties._Rule__overrides,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
-			QVTimperativeTables.Properties._Mapping__ownedStatements,
-			QVTimperativeTables.Properties._EntryPoint__targetName,
+			Properties._Mapping__ownedMappingParameters,
+			Properties._Mapping__ownedStatements,
+			Properties._EntryPoint__targetName,
 			QVTbaseTables.Properties._Rule__transformation
 		};
 
@@ -2696,24 +2778,24 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameter__owningMapping,
-			QVTimperativeTables.Properties._GuardParameter__referredTypedModel,
-			QVTimperativeTables.Properties._GuardParameter__successProperty,
+			Properties._MappingParameter__owningMapping,
+			Properties._GuardParameter__referredTypedModel,
+			Properties._GuardParameter__successProperty,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
 
 		private static final @NonNull Property @NonNull [] _GuardParameterBinding = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
-			QVTimperativeTables.Properties._GuardParameterBinding__isCheck,
+			Properties._MappingParameterBinding__boundVariable,
+			Properties._GuardParameterBinding__isCheck,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
-			QVTimperativeTables.Properties._GuardParameterBinding__value
+			Properties._MappingParameterBinding__owningMappingCall,
+			Properties._GuardParameterBinding__value
 		};
 
 		private static final @NonNull Property @NonNull [] _ImperativeModel = {
@@ -2733,7 +2815,7 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _ImperativeTransformation = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._ImperativeTransformation__contextType,
+			Properties._ImperativeTransformation__contextType,
 			PivotTables.Properties._Class__extenders,
 			QVTbaseTables.Properties._Transformation__extends,
 			PivotTables.Properties._Class__instanceClassName,
@@ -2765,15 +2847,15 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _LoopParameterBinding = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
-			QVTimperativeTables.Properties._LoopParameterBinding__isCheck,
+			Properties._MappingParameterBinding__boundVariable,
+			Properties._LoopParameterBinding__isCheck,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
-			QVTimperativeTables.Properties._LoopParameterBinding__value
+			Properties._MappingParameterBinding__owningMappingCall,
+			Properties._LoopParameterBinding__value
 		};
 
 		private static final @NonNull Property @NonNull [] _LoopVariable = {
@@ -2786,7 +2868,7 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._LoopVariable__owningMappingLoop,
+			Properties._LoopVariable__owningMappingLoop,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
@@ -2794,10 +2876,10 @@ public class QVTimperativeTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _Mapping = {
 			PivotTables.Properties._Element__annotatingComments,
 			QVTbaseTables.Properties._Rule__domain,
-			QVTimperativeTables.Properties._Mapping__firstPass,
+			Properties._Mapping__firstPass,
 			QVTbaseTables.Properties._Rule__isAbstract,
-			QVTimperativeTables.Properties._Mapping__isStrict,
-			QVTimperativeTables.Properties._Mapping__lastPass,
+			Properties._Mapping__isStrict,
+			Properties._Mapping__lastPass,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -2807,39 +2889,39 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__ownedComments,
 			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
-			QVTimperativeTables.Properties._Mapping__ownedStatements,
+			Properties._Mapping__ownedMappingParameters,
+			Properties._Mapping__ownedStatements,
 			QVTbaseTables.Properties._Rule__transformation
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingCall = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingCall__bindingNames,
-			QVTimperativeTables.Properties._MappingCall__isInstall,
-			QVTimperativeTables.Properties._MappingCall__isInvoke,
+			Properties._MappingCall__bindingNames,
+			Properties._MappingCall__isInstall,
+			Properties._MappingCall__isInvoke,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingCall__ownedMappingParameterBindings,
-			QVTimperativeTables.Properties._MappingCall__referredMapping,
-			QVTimperativeTables.Properties._MappingCall__referredNames
+			Properties._MappingCall__ownedMappingParameterBindings,
+			Properties._MappingCall__referredMapping,
+			Properties._MappingCall__referredNames
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingLoop = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._MappingLoop__ownedExpression,
+			Properties._MappingLoop__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingLoop__ownedIterators,
-			QVTimperativeTables.Properties._MappingLoop__ownedMappingStatements
+			Properties._MappingLoop__ownedIterators,
+			Properties._MappingLoop__ownedMappingStatements
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingParameter = {
@@ -2852,20 +2934,20 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameter__owningMapping,
+			Properties._MappingParameter__owningMapping,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingParameterBinding = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
+			Properties._MappingParameterBinding__boundVariable,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall
+			Properties._MappingParameterBinding__owningMappingCall
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingStatement = {
@@ -2880,19 +2962,19 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _NewStatement = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._NewStatement__isContained,
+			Properties._NewStatement__isContained,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._NewStatement__ownedExpression,
+			Properties._NewStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._NewStatement__ownedParts,
-			QVTimperativeTables.Properties._NewStatement__referredTypedModel,
+			Properties._NewStatement__ownedParts,
+			Properties._NewStatement__referredTypedModel,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
@@ -2904,16 +2986,16 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._NewStatementPart__ownedExpression,
+			Properties._NewStatementPart__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._NewStatementPart__owningNewStatement,
-			QVTimperativeTables.Properties._NewStatementPart__referredProperty
+			Properties._NewStatementPart__owningNewStatement,
+			Properties._NewStatementPart__referredProperty
 		};
 
 		private static final @NonNull Property @NonNull [] _ObservableStatement = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
@@ -2923,20 +3005,20 @@ public class QVTimperativeTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _SetStatement = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._SetStatement__isNotify,
-			QVTimperativeTables.Properties._SetStatement__isOpposite,
-			QVTimperativeTables.Properties._SetStatement__isPartial,
+			Properties._SetStatement__isNotify,
+			Properties._SetStatement__isOpposite,
+			Properties._SetStatement__isPartial,
 			PivotTables.Properties._NamedElement__name,
-			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
+			Properties._ObservableStatement__observedProperties,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._SetStatement__ownedExpression,
+			Properties._SetStatement__ownedExpression,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._SetStatement__resolvedProperty,
-			QVTimperativeTables.Properties._SetStatement__targetProperty,
-			QVTimperativeTables.Properties._SetStatement__targetVariable
+			Properties._SetStatement__resolvedProperty,
+			Properties._SetStatement__targetProperty,
+			Properties._SetStatement__targetVariable
 		};
 
 		private static final @NonNull Property @NonNull [] _SimpleParameter = {
@@ -2949,23 +3031,23 @@ public class QVTimperativeTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameter__owningMapping,
-			QVTimperativeTables.Properties._SimpleParameter__referredTypedModel,
+			Properties._MappingParameter__owningMapping,
+			Properties._SimpleParameter__referredTypedModel,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._VariableDeclaration__typeValue
 		};
 
 		private static final @NonNull Property @NonNull [] _SimpleParameterBinding = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
-			QVTimperativeTables.Properties._SimpleParameterBinding__isCheck,
+			Properties._MappingParameterBinding__boundVariable,
+			Properties._SimpleParameterBinding__isCheck,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
-			QVTimperativeTables.Properties._SimpleParameterBinding__value
+			Properties._MappingParameterBinding__owningMappingCall,
+			Properties._SimpleParameterBinding__value
 		};
 
 		private static final @NonNull Property @NonNull [] _SpeculateStatement = {
@@ -2975,7 +3057,7 @@ public class QVTimperativeTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
-			QVTimperativeTables.Properties._SpeculateStatement__ownedExpressions,
+			Properties._SpeculateStatement__ownedExpressions,
 			PivotTables.Properties._Element__ownedExtensions
 		};
 

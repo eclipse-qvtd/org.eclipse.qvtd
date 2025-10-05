@@ -18,8 +18,6 @@
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore
  *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
  *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore
  *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel
@@ -76,7 +74,7 @@ public class QVTcoreTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTcorePackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -213,24 +211,24 @@ public class QVTcoreTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _Area__Area = LIBRARY.createFragment(Types._Area, QVTcoreTables.Types._Area);
+		private static final @NonNull FlatFragment _Area__Area = LIBRARY.createFragment(Types._Area, Types._Area);
 		private static final @NonNull FlatFragment _Area__Element = LIBRARY.createFragment(Types._Area, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Area__OclAny = LIBRARY.createFragment(Types._Area, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Area__OclElement = LIBRARY.createFragment(Types._Area, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _Assignment__Assignment = LIBRARY.createFragment(Types._Assignment, QVTcoreTables.Types._Assignment);
+		private static final @NonNull FlatFragment _Assignment__Assignment = LIBRARY.createFragment(Types._Assignment, Types._Assignment);
 		private static final @NonNull FlatFragment _Assignment__Element = LIBRARY.createFragment(Types._Assignment, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Assignment__OclAny = LIBRARY.createFragment(Types._Assignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Assignment__OclElement = LIBRARY.createFragment(Types._Assignment, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _BottomPattern__BottomPattern = LIBRARY.createFragment(Types._BottomPattern, QVTcoreTables.Types._BottomPattern);
-		private static final @NonNull FlatFragment _BottomPattern__CorePattern = LIBRARY.createFragment(Types._BottomPattern, QVTcoreTables.Types._CorePattern);
+		private static final @NonNull FlatFragment _BottomPattern__BottomPattern = LIBRARY.createFragment(Types._BottomPattern, Types._BottomPattern);
+		private static final @NonNull FlatFragment _BottomPattern__CorePattern = LIBRARY.createFragment(Types._BottomPattern, Types._CorePattern);
 		private static final @NonNull FlatFragment _BottomPattern__Element = LIBRARY.createFragment(Types._BottomPattern, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _BottomPattern__OclAny = LIBRARY.createFragment(Types._BottomPattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _BottomPattern__OclElement = LIBRARY.createFragment(Types._BottomPattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _BottomPattern__Pattern = LIBRARY.createFragment(Types._BottomPattern, QVTbaseTables.Types._Pattern);
 
-		private static final @NonNull FlatFragment _BottomVariable__BottomVariable = LIBRARY.createFragment(Types._BottomVariable, QVTcoreTables.Types._BottomVariable);
+		private static final @NonNull FlatFragment _BottomVariable__BottomVariable = LIBRARY.createFragment(Types._BottomVariable, Types._BottomVariable);
 		private static final @NonNull FlatFragment _BottomVariable__Element = LIBRARY.createFragment(Types._BottomVariable, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _BottomVariable__NamedElement = LIBRARY.createFragment(Types._BottomVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _BottomVariable__OclAny = LIBRARY.createFragment(Types._BottomVariable, OCLstdlibTables.Types._OclAny);
@@ -239,8 +237,8 @@ public class QVTcoreTables extends AbstractTables
 		private static final @NonNull FlatFragment _BottomVariable__Variable = LIBRARY.createFragment(Types._BottomVariable, PivotTables.Types._Variable);
 		private static final @NonNull FlatFragment _BottomVariable__VariableDeclaration = LIBRARY.createFragment(Types._BottomVariable, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull FlatFragment _CoreDomain__Area = LIBRARY.createFragment(Types._CoreDomain, QVTcoreTables.Types._Area);
-		private static final @NonNull FlatFragment _CoreDomain__CoreDomain = LIBRARY.createFragment(Types._CoreDomain, QVTcoreTables.Types._CoreDomain);
+		private static final @NonNull FlatFragment _CoreDomain__Area = LIBRARY.createFragment(Types._CoreDomain, Types._Area);
+		private static final @NonNull FlatFragment _CoreDomain__CoreDomain = LIBRARY.createFragment(Types._CoreDomain, Types._CoreDomain);
 		private static final @NonNull FlatFragment _CoreDomain__Domain = LIBRARY.createFragment(Types._CoreDomain, QVTbaseTables.Types._Domain);
 		private static final @NonNull FlatFragment _CoreDomain__Element = LIBRARY.createFragment(Types._CoreDomain, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CoreDomain__NamedElement = LIBRARY.createFragment(Types._CoreDomain, PivotTables.Types._NamedElement);
@@ -249,7 +247,7 @@ public class QVTcoreTables extends AbstractTables
 		private static final @NonNull FlatFragment _CoreDomain__ReferringElement = LIBRARY.createFragment(Types._CoreDomain, PivotTables.Types._ReferringElement);
 
 		private static final @NonNull FlatFragment _CoreModel__BaseModel = LIBRARY.createFragment(Types._CoreModel, QVTbaseTables.Types._BaseModel);
-		private static final @NonNull FlatFragment _CoreModel__CoreModel = LIBRARY.createFragment(Types._CoreModel, QVTcoreTables.Types._CoreModel);
+		private static final @NonNull FlatFragment _CoreModel__CoreModel = LIBRARY.createFragment(Types._CoreModel, Types._CoreModel);
 		private static final @NonNull FlatFragment _CoreModel__Element = LIBRARY.createFragment(Types._CoreModel, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CoreModel__Model = LIBRARY.createFragment(Types._CoreModel, PivotTables.Types._Model);
 		private static final @NonNull FlatFragment _CoreModel__NamedElement = LIBRARY.createFragment(Types._CoreModel, PivotTables.Types._NamedElement);
@@ -257,32 +255,32 @@ public class QVTcoreTables extends AbstractTables
 		private static final @NonNull FlatFragment _CoreModel__OclAny = LIBRARY.createFragment(Types._CoreModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CoreModel__OclElement = LIBRARY.createFragment(Types._CoreModel, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _CorePattern__CorePattern = LIBRARY.createFragment(Types._CorePattern, QVTcoreTables.Types._CorePattern);
+		private static final @NonNull FlatFragment _CorePattern__CorePattern = LIBRARY.createFragment(Types._CorePattern, Types._CorePattern);
 		private static final @NonNull FlatFragment _CorePattern__Element = LIBRARY.createFragment(Types._CorePattern, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CorePattern__OclAny = LIBRARY.createFragment(Types._CorePattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CorePattern__OclElement = LIBRARY.createFragment(Types._CorePattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _CorePattern__Pattern = LIBRARY.createFragment(Types._CorePattern, QVTbaseTables.Types._Pattern);
 
-		private static final @NonNull FlatFragment _EnforcementMode__EnforcementMode = LIBRARY.createFragment(Types._EnforcementMode, QVTcoreTables.Types._EnforcementMode);
+		private static final @NonNull FlatFragment _EnforcementMode__EnforcementMode = LIBRARY.createFragment(Types._EnforcementMode, Types._EnforcementMode);
 		private static final @NonNull FlatFragment _EnforcementMode__OclAny = LIBRARY.createFragment(Types._EnforcementMode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _EnforcementMode__OclElement = LIBRARY.createFragment(Types._EnforcementMode, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _EnforcementMode__OclEnumeration = LIBRARY.createFragment(Types._EnforcementMode, OCLstdlibTables.Types._OclEnumeration);
 		private static final @NonNull FlatFragment _EnforcementMode__OclType = LIBRARY.createFragment(Types._EnforcementMode, OCLstdlibTables.Types._OclType);
 
 		private static final @NonNull FlatFragment _EnforcementOperation__Element = LIBRARY.createFragment(Types._EnforcementOperation, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _EnforcementOperation__EnforcementOperation = LIBRARY.createFragment(Types._EnforcementOperation, QVTcoreTables.Types._EnforcementOperation);
+		private static final @NonNull FlatFragment _EnforcementOperation__EnforcementOperation = LIBRARY.createFragment(Types._EnforcementOperation, Types._EnforcementOperation);
 		private static final @NonNull FlatFragment _EnforcementOperation__OclAny = LIBRARY.createFragment(Types._EnforcementOperation, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _EnforcementOperation__OclElement = LIBRARY.createFragment(Types._EnforcementOperation, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _GuardPattern__CorePattern = LIBRARY.createFragment(Types._GuardPattern, QVTcoreTables.Types._CorePattern);
+		private static final @NonNull FlatFragment _GuardPattern__CorePattern = LIBRARY.createFragment(Types._GuardPattern, Types._CorePattern);
 		private static final @NonNull FlatFragment _GuardPattern__Element = LIBRARY.createFragment(Types._GuardPattern, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _GuardPattern__GuardPattern = LIBRARY.createFragment(Types._GuardPattern, QVTcoreTables.Types._GuardPattern);
+		private static final @NonNull FlatFragment _GuardPattern__GuardPattern = LIBRARY.createFragment(Types._GuardPattern, Types._GuardPattern);
 		private static final @NonNull FlatFragment _GuardPattern__OclAny = LIBRARY.createFragment(Types._GuardPattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _GuardPattern__OclElement = LIBRARY.createFragment(Types._GuardPattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _GuardPattern__Pattern = LIBRARY.createFragment(Types._GuardPattern, QVTbaseTables.Types._Pattern);
 
 		private static final @NonNull FlatFragment _GuardVariable__Element = LIBRARY.createFragment(Types._GuardVariable, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _GuardVariable__GuardVariable = LIBRARY.createFragment(Types._GuardVariable, QVTcoreTables.Types._GuardVariable);
+		private static final @NonNull FlatFragment _GuardVariable__GuardVariable = LIBRARY.createFragment(Types._GuardVariable, Types._GuardVariable);
 		private static final @NonNull FlatFragment _GuardVariable__NamedElement = LIBRARY.createFragment(Types._GuardVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _GuardVariable__OclAny = LIBRARY.createFragment(Types._GuardVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _GuardVariable__OclElement = LIBRARY.createFragment(Types._GuardVariable, OCLstdlibTables.Types._OclElement);
@@ -290,48 +288,48 @@ public class QVTcoreTables extends AbstractTables
 		private static final @NonNull FlatFragment _GuardVariable__Variable = LIBRARY.createFragment(Types._GuardVariable, PivotTables.Types._Variable);
 		private static final @NonNull FlatFragment _GuardVariable__VariableDeclaration = LIBRARY.createFragment(Types._GuardVariable, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull FlatFragment _Mapping__Area = LIBRARY.createFragment(Types._Mapping, QVTcoreTables.Types._Area);
+		private static final @NonNull FlatFragment _Mapping__Area = LIBRARY.createFragment(Types._Mapping, Types._Area);
 		private static final @NonNull FlatFragment _Mapping__Element = LIBRARY.createFragment(Types._Mapping, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _Mapping__Mapping = LIBRARY.createFragment(Types._Mapping, QVTcoreTables.Types._Mapping);
+		private static final @NonNull FlatFragment _Mapping__Mapping = LIBRARY.createFragment(Types._Mapping, Types._Mapping);
 		private static final @NonNull FlatFragment _Mapping__NamedElement = LIBRARY.createFragment(Types._Mapping, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Mapping__OclAny = LIBRARY.createFragment(Types._Mapping, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Mapping__OclElement = LIBRARY.createFragment(Types._Mapping, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _Mapping__Rule = LIBRARY.createFragment(Types._Mapping, QVTbaseTables.Types._Rule);
 
-		private static final @NonNull FlatFragment _NavigationAssignment__Assignment = LIBRARY.createFragment(Types._NavigationAssignment, QVTcoreTables.Types._Assignment);
+		private static final @NonNull FlatFragment _NavigationAssignment__Assignment = LIBRARY.createFragment(Types._NavigationAssignment, Types._Assignment);
 		private static final @NonNull FlatFragment _NavigationAssignment__Element = LIBRARY.createFragment(Types._NavigationAssignment, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NavigationAssignment__NavigationAssignment = LIBRARY.createFragment(Types._NavigationAssignment, QVTcoreTables.Types._NavigationAssignment);
+		private static final @NonNull FlatFragment _NavigationAssignment__NavigationAssignment = LIBRARY.createFragment(Types._NavigationAssignment, Types._NavigationAssignment);
 		private static final @NonNull FlatFragment _NavigationAssignment__OclAny = LIBRARY.createFragment(Types._NavigationAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NavigationAssignment__OclElement = LIBRARY.createFragment(Types._NavigationAssignment, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _OppositePropertyAssignment__Assignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, QVTcoreTables.Types._Assignment);
+		private static final @NonNull FlatFragment _OppositePropertyAssignment__Assignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, Types._Assignment);
 		private static final @NonNull FlatFragment _OppositePropertyAssignment__Element = LIBRARY.createFragment(Types._OppositePropertyAssignment, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _OppositePropertyAssignment__NavigationAssignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, QVTcoreTables.Types._NavigationAssignment);
+		private static final @NonNull FlatFragment _OppositePropertyAssignment__NavigationAssignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, Types._NavigationAssignment);
 		private static final @NonNull FlatFragment _OppositePropertyAssignment__OclAny = LIBRARY.createFragment(Types._OppositePropertyAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OppositePropertyAssignment__OclElement = LIBRARY.createFragment(Types._OppositePropertyAssignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OppositePropertyAssignment__OppositePropertyAssignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, QVTcoreTables.Types._OppositePropertyAssignment);
+		private static final @NonNull FlatFragment _OppositePropertyAssignment__OppositePropertyAssignment = LIBRARY.createFragment(Types._OppositePropertyAssignment, Types._OppositePropertyAssignment);
 
-		private static final @NonNull FlatFragment _PropertyAssignment__Assignment = LIBRARY.createFragment(Types._PropertyAssignment, QVTcoreTables.Types._Assignment);
+		private static final @NonNull FlatFragment _PropertyAssignment__Assignment = LIBRARY.createFragment(Types._PropertyAssignment, Types._Assignment);
 		private static final @NonNull FlatFragment _PropertyAssignment__Element = LIBRARY.createFragment(Types._PropertyAssignment, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _PropertyAssignment__NavigationAssignment = LIBRARY.createFragment(Types._PropertyAssignment, QVTcoreTables.Types._NavigationAssignment);
+		private static final @NonNull FlatFragment _PropertyAssignment__NavigationAssignment = LIBRARY.createFragment(Types._PropertyAssignment, Types._NavigationAssignment);
 		private static final @NonNull FlatFragment _PropertyAssignment__OclAny = LIBRARY.createFragment(Types._PropertyAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PropertyAssignment__OclElement = LIBRARY.createFragment(Types._PropertyAssignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PropertyAssignment__PropertyAssignment = LIBRARY.createFragment(Types._PropertyAssignment, QVTcoreTables.Types._PropertyAssignment);
+		private static final @NonNull FlatFragment _PropertyAssignment__PropertyAssignment = LIBRARY.createFragment(Types._PropertyAssignment, Types._PropertyAssignment);
 
 		private static final @NonNull FlatFragment _RealizedVariable__Element = LIBRARY.createFragment(Types._RealizedVariable, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _RealizedVariable__NamedElement = LIBRARY.createFragment(Types._RealizedVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _RealizedVariable__OclAny = LIBRARY.createFragment(Types._RealizedVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RealizedVariable__OclElement = LIBRARY.createFragment(Types._RealizedVariable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RealizedVariable__RealizedVariable = LIBRARY.createFragment(Types._RealizedVariable, QVTcoreTables.Types._RealizedVariable);
+		private static final @NonNull FlatFragment _RealizedVariable__RealizedVariable = LIBRARY.createFragment(Types._RealizedVariable, Types._RealizedVariable);
 		private static final @NonNull FlatFragment _RealizedVariable__TypedElement = LIBRARY.createFragment(Types._RealizedVariable, PivotTables.Types._TypedElement);
 		private static final @NonNull FlatFragment _RealizedVariable__Variable = LIBRARY.createFragment(Types._RealizedVariable, PivotTables.Types._Variable);
 		private static final @NonNull FlatFragment _RealizedVariable__VariableDeclaration = LIBRARY.createFragment(Types._RealizedVariable, PivotTables.Types._VariableDeclaration);
 
-		private static final @NonNull FlatFragment _VariableAssignment__Assignment = LIBRARY.createFragment(Types._VariableAssignment, QVTcoreTables.Types._Assignment);
+		private static final @NonNull FlatFragment _VariableAssignment__Assignment = LIBRARY.createFragment(Types._VariableAssignment, Types._Assignment);
 		private static final @NonNull FlatFragment _VariableAssignment__Element = LIBRARY.createFragment(Types._VariableAssignment, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _VariableAssignment__OclAny = LIBRARY.createFragment(Types._VariableAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _VariableAssignment__OclElement = LIBRARY.createFragment(Types._VariableAssignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _VariableAssignment__VariableAssignment = LIBRARY.createFragment(Types._VariableAssignment, QVTcoreTables.Types._VariableAssignment);
+		private static final @NonNull FlatFragment _VariableAssignment__VariableAssignment = LIBRARY.createFragment(Types._VariableAssignment, Types._VariableAssignment);
 
 		static {
 			Init.initEnd();
@@ -379,14 +377,14 @@ public class QVTcoreTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _CorePattern__getArea = LIBRARY.createOperation("getArea", ParameterTypes.EMPTY_LIST, Types._CorePattern,
-			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull Operation _CorePattern__getArea = LIBRARY.createOperation(Types._CorePattern, "getArea", ParameterTypes.EMPTY_LIST, Types._Area,
+			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _OppositePropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation("getReferredTargetProperty", ParameterTypes.EMPTY_LIST, Types._OppositePropertyAssignment,
-			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull Operation _OppositePropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._OppositePropertyAssignment, "getReferredTargetProperty", ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
+			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _PropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation("getReferredTargetProperty", ParameterTypes.EMPTY_LIST, Types._PropertyAssignment,
-			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull Operation _PropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._PropertyAssignment, "getReferredTargetProperty", ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
+			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
 		static {
 			Init.initEnd();
@@ -411,39 +409,72 @@ public class QVTcoreTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _Area__bottomPattern = LIBRARY.createProperty(QVTcorePackage.Literals.AREA__BOTTOM_PATTERN, Types._Area, 0);
-		public static final @NonNull Property _Area__guardPattern = LIBRARY.createProperty(QVTcorePackage.Literals.AREA__GUARD_PATTERN, Types._Area, 1);
+		public static final @NonNull Property _Area__bottomPattern = LIBRARY.createProperty(Types._Area, QVTcorePackage.Literals.AREA__BOTTOM_PATTERN, Types._BottomPattern, 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Area__guardPattern = LIBRARY.createProperty(Types._Area, QVTcorePackage.Literals.AREA__GUARD_PATTERN, Types._GuardPattern, 1 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _Assignment__bottomPattern = LIBRARY.createProperty(QVTcorePackage.Literals.ASSIGNMENT__BOTTOM_PATTERN, Types._Assignment, 0);
-		public static final @NonNull Property _Assignment__isDefault = LIBRARY.createProperty(QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT, Types._Assignment, 1);
-		public static final @NonNull Property _Assignment__isPartial = LIBRARY.createProperty(QVTcorePackage.Literals.ASSIGNMENT__IS_PARTIAL, Types._Assignment, 2);
-		public static final @NonNull Property _Assignment__value = LIBRARY.createProperty(QVTcorePackage.Literals.ASSIGNMENT__VALUE, Types._Assignment, 3);
+		public static final @NonNull Property _Assignment__bottomPattern = LIBRARY.createProperty(Types._Assignment, QVTcorePackage.Literals.ASSIGNMENT__BOTTOM_PATTERN, Types._BottomPattern, 0 | IsRequired | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _Assignment__isDefault = LIBRARY.createProperty(Types._Assignment, QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies | IsUnsettable);
+		public static final @NonNull Property _Assignment__isPartial = LIBRARY.createProperty(Types._Assignment, QVTcorePackage.Literals.ASSIGNMENT__IS_PARTIAL, OCLstdlibTables.Types._Boolean, 2 | IsRequired | IsResolveProxies | IsUnsettable);
+		public static final @NonNull Property _Assignment__value = LIBRARY.createProperty(Types._Assignment, QVTcorePackage.Literals.ASSIGNMENT__VALUE, PivotTables.Types._OCLExpression, 3 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _BottomPattern__area = LIBRARY.createProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__AREA, Types._BottomPattern, 0);
-		public static final @NonNull Property _BottomPattern__assignment = LIBRARY.createProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT, Types._BottomPattern, 1);
-		public static final @NonNull Property _BottomPattern__enforcementOperation = LIBRARY.createProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, Types._BottomPattern, 2);
-		public static final @NonNull Property _BottomPattern__realizedVariable = LIBRARY.createProperty(QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE, Types._BottomPattern, 3);
+		public static final @NonNull Property _BottomPattern__area = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__AREA, Types._Area, 0 | IsRequired | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _BottomPattern__assignment = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Assignment), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BottomPattern__enforcementOperation = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._EnforcementOperation), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BottomPattern__realizedVariable = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._RealizedVariable), 3 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _CorePattern__ownedVariables = LIBRARY.createProperty(QVTcorePackage.Literals.CORE_PATTERN__OWNED_VARIABLES, Types._CorePattern, 0);
+		public static final @NonNull Property _CorePattern__ownedVariables = LIBRARY.createProperty(Types._CorePattern, QVTcorePackage.Literals.CORE_PATTERN__OWNED_VARIABLES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._VariableDeclaration), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _EnforcementOperation__bottomPattern = LIBRARY.createProperty(QVTcorePackage.Literals.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, Types._EnforcementOperation, 0);
-		public static final @NonNull Property _EnforcementOperation__enforcementMode = LIBRARY.createProperty(QVTcorePackage.Literals.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE, Types._EnforcementOperation, 1);
-		public static final @NonNull Property _EnforcementOperation__operationCallExp = LIBRARY.createProperty(QVTcorePackage.Literals.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, Types._EnforcementOperation, 2);
+		public static final @NonNull Property _EnforcementOperation__bottomPattern = LIBRARY.createProperty(Types._EnforcementOperation, QVTcorePackage.Literals.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, Types._BottomPattern, 0 | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _EnforcementOperation__enforcementMode = LIBRARY.createProperty(Types._EnforcementOperation, QVTcorePackage.Literals.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE, Types._EnforcementMode, 1 | IsResolveProxies);
+		public static final @NonNull Property _EnforcementOperation__operationCallExp = LIBRARY.createProperty(Types._EnforcementOperation, QVTcorePackage.Literals.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, PivotTables.Types._OperationCallExp, 2 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _GuardPattern__area = LIBRARY.createProperty(QVTcorePackage.Literals.GUARD_PATTERN__AREA, Types._GuardPattern, 0);
+		public static final @NonNull Property _GuardPattern__area = LIBRARY.createProperty(Types._GuardPattern, QVTcorePackage.Literals.GUARD_PATTERN__AREA, Types._Area, 0 | IsRequired | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _Mapping__context = LIBRARY.createProperty(QVTcorePackage.Literals.MAPPING__CONTEXT, Types._Mapping, 0);
-		public static final @NonNull Property _Mapping__local = LIBRARY.createProperty(QVTcorePackage.Literals.MAPPING__LOCAL, Types._Mapping, 1);
-		public static final @NonNull Property _Mapping__refinement = LIBRARY.createProperty(QVTcorePackage.Literals.MAPPING__REFINEMENT, Types._Mapping, 2);
-		public static final @NonNull Property _Mapping__specification = LIBRARY.createProperty(QVTcorePackage.Literals.MAPPING__SPECIFICATION, Types._Mapping, 3);
+		public static final @NonNull Property _Mapping__context = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__CONTEXT, Types._Mapping, 0 | IsResolveProxies);
+		public static final @NonNull Property _Mapping__local = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__LOCAL, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__refinement = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__REFINEMENT, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__specification = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__SPECIFICATION, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 3 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _NavigationAssignment__slotExpression = LIBRARY.createProperty(QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, Types._NavigationAssignment, 0);
-		public static final @NonNull Property _NavigationAssignment__targetProperty = LIBRARY.createProperty(QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__TARGET_PROPERTY, Types._NavigationAssignment, 1);
+		public static final @NonNull Property _NavigationAssignment__slotExpression = LIBRARY.createProperty(Types._NavigationAssignment, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, PivotTables.Types._OCLExpression, 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NavigationAssignment__targetProperty = LIBRARY.createProperty(Types._NavigationAssignment, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__TARGET_PROPERTY, PivotTables.Types._Property, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RealizedVariable__BottomPattern__realizedVariable = LIBRARY.createOppositeProperty("BottomPattern", Types._RealizedVariable, 0, QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE);
+		public static final @NonNull Property _RealizedVariable__BottomPattern__realizedVariable = LIBRARY.createOppositeProperty(Types._RealizedVariable, "BottomPattern", Types._BottomPattern, 0 | IsImplicit | IsResolveProxies, QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE);
 
-		public static final @NonNull Property _VariableAssignment__targetVariable = LIBRARY.createProperty(QVTcorePackage.Literals.VARIABLE_ASSIGNMENT__TARGET_VARIABLE, Types._VariableAssignment, 0);
+		public static final @NonNull Property _VariableAssignment__targetVariable = LIBRARY.createProperty(Types._VariableAssignment, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT__TARGET_VARIABLE, PivotTables.Types._VariableDeclaration, 0 | IsRequired | IsResolveProxies);
+
 		static {
+			_Area__bottomPattern.setOpposite(_BottomPattern__area);
+			_Area__guardPattern.setOpposite(_GuardPattern__area);
+
+			_Assignment__bottomPattern.setOpposite(_BottomPattern__assignment);
+			_Assignment__isDefault.setDefaultValueString("false");
+			_Assignment__isPartial.setDefaultValueString("false");
+			_Assignment__value.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "valueAssignment", _Assignment__value));
+
+			_BottomPattern__area.setOpposite(_Area__bottomPattern);
+			_BottomPattern__assignment.setOpposite(_Assignment__bottomPattern);
+			_BottomPattern__enforcementOperation.setOpposite(_EnforcementOperation__bottomPattern);
+			_BottomPattern__realizedVariable.setOpposite(_RealizedVariable__BottomPattern__realizedVariable);
+
+			_CorePattern__ownedVariables.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "CorePattern", _CorePattern__ownedVariables));
+
+			_EnforcementOperation__bottomPattern.setOpposite(_BottomPattern__enforcementOperation);
+			_EnforcementOperation__operationCallExp.setOpposite(createOpposite(PivotPackage.Literals.OPERATION_CALL_EXP, "EnforcementOperation", _EnforcementOperation__operationCallExp));
+
+			_GuardPattern__area.setOpposite(_Area__guardPattern);
+
+			_Mapping__context.setOpposite(_Mapping__local);
+			_Mapping__local.setOpposite(_Mapping__context);
+			_Mapping__refinement.setOpposite(_Mapping__specification);
+			_Mapping__specification.setOpposite(_Mapping__refinement);
+
+			_NavigationAssignment__slotExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "slotAssignment", _NavigationAssignment__slotExpression));
+			_NavigationAssignment__targetProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "assignment", _NavigationAssignment__targetProperty));
+
+			_RealizedVariable__BottomPattern__realizedVariable.setOpposite(_BottomPattern__realizedVariable);
+
+			_VariableAssignment__targetVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "assignment", _VariableAssignment__targetVariable));
+
 			Init.initEnd();
 		}
 
@@ -764,7 +795,7 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Operation @NonNull [] _BottomPattern__BottomPattern = {};
 		private static final @NonNull Operation @NonNull [] _BottomPattern__CorePattern = {
-			QVTcoreTables.Operations._CorePattern__getArea /* getArea() */
+			Operations._CorePattern__getArea /* getArea() */
 		};
 		private static final @NonNull Operation @NonNull [] _BottomPattern__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -927,7 +958,7 @@ public class QVTcoreTables extends AbstractTables
 		};
 
 		private static final @NonNull Operation @NonNull [] _CorePattern__CorePattern = {
-			QVTcoreTables.Operations._CorePattern__getArea /* getArea() */
+			Operations._CorePattern__getArea /* getArea() */
 		};
 		private static final @NonNull Operation @NonNull [] _CorePattern__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -1039,7 +1070,7 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Operation @NonNull [] _GuardPattern__GuardPattern = {};
 		private static final @NonNull Operation @NonNull [] _GuardPattern__CorePattern = {
-			QVTcoreTables.Operations._CorePattern__getArea /* getArea() */
+			Operations._CorePattern__getArea /* getArea() */
 		};
 		private static final @NonNull Operation @NonNull [] _GuardPattern__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -1196,7 +1227,7 @@ public class QVTcoreTables extends AbstractTables
 		};
 
 		private static final @NonNull Operation @NonNull [] _OppositePropertyAssignment__OppositePropertyAssignment = {
-			QVTcoreTables.Operations._OppositePropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
+			Operations._OppositePropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
 		};
 		private static final @NonNull Operation @NonNull [] _OppositePropertyAssignment__Assignment = {};
 		private static final @NonNull Operation @NonNull [] _OppositePropertyAssignment__Element = {
@@ -1236,7 +1267,7 @@ public class QVTcoreTables extends AbstractTables
 		};
 
 		private static final @NonNull Operation @NonNull [] _PropertyAssignment__PropertyAssignment = {
-			QVTcoreTables.Operations._PropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
+			Operations._PropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
 		};
 		private static final @NonNull Operation @NonNull [] _PropertyAssignment__Assignment = {};
 		private static final @NonNull Operation @NonNull [] _PropertyAssignment__Element = {
@@ -1498,8 +1529,8 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _Area = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Area__bottomPattern,
-			QVTcoreTables.Properties._Area__guardPattern,
+			Properties._Area__bottomPattern,
+			Properties._Area__guardPattern,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
@@ -1509,31 +1540,31 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _Assignment = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Assignment__bottomPattern,
-			QVTcoreTables.Properties._Assignment__isDefault,
-			QVTcoreTables.Properties._Assignment__isPartial,
+			Properties._Assignment__bottomPattern,
+			Properties._Assignment__isDefault,
+			Properties._Assignment__isPartial,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._Assignment__value
+			Properties._Assignment__value
 		};
 
 		private static final @NonNull Property @NonNull [] _BottomPattern = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._BottomPattern__area,
-			QVTcoreTables.Properties._BottomPattern__assignment,
+			Properties._BottomPattern__area,
+			Properties._BottomPattern__assignment,
 			QVTbaseTables.Properties._Pattern__bindsTo,
-			QVTcoreTables.Properties._BottomPattern__enforcementOperation,
+			Properties._BottomPattern__enforcementOperation,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._CorePattern__ownedVariables,
+			Properties._CorePattern__ownedVariables,
 			QVTbaseTables.Properties._Pattern__predicate,
-			QVTcoreTables.Properties._BottomPattern__realizedVariable
+			Properties._BottomPattern__realizedVariable
 		};
 
 		private static final @NonNull Property @NonNull [] _BottomVariable = {
@@ -1555,8 +1586,8 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _CoreDomain = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Area__bottomPattern,
-			QVTcoreTables.Properties._Area__guardPattern,
+			Properties._Area__bottomPattern,
+			Properties._Area__guardPattern,
 			QVTbaseTables.Properties._Domain__isCheckable,
 			QVTbaseTables.Properties._Domain__isEnforceable,
 			PivotTables.Properties._NamedElement__name,
@@ -1592,7 +1623,7 @@ public class QVTcoreTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._CorePattern__ownedVariables,
+			Properties._CorePattern__ownedVariables,
 			QVTbaseTables.Properties._Pattern__predicate
 		};
 
@@ -1603,11 +1634,11 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _EnforcementOperation = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._EnforcementOperation__bottomPattern,
-			QVTcoreTables.Properties._EnforcementOperation__enforcementMode,
+			Properties._EnforcementOperation__bottomPattern,
+			Properties._EnforcementOperation__enforcementMode,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTcoreTables.Properties._EnforcementOperation__operationCallExp,
+			Properties._EnforcementOperation__operationCallExp,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions
@@ -1615,14 +1646,14 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _GuardPattern = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._GuardPattern__area,
+			Properties._GuardPattern__area,
 			QVTbaseTables.Properties._Pattern__bindsTo,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._CorePattern__ownedVariables,
+			Properties._CorePattern__ownedVariables,
 			QVTbaseTables.Properties._Pattern__predicate
 		};
 
@@ -1645,12 +1676,12 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _Mapping = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Area__bottomPattern,
-			QVTcoreTables.Properties._Mapping__context,
+			Properties._Area__bottomPattern,
+			Properties._Mapping__context,
 			QVTbaseTables.Properties._Rule__domain,
-			QVTcoreTables.Properties._Area__guardPattern,
+			Properties._Area__guardPattern,
 			QVTbaseTables.Properties._Rule__isAbstract,
-			QVTcoreTables.Properties._Mapping__local,
+			Properties._Mapping__local,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -1660,54 +1691,54 @@ public class QVTcoreTables extends AbstractTables
 			PivotTables.Properties._Element__ownedComments,
 			QVTbaseTables.Properties._Rule__ownedContext,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._Mapping__refinement,
-			QVTcoreTables.Properties._Mapping__specification,
+			Properties._Mapping__refinement,
+			Properties._Mapping__specification,
 			QVTbaseTables.Properties._Rule__transformation
 		};
 
 		private static final @NonNull Property @NonNull [] _NavigationAssignment = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Assignment__bottomPattern,
-			QVTcoreTables.Properties._Assignment__isDefault,
-			QVTcoreTables.Properties._Assignment__isPartial,
+			Properties._Assignment__bottomPattern,
+			Properties._Assignment__isDefault,
+			Properties._Assignment__isPartial,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
-			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
-			QVTcoreTables.Properties._Assignment__value
+			Properties._NavigationAssignment__slotExpression,
+			Properties._NavigationAssignment__targetProperty,
+			Properties._Assignment__value
 		};
 
 		private static final @NonNull Property @NonNull [] _OppositePropertyAssignment = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Assignment__bottomPattern,
-			QVTcoreTables.Properties._Assignment__isDefault,
-			QVTcoreTables.Properties._Assignment__isPartial,
+			Properties._Assignment__bottomPattern,
+			Properties._Assignment__isDefault,
+			Properties._Assignment__isPartial,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
-			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
-			QVTcoreTables.Properties._Assignment__value
+			Properties._NavigationAssignment__slotExpression,
+			Properties._NavigationAssignment__targetProperty,
+			Properties._Assignment__value
 		};
 
 		private static final @NonNull Property @NonNull [] _PropertyAssignment = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Assignment__bottomPattern,
-			QVTcoreTables.Properties._Assignment__isDefault,
-			QVTcoreTables.Properties._Assignment__isPartial,
+			Properties._Assignment__bottomPattern,
+			Properties._Assignment__isDefault,
+			Properties._Assignment__isPartial,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._NavigationAssignment__slotExpression,
-			QVTcoreTables.Properties._NavigationAssignment__targetProperty,
-			QVTcoreTables.Properties._Assignment__value
+			Properties._NavigationAssignment__slotExpression,
+			Properties._NavigationAssignment__targetProperty,
+			Properties._Assignment__value
 		};
 
 		private static final @NonNull Property @NonNull [] _RealizedVariable = {
@@ -1729,16 +1760,16 @@ public class QVTcoreTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _VariableAssignment = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTcoreTables.Properties._Assignment__bottomPattern,
-			QVTcoreTables.Properties._Assignment__isDefault,
-			QVTcoreTables.Properties._Assignment__isPartial,
+			Properties._Assignment__bottomPattern,
+			Properties._Assignment__isDefault,
+			Properties._Assignment__isPartial,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTcoreTables.Properties._VariableAssignment__targetVariable,
-			QVTcoreTables.Properties._Assignment__value
+			Properties._VariableAssignment__targetVariable,
+			Properties._Assignment__value
 		};
 
 		/**

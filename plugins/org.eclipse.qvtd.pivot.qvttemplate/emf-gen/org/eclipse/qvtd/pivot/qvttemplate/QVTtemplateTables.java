@@ -17,7 +17,6 @@
  *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
  *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
- *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore
  *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel
@@ -68,7 +67,7 @@ public class QVTtemplateTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -159,7 +158,7 @@ public class QVTtemplateTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _CollectionTemplateExp__CollectionTemplateExp = LIBRARY.createFragment(Types._CollectionTemplateExp, QVTtemplateTables.Types._CollectionTemplateExp);
+		private static final @NonNull FlatFragment _CollectionTemplateExp__CollectionTemplateExp = LIBRARY.createFragment(Types._CollectionTemplateExp, Types._CollectionTemplateExp);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__Element = LIBRARY.createFragment(Types._CollectionTemplateExp, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__LiteralExp = LIBRARY.createFragment(Types._CollectionTemplateExp, PivotTables.Types._LiteralExp);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__NamedElement = LIBRARY.createFragment(Types._CollectionTemplateExp, PivotTables.Types._NamedElement);
@@ -167,24 +166,24 @@ public class QVTtemplateTables extends AbstractTables
 		private static final @NonNull FlatFragment _CollectionTemplateExp__OclAny = LIBRARY.createFragment(Types._CollectionTemplateExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__OclElement = LIBRARY.createFragment(Types._CollectionTemplateExp, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__ReferringElement = LIBRARY.createFragment(Types._CollectionTemplateExp, PivotTables.Types._ReferringElement);
-		private static final @NonNull FlatFragment _CollectionTemplateExp__TemplateExp = LIBRARY.createFragment(Types._CollectionTemplateExp, QVTtemplateTables.Types._TemplateExp);
+		private static final @NonNull FlatFragment _CollectionTemplateExp__TemplateExp = LIBRARY.createFragment(Types._CollectionTemplateExp, Types._TemplateExp);
 		private static final @NonNull FlatFragment _CollectionTemplateExp__TypedElement = LIBRARY.createFragment(Types._CollectionTemplateExp, PivotTables.Types._TypedElement);
 
 		private static final @NonNull FlatFragment _ObjectTemplateExp__Element = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__LiteralExp = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._LiteralExp);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__NamedElement = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__OCLExpression = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._OCLExpression);
-		private static final @NonNull FlatFragment _ObjectTemplateExp__ObjectTemplateExp = LIBRARY.createFragment(Types._ObjectTemplateExp, QVTtemplateTables.Types._ObjectTemplateExp);
+		private static final @NonNull FlatFragment _ObjectTemplateExp__ObjectTemplateExp = LIBRARY.createFragment(Types._ObjectTemplateExp, Types._ObjectTemplateExp);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__OclAny = LIBRARY.createFragment(Types._ObjectTemplateExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__OclElement = LIBRARY.createFragment(Types._ObjectTemplateExp, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__ReferringElement = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._ReferringElement);
-		private static final @NonNull FlatFragment _ObjectTemplateExp__TemplateExp = LIBRARY.createFragment(Types._ObjectTemplateExp, QVTtemplateTables.Types._TemplateExp);
+		private static final @NonNull FlatFragment _ObjectTemplateExp__TemplateExp = LIBRARY.createFragment(Types._ObjectTemplateExp, Types._TemplateExp);
 		private static final @NonNull FlatFragment _ObjectTemplateExp__TypedElement = LIBRARY.createFragment(Types._ObjectTemplateExp, PivotTables.Types._TypedElement);
 
 		private static final @NonNull FlatFragment _PropertyTemplateItem__Element = LIBRARY.createFragment(Types._PropertyTemplateItem, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _PropertyTemplateItem__OclAny = LIBRARY.createFragment(Types._PropertyTemplateItem, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PropertyTemplateItem__OclElement = LIBRARY.createFragment(Types._PropertyTemplateItem, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PropertyTemplateItem__PropertyTemplateItem = LIBRARY.createFragment(Types._PropertyTemplateItem, QVTtemplateTables.Types._PropertyTemplateItem);
+		private static final @NonNull FlatFragment _PropertyTemplateItem__PropertyTemplateItem = LIBRARY.createFragment(Types._PropertyTemplateItem, Types._PropertyTemplateItem);
 		private static final @NonNull FlatFragment _PropertyTemplateItem__ReferringElement = LIBRARY.createFragment(Types._PropertyTemplateItem, PivotTables.Types._ReferringElement);
 
 		private static final @NonNull FlatFragment _TemplateExp__Element = LIBRARY.createFragment(Types._TemplateExp, PivotTables.Types._Element);
@@ -194,7 +193,7 @@ public class QVTtemplateTables extends AbstractTables
 		private static final @NonNull FlatFragment _TemplateExp__OclAny = LIBRARY.createFragment(Types._TemplateExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TemplateExp__OclElement = LIBRARY.createFragment(Types._TemplateExp, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _TemplateExp__ReferringElement = LIBRARY.createFragment(Types._TemplateExp, PivotTables.Types._ReferringElement);
-		private static final @NonNull FlatFragment _TemplateExp__TemplateExp = LIBRARY.createFragment(Types._TemplateExp, QVTtemplateTables.Types._TemplateExp);
+		private static final @NonNull FlatFragment _TemplateExp__TemplateExp = LIBRARY.createFragment(Types._TemplateExp, Types._TemplateExp);
 		private static final @NonNull FlatFragment _TemplateExp__TypedElement = LIBRARY.createFragment(Types._TemplateExp, PivotTables.Types._TypedElement);
 
 		static {
@@ -266,22 +265,39 @@ public class QVTtemplateTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _CollectionTemplateExp__member = LIBRARY.createProperty(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__MEMBER, Types._CollectionTemplateExp, 0);
-		public static final @NonNull Property _CollectionTemplateExp__referredCollectionType = LIBRARY.createProperty(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE, Types._CollectionTemplateExp, 1);
-		public static final @NonNull Property _CollectionTemplateExp__rest = LIBRARY.createProperty(QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REST, Types._CollectionTemplateExp, 2);
+		public static final @NonNull Property _CollectionTemplateExp__member = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__MEMBER, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._OCLExpression), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _CollectionTemplateExp__referredCollectionType = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE, PivotTables.Types._CollectionType, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _CollectionTemplateExp__rest = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REST, PivotTables.Types._Variable, 2 | IsResolveProxies);
 
-		public static final @NonNull Property _ObjectTemplateExp__part = LIBRARY.createProperty(QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__PART, Types._ObjectTemplateExp, 0);
-		public static final @NonNull Property _ObjectTemplateExp__referredClass = LIBRARY.createProperty(QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, Types._ObjectTemplateExp, 1);
+		public static final @NonNull Property _ObjectTemplateExp__part = LIBRARY.createProperty(Types._ObjectTemplateExp, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__PART, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._PropertyTemplateItem), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ObjectTemplateExp__referredClass = LIBRARY.createProperty(Types._ObjectTemplateExp, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, PivotTables.Types._Class, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _PropertyTemplateItem__isOpposite = LIBRARY.createProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, Types._PropertyTemplateItem, 0);
-		public static final @NonNull Property _PropertyTemplateItem__objContainer = LIBRARY.createProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER, Types._PropertyTemplateItem, 1);
-		public static final @NonNull Property _PropertyTemplateItem__referredProperty = LIBRARY.createProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY, Types._PropertyTemplateItem, 2);
-		public static final @NonNull Property _PropertyTemplateItem__resolvedProperty = LIBRARY.createProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY, Types._PropertyTemplateItem, 3);
-		public static final @NonNull Property _PropertyTemplateItem__value = LIBRARY.createProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE, Types._PropertyTemplateItem, 4);
+		public static final @NonNull Property _PropertyTemplateItem__isOpposite = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _PropertyTemplateItem__objContainer = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER, Types._ObjectTemplateExp, 1 | IsRequired | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _PropertyTemplateItem__referredProperty = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY, PivotTables.Types._Property, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _PropertyTemplateItem__resolvedProperty = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY, PivotTables.Types._Property, 3 | IsDerived | IsReadOnly | IsRequired | IsTransient | IsVolatile);
+		public static final @NonNull Property _PropertyTemplateItem__value = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE, PivotTables.Types._OCLExpression, 4 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TemplateExp__bindsTo = LIBRARY.createProperty(QVTtemplatePackage.Literals.TEMPLATE_EXP__BINDS_TO, Types._TemplateExp, 0);
-		public static final @NonNull Property _TemplateExp__where = LIBRARY.createProperty(QVTtemplatePackage.Literals.TEMPLATE_EXP__WHERE, Types._TemplateExp, 1);
+		public static final @NonNull Property _TemplateExp__bindsTo = LIBRARY.createProperty(Types._TemplateExp, QVTtemplatePackage.Literals.TEMPLATE_EXP__BINDS_TO, PivotTables.Types._Variable, 0 | IsResolveProxies);
+		public static final @NonNull Property _TemplateExp__where = LIBRARY.createProperty(Types._TemplateExp, QVTtemplatePackage.Literals.TEMPLATE_EXP__WHERE, PivotTables.Types._OCLExpression, 1 | IsComposite | IsResolveProxies);
+
 		static {
+			_CollectionTemplateExp__member.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "listContainer", _CollectionTemplateExp__member));
+			_CollectionTemplateExp__referredCollectionType.setOpposite(createOpposite(PivotPackage.Literals.COLLECTION_TYPE, "CollectionTemplateExp", _CollectionTemplateExp__referredCollectionType));
+			_CollectionTemplateExp__rest.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "matchingExp", _CollectionTemplateExp__rest));
+
+			_ObjectTemplateExp__part.setOpposite(_PropertyTemplateItem__objContainer);
+			_ObjectTemplateExp__referredClass.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "ObjectTemplateExp", _ObjectTemplateExp__referredClass));
+
+			_PropertyTemplateItem__isOpposite.setDefaultValueString("false");
+			_PropertyTemplateItem__objContainer.setOpposite(_ObjectTemplateExp__part);
+			_PropertyTemplateItem__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "propertyItem", _PropertyTemplateItem__referredProperty));
+			_PropertyTemplateItem__resolvedProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "PropertyTemplateItem", _PropertyTemplateItem__resolvedProperty));
+			_PropertyTemplateItem__value.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "propertyItem", _PropertyTemplateItem__value));
+
+			_TemplateExp__bindsTo.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "templateExp", _TemplateExp__bindsTo));
+			_TemplateExp__where.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "owner", _TemplateExp__where));
+
 			Init.initEnd();
 		}
 
@@ -628,26 +644,26 @@ public class QVTtemplateTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _CollectionTemplateExp = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTtemplateTables.Properties._TemplateExp__bindsTo,
+			Properties._TemplateExp__bindsTo,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
-			QVTtemplateTables.Properties._CollectionTemplateExp__member,
+			Properties._CollectionTemplateExp__member,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTtemplateTables.Properties._CollectionTemplateExp__referredCollectionType,
-			QVTtemplateTables.Properties._CollectionTemplateExp__rest,
+			Properties._CollectionTemplateExp__referredCollectionType,
+			Properties._CollectionTemplateExp__rest,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._OCLExpression__typeValue,
-			QVTtemplateTables.Properties._TemplateExp__where
+			Properties._TemplateExp__where
 		};
 
 		private static final @NonNull Property @NonNull [] _ObjectTemplateExp = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTtemplateTables.Properties._TemplateExp__bindsTo,
+			Properties._TemplateExp__bindsTo,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__name,
@@ -656,30 +672,30 @@ public class QVTtemplateTables extends AbstractTables
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTtemplateTables.Properties._ObjectTemplateExp__part,
-			QVTtemplateTables.Properties._ObjectTemplateExp__referredClass,
+			Properties._ObjectTemplateExp__part,
+			Properties._ObjectTemplateExp__referredClass,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._OCLExpression__typeValue,
-			QVTtemplateTables.Properties._TemplateExp__where
+			Properties._TemplateExp__where
 		};
 
 		private static final @NonNull Property @NonNull [] _PropertyTemplateItem = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTtemplateTables.Properties._PropertyTemplateItem__isOpposite,
-			QVTtemplateTables.Properties._PropertyTemplateItem__objContainer,
+			Properties._PropertyTemplateItem__isOpposite,
+			Properties._PropertyTemplateItem__objContainer,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTtemplateTables.Properties._PropertyTemplateItem__referredProperty,
-			QVTtemplateTables.Properties._PropertyTemplateItem__resolvedProperty,
-			QVTtemplateTables.Properties._PropertyTemplateItem__value
+			Properties._PropertyTemplateItem__referredProperty,
+			Properties._PropertyTemplateItem__resolvedProperty,
+			Properties._PropertyTemplateItem__value
 		};
 
 		private static final @NonNull Property @NonNull [] _TemplateExp = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTtemplateTables.Properties._TemplateExp__bindsTo,
+			Properties._TemplateExp__bindsTo,
 			PivotTables.Properties._TypedElement__isMany,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__name,
@@ -690,7 +706,7 @@ public class QVTtemplateTables extends AbstractTables
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._TypedElement__type,
 			PivotTables.Properties._OCLExpression__typeValue,
-			QVTtemplateTables.Properties._TemplateExp__where
+			Properties._TemplateExp__where
 		};
 
 		/**

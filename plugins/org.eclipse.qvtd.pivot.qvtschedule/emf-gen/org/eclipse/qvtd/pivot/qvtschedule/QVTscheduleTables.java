@@ -45,6 +45,8 @@ import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImp
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 // import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 // import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables;
 
@@ -68,7 +70,7 @@ public class QVTscheduleTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTschedulePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTschedulePackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -392,502 +394,502 @@ public class QVTscheduleTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _AbstractDatum__AbstractDatum = LIBRARY.createFragment(Types._AbstractDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _AbstractDatum__AbstractDatum = LIBRARY.createFragment(Types._AbstractDatum, Types._AbstractDatum);
 		private static final @NonNull FlatFragment _AbstractDatum__Element = LIBRARY.createFragment(Types._AbstractDatum, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _AbstractDatum__NamedElement = LIBRARY.createFragment(Types._AbstractDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _AbstractDatum__OclAny = LIBRARY.createFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _AbstractDatum__OclElement = LIBRARY.createFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _ArgumentEdge__ArgumentEdge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _ArgumentEdge__Edge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ArgumentEdge__ArgumentEdge = LIBRARY.createFragment(Types._ArgumentEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _ArgumentEdge__Edge = LIBRARY.createFragment(Types._ArgumentEdge, Types._Edge);
 		private static final @NonNull FlatFragment _ArgumentEdge__Element = LIBRARY.createFragment(Types._ArgumentEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ArgumentEdge__ExpressionEdge = LIBRARY.createFragment(Types._ArgumentEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ArgumentEdge__ExpressionEdge = LIBRARY.createFragment(Types._ArgumentEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _ArgumentEdge__OclAny = LIBRARY.createFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ArgumentEdge__OclElement = LIBRARY.createFragment(Types._ArgumentEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _BasicPartition__BasicPartition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._BasicPartition);
+		private static final @NonNull FlatFragment _BasicPartition__BasicPartition = LIBRARY.createFragment(Types._BasicPartition, Types._BasicPartition);
 		private static final @NonNull FlatFragment _BasicPartition__Element = LIBRARY.createFragment(Types._BasicPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _BasicPartition__MappingPartition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _BasicPartition__MappingPartition = LIBRARY.createFragment(Types._BasicPartition, Types._MappingPartition);
 		private static final @NonNull FlatFragment _BasicPartition__NamedElement = LIBRARY.createFragment(Types._BasicPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _BasicPartition__OclAny = LIBRARY.createFragment(Types._BasicPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _BasicPartition__OclElement = LIBRARY.createFragment(Types._BasicPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _BasicPartition__Partition = LIBRARY.createFragment(Types._BasicPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _BasicPartition__Partition = LIBRARY.createFragment(Types._BasicPartition, Types._Partition);
 
-		private static final @NonNull FlatFragment _BooleanLiteralNode__BooleanLiteralNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._BooleanLiteralNode);
-		private static final @NonNull FlatFragment _BooleanLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__BooleanLiteralNode = LIBRARY.createFragment(Types._BooleanLiteralNode, Types._BooleanLiteralNode);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._BooleanLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _BooleanLiteralNode__Element = LIBRARY.createFragment(Types._BooleanLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _BooleanLiteralNode__MappingNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _BooleanLiteralNode__Node = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__MappingNode = LIBRARY.createFragment(Types._BooleanLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__Node = LIBRARY.createFragment(Types._BooleanLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _BooleanLiteralNode__OclAny = LIBRARY.createFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _BooleanLiteralNode__OclElement = LIBRARY.createFragment(Types._BooleanLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _BooleanLiteralNode__OperationNode = LIBRARY.createFragment(Types._BooleanLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _BooleanLiteralNode__OperationNode = LIBRARY.createFragment(Types._BooleanLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _CastEdge__CastEdge = LIBRARY.createFragment(Types._CastEdge, QVTscheduleTables.Types._CastEdge);
-		private static final @NonNull FlatFragment _CastEdge__Edge = LIBRARY.createFragment(Types._CastEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _CastEdge__CastEdge = LIBRARY.createFragment(Types._CastEdge, Types._CastEdge);
+		private static final @NonNull FlatFragment _CastEdge__Edge = LIBRARY.createFragment(Types._CastEdge, Types._Edge);
 		private static final @NonNull FlatFragment _CastEdge__Element = LIBRARY.createFragment(Types._CastEdge, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CastEdge__OclAny = LIBRARY.createFragment(Types._CastEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CastEdge__OclElement = LIBRARY.createFragment(Types._CastEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _ClassDatum__AbstractDatum = LIBRARY.createFragment(Types._ClassDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull FlatFragment _ClassDatum__ClassDatum = LIBRARY.createFragment(Types._ClassDatum, QVTscheduleTables.Types._ClassDatum);
+		private static final @NonNull FlatFragment _ClassDatum__AbstractDatum = LIBRARY.createFragment(Types._ClassDatum, Types._AbstractDatum);
+		private static final @NonNull FlatFragment _ClassDatum__ClassDatum = LIBRARY.createFragment(Types._ClassDatum, Types._ClassDatum);
 		private static final @NonNull FlatFragment _ClassDatum__Element = LIBRARY.createFragment(Types._ClassDatum, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _ClassDatum__NamedElement = LIBRARY.createFragment(Types._ClassDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _ClassDatum__OclAny = LIBRARY.createFragment(Types._ClassDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ClassDatum__OclElement = LIBRARY.createFragment(Types._ClassDatum, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _Cluster__Cluster = LIBRARY.createFragment(Types._Cluster, QVTscheduleTables.Types._Cluster);
+		private static final @NonNull FlatFragment _Cluster__Cluster = LIBRARY.createFragment(Types._Cluster, Types._Cluster);
 		private static final @NonNull FlatFragment _Cluster__Element = LIBRARY.createFragment(Types._Cluster, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Cluster__NamedElement = LIBRARY.createFragment(Types._Cluster, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Cluster__OclAny = LIBRARY.createFragment(Types._Cluster, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Cluster__OclElement = LIBRARY.createFragment(Types._Cluster, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Cluster__Symbolable = LIBRARY.createFragment(Types._Cluster, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _Cluster__Symbolable = LIBRARY.createFragment(Types._Cluster, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _CollectionClassDatum__AbstractDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._AbstractDatum);
-		private static final @NonNull FlatFragment _CollectionClassDatum__ClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._ClassDatum);
-		private static final @NonNull FlatFragment _CollectionClassDatum__CollectionClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, QVTscheduleTables.Types._CollectionClassDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__AbstractDatum = LIBRARY.createFragment(Types._CollectionClassDatum, Types._AbstractDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__ClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, Types._ClassDatum);
+		private static final @NonNull FlatFragment _CollectionClassDatum__CollectionClassDatum = LIBRARY.createFragment(Types._CollectionClassDatum, Types._CollectionClassDatum);
 		private static final @NonNull FlatFragment _CollectionClassDatum__Element = LIBRARY.createFragment(Types._CollectionClassDatum, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CollectionClassDatum__NamedElement = LIBRARY.createFragment(Types._CollectionClassDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _CollectionClassDatum__OclAny = LIBRARY.createFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CollectionClassDatum__OclElement = LIBRARY.createFragment(Types._CollectionClassDatum, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _CollectionLiteralNode__CollectionLiteralNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._CollectionLiteralNode);
-		private static final @NonNull FlatFragment _CollectionLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__CollectionLiteralNode = LIBRARY.createFragment(Types._CollectionLiteralNode, Types._CollectionLiteralNode);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _CollectionLiteralNode__Element = LIBRARY.createFragment(Types._CollectionLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _CollectionLiteralNode__MappingNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _CollectionLiteralNode__Node = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__MappingNode = LIBRARY.createFragment(Types._CollectionLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__Node = LIBRARY.createFragment(Types._CollectionLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _CollectionLiteralNode__OclAny = LIBRARY.createFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CollectionLiteralNode__OclElement = LIBRARY.createFragment(Types._CollectionLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CollectionLiteralNode__OperationNode = LIBRARY.createFragment(Types._CollectionLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _CollectionLiteralNode__OperationNode = LIBRARY.createFragment(Types._CollectionLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _CollectionPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _CollectionPartEdge__CollectionPartEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._CollectionPartEdge);
-		private static final @NonNull FlatFragment _CollectionPartEdge__Edge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._CollectionPartEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__CollectionPartEdge = LIBRARY.createFragment(Types._CollectionPartEdge, Types._CollectionPartEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__Edge = LIBRARY.createFragment(Types._CollectionPartEdge, Types._Edge);
 		private static final @NonNull FlatFragment _CollectionPartEdge__Element = LIBRARY.createFragment(Types._CollectionPartEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _CollectionPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._CollectionPartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _CollectionPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._CollectionPartEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _CollectionPartEdge__OclAny = LIBRARY.createFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CollectionPartEdge__OclElement = LIBRARY.createFragment(Types._CollectionPartEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _CollectionRangeNode__CollectionRangeNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._CollectionRangeNode);
-		private static final @NonNull FlatFragment _CollectionRangeNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _CollectionRangeNode__CollectionRangeNode = LIBRARY.createFragment(Types._CollectionRangeNode, Types._CollectionRangeNode);
+		private static final @NonNull FlatFragment _CollectionRangeNode__ConnectionEnd = LIBRARY.createFragment(Types._CollectionRangeNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _CollectionRangeNode__Element = LIBRARY.createFragment(Types._CollectionRangeNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _CollectionRangeNode__MappingNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _CollectionRangeNode__Node = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _CollectionRangeNode__MappingNode = LIBRARY.createFragment(Types._CollectionRangeNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _CollectionRangeNode__Node = LIBRARY.createFragment(Types._CollectionRangeNode, Types._Node);
 		private static final @NonNull FlatFragment _CollectionRangeNode__OclAny = LIBRARY.createFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CollectionRangeNode__OclElement = LIBRARY.createFragment(Types._CollectionRangeNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CollectionRangeNode__OperationNode = LIBRARY.createFragment(Types._CollectionRangeNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _CollectionRangeNode__OperationNode = LIBRARY.createFragment(Types._CollectionRangeNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _ComposedNode__ComposedNode = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._ComposedNode);
-		private static final @NonNull FlatFragment _ComposedNode__ConnectionEnd = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ComposedNode__ComposedNode = LIBRARY.createFragment(Types._ComposedNode, Types._ComposedNode);
+		private static final @NonNull FlatFragment _ComposedNode__ConnectionEnd = LIBRARY.createFragment(Types._ComposedNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _ComposedNode__Element = LIBRARY.createFragment(Types._ComposedNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ComposedNode__Node = LIBRARY.createFragment(Types._ComposedNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ComposedNode__Node = LIBRARY.createFragment(Types._ComposedNode, Types._Node);
 		private static final @NonNull FlatFragment _ComposedNode__OclAny = LIBRARY.createFragment(Types._ComposedNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ComposedNode__OclElement = LIBRARY.createFragment(Types._ComposedNode, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _CompositePartition__CompositePartition = LIBRARY.createFragment(Types._CompositePartition, QVTscheduleTables.Types._CompositePartition);
+		private static final @NonNull FlatFragment _CompositePartition__CompositePartition = LIBRARY.createFragment(Types._CompositePartition, Types._CompositePartition);
 		private static final @NonNull FlatFragment _CompositePartition__Element = LIBRARY.createFragment(Types._CompositePartition, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _CompositePartition__NamedElement = LIBRARY.createFragment(Types._CompositePartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _CompositePartition__OclAny = LIBRARY.createFragment(Types._CompositePartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CompositePartition__OclElement = LIBRARY.createFragment(Types._CompositePartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CompositePartition__Partition = LIBRARY.createFragment(Types._CompositePartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _CompositePartition__Partition = LIBRARY.createFragment(Types._CompositePartition, Types._Partition);
 
-		private static final @NonNull FlatFragment _Connection__Connection = LIBRARY.createFragment(Types._Connection, QVTscheduleTables.Types._Connection);
+		private static final @NonNull FlatFragment _Connection__Connection = LIBRARY.createFragment(Types._Connection, Types._Connection);
 		private static final @NonNull FlatFragment _Connection__Element = LIBRARY.createFragment(Types._Connection, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Connection__OclAny = LIBRARY.createFragment(Types._Connection, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Connection__OclElement = LIBRARY.createFragment(Types._Connection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Connection__Symbolable = LIBRARY.createFragment(Types._Connection, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _Connection__Symbolable = LIBRARY.createFragment(Types._Connection, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _ConnectionEnd__ConnectionEnd = LIBRARY.createFragment(Types._ConnectionEnd, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ConnectionEnd__ConnectionEnd = LIBRARY.createFragment(Types._ConnectionEnd, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _ConnectionEnd__OclAny = LIBRARY.createFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ConnectionEnd__OclElement = LIBRARY.createFragment(Types._ConnectionEnd, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _ConnectionRole__ConnectionRole = LIBRARY.createFragment(Types._ConnectionRole, QVTscheduleTables.Types._ConnectionRole);
+		private static final @NonNull FlatFragment _ConnectionRole__ConnectionRole = LIBRARY.createFragment(Types._ConnectionRole, Types._ConnectionRole);
 		private static final @NonNull FlatFragment _ConnectionRole__OclAny = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ConnectionRole__OclElement = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _ConnectionRole__OclEnumeration = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclEnumeration);
 		private static final @NonNull FlatFragment _ConnectionRole__OclType = LIBRARY.createFragment(Types._ConnectionRole, OCLstdlibTables.Types._OclType);
 
-		private static final @NonNull FlatFragment _CyclicMappingRegion__CyclicMappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._CyclicMappingRegion);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__CyclicMappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, Types._CyclicMappingRegion);
 		private static final @NonNull FlatFragment _CyclicMappingRegion__Element = LIBRARY.createFragment(Types._CyclicMappingRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _CyclicMappingRegion__MappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__MappingRegion = LIBRARY.createFragment(Types._CyclicMappingRegion, Types._MappingRegion);
 		private static final @NonNull FlatFragment _CyclicMappingRegion__NamedElement = LIBRARY.createFragment(Types._CyclicMappingRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _CyclicMappingRegion__OclAny = LIBRARY.createFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CyclicMappingRegion__OclElement = LIBRARY.createFragment(Types._CyclicMappingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CyclicMappingRegion__Region = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _CyclicMappingRegion__Symbolable = LIBRARY.createFragment(Types._CyclicMappingRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__Region = LIBRARY.createFragment(Types._CyclicMappingRegion, Types._Region);
+		private static final @NonNull FlatFragment _CyclicMappingRegion__Symbolable = LIBRARY.createFragment(Types._CyclicMappingRegion, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _CyclicPartition__CompositePartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._CompositePartition);
-		private static final @NonNull FlatFragment _CyclicPartition__CyclicPartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._CyclicPartition);
+		private static final @NonNull FlatFragment _CyclicPartition__CompositePartition = LIBRARY.createFragment(Types._CyclicPartition, Types._CompositePartition);
+		private static final @NonNull FlatFragment _CyclicPartition__CyclicPartition = LIBRARY.createFragment(Types._CyclicPartition, Types._CyclicPartition);
 		private static final @NonNull FlatFragment _CyclicPartition__Element = LIBRARY.createFragment(Types._CyclicPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _CyclicPartition__MappingPartition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _CyclicPartition__MappingPartition = LIBRARY.createFragment(Types._CyclicPartition, Types._MappingPartition);
 		private static final @NonNull FlatFragment _CyclicPartition__NamedElement = LIBRARY.createFragment(Types._CyclicPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _CyclicPartition__OclAny = LIBRARY.createFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CyclicPartition__OclElement = LIBRARY.createFragment(Types._CyclicPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CyclicPartition__Partition = LIBRARY.createFragment(Types._CyclicPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _CyclicPartition__Partition = LIBRARY.createFragment(Types._CyclicPartition, Types._Partition);
 
-		private static final @NonNull FlatFragment _DependencyEdge__DependencyEdge = LIBRARY.createFragment(Types._DependencyEdge, QVTscheduleTables.Types._DependencyEdge);
-		private static final @NonNull FlatFragment _DependencyEdge__Edge = LIBRARY.createFragment(Types._DependencyEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _DependencyEdge__DependencyEdge = LIBRARY.createFragment(Types._DependencyEdge, Types._DependencyEdge);
+		private static final @NonNull FlatFragment _DependencyEdge__Edge = LIBRARY.createFragment(Types._DependencyEdge, Types._Edge);
 		private static final @NonNull FlatFragment _DependencyEdge__Element = LIBRARY.createFragment(Types._DependencyEdge, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _DependencyEdge__OclAny = LIBRARY.createFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _DependencyEdge__OclElement = LIBRARY.createFragment(Types._DependencyEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _DependencyNode__ConnectionEnd = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull FlatFragment _DependencyNode__DependencyNode = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._DependencyNode);
+		private static final @NonNull FlatFragment _DependencyNode__ConnectionEnd = LIBRARY.createFragment(Types._DependencyNode, Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _DependencyNode__DependencyNode = LIBRARY.createFragment(Types._DependencyNode, Types._DependencyNode);
 		private static final @NonNull FlatFragment _DependencyNode__Element = LIBRARY.createFragment(Types._DependencyNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _DependencyNode__Node = LIBRARY.createFragment(Types._DependencyNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _DependencyNode__Node = LIBRARY.createFragment(Types._DependencyNode, Types._Node);
 		private static final @NonNull FlatFragment _DependencyNode__OclAny = LIBRARY.createFragment(Types._DependencyNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _DependencyNode__OclElement = LIBRARY.createFragment(Types._DependencyNode, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _DispatchRegion__DispatchRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._DispatchRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__DispatchRegion = LIBRARY.createFragment(Types._DispatchRegion, Types._DispatchRegion);
 		private static final @NonNull FlatFragment _DispatchRegion__Element = LIBRARY.createFragment(Types._DispatchRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _DispatchRegion__MappingRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__MappingRegion = LIBRARY.createFragment(Types._DispatchRegion, Types._MappingRegion);
 		private static final @NonNull FlatFragment _DispatchRegion__NamedElement = LIBRARY.createFragment(Types._DispatchRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _DispatchRegion__OclAny = LIBRARY.createFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _DispatchRegion__OclElement = LIBRARY.createFragment(Types._DispatchRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _DispatchRegion__Region = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _DispatchRegion__RuleRegion = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull FlatFragment _DispatchRegion__Symbolable = LIBRARY.createFragment(Types._DispatchRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _DispatchRegion__Region = LIBRARY.createFragment(Types._DispatchRegion, Types._Region);
+		private static final @NonNull FlatFragment _DispatchRegion__RuleRegion = LIBRARY.createFragment(Types._DispatchRegion, Types._RuleRegion);
+		private static final @NonNull FlatFragment _DispatchRegion__Symbolable = LIBRARY.createFragment(Types._DispatchRegion, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _Edge__Edge = LIBRARY.createFragment(Types._Edge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _Edge__Edge = LIBRARY.createFragment(Types._Edge, Types._Edge);
 		private static final @NonNull FlatFragment _Edge__Element = LIBRARY.createFragment(Types._Edge, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Edge__OclAny = LIBRARY.createFragment(Types._Edge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Edge__OclElement = LIBRARY.createFragment(Types._Edge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _EdgeConnection__Connection = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._Connection);
-		private static final @NonNull FlatFragment _EdgeConnection__EdgeConnection = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._EdgeConnection);
+		private static final @NonNull FlatFragment _EdgeConnection__Connection = LIBRARY.createFragment(Types._EdgeConnection, Types._Connection);
+		private static final @NonNull FlatFragment _EdgeConnection__EdgeConnection = LIBRARY.createFragment(Types._EdgeConnection, Types._EdgeConnection);
 		private static final @NonNull FlatFragment _EdgeConnection__Element = LIBRARY.createFragment(Types._EdgeConnection, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _EdgeConnection__OclAny = LIBRARY.createFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _EdgeConnection__OclElement = LIBRARY.createFragment(Types._EdgeConnection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _EdgeConnection__Symbolable = LIBRARY.createFragment(Types._EdgeConnection, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _EdgeConnection__Symbolable = LIBRARY.createFragment(Types._EdgeConnection, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _EnumLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _EnumLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._EnumLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _EnumLiteralNode__Element = LIBRARY.createFragment(Types._EnumLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _EnumLiteralNode__EnumLiteralNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._EnumLiteralNode);
-		private static final @NonNull FlatFragment _EnumLiteralNode__MappingNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _EnumLiteralNode__Node = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _EnumLiteralNode__EnumLiteralNode = LIBRARY.createFragment(Types._EnumLiteralNode, Types._EnumLiteralNode);
+		private static final @NonNull FlatFragment _EnumLiteralNode__MappingNode = LIBRARY.createFragment(Types._EnumLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _EnumLiteralNode__Node = LIBRARY.createFragment(Types._EnumLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _EnumLiteralNode__OclAny = LIBRARY.createFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _EnumLiteralNode__OclElement = LIBRARY.createFragment(Types._EnumLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _EnumLiteralNode__OperationNode = LIBRARY.createFragment(Types._EnumLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _EnumLiteralNode__OperationNode = LIBRARY.createFragment(Types._EnumLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _ErrorNode__ConnectionEnd = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ErrorNode__ConnectionEnd = LIBRARY.createFragment(Types._ErrorNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _ErrorNode__Element = LIBRARY.createFragment(Types._ErrorNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ErrorNode__ErrorNode = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._ErrorNode);
-		private static final @NonNull FlatFragment _ErrorNode__MappingNode = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _ErrorNode__Node = LIBRARY.createFragment(Types._ErrorNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ErrorNode__ErrorNode = LIBRARY.createFragment(Types._ErrorNode, Types._ErrorNode);
+		private static final @NonNull FlatFragment _ErrorNode__MappingNode = LIBRARY.createFragment(Types._ErrorNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _ErrorNode__Node = LIBRARY.createFragment(Types._ErrorNode, Types._Node);
 		private static final @NonNull FlatFragment _ErrorNode__OclAny = LIBRARY.createFragment(Types._ErrorNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ErrorNode__OclElement = LIBRARY.createFragment(Types._ErrorNode, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _ExpressionEdge__Edge = LIBRARY.createFragment(Types._ExpressionEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ExpressionEdge__Edge = LIBRARY.createFragment(Types._ExpressionEdge, Types._Edge);
 		private static final @NonNull FlatFragment _ExpressionEdge__Element = LIBRARY.createFragment(Types._ExpressionEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ExpressionEdge__ExpressionEdge = LIBRARY.createFragment(Types._ExpressionEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ExpressionEdge__ExpressionEdge = LIBRARY.createFragment(Types._ExpressionEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _ExpressionEdge__OclAny = LIBRARY.createFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ExpressionEdge__OclElement = LIBRARY.createFragment(Types._ExpressionEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _IfNode__ConnectionEnd = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _IfNode__ConnectionEnd = LIBRARY.createFragment(Types._IfNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _IfNode__Element = LIBRARY.createFragment(Types._IfNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _IfNode__IfNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._IfNode);
-		private static final @NonNull FlatFragment _IfNode__MappingNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _IfNode__Node = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _IfNode__IfNode = LIBRARY.createFragment(Types._IfNode, Types._IfNode);
+		private static final @NonNull FlatFragment _IfNode__MappingNode = LIBRARY.createFragment(Types._IfNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _IfNode__Node = LIBRARY.createFragment(Types._IfNode, Types._Node);
 		private static final @NonNull FlatFragment _IfNode__OclAny = LIBRARY.createFragment(Types._IfNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _IfNode__OclElement = LIBRARY.createFragment(Types._IfNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _IfNode__OperationNode = LIBRARY.createFragment(Types._IfNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _IfNode__OperationNode = LIBRARY.createFragment(Types._IfNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _IncludesEdge__Edge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _IncludesEdge__Edge = LIBRARY.createFragment(Types._IncludesEdge, Types._Edge);
 		private static final @NonNull FlatFragment _IncludesEdge__Element = LIBRARY.createFragment(Types._IncludesEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _IncludesEdge__ExpressionEdge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull FlatFragment _IncludesEdge__IncludesEdge = LIBRARY.createFragment(Types._IncludesEdge, QVTscheduleTables.Types._IncludesEdge);
+		private static final @NonNull FlatFragment _IncludesEdge__ExpressionEdge = LIBRARY.createFragment(Types._IncludesEdge, Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _IncludesEdge__IncludesEdge = LIBRARY.createFragment(Types._IncludesEdge, Types._IncludesEdge);
 		private static final @NonNull FlatFragment _IncludesEdge__OclAny = LIBRARY.createFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _IncludesEdge__OclElement = LIBRARY.createFragment(Types._IncludesEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _InputNode__ConnectionEnd = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _InputNode__ConnectionEnd = LIBRARY.createFragment(Types._InputNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _InputNode__Element = LIBRARY.createFragment(Types._InputNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _InputNode__InputNode = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._InputNode);
-		private static final @NonNull FlatFragment _InputNode__Node = LIBRARY.createFragment(Types._InputNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _InputNode__InputNode = LIBRARY.createFragment(Types._InputNode, Types._InputNode);
+		private static final @NonNull FlatFragment _InputNode__Node = LIBRARY.createFragment(Types._InputNode, Types._Node);
 		private static final @NonNull FlatFragment _InputNode__OclAny = LIBRARY.createFragment(Types._InputNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _InputNode__OclElement = LIBRARY.createFragment(Types._InputNode, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _IteratedEdge__Edge = LIBRARY.createFragment(Types._IteratedEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _IteratedEdge__Edge = LIBRARY.createFragment(Types._IteratedEdge, Types._Edge);
 		private static final @NonNull FlatFragment _IteratedEdge__Element = LIBRARY.createFragment(Types._IteratedEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _IteratedEdge__IteratedEdge = LIBRARY.createFragment(Types._IteratedEdge, QVTscheduleTables.Types._IteratedEdge);
+		private static final @NonNull FlatFragment _IteratedEdge__IteratedEdge = LIBRARY.createFragment(Types._IteratedEdge, Types._IteratedEdge);
 		private static final @NonNull FlatFragment _IteratedEdge__OclAny = LIBRARY.createFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _IteratedEdge__OclElement = LIBRARY.createFragment(Types._IteratedEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _IteratorNode__ConnectionEnd = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _IteratorNode__ConnectionEnd = LIBRARY.createFragment(Types._IteratorNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _IteratorNode__Element = LIBRARY.createFragment(Types._IteratorNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _IteratorNode__IteratorNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._IteratorNode);
-		private static final @NonNull FlatFragment _IteratorNode__MappingNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _IteratorNode__Node = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _IteratorNode__IteratorNode = LIBRARY.createFragment(Types._IteratorNode, Types._IteratorNode);
+		private static final @NonNull FlatFragment _IteratorNode__MappingNode = LIBRARY.createFragment(Types._IteratorNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _IteratorNode__Node = LIBRARY.createFragment(Types._IteratorNode, Types._Node);
 		private static final @NonNull FlatFragment _IteratorNode__OclAny = LIBRARY.createFragment(Types._IteratorNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _IteratorNode__OclElement = LIBRARY.createFragment(Types._IteratorNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _IteratorNode__VariableNode = LIBRARY.createFragment(Types._IteratorNode, QVTscheduleTables.Types._VariableNode);
+		private static final @NonNull FlatFragment _IteratorNode__VariableNode = LIBRARY.createFragment(Types._IteratorNode, Types._VariableNode);
 
-		private static final @NonNull FlatFragment _KeyPartEdge__ConnectionEnd = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull FlatFragment _KeyPartEdge__Edge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _KeyPartEdge__ConnectionEnd = LIBRARY.createFragment(Types._KeyPartEdge, Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _KeyPartEdge__Edge = LIBRARY.createFragment(Types._KeyPartEdge, Types._Edge);
 		private static final @NonNull FlatFragment _KeyPartEdge__Element = LIBRARY.createFragment(Types._KeyPartEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _KeyPartEdge__KeyPartEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._KeyPartEdge);
-		private static final @NonNull FlatFragment _KeyPartEdge__NavigableEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull FlatFragment _KeyPartEdge__NavigationEdge = LIBRARY.createFragment(Types._KeyPartEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__KeyPartEdge = LIBRARY.createFragment(Types._KeyPartEdge, Types._KeyPartEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__NavigableEdge = LIBRARY.createFragment(Types._KeyPartEdge, Types._NavigableEdge);
+		private static final @NonNull FlatFragment _KeyPartEdge__NavigationEdge = LIBRARY.createFragment(Types._KeyPartEdge, Types._NavigationEdge);
 		private static final @NonNull FlatFragment _KeyPartEdge__OclAny = LIBRARY.createFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _KeyPartEdge__OclElement = LIBRARY.createFragment(Types._KeyPartEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _KeyedValueNode__ConnectionEnd = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _KeyedValueNode__ConnectionEnd = LIBRARY.createFragment(Types._KeyedValueNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _KeyedValueNode__Element = LIBRARY.createFragment(Types._KeyedValueNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _KeyedValueNode__KeyedValueNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._KeyedValueNode);
-		private static final @NonNull FlatFragment _KeyedValueNode__MappingNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _KeyedValueNode__Node = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _KeyedValueNode__KeyedValueNode = LIBRARY.createFragment(Types._KeyedValueNode, Types._KeyedValueNode);
+		private static final @NonNull FlatFragment _KeyedValueNode__MappingNode = LIBRARY.createFragment(Types._KeyedValueNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _KeyedValueNode__Node = LIBRARY.createFragment(Types._KeyedValueNode, Types._Node);
 		private static final @NonNull FlatFragment _KeyedValueNode__OclAny = LIBRARY.createFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _KeyedValueNode__OclElement = LIBRARY.createFragment(Types._KeyedValueNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _KeyedValueNode__OperationNode = LIBRARY.createFragment(Types._KeyedValueNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _KeyedValueNode__OperationNode = LIBRARY.createFragment(Types._KeyedValueNode, Types._OperationNode);
 
 		private static final @NonNull FlatFragment _LoadingPartition__Element = LIBRARY.createFragment(Types._LoadingPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _LoadingPartition__LoadingPartition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._LoadingPartition);
-		private static final @NonNull FlatFragment _LoadingPartition__MappingPartition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _LoadingPartition__LoadingPartition = LIBRARY.createFragment(Types._LoadingPartition, Types._LoadingPartition);
+		private static final @NonNull FlatFragment _LoadingPartition__MappingPartition = LIBRARY.createFragment(Types._LoadingPartition, Types._MappingPartition);
 		private static final @NonNull FlatFragment _LoadingPartition__NamedElement = LIBRARY.createFragment(Types._LoadingPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _LoadingPartition__OclAny = LIBRARY.createFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _LoadingPartition__OclElement = LIBRARY.createFragment(Types._LoadingPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _LoadingPartition__Partition = LIBRARY.createFragment(Types._LoadingPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _LoadingPartition__Partition = LIBRARY.createFragment(Types._LoadingPartition, Types._Partition);
 
 		private static final @NonNull FlatFragment _LoadingRegion__Element = LIBRARY.createFragment(Types._LoadingRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _LoadingRegion__LoadingRegion = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._LoadingRegion);
+		private static final @NonNull FlatFragment _LoadingRegion__LoadingRegion = LIBRARY.createFragment(Types._LoadingRegion, Types._LoadingRegion);
 		private static final @NonNull FlatFragment _LoadingRegion__NamedElement = LIBRARY.createFragment(Types._LoadingRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _LoadingRegion__OclAny = LIBRARY.createFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _LoadingRegion__OclElement = LIBRARY.createFragment(Types._LoadingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _LoadingRegion__Region = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _LoadingRegion__Symbolable = LIBRARY.createFragment(Types._LoadingRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _LoadingRegion__Region = LIBRARY.createFragment(Types._LoadingRegion, Types._Region);
+		private static final @NonNull FlatFragment _LoadingRegion__Symbolable = LIBRARY.createFragment(Types._LoadingRegion, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _MapLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MapLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._MapLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _MapLiteralNode__Element = LIBRARY.createFragment(Types._MapLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MapLiteralNode__MapLiteralNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MapLiteralNode);
-		private static final @NonNull FlatFragment _MapLiteralNode__MappingNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _MapLiteralNode__Node = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MapLiteralNode__MapLiteralNode = LIBRARY.createFragment(Types._MapLiteralNode, Types._MapLiteralNode);
+		private static final @NonNull FlatFragment _MapLiteralNode__MappingNode = LIBRARY.createFragment(Types._MapLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _MapLiteralNode__Node = LIBRARY.createFragment(Types._MapLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _MapLiteralNode__OclAny = LIBRARY.createFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MapLiteralNode__OclElement = LIBRARY.createFragment(Types._MapLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MapLiteralNode__OperationNode = LIBRARY.createFragment(Types._MapLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _MapLiteralNode__OperationNode = LIBRARY.createFragment(Types._MapLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _MapPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _MapPartEdge__Edge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _MapPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._MapPartEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__Edge = LIBRARY.createFragment(Types._MapPartEdge, Types._Edge);
 		private static final @NonNull FlatFragment _MapPartEdge__Element = LIBRARY.createFragment(Types._MapPartEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MapPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._ExpressionEdge);
-		private static final @NonNull FlatFragment _MapPartEdge__MapPartEdge = LIBRARY.createFragment(Types._MapPartEdge, QVTscheduleTables.Types._MapPartEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._MapPartEdge, Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _MapPartEdge__MapPartEdge = LIBRARY.createFragment(Types._MapPartEdge, Types._MapPartEdge);
 		private static final @NonNull FlatFragment _MapPartEdge__OclAny = LIBRARY.createFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MapPartEdge__OclElement = LIBRARY.createFragment(Types._MapPartEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _MapPartNode__ConnectionEnd = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MapPartNode__ConnectionEnd = LIBRARY.createFragment(Types._MapPartNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _MapPartNode__Element = LIBRARY.createFragment(Types._MapPartNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MapPartNode__MapPartNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._MapPartNode);
-		private static final @NonNull FlatFragment _MapPartNode__MappingNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _MapPartNode__Node = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MapPartNode__MapPartNode = LIBRARY.createFragment(Types._MapPartNode, Types._MapPartNode);
+		private static final @NonNull FlatFragment _MapPartNode__MappingNode = LIBRARY.createFragment(Types._MapPartNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _MapPartNode__Node = LIBRARY.createFragment(Types._MapPartNode, Types._Node);
 		private static final @NonNull FlatFragment _MapPartNode__OclAny = LIBRARY.createFragment(Types._MapPartNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MapPartNode__OclElement = LIBRARY.createFragment(Types._MapPartNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MapPartNode__OperationNode = LIBRARY.createFragment(Types._MapPartNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _MapPartNode__OperationNode = LIBRARY.createFragment(Types._MapPartNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _MappingNode__ConnectionEnd = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _MappingNode__ConnectionEnd = LIBRARY.createFragment(Types._MappingNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _MappingNode__Element = LIBRARY.createFragment(Types._MappingNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingNode__MappingNode = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _MappingNode__Node = LIBRARY.createFragment(Types._MappingNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _MappingNode__MappingNode = LIBRARY.createFragment(Types._MappingNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _MappingNode__Node = LIBRARY.createFragment(Types._MappingNode, Types._Node);
 		private static final @NonNull FlatFragment _MappingNode__OclAny = LIBRARY.createFragment(Types._MappingNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingNode__OclElement = LIBRARY.createFragment(Types._MappingNode, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _MappingPartition__Element = LIBRARY.createFragment(Types._MappingPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingPartition__MappingPartition = LIBRARY.createFragment(Types._MappingPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _MappingPartition__MappingPartition = LIBRARY.createFragment(Types._MappingPartition, Types._MappingPartition);
 		private static final @NonNull FlatFragment _MappingPartition__NamedElement = LIBRARY.createFragment(Types._MappingPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MappingPartition__OclAny = LIBRARY.createFragment(Types._MappingPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingPartition__OclElement = LIBRARY.createFragment(Types._MappingPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MappingPartition__Partition = LIBRARY.createFragment(Types._MappingPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _MappingPartition__Partition = LIBRARY.createFragment(Types._MappingPartition, Types._Partition);
 
 		private static final @NonNull FlatFragment _MappingRegion__Element = LIBRARY.createFragment(Types._MappingRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MappingRegion__MappingRegion = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _MappingRegion__MappingRegion = LIBRARY.createFragment(Types._MappingRegion, Types._MappingRegion);
 		private static final @NonNull FlatFragment _MappingRegion__NamedElement = LIBRARY.createFragment(Types._MappingRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MappingRegion__OclAny = LIBRARY.createFragment(Types._MappingRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MappingRegion__OclElement = LIBRARY.createFragment(Types._MappingRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MappingRegion__Region = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _MappingRegion__Symbolable = LIBRARY.createFragment(Types._MappingRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _MappingRegion__Region = LIBRARY.createFragment(Types._MappingRegion, Types._Region);
+		private static final @NonNull FlatFragment _MappingRegion__Symbolable = LIBRARY.createFragment(Types._MappingRegion, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _MergedPartition__BasicPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._BasicPartition);
+		private static final @NonNull FlatFragment _MergedPartition__BasicPartition = LIBRARY.createFragment(Types._MergedPartition, Types._BasicPartition);
 		private static final @NonNull FlatFragment _MergedPartition__Element = LIBRARY.createFragment(Types._MergedPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _MergedPartition__MappingPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._MappingPartition);
-		private static final @NonNull FlatFragment _MergedPartition__MergedPartition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._MergedPartition);
+		private static final @NonNull FlatFragment _MergedPartition__MappingPartition = LIBRARY.createFragment(Types._MergedPartition, Types._MappingPartition);
+		private static final @NonNull FlatFragment _MergedPartition__MergedPartition = LIBRARY.createFragment(Types._MergedPartition, Types._MergedPartition);
 		private static final @NonNull FlatFragment _MergedPartition__NamedElement = LIBRARY.createFragment(Types._MergedPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _MergedPartition__OclAny = LIBRARY.createFragment(Types._MergedPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _MergedPartition__OclElement = LIBRARY.createFragment(Types._MergedPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _MergedPartition__Partition = LIBRARY.createFragment(Types._MergedPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _MergedPartition__Partition = LIBRARY.createFragment(Types._MergedPartition, Types._Partition);
 
-		private static final @NonNull FlatFragment _NavigableEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull FlatFragment _NavigableEdge__Edge = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _NavigableEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigableEdge, Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NavigableEdge__Edge = LIBRARY.createFragment(Types._NavigableEdge, Types._Edge);
 		private static final @NonNull FlatFragment _NavigableEdge__Element = LIBRARY.createFragment(Types._NavigableEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NavigableEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigableEdge, QVTscheduleTables.Types._NavigableEdge);
+		private static final @NonNull FlatFragment _NavigableEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigableEdge, Types._NavigableEdge);
 		private static final @NonNull FlatFragment _NavigableEdge__OclAny = LIBRARY.createFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NavigableEdge__OclElement = LIBRARY.createFragment(Types._NavigableEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _NavigationEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull FlatFragment _NavigationEdge__Edge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _NavigationEdge__ConnectionEnd = LIBRARY.createFragment(Types._NavigationEdge, Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NavigationEdge__Edge = LIBRARY.createFragment(Types._NavigationEdge, Types._Edge);
 		private static final @NonNull FlatFragment _NavigationEdge__Element = LIBRARY.createFragment(Types._NavigationEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NavigationEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull FlatFragment _NavigationEdge__NavigationEdge = LIBRARY.createFragment(Types._NavigationEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _NavigationEdge__NavigableEdge = LIBRARY.createFragment(Types._NavigationEdge, Types._NavigableEdge);
+		private static final @NonNull FlatFragment _NavigationEdge__NavigationEdge = LIBRARY.createFragment(Types._NavigationEdge, Types._NavigationEdge);
 		private static final @NonNull FlatFragment _NavigationEdge__OclAny = LIBRARY.createFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NavigationEdge__OclElement = LIBRARY.createFragment(Types._NavigationEdge, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _Node__ConnectionEnd = LIBRARY.createFragment(Types._Node, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _Node__ConnectionEnd = LIBRARY.createFragment(Types._Node, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _Node__Element = LIBRARY.createFragment(Types._Node, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _Node__Node = LIBRARY.createFragment(Types._Node, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _Node__Node = LIBRARY.createFragment(Types._Node, Types._Node);
 		private static final @NonNull FlatFragment _Node__OclAny = LIBRARY.createFragment(Types._Node, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Node__OclElement = LIBRARY.createFragment(Types._Node, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _NodeConnection__Connection = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._Connection);
+		private static final @NonNull FlatFragment _NodeConnection__Connection = LIBRARY.createFragment(Types._NodeConnection, Types._Connection);
 		private static final @NonNull FlatFragment _NodeConnection__Element = LIBRARY.createFragment(Types._NodeConnection, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NodeConnection__NodeConnection = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._NodeConnection);
+		private static final @NonNull FlatFragment _NodeConnection__NodeConnection = LIBRARY.createFragment(Types._NodeConnection, Types._NodeConnection);
 		private static final @NonNull FlatFragment _NodeConnection__OclAny = LIBRARY.createFragment(Types._NodeConnection, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NodeConnection__OclElement = LIBRARY.createFragment(Types._NodeConnection, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NodeConnection__Symbolable = LIBRARY.createFragment(Types._NodeConnection, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _NodeConnection__Symbolable = LIBRARY.createFragment(Types._NodeConnection, Types._Symbolable);
 
 		private static final @NonNull FlatFragment _NonPartition__Element = LIBRARY.createFragment(Types._NonPartition, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NonPartition__MappingPartition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull FlatFragment _NonPartition__MappingPartition = LIBRARY.createFragment(Types._NonPartition, Types._MappingPartition);
 		private static final @NonNull FlatFragment _NonPartition__NamedElement = LIBRARY.createFragment(Types._NonPartition, PivotTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _NonPartition__NonPartition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._NonPartition);
+		private static final @NonNull FlatFragment _NonPartition__NonPartition = LIBRARY.createFragment(Types._NonPartition, Types._NonPartition);
 		private static final @NonNull FlatFragment _NonPartition__OclAny = LIBRARY.createFragment(Types._NonPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NonPartition__OclElement = LIBRARY.createFragment(Types._NonPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NonPartition__Partition = LIBRARY.createFragment(Types._NonPartition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _NonPartition__Partition = LIBRARY.createFragment(Types._NonPartition, Types._Partition);
 
-		private static final @NonNull FlatFragment _NullLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NullLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NullLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _NullLiteralNode__Element = LIBRARY.createFragment(Types._NullLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NullLiteralNode__MappingNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _NullLiteralNode__Node = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull FlatFragment _NullLiteralNode__NullLiteralNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._NullLiteralNode);
+		private static final @NonNull FlatFragment _NullLiteralNode__MappingNode = LIBRARY.createFragment(Types._NullLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _NullLiteralNode__Node = LIBRARY.createFragment(Types._NullLiteralNode, Types._Node);
+		private static final @NonNull FlatFragment _NullLiteralNode__NullLiteralNode = LIBRARY.createFragment(Types._NullLiteralNode, Types._NullLiteralNode);
 		private static final @NonNull FlatFragment _NullLiteralNode__OclAny = LIBRARY.createFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NullLiteralNode__OclElement = LIBRARY.createFragment(Types._NullLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NullLiteralNode__OperationNode = LIBRARY.createFragment(Types._NullLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _NullLiteralNode__OperationNode = LIBRARY.createFragment(Types._NullLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _Number__Number = LIBRARY.createFragment(Types._Number, QVTscheduleTables.Types._Number);
+		private static final @NonNull FlatFragment _Number__Number = LIBRARY.createFragment(Types._Number, Types._Number);
 		private static final @NonNull FlatFragment _Number__OclAny = LIBRARY.createFragment(Types._Number, OCLstdlibTables.Types._OclAny);
 
-		private static final @NonNull FlatFragment _NumericLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _NumericLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._NumericLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _NumericLiteralNode__Element = LIBRARY.createFragment(Types._NumericLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _NumericLiteralNode__MappingNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _NumericLiteralNode__Node = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._Node);
-		private static final @NonNull FlatFragment _NumericLiteralNode__NumericLiteralNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._NumericLiteralNode);
+		private static final @NonNull FlatFragment _NumericLiteralNode__MappingNode = LIBRARY.createFragment(Types._NumericLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _NumericLiteralNode__Node = LIBRARY.createFragment(Types._NumericLiteralNode, Types._Node);
+		private static final @NonNull FlatFragment _NumericLiteralNode__NumericLiteralNode = LIBRARY.createFragment(Types._NumericLiteralNode, Types._NumericLiteralNode);
 		private static final @NonNull FlatFragment _NumericLiteralNode__OclAny = LIBRARY.createFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NumericLiteralNode__OclElement = LIBRARY.createFragment(Types._NumericLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NumericLiteralNode__OperationNode = LIBRARY.createFragment(Types._NumericLiteralNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _NumericLiteralNode__OperationNode = LIBRARY.createFragment(Types._NumericLiteralNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _OperationCallNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _OperationCallNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationCallNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _OperationCallNode__Element = LIBRARY.createFragment(Types._OperationCallNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _OperationCallNode__MappingNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _OperationCallNode__Node = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _OperationCallNode__MappingNode = LIBRARY.createFragment(Types._OperationCallNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _OperationCallNode__Node = LIBRARY.createFragment(Types._OperationCallNode, Types._Node);
 		private static final @NonNull FlatFragment _OperationCallNode__OclAny = LIBRARY.createFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationCallNode__OclElement = LIBRARY.createFragment(Types._OperationCallNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationCallNode__OperationCallNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationCallNode);
-		private static final @NonNull FlatFragment _OperationCallNode__OperationNode = LIBRARY.createFragment(Types._OperationCallNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _OperationCallNode__OperationCallNode = LIBRARY.createFragment(Types._OperationCallNode, Types._OperationCallNode);
+		private static final @NonNull FlatFragment _OperationCallNode__OperationNode = LIBRARY.createFragment(Types._OperationCallNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _OperationNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _OperationNode__ConnectionEnd = LIBRARY.createFragment(Types._OperationNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _OperationNode__Element = LIBRARY.createFragment(Types._OperationNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _OperationNode__MappingNode = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _OperationNode__Node = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _OperationNode__MappingNode = LIBRARY.createFragment(Types._OperationNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _OperationNode__Node = LIBRARY.createFragment(Types._OperationNode, Types._Node);
 		private static final @NonNull FlatFragment _OperationNode__OclAny = LIBRARY.createFragment(Types._OperationNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationNode__OclElement = LIBRARY.createFragment(Types._OperationNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationNode__OperationNode = LIBRARY.createFragment(Types._OperationNode, QVTscheduleTables.Types._OperationNode);
+		private static final @NonNull FlatFragment _OperationNode__OperationNode = LIBRARY.createFragment(Types._OperationNode, Types._OperationNode);
 
-		private static final @NonNull FlatFragment _OperationParameterEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _OperationParameterEdge__Edge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationParameterEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__Edge = LIBRARY.createFragment(Types._OperationParameterEdge, Types._Edge);
 		private static final @NonNull FlatFragment _OperationParameterEdge__Element = LIBRARY.createFragment(Types._OperationParameterEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _OperationParameterEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationParameterEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _OperationParameterEdge__OclAny = LIBRARY.createFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationParameterEdge__OclElement = LIBRARY.createFragment(Types._OperationParameterEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationParameterEdge__OperationParameterEdge = LIBRARY.createFragment(Types._OperationParameterEdge, QVTscheduleTables.Types._OperationParameterEdge);
+		private static final @NonNull FlatFragment _OperationParameterEdge__OperationParameterEdge = LIBRARY.createFragment(Types._OperationParameterEdge, Types._OperationParameterEdge);
 
 		private static final @NonNull FlatFragment _OperationRegion__Element = LIBRARY.createFragment(Types._OperationRegion, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _OperationRegion__NamedElement = LIBRARY.createFragment(Types._OperationRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _OperationRegion__OclAny = LIBRARY.createFragment(Types._OperationRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationRegion__OclElement = LIBRARY.createFragment(Types._OperationRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationRegion__OperationRegion = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._OperationRegion);
-		private static final @NonNull FlatFragment _OperationRegion__Region = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _OperationRegion__Symbolable = LIBRARY.createFragment(Types._OperationRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _OperationRegion__OperationRegion = LIBRARY.createFragment(Types._OperationRegion, Types._OperationRegion);
+		private static final @NonNull FlatFragment _OperationRegion__Region = LIBRARY.createFragment(Types._OperationRegion, Types._Region);
+		private static final @NonNull FlatFragment _OperationRegion__Symbolable = LIBRARY.createFragment(Types._OperationRegion, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _OperationSelfEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _OperationSelfEdge__Edge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__ArgumentEdge = LIBRARY.createFragment(Types._OperationSelfEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__Edge = LIBRARY.createFragment(Types._OperationSelfEdge, Types._Edge);
 		private static final @NonNull FlatFragment _OperationSelfEdge__Element = LIBRARY.createFragment(Types._OperationSelfEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _OperationSelfEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__ExpressionEdge = LIBRARY.createFragment(Types._OperationSelfEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _OperationSelfEdge__OclAny = LIBRARY.createFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationSelfEdge__OclElement = LIBRARY.createFragment(Types._OperationSelfEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationSelfEdge__OperationSelfEdge = LIBRARY.createFragment(Types._OperationSelfEdge, QVTscheduleTables.Types._OperationSelfEdge);
+		private static final @NonNull FlatFragment _OperationSelfEdge__OperationSelfEdge = LIBRARY.createFragment(Types._OperationSelfEdge, Types._OperationSelfEdge);
 
 		private static final @NonNull FlatFragment _Partition__Element = LIBRARY.createFragment(Types._Partition, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Partition__NamedElement = LIBRARY.createFragment(Types._Partition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Partition__OclAny = LIBRARY.createFragment(Types._Partition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Partition__OclElement = LIBRARY.createFragment(Types._Partition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Partition__Partition = LIBRARY.createFragment(Types._Partition, QVTscheduleTables.Types._Partition);
+		private static final @NonNull FlatFragment _Partition__Partition = LIBRARY.createFragment(Types._Partition, Types._Partition);
 
-		private static final @NonNull FlatFragment _PatternTypedNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _PatternTypedNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternTypedNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _PatternTypedNode__Element = LIBRARY.createFragment(Types._PatternTypedNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _PatternTypedNode__MappingNode = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _PatternTypedNode__Node = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _PatternTypedNode__MappingNode = LIBRARY.createFragment(Types._PatternTypedNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _PatternTypedNode__Node = LIBRARY.createFragment(Types._PatternTypedNode, Types._Node);
 		private static final @NonNull FlatFragment _PatternTypedNode__OclAny = LIBRARY.createFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PatternTypedNode__OclElement = LIBRARY.createFragment(Types._PatternTypedNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PatternTypedNode__PatternTypedNode = LIBRARY.createFragment(Types._PatternTypedNode, QVTscheduleTables.Types._PatternTypedNode);
+		private static final @NonNull FlatFragment _PatternTypedNode__PatternTypedNode = LIBRARY.createFragment(Types._PatternTypedNode, Types._PatternTypedNode);
 
-		private static final @NonNull FlatFragment _PatternVariableNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _PatternVariableNode__ConnectionEnd = LIBRARY.createFragment(Types._PatternVariableNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _PatternVariableNode__Element = LIBRARY.createFragment(Types._PatternVariableNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _PatternVariableNode__MappingNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _PatternVariableNode__Node = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _PatternVariableNode__MappingNode = LIBRARY.createFragment(Types._PatternVariableNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _PatternVariableNode__Node = LIBRARY.createFragment(Types._PatternVariableNode, Types._Node);
 		private static final @NonNull FlatFragment _PatternVariableNode__OclAny = LIBRARY.createFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PatternVariableNode__OclElement = LIBRARY.createFragment(Types._PatternVariableNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PatternVariableNode__PatternVariableNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._PatternVariableNode);
-		private static final @NonNull FlatFragment _PatternVariableNode__VariableNode = LIBRARY.createFragment(Types._PatternVariableNode, QVTscheduleTables.Types._VariableNode);
+		private static final @NonNull FlatFragment _PatternVariableNode__PatternVariableNode = LIBRARY.createFragment(Types._PatternVariableNode, Types._PatternVariableNode);
+		private static final @NonNull FlatFragment _PatternVariableNode__VariableNode = LIBRARY.createFragment(Types._PatternVariableNode, Types._VariableNode);
 
-		private static final @NonNull FlatFragment _PredicateEdge__Edge = LIBRARY.createFragment(Types._PredicateEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _PredicateEdge__Edge = LIBRARY.createFragment(Types._PredicateEdge, Types._Edge);
 		private static final @NonNull FlatFragment _PredicateEdge__Element = LIBRARY.createFragment(Types._PredicateEdge, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _PredicateEdge__OclAny = LIBRARY.createFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PredicateEdge__OclElement = LIBRARY.createFragment(Types._PredicateEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PredicateEdge__PredicateEdge = LIBRARY.createFragment(Types._PredicateEdge, QVTscheduleTables.Types._PredicateEdge);
+		private static final @NonNull FlatFragment _PredicateEdge__PredicateEdge = LIBRARY.createFragment(Types._PredicateEdge, Types._PredicateEdge);
 
-		private static final @NonNull FlatFragment _PropertyDatum__AbstractDatum = LIBRARY.createFragment(Types._PropertyDatum, QVTscheduleTables.Types._AbstractDatum);
+		private static final @NonNull FlatFragment _PropertyDatum__AbstractDatum = LIBRARY.createFragment(Types._PropertyDatum, Types._AbstractDatum);
 		private static final @NonNull FlatFragment _PropertyDatum__Element = LIBRARY.createFragment(Types._PropertyDatum, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _PropertyDatum__NamedElement = LIBRARY.createFragment(Types._PropertyDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _PropertyDatum__OclAny = LIBRARY.createFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PropertyDatum__OclElement = LIBRARY.createFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PropertyDatum__PropertyDatum = LIBRARY.createFragment(Types._PropertyDatum, QVTscheduleTables.Types._PropertyDatum);
+		private static final @NonNull FlatFragment _PropertyDatum__PropertyDatum = LIBRARY.createFragment(Types._PropertyDatum, Types._PropertyDatum);
 
-		private static final @NonNull FlatFragment _RecursionEdge__Edge = LIBRARY.createFragment(Types._RecursionEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _RecursionEdge__Edge = LIBRARY.createFragment(Types._RecursionEdge, Types._Edge);
 		private static final @NonNull FlatFragment _RecursionEdge__Element = LIBRARY.createFragment(Types._RecursionEdge, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _RecursionEdge__OclAny = LIBRARY.createFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RecursionEdge__OclElement = LIBRARY.createFragment(Types._RecursionEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RecursionEdge__RecursionEdge = LIBRARY.createFragment(Types._RecursionEdge, QVTscheduleTables.Types._RecursionEdge);
+		private static final @NonNull FlatFragment _RecursionEdge__RecursionEdge = LIBRARY.createFragment(Types._RecursionEdge, Types._RecursionEdge);
 
 		private static final @NonNull FlatFragment _Region__Element = LIBRARY.createFragment(Types._Region, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _Region__NamedElement = LIBRARY.createFragment(Types._Region, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _Region__OclAny = LIBRARY.createFragment(Types._Region, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Region__OclElement = LIBRARY.createFragment(Types._Region, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Region__Region = LIBRARY.createFragment(Types._Region, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _Region__Symbolable = LIBRARY.createFragment(Types._Region, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _Region__Region = LIBRARY.createFragment(Types._Region, Types._Region);
+		private static final @NonNull FlatFragment _Region__Symbolable = LIBRARY.createFragment(Types._Region, Types._Symbolable);
 
 		private static final @NonNull FlatFragment _Role__OclAny = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Role__OclElement = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _Role__OclEnumeration = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclEnumeration);
 		private static final @NonNull FlatFragment _Role__OclType = LIBRARY.createFragment(Types._Role, OCLstdlibTables.Types._OclType);
-		private static final @NonNull FlatFragment _Role__Role = LIBRARY.createFragment(Types._Role, QVTscheduleTables.Types._Role);
+		private static final @NonNull FlatFragment _Role__Role = LIBRARY.createFragment(Types._Role, Types._Role);
 
-		private static final @NonNull FlatFragment _RootPartition__CompositePartition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._CompositePartition);
+		private static final @NonNull FlatFragment _RootPartition__CompositePartition = LIBRARY.createFragment(Types._RootPartition, Types._CompositePartition);
 		private static final @NonNull FlatFragment _RootPartition__Element = LIBRARY.createFragment(Types._RootPartition, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _RootPartition__NamedElement = LIBRARY.createFragment(Types._RootPartition, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _RootPartition__OclAny = LIBRARY.createFragment(Types._RootPartition, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RootPartition__OclElement = LIBRARY.createFragment(Types._RootPartition, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RootPartition__Partition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._Partition);
-		private static final @NonNull FlatFragment _RootPartition__RootPartition = LIBRARY.createFragment(Types._RootPartition, QVTscheduleTables.Types._RootPartition);
+		private static final @NonNull FlatFragment _RootPartition__Partition = LIBRARY.createFragment(Types._RootPartition, Types._Partition);
+		private static final @NonNull FlatFragment _RootPartition__RootPartition = LIBRARY.createFragment(Types._RootPartition, Types._RootPartition);
 
 		private static final @NonNull FlatFragment _RootRegion__Element = LIBRARY.createFragment(Types._RootRegion, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _RootRegion__NamedElement = LIBRARY.createFragment(Types._RootRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _RootRegion__OclAny = LIBRARY.createFragment(Types._RootRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RootRegion__OclElement = LIBRARY.createFragment(Types._RootRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RootRegion__Region = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _RootRegion__RootRegion = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._RootRegion);
-		private static final @NonNull FlatFragment _RootRegion__Symbolable = LIBRARY.createFragment(Types._RootRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _RootRegion__Region = LIBRARY.createFragment(Types._RootRegion, Types._Region);
+		private static final @NonNull FlatFragment _RootRegion__RootRegion = LIBRARY.createFragment(Types._RootRegion, Types._RootRegion);
+		private static final @NonNull FlatFragment _RootRegion__Symbolable = LIBRARY.createFragment(Types._RootRegion, Types._Symbolable);
 
 		private static final @NonNull FlatFragment _RuleRegion__Element = LIBRARY.createFragment(Types._RuleRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _RuleRegion__MappingRegion = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _RuleRegion__MappingRegion = LIBRARY.createFragment(Types._RuleRegion, Types._MappingRegion);
 		private static final @NonNull FlatFragment _RuleRegion__NamedElement = LIBRARY.createFragment(Types._RuleRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _RuleRegion__OclAny = LIBRARY.createFragment(Types._RuleRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RuleRegion__OclElement = LIBRARY.createFragment(Types._RuleRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RuleRegion__Region = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _RuleRegion__RuleRegion = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull FlatFragment _RuleRegion__Symbolable = LIBRARY.createFragment(Types._RuleRegion, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _RuleRegion__Region = LIBRARY.createFragment(Types._RuleRegion, Types._Region);
+		private static final @NonNull FlatFragment _RuleRegion__RuleRegion = LIBRARY.createFragment(Types._RuleRegion, Types._RuleRegion);
+		private static final @NonNull FlatFragment _RuleRegion__Symbolable = LIBRARY.createFragment(Types._RuleRegion, Types._Symbolable);
 
 		private static final @NonNull FlatFragment _ScheduleModel__Element = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Element);
 		private static final @NonNull FlatFragment _ScheduleModel__Model = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Model);
@@ -895,112 +897,112 @@ public class QVTscheduleTables extends AbstractTables
 		private static final @NonNull FlatFragment _ScheduleModel__Namespace = LIBRARY.createFragment(Types._ScheduleModel, PivotTables.Types._Namespace);
 		private static final @NonNull FlatFragment _ScheduleModel__OclAny = LIBRARY.createFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ScheduleModel__OclElement = LIBRARY.createFragment(Types._ScheduleModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _ScheduleModel__ScheduleModel = LIBRARY.createFragment(Types._ScheduleModel, QVTscheduleTables.Types._ScheduleModel);
+		private static final @NonNull FlatFragment _ScheduleModel__ScheduleModel = LIBRARY.createFragment(Types._ScheduleModel, Types._ScheduleModel);
 
-		private static final @NonNull FlatFragment _ShadowNode__ConnectionEnd = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _ShadowNode__ConnectionEnd = LIBRARY.createFragment(Types._ShadowNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _ShadowNode__Element = LIBRARY.createFragment(Types._ShadowNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ShadowNode__MappingNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _ShadowNode__Node = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _ShadowNode__MappingNode = LIBRARY.createFragment(Types._ShadowNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _ShadowNode__Node = LIBRARY.createFragment(Types._ShadowNode, Types._Node);
 		private static final @NonNull FlatFragment _ShadowNode__OclAny = LIBRARY.createFragment(Types._ShadowNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ShadowNode__OclElement = LIBRARY.createFragment(Types._ShadowNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _ShadowNode__OperationNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull FlatFragment _ShadowNode__ShadowNode = LIBRARY.createFragment(Types._ShadowNode, QVTscheduleTables.Types._ShadowNode);
+		private static final @NonNull FlatFragment _ShadowNode__OperationNode = LIBRARY.createFragment(Types._ShadowNode, Types._OperationNode);
+		private static final @NonNull FlatFragment _ShadowNode__ShadowNode = LIBRARY.createFragment(Types._ShadowNode, Types._ShadowNode);
 
-		private static final @NonNull FlatFragment _ShadowPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _ShadowPartEdge__Edge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__ArgumentEdge = LIBRARY.createFragment(Types._ShadowPartEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__Edge = LIBRARY.createFragment(Types._ShadowPartEdge, Types._Edge);
 		private static final @NonNull FlatFragment _ShadowPartEdge__Element = LIBRARY.createFragment(Types._ShadowPartEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _ShadowPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__ExpressionEdge = LIBRARY.createFragment(Types._ShadowPartEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _ShadowPartEdge__OclAny = LIBRARY.createFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _ShadowPartEdge__OclElement = LIBRARY.createFragment(Types._ShadowPartEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _ShadowPartEdge__ShadowPartEdge = LIBRARY.createFragment(Types._ShadowPartEdge, QVTscheduleTables.Types._ShadowPartEdge);
+		private static final @NonNull FlatFragment _ShadowPartEdge__ShadowPartEdge = LIBRARY.createFragment(Types._ShadowPartEdge, Types._ShadowPartEdge);
 
-		private static final @NonNull FlatFragment _StringLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _StringLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._StringLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _StringLiteralNode__Element = LIBRARY.createFragment(Types._StringLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _StringLiteralNode__MappingNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _StringLiteralNode__Node = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _StringLiteralNode__MappingNode = LIBRARY.createFragment(Types._StringLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _StringLiteralNode__Node = LIBRARY.createFragment(Types._StringLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _StringLiteralNode__OclAny = LIBRARY.createFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _StringLiteralNode__OclElement = LIBRARY.createFragment(Types._StringLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _StringLiteralNode__OperationNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull FlatFragment _StringLiteralNode__StringLiteralNode = LIBRARY.createFragment(Types._StringLiteralNode, QVTscheduleTables.Types._StringLiteralNode);
+		private static final @NonNull FlatFragment _StringLiteralNode__OperationNode = LIBRARY.createFragment(Types._StringLiteralNode, Types._OperationNode);
+		private static final @NonNull FlatFragment _StringLiteralNode__StringLiteralNode = LIBRARY.createFragment(Types._StringLiteralNode, Types._StringLiteralNode);
 
-		private static final @NonNull FlatFragment _SuccessEdge__ConnectionEnd = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._ConnectionEnd);
-		private static final @NonNull FlatFragment _SuccessEdge__Edge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _SuccessEdge__ConnectionEnd = LIBRARY.createFragment(Types._SuccessEdge, Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _SuccessEdge__Edge = LIBRARY.createFragment(Types._SuccessEdge, Types._Edge);
 		private static final @NonNull FlatFragment _SuccessEdge__Element = LIBRARY.createFragment(Types._SuccessEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _SuccessEdge__NavigableEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigableEdge);
-		private static final @NonNull FlatFragment _SuccessEdge__NavigationEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._NavigationEdge);
+		private static final @NonNull FlatFragment _SuccessEdge__NavigableEdge = LIBRARY.createFragment(Types._SuccessEdge, Types._NavigableEdge);
+		private static final @NonNull FlatFragment _SuccessEdge__NavigationEdge = LIBRARY.createFragment(Types._SuccessEdge, Types._NavigationEdge);
 		private static final @NonNull FlatFragment _SuccessEdge__OclAny = LIBRARY.createFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SuccessEdge__OclElement = LIBRARY.createFragment(Types._SuccessEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SuccessEdge__SuccessEdge = LIBRARY.createFragment(Types._SuccessEdge, QVTscheduleTables.Types._SuccessEdge);
+		private static final @NonNull FlatFragment _SuccessEdge__SuccessEdge = LIBRARY.createFragment(Types._SuccessEdge, Types._SuccessEdge);
 
-		private static final @NonNull FlatFragment _SuccessNode__ConnectionEnd = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _SuccessNode__ConnectionEnd = LIBRARY.createFragment(Types._SuccessNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _SuccessNode__Element = LIBRARY.createFragment(Types._SuccessNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _SuccessNode__MappingNode = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _SuccessNode__Node = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _SuccessNode__MappingNode = LIBRARY.createFragment(Types._SuccessNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _SuccessNode__Node = LIBRARY.createFragment(Types._SuccessNode, Types._Node);
 		private static final @NonNull FlatFragment _SuccessNode__OclAny = LIBRARY.createFragment(Types._SuccessNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _SuccessNode__OclElement = LIBRARY.createFragment(Types._SuccessNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _SuccessNode__SuccessNode = LIBRARY.createFragment(Types._SuccessNode, QVTscheduleTables.Types._SuccessNode);
+		private static final @NonNull FlatFragment _SuccessNode__SuccessNode = LIBRARY.createFragment(Types._SuccessNode, Types._SuccessNode);
 
 		private static final @NonNull FlatFragment _Symbolable__OclAny = LIBRARY.createFragment(Types._Symbolable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Symbolable__OclElement = LIBRARY.createFragment(Types._Symbolable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Symbolable__Symbolable = LIBRARY.createFragment(Types._Symbolable, QVTscheduleTables.Types._Symbolable);
+		private static final @NonNull FlatFragment _Symbolable__Symbolable = LIBRARY.createFragment(Types._Symbolable, Types._Symbolable);
 
-		private static final @NonNull FlatFragment _TupleLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _TupleLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TupleLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _TupleLiteralNode__Element = LIBRARY.createFragment(Types._TupleLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _TupleLiteralNode__MappingNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _TupleLiteralNode__Node = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _TupleLiteralNode__MappingNode = LIBRARY.createFragment(Types._TupleLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _TupleLiteralNode__Node = LIBRARY.createFragment(Types._TupleLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _TupleLiteralNode__OclAny = LIBRARY.createFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TupleLiteralNode__OclElement = LIBRARY.createFragment(Types._TupleLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TupleLiteralNode__OperationNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull FlatFragment _TupleLiteralNode__TupleLiteralNode = LIBRARY.createFragment(Types._TupleLiteralNode, QVTscheduleTables.Types._TupleLiteralNode);
+		private static final @NonNull FlatFragment _TupleLiteralNode__OperationNode = LIBRARY.createFragment(Types._TupleLiteralNode, Types._OperationNode);
+		private static final @NonNull FlatFragment _TupleLiteralNode__TupleLiteralNode = LIBRARY.createFragment(Types._TupleLiteralNode, Types._TupleLiteralNode);
 
-		private static final @NonNull FlatFragment _TuplePartEdge__ArgumentEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ArgumentEdge);
-		private static final @NonNull FlatFragment _TuplePartEdge__Edge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._Edge);
+		private static final @NonNull FlatFragment _TuplePartEdge__ArgumentEdge = LIBRARY.createFragment(Types._TuplePartEdge, Types._ArgumentEdge);
+		private static final @NonNull FlatFragment _TuplePartEdge__Edge = LIBRARY.createFragment(Types._TuplePartEdge, Types._Edge);
 		private static final @NonNull FlatFragment _TuplePartEdge__Element = LIBRARY.createFragment(Types._TuplePartEdge, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _TuplePartEdge__ExpressionEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._ExpressionEdge);
+		private static final @NonNull FlatFragment _TuplePartEdge__ExpressionEdge = LIBRARY.createFragment(Types._TuplePartEdge, Types._ExpressionEdge);
 		private static final @NonNull FlatFragment _TuplePartEdge__OclAny = LIBRARY.createFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TuplePartEdge__OclElement = LIBRARY.createFragment(Types._TuplePartEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TuplePartEdge__TuplePartEdge = LIBRARY.createFragment(Types._TuplePartEdge, QVTscheduleTables.Types._TuplePartEdge);
+		private static final @NonNull FlatFragment _TuplePartEdge__TuplePartEdge = LIBRARY.createFragment(Types._TuplePartEdge, Types._TuplePartEdge);
 
-		private static final @NonNull FlatFragment _TypeLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _TypeLiteralNode__ConnectionEnd = LIBRARY.createFragment(Types._TypeLiteralNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _TypeLiteralNode__Element = LIBRARY.createFragment(Types._TypeLiteralNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _TypeLiteralNode__MappingNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _TypeLiteralNode__Node = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _TypeLiteralNode__MappingNode = LIBRARY.createFragment(Types._TypeLiteralNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _TypeLiteralNode__Node = LIBRARY.createFragment(Types._TypeLiteralNode, Types._Node);
 		private static final @NonNull FlatFragment _TypeLiteralNode__OclAny = LIBRARY.createFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TypeLiteralNode__OclElement = LIBRARY.createFragment(Types._TypeLiteralNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TypeLiteralNode__OperationNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._OperationNode);
-		private static final @NonNull FlatFragment _TypeLiteralNode__TypeLiteralNode = LIBRARY.createFragment(Types._TypeLiteralNode, QVTscheduleTables.Types._TypeLiteralNode);
+		private static final @NonNull FlatFragment _TypeLiteralNode__OperationNode = LIBRARY.createFragment(Types._TypeLiteralNode, Types._OperationNode);
+		private static final @NonNull FlatFragment _TypeLiteralNode__TypeLiteralNode = LIBRARY.createFragment(Types._TypeLiteralNode, Types._TypeLiteralNode);
 
-		private static final @NonNull FlatFragment _UnknownNode__ConnectionEnd = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _UnknownNode__ConnectionEnd = LIBRARY.createFragment(Types._UnknownNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _UnknownNode__Element = LIBRARY.createFragment(Types._UnknownNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _UnknownNode__MappingNode = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _UnknownNode__Node = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _UnknownNode__MappingNode = LIBRARY.createFragment(Types._UnknownNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _UnknownNode__Node = LIBRARY.createFragment(Types._UnknownNode, Types._Node);
 		private static final @NonNull FlatFragment _UnknownNode__OclAny = LIBRARY.createFragment(Types._UnknownNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _UnknownNode__OclElement = LIBRARY.createFragment(Types._UnknownNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _UnknownNode__UnknownNode = LIBRARY.createFragment(Types._UnknownNode, QVTscheduleTables.Types._UnknownNode);
+		private static final @NonNull FlatFragment _UnknownNode__UnknownNode = LIBRARY.createFragment(Types._UnknownNode, Types._UnknownNode);
 
 		private static final @NonNull FlatFragment _Utility__OclAny = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Utility__OclElement = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull FlatFragment _Utility__OclEnumeration = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclEnumeration);
 		private static final @NonNull FlatFragment _Utility__OclType = LIBRARY.createFragment(Types._Utility, OCLstdlibTables.Types._OclType);
-		private static final @NonNull FlatFragment _Utility__Utility = LIBRARY.createFragment(Types._Utility, QVTscheduleTables.Types._Utility);
+		private static final @NonNull FlatFragment _Utility__Utility = LIBRARY.createFragment(Types._Utility, Types._Utility);
 
-		private static final @NonNull FlatFragment _VariableNode__ConnectionEnd = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._ConnectionEnd);
+		private static final @NonNull FlatFragment _VariableNode__ConnectionEnd = LIBRARY.createFragment(Types._VariableNode, Types._ConnectionEnd);
 		private static final @NonNull FlatFragment _VariableNode__Element = LIBRARY.createFragment(Types._VariableNode, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _VariableNode__MappingNode = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._MappingNode);
-		private static final @NonNull FlatFragment _VariableNode__Node = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._Node);
+		private static final @NonNull FlatFragment _VariableNode__MappingNode = LIBRARY.createFragment(Types._VariableNode, Types._MappingNode);
+		private static final @NonNull FlatFragment _VariableNode__Node = LIBRARY.createFragment(Types._VariableNode, Types._Node);
 		private static final @NonNull FlatFragment _VariableNode__OclAny = LIBRARY.createFragment(Types._VariableNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _VariableNode__OclElement = LIBRARY.createFragment(Types._VariableNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _VariableNode__VariableNode = LIBRARY.createFragment(Types._VariableNode, QVTscheduleTables.Types._VariableNode);
+		private static final @NonNull FlatFragment _VariableNode__VariableNode = LIBRARY.createFragment(Types._VariableNode, Types._VariableNode);
 
 		private static final @NonNull FlatFragment _VerdictRegion__Element = LIBRARY.createFragment(Types._VerdictRegion, PivotTables.Types._Element);
-		private static final @NonNull FlatFragment _VerdictRegion__MappingRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._MappingRegion);
+		private static final @NonNull FlatFragment _VerdictRegion__MappingRegion = LIBRARY.createFragment(Types._VerdictRegion, Types._MappingRegion);
 		private static final @NonNull FlatFragment _VerdictRegion__NamedElement = LIBRARY.createFragment(Types._VerdictRegion, PivotTables.Types._NamedElement);
 		private static final @NonNull FlatFragment _VerdictRegion__OclAny = LIBRARY.createFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _VerdictRegion__OclElement = LIBRARY.createFragment(Types._VerdictRegion, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _VerdictRegion__Region = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._Region);
-		private static final @NonNull FlatFragment _VerdictRegion__RuleRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._RuleRegion);
-		private static final @NonNull FlatFragment _VerdictRegion__Symbolable = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._Symbolable);
-		private static final @NonNull FlatFragment _VerdictRegion__VerdictRegion = LIBRARY.createFragment(Types._VerdictRegion, QVTscheduleTables.Types._VerdictRegion);
+		private static final @NonNull FlatFragment _VerdictRegion__Region = LIBRARY.createFragment(Types._VerdictRegion, Types._Region);
+		private static final @NonNull FlatFragment _VerdictRegion__RuleRegion = LIBRARY.createFragment(Types._VerdictRegion, Types._RuleRegion);
+		private static final @NonNull FlatFragment _VerdictRegion__Symbolable = LIBRARY.createFragment(Types._VerdictRegion, Types._Symbolable);
+		private static final @NonNull FlatFragment _VerdictRegion__VerdictRegion = LIBRARY.createFragment(Types._VerdictRegion, Types._VerdictRegion);
 
 		static {
 			Init.initEnd();
@@ -1071,235 +1073,450 @@ public class QVTscheduleTables extends AbstractTables
 			Operations.init();
 		}
 
+		public static final @NonNull Property _BasicPartition__constantEdges = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Edge), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__constantNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__constantSuccessFalseNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__constantSuccessTrueNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__explicitPredecessors = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__EXPLICIT_PREDECESSORS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._MappingPartition), 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__headNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__loadedEdges = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Edge), 6 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__loadedNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 7 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__owningMergedPartition = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__OWNING_MERGED_PARTITION, Types._MergedPartition, 8 | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__predicatedEdges = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Edge), 9 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__predicatedNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 10 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__realizedEdges = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Edge), 11 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__realizedNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 12 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__speculatedEdges = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Edge), 13 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__speculatedNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 14 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BasicPartition__speculationNodes = LIBRARY.createProperty(Types._BasicPartition, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 15 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _BasicPartition__constantEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES, Types._BasicPartition, 0);
-		public static final @NonNull Property _BasicPartition__constantNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES, Types._BasicPartition, 1);
-		public static final @NonNull Property _BasicPartition__constantSuccessFalseNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, Types._BasicPartition, 2);
-		public static final @NonNull Property _BasicPartition__constantSuccessTrueNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, Types._BasicPartition, 3);
-		public static final @NonNull Property _BasicPartition__explicitPredecessors = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__EXPLICIT_PREDECESSORS, Types._BasicPartition, 4);
-		public static final @NonNull Property _BasicPartition__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES, Types._BasicPartition, 5);
-		public static final @NonNull Property _BasicPartition__loadedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES, Types._BasicPartition, 6);
-		public static final @NonNull Property _BasicPartition__loadedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES, Types._BasicPartition, 7);
-		public static final @NonNull Property _BasicPartition__owningMergedPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__OWNING_MERGED_PARTITION, Types._BasicPartition, 8);
-		public static final @NonNull Property _BasicPartition__predicatedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, Types._BasicPartition, 9);
-		public static final @NonNull Property _BasicPartition__predicatedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, Types._BasicPartition, 10);
-		public static final @NonNull Property _BasicPartition__realizedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, Types._BasicPartition, 11);
-		public static final @NonNull Property _BasicPartition__realizedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, Types._BasicPartition, 12);
-		public static final @NonNull Property _BasicPartition__speculatedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, Types._BasicPartition, 13);
-		public static final @NonNull Property _BasicPartition__speculatedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, Types._BasicPartition, 14);
-		public static final @NonNull Property _BasicPartition__speculationNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, Types._BasicPartition, 15);
+		public static final @NonNull Property _BooleanLiteralNode__booleanValue = LIBRARY.createProperty(Types._BooleanLiteralNode, QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _BooleanLiteralNode__booleanValue = LIBRARY.createProperty(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, Types._BooleanLiteralNode, 0);
+		public static final @NonNull Property _CastEdge__referredClassDatum = LIBRARY.createProperty(Types._CastEdge, QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM, Types._ClassDatum, 0 | IsDerived | IsRequired | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _CastEdge__referredClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM, Types._CastEdge, 0);
+		public static final @NonNull Property _ClassDatum__completeClasses = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASSES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, PivotTables.Types._CompleteClass), 0 | IsDerived | IsRequired | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _ClassDatum__ownedPropertyDatums = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__OWNED_PROPERTY_DATUMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._PropertyDatum), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ClassDatum__owningScheduleModel = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__OWNING_SCHEDULE_MODEL, Types._ScheduleModel, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ClassDatum__referredClass = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, PivotTables.Types._Class, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ClassDatum__referredTypedModel = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_TYPED_MODEL, QVTbaseTables.Types._TypedModel, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ClassDatum__superClassDatums = LIBRARY.createProperty(Types._ClassDatum, QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._ClassDatum), 5 | IsRequired | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _ClassDatum__CastEdge__referredClassDatum = LIBRARY.createOppositeProperty(Types._ClassDatum, "CastEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._CastEdge), 6 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__ClassDatum__superClassDatums = LIBRARY.createOppositeProperty(Types._ClassDatum, "ClassDatum", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._ClassDatum), 7 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS);
+		public static final @NonNull Property _ClassDatum__CollectionClassDatum__elementalClassDatum = LIBRARY.createOppositeProperty(Types._ClassDatum, "CollectionClassDatum", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._CollectionClassDatum), 8 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__KeyedValueNode__classDatumValue = LIBRARY.createOppositeProperty(Types._ClassDatum, "KeyedValueNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._KeyedValueNode), 9 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE);
+		public static final @NonNull Property _ClassDatum__Node__classDatum = LIBRARY.createOppositeProperty(Types._ClassDatum, "Node", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Node), 10 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE__CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__NodeConnection__classDatum = LIBRARY.createOppositeProperty(Types._ClassDatum, "NodeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NodeConnection), 11 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM);
+		public static final @NonNull Property _ClassDatum__PropertyDatum__targetClassDatum = LIBRARY.createOppositeProperty(Types._ClassDatum, "PropertyDatum", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._PropertyDatum), 12 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM);
 
-		public static final @NonNull Property _ClassDatum__completeClasses = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__COMPLETE_CLASSES, Types._ClassDatum, 0);
-		public static final @NonNull Property _ClassDatum__ownedPropertyDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNED_PROPERTY_DATUMS, Types._ClassDatum, 1);
-		public static final @NonNull Property _ClassDatum__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__OWNING_SCHEDULE_MODEL, Types._ClassDatum, 2);
-		public static final @NonNull Property _ClassDatum__referredClass = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_CLASS, Types._ClassDatum, 3);
-		public static final @NonNull Property _ClassDatum__referredTypedModel = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__REFERRED_TYPED_MODEL, Types._ClassDatum, 4);
-		public static final @NonNull Property _ClassDatum__superClassDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS, Types._ClassDatum, 5);
-		public static final @NonNull Property _ClassDatum__CastEdge__referredClassDatum = LIBRARY.createOppositeProperty("CastEdge", Types._ClassDatum, 6, QVTschedulePackage.Literals.CAST_EDGE__REFERRED_CLASS_DATUM);
-		public static final @NonNull Property _ClassDatum__ClassDatum__superClassDatums = LIBRARY.createOppositeProperty("ClassDatum", Types._ClassDatum, 7, QVTschedulePackage.Literals.CLASS_DATUM__SUPER_CLASS_DATUMS);
-		public static final @NonNull Property _ClassDatum__CollectionClassDatum__elementalClassDatum = LIBRARY.createOppositeProperty("CollectionClassDatum", Types._ClassDatum, 8, QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM);
-		public static final @NonNull Property _ClassDatum__KeyedValueNode__classDatumValue = LIBRARY.createOppositeProperty("KeyedValueNode", Types._ClassDatum, 9, QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE);
-		public static final @NonNull Property _ClassDatum__Node__classDatum = LIBRARY.createOppositeProperty("Node", Types._ClassDatum, 10, QVTschedulePackage.Literals.NODE__CLASS_DATUM);
-		public static final @NonNull Property _ClassDatum__NodeConnection__classDatum = LIBRARY.createOppositeProperty("NodeConnection", Types._ClassDatum, 11, QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM);
-		public static final @NonNull Property _ClassDatum__PropertyDatum__targetClassDatum = LIBRARY.createOppositeProperty("PropertyDatum", Types._ClassDatum, 12, QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM);
+		public static final @NonNull Property _Cluster__depth = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__DEPTH, OCLstdlibTables.Types._Integer, 0 | IsResolveProxies);
+		public static final @NonNull Property _Cluster__memberEdges = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Edge), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Cluster__memberNodes = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__MEMBER_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Cluster__owningRegion = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__OWNING_REGION, Types._Region, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Cluster__precedingClusters = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__PRECEDING_CLUSTERS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Cluster), 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Cluster__succeedingClusters = LIBRARY.createProperty(Types._Cluster, QVTschedulePackage.Literals.CLUSTER__SUCCEEDING_CLUSTERS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Cluster), 5 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _Cluster__depth = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__DEPTH, Types._Cluster, 0);
-		public static final @NonNull Property _Cluster__memberEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_EDGES, Types._Cluster, 1);
-		public static final @NonNull Property _Cluster__memberNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__MEMBER_NODES, Types._Cluster, 2);
-		public static final @NonNull Property _Cluster__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__OWNING_REGION, Types._Cluster, 3);
-		public static final @NonNull Property _Cluster__precedingClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__PRECEDING_CLUSTERS, Types._Cluster, 4);
-		public static final @NonNull Property _Cluster__succeedingClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.CLUSTER__SUCCEEDING_CLUSTERS, Types._Cluster, 5);
+		public static final @NonNull Property _CollectionClassDatum__elementalClassDatum = LIBRARY.createProperty(Types._CollectionClassDatum, QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM, Types._ClassDatum, 0 | IsDerived | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _CollectionClassDatum__elementalClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.COLLECTION_CLASS_DATUM__ELEMENTAL_CLASS_DATUM, Types._CollectionClassDatum, 0);
+		public static final @NonNull Property _CollectionPartEdge__referredPart = LIBRARY.createProperty(Types._CollectionPartEdge, QVTschedulePackage.Literals.COLLECTION_PART_EDGE__REFERRED_PART, PivotTables.Types._CollectionLiteralPart, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _CollectionPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.COLLECTION_PART_EDGE__REFERRED_PART, Types._CollectionPartEdge, 0);
+		public static final @NonNull Property _CompositePartition__ownedMappingPartitions = LIBRARY.createProperty(Types._CompositePartition, QVTschedulePackage.Literals.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingPartition), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _CompositePartition__ownedMappingPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, Types._CompositePartition, 0);
+		public static final @NonNull Property _Connection__commonPartition = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION, Types._Partition, 0 | IsResolveProxies);
+		public static final @NonNull Property _Connection__connectionRole = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._ConnectionRole, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Connection__intermediatePartitions = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Partition), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Connection__name = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__NAME, OCLstdlibTables.Types._String, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Connection__owningRootRegion = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__OWNING_ROOT_REGION, Types._RootRegion, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Connection__sourceEnds = LIBRARY.createProperty(Types._Connection, QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._ConnectionEnd), 5 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _Connection__commonPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION, Types._Connection, 0);
-		public static final @NonNull Property _Connection__connectionRole = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._Connection, 1);
-		public static final @NonNull Property _Connection__intermediatePartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS, Types._Connection, 2);
-		public static final @NonNull Property _Connection__name = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__NAME, Types._Connection, 3);
-		public static final @NonNull Property _Connection__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__OWNING_ROOT_REGION, Types._Connection, 4);
-		public static final @NonNull Property _Connection__sourceEnds = LIBRARY.createProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, Types._Connection, 5);
+		public static final @NonNull Property _ConnectionEnd__Connection__sourceEnds = LIBRARY.createOppositeProperty(Types._ConnectionEnd, "Connection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Connection), 0 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS);
 
-		public static final @NonNull Property _ConnectionEnd__Connection__sourceEnds = LIBRARY.createOppositeProperty("Connection", Types._ConnectionEnd, 0, QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS);
+		public static final @NonNull Property _CyclicMappingRegion__elementRegions = LIBRARY.createProperty(Types._CyclicMappingRegion, QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingRegion), 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _CyclicMappingRegion__elementRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS, Types._CyclicMappingRegion, 0);
+		public static final @NonNull Property _DispatchRegion__referredRuleRegion = LIBRARY.createProperty(Types._DispatchRegion, QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION, Types._RuleRegion, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _DispatchRegion__referredRuleRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION, Types._DispatchRegion, 0);
+		public static final @NonNull Property _Edge__cluster = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__CLUSTER, Types._Cluster, 0 | IsResolveProxies);
+		public static final @NonNull Property _Edge__edgeRole = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__EDGE_ROLE, Types._Role, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Edge__name = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__NAME, OCLstdlibTables.Types._String, 2 | IsResolveProxies);
+		public static final @NonNull Property _Edge__owningRegion = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__OWNING_REGION, Types._Region, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Edge__sourceNode = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Node, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Edge__targetNode = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Node, 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Edge__utility = LIBRARY.createProperty(Types._Edge, QVTschedulePackage.Literals.EDGE__UTILITY, Types._Utility, 6 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Edge__BasicPartition__constantEdges = LIBRARY.createOppositeProperty(Types._Edge, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 7 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__loadedEdges = LIBRARY.createOppositeProperty(Types._Edge, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 8 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__predicatedEdges = LIBRARY.createOppositeProperty(Types._Edge, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 9 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__realizedEdges = LIBRARY.createOppositeProperty(Types._Edge, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 10 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES);
+		public static final @NonNull Property _Edge__BasicPartition__speculatedEdges = LIBRARY.createOppositeProperty(Types._Edge, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 11 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES);
 
-		public static final @NonNull Property _Edge__cluster = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__CLUSTER, Types._Edge, 0);
-		public static final @NonNull Property _Edge__edgeRole = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__EDGE_ROLE, Types._Edge, 1);
-		public static final @NonNull Property _Edge__name = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__NAME, Types._Edge, 2);
-		public static final @NonNull Property _Edge__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__OWNING_REGION, Types._Edge, 3);
-		public static final @NonNull Property _Edge__sourceNode = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__SOURCE_NODE, Types._Edge, 4);
-		public static final @NonNull Property _Edge__targetNode = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__TARGET_NODE, Types._Edge, 5);
-		public static final @NonNull Property _Edge__utility = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE__UTILITY, Types._Edge, 6);
-		public static final @NonNull Property _Edge__BasicPartition__constantEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 7, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES);
-		public static final @NonNull Property _Edge__BasicPartition__loadedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 8, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES);
-		public static final @NonNull Property _Edge__BasicPartition__predicatedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 9, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES);
-		public static final @NonNull Property _Edge__BasicPartition__realizedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 10, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES);
-		public static final @NonNull Property _Edge__BasicPartition__speculatedEdges = LIBRARY.createOppositeProperty("BasicPartition", Types._Edge, 11, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES);
+		public static final @NonNull Property _EdgeConnection__mandatoryTargetEdges = LIBRARY.createProperty(Types._EdgeConnection, QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._NavigableEdge), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _EdgeConnection__preferredTargetEdges = LIBRARY.createProperty(Types._EdgeConnection, QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._NavigableEdge), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _EdgeConnection__referredProperty = LIBRARY.createProperty(Types._EdgeConnection, QVTschedulePackage.Literals.EDGE_CONNECTION__REFERRED_PROPERTY, PivotTables.Types._Property, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _EdgeConnection__NavigableEdge__incomingConnection = LIBRARY.createOppositeProperty(Types._EdgeConnection, "NavigableEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NavigableEdge), 3 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION);
+		public static final @NonNull Property _EdgeConnection__NavigableEdge__outgoingConnections = LIBRARY.createOppositeProperty(Types._EdgeConnection, "NavigableEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NavigableEdge), 4 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
 
-		public static final @NonNull Property _EdgeConnection__mandatoryTargetEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES, Types._EdgeConnection, 0);
-		public static final @NonNull Property _EdgeConnection__preferredTargetEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES, Types._EdgeConnection, 1);
-		public static final @NonNull Property _EdgeConnection__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.EDGE_CONNECTION__REFERRED_PROPERTY, Types._EdgeConnection, 2);
-		public static final @NonNull Property _EdgeConnection__NavigableEdge__incomingConnection = LIBRARY.createOppositeProperty("NavigableEdge", Types._EdgeConnection, 3, QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION);
-		public static final @NonNull Property _EdgeConnection__NavigableEdge__outgoingConnections = LIBRARY.createOppositeProperty("NavigableEdge", Types._EdgeConnection, 4, QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
+		public static final @NonNull Property _EnumLiteralNode__enumValue = LIBRARY.createProperty(Types._EnumLiteralNode, QVTschedulePackage.Literals.ENUM_LITERAL_NODE__ENUM_VALUE, PivotTables.Types._EnumerationLiteral, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _EnumLiteralNode__enumValue = LIBRARY.createProperty(QVTschedulePackage.Literals.ENUM_LITERAL_NODE__ENUM_VALUE, Types._EnumLiteralNode, 0);
+		public static final @NonNull Property _KeyPartEdge__referredPart = LIBRARY.createProperty(Types._KeyPartEdge, QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART, Types._PropertyDatum, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _KeyPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART, Types._KeyPartEdge, 0);
+		public static final @NonNull Property _KeyedValueNode__classDatumValue = LIBRARY.createProperty(Types._KeyedValueNode, QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, Types._ClassDatum, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _KeyedValueNode__classDatumValue = LIBRARY.createProperty(QVTschedulePackage.Literals.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, Types._KeyedValueNode, 0);
+		public static final @NonNull Property _LoadingPartition__referredLoadingRegion = LIBRARY.createProperty(Types._LoadingPartition, QVTschedulePackage.Literals.LOADING_PARTITION__REFERRED_LOADING_REGION, Types._LoadingRegion, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LoadingPartition__RootPartition__loadingPartition = LIBRARY.createOppositeProperty(Types._LoadingPartition, "RootPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._RootPartition), 1 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION);
 
-		public static final @NonNull Property _LoadingPartition__referredLoadingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_PARTITION__REFERRED_LOADING_REGION, Types._LoadingPartition, 0);
-		public static final @NonNull Property _LoadingPartition__RootPartition__loadingPartition = LIBRARY.createOppositeProperty("RootPartition", Types._LoadingPartition, 1, QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION);
+		public static final @NonNull Property _LoadingRegion__loadingPartition = LIBRARY.createProperty(Types._LoadingRegion, QVTschedulePackage.Literals.LOADING_REGION__LOADING_PARTITION, Types._LoadingPartition, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LoadingRegion__owningRootRegion = LIBRARY.createProperty(Types._LoadingRegion, QVTschedulePackage.Literals.LOADING_REGION__OWNING_ROOT_REGION, Types._RootRegion, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LoadingRegion__targetName = LIBRARY.createProperty(Types._LoadingRegion, QVTschedulePackage.Literals.LOADING_REGION__TARGET_NAME, OCLstdlibTables.Types._String, 2 | IsResolveProxies);
 
-		public static final @NonNull Property _LoadingRegion__loadingPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__LOADING_PARTITION, Types._LoadingRegion, 0);
-		public static final @NonNull Property _LoadingRegion__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_ROOT_REGION, Types._LoadingRegion, 1);
-		public static final @NonNull Property _LoadingRegion__targetName = LIBRARY.createProperty(QVTschedulePackage.Literals.LOADING_REGION__TARGET_NAME, Types._LoadingRegion, 2);
+		public static final @NonNull Property _MapPartEdge__referredPart = LIBRARY.createProperty(Types._MapPartEdge, QVTschedulePackage.Literals.MAP_PART_EDGE__REFERRED_PART, PivotTables.Types._MapLiteralPart, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _MapPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.MAP_PART_EDGE__REFERRED_PART, Types._MapPartEdge, 0);
+		public static final @NonNull Property _MappingPartition__explicitSuccessors = LIBRARY.createProperty(Types._MappingPartition, QVTschedulePackage.Literals.MAPPING_PARTITION__EXPLICIT_SUCCESSORS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._BasicPartition), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingPartition__owningCompositePartition = LIBRARY.createProperty(Types._MappingPartition, QVTschedulePackage.Literals.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, Types._CompositePartition, 1 | IsResolveProxies);
+		public static final @NonNull Property _MappingPartition__referedMappingRegion = LIBRARY.createProperty(Types._MappingPartition, QVTschedulePackage.Literals.MAPPING_PARTITION__REFERED_MAPPING_REGION, Types._MappingRegion, 2 | IsResolveProxies);
+		public static final @NonNull Property _MappingPartition__region = LIBRARY.createProperty(Types._MappingPartition, QVTschedulePackage.Literals.MAPPING_PARTITION__REGION, Types._Region, 3 | IsDerived | IsReadOnly | IsResolveProxies | IsTransient | IsVolatile);
 
-		public static final @NonNull Property _MappingPartition__explicitSuccessors = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__EXPLICIT_SUCCESSORS, Types._MappingPartition, 0);
-		public static final @NonNull Property _MappingPartition__owningCompositePartition = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, Types._MappingPartition, 1);
-		public static final @NonNull Property _MappingPartition__referedMappingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REFERED_MAPPING_REGION, Types._MappingPartition, 2);
-		public static final @NonNull Property _MappingPartition__region = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_PARTITION__REGION, Types._MappingPartition, 3);
+		public static final @NonNull Property _MappingRegion__headNodes = LIBRARY.createProperty(Types._MappingRegion, QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingRegion__mappingPartitions = LIBRARY.createProperty(Types._MappingRegion, QVTschedulePackage.Literals.MAPPING_REGION__MAPPING_PARTITIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingPartition), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _MappingRegion__owningScheduleModel = LIBRARY.createProperty(Types._MappingRegion, QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULE_MODEL, Types._ScheduleModel, 2 | IsResolveProxies);
+		public static final @NonNull Property _MappingRegion__CyclicMappingRegion__elementRegions = LIBRARY.createOppositeProperty(Types._MappingRegion, "CyclicMappingRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._CyclicMappingRegion), 3 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
 
-		public static final @NonNull Property _MappingRegion__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, Types._MappingRegion, 0);
-		public static final @NonNull Property _MappingRegion__mappingPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__MAPPING_PARTITIONS, Types._MappingRegion, 1);
-		public static final @NonNull Property _MappingRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULE_MODEL, Types._MappingRegion, 2);
-		public static final @NonNull Property _MappingRegion__CyclicMappingRegion__elementRegions = LIBRARY.createOppositeProperty("CyclicMappingRegion", Types._MappingRegion, 3, QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
+		public static final @NonNull Property _MergedPartition__ownedMergedPartitions = LIBRARY.createProperty(Types._MergedPartition, QVTschedulePackage.Literals.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._BasicPartition), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _MergedPartition__ownedMergedPartitions = LIBRARY.createProperty(QVTschedulePackage.Literals.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, Types._MergedPartition, 0);
+		public static final @NonNull Property _NavigableEdge__incomingConnection = LIBRARY.createProperty(Types._NavigableEdge, QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION, Types._EdgeConnection, 0 | IsResolveProxies);
+		public static final @NonNull Property _NavigableEdge__outgoingConnections = LIBRARY.createProperty(Types._NavigableEdge, QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._EdgeConnection), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NavigableEdge__EdgeConnection__mandatoryTargetEdges = LIBRARY.createOppositeProperty(Types._NavigableEdge, "EdgeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._EdgeConnection), 2 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES);
+		public static final @NonNull Property _NavigableEdge__EdgeConnection__preferredTargetEdges = LIBRARY.createOppositeProperty(Types._NavigableEdge, "EdgeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._EdgeConnection), 3 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES);
 
-		public static final @NonNull Property _NavigableEdge__incomingConnection = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION, Types._NavigableEdge, 0);
-		public static final @NonNull Property _NavigableEdge__outgoingConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS, Types._NavigableEdge, 1);
-		public static final @NonNull Property _NavigableEdge__EdgeConnection__mandatoryTargetEdges = LIBRARY.createOppositeProperty("EdgeConnection", Types._NavigableEdge, 2, QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES);
-		public static final @NonNull Property _NavigableEdge__EdgeConnection__preferredTargetEdges = LIBRARY.createOppositeProperty("EdgeConnection", Types._NavigableEdge, 3, QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES);
+		public static final @NonNull Property _NavigationEdge__oppositeEdge = LIBRARY.createProperty(Types._NavigationEdge, QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE, Types._NavigationEdge, 0 | IsResolveProxies);
+		public static final @NonNull Property _NavigationEdge__partial = LIBRARY.createProperty(Types._NavigationEdge, QVTschedulePackage.Literals.NAVIGATION_EDGE__PARTIAL, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NavigationEdge__referredProperty = LIBRARY.createProperty(Types._NavigationEdge, QVTschedulePackage.Literals.NAVIGATION_EDGE__REFERRED_PROPERTY, PivotTables.Types._Property, 2 | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _NavigationEdge__secondary = LIBRARY.createProperty(Types._NavigationEdge, QVTschedulePackage.Literals.NAVIGATION_EDGE__SECONDARY, OCLstdlibTables.Types._Boolean, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NavigationEdge__NavigationEdge__oppositeEdge = LIBRARY.createOppositeProperty(Types._NavigationEdge, "NavigationEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NavigationEdge), 4 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE);
 
-		public static final @NonNull Property _NavigationEdge__oppositeEdge = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE, Types._NavigationEdge, 0);
-		public static final @NonNull Property _NavigationEdge__partial = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__PARTIAL, Types._NavigationEdge, 1);
-		public static final @NonNull Property _NavigationEdge__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__REFERRED_PROPERTY, Types._NavigationEdge, 2);
-		public static final @NonNull Property _NavigationEdge__secondary = LIBRARY.createProperty(QVTschedulePackage.Literals.NAVIGATION_EDGE__SECONDARY, Types._NavigationEdge, 3);
-		public static final @NonNull Property _NavigationEdge__NavigationEdge__oppositeEdge = LIBRARY.createOppositeProperty("NavigationEdge", Types._NavigationEdge, 4, QVTschedulePackage.Literals.NAVIGATION_EDGE__OPPOSITE_EDGE);
+		public static final @NonNull Property _Node__classDatum = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__CLASS_DATUM, Types._ClassDatum, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__cluster = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__CLUSTER, Types._Cluster, 1 | IsResolveProxies);
+		public static final @NonNull Property _Node__incomingConnection = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION, Types._NodeConnection, 2 | IsResolveProxies);
+		public static final @NonNull Property _Node__incomingEdges = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__INCOMING_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Edge), 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__name = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__NAME, OCLstdlibTables.Types._String, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__nodeRole = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Role, 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__outgoingConnections = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._NodeConnection), 6 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__outgoingEdges = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Edge), 7 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__owningRegion = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__OWNING_REGION, Types._Region, 8 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__utility = LIBRARY.createProperty(Types._Node, QVTschedulePackage.Literals.NODE__UTILITY, Types._Utility, 9 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Node__BasicPartition__constantNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 10 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES);
+		public static final @NonNull Property _Node__BasicPartition__constantSuccessFalseNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 11 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES);
+		public static final @NonNull Property _Node__BasicPartition__constantSuccessTrueNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 12 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES);
+		public static final @NonNull Property _Node__BasicPartition__headNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 13 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES);
+		public static final @NonNull Property _Node__BasicPartition__loadedNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 14 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__predicatedNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 15 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__realizedNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 16 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__speculatedNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 17 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES);
+		public static final @NonNull Property _Node__BasicPartition__speculationNodes = LIBRARY.createOppositeProperty(Types._Node, "BasicPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._BasicPartition), 18 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES);
+		public static final @NonNull Property _Node__MappingRegion__headNodes = LIBRARY.createOppositeProperty(Types._Node, "MappingRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._MappingRegion), 19 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES);
+		public static final @NonNull Property _Node__NodeConnection__mandatoryTargetNodes = LIBRARY.createOppositeProperty(Types._Node, "NodeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NodeConnection), 20 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES);
+		public static final @NonNull Property _Node__NodeConnection__passedTargetNodes = LIBRARY.createOppositeProperty(Types._Node, "NodeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NodeConnection), 21 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES);
+		public static final @NonNull Property _Node__NodeConnection__preferredTargetNodes = LIBRARY.createOppositeProperty(Types._Node, "NodeConnection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._NodeConnection), 22 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES);
+		public static final @NonNull Property _Node__OperationRegion__dependencyNodes = LIBRARY.createOppositeProperty(Types._Node, "OperationRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._OperationRegion), 23 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES);
+		public static final @NonNull Property _Node__OperationRegion__headNodes = LIBRARY.createOppositeProperty(Types._Node, "OperationRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._OperationRegion), 24 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES);
+		public static final @NonNull Property _Node__OperationRegion__resultNode = LIBRARY.createOppositeProperty(Types._Node, "OperationRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._OperationRegion), 25 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE);
 
-		public static final @NonNull Property _Node__classDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__CLASS_DATUM, Types._Node, 0);
-		public static final @NonNull Property _Node__cluster = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__CLUSTER, Types._Node, 1);
-		public static final @NonNull Property _Node__incomingConnection = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION, Types._Node, 2);
-		public static final @NonNull Property _Node__incomingEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__INCOMING_EDGES, Types._Node, 3);
-		public static final @NonNull Property _Node__name = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__NAME, Types._Node, 4);
-		public static final @NonNull Property _Node__nodeRole = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__NODE_ROLE, Types._Node, 5);
-		public static final @NonNull Property _Node__outgoingConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS, Types._Node, 6);
-		public static final @NonNull Property _Node__outgoingEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OUTGOING_EDGES, Types._Node, 7);
-		public static final @NonNull Property _Node__owningRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__OWNING_REGION, Types._Node, 8);
-		public static final @NonNull Property _Node__utility = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE__UTILITY, Types._Node, 9);
-		public static final @NonNull Property _Node__BasicPartition__constantNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 10, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES);
-		public static final @NonNull Property _Node__BasicPartition__constantSuccessFalseNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 11, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES);
-		public static final @NonNull Property _Node__BasicPartition__constantSuccessTrueNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 12, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES);
-		public static final @NonNull Property _Node__BasicPartition__headNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 13, QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES);
-		public static final @NonNull Property _Node__BasicPartition__loadedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 14, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES);
-		public static final @NonNull Property _Node__BasicPartition__predicatedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 15, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES);
-		public static final @NonNull Property _Node__BasicPartition__realizedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 16, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES);
-		public static final @NonNull Property _Node__BasicPartition__speculatedNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 17, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES);
-		public static final @NonNull Property _Node__BasicPartition__speculationNodes = LIBRARY.createOppositeProperty("BasicPartition", Types._Node, 18, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES);
-		public static final @NonNull Property _Node__MappingRegion__headNodes = LIBRARY.createOppositeProperty("MappingRegion", Types._Node, 19, QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES);
-		public static final @NonNull Property _Node__NodeConnection__mandatoryTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 20, QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES);
-		public static final @NonNull Property _Node__NodeConnection__passedTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 21, QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES);
-		public static final @NonNull Property _Node__NodeConnection__preferredTargetNodes = LIBRARY.createOppositeProperty("NodeConnection", Types._Node, 22, QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES);
-		public static final @NonNull Property _Node__OperationRegion__dependencyNodes = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 23, QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES);
-		public static final @NonNull Property _Node__OperationRegion__headNodes = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 24, QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES);
-		public static final @NonNull Property _Node__OperationRegion__resultNode = LIBRARY.createOppositeProperty("OperationRegion", Types._Node, 25, QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE);
+		public static final @NonNull Property _NodeConnection__classDatum = LIBRARY.createProperty(Types._NodeConnection, QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM, Types._ClassDatum, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NodeConnection__mandatoryTargetNodes = LIBRARY.createProperty(Types._NodeConnection, QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NodeConnection__passedTargetNodes = LIBRARY.createProperty(Types._NodeConnection, QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NodeConnection__preferredTargetNodes = LIBRARY.createProperty(Types._NodeConnection, QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Node), 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _NodeConnection__Node__incomingConnection = LIBRARY.createOppositeProperty(Types._NodeConnection, "Node", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Node), 4 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION);
+		public static final @NonNull Property _NodeConnection__Node__outgoingConnections = LIBRARY.createOppositeProperty(Types._NodeConnection, "Node", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Node), 5 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS);
+		public static final @NonNull Property _NodeConnection__Partition__intermediateConnections = LIBRARY.createOppositeProperty(Types._NodeConnection, "Partition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Partition), 6 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS);
+		public static final @NonNull Property _NodeConnection__Partition__rootConnections = LIBRARY.createOppositeProperty(Types._NodeConnection, "Partition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Partition), 7 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS);
 
-		public static final @NonNull Property _NodeConnection__classDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__CLASS_DATUM, Types._NodeConnection, 0);
-		public static final @NonNull Property _NodeConnection__mandatoryTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES, Types._NodeConnection, 1);
-		public static final @NonNull Property _NodeConnection__passedTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES, Types._NodeConnection, 2);
-		public static final @NonNull Property _NodeConnection__preferredTargetNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES, Types._NodeConnection, 3);
-		public static final @NonNull Property _NodeConnection__Node__incomingConnection = LIBRARY.createOppositeProperty("Node", Types._NodeConnection, 4, QVTschedulePackage.Literals.NODE__INCOMING_CONNECTION);
-		public static final @NonNull Property _NodeConnection__Node__outgoingConnections = LIBRARY.createOppositeProperty("Node", Types._NodeConnection, 5, QVTschedulePackage.Literals.NODE__OUTGOING_CONNECTIONS);
-		public static final @NonNull Property _NodeConnection__Partition__intermediateConnections = LIBRARY.createOppositeProperty("Partition", Types._NodeConnection, 6, QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS);
-		public static final @NonNull Property _NodeConnection__Partition__rootConnections = LIBRARY.createOppositeProperty("Partition", Types._NodeConnection, 7, QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS);
+		public static final @NonNull Property _NumericLiteralNode__numericValue = LIBRARY.createProperty(Types._NumericLiteralNode, QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE__NUMERIC_VALUE, Types._Number, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _NumericLiteralNode__numericValue = LIBRARY.createProperty(QVTschedulePackage.Literals.NUMERIC_LITERAL_NODE__NUMERIC_VALUE, Types._NumericLiteralNode, 0);
+		public static final @NonNull Property _OperationCallNode__referredOperation = LIBRARY.createProperty(Types._OperationCallNode, QVTschedulePackage.Literals.OPERATION_CALL_NODE__REFERRED_OPERATION, PivotTables.Types._Operation, 0 | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _OperationCallNode__referredOperation = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_CALL_NODE__REFERRED_OPERATION, Types._OperationCallNode, 0);
+		public static final @NonNull Property _OperationParameterEdge__parameterIndex = LIBRARY.createProperty(Types._OperationParameterEdge, QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX, OCLstdlibTables.Types._Integer, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationParameterEdge__referredParameter = LIBRARY.createProperty(Types._OperationParameterEdge, QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, PivotTables.Types._Parameter, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _OperationParameterEdge__parameterIndex = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX, Types._OperationParameterEdge, 0);
-		public static final @NonNull Property _OperationParameterEdge__referredParameter = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, Types._OperationParameterEdge, 1);
+		public static final @NonNull Property _OperationRegion__dependencyNodes = LIBRARY.createProperty(Types._OperationRegion, QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationRegion__headNodes = LIBRARY.createProperty(Types._OperationRegion, QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationRegion__owningScheduleModel = LIBRARY.createProperty(Types._OperationRegion, QVTschedulePackage.Literals.OPERATION_REGION__OWNING_SCHEDULE_MODEL, Types._ScheduleModel, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationRegion__referredOperation = LIBRARY.createProperty(Types._OperationRegion, QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, PivotTables.Types._Operation, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationRegion__resultNode = LIBRARY.createProperty(Types._OperationRegion, QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._Node, 4 | IsResolveProxies);
 
-		public static final @NonNull Property _OperationRegion__dependencyNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, Types._OperationRegion, 0);
-		public static final @NonNull Property _OperationRegion__headNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, Types._OperationRegion, 1);
-		public static final @NonNull Property _OperationRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__OWNING_SCHEDULE_MODEL, Types._OperationRegion, 2);
-		public static final @NonNull Property _OperationRegion__referredOperation = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, Types._OperationRegion, 3);
-		public static final @NonNull Property _OperationRegion__resultNode = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 4);
+		public static final @NonNull Property _OperationSelfEdge__referredType = LIBRARY.createProperty(Types._OperationSelfEdge, QVTschedulePackage.Literals.OPERATION_SELF_EDGE__REFERRED_TYPE, PivotTables.Types._Type, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _OperationSelfEdge__referredType = LIBRARY.createProperty(QVTschedulePackage.Literals.OPERATION_SELF_EDGE__REFERRED_TYPE, Types._OperationSelfEdge, 0);
+		public static final @NonNull Property _Partition__intermediateConnections = LIBRARY.createProperty(Types._Partition, QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._NodeConnection), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Partition__passes = LIBRARY.createProperty(Types._Partition, QVTschedulePackage.Literals.PARTITION__PASSES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._Integer), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Partition__rootConnections = LIBRARY.createProperty(Types._Partition, QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._NodeConnection), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Partition__Connection__commonPartition = LIBRARY.createOppositeProperty(Types._Partition, "Connection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Connection), 3 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION);
+		public static final @NonNull Property _Partition__Connection__intermediatePartitions = LIBRARY.createOppositeProperty(Types._Partition, "Connection", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Connection), 4 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS);
 
-		public static final @NonNull Property _Partition__intermediateConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS, Types._Partition, 0);
-		public static final @NonNull Property _Partition__passes = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__PASSES, Types._Partition, 1);
-		public static final @NonNull Property _Partition__rootConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS, Types._Partition, 2);
-		public static final @NonNull Property _Partition__Connection__commonPartition = LIBRARY.createOppositeProperty("Connection", Types._Partition, 3, QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION);
-		public static final @NonNull Property _Partition__Connection__intermediatePartitions = LIBRARY.createOppositeProperty("Connection", Types._Partition, 4, QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS);
+		public static final @NonNull Property _PredicateEdge__partial = LIBRARY.createProperty(Types._PredicateEdge, QVTschedulePackage.Literals.PREDICATE_EDGE__PARTIAL, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _PredicateEdge__partial = LIBRARY.createProperty(QVTschedulePackage.Literals.PREDICATE_EDGE__PARTIAL, Types._PredicateEdge, 0);
+		public static final @NonNull Property _PropertyDatum__key = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _PropertyDatum__opposite = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1 | IsResolveProxies);
+		public static final @NonNull Property _PropertyDatum__owningClassDatum = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._ClassDatum, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _PropertyDatum__referredProperty = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__REFERRED_PROPERTY, PivotTables.Types._Property, 3 | IsResolveProxies | IsTransient);
+		public static final @NonNull Property _PropertyDatum__superPropertyDatums = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._PropertyDatum), 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _PropertyDatum__targetClassDatum = LIBRARY.createProperty(Types._PropertyDatum, QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM, Types._ClassDatum, 5 | IsResolveProxies);
+		public static final @NonNull Property _PropertyDatum__KeyPartEdge__referredPart = LIBRARY.createOppositeProperty(Types._PropertyDatum, "KeyPartEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._KeyPartEdge), 6 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART);
+		public static final @NonNull Property _PropertyDatum__PropertyDatum__opposite = LIBRARY.createOppositeProperty(Types._PropertyDatum, "PropertyDatum", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._PropertyDatum), 7 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE);
+		public static final @NonNull Property _PropertyDatum__PropertyDatum__superPropertyDatums = LIBRARY.createOppositeProperty(Types._PropertyDatum, "PropertyDatum", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._PropertyDatum), 8 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS);
 
-		public static final @NonNull Property _PropertyDatum__key = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, Types._PropertyDatum, 0);
-		public static final @NonNull Property _PropertyDatum__opposite = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
-		public static final @NonNull Property _PropertyDatum__owningClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OWNING_CLASS_DATUM, Types._PropertyDatum, 2);
-		public static final @NonNull Property _PropertyDatum__referredProperty = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__REFERRED_PROPERTY, Types._PropertyDatum, 3);
-		public static final @NonNull Property _PropertyDatum__superPropertyDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS, Types._PropertyDatum, 4);
-		public static final @NonNull Property _PropertyDatum__targetClassDatum = LIBRARY.createProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__TARGET_CLASS_DATUM, Types._PropertyDatum, 5);
-		public static final @NonNull Property _PropertyDatum__KeyPartEdge__referredPart = LIBRARY.createOppositeProperty("KeyPartEdge", Types._PropertyDatum, 6, QVTschedulePackage.Literals.KEY_PART_EDGE__REFERRED_PART);
-		public static final @NonNull Property _PropertyDatum__PropertyDatum__opposite = LIBRARY.createOppositeProperty("PropertyDatum", Types._PropertyDatum, 7, QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE);
-		public static final @NonNull Property _PropertyDatum__PropertyDatum__superPropertyDatums = LIBRARY.createOppositeProperty("PropertyDatum", Types._PropertyDatum, 8, QVTschedulePackage.Literals.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS);
+		public static final @NonNull Property _RecursionEdge__primary = LIBRARY.createProperty(Types._RecursionEdge, QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RecursionEdge__primary = LIBRARY.createProperty(QVTschedulePackage.Literals.RECURSION_EDGE__PRIMARY, Types._RecursionEdge, 0);
+		public static final @NonNull Property _Region__ownedClusters = LIBRARY.createProperty(Types._Region, QVTschedulePackage.Literals.REGION__OWNED_CLUSTERS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Cluster), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Region__ownedEdges = LIBRARY.createProperty(Types._Region, QVTschedulePackage.Literals.REGION__OWNED_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Edge), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Region__ownedNodes = LIBRARY.createProperty(Types._Region, QVTschedulePackage.Literals.REGION__OWNED_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Node), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Region__rootRegion = LIBRARY.createProperty(Types._Region, QVTschedulePackage.Literals.REGION__ROOT_REGION, Types._RootRegion, 3 | IsResolveProxies);
+		public static final @NonNull Property _Region__MappingPartition__region = LIBRARY.createOppositeProperty(Types._Region, "MappingPartition", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._MappingPartition), 4 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.MAPPING_PARTITION__REGION);
 
-		public static final @NonNull Property _Region__ownedClusters = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_CLUSTERS, Types._Region, 0);
-		public static final @NonNull Property _Region__ownedEdges = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_EDGES, Types._Region, 1);
-		public static final @NonNull Property _Region__ownedNodes = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__OWNED_NODES, Types._Region, 2);
-		public static final @NonNull Property _Region__rootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.REGION__ROOT_REGION, Types._Region, 3);
-		public static final @NonNull Property _Region__MappingPartition__region = LIBRARY.createOppositeProperty("MappingPartition", Types._Region, 4, QVTschedulePackage.Literals.MAPPING_PARTITION__REGION);
+		public static final @NonNull Property _RootPartition__loadingPartition = LIBRARY.createProperty(Types._RootPartition, QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION, Types._LoadingPartition, 0 | IsResolveProxies);
+		public static final @NonNull Property _RootPartition__owningRootRegion = LIBRARY.createProperty(Types._RootPartition, QVTschedulePackage.Literals.ROOT_PARTITION__OWNING_ROOT_REGION, Types._RootRegion, 1 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RootPartition__loadingPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_PARTITION__LOADING_PARTITION, Types._RootPartition, 0);
-		public static final @NonNull Property _RootPartition__owningRootRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_PARTITION__OWNING_ROOT_REGION, Types._RootPartition, 1);
+		public static final @NonNull Property _RootRegion__activeRegions = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__ACTIVE_REGIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Region), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RootRegion__ownedConnections = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__OWNED_CONNECTIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Connection), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RootRegion__ownedLoadingRegion = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__OWNED_LOADING_REGION, Types._LoadingRegion, 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RootRegion__ownedRootPartition = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__OWNED_ROOT_PARTITION, Types._RootPartition, 3 | IsComposite | IsResolveProxies);
+		public static final @NonNull Property _RootRegion__owningScheduleModel = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__OWNING_SCHEDULE_MODEL, Types._ScheduleModel, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RootRegion__referredTransformation = LIBRARY.createProperty(Types._RootRegion, QVTschedulePackage.Literals.ROOT_REGION__REFERRED_TRANSFORMATION, QVTbaseTables.Types._Transformation, 5 | IsResolveProxies);
 
-		public static final @NonNull Property _RootRegion__activeRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__ACTIVE_REGIONS, Types._RootRegion, 0);
-		public static final @NonNull Property _RootRegion__ownedConnections = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_CONNECTIONS, Types._RootRegion, 1);
-		public static final @NonNull Property _RootRegion__ownedLoadingRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_LOADING_REGION, Types._RootRegion, 2);
-		public static final @NonNull Property _RootRegion__ownedRootPartition = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNED_ROOT_PARTITION, Types._RootRegion, 3);
-		public static final @NonNull Property _RootRegion__owningScheduleModel = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__OWNING_SCHEDULE_MODEL, Types._RootRegion, 4);
-		public static final @NonNull Property _RootRegion__referredTransformation = LIBRARY.createProperty(QVTschedulePackage.Literals.ROOT_REGION__REFERRED_TRANSFORMATION, Types._RootRegion, 5);
+		public static final @NonNull Property _RuleRegion__referredRule = LIBRARY.createProperty(Types._RuleRegion, QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, QVTbaseTables.Types._Rule, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RuleRegion__DispatchRegion__referredRuleRegion = LIBRARY.createOppositeProperty(Types._RuleRegion, "DispatchRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._DispatchRegion), 1 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION);
+		public static final @NonNull Property _RuleRegion__VerdictRegion__referredRuleRegion = LIBRARY.createOppositeProperty(Types._RuleRegion, "VerdictRegion", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._VerdictRegion), 2 | IsImplicit | IsRequired | IsResolveProxies, QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION);
 
-		public static final @NonNull Property _RuleRegion__referredRule = LIBRARY.createProperty(QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, Types._RuleRegion, 0);
-		public static final @NonNull Property _RuleRegion__DispatchRegion__referredRuleRegion = LIBRARY.createOppositeProperty("DispatchRegion", Types._RuleRegion, 1, QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION);
-		public static final @NonNull Property _RuleRegion__VerdictRegion__referredRuleRegion = LIBRARY.createOppositeProperty("VerdictRegion", Types._RuleRegion, 2, QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION);
+		public static final @NonNull Property _ScheduleModel__ownedClassDatums = LIBRARY.createProperty(Types._ScheduleModel, QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._ClassDatum), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ScheduleModel__ownedMappingRegions = LIBRARY.createProperty(Types._ScheduleModel, QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._MappingRegion), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ScheduleModel__ownedOperationRegions = LIBRARY.createProperty(Types._ScheduleModel, QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._OperationRegion), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ScheduleModel__ownedRootRegions = LIBRARY.createProperty(Types._ScheduleModel, QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RootRegion), 3 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _ScheduleModel__ownedClassDatums = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 0);
-		public static final @NonNull Property _ScheduleModel__ownedMappingRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, Types._ScheduleModel, 1);
-		public static final @NonNull Property _ScheduleModel__ownedOperationRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, Types._ScheduleModel, 2);
-		public static final @NonNull Property _ScheduleModel__ownedRootRegions = LIBRARY.createProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, Types._ScheduleModel, 3);
+		public static final @NonNull Property _ShadowPartEdge__referredPart = LIBRARY.createProperty(Types._ShadowPartEdge, QVTschedulePackage.Literals.SHADOW_PART_EDGE__REFERRED_PART, PivotTables.Types._ShadowPart, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _ShadowPartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.SHADOW_PART_EDGE__REFERRED_PART, Types._ShadowPartEdge, 0);
+		public static final @NonNull Property _StringLiteralNode__stringValue = LIBRARY.createProperty(Types._StringLiteralNode, QVTschedulePackage.Literals.STRING_LITERAL_NODE__STRING_VALUE, OCLstdlibTables.Types._String, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _StringLiteralNode__stringValue = LIBRARY.createProperty(QVTschedulePackage.Literals.STRING_LITERAL_NODE__STRING_VALUE, Types._StringLiteralNode, 0);
+		public static final @NonNull Property _Symbolable__symbolName = LIBRARY.createProperty(Types._Symbolable, QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _Symbolable__symbolName = LIBRARY.createProperty(QVTschedulePackage.Literals.SYMBOLABLE__SYMBOL_NAME, Types._Symbolable, 0);
+		public static final @NonNull Property _TuplePartEdge__referredPart = LIBRARY.createProperty(Types._TuplePartEdge, QVTschedulePackage.Literals.TUPLE_PART_EDGE__REFERRED_PART, PivotTables.Types._TupleLiteralPart, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TuplePartEdge__referredPart = LIBRARY.createProperty(QVTschedulePackage.Literals.TUPLE_PART_EDGE__REFERRED_PART, Types._TuplePartEdge, 0);
+		public static final @NonNull Property _TypeLiteralNode__typeValue = LIBRARY.createProperty(Types._TypeLiteralNode, QVTschedulePackage.Literals.TYPE_LITERAL_NODE__TYPE_VALUE, PivotTables.Types._Type, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TypeLiteralNode__typeValue = LIBRARY.createProperty(QVTschedulePackage.Literals.TYPE_LITERAL_NODE__TYPE_VALUE, Types._TypeLiteralNode, 0);
+		public static final @NonNull Property _VariableNode__referredVariable = LIBRARY.createProperty(Types._VariableNode, QVTschedulePackage.Literals.VARIABLE_NODE__REFERRED_VARIABLE, PivotTables.Types._VariableDeclaration, 0 | IsResolveProxies | IsTransient);
 
-		public static final @NonNull Property _VariableNode__referredVariable = LIBRARY.createProperty(QVTschedulePackage.Literals.VARIABLE_NODE__REFERRED_VARIABLE, Types._VariableNode, 0);
+		public static final @NonNull Property _VerdictRegion__referredRuleRegion = LIBRARY.createProperty(Types._VerdictRegion, QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION, Types._RuleRegion, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _VerdictRegion__referredRuleRegion = LIBRARY.createProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION, Types._VerdictRegion, 0);
 		static {
+			_BasicPartition__constantEdges.setOpposite(_Edge__BasicPartition__constantEdges);
+			_BasicPartition__constantNodes.setOpposite(_Node__BasicPartition__constantNodes);
+			_BasicPartition__constantSuccessFalseNodes.setOpposite(_Node__BasicPartition__constantSuccessFalseNodes);
+			_BasicPartition__constantSuccessTrueNodes.setOpposite(_Node__BasicPartition__constantSuccessTrueNodes);
+			_BasicPartition__explicitPredecessors.setOpposite(_MappingPartition__explicitSuccessors);
+			_BasicPartition__headNodes.setOpposite(_Node__BasicPartition__headNodes);
+			_BasicPartition__loadedEdges.setOpposite(_Edge__BasicPartition__loadedEdges);
+			_BasicPartition__loadedNodes.setOpposite(_Node__BasicPartition__loadedNodes);
+			_BasicPartition__owningMergedPartition.setOpposite(_MergedPartition__ownedMergedPartitions);
+			_BasicPartition__predicatedEdges.setOpposite(_Edge__BasicPartition__predicatedEdges);
+			_BasicPartition__predicatedNodes.setOpposite(_Node__BasicPartition__predicatedNodes);
+			_BasicPartition__realizedEdges.setOpposite(_Edge__BasicPartition__realizedEdges);
+			_BasicPartition__realizedNodes.setOpposite(_Node__BasicPartition__realizedNodes);
+			_BasicPartition__speculatedEdges.setOpposite(_Edge__BasicPartition__speculatedEdges);
+			_BasicPartition__speculatedNodes.setOpposite(_Node__BasicPartition__speculatedNodes);
+			_BasicPartition__speculationNodes.setOpposite(_Node__BasicPartition__speculationNodes);
+
+
+			_CastEdge__referredClassDatum.setOpposite(_ClassDatum__CastEdge__referredClassDatum);
+
+			_ClassDatum__completeClasses.setOpposite(createOpposite(PivotPackage.Literals.COMPLETE_CLASS, "ClassDatum", _ClassDatum__completeClasses));
+			_ClassDatum__ownedPropertyDatums.setOpposite(_PropertyDatum__owningClassDatum);
+			_ClassDatum__owningScheduleModel.setOpposite(_ScheduleModel__ownedClassDatums);
+			_ClassDatum__referredClass.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "ClassDatum", _ClassDatum__referredClass));
+			_ClassDatum__referredTypedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "ClassDatum", _ClassDatum__referredTypedModel));
+			_ClassDatum__superClassDatums.setOpposite(_ClassDatum__ClassDatum__superClassDatums);
+			_ClassDatum__CastEdge__referredClassDatum.setOpposite(_CastEdge__referredClassDatum);
+			_ClassDatum__ClassDatum__superClassDatums.setOpposite(_ClassDatum__superClassDatums);
+			_ClassDatum__CollectionClassDatum__elementalClassDatum.setOpposite(_CollectionClassDatum__elementalClassDatum);
+			_ClassDatum__KeyedValueNode__classDatumValue.setOpposite(_KeyedValueNode__classDatumValue);
+			_ClassDatum__Node__classDatum.setOpposite(_Node__classDatum);
+			_ClassDatum__NodeConnection__classDatum.setOpposite(_NodeConnection__classDatum);
+			_ClassDatum__PropertyDatum__targetClassDatum.setOpposite(_PropertyDatum__targetClassDatum);
+
+			_Cluster__memberEdges.setOpposite(_Edge__cluster);
+			_Cluster__memberNodes.setOpposite(_Node__cluster);
+			_Cluster__owningRegion.setOpposite(_Region__ownedClusters);
+			_Cluster__precedingClusters.setOpposite(_Cluster__succeedingClusters);
+			_Cluster__succeedingClusters.setOpposite(_Cluster__precedingClusters);
+
+			_CollectionClassDatum__elementalClassDatum.setOpposite(_ClassDatum__CollectionClassDatum__elementalClassDatum);
+
+			_CollectionPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.COLLECTION_LITERAL_PART, "CollectionPartEdge", _CollectionPartEdge__referredPart));
+
+			_CompositePartition__ownedMappingPartitions.setOpposite(_MappingPartition__owningCompositePartition);
+
+			_Connection__commonPartition.setOpposite(_Partition__Connection__commonPartition);
+			_Connection__connectionRole.setDefaultValueString("UNDEFINED");
+			_Connection__intermediatePartitions.setOpposite(_Partition__Connection__intermediatePartitions);
+			_Connection__owningRootRegion.setOpposite(_RootRegion__ownedConnections);
+			_Connection__sourceEnds.setOpposite(_ConnectionEnd__Connection__sourceEnds);
+
+			_ConnectionEnd__Connection__sourceEnds.setOpposite(_Connection__sourceEnds);
+
+			_CyclicMappingRegion__elementRegions.setOpposite(_MappingRegion__CyclicMappingRegion__elementRegions);
+
+			_DispatchRegion__referredRuleRegion.setOpposite(_RuleRegion__DispatchRegion__referredRuleRegion);
+
+			_Edge__cluster.setOpposite(_Cluster__memberEdges);
+			_Edge__owningRegion.setOpposite(_Region__ownedEdges);
+			_Edge__sourceNode.setOpposite(_Node__outgoingEdges);
+			_Edge__targetNode.setOpposite(_Node__incomingEdges);
+			_Edge__utility.setDefaultValueString("NOT_KNOWN");
+			_Edge__BasicPartition__constantEdges.setOpposite(_BasicPartition__constantEdges);
+			_Edge__BasicPartition__loadedEdges.setOpposite(_BasicPartition__loadedEdges);
+			_Edge__BasicPartition__predicatedEdges.setOpposite(_BasicPartition__predicatedEdges);
+			_Edge__BasicPartition__realizedEdges.setOpposite(_BasicPartition__realizedEdges);
+			_Edge__BasicPartition__speculatedEdges.setOpposite(_BasicPartition__speculatedEdges);
+
+			_EdgeConnection__mandatoryTargetEdges.setOpposite(_NavigableEdge__EdgeConnection__mandatoryTargetEdges);
+			_EdgeConnection__preferredTargetEdges.setOpposite(_NavigableEdge__EdgeConnection__preferredTargetEdges);
+			_EdgeConnection__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "EdgeConnection", _EdgeConnection__referredProperty));
+			_EdgeConnection__NavigableEdge__incomingConnection.setOpposite(_NavigableEdge__incomingConnection);
+			_EdgeConnection__NavigableEdge__outgoingConnections.setOpposite(_NavigableEdge__outgoingConnections);
+
+			_EnumLiteralNode__enumValue.setOpposite(createOpposite(PivotPackage.Literals.ENUMERATION_LITERAL, "EnumLiteralNode", _EnumLiteralNode__enumValue));
+
+			_KeyPartEdge__referredPart.setOpposite(_PropertyDatum__KeyPartEdge__referredPart);
+
+			_KeyedValueNode__classDatumValue.setOpposite(_ClassDatum__KeyedValueNode__classDatumValue);
+
+			_LoadingPartition__referredLoadingRegion.setOpposite(_LoadingRegion__loadingPartition);
+			_LoadingPartition__RootPartition__loadingPartition.setOpposite(_RootPartition__loadingPartition);
+
+			_LoadingRegion__loadingPartition.setOpposite(_LoadingPartition__referredLoadingRegion);
+			_LoadingRegion__owningRootRegion.setOpposite(_RootRegion__ownedLoadingRegion);
+
+			_MapPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.MAP_LITERAL_PART, "MapPartEdge", _MapPartEdge__referredPart));
+
+			_MappingPartition__explicitSuccessors.setOpposite(_BasicPartition__explicitPredecessors);
+			_MappingPartition__owningCompositePartition.setOpposite(_CompositePartition__ownedMappingPartitions);
+			_MappingPartition__referedMappingRegion.setOpposite(_MappingRegion__mappingPartitions);
+			_MappingPartition__region.setOpposite(_Region__MappingPartition__region);
+
+			_MappingRegion__headNodes.setOpposite(_Node__MappingRegion__headNodes);
+			_MappingRegion__mappingPartitions.setOpposite(_MappingPartition__referedMappingRegion);
+			_MappingRegion__owningScheduleModel.setOpposite(_ScheduleModel__ownedMappingRegions);
+			_MappingRegion__CyclicMappingRegion__elementRegions.setOpposite(_CyclicMappingRegion__elementRegions);
+
+			_MergedPartition__ownedMergedPartitions.setOpposite(_BasicPartition__owningMergedPartition);
+
+			_NavigableEdge__incomingConnection.setOpposite(_EdgeConnection__NavigableEdge__incomingConnection);
+			_NavigableEdge__outgoingConnections.setOpposite(_EdgeConnection__NavigableEdge__outgoingConnections);
+			_NavigableEdge__EdgeConnection__mandatoryTargetEdges.setOpposite(_EdgeConnection__mandatoryTargetEdges);
+			_NavigableEdge__EdgeConnection__preferredTargetEdges.setOpposite(_EdgeConnection__preferredTargetEdges);
+
+			_NavigationEdge__oppositeEdge.setOpposite(_NavigationEdge__NavigationEdge__oppositeEdge);
+			_NavigationEdge__partial.setDefaultValueString("false");
+			_NavigationEdge__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "NavigationEdge", _NavigationEdge__referredProperty));
+			_NavigationEdge__secondary.setDefaultValueString("false");
+			_NavigationEdge__NavigationEdge__oppositeEdge.setOpposite(_NavigationEdge__oppositeEdge);
+
+			_Node__classDatum.setOpposite(_ClassDatum__Node__classDatum);
+			_Node__cluster.setOpposite(_Cluster__memberNodes);
+			_Node__incomingConnection.setOpposite(_NodeConnection__Node__incomingConnection);
+			_Node__incomingEdges.setOpposite(_Edge__targetNode);
+			_Node__outgoingConnections.setOpposite(_NodeConnection__Node__outgoingConnections);
+			_Node__outgoingEdges.setOpposite(_Edge__sourceNode);
+			_Node__owningRegion.setOpposite(_Region__ownedNodes);
+			_Node__utility.setDefaultValueString("NOT_KNOWN");
+			_Node__BasicPartition__constantNodes.setOpposite(_BasicPartition__constantNodes);
+			_Node__BasicPartition__constantSuccessFalseNodes.setOpposite(_BasicPartition__constantSuccessFalseNodes);
+			_Node__BasicPartition__constantSuccessTrueNodes.setOpposite(_BasicPartition__constantSuccessTrueNodes);
+			_Node__BasicPartition__headNodes.setOpposite(_BasicPartition__headNodes);
+			_Node__BasicPartition__loadedNodes.setOpposite(_BasicPartition__loadedNodes);
+			_Node__BasicPartition__predicatedNodes.setOpposite(_BasicPartition__predicatedNodes);
+			_Node__BasicPartition__realizedNodes.setOpposite(_BasicPartition__realizedNodes);
+			_Node__BasicPartition__speculatedNodes.setOpposite(_BasicPartition__speculatedNodes);
+			_Node__BasicPartition__speculationNodes.setOpposite(_BasicPartition__speculationNodes);
+			_Node__MappingRegion__headNodes.setOpposite(_MappingRegion__headNodes);
+			_Node__NodeConnection__mandatoryTargetNodes.setOpposite(_NodeConnection__mandatoryTargetNodes);
+			_Node__NodeConnection__passedTargetNodes.setOpposite(_NodeConnection__passedTargetNodes);
+			_Node__NodeConnection__preferredTargetNodes.setOpposite(_NodeConnection__preferredTargetNodes);
+			_Node__OperationRegion__dependencyNodes.setOpposite(_OperationRegion__dependencyNodes);
+			_Node__OperationRegion__headNodes.setOpposite(_OperationRegion__headNodes);
+			_Node__OperationRegion__resultNode.setOpposite(_OperationRegion__resultNode);
+
+			_NodeConnection__classDatum.setOpposite(_ClassDatum__NodeConnection__classDatum);
+			_NodeConnection__mandatoryTargetNodes.setOpposite(_Node__NodeConnection__mandatoryTargetNodes);
+			_NodeConnection__passedTargetNodes.setOpposite(_Node__NodeConnection__passedTargetNodes);
+			_NodeConnection__preferredTargetNodes.setOpposite(_Node__NodeConnection__preferredTargetNodes);
+			_NodeConnection__Node__incomingConnection.setOpposite(_Node__incomingConnection);
+			_NodeConnection__Node__outgoingConnections.setOpposite(_Node__outgoingConnections);
+			_NodeConnection__Partition__intermediateConnections.setOpposite(_Partition__intermediateConnections);
+			_NodeConnection__Partition__rootConnections.setOpposite(_Partition__rootConnections);
+
+
+			_OperationCallNode__referredOperation.setOpposite(createOpposite(PivotPackage.Literals.OPERATION, "OperationCallNode", _OperationCallNode__referredOperation));
+
+			_OperationParameterEdge__parameterIndex.setDefaultValueString("-1");
+			_OperationParameterEdge__referredParameter.setOpposite(createOpposite(PivotPackage.Literals.PARAMETER, "OperationParameterEdge", _OperationParameterEdge__referredParameter));
+
+			_OperationRegion__dependencyNodes.setOpposite(_Node__OperationRegion__dependencyNodes);
+			_OperationRegion__headNodes.setOpposite(_Node__OperationRegion__headNodes);
+			_OperationRegion__owningScheduleModel.setOpposite(_ScheduleModel__ownedOperationRegions);
+			_OperationRegion__referredOperation.setOpposite(createOpposite(PivotPackage.Literals.OPERATION, "OperationRegion", _OperationRegion__referredOperation));
+			_OperationRegion__resultNode.setOpposite(_Node__OperationRegion__resultNode);
+
+			_OperationSelfEdge__referredType.setOpposite(createOpposite(PivotPackage.Literals.TYPE, "OperationSelfEdge", _OperationSelfEdge__referredType));
+
+			_Partition__intermediateConnections.setOpposite(_NodeConnection__Partition__intermediateConnections);
+			_Partition__rootConnections.setOpposite(_NodeConnection__Partition__rootConnections);
+			_Partition__Connection__commonPartition.setOpposite(_Connection__commonPartition);
+			_Partition__Connection__intermediatePartitions.setOpposite(_Connection__intermediatePartitions);
+
+			_PredicateEdge__partial.setDefaultValueString("false");
+
+			_PropertyDatum__opposite.setOpposite(_PropertyDatum__PropertyDatum__opposite);
+			_PropertyDatum__owningClassDatum.setOpposite(_ClassDatum__ownedPropertyDatums);
+			_PropertyDatum__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "PropertyDatum", _PropertyDatum__referredProperty));
+			_PropertyDatum__superPropertyDatums.setOpposite(_PropertyDatum__PropertyDatum__superPropertyDatums);
+			_PropertyDatum__targetClassDatum.setOpposite(_ClassDatum__PropertyDatum__targetClassDatum);
+			_PropertyDatum__KeyPartEdge__referredPart.setOpposite(_KeyPartEdge__referredPart);
+			_PropertyDatum__PropertyDatum__opposite.setOpposite(_PropertyDatum__opposite);
+			_PropertyDatum__PropertyDatum__superPropertyDatums.setOpposite(_PropertyDatum__superPropertyDatums);
+
+			_RecursionEdge__primary.setDefaultValueString("false");
+
+			_Region__ownedClusters.setOpposite(_Cluster__owningRegion);
+			_Region__ownedEdges.setOpposite(_Edge__owningRegion);
+			_Region__ownedNodes.setOpposite(_Node__owningRegion);
+			_Region__rootRegion.setOpposite(_RootRegion__activeRegions);
+			_Region__MappingPartition__region.setOpposite(_MappingPartition__region);
+
+			_RootPartition__loadingPartition.setOpposite(_LoadingPartition__RootPartition__loadingPartition);
+			_RootPartition__owningRootRegion.setOpposite(_RootRegion__ownedRootPartition);
+
+			_RootRegion__activeRegions.setOpposite(_Region__rootRegion);
+			_RootRegion__ownedConnections.setOpposite(_Connection__owningRootRegion);
+			_RootRegion__ownedLoadingRegion.setOpposite(_LoadingRegion__owningRootRegion);
+			_RootRegion__ownedRootPartition.setOpposite(_RootPartition__owningRootRegion);
+			_RootRegion__owningScheduleModel.setOpposite(_ScheduleModel__ownedRootRegions);
+			_RootRegion__referredTransformation.setOpposite(createOpposite(QVTbasePackage.Literals.TRANSFORMATION, "RootRegion", _RootRegion__referredTransformation));
+
+			_RuleRegion__referredRule.setOpposite(createOpposite(QVTbasePackage.Literals.RULE, "RuleRegion", _RuleRegion__referredRule));
+			_RuleRegion__DispatchRegion__referredRuleRegion.setOpposite(_DispatchRegion__referredRuleRegion);
+			_RuleRegion__VerdictRegion__referredRuleRegion.setOpposite(_VerdictRegion__referredRuleRegion);
+
+			_ScheduleModel__ownedClassDatums.setOpposite(_ClassDatum__owningScheduleModel);
+			_ScheduleModel__ownedMappingRegions.setOpposite(_MappingRegion__owningScheduleModel);
+			_ScheduleModel__ownedOperationRegions.setOpposite(_OperationRegion__owningScheduleModel);
+			_ScheduleModel__ownedRootRegions.setOpposite(_RootRegion__owningScheduleModel);
+
+			_ShadowPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.SHADOW_PART, "ShadowPartEdge", _ShadowPartEdge__referredPart));
+
+
+
+			_TuplePartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.TUPLE_LITERAL_PART, "TuplePartEdge", _TuplePartEdge__referredPart));
+
+			_TypeLiteralNode__typeValue.setOpposite(createOpposite(PivotPackage.Literals.TYPE, "TypeLiteralNode", _TypeLiteralNode__typeValue));
+
+			_VariableNode__referredVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "VariableNode", _VariableNode__referredVariable));
+
+			_VerdictRegion__referredRuleRegion.setOpposite(_RuleRegion__VerdictRegion__referredRuleRegion);
+
 			Init.initEnd();
 		}
 
@@ -6061,242 +6278,242 @@ public class QVTscheduleTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _ArgumentEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _BasicPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._BasicPartition__constantEdges,
-			QVTscheduleTables.Properties._BasicPartition__constantNodes,
-			QVTscheduleTables.Properties._BasicPartition__constantSuccessFalseNodes,
-			QVTscheduleTables.Properties._BasicPartition__constantSuccessTrueNodes,
-			QVTscheduleTables.Properties._BasicPartition__explicitPredecessors,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._BasicPartition__headNodes,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
-			QVTscheduleTables.Properties._BasicPartition__loadedEdges,
-			QVTscheduleTables.Properties._BasicPartition__loadedNodes,
+			Properties._BasicPartition__constantEdges,
+			Properties._BasicPartition__constantNodes,
+			Properties._BasicPartition__constantSuccessFalseNodes,
+			Properties._BasicPartition__constantSuccessTrueNodes,
+			Properties._BasicPartition__explicitPredecessors,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._BasicPartition__headNodes,
+			Properties._Partition__intermediateConnections,
+			Properties._BasicPartition__loadedEdges,
+			Properties._BasicPartition__loadedNodes,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._BasicPartition__owningMergedPartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._BasicPartition__predicatedEdges,
-			QVTscheduleTables.Properties._BasicPartition__predicatedNodes,
-			QVTscheduleTables.Properties._BasicPartition__realizedEdges,
-			QVTscheduleTables.Properties._BasicPartition__realizedNodes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._BasicPartition__speculatedEdges,
-			QVTscheduleTables.Properties._BasicPartition__speculatedNodes,
-			QVTscheduleTables.Properties._BasicPartition__speculationNodes
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._BasicPartition__owningMergedPartition,
+			Properties._Partition__passes,
+			Properties._BasicPartition__predicatedEdges,
+			Properties._BasicPartition__predicatedNodes,
+			Properties._BasicPartition__realizedEdges,
+			Properties._BasicPartition__realizedNodes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections,
+			Properties._BasicPartition__speculatedEdges,
+			Properties._BasicPartition__speculatedNodes,
+			Properties._BasicPartition__speculationNodes
 		};
 
 		private static final @NonNull Property @NonNull [] _BooleanLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._BooleanLiteralNode__booleanValue,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._BooleanLiteralNode__booleanValue,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _CastEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._CastEdge__referredClassDatum,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._CastEdge__referredClassDatum,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _ClassDatum = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._ClassDatum__completeClasses,
+			Properties._ClassDatum__completeClasses,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
-			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
-			QVTscheduleTables.Properties._ClassDatum__referredClass,
-			QVTscheduleTables.Properties._ClassDatum__referredTypedModel,
-			QVTscheduleTables.Properties._ClassDatum__superClassDatums
+			Properties._ClassDatum__ownedPropertyDatums,
+			Properties._ClassDatum__owningScheduleModel,
+			Properties._ClassDatum__referredClass,
+			Properties._ClassDatum__referredTypedModel,
+			Properties._ClassDatum__superClassDatums
 		};
 
 		private static final @NonNull Property @NonNull [] _Cluster = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Cluster__depth,
-			QVTscheduleTables.Properties._Cluster__memberEdges,
-			QVTscheduleTables.Properties._Cluster__memberNodes,
+			Properties._Cluster__depth,
+			Properties._Cluster__memberEdges,
+			Properties._Cluster__memberNodes,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Cluster__owningRegion,
-			QVTscheduleTables.Properties._Cluster__precedingClusters,
-			QVTscheduleTables.Properties._Cluster__succeedingClusters,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Cluster__owningRegion,
+			Properties._Cluster__precedingClusters,
+			Properties._Cluster__succeedingClusters,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _CollectionClassDatum = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._ClassDatum__completeClasses,
-			QVTscheduleTables.Properties._CollectionClassDatum__elementalClassDatum,
+			Properties._ClassDatum__completeClasses,
+			Properties._CollectionClassDatum__elementalClassDatum,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
-			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
-			QVTscheduleTables.Properties._ClassDatum__referredClass,
-			QVTscheduleTables.Properties._ClassDatum__referredTypedModel,
-			QVTscheduleTables.Properties._ClassDatum__superClassDatums
+			Properties._ClassDatum__ownedPropertyDatums,
+			Properties._ClassDatum__owningScheduleModel,
+			Properties._ClassDatum__referredClass,
+			Properties._ClassDatum__referredTypedModel,
+			Properties._ClassDatum__superClassDatums
 		};
 
 		private static final @NonNull Property @NonNull [] _CollectionLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _CollectionPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._CollectionPartEdge__referredPart,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._CollectionPartEdge__referredPart,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _CollectionRangeNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _ComposedNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _CompositePartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._CompositePartition__ownedMappingPartitions,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._CompositePartition__ownedMappingPartitions,
+			Properties._Partition__passes,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _Connection = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Connection__commonPartition,
-			QVTscheduleTables.Properties._Connection__connectionRole,
-			QVTscheduleTables.Properties._Connection__intermediatePartitions,
-			QVTscheduleTables.Properties._Connection__name,
+			Properties._Connection__commonPartition,
+			Properties._Connection__connectionRole,
+			Properties._Connection__intermediatePartitions,
+			Properties._Connection__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Connection__owningRootRegion,
-			QVTscheduleTables.Properties._Connection__sourceEnds,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Connection__owningRootRegion,
+			Properties._Connection__sourceEnds,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _ConnectionEnd = {
@@ -6311,829 +6528,829 @@ public class QVTscheduleTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _CyclicMappingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._CyclicMappingRegion__elementRegions,
-			QVTscheduleTables.Properties._MappingRegion__headNodes,
-			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
+			Properties._CyclicMappingRegion__elementRegions,
+			Properties._MappingRegion__headNodes,
+			Properties._MappingRegion__mappingPartitions,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._MappingRegion__owningScheduleModel,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _CyclicPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._CompositePartition__ownedMappingPartitions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._CompositePartition__ownedMappingPartitions,
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._Partition__passes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _DependencyEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _DependencyNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _DispatchRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingRegion__headNodes,
-			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
+			Properties._MappingRegion__headNodes,
+			Properties._MappingRegion__mappingPartitions,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__referredRule,
-			QVTscheduleTables.Properties._DispatchRegion__referredRuleRegion,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._MappingRegion__owningScheduleModel,
+			Properties._RuleRegion__referredRule,
+			Properties._DispatchRegion__referredRuleRegion,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _Edge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _EdgeConnection = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Connection__commonPartition,
-			QVTscheduleTables.Properties._Connection__connectionRole,
-			QVTscheduleTables.Properties._Connection__intermediatePartitions,
-			QVTscheduleTables.Properties._EdgeConnection__mandatoryTargetEdges,
-			QVTscheduleTables.Properties._Connection__name,
+			Properties._Connection__commonPartition,
+			Properties._Connection__connectionRole,
+			Properties._Connection__intermediatePartitions,
+			Properties._EdgeConnection__mandatoryTargetEdges,
+			Properties._Connection__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Connection__owningRootRegion,
-			QVTscheduleTables.Properties._EdgeConnection__preferredTargetEdges,
-			QVTscheduleTables.Properties._EdgeConnection__referredProperty,
-			QVTscheduleTables.Properties._Connection__sourceEnds,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Connection__owningRootRegion,
+			Properties._EdgeConnection__preferredTargetEdges,
+			Properties._EdgeConnection__referredProperty,
+			Properties._Connection__sourceEnds,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _EnumLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._EnumLiteralNode__enumValue,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._EnumLiteralNode__enumValue,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _ErrorNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _ExpressionEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _IfNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _IncludesEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _InputNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _IteratedEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _IteratorNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._VariableNode__referredVariable,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._VariableNode__referredVariable,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _KeyPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._NavigableEdge__incomingConnection,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._NavigableEdge__incomingConnection,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._NavigationEdge__oppositeEdge,
-			QVTscheduleTables.Properties._NavigableEdge__outgoingConnections,
+			Properties._NavigationEdge__oppositeEdge,
+			Properties._NavigableEdge__outgoingConnections,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._NavigationEdge__partial,
-			QVTscheduleTables.Properties._KeyPartEdge__referredPart,
-			QVTscheduleTables.Properties._NavigationEdge__referredProperty,
-			QVTscheduleTables.Properties._NavigationEdge__secondary,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._NavigationEdge__partial,
+			Properties._KeyPartEdge__referredPart,
+			Properties._NavigationEdge__referredProperty,
+			Properties._NavigationEdge__secondary,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _KeyedValueNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._KeyedValueNode__classDatumValue,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._KeyedValueNode__classDatumValue,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _LoadingPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._LoadingPartition__referredLoadingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._Partition__passes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._LoadingPartition__referredLoadingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _LoadingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._LoadingRegion__loadingPartition,
+			Properties._LoadingRegion__loadingPartition,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._LoadingRegion__owningRootRegion,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName,
-			QVTscheduleTables.Properties._LoadingRegion__targetName
+			Properties._Region__ownedNodes,
+			Properties._LoadingRegion__owningRootRegion,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName,
+			Properties._LoadingRegion__targetName
 		};
 
 		private static final @NonNull Property @NonNull [] _MapLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _MapPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._MapPartEdge__referredPart,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._MapPartEdge__referredPart,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _MapPartNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._Partition__passes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _MappingRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingRegion__headNodes,
-			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
+			Properties._MappingRegion__headNodes,
+			Properties._MappingRegion__mappingPartitions,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._MappingRegion__owningScheduleModel,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _MergedPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._BasicPartition__constantEdges,
-			QVTscheduleTables.Properties._BasicPartition__constantNodes,
-			QVTscheduleTables.Properties._BasicPartition__constantSuccessFalseNodes,
-			QVTscheduleTables.Properties._BasicPartition__constantSuccessTrueNodes,
-			QVTscheduleTables.Properties._BasicPartition__explicitPredecessors,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._BasicPartition__headNodes,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
-			QVTscheduleTables.Properties._BasicPartition__loadedEdges,
-			QVTscheduleTables.Properties._BasicPartition__loadedNodes,
+			Properties._BasicPartition__constantEdges,
+			Properties._BasicPartition__constantNodes,
+			Properties._BasicPartition__constantSuccessFalseNodes,
+			Properties._BasicPartition__constantSuccessTrueNodes,
+			Properties._BasicPartition__explicitPredecessors,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._BasicPartition__headNodes,
+			Properties._Partition__intermediateConnections,
+			Properties._BasicPartition__loadedEdges,
+			Properties._BasicPartition__loadedNodes,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._MergedPartition__ownedMergedPartitions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._BasicPartition__owningMergedPartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._BasicPartition__predicatedEdges,
-			QVTscheduleTables.Properties._BasicPartition__predicatedNodes,
-			QVTscheduleTables.Properties._BasicPartition__realizedEdges,
-			QVTscheduleTables.Properties._BasicPartition__realizedNodes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections,
-			QVTscheduleTables.Properties._BasicPartition__speculatedEdges,
-			QVTscheduleTables.Properties._BasicPartition__speculatedNodes,
-			QVTscheduleTables.Properties._BasicPartition__speculationNodes
+			Properties._MergedPartition__ownedMergedPartitions,
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._BasicPartition__owningMergedPartition,
+			Properties._Partition__passes,
+			Properties._BasicPartition__predicatedEdges,
+			Properties._BasicPartition__predicatedNodes,
+			Properties._BasicPartition__realizedEdges,
+			Properties._BasicPartition__realizedNodes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections,
+			Properties._BasicPartition__speculatedEdges,
+			Properties._BasicPartition__speculatedNodes,
+			Properties._BasicPartition__speculationNodes
 		};
 
 		private static final @NonNull Property @NonNull [] _NavigableEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._NavigableEdge__incomingConnection,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._NavigableEdge__incomingConnection,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._NavigableEdge__outgoingConnections,
+			Properties._NavigableEdge__outgoingConnections,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _NavigationEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._NavigableEdge__incomingConnection,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._NavigableEdge__incomingConnection,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._NavigationEdge__oppositeEdge,
-			QVTscheduleTables.Properties._NavigableEdge__outgoingConnections,
+			Properties._NavigationEdge__oppositeEdge,
+			Properties._NavigableEdge__outgoingConnections,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._NavigationEdge__partial,
-			QVTscheduleTables.Properties._NavigationEdge__referredProperty,
-			QVTscheduleTables.Properties._NavigationEdge__secondary,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._NavigationEdge__partial,
+			Properties._NavigationEdge__referredProperty,
+			Properties._NavigationEdge__secondary,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Node = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _NodeConnection = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._NodeConnection__classDatum,
-			QVTscheduleTables.Properties._Connection__commonPartition,
-			QVTscheduleTables.Properties._Connection__connectionRole,
-			QVTscheduleTables.Properties._Connection__intermediatePartitions,
-			QVTscheduleTables.Properties._NodeConnection__mandatoryTargetNodes,
-			QVTscheduleTables.Properties._Connection__name,
+			Properties._NodeConnection__classDatum,
+			Properties._Connection__commonPartition,
+			Properties._Connection__connectionRole,
+			Properties._Connection__intermediatePartitions,
+			Properties._NodeConnection__mandatoryTargetNodes,
+			Properties._Connection__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Connection__owningRootRegion,
-			QVTscheduleTables.Properties._NodeConnection__passedTargetNodes,
-			QVTscheduleTables.Properties._NodeConnection__preferredTargetNodes,
-			QVTscheduleTables.Properties._Connection__sourceEnds,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Connection__owningRootRegion,
+			Properties._NodeConnection__passedTargetNodes,
+			Properties._NodeConnection__preferredTargetNodes,
+			Properties._Connection__sourceEnds,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _NonPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._MappingPartition__explicitSuccessors,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
-			QVTscheduleTables.Properties._MappingPartition__region,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._MappingPartition__owningCompositePartition,
+			Properties._Partition__passes,
+			Properties._MappingPartition__referedMappingRegion,
+			Properties._MappingPartition__region,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _NullLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Number = {};
 
 		private static final @NonNull Property @NonNull [] _NumericLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
-			QVTscheduleTables.Properties._NumericLiteralNode__numericValue,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
+			Properties._NumericLiteralNode__numericValue,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationCallNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._OperationCallNode__referredOperation,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._OperationCallNode__referredOperation,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationParameterEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._OperationParameterEdge__parameterIndex,
-			QVTscheduleTables.Properties._OperationParameterEdge__referredParameter,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._OperationParameterEdge__parameterIndex,
+			Properties._OperationParameterEdge__referredParameter,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._OperationRegion__dependencyNodes,
-			QVTscheduleTables.Properties._OperationRegion__headNodes,
+			Properties._OperationRegion__dependencyNodes,
+			Properties._OperationRegion__headNodes,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._OperationRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._OperationRegion__referredOperation,
-			QVTscheduleTables.Properties._OperationRegion__resultNode,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._OperationRegion__owningScheduleModel,
+			Properties._OperationRegion__referredOperation,
+			Properties._OperationRegion__resultNode,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationSelfEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._OperationSelfEdge__referredType,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._OperationSelfEdge__referredType,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Partition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			Properties._Partition__intermediateConnections,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._Partition__passes,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _PatternTypedNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _PatternVariableNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._VariableNode__referredVariable,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._VariableNode__referredVariable,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _PredicateEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._PredicateEdge__partial,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._PredicateEdge__partial,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _PropertyDatum = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._PropertyDatum__key,
+			Properties._PropertyDatum__key,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._PropertyDatum__opposite,
+			Properties._PropertyDatum__opposite,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._PropertyDatum__owningClassDatum,
-			QVTscheduleTables.Properties._PropertyDatum__referredProperty,
-			QVTscheduleTables.Properties._PropertyDatum__superPropertyDatums,
-			QVTscheduleTables.Properties._PropertyDatum__targetClassDatum
+			Properties._PropertyDatum__owningClassDatum,
+			Properties._PropertyDatum__referredProperty,
+			Properties._PropertyDatum__superPropertyDatums,
+			Properties._PropertyDatum__targetClassDatum
 		};
 
 		private static final @NonNull Property @NonNull [] _RecursionEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._RecursionEdge__primary,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._RecursionEdge__primary,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Region = {
@@ -7142,13 +7359,13 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _Role = {
@@ -7158,58 +7375,58 @@ public class QVTscheduleTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _RootPartition = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Partition__intermediateConnections,
-			QVTscheduleTables.Properties._RootPartition__loadingPartition,
+			Properties._Partition__intermediateConnections,
+			Properties._RootPartition__loadingPartition,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._CompositePartition__ownedMappingPartitions,
-			QVTscheduleTables.Properties._RootPartition__owningRootRegion,
-			QVTscheduleTables.Properties._Partition__passes,
-			QVTscheduleTables.Properties._Partition__rootConnections
+			Properties._CompositePartition__ownedMappingPartitions,
+			Properties._RootPartition__owningRootRegion,
+			Properties._Partition__passes,
+			Properties._Partition__rootConnections
 		};
 
 		private static final @NonNull Property @NonNull [] _RootRegion = {
-			QVTscheduleTables.Properties._RootRegion__activeRegions,
+			Properties._RootRegion__activeRegions,
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._RootRegion__ownedConnections,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._RootRegion__ownedConnections,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._RootRegion__ownedLoadingRegion,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._RootRegion__ownedRootPartition,
-			QVTscheduleTables.Properties._RootRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RootRegion__referredTransformation,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._RootRegion__ownedLoadingRegion,
+			Properties._Region__ownedNodes,
+			Properties._RootRegion__ownedRootPartition,
+			Properties._RootRegion__owningScheduleModel,
+			Properties._RootRegion__referredTransformation,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _RuleRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingRegion__headNodes,
-			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
+			Properties._MappingRegion__headNodes,
+			Properties._MappingRegion__mappingPartitions,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__referredRule,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._MappingRegion__owningScheduleModel,
+			Properties._RuleRegion__referredRule,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _ScheduleModel = {
@@ -7219,194 +7436,194 @@ public class QVTscheduleTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._ScheduleModel__ownedClassDatums,
+			Properties._ScheduleModel__ownedClassDatums,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Namespace__ownedConstraints,
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._Model__ownedImports,
-			QVTscheduleTables.Properties._ScheduleModel__ownedMappingRegions,
-			QVTscheduleTables.Properties._ScheduleModel__ownedOperationRegions,
+			Properties._ScheduleModel__ownedMappingRegions,
+			Properties._ScheduleModel__ownedOperationRegions,
 			PivotTables.Properties._Model__ownedPackages,
-			QVTscheduleTables.Properties._ScheduleModel__ownedRootRegions,
+			Properties._ScheduleModel__ownedRootRegions,
 			PivotTables.Properties._Model__xmiidVersion
 		};
 
 		private static final @NonNull Property @NonNull [] _ShadowNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _ShadowPartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._ShadowPartEdge__referredPart,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._ShadowPartEdge__referredPart,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _StringLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._StringLiteralNode__stringValue,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._StringLiteralNode__stringValue,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _SuccessEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._NavigableEdge__incomingConnection,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._NavigableEdge__incomingConnection,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._NavigationEdge__oppositeEdge,
-			QVTscheduleTables.Properties._NavigableEdge__outgoingConnections,
+			Properties._NavigationEdge__oppositeEdge,
+			Properties._NavigableEdge__outgoingConnections,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._NavigationEdge__partial,
-			QVTscheduleTables.Properties._NavigationEdge__referredProperty,
-			QVTscheduleTables.Properties._NavigationEdge__secondary,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._NavigationEdge__partial,
+			Properties._NavigationEdge__referredProperty,
+			Properties._NavigationEdge__secondary,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _SuccessNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Symbolable = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Symbolable__symbolName
 		};
 
 		private static final @NonNull Property @NonNull [] _TupleLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _TuplePartEdge = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Edge__cluster,
-			QVTscheduleTables.Properties._Edge__edgeRole,
-			QVTscheduleTables.Properties._Edge__name,
+			Properties._Edge__cluster,
+			Properties._Edge__edgeRole,
+			Properties._Edge__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Edge__owningRegion,
-			QVTscheduleTables.Properties._TuplePartEdge__referredPart,
-			QVTscheduleTables.Properties._Edge__sourceNode,
-			QVTscheduleTables.Properties._Edge__targetNode,
-			QVTscheduleTables.Properties._Edge__utility
+			Properties._Edge__owningRegion,
+			Properties._TuplePartEdge__referredPart,
+			Properties._Edge__sourceNode,
+			Properties._Edge__targetNode,
+			Properties._Edge__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _TypeLiteralNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._TypeLiteralNode__typeValue,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._TypeLiteralNode__typeValue,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _UnknownNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _Utility = {
@@ -7416,42 +7633,42 @@ public class QVTscheduleTables extends AbstractTables
 
 		private static final @NonNull Property @NonNull [] _VariableNode = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._Node__classDatum,
-			QVTscheduleTables.Properties._Node__cluster,
-			QVTscheduleTables.Properties._Node__incomingConnection,
-			QVTscheduleTables.Properties._Node__incomingEdges,
-			QVTscheduleTables.Properties._Node__name,
-			QVTscheduleTables.Properties._Node__nodeRole,
+			Properties._Node__classDatum,
+			Properties._Node__cluster,
+			Properties._Node__incomingConnection,
+			Properties._Node__incomingEdges,
+			Properties._Node__name,
+			Properties._Node__nodeRole,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			QVTscheduleTables.Properties._Node__outgoingConnections,
-			QVTscheduleTables.Properties._Node__outgoingEdges,
+			Properties._Node__outgoingConnections,
+			Properties._Node__outgoingEdges,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Node__owningRegion,
-			QVTscheduleTables.Properties._VariableNode__referredVariable,
-			QVTscheduleTables.Properties._Node__utility
+			Properties._Node__owningRegion,
+			Properties._VariableNode__referredVariable,
+			Properties._Node__utility
 		};
 
 		private static final @NonNull Property @NonNull [] _VerdictRegion = {
 			PivotTables.Properties._Element__annotatingComments,
-			QVTscheduleTables.Properties._MappingRegion__headNodes,
-			QVTscheduleTables.Properties._MappingRegion__mappingPartitions,
+			Properties._MappingRegion__headNodes,
+			Properties._MappingRegion__mappingPartitions,
 			PivotTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			QVTscheduleTables.Properties._Region__ownedClusters,
+			Properties._Region__ownedClusters,
 			PivotTables.Properties._Element__ownedComments,
-			QVTscheduleTables.Properties._Region__ownedEdges,
+			Properties._Region__ownedEdges,
 			PivotTables.Properties._Element__ownedExtensions,
-			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__referredRule,
-			QVTscheduleTables.Properties._VerdictRegion__referredRuleRegion,
-			QVTscheduleTables.Properties._Region__rootRegion,
-			QVTscheduleTables.Properties._Symbolable__symbolName
+			Properties._Region__ownedNodes,
+			Properties._MappingRegion__owningScheduleModel,
+			Properties._RuleRegion__referredRule,
+			Properties._VerdictRegion__referredRuleRegion,
+			Properties._Region__rootRegion,
+			Properties._Symbolable__symbolName
 		};
 
 		/**
