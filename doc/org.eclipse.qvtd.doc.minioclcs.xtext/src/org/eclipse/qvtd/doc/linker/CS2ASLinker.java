@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.doc.minioclcs.xtext._MiniOCLCS2AS_qvtm_qvtcas.MiniOCLCS2AS_qvtm_qvtcas;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.CS2ASDiagnostic;
@@ -55,7 +54,7 @@ public class CS2ASLinker extends LazyLinker
 					CS2ASTransformationExecutor txExecutor= new CS2ASTransformationExecutor(ocl.getEnvironmentFactory(), MiniOCLCS2AS_qvtm_qvtcas.class);
 					tx = txExecutor.getTransformer();
 
-					tx.addRootObjects("leftCS", ClassUtil.requireNonNull(eResource.getContents()));
+					tx.getTypedModelInstance("leftCS").addInputResource(eResource);
 					if (tx.run()) {
 						URI asModelURI = eResource.getURI().appendFileExtension("xmi");
 						Resource outputResource = rSet.getResource(asModelURI, false);
@@ -63,7 +62,7 @@ public class CS2ASLinker extends LazyLinker
 							outputResource = rSet.createResource(asModelURI);
 						}
 						outputResource.getContents().clear();
-						outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
+						outputResource.getContents().addAll(tx.getTypedModelInstance("rightAS").getRootEObjects());
 						outputResource.save(null);
 					}
 				}
