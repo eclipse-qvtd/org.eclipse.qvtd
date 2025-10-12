@@ -29,20 +29,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Library;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.VoidType;
-import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
@@ -50,12 +46,11 @@ import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
-import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
 /**
@@ -125,6 +120,17 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		Model model = (Model)(getDefault().getContents().get(0));
 		assert model != null;
 		return model;
+	}
+
+	/**
+	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library package.
+	 *  This static definition auto-generated from /org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.oclstdlib
+	 *  is used as the default when no overriding copy is registered.
+	 */
+	public static org.eclipse.ocl.pivot.@NonNull Package getDefaultPackage() {
+		org.eclipse.ocl.pivot.Package pkge = getDefaultModel().getOwnedPackages().get(0);
+		assert pkge != null;
+		return pkge;
 	}
 
 	/**
@@ -212,7 +218,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 
 		/**
-		 * Overridden to trivialise loading of the shared instance.
+		 * Overridden to trivialize loading of the shared instance.
 		 */
 		@Override
 		public void load(Map<?, ?> options) throws IOException {
@@ -267,32 +273,34 @@ public class QVTruntimeLibrary extends ASResourceImpl
 
 	private static class AbstractLibraryContents extends AbstractContents
 	{
-		protected final @NonNull Package ocl;
-		protected final @NonNull Library qvtruntimelibrary;
-		protected final @NonNull Package orphanPackage;
+		protected final org.eclipse.ocl.pivot.@NonNull Package standardLibraryPackage;
+		protected final org.eclipse.ocl.pivot.@NonNull Package local_ocl;
+		protected final org.eclipse.ocl.pivot.@NonNull Package local_orphanage;
 		protected final @NonNull NormalizedTemplateParameter $$0;
 		protected final @NonNull NormalizedTemplateParameter $$1;
 		protected final @NonNull NormalizedTemplateParameter $$2;
 		protected final @NonNull NormalizedTemplateParameter $$3;
 
 		protected AbstractLibraryContents() {
-			ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", IdManager.METAMODEL_ID, OCLstdlibPackage.eINSTANCE);
-			qvtruntimelibrary = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, QVTruntimeLibraryPackage.eINSTANCE);
-			orphanPackage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
-			$$0 = Orphanage.getNormalizedTemplateParameter(orphanPackage, 0);
-			$$1 = Orphanage.getNormalizedTemplateParameter(orphanPackage, 1);
-			$$2 = Orphanage.getNormalizedTemplateParameter(orphanPackage, 2);
-			$$3 = Orphanage.getNormalizedTemplateParameter(orphanPackage, 3);
+			standardLibraryPackage = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
+			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, OCLstdlibPackage.eINSTANCE);
+			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
+			$$0 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 0);
+			$$1 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 1);
+			$$2 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 2);
+			$$3 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 3);
 		}
 	}
 
 	private static class Contents extends AbstractLibraryContents
 	{
 		private final @NonNull Model model;
+		private final org.eclipse.ocl.pivot.@NonNull Package library;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
+			library = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, QVTruntimeLibraryPackage.eINSTANCE);
 			installPackages();
 			installClassTypes();
 			installCollectionTypes();
@@ -306,27 +314,26 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			return model;
 		}
 
-		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
-		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
-		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
-		private final @NonNull Class _CollectionItem = getClass(_pivot, "CollectionItem");
-		private final @NonNull Class _CollectionLiteralExp = getClass(_pivot, "CollectionLiteralExp");
-		private final @NonNull Class _CollectionRange = getClass(_pivot, "CollectionRange");
-		private final @NonNull Class _Element = getClass(_pivot, "Element");
-		private final @NonNull Class _MapLiteralExp = getClass(_pivot, "MapLiteralExp");
-		private final @NonNull Class _MapLiteralPart = getClass(_pivot, "MapLiteralPart");
-		private final @NonNull Class _OCLExpression = getClass(_pivot, "OCLExpression");
-		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
-		private final @NonNull VoidType _OclVoid = getVoidType(_ocl, "OclVoid");
-		private final @NonNull CollectionType _OrderedCollection = getCollectionType(_ocl, "OrderedCollection");
-		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(_ocl, "OrderedSet");
-		private final @NonNull Class _Property = getClass(_pivot, "Property");
-		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
-		private final @NonNull Class _ShadowExp = getClass(_pivot, "ShadowExp");
-		private final @NonNull Class _TupleLiteralExp = getClass(_pivot, "TupleLiteralExp");
-		private final @NonNull Class _TupleLiteralPart = getClass(_pivot, "TupleLiteralPart");
-		private final @NonNull Class _TypeExp = getClass(_pivot, "TypeExp");
-		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
+		private final org.eclipse.ocl.pivot.@NonNull Package pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
+		private final @NonNull CollectionType _Collection = getCollectionType(standardLibraryPackage, "Collection");
+		private final org.eclipse.ocl.pivot.@NonNull Class _CollectionItem = getClass(pivot, "CollectionItem");
+		private final org.eclipse.ocl.pivot.@NonNull Class _CollectionLiteralExp = getClass(pivot, "CollectionLiteralExp");
+		private final org.eclipse.ocl.pivot.@NonNull Class _CollectionRange = getClass(pivot, "CollectionRange");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Element = getClass(pivot, "Element");
+		private final org.eclipse.ocl.pivot.@NonNull Class _MapLiteralExp = getClass(pivot, "MapLiteralExp");
+		private final org.eclipse.ocl.pivot.@NonNull Class _MapLiteralPart = getClass(pivot, "MapLiteralPart");
+		private final org.eclipse.ocl.pivot.@NonNull Class _OCLExpression = getClass(pivot, "OCLExpression");
+		private final @NonNull AnyType _OclAny = getAnyType(standardLibraryPackage, "OclAny");
+		private final @NonNull VoidType _OclVoid = getVoidType(standardLibraryPackage, "OclVoid");
+		private final @NonNull CollectionType _OrderedCollection = getCollectionType(standardLibraryPackage, "OrderedCollection");
+		private final @NonNull OrderedSetType _OrderedSet = getOrderedSetType(standardLibraryPackage, "OrderedSet");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Property = getClass(pivot, "Property");
+		private final @NonNull SetType _Set = getSetType(standardLibraryPackage, "Set");
+		private final org.eclipse.ocl.pivot.@NonNull Class _ShadowExp = getClass(pivot, "ShadowExp");
+		private final org.eclipse.ocl.pivot.@NonNull Class _TupleLiteralExp = getClass(pivot, "TupleLiteralExp");
+		private final org.eclipse.ocl.pivot.@NonNull Class _TupleLiteralPart = getClass(pivot, "TupleLiteralPart");
+		private final org.eclipse.ocl.pivot.@NonNull Class _TypeExp = getClass(pivot, "TypeExp");
+		private final @NonNull CollectionType _UniqueCollection = getCollectionType(standardLibraryPackage, "UniqueCollection");
 		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
 		private final @NonNull TemplateParameter _OrderedCollection_T = getTemplateParameter(_OrderedCollection, 0);
 		private final @NonNull TemplateParameter _OrderedSet_T = getTemplateParameter(_OrderedSet, 0);
@@ -334,19 +341,19 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
 
 		private void installPackages() {
-			model.getOwnedPackages().add(ocl);
-			model.getOwnedPackages().add(qvtruntimelibrary);
-			model.getOwnedPackages().add(orphanPackage);
-			model.getOwnedImports().add(createImport(null, _ocl));
-			model.getOwnedImports().add(createImport("ocl", _pivot));
+			model.getOwnedPackages().add(library);
+			model.getOwnedPackages().add(local_orphanage);
+			local_orphanage.getOwnedPackages().add(local_ocl);
+			model.getOwnedImports().add(createImport(null, standardLibraryPackage));
+			model.getOwnedImports().add(createImport("ocl", pivot));
 		}
 
-		private final @NonNull Class _OclElement = createClass("OclElement");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Extent = createClass(QVTruntimeLibraryPackage.Literals.EXTENT);
+		private final org.eclipse.ocl.pivot.@NonNull Class _Model = createClass(QVTruntimeLibraryPackage.Literals.MODEL);
+		private final org.eclipse.ocl.pivot.@NonNull Class _PseudoOperations = createClass("PseudoOperations");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Transformation = createClass(QVTruntimeLibraryPackage.Literals.TRANSFORMATION);
 
-		private final @NonNull Class _Extent = createClass(QVTruntimeLibraryPackage.Literals.EXTENT);
-		private final @NonNull Class _Model = createClass(QVTruntimeLibraryPackage.Literals.MODEL);
-		private final @NonNull Class _PseudoOperations = createClass("PseudoOperations");
-		private final @NonNull Class _Transformation = createClass(QVTruntimeLibraryPackage.Literals.TRANSFORMATION);
+		private final org.eclipse.ocl.pivot.@NonNull Class _OclElement = createClass("OclElement");
 
 		private final @NonNull TemplateParameter tp_PseudoOperations_collection_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_error_T = createTemplateParameter("T");
@@ -381,15 +388,11 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		private final @NonNull CollectionType _UniqueCollection_TupleLiteralPart_F = createCollectionType(_UniqueCollection);
 
 		private void installClassTypes() {
-			List<Class> ownedClasses;
-			List<Class> superClasses;
-			Class type;
+			List<org.eclipse.ocl.pivot.Class> ownedClasses;
+			List<org.eclipse.ocl.pivot.Class> superClasses;
+			org.eclipse.ocl.pivot.Class type;
 
-			ownedClasses = ocl.getOwnedClasses();
-			type = _OclElement;
-			ownedClasses.add(type);
-
-			ownedClasses = qvtruntimelibrary.getOwnedClasses();
+			ownedClasses = library.getOwnedClasses();
 			type = _Extent;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
@@ -406,14 +409,18 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
+
+			ownedClasses = local_ocl.getOwnedClasses();
+			type = _OclElement;
+			ownedClasses.add(type);
 		}
 
 		private void installCollectionTypes() {
-			List<Class> ownedClasses;
-			List<Class> superClasses;
+			List<org.eclipse.ocl.pivot.Class> ownedClasses;
+			List<org.eclipse.ocl.pivot.Class> superClasses;
 			CollectionType type;
 
-			ownedClasses = orphanPackage.getOwnedClasses();
+			ownedClasses = local_orphanage.getOwnedClasses();
 			type = _Collection_$$0_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
@@ -568,25 +575,25 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		}
 
 
-		private final @NonNull Property pr_OclElement_extent_elements = createProperty("extent", _Extent);
-
 		private final @NonNull Property pr_Extent_elements = createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, _OrderedSet_OclElement_F);
+
+		private final @NonNull Property _OclElement_extent_elements = createProperty("extent", _Extent);
 
 		private void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
 
-			ownedProperties = _OclElement.getOwnedProperties();
-			ownedProperties.add(property = pr_OclElement_extent_elements);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Extent_elements);
-
 			ownedProperties = _Extent.getOwnedProperties();
 			ownedProperties.add(property = pr_Extent_elements);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_OclElement_extent_elements);
+			property.setOpposite(_OclElement_extent_elements);
+
+			ownedProperties = _OclElement.getOwnedProperties();
+			ownedProperties.add(property = _OclElement_extent_elements);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Extent_elements);
 		}
 
 		private void installTemplateBindings() {
