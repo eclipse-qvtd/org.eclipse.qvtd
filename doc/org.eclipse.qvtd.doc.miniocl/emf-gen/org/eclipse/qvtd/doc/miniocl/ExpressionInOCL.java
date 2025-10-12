@@ -43,7 +43,6 @@ public interface ExpressionInOCL extends OpaqueExpression {
 	 * @see #setOwnedSelfVar(Variable)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getExpressionInOCL_OwnedSelfVar()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!ExpressionInOCL!ownedSelfVar'"
 	 * @generated
 	 */
 	Variable getOwnedSelfVar();
@@ -70,7 +69,6 @@ public interface ExpressionInOCL extends OpaqueExpression {
 	 * @see #setOwnedBody(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getExpressionInOCL_OwnedBody()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!ExpressionInOCL!ownedBody'"
 	 * @generated
 	 */
 	OCLExpression getOwnedBody();

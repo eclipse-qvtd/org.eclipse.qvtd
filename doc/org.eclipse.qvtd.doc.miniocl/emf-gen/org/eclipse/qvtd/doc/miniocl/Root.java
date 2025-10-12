@@ -45,7 +45,6 @@ public interface Root extends Element {
 	 * @return the value of the '<em>Owned Constraints</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getRoot_OwnedConstraints()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Root!ownedConstraints'"
 	 * @generated
 	 */
 	EList<Constraint> getOwnedConstraints();
@@ -62,7 +61,6 @@ public interface Root extends Element {
 	 * @return the value of the '<em>Owned Imports</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getRoot_OwnedImports()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Root!ownedImports'"
 	 * @generated
 	 */
 	EList<Import> getOwnedImports();
@@ -79,7 +77,6 @@ public interface Root extends Element {
 	 * @return the value of the '<em>Owned Packages</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getRoot_OwnedPackages()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Root!ownedPackages'"
 	 * @generated
 	 */
 	EList<org.eclipse.qvtd.doc.miniocl.Package> getOwnedPackages();

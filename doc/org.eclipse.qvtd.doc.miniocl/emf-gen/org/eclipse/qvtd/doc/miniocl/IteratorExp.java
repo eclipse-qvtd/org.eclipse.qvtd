@@ -42,7 +42,7 @@ public interface IteratorExp extends LoopExp {
 	 * @return the value of the '<em>Iterator</em>' attribute.
 	 * @see #setIterator(String)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getIteratorExp_Iterator()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!IteratorExp!iterator'"
+	 * @model
 	 * @generated
 	 */
 	String getIterator();

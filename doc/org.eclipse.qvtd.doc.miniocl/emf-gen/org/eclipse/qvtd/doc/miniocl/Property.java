@@ -47,7 +47,6 @@ public interface Property extends Feature {
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getProperty_OwningClass()
 	 * @see org.eclipse.qvtd.doc.miniocl.Class#getOwnedProperties
 	 * @model opposite="ownedProperties" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Property!owningClass'"
 	 * @generated
 	 */
 	org.eclipse.qvtd.doc.miniocl.Class getOwningClass();
@@ -73,7 +72,7 @@ public interface Property extends Feature {
 	 * @return the value of the '<em>Lower Bound</em>' attribute.
 	 * @see #setLowerBound(int)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getProperty_LowerBound()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Property!lowerBound'"
+	 * @model
 	 * @generated
 	 */
 	int getLowerBound();
@@ -99,7 +98,7 @@ public interface Property extends Feature {
 	 * @return the value of the '<em>Upper Bound</em>' attribute.
 	 * @see #setUpperBound(int)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getProperty_UpperBound()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Property!upperBound'"
+	 * @model
 	 * @generated
 	 */
 	int getUpperBound();

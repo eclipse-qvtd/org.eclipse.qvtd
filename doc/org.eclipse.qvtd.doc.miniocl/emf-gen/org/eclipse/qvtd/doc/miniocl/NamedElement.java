@@ -41,7 +41,7 @@ public interface NamedElement extends Element {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getNamedElement_Name()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!NamedElement!name'"
+	 * @model
 	 * @generated
 	 */
 	String getName();

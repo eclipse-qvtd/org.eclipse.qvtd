@@ -44,7 +44,6 @@ public interface OperationCallExp extends CallExp {
 	 * @return the value of the '<em>Owned Arguments</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperationCallExp_OwnedArguments()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!OperationCallExp!ownedArguments'"
 	 * @generated
 	 */
 	EList<OCLExpression> getOwnedArguments();
@@ -61,7 +60,6 @@ public interface OperationCallExp extends CallExp {
 	 * @see #setReferredOperation(Operation)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperationCallExp_ReferredOperation()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!OperationCallExp!referredOperation'"
 	 * @generated
 	 */
 	Operation getReferredOperation();

@@ -20,6 +20,7 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.library.model;
 
 import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -46,7 +47,7 @@ public class RootObjectsOperation extends AbstractUnaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Collection<@NonNull ? extends Object> results = typedModelInstance.getRootObjects();
+		Collection<@NonNull ? extends EObject> results = typedModelInstance.getRootEObjects();
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

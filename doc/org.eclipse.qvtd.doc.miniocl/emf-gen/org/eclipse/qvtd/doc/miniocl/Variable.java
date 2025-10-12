@@ -43,7 +43,6 @@ public interface Variable extends NamedElement, TypedElement {
 	 * @see #setOwnedInitExp(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getVariable_OwnedInitExp()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Variable!ownedInitExp'"
 	 * @generated
 	 */
 	OCLExpression getOwnedInitExp();

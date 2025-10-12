@@ -42,7 +42,6 @@ public interface OpaqueExpression extends TypedElement {
 	 * @see #setLanguage(String)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOpaqueExpression_Language()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!OpaqueExpression!language'"
 	 * @generated
 	 */
 	String getLanguage();

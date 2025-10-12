@@ -45,7 +45,6 @@ public interface Operation extends Feature {
 	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperation_OwnedParameters()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Operation!ownedParameters'"
 	 * @generated
 	 */
 	EList<Parameter> getOwnedParameters();
@@ -64,7 +63,6 @@ public interface Operation extends Feature {
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperation_OwningClass()
 	 * @see org.eclipse.qvtd.doc.miniocl.Class#getOwnedOperations
 	 * @model opposite="ownedOperations" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Operation!owningClass'"
 	 * @generated
 	 */
 	org.eclipse.qvtd.doc.miniocl.Class getOwningClass();
@@ -91,7 +89,6 @@ public interface Operation extends Feature {
 	 * @see #setOwnedBodyExpression(ExpressionInOCL)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperation_OwnedBodyExpression()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Operation!ownedBodyExpression'"
 	 * @generated
 	 */
 	ExpressionInOCL getOwnedBodyExpression();

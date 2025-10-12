@@ -42,7 +42,6 @@ public interface TypedElement extends Element {
 	 * @see #setType(org.eclipse.qvtd.doc.miniocl.Class)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getTypedElement_Type()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!TypedElement!type'"
 	 * @generated
 	 */
 	org.eclipse.qvtd.doc.miniocl.Class getType();

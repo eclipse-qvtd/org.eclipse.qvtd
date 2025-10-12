@@ -42,7 +42,6 @@ public interface CollectionItem extends CollectionLiteralPart {
 	 * @see #setOwnedItem(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCollectionItem_OwnedItem()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CollectionItem!ownedItem'"
 	 * @generated
 	 */
 	OCLExpression getOwnedItem();

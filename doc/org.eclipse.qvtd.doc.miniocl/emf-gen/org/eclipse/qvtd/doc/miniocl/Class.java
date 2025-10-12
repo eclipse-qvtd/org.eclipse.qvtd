@@ -44,7 +44,7 @@ public interface Class extends Namespace {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Classes</em>' reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getClass_SuperClasses()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Class!superClasses'"
+	 * @model
 	 * @generated
 	 */
 	EList<Class> getSuperClasses();
@@ -63,7 +63,6 @@ public interface Class extends Namespace {
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getClass_OwnedOperations()
 	 * @see org.eclipse.qvtd.doc.miniocl.Operation#getOwningClass
 	 * @model opposite="owningClass" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Class!ownedOperations'"
 	 * @generated
 	 */
 	EList<Operation> getOwnedOperations();
@@ -82,7 +81,6 @@ public interface Class extends Namespace {
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getClass_OwnedProperties()
 	 * @see org.eclipse.qvtd.doc.miniocl.Property#getOwningClass
 	 * @model opposite="owningClass" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Class!ownedProperties'"
 	 * @generated
 	 */
 	EList<Property> getOwnedProperties();

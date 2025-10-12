@@ -42,7 +42,7 @@ public interface Import extends Element {
 	 * @return the value of the '<em>Uri</em>' attribute.
 	 * @see #setUri(String)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getImport_Uri()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Import!uri'"
+	 * @model
 	 * @generated
 	 */
 	String getUri();
@@ -68,7 +68,7 @@ public interface Import extends Element {
 	 * @return the value of the '<em>Alias</em>' attribute.
 	 * @see #setAlias(String)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getImport_Alias()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Import!alias'"
+	 * @model
 	 * @generated
 	 */
 	String getAlias();

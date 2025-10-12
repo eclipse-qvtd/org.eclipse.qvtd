@@ -42,7 +42,6 @@ public interface CallExp extends OCLExpression {
 	 * @see #setOwnedSource(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCallExp_OwnedSource()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CallExp!ownedSource'"
 	 * @generated
 	 */
 	OCLExpression getOwnedSource();

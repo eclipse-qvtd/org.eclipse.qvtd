@@ -41,7 +41,7 @@ public interface BooleanLiteralExp extends PrimitiveLiteralExp {
 	 * @return the value of the '<em>Boolean Symbol</em>' attribute.
 	 * @see #setBooleanSymbol(boolean)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getBooleanLiteralExp_BooleanSymbol()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!BooleanLiteralExp!booleanSymbol'"
+	 * @model
 	 * @generated
 	 */
 	boolean isBooleanSymbol();

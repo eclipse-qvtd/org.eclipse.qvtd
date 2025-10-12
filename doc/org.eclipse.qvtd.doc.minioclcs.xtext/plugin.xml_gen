@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
-		<package 
+		<package
 			uri = "http://www.eclipse.org/qvtd/doc/MiniOCLCS"
 			class = "org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage"
 			genModel = "model/generated/MiniOCLCS.genmodel" />

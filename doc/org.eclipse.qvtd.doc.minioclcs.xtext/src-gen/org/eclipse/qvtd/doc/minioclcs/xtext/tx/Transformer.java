@@ -18,12 +18,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
+import org.eclipse.qvtd.runtime.qvttrace.TransformationExecution;
 
 /**
  * A Transformer provides the core support to execute an auto-generated transformation
@@ -50,14 +48,15 @@ public interface Transformer extends ExecutionVisitable
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	void addRootObjects(@NonNull String modelName, @NonNull Iterable<@NonNull ? extends Object> rootObjects);
+	void analyzeInputResources();
 	@NonNull EvaluationCache getEvaluationCache();
 	@NonNull TransformationExecutor getExecutor();
 	@NonNull InvocationManager getInvocationManager();
+	@NonNull ModelsManager getModelsManager();
 	@NonNull ObjectManager getObjectManager();
-	@NonNull Collection<@NonNull ? extends EObject> getRootEObjects(@NonNull String modelName);
-	@NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName);
+	@Nullable TransformationExecution getTransformationExecution();
+	int getTypedModelIndex(@NonNull String targetModelName);
 	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
-	void setExternalURI(@NonNull String modelName, @NonNull URI modelURI);
+	boolean run(@NonNull String targetName) throws Exception;
 }

@@ -18,7 +18,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
+import java.io.IOException;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
@@ -28,5 +35,17 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
  */
 public interface TransformationExecutor extends Executor
 {
+	@Nullable Resource addInputURI(@NonNull String modelName, @NonNull URI modelURI);
+	@NonNull Resource addOutputURI(@NonNull String modelName, @NonNull URI modelURI);
+	@Override
+	void dispose();
+	Boolean execute(@Nullable String targetName) throws Exception;
+	@NonNull ModelsManager getModelsManager();
+	@Nullable EObject getTransformationExecution();
 	@NonNull Transformer getTransformer();
+	int getTypedModelIndex(@NonNull String targetModelName);
+	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
+	void saveModels(@Nullable Map<?, ?> saveOptions) throws IOException;
+	void setContextualProperty(@NonNull String propertyName, Object value);
+	void setSuppressFailureDiagnosis(boolean suppressFailureDiagnosis);
 }

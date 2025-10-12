@@ -43,7 +43,6 @@ public interface VariableExp extends OCLExpression {
 	 * @see #setReferredVariable(Variable)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getVariableExp_ReferredVariable()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!VariableExp!referredVariable'"
 	 * @generated
 	 */
 	Variable getReferredVariable();

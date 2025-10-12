@@ -20,6 +20,7 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
@@ -94,11 +95,15 @@ public interface Connection extends ExecutionVisitable, Nameable
 	 */
 	@NonNull Object appendElement(@NonNull Object anElement);
 
+	void clear();
+
 	int debugGetSize();
 
 	int getCapacity();
 
 	@NonNull Iterable<@NonNull InvocationConstructor> getConsumers();
+
+	@NonNull TypeId getTypeId();
 
 	@Nullable Object getValue(int i);
 

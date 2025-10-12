@@ -28,7 +28,7 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractTransformer;
 import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Interval;
 
 /**
- * A StrictConnectionInternal maintains the unqiue values between one or more sources,
+ * A StrictConnectionInternal maintains the unique values between one or more sources,
  * typically Mappings, that invoke append() and one or more consumers that consume each value.
  * Uniqueness on the internal values on behalf of an overall application that is unable to do so automatically.
  *

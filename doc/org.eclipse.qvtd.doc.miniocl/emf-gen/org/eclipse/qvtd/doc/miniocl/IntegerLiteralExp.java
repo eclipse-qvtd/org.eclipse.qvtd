@@ -41,7 +41,7 @@ public interface IntegerLiteralExp extends PrimitiveLiteralExp {
 	 * @return the value of the '<em>Integer Symbol</em>' attribute.
 	 * @see #setIntegerSymbol(int)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getIntegerLiteralExp_IntegerSymbol()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!IntegerLiteralExp!integerSymbol'"
+	 * @model
 	 * @generated
 	 */
 	int getIntegerSymbol();

@@ -42,7 +42,6 @@ public interface PropertyCallExp extends CallExp {
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getPropertyCallExp_ReferredProperty()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!PropertyCallExp!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();

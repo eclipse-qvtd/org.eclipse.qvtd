@@ -44,7 +44,6 @@ public interface CollectionLiteralExp extends LiteralExp {
 	 * @return the value of the '<em>Owned Parts</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCollectionLiteralExp_OwnedParts()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CollectionLiteralExp!ownedParts'"
 	 * @generated
 	 */
 	EList<CollectionLiteralPart> getOwnedParts();
@@ -63,7 +62,6 @@ public interface CollectionLiteralExp extends LiteralExp {
 	 * @see #setKind(CollectionKind)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCollectionLiteralExp_Kind()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CollectionLiteralExp!kind'"
 	 * @generated
 	 */
 	CollectionKind getKind();

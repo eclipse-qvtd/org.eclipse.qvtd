@@ -44,7 +44,6 @@ public interface Package extends Namespace {
 	 * @return the value of the '<em>Owned Classes</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getPackage_OwnedClasses()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Package!ownedClasses'"
 	 * @generated
 	 */
 	EList<org.eclipse.qvtd.doc.miniocl.Class> getOwnedClasses();
@@ -61,7 +60,6 @@ public interface Package extends Namespace {
 	 * @return the value of the '<em>Owned Packages</em>' containment reference list.
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getPackage_OwnedPackages()
 	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Package!ownedPackages'"
 	 * @generated
 	 */
 	EList<Package> getOwnedPackages();

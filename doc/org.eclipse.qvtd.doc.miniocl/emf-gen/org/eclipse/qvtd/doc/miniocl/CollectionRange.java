@@ -43,7 +43,6 @@ public interface CollectionRange extends CollectionLiteralPart {
 	 * @see #setOwnedFirst(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCollectionRange_OwnedFirst()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CollectionRange!ownedFirst'"
 	 * @generated
 	 */
 	OCLExpression getOwnedFirst();
@@ -70,7 +69,6 @@ public interface CollectionRange extends CollectionLiteralPart {
 	 * @see #setOwnedLast(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getCollectionRange_OwnedLast()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!CollectionRange!ownedLast'"
 	 * @generated
 	 */
 	OCLExpression getOwnedLast();

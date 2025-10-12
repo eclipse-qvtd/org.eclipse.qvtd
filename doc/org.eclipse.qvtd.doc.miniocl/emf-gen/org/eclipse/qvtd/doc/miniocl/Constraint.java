@@ -43,7 +43,6 @@ public interface Constraint extends NamedElement {
 	 * @see #setOwnedSpecification(ExpressionInOCL)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getConstraint_OwnedSpecification()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Constraint!ownedSpecification'"
 	 * @generated
 	 */
 	ExpressionInOCL getOwnedSpecification();
@@ -70,7 +69,6 @@ public interface Constraint extends NamedElement {
 	 * @see #setConstrainedElement(org.eclipse.qvtd.doc.miniocl.Class)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getConstraint_ConstrainedElement()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!Constraint!constrainedElement'"
 	 * @generated
 	 */
 	org.eclipse.qvtd.doc.miniocl.Class getConstrainedElement();

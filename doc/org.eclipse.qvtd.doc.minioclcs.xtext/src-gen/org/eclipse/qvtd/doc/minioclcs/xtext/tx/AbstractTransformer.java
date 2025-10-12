@@ -37,7 +37,11 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	{
 		protected Incremental(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 				@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+		}
+
+		protected Incremental(@NonNull TransformationExecutor executor, int models) {
+			super(executor, models);
 		}
 	}
 
@@ -46,6 +50,10 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	public static final @NonNull URI TRACE_MODEL_URI = URI.createPlatformResourceURI(TRACE_MODEL, true);
 	public static final @NonNull String TRACE_GENMODEL = "org.eclipse.qvtd.runtime/model/QVTtrace.genmodel";
 	public static final @NonNull String TRACE_GENMODEL_FRAGMENT = "//qvttrace";
+	public static final @NonNull String QVTLIB_GENMODEL = "org.eclipse.qvtd.runtime/model/QVTruntimeLibrary.genmodel";
+	public static final @NonNull String QVTLIB_GENMODEL_FRAGMENT = "//qvtruntimelibrary";
+	public static final @NonNull String OCLLIB_GENMODEL = "org.eclipse.ocl.pivot/model/oclstdlib.genmodel";
+	public static final @NonNull String OCLLIB_GENMODEL_FRAGMENT = "//oclstdlib";
 
 	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
 	public static final @NonNull TracingOption ASSIGNMENTS = new TracingOption(PLUGIN_ID, "tx/assignments");
@@ -60,5 +68,9 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+	}
+
+	protected AbstractTransformer(@NonNull TransformationExecutor executor, int models) {
+		super(executor, models);
 	}
 }

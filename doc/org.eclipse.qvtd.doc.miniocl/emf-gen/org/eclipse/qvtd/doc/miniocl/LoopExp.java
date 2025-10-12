@@ -43,7 +43,6 @@ public interface LoopExp extends CallExp {
 	 * @see #setOwnedIterator(Variable)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getLoopExp_OwnedIterator()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!LoopExp!ownedIterator'"
 	 * @generated
 	 */
 	Variable getOwnedIterator();
@@ -70,7 +69,6 @@ public interface LoopExp extends CallExp {
 	 * @see #setOwnedBody(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getLoopExp_OwnedBody()
 	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!LoopExp!ownedBody'"
 	 * @generated
 	 */
 	OCLExpression getOwnedBody();

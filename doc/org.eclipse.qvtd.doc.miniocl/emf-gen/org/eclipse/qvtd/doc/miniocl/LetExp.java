@@ -43,7 +43,6 @@ public interface LetExp extends OCLExpression {
 	 * @see #setOwnedIn(OCLExpression)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getLetExp_OwnedIn()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!LetExp!ownedIn'"
 	 * @generated
 	 */
 	OCLExpression getOwnedIn();
@@ -70,7 +69,6 @@ public interface LetExp extends OCLExpression {
 	 * @see #setOwnedVariable(Variable)
 	 * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getLetExp_OwnedVariable()
 	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvtd/doc/MiniOCL/1.0!LetExp!ownedVariable'"
 	 * @generated
 	 */
 	Variable getOwnedVariable();
