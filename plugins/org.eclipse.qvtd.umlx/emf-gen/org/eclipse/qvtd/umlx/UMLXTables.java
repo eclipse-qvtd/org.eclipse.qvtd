@@ -19,7 +19,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.umlx;
 
-import java.lang.String;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
@@ -66,14 +65,14 @@ public class UMLXTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(UMLXPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(UMLXPackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/UMLX", null, UMLXPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", "ecore", EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/UMLX", "umlx", UMLXPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = UMLXTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EAttribute = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EAttribute", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EClass = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClass", 0);
@@ -236,123 +235,123 @@ public class UMLXTables extends AbstractTables
 
 		private static final @NonNull FlatFragment _RelDiagram__OclAny = LIBRARY.createFragment(Types._RelDiagram, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelDiagram__OclElement = LIBRARY.createFragment(Types._RelDiagram, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelDiagram__RelDiagram = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._RelDiagram);
-		private static final @NonNull FlatFragment _RelDiagram__UMLXElement = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _RelDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._RelDiagram, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _RelDiagram__RelDiagram = LIBRARY.createFragment(Types._RelDiagram, Types._RelDiagram);
+		private static final @NonNull FlatFragment _RelDiagram__UMLXElement = LIBRARY.createFragment(Types._RelDiagram, Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._RelDiagram, Types._UMLXNamedElement);
 
 		private static final @NonNull FlatFragment _RelDomainNode__OclAny = LIBRARY.createFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelDomainNode__OclElement = LIBRARY.createFragment(Types._RelDomainNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelDomainNode__RelDomainNode = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._RelDomainNode);
-		private static final @NonNull FlatFragment _RelDomainNode__RelNode = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._RelNode);
-		private static final @NonNull FlatFragment _RelDomainNode__UMLXElement = LIBRARY.createFragment(Types._RelDomainNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelDomainNode__RelDomainNode = LIBRARY.createFragment(Types._RelDomainNode, Types._RelDomainNode);
+		private static final @NonNull FlatFragment _RelDomainNode__RelNode = LIBRARY.createFragment(Types._RelDomainNode, Types._RelNode);
+		private static final @NonNull FlatFragment _RelDomainNode__UMLXElement = LIBRARY.createFragment(Types._RelDomainNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelEdge__OclAny = LIBRARY.createFragment(Types._RelEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelEdge__OclElement = LIBRARY.createFragment(Types._RelEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelEdge__RelEdge = LIBRARY.createFragment(Types._RelEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull FlatFragment _RelEdge__UMLXElement = LIBRARY.createFragment(Types._RelEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelEdge__RelEdge = LIBRARY.createFragment(Types._RelEdge, Types._RelEdge);
+		private static final @NonNull FlatFragment _RelEdge__UMLXElement = LIBRARY.createFragment(Types._RelEdge, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelInvocationEdge__OclAny = LIBRARY.createFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelInvocationEdge__OclElement = LIBRARY.createFragment(Types._RelInvocationEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelInvocationEdge__RelEdge = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull FlatFragment _RelInvocationEdge__RelInvocationEdge = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._RelInvocationEdge);
-		private static final @NonNull FlatFragment _RelInvocationEdge__UMLXElement = LIBRARY.createFragment(Types._RelInvocationEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelInvocationEdge__RelEdge = LIBRARY.createFragment(Types._RelInvocationEdge, Types._RelEdge);
+		private static final @NonNull FlatFragment _RelInvocationEdge__RelInvocationEdge = LIBRARY.createFragment(Types._RelInvocationEdge, Types._RelInvocationEdge);
+		private static final @NonNull FlatFragment _RelInvocationEdge__UMLXElement = LIBRARY.createFragment(Types._RelInvocationEdge, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelInvocationNode__OclAny = LIBRARY.createFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelInvocationNode__OclElement = LIBRARY.createFragment(Types._RelInvocationNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelInvocationNode__RelInvocationNode = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._RelInvocationNode);
-		private static final @NonNull FlatFragment _RelInvocationNode__RelNode = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._RelNode);
-		private static final @NonNull FlatFragment _RelInvocationNode__UMLXElement = LIBRARY.createFragment(Types._RelInvocationNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelInvocationNode__RelInvocationNode = LIBRARY.createFragment(Types._RelInvocationNode, Types._RelInvocationNode);
+		private static final @NonNull FlatFragment _RelInvocationNode__RelNode = LIBRARY.createFragment(Types._RelInvocationNode, Types._RelNode);
+		private static final @NonNull FlatFragment _RelInvocationNode__UMLXElement = LIBRARY.createFragment(Types._RelInvocationNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelNode__OclAny = LIBRARY.createFragment(Types._RelNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelNode__OclElement = LIBRARY.createFragment(Types._RelNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelNode__RelNode = LIBRARY.createFragment(Types._RelNode, UMLXTables.Types._RelNode);
-		private static final @NonNull FlatFragment _RelNode__UMLXElement = LIBRARY.createFragment(Types._RelNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelNode__RelNode = LIBRARY.createFragment(Types._RelNode, Types._RelNode);
+		private static final @NonNull FlatFragment _RelNode__UMLXElement = LIBRARY.createFragment(Types._RelNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelPatternEdge__OclAny = LIBRARY.createFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelPatternEdge__OclElement = LIBRARY.createFragment(Types._RelPatternEdge, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelPatternEdge__RelEdge = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._RelEdge);
-		private static final @NonNull FlatFragment _RelPatternEdge__RelPatternEdge = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._RelPatternEdge);
-		private static final @NonNull FlatFragment _RelPatternEdge__UMLXElement = LIBRARY.createFragment(Types._RelPatternEdge, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelPatternEdge__RelEdge = LIBRARY.createFragment(Types._RelPatternEdge, Types._RelEdge);
+		private static final @NonNull FlatFragment _RelPatternEdge__RelPatternEdge = LIBRARY.createFragment(Types._RelPatternEdge, Types._RelPatternEdge);
+		private static final @NonNull FlatFragment _RelPatternEdge__UMLXElement = LIBRARY.createFragment(Types._RelPatternEdge, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _RelPatternNode__OclAny = LIBRARY.createFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _RelPatternNode__OclElement = LIBRARY.createFragment(Types._RelPatternNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _RelPatternNode__RelNode = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._RelNode);
-		private static final @NonNull FlatFragment _RelPatternNode__RelPatternNode = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._RelPatternNode);
-		private static final @NonNull FlatFragment _RelPatternNode__UMLXElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _RelPatternNode__UMLXNamedElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull FlatFragment _RelPatternNode__UMLXTypedElement = LIBRARY.createFragment(Types._RelPatternNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _RelPatternNode__RelNode = LIBRARY.createFragment(Types._RelPatternNode, Types._RelNode);
+		private static final @NonNull FlatFragment _RelPatternNode__RelPatternNode = LIBRARY.createFragment(Types._RelPatternNode, Types._RelPatternNode);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXElement = LIBRARY.createFragment(Types._RelPatternNode, Types._UMLXElement);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXNamedElement = LIBRARY.createFragment(Types._RelPatternNode, Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _RelPatternNode__UMLXTypedElement = LIBRARY.createFragment(Types._RelPatternNode, Types._UMLXTypedElement);
 
 		private static final @NonNull FlatFragment _TxDiagram__OclAny = LIBRARY.createFragment(Types._TxDiagram, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxDiagram__OclElement = LIBRARY.createFragment(Types._TxDiagram, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxDiagram__TxDiagram = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._TxDiagram);
-		private static final @NonNull FlatFragment _TxDiagram__UMLXElement = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _TxDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._TxDiagram, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxDiagram__TxDiagram = LIBRARY.createFragment(Types._TxDiagram, Types._TxDiagram);
+		private static final @NonNull FlatFragment _TxDiagram__UMLXElement = LIBRARY.createFragment(Types._TxDiagram, Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxDiagram__UMLXNamedElement = LIBRARY.createFragment(Types._TxDiagram, Types._UMLXNamedElement);
 
 		private static final @NonNull FlatFragment _TxKeyNode__OclAny = LIBRARY.createFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxKeyNode__OclElement = LIBRARY.createFragment(Types._TxKeyNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxKeyNode__TxKeyNode = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._TxKeyNode);
-		private static final @NonNull FlatFragment _TxKeyNode__TxNode = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxKeyNode__UMLXElement = LIBRARY.createFragment(Types._TxKeyNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxKeyNode__TxKeyNode = LIBRARY.createFragment(Types._TxKeyNode, Types._TxKeyNode);
+		private static final @NonNull FlatFragment _TxKeyNode__TxNode = LIBRARY.createFragment(Types._TxKeyNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxKeyNode__UMLXElement = LIBRARY.createFragment(Types._TxKeyNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _TxNode__OclAny = LIBRARY.createFragment(Types._TxNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxNode__OclElement = LIBRARY.createFragment(Types._TxNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxNode__TxNode = LIBRARY.createFragment(Types._TxNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxNode__UMLXElement = LIBRARY.createFragment(Types._TxNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxNode__TxNode = LIBRARY.createFragment(Types._TxNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxNode__UMLXElement = LIBRARY.createFragment(Types._TxNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _TxPackageNode__OclAny = LIBRARY.createFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxPackageNode__OclElement = LIBRARY.createFragment(Types._TxPackageNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxPackageNode__TxNode = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxPackageNode__TxPackageNode = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._TxPackageNode);
-		private static final @NonNull FlatFragment _TxPackageNode__UMLXElement = LIBRARY.createFragment(Types._TxPackageNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxPackageNode__TxNode = LIBRARY.createFragment(Types._TxPackageNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxPackageNode__TxPackageNode = LIBRARY.createFragment(Types._TxPackageNode, Types._TxPackageNode);
+		private static final @NonNull FlatFragment _TxPackageNode__UMLXElement = LIBRARY.createFragment(Types._TxPackageNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _TxParameterNode__OclAny = LIBRARY.createFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxParameterNode__OclElement = LIBRARY.createFragment(Types._TxParameterNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxParameterNode__TxNode = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxParameterNode__TxParameterNode = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._TxParameterNode);
-		private static final @NonNull FlatFragment _TxParameterNode__UMLXElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _TxParameterNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull FlatFragment _TxParameterNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxParameterNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _TxParameterNode__TxNode = LIBRARY.createFragment(Types._TxParameterNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxParameterNode__TxParameterNode = LIBRARY.createFragment(Types._TxParameterNode, Types._TxParameterNode);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXElement = LIBRARY.createFragment(Types._TxParameterNode, Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxParameterNode, Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxParameterNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxParameterNode, Types._UMLXTypedElement);
 
 		private static final @NonNull FlatFragment _TxPartNode__OclAny = LIBRARY.createFragment(Types._TxPartNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxPartNode__OclElement = LIBRARY.createFragment(Types._TxPartNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxPartNode__TxNode = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxPartNode__TxPartNode = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._TxPartNode);
-		private static final @NonNull FlatFragment _TxPartNode__UMLXElement = LIBRARY.createFragment(Types._TxPartNode, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxPartNode__TxNode = LIBRARY.createFragment(Types._TxPartNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxPartNode__TxPartNode = LIBRARY.createFragment(Types._TxPartNode, Types._TxPartNode);
+		private static final @NonNull FlatFragment _TxPartNode__UMLXElement = LIBRARY.createFragment(Types._TxPartNode, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _TxQueryNode__OclAny = LIBRARY.createFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxQueryNode__OclElement = LIBRARY.createFragment(Types._TxQueryNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxQueryNode__TxNode = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxQueryNode__TxQueryNode = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._TxQueryNode);
-		private static final @NonNull FlatFragment _TxQueryNode__UMLXElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _TxQueryNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull FlatFragment _TxQueryNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxQueryNode, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _TxQueryNode__TxNode = LIBRARY.createFragment(Types._TxQueryNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxQueryNode__TxQueryNode = LIBRARY.createFragment(Types._TxQueryNode, Types._TxQueryNode);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXElement = LIBRARY.createFragment(Types._TxQueryNode, Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxQueryNode, Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxQueryNode__UMLXTypedElement = LIBRARY.createFragment(Types._TxQueryNode, Types._UMLXTypedElement);
 
 		private static final @NonNull FlatFragment _TxTypedModelNode__OclAny = LIBRARY.createFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TxTypedModelNode__OclElement = LIBRARY.createFragment(Types._TxTypedModelNode, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TxTypedModelNode__TxNode = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._TxNode);
-		private static final @NonNull FlatFragment _TxTypedModelNode__TxTypedModelNode = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._TxTypedModelNode);
-		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXElement = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxTypedModelNode, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _TxTypedModelNode__TxNode = LIBRARY.createFragment(Types._TxTypedModelNode, Types._TxNode);
+		private static final @NonNull FlatFragment _TxTypedModelNode__TxTypedModelNode = LIBRARY.createFragment(Types._TxTypedModelNode, Types._TxTypedModelNode);
+		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXElement = LIBRARY.createFragment(Types._TxTypedModelNode, Types._UMLXElement);
+		private static final @NonNull FlatFragment _TxTypedModelNode__UMLXNamedElement = LIBRARY.createFragment(Types._TxTypedModelNode, Types._UMLXNamedElement);
 
 		private static final @NonNull FlatFragment _UMLXElement__OclAny = LIBRARY.createFragment(Types._UMLXElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _UMLXElement__OclElement = LIBRARY.createFragment(Types._UMLXElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _UMLXElement__UMLXElement = LIBRARY.createFragment(Types._UMLXElement, UMLXTables.Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXElement__UMLXElement = LIBRARY.createFragment(Types._UMLXElement, Types._UMLXElement);
 
 		private static final @NonNull FlatFragment _UMLXModel__OclAny = LIBRARY.createFragment(Types._UMLXModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _UMLXModel__OclElement = LIBRARY.createFragment(Types._UMLXModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _UMLXModel__UMLXElement = LIBRARY.createFragment(Types._UMLXModel, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _UMLXModel__UMLXModel = LIBRARY.createFragment(Types._UMLXModel, UMLXTables.Types._UMLXModel);
+		private static final @NonNull FlatFragment _UMLXModel__UMLXElement = LIBRARY.createFragment(Types._UMLXModel, Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXModel__UMLXModel = LIBRARY.createFragment(Types._UMLXModel, Types._UMLXModel);
 
 		private static final @NonNull FlatFragment _UMLXNamedElement__OclAny = LIBRARY.createFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _UMLXNamedElement__OclElement = LIBRARY.createFragment(Types._UMLXNamedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXNamedElement, UMLXTables.Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXNamedElement, Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXNamedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXNamedElement, Types._UMLXNamedElement);
 
 		private static final @NonNull FlatFragment _UMLXTypedElement__OclAny = LIBRARY.createFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _UMLXTypedElement__OclElement = LIBRARY.createFragment(Types._UMLXTypedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXElement);
-		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXNamedElement);
-		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXTypedElement = LIBRARY.createFragment(Types._UMLXTypedElement, UMLXTables.Types._UMLXTypedElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXElement = LIBRARY.createFragment(Types._UMLXTypedElement, Types._UMLXElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXNamedElement = LIBRARY.createFragment(Types._UMLXTypedElement, Types._UMLXNamedElement);
+		private static final @NonNull FlatFragment _UMLXTypedElement__UMLXTypedElement = LIBRARY.createFragment(Types._UMLXTypedElement, Types._UMLXTypedElement);
 
 		static {
 			Init.initEnd();
@@ -400,7 +399,7 @@ public class UMLXTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _RelPatternNode__isExpression = LIBRARY.createOperation("isExpression", ParameterTypes.EMPTY_LIST, Types._RelPatternNode,
+		public static final @NonNull Operation _RelPatternNode__isExpression = LIBRARY.createOperation(Types._RelPatternNode, "isExpression", ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
 			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
@@ -426,93 +425,174 @@ public class UMLXTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _RelDiagram__isAbstract = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_ABSTRACT, Types._RelDiagram, 0);
-		public static final @NonNull Property _RelDiagram__isTop = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, Types._RelDiagram, 1);
-		public static final @NonNull Property _RelDiagram__ownedRelDomainNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, Types._RelDiagram, 2);
-		public static final @NonNull Property _RelDiagram__ownedRelInvocationNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, Types._RelDiagram, 3);
-		public static final @NonNull Property _RelDiagram__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._RelDiagram, 4);
-		public static final @NonNull Property _RelDiagram__RelInvocationNode__referredRelDiagram = LIBRARY.createOppositeProperty("RelInvocationNode", Types._RelDiagram, 5, UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM);
+		public static final @NonNull Property _RelDiagram__isAbstract = LIBRARY.createProperty(Types._RelDiagram, UMLXPackage.Literals.REL_DIAGRAM__IS_ABSTRACT, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDiagram__isTop = LIBRARY.createProperty(Types._RelDiagram, UMLXPackage.Literals.REL_DIAGRAM__IS_TOP, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDiagram__ownedRelDomainNodes = LIBRARY.createProperty(Types._RelDiagram, UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_DOMAIN_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelDomainNode), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDiagram__ownedRelInvocationNodes = LIBRARY.createProperty(Types._RelDiagram, UMLXPackage.Literals.REL_DIAGRAM__OWNED_REL_INVOCATION_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelInvocationNode), 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDiagram__owningTxDiagram = LIBRARY.createProperty(Types._RelDiagram, UMLXPackage.Literals.REL_DIAGRAM__OWNING_TX_DIAGRAM, Types._TxDiagram, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDiagram__RelInvocationNode__referredRelDiagram = LIBRARY.createOppositeProperty(Types._RelDiagram, "RelInvocationNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._RelInvocationNode), 5 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM);
 
-		public static final @NonNull Property _RelDomainNode__isEnforced = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, Types._RelDomainNode, 0);
-		public static final @NonNull Property _RelDomainNode__ownedRelPatternEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, Types._RelDomainNode, 1);
-		public static final @NonNull Property _RelDomainNode__ownedRelPatternNodes = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, Types._RelDomainNode, 2);
-		public static final @NonNull Property _RelDomainNode__owningRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDomainNode, 3);
-		public static final @NonNull Property _RelDomainNode__referredTxTypedModelNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._RelDomainNode, 4);
+		public static final @NonNull Property _RelDomainNode__isEnforced = LIBRARY.createProperty(Types._RelDomainNode, UMLXPackage.Literals.REL_DOMAIN_NODE__IS_ENFORCED, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDomainNode__ownedRelPatternEdges = LIBRARY.createProperty(Types._RelDomainNode, UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelPatternEdge), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDomainNode__ownedRelPatternNodes = LIBRARY.createProperty(Types._RelDomainNode, UMLXPackage.Literals.REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelPatternNode), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDomainNode__owningRelDiagram = LIBRARY.createProperty(Types._RelDomainNode, UMLXPackage.Literals.REL_DOMAIN_NODE__OWNING_REL_DIAGRAM, Types._RelDiagram, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelDomainNode__referredTxTypedModelNode = LIBRARY.createProperty(Types._RelDomainNode, UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE, Types._TxTypedModelNode, 4 | IsResolveProxies);
 
-		public static final @NonNull Property _RelInvocationEdge__invokingRelPatternNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, Types._RelInvocationEdge, 0);
-		public static final @NonNull Property _RelInvocationEdge__owningRelInvocationNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, Types._RelInvocationEdge, 1);
-		public static final @NonNull Property _RelInvocationEdge__referredRelPatternNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, Types._RelInvocationEdge, 2);
+		public static final @NonNull Property _RelInvocationEdge__invokingRelPatternNode = LIBRARY.createProperty(Types._RelInvocationEdge, UMLXPackage.Literals.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, Types._RelPatternNode, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelInvocationEdge__owningRelInvocationNode = LIBRARY.createProperty(Types._RelInvocationEdge, UMLXPackage.Literals.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, Types._RelInvocationNode, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelInvocationEdge__referredRelPatternNode = LIBRARY.createProperty(Types._RelInvocationEdge, UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, Types._RelPatternNode, 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RelInvocationNode__isThen = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__IS_THEN, Types._RelInvocationNode, 0);
-		public static final @NonNull Property _RelInvocationNode__ownedRelInvocationEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, Types._RelInvocationNode, 1);
-		public static final @NonNull Property _RelInvocationNode__owningRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelInvocationNode, 2);
-		public static final @NonNull Property _RelInvocationNode__referredRelDiagram = LIBRARY.createProperty(UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelInvocationNode, 3);
+		public static final @NonNull Property _RelInvocationNode__isThen = LIBRARY.createProperty(Types._RelInvocationNode, UMLXPackage.Literals.REL_INVOCATION_NODE__IS_THEN, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelInvocationNode__ownedRelInvocationEdges = LIBRARY.createProperty(Types._RelInvocationNode, UMLXPackage.Literals.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelInvocationEdge), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelInvocationNode__owningRelDiagram = LIBRARY.createProperty(Types._RelInvocationNode, UMLXPackage.Literals.REL_INVOCATION_NODE__OWNING_REL_DIAGRAM, Types._RelDiagram, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelInvocationNode__referredRelDiagram = LIBRARY.createProperty(Types._RelInvocationNode, UMLXPackage.Literals.REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM, Types._RelDiagram, 3 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RelPatternEdge__owningRelDomainNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelPatternEdge, 0);
-		public static final @NonNull Property _RelPatternEdge__referredEStructuralFeature = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, Types._RelPatternEdge, 1);
-		public static final @NonNull Property _RelPatternEdge__source = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE, Types._RelPatternEdge, 2);
-		public static final @NonNull Property _RelPatternEdge__sourceIndex = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE_INDEX, Types._RelPatternEdge, 3);
-		public static final @NonNull Property _RelPatternEdge__target = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternEdge, 4);
+		public static final @NonNull Property _RelPatternEdge__owningRelDomainNode = LIBRARY.createProperty(Types._RelPatternEdge, UMLXPackage.Literals.REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE, Types._RelDomainNode, 0 | IsResolveProxies);
+		public static final @NonNull Property _RelPatternEdge__referredEStructuralFeature = LIBRARY.createProperty(Types._RelPatternEdge, UMLXPackage.Literals.REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE, getASClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE), 1 | IsResolveProxies);
+		public static final @NonNull Property _RelPatternEdge__source = LIBRARY.createProperty(Types._RelPatternEdge, UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE, Types._RelPatternNode, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternEdge__sourceIndex = LIBRARY.createProperty(Types._RelPatternEdge, UMLXPackage.Literals.REL_PATTERN_EDGE__SOURCE_INDEX, OCLstdlibTables.Types._Integer, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternEdge__target = LIBRARY.createProperty(Types._RelPatternEdge, UMLXPackage.Literals.REL_PATTERN_EDGE__TARGET, Types._RelPatternNode, 4 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _RelPatternNode__incoming = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INCOMING, Types._RelPatternNode, 0);
-		public static final @NonNull Property _RelPatternNode__initExpressionLines = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INIT_EXPRESSION_LINES, Types._RelPatternNode, 1);
-		public static final @NonNull Property _RelPatternNode__invokingRelInvocationEdges = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, Types._RelPatternNode, 2);
-		public static final @NonNull Property _RelPatternNode__isAnon = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ANON, Types._RelPatternNode, 3);
-		public static final @NonNull Property _RelPatternNode__isRoot = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, Types._RelPatternNode, 4);
-		public static final @NonNull Property _RelPatternNode__outgoing = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, Types._RelPatternNode, 5);
-		public static final @NonNull Property _RelPatternNode__owningRelDomainNode = LIBRARY.createProperty(UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelPatternNode, 6);
-		public static final @NonNull Property _RelPatternNode__RelInvocationEdge__referredRelPatternNode = LIBRARY.createOppositeProperty("RelInvocationEdge", Types._RelPatternNode, 7, UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE);
+		public static final @NonNull Property _RelPatternNode__incoming = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__INCOMING, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelPatternEdge), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__initExpressionLines = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__INIT_EXPRESSION_LINES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__invokingRelInvocationEdges = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelInvocationEdge), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__isAnon = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__IS_ANON, OCLstdlibTables.Types._Boolean, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__isRoot = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__IS_ROOT, OCLstdlibTables.Types._Boolean, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__outgoing = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__OUTGOING, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelPatternEdge), 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__owningRelDomainNode = LIBRARY.createProperty(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE, Types._RelDomainNode, 6 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _RelPatternNode__RelInvocationEdge__referredRelPatternNode = LIBRARY.createOppositeProperty(Types._RelPatternNode, "RelInvocationEdge", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._RelInvocationEdge), 7 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE);
 
-		public static final @NonNull Property _TxDiagram__ownedRelDiagrams = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, Types._TxDiagram, 0);
-		public static final @NonNull Property _TxDiagram__ownedTxKeyNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, Types._TxDiagram, 1);
-		public static final @NonNull Property _TxDiagram__ownedTxPackageNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, Types._TxDiagram, 2);
-		public static final @NonNull Property _TxDiagram__ownedTxQueryNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_QUERY_NODES, Types._TxDiagram, 3);
-		public static final @NonNull Property _TxDiagram__ownedTxTypedModelNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, Types._TxDiagram, 4);
-		public static final @NonNull Property _TxDiagram__package = LIBRARY.createProperty(UMLXPackage.Literals.TX_DIAGRAM__PACKAGE, Types._TxDiagram, 5);
-		public static final @NonNull Property _TxDiagram__UMLXModel__ownedTxDiagrams = LIBRARY.createOppositeProperty("UMLXModel", Types._TxDiagram, 6, UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS);
+		public static final @NonNull Property _TxDiagram__ownedRelDiagrams = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__OWNED_REL_DIAGRAMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._RelDiagram), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__ownedTxKeyNodes = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_KEY_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxKeyNode), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__ownedTxPackageNodes = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_PACKAGE_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxPackageNode), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__ownedTxQueryNodes = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_QUERY_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxQueryNode), 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__ownedTxTypedModelNodes = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxTypedModelNode), 4 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__package = LIBRARY.createProperty(Types._TxDiagram, UMLXPackage.Literals.TX_DIAGRAM__PACKAGE, OCLstdlibTables.Types._String, 5 | IsResolveProxies);
+		public static final @NonNull Property _TxDiagram__UMLXModel__ownedTxDiagrams = LIBRARY.createOppositeProperty(Types._TxDiagram, "UMLXModel", Types._UMLXModel, 6 | IsImplicit | IsResolveProxies, UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS);
 
-		public static final @NonNull Property _TxKeyNode__ownedTxPartNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, Types._TxKeyNode, 0);
-		public static final @NonNull Property _TxKeyNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxKeyNode, 1);
-		public static final @NonNull Property _TxKeyNode__referredEClass = LIBRARY.createProperty(UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, Types._TxKeyNode, 2);
+		public static final @NonNull Property _TxKeyNode__ownedTxPartNodes = LIBRARY.createProperty(Types._TxKeyNode, UMLXPackage.Literals.TX_KEY_NODE__OWNED_TX_PART_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxPartNode), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxKeyNode__owningTxDiagram = LIBRARY.createProperty(Types._TxKeyNode, UMLXPackage.Literals.TX_KEY_NODE__OWNING_TX_DIAGRAM, Types._TxDiagram, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxKeyNode__referredEClass = LIBRARY.createProperty(Types._TxKeyNode, UMLXPackage.Literals.TX_KEY_NODE__REFERRED_ECLASS, getASClass(EcorePackage.Literals.ECLASS), 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TxPackageNode__importAliases = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__IMPORT_ALIASES, Types._TxPackageNode, 0);
-		public static final @NonNull Property _TxPackageNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM, Types._TxPackageNode, 1);
-		public static final @NonNull Property _TxPackageNode__referredEPackage = LIBRARY.createProperty(UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, Types._TxPackageNode, 2);
-		public static final @NonNull Property _TxPackageNode__TxTypedModelNode__usedTxPackageNodes = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxPackageNode, 3, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
+		public static final @NonNull Property _TxPackageNode__importAliases = LIBRARY.createProperty(Types._TxPackageNode, UMLXPackage.Literals.TX_PACKAGE_NODE__IMPORT_ALIASES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxPackageNode__owningTxDiagram = LIBRARY.createProperty(Types._TxPackageNode, UMLXPackage.Literals.TX_PACKAGE_NODE__OWNING_TX_DIAGRAM, Types._TxDiagram, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxPackageNode__referredEPackage = LIBRARY.createProperty(Types._TxPackageNode, UMLXPackage.Literals.TX_PACKAGE_NODE__REFERRED_EPACKAGE, getASClass(EcorePackage.Literals.EPACKAGE), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxPackageNode__TxTypedModelNode__usedTxPackageNodes = LIBRARY.createOppositeProperty(Types._TxPackageNode, "TxTypedModelNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._TxTypedModelNode), 3 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
 
-		public static final @NonNull Property _TxParameterNode__owningTxQueryNode = LIBRARY.createProperty(UMLXPackage.Literals.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE, Types._TxParameterNode, 0);
+		public static final @NonNull Property _TxParameterNode__owningTxQueryNode = LIBRARY.createProperty(Types._TxParameterNode, UMLXPackage.Literals.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE, Types._TxQueryNode, 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TxPartNode__isOpposite = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__IS_OPPOSITE, Types._TxPartNode, 0);
-		public static final @NonNull Property _TxPartNode__owningTxKeyNode = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__OWNING_TX_KEY_NODE, Types._TxPartNode, 1);
-		public static final @NonNull Property _TxPartNode__referredEStructuralFeature = LIBRARY.createProperty(UMLXPackage.Literals.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, Types._TxPartNode, 2);
+		public static final @NonNull Property _TxPartNode__isOpposite = LIBRARY.createProperty(Types._TxPartNode, UMLXPackage.Literals.TX_PART_NODE__IS_OPPOSITE, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxPartNode__owningTxKeyNode = LIBRARY.createProperty(Types._TxPartNode, UMLXPackage.Literals.TX_PART_NODE__OWNING_TX_KEY_NODE, Types._TxKeyNode, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxPartNode__referredEStructuralFeature = LIBRARY.createProperty(Types._TxPartNode, UMLXPackage.Literals.TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE, getASClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE), 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TxQueryNode__initExpressionLines = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__INIT_EXPRESSION_LINES, Types._TxQueryNode, 0);
-		public static final @NonNull Property _TxQueryNode__ownedTxParameterNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES, Types._TxQueryNode, 1);
-		public static final @NonNull Property _TxQueryNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_QUERY_NODE__OWNING_TX_DIAGRAM, Types._TxQueryNode, 2);
+		public static final @NonNull Property _TxQueryNode__initExpressionLines = LIBRARY.createProperty(Types._TxQueryNode, UMLXPackage.Literals.TX_QUERY_NODE__INIT_EXPRESSION_LINES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxQueryNode__ownedTxParameterNodes = LIBRARY.createProperty(Types._TxQueryNode, UMLXPackage.Literals.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxParameterNode), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxQueryNode__owningTxDiagram = LIBRARY.createProperty(Types._TxQueryNode, UMLXPackage.Literals.TX_QUERY_NODE__OWNING_TX_DIAGRAM, Types._TxDiagram, 2 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TxTypedModelNode__check = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, Types._TxTypedModelNode, 0);
-		public static final @NonNull Property _TxTypedModelNode__dependsOns = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, Types._TxTypedModelNode, 1);
-		public static final @NonNull Property _TxTypedModelNode__enforce = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, Types._TxTypedModelNode, 2);
-		public static final @NonNull Property _TxTypedModelNode__iterates = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES, Types._TxTypedModelNode, 3);
-		public static final @NonNull Property _TxTypedModelNode__owningTxDiagram = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxTypedModelNode, 4);
-		public static final @NonNull Property _TxTypedModelNode__usedTxPackageNodes = LIBRARY.createProperty(UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES, Types._TxTypedModelNode, 5);
-		public static final @NonNull Property _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = LIBRARY.createOppositeProperty("RelDomainNode", Types._TxTypedModelNode, 6, UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE);
-		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__dependsOns = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxTypedModelNode, 7, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS);
-		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__iterates = LIBRARY.createOppositeProperty("TxTypedModelNode", Types._TxTypedModelNode, 8, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES);
+		public static final @NonNull Property _TxTypedModelNode__check = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__CHECK, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__dependsOns = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxTypedModelNode), 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__enforce = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ENFORCE, OCLstdlibTables.Types._Boolean, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__iterates = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxTypedModelNode), 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__owningTxDiagram = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM, Types._TxDiagram, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__usedTxPackageNodes = LIBRARY.createProperty(Types._TxTypedModelNode, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxPackageNode), 5 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TxTypedModelNode__RelDomainNode__referredTxTypedModelNode = LIBRARY.createOppositeProperty(Types._TxTypedModelNode, "RelDomainNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._RelDomainNode), 6 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE);
+		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__dependsOns = LIBRARY.createOppositeProperty(Types._TxTypedModelNode, "TxTypedModelNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._TxTypedModelNode), 7 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__DEPENDS_ONS);
+		public static final @NonNull Property _TxTypedModelNode__TxTypedModelNode__iterates = LIBRARY.createOppositeProperty(Types._TxTypedModelNode, "TxTypedModelNode", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._TxTypedModelNode), 8 | IsImplicit | IsRequired | IsResolveProxies, UMLXPackage.Literals.TX_TYPED_MODEL_NODE__ITERATES);
 
-		public static final @NonNull Property _UMLXElement__comments = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_ELEMENT__COMMENTS, Types._UMLXElement, 0);
+		public static final @NonNull Property _UMLXElement__comments = LIBRARY.createProperty(Types._UMLXElement, UMLXPackage.Literals.UMLX_ELEMENT__COMMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._String), 0 | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _UMLXModel__ownedTxDiagrams = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS, Types._UMLXModel, 0);
+		public static final @NonNull Property _UMLXModel__ownedTxDiagrams = LIBRARY.createProperty(Types._UMLXModel, UMLXPackage.Literals.UMLX_MODEL__OWNED_TX_DIAGRAMS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._TxDiagram), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _UMLXNamedElement__name = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_NAMED_ELEMENT__NAME, Types._UMLXNamedElement, 0);
+		public static final @NonNull Property _UMLXNamedElement__name = LIBRARY.createProperty(Types._UMLXNamedElement, UMLXPackage.Literals.UMLX_NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _UMLXTypedElement__isMany = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_MANY, Types._UMLXTypedElement, 0);
-		public static final @NonNull Property _UMLXTypedElement__isNullFree = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_NULL_FREE, Types._UMLXTypedElement, 1);
-		public static final @NonNull Property _UMLXTypedElement__isOrdered = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_ORDERED, Types._UMLXTypedElement, 2);
-		public static final @NonNull Property _UMLXTypedElement__isRequired = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_REQUIRED, Types._UMLXTypedElement, 3);
-		public static final @NonNull Property _UMLXTypedElement__isUnique = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_UNIQUE, Types._UMLXTypedElement, 4);
-		public static final @NonNull Property _UMLXTypedElement__referredEClassifier = LIBRARY.createProperty(UMLXPackage.Literals.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, Types._UMLXTypedElement, 5);
+		public static final @NonNull Property _UMLXTypedElement__isMany = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_MANY, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _UMLXTypedElement__isNullFree = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_NULL_FREE, OCLstdlibTables.Types._Boolean, 1 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _UMLXTypedElement__isOrdered = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_ORDERED, OCLstdlibTables.Types._Boolean, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _UMLXTypedElement__isRequired = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_REQUIRED, OCLstdlibTables.Types._Boolean, 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _UMLXTypedElement__isUnique = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__IS_UNIQUE, OCLstdlibTables.Types._Boolean, 4 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _UMLXTypedElement__referredEClassifier = LIBRARY.createProperty(Types._UMLXTypedElement, UMLXPackage.Literals.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, getASClass(EcorePackage.Literals.ECLASSIFIER), 5 | IsResolveProxies);
+
 		static {
+			_RelDiagram__isAbstract.setDefaultValueString("false");
+			_RelDiagram__isTop.setDefaultValueString("false");
+			_RelDiagram__ownedRelDomainNodes.setOpposite(_RelDomainNode__owningRelDiagram);
+			_RelDiagram__ownedRelInvocationNodes.setOpposite(_RelInvocationNode__owningRelDiagram);
+			_RelDiagram__owningTxDiagram.setOpposite(_TxDiagram__ownedRelDiagrams);
+			_RelDiagram__RelInvocationNode__referredRelDiagram.setOpposite(_RelInvocationNode__referredRelDiagram);
+
+			_RelDomainNode__isEnforced.setDefaultValueString("false");
+			_RelDomainNode__ownedRelPatternEdges.setOpposite(_RelPatternEdge__owningRelDomainNode);
+			_RelDomainNode__ownedRelPatternNodes.setOpposite(_RelPatternNode__owningRelDomainNode);
+			_RelDomainNode__owningRelDiagram.setOpposite(_RelDiagram__ownedRelDomainNodes);
+			_RelDomainNode__referredTxTypedModelNode.setOpposite(_TxTypedModelNode__RelDomainNode__referredTxTypedModelNode);
+
+			_RelInvocationEdge__invokingRelPatternNode.setOpposite(_RelPatternNode__invokingRelInvocationEdges);
+			_RelInvocationEdge__owningRelInvocationNode.setOpposite(_RelInvocationNode__ownedRelInvocationEdges);
+			_RelInvocationEdge__referredRelPatternNode.setOpposite(_RelPatternNode__RelInvocationEdge__referredRelPatternNode);
+
+			_RelInvocationNode__isThen.setDefaultValueString("true");
+			_RelInvocationNode__ownedRelInvocationEdges.setOpposite(_RelInvocationEdge__owningRelInvocationNode);
+			_RelInvocationNode__owningRelDiagram.setOpposite(_RelDiagram__ownedRelInvocationNodes);
+			_RelInvocationNode__referredRelDiagram.setOpposite(_RelDiagram__RelInvocationNode__referredRelDiagram);
+
+			_RelPatternEdge__owningRelDomainNode.setOpposite(_RelDomainNode__ownedRelPatternEdges);
+			_RelPatternEdge__referredEStructuralFeature.setOpposite(createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "RelPatternEdge", _RelPatternEdge__referredEStructuralFeature));
+			_RelPatternEdge__source.setOpposite(_RelPatternNode__outgoing);
+			_RelPatternEdge__target.setOpposite(_RelPatternNode__incoming);
+
+			_RelPatternNode__incoming.setOpposite(_RelPatternEdge__target);
+			_RelPatternNode__invokingRelInvocationEdges.setOpposite(_RelInvocationEdge__invokingRelPatternNode);
+			_RelPatternNode__isAnon.setDefaultValueString("false");
+			_RelPatternNode__isRoot.setDefaultValueString("false");
+			_RelPatternNode__outgoing.setOpposite(_RelPatternEdge__source);
+			_RelPatternNode__owningRelDomainNode.setOpposite(_RelDomainNode__ownedRelPatternNodes);
+			_RelPatternNode__RelInvocationEdge__referredRelPatternNode.setOpposite(_RelInvocationEdge__referredRelPatternNode);
+
+			_TxDiagram__ownedRelDiagrams.setOpposite(_RelDiagram__owningTxDiagram);
+			_TxDiagram__ownedTxKeyNodes.setOpposite(_TxKeyNode__owningTxDiagram);
+			_TxDiagram__ownedTxPackageNodes.setOpposite(_TxPackageNode__owningTxDiagram);
+			_TxDiagram__ownedTxQueryNodes.setOpposite(_TxQueryNode__owningTxDiagram);
+			_TxDiagram__ownedTxTypedModelNodes.setOpposite(_TxTypedModelNode__owningTxDiagram);
+			_TxDiagram__UMLXModel__ownedTxDiagrams.setOpposite(_UMLXModel__ownedTxDiagrams);
+
+			_TxKeyNode__ownedTxPartNodes.setOpposite(_TxPartNode__owningTxKeyNode);
+			_TxKeyNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxKeyNodes);
+			_TxKeyNode__referredEClass.setOpposite(createOpposite(EcorePackage.Literals.ECLASS, "TxKeyNode", _TxKeyNode__referredEClass));
+
+			_TxPackageNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxPackageNodes);
+			_TxPackageNode__referredEPackage.setOpposite(createOpposite(EcorePackage.Literals.EPACKAGE, "TxPackageNode", _TxPackageNode__referredEPackage));
+			_TxPackageNode__TxTypedModelNode__usedTxPackageNodes.setOpposite(_TxTypedModelNode__usedTxPackageNodes);
+
+			_TxParameterNode__owningTxQueryNode.setOpposite(_TxQueryNode__ownedTxParameterNodes);
+
+			_TxPartNode__isOpposite.setDefaultValueString("false");
+			_TxPartNode__owningTxKeyNode.setOpposite(_TxKeyNode__ownedTxPartNodes);
+			_TxPartNode__referredEStructuralFeature.setOpposite(createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "TxPartNode", _TxPartNode__referredEStructuralFeature));
+
+			_TxQueryNode__ownedTxParameterNodes.setOpposite(_TxParameterNode__owningTxQueryNode);
+			_TxQueryNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxQueryNodes);
+
+			_TxTypedModelNode__check.setDefaultValueString("false");
+			_TxTypedModelNode__dependsOns.setOpposite(_TxTypedModelNode__TxTypedModelNode__dependsOns);
+			_TxTypedModelNode__enforce.setDefaultValueString("false");
+			_TxTypedModelNode__iterates.setOpposite(_TxTypedModelNode__TxTypedModelNode__iterates);
+			_TxTypedModelNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxTypedModelNodes);
+			_TxTypedModelNode__usedTxPackageNodes.setOpposite(_TxPackageNode__TxTypedModelNode__usedTxPackageNodes);
+			_TxTypedModelNode__RelDomainNode__referredTxTypedModelNode.setOpposite(_RelDomainNode__referredTxTypedModelNode);
+			_TxTypedModelNode__TxTypedModelNode__dependsOns.setOpposite(_TxTypedModelNode__dependsOns);
+			_TxTypedModelNode__TxTypedModelNode__iterates.setOpposite(_TxTypedModelNode__iterates);
+
+
+			_UMLXModel__ownedTxDiagrams.setOpposite(_TxDiagram__UMLXModel__ownedTxDiagrams);
+
+
+			_UMLXTypedElement__isMany.setDefaultValueString("false");
+			_UMLXTypedElement__isNullFree.setDefaultValueString("true");
+			_UMLXTypedElement__isOrdered.setDefaultValueString("false");
+			_UMLXTypedElement__isRequired.setDefaultValueString("true");
+			_UMLXTypedElement__isUnique.setDefaultValueString("true");
+			_UMLXTypedElement__referredEClassifier.setOpposite(createOpposite(EcorePackage.Literals.ECLASSIFIER, "UMLXTypedElement", _UMLXTypedElement__referredEClassifier));
+
 			Init.initEnd();
 		}
 
@@ -1011,7 +1091,7 @@ public class UMLXTables extends AbstractTables
 		private static final @NonNull Operation @NonNull [] _RelPatternEdge__UMLXElement = {};
 
 		private static final @NonNull Operation @NonNull [] _RelPatternNode__RelPatternNode = {
-			UMLXTables.Operations._RelPatternNode__isExpression /* isExpression() */
+			Operations._RelPatternNode__isExpression /* isExpression() */
 		};
 		private static final @NonNull Operation @NonNull [] _RelPatternNode__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -1599,210 +1679,210 @@ public class UMLXTables extends AbstractTables
 		}
 
 		private static final @NonNull Property @NonNull [] _RelDiagram = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._RelDiagram__isAbstract,
-			UMLXTables.Properties._RelDiagram__isTop,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._RelDiagram__isAbstract,
+			Properties._RelDiagram__isTop,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelDiagram__ownedRelDomainNodes,
-			UMLXTables.Properties._RelDiagram__ownedRelInvocationNodes,
-			UMLXTables.Properties._RelDiagram__owningTxDiagram
+			Properties._RelDiagram__ownedRelDomainNodes,
+			Properties._RelDiagram__ownedRelInvocationNodes,
+			Properties._RelDiagram__owningTxDiagram
 		};
 
 		private static final @NonNull Property @NonNull [] _RelDomainNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._RelDomainNode__isEnforced,
+			Properties._UMLXElement__comments,
+			Properties._RelDomainNode__isEnforced,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelDomainNode__ownedRelPatternEdges,
-			UMLXTables.Properties._RelDomainNode__ownedRelPatternNodes,
-			UMLXTables.Properties._RelDomainNode__owningRelDiagram,
-			UMLXTables.Properties._RelDomainNode__referredTxTypedModelNode
+			Properties._RelDomainNode__ownedRelPatternEdges,
+			Properties._RelDomainNode__ownedRelPatternNodes,
+			Properties._RelDomainNode__owningRelDiagram,
+			Properties._RelDomainNode__referredTxTypedModelNode
 		};
 
 		private static final @NonNull Property @NonNull [] _RelEdge = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _RelInvocationEdge = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._RelInvocationEdge__invokingRelPatternNode,
+			Properties._UMLXElement__comments,
+			Properties._RelInvocationEdge__invokingRelPatternNode,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelInvocationEdge__owningRelInvocationNode,
-			UMLXTables.Properties._RelInvocationEdge__referredRelPatternNode
+			Properties._RelInvocationEdge__owningRelInvocationNode,
+			Properties._RelInvocationEdge__referredRelPatternNode
 		};
 
 		private static final @NonNull Property @NonNull [] _RelInvocationNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._RelInvocationNode__isThen,
+			Properties._UMLXElement__comments,
+			Properties._RelInvocationNode__isThen,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelInvocationNode__ownedRelInvocationEdges,
-			UMLXTables.Properties._RelInvocationNode__owningRelDiagram,
-			UMLXTables.Properties._RelInvocationNode__referredRelDiagram
+			Properties._RelInvocationNode__ownedRelInvocationEdges,
+			Properties._RelInvocationNode__owningRelDiagram,
+			Properties._RelInvocationNode__referredRelDiagram
 		};
 
 		private static final @NonNull Property @NonNull [] _RelNode = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _RelPatternEdge = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelPatternEdge__owningRelDomainNode,
-			UMLXTables.Properties._RelPatternEdge__referredEStructuralFeature,
-			UMLXTables.Properties._RelPatternEdge__source,
-			UMLXTables.Properties._RelPatternEdge__sourceIndex,
-			UMLXTables.Properties._RelPatternEdge__target
+			Properties._RelPatternEdge__owningRelDomainNode,
+			Properties._RelPatternEdge__referredEStructuralFeature,
+			Properties._RelPatternEdge__source,
+			Properties._RelPatternEdge__sourceIndex,
+			Properties._RelPatternEdge__target
 		};
 
 		private static final @NonNull Property @NonNull [] _RelPatternNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._RelPatternNode__incoming,
-			UMLXTables.Properties._RelPatternNode__initExpressionLines,
-			UMLXTables.Properties._RelPatternNode__invokingRelInvocationEdges,
-			UMLXTables.Properties._RelPatternNode__isAnon,
-			UMLXTables.Properties._UMLXTypedElement__isMany,
-			UMLXTables.Properties._UMLXTypedElement__isNullFree,
-			UMLXTables.Properties._UMLXTypedElement__isOrdered,
-			UMLXTables.Properties._UMLXTypedElement__isRequired,
-			UMLXTables.Properties._RelPatternNode__isRoot,
-			UMLXTables.Properties._UMLXTypedElement__isUnique,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._RelPatternNode__incoming,
+			Properties._RelPatternNode__initExpressionLines,
+			Properties._RelPatternNode__invokingRelInvocationEdges,
+			Properties._RelPatternNode__isAnon,
+			Properties._UMLXTypedElement__isMany,
+			Properties._UMLXTypedElement__isNullFree,
+			Properties._UMLXTypedElement__isOrdered,
+			Properties._UMLXTypedElement__isRequired,
+			Properties._RelPatternNode__isRoot,
+			Properties._UMLXTypedElement__isUnique,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._RelPatternNode__outgoing,
-			UMLXTables.Properties._RelPatternNode__owningRelDomainNode,
-			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
+			Properties._RelPatternNode__outgoing,
+			Properties._RelPatternNode__owningRelDomainNode,
+			Properties._UMLXTypedElement__referredEClassifier
 		};
 
 		private static final @NonNull Property @NonNull [] _TxDiagram = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxDiagram__ownedRelDiagrams,
-			UMLXTables.Properties._TxDiagram__ownedTxKeyNodes,
-			UMLXTables.Properties._TxDiagram__ownedTxPackageNodes,
-			UMLXTables.Properties._TxDiagram__ownedTxQueryNodes,
-			UMLXTables.Properties._TxDiagram__ownedTxTypedModelNodes,
-			UMLXTables.Properties._TxDiagram__package
+			Properties._TxDiagram__ownedRelDiagrams,
+			Properties._TxDiagram__ownedTxKeyNodes,
+			Properties._TxDiagram__ownedTxPackageNodes,
+			Properties._TxDiagram__ownedTxQueryNodes,
+			Properties._TxDiagram__ownedTxTypedModelNodes,
+			Properties._TxDiagram__package
 		};
 
 		private static final @NonNull Property @NonNull [] _TxKeyNode = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxKeyNode__ownedTxPartNodes,
-			UMLXTables.Properties._TxKeyNode__owningTxDiagram,
-			UMLXTables.Properties._TxKeyNode__referredEClass
+			Properties._TxKeyNode__ownedTxPartNodes,
+			Properties._TxKeyNode__owningTxDiagram,
+			Properties._TxKeyNode__referredEClass
 		};
 
 		private static final @NonNull Property @NonNull [] _TxNode = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _TxPackageNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._TxPackageNode__importAliases,
+			Properties._UMLXElement__comments,
+			Properties._TxPackageNode__importAliases,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxPackageNode__owningTxDiagram,
-			UMLXTables.Properties._TxPackageNode__referredEPackage
+			Properties._TxPackageNode__owningTxDiagram,
+			Properties._TxPackageNode__referredEPackage
 		};
 
 		private static final @NonNull Property @NonNull [] _TxParameterNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._UMLXTypedElement__isMany,
-			UMLXTables.Properties._UMLXTypedElement__isNullFree,
-			UMLXTables.Properties._UMLXTypedElement__isOrdered,
-			UMLXTables.Properties._UMLXTypedElement__isRequired,
-			UMLXTables.Properties._UMLXTypedElement__isUnique,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._UMLXTypedElement__isMany,
+			Properties._UMLXTypedElement__isNullFree,
+			Properties._UMLXTypedElement__isOrdered,
+			Properties._UMLXTypedElement__isRequired,
+			Properties._UMLXTypedElement__isUnique,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxParameterNode__owningTxQueryNode,
-			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
+			Properties._TxParameterNode__owningTxQueryNode,
+			Properties._UMLXTypedElement__referredEClassifier
 		};
 
 		private static final @NonNull Property @NonNull [] _TxPartNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._TxPartNode__isOpposite,
+			Properties._UMLXElement__comments,
+			Properties._TxPartNode__isOpposite,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxPartNode__owningTxKeyNode,
-			UMLXTables.Properties._TxPartNode__referredEStructuralFeature
+			Properties._TxPartNode__owningTxKeyNode,
+			Properties._TxPartNode__referredEStructuralFeature
 		};
 
 		private static final @NonNull Property @NonNull [] _TxQueryNode = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._TxQueryNode__initExpressionLines,
-			UMLXTables.Properties._UMLXTypedElement__isMany,
-			UMLXTables.Properties._UMLXTypedElement__isNullFree,
-			UMLXTables.Properties._UMLXTypedElement__isOrdered,
-			UMLXTables.Properties._UMLXTypedElement__isRequired,
-			UMLXTables.Properties._UMLXTypedElement__isUnique,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._TxQueryNode__initExpressionLines,
+			Properties._UMLXTypedElement__isMany,
+			Properties._UMLXTypedElement__isNullFree,
+			Properties._UMLXTypedElement__isOrdered,
+			Properties._UMLXTypedElement__isRequired,
+			Properties._UMLXTypedElement__isUnique,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxQueryNode__ownedTxParameterNodes,
-			UMLXTables.Properties._TxQueryNode__owningTxDiagram,
-			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
+			Properties._TxQueryNode__ownedTxParameterNodes,
+			Properties._TxQueryNode__owningTxDiagram,
+			Properties._UMLXTypedElement__referredEClassifier
 		};
 
 		private static final @NonNull Property @NonNull [] _TxTypedModelNode = {
-			UMLXTables.Properties._TxTypedModelNode__check,
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._TxTypedModelNode__dependsOns,
-			UMLXTables.Properties._TxTypedModelNode__enforce,
-			UMLXTables.Properties._TxTypedModelNode__iterates,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._TxTypedModelNode__check,
+			Properties._UMLXElement__comments,
+			Properties._TxTypedModelNode__dependsOns,
+			Properties._TxTypedModelNode__enforce,
+			Properties._TxTypedModelNode__iterates,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._TxTypedModelNode__owningTxDiagram,
-			UMLXTables.Properties._TxTypedModelNode__usedTxPackageNodes
+			Properties._TxTypedModelNode__owningTxDiagram,
+			Properties._TxTypedModelNode__usedTxPackageNodes
 		};
 
 		private static final @NonNull Property @NonNull [] _UMLXElement = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _UMLXModel = {
-			UMLXTables.Properties._UMLXElement__comments,
+			Properties._UMLXElement__comments,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._UMLXModel__ownedTxDiagrams
+			Properties._UMLXModel__ownedTxDiagrams
 		};
 
 		private static final @NonNull Property @NonNull [] _UMLXNamedElement = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _UMLXTypedElement = {
-			UMLXTables.Properties._UMLXElement__comments,
-			UMLXTables.Properties._UMLXTypedElement__isMany,
-			UMLXTables.Properties._UMLXTypedElement__isNullFree,
-			UMLXTables.Properties._UMLXTypedElement__isOrdered,
-			UMLXTables.Properties._UMLXTypedElement__isRequired,
-			UMLXTables.Properties._UMLXTypedElement__isUnique,
-			UMLXTables.Properties._UMLXNamedElement__name,
+			Properties._UMLXElement__comments,
+			Properties._UMLXTypedElement__isMany,
+			Properties._UMLXTypedElement__isNullFree,
+			Properties._UMLXTypedElement__isOrdered,
+			Properties._UMLXTypedElement__isRequired,
+			Properties._UMLXTypedElement__isUnique,
+			Properties._UMLXNamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			UMLXTables.Properties._UMLXTypedElement__referredEClassifier
+			Properties._UMLXTypedElement__referredEClassifier
 		};
 
 		/**

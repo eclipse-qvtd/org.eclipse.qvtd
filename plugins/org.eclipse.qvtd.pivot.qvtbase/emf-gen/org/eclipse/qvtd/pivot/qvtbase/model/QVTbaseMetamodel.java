@@ -310,11 +310,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
 
 		private final org.eclipse.ocl.pivot.@NonNull Class _OCLExpression = createClass("OCLExpression");
-		private final org.eclipse.ocl.pivot.@NonNull Class _ParameterVariable = createClass("ParameterVariable");
-		private final org.eclipse.ocl.pivot.@NonNull Class _Variable = createClass("Variable");
 		private final org.eclipse.ocl.pivot.@NonNull Class _Annotation = createClass("Annotation");
 		private final org.eclipse.ocl.pivot.@NonNull Class _Package = createClass("Package");
 		private final org.eclipse.ocl.pivot.@NonNull Class _Parameter = createClass("Parameter");
+		private final org.eclipse.ocl.pivot.@NonNull Class _ParameterVariable = createClass("ParameterVariable");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Variable = createClass("Variable");
 
 		private final @NonNull Enumeration _TargetElementKind = createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND);
 		private final @NonNull EnumerationLiteral el__TargetElementKind_INPUT = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"));
@@ -438,14 +438,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
-			type = _ParameterVariable;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
-			type = _Variable;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type);
 			type = _Annotation;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
@@ -455,6 +447,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
 			type = _Parameter;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _ParameterVariable;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type);
+			type = _Variable;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
@@ -737,12 +737,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 
 		private final @NonNull Property _OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
 		private final @NonNull Property _OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function_F);
-		private final @NonNull Property _ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
-		private final @NonNull Property _Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
 		private final @NonNull Property _Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
 		private final @NonNull Property _Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel_F);
 		private final @NonNull Property _Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		private final @NonNull Property _Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
+		private final @NonNull Property _ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
+		private final @NonNull Property _Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
 
 		private void installProperties() {
 			List<Property> ownedProperties;
@@ -966,19 +966,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Function_queryExpression);
 
-			ownedProperties = _ParameterVariable.getOwnedProperties();
-			ownedProperties.add(property = _ParameterVariable_Rule_ownedContext);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Rule_ownedContext);
-
-			ownedProperties = _Variable.getOwnedProperties();
-			ownedProperties.add(property = _Variable_Pattern_bindsTo);
-			property.setIsImplicit(true);
-			property.setIsRequired(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Pattern_bindsTo);
-
 			ownedProperties = _Annotation.getOwnedProperties();
 			ownedProperties.add(property = _Annotation_Transformation_ownedTag);
 			property.setIsImplicit(true);
@@ -1001,6 +988,19 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transformation_ownedContext);
+
+			ownedProperties = _ParameterVariable.getOwnedProperties();
+			ownedProperties.add(property = _ParameterVariable_Rule_ownedContext);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Rule_ownedContext);
+
+			ownedProperties = _Variable.getOwnedProperties();
+			ownedProperties.add(property = _Variable_Pattern_bindsTo);
+			property.setIsImplicit(true);
+			property.setIsRequired(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pattern_bindsTo);
 		}
 
 		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant(QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP, "NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");
