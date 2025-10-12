@@ -75,19 +75,19 @@ public class List2listAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected List2listSwitch<@Nullable Adapter> modelSwitch =
 			new List2listSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseList2List(List2List object) {
-				return createList2ListAdapter();
-			}
-			@Override
-			public Adapter caseElement2Element(Element2Element object) {
-				return createElement2ElementAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseList2List(List2List object) {
+			return createList2ListAdapter();
+		}
+		@Override
+		public Adapter caseElement2Element(Element2Element object) {
+			return createElement2ElementAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
