@@ -54,9 +54,4 @@
      	class="org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary$Loader"/>
    </extension>
 
-  <extension point="org.eclipse.ocl.pivot.complete_package_id">
-     <mapping completePackageId="$metamodel$" packageURI="http://www.eclipse.org/qvt/2016/QVTimperative"/>
-  </extension>
-
-
 </plugin>
