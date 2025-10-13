@@ -329,7 +329,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
 							if (ownedExpression == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
 							@SuppressWarnings("null")

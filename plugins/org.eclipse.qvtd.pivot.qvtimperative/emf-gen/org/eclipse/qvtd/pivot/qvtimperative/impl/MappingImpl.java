@@ -375,7 +375,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						 * name
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
 						}
 						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
@@ -460,7 +460,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						 * name
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
 						}
 						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//

@@ -225,7 +225,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 						 * resolvedProperty
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTtemplate\'::PropertyTemplateItem::resolvedProperty\'");
+							throw new InvalidValueException("Null source for \'qvttemplate::PropertyTemplateItem::resolvedProperty : Property[1]\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();

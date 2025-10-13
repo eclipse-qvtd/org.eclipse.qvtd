@@ -344,7 +344,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						/*@Caught*/ @NonNull Object CAUGHT_includes;
 						try {
 							if (transformation == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
+								throw new InvalidValueException("Null source for \'qvtbase::Transformation::modelParameter : OrderedSet(qvtbase::TypedModel)\'");
 							}
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
@@ -361,7 +361,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * usedPackage
 								 */
 								if (_1 == null) {
-									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
+									throw new InvalidValueException("Null source for \'qvtbase::TypedModel::usedPackage : Set(Package)\'");
 								}
 								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
 								final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
@@ -471,7 +471,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object BOXED_superClasses_0, final /*@NonInvalid*/ @Nullable Object _1) {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class CAST_null = (org.eclipse.ocl.pivot.Class)_1;
 									if (CAST_null == null) {
-										throw new InvalidValueException("Null source for \'Class::superClasses\'");
+										throw new InvalidValueException("Null source for \'Class::superClasses : Set(Class[*|1])\'");
 									}
 									final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Class> superClasses_1 = CAST_null.getSuperClasses();
 									final /*@Thrown*/ @NonNull SetValue BOXED_superClasses_1 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_1);
@@ -511,7 +511,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * identifies
 								 */
 								if (_1_0 == null) {
-									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
+									throw new InvalidValueException("Null source for \'qvtrelation::Key::identifies : Class[1]\'");
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = _1_0.getIdentifies();
@@ -627,7 +627,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * identifies
 								 */
 								if (_1 == null) {
-									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
+									throw new InvalidValueException("Null source for \'qvtrelation::Key::identifies : Class[1]\'");
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();
@@ -724,7 +724,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						/*@Caught*/ @NonNull Object CAUGHT_ne;
 						try {
 							if (_1 == null) {
-								throw new InvalidValueException("Null source for \'Property::opposite\'");
+								throw new InvalidValueException("Null source for \'Property::opposite : Property\'");
 							}
 							final /*@Thrown*/ @Nullable Property opposite = _1.getOpposite();
 							final /*@Thrown*/ boolean ne = opposite != null;
@@ -823,7 +823,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 							if (_1 == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = _1.getType();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, identifies, type).booleanValue();
@@ -922,7 +922,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 							if (_1 == null) {
-								throw new InvalidValueException("Null source for \'Property::owningClass\'");
+								throw new InvalidValueException("Null source for \'Property::owningClass : Class\'");
 							}
 							final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = _1.getOwningClass();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, identifies, owningClass).booleanValue();
@@ -1014,7 +1014,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						 * opposite
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'Property::opposite\'");
+							throw new InvalidValueException("Null source for \'Property::opposite : Property\'");
 						}
 						final /*@Thrown*/ @Nullable Property opposite = _1.getOpposite();
 						//

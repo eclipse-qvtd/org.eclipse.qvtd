@@ -243,7 +243,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 						try {
 							final /*@NonInvalid*/ @NonNull BooleanType TYP_Boolean = (@NonNull BooleanType)idResolver.getClass(TypeId.BOOLEAN, null);
 							if (where == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = where.getType();
 							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;

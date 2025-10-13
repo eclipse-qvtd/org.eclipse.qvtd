@@ -693,7 +693,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 						 * name
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
 						}
 						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//
@@ -723,7 +723,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 							 * name
 							 */
 							if (_1_0 == null) {
-								throw new InvalidValueException("Null source for \'NamedElement::name\'");
+								throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
 							}
 							final /*@Thrown*/ @Nullable String name_0 = _1_0.getName();
 							//
@@ -809,7 +809,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 						final /*@Thrown*/ @NonNull String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, QVTrelationTables.STR__32_in_32_34);
 						final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
 						if (transformation == null) {
-							throw new InvalidValueException("Null source for \'NamedElement::name\'");
+							throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
 						}
 						final /*@Thrown*/ @Nullable String name_1 = transformation.getName();
 						final /*@Thrown*/ @NonNull String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, name_1);
