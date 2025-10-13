@@ -109,7 +109,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		final /*@NonInvalid*/ @NonNull Property targetProperty = this.getTargetProperty();
 		final /*@NonInvalid*/ @Nullable Property opposite = targetProperty.getOpposite();
 		if (opposite == null) {
-			throw new InvalidValueException("Null body for \'OppositePropertyAssignment::getReferredTargetProperty() : Property[1]\'");
+			throw new InvalidValueException("Null body for \'qvtcore::OppositePropertyAssignment::getReferredTargetProperty() : Property[1]\'");
 		}
 		return opposite;
 	}

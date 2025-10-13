@@ -6,7 +6,6 @@
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" xmi:id="AAAAA" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" name="QVTbase.ecore" xmiidVersion="1">
   <ownedPackages xmi:id="6+ray" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
-    <ownedAnnotations xsi:type="pivot:Annotation" name="http://www.eclipse.org/OCL/ASMetamodel"/>
     <ownedClasses xmi:id="Phhr+" name="BaseModel" superClasses="&_0;#aKB,e"/>
     <ownedClasses xmi:id="32OJ," name="CompoundTargetElement" superClasses="#imhVK">
       <ownedProperties xmi:id="gsp,1" isComposite="true" isRequired="true" name="ownedTargetElements" opposite="#Ddfbo" type="#xr+J3"/>

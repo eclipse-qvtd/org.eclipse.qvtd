@@ -77,6 +77,7 @@ public class QVTscheduleTables extends AbstractTables
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", "ecore", EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", "qvtb", QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2017/QVTschedule", "qvts", QVTschedulePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BasicPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("BasicPartition", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CastEdge = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("CastEdge", 0);
@@ -115,14 +116,14 @@ public class QVTscheduleTables extends AbstractTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Region = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Region", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RootPartition = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RootPartition", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RootRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RootRegion", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTscheduleTables.PACKid_$metamodel$.getClassId("Rule", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RuleRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("RuleRegion", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ScheduleModel = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ScheduleModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ShadowPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("ShadowPart", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTscheduleTables.PACKid_$metamodel$.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TupleLiteralPart = QVTscheduleTables.PACKid_$metamodel$.getClassId("TupleLiteralPart", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTscheduleTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTscheduleTables.PACKid_$metamodel$.getClassId("TypedModel", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTscheduleTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VerdictRegion = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("VerdictRegion", 0);
 	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EInt = QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);

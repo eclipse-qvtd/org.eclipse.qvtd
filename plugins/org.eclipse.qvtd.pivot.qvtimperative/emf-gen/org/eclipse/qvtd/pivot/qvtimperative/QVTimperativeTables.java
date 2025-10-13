@@ -14,11 +14,7 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore
- *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
- *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -53,6 +49,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+// import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 // import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 
 /**
@@ -82,43 +79,45 @@ public class QVTimperativeTables extends AbstractTables
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", "ecore", EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", "qvtb", QVTbasePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/QVTimperative", "qvti", QVTimperativePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_PRIMid_String = TypeId.BAG.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AddStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("AddStatement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AppendParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("AppendParameterBinding", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AddStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AddStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_AppendParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AppendParameterBinding", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BooleanType = QVTimperativeTables.PACKid_$metamodel$.getClassId("BooleanType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BufferStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("BufferStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BufferStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("BufferStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CallExp = QVTimperativeTables.PACKid_$metamodel$.getClassId("CallExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CheckStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("CheckStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CheckStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("CheckStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTimperativeTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTimperativeTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ConnectionVariable = QVTimperativeTables.PACKid_$metamodel$.getClassId("ConnectionVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ConnectionVariable = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("ConnectionVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTimperativeTables.PACKid_$metamodel$.getClassId("DataType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DeclareStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("DeclareStatement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EntryPoint = QVTimperativeTables.PACKid_$metamodel$.getClassId("EntryPoint", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("GuardParameterBinding", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ImperativeTransformation = QVTimperativeTables.PACKid_$metamodel$.getClassId("ImperativeTransformation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoopParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("LoopParameterBinding", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoopVariable = QVTimperativeTables.PACKid_$metamodel$.getClassId("LoopVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTimperativeTables.PACKid_$metamodel$.getClassId("Mapping", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingCall = QVTimperativeTables.PACKid_$metamodel$.getClassId("MappingCall", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingLoop = QVTimperativeTables.PACKid_$metamodel$.getClassId("MappingLoop", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingParameter = QVTimperativeTables.PACKid_$metamodel$.getClassId("MappingParameter", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("MappingParameterBinding", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("MappingStatement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("NewStatement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatementPart = QVTimperativeTables.PACKid_$metamodel$.getClassId("NewStatementPart", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DeclareStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("DeclareStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EntryPoint = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("EntryPoint", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("GuardParameterBinding", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ImperativeTransformation = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("ImperativeTransformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoopParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("LoopParameterBinding", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LoopVariable = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("LoopVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("Mapping", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingCall = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingCall", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingLoop = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingLoop", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingParameter = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingParameter", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingParameterBinding", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_MappingStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("MappingStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NewStatementPart = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatementPart", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTimperativeTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = QVTimperativeTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTimperativeTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTimperativeTables.PACKid_$metamodel$.getClassId("Rule", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SetStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("SetStatement", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleParameterBinding = QVTimperativeTables.PACKid_$metamodel$.getClassId("SimpleParameterBinding", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Statement = QVTimperativeTables.PACKid_$metamodel$.getClassId("Statement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Rule = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SetStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SetStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_SimpleParameterBinding = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SimpleParameterBinding", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Statement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("Statement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTimperativeTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTimperativeTables.PACKid_$metamodel$.getClassId("TypedModel", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableExp = QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableStatement = QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableStatement", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableStatement = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("VariableStatement", 0);
 	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EIntegerObject = QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EIntegerObject", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_PRIMid_String = TypeId.ORDERED_SET.getSpecializedId(TypeId.STRING, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);

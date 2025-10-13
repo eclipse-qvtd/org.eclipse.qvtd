@@ -20,7 +20,6 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractTransformationExecutor;
 
 public class CS2ASTransformationExecutor extends AbstractTransformationExecutor {
 

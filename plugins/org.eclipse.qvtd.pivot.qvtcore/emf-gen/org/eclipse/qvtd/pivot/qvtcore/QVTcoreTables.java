@@ -14,11 +14,7 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   http://www.eclipse.org/ocl/2015/Library
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore
- *   platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore
- *   platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore
- *   http://www.eclipse.org/ocl/2015/Library
  * using:
  *   /org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel
  *   org.eclipse.ocl.codegen.oclinecore.OCLinEcoreTables
@@ -41,6 +37,7 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.EnumerationId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.PartId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TupleTypeId;
@@ -51,7 +48,9 @@ import org.eclipse.ocl.pivot.types.TemplateParameters;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
+// import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 // import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 
 /**
@@ -80,30 +79,32 @@ public class QVTcoreTables extends AbstractTables
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Area = QVTcoreTables.PACKid_$metamodel$.getClassId("Area", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Assignment = QVTcoreTables.PACKid_$metamodel$.getClassId("Assignment", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomPattern = QVTcoreTables.PACKid_$metamodel$.getClassId("BottomPattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("BottomVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", "qvtb", QVTbasePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTcore", "qvtc", QVTcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Area = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Area", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Assignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Assignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomPattern = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomPattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_BottomVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("BottomVariable", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTcoreTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTcoreTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CoreDomain = QVTcoreTables.PACKid_$metamodel$.getClassId("CoreDomain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CoreDomain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("CoreDomain", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_DataType = QVTcoreTables.PACKid_$metamodel$.getClassId("DataType", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTcoreTables.PACKid_$metamodel$.getClassId("Domain", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnforcementOperation = QVTcoreTables.PACKid_$metamodel$.getClassId("EnforcementOperation", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardPattern = QVTcoreTables.PACKid_$metamodel$.getClassId("GuardPattern", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("GuardVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTcoreTables.PACKid_$metamodel$.getClassId("Mapping", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Domain = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EnforcementOperation = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("EnforcementOperation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardPattern = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("GuardPattern", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_GuardVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("GuardVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Mapping = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("Mapping", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTcoreTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp = QVTcoreTables.PACKid_$metamodel$.getClassId("OperationCallExp", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OppositePropertyAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("OppositePropertyAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OppositePropertyAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("OppositePropertyAssignment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTcoreTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("PropertyAssignment", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RealizedVariable = QVTcoreTables.PACKid_$metamodel$.getClassId("RealizedVariable", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTcoreTables.PACKid_$metamodel$.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("PropertyAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RealizedVariable = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("RealizedVariable", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Transformation = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTcoreTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableAssignment = QVTcoreTables.PACKid_$metamodel$.getClassId("VariableAssignment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableAssignment = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getClassId("VariableAssignment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_VariableDeclaration = QVTcoreTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
-	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_EnforcementMode = QVTcoreTables.PACKid_$metamodel$.getEnumerationId("EnforcementMode");
+	public static final /*@NonInvalid*/ @NonNull EnumerationId ENUMid_EnforcementMode = QVTcoreTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTcore.getEnumerationId("EnforcementMode");
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull PartId PARTid_ = IdManager.getPartId(1, "status", TypeId.BOOLEAN, false);
 	public static final /*@NonInvalid*/ @NonNull PartId PARTid__0 = IdManager.getPartId(0, "message", TypeId.STRING, true);

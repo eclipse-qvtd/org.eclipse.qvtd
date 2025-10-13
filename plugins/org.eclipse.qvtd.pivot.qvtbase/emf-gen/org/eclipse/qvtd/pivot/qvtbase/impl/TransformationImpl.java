@@ -584,12 +584,12 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 					else {
 						/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
 							if (ownedContext == null) {
 								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
-							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_Transformation_0).booleanValue();
+							final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_qvtbase_c_c_Transformation_0).booleanValue();
 							CAUGHT_oclIsKindOf = oclIsKindOf;
 						}
 						catch (Exception e) {
@@ -666,7 +666,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 						/*@Caught*/ @Nullable Object CAUGHT_forAll;
 						try {
 							if (extends1 == null) {
-								throw new InvalidValueException("Null source for \'Transformation::modelParameter\'");
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 							}
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = extends1.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
@@ -692,7 +692,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 								/*@Caught*/ @NonNull Object CAUGHT_includesAll;
 								try {
 									if (etm == null) {
-										throw new InvalidValueException("Null source for \'TypedModel::usedPackage\'");
+										throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
 									}
 									final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
 									final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
@@ -732,7 +732,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 										 * usedPackage
 										 */
 										if (_1_0 == null) {
-											throw new InvalidValueException("Null source for \'TypedModel::usedPackage\'");
+											throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
 										}
 										final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1_0.getUsedPackage();
 										final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage);
@@ -929,7 +929,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 							final /*@NonInvalid*/ @Nullable Transformation CAST_null = (Transformation)_1;
 							if (CAST_null == null) {
-								throw new InvalidValueException("Null source for \'Transformation::extends\'");
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::extends\'");
 							}
 							final /*@Thrown*/ @Nullable Transformation extends1_0 = CAST_null.getExtends();
 							return extends1_0;

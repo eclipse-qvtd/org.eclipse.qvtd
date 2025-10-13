@@ -26,8 +26,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractTransformer;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tx.TransformationExecutor;
 
 
 public abstract class AbstractCS2ASTransformer extends AbstractTransformer

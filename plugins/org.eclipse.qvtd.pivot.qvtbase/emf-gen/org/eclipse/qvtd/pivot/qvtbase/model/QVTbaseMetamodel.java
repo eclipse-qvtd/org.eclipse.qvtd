@@ -310,11 +310,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
 
 		private final org.eclipse.ocl.pivot.@NonNull Class _OCLExpression = createClass("OCLExpression");
-		private final org.eclipse.ocl.pivot.@NonNull Class _Annotation = createClass("Annotation");
 		private final org.eclipse.ocl.pivot.@NonNull Class _Package = createClass("Package");
-		private final org.eclipse.ocl.pivot.@NonNull Class _Parameter = createClass("Parameter");
-		private final org.eclipse.ocl.pivot.@NonNull Class _ParameterVariable = createClass("ParameterVariable");
 		private final org.eclipse.ocl.pivot.@NonNull Class _Variable = createClass("Variable");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Parameter = createClass("Parameter");
+		private final org.eclipse.ocl.pivot.@NonNull Class _Annotation = createClass("Annotation");
+		private final org.eclipse.ocl.pivot.@NonNull Class _ParameterVariable = createClass("ParameterVariable");
 
 		private final @NonNull Enumeration _TargetElementKind = createEnumeration(QVTbasePackage.Literals.TARGET_ELEMENT_KIND);
 		private final @NonNull EnumerationLiteral el__TargetElementKind_INPUT = createEnumerationLiteral(QVTbasePackage.Literals.TARGET_ELEMENT_KIND.getEEnumLiteral("INPUT"));
@@ -326,10 +326,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull BagType _Bag_Pattern_F = createBagType(_Bag);
 		private final @NonNull BagType _Bag_SimpleTargetElement_F = createBagType(_Bag);
 		private final @NonNull BagType _Bag_TypedModel_F = createBagType(_Bag);
-		private final @NonNull CollectionType _Collection_Annotation_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Domain_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Function_F = createCollectionType(_Collection);
-		private final @NonNull CollectionType _Collection_Package_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Pattern_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Predicate_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Rule_F = createCollectionType(_Collection);
@@ -338,6 +336,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull CollectionType _Collection_Target_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_TargetElement_F_L2 = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_TypedModel_F = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Annotation_F = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Package_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _Collection_Variable_F = createCollectionType(_Collection);
 		private final @NonNull CollectionType _OrderedCollection_Domain_F = createCollectionType(_OrderedCollection);
 		private final @NonNull CollectionType _OrderedCollection_Rule_F = createCollectionType(_OrderedCollection);
@@ -347,23 +347,23 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull OrderedSetType _OrderedSet_Rule_F = createOrderedSetType(_OrderedSet);
 		private final @NonNull OrderedSetType _OrderedSet_SimpleTargetElement_F_L2 = createOrderedSetType(_OrderedSet);
 		private final @NonNull OrderedSetType _OrderedSet_TypedModel_F = createOrderedSetType(_OrderedSet);
-		private final @NonNull SetType _Set_Annotation_F = createSetType(_Set);
-		private final @NonNull SetType _Set_Package_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Predicate_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Rule_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Target_F = createSetType(_Set);
 		private final @NonNull SetType _Set_TargetElement_F_L2 = createSetType(_Set);
 		private final @NonNull SetType _Set_TypedModel_F = createSetType(_Set);
+		private final @NonNull SetType _Set_Annotation_F = createSetType(_Set);
+		private final @NonNull SetType _Set_Package_F = createSetType(_Set);
 		private final @NonNull SetType _Set_Variable_F = createSetType(_Set);
-		private final @NonNull CollectionType _UniqueCollection_Annotation_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Domain_F = createCollectionType(_UniqueCollection);
-		private final @NonNull CollectionType _UniqueCollection_Package_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Predicate_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Rule_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_SimpleTargetElement_F_L2 = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Target_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_TargetElement_F_L2 = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_TypedModel_F = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_Annotation_F = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_Package_F = createCollectionType(_UniqueCollection);
 		private final @NonNull CollectionType _UniqueCollection_Variable_F = createCollectionType(_UniqueCollection);
 
 		private void installClassTypes() {
@@ -438,11 +438,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
-			type = _Annotation;
+			type = _Package;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
-			type = _Package;
+			type = _Variable;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
@@ -450,11 +450,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
-			type = _ParameterVariable;
+			type = _Annotation;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
-			type = _Variable;
+			type = _ParameterVariable;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type);
@@ -501,19 +501,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel_F);
 			ownedClasses.add(type);
-			type = _Collection_Annotation_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclAny);
-			ownedClasses.add(type);
 			type = _Collection_Domain_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
 			type = _Collection_Function_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclAny);
-			ownedClasses.add(type);
-			type = _Collection_Package_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
@@ -548,6 +540,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
 			type = _Collection_TypedModel_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclAny);
+			ownedClasses.add(type);
+			type = _Collection_Annotation_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclAny);
+			ownedClasses.add(type);
+			type = _Collection_Package_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclAny);
 			ownedClasses.add(type);
@@ -593,14 +593,6 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses.add(_OrderedCollection_TypedModel_F);
 			superClasses.add(_UniqueCollection_TypedModel_F);
 			ownedClasses.add(type);
-			type = _Set_Annotation_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_UniqueCollection_Annotation_F);
-			ownedClasses.add(type);
-			type = _Set_Package_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_UniqueCollection_Package_F);
-			ownedClasses.add(type);
 			type = _Set_Predicate_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Predicate_F);
@@ -622,21 +614,21 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_TypedModel_F);
 			ownedClasses.add(type);
+			type = _Set_Annotation_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_Annotation_F);
+			ownedClasses.add(type);
+			type = _Set_Package_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_Package_F);
+			ownedClasses.add(type);
 			type = _Set_Variable_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Variable_F);
 			ownedClasses.add(type);
-			type = _UniqueCollection_Annotation_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_Collection_Annotation_F);
-			ownedClasses.add(type);
 			type = _UniqueCollection_Domain_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain_F);
-			ownedClasses.add(type);
-			type = _UniqueCollection_Package_F;
-			superClasses = type.getSuperClasses();
-			superClasses.add(_Collection_Package_F);
 			ownedClasses.add(type);
 			type = _UniqueCollection_Predicate_F;
 			superClasses = type.getSuperClasses();
@@ -663,6 +655,14 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			type = _UniqueCollection_TypedModel_F;
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel_F);
+			ownedClasses.add(type);
+			type = _UniqueCollection_Annotation_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Annotation_F);
+			ownedClasses.add(type);
+			type = _UniqueCollection_Package_F;
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Package_F);
 			ownedClasses.add(type);
 			type = _UniqueCollection_Variable_F;
 			superClasses = type.getSuperClasses();
@@ -737,12 +737,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 
 		private final @NonNull Property _OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
 		private final @NonNull Property _OCLExpression_Function_queryExpression = createProperty("Function", _Bag_Function_F);
-		private final @NonNull Property _Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
 		private final @NonNull Property _Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel_F);
+		private final @NonNull Property _Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
 		private final @NonNull Property _Parameter_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		private final @NonNull Property _Parameter_Transformation_ownedContext = createProperty("Transformation", _Transformation);
+		private final @NonNull Property _Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
 		private final @NonNull Property _ParameterVariable_Rule_ownedContext = createProperty("Rule", _Rule);
-		private final @NonNull Property _Variable_Pattern_bindsTo = createProperty("Pattern", _Bag_Pattern_F);
 
 		private void installProperties() {
 			List<Property> ownedProperties;
@@ -966,18 +966,19 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Function_queryExpression);
 
-			ownedProperties = _Annotation.getOwnedProperties();
-			ownedProperties.add(property = _Annotation_Transformation_ownedTag);
-			property.setIsImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Transformation_ownedTag);
-
 			ownedProperties = _Package.getOwnedProperties();
 			ownedProperties.add(property = _Package_TypedModel_usedPackage);
 			property.setIsImplicit(true);
 			property.setIsRequired(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_usedPackage);
+
+			ownedProperties = _Variable.getOwnedProperties();
+			ownedProperties.add(property = _Variable_Pattern_bindsTo);
+			property.setIsImplicit(true);
+			property.setIsRequired(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pattern_bindsTo);
 
 			ownedProperties = _Parameter.getOwnedProperties();
 			ownedProperties.add(property = _Parameter_TypedModel_ownedContext);
@@ -989,18 +990,17 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transformation_ownedContext);
 
+			ownedProperties = _Annotation.getOwnedProperties();
+			ownedProperties.add(property = _Annotation_Transformation_ownedTag);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transformation_ownedTag);
+
 			ownedProperties = _ParameterVariable.getOwnedProperties();
 			ownedProperties.add(property = _ParameterVariable_Rule_ownedContext);
 			property.setIsImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Rule_ownedContext);
-
-			ownedProperties = _Variable.getOwnedProperties();
-			ownedProperties.add(property = _Variable_Pattern_bindsTo);
-			property.setIsImplicit(true);
-			property.setIsRequired(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Pattern_bindsTo);
 		}
 
 		private final @NonNull Constraint iv_Domain_NameIsTypedModelName = createInvariant(QVTbasePackage.Literals.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP, "NameIsTypedModelName", "typedModel <> null implies name = typedModel.name");

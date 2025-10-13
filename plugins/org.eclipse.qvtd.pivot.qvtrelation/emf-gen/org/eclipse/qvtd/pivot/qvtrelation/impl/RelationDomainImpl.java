@@ -224,7 +224,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 						 * variable
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'RelationDomainAssignment::variable\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationDomainAssignment::variable\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull VariableDeclaration variable = _1.getVariable();

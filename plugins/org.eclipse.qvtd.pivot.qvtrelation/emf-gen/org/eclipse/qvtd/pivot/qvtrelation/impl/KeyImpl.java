@@ -344,7 +344,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						/*@Caught*/ @NonNull Object CAUGHT_includes;
 						try {
 							if (transformation == null) {
-								throw new InvalidValueException("Null source for \'Transformation::modelParameter\'");
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 							}
 							final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
 							final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
@@ -361,7 +361,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * usedPackage
 								 */
 								if (_1 == null) {
-									throw new InvalidValueException("Null source for \'TypedModel::usedPackage\'");
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::TypedModel::usedPackage\'");
 								}
 								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
 								final /*@Thrown*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
@@ -426,7 +426,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *           superClasses : Set(Class) = identifies.superClasses->closure(superClasses)
 			 *         in
 			 *           let
-			 *             otherKeys : Set(ocl::Key) = transformation?.ownedKeys?->excluding(self)
+			 *             otherKeys : Set(qvtrelation::Key) = transformation?.ownedKeys?->excluding(self)
 			 *           in otherKeys.identifies->excludesAll(superClasses)
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -511,7 +511,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * identifies
 								 */
 								if (_1_0 == null) {
-									throw new InvalidValueException("Null source for \'Key::identifies\'");
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies_0 = _1_0.getIdentifies();
@@ -571,7 +571,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *     else
 			 *       let result : Boolean[?] = transformation <> null implies
 			 *         let
-			 *           otherKeys : Set(ocl::Key) = transformation?.ownedKeys?->excluding(self)
+			 *           otherKeys : Set(qvtrelation::Key) = transformation?.ownedKeys?->excluding(self)
 			 *         in otherKeys.identifies->excludes(identifies)
 			 *       in
 			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -627,7 +627,7 @@ public class KeyImpl extends ElementImpl implements Key {
 								 * identifies
 								 */
 								if (_1 == null) {
-									throw new InvalidValueException("Null source for \'Key::identifies\'");
+									throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Key::identifies\'");
 								}
 								@SuppressWarnings("null")
 								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class identifies = _1.getIdentifies();

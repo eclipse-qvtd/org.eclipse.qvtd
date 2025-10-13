@@ -261,7 +261,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 * boundVariable
 			 */
 			if (_1 == null) {
-				throw new InvalidValueException("Null source for \'MappingParameterBinding::boundVariable\'");
+				throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/QVTimperative\'::MappingParameterBinding::boundVariable\'");
 			}
 			@SuppressWarnings("null")
 			final /*@Thrown*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();
@@ -575,7 +575,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 						 * boundVariable
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'MappingParameterBinding::boundVariable\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/QVTimperative\'::MappingParameterBinding::boundVariable\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull MappingParameter boundVariable = _1.getBoundVariable();

@@ -31,7 +31,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/ASMetamodel"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore"
  * @generated
  */
