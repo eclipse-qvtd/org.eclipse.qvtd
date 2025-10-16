@@ -38,7 +38,6 @@ import org.eclipse.ocl.pivot.annotations.PivotAnnotationsPackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.AS2ID;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -295,7 +294,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 	}
 	public static @NonNull Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
 		URI uri = ecoreURI != null ? ecoreURI : URI.createURI("test.ecore");
-		Resource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) ocl.getEnvironmentFactory(), pivotResource, uri, null);
+		Resource ecoreResource = AS2Ecore.createResource(ocl.getEnvironmentFactory(), pivotResource, uri, null);
 		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);
 		if (ecoreURI != null) {
 			ecoreResource.save(DefaultCompilerOptions.defaultSavingOptions);

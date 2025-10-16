@@ -450,17 +450,17 @@ public class QVTcoreTables extends AbstractTables
 			_Assignment__bottomPattern.setOpposite(_BottomPattern__assignment);
 			_Assignment__isDefault.setDefaultValueString("false");
 			_Assignment__isPartial.setDefaultValueString("false");
-			_Assignment__value.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "valueAssignment", _Assignment__value));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "valueAssignment", _Assignment__value);
 
 			_BottomPattern__area.setOpposite(_Area__bottomPattern);
 			_BottomPattern__assignment.setOpposite(_Assignment__bottomPattern);
 			_BottomPattern__enforcementOperation.setOpposite(_EnforcementOperation__bottomPattern);
 			_BottomPattern__realizedVariable.setOpposite(_RealizedVariable__BottomPattern__realizedVariable);
 
-			_CorePattern__ownedVariables.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "CorePattern", _CorePattern__ownedVariables));
+			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "CorePattern", _CorePattern__ownedVariables);
 
 			_EnforcementOperation__bottomPattern.setOpposite(_BottomPattern__enforcementOperation);
-			_EnforcementOperation__operationCallExp.setOpposite(createOpposite(PivotPackage.Literals.OPERATION_CALL_EXP, "EnforcementOperation", _EnforcementOperation__operationCallExp));
+			createOpposite(PivotPackage.Literals.OPERATION_CALL_EXP, "EnforcementOperation", _EnforcementOperation__operationCallExp);
 
 			_GuardPattern__area.setOpposite(_Area__guardPattern);
 
@@ -469,12 +469,12 @@ public class QVTcoreTables extends AbstractTables
 			_Mapping__refinement.setOpposite(_Mapping__specification);
 			_Mapping__specification.setOpposite(_Mapping__refinement);
 
-			_NavigationAssignment__slotExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "slotAssignment", _NavigationAssignment__slotExpression));
-			_NavigationAssignment__targetProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "assignment", _NavigationAssignment__targetProperty));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "slotAssignment", _NavigationAssignment__slotExpression);
+			createOpposite(PivotPackage.Literals.PROPERTY, "assignment", _NavigationAssignment__targetProperty);
 
 			_RealizedVariable__BottomPattern__realizedVariable.setOpposite(_BottomPattern__realizedVariable);
 
-			_VariableAssignment__targetVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "assignment", _VariableAssignment__targetVariable));
+			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "assignment", _VariableAssignment__targetVariable);
 
 			Init.initEnd();
 		}

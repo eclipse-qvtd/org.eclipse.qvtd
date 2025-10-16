@@ -1323,11 +1323,11 @@ public class QVTscheduleTables extends AbstractTables
 
 			_CastEdge__referredClassDatum.setOpposite(_ClassDatum__CastEdge__referredClassDatum);
 
-			_ClassDatum__completeClasses.setOpposite(createOpposite(PivotPackage.Literals.COMPLETE_CLASS, "ClassDatum", _ClassDatum__completeClasses));
+			createOpposite(PivotPackage.Literals.COMPLETE_CLASS, "ClassDatum", _ClassDatum__completeClasses);
 			_ClassDatum__ownedPropertyDatums.setOpposite(_PropertyDatum__owningClassDatum);
 			_ClassDatum__owningScheduleModel.setOpposite(_ScheduleModel__ownedClassDatums);
-			_ClassDatum__referredClass.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "ClassDatum", _ClassDatum__referredClass));
-			_ClassDatum__referredTypedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "ClassDatum", _ClassDatum__referredTypedModel));
+			createOpposite(PivotPackage.Literals.CLASS, "ClassDatum", _ClassDatum__referredClass);
+			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "ClassDatum", _ClassDatum__referredTypedModel);
 			_ClassDatum__superClassDatums.setOpposite(_ClassDatum__ClassDatum__superClassDatums);
 			_ClassDatum__CastEdge__referredClassDatum.setOpposite(_CastEdge__referredClassDatum);
 			_ClassDatum__ClassDatum__superClassDatums.setOpposite(_ClassDatum__superClassDatums);
@@ -1345,7 +1345,7 @@ public class QVTscheduleTables extends AbstractTables
 
 			_CollectionClassDatum__elementalClassDatum.setOpposite(_ClassDatum__CollectionClassDatum__elementalClassDatum);
 
-			_CollectionPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.COLLECTION_LITERAL_PART, "CollectionPartEdge", _CollectionPartEdge__referredPart));
+			createOpposite(PivotPackage.Literals.COLLECTION_LITERAL_PART, "CollectionPartEdge", _CollectionPartEdge__referredPart);
 
 			_CompositePartition__ownedMappingPartitions.setOpposite(_MappingPartition__owningCompositePartition);
 
@@ -1374,11 +1374,11 @@ public class QVTscheduleTables extends AbstractTables
 
 			_EdgeConnection__mandatoryTargetEdges.setOpposite(_NavigableEdge__EdgeConnection__mandatoryTargetEdges);
 			_EdgeConnection__preferredTargetEdges.setOpposite(_NavigableEdge__EdgeConnection__preferredTargetEdges);
-			_EdgeConnection__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "EdgeConnection", _EdgeConnection__referredProperty));
+			createOpposite(PivotPackage.Literals.PROPERTY, "EdgeConnection", _EdgeConnection__referredProperty);
 			_EdgeConnection__NavigableEdge__incomingConnection.setOpposite(_NavigableEdge__incomingConnection);
 			_EdgeConnection__NavigableEdge__outgoingConnections.setOpposite(_NavigableEdge__outgoingConnections);
 
-			_EnumLiteralNode__enumValue.setOpposite(createOpposite(PivotPackage.Literals.ENUMERATION_LITERAL, "EnumLiteralNode", _EnumLiteralNode__enumValue));
+			createOpposite(PivotPackage.Literals.ENUMERATION_LITERAL, "EnumLiteralNode", _EnumLiteralNode__enumValue);
 
 			_KeyPartEdge__referredPart.setOpposite(_PropertyDatum__KeyPartEdge__referredPart);
 
@@ -1390,7 +1390,7 @@ public class QVTscheduleTables extends AbstractTables
 			_LoadingRegion__loadingPartition.setOpposite(_LoadingPartition__referredLoadingRegion);
 			_LoadingRegion__owningRootRegion.setOpposite(_RootRegion__ownedLoadingRegion);
 
-			_MapPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.MAP_LITERAL_PART, "MapPartEdge", _MapPartEdge__referredPart));
+			createOpposite(PivotPackage.Literals.MAP_LITERAL_PART, "MapPartEdge", _MapPartEdge__referredPart);
 
 			_MappingPartition__explicitSuccessors.setOpposite(_BasicPartition__explicitPredecessors);
 			_MappingPartition__owningCompositePartition.setOpposite(_CompositePartition__ownedMappingPartitions);
@@ -1411,7 +1411,7 @@ public class QVTscheduleTables extends AbstractTables
 
 			_NavigationEdge__oppositeEdge.setOpposite(_NavigationEdge__NavigationEdge__oppositeEdge);
 			_NavigationEdge__partial.setDefaultValueString("false");
-			_NavigationEdge__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "NavigationEdge", _NavigationEdge__referredProperty));
+			createOpposite(PivotPackage.Literals.PROPERTY, "NavigationEdge", _NavigationEdge__referredProperty);
 			_NavigationEdge__secondary.setDefaultValueString("false");
 			_NavigationEdge__NavigationEdge__oppositeEdge.setOpposite(_NavigationEdge__oppositeEdge);
 
@@ -1450,18 +1450,18 @@ public class QVTscheduleTables extends AbstractTables
 			_NodeConnection__Partition__rootConnections.setOpposite(_Partition__rootConnections);
 
 
-			_OperationCallNode__referredOperation.setOpposite(createOpposite(PivotPackage.Literals.OPERATION, "OperationCallNode", _OperationCallNode__referredOperation));
+			createOpposite(PivotPackage.Literals.OPERATION, "OperationCallNode", _OperationCallNode__referredOperation);
 
 			_OperationParameterEdge__parameterIndex.setDefaultValueString("-1");
-			_OperationParameterEdge__referredParameter.setOpposite(createOpposite(PivotPackage.Literals.PARAMETER, "OperationParameterEdge", _OperationParameterEdge__referredParameter));
+			createOpposite(PivotPackage.Literals.PARAMETER, "OperationParameterEdge", _OperationParameterEdge__referredParameter);
 
 			_OperationRegion__dependencyNodes.setOpposite(_Node__OperationRegion__dependencyNodes);
 			_OperationRegion__headNodes.setOpposite(_Node__OperationRegion__headNodes);
 			_OperationRegion__owningScheduleModel.setOpposite(_ScheduleModel__ownedOperationRegions);
-			_OperationRegion__referredOperation.setOpposite(createOpposite(PivotPackage.Literals.OPERATION, "OperationRegion", _OperationRegion__referredOperation));
+			createOpposite(PivotPackage.Literals.OPERATION, "OperationRegion", _OperationRegion__referredOperation);
 			_OperationRegion__resultNode.setOpposite(_Node__OperationRegion__resultNode);
 
-			_OperationSelfEdge__referredType.setOpposite(createOpposite(PivotPackage.Literals.TYPE, "OperationSelfEdge", _OperationSelfEdge__referredType));
+			createOpposite(PivotPackage.Literals.TYPE, "OperationSelfEdge", _OperationSelfEdge__referredType);
 
 			_Partition__intermediateConnections.setOpposite(_NodeConnection__Partition__intermediateConnections);
 			_Partition__rootConnections.setOpposite(_NodeConnection__Partition__rootConnections);
@@ -1472,7 +1472,7 @@ public class QVTscheduleTables extends AbstractTables
 
 			_PropertyDatum__opposite.setOpposite(_PropertyDatum__PropertyDatum__opposite);
 			_PropertyDatum__owningClassDatum.setOpposite(_ClassDatum__ownedPropertyDatums);
-			_PropertyDatum__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "PropertyDatum", _PropertyDatum__referredProperty));
+			createOpposite(PivotPackage.Literals.PROPERTY, "PropertyDatum", _PropertyDatum__referredProperty);
 			_PropertyDatum__superPropertyDatums.setOpposite(_PropertyDatum__PropertyDatum__superPropertyDatums);
 			_PropertyDatum__targetClassDatum.setOpposite(_ClassDatum__PropertyDatum__targetClassDatum);
 			_PropertyDatum__KeyPartEdge__referredPart.setOpposite(_KeyPartEdge__referredPart);
@@ -1495,9 +1495,9 @@ public class QVTscheduleTables extends AbstractTables
 			_RootRegion__ownedLoadingRegion.setOpposite(_LoadingRegion__owningRootRegion);
 			_RootRegion__ownedRootPartition.setOpposite(_RootPartition__owningRootRegion);
 			_RootRegion__owningScheduleModel.setOpposite(_ScheduleModel__ownedRootRegions);
-			_RootRegion__referredTransformation.setOpposite(createOpposite(QVTbasePackage.Literals.TRANSFORMATION, "RootRegion", _RootRegion__referredTransformation));
+			createOpposite(QVTbasePackage.Literals.TRANSFORMATION, "RootRegion", _RootRegion__referredTransformation);
 
-			_RuleRegion__referredRule.setOpposite(createOpposite(QVTbasePackage.Literals.RULE, "RuleRegion", _RuleRegion__referredRule));
+			createOpposite(QVTbasePackage.Literals.RULE, "RuleRegion", _RuleRegion__referredRule);
 			_RuleRegion__DispatchRegion__referredRuleRegion.setOpposite(_DispatchRegion__referredRuleRegion);
 			_RuleRegion__VerdictRegion__referredRuleRegion.setOpposite(_VerdictRegion__referredRuleRegion);
 
@@ -1506,15 +1506,15 @@ public class QVTscheduleTables extends AbstractTables
 			_ScheduleModel__ownedOperationRegions.setOpposite(_OperationRegion__owningScheduleModel);
 			_ScheduleModel__ownedRootRegions.setOpposite(_RootRegion__owningScheduleModel);
 
-			_ShadowPartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.SHADOW_PART, "ShadowPartEdge", _ShadowPartEdge__referredPart));
+			createOpposite(PivotPackage.Literals.SHADOW_PART, "ShadowPartEdge", _ShadowPartEdge__referredPart);
 
 
 
-			_TuplePartEdge__referredPart.setOpposite(createOpposite(PivotPackage.Literals.TUPLE_LITERAL_PART, "TuplePartEdge", _TuplePartEdge__referredPart));
+			createOpposite(PivotPackage.Literals.TUPLE_LITERAL_PART, "TuplePartEdge", _TuplePartEdge__referredPart);
 
-			_TypeLiteralNode__typeValue.setOpposite(createOpposite(PivotPackage.Literals.TYPE, "TypeLiteralNode", _TypeLiteralNode__typeValue));
+			createOpposite(PivotPackage.Literals.TYPE, "TypeLiteralNode", _TypeLiteralNode__typeValue);
 
-			_VariableNode__referredVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "VariableNode", _VariableNode__referredVariable));
+			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "VariableNode", _VariableNode__referredVariable);
 
 			_VerdictRegion__referredRuleRegion.setOpposite(_RuleRegion__VerdictRegion__referredRuleRegion);
 

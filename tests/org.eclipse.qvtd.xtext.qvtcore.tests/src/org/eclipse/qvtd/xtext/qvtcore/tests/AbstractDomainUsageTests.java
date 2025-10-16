@@ -23,10 +23,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -49,7 +49,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 
 	protected static class MyQVT extends OCLInternal
 	{
-		public MyQVT(@NonNull EnvironmentFactoryInternal environmentFactory) {
+		public MyQVT(@NonNull EnvironmentFactory environmentFactory) {
 			super(environmentFactory);
 		}
 

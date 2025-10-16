@@ -286,7 +286,7 @@ public class XtextTestCase extends PivotTestCase
 		return xtextResource;
 	} */
 
-	/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
+	/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactory environmentFactory, Resource ecoreResource) {
 		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, environmentFactory);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();

@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -48,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class EntryPointsAnalysis
 {
-	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull ImperativeTransformation transformation;
 
 	/**
@@ -77,7 +76,7 @@ public class EntryPointsAnalysis
 	 */
 	private final @NonNull Map<@NonNull Mapping, @NonNull EntryPointAnalysis> mapping2entryPointAnalysis = new HashMap<>();
 
-	public EntryPointsAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ImperativeTransformation transformation) {
+	public EntryPointsAnalysis(@NonNull EnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = transformation;
 	}

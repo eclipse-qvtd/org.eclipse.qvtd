@@ -67,6 +67,7 @@ import org.eclipse.ocl.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -86,14 +87,12 @@ import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
@@ -592,7 +591,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected @Nullable List<@Nullable AllInstancesAnalysis> doAllInstances(@NonNull EntryPointsAnalysis entryPointsAnalysis) {
-		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		Set<@NonNull CompleteClass> allInstancesCompleteClasses = new HashSet<>();
 		for (@NonNull CompleteClass allInstancesCompleteClass : entryPointsAnalysis.getAllInstancesCompleteClasses()) {
 			allInstancesCompleteClasses.add(allInstancesCompleteClass);
@@ -1029,7 +1028,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (nsURI == null) {
 			throw new IllegalStateException("No EPackage NsURI for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()");
 		}
-		GenPackage genPackage = environmentFactory.getMetamodelManager().getGenPackage(nsURI);
+		GenPackage genPackage = environmentFactory.getGenPackageManager().getGenPackage(nsURI);
 		if (genPackage == null) {
 			throw new IllegalStateException("No GenPackage for " + cgElement + " in QVTiCG2JavaVisitor.doEcoreCreateDataType()");
 		}
@@ -2439,7 +2438,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doRun(@NonNull CGTransformation cgTransformation, @Nullable List<@Nullable AllInstancesAnalysis> allInstancesAnalyses) {
-		CompleteModelInternal completeModel = environmentFactory.getCompleteModel();
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		Map<@NonNull TypedModel, @NonNull CGTypedModel> asTypedModel2cgTypedModel = new HashMap<>();
 		ImperativeTransformation asTransformation = QVTiCGUtil.getAST(cgTransformation);
 		List<@NonNull TypedModel> asTypedModels = QVTimperativeUtil.getModelParameterList(asTransformation);
@@ -2668,8 +2667,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return null;
 		}
 		if (!oppositeProperty.isIsComposite()) {
-			MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
-			LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
+			LibraryProperty libraryProperty = environmentFactory.getPropertyImplementation(null, null, asProperty);
 			if (!(libraryProperty instanceof OclElementOclContainerProperty)) {
 				return null;
 			}

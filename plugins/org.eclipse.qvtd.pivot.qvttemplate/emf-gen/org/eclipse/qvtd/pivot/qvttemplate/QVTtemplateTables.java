@@ -282,21 +282,21 @@ public class QVTtemplateTables extends AbstractTables
 		public static final @NonNull Property _TemplateExp__where = LIBRARY.createProperty(Types._TemplateExp, QVTtemplatePackage.Literals.TEMPLATE_EXP__WHERE, PivotTables.Types._OCLExpression, 1 | IsComposite | IsResolveProxies);
 
 		static {
-			_CollectionTemplateExp__member.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "listContainer", _CollectionTemplateExp__member));
-			_CollectionTemplateExp__referredCollectionType.setOpposite(createOpposite(PivotPackage.Literals.COLLECTION_TYPE, "CollectionTemplateExp", _CollectionTemplateExp__referredCollectionType));
-			_CollectionTemplateExp__rest.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "matchingExp", _CollectionTemplateExp__rest));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "listContainer", _CollectionTemplateExp__member);
+			createOpposite(PivotPackage.Literals.COLLECTION_TYPE, "CollectionTemplateExp", _CollectionTemplateExp__referredCollectionType);
+			createOpposite(PivotPackage.Literals.VARIABLE, "matchingExp", _CollectionTemplateExp__rest);
 
 			_ObjectTemplateExp__part.setOpposite(_PropertyTemplateItem__objContainer);
-			_ObjectTemplateExp__referredClass.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "ObjectTemplateExp", _ObjectTemplateExp__referredClass));
+			createOpposite(PivotPackage.Literals.CLASS, "ObjectTemplateExp", _ObjectTemplateExp__referredClass);
 
 			_PropertyTemplateItem__isOpposite.setDefaultValueString("false");
 			_PropertyTemplateItem__objContainer.setOpposite(_ObjectTemplateExp__part);
-			_PropertyTemplateItem__referredProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "propertyItem", _PropertyTemplateItem__referredProperty));
-			_PropertyTemplateItem__resolvedProperty.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "PropertyTemplateItem", _PropertyTemplateItem__resolvedProperty));
-			_PropertyTemplateItem__value.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "propertyItem", _PropertyTemplateItem__value));
+			createOpposite(PivotPackage.Literals.PROPERTY, "propertyItem", _PropertyTemplateItem__referredProperty);
+			createOpposite(PivotPackage.Literals.PROPERTY, "PropertyTemplateItem", _PropertyTemplateItem__resolvedProperty);
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "propertyItem", _PropertyTemplateItem__value);
 
-			_TemplateExp__bindsTo.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "templateExp", _TemplateExp__bindsTo));
-			_TemplateExp__where.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "owner", _TemplateExp__where));
+			createOpposite(PivotPackage.Literals.VARIABLE, "templateExp", _TemplateExp__bindsTo);
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "owner", _TemplateExp__where);
 
 			Init.initEnd();
 		}

@@ -536,7 +536,7 @@ public class UMLXTables extends AbstractTables
 			_RelInvocationNode__referredRelDiagram.setOpposite(_RelDiagram__RelInvocationNode__referredRelDiagram);
 
 			_RelPatternEdge__owningRelDomainNode.setOpposite(_RelDomainNode__ownedRelPatternEdges);
-			_RelPatternEdge__referredEStructuralFeature.setOpposite(createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "RelPatternEdge", _RelPatternEdge__referredEStructuralFeature));
+			createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "RelPatternEdge", _RelPatternEdge__referredEStructuralFeature);
 			_RelPatternEdge__source.setOpposite(_RelPatternNode__outgoing);
 			_RelPatternEdge__target.setOpposite(_RelPatternNode__incoming);
 
@@ -557,17 +557,17 @@ public class UMLXTables extends AbstractTables
 
 			_TxKeyNode__ownedTxPartNodes.setOpposite(_TxPartNode__owningTxKeyNode);
 			_TxKeyNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxKeyNodes);
-			_TxKeyNode__referredEClass.setOpposite(createOpposite(EcorePackage.Literals.ECLASS, "TxKeyNode", _TxKeyNode__referredEClass));
+			createOpposite(EcorePackage.Literals.ECLASS, "TxKeyNode", _TxKeyNode__referredEClass);
 
 			_TxPackageNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxPackageNodes);
-			_TxPackageNode__referredEPackage.setOpposite(createOpposite(EcorePackage.Literals.EPACKAGE, "TxPackageNode", _TxPackageNode__referredEPackage));
+			createOpposite(EcorePackage.Literals.EPACKAGE, "TxPackageNode", _TxPackageNode__referredEPackage);
 			_TxPackageNode__TxTypedModelNode__usedTxPackageNodes.setOpposite(_TxTypedModelNode__usedTxPackageNodes);
 
 			_TxParameterNode__owningTxQueryNode.setOpposite(_TxQueryNode__ownedTxParameterNodes);
 
 			_TxPartNode__isOpposite.setDefaultValueString("false");
 			_TxPartNode__owningTxKeyNode.setOpposite(_TxKeyNode__ownedTxPartNodes);
-			_TxPartNode__referredEStructuralFeature.setOpposite(createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "TxPartNode", _TxPartNode__referredEStructuralFeature));
+			createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "TxPartNode", _TxPartNode__referredEStructuralFeature);
 
 			_TxQueryNode__ownedTxParameterNodes.setOpposite(_TxParameterNode__owningTxQueryNode);
 			_TxQueryNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxQueryNodes);
@@ -591,7 +591,7 @@ public class UMLXTables extends AbstractTables
 			_UMLXTypedElement__isOrdered.setDefaultValueString("false");
 			_UMLXTypedElement__isRequired.setDefaultValueString("true");
 			_UMLXTypedElement__isUnique.setDefaultValueString("true");
-			_UMLXTypedElement__referredEClassifier.setOpposite(createOpposite(EcorePackage.Literals.ECLASSIFIER, "UMLXTypedElement", _UMLXTypedElement__referredEClassifier));
+			createOpposite(EcorePackage.Literals.ECLASSIFIER, "UMLXTypedElement", _UMLXTypedElement__referredEClassifier);
 
 			Init.initEnd();
 		}

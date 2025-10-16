@@ -411,37 +411,37 @@ public class QVTrelationTables extends AbstractTables
 
 		static {
 			_DomainPattern__relationDomain.setOpposite(_RelationDomain__pattern);
-			_DomainPattern__templateExpression.setOpposite(createOpposite(QVTtemplatePackage.Literals.TEMPLATE_EXP, "DomainPattern", _DomainPattern__templateExpression));
+			createOpposite(QVTtemplatePackage.Literals.TEMPLATE_EXP, "DomainPattern", _DomainPattern__templateExpression);
 
-			_Key__identifies.setOpposite(createOpposite(PivotPackage.Literals.CLASS, "key", _Key__identifies));
-			_Key__oppositePart.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "oppKey", _Key__oppositePart));
-			_Key__part.setOpposite(createOpposite(PivotPackage.Literals.PROPERTY, "key", _Key__part));
+			createOpposite(PivotPackage.Literals.CLASS, "key", _Key__identifies);
+			createOpposite(PivotPackage.Literals.PROPERTY, "oppKey", _Key__oppositePart);
+			createOpposite(PivotPackage.Literals.PROPERTY, "key", _Key__part);
 			_Key__transformation.setOpposite(_RelationalTransformation__ownedKeys);
 
 			_Relation__operationalImpl.setOpposite(_RelationImplementation__relation);
-			_Relation__variable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "Relation", _Relation__variable));
-			_Relation__when.setOpposite(createOpposite(QVTbasePackage.Literals.PATTERN, "whenOwner", _Relation__when));
-			_Relation__where.setOpposite(createOpposite(QVTbasePackage.Literals.PATTERN, "whereOwner", _Relation__where));
+			createOpposite(PivotPackage.Literals.VARIABLE, "Relation", _Relation__variable);
+			createOpposite(QVTbasePackage.Literals.PATTERN, "whenOwner", _Relation__when);
+			createOpposite(QVTbasePackage.Literals.PATTERN, "whereOwner", _Relation__where);
 			_Relation__relationCallExp__referredRelation.setOpposite(_RelationCallExp__referredRelation);
 
-			_RelationCallExp__argument.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "relationCallExp", _RelationCallExp__argument));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "relationCallExp", _RelationCallExp__argument);
 			_RelationCallExp__referredRelation.setOpposite(_Relation__relationCallExp__referredRelation);
 
 			_RelationDomain__defaultAssignment.setOpposite(_RelationDomainAssignment__owner);
 			_RelationDomain__pattern.setOpposite(_DomainPattern__relationDomain);
-			_RelationDomain__rootVariable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "RelationDomain", _RelationDomain__rootVariable));
+			createOpposite(PivotPackage.Literals.VARIABLE, "RelationDomain", _RelationDomain__rootVariable);
 
 			_RelationDomainAssignment__owner.setOpposite(_RelationDomain__defaultAssignment);
-			_RelationDomainAssignment__valueExp.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "domainAssignment", _RelationDomainAssignment__valueExp));
-			_RelationDomainAssignment__variable.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "domainAssignment", _RelationDomainAssignment__variable));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "domainAssignment", _RelationDomainAssignment__valueExp);
+			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "domainAssignment", _RelationDomainAssignment__variable);
 
-			_RelationImplementation__impl.setOpposite(createOpposite(PivotPackage.Literals.OPERATION, "RelationImplementation", _RelationImplementation__impl));
-			_RelationImplementation__inDirectionOf.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "RelationImplementation", _RelationImplementation__inDirectionOf));
+			createOpposite(PivotPackage.Literals.OPERATION, "RelationImplementation", _RelationImplementation__impl);
+			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "RelationImplementation", _RelationImplementation__inDirectionOf);
 			_RelationImplementation__relation.setOpposite(_Relation__operationalImpl);
 
 			_RelationalTransformation__ownedKeys.setOpposite(_Key__transformation);
 
-			_SharedVariable__typedModel.setOpposite(createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "SharedVariable", _SharedVariable__typedModel));
+			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "SharedVariable", _SharedVariable__typedModel);
 
 			Init.initEnd();
 		}

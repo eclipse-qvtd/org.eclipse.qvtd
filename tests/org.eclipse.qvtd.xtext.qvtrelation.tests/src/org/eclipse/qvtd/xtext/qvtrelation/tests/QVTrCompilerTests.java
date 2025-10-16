@@ -41,7 +41,6 @@ import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -342,7 +341,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getEnvironmentFactory().addClassLoader(classLoader);
 			txClass1 = myQVT1.buildTransformation("qvtr", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
@@ -501,7 +500,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getEnvironmentFactory().addClassLoader(classLoader);
 			/*txClass1 =*/ myQVT1.buildTransformation("atl", false);
 			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
 			//
@@ -700,7 +699,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			assert inputResource != null;
 			assertNoResourceErrors("Ecore load", inputResource);
 			assertNoValidationErrors("Ecore load", inputResource);
-			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			Resource asResource = pivotModel.eResource();
 			asResource.setURI(asURI2a);
@@ -781,7 +780,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			assert inputResource != null;
 			assertNoResourceErrors("Ecore load", inputResource);
 			assertNoValidationErrors("Ecore load", inputResource);
-			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			Resource asResource = pivotModel.eResource();
 			asResource.setURI(asURI2a);
@@ -841,7 +840,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			assert inputResource != null;
 			assertNoResourceErrors("Ecore load", inputResource);
 			assertNoValidationErrors("Ecore load", inputResource);
-			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			ASResource asResource = (ASResource) pivotModel.eResource();
 			asResource.setSaveable(true);
@@ -916,7 +915,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
-			myQVT1.getMetamodelManager().getImplementationManager().getClassLoaders().add(classLoader);
+			myQVT1.getEnvironmentFactory().addClassLoader(classLoader);
 			txClass1 = myQVT1.buildTransformation("as", false);
 			//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
 			//
@@ -940,7 +939,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			assert inputResource != null;
 			assertNoResourceErrors("Ecore load", inputResource);
 			assertNoValidationErrors("Ecore load", inputResource);
-			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, (EnvironmentFactoryInternal) ocl.getEnvironmentFactory());
+			Ecore2AS ecore2as = Ecore2AS.getAdapter(inputResource, ocl.getEnvironmentFactory());
 			Model pivotModel = ecore2as.getASModel();
 			ASResource asResource = (ASResource) pivotModel.eResource();
 			asResource.setSaveable(true);

@@ -26,8 +26,6 @@ import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
-
 import com.google.common.collect.Sets;
 
 /**
@@ -51,15 +49,14 @@ public class InheritanceAnalysis
 	public InheritanceAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		this.environmentFactory = environmentFactory;
 		this.completeModel = environmentFactory.getCompleteModel();
-		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
 		//	Ensure metamodels are loaded.
 		//
-		metamodelManager.getASmetamodel();
+		completeModel.getASmetamodel();
 		//
 		//	Populate the class2superClass map, and initialize class2subClass to 'self'.
 		//
-		ResourceSet resourceSet = metamodelManager.getASResourceSet();
+		ResourceSet resourceSet = environmentFactory.getASResourceSet();
 		for (@NonNull Resource resource : ClassUtil.nullFree(resourceSet.getResources())) {
 			for (EObject root : resource.getContents()) {
 				if (root instanceof Model) {

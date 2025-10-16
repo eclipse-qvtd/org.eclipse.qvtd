@@ -61,7 +61,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.UniqueList;
@@ -629,7 +628,7 @@ public class OCL2QVTm {
 	private @NonNull Property getTraceabilityProperty(Type type) {
 		Class aClass = type.isClass();
 		assert(aClass != null);
-		Class pClass = envFact.getMetamodelManager().getPrimaryClass(aClass);
+		Class pClass = envFact.getCompleteModel().getPrimaryClass(aClass);
 		Set<Class> allClasses = getSuperClasses().apply(pClass);
 		allClasses.add(pClass);
 		return allClasses.stream()
@@ -647,7 +646,7 @@ public class OCL2QVTm {
 
 	private @NonNull Operation getOclAnyEqualsOp() {
 		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
-		return envFact.getMetamodelManager().getPrimaryClass(oclAny).getOwnedOperations().stream()
+		return envFact.getCompleteModel().getPrimaryClass(oclAny).getOwnedOperations().stream()
 				.filter(x -> "=".equals(x.getName()))
 				.findFirst().get();
 	}
@@ -658,14 +657,14 @@ public class OCL2QVTm {
 
 	private @NonNull Operation getOclAnyOclAsTypeOp() {
 		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
-		return envFact.getMetamodelManager().getPrimaryClass(oclAny).getOwnedOperations().stream()
+		return envFact.getCompleteModel().getPrimaryClass(oclAny).getOwnedOperations().stream()
 				.filter(x -> "oclAsType".equals(x.getName()))
 				.findFirst().get();
 	}
 
 	private @NonNull Operation getOclAnyOclIsTypeOfOp() {
 		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
-		return envFact.getMetamodelManager().getPrimaryClass(oclAny).getOwnedOperations().stream()
+		return envFact.getCompleteModel().getPrimaryClass(oclAny).getOwnedOperations().stream()
 				.filter(x -> "oclIsTypeOf".equals(x.getName()))
 				.findFirst().get();
 	}
@@ -677,7 +676,7 @@ public class OCL2QVTm {
 
 	private @NonNull Operation getBooleanNotOp() {
 		Class boolType = envFact.getStandardLibrary().getBooleanType();
-		return envFact.getMetamodelManager().getPrimaryClass(boolType).getOwnedOperations().stream()
+		return envFact.getCompleteModel().getPrimaryClass(boolType).getOwnedOperations().stream()
 				.filter(x -> "not".equals(x.getName()))
 				.findFirst().get();
 	}
@@ -701,8 +700,7 @@ public class OCL2QVTm {
 	// will include an additional guard to ensure that only strictly instance of (oclTypeOf) the source type
 	// are considered. Therefor, any instance of a subtype won't ever be considered by this mapping
 	private void workaround495327(Operation op, Mapping mapping, CoreDomain leftDomain) {
-		MetamodelManager mm = envFact.getMetamodelManager();
-		if (!mm.getFinalAnalysis().isFinal(op)) {
+		if (!envFact.getFinalAnalysis().isFinal(op)) {
 			GuardPattern guard = mapping.getGuardPattern();
 			VariableDeclaration leftVar = leftDomain.getGuardPattern().getOwnedVariables().get(0);
 

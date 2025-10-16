@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
@@ -36,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2MonikerVisitor;
@@ -112,12 +112,12 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	}
 
 	@Override
-	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
+	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactory environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
 		return new QVTimperativeCS2AS(environmentFactory, csResource, asResource);
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+	public @NonNull EnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
 		return new QVTiEnvironmentFactory(projectManager, null);
 	}
 
@@ -134,7 +134,7 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	@Override
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTimperativeTemplateParameterSubstitutionVisitor((EnvironmentFactoryInternal) environmentFactory, selfType, selfTypeValue);
+		return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 	}
 
 	@Override
@@ -156,6 +156,7 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	public void registerMetaPackages(@NonNull CompleteModel completeModel) {
 		super.registerMetaPackages(completeModel);
 		//
+		completeModel.getPartialModels().add(QVTbaseMetamodel.getDefaultModel());
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTimperativePackage.eINSTANCE);
 	}

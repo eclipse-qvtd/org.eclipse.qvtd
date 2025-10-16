@@ -298,7 +298,7 @@ public class TxPartNodeImpl extends TxNodeImpl implements TxPartNode {
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 							final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
 							if (CAST_null == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/emf/2002/Ecore\'::EClass::eSuperTypes\'");
+								throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes : OrderedSet(ecore::EClass)\'");
 							}
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();

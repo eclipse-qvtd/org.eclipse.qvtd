@@ -62,7 +62,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.AbstractExtendingPivotVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -464,9 +463,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		visit(object.getOwnedResult());
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getFirstOwnedBody());
-		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
+		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
 		//		object.accept(visitor);
-		EnvironmentFactoryInternal environmentFactory = (@NonNull EnvironmentFactoryInternal) context;
+		EnvironmentFactory environmentFactory = context;
 		Type selfType = object.getOwnedSource().getType();
 		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();
@@ -498,9 +497,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 		}
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
+		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
 		//		object.accept(visitor);
-		EnvironmentFactoryInternal environmentFactory = (@NonNull EnvironmentFactoryInternal) context;
+		EnvironmentFactory environmentFactory = context;
 		Type selfType = object.getOwnedSource().getType();
 		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();

@@ -13,12 +13,12 @@ package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvttemplate.util.AbstractQVTtemplateTemplateParameterSubstitutionVisitor;
 
 public class QVTtemplateTemplateParameterSubstitutionVisitor extends AbstractQVTtemplateTemplateParameterSubstitutionVisitor
-{	
-	public QVTtemplateTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactoryInternal environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+{
+	public QVTtemplateTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		super(environmentFactory, selfType, selfTypeValue);
 	}
 }

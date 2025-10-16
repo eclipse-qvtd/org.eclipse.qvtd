@@ -47,12 +47,12 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.pivot.internal.manager.GenPackageManager;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -834,13 +834,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
 		ResourceSet resourceSet = getResourceSet();
-		MetamodelManager metamodelManager = getMetamodelManager();
+		GenPackageManager genPackageManager = environmentFactory.getGenPackageManager();
 		Resource csGenResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : csGenResource.getContents()) {
 			if (eObject instanceof GenModel) {
 				GenModel genModel = (GenModel)eObject;
 				genModel.reconcile();
-				metamodelManager.addGenModel(genModel);
+				genPackageManager.addGenModel(genModel);
 			}
 		}
 	}

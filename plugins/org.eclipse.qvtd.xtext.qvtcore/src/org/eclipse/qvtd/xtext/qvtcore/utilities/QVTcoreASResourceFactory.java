@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
@@ -54,7 +53,6 @@ import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 /**
  * QVTcoreASResourceFactory supports creation of a QVTcore AS resource and associated artefacts.
  */
-@SuppressWarnings("deprecation")
 public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 {
 	private static @Nullable QVTcoreASResourceFactory CONTENT_TYPE_INSTANCE = null;
@@ -118,12 +116,12 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 	}
 
 	@Override
-	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
+	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactory environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
 		return new QVTcoreCS2AS(environmentFactory, csResource, asResource);
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+	public @NonNull EnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
 		return new QVTcEnvironmentFactory(projectManager, null);
 	}
 
@@ -145,7 +143,7 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 	@Override
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTcoreTemplateParameterSubstitutionVisitor((EnvironmentFactoryInternal) environmentFactory, selfType, selfTypeValue);
+		return new QVTcoreTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 	}
 
 	@Override

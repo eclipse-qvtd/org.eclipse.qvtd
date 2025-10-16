@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.complete.PartialPackages;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -625,6 +626,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTcCompiler_Upper2Lower() throws Exception {
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+		PartialPackages.PARTIAL_PACKAGES.setState(true);
 		MyQVT myQVT = createQVT("Upper2Lower", getModelsURI("upper2lower/Upper2Lower.qvtcas"));
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {

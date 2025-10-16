@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 
 public class QVTcoreCS2AS extends EssentialOCLCS2AS
 {
-	public QVTcoreCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
+	public QVTcoreCS2AS(@NonNull EnvironmentFactory environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
 		super(environmentFactory, csResource, asResource);
 	}
 

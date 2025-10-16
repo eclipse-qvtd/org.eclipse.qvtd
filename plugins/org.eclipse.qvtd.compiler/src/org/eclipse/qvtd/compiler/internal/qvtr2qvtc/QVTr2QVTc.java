@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -515,7 +514,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 				root.getOwnedPackages().add(rootPackage);
 			}
 		}
-		XMLResource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) environmentFactory, asResource, traceURI, null);
+		XMLResource ecoreResource = AS2Ecore.createResource(environmentFactory, asResource, traceURI, null);
 		ecoreResource.save(saveOptions);
 		return ecoreResource;
 	}

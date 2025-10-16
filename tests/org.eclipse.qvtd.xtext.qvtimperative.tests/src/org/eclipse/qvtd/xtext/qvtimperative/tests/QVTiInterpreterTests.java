@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -138,12 +138,12 @@ public class QVTiInterpreterTests extends LoadTestCase
 	protected void assertLoadable(@NonNull TestProject testProject, @NonNull URI asURI) throws Exception {
 		ProjectManager projectManager = getTestProjectManager();
 		OCLInternal ocl = OCLInternal.newInstance(projectManager, null); //EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false));
-		MetamodelManager metamodelManager = ocl.getMetamodelManager();
-		ResourceSet asResourceSet = metamodelManager.getASResourceSet();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
+		ResourceSet asResourceSet = environmentFactory.getASResourceSet();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 		}
-		metamodelManager.getASmetamodel();
+		environmentFactory.getCompleteModel().getASmetamodel();
 		ASResource asResource = (ASResource)asResourceSet.getResource(asURI, true);
 		assert asResource != null;
 		EcoreUtil.resolveAll(asResource);

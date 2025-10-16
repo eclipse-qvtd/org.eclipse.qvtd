@@ -934,24 +934,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//				e.printStackTrace();
 			//			}
 		} else if (implementationClass != null) {
-			ClassNotFoundException cnfe = null;
 			Class<?> functionClass = null;
-			for (@NonNull ClassLoader classLoader : metamodelManager.getImplementationManager().getClassLoaders()) {
-				try {
-					functionClass = classLoader.loadClass(implementationClass);
-					cnfe = null;
-					break;
-				} catch (ClassNotFoundException e) {
-					if (cnfe == null) {
-						cnfe = e;
-					}
-				}
+			try {
+				functionClass = environmentFactory.getClassImplementation(null, implementationClass);
 			}
-			if (cnfe != null) {
-				throw new IllegalStateException("Load class failure for " + implementationClass + " in QVTiAS2CGVisitor.visitFunction()", cnfe);
+			catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Load class failure for " + implementationClass + " in QVTiAS2CGVisitor.visitFunction()", e);
 			}
 			assert functionClass != null;
-			//			ClassLoader classLoader = asFunction.getClass().getClassLoader();
 			Object implementationInstance;
 			try {
 				Field implementationField = functionClass.getField("INSTANCE");
@@ -1298,7 +1288,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		else {
 			Property asTargetProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
-			LibraryProperty libraryProperty = metamodelManager.getImplementation(asSetStatement, null, asTargetProperty);
+			LibraryProperty libraryProperty = environmentFactory.getPropertyImplementation(asSetStatement, null, asTargetProperty);
 			CGPropertyAssignment cgPropertyAssignment = null;
 			if (isEcoreProperty(libraryProperty)) {
 				EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();

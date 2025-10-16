@@ -34,9 +34,9 @@ import org.eclipse.ocl.pivot.internal.dynamic.ExplicitClassLoader;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaSourceFileObject;
+import org.eclipse.ocl.pivot.internal.manager.GenPackageManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -209,13 +209,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 		private void loadGenModel(@NonNull URI genModelURI) {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
-			MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+			GenPackageManager genPackageManager = environmentFactory.getGenPackageManager();
 			Resource csGenResource = resourceSet.getResource(genModelURI, true);
 			for (EObject eObject : csGenResource.getContents()) {
 				if (eObject instanceof GenModel) {
 					GenModel genModel = (GenModel)eObject;
 					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
+					genPackageManager.addGenModel(genModel);
 				}
 			}
 		}

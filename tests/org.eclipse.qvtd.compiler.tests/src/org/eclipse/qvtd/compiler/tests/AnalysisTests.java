@@ -30,11 +30,11 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
@@ -71,7 +71,7 @@ public class AnalysisTests extends XtextTestCase
 	/*	@Test
 	public void testContainmentAnalysis_Delphi() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
@@ -106,7 +106,7 @@ public class AnalysisTests extends XtextTestCase
 	@Test
 	public void testContainmentAnalysis_ContainerClass_Ecore() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
@@ -170,7 +170,7 @@ public class AnalysisTests extends XtextTestCase
 	@Test
 	public void testContainmentAnalysis_ContainmentProperty_Ecore() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
@@ -231,7 +231,7 @@ public class AnalysisTests extends XtextTestCase
 	@Test
 	public void testInheritanceAnalysis_SuperClass_Ecore() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
@@ -270,7 +270,7 @@ public class AnalysisTests extends XtextTestCase
 	@Test
 	public void testInheritanceAnalysis_SubClass_Ecore() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		//
@@ -295,7 +295,7 @@ public class AnalysisTests extends XtextTestCase
 	@Test
 	public void testOperationDependencyAnalysis_Companies() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
-		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		EnvironmentFactory environmentFactory = ocl.getEnvironmentFactory();
 		//
 		URI qvtcURI = URI.createPlatformResourceURI(getClass().getPackage().getName() + "/src/" + getProjectName() + "/companies/CompaniesCS2AS.qvtc", true);
 		BaseCSResource csResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(qvtcURI, true);

@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
 import org.eclipse.ocl.pivot.internal.resource.ResourceSetAwareASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
@@ -53,7 +52,6 @@ import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 /**
  * QVTrelationASResourceFactory supports creation of a QVTrelation AS resource and associated artefacts.
  */
-@SuppressWarnings("deprecation")
 public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFactory
 {
 	private static @Nullable QVTrelationASResourceFactory CONTENT_TYPE_INSTANCE = null;
@@ -118,12 +116,12 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	}
 
 	@Override
-	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
+	public @NonNull ICS2AS createCS2AS(@NonNull EnvironmentFactory environmentFactory, @NonNull CSResource csResource, @NonNull ASResource asResource) {
 		return new QVTrelationCS2AS(environmentFactory, csResource, asResource);
 	}
 
 	@Override
-	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+	public @NonNull EnvironmentFactory createEnvironmentFactory(@NonNull ProjectManager projectManager) {
 		return new QVTrEnvironmentFactory(projectManager, null);
 	}
 
@@ -145,7 +143,7 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	@Override
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTrelationTemplateParameterSubstitutionVisitor((EnvironmentFactoryInternal) environmentFactory, selfType, selfTypeValue);
+		return new QVTrelationTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 	}
 
 	@Override

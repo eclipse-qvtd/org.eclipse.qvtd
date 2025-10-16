@@ -49,7 +49,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTruntimeLibraryPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTruntimeLibraryPackage.eINSTANCE);
 
 	/**
 	 *	The type parameters for templated types and operations.

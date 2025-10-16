@@ -45,10 +45,10 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ocl.debug.vm.ui.launching.LaunchingUtils;
 import org.eclipse.ocl.pivot.internal.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.pivot.internal.manager.GenPackageManager;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -189,13 +189,13 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 
 		private void loadGenModel(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI genModelURI) {
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
-			MetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+			GenPackageManager genPackageManager = environmentFactory.getGenPackageManager();
 			Resource csGenResource = resourceSet.getResource(genModelURI, true);
 			for (EObject eObject : csGenResource.getContents()) {
 				if (eObject instanceof GenModel) {
 					GenModel genModel = (GenModel)eObject;
 					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
+					genPackageManager.addGenModel(genModel);
 				}
 			}
 		}

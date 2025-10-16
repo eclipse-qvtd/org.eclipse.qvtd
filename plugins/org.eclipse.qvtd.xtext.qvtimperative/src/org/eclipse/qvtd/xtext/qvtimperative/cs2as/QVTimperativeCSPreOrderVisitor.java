@@ -481,7 +481,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 			//			helper.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.pivot.Class oclElementType = context.getMetamodelManager().getStandardLibrary().getOclElementType();
+				org.eclipse.ocl.pivot.Class oclElementType = context.getStandardLibrary().getOclElementType();
 				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}

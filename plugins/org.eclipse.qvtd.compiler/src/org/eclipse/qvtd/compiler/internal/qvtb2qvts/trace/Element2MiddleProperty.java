@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -97,14 +97,14 @@ public abstract class Element2MiddleProperty implements Nameable
 			property.getOwnedAnnotations().add(domainAnnotation);
 		}
 		traceClass.getOwnedProperties().add(property);
-		MetamodelManager metamodelManager = relation2middleType.getScheduleManager().getEnvironmentFactory().getMetamodelManager();
+		EnvironmentFactory environmentFactory = relation2middleType.getScheduleManager().getEnvironmentFactory();
 		Model model = PivotUtil.getContainingModel(relation2middleType.getRule());
 		assert model != null;
 		org.eclipse.ocl.pivot.Package tracePackage = relation2middleType.getMiddleClass().getOwningPackage();
 		org.eclipse.ocl.pivot.Package typePackage = type.getOwningPackage();
 		org.eclipse.ocl.pivot.Class oppositeType = type;
 		if (tracePackage != typePackage) {			// We're building the tracePackage; any other package must be redirected to a mutable sibling
-			oppositeType = metamodelManager.getEquivalentClass(model, type);
+			oppositeType = environmentFactory.getCompleteModel().getEquivalentClass(model, type);
 		}
 		if (oppositeType instanceof CollectionType) {
 			Type elementType = ((CollectionType)oppositeType).getElementType();

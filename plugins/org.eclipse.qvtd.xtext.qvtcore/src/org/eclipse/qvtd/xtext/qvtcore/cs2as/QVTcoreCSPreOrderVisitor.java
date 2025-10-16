@@ -172,7 +172,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 			//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.pivot.Class oclElementType = context.getMetamodelManager().getStandardLibrary().getOclElementType();
+				org.eclipse.ocl.pivot.Class oclElementType = context.getStandardLibrary().getOclElementType();
 				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}

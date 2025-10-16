@@ -62,10 +62,9 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.FinalAnalysis;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.ParserException;
@@ -1306,7 +1305,7 @@ public class OperationDependencyAnalysis
 			if (operation instanceof Function) {
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
-				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
+				VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.getStandardLibrary(), transformation);
 				visitor.addVariable(thisVariable, ClassUtil.requireNonNull(sourceAndArgumentPaths.get(0)));
 				ownedParameters = function.getOwnedParameters();
 				ownedBody = function.getQueryExpression();
@@ -1396,8 +1395,7 @@ public class OperationDependencyAnalysis
 		}
 	}
 
-	private final @NonNull EnvironmentFactoryInternal environmentFactory;
-	private final @NonNull MetamodelManager metamodelManager;
+	private final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
@@ -1422,14 +1420,13 @@ public class OperationDependencyAnalysis
 	private final @NonNull Set<@NonNull OperationAnalysis> refining = new HashSet<>();
 
 	public OperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
-		this.environmentFactory = (EnvironmentFactoryInternal) containmentAnalysis.getEnvironmentFactory();
-		this.metamodelManager = environmentFactory.getMetamodelManager();
+		this.environmentFactory = containmentAnalysis.getEnvironmentFactory();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		this.domainUsageAnalysis = domainUsageAnalysis;
 		this.containmentAnalysis = containmentAnalysis;
 		//		this.scheduler = scheduler;
-		this.finalAnalysis = metamodelManager.getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
+		this.finalAnalysis = environmentFactory.getFinalAnalysis(); //new FinalAnalysis((CompleteModelImpl) environmentFactory.getCompleteModel());
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.oclVoidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclVoidType());
 		this.oclInvalidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclInvalidType());

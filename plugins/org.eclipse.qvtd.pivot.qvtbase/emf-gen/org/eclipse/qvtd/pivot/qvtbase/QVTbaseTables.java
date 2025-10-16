@@ -452,19 +452,19 @@ public class QVTbaseTables extends AbstractTables
 			_Domain__rule.setOpposite(_Rule__domain);
 			_Domain__typedModel.setOpposite(_TypedModel__Domain__typedModel);
 
-			_Function__queryExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "Function", _Function__queryExpression));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "Function", _Function__queryExpression);
 
-			_Pattern__bindsTo.setOpposite(createOpposite(PivotPackage.Literals.VARIABLE, "Pattern", _Pattern__bindsTo));
+			createOpposite(PivotPackage.Literals.VARIABLE, "Pattern", _Pattern__bindsTo);
 			_Pattern__predicate.setOpposite(_Predicate__pattern);
 
-			_Predicate__conditionExpression.setOpposite(createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "predicate", _Predicate__conditionExpression));
+			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "predicate", _Predicate__conditionExpression);
 			_Predicate__pattern.setOpposite(_Pattern__predicate);
 
 			_Rule__domain.setOpposite(_Domain__rule);
 			_Rule__isAbstract.setDefaultValueString("false");
 			_Rule__overridden.setOpposite(_Rule__overrides);
 			_Rule__overrides.setOpposite(_Rule__overridden);
-			_Rule__ownedContext.setOpposite(createOpposite(PivotPackage.Literals.PARAMETER_VARIABLE, "Rule", _Rule__ownedContext));
+			createOpposite(PivotPackage.Literals.PARAMETER_VARIABLE, "Rule", _Rule__ownedContext);
 			_Rule__transformation.setOpposite(_Transformation__rule);
 
 			_SimpleTargetElement__iterates.setOpposite(_TypedModel__SimpleTargetElement__iterates);
@@ -478,8 +478,8 @@ public class QVTbaseTables extends AbstractTables
 
 			_Transformation__extends.setOpposite(_Transformation__extendedBy__extends);
 			_Transformation__modelParameter.setOpposite(_TypedModel__transformation);
-			_Transformation__ownedContext.setOpposite(createOpposite(PivotPackage.Literals.PARAMETER, "Transformation", _Transformation__ownedContext));
-			_Transformation__ownedTag.setOpposite(createOpposite(PivotPackage.Literals.ANNOTATION, "Transformation", _Transformation__ownedTag));
+			createOpposite(PivotPackage.Literals.PARAMETER, "Transformation", _Transformation__ownedContext);
+			createOpposite(PivotPackage.Literals.ANNOTATION, "Transformation", _Transformation__ownedTag);
 			_Transformation__ownedTargets.setOpposite(_Target__owningTransformation);
 			_Transformation__rule.setOpposite(_Rule__transformation);
 			_Transformation__extendedBy__extends.setOpposite(_Transformation__extends);
@@ -489,9 +489,9 @@ public class QVTbaseTables extends AbstractTables
 			_TypedModel__isThis.setDefaultValueString("false");
 			_TypedModel__isTrace.setDefaultValueString("false");
 			_TypedModel__iterates.setOpposite(_TypedModel__TypedModel__iterates);
-			_TypedModel__ownedContext.setOpposite(createOpposite(PivotPackage.Literals.PARAMETER, "TypedModel", _TypedModel__ownedContext));
+			createOpposite(PivotPackage.Literals.PARAMETER, "TypedModel", _TypedModel__ownedContext);
 			_TypedModel__transformation.setOpposite(_Transformation__modelParameter);
-			_TypedModel__usedPackage.setOpposite(createOpposite(PivotPackage.Literals.PACKAGE, "TypedModel", _TypedModel__usedPackage));
+			createOpposite(PivotPackage.Literals.PACKAGE, "TypedModel", _TypedModel__usedPackage);
 			_TypedModel__Domain__typedModel.setOpposite(_Domain__typedModel);
 			_TypedModel__SimpleTargetElement__iterates.setOpposite(_SimpleTargetElement__iterates);
 			_TypedModel__SimpleTargetElement__typedModel.setOpposite(_SimpleTargetElement__typedModel);

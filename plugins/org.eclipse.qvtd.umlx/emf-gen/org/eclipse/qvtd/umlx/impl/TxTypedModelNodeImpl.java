@@ -396,7 +396,7 @@ public class TxTypedModelNodeImpl extends TxNodeImpl implements TxTypedModelNode
 						 * referredEPackage
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxPackageNode::referredEPackage\'");
+							throw new InvalidValueException("Null source for \'umlx::TxPackageNode::referredEPackage : ecore::EPackage[1]\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull EPackage referredEPackage = _1.getReferredEPackage();

@@ -389,7 +389,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						 * ownedRelPatternNodes
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelDomainNode::ownedRelPatternNodes\'");
+							throw new InvalidValueException("Null source for \'umlx::RelDomainNode::ownedRelPatternNodes : OrderedSet(umlx::RelPatternNode)\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull List<RelPatternNode> ownedRelPatternNodes = _1.getOwnedRelPatternNodes();
@@ -460,7 +460,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						/*@Caught*/ @NonNull Object CAUGHT_isAnon;
 						try {
 							if (_1_1 == null) {
-								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelPatternNode::isAnon\'");
+								throw new InvalidValueException("Null source for \'umlx::RelPatternNode::isAnon : Boolean[1]\'");
 							}
 							final /*@Thrown*/ boolean isAnon = _1_1.isIsAnon();
 							CAUGHT_isAnon = isAnon;
@@ -504,7 +504,7 @@ public class RelDiagramImpl extends UMLXNamedElementImpl implements RelDiagram {
 						 * name
 						 */
 						if (_1_2 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
+							throw new InvalidValueException("Null source for \'umlx::UMLXNamedElement::name : String\'");
 						}
 						final /*@Thrown*/ @Nullable String name = _1_2.getName();
 						//

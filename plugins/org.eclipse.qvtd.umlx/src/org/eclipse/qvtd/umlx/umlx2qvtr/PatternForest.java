@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -318,7 +317,7 @@ class PatternForest
 	}
 
 	protected final @NonNull UMLX2QVTr umlx2qvtr;
-	protected final @NonNull MetamodelManager metamodelManager;
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull RelDiagram relDiagram;
 	//
 	private final @NonNull List<@NonNull RelPatternNode> allNodes = new ArrayList<>();
@@ -332,8 +331,7 @@ class PatternForest
 
 	public PatternForest(@NonNull UMLX2QVTr umlx2qvtr, @NonNull RelDiagram relDiagram) {
 		this.umlx2qvtr = umlx2qvtr;
-		EnvironmentFactory environmentFactory = umlx2qvtr.getEnvironmentFactory();
-		this.metamodelManager = environmentFactory.getMetamodelManager();
+		this.environmentFactory = umlx2qvtr.getEnvironmentFactory();
 		this.relDiagram = relDiagram;
 		analyzePatternRoots();
 		analyzePatternTree();
@@ -625,7 +623,7 @@ class PatternForest
 				qvtrTarget = PivotUtil.createVariableExp((VariableDeclaration)qvtrTarget);
 			}
 			ObjectTemplateExp qvtrObjectTemplateExp = (ObjectTemplateExp) qvtrSourceExpression;
-			Property asProperty = metamodelManager.getASOfEcore(Property.class, eStructuralFeature);
+			Property asProperty = environmentFactory.getMetamodelManager().getASOfEcore(Property.class, eStructuralFeature);
 			assert asProperty != null;
 			if (treeEdge.isOpposite) {
 				asProperty = asProperty.getOpposite();
@@ -652,7 +650,7 @@ class PatternForest
 			TemplateExp qvtrExpression = null;
 			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)asVariable.getType();
 			if (type == null) {
-				type = metamodelManager.getStandardLibrary().getOclInvalidType();
+				type = environmentFactory.getStandardLibrary().getOclInvalidType();
 			}
 			for (@NonNull TreeEdge childEdge : treeNode.childEdges) {
 				if (childEdge.patternEdge.getSourceIndex() != 0) {

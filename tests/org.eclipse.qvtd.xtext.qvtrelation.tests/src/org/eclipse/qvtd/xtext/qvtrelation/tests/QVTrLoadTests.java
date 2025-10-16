@@ -41,7 +41,7 @@ public class QVTrLoadTests extends LoadTestCase
 		ClassLoader cl0 = getClass().getClassLoader();
 		assert cl0 != null;
 		OCLInternal ocl = QVTrelation.newInstance(getTestProjectManager());
-		ocl.getMetamodelManager().addClassLoader(cl0);
+		ocl.getEnvironmentFactory().addClassLoader(cl0);
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}

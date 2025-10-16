@@ -148,7 +148,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 	}
 
 	protected void generateModels(@NonNull GenModel genModel) {
-		environmentFactory.getMetamodelManager().addGenModel(genModel);
+		environmentFactory.getGenPackageManager().addGenModel(genModel);
 		//**		ResourceUtils.checkResourceSet(resourceSet);
 		// genModel.setCanGenerate(true);
 		// validate();
