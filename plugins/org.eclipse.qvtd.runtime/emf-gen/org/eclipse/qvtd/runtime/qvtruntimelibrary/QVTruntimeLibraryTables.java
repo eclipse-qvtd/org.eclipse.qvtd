@@ -25,9 +25,9 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
-// import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryTables;
 
 /**
  * QVTruntimeLibraryTables provides the dispatch tables for the qvtruntimelibrary for use by the OCL dispatcher.
@@ -112,17 +112,17 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _Extent__Extent = LIBRARY.createFragment(Types._Extent, QVTruntimeLibraryTables.Types._Extent);
+		private static final @NonNull FlatFragment _Extent__Extent = LIBRARY.createFragment(Types._Extent, Types._Extent);
 		private static final @NonNull FlatFragment _Extent__OclAny = LIBRARY.createFragment(Types._Extent, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Extent__OclElement = LIBRARY.createFragment(Types._Extent, OCLstdlibTables.Types._OclElement);
 
-		private static final @NonNull FlatFragment _Model__Model = LIBRARY.createFragment(Types._Model, QVTruntimeLibraryTables.Types._Model);
+		private static final @NonNull FlatFragment _Model__Model = LIBRARY.createFragment(Types._Model, Types._Model);
 		private static final @NonNull FlatFragment _Model__OclAny = LIBRARY.createFragment(Types._Model, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Model__OclElement = LIBRARY.createFragment(Types._Model, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull FlatFragment _Transformation__OclAny = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Transformation__OclElement = LIBRARY.createFragment(Types._Transformation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Transformation__Transformation = LIBRARY.createFragment(Types._Transformation, QVTruntimeLibraryTables.Types._Transformation);
+		private static final @NonNull FlatFragment _Transformation__Transformation = LIBRARY.createFragment(Types._Transformation, Types._Transformation);
 
 		static {
 			Init.initEnd();
@@ -193,8 +193,11 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, Types._Extent, 0);
+		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement), 0 | IsRequired | IsResolveProxies);
+
 		static {
+			createOpposite(OCLstdlibPackage.Literals.OCL_ELEMENT, "extent", _Extent__elements);
+
 			Init.initEnd();
 		}
 
@@ -394,7 +397,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		}
 
 		private static final @NonNull Property @NonNull [] _Extent = {
-			QVTruntimeLibraryTables.Properties._Extent__elements,
+			Properties._Extent__elements,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};

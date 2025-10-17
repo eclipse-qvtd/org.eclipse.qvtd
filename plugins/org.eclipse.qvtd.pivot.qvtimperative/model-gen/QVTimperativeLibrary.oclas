@@ -31,7 +31,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="&_1;#zfDWR"/>
   </ownedPackages>
-  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
     <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ViIGS" name="Collection" superClasses="&_1;#jbMkR">
       <ownedBindings>
         <ownedSubstitutions actual="#NxGT6" formal="&_1;#qs59R"/>
