@@ -29,7 +29,6 @@ import org.eclipse.qvtd.compiler.internal.usage.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -138,7 +137,7 @@ public class QVTrelationDirectedScheduleManager extends BasicScheduleManager imp
 
 	public @NonNull String getDirectedName(@NonNull Transformation asTransformation) {
 		StringBuilder s = new StringBuilder();
-		s.append(QVTbaseUtil.getName(asTransformation));
+		s.append(asTransformation.getName());
 		s.append("_");
 		s.append(PivotUtil.getName(typedModelsConfiguration.getTargetTypedModel()));
 		return s.toString();
