@@ -22,11 +22,16 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.util.PivotValidator;
-
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 import org.eclipse.qvtd.pivot.qvtrelation.*;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
 
 /**
  * <!-- begin-user-doc -->
@@ -274,7 +279,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -655,9 +660,14 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * Validates the validateContextTypeIsThisTransformation constraint of '<em>Relational Transformation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateRelationalTransformation_validateContextTypeIsThisTransformation(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(relationalTransformation);
+		CompleteModel completeModel = executor.getEnvironmentFactory().getCompleteModel();
+		completeModel.getPartialModels().add((Model)QVTbaseTables.PACKAGE.eContainer());
+		completeModel.getPartialModels().add((Model)QVTtemplateTables.PACKAGE.eContainer());
+		completeModel.getPartialModels().add((Model)QVTrelationTables.PACKAGE.eContainer());
 		return relationalTransformation.validateContextTypeIsThisTransformation(diagnostics, context);
 	}
 
