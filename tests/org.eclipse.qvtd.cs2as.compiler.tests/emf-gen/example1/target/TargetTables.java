@@ -57,12 +57,12 @@ public class TargetTables extends AbstractTables
 	/**
 	 *	The package descriptor for the package.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(TargetPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(TargetPackage.eINSTANCE);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", "target", TargetPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_A = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_A1 = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_A2 = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
@@ -152,77 +152,77 @@ public class TargetTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _A__A = LIBRARY.createFragment(Types._A, TargetTables.Types._A);
-		private static final @NonNull FlatFragment _A__NamedElement = LIBRARY.createFragment(Types._A, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _A__Namespace = LIBRARY.createFragment(Types._A, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _A__A = LIBRARY.createFragment(Types._A, Types._A);
+		private static final @NonNull FlatFragment _A__NamedElement = LIBRARY.createFragment(Types._A, Types._NamedElement);
+		private static final @NonNull FlatFragment _A__Namespace = LIBRARY.createFragment(Types._A, Types._Namespace);
 		private static final @NonNull FlatFragment _A__OclAny = LIBRARY.createFragment(Types._A, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _A__OclElement = LIBRARY.createFragment(Types._A, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _A__Visitable = LIBRARY.createFragment(Types._A, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _A__Visitable = LIBRARY.createFragment(Types._A, Types._Visitable);
 
-		private static final @NonNull FlatFragment _A1__A = LIBRARY.createFragment(Types._A1, TargetTables.Types._A);
-		private static final @NonNull FlatFragment _A1__A1 = LIBRARY.createFragment(Types._A1, TargetTables.Types._A1);
-		private static final @NonNull FlatFragment _A1__NamedElement = LIBRARY.createFragment(Types._A1, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _A1__Namespace = LIBRARY.createFragment(Types._A1, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _A1__A = LIBRARY.createFragment(Types._A1, Types._A);
+		private static final @NonNull FlatFragment _A1__A1 = LIBRARY.createFragment(Types._A1, Types._A1);
+		private static final @NonNull FlatFragment _A1__NamedElement = LIBRARY.createFragment(Types._A1, Types._NamedElement);
+		private static final @NonNull FlatFragment _A1__Namespace = LIBRARY.createFragment(Types._A1, Types._Namespace);
 		private static final @NonNull FlatFragment _A1__OclAny = LIBRARY.createFragment(Types._A1, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _A1__OclElement = LIBRARY.createFragment(Types._A1, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _A1__Visitable = LIBRARY.createFragment(Types._A1, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _A1__Visitable = LIBRARY.createFragment(Types._A1, Types._Visitable);
 
-		private static final @NonNull FlatFragment _A2__A = LIBRARY.createFragment(Types._A2, TargetTables.Types._A);
-		private static final @NonNull FlatFragment _A2__A2 = LIBRARY.createFragment(Types._A2, TargetTables.Types._A2);
-		private static final @NonNull FlatFragment _A2__NamedElement = LIBRARY.createFragment(Types._A2, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _A2__Namespace = LIBRARY.createFragment(Types._A2, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _A2__A = LIBRARY.createFragment(Types._A2, Types._A);
+		private static final @NonNull FlatFragment _A2__A2 = LIBRARY.createFragment(Types._A2, Types._A2);
+		private static final @NonNull FlatFragment _A2__NamedElement = LIBRARY.createFragment(Types._A2, Types._NamedElement);
+		private static final @NonNull FlatFragment _A2__Namespace = LIBRARY.createFragment(Types._A2, Types._Namespace);
 		private static final @NonNull FlatFragment _A2__OclAny = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _A2__OclElement = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _A2__Visitable = LIBRARY.createFragment(Types._A2, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _A2__Visitable = LIBRARY.createFragment(Types._A2, Types._Visitable);
 
-		private static final @NonNull FlatFragment _A3__A = LIBRARY.createFragment(Types._A3, TargetTables.Types._A);
-		private static final @NonNull FlatFragment _A3__A2 = LIBRARY.createFragment(Types._A3, TargetTables.Types._A2);
-		private static final @NonNull FlatFragment _A3__A3 = LIBRARY.createFragment(Types._A3, TargetTables.Types._A3);
-		private static final @NonNull FlatFragment _A3__NamedElement = LIBRARY.createFragment(Types._A3, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _A3__Namespace = LIBRARY.createFragment(Types._A3, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _A3__A = LIBRARY.createFragment(Types._A3, Types._A);
+		private static final @NonNull FlatFragment _A3__A2 = LIBRARY.createFragment(Types._A3, Types._A2);
+		private static final @NonNull FlatFragment _A3__A3 = LIBRARY.createFragment(Types._A3, Types._A3);
+		private static final @NonNull FlatFragment _A3__NamedElement = LIBRARY.createFragment(Types._A3, Types._NamedElement);
+		private static final @NonNull FlatFragment _A3__Namespace = LIBRARY.createFragment(Types._A3, Types._Namespace);
 		private static final @NonNull FlatFragment _A3__OclAny = LIBRARY.createFragment(Types._A3, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _A3__OclElement = LIBRARY.createFragment(Types._A3, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _A3__Visitable = LIBRARY.createFragment(Types._A3, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _A3__Visitable = LIBRARY.createFragment(Types._A3, Types._Visitable);
 
-		private static final @NonNull FlatFragment _B__B = LIBRARY.createFragment(Types._B, TargetTables.Types._B);
-		private static final @NonNull FlatFragment _B__NamedElement = LIBRARY.createFragment(Types._B, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _B__Namespace = LIBRARY.createFragment(Types._B, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _B__B = LIBRARY.createFragment(Types._B, Types._B);
+		private static final @NonNull FlatFragment _B__NamedElement = LIBRARY.createFragment(Types._B, Types._NamedElement);
+		private static final @NonNull FlatFragment _B__Namespace = LIBRARY.createFragment(Types._B, Types._Namespace);
 		private static final @NonNull FlatFragment _B__OclAny = LIBRARY.createFragment(Types._B, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _B__OclElement = LIBRARY.createFragment(Types._B, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _B__Visitable = LIBRARY.createFragment(Types._B, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _B__Visitable = LIBRARY.createFragment(Types._B, Types._Visitable);
 
-		private static final @NonNull FlatFragment _C__C = LIBRARY.createFragment(Types._C, TargetTables.Types._C);
-		private static final @NonNull FlatFragment _C__NamedElement = LIBRARY.createFragment(Types._C, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _C__Namespace = LIBRARY.createFragment(Types._C, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _C__C = LIBRARY.createFragment(Types._C, Types._C);
+		private static final @NonNull FlatFragment _C__NamedElement = LIBRARY.createFragment(Types._C, Types._NamedElement);
+		private static final @NonNull FlatFragment _C__Namespace = LIBRARY.createFragment(Types._C, Types._Namespace);
 		private static final @NonNull FlatFragment _C__OclAny = LIBRARY.createFragment(Types._C, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _C__OclElement = LIBRARY.createFragment(Types._C, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _C__Visitable = LIBRARY.createFragment(Types._C, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _C__Visitable = LIBRARY.createFragment(Types._C, Types._Visitable);
 
-		private static final @NonNull FlatFragment _D__D = LIBRARY.createFragment(Types._D, TargetTables.Types._D);
-		private static final @NonNull FlatFragment _D__NamedElement = LIBRARY.createFragment(Types._D, TargetTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _D__D = LIBRARY.createFragment(Types._D, Types._D);
+		private static final @NonNull FlatFragment _D__NamedElement = LIBRARY.createFragment(Types._D, Types._NamedElement);
 		private static final @NonNull FlatFragment _D__OclAny = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _D__OclElement = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _D__Visitable = LIBRARY.createFragment(Types._D, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _D__Visitable = LIBRARY.createFragment(Types._D, Types._Visitable);
 
-		private static final @NonNull FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, TargetTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, Types._NamedElement);
 		private static final @NonNull FlatFragment _NamedElement__OclAny = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NamedElement__OclElement = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NamedElement__Visitable = LIBRARY.createFragment(Types._NamedElement, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _NamedElement__Visitable = LIBRARY.createFragment(Types._NamedElement, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Namespace__NamedElement = LIBRARY.createFragment(Types._Namespace, TargetTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _Namespace__Namespace = LIBRARY.createFragment(Types._Namespace, TargetTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Namespace__NamedElement = LIBRARY.createFragment(Types._Namespace, Types._NamedElement);
+		private static final @NonNull FlatFragment _Namespace__Namespace = LIBRARY.createFragment(Types._Namespace, Types._Namespace);
 		private static final @NonNull FlatFragment _Namespace__OclAny = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Namespace__OclElement = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Namespace__Visitable = LIBRARY.createFragment(Types._Namespace, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Namespace__Visitable = LIBRARY.createFragment(Types._Namespace, Types._Visitable);
 
 		private static final @NonNull FlatFragment _TRoot__OclAny = LIBRARY.createFragment(Types._TRoot, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TRoot__OclElement = LIBRARY.createFragment(Types._TRoot, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TRoot__TRoot = LIBRARY.createFragment(Types._TRoot, TargetTables.Types._TRoot);
-		private static final @NonNull FlatFragment _TRoot__Visitable = LIBRARY.createFragment(Types._TRoot, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _TRoot__TRoot = LIBRARY.createFragment(Types._TRoot, Types._TRoot);
+		private static final @NonNull FlatFragment _TRoot__Visitable = LIBRARY.createFragment(Types._TRoot, Types._Visitable);
 
 		private static final @NonNull FlatFragment _Visitable__OclAny = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Visitable__OclElement = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Visitable__Visitable = LIBRARY.createFragment(Types._Visitable, TargetTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Visitable__Visitable = LIBRARY.createFragment(Types._Visitable, Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -293,31 +293,56 @@ public class TargetTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _A__D__toA = LIBRARY.createOppositeProperty("D", Types._A, 0, TargetPackage.Literals.D__TO_A);
-		public static final @NonNull Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty("TRoot", Types._A, 1, TargetPackage.Literals.TROOT__OWNED_A);
+		public static final @NonNull Property _A__D__toA = LIBRARY.createOppositeProperty(Types._A, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 0 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__TO_A);
+		public static final @NonNull Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty(Types._A, "TRoot", Types._TRoot, 1 | IsImplicit | IsResolveProxies, TargetPackage.Literals.TROOT__OWNED_A);
 
-		public static final @NonNull Property _A1__ownsB = LIBRARY.createProperty(TargetPackage.Literals.A1__OWNS_B, Types._A1, 0);
+		public static final @NonNull Property _A1__ownsB = LIBRARY.createProperty(Types._A1, TargetPackage.Literals.A1__OWNS_B, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._B), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _A2__ownsC = LIBRARY.createProperty(TargetPackage.Literals.A2__OWNS_C, Types._A2, 0);
+		public static final @NonNull Property _A2__ownsC = LIBRARY.createProperty(Types._A2, TargetPackage.Literals.A2__OWNS_C, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._C), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _B__ownsD = LIBRARY.createProperty(TargetPackage.Literals.B__OWNS_D, Types._B, 0);
-		public static final @NonNull Property _B__toA1 = LIBRARY.createProperty(TargetPackage.Literals.B__TO_A1, Types._B, 1);
-		public static final @NonNull Property _B__D__refsB = LIBRARY.createOppositeProperty("D", Types._B, 2, TargetPackage.Literals.D__REFS_B);
+		public static final @NonNull Property _B__ownsD = LIBRARY.createProperty(Types._B, TargetPackage.Literals.B__OWNS_D, Types._D, 0 | IsComposite | IsResolveProxies);
+		public static final @NonNull Property _B__toA1 = LIBRARY.createProperty(Types._B, TargetPackage.Literals.B__TO_A1, Types._A1, 1 | IsResolveProxies);
+		public static final @NonNull Property _B__D__refsB = LIBRARY.createOppositeProperty(Types._B, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_B);
 
-		public static final @NonNull Property _C__ownsD = LIBRARY.createProperty(TargetPackage.Literals.C__OWNS_D, Types._C, 0);
-		public static final @NonNull Property _C__toA2 = LIBRARY.createProperty(TargetPackage.Literals.C__TO_A2, Types._C, 1);
-		public static final @NonNull Property _C__D__refsC = LIBRARY.createOppositeProperty("D", Types._C, 2, TargetPackage.Literals.D__REFS_C);
+		public static final @NonNull Property _C__ownsD = LIBRARY.createProperty(Types._C, TargetPackage.Literals.C__OWNS_D, Types._D, 0 | IsComposite | IsResolveProxies);
+		public static final @NonNull Property _C__toA2 = LIBRARY.createProperty(Types._C, TargetPackage.Literals.C__TO_A2, Types._A2, 1 | IsResolveProxies);
+		public static final @NonNull Property _C__D__refsC = LIBRARY.createOppositeProperty(Types._C, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_C);
 
-		public static final @NonNull Property _D__refsB = LIBRARY.createProperty(TargetPackage.Literals.D__REFS_B, Types._D, 0);
-		public static final @NonNull Property _D__refsC = LIBRARY.createProperty(TargetPackage.Literals.D__REFS_C, Types._D, 1);
-		public static final @NonNull Property _D__toA = LIBRARY.createProperty(TargetPackage.Literals.D__TO_A, Types._D, 2);
-		public static final @NonNull Property _D__toB = LIBRARY.createProperty(TargetPackage.Literals.D__TO_B, Types._D, 3);
-		public static final @NonNull Property _D__toC = LIBRARY.createProperty(TargetPackage.Literals.D__TO_C, Types._D, 4);
+		public static final @NonNull Property _D__refsB = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__REFS_B, Types._B, 0 | IsResolveProxies);
+		public static final @NonNull Property _D__refsC = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__REFS_C, Types._C, 1 | IsResolveProxies);
+		public static final @NonNull Property _D__toA = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__TO_A, Types._A, 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _D__toB = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__TO_B, Types._B, 3 | IsResolveProxies);
+		public static final @NonNull Property _D__toC = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__TO_C, Types._C, 4 | IsResolveProxies);
 
-		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(TargetPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
+		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(Types._NamedElement, TargetPackage.Literals.NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _TRoot__ownedA = LIBRARY.createProperty(TargetPackage.Literals.TROOT__OWNED_A, Types._TRoot, 0);
+		public static final @NonNull Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TargetPackage.Literals.TROOT__OWNED_A, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._A), 0 | IsComposite | IsRequired | IsResolveProxies);
+
 		static {
+			_A__D__toA.setOpposite(_D__toA);
+			_A__TRoot__ownedA.setOpposite(_TRoot__ownedA);
+
+			_A1__ownsB.setOpposite(_B__toA1);
+
+			_A2__ownsC.setOpposite(_C__toA2);
+
+			_B__ownsD.setOpposite(_D__toB);
+			_B__toA1.setOpposite(_A1__ownsB);
+			_B__D__refsB.setOpposite(_D__refsB);
+
+			_C__ownsD.setOpposite(_D__toC);
+			_C__toA2.setOpposite(_A2__ownsC);
+			_C__D__refsC.setOpposite(_D__refsC);
+
+			_D__refsB.setOpposite(_B__D__refsB);
+			_D__refsC.setOpposite(_C__D__refsC);
+			_D__toA.setOpposite(_A__D__toA);
+			_D__toB.setOpposite(_B__ownsD);
+			_D__toC.setOpposite(_C__ownsD);
+
+
+			_TRoot__ownedA.setOpposite(_A__TRoot__ownedA);
+
 			Init.initEnd();
 		}
 
@@ -961,67 +986,67 @@ public class TargetTables extends AbstractTables
 		}
 
 		private static final @NonNull Property @NonNull [] _A = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _A1 = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._A1__ownsB
+			Properties._A1__ownsB
 		};
 
 		private static final @NonNull Property @NonNull [] _A2 = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._A2__ownsC
+			Properties._A2__ownsC
 		};
 
 		private static final @NonNull Property @NonNull [] _A3 = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._A2__ownsC
+			Properties._A2__ownsC
 		};
 
 		private static final @NonNull Property @NonNull [] _B = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._B__ownsD,
-			TargetTables.Properties._B__toA1
+			Properties._B__ownsD,
+			Properties._B__toA1
 		};
 
 		private static final @NonNull Property @NonNull [] _C = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._C__ownsD,
-			TargetTables.Properties._C__toA2
+			Properties._C__ownsD,
+			Properties._C__toA2
 		};
 
 		private static final @NonNull Property @NonNull [] _D = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._D__refsB,
-			TargetTables.Properties._D__refsC,
-			TargetTables.Properties._D__toA,
-			TargetTables.Properties._D__toB,
-			TargetTables.Properties._D__toC
+			Properties._D__refsB,
+			Properties._D__refsC,
+			Properties._D__toA,
+			Properties._D__toB,
+			Properties._D__toC
 		};
 
 		private static final @NonNull Property @NonNull [] _NamedElement = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _Namespace = {
-			TargetTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
@@ -1029,7 +1054,7 @@ public class TargetTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _TRoot = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TargetTables.Properties._TRoot__ownedA
+			Properties._TRoot__ownedA
 		};
 
 		private static final @NonNull Property @NonNull [] _Visitable = {

@@ -56,9 +56,9 @@ import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.model.OCLmetamodel;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -249,7 +249,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		 * @since 7.0
 		 */
 		@Override
-		public void preUnload(@NonNull EnvironmentFactoryInternal environmentFactory) {}
+		public void preUnload(@NonNull EnvironmentFactory environmentFactory) {}
 
 		/**
 		 * Overridden to inhibit unloading of the shared instance.
@@ -287,6 +287,8 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	private static class AbstractLibraryContents extends AbstractContents
 	{
 		protected final org.eclipse.ocl.pivot.@NonNull Package standardLibraryPackage;
+		protected final org.eclipse.ocl.pivot.@NonNull Package local_orphanage;
+		protected final org.eclipse.ocl.pivot.@NonNull Package local_ocl;
 		protected final @NonNull NormalizedTemplateParameter $$0;
 		protected final @NonNull NormalizedTemplateParameter $$1;
 		protected final @NonNull NormalizedTemplateParameter $$2;
@@ -294,6 +296,8 @@ public class QVTruntimeLibrary extends ASResourceImpl
 
 		protected AbstractLibraryContents() {
 			standardLibraryPackage = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
+			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
+			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, OCLstdlibPackage.eINSTANCE);
 			$$0 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 0);
 			$$1 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 1);
 			$$2 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 2);
@@ -305,15 +309,11 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	{
 		private final @NonNull Model model;
 		private final org.eclipse.ocl.pivot.@NonNull Package library;
-		private final org.eclipse.ocl.pivot.@NonNull Package local_orphanage;
-		private final org.eclipse.ocl.pivot.@NonNull Package local_ocl;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			library = createLibrary("qvtruntimelibrary", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, QVTruntimeLibraryPackage.eINSTANCE);
-			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Library", null, null);
-			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, OCLstdlibPackage.eINSTANCE);
+			library = createLibrary("qvtruntimelibrary", "qvtrtlib", "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary", null, QVTruntimeLibraryPackage.eINSTANCE);
 			installPackages();
 			installClassTypes();
 			installCollectionTypes();
