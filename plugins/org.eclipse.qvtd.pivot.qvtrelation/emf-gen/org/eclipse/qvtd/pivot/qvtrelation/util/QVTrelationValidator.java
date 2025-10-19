@@ -14,15 +14,15 @@
  */
 package org.eclipse.qvtd.pivot.qvtrelation.util;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -627,6 +627,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelationModel(RelationModel relationModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		install(relationModel);
 		return validate_EveryDefaultConstraint(relationModel, diagnostics, context);
 	}
 
@@ -663,11 +664,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated NOT
 	 */
 	public boolean validateRelationalTransformation_validateContextTypeIsThisTransformation(RelationalTransformation relationalTransformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(relationalTransformation);
-		CompleteModel completeModel = executor.getEnvironmentFactory().getCompleteModel();
-		completeModel.getPartialModels().add((Model)QVTbaseTables.PACKAGE.eContainer());
-		completeModel.getPartialModels().add((Model)QVTtemplateTables.PACKAGE.eContainer());
-		completeModel.getPartialModels().add((Model)QVTrelationTables.PACKAGE.eContainer());
+		//	install(relationalTransformation);
 		return relationalTransformation.validateContextTypeIsThisTransformation(diagnostics, context);
 	}
 
@@ -759,6 +756,15 @@ public class QVTrelationValidator extends EObjectValidator {
 		// Specialize this to return a resource locator for messages specific to this validator.
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
+	}
+
+	protected void install(EObject eObject) {
+		Executor executor = PivotUtil.getExecutor(eObject);
+		CompleteModel completeModel = executor.getEnvironmentFactory().getCompleteModel();
+		List<Model> partialModels = completeModel.getPartialModels();
+		partialModels.add((Model)QVTbaseTables.PACKAGE.eContainer());
+		partialModels.add((Model)QVTtemplateTables.PACKAGE.eContainer());
+		partialModels.add((Model)QVTrelationTables.PACKAGE.eContainer());
 	}
 
 } //QVTrelationValidator
