@@ -127,7 +127,7 @@ public class BottomVariableImpl extends VariableImpl implements BottomVariable {
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							if (ownedInit == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedInit.getType();
 							/*@Caught*/ @Nullable Object CAUGHT_type;

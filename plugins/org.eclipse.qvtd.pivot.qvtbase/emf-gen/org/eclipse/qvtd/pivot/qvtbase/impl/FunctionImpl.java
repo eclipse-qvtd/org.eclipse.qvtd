@@ -223,7 +223,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							if (queryExpression == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
 							/*@Caught*/ @Nullable Object CAUGHT_type;

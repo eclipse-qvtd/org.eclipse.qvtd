@@ -23,7 +23,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.PivotTables;
@@ -59,14 +61,24 @@ public class QVTtemplateTables extends AbstractTables
 	}
 
 	/**
-	 *	The library of all packages and types.
+	 *	The overall library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	The package descriptor for the package.
+	 *	The AS package for the QVTtemplatePackage.eINSTANCE EPackage.
 	 */
 	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(QVTtemplatePackage.eINSTANCE);
+
+	/**
+	 *	The AS model for the AS package and its orphans.
+	 */
+	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+
+	/**
+	 *	The EMF Resource containing the AS model, its AS package and its orphans.
+	 */
+	public static final @NonNull Resource RESOURCE = LIBRARY.createResource(MODEL);
 
 	/**
 	 *	Constants used by auto-generated code.

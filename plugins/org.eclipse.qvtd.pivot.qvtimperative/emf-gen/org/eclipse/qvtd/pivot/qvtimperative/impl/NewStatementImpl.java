@@ -353,7 +353,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							if (ownedExpression == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
 							/*@Caught*/ @Nullable Object CAUGHT_type;

@@ -397,7 +397,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 						try {
 							final /*@NonInvalid*/ @Nullable String name = this.getName();
 							if (typedModel == null) {
-								throw new InvalidValueException("Null source for \'NamedElement::name : String\'");
+								throw new InvalidValueException("Null source for \'NamedElement::name\'");
 							}
 							final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
 							final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);

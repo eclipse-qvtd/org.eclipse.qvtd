@@ -267,7 +267,7 @@ public class TxKeyNodeImpl extends TxNodeImpl implements TxKeyNode {
 						 * referredEStructuralFeature
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'umlx::TxPartNode::referredEStructuralFeature : ecore::EStructuralFeature[1]\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::TxPartNode::referredEStructuralFeature\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull EStructuralFeature referredEStructuralFeature = _1.getReferredEStructuralFeature();

@@ -648,7 +648,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 						 * name
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'umlx::UMLXNamedElement::name : String\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::UMLXNamedElement::name\'");
 						}
 						final /*@Thrown*/ @Nullable String name = _1.getName();
 						//

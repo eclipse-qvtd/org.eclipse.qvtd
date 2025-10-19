@@ -282,7 +282,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 						 * ownedRelPatternNodes
 						 */
 						if (_1 == null) {
-							throw new InvalidValueException("Null source for \'umlx::RelDomainNode::ownedRelPatternNodes : OrderedSet(umlx::RelPatternNode)\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelDomainNode::ownedRelPatternNodes\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull List<RelPatternNode> ownedRelPatternNodes = _1.getOwnedRelPatternNodes();
@@ -305,7 +305,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 						 * isRoot
 						 */
 						if (_1_0 == null) {
-							throw new InvalidValueException("Null source for \'umlx::RelPatternNode::isRoot : Boolean[1]\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelPatternNode::isRoot\'");
 						}
 						final /*@Thrown*/ boolean isRoot = _1_0.isIsRoot();
 						//
@@ -330,7 +330,7 @@ public class RelInvocationNodeImpl extends RelNodeImpl implements RelInvocationN
 						 * referredRelPatternNode
 						 */
 						if (_1_1 == null) {
-							throw new InvalidValueException("Null source for \'umlx::RelInvocationEdge::referredRelPatternNode : umlx::RelPatternNode[1]\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2016/UMLX\'::RelInvocationEdge::referredRelPatternNode\'");
 						}
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull RelPatternNode referredRelPatternNode = _1_1.getReferredRelPatternNode();

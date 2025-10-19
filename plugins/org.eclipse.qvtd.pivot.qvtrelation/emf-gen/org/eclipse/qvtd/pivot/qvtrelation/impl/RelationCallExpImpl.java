@@ -414,7 +414,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					/*@Caught*/ @NonNull Object CAUGHT_eq;
 					try {
 						if (CAUGHT_relation == null) {
-							throw new InvalidValueException("Null source for \'qvtrelation::Relation::where : qvtbase::Pattern\'");
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::Relation::where\'");
 						}
 						if (CAUGHT_relation instanceof InvalidValueException) {
 							throw (InvalidValueException)CAUGHT_relation;
@@ -548,7 +548,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 								try {
 									final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTrelationTables.CLSSid_DataType, null);
 									if (_1 == null) {
-										throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+										throw new InvalidValueException("Null source for \'TypedElement::type\'");
 									}
 									final /*@Thrown*/ @Nullable Type type = _1.getType();
 									final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
@@ -568,7 +568,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 										try {
 											final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
 											if (_1 == null) {
-												throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+												throw new InvalidValueException("Null source for \'TypedElement::type\'");
 											}
 											final /*@Thrown*/ @Nullable Type type_0 = _1.getType();
 											final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();

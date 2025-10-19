@@ -290,7 +290,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							if (_1 == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = _1.getType();
 							/*@Caught*/ @Nullable Object CAUGHT_type;
@@ -397,7 +397,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 						/*@Caught*/ @NonNull Object CAUGHT_eq;
 						try {
 							if (rest == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = rest.getType();
 							@SuppressWarnings("null")

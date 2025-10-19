@@ -163,7 +163,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 						/*@Caught*/ @NonNull Object CAUGHT_eq;
 						try {
 							if (ownedContext == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
 							final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;

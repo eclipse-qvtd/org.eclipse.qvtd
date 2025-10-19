@@ -279,7 +279,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTrelationPackage.eINSTANCE;
+	  return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -627,7 +627,6 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelationModel(RelationModel relationModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		install(relationModel);
 		return validate_EveryDefaultConstraint(relationModel, diagnostics, context);
 	}
 

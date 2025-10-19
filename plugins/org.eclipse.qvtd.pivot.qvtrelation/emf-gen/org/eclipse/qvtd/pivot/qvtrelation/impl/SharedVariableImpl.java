@@ -190,7 +190,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							if (ownedInit == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::type : Type\'");
+								throw new InvalidValueException("Null source for \'TypedElement::type\'");
 							}
 							final /*@Thrown*/ @Nullable Type type = ownedInit.getType();
 							/*@Caught*/ @Nullable Object CAUGHT_type;
@@ -290,7 +290,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 						/*@Caught*/ @NonNull Object CAUGHT_eq;
 						try {
 							if (ownedInit == null) {
-								throw new InvalidValueException("Null source for \'TypedElement::isRequired : Boolean[1]\'");
+								throw new InvalidValueException("Null source for \'TypedElement::isRequired\'");
 							}
 							final /*@Thrown*/ boolean isRequired = ownedInit.isIsRequired();
 							final /*@NonInvalid*/ boolean isRequired_0 = this.isIsRequired();

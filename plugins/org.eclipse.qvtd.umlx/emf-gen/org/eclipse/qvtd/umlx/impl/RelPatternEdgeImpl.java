@@ -666,7 +666,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 						try {
 							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
 							if (referredEStructuralFeature_1 == null) {
-								throw new InvalidValueException("Null source for \'ecore::ETypedElement::eType : ecore::EClassifier\'");
+								throw new InvalidValueException("Null source for \'ecore::ETypedElement::eType\'");
 							}
 							final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
 							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Class t1 = (org.eclipse.ocl.pivot.@Nullable Class)OclAnyOclTypeOperation.INSTANCE.evaluate(executor, eType);
@@ -903,7 +903,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 									final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
 									if (CAST_null == null) {
-										throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes : OrderedSet(ecore::EClass)\'");
+										throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes\'");
 									}
 									@SuppressWarnings("null")
 									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
@@ -916,7 +916,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 							final /*@NonInvalid*/ @Nullable EStructuralFeature referredEStructuralFeature_1 = this.getReferredEStructuralFeature();
 							if (referredEStructuralFeature_1 == null) {
-								throw new InvalidValueException("Null source for \'ecore::ETypedElement::eType : ecore::EClassifier\'");
+								throw new InvalidValueException("Null source for \'ecore::ETypedElement::eType\'");
 							}
 							final /*@Thrown*/ @Nullable EClassifier eType = referredEStructuralFeature_1.getEType();
 							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eType).booleanValue();
@@ -1025,7 +1025,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 								public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 									final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
 									if (CAST_null == null) {
-										throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes : OrderedSet(ecore::EClass)\'");
+										throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes\'");
 									}
 									@SuppressWarnings("null")
 									final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
@@ -1037,7 +1037,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 							if (referredEStructuralFeature == null) {
-								throw new InvalidValueException("Null source for \'ecore::EStructuralFeature::eContainingClass : ecore::EClass\'");
+								throw new InvalidValueException("Null source for \'ecore::EStructuralFeature::eContainingClass\'");
 							}
 							final /*@Thrown*/ @Nullable EClass eContainingClass = referredEStructuralFeature.getEContainingClass();
 							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(closure, eContainingClass).booleanValue();
@@ -1564,7 +1564,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 									public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
 										final /*@NonInvalid*/ @Nullable EClass CAST_null = (EClass)_1;
 										if (CAST_null == null) {
-											throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes : OrderedSet(ecore::EClass)\'");
+											throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes\'");
 										}
 										@SuppressWarnings("null")
 										final /*@Thrown*/ @NonNull List<EClass> eSuperTypes = CAST_null.getESuperTypes();
@@ -1609,7 +1609,7 @@ public class RelPatternEdgeImpl extends RelEdgeImpl implements RelPatternEdge {
 										public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet_0, final /*@NonInvalid*/ @Nullable Object _1_0) {
 											final /*@NonInvalid*/ @Nullable EClass CAST_null_0 = (EClass)_1_0;
 											if (CAST_null_0 == null) {
-												throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes : OrderedSet(ecore::EClass)\'");
+												throw new InvalidValueException("Null source for \'ecore::EClass::eSuperTypes\'");
 											}
 											@SuppressWarnings("null")
 											final /*@Thrown*/ @NonNull List<EClass> eSuperTypes_0 = CAST_null_0.getESuperTypes();
