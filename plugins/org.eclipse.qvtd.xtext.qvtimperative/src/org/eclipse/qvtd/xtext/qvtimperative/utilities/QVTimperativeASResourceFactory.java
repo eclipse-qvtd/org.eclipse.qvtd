@@ -86,7 +86,7 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 		}
 
 		@Override
-		public Resource createResource(URI uri) {
+		public @NonNull Resource createResource(URI uri) {
 			assert resourceSet != null;
 			assert uri != null;
 			return createResource(resourceSet, uri);

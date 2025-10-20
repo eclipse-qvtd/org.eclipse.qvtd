@@ -793,6 +793,7 @@ public class QVTtemplateTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					LIBRARY.freeze(RESOURCE);
 				}
 			}
 		}
