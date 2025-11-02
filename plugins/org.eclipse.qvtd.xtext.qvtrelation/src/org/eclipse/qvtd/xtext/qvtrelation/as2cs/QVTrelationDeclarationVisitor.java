@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.as2cs.BaseReferenceVisitor;
@@ -459,7 +460,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 
 	@Override
 	public ElementCS visitRelation(@NonNull Relation asRelation) {
-		RelationCS csRelation = context.refreshNamedElement(RelationCS.class, QVTrelationCSPackage.Literals.RELATION_CS, asRelation, "«null»");
+		RelationCS csRelation = context.refreshNamedElement(RelationCS.class, QVTrelationCSPackage.Literals.RELATION_CS, asRelation, StringUtil.NULL_PLACEHOLDER);
 		csRelation.setPivot(asRelation);
 		csRelation.setIsAbstract(asRelation.isIsAbstract());
 		csRelation.setIsTop(asRelation.isIsTopLevel());

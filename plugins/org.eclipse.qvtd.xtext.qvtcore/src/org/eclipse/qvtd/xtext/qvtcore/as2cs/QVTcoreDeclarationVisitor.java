@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -393,7 +394,7 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 
 	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
-		String defaultName = asMapping.getContext() != null ? null : "«null»";
+		String defaultName = asMapping.getContext() != null ? null : StringUtil.NULL_PLACEHOLDER;
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping, defaultName);
 		csMapping.setPivot(asMapping);
 		csMapping.setIsAbstract(asMapping.isIsAbstract());

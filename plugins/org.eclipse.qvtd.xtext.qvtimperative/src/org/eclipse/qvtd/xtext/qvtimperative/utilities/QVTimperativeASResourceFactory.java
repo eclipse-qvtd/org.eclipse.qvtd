@@ -10,6 +10,8 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperative.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
@@ -35,8 +38,9 @@ import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverNormalizeVisitor;
@@ -156,7 +160,10 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	public void registerMetaPackages(@NonNull CompleteModel completeModel) {
 		super.registerMetaPackages(completeModel);
 		//
-		completeModel.getPartialModels().add(QVTbaseMetamodel.getDefaultModel());
+		List<Model> partialModels = completeModel.getPartialModels();
+	//	partialModels.add(QVTbaseMetamodel.getDefaultModel());			// XXX QVTbaseTables.MODEL and super
+		partialModels.add(QVTbaseTables.MODEL);			// XXX QVTbaseTables.MODEL and super
+		partialModels.add(QVTimperativeTables.MODEL);			// XXX QVTbaseTables.MODEL and super
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTimperativePackage.eINSTANCE);
 	}

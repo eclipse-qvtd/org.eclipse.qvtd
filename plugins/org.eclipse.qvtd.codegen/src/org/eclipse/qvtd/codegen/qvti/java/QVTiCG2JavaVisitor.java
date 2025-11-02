@@ -2532,7 +2532,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
 				Type type = QVTimperativeUtil.getType(asGuardVariable);
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
-				assert asPackage != null;
 				AllInstancesAnalysis allInstancesAnalysis = null;
 				CGTypedModel cgTypedModel = null;
 				for (@NonNull TypedModel asTypedModel : QVTimperativeUtil.getInputTypedModels(asEntryPoint)) {

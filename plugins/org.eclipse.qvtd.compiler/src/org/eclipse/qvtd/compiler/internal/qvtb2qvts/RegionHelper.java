@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -449,7 +450,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 			classDatum = scheduleManager.getOclVoidClassDatum();
 		}
 		NullLiteralNode node = QVTscheduleFactory.eINSTANCE.createNullLiteralNode();
-		node.initialize(nodeRole, region, utility, "«null»", classDatum);
+		node.initialize(nodeRole, region, utility, StringUtil.NULL_PLACEHOLDER, classDatum);
 		if (nullLiteralExp != null) {
 			node.setOriginatingElement(nullLiteralExp);
 		}

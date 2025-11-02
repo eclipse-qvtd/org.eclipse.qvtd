@@ -1005,7 +1005,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor,
 				if (mappingParameter instanceof AppendParameter) {
 					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
 					org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
-					assert asPackage != null;
 					TypedModelInstance modelInstance = null;
 					for (@NonNull TypedModel asTypedModel : inputTypedModels) {
 						if (asTypedModel.getUsedPackage().contains(asPackage)) {

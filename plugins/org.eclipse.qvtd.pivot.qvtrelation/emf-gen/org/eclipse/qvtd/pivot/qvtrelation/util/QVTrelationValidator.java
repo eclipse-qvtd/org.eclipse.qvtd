@@ -279,7 +279,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -627,6 +627,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelationModel(RelationModel relationModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		install(relationModel);
 		return validate_EveryDefaultConstraint(relationModel, diagnostics, context);
 	}
 
@@ -758,12 +759,13 @@ public class QVTrelationValidator extends EObjectValidator {
 	}
 
 	protected void install(EObject eObject) {
-		Executor executor = PivotUtil.getExecutor(eObject);
+		Executor executor = PivotUtil.getExecutor(eObject);			// XXX Use ValidationContext for all Validation usage, what if no EnvironmentFactory ?? EnvironmentFactory is mandatory for validation
 		CompleteModel completeModel = executor.getEnvironmentFactory().getCompleteModel();
 		List<Model> partialModels = completeModel.getPartialModels();
-		partialModels.add((Model)QVTbaseTables.PACKAGE.eContainer());
-		partialModels.add((Model)QVTtemplateTables.PACKAGE.eContainer());
-		partialModels.add((Model)QVTrelationTables.PACKAGE.eContainer());
+		partialModels.add(QVTbaseTables.MODEL);		// XXX if not contains
+		partialModels.add(QVTtemplateTables.MODEL);
+		partialModels.add(QVTrelationTables.MODEL);
+		getClass();
 	}
 
 } //QVTrelationValidator
