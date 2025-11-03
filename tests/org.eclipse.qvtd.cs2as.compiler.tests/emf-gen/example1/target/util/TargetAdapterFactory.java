@@ -85,7 +85,7 @@ public class TargetAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected TargetSwitch<@Nullable Adapter> modelSwitch =
-		new TargetSwitch<@Nullable Adapter>() {
+			new TargetSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseA(A object) {
 				return createAAdapter();
