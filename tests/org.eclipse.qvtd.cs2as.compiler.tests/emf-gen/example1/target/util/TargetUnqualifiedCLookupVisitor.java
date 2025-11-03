@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedCLookupVisitor
-extends AbstractTargetCommonLookupVisitor
+	extends AbstractTargetCommonLookupVisitor
 {
 	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", "lookup", EnvironmentPackage.eINSTANCE);
@@ -48,8 +48,6 @@ extends AbstractTargetCommonLookupVisitor
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Env4CG = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Env4CG", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Executor = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("Executor", 0);
-	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_IdResolver = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("IdResolver", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TargetUnqualifiedCLookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedCLookupVisitor", 0);

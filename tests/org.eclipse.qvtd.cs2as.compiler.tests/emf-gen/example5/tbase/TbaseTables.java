@@ -21,6 +21,8 @@ package example5.tbase;
 
 // import example5.tbase.TbasePackage;
 // import example5.tbase.TbaseTables;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -49,19 +51,29 @@ public class TbaseTables extends AbstractTables
 	}
 
 	/**
-	 *	The library of all packages and types.
+	 *	The overall library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	The package descriptor for the package.
+	 *	The AS package for the TbasePackage.eINSTANCE EPackage.
 	 */
-	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TbasePackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TbasePackage.eINSTANCE);
+
+	/**
+	 *	The AS model for the AS package and its orphans.
+	 */
+	public static final Model MODEL = LIBRARY.createModel(PACKAGE);
+
+	/**
+	 *	The EMF Resource containing the AS model, its AS package and its orphans.
+	 */
+	public static final Resource RESOURCE = LIBRARY.createResource(MODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetBaseMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetBaseMM/1.0", null, TbasePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetBaseMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetBaseMM/1.0", "tbase", TbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ ClassId CLSSid_A = TbaseTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetBaseMM_s_1_0.getClassId("A", 0);
 	public static final /*@NonInvalid*/ ClassId CLSSid_B = TbaseTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetBaseMM_s_1_0.getClassId("B", 0);
 	public static final /*@NonInvalid*/ ClassId CLSSid_C = TbaseTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetBaseMM_s_1_0.getClassId("C", 0);
@@ -136,36 +148,36 @@ public class TbaseTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final FlatFragment _A__A = LIBRARY.createFragment(Types._A, TbaseTables.Types._A);
-		private static final FlatFragment _A__Element = LIBRARY.createFragment(Types._A, TbaseTables.Types._Element);
-		private static final FlatFragment _A__NamedElement = LIBRARY.createFragment(Types._A, TbaseTables.Types._NamedElement);
+		private static final FlatFragment _A__A = LIBRARY.createFragment(Types._A, Types._A);
+		private static final FlatFragment _A__Element = LIBRARY.createFragment(Types._A, Types._Element);
+		private static final FlatFragment _A__NamedElement = LIBRARY.createFragment(Types._A, Types._NamedElement);
 		private static final FlatFragment _A__OclAny = LIBRARY.createFragment(Types._A, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _A__OclElement = LIBRARY.createFragment(Types._A, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _B__B = LIBRARY.createFragment(Types._B, TbaseTables.Types._B);
-		private static final FlatFragment _B__Element = LIBRARY.createFragment(Types._B, TbaseTables.Types._Element);
-		private static final FlatFragment _B__NamedElement = LIBRARY.createFragment(Types._B, TbaseTables.Types._NamedElement);
+		private static final FlatFragment _B__B = LIBRARY.createFragment(Types._B, Types._B);
+		private static final FlatFragment _B__Element = LIBRARY.createFragment(Types._B, Types._Element);
+		private static final FlatFragment _B__NamedElement = LIBRARY.createFragment(Types._B, Types._NamedElement);
 		private static final FlatFragment _B__OclAny = LIBRARY.createFragment(Types._B, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _B__OclElement = LIBRARY.createFragment(Types._B, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _C__C = LIBRARY.createFragment(Types._C, TbaseTables.Types._C);
-		private static final FlatFragment _C__Element = LIBRARY.createFragment(Types._C, TbaseTables.Types._Element);
+		private static final FlatFragment _C__C = LIBRARY.createFragment(Types._C, Types._C);
+		private static final FlatFragment _C__Element = LIBRARY.createFragment(Types._C, Types._Element);
 		private static final FlatFragment _C__OclAny = LIBRARY.createFragment(Types._C, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _C__OclElement = LIBRARY.createFragment(Types._C, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _Element__Element = LIBRARY.createFragment(Types._Element, TbaseTables.Types._Element);
+		private static final FlatFragment _Element__Element = LIBRARY.createFragment(Types._Element, Types._Element);
 		private static final FlatFragment _Element__OclAny = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _Element__OclElement = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _NamedElement__Element = LIBRARY.createFragment(Types._NamedElement, TbaseTables.Types._Element);
-		private static final FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, TbaseTables.Types._NamedElement);
+		private static final FlatFragment _NamedElement__Element = LIBRARY.createFragment(Types._NamedElement, Types._Element);
+		private static final FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, Types._NamedElement);
 		private static final FlatFragment _NamedElement__OclAny = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _NamedElement__OclElement = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _TRoot__Element = LIBRARY.createFragment(Types._TRoot, TbaseTables.Types._Element);
+		private static final FlatFragment _TRoot__Element = LIBRARY.createFragment(Types._TRoot, Types._Element);
 		private static final FlatFragment _TRoot__OclAny = LIBRARY.createFragment(Types._TRoot, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _TRoot__OclElement = LIBRARY.createFragment(Types._TRoot, OCLstdlibTables.Types._OclElement);
-		private static final FlatFragment _TRoot__TRoot = LIBRARY.createFragment(Types._TRoot, TbaseTables.Types._TRoot);
+		private static final FlatFragment _TRoot__TRoot = LIBRARY.createFragment(Types._TRoot, Types._TRoot);
 
 		static {
 			Init.initEnd();
@@ -236,18 +248,30 @@ public class TbaseTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final Property _A__ownsB = LIBRARY.createProperty(TbasePackage.Literals.A__OWNS_B, Types._A, 0);
-		public static final Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty("TRoot", Types._A, 1, TbasePackage.Literals.TROOT__OWNED_A);
+		public static final Property _A__ownsB = LIBRARY.createProperty(Types._A, TbasePackage.Literals.A__OWNS_B, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.B)), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty(Types._A, "TRoot", getASClass(TbasePackage.Literals.TROOT), 1 | IsImplicit | IsResolveProxies, TbasePackage.Literals.TROOT__OWNED_A);
 
-		public static final Property _B__ownsC = LIBRARY.createProperty(TbasePackage.Literals.B__OWNS_C, Types._B, 0);
-		public static final Property _B__A__ownsB = LIBRARY.createOppositeProperty("A", Types._B, 1, TbasePackage.Literals.A__OWNS_B);
+		public static final Property _B__ownsC = LIBRARY.createProperty(Types._B, TbasePackage.Literals.B__OWNS_C, getASClass(TbasePackage.Literals.C), 0 | IsComposite | IsResolveProxies);
+		public static final Property _B__A__ownsB = LIBRARY.createOppositeProperty(Types._B, "A", getASClass(TbasePackage.Literals.A), 1 | IsImplicit | IsResolveProxies, TbasePackage.Literals.A__OWNS_B);
 
-		public static final Property _C__B__ownsC = LIBRARY.createOppositeProperty("B", Types._C, 0, TbasePackage.Literals.B__OWNS_C);
+		public static final Property _C__B__ownsC = LIBRARY.createOppositeProperty(Types._C, "B", getASClass(TbasePackage.Literals.B), 0 | IsImplicit | IsResolveProxies, TbasePackage.Literals.B__OWNS_C);
 
-		public static final Property _NamedElement__name = LIBRARY.createProperty(TbasePackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
+		public static final Property _NamedElement__name = LIBRARY.createProperty(Types._NamedElement, TbasePackage.Literals.NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final Property _TRoot__ownedA = LIBRARY.createProperty(TbasePackage.Literals.TROOT__OWNED_A, Types._TRoot, 0);
+		public static final Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TbasePackage.Literals.TROOT__OWNED_A, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.A)), 0 | IsComposite | IsRequired | IsResolveProxies);
+
 		static {
+			_A__ownsB.setOpposite(_B__A__ownsB);
+			_A__TRoot__ownedA.setOpposite(_TRoot__ownedA);
+
+			_B__ownsC.setOpposite(_C__B__ownsC);
+			_B__A__ownsB.setOpposite(_A__ownsB);
+
+			_C__B__ownsC.setOpposite(_B__ownsC);
+
+
+			_TRoot__ownedA.setOpposite(_A__TRoot__ownedA);
+
 			Init.initEnd();
 		}
 
@@ -603,17 +627,17 @@ public class TbaseTables extends AbstractTables
 		}
 
 		private static final Property /*@NonNull*/ [] _A = {
-			TbaseTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TbaseTables.Properties._A__ownsB
+			Properties._A__ownsB
 		};
 
 		private static final Property /*@NonNull*/ [] _B = {
-			TbaseTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TbaseTables.Properties._B__ownsC
+			Properties._B__ownsC
 		};
 
 		private static final Property /*@NonNull*/ [] _C = {
@@ -627,7 +651,7 @@ public class TbaseTables extends AbstractTables
 		};
 
 		private static final Property /*@NonNull*/ [] _NamedElement = {
-			TbaseTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
@@ -635,7 +659,7 @@ public class TbaseTables extends AbstractTables
 		private static final Property /*@NonNull*/ [] _TRoot = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			TbaseTables.Properties._TRoot__ownedA
+			Properties._TRoot__ownedA
 		};
 
 		/**
@@ -712,6 +736,7 @@ public class TbaseTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					LIBRARY.freeze(RESOURCE);
 				}
 			}
 		}

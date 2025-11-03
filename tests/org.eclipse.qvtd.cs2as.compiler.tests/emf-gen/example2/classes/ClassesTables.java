@@ -21,7 +21,9 @@ package example2.classes;
 
 // import example2.classes.ClassesPackage;
 // import example2.classes.ClassesTables;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -50,19 +52,29 @@ public class ClassesTables extends AbstractTables
 	}
 
 	/**
-	 *	The library of all packages and types.
+	 *	The overall library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	The package descriptor for the package.
+	 *	The AS package for the ClassesPackage.eINSTANCE EPackage.
 	 */
-	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(ClassesPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(ClassesPackage.eINSTANCE);
+
+	/**
+	 *	The AS model for the AS package and its orphans.
+	 */
+	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+
+	/**
+	 *	The EMF Resource containing the AS model, its AS package and its orphans.
+	 */
+	public static final @NonNull Resource RESOURCE = LIBRARY.createResource(MODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", "classes", ClassesPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Argument = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Argument", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CallExp = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("CallExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
@@ -171,106 +183,106 @@ public class ClassesTables extends AbstractTables
 			Types.init();
 		}
 
-		private static final @NonNull FlatFragment _Argument__Argument = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Argument);
-		private static final @NonNull FlatFragment _Argument__Element = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Argument__NamedElement = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Argument__Argument = LIBRARY.createFragment(Types._Argument, Types._Argument);
+		private static final @NonNull FlatFragment _Argument__Element = LIBRARY.createFragment(Types._Argument, Types._Element);
+		private static final @NonNull FlatFragment _Argument__NamedElement = LIBRARY.createFragment(Types._Argument, Types._NamedElement);
 		private static final @NonNull FlatFragment _Argument__OclAny = LIBRARY.createFragment(Types._Argument, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Argument__OclElement = LIBRARY.createFragment(Types._Argument, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Argument__Visitable = LIBRARY.createFragment(Types._Argument, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Argument__Visitable = LIBRARY.createFragment(Types._Argument, Types._Visitable);
 
-		private static final @NonNull FlatFragment _CallExp__CallExp = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull FlatFragment _CallExp__Element = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _CallExp__CallExp = LIBRARY.createFragment(Types._CallExp, Types._CallExp);
+		private static final @NonNull FlatFragment _CallExp__Element = LIBRARY.createFragment(Types._CallExp, Types._Element);
 		private static final @NonNull FlatFragment _CallExp__OclAny = LIBRARY.createFragment(Types._CallExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _CallExp__OclElement = LIBRARY.createFragment(Types._CallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _CallExp__TypedElement = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _CallExp__Visitable = LIBRARY.createFragment(Types._CallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _CallExp__TypedElement = LIBRARY.createFragment(Types._CallExp, Types._TypedElement);
+		private static final @NonNull FlatFragment _CallExp__Visitable = LIBRARY.createFragment(Types._CallExp, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Class__Class = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Class);
-		private static final @NonNull FlatFragment _Class__Element = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Class__NamedElement = LIBRARY.createFragment(Types._Class, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Class__Class = LIBRARY.createFragment(Types._Class, Types._Class);
+		private static final @NonNull FlatFragment _Class__Element = LIBRARY.createFragment(Types._Class, Types._Element);
+		private static final @NonNull FlatFragment _Class__NamedElement = LIBRARY.createFragment(Types._Class, Types._NamedElement);
 		private static final @NonNull FlatFragment _Class__OclAny = LIBRARY.createFragment(Types._Class, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Class__OclElement = LIBRARY.createFragment(Types._Class, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Class__Visitable = LIBRARY.createFragment(Types._Class, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Class__Visitable = LIBRARY.createFragment(Types._Class, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Element__Element = LIBRARY.createFragment(Types._Element, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Element__Element = LIBRARY.createFragment(Types._Element, Types._Element);
 		private static final @NonNull FlatFragment _Element__OclAny = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Element__OclElement = LIBRARY.createFragment(Types._Element, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Element__Visitable = LIBRARY.createFragment(Types._Element, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Element__Visitable = LIBRARY.createFragment(Types._Element, Types._Visitable);
 
-		private static final @NonNull FlatFragment _NamedElement__Element = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _NamedElement__Element = LIBRARY.createFragment(Types._NamedElement, Types._Element);
+		private static final @NonNull FlatFragment _NamedElement__NamedElement = LIBRARY.createFragment(Types._NamedElement, Types._NamedElement);
 		private static final @NonNull FlatFragment _NamedElement__OclAny = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _NamedElement__OclElement = LIBRARY.createFragment(Types._NamedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _NamedElement__Visitable = LIBRARY.createFragment(Types._NamedElement, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _NamedElement__Visitable = LIBRARY.createFragment(Types._NamedElement, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Namespace__Element = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Namespace__Namespace = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Namespace__Element = LIBRARY.createFragment(Types._Namespace, Types._Element);
+		private static final @NonNull FlatFragment _Namespace__Namespace = LIBRARY.createFragment(Types._Namespace, Types._Namespace);
 		private static final @NonNull FlatFragment _Namespace__OclAny = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Namespace__OclElement = LIBRARY.createFragment(Types._Namespace, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Namespace__Visitable = LIBRARY.createFragment(Types._Namespace, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Namespace__Visitable = LIBRARY.createFragment(Types._Namespace, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Operation__Element = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Operation__NamedElement = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Operation__Element = LIBRARY.createFragment(Types._Operation, Types._Element);
+		private static final @NonNull FlatFragment _Operation__NamedElement = LIBRARY.createFragment(Types._Operation, Types._NamedElement);
 		private static final @NonNull FlatFragment _Operation__OclAny = LIBRARY.createFragment(Types._Operation, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Operation__OclElement = LIBRARY.createFragment(Types._Operation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Operation__Operation = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Operation);
-		private static final @NonNull FlatFragment _Operation__TypedElement = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _Operation__Visitable = LIBRARY.createFragment(Types._Operation, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Operation__Operation = LIBRARY.createFragment(Types._Operation, Types._Operation);
+		private static final @NonNull FlatFragment _Operation__TypedElement = LIBRARY.createFragment(Types._Operation, Types._TypedElement);
+		private static final @NonNull FlatFragment _Operation__Visitable = LIBRARY.createFragment(Types._Operation, Types._Visitable);
 
-		private static final @NonNull FlatFragment _OperationCallExp__CallExp = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull FlatFragment _OperationCallExp__Element = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _OperationCallExp__CallExp = LIBRARY.createFragment(Types._OperationCallExp, Types._CallExp);
+		private static final @NonNull FlatFragment _OperationCallExp__Element = LIBRARY.createFragment(Types._OperationCallExp, Types._Element);
 		private static final @NonNull FlatFragment _OperationCallExp__OclAny = LIBRARY.createFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _OperationCallExp__OclElement = LIBRARY.createFragment(Types._OperationCallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _OperationCallExp__OperationCallExp = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._OperationCallExp);
-		private static final @NonNull FlatFragment _OperationCallExp__TypedElement = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _OperationCallExp__Visitable = LIBRARY.createFragment(Types._OperationCallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _OperationCallExp__OperationCallExp = LIBRARY.createFragment(Types._OperationCallExp, Types._OperationCallExp);
+		private static final @NonNull FlatFragment _OperationCallExp__TypedElement = LIBRARY.createFragment(Types._OperationCallExp, Types._TypedElement);
+		private static final @NonNull FlatFragment _OperationCallExp__Visitable = LIBRARY.createFragment(Types._OperationCallExp, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Package__Element = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Package__NamedElement = LIBRARY.createFragment(Types._Package, ClassesTables.Types._NamedElement);
-		private static final @NonNull FlatFragment _Package__Namespace = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Namespace);
+		private static final @NonNull FlatFragment _Package__Element = LIBRARY.createFragment(Types._Package, Types._Element);
+		private static final @NonNull FlatFragment _Package__NamedElement = LIBRARY.createFragment(Types._Package, Types._NamedElement);
+		private static final @NonNull FlatFragment _Package__Namespace = LIBRARY.createFragment(Types._Package, Types._Namespace);
 		private static final @NonNull FlatFragment _Package__OclAny = LIBRARY.createFragment(Types._Package, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Package__OclElement = LIBRARY.createFragment(Types._Package, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Package__Package = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Package);
-		private static final @NonNull FlatFragment _Package__Visitable = LIBRARY.createFragment(Types._Package, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Package__Package = LIBRARY.createFragment(Types._Package, Types._Package);
+		private static final @NonNull FlatFragment _Package__Visitable = LIBRARY.createFragment(Types._Package, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Parameter__Element = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Parameter__NamedElement = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Parameter__Element = LIBRARY.createFragment(Types._Parameter, Types._Element);
+		private static final @NonNull FlatFragment _Parameter__NamedElement = LIBRARY.createFragment(Types._Parameter, Types._NamedElement);
 		private static final @NonNull FlatFragment _Parameter__OclAny = LIBRARY.createFragment(Types._Parameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Parameter__OclElement = LIBRARY.createFragment(Types._Parameter, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Parameter__Parameter = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Parameter);
-		private static final @NonNull FlatFragment _Parameter__Visitable = LIBRARY.createFragment(Types._Parameter, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Parameter__Parameter = LIBRARY.createFragment(Types._Parameter, Types._Parameter);
+		private static final @NonNull FlatFragment _Parameter__Visitable = LIBRARY.createFragment(Types._Parameter, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Property__Element = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Element);
-		private static final @NonNull FlatFragment _Property__NamedElement = LIBRARY.createFragment(Types._Property, ClassesTables.Types._NamedElement);
+		private static final @NonNull FlatFragment _Property__Element = LIBRARY.createFragment(Types._Property, Types._Element);
+		private static final @NonNull FlatFragment _Property__NamedElement = LIBRARY.createFragment(Types._Property, Types._NamedElement);
 		private static final @NonNull FlatFragment _Property__OclAny = LIBRARY.createFragment(Types._Property, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Property__OclElement = LIBRARY.createFragment(Types._Property, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Property__Property = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Property);
-		private static final @NonNull FlatFragment _Property__TypedElement = LIBRARY.createFragment(Types._Property, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _Property__Visitable = LIBRARY.createFragment(Types._Property, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Property__Property = LIBRARY.createFragment(Types._Property, Types._Property);
+		private static final @NonNull FlatFragment _Property__TypedElement = LIBRARY.createFragment(Types._Property, Types._TypedElement);
+		private static final @NonNull FlatFragment _Property__Visitable = LIBRARY.createFragment(Types._Property, Types._Visitable);
 
-		private static final @NonNull FlatFragment _PropertyCallExp__CallExp = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._CallExp);
-		private static final @NonNull FlatFragment _PropertyCallExp__Element = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _PropertyCallExp__CallExp = LIBRARY.createFragment(Types._PropertyCallExp, Types._CallExp);
+		private static final @NonNull FlatFragment _PropertyCallExp__Element = LIBRARY.createFragment(Types._PropertyCallExp, Types._Element);
 		private static final @NonNull FlatFragment _PropertyCallExp__OclAny = LIBRARY.createFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _PropertyCallExp__OclElement = LIBRARY.createFragment(Types._PropertyCallExp, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _PropertyCallExp__PropertyCallExp = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._PropertyCallExp);
-		private static final @NonNull FlatFragment _PropertyCallExp__TypedElement = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _PropertyCallExp__Visitable = LIBRARY.createFragment(Types._PropertyCallExp, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _PropertyCallExp__PropertyCallExp = LIBRARY.createFragment(Types._PropertyCallExp, Types._PropertyCallExp);
+		private static final @NonNull FlatFragment _PropertyCallExp__TypedElement = LIBRARY.createFragment(Types._PropertyCallExp, Types._TypedElement);
+		private static final @NonNull FlatFragment _PropertyCallExp__Visitable = LIBRARY.createFragment(Types._PropertyCallExp, Types._Visitable);
 
-		private static final @NonNull FlatFragment _Root__Element = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _Root__Element = LIBRARY.createFragment(Types._Root, Types._Element);
 		private static final @NonNull FlatFragment _Root__OclAny = LIBRARY.createFragment(Types._Root, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Root__OclElement = LIBRARY.createFragment(Types._Root, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Root__Root = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Root);
-		private static final @NonNull FlatFragment _Root__Visitable = LIBRARY.createFragment(Types._Root, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Root__Root = LIBRARY.createFragment(Types._Root, Types._Root);
+		private static final @NonNull FlatFragment _Root__Visitable = LIBRARY.createFragment(Types._Root, Types._Visitable);
 
-		private static final @NonNull FlatFragment _TypedElement__Element = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._Element);
+		private static final @NonNull FlatFragment _TypedElement__Element = LIBRARY.createFragment(Types._TypedElement, Types._Element);
 		private static final @NonNull FlatFragment _TypedElement__OclAny = LIBRARY.createFragment(Types._TypedElement, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _TypedElement__OclElement = LIBRARY.createFragment(Types._TypedElement, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _TypedElement__TypedElement = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._TypedElement);
-		private static final @NonNull FlatFragment _TypedElement__Visitable = LIBRARY.createFragment(Types._TypedElement, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _TypedElement__TypedElement = LIBRARY.createFragment(Types._TypedElement, Types._TypedElement);
+		private static final @NonNull FlatFragment _TypedElement__Visitable = LIBRARY.createFragment(Types._TypedElement, Types._Visitable);
 
 		private static final @NonNull FlatFragment _Visitable__OclAny = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull FlatFragment _Visitable__OclElement = LIBRARY.createFragment(Types._Visitable, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull FlatFragment _Visitable__Visitable = LIBRARY.createFragment(Types._Visitable, ClassesTables.Types._Visitable);
+		private static final @NonNull FlatFragment _Visitable__Visitable = LIBRARY.createFragment(Types._Visitable, Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -341,45 +353,84 @@ public class ClassesTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _Argument__OperationCallExp__ownedArguments = LIBRARY.createOppositeProperty("OperationCallExp", Types._Argument, 0, ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
+		public static final @NonNull Property _Argument__OperationCallExp__ownedArguments = LIBRARY.createOppositeProperty(Types._Argument, "OperationCallExp", Types._OperationCallExp, 0 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
 
-		public static final @NonNull Property _CallExp__ownedCallExp = LIBRARY.createProperty(ClassesPackage.Literals.CALL_EXP__OWNED_CALL_EXP, Types._CallExp, 0);
-		public static final @NonNull Property _CallExp__owningSource = LIBRARY.createProperty(ClassesPackage.Literals.CALL_EXP__OWNING_SOURCE, Types._CallExp, 1);
-		public static final @NonNull Property _CallExp__Operation__ownedExpressions = LIBRARY.createOppositeProperty("Operation", Types._CallExp, 2, ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS);
+		public static final @NonNull Property _CallExp__ownedCallExp = LIBRARY.createProperty(Types._CallExp, ClassesPackage.Literals.CALL_EXP__OWNED_CALL_EXP, Types._CallExp, 0 | IsComposite | IsResolveProxies);
+		public static final @NonNull Property _CallExp__owningSource = LIBRARY.createProperty(Types._CallExp, ClassesPackage.Literals.CALL_EXP__OWNING_SOURCE, Types._CallExp, 1 | IsResolveProxies);
+		public static final @NonNull Property _CallExp__Operation__ownedExpressions = LIBRARY.createOppositeProperty(Types._CallExp, "Operation", Types._Operation, 2 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS);
 
-		public static final @NonNull Property _Class__ownedOperations = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__OWNED_OPERATIONS, Types._Class, 0);
-		public static final @NonNull Property _Class__ownedProperties = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__OWNED_PROPERTIES, Types._Class, 1);
-		public static final @NonNull Property _Class__superClass = LIBRARY.createProperty(ClassesPackage.Literals.CLASS__SUPER_CLASS, Types._Class, 2);
-		public static final @NonNull Property _Class__Class__superClass = LIBRARY.createOppositeProperty("Class", Types._Class, 3, ClassesPackage.Literals.CLASS__SUPER_CLASS);
-		public static final @NonNull Property _Class__Package__ownedClasses = LIBRARY.createOppositeProperty("Package", Types._Class, 4, ClassesPackage.Literals.PACKAGE__OWNED_CLASSES);
-		public static final @NonNull Property _Class__TypedElement__type = LIBRARY.createOppositeProperty("TypedElement", Types._Class, 5, ClassesPackage.Literals.TYPED_ELEMENT__TYPE);
+		public static final @NonNull Property _Class__ownedOperations = LIBRARY.createProperty(Types._Class, ClassesPackage.Literals.CLASS__OWNED_OPERATIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Operation), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Class__ownedProperties = LIBRARY.createProperty(Types._Class, ClassesPackage.Literals.CLASS__OWNED_PROPERTIES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Property), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Class__superClass = LIBRARY.createProperty(Types._Class, ClassesPackage.Literals.CLASS__SUPER_CLASS, Types._Class, 2 | IsResolveProxies);
+		public static final @NonNull Property _Class__Class__superClass = LIBRARY.createOppositeProperty(Types._Class, "Class", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._Class), 3 | IsImplicit | IsRequired | IsResolveProxies, ClassesPackage.Literals.CLASS__SUPER_CLASS);
+		public static final @NonNull Property _Class__Package__ownedClasses = LIBRARY.createOppositeProperty(Types._Class, "Package", Types._Package, 4 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.PACKAGE__OWNED_CLASSES);
+		public static final @NonNull Property _Class__TypedElement__type = LIBRARY.createOppositeProperty(Types._Class, "TypedElement", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._TypedElement), 5 | IsImplicit | IsRequired | IsResolveProxies, ClassesPackage.Literals.TYPED_ELEMENT__TYPE);
 
-		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(ClassesPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
+		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(Types._NamedElement, ClassesPackage.Literals.NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _Operation__ownedExpressions = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS, Types._Operation, 0);
-		public static final @NonNull Property _Operation__ownedParameters = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS, Types._Operation, 1);
-		public static final @NonNull Property _Operation__Class__ownedOperations = LIBRARY.createOppositeProperty("Class", Types._Operation, 2, ClassesPackage.Literals.CLASS__OWNED_OPERATIONS);
-		public static final @NonNull Property _Operation__OperationCallExp__referredOperation = LIBRARY.createOppositeProperty("OperationCallExp", Types._Operation, 3, ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION);
+		public static final @NonNull Property _Operation__ownedExpressions = LIBRARY.createProperty(Types._Operation, ClassesPackage.Literals.OPERATION__OWNED_EXPRESSIONS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._CallExp), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Operation__ownedParameters = LIBRARY.createProperty(Types._Operation, ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Parameter), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Operation__Class__ownedOperations = LIBRARY.createOppositeProperty(Types._Operation, "Class", Types._Class, 2 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.CLASS__OWNED_OPERATIONS);
+		public static final @NonNull Property _Operation__OperationCallExp__referredOperation = LIBRARY.createOppositeProperty(Types._Operation, "OperationCallExp", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._OperationCallExp), 3 | IsImplicit | IsRequired | IsResolveProxies, ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION);
 
-		public static final @NonNull Property _OperationCallExp__ownedArguments = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS, Types._OperationCallExp, 0);
-		public static final @NonNull Property _OperationCallExp__referredOperation = LIBRARY.createProperty(ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, Types._OperationCallExp, 1);
+		public static final @NonNull Property _OperationCallExp__ownedArguments = LIBRARY.createProperty(Types._OperationCallExp, ClassesPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Argument), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _OperationCallExp__referredOperation = LIBRARY.createProperty(Types._OperationCallExp, ClassesPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, Types._Operation, 1 | IsResolveProxies);
 
-		public static final @NonNull Property _Package__ownedClasses = LIBRARY.createProperty(ClassesPackage.Literals.PACKAGE__OWNED_CLASSES, Types._Package, 0);
-		public static final @NonNull Property _Package__ownedPackages = LIBRARY.createProperty(ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES, Types._Package, 1);
-		public static final @NonNull Property _Package__Package__ownedPackages = LIBRARY.createOppositeProperty("Package", Types._Package, 2, ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES);
-		public static final @NonNull Property _Package__Root__ownedPackages = LIBRARY.createOppositeProperty("Root", Types._Package, 3, ClassesPackage.Literals.ROOT__OWNED_PACKAGES);
+		public static final @NonNull Property _Package__ownedClasses = LIBRARY.createProperty(Types._Package, ClassesPackage.Literals.PACKAGE__OWNED_CLASSES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Class), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Package__ownedPackages = LIBRARY.createProperty(Types._Package, ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Package), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Package__Package__ownedPackages = LIBRARY.createOppositeProperty(Types._Package, "Package", Types._Package, 2 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.PACKAGE__OWNED_PACKAGES);
+		public static final @NonNull Property _Package__Root__ownedPackages = LIBRARY.createOppositeProperty(Types._Package, "Root", Types._Root, 3 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.ROOT__OWNED_PACKAGES);
 
-		public static final @NonNull Property _Parameter__Operation__ownedParameters = LIBRARY.createOppositeProperty("Operation", Types._Parameter, 0, ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS);
+		public static final @NonNull Property _Parameter__Operation__ownedParameters = LIBRARY.createOppositeProperty(Types._Parameter, "Operation", Types._Operation, 0 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.OPERATION__OWNED_PARAMETERS);
 
-		public static final @NonNull Property _Property__Class__ownedProperties = LIBRARY.createOppositeProperty("Class", Types._Property, 0, ClassesPackage.Literals.CLASS__OWNED_PROPERTIES);
-		public static final @NonNull Property _Property__PropertyCallExp__referredProperty = LIBRARY.createOppositeProperty("PropertyCallExp", Types._Property, 1, ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY);
+		public static final @NonNull Property _Property__Class__ownedProperties = LIBRARY.createOppositeProperty(Types._Property, "Class", Types._Class, 0 | IsImplicit | IsResolveProxies, ClassesPackage.Literals.CLASS__OWNED_PROPERTIES);
+		public static final @NonNull Property _Property__PropertyCallExp__referredProperty = LIBRARY.createOppositeProperty(Types._Property, "PropertyCallExp", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._PropertyCallExp), 1 | IsImplicit | IsRequired | IsResolveProxies, ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 
-		public static final @NonNull Property _PropertyCallExp__referredProperty = LIBRARY.createProperty(ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._PropertyCallExp, 0);
+		public static final @NonNull Property _PropertyCallExp__referredProperty = LIBRARY.createProperty(Types._PropertyCallExp, ClassesPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._Property, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _Root__ownedPackages = LIBRARY.createProperty(ClassesPackage.Literals.ROOT__OWNED_PACKAGES, Types._Root, 0);
+		public static final @NonNull Property _Root__ownedPackages = LIBRARY.createProperty(Types._Root, ClassesPackage.Literals.ROOT__OWNED_PACKAGES, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._Package), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _TypedElement__type = LIBRARY.createProperty(ClassesPackage.Literals.TYPED_ELEMENT__TYPE, Types._TypedElement, 0);
+		public static final @NonNull Property _TypedElement__type = LIBRARY.createProperty(Types._TypedElement, ClassesPackage.Literals.TYPED_ELEMENT__TYPE, Types._Class, 0 | IsResolveProxies);
+
 		static {
+			_Argument__OperationCallExp__ownedArguments.setOpposite(_OperationCallExp__ownedArguments);
+
+			_CallExp__ownedCallExp.setOpposite(_CallExp__owningSource);
+			_CallExp__owningSource.setOpposite(_CallExp__ownedCallExp);
+			_CallExp__Operation__ownedExpressions.setOpposite(_Operation__ownedExpressions);
+
+			_Class__ownedOperations.setOpposite(_Operation__Class__ownedOperations);
+			_Class__ownedProperties.setOpposite(_Property__Class__ownedProperties);
+			_Class__superClass.setOpposite(_Class__Class__superClass);
+			_Class__Class__superClass.setOpposite(_Class__superClass);
+			_Class__Package__ownedClasses.setOpposite(_Package__ownedClasses);
+			_Class__TypedElement__type.setOpposite(_TypedElement__type);
+
+
+			_Operation__ownedExpressions.setOpposite(_CallExp__Operation__ownedExpressions);
+			_Operation__ownedParameters.setOpposite(_Parameter__Operation__ownedParameters);
+			_Operation__Class__ownedOperations.setOpposite(_Class__ownedOperations);
+			_Operation__OperationCallExp__referredOperation.setOpposite(_OperationCallExp__referredOperation);
+
+			_OperationCallExp__ownedArguments.setOpposite(_Argument__OperationCallExp__ownedArguments);
+			_OperationCallExp__referredOperation.setOpposite(_Operation__OperationCallExp__referredOperation);
+
+			_Package__ownedClasses.setOpposite(_Class__Package__ownedClasses);
+			_Package__ownedPackages.setOpposite(_Package__Package__ownedPackages);
+			_Package__Package__ownedPackages.setOpposite(_Package__ownedPackages);
+			_Package__Root__ownedPackages.setOpposite(_Root__ownedPackages);
+
+			_Parameter__Operation__ownedParameters.setOpposite(_Operation__ownedParameters);
+
+			_Property__Class__ownedProperties.setOpposite(_Class__ownedProperties);
+			_Property__PropertyCallExp__referredProperty.setOpposite(_PropertyCallExp__referredProperty);
+
+			_PropertyCallExp__referredProperty.setOpposite(_Property__PropertyCallExp__referredProperty);
+
+			_Root__ownedPackages.setOpposite(_Package__Root__ownedPackages);
+
+			_TypedElement__type.setOpposite(_Class__TypedElement__type);
+
 			Init.initEnd();
 		}
 
@@ -1242,7 +1293,7 @@ public class ClassesTables extends AbstractTables
 		}
 
 		private static final @NonNull Property @NonNull [] _Argument = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
@@ -1250,18 +1301,18 @@ public class ClassesTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _CallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._CallExp__ownedCallExp,
-			ClassesTables.Properties._CallExp__owningSource,
-			ClassesTables.Properties._TypedElement__type
+			Properties._CallExp__ownedCallExp,
+			Properties._CallExp__owningSource,
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _Class = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._Class__ownedOperations,
-			ClassesTables.Properties._Class__ownedProperties,
-			ClassesTables.Properties._Class__superClass
+			Properties._Class__ownedOperations,
+			Properties._Class__ownedProperties,
+			Properties._Class__superClass
 		};
 
 		private static final @NonNull Property @NonNull [] _Element = {
@@ -1270,7 +1321,7 @@ public class ClassesTables extends AbstractTables
 		};
 
 		private static final @NonNull Property @NonNull [] _NamedElement = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
@@ -1281,64 +1332,64 @@ public class ClassesTables extends AbstractTables
 		};
 
 		private static final @NonNull Property @NonNull [] _Operation = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._Operation__ownedExpressions,
-			ClassesTables.Properties._Operation__ownedParameters,
-			ClassesTables.Properties._TypedElement__type
+			Properties._Operation__ownedExpressions,
+			Properties._Operation__ownedParameters,
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _OperationCallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._OperationCallExp__ownedArguments,
-			ClassesTables.Properties._CallExp__ownedCallExp,
-			ClassesTables.Properties._CallExp__owningSource,
-			ClassesTables.Properties._OperationCallExp__referredOperation,
-			ClassesTables.Properties._TypedElement__type
+			Properties._OperationCallExp__ownedArguments,
+			Properties._CallExp__ownedCallExp,
+			Properties._CallExp__owningSource,
+			Properties._OperationCallExp__referredOperation,
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _Package = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._Package__ownedClasses,
-			ClassesTables.Properties._Package__ownedPackages
+			Properties._Package__ownedClasses,
+			Properties._Package__ownedPackages
 		};
 
 		private static final @NonNull Property @NonNull [] _Parameter = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents
 		};
 
 		private static final @NonNull Property @NonNull [] _Property = {
-			ClassesTables.Properties._NamedElement__name,
+			Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._TypedElement__type
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _PropertyCallExp = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._CallExp__ownedCallExp,
-			ClassesTables.Properties._CallExp__owningSource,
-			ClassesTables.Properties._PropertyCallExp__referredProperty,
-			ClassesTables.Properties._TypedElement__type
+			Properties._CallExp__ownedCallExp,
+			Properties._CallExp__owningSource,
+			Properties._PropertyCallExp__referredProperty,
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _Root = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._Root__ownedPackages
+			Properties._Root__ownedPackages
 		};
 
 		private static final @NonNull Property @NonNull [] _TypedElement = {
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
-			ClassesTables.Properties._TypedElement__type
+			Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _Visitable = {
@@ -1429,6 +1480,7 @@ public class ClassesTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					LIBRARY.freeze(RESOURCE);
 				}
 			}
 		}

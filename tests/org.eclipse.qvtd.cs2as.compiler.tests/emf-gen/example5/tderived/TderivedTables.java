@@ -22,6 +22,8 @@ package example5.tderived;
 import example5.tbase.TbaseTables;
 // import example5.tderived.TderivedPackage;
 // import example5.tderived.TderivedTables;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -49,19 +51,29 @@ public class TderivedTables extends AbstractTables
 	}
 
 	/**
-	 *	The library of all packages and types.
+	 *	The overall library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	The package descriptor for the package.
+	 *	The AS package for the TderivedPackage.eINSTANCE EPackage.
 	 */
-	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TderivedPackage.eINSTANCE, null);
+	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TderivedPackage.eINSTANCE);
+
+	/**
+	 *	The AS model for the AS package and its orphans.
+	 */
+	public static final Model MODEL = LIBRARY.createModel(PACKAGE);
+
+	/**
+	 *	The EMF Resource containing the AS model, its AS package and its orphans.
+	 */
+	public static final Resource RESOURCE = LIBRARY.createResource(MODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetDerivedMM/1.0", null, TderivedPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example5/targetDerivedMM/1.0", "tderived", TderivedPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ ClassId CLSSid_A2 = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("A2", 0);
 	public static final /*@NonInvalid*/ ClassId CLSSid_D = TderivedTables.PACKid_http_c_s_s_cs2as_s_tests_s_example5_s_targetDerivedMM_s_1_0.getClassId("D", 0);
 	public static final /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_D = TypeId.ORDERED_SET.getSpecializedId(TderivedTables.CLSSid_D, false, ValueUtil.ZERO_VALUE, ValueUtil.UNLIMITED_VALUE);
@@ -128,20 +140,20 @@ public class TderivedTables extends AbstractTables
 		}
 
 		private static final FlatFragment _A2__A = LIBRARY.createFragment(Types._A2, TbaseTables.Types._A);
-		private static final FlatFragment _A2__A2 = LIBRARY.createFragment(Types._A2, TderivedTables.Types._A2);
+		private static final FlatFragment _A2__A2 = LIBRARY.createFragment(Types._A2, Types._A2);
 		private static final FlatFragment _A2__Element = LIBRARY.createFragment(Types._A2, TbaseTables.Types._Element);
 		private static final FlatFragment _A2__NamedElement = LIBRARY.createFragment(Types._A2, TbaseTables.Types._NamedElement);
 		private static final FlatFragment _A2__OclAny = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _A2__OclElement = LIBRARY.createFragment(Types._A2, OCLstdlibTables.Types._OclElement);
 
 		private static final FlatFragment _B2__B = LIBRARY.createFragment(Types._B2, TbaseTables.Types._B);
-		private static final FlatFragment _B2__B2 = LIBRARY.createFragment(Types._B2, TderivedTables.Types._B2);
+		private static final FlatFragment _B2__B2 = LIBRARY.createFragment(Types._B2, Types._B2);
 		private static final FlatFragment _B2__Element = LIBRARY.createFragment(Types._B2, TbaseTables.Types._Element);
 		private static final FlatFragment _B2__NamedElement = LIBRARY.createFragment(Types._B2, TbaseTables.Types._NamedElement);
 		private static final FlatFragment _B2__OclAny = LIBRARY.createFragment(Types._B2, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _B2__OclElement = LIBRARY.createFragment(Types._B2, OCLstdlibTables.Types._OclElement);
 
-		private static final FlatFragment _D__D = LIBRARY.createFragment(Types._D, TderivedTables.Types._D);
+		private static final FlatFragment _D__D = LIBRARY.createFragment(Types._D, Types._D);
 		private static final FlatFragment _D__Element = LIBRARY.createFragment(Types._D, TbaseTables.Types._Element);
 		private static final FlatFragment _D__OclAny = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclAny);
 		private static final FlatFragment _D__OclElement = LIBRARY.createFragment(Types._D, OCLstdlibTables.Types._OclElement);
@@ -215,12 +227,18 @@ public class TderivedTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final Property _A2__ownsD = LIBRARY.createProperty(TderivedPackage.Literals.A2__OWNS_D, Types._A2, 0);
+		public static final Property _A2__ownsD = LIBRARY.createProperty(Types._A2, TderivedPackage.Literals.A2__OWNS_D, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TderivedPackage.Literals.D)), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final Property _B2__anotherName = LIBRARY.createProperty(TderivedPackage.Literals.B2__ANOTHER_NAME, Types._B2, 0);
+		public static final Property _B2__anotherName = LIBRARY.createProperty(Types._B2, TderivedPackage.Literals.B2__ANOTHER_NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final Property _D__A2__ownsD = LIBRARY.createOppositeProperty("A2", Types._D, 0, TderivedPackage.Literals.A2__OWNS_D);
+		public static final Property _D__A2__ownsD = LIBRARY.createOppositeProperty(Types._D, "A2", getASClass(TderivedPackage.Literals.A2), 0 | IsImplicit | IsResolveProxies, TderivedPackage.Literals.A2__OWNS_D);
+
 		static {
+			_A2__ownsD.setOpposite(_D__A2__ownsD);
+
+
+			_D__A2__ownsD.setOpposite(_A2__ownsD);
+
 			Init.initEnd();
 		}
 
@@ -445,11 +463,11 @@ public class TderivedTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			TbaseTables.Properties._A__ownsB,
-			TderivedTables.Properties._A2__ownsD
+			Properties._A2__ownsD
 		};
 
 		private static final Property /*@NonNull*/ [] _B2 = {
-			TderivedTables.Properties._B2__anotherName,
+			Properties._B2__anotherName,
 			TbaseTables.Properties._NamedElement__name,
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
@@ -532,6 +550,7 @@ public class TderivedTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					LIBRARY.freeze(RESOURCE);
 				}
 			}
 		}
