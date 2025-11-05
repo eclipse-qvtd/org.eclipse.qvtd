@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.flat.AbstractFlatClass;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -157,6 +158,8 @@ public class QVTiSerializeTests extends LoadTestCase
 	}
 
 	public void testQVTiSerialize_KiamaRewrite_qvti() throws Exception {
+		AbstractFlatClass.DYNAMIC_FRAGMENTS.setState(true);
+		AbstractFlatClass.STATIC_FRAGMENTS.setState(true);
 		URI inputURI = getModelsURI("KiamaRewrite/KiamaRewrite.qvti");
 		doSerializeRoundTrip(inputURI);
 	}
