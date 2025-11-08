@@ -30,7 +30,7 @@ public class Helper4getProperty extends AbstractTernaryOperation
 		String propertyName = (String) argumentValue;
 		assert propertyName != null;
 		CompleteClass completeClass = executor.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
-		asProperty = completeClass.getProperty(propertyName);
+		asProperty = completeClass.basicGetPrimaryProperty(null, propertyName);
 		//		}
 		if (asProperty == null) {
 			asProperty = executor.getStandardLibrary().getOclInvalidProperty();

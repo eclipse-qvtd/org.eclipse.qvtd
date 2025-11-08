@@ -193,16 +193,16 @@ public class AnalysisTests extends XtextTestCase
 		CompleteClass eTypedElementClass = ClassUtil.requireNonNull(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
 		// EModelElement is not an EObject: Property eAnnotation__contents = ClassUtil.requireNonNull(eAnnotationClass.getProperty(EcorePackage.Literals.EANNOTATION__CONTENTS.getName()));
-		Property eClass__eGenericSuperType = ClassUtil.requireNonNull(eClassClass.getProperty(EcorePackage.Literals.ECLASS__EGENERIC_SUPER_TYPES.getName()));
-		Property eClass__eStructuralFeatures = ClassUtil.requireNonNull(eClassClass.getProperty(EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES.getName()));
-		Property eGenericType__eLowerBound = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ELOWER_BOUND.getName()));
-		Property eGenericType__eTypeArguments = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ETYPE_ARGUMENTS.getName()));
-		Property eGenericType__eUpperBound = ClassUtil.requireNonNull(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__EUPPER_BOUND.getName()));
-		Property eModelElement__eAnnotations = ClassUtil.requireNonNull(eModelElementClass.getProperty(EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS.getName()));
-		Property eOperation__eGenericExceptions = ClassUtil.requireNonNull(eOperationClass.getProperty(EcorePackage.Literals.EOPERATION__EGENERIC_EXCEPTIONS.getName()));
-		Property ePackage__eClassifiers = ClassUtil.requireNonNull(ePackageClass.getProperty(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS.getName()));
-		Property eTypedElement__eGenericType = ClassUtil.requireNonNull(eTypedElementClass.getProperty(EcorePackage.Literals.ETYPED_ELEMENT__EGENERIC_TYPE.getName()));
-		Property eTypeParameter__eBounds = ClassUtil.requireNonNull(eTypeParameterClass.getProperty(EcorePackage.Literals.ETYPE_PARAMETER__EBOUNDS.getName()));
+		Property eClass__eGenericSuperType = eClassClass.getPrimaryProperty(null, EcorePackage.Literals.ECLASS__EGENERIC_SUPER_TYPES.getName());
+		Property eClass__eStructuralFeatures = eClassClass.getPrimaryProperty(null, EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES.getName());
+		Property eGenericType__eLowerBound = eGenericTypeClass.getPrimaryProperty(null, EcorePackage.Literals.EGENERIC_TYPE__ELOWER_BOUND.getName());
+		Property eGenericType__eTypeArguments = eGenericTypeClass.getPrimaryProperty(null, EcorePackage.Literals.EGENERIC_TYPE__ETYPE_ARGUMENTS.getName());
+		Property eGenericType__eUpperBound = eGenericTypeClass.getPrimaryProperty(null, EcorePackage.Literals.EGENERIC_TYPE__EUPPER_BOUND.getName());
+		Property eModelElement__eAnnotations = eModelElementClass.getPrimaryProperty(null, EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS.getName());
+		Property eOperation__eGenericExceptions = eOperationClass.getPrimaryProperty(null, EcorePackage.Literals.EOPERATION__EGENERIC_EXCEPTIONS.getName());
+		Property ePackage__eClassifiers = ePackageClass.getPrimaryProperty(null, EcorePackage.Literals.EPACKAGE__ECLASSIFIERS.getName());
+		Property eTypedElement__eGenericType = eTypedElementClass.getPrimaryProperty(null, EcorePackage.Literals.ETYPED_ELEMENT__EGENERIC_TYPE.getName());
+		Property eTypeParameter__eBounds = eTypeParameterClass.getPrimaryProperty(null, EcorePackage.Literals.ETYPE_PARAMETER__EBOUNDS.getName());
 		//
 		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		//
@@ -326,13 +326,13 @@ public class AnalysisTests extends XtextTestCase
 		//
 		CompleteClass companyClass = companyPackage.getOwnedCompleteClass("Company");
 		Operation companyUnqualifiedEnvEmployee = companyClass.getOperations(null, "_unqualified_env_Employee").iterator().next();
-		Property companyDepts = companyClass.getProperty("depts");
+		Property companyDepts = companyClass.getPrimaryProperty(null, "depts");
 		//
 		CompleteClass departmentClass = companyPackage.getOwnedCompleteClass("Department");
 		Operation departmentGetEmployees = departmentClass.getOperations(null, "getEmployees").iterator().next();
-		Property departmentEmployees = departmentClass.getProperty("employees");
-		Property departmentManager = departmentClass.getProperty("manager");
-		Property departmentSubdepts = departmentClass.getProperty("subdepts");
+		Property departmentEmployees = departmentClass.getPrimaryProperty(null, "employees");
+		Property departmentManager = departmentClass.getPrimaryProperty(null, "manager");
+		Property departmentSubdepts = departmentClass.getPrimaryProperty(null, "subdepts");
 
 		Set<@NonNull List<@NonNull Element>> actualReturns = toElements(analyze.getReturnPaths());
 		Set<@NonNull List<@NonNull Element>> expectedReturns =  new HashSet<>();

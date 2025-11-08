@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -391,7 +392,7 @@ public abstract class Transformation2TracePackage
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, /*@NonNull*/ String name) throws CompilerChainException {
 		assert (aClass != null) && (name != null);
 		CompleteClass completeClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(aClass);
-		Property p = completeClass.getProperty(name);
+		Property p = completeClass.basicGetPrimaryProperty(FeatureFilter.SELECT_NON_STATIC, name);
 		if (p != null)
 			return p;
 		throw new CompilerChainException("No property '" + name + "' in '" + aClass + "::" + "'");

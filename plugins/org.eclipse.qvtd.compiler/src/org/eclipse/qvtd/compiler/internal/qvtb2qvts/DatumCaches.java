@@ -106,7 +106,7 @@ public class DatumCaches
 		InheritanceAnalysis inheritanceAnalysis = containmentAnalysis.getInheritanceAnalysis();
 		Set<@NonNull PropertyDatum> result = new HashSet<>();
 		for (@NonNull CompleteClass parentClass : containmentAnalysis.getContainerClasses(context)) {
-			for (@NonNull Property prop : parentClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+			for (@NonNull Property prop : parentClass.getPrimaryProperties(FeatureFilter.SELECT_NON_STATIC)) {
 				if (prop.isIsComposite()) {
 					Set<@NonNull CompleteClass> allSuperAndSubClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(context);
 					CompleteClass elementClass = getElementClass(prop);

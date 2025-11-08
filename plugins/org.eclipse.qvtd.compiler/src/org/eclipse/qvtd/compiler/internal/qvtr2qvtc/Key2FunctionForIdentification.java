@@ -74,9 +74,10 @@ public class Key2FunctionForIdentification
 		//
 		//	One shadow part per uninitialized key property
 		//
+		Property oclContainerProperty = qvtr2qvtc.getOclContainerProperty();
 		CompleteClass completeClass = helper.getCompleteClass(identifiedClass);
-		for (@NonNull Property asProperty : completeClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
-			if (!asProperty.isIsImplicit() && !asProperty.isIsMany() && (asProperty != qvtr2qvtc.getOclContainerProperty())) {
+		for (@NonNull Property asProperty : completeClass.getPrimaryProperties(FeatureFilter.SELECT_NON_STATIC)) {
+			if (!asProperty.isIsImplicit() && !asProperty.isIsMany() && (asProperty != oclContainerProperty)) {
 				boolean gotIt = false;
 				for (@NonNull ShadowPart asShadowPart : asShadowParts) {
 					if (asShadowPart.getReferredProperty() == asProperty) {

@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.complete.PartialPackages;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
@@ -52,7 +51,7 @@ public class QVTcLoadTests extends LoadTestCase
 	}
 
 	public void testQVTcLoad_expressions_qvtc() throws Exception {
-		PartialPackages.PARTIAL_PACKAGES.setState(true);
+		//	PartialPackages.PARTIAL_PACKAGES.setState(true);
 		doLoad_Concrete(getModelsURI("misc/expressions.qvtc"), NO_MESSAGES);
 	}
 

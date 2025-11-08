@@ -88,7 +88,7 @@ public class ContainmentAnalysis
 	}
 
 	private void computeContainedClass2containerClasses(@NonNull CompleteClass containerCompleteClass) {
-		for (@NonNull Property property : containerCompleteClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+		for (@NonNull Property property : containerCompleteClass.getPrimaryProperties(FeatureFilter.SELECT_NON_STATIC)) {
 			if (property.isIsComposite()) {
 				Type type = PivotUtil.getElementalType(PivotUtil.getType(property));
 				if (!(type instanceof MapType)) {		// FIXME why?

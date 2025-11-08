@@ -43,7 +43,7 @@ public class GuardParameterAttribution extends EmptyAttribution
 				CompleteClass asCompleteClass = environmentView.getEnvironmentFactory().getCompleteModel().getCompleteClass(asClass);
 				String name = environmentView.getName();
 				if (name != null) {
-					Property property = asCompleteClass.getProperty(name);
+					Property property = asCompleteClass.basicGetPrimaryProperty(FeatureFilter.SELECT_NON_STATIC, name);
 					if (property != null) {
 						environmentView.addNamedElement(property);
 					}

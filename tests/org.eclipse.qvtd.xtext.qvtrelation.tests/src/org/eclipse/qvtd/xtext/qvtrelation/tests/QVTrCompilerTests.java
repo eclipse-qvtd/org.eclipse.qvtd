@@ -35,7 +35,6 @@ import org.eclipse.ocl.xtext.tests.TestProject;
 import org.eclipse.ocl.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.ocl.pivot.internal.complete.PartialPackages;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.internal.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
@@ -898,7 +897,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
-		PartialPackages.PARTIAL_PACKAGES.setState(true);
+		//	PartialPackages.PARTIAL_PACKAGES.setState(true);
 		QVTrelationTestFileSystemHelper testFileSystemHelper = getTestFileSystemHelper();
 		testFileSystemHelper.addRequiredBundle("org.eclipse.qvtd.pivot.qvtbase");
 		Class<? extends Transformer> txClass1 = null;

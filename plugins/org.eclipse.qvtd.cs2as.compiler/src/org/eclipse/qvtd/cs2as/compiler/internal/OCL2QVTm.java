@@ -102,7 +102,7 @@ public class OCL2QVTm {
 		EObject rootModel = input.getContents().get(0);
 		if (rootModel instanceof Model) {
 			Model model = (Model) rootModel;
-			CoreModel outputModel = oclModelToImperativeModel().apply(model);
+			CoreModel outputModel = oclModelToImperativeModel(model);
 
 			// We create the output resource
 			//			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtm.qvtcas");
@@ -118,101 +118,100 @@ public class OCL2QVTm {
 	private @NonNull TypedModel leftTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 	private @NonNull TypedModel rightTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
-	public Function<Model, CoreModel> oclModelToImperativeModel() {
-		return oclModel -> {
+	public CoreModel oclModelToImperativeModel(Model oclModel) {
+		CoreModel iModel = QVTcoreFactory.eINSTANCE.createCoreModel();
 
-			CoreModel iModel = QVTcoreFactory.eINSTANCE.createCoreModel();
+		List<Operation> allAstOps = getAllContents().apply(oclModel)
+				.filter(isAstOp())
+				.map(Operation.class::cast).collect(Collectors.toList());
+		List<ShadowExp> shadowExps = allAstOps.stream()
+				.flatMap(getAllContents())
+				.filter(ShadowExp.class::isInstance)
+				.map(ShadowExp.class::cast).collect(Collectors.toList());
+		List<ShadowPart> shadowParts =  allAstOps.stream()
+				.flatMap(getAllContents())
+				.filter(ShadowPart.class::isInstance)
+				.map(ShadowPart.class::cast).collect(Collectors.toList());
 
-			List<Operation> allAstOps = getAllContents().apply(oclModel)
-					.filter(isAstOp())
-					.map(Operation.class::cast).collect(Collectors.toList());
-			List<ShadowExp> shadowExps = allAstOps.stream()
-					.flatMap(getAllContents())
-					.filter(ShadowExp.class::isInstance)
-					.map(ShadowExp.class::cast).collect(Collectors.toList());
-			List<ShadowPart> shadowParts =  allAstOps.stream()
-					.flatMap(getAllContents())
-					.filter(ShadowPart.class::isInstance)
-					.map(ShadowPart.class::cast).collect(Collectors.toList());
+		iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtm.qvtcas")); // When the externalURI is set, also is its name
+		iModel.getOwnedImports().addAll(oclModel.getOwnedImports().stream()
+			.map(importToImport())
+			.collect(Collectors.toList()));
 
-			iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtm.qvtcas")); // When the externalURI is set, also is its name
-			iModel.getOwnedImports().addAll(oclModel.getOwnedImports().stream()
-				.map(importToImport())
-				.collect(Collectors.toList()));
+		Package pPackage = PivotFactory.eINSTANCE.createPackage();
+		pPackage.setName("");
+		iModel.getOwnedPackages().add(pPackage);
 
-			Package pPackage = PivotFactory.eINSTANCE.createPackage();
-			pPackage.setName("");
-			iModel.getOwnedPackages().add(pPackage);
+		Transformation pTx = QVTbaseFactory.eINSTANCE.createTransformation();
+		pTx.setName(iModel.getName().replace('.', '_')); // FIXME . as part of the name is causing issues in the CG);
+		pPackage.getOwnedClasses().add(pTx);
 
-			Transformation pTx = QVTbaseFactory.eINSTANCE.createTransformation();
-			pTx.setName(iModel.getName().replace('.', '_')); // FIXME . as part of the name is causing issues in the CG);
-			pPackage.getOwnedClasses().add(pTx);
+		pTx.getModelParameter().add(new QVTbaseHelper(envFact).createPrimitiveTypedModel());
 
-			pTx.getModelParameter().add(new QVTbaseHelper(envFact).createPrimitiveTypedModel());
+		leftTypedModel.setName(LEFT_MODEL_TYPE_NAME);
+		leftTypedModel.getUsedPackage().addAll(shadowExps.stream()
+			.map(getExpressionContextType())
+			.map(getOwningPackage())
+			.collect(Collectors.toSet()));
+		pTx.getModelParameter().add(leftTypedModel);
 
-			leftTypedModel.setName(LEFT_MODEL_TYPE_NAME);
-			leftTypedModel.getUsedPackage().addAll(shadowExps.stream()
-				.map(getExpressionContextType())
-				.map(getOwningPackage())
-				.collect(Collectors.toSet()));
-			pTx.getModelParameter().add(leftTypedModel);
-
-			rightTypedModel.setName(RIGHT_MODEL_TYPE_NAME);
-			rightTypedModel.getUsedPackage().addAll(shadowExps.stream()
-				.map(x -> x.getType())
-				.map(getOwningPackage())
-				.collect(Collectors.toSet()));
-			pTx.getModelParameter().add(rightTypedModel);
-			CompleteModel completeModel = envFact.getCompleteModel();
-			Set<@NonNull CompletePackage> allKnownCompletePackages = new HashSet<>();
-			Set<@NonNull CompleteClass> allKnownCompleteClasses = new HashSet<>();
-			for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : QVTbaseUtil.getUsedPackages(leftTypedModel)) {
-				CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
-				accumulateUsedPackages(allKnownCompletePackages, allKnownCompleteClasses, importedCompletePackage);
-			}
-			for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : QVTbaseUtil.getUsedPackages(rightTypedModel)) {
-				CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
-				accumulateUsedPackages(allKnownCompletePackages, allKnownCompleteClasses, importedCompletePackage);
-			}
-			Set<@NonNull CompletePackage> allUsedCompletePackages = new HashSet<>();
-			for (@NonNull Import anImport : PivotUtil.getOwnedImports(oclModel)) {
-				Namespace importedNamespace = anImport.getImportedNamespace();
-				if (importedNamespace instanceof Model) {
-					for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : PivotUtil.getOwnedPackages((Model)importedNamespace)) {
-						CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
-						accumulateUsedPackages(allUsedCompletePackages, new HashSet<>(), importedCompletePackage);
-					}
+		rightTypedModel.setName(RIGHT_MODEL_TYPE_NAME);
+		rightTypedModel.getUsedPackage().addAll(shadowExps.stream()
+			.map(x -> x.getType())
+			.map(getOwningPackage())
+			.collect(Collectors.toSet()));
+		pTx.getModelParameter().add(rightTypedModel);
+		CompleteModel completeModel = envFact.getCompleteModel();
+		Set<@NonNull CompletePackage> allKnownCompletePackages = new HashSet<>();
+		Set<@NonNull CompleteClass> allKnownCompleteClasses = new HashSet<>();
+		for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : QVTbaseUtil.getUsedPackages(leftTypedModel)) {
+			CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
+			accumulateUsedPackages(allKnownCompletePackages, allKnownCompleteClasses, importedCompletePackage);
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : QVTbaseUtil.getUsedPackages(rightTypedModel)) {
+			CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
+			accumulateUsedPackages(allKnownCompletePackages, allKnownCompleteClasses, importedCompletePackage);
+		}
+		Set<@NonNull CompletePackage> allUsedCompletePackages = new HashSet<>();
+		for (@NonNull Import anImport : PivotUtil.getOwnedImports(oclModel)) {
+			Namespace importedNamespace = anImport.getImportedNamespace();
+			if (importedNamespace instanceof Model) {
+				for (org.eclipse.ocl.pivot.@NonNull Package importedPackage : PivotUtil.getOwnedPackages((Model)importedNamespace)) {
+					CompletePackage importedCompletePackage = completeModel.getCompletePackage(importedPackage);
+					accumulateUsedPackages(allUsedCompletePackages, new HashSet<>(), importedCompletePackage);
 				}
 			}
-			CompletePackage libraryCompletePackage = completeModel.getCompletePackage(envFact.getStandardLibrary().getOclAnyType().getOwningPackage());
-			Set<CompletePackage> otherUsedCompletePackages = new HashSet<>(allUsedCompletePackages);
-			otherUsedCompletePackages.removeAll(allKnownCompletePackages);
-			otherUsedCompletePackages.remove(libraryCompletePackage);
-			if (otherUsedCompletePackages.size() > 0) {
-				TypedModel otherTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
-				otherTypedModel.setName(OTHER_MODEL_TYPE_NAME);
-				List<Package> otherUsedPackages = otherTypedModel.getUsedPackage();
-				for (CompletePackage otherUsedCompletePackage : otherUsedCompletePackages) {
-					otherUsedPackages.add(otherUsedCompletePackage.getPrimaryPackage());
-				}
-				pTx.getModelParameter().add(otherTypedModel);
+		}
+		CompletePackage libraryCompletePackage = completeModel.getCompletePackage(envFact.getStandardLibrary().getOclAnyType().getOwningPackage());
+		CompletePackage orphanCompletePackage = completeModel.getCompletePackage(envFact.getOrphanage());
+		Set<CompletePackage> otherUsedCompletePackages = new HashSet<>(allUsedCompletePackages);
+		otherUsedCompletePackages.removeAll(allKnownCompletePackages);
+		otherUsedCompletePackages.remove(libraryCompletePackage);
+		otherUsedCompletePackages.remove(orphanCompletePackage);
+		if (otherUsedCompletePackages.size() > 0) {
+			TypedModel otherTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+			otherTypedModel.setName(OTHER_MODEL_TYPE_NAME);
+			List<Package> otherUsedPackages = otherTypedModel.getUsedPackage();
+			for (CompletePackage otherUsedCompletePackage : otherUsedCompletePackages) {
+				otherUsedPackages.add(otherUsedCompletePackage.getPrimaryPackage());
 			}
-			pTx.getRule().addAll(shadowExps.stream()
-				.filter(shadowExpToCreationMappingGuard())
-				.map(shadowExpToCreationMapping())
-				.collect(Collectors.toList()));
+			pTx.getModelParameter().add(otherTypedModel);
+		}
+		pTx.getRule().addAll(shadowExps.stream()
+			.filter(shadowExpToCreationMappingGuard())
+			.map(shadowExpToCreationMapping())
+			.collect(Collectors.toList()));
 
-			pTx.getRule().addAll(shadowParts.stream()
-				.filter(shadowPartToUpdateMappingGuard())
-				.map(shadowPartToUpdateMapping())
-				.collect(Collectors.toList()));
+		pTx.getRule().addAll(shadowParts.stream()
+			.filter(shadowPartToUpdateMappingGuard())
+			.map(shadowPartToUpdateMapping())
+			.collect(Collectors.toList()));
 
-			pTx.getRule().addAll(allAstOps.stream()
-				.filter(astOpWithNoShadowExps2UpdateMappingGuard())
-				.map(astOpWithNoShadowExps2UpdateMapping())
-				.collect(Collectors.toList()));
-			return iModel;
-		};
+		pTx.getRule().addAll(allAstOps.stream()
+			.filter(astOpWithNoShadowExps2UpdateMappingGuard())
+			.map(astOpWithNoShadowExps2UpdateMapping())
+			.collect(Collectors.toList()));
+		return iModel;
 	}
 
 	/**
@@ -256,7 +255,7 @@ public class OCL2QVTm {
 		};
 	}
 
-	public Function<@NonNull ShadowExp, @NonNull Mapping>  shadowExpToCreationMapping() {
+	public Function<@NonNull ShadowExp, @NonNull Mapping> shadowExpToCreationMapping() {
 		return shadowExp -> {
 			Mapping mapping = QVTcoreFactory.eINSTANCE.createMapping();
 			mapping.setName(getCreationMappingName().apply(shadowExp));

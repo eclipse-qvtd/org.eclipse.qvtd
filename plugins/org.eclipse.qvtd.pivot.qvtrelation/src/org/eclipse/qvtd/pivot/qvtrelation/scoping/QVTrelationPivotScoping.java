@@ -10,10 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.scoping;
 
-import java.util.Comparator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView.Disambiguator;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -23,11 +24,10 @@ import org.eclipse.qvtd.pivot.qvtrelation.attributes.RelationDomainAttribution;
 
 public class QVTrelationPivotScoping
 {
-	private static final class FunctionDisambiguator implements Comparator<@NonNull Function>
+	private static final class FunctionDisambiguator extends Disambiguator<@NonNull Function>
 	{
 		@Override
-		@SuppressWarnings("null")
-		public int compare(Function match1, Function match2) {
+		public int compare(@NonNull StandardLibrary standardLibrary, @NonNull Function match1, @NonNull Function match2) {
 			if (isDefinitionOf(match1, match2)) {
 				return 1;				// match2 inferior
 			}

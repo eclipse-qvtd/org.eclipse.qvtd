@@ -10,13 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcore.scoping;
 
-import java.util.Comparator;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView.Disambiguator;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution.AttributionRegistryInstaller;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -28,10 +29,10 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 public class QVTcorePivotScoping
 {
-	private static final class GuardVariableDisambiguator implements Comparator<@NonNull Variable>
+	private static final class GuardVariableDisambiguator extends Disambiguator<@NonNull Variable>
 	{
 		@Override
-		public int compare(@NonNull Variable match1, @NonNull Variable match2) {
+		public int compare(@NonNull StandardLibrary standardLibrary, @NonNull Variable match1, @NonNull Variable match2) {
 			Mapping mapping1 = QVTcoreUtil.getContainingMapping(match1);
 			if (mapping1 == null) {
 				return 1;				// match2 inferior
