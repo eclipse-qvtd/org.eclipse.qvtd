@@ -14,24 +14,16 @@
  */
 package org.eclipse.qvtd.pivot.qvtrelation.util;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.util.PivotValidator;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 import org.eclipse.qvtd.pivot.qvtrelation.*;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
 
 /**
  * <!-- begin-user-doc -->
@@ -279,7 +271,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -756,15 +748,4 @@ public class QVTrelationValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
 	}
-
-	protected void install(EObject eObject) {
-		Executor executor = PivotUtil.getExecutor(eObject);			// XXX Use ValidationContext for all Validation usage, what if no EnvironmentFactory ?? EnvironmentFactory is mandatory for validation
-		CompleteModel completeModel = executor.getEnvironmentFactory().getCompleteModel();
-		List<Model> partialModels = completeModel.getPartialModels();
-		partialModels.add(QVTbaseTables.MODEL);		// XXX if not contains
-		partialModels.add(QVTtemplateTables.MODEL);
-		partialModels.add(QVTrelationTables.MODEL);
-		getClass();
-	}
-
 } //QVTrelationValidator
