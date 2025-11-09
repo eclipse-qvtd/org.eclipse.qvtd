@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.resource.ICS2AS;
@@ -415,9 +416,13 @@ public class QVTbaseUtil extends PivotUtil
 			//			ownedContext.setTypeValue(transformation);
 			ownedContext.setIsRequired(true);
 			asTransformation.setOwnedContext(ownedContext);
-		}
-		else {
-			ownedContext.setTypeValue(asTransformation);		// FIXME BUG 484723 find a better solution for the transient declaration
+		} else {
+			Type oldTypeValue = ownedContext.getTypeValue();
+			if (asTransformation != oldTypeValue) {
+				if ((oldTypeValue == null) && (asTransformation != ownedContext.getType())) {
+					ownedContext.setTypeValue(asTransformation);		// FIXME BUG 484723 find a better solution for the transient declaration
+				}														// XXX ?? set eagerly to avoid immutability challenge ??
+			}
 		}
 		return ownedContext;
 	}

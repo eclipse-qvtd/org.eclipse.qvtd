@@ -995,7 +995,7 @@ public class OperationDependencyAnalysis
 					}
 					OperationAnalysis operationAnalysis = args2result.get(aSourceAndArgumentPaths);
 					if (operationAnalysis == null) {
-						if (referredOperation.getBodyExpression() != null) {
+						if (operation.getBodyExpression() != null) {
 							operationAnalysis = new OperationAnalysis(OperationDependencyAnalysis.this, operation, aSourceAndArgumentPaths, null);
 							addPendingAnalysis(operationAnalysis);				// Queue for evaluation later
 							result = null;
@@ -1287,6 +1287,9 @@ public class OperationDependencyAnalysis
 			this.sourceAndArgumentPaths = sourceAndArgumentPaths;
 			this.result = result;
 			CREATE.println(toString());
+			if ("not".equals(operation.getName())) {
+				getClass();		// XXX
+			}
 		}
 
 		@Override
