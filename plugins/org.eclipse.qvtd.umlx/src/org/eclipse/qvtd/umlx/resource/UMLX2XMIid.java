@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.umlx.resource;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -160,7 +161,9 @@ public class UMLX2XMIid
 	 */
 	public void assignIds(@NonNull ResourceSet asResourceSet, @Nullable Map<@NonNull String, @Nullable Object> options) {
 		EcoreUtil.resolveAll(asResourceSet);		// Pending a fix to BUG 451928 this may provoke  CME unless all resources already loaded
-		for (@SuppressWarnings("null")@NonNull Resource resource : asResourceSet.getResources()) {
+		List<Resource> asResources = asResourceSet.getResources();
+		for (int i = 0; i < asResources.size(); i++) {
+			Resource resource = asResources.get(i);
 			if (resource instanceof UMLXResourceImpl) {
 				assignIds((UMLXResourceImpl)resource, options);
 			}

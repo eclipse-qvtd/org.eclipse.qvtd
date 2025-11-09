@@ -345,6 +345,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitDeclareStatement(@NonNull DeclareStatement asVariable) {
+		if ("oclContainer".equals(asVariable.getName())) {
+			getClass();		// XXX
+		}
 		DeclareStatementCS csVariable = refreshTypedElement(DeclareStatementCS.class, QVTimperativeCSPackage.Literals.DECLARE_STATEMENT_CS, asVariable);
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
 		csVariable.setIsCheck(asVariable.isIsCheck());
