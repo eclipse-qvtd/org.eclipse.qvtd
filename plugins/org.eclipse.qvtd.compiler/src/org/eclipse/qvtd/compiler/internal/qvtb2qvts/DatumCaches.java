@@ -238,6 +238,7 @@ public class DatumCaches
 			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
 			classDatum.getCompleteClasses().add(completeClass);
 			classDatum.setReferredClass(primaryClass);
+			//	assert primaryClass.eContainer() != null;			// XXX
 			classDatum.setName(primaryClass.getName());
 			classDatum.setReferredTypedModel(typedModel);
 			if (!(primaryClass instanceof DataType)) {
