@@ -180,6 +180,7 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	@Override
 	public void registerMetaPackages(@NonNull CompleteModel completeModel) {
 		super.registerMetaPackages(completeModel);
+		completeModel.getStandardLibrary().getOclAnyType();		// Ensure library loaded before xxxTables.postInit side effects
 		//
 		//	completeModel.registerCompletePackageContribution(null, QVTbasePackage.eINSTANCE);
 		//	completeModel.registerCompletePackageContribution(null, QVTtemplatePackage.eINSTANCE);

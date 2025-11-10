@@ -637,7 +637,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//
 		//	Load QVTiAS
 		//
-		OCL ocl = QVTbase.newInstance(getTestProjectManager());
+		OCL ocl = QVTbase.newInstance(getTestProjectManager());				// XXX creates PivotEnvironmentFactory and uses OCL library
 		//	System.out.println("\nocl-serialize " + NameUtil.debugSimpleName(ocl) + " : " + inputURI + " => " + serializedURI + "\n");
 		if (extraLocalPackageRegistryEntries != null) {
 			ocl.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);

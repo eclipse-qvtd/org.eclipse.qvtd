@@ -380,7 +380,8 @@ public class PivotTestCase extends AbstractPivotTestCase
 			for (String nsURI : newList) {
 				if (nsURI.contains("example") || nsURI.contains("test")		// FIXME Avoid using http://www.eclipse.org for test models
 						|| (!nsURI.startsWith("http://www.eclipse.org") && !nsURI.startsWith("http://www.w3.org"))) {
-					PivotUtil.debugPrintln("Extra EPackage registration" + nsURI);
+					PivotUtil.debugPrintln("Extra EPackage registration " + nsURI);
+					EPackage.Registry.INSTANCE.remove(nsURI);			// XXX ???
 				}
 			}
 		}
