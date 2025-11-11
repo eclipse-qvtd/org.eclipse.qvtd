@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -174,7 +173,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 							final /*@NonInvalid*/ @Nullable Type type = getReferredTargetProperty.getType();
 							@SuppressWarnings("null")
 							final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
-							final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTcoreTables.CLSSid_Type, oclAsType);
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull Type propertyType = oclAsType.getElementType();
 							CAUGHT_propertyType = propertyType;
 						}
 						catch (Exception e) {

@@ -45,7 +45,6 @@ import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.collection.CollectionIsEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
@@ -607,7 +606,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
-						final /*@Thrown*/ @NonNull Type requiredType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTimperativeTables.CLSSid_Type, oclAsType);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Type requiredType = oclAsType.getElementType();
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();

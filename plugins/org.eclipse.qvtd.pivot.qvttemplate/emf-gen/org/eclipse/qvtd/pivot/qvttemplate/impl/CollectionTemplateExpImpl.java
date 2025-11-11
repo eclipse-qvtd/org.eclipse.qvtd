@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -311,7 +310,8 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 								}
 								@SuppressWarnings("null")
 								final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
-								final /*@NonInvalid*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, referredCollectionType);
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull Type elementType = referredCollectionType.getElementType();
 								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, elementType).booleanValue();
 								safe_conformsTo_source = conformsTo_0;
 							}

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation.scoping;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -41,8 +42,8 @@ public class QVTrelationPivotScoping
 			//				if (!match1.getName().equals(match2.getName())) {
 			//					return false;
 			//				}
-			if (!match1.getParameterTypes().equals(match2.getParameterTypes())) {
-				return false;
+			if (!new ParameterTypes(match1.getOwnedParameters()).equals(new ParameterTypes(match2.getOwnedParameters()))) {
+				return false;			// XXX Optimize to avoid redundant construction
 			}
 			return (match1.getQueryExpression() != null) && (match2.getQueryExpression() == null);
 		}

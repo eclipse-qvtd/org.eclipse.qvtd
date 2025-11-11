@@ -271,7 +271,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTrelationPackage.eINSTANCE;
+	  return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**

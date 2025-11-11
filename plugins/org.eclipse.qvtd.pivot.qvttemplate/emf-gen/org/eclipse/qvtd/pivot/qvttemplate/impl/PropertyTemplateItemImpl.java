@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.pivot.library.collection.CollectionElementTypeProperty;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -785,7 +784,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_2);
-								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull Type propertyType = oclAsType.getElementType();
 								CAUGHT_propertyType = propertyType;
 							}
 							catch (Exception e) {
@@ -899,7 +899,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@NonInvalid*/ @Nullable Type type_3 = resolvedProperty_1.getType();
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_3);
-						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Type elementType = oclAsType_0.getElementType();
 						final /*@Thrown*/ @Nullable String name_1 = elementType.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_1);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);
@@ -1038,7 +1039,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								final /*@NonInvalid*/ @Nullable Type type_1 = resolvedProperty_0.getType();
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_CollectionType_2);
-								final /*@Thrown*/ @NonNull Type propertyType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType);
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull Type propertyType = oclAsType.getElementType();
 								CAUGHT_propertyType = propertyType;
 							}
 							catch (Exception e) {
@@ -1052,7 +1054,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 								final /*@NonInvalid*/ @Nullable Type type_2 = value_0.getType();
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull CollectionType oclAsType_0 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_2, TYP_CollectionType_3);
-								final /*@Thrown*/ @NonNull Type valueType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_0);
+								@SuppressWarnings("null")
+								final /*@Thrown*/ @NonNull Type valueType = oclAsType_0.getElementType();
 								CAUGHT_valueType = valueType;
 							}
 							catch (Exception e) {
@@ -1139,7 +1142,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull CollectionType oclAsType_1 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_3, TYP_CollectionType_5);
-						final /*@Thrown*/ @NonNull Type elementType = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_1);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Type elementType = oclAsType_1.getElementType();
 						final /*@Thrown*/ @Nullable String name = elementType.getName();
 						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, QVTtemplateTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
@@ -1147,7 +1151,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						final /*@NonInvalid*/ @Nullable Type type_4 = resolvedProperty_1.getType();
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull CollectionType oclAsType_2 = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_4, TYP_CollectionType_5);
-						final /*@Thrown*/ @NonNull Type elementType_0 = CollectionElementTypeProperty.INSTANCE.evaluate(executor, QVTtemplateTables.CLSSid_Type, oclAsType_2);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull Type elementType_0 = oclAsType_2.getElementType();
 						final /*@Thrown*/ @Nullable String name_0 = elementType_0.getName();
 						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, QVTtemplateTables.STR__32_or_32_vice_m_versa);

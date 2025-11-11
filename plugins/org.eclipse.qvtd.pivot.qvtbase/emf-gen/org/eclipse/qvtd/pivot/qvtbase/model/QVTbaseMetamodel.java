@@ -76,7 +76,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	/**
 	 *	The URI of the AS representation of this Metamodel.
 	 */
-	public static final @NonNull URI PIVOT_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2015/QVTbase" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+	public static final @NonNull URI PIVOT_AS_URI = URI.createURI(PIVOT_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	public static org.eclipse.ocl.pivot.@NonNull Package create(@NonNull CompleteStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 		QVTbaseMetamodel resource = new ReadOnly(PIVOT_AS_URI);

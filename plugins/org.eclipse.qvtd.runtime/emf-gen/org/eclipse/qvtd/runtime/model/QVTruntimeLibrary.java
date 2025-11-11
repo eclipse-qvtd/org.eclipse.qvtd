@@ -29,27 +29,15 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
-import org.eclipse.ocl.pivot.AssociativityKind;
-import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.InvalidType;
-import org.eclipse.ocl.pivot.Iteration;
-import org.eclipse.ocl.pivot.LambdaType;
-import org.eclipse.ocl.pivot.Library;
-import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.Precedence;
-import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.SelfType;
-import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
-import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
@@ -62,7 +50,6 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
@@ -94,7 +81,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	/**
 	 *	The URI of the AS representation of this Standard Library.
 	 */
-	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+	public static final @NonNull URI STDLIB_AS_URI = URI.createURI(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	/**
 	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library Resource
@@ -297,7 +284,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		protected AbstractLibraryContents() {
 			standardLibraryPackage = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
-			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, OCLstdlibPackage.eINSTANCE);
+			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, null);
 			$$0 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 0);
 			$$1 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 1);
 			$$2 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 2);

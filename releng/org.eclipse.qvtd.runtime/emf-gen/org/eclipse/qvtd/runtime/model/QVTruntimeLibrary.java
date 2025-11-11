@@ -94,7 +94,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	/**
 	 *	The URI of the AS representation of this Standard Library.
 	 */
-	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2019/QVTruntimeLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+	public static final @NonNull URI STDLIB_AS_URI = URI.createURI(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
 
 	/**
 	 * Return the default http://www.eclipse.org/qvt/2019/QVTruntimeLibrary standard Library Resource
@@ -297,7 +297,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 		protected AbstractLibraryContents() {
 			standardLibraryPackage = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
 			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
-			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, OCLstdlibPackage.eINSTANCE);
+			local_ocl = createPackage("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Library", null, null);
 			$$0 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 0);
 			$$1 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 1);
 			$$2 = Orphanage.getNormalizedTemplateParameter(local_orphanage, 2);

@@ -108,10 +108,10 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="_extends->closure(_extends)->excludes(self)"/>
       </ownedInvariants>
       <ownedOperations xmi:id="DU934" isRequired="true" name="getFunction" type="#PGjqK">
-        <ownedParameters xmi:id="te2fe" isRequired="true" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
+        <ownedParameters xmi:id="tVE41" isRequired="true" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
       </ownedOperations>
       <ownedOperations xmi:id="rcEGq" isRequired="true" name="getModelParameter" type="#WqJYx">
-        <ownedParameters xmi:id="1Erns" isRequired="true" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
+        <ownedParameters xmi:id="174,D" isRequired="true" name="name" type="pivot:PrimitiveType &_1;#AlwVZ"/>
       </ownedOperations>
       <ownedProperties xmi:id="xL9bQ" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
       <ownedProperties xmi:id="YTQDv" isComposite="true" isRequired="true" name="modelParameter" opposite="#fPfk3" type="#NocSN"/>
