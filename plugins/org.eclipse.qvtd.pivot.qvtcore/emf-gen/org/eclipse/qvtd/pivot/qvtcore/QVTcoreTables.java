@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Enumeration;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -80,7 +79,7 @@ public class QVTcoreTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.@NonNull BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -431,11 +430,11 @@ public class QVTcoreTables extends AbstractTables
 		public static final @NonNull Property _Assignment__value = LIBRARY.createProperty(Types._Assignment, QVTcorePackage.Literals.ASSIGNMENT__VALUE, PivotTables.Types._OCLExpression, 3 | IsComposite | IsRequired | IsResolveProxies);
 
 		public static final @NonNull Property _BottomPattern__area = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__AREA, Types._Area, 0 | IsRequired | IsResolveProxies | IsTransient);
-		public static final @NonNull Property _BottomPattern__assignment = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Assignment), 1 | IsComposite | IsRequired | IsResolveProxies);
-		public static final @NonNull Property _BottomPattern__enforcementOperation = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._EnforcementOperation), 2 | IsComposite | IsRequired | IsResolveProxies);
-		public static final @NonNull Property _BottomPattern__realizedVariable = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._RealizedVariable), 3 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BottomPattern__assignment = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ASSIGNMENT, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._Assignment), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BottomPattern__enforcementOperation = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._EnforcementOperation), 2 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _BottomPattern__realizedVariable = LIBRARY.createProperty(Types._BottomPattern, QVTcorePackage.Literals.BOTTOM_PATTERN__REALIZED_VARIABLE, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._RealizedVariable), 3 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _CorePattern__ownedVariables = LIBRARY.createProperty(Types._CorePattern, QVTcorePackage.Literals.CORE_PATTERN__OWNED_VARIABLES, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._VariableDeclaration), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _CorePattern__ownedVariables = LIBRARY.createProperty(Types._CorePattern, QVTcorePackage.Literals.CORE_PATTERN__OWNED_VARIABLES, MODEL.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._VariableDeclaration), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		public static final @NonNull Property _EnforcementOperation__bottomPattern = LIBRARY.createProperty(Types._EnforcementOperation, QVTcorePackage.Literals.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, Types._BottomPattern, 0 | IsResolveProxies | IsTransient);
 		public static final @NonNull Property _EnforcementOperation__enforcementMode = LIBRARY.createProperty(Types._EnforcementOperation, QVTcorePackage.Literals.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE, Types._EnforcementMode, 1 | IsResolveProxies);
@@ -444,9 +443,9 @@ public class QVTcoreTables extends AbstractTables
 		public static final @NonNull Property _GuardPattern__area = LIBRARY.createProperty(Types._GuardPattern, QVTcorePackage.Literals.GUARD_PATTERN__AREA, Types._Area, 0 | IsRequired | IsResolveProxies | IsTransient);
 
 		public static final @NonNull Property _Mapping__context = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__CONTEXT, Types._Mapping, 0 | IsResolveProxies);
-		public static final @NonNull Property _Mapping__local = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__LOCAL, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 1 | IsComposite | IsRequired | IsResolveProxies);
-		public static final @NonNull Property _Mapping__refinement = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__REFINEMENT, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 2 | IsRequired | IsResolveProxies);
-		public static final @NonNull Property _Mapping__specification = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__SPECIFICATION, LIBRARY.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 3 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__local = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__LOCAL, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 1 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__refinement = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__REFINEMENT, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 2 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Mapping__specification = LIBRARY.createProperty(Types._Mapping, QVTcorePackage.Literals.MAPPING__SPECIFICATION, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._Mapping), 3 | IsRequired | IsResolveProxies);
 
 		public static final @NonNull Property _NavigationAssignment__slotExpression = LIBRARY.createProperty(Types._NavigationAssignment, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, PivotTables.Types._OCLExpression, 0 | IsComposite | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _NavigationAssignment__targetProperty = LIBRARY.createProperty(Types._NavigationAssignment, QVTcorePackage.Literals.NAVIGATION_ASSIGNMENT__TARGET_PROPERTY, PivotTables.Types._Property, 1 | IsRequired | IsResolveProxies);

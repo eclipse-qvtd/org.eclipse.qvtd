@@ -23,7 +23,6 @@ import example5.tbase.TbaseTables;
 // import example5.tderived.TderivedPackage;
 // import example5.tderived.TderivedTables;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -63,7 +62,7 @@ public class TderivedTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -227,7 +226,7 @@ public class TderivedTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final Property _A2__ownsD = LIBRARY.createProperty(Types._A2, TderivedPackage.Literals.A2__OWNS_D, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TderivedPackage.Literals.D)), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final Property _A2__ownsD = LIBRARY.createProperty(Types._A2, TderivedPackage.Literals.A2__OWNS_D, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TderivedPackage.Literals.D)), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		public static final Property _B2__anotherName = LIBRARY.createProperty(Types._B2, TderivedPackage.Literals.B2__ANOTHER_NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 

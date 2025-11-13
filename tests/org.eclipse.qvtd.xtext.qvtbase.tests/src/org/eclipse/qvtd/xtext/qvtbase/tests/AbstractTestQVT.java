@@ -645,6 +645,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		ocl.getEnvironmentFactory().setSeverity(PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP, StatusCodes.Severity.IGNORE);
 		XtextResource xtextResource = null;
 		try {
+			ocl.getStandardLibrary().getOclAnyType();			// XXX ensure qvtruntimelibrary known before ocl loaded
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI + " loading " + inputURI, asResource);
 			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI + " loading " + inputURI, asResource);
@@ -678,6 +679,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			qvti.getResourceSet().getPackageRegistry().putAll(extraLocalPackageRegistryEntries);
 		}
 		try {
+			qvti.getStandardLibrary().getOclAnyType();			// XXX ensure qvtruntimelibrary known before ocl loaded
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
 			Resource asResource2 = asTransformation.eResource();
 			assert asResource2 != null;

@@ -166,5 +166,7 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 		partialModels.add(QVTimperativeTables.MODEL);			// XXX QVTbaseTables.MODEL and super
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTimperativePackage.eINSTANCE);
+		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
+		completeModel.registerCompleteModelContribution(QVTimperativeTables.MODEL);
 	}
 }

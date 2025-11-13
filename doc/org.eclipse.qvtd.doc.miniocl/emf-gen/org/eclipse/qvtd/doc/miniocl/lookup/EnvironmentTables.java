@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.miniocl.lookup;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
@@ -49,14 +50,24 @@ public class EnvironmentTables extends AbstractTables
 	}
 
 	/**
-	 *	The library of all packages and types.
+	 *	The overall library of all packages and types.
 	 */
 	public static final PartialStandardLibraryImpl.@NonNull ReadOnly LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	The package descriptor for the package.
+	 *	The AS package for the EnvironmentPackage.eINSTANCE EPackage.
 	 */
 	public static final org.eclipse.ocl.pivot.@NonNull Package PACKAGE = LIBRARY.createPackage(EnvironmentPackage.eINSTANCE);
+
+	/**
+	 *	The AS model for the AS package and its additional orphans.
+	 */
+	public static final AbstractTables.@NonNull BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
+
+	/**
+	 *	The EMF Resource containing the AS model, its AS package and its additional orphans.
+	 */
+	public static final @NonNull Resource RESOURCE = LIBRARY.createResource(MODEL);
 
 	/**
 	 *	Constants used by auto-generated code.
@@ -173,7 +184,7 @@ public class EnvironmentTables extends AbstractTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(LIBRARY.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
+		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(MODEL.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(MiniOCLTables.Types._NamedElement);
 
 		static {
@@ -232,9 +243,9 @@ public class EnvironmentTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, MiniOCLTables.Types._NamedElement), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, MiniOCLTables.Types._NamedElement), 0 | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _LookupEnvironment__parentEnv = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV, Types._LookupEnvironment, 1 | IsResolveProxies);
-		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
+		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
 
 		static {
 			createOpposite(MiniOCLPackage.Literals.NAMED_ELEMENT, "LookupEnvironment", _LookupEnvironment__namedElements);
@@ -539,6 +550,7 @@ public class EnvironmentTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					LIBRARY.freeze(RESOURCE);
 				}
 			}
 		}

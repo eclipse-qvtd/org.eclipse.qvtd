@@ -435,7 +435,7 @@ public class QVTbaseUtil extends PivotUtil
 		if (ownedContext == null) {
 			ownedContext = PivotFactory.eINSTANCE.createParameter();
 			ownedContext.setName(typedModel.getName());
-			ownedContext.setType(standardLibrary.basicGetLibraryClass("Model"));
+			ownedContext.setType(standardLibrary.getLibraryClass("Model"));
 			//        	ownedContext.setTypeValue(typedModel);
 			ownedContext.setIsRequired(true);
 			typedModel.setOwnedContext(ownedContext);

@@ -22,7 +22,6 @@ package example5.tbase;
 // import example5.tbase.TbasePackage;
 // import example5.tbase.TbaseTables;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -63,7 +62,7 @@ public class TbaseTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -248,7 +247,7 @@ public class TbaseTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final Property _A__ownsB = LIBRARY.createProperty(Types._A, TbasePackage.Literals.A__OWNS_B, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.B)), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final Property _A__ownsB = LIBRARY.createProperty(Types._A, TbasePackage.Literals.A__OWNS_B, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.B)), 0 | IsComposite | IsRequired | IsResolveProxies);
 		public static final Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty(Types._A, "TRoot", getASClass(TbasePackage.Literals.TROOT), 1 | IsImplicit | IsResolveProxies, TbasePackage.Literals.TROOT__OWNED_A);
 
 		public static final Property _B__ownsC = LIBRARY.createProperty(Types._B, TbasePackage.Literals.B__OWNS_C, getASClass(TbasePackage.Literals.C), 0 | IsComposite | IsResolveProxies);
@@ -258,7 +257,7 @@ public class TbaseTables extends AbstractTables
 
 		public static final Property _NamedElement__name = LIBRARY.createProperty(Types._NamedElement, TbasePackage.Literals.NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TbasePackage.Literals.TROOT__OWNED_A, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.A)), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TbasePackage.Literals.TROOT__OWNED_A, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TbasePackage.Literals.A)), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		static {
 			_A__ownsB.setOpposite(_B__A__ownsB);

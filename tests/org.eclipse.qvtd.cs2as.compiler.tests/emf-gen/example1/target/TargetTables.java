@@ -23,7 +23,6 @@ package example1.target;
 // import example1.target.TargetTables;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -64,7 +63,7 @@ public class TargetTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.@NonNull BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -305,20 +304,20 @@ public class TargetTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _A__D__toA = LIBRARY.createOppositeProperty(Types._A, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 0 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__TO_A);
+		public static final @NonNull Property _A__D__toA = LIBRARY.createOppositeProperty(Types._A, "D", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 0 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__TO_A);
 		public static final @NonNull Property _A__TRoot__ownedA = LIBRARY.createOppositeProperty(Types._A, "TRoot", Types._TRoot, 1 | IsImplicit | IsResolveProxies, TargetPackage.Literals.TROOT__OWNED_A);
 
-		public static final @NonNull Property _A1__ownsB = LIBRARY.createProperty(Types._A1, TargetPackage.Literals.A1__OWNS_B, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._B), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _A1__ownsB = LIBRARY.createProperty(Types._A1, TargetPackage.Literals.A1__OWNS_B, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._B), 0 | IsComposite | IsRequired | IsResolveProxies);
 
-		public static final @NonNull Property _A2__ownsC = LIBRARY.createProperty(Types._A2, TargetPackage.Literals.A2__OWNS_C, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._C), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _A2__ownsC = LIBRARY.createProperty(Types._A2, TargetPackage.Literals.A2__OWNS_C, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._C), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		public static final @NonNull Property _B__ownsD = LIBRARY.createProperty(Types._B, TargetPackage.Literals.B__OWNS_D, Types._D, 0 | IsComposite | IsResolveProxies);
 		public static final @NonNull Property _B__toA1 = LIBRARY.createProperty(Types._B, TargetPackage.Literals.B__TO_A1, Types._A1, 1 | IsResolveProxies);
-		public static final @NonNull Property _B__D__refsB = LIBRARY.createOppositeProperty(Types._B, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_B);
+		public static final @NonNull Property _B__D__refsB = LIBRARY.createOppositeProperty(Types._B, "D", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_B);
 
 		public static final @NonNull Property _C__ownsD = LIBRARY.createProperty(Types._C, TargetPackage.Literals.C__OWNS_D, Types._D, 0 | IsComposite | IsResolveProxies);
 		public static final @NonNull Property _C__toA2 = LIBRARY.createProperty(Types._C, TargetPackage.Literals.C__TO_A2, Types._A2, 1 | IsResolveProxies);
-		public static final @NonNull Property _C__D__refsC = LIBRARY.createOppositeProperty(Types._C, "D", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_C);
+		public static final @NonNull Property _C__D__refsC = LIBRARY.createOppositeProperty(Types._C, "D", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._D), 2 | IsImplicit | IsRequired | IsResolveProxies, TargetPackage.Literals.D__REFS_C);
 
 		public static final @NonNull Property _D__refsB = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__REFS_B, Types._B, 0 | IsResolveProxies);
 		public static final @NonNull Property _D__refsC = LIBRARY.createProperty(Types._D, TargetPackage.Literals.D__REFS_C, Types._C, 1 | IsResolveProxies);
@@ -328,7 +327,7 @@ public class TargetTables extends AbstractTables
 
 		public static final @NonNull Property _NamedElement__name = LIBRARY.createProperty(Types._NamedElement, TargetPackage.Literals.NAMED_ELEMENT__NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 
-		public static final @NonNull Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TargetPackage.Literals.TROOT__OWNED_A, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._A), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _TRoot__ownedA = LIBRARY.createProperty(Types._TRoot, TargetPackage.Literals.TROOT__OWNED_A, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, Types._A), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		static {
 			_A__D__toA.setOpposite(_D__toA);

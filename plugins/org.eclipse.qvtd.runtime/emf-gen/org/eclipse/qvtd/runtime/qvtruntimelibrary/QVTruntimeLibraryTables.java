@@ -21,7 +21,6 @@ package org.eclipse.qvtd.runtime.qvtruntimelibrary;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -56,7 +55,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.@NonNull BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -205,7 +204,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement), 0 | IsRequired | IsResolveProxies);
 
 		static {
 			createOpposite(OCLstdlibPackage.Literals.OCL_ELEMENT, "extent", _Extent__elements);

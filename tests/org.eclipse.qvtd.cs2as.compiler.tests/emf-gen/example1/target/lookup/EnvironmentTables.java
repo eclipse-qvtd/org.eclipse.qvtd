@@ -25,7 +25,6 @@ import example1.target.TargetTables;
 // import example1.target.lookup.EnvironmentTables;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -71,7 +70,7 @@ public class EnvironmentTables extends AbstractTables
 	/**
 	 *	The AS model for the AS package and its orphans.
 	 */
-	public static final @NonNull Model MODEL = LIBRARY.createModel(PACKAGE);
+	public static final AbstractTables.@NonNull BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
 	 *	The EMF Resource containing the AS model, its AS package and its orphans.
@@ -193,7 +192,7 @@ public class EnvironmentTables extends AbstractTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(LIBRARY.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
+		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(MODEL.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(TargetTables.Types._NamedElement);
 
 		static {
@@ -252,9 +251,9 @@ public class EnvironmentTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, LIBRARY.getCollectionType(OCLstdlibTables.Types._OrderedSet, TargetTables.Types._NamedElement), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, TargetTables.Types._NamedElement), 0 | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _LookupEnvironment__parentEnv = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV, Types._LookupEnvironment, 1 | IsResolveProxies);
-		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", LIBRARY.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
+		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
 
 		static {
 			createOpposite(TargetPackage.Literals.NAMED_ELEMENT, "LookupEnvironment", _LookupEnvironment__namedElements);
