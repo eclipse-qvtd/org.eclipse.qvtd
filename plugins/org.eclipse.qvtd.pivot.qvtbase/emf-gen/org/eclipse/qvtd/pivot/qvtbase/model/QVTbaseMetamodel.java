@@ -242,7 +242,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
 			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 			local_orphanage = createPackage("$$", null, "http://www.eclipse.org/ocl/2015/Orphanage", null, null);
-			local_pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", null, PivotPackage.eINSTANCE);
+			local_pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", null, null);
 			installPackages();
 			installClassTypes();
 			installEnumerations();

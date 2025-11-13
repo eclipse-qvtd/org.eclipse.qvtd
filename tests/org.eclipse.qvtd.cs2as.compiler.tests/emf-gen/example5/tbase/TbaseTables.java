@@ -60,12 +60,12 @@ public class TbaseTables extends AbstractTables
 	public static final org.eclipse.ocl.pivot.Package PACKAGE = LIBRARY.createPackage(TbasePackage.eINSTANCE);
 
 	/**
-	 *	The AS model for the AS package and its orphans.
+	 *	The AS model for the AS package and its additional orphans.
 	 */
 	public static final AbstractTables.BuiltInModel MODEL = LIBRARY.createModel(PACKAGE);
 
 	/**
-	 *	The EMF Resource containing the AS model, its AS package and its orphans.
+	 *	The EMF Resource containing the AS model, its AS package and its additional orphans.
 	 */
 	public static final Resource RESOURCE = LIBRARY.createResource(MODEL);
 
