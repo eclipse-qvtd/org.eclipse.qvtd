@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
@@ -159,15 +158,5 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 	@Override
 	protected @NonNull URI getCSuri(@NonNull URI uri) {
 		return uri.trimFileExtension().appendFileExtension(QVTcoreUtil.QVTC_FILE_EXTENSION);
-	}
-
-	@Override
-	public void registerMetaPackages(@NonNull CompleteModel completeModel) {
-		super.registerMetaPackages(completeModel);
-		//
-		//		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
-		//		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTcorePackage.eINSTANCE);
-		//		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
-		//		completeModel.registerCompleteModelContribution(QVTcoreTables.MODEL);
 	}
 }
