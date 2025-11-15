@@ -10,8 +10,6 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperative.utilities;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,7 +18,6 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
@@ -36,7 +33,6 @@ import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
-import org.eclipse.ocl.pivot.utilities.AbstractTables.BuiltInModel;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -161,14 +157,11 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	public void registerMetaPackages(@NonNull CompleteModel completeModel) {
 		super.registerMetaPackages(completeModel);
 		//
-		List<Model> partialModels = completeModel.getPartialModels();
-	//	partialModels.add(QVTbaseMetamodel.getDefaultModel());			// XXX QVTbaseTables.MODEL and super
-		BuiltInModel qvtBaseModel = QVTbaseTables.MODEL;
-		partialModels.add(qvtBaseModel);			// XXX QVTbaseTables.MODEL and super
-		partialModels.add(QVTimperativeTables.MODEL);			// XXX QVTbaseTables.MODEL and super
+		completeModel.addPartialModel(QVTbaseTables.MODEL);
+		completeModel.addPartialModel(QVTimperativeTables.MODEL);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTimperativePackage.eINSTANCE);
-		completeModel.registerCompleteModelContribution(qvtBaseModel);
+		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
 		completeModel.registerCompleteModelContribution(QVTimperativeTables.MODEL);
 	}
 }

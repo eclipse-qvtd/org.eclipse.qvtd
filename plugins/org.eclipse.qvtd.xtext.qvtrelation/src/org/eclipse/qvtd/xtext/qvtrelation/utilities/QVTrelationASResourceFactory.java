@@ -182,6 +182,9 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 		super.registerMetaPackages(completeModel);
 		completeModel.getStandardLibrary().getOclAnyType();		// Ensure library loaded before xxxTables.postInit side effects
 		//
+		completeModel.addPartialModel(QVTbaseTables.MODEL);
+		completeModel.addPartialModel(QVTtemplateTables.MODEL);
+		completeModel.addPartialModel(QVTrelationTables.MODEL);
 		//	completeModel.registerCompletePackageContribution(null, QVTbasePackage.eINSTANCE);
 		//	completeModel.registerCompletePackageContribution(null, QVTtemplatePackage.eINSTANCE);
 		//	completeModel.registerCompletePackageContribution(null, QVTrelationPackage.eINSTANCE);
