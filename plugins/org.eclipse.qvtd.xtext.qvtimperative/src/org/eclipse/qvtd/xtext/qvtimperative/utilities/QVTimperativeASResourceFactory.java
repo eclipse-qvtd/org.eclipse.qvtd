@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.resource.NotXMLContentHandlerImpl;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
+import org.eclipse.ocl.pivot.utilities.AbstractTables.BuiltInModel;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -162,11 +163,12 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 		//
 		List<Model> partialModels = completeModel.getPartialModels();
 	//	partialModels.add(QVTbaseMetamodel.getDefaultModel());			// XXX QVTbaseTables.MODEL and super
-		partialModels.add(QVTbaseTables.MODEL);			// XXX QVTbaseTables.MODEL and super
+		BuiltInModel qvtBaseModel = QVTbaseTables.MODEL;
+		partialModels.add(qvtBaseModel);			// XXX QVTbaseTables.MODEL and super
 		partialModels.add(QVTimperativeTables.MODEL);			// XXX QVTbaseTables.MODEL and super
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 //		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTimperativePackage.eINSTANCE);
-		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
+		completeModel.registerCompleteModelContribution(qvtBaseModel);
 		completeModel.registerCompleteModelContribution(QVTimperativeTables.MODEL);
 	}
 }

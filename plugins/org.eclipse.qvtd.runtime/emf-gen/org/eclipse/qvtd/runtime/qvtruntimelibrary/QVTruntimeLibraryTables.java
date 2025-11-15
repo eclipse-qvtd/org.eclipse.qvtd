@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.flat.FlatFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.PartialStandardLibraryImpl;
-import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.AbstractTables;
 
@@ -207,7 +206,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement), 0 | IsRequired | IsResolveProxies);
 
 		static {
-			createOpposite(OCLstdlibPackage.Literals.OCL_ELEMENT, "extent", _Extent__elements);
+			LIBRARY.createOpposite("extent", _Extent__elements);
 
 			Init.initEnd();
 		}

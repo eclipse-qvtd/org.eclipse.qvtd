@@ -690,14 +690,14 @@ public class QVTimperativeTables extends AbstractTables
 		public static final @NonNull Property _Statement__Mapping__ownedStatements = LIBRARY.createOppositeProperty(Types._Statement, "Mapping", Types._Mapping, 0 | IsImplicit | IsResolveProxies, QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS);
 
 		static {
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "AddStatement", _AddStatement__ownedExpression);
+			LIBRARY.createOpposite("AddStatement", _AddStatement__ownedExpression);
 			_AddStatement__targetVariable.setOpposite(_ConnectionVariable__AddStatement__targetVariable);
 
 			_AppendParameterBinding__value.setOpposite(_ConnectionVariable__AppendParameterBinding__value);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "BufferStatement", _BufferStatement__ownedExpression);
+			LIBRARY.createOpposite("BufferStatement", _BufferStatement__ownedExpression);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "CheckStatement", _CheckStatement__ownedExpression);
+			LIBRARY.createOpposite("CheckStatement", _CheckStatement__ownedExpression);
 
 			_ConnectionVariable__isStrict.setDefaultValueString("false");
 			_ConnectionVariable__AddStatement__targetVariable.setOpposite(_AddStatement__targetVariable);
@@ -705,18 +705,18 @@ public class QVTimperativeTables extends AbstractTables
 			_ConnectionVariable__GuardParameterBinding__value.setOpposite(_GuardParameterBinding__value);
 
 			_DeclareStatement__isCheck.setDefaultValueString("false");
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "DeclareStatement", _DeclareStatement__ownedExpression);
+			LIBRARY.createOpposite("DeclareStatement", _DeclareStatement__ownedExpression);
 
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "EntryPoint", _EntryPoint__inputTypedModels);
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "EntryPoint", _EntryPoint__outputTypedModels);
+			LIBRARY.createOpposite("EntryPoint", _EntryPoint__inputTypedModels);
+			LIBRARY.createOpposite("EntryPoint", _EntryPoint__outputTypedModels);
 
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "GuardParameter", _GuardParameter__referredTypedModel);
-			createOpposite(PivotPackage.Literals.PROPERTY, "GuardParameter", _GuardParameter__successProperty);
+			LIBRARY.createOpposite("GuardParameter", _GuardParameter__referredTypedModel);
+			LIBRARY.createOpposite("GuardParameter", _GuardParameter__successProperty);
 
 			_GuardParameterBinding__isCheck.setDefaultValueString("false");
 			_GuardParameterBinding__value.setOpposite(_ConnectionVariable__GuardParameterBinding__value);
 
-			createOpposite(PivotPackage.Literals.CLASS, "ImperativeTransformation", _ImperativeTransformation__contextType);
+			LIBRARY.createOpposite("ImperativeTransformation", _ImperativeTransformation__contextType);
 
 			_LoopParameterBinding__isCheck.setDefaultValueString("false");
 			_LoopParameterBinding__value.setOpposite(_LoopVariable__LoopParameterBinding__value);
@@ -734,7 +734,7 @@ public class QVTimperativeTables extends AbstractTables
 			_MappingCall__ownedMappingParameterBindings.setOpposite(_MappingParameterBinding__owningMappingCall);
 			_MappingCall__referredMapping.setOpposite(_Mapping__MappingCall__referredMapping);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "MappingLoop", _MappingLoop__ownedExpression);
+			LIBRARY.createOpposite("MappingLoop", _MappingLoop__ownedExpression);
 			_MappingLoop__ownedIterators.setOpposite(_LoopVariable__owningMappingLoop);
 			_MappingLoop__ownedMappingStatements.setOpposite(_MappingStatement__MappingLoop__ownedMappingStatements);
 
@@ -746,30 +746,30 @@ public class QVTimperativeTables extends AbstractTables
 
 			_MappingStatement__MappingLoop__ownedMappingStatements.setOpposite(_MappingLoop__ownedMappingStatements);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "NewStatement", _NewStatement__ownedExpression);
+			LIBRARY.createOpposite("NewStatement", _NewStatement__ownedExpression);
 			_NewStatement__ownedParts.setOpposite(_NewStatementPart__owningNewStatement);
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "NewStatement", _NewStatement__referredTypedModel);
+			LIBRARY.createOpposite("NewStatement", _NewStatement__referredTypedModel);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "NewStatementPart", _NewStatementPart__ownedExpression);
+			LIBRARY.createOpposite("NewStatementPart", _NewStatementPart__ownedExpression);
 			_NewStatementPart__owningNewStatement.setOpposite(_NewStatement__ownedParts);
-			createOpposite(PivotPackage.Literals.PROPERTY, "NewStatementPart", _NewStatementPart__referredProperty);
+			LIBRARY.createOpposite("NewStatementPart", _NewStatementPart__referredProperty);
 
-			createOpposite(PivotPackage.Literals.PROPERTY, "ObservableStatement", _ObservableStatement__observedProperties);
+			LIBRARY.createOpposite("ObservableStatement", _ObservableStatement__observedProperties);
 
 			_SetStatement__isNotify.setDefaultValueString("false");
 			_SetStatement__isOpposite.setDefaultValueString("false");
 			_SetStatement__isPartial.setDefaultValueString("false");
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SetStatement", _SetStatement__ownedExpression);
-			createOpposite(PivotPackage.Literals.PROPERTY, "SetStatement", _SetStatement__resolvedProperty);
-			createOpposite(PivotPackage.Literals.PROPERTY, "SetStatement", _SetStatement__targetProperty);
-			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "SetStatement", _SetStatement__targetVariable);
+			LIBRARY.createOpposite("SetStatement", _SetStatement__ownedExpression);
+			LIBRARY.createOpposite("SetStatement", _SetStatement__resolvedProperty);
+			LIBRARY.createOpposite("SetStatement", _SetStatement__targetProperty);
+			LIBRARY.createOpposite("SetStatement", _SetStatement__targetVariable);
 
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "SimpleParameter", _SimpleParameter__referredTypedModel);
+			LIBRARY.createOpposite("SimpleParameter", _SimpleParameter__referredTypedModel);
 
 			_SimpleParameterBinding__isCheck.setDefaultValueString("false");
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SimpleParameterBinding", _SimpleParameterBinding__value);
+			LIBRARY.createOpposite("SimpleParameterBinding", _SimpleParameterBinding__value);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "SpeculateStatement", _SpeculateStatement__ownedExpressions);
+			LIBRARY.createOpposite("SpeculateStatement", _SpeculateStatement__ownedExpressions);
 
 			_Statement__Mapping__ownedStatements.setOpposite(_Mapping__ownedStatements);
 

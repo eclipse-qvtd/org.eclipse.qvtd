@@ -422,37 +422,37 @@ public class QVTrelationTables extends AbstractTables
 
 		static {
 			_DomainPattern__relationDomain.setOpposite(_RelationDomain__pattern);
-			createOpposite(QVTtemplatePackage.Literals.TEMPLATE_EXP, "DomainPattern", _DomainPattern__templateExpression);
+			LIBRARY.createOpposite("DomainPattern", _DomainPattern__templateExpression);
 
-			createOpposite(PivotPackage.Literals.CLASS, "key", _Key__identifies);
-			createOpposite(PivotPackage.Literals.PROPERTY, "oppKey", _Key__oppositePart);
-			createOpposite(PivotPackage.Literals.PROPERTY, "key", _Key__part);
+			LIBRARY.createOpposite("key", _Key__identifies);
+			LIBRARY.createOpposite("oppKey", _Key__oppositePart);
+			LIBRARY.createOpposite("key", _Key__part);
 			_Key__transformation.setOpposite(_RelationalTransformation__ownedKeys);
 
 			_Relation__operationalImpl.setOpposite(_RelationImplementation__relation);
-			createOpposite(PivotPackage.Literals.VARIABLE, "Relation", _Relation__variable);
-			createOpposite(QVTbasePackage.Literals.PATTERN, "whenOwner", _Relation__when);
-			createOpposite(QVTbasePackage.Literals.PATTERN, "whereOwner", _Relation__where);
+			LIBRARY.createOpposite("Relation", _Relation__variable);
+			LIBRARY.createOpposite("whenOwner", _Relation__when);
+			LIBRARY.createOpposite("whereOwner", _Relation__where);
 			_Relation__relationCallExp__referredRelation.setOpposite(_RelationCallExp__referredRelation);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "relationCallExp", _RelationCallExp__argument);
+			LIBRARY.createOpposite("relationCallExp", _RelationCallExp__argument);
 			_RelationCallExp__referredRelation.setOpposite(_Relation__relationCallExp__referredRelation);
 
 			_RelationDomain__defaultAssignment.setOpposite(_RelationDomainAssignment__owner);
 			_RelationDomain__pattern.setOpposite(_DomainPattern__relationDomain);
-			createOpposite(PivotPackage.Literals.VARIABLE, "RelationDomain", _RelationDomain__rootVariable);
+			LIBRARY.createOpposite("RelationDomain", _RelationDomain__rootVariable);
 
 			_RelationDomainAssignment__owner.setOpposite(_RelationDomain__defaultAssignment);
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "domainAssignment", _RelationDomainAssignment__valueExp);
-			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "domainAssignment", _RelationDomainAssignment__variable);
+			LIBRARY.createOpposite("domainAssignment", _RelationDomainAssignment__valueExp);
+			LIBRARY.createOpposite("domainAssignment", _RelationDomainAssignment__variable);
 
-			createOpposite(PivotPackage.Literals.OPERATION, "RelationImplementation", _RelationImplementation__impl);
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "RelationImplementation", _RelationImplementation__inDirectionOf);
+			LIBRARY.createOpposite("RelationImplementation", _RelationImplementation__impl);
+			LIBRARY.createOpposite("RelationImplementation", _RelationImplementation__inDirectionOf);
 			_RelationImplementation__relation.setOpposite(_Relation__operationalImpl);
 
 			_RelationalTransformation__ownedKeys.setOpposite(_Key__transformation);
 
-			createOpposite(QVTbasePackage.Literals.TYPED_MODEL, "SharedVariable", _SharedVariable__typedModel);
+			LIBRARY.createOpposite("SharedVariable", _SharedVariable__typedModel);
 
 			Init.initEnd();
 		}

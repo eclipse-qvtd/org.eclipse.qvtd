@@ -293,21 +293,21 @@ public class QVTtemplateTables extends AbstractTables
 		public static final @NonNull Property _TemplateExp__where = LIBRARY.createProperty(Types._TemplateExp, QVTtemplatePackage.Literals.TEMPLATE_EXP__WHERE, PivotTables.Types._OCLExpression, 1 | IsComposite | IsResolveProxies);
 
 		static {
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "listContainer", _CollectionTemplateExp__member);
-			createOpposite(PivotPackage.Literals.COLLECTION_TYPE, "CollectionTemplateExp", _CollectionTemplateExp__referredCollectionType);
-			createOpposite(PivotPackage.Literals.VARIABLE, "matchingExp", _CollectionTemplateExp__rest);
+			LIBRARY.createOpposite("listContainer", _CollectionTemplateExp__member);
+			LIBRARY.createOpposite("CollectionTemplateExp", _CollectionTemplateExp__referredCollectionType);
+			LIBRARY.createOpposite("matchingExp", _CollectionTemplateExp__rest);
 
 			_ObjectTemplateExp__part.setOpposite(_PropertyTemplateItem__objContainer);
-			createOpposite(PivotPackage.Literals.CLASS, "ObjectTemplateExp", _ObjectTemplateExp__referredClass);
+			LIBRARY.createOpposite("ObjectTemplateExp", _ObjectTemplateExp__referredClass);
 
 			_PropertyTemplateItem__isOpposite.setDefaultValueString("false");
 			_PropertyTemplateItem__objContainer.setOpposite(_ObjectTemplateExp__part);
-			createOpposite(PivotPackage.Literals.PROPERTY, "propertyItem", _PropertyTemplateItem__referredProperty);
-			createOpposite(PivotPackage.Literals.PROPERTY, "PropertyTemplateItem", _PropertyTemplateItem__resolvedProperty);
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "propertyItem", _PropertyTemplateItem__value);
+			LIBRARY.createOpposite("propertyItem", _PropertyTemplateItem__referredProperty);
+			LIBRARY.createOpposite("PropertyTemplateItem", _PropertyTemplateItem__resolvedProperty);
+			LIBRARY.createOpposite("propertyItem", _PropertyTemplateItem__value);
 
-			createOpposite(PivotPackage.Literals.VARIABLE, "templateExp", _TemplateExp__bindsTo);
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "owner", _TemplateExp__where);
+			LIBRARY.createOpposite("templateExp", _TemplateExp__bindsTo);
+			LIBRARY.createOpposite("owner", _TemplateExp__where);
 
 			Init.initEnd();
 		}

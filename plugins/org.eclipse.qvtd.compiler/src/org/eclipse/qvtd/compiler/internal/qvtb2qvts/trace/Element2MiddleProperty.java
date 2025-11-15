@@ -104,7 +104,7 @@ public abstract class Element2MiddleProperty implements Nameable
 		org.eclipse.ocl.pivot.Package typePackage = type.getOwningPackage();
 		org.eclipse.ocl.pivot.Class oppositeType = type;
 		if (tracePackage != typePackage) {			// We're building the tracePackage; any other package must be redirected to a mutable sibling
-			oppositeType = environmentFactory.getCompleteModel().getEquivalentClass(model, type);
+			oppositeType = environmentFactory.getStandardLibrary().getEquivalentClass(model, type);
 		}
 		if (oppositeType instanceof CollectionType) {
 			Type elementType = ((CollectionType)oppositeType).getElementType();

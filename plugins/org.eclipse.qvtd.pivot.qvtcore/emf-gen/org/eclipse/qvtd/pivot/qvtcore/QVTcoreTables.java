@@ -461,17 +461,17 @@ public class QVTcoreTables extends AbstractTables
 			_Assignment__bottomPattern.setOpposite(_BottomPattern__assignment);
 			_Assignment__isDefault.setDefaultValueString("false");
 			_Assignment__isPartial.setDefaultValueString("false");
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "valueAssignment", _Assignment__value);
+			LIBRARY.createOpposite("valueAssignment", _Assignment__value);
 
 			_BottomPattern__area.setOpposite(_Area__bottomPattern);
 			_BottomPattern__assignment.setOpposite(_Assignment__bottomPattern);
 			_BottomPattern__enforcementOperation.setOpposite(_EnforcementOperation__bottomPattern);
 			_BottomPattern__realizedVariable.setOpposite(_RealizedVariable__BottomPattern__realizedVariable);
 
-			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "CorePattern", _CorePattern__ownedVariables);
+			LIBRARY.createOpposite("CorePattern", _CorePattern__ownedVariables);
 
 			_EnforcementOperation__bottomPattern.setOpposite(_BottomPattern__enforcementOperation);
-			createOpposite(PivotPackage.Literals.OPERATION_CALL_EXP, "EnforcementOperation", _EnforcementOperation__operationCallExp);
+			LIBRARY.createOpposite("EnforcementOperation", _EnforcementOperation__operationCallExp);
 
 			_GuardPattern__area.setOpposite(_Area__guardPattern);
 
@@ -480,12 +480,12 @@ public class QVTcoreTables extends AbstractTables
 			_Mapping__refinement.setOpposite(_Mapping__specification);
 			_Mapping__specification.setOpposite(_Mapping__refinement);
 
-			createOpposite(PivotPackage.Literals.OCL_EXPRESSION, "slotAssignment", _NavigationAssignment__slotExpression);
-			createOpposite(PivotPackage.Literals.PROPERTY, "assignment", _NavigationAssignment__targetProperty);
+			LIBRARY.createOpposite("slotAssignment", _NavigationAssignment__slotExpression);
+			LIBRARY.createOpposite("assignment", _NavigationAssignment__targetProperty);
 
 			_RealizedVariable__BottomPattern__realizedVariable.setOpposite(_BottomPattern__realizedVariable);
 
-			createOpposite(PivotPackage.Literals.VARIABLE_DECLARATION, "assignment", _VariableAssignment__targetVariable);
+			LIBRARY.createOpposite("assignment", _VariableAssignment__targetVariable);
 
 			Init.initEnd();
 		}

@@ -547,7 +547,7 @@ public class UMLXTables extends AbstractTables
 			_RelInvocationNode__referredRelDiagram.setOpposite(_RelDiagram__RelInvocationNode__referredRelDiagram);
 
 			_RelPatternEdge__owningRelDomainNode.setOpposite(_RelDomainNode__ownedRelPatternEdges);
-			createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "RelPatternEdge", _RelPatternEdge__referredEStructuralFeature);
+			LIBRARY.createOpposite("RelPatternEdge", _RelPatternEdge__referredEStructuralFeature);
 			_RelPatternEdge__source.setOpposite(_RelPatternNode__outgoing);
 			_RelPatternEdge__target.setOpposite(_RelPatternNode__incoming);
 
@@ -568,17 +568,17 @@ public class UMLXTables extends AbstractTables
 
 			_TxKeyNode__ownedTxPartNodes.setOpposite(_TxPartNode__owningTxKeyNode);
 			_TxKeyNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxKeyNodes);
-			createOpposite(EcorePackage.Literals.ECLASS, "TxKeyNode", _TxKeyNode__referredEClass);
+			LIBRARY.createOpposite("TxKeyNode", _TxKeyNode__referredEClass);
 
 			_TxPackageNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxPackageNodes);
-			createOpposite(EcorePackage.Literals.EPACKAGE, "TxPackageNode", _TxPackageNode__referredEPackage);
+			LIBRARY.createOpposite("TxPackageNode", _TxPackageNode__referredEPackage);
 			_TxPackageNode__TxTypedModelNode__usedTxPackageNodes.setOpposite(_TxTypedModelNode__usedTxPackageNodes);
 
 			_TxParameterNode__owningTxQueryNode.setOpposite(_TxQueryNode__ownedTxParameterNodes);
 
 			_TxPartNode__isOpposite.setDefaultValueString("false");
 			_TxPartNode__owningTxKeyNode.setOpposite(_TxKeyNode__ownedTxPartNodes);
-			createOpposite(EcorePackage.Literals.ESTRUCTURAL_FEATURE, "TxPartNode", _TxPartNode__referredEStructuralFeature);
+			LIBRARY.createOpposite("TxPartNode", _TxPartNode__referredEStructuralFeature);
 
 			_TxQueryNode__ownedTxParameterNodes.setOpposite(_TxParameterNode__owningTxQueryNode);
 			_TxQueryNode__owningTxDiagram.setOpposite(_TxDiagram__ownedTxQueryNodes);
@@ -602,7 +602,7 @@ public class UMLXTables extends AbstractTables
 			_UMLXTypedElement__isOrdered.setDefaultValueString("false");
 			_UMLXTypedElement__isRequired.setDefaultValueString("true");
 			_UMLXTypedElement__isUnique.setDefaultValueString("true");
-			createOpposite(EcorePackage.Literals.ECLASSIFIER, "UMLXTypedElement", _UMLXTypedElement__referredEClassifier);
+			LIBRARY.createOpposite("UMLXTypedElement", _UMLXTypedElement__referredEClassifier);
 
 			Init.initEnd();
 		}
