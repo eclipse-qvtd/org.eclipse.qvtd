@@ -38,11 +38,9 @@ import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASSaverNormalizeVisitor;
@@ -169,7 +167,7 @@ public class QVTcoreASResourceFactory extends ResourceSetAwareASResourceFactory
 		//
 		//		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTbasePackage.eINSTANCE);
 		//		completeModel.registerCompletePackageContribution(PivotConstants.METAMODEL_NAME, QVTcorePackage.eINSTANCE);
-		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
-		completeModel.registerCompleteModelContribution(QVTcoreTables.MODEL);
+		//		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
+		//		completeModel.registerCompleteModelContribution(QVTcoreTables.MODEL);
 	}
 }

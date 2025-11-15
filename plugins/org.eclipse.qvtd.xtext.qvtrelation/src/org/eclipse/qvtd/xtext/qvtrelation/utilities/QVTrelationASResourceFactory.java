@@ -38,10 +38,8 @@ import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASSaverNormalizeVisitor;
@@ -49,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationPrettyPrintVisito
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationTemplateParameterSubstitutionVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 
 /**
@@ -182,15 +179,15 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 		super.registerMetaPackages(completeModel);
 		completeModel.getStandardLibrary().getOclAnyType();		// Ensure library loaded before xxxTables.postInit side effects
 		//
-		completeModel.addPartialModel(QVTbaseTables.MODEL);
-		completeModel.addPartialModel(QVTtemplateTables.MODEL);
-		completeModel.addPartialModel(QVTrelationTables.MODEL);
+		//		completeModel.addPartialModel(QVTbaseTables.MODEL);
+		//		completeModel.addPartialModel(QVTtemplateTables.MODEL);
+		//		completeModel.addPartialModel(QVTrelationTables.MODEL);			// XXX gives a conflict if serializing with a QVTrelation.ecore import
 		//	completeModel.registerCompletePackageContribution(null, QVTbasePackage.eINSTANCE);
 		//	completeModel.registerCompletePackageContribution(null, QVTtemplatePackage.eINSTANCE);
 		//	completeModel.registerCompletePackageContribution(null, QVTrelationPackage.eINSTANCE);
 		//?? QVTtraceTables ???
-		completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
-		completeModel.registerCompleteModelContribution(QVTtemplateTables.MODEL);
-		completeModel.registerCompleteModelContribution(QVTrelationTables.MODEL);
+		//	completeModel.registerCompleteModelContribution(QVTbaseTables.MODEL);
+		//	completeModel.registerCompleteModelContribution(QVTtemplateTables.MODEL);
+		//	completeModel.registerCompleteModelContribution(QVTrelationTables.MODEL);
 	}
 }
