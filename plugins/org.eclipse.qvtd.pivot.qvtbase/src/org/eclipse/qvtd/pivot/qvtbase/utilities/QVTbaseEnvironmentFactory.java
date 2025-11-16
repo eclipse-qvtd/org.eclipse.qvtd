@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
 
-public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
+public abstract class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 {
 	public static abstract class CreateStrategy
 	{
