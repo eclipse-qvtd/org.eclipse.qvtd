@@ -97,8 +97,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 {
 	/**
 	 * ContentEditingURIConverter delegates to a URIConverter but intercepts createInputStream to
-	 * read the input fie andapply global replacements. This is used to chnage nsURIs so that multiple
-	 * test project syntheses from the same source models do not generate dupicate Java registrations,
+	 * read the input fie and apply global replacements. This is used to change nsURIs so that multiple
+	 * test project syntheses from the same source models do not generate duplicate Java registrations,
 	 */
 	public static class ContentEditingURIConverter implements URIConverter
 	{

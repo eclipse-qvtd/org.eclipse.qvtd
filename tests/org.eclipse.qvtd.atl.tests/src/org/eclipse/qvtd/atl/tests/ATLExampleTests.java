@@ -10,7 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.atl.tests;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +23,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
@@ -30,17 +37,19 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.ocl.xtext.tests.TestFile;
+import org.eclipse.ocl.xtext.tests.TestFolder;
 import org.eclipse.ocl.xtext.tests.TestProject;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT.ContentEditingURIConverter;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.junit.Test;
 
@@ -113,7 +122,7 @@ public class ATLExampleTests extends LoadTestCase
 	}
 
 	protected void doATLExampleTest_CG(@NonNull String resultPrefix, @NonNull URI atlURI) throws Exception {
-		String targetRelease = System.getProperty("targetRelease");
+		//	String targetRelease = System.getProperty("targetRelease");
 		//	if (true || (targetRelease != null)) {
 		//		System.err.println(getTestName() + " skipped for " + targetRelease + " - ANTLR version problems");	// FIXME BUG 514604
 		//		return;
@@ -121,10 +130,11 @@ public class ATLExampleTests extends LoadTestCase
 		MyQVT myQVT = createQVT(resultPrefix, atlURI);
 		try {
 			Class<?> txClass = Class.forName("org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr");		// FIXME Use direct reference once generation works redliably
-			@SuppressWarnings({"unchecked", "null"})
+			@SuppressWarnings({"unchecked"})
 			@NonNull Class<? extends Transformer> txCastClass = (Class<? extends Transformer>)txClass;
 			myQVT.createGeneratedExecutor(txCastClass);
-			URI atlXMIURI = getTestURIWithExtension(atlURI, "xmi");
+			//	URI atlXMIURI = getTestURIWithExtension(atlURI, "xmi");
+			URI atlXMIURI = atlURI.trimFileExtension().appendFileExtension("xmi");
 			Resource atlResource = myQVT.addInputURI("atl", atlURI);
 			assert atlResource != null;
 			EList<@NonNull EObject> contents = atlResource.getContents();
@@ -134,7 +144,7 @@ public class ATLExampleTests extends LoadTestCase
 			atlXmiResource.save(XMIUtil.createSaveOptions(atlXmiResource));
 			contents.addAll(atlXmiResource.getContents());
 			String name = atlURI.trimFileExtension().lastSegment();
-			URI outputURI = getTestURIWithExtension(atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras"), QVTrelationUtil.QVTRAS_FILE_EXTENSION);
+			URI outputURI = atlURI.trimSegments(1).appendSegment(name + "_CG.qvtras");
 			try {
 				myQVT.executeTransformation();
 				myQVT.addOutputURI("qvtr", outputURI);
@@ -164,7 +174,32 @@ public class ATLExampleTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		QVTrelationToStringVisitor.FACTORY.getClass();
-		doATLExampleTest_CG("Families2Persons", getModelsURI("families2persons/Families2Persons.atl"));
+		ResourceSet resourceSet = new ResourceSetImpl();
+		getTestProjectManager().initializeResourceSet(resourceSet);
+		TestProject testProject = getTestProject();
+		ContentEditingURIConverter uriConverter = new ContentEditingURIConverter(resourceSet.getURIConverter());
+		//	uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/java", "http://" + testProject.getName() + "/java");
+		//	uriConverter.addReplacement("http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/mitosi/uml", "http://" + testProject.getName() + "/uml");
+		TestFolder testFolder = testProject.getOutputFolder("models");
+		TestFile atlFile = testProject.copyFile(uriConverter, testFolder, getModelsURI("families2persons/Families2Persons.atl"));
+
+		String sourceProjectPath = getTestBundleName() + "/models/families2persons";
+		String targetProjectPath = testProject.getName() + "/models";
+		InputStream inputStream = uriConverter.createInputStream(atlFile.getFileURI());
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		Writer writer = new OutputStreamWriter(uriConverter.createOutputStream(atlFile.getFileURI()), "UTF-8");
+		for (String line; (line = reader.readLine()) != null; ) {
+			String editedLine = line.replace(sourceProjectPath, targetProjectPath);
+			writer.write(editedLine);
+			writer.write("\n");
+		}
+		writer.close();
+		reader.close();
+
+		testProject.copyFile(uriConverter, testFolder, getModelsURI("families2persons/Families.ecore"));
+		testProject.copyFile(uriConverter, testFolder, getModelsURI("families2persons/Persons.ecore"));
+		testProject.copyFile(uriConverter, testFolder, getModelsURI("families2persons/Families2Persons_expected.qvtras"));
+		doATLExampleTest_CG("Families2Persons", atlFile.getFileURI());
 	}
 
 	/*	@Test
