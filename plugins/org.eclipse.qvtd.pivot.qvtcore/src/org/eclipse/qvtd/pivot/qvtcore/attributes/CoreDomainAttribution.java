@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.internal.scoping.AbstractAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -32,7 +31,7 @@ public class CoreDomainAttribution extends AbstractAttribution
 		if (typedModel != null) {
 			for (org.eclipse.ocl.pivot.Package pPackage : ClassUtil.nullFree(typedModel.getUsedPackage())) {
 				environmentView.addNamedElement(pPackage);
-				PivotUtil.addAllClasses(environmentView, pPackage);
+				environmentView.addAllTypes(pPackage);
 			}
 		}
 		for (ScopeView parentScopeView = scopeView.getParent(); true; parentScopeView  = parentScopeView.getParent()) {
