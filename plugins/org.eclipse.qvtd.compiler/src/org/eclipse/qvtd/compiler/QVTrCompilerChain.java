@@ -106,6 +106,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			if (missingTraceArtefacts) {
 				PivotUtil.errPrintln("Missing trace TypedModel.Class artefacts were fixed up for '" + txURI + "'");
 			}
+			environmentFactory.getStandardLibrary().getOclAnyType();		 // Ensure qvtruntimelibrary has been loaded before a just-oclstdlib occludes it
 			checkForProxyURIs(qvtrResource);
 			qvtrResource.setSaveable(true);			// By default *.qvtras is a derived not-saveable Resource see Bug 535842
 			saveResource(qvtrResource);

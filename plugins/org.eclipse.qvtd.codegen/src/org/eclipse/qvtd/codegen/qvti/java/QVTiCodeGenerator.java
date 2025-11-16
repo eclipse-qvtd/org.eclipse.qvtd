@@ -238,6 +238,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	public @NonNull EntryPointsAnalysis getEntryPointsAnalysis(@NonNull ImperativeTransformation transformation) {
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+		completeModel.getStandardLibrary().getOclAnyType();		// Ensure library loaded before xxxTables.postInit side effects
 		EntryPointsAnalysis entryPointsAnalysis = transformation2analysis.get(transformation);
 		if (entryPointsAnalysis == null) {
 			entryPointsAnalysis = new EntryPointsAnalysis(getEnvironmentFactory(), transformation);

@@ -601,6 +601,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 			URI asURIstem = asURI.trimFileExtension();
 			doSerialize(asURI, asURIstem.appendFileExtension("serialized.qvti"));
 		}
+		environmentFactory.getStandardLibrary().getOclAnyType();		// Ensure library loaded before xxxTables.postInit side effects
 		return compilerChain.generate(asTransformation, genModelFiles);
 	}
 
