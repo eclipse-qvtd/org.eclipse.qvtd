@@ -494,7 +494,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		if (usage != null) {
 			return usage;
 		}
-		Operation operation = PivotUtil.getContainingOperation(element);
+		Operation operation = PivotUtil.basicGetContainingOperation(element);
 		if (operation == null) {
 			return null;
 		}
@@ -692,7 +692,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	@Override
 	public @NonNull DomainUsage getUsage(@NonNull Element element) {
-		Operation operation = PivotUtil.getContainingOperation(element);
+		Operation operation = PivotUtil.basicGetContainingOperation(element);
 		if (operation != null) {
 			DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
 			return ClassUtil.requireNonNull(analyzeOperation.getUsage(element));

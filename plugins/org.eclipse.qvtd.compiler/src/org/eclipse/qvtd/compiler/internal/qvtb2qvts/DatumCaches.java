@@ -621,7 +621,7 @@ public class DatumCaches
 	}
 
 	protected @Nullable DomainUsage getUsage(@NonNull Element element) {
-		Operation operation = QVTbaseUtil.getContainingOperation(element);
+		Operation operation = QVTbaseUtil.basicGetContainingOperation(element);
 		if (operation != null) {
 			DomainUsageAnalysis analysis = domainUsageAnalysis.getAnalysis(operation);
 			return analysis.getUsage(element);

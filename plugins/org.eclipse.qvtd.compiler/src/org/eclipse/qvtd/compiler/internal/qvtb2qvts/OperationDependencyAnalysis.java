@@ -938,7 +938,7 @@ public class OperationDependencyAnalysis
 			BasicDependencyPaths result = emptyDependencyPaths;
 			StringBuilder s = ATTEMPT.isActive() || RESULT.isActive() ? new StringBuilder() : null;
 			if (s != null) {
-				Operation containingOperation = PivotUtil.getContainingOperation(operationCallExp);
+				Operation containingOperation = PivotUtil.basicGetContainingOperation(operationCallExp);
 				if (containingOperation != null) {
 					s.append("\n\tin: " + containingOperation);
 				}

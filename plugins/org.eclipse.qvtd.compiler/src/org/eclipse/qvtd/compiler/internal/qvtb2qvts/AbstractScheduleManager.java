@@ -648,7 +648,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			return domainUsageAnalysis.getConstantUsage(netMask);
 		}
 		DomainUsageAnalysis analysis = domainUsageAnalysis;
-		Operation operation = PivotUtil.getContainingOperation(element);
+		Operation operation = PivotUtil.basicGetContainingOperation(element);
 		if (operation != null) {
 			analysis = domainUsageAnalysis.getAnalysis(operation);
 		}

@@ -25,6 +25,7 @@ import example2.classes.ClassesTables;
 // import example2.classes.lookup.EnvironmentTables;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -102,7 +103,9 @@ public class EnvironmentTables extends AbstractTables
 			EnvironmentTables.init();
 		}
 
-		public static final @NonNull TemplateParameter $$0 = LIBRARY.createTemplateParameter(0, "$$0");
+		public static final @NonNull NormalizedTemplateParameter $$0 = LIBRARY.createNormalizedTemplateParameter(0, "$$0");
+
+		private static final @NonNull TemplateParameter _0_LookupEnvironment_addElements_NE = LIBRARY.createTemplateParameter("NE");
 
 		static {
 			Init.initEnd();
@@ -192,7 +195,6 @@ public class EnvironmentTables extends AbstractTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(MODEL.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(ClassesTables.Types._NamedElement);
 
 		static {
@@ -225,8 +227,16 @@ public class EnvironmentTables extends AbstractTables
 
 		public static final @NonNull Operation _LookupEnvironment__addElement = LIBRARY.createOperation(Types._LookupEnvironment, "addElement", Parameters._NamedElement, Types._LookupEnvironment,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull Operation _LookupEnvironment__addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", Parameters._Collection__NE__, Types._LookupEnvironment,
-			1 | IsRequired, new TemplateParameters(TypeParameters.$$0), null);
+		public static final @NonNull Operation _LookupEnvironment__addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", null, Types._LookupEnvironment,
+			1 | IsRequired, new TemplateParameters(TypeParameters._0_LookupEnvironment_addElements_NE), null);
+
+		/*
+		 * Deferred initialization for operations with a return type involving a nested specialization
+		 * or a parameter whose type references an Operation TemplateParameter.
+		 */
+		public static void postInit() {
+			LIBRARY.setParameters(_LookupEnvironment__addElements, MODEL.getCollectionType(OCLstdlibTables.Types._Collection, LIBRARY.getTemplateParameter(_LookupEnvironment__addElements, TypeParameters.$$0)));
+		}
 
 		static {
 			Init.initEnd();
@@ -558,6 +568,7 @@ public class EnvironmentTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					Operations.postInit();
 					LIBRARY.freeze(RESOURCE);
 				}
 			}
