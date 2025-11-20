@@ -76,7 +76,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 		@Override
 		public BasicContinuation<?> execute() {
-			SimpleParameterBinding pBinding = PivotUtil.getPivot(SimpleParameterBinding.class, csElement);
+			SimpleParameterBinding pBinding = PivotUtil.basicGetPivot(SimpleParameterBinding.class, csElement);
 			if (pBinding != null) {
 				ExpCS expression = csElement.getOwnedValue();
 				if (expression != null) {
@@ -112,7 +112,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public @Nullable Continuation<?> visitAddStatementCS(@NonNull AddStatementCS csElement) {
-		AddStatement asAddStatement = PivotUtil.getPivot(AddStatement.class, csElement);
+		AddStatement asAddStatement = PivotUtil.basicGetPivot(AddStatement.class, csElement);
 		if (asAddStatement != null) {
 			asAddStatement.setTargetVariable(csElement.getTargetVariable());
 			ExpCS csInitializer = csElement.getOwnedExpression();
@@ -131,7 +131,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitBufferStatementCS(@NonNull BufferStatementCS csElement) {
-		BufferStatement asOutStatement = PivotUtil.getPivot(BufferStatement.class, csElement);
+		BufferStatement asOutStatement = PivotUtil.basicGetPivot(BufferStatement.class, csElement);
 		if (asOutStatement != null) {
 			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
@@ -157,7 +157,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitCheckStatementCS(@NonNull CheckStatementCS csElement) {
-		CheckStatement asPredicate = PivotUtil.getPivot(CheckStatement.class, csElement);
+		CheckStatement asPredicate = PivotUtil.basicGetPivot(CheckStatement.class, csElement);
 		if (asPredicate != null) {
 			OCLExpression asCondition = null;
 			ExpCS csCondition = csElement.getOwnedCondition();
@@ -176,7 +176,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitDeclareStatementCS(@NonNull DeclareStatementCS csElement) {
-		DeclareStatement asVariable = PivotUtil.getPivot(DeclareStatement.class, csElement);
+		DeclareStatement asVariable = PivotUtil.basicGetPivot(DeclareStatement.class, csElement);
 		if (asVariable != null) {
 			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
@@ -225,7 +225,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public @Nullable Continuation<?> visitEntryPointCS(@NonNull EntryPointCS csElement) {
-		EntryPoint asEntryPoint = PivotUtil.getPivot(EntryPoint.class, csElement);
+		EntryPoint asEntryPoint = PivotUtil.basicGetPivot(EntryPoint.class, csElement);
 		if (asEntryPoint != null) {
 			context.refreshList(asEntryPoint.getInputTypedModels(), csElement.getInputTypedModels());
 			context.refreshList(asEntryPoint.getOutputTypedModels(), csElement.getOutputTypedModels());
@@ -235,7 +235,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitGuardParameterCS(@NonNull GuardParameterCS csElement) {
-		GuardParameter asGuardParameter = PivotUtil.getPivot(GuardParameter.class, csElement);
+		GuardParameter asGuardParameter = PivotUtil.basicGetPivot(GuardParameter.class, csElement);
 		if (asGuardParameter != null) {
 			asGuardParameter.setReferredTypedModel(csElement.getReferredTypedModel());
 			asGuardParameter.setSuccessProperty(csElement.getSuccessProperty());
@@ -260,7 +260,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
-		MappingLoop pMappingLoop = PivotUtil.getPivot(MappingLoop.class, csElement);
+		MappingLoop pMappingLoop = PivotUtil.basicGetPivot(MappingLoop.class, csElement);
 		if (pMappingLoop != null) {
 			ExpCS expression = csElement.getOwnedInExpression();
 			if (expression != null) {
@@ -286,7 +286,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
-		NewStatement asNewStatement = PivotUtil.getPivot(NewStatement.class, csElement);
+		NewStatement asNewStatement = PivotUtil.basicGetPivot(NewStatement.class, csElement);
 		if (asNewStatement != null) {
 			asNewStatement.setReferredTypedModel(csElement.getReferredTypedModel());
 			ExpCS expression = csElement.getOwnedExpression();
@@ -300,7 +300,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
-		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
+		Function pFunction = PivotUtil.basicGetPivot(Function.class, csElement);
 		if (pFunction != null) {
 			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
@@ -313,7 +313,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
-		SetStatement setStatement = PivotUtil.getPivot(SetStatement.class, csElement);
+		SetStatement setStatement = PivotUtil.basicGetPivot(SetStatement.class, csElement);
 		if (setStatement != null) {
 			VariableDeclaration targetVariable = csElement.getReferredVariable();
 			assert targetVariable != null;
@@ -333,7 +333,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	@Override
 	public @Nullable Continuation<?> visitShadowPartCS(@NonNull ShadowPartCS csShadowPart) {
 		if (QVTimperativeCS2AS.isNewStatementPartCS(csShadowPart)) {
-			NewStatementPart pivotElement = PivotUtil.getPivot(NewStatementPart.class, csShadowPart);
+			NewStatementPart pivotElement = PivotUtil.basicGetPivot(NewStatementPart.class, csShadowPart);
 			if (pivotElement != null) {
 				Property property = csShadowPart.getReferredProperty();
 				pivotElement.setReferredProperty(property);
@@ -350,7 +350,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitSimpleParameterCS(@NonNull SimpleParameterCS csElement) {
-		SimpleParameter asSimpleParameter = PivotUtil.getPivot(SimpleParameter.class, csElement);
+		SimpleParameter asSimpleParameter = PivotUtil.basicGetPivot(SimpleParameter.class, csElement);
 		if (asSimpleParameter != null) {
 			asSimpleParameter.setReferredTypedModel(csElement.getReferredTypedModel());
 		}
@@ -364,7 +364,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitSpeculateStatementCS(@NonNull SpeculateStatementCS csElement) {
-		SpeculateStatement asSpeculateStatement = PivotUtil.getPivot(SpeculateStatement.class, csElement);
+		SpeculateStatement asSpeculateStatement = PivotUtil.basicGetPivot(SpeculateStatement.class, csElement);
 		if (asSpeculateStatement != null) {
 			List<@NonNull OCLExpression> asExpressions = new ArrayList<>();
 			for (@NonNull ExpCS csExp : ClassUtil.nullFree(csElement.getOwnedConditions())) {

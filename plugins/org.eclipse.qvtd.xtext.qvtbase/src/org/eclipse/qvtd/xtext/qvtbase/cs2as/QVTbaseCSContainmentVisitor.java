@@ -129,7 +129,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 		}
 
 		private org.eclipse.ocl.pivot.@Nullable Class installClass(org.eclipse.ocl.pivot.@Nullable Package asContextPackage, @NonNull ClassCS csClass) {
-			org.eclipse.ocl.pivot.Class asClass = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csClass);
+			org.eclipse.ocl.pivot.Class asClass = PivotUtil.basicGetPivot(org.eclipse.ocl.pivot.Class.class, csClass);
 			if (asClass != null) {
 				org.eclipse.ocl.pivot.Package asParent;
 				/*PathNameCS qualifiedPathName = csClass.getOwnedPathName();
@@ -191,7 +191,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 		}
 
 		private org.eclipse.ocl.pivot.@Nullable Package installPackage(org.eclipse.ocl.pivot.@Nullable Package asContextPackage, @NonNull PackageCS csPackage) {
-			org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getPivot(org.eclipse.ocl.pivot.Package.class, csPackage);
+			org.eclipse.ocl.pivot.Package asPackage = PivotUtil.basicGetPivot(org.eclipse.ocl.pivot.Package.class, csPackage);
 			if (asPackage != null) {
 				org.eclipse.ocl.pivot.Package asParent;
 				PathNameCS qualifiedPathName = csPackage instanceof QualifiedPackageCS ? ((QualifiedPackageCS)csPackage).getOwnedPathName() : null;
@@ -219,7 +219,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 		}
 
 		private @Nullable Transformation installTransformation(org.eclipse.ocl.pivot.@Nullable Package asContextPackage, @NonNull AbstractTransformationCS csTransformation) {
-			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
+			Transformation asTransformation = PivotUtil.basicGetPivot(Transformation.class, csTransformation);
 			if (asTransformation != null) {
 				PathNameCS qualifiedPathName = csTransformation.getOwnedPathName();
 				org.eclipse.ocl.pivot.Package asParent;
@@ -254,7 +254,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 
 		@Override
 		public BasicContinuation<?> execute() {
-			SimpleTargetElement asSimpleTargetElement = PivotUtil.getPivot(SimpleTargetElement.class, csElement);
+			SimpleTargetElement asSimpleTargetElement = PivotUtil.basicGetPivot(SimpleTargetElement.class, csElement);
 			if (asSimpleTargetElement != null) {
 				asSimpleTargetElement.setTypedModel(csElement.getTypedModel());
 				PivotUtil.refreshList(asSimpleTargetElement.getIterates(), csElement.getIterates());

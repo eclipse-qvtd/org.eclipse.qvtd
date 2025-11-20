@@ -104,7 +104,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			TypedModel pTypedModel = PivotUtil.basicGetPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
 				PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 			}
@@ -120,7 +120,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			GuardParameter pivotElement = PivotUtil.getPivot(GuardParameter.class, csElement);
+			GuardParameter pivotElement = PivotUtil.basicGetPivot(GuardParameter.class, csElement);
 			if (pivotElement != null) {
 				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
 			}
@@ -136,7 +136,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csElement);
+			NewStatement pivotElement = PivotUtil.basicGetPivot(NewStatement.class, csElement);
 			if (pivotElement != null) {
 				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
 			}
@@ -152,7 +152,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			SimpleParameter pivotElement = PivotUtil.getPivot(SimpleParameter.class, csElement);
+			SimpleParameter pivotElement = PivotUtil.basicGetPivot(SimpleParameter.class, csElement);
 			if (pivotElement != null) {
 				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
 			}

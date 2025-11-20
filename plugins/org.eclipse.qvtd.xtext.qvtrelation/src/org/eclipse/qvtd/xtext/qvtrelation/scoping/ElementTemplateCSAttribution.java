@@ -27,7 +27,7 @@ public class ElementTemplateCSAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		Element asElement = PivotUtil.getPivot(Element.class, (ElementTemplateCS)target);
+		Element asElement = PivotUtil.basicGetPivot(Element.class, (ElementTemplateCS)target);
 		String name = environmentView.getName();
 		if (name != null) {
 			if (asElement instanceof VariableExp) {

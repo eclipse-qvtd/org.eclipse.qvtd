@@ -35,7 +35,7 @@ public class QVTrelationPathElementCSAttribution extends PathElementCSAttributio
 		if (QVTrelationUtil.DUMMY_VARIABLE_NAME.equals(name)) {
 			for (EObject eObject = target; eObject != null; eObject = eObject.eContainer()) {
 				if (eObject instanceof RelationCS) {
-					Relation relation = PivotUtil.getPivot(Relation.class, (RelationCS)eObject);
+					Relation relation = PivotUtil.basicGetPivot(Relation.class, (RelationCS)eObject);
 					if (relation != null) {
 						QVTrelationHelper helper = new QVTrelationHelper(environmentView.getEnvironmentFactory());
 						List<Variable> variables = relation.getVariable();

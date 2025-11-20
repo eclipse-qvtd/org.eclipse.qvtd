@@ -50,7 +50,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 
 		@Override
 		public BasicContinuation<?> execute() {
-			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			FunctionParameter pivotElement = PivotUtil.basicGetPivot(FunctionParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -66,7 +66,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
+			Function pivotElement = PivotUtil.basicGetPivot(Function.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -82,7 +82,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			Variable pivotElement = PivotUtil.basicGetPivot(Variable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 				TypedRefCS csType = csElement.getOwnedType();
@@ -128,7 +128,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
-		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
+		Mapping pMapping = PivotUtil.basicGetPivot(Mapping.class, csElement);
 		if (pMapping != null) {
 			PivotUtil.refreshList(pMapping.getSpecification(), csElement.getRefines());
 		}
@@ -167,7 +167,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		Transformation pivotElement = PivotUtil.basicGetPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 			//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());

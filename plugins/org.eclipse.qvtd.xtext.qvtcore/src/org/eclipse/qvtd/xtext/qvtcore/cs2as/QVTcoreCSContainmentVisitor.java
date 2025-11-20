@@ -107,7 +107,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 		@Override
 		public BasicContinuation<?> execute() {
-			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			TypedModel pTypedModel = PivotUtil.basicGetPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
 				PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 				PivotUtil.refreshList(pTypedModel.getDependsOn(), csElement.getUses());
@@ -125,7 +125,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 		@Override
 		public BasicContinuation<?> execute() {
-			CoreDomain pDomain = PivotUtil.getPivot(CoreDomain.class, csElement);
+			CoreDomain pDomain = PivotUtil.basicGetPivot(CoreDomain.class, csElement);
 			if (pDomain != null) {
 				TypedModel direction = csElement.getDirection();
 				if (direction == null) {
@@ -155,7 +155,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			if (csInPathName != null) {
 				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
 				if (asTransformation != null) {
-					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
+					Mapping asMapping = PivotUtil.basicGetPivot(Mapping.class, csMapping);
 					if (asMapping != null) {
 						List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 						if (asMappings == null) {
@@ -184,7 +184,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		for (@NonNull QueryCS csQuery : csQueries) {
 			Transformation asTransformation = csQuery.getTransformation();
 			if (asTransformation != null) {
-				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
+				Function asQuery = PivotUtil.basicGetPivot(Function.class,  csQuery);
 				if (asQuery != null) {
 					List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
 					if (asQueries == null) {
@@ -237,8 +237,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcorePackage.Literals.CORE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isIsCheck() || csElement.isIsEnforce());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
-		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
-		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));
+		pivotElement.setBottomPattern(PivotUtil.basicGetPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
+		pivotElement.setGuardPattern(PivotUtil.basicGetPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));
 		context.refreshComments(pivotElement, csElement);
 		return new DomainContentContinuation(context, csElement);
 	}
@@ -273,8 +273,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
 		DomainCS csMiddle = csElement.getOwnedMiddle();
 		if (csMiddle != null) {
-			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getOwnedBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getOwnedGuardPattern()));
+			pivotElement.setBottomPattern(PivotUtil.basicGetPivot(BottomPattern.class, csMiddle.getOwnedBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.basicGetPivot(GuardPattern.class, csMiddle.getOwnedGuardPattern()));
 		}
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();

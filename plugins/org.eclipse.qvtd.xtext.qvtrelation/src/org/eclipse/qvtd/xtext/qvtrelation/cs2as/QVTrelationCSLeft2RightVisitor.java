@@ -110,7 +110,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof TransformationCS) {
-					Transformation asContext = PivotUtil.getPivot(Transformation.class, (TransformationCS)csParent);
+					Transformation asContext = PivotUtil.basicGetPivot(Transformation.class, (TransformationCS)csParent);
 					if (asContext != null) {
 						next = asContext;
 					}
@@ -279,17 +279,17 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 
 	@Override
 	public Element visitCollectionTemplateCS(@NonNull CollectionTemplateCS csElement) {
-		return PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
+		return PivotUtil.basicGetPivot(CollectionTemplateExp.class, csElement);
 	}
 
 	@Override
 	public Element visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
-		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		RelationDomainAssignment pivotElement = PivotUtil.basicGetPivot(RelationDomainAssignment.class, csElement);
 		return pivotElement;
 	}
 
 	@Override
 	public Element visitObjectTemplateCS(@NonNull ObjectTemplateCS csElement) {
-		return PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
+		return PivotUtil.basicGetPivot(ObjectTemplateExp.class, csElement);
 	}
 }

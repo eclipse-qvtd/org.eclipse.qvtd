@@ -585,7 +585,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			try {
 				Object boxedValue = setStatement.getOwnedExpression().accept(undecoratedVisitor);
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
-				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
+				Class<?> instanceClass = PivotUtil.basicGetEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
 				executor.internalExecuteSetStatement(setStatement, slotObject, ecoreValue);
 				return true;

@@ -39,7 +39,7 @@ public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttrib
 		RoundBracketedClauseCS csRoundBracketedClause = fromArgument.getOwningRoundBracketedClause();
 		AbstractNameExpCS targetElement = csRoundBracketedClause.getOwningNameExp();
 		assert targetElement != null;
-		OCLExpression pivot = PivotUtil.getPivot(OCLExpression.class, targetElement);
+		OCLExpression pivot = PivotUtil.basicGetPivot(OCLExpression.class, targetElement);
 		if (pivot instanceof RelationCallExp) {
 			int argumentIndex = csRoundBracketedClause.getOwnedArguments().indexOf(fromArgument);
 			if (argumentIndex >= 0) {
@@ -49,7 +49,7 @@ public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttrib
 				if (argumentTypedModel != null) {
 					for (EObject eObject = csRoundBracketedClause; eObject != null; eObject = eObject.eContainer()) {
 						if (eObject instanceof RelationCS) {
-							Relation invokingRelation = ClassUtil.requireNonNull(PivotUtil.getPivot(Relation.class, (RelationCS)eObject));
+							Relation invokingRelation = ClassUtil.requireNonNull(PivotUtil.basicGetPivot(Relation.class, (RelationCS)eObject));
 							RelationDomain asRelationDomain = QVTrelationUtil.basicGetRelationDomain(invokingRelation, argumentTypedModel);
 							if (asRelationDomain != null) {
 								for (@NonNull DomainPattern asPattern : QVTrelationUtil.getOwnedPatterns(asRelationDomain)) {

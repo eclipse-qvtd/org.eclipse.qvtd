@@ -104,7 +104,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(AddStatement ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -119,7 +119,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(ConnectionVariable ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -142,7 +142,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(DeclareStatement ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -159,7 +159,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(GuardParameter ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -175,7 +175,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(LoopVariable ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -207,7 +207,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(SetStatement ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}

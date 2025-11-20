@@ -84,7 +84,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	}
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
-		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
+		VariableAssignment variableAssignment = PivotUtil.basicGetPivot(VariableAssignment.class, csConstraint);
 		if (variableAssignment != null) {
 			variableAssignment.setTargetVariable(variableExp.getReferredVariable());
 		}
@@ -98,7 +98,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
+		BottomPattern pBottomPattern = PivotUtil.basicGetPivot(BottomPattern.class, csElement);
 		if (pBottomPattern != null) {
 			List<Assignment> pAssignments = new ArrayList<Assignment>();
 			List<Predicate> pPredicates = new ArrayList<Predicate>();
@@ -129,7 +129,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 					if (isDefault) {
 						context.addError(csElement, "misplaced default ignored");
 					}
-					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
+					Predicate predicate = PivotUtil.basicGetPivot(Predicate.class, csConstraint);
 					if (predicate != null) {
 						predicate.setConditionExpression(target);
 						pPredicates.add(predicate);
@@ -164,7 +164,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
+		GuardPattern asGuardPattern = PivotUtil.basicGetPivot(GuardPattern.class, csElement);
 		if (asGuardPattern != null) {
 			context.refreshList(Predicate.class, QVTbaseUtil.getPredicatesList(asGuardPattern), csElement.getOwnedPredicates());
 		}
@@ -188,7 +188,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
-		Predicate asPredicate = PivotUtil.getPivot(Predicate.class, csElement);
+		Predicate asPredicate = PivotUtil.basicGetPivot(Predicate.class, csElement);
 		if (asPredicate != null) {
 			OCLExpression asCondition = null;
 			ExpCS csCondition = csElement.getOwnedCondition();
@@ -207,7 +207,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
-		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
+		Function pFunction = PivotUtil.basicGetPivot(Function.class, csElement);
 		if (pFunction != null) {
 			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
@@ -235,7 +235,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csElement);
+		Transformation asTransformation = PivotUtil.basicGetPivot(Transformation.class, csElement);
 		if (asTransformation != null) {
 			TypedModel thisTypedModel = QVTbaseUtil.basicGetThisTypedModel(asTransformation);
 			if (thisTypedModel != null) {
@@ -247,7 +247,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 
 	@Override
 	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
-		Variable asVariable = PivotUtil.getPivot(Variable.class, csElement);
+		Variable asVariable = PivotUtil.basicGetPivot(Variable.class, csElement);
 		if (asVariable != null) {
 			ExpCS expression = csElement.getOwnedInitExpression();
 			if (expression != null) {

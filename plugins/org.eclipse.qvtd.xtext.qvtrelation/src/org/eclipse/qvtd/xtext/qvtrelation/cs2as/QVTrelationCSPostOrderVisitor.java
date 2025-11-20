@@ -84,7 +84,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Predicate pivotElement = PivotUtil.getPivot(Predicate.class, csElement);
+			Predicate pivotElement = PivotUtil.basicGetPivot(Predicate.class, csElement);
 			ExpCS csExpr = csElement.getOwnedCondition();
 			OCLExpression conditionExpression = csExpr != null ? context.visitLeft2Right(OCLExpression.class, csExpr) : null;
 			if (pivotElement != null) {
@@ -102,7 +102,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 		@Override
 		public BasicContinuation<?> execute() {
-			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
+			PropertyTemplateItem pivotElement = PivotUtil.basicGetPivot(PropertyTemplateItem.class, csElement);
 			ExpCS csExpression = csElement.getOwnedExpression();
 			OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
 			if (pivotElement != null) {
@@ -120,7 +120,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Function asFunction = PivotUtil.getPivot(Function.class, csElement);
+			Function asFunction = PivotUtil.basicGetPivot(Function.class, csElement);
 			if (asFunction != null) {
 				ExpCS csExpression = csElement.getOwnedExpression();
 				OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
@@ -138,7 +138,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 		@Override
 		public BasicContinuation<?> execute() {
-			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+			RelationDomainAssignment pDomain = PivotUtil.basicGetPivot(RelationDomainAssignment.class, csElement);
 			ExpCS csInitializer = csElement.getOwnedInitExpression();
 			OCLExpression oclExpression = csInitializer != null ? context.visitLeft2Right(OCLExpression.class, csInitializer) : null;
 			if (pDomain != null) {
@@ -156,7 +156,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 		@Override
 		public BasicContinuation<?> execute() {
-			TemplateExp pivotElement = PivotUtil.getPivot(TemplateExp.class, csElement);
+			TemplateExp pivotElement = PivotUtil.basicGetPivot(TemplateExp.class, csElement);
 			ExpCS guardExpression = csElement.getOwnedGuardExpression();
 			OCLExpression oclExpression = guardExpression != null ? context.visitLeft2Right(OCLExpression.class, guardExpression) : null;
 			if (pivotElement != null) {
@@ -172,7 +172,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 	@Override
 	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
-		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		RelationDomainAssignment pivotElement = PivotUtil.basicGetPivot(RelationDomainAssignment.class, csElement);
 		if (pivotElement != null) {
 			ExpCS initializer = csElement.getOwnedInitExpression();
 			OCLExpression oclExpression = initializer != null ? context.visitLeft2Right(OCLExpression.class, initializer) : null;
@@ -205,9 +205,9 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 	@Override
 	public @Nullable Continuation<?> visitPrimitiveTypeDomainPatternCS(@NonNull PrimitiveTypeDomainPatternCS csElement) {
-		DomainPattern pivotElement = PivotUtil.getPivot(DomainPattern.class, csElement);
+		DomainPattern pivotElement = PivotUtil.basicGetPivot(DomainPattern.class, csElement);
 		if (pivotElement != null) {
-			Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+			Type type = PivotUtil.basicGetPivot(Type.class, csElement.getOwnedType());
 			TemplateExp template = pivotElement.getTemplateExpression();
 			if (template instanceof ObjectTemplateExp) {
 				((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
@@ -240,7 +240,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		Boolean isRequired = null;
 		TypedRefCS ownedType = csElement.getOwnedType();
 		if (ownedType != null) {
-			pivotType = PivotUtil.getPivot(Type.class, ownedType);
+			pivotType = PivotUtil.basicGetPivot(Type.class, ownedType);
 			isRequired = context.isRequired(ownedType);
 		}
 		OCLExpression oclExpression = null;
@@ -257,7 +257,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 			}
 		}
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getOwnedVarDeclarationIds()) {
-			pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
+			pivotVariable = PivotUtil.basicGetPivot(Variable.class, csVarDeclarationId);
 			if (pivotVariable != null) {
 				//				if (ownedType != null) {
 				//					context.refreshRequiredType(pivotVariable, ownedType);

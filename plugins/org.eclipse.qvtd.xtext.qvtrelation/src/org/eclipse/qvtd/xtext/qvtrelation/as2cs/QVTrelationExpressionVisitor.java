@@ -41,7 +41,7 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 	@Override
 	public ElementCS visitClass(org.eclipse.ocl.pivot.@NonNull Class object) {   // FIXME see Bug 496148
 		org.eclipse.ocl.pivot.Class scopeClass = context.getScope();
-		org.eclipse.ocl.pivot.Package scopePackage = scopeClass != null ? PivotUtil.getPackage(scopeClass) : null;
+		org.eclipse.ocl.pivot.Package scopePackage = scopeClass != null ? PivotUtil.basicGetPackage(scopeClass) : null;
 		TypedTypeRefCS csRef = BaseCSFactory.eINSTANCE.createTypedTypeRefCS();
 		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
 		PathNameCS csPathName = csRef.getOwnedPathName();
@@ -53,7 +53,7 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 		context.refreshPathName(csPathName, type, context.getScope());
 		csRef.setPivot(type);		// FIXME object ??
 		if (!(type instanceof PrimitiveType)) {
-			org.eclipse.ocl.pivot.Package objectPackage = PivotUtil.getPackage(type);
+			org.eclipse.ocl.pivot.Package objectPackage = PivotUtil.basicGetPackage(type);
 			if ((objectPackage != null) && (scopePackage != null) && objectPackage.eResource() != scopePackage.eResource()) {
 				context.importNamespace(objectPackage, null);
 			}

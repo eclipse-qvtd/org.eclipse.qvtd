@@ -38,7 +38,7 @@ public class QVTimperativeShadowPartCSAttribution extends ShadowPartCSAttributio
 			if (QVTimperativeCS2AS.isNewStatementPartCS(targetElement)) {
 				CurlyBracketedClauseCS csCurlyBracketClause = targetElement.getOwningCurlyBracketClause();
 				Pivotable eContainer = (Pivotable) csCurlyBracketClause.eContainer().eContainer();
-				NewStatement pivot = PivotUtil.getPivot(NewStatement.class, eContainer);
+				NewStatement pivot = PivotUtil.basicGetPivot(NewStatement.class, eContainer);
 				if (pivot != null) {
 					Type type = pivot.getType();
 					if (type instanceof org.eclipse.ocl.pivot.Class) {

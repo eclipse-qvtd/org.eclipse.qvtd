@@ -133,7 +133,7 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(PropertyAssignment ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}
@@ -160,7 +160,7 @@ public class QVTcoreLabelProvider extends QVTbaseLabelProvider
 
 	protected String text(VariableAssignment ele) {
 		assert ele != null;
-		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
+		Namespace namespace = PivotUtil.basicGetNamespace(ele.eContainer());
 		if (namespace == null) {
 			return "";
 		}

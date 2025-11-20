@@ -87,7 +87,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			AppendParameter pivotElement = PivotUtil.getPivot(AppendParameter.class, csElement);
+			AppendParameter pivotElement = PivotUtil.basicGetPivot(AppendParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -103,7 +103,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			BufferStatement pivotElement = PivotUtil.getPivot(BufferStatement.class, csElement);
+			BufferStatement pivotElement = PivotUtil.basicGetPivot(BufferStatement.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -119,7 +119,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			DeclareStatement pivotElement = PivotUtil.getPivot(DeclareStatement.class, csElement);
+			DeclareStatement pivotElement = PivotUtil.basicGetPivot(DeclareStatement.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -135,7 +135,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			GuardParameter pivotElement = PivotUtil.getPivot(GuardParameter.class, csElement);
+			GuardParameter pivotElement = PivotUtil.basicGetPivot(GuardParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -162,13 +162,13 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			MappingLoop pivotElement = PivotUtil.getPivot(MappingLoop.class, csElement);
+			MappingLoop pivotElement = PivotUtil.basicGetPivot(MappingLoop.class, csElement);
 			if (pivotElement != null) {
 				LoopVariable iterator = pivotElement.getOwnedIterators().get(0);
 				if (iterator != null) {
 					VariableCS csIterator = csElement.getOwnedIterator();
 					if (csIterator != null) {
-						Type type = PivotUtil.getPivot(Type.class, csIterator.getOwnedType());
+						Type type = PivotUtil.basicGetPivot(Type.class, csIterator.getOwnedType());
 						iterator.setType(type);
 					}
 				}
@@ -186,7 +186,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csElement);
+			NewStatement pivotElement = PivotUtil.basicGetPivot(NewStatement.class, csElement);
 			if (pivotElement != null) {
 				TypedRefCS csType = csElement.getOwnedType();
 				if (csType instanceof TypeNameExpCS) {
@@ -211,7 +211,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csNewStatement);
+			NewStatement pivotElement = PivotUtil.basicGetPivot(NewStatement.class, csNewStatement);
 			if (pivotElement != null) {
 				context.installPivotUsage(csElement, pivotElement);
 			}
@@ -227,7 +227,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			FunctionParameter pivotElement = PivotUtil.basicGetPivot(FunctionParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -243,7 +243,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
+			Function pivotElement = PivotUtil.basicGetPivot(Function.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -259,7 +259,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			SimpleParameter pivotElement = PivotUtil.getPivot(SimpleParameter.class, csElement);
+			SimpleParameter pivotElement = PivotUtil.basicGetPivot(SimpleParameter.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -275,11 +275,11 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			ImperativeTransformation pivotElement = PivotUtil.getPivot(ImperativeTransformation.class, csElement);
+			ImperativeTransformation pivotElement = PivotUtil.basicGetPivot(ImperativeTransformation.class, csElement);
 			if (pivotElement != null) {
 				TypedRefCS csContextType = csElement.getOwnedContextType();
 				if (csContextType != null) {
-					org.eclipse.ocl.pivot.Class pivotType = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csContextType);
+					org.eclipse.ocl.pivot.Class pivotType = PivotUtil.basicGetPivot(org.eclipse.ocl.pivot.Class.class, csContextType);
 					pivotElement.setContextType(pivotType);
 				}
 			}
@@ -327,7 +327,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	private void refreshObservedProperties(@NonNull PivotableElementCS csElement, /*@NonNull*/ List<PathNameCS> csProperties) {
-		ObservableStatement asElement = PivotUtil.getPivot(ObservableStatement.class, csElement);
+		ObservableStatement asElement = PivotUtil.basicGetPivot(ObservableStatement.class, csElement);
 		assert asElement != null;
 		List<Property> properties = new ArrayList<Property>();
 		for (PathNameCS csPathName : csProperties) {
@@ -354,7 +354,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitAppendParameterBindingCS(@NonNull AppendParameterBindingCS csElement) {
-		AppendParameterBinding pivotElement = PivotUtil.getPivot(AppendParameterBinding.class, csElement);
+		AppendParameterBinding pivotElement = PivotUtil.basicGetPivot(AppendParameterBinding.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setBoundVariable(csElement.getReferredVariable());
 			pivotElement.setValue(csElement.getValue());
@@ -391,7 +391,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitGuardParameterBindingCS(@NonNull GuardParameterBindingCS csElement) {
-		GuardParameterBinding pivotElement = PivotUtil.getPivot(GuardParameterBinding.class, csElement);
+		GuardParameterBinding pivotElement = PivotUtil.basicGetPivot(GuardParameterBinding.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setBoundVariable(csElement.getReferredVariable());
 			pivotElement.setValue(csElement.getValue());
@@ -401,7 +401,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitLoopParameterBindingCS(@NonNull LoopParameterBindingCS csElement) {
-		LoopParameterBinding pivotElement = PivotUtil.getPivot(LoopParameterBinding.class, csElement);
+		LoopParameterBinding pivotElement = PivotUtil.basicGetPivot(LoopParameterBinding.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setBoundVariable(csElement.getReferredVariable());
 			pivotElement.setValue(csElement.getValue());
@@ -416,7 +416,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
-		MappingCall pivotElement = PivotUtil.getPivot(MappingCall.class, csElement);
+		MappingCall pivotElement = PivotUtil.basicGetPivot(MappingCall.class, csElement);
 		if (pivotElement != null) {
 			PathNameCS csPathName = csElement.getOwnedPathName();
 			if (csPathName != null) {
@@ -462,7 +462,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitSimpleParameterBindingCS(@NonNull SimpleParameterBindingCS csElement) {
-		SimpleParameterBinding pivotElement = PivotUtil.getPivot(SimpleParameterBinding.class, csElement);
+		SimpleParameterBinding pivotElement = PivotUtil.basicGetPivot(SimpleParameterBinding.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setBoundVariable(csElement.getReferredVariable());
 		}
@@ -476,7 +476,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		Transformation pivotElement = PivotUtil.basicGetPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 			//			helper.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());

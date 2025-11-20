@@ -57,7 +57,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof MappingCS) {
-					Mapping asMapping = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
+					Mapping asMapping = PivotUtil.basicGetPivot(Mapping.class, (MappingCS)csParent);
 					if (asMapping != null) {
 						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asMapping);
 						if (asTransformation != null) {
@@ -67,7 +67,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 					return DONE; // no more parents
 				}
 				else if (csParent instanceof QueryCS) {
-					Function asFunction = PivotUtil.getPivot(Function.class, (QueryCS)csParent);
+					Function asFunction = PivotUtil.basicGetPivot(Function.class, (QueryCS)csParent);
 					if (asFunction != null) {
 						Transformation asTransformation = QVTbaseUtil.basicGetContainingTransformation(asFunction);;
 						if (asTransformation != null) {
@@ -89,7 +89,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof MappingCS) {
-					Mapping asContext = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
+					Mapping asContext = PivotUtil.basicGetPivot(Mapping.class, (MappingCS)csParent);
 					if (asContext != null) {
 						VariableDeclaration asVariable = asContext.getTransformation().getOwnedContext();
 						if (asVariable != null) {
