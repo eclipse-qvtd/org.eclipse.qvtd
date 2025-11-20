@@ -14,14 +14,9 @@ package org.eclipse.qvtd.xtext.qvtbase.tests;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -327,7 +322,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		super(QVTTestHelper.INSTANCE);
 	}
 
-	private static List<String> savedEPackageRegistry = null;
+	//	private static List<String> savedEPackageRegistry = null;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -343,8 +338,8 @@ public class PivotTestCase extends AbstractPivotTestCase
 			QVTtemplatePackage.eINSTANCE.getName();
 			QVTiCGModelPackage.eINSTANCE.getName();
 		}
-		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
-		Collections.sort(savedEPackageRegistry);
+		//		savedEPackageRegistry = new ArrayList<>(EPackage.Registry.INSTANCE.keySet());
+		//		Collections.sort(savedEPackageRegistry);
 		super.setUp();
 		//	resetEValidators();
 	}
@@ -363,7 +358,7 @@ public class PivotTestCase extends AbstractPivotTestCase
 		}
 	} */
 
-	@Override
+	/*	@Override -- no longer required -- shared via AbstractPivotTestCase
 	protected void tearDown() throws Exception {
 		//	long time = System.nanoTime() - startTime;
 		//	superTearDown1();
@@ -385,5 +380,5 @@ public class PivotTestCase extends AbstractPivotTestCase
 				}
 			}
 		}
-	}
+	} */
 }
