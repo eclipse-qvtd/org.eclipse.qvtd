@@ -8,17 +8,17 @@
  * Contributors:
  *   E.D. Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtrelation.utilities;
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractQVTrelationTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeTemplateArgumentVisitor;
 
-public class QVTrelationTemplateParameterSubstitutionVisitor extends AbstractQVTrelationTemplateParameterSubstitutionVisitor
+public class QVTimperativeTemplateArgumentVisitor extends AbstractQVTimperativeTemplateArgumentVisitor
 {
-	public QVTrelationTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+	public QVTimperativeTemplateArgumentVisitor(@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		super(environmentFactory, selfType, selfTypeValue);
 	}
 }

@@ -1502,6 +1502,7 @@ public class QVTbaseTables extends AbstractTables
 		private static final @NonNull Property @NonNull [] _Function = {
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Operation__bodyExpression,
+			PivotTables.Properties._TemplateableElement__generic,
 			PivotTables.Properties._Feature__implementation,
 			PivotTables.Properties._Feature__implementationClass,
 			PivotTables.Properties._Operation__isInvalidating,
@@ -1515,21 +1516,20 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContainer,
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
-			PivotTables.Properties._TemplateableElement__ownedBindings,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Namespace__ownedConstraints,
 			PivotTables.Properties._Element__ownedExtensions,
 			PivotTables.Properties._Operation__ownedParameters,
 			PivotTables.Properties._Operation__ownedPostconditions,
 			PivotTables.Properties._Operation__ownedPreconditions,
-			PivotTables.Properties._TemplateableElement__ownedSignature,
+			PivotTables.Properties._TemplateableElement__ownedTemplateArguments,
+			PivotTables.Properties._TemplateableElement__ownedTemplateParameters,
 			PivotTables.Properties._Operation__owningClass,
 			PivotTables.Properties._Operation__precedence,
 			Properties._Function__queryExpression,
 			PivotTables.Properties._Operation__raisedExceptions,
 			PivotTables.Properties._Operation__redefinedOperations,
-			PivotTables.Properties._TypedElement__type,
-			PivotTables.Properties._TemplateableElement__unspecializedElement
+			PivotTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull Property @NonNull [] _FunctionBody = {
@@ -1648,6 +1648,7 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Class__extenders,
 			Properties._Transformation__extends,
+			PivotTables.Properties._TemplateableElement__generic,
 			PivotTables.Properties._Class__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isActive,
@@ -1658,7 +1659,6 @@ public class QVTbaseTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Class__ownedBehaviors,
-			PivotTables.Properties._TemplateableElement__ownedBindings,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Namespace__ownedConstraints,
 			Properties._Transformation__ownedContext,
@@ -1666,13 +1666,13 @@ public class QVTbaseTables extends AbstractTables
 			PivotTables.Properties._Class__ownedInvariants,
 			PivotTables.Properties._Class__ownedOperations,
 			PivotTables.Properties._Class__ownedProperties,
-			PivotTables.Properties._TemplateableElement__ownedSignature,
 			Properties._Transformation__ownedTag,
 			Properties._Transformation__ownedTargets,
+			PivotTables.Properties._TemplateableElement__ownedTemplateArguments,
+			PivotTables.Properties._TemplateableElement__ownedTemplateParameters,
 			PivotTables.Properties._Class__owningPackage,
 			Properties._Transformation__rule,
-			PivotTables.Properties._Class__superClasses,
-			PivotTables.Properties._TemplateableElement__unspecializedElement
+			PivotTables.Properties._Class__superClasses
 		};
 
 		private static final @NonNull Property @NonNull [] _TypedModel = {

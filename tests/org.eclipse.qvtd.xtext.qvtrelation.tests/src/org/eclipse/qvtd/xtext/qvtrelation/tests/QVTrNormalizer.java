@@ -95,11 +95,11 @@ public class QVTrNormalizer extends PivotNormalizer
 				normalizers.add(new PackageNormalizer((org.eclipse.ocl.pivot.Package)eObject));
 			}
 			else if (eObject instanceof Transformation) {
-				((Transformation)eObject).setUnspecializedElement(null);		// Suppress transient value
+				((Transformation)eObject).setGeneric(null);		// Suppress transient value
 				normalizers.add(new TransformationNormalizer((Transformation)eObject));
 			}
 			else if (eObject instanceof org.eclipse.ocl.pivot.Class) {
-				((org.eclipse.ocl.pivot.Class)eObject).setUnspecializedElement(null);		// Suppress transient value
+				((org.eclipse.ocl.pivot.Class)eObject).setGeneric(null);		// Suppress transient value
 				normalizers.add(new ClassNormalizer((org.eclipse.ocl.pivot.Class)eObject));
 			}
 			else if (eObject instanceof Relation) {

@@ -17,184 +17,124 @@
       <ownedOperations xmi:id="k8wX0" isRequired="true" isStatic="true" name="collection" type="pivot:Class &_0;#dfRul">
         <ownedComments body="*&#xA;The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="BCboO" isRequired="true" name="items" type="#GqeYl"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="msfHj" name="T"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="VKVjF" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="XilWQ" isRequired="true" isStatic="true" name="error" type="pivot:VoidType &_1;#7u3MH">
         <ownedComments body="*&#xA;The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="wAh6J" isRequired="true" name="elements" type="#58MeC"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="xgMQn" name="T"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="8IUwe" name="T"/>
       </ownedOperations>
-      <ownedOperations xmi:id="tgma9" isStatic="true" name="if" type="#NxGT6">
+      <ownedOperations xmi:id="tgma9" isStatic="true" name="if" type="#YVcXo">
         <ownedComments body="*&#xA;The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated&#xA;as an Operation within QVTs.&#xA;"/>
-        <ownedParameters xmi:id=",ikoH" name="condition" type="#NxGT6"/>
-        <ownedParameters xmi:id="BnyL7" name="then" type="#NxGT6"/>
-        <ownedParameters xmi:id="djGK7" name="else" type="#NxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="3R0u0" name="T"/>
-        </ownedSignature>
+        <ownedParameters xmi:id=",ikoH" name="condition" type="#YVcXo"/>
+        <ownedParameters xmi:id="BnyL7" name="then" type="#YVcXo"/>
+        <ownedParameters xmi:id="djGK7" name="else" type="#YVcXo"/>
+        <ownedTemplateParameters xmi:id="6t2zX" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="8ZTic" isStatic="true" name="loop" type="pivot:AnyType &_1;#jbMkR">
         <ownedComments body="*&#xA;The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="9r4Sd" isRequired="true" name="source" type="pivot:Class &_0;#BFtK4"/>
-        <ownedParameters xmi:id="Y65mB" isRequired="true" name="iterators" type="#ZIkED"/>
+        <ownedParameters xmi:id="Y65mB" isRequired="true" name="iterators" type="#sbjGH"/>
         <ownedParameters xmi:id="EyV6S" isRequired="true" name="body" type="pivot:Class &_0;#BFtK4"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="v0RaO" name="E"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="+xDr1" name="E"/>
       </ownedOperations>
       <ownedOperations xmi:id="OZOC6" isRequired="true" isStatic="true" name="map" type="pivot:Class &_0;#bTDI1">
         <ownedComments body="*&#xA;The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="v,uBS" isRequired="true" name="parts" type="#qrSV7"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="gupic" name="T"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="XUH7b" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="Dl8Rv" isRequired="true" isStatic="true" name="mapPart" type="pivot:Class &_0;#33CoS">
         <ownedComments body="*&#xA;The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated&#xA;as an Operation within QVTs.&#xA;"/>
-        <ownedParameters xmi:id="B7q5a" name="key" type="#NxGT6"/>
-        <ownedParameters xmi:id="epckh" name="value" type="#OxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="04ZyF" name="K"/>
-          <ownedParameters xmi:id=",4ZyF" name="V"/>
-        </ownedSignature>
+        <ownedParameters xmi:id="B7q5a" name="key" type="#YVcXo"/>
+        <ownedParameters xmi:id="epckh" name="value" type="#ZVcXo"/>
+        <ownedTemplateParameters xmi:id="vA6u3" name="K"/>
+        <ownedTemplateParameters xmi:id="6A6u3" name="V"/>
       </ownedOperations>
       <ownedOperations xmi:id="PJp3D" isRequired="true" isStatic="true" name="range" type="pivot:Class &_0;#wy8kd">
         <ownedComments body="*&#xA;The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated&#xA;as an Operation within QVTs.&#xA;"/>
-        <ownedParameters xmi:id="uf7E+" name="first" type="#NxGT6"/>
-        <ownedParameters xmi:id="Uf3d4" name="last" type="#NxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="p+Y,s" name="T"/>
-        </ownedSignature>
+        <ownedParameters xmi:id="uf7E+" name="first" type="#YVcXo"/>
+        <ownedParameters xmi:id="Uf3d4" name="last" type="#YVcXo"/>
+        <ownedTemplateParameters xmi:id="UU3GV" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="So7KE" isRequired="true" isStatic="true" name="shadow" type="pivot:Class &_0;#Oxaac">
         <ownedComments body="*&#xA;The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="jSY7+" isRequired="true" name="parts" type="#qrSV7"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="E2aKw" name="T"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="Lnw0I" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="BCxpG" isRequired="true" isStatic="true" name="tuple" type="pivot:Class &_0;#HhIN2">
         <ownedComments body="*&#xA;The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="Vry1Q" isRequired="true" name="parts" type="#nc6Pa"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="r9UVd" name="T"/>
-        </ownedSignature>
+        <ownedTemplateParameters xmi:id="+Jsuu" name="T"/>
       </ownedOperations>
       <ownedOperations xmi:id="4bOo9" isRequired="true" isStatic="true" name="type" type="pivot:Class &_0;#0,h6K">
         <ownedComments body="*&#xA;The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated&#xA;as an Operation within QVTs.&#xA;"/>
-        <ownedParameters xmi:id="9pxhU" name="type" type="#NxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="cGrcH" name="V"/>
-        </ownedSignature>
+        <ownedParameters xmi:id="9pxhU" name="type" type="#YVcXo"/>
+        <ownedTemplateParameters xmi:id="bsxJx" name="V"/>
       </ownedOperations>
     </ownedClasses>
     <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="&_1;#zfDWR"/>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ViIGS" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="o1HIW" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="CEDa0" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#CKfVx" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="CEDa0" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#CKfVx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="1WxfR" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t5rpa" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="1WxfR" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t5rpa"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mF3WK" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#Gm0Mj" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mF3WK" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#Gm0Mj"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="j2eRp" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#LgkF0" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="j2eRp" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#LgkF0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YlajL" name="OrderedCollection" superClasses="#LVlMV">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YlajL" generic="pivot:CollectionType &_1;#Vw5fK" name="OrderedCollection" superClasses="#LVlMV">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="i93Xq" name="OrderedSet" superClasses="#YlajL #8PVIF">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="i93Xq" generic="pivot:OrderedSetType &_1;#fIXUp" name="OrderedSet" superClasses="#YlajL #8PVIF">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="ZIkED" name="Set" superClasses="#Gd4BC">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="sbjGH" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#Zw3DG">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="GqeYl" name="Set" superClasses="#z+yVk">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#CKfVx" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="GqeYl" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#z+yVk">
+      <ownedTemplateArguments actual="pivot:Class &_0;#CKfVx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="58MeC" name="Set" superClasses="#mRhbB">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t5rpa" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="58MeC" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#mRhbB">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t5rpa"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="qrSV7" name="Set" superClasses="#XAnS6">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#Gm0Mj" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="qrSV7" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#XAnS6">
+      <ownedTemplateArguments actual="pivot:Class &_0;#Gm0Mj"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="nc6Pa" name="Set" superClasses="#UxONZ">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#LgkF0" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="nc6Pa" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#UxONZ">
+      <ownedTemplateArguments actual="pivot:Class &_0;#LgkF0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Gd4BC" name="UniqueCollection" superClasses="#ViIGS">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Zw3DG" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#o1HIW">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="z+yVk" name="UniqueCollection" superClasses="#CEDa0">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#CKfVx" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="z+yVk" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#CEDa0">
+      <ownedTemplateArguments actual="pivot:Class &_0;#CKfVx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mRhbB" name="UniqueCollection" superClasses="#1WxfR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t5rpa" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mRhbB" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#1WxfR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t5rpa"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" name="UniqueCollection" superClasses="#LVlMV">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#LVlMV">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XAnS6" name="UniqueCollection" superClasses="#mF3WK">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#Gm0Mj" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XAnS6" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#mF3WK">
+      <ownedTemplateArguments actual="pivot:Class &_0;#Gm0Mj"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="UxONZ" name="UniqueCollection" superClasses="#j2eRp">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#LgkF0" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="UxONZ" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#j2eRp">
+      <ownedTemplateArguments actual="pivot:Class &_0;#LgkF0"/>
     </ownedClasses>
     <ownedClasses xmi:id="Xt1f+" name="$$">
-      <ownedSignature>
-        <ownedParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="NxGT6" name="$$0"/>
-        <ownedParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="OxGT6" name="$$1"/>
-      </ownedSignature>
+      <ownedTemplateParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="YVcXo" name="$$0"/>
+      <ownedTemplateParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="ZVcXo" name="$$1"/>
     </ownedClasses>
     <ownedPackages xmi:id="kSWnm" URI="http://www.eclipse.org/ocl/2015/Library" name="ocl" nsPrefix="ocl">
       <ownedClasses xmi:id="924tu" name="OclElement">

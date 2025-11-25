@@ -16,8 +16,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PrimitiveType;
-import org.eclipse.ocl.pivot.TemplateBinding;
-import org.eclipse.ocl.pivot.TemplateParameterSubstitution;
+import org.eclipse.ocl.pivot.TemplateArgument;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -43,7 +42,7 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 		org.eclipse.ocl.pivot.Class scopeClass = context.getScope();
 		org.eclipse.ocl.pivot.Package scopePackage = scopeClass != null ? PivotUtil.basicGetPackage(scopeClass) : null;
 		TypedTypeRefCS csRef = BaseCSFactory.eINSTANCE.createTypedTypeRefCS();
-		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
+		Type type = PivotUtil.getGenericElement(object);
 		PathNameCS csPathName = csRef.getOwnedPathName();
 		if (csPathName == null) {
 			PathNameCS csPathName2 = BaseCSFactory.eINSTANCE.createPathNameCS();
@@ -58,26 +57,22 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 				context.importNamespace(objectPackage, null);
 			}
 		}
-		List<TemplateBinding> templateBindings = object.getOwnedBindings();
-		if (templateBindings.isEmpty()) {
-		}
-		else {
+		List<TemplateArgument> templateArguments = object.basicGetOwnedTemplateArguments();
+		if (templateArguments != null) {
 			TemplateBindingCS csTemplateBinding = csRef.getOwnedBinding();
 			if (csTemplateBinding == null) {
 				csTemplateBinding = BaseCSFactory.eINSTANCE.createTemplateBindingCS();
 				csRef.setOwnedBinding(csTemplateBinding);
 			}
 			List<TemplateParameterSubstitutionCS> csParameterSubstitutions = new ArrayList<TemplateParameterSubstitutionCS>();
-			for (TemplateBinding templateBinding : templateBindings) {
-				for (TemplateParameterSubstitution templateParameterSubstitution : templateBinding.getOwnedSubstitutions()) {
-					Type actual = templateParameterSubstitution.getActual();
-					if (actual != null) {
-						TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
-						TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual);
-						csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
-						csParameterSubstitutions.add(csTemplateParameterSubstitution);
-						csTemplateParameterSubstitution.setPivot(templateParameterSubstitution);
-					}
+			for (TemplateArgument templateArgument : templateArguments) {
+				Type actual = templateArgument.getActual();
+				if (actual != null) {
+					TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
+					TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual);
+					csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
+					csParameterSubstitutions.add(csTemplateParameterSubstitution);
+					csTemplateParameterSubstitution.setPivot(templateArgument);
 				}
 			}
 			context.refreshList(csTemplateBinding.getOwnedSubstitutions(), csParameterSubstitutions);

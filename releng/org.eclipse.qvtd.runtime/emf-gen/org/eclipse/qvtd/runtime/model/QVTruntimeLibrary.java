@@ -319,7 +319,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			installCollectionTypes();
 			installOperations();
 			installProperties();
-			installTemplateBindings();
+			installTemplateArguments();
 			installComments();
 		}
 
@@ -609,7 +609,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			property.setOpposite(pr_Extent_elements);
 		}
 		
-		private void installTemplateBindings() {
+		private void installTemplateArguments() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_CollectionItem_F, _CollectionItem);
 			addBinding(_Collection_Element_F, _Element);

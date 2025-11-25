@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -48,7 +47,6 @@ import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.SpecificationCS;
-import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
@@ -182,8 +180,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override // FIXME Re-implemented to workaround Bug 496148
 	public ElementCS visitOperation(@NonNull Operation object) {
 		OperationCS csElement = refreshTypedElement(OperationCS.class, BaseCSPackage.Literals.OPERATION_CS, object);
-		TemplateSignature ownedTemplateSignature = object.getOwnedSignature();
-		csElement.setOwnedSignature(context.visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
+		context.refreshTemplateSignature(csElement, object);
 		context.refreshList(csElement.getOwnedParameters(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameters(), null));
 		context.refreshList(csElement.getOwnedExceptions(), context.visitReferences(TypedRefCS.class, object.getRaisedExceptions(), null));
 		//

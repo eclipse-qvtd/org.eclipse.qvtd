@@ -49,7 +49,6 @@ import org.eclipse.ocl.pivot.SelfType;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.TemplateParameter;
-import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.TupleLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralPart;
@@ -61,7 +60,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.util.AbstractExtendingPivotVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -463,22 +462,20 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 		}
 		visit(object.getOwnedResult());
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getFirstOwnedBody());
-		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
+		//		TemplateArgumentVisitor visitor = new TemplateArgumentVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
 		//		object.accept(visitor);
 		EnvironmentFactory environmentFactory = context;
 		Type selfType = object.getOwnedSource().getType();
-		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
+		TemplateArgumentVisitor visitor = TemplateArgumentVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof TemplateableElement) {
-				TemplateSignature ownedSignature = ((TemplateableElement)eObject).getOwnedSignature();
-				if (ownedSignature != null) {
-					for (TemplateParameter templateParameter : ownedSignature.getOwnedParameters()) {
-						if (templateParameter != null) {
-							Type normalizedTemplateParameter = visitor.get(templateParameter);
-							DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
-							setUsage(templateParameter, templateParameterUsage);
-						}
+				Iterable<@NonNull TemplateParameter> asTemplateParameters = ((TemplateableElement)eObject).basicGetOwnedTemplateParameters();
+				if (asTemplateParameters != null) {
+					for (@NonNull TemplateParameter templateParameter : asTemplateParameters) {
+						Type normalizedTemplateParameter = visitor.get(templateParameter);
+						DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
+						setUsage(templateParameter, templateParameterUsage);
 					}
 				}
 			}
@@ -497,22 +494,20 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 			}
 		}
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		//		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
+		//		TemplateArgumentVisitor visitor = new TemplateArgumentVisitor((@NonNull EnvironmentFactory) context, object.getOwnedSource().getType(), null);
 		//		object.accept(visitor);
 		EnvironmentFactory environmentFactory = context;
 		Type selfType = object.getOwnedSource().getType();
-		TemplateParameterSubstitutionVisitor visitor = TemplateParameterSubstitutionVisitor.create(environmentFactory, object, selfType);
+		TemplateArgumentVisitor visitor = TemplateArgumentVisitor.create(environmentFactory, object, selfType);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof TemplateableElement) {
-				TemplateSignature ownedSignature = ((TemplateableElement)eObject).getOwnedSignature();
-				if (ownedSignature != null) {
-					for (TemplateParameter templateParameter : ownedSignature.getOwnedParameters()) {
-						if (templateParameter != null) {
-							Type normalizedTemplateParameter = visitor.get(templateParameter);
-							DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
-							setUsage(templateParameter, templateParameterUsage);
-						}
+				Iterable<@NonNull TemplateParameter> asTemplateParameters = ((TemplateableElement)eObject).basicGetOwnedTemplateParameters();
+				if (asTemplateParameters != null) {
+					for (@NonNull TemplateParameter templateParameter : asTemplateParameters) {
+						Type normalizedTemplateParameter = visitor.get(templateParameter);
+						DomainUsage templateParameterUsage = visit(normalizedTemplateParameter);
+						setUsage(templateParameter, templateParameterUsage);
 					}
 				}
 			}

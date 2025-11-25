@@ -224,7 +224,7 @@ public class XtextTestCase extends PivotTestCase
 				return false;
 			}
 		}
-		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).getOwnedBindings().size() > 0)) {
+		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).basicGetOwnedTemplateArguments() != null)) {
 			return false;
 		}
 		if (pivotElement instanceof LambdaType) {

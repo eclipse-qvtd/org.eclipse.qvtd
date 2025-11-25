@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASSaverNormalizeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativePrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateArgumentVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
@@ -130,9 +130,9 @@ public class QVTimperativeASResourceFactory extends ResourceSetAwareASResourceFa
 	}
 
 	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+	public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		return new QVTimperativeTemplateArgumentVisitor(environmentFactory, selfType, selfTypeValue);
 	}
 
 	@Override

@@ -16,22 +16,22 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeFlowAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateArgumentVisitor;
 
 public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 {
 	private static class QVTiCreateStrategy extends CreateStrategy
 	{
 		@Override
-		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+		public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-			return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+			return new QVTimperativeTemplateArgumentVisitor(environmentFactory, selfType, selfTypeValue);
 		}
 	}
 

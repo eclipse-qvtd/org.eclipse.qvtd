@@ -86,9 +86,9 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+	public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTscheduleTemplateParameterSubstitutionVisitor((EnvironmentFactory) environmentFactory, selfType, selfTypeValue);
+		return new QVTscheduleTemplateArgumentVisitor((EnvironmentFactory) environmentFactory, selfType, selfTypeValue);
 	} */
 
 	@Override

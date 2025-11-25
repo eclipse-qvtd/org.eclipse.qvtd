@@ -22,7 +22,7 @@ public class TestsXMLUtil
 	public static void resetTransients(@NonNull Resource asResource) {
 		for (@NonNull EObject eObject : new TreeIterable(asResource)) {
 			if (eObject instanceof org.eclipse.ocl.pivot.Class) {
-				((org.eclipse.ocl.pivot.Class)eObject).setUnspecializedElement(null);		// Suppress transient value
+				//	((org.eclipse.ocl.pivot.Class)eObject).setGeneric(null);		// Suppress transient value
 			}
 			else if (eObject instanceof VariableDeclaration) {
 				((VariableDeclaration)eObject).setTypeValue(null);		// Suppress transient value

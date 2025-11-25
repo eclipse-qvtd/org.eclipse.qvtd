@@ -1,3 +1,7 @@
+HSV2HSLas.qvtias is updated by saving the AS of HSV2HSL.qvti in the QVTi editor.
+
+or ...
+
 HSV2HSLas.qvtias is copied from /_QVTd_QVTiSerializeTests__testQVTiSerialize_HSV2HSL_qvti/HSV2HSL.qvtias
 then the three model paths are adjusted to local. e.g.
 

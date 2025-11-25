@@ -20,20 +20,20 @@
       <modelParameter xmi:id="4h0Qn" name="hsv" usedPackage="&_0;#jRMJ8"/>
       <modelParameter xmi:id="uh0Qn" name="hsl" usedPackage="&_1;#Zl9l7"/>
       <modelParameter xmi:id="C1IOn" isTrace="true" name="middle" usedPackage="&_2;#U,KF8"/>
-      <ownedContext xmi:id="feaPR" name="this" type="#xreyG"/>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id=",Fekz" name="hsl2rgb" type="pivot:DataType &_2;#23CR,">
+      <ownedContext xmi:id="feaPR" isRequired="true" name="this" type="#xreyG"/>
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="IHekz" isRequired="true" name="hsl2rgb" type="pivot:DataType &_2;#23CR,">
         <bodyExpression xsi:type="qvtb:FunctionBody">
           <ownedBody xsi:type="pivot:ShadowExp" type="pivot:DataType &_2;#23CR,">
-            <ownedParts xmi:id="8v5ss" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedInit xsi:type="pivot:VariableExp" name="color" referredVariable="#RcuD8" type="pivot:DataType &_1;#bFKYN"/>
+            <ownedParts xmi:id="JBmwD" isRequired="true" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedInit xsi:type="pivot:VariableExp" name="color" referredVariable="#,s3cT" type="pivot:DataType &_1;#bFKYN"/>
             </ownedParts>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#RcuD8" type="pivot:DataType &_1;#bFKYN"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" isRequired="true" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#,s3cT" type="pivot:DataType &_1;#bFKYN"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="RcuD8" name="color" type="pivot:DataType &_1;#bFKYN"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id=",s3cT" name="color" type="pivot:DataType &_1;#bFKYN"/>
       </ownedOperations>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="Nsy3r" name="hsv2rgb" type="pivot:DataType &_2;#23CR,">
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="Nsy3r" isRequired="true" name="hsv2rgb" type="pivot:DataType &_2;#23CR,">
         <bodyExpression xsi:type="qvtb:FunctionBody">
           <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
             <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
@@ -52,27 +52,33 @@
                                       <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
                                         <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_2;#23CR,">
                                           <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType &_2;#23CR,">
-                                            <ownedParts xmi:id="ihMO3" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                              <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
+                                            <ownedParts xmi:id="ihMO3" isRequired="true" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
+                                              <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
+                                                  type="pivot:PrimitiveType &_3;#AlwVZ">
+                                                <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="toString" referredOperation="&_3;#aIlbs"
                                                     type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                  <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#FsNab" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#FsNab"
+                                                      type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                 </ownedArguments>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ"
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
                                                     type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                  <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ"
+                                                  <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol=","
+                                                      type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
                                                       type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
-                                                        type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                      <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#zyTam" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                    <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="toString"
+                                                        referredOperation="&_3;#aIlbs" type="pivot:PrimitiveType &_3;#AlwVZ">
+                                                      <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#zyTam"
+                                                          type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                     </ownedArguments>
-                                                    <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ"
+                                                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
                                                         type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                      <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                                                      <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
-                                                          type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                        <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#5l3Dr" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                      <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol=","
+                                                          type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                                                      <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="toString"
+                                                          referredOperation="&_3;#aIlbs" type="pivot:PrimitiveType &_3;#AlwVZ">
+                                                        <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#5l3Dr"
+                                                            type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                       </ownedSource>
                                                     </ownedSource>
                                                   </ownedSource>
@@ -80,283 +86,334 @@
                                               </ownedInit>
                                             </ownedParts>
                                           </ownedIn>
-                                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="FsNab" name="b" type="pivot:PrimitiveType &_3;#tYtCd">
-                                            <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G" type="pivot:PrimitiveType &_3;#tYtCd">
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="FsNab" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#tYtCd">
+                                            <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
+                                                type="pivot:PrimitiveType &_3;#tYtCd">
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                     type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                  <ownedSource xsi:type="pivot:PropertyCallExp" name="b" referredProperty="#9lIn6" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="m" referredVariable="#Nlf,h"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="true" name="b" referredProperty="#9lIn6"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="t" referredVariable="#30Qn7"
+                                                        type="#,5eVD"/>
                                                   </ownedSource>
                                                 </ownedArguments>
-                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
                                               </ownedSource>
                                             </ownedInit>
                                           </ownedVariable>
                                         </ownedIn>
-                                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="zyTam" name="g" type="pivot:PrimitiveType &_3;#tYtCd">
-                                          <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G" type="pivot:PrimitiveType &_3;#tYtCd">
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="zyTam" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#tYtCd">
+                                          <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
+                                              type="pivot:PrimitiveType &_3;#tYtCd">
+                                            <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                   type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                <ownedSource xsi:type="pivot:PropertyCallExp" name="g" referredProperty="#CmIn6" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="m" referredVariable="#Nlf,h"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="true" name="g" referredProperty="#CmIn6"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="t" referredVariable="#30Qn7"
+                                                      type="#,5eVD"/>
                                                 </ownedSource>
                                               </ownedArguments>
-                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                             </ownedSource>
                                           </ownedInit>
                                         </ownedVariable>
                                       </ownedIn>
-                                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="5l3Dr" name="r" type="pivot:PrimitiveType &_3;#tYtCd">
-                                        <ownedInit xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G" type="pivot:PrimitiveType &_3;#tYtCd">
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="5l3Dr" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#tYtCd">
+                                        <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
+                                            type="pivot:PrimitiveType &_3;#tYtCd">
+                                          <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                 type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="m" referredVariable="#Nlf,h" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:PropertyCallExp" name="r" referredProperty="#NmIn6" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedSource xsi:type="pivot:VariableExp" name="t" referredVariable="#30Qn7" type="#,5eVD"/>
+                                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="m" referredVariable="#Nlf,h"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="true" name="r" referredProperty="#NmIn6"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="t" referredVariable="#30Qn7"
+                                                    type="#,5eVD"/>
                                               </ownedSource>
                                             </ownedArguments>
-                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="255" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                           </ownedSource>
                                         </ownedInit>
                                       </ownedVariable>
                                     </ownedIn>
-                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="30Qn7" name="t" type="#,5eVD">
-                                      <ownedInit xsi:type="pivot:IfExp" type="#,5eVD">
-                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY" type="pivot:BooleanType &_3;#XEMMs">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="30Qn7" isRequired="true" name="t" type="#,5eVD">
+                                      <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="#,5eVD">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
+                                            type="pivot:BooleanType &_3;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD"
+                                              type="pivot:PrimitiveType &_3;#tYtCd"/>
                                         </ownedCondition>
-                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY"
+                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="#,5eVD">
+                                          <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
                                               type="pivot:BooleanType &_3;#XEMMs">
-                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                            <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD"
+                                                type="pivot:PrimitiveType &_3;#tYtCd"/>
                                           </ownedCondition>
-                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY"
+                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="#,5eVD">
+                                            <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
                                                 type="pivot:BooleanType &_3;#XEMMs">
-                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="180" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="180" isRequired="true"
+                                                  type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD"
+                                                  type="pivot:PrimitiveType &_3;#tYtCd"/>
                                             </ownedCondition>
-                                            <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                              <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY"
+                                            <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="#,5eVD">
+                                              <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
                                                   type="pivot:BooleanType &_3;#XEMMs">
-                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="240" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                                <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="240" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
                                               </ownedCondition>
-                                              <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="#,5eVD">
-                                                <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY"
+                                              <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="#,5eVD">
+                                                <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
                                                     type="pivot:BooleanType &_3;#XEMMs">
-                                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="300" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                                  <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="300" isRequired="true"
+                                                      type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD"
+                                                      type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                 </ownedCondition>
-                                                <ownedElse xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                                  <ownedParts xmi:id="j2Bxr" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedElse xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                                  <ownedParts xmi:id="j2Bxr" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
-                                                  <ownedParts xmi:id="Y2Bxr" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedParts xmi:id="Y2Bxr" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
-                                                  <ownedParts xmi:id="T2Bxr" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedParts xmi:id="T2Bxr" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
                                                 </ownedElse>
-                                                <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                                  <ownedParts xmi:id="HBKcy" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedThen xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                                  <ownedParts xmi:id="HBKcy" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
-                                                  <ownedParts xmi:id="8AKcy" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedParts xmi:id="8AKcy" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
-                                                  <ownedParts xmi:id="3AKcy" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedParts xmi:id="3AKcy" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                    <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedParts>
                                                 </ownedThen>
                                               </ownedElse>
-                                              <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                                <ownedParts xmi:id="ZIAV1" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedThen xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                                <ownedParts xmi:id="ZIAV1" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                 </ownedParts>
-                                                <ownedParts xmi:id="OIAV1" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedParts xmi:id="OIAV1" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                 </ownedParts>
-                                                <ownedParts xmi:id="JIAV1" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedParts xmi:id="JIAV1" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                  <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                 </ownedParts>
                                               </ownedThen>
                                             </ownedElse>
-                                            <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                              <ownedParts xmi:id="T7SmQ" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedThen xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                              <ownedParts xmi:id="T7SmQ" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                               </ownedParts>
-                                              <ownedParts xmi:id="I7SmQ" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedParts xmi:id="I7SmQ" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                               </ownedParts>
-                                              <ownedParts xmi:id="D7SmQ" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedParts xmi:id="D7SmQ" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                               </ownedParts>
                                             </ownedThen>
                                           </ownedElse>
-                                          <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                            <ownedParts xmi:id="VKyxE" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                          <ownedThen xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                            <ownedParts xmi:id="VKyxE" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedParts>
-                                            <ownedParts xmi:id="KKyxE" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedParts xmi:id="KKyxE" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedParts>
-                                            <ownedParts xmi:id="FKyxE" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedParts xmi:id="FKyxE" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedParts>
                                           </ownedThen>
                                         </ownedElse>
-                                        <ownedThen xsi:type="pivot:TupleLiteralExp" type="#,5eVD">
-                                          <ownedParts xmi:id=",Pbeh" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedInit xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                        <ownedThen xsi:type="pivot:TupleLiteralExp" isRequired="true" type="#,5eVD">
+                                          <ownedParts xmi:id=",Pbeh" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                           </ownedParts>
-                                          <ownedParts xmi:id="0Pbeh" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedInit xsi:type="pivot:VariableExp" name="x" referredVariable="#bKhq6" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                          <ownedParts xmi:id="0Pbeh" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:VariableExp" isRequired="true" name="x" referredVariable="#bKhq6"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                           </ownedParts>
-                                          <ownedParts xmi:id="vPbeh" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedInit xsi:type="pivot:RealLiteralExp" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                          <ownedParts xmi:id="vPbeh" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedInit xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="0.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                           </ownedParts>
                                         </ownedThen>
                                       </ownedInit>
                                     </ownedVariable>
                                   </ownedIn>
-                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Nlf,h" name="m" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                      <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Nlf,h" isRequired="true" name="m" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF">
+                                      <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV"
+                                          type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                      <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                     </ownedInit>
                                   </ownedVariable>
                                 </ownedIn>
-                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="bKhq6" name="x" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                  <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                      <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="&_3;#ApdgA" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                        <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="hh2" referredVariable="#Bee48" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="bKhq6" isRequired="true" name="x" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                      type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF">
+                                      <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="abs" referredOperation="&_3;#ApdgA"
+                                          type="pivot:PrimitiveType &_3;#Nr4QF">
+                                        <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                            type="pivot:PrimitiveType &_3;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hh2" referredVariable="#Bee48"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                         </ownedSource>
                                       </ownedArguments>
-                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                      <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                     </ownedArguments>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="c" referredVariable="#VkaTV" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                   </ownedInit>
                                 </ownedVariable>
                               </ownedIn>
-                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Bee48" name="hh2" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                  <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:OperationCallExp" name="floor" referredOperation="&_3;#aXIUG" type="pivot:PrimitiveType &_3;#tYtCd">
-                                      <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#f3Rbg" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Bee48" isRequired="true" name="hh2" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                    type="pivot:PrimitiveType &_3;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                      type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="floor" referredOperation="&_3;#aXIUG"
+                                        type="pivot:PrimitiveType &_3;#tYtCd">
+                                      <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hh1" referredVariable="#f3Rbg"
+                                          type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                     </ownedArguments>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="hh1" referredVariable="#f3Rbg" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hh1" referredVariable="#f3Rbg" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                   </ownedArguments>
-                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                 </ownedInit>
                               </ownedVariable>
                             </ownedIn>
-                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="f3Rbg" name="hh1" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#mA+ir" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="f3Rbg" isRequired="true" name="hh1" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#mA+ir" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="120" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#HI2yD" type="pivot:PrimitiveType &_3;#tYtCd"/>
                               </ownedInit>
                             </ownedVariable>
                           </ownedIn>
-                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="VkaTV" name="c" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedInit xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#Js71L" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:VariableExp" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="VkaTV" isRequired="true" name="c" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="s" referredVariable="#Js71L" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="v" referredVariable="#DgrFl" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                             </ownedInit>
                           </ownedVariable>
                         </ownedIn>
-                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="DgrFl" name="v" type="pivot:PrimitiveType &_3;#Nr4QF">
-                          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                              <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="DgrFl" isRequired="true" name="v" type="pivot:PrimitiveType &_3;#Nr4QF">
+                          <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                                type="pivot:BooleanType &_3;#XEMMs">
+                              <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                              <ownedSource xsi:type="pivot:VariableExp" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                             </ownedCondition>
-                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                            <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                            <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="100.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" name="vopt" referredVariable="#dJ,jM" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                             </ownedThen>
                           </ownedInit>
                         </ownedVariable>
                       </ownedIn>
-                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Js71L" name="s" type="pivot:PrimitiveType &_3;#Nr4QF">
-                        <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Js71L" isRequired="true" name="s" type="pivot:PrimitiveType &_3;#Nr4QF">
+                        <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                          <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                              type="pivot:BooleanType &_3;#XEMMs">
+                            <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                            <ownedSource xsi:type="pivot:VariableExp" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                           </ownedCondition>
-                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                          <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="100.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                          <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedArguments xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="100.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                            <ownedSource xsi:type="pivot:VariableExp" name="sopt" referredVariable="#rTd02" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                           </ownedThen>
                         </ownedInit>
                       </ownedVariable>
                     </ownedIn>
-                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="HI2yD" name="h" type="pivot:PrimitiveType &_3;#tYtCd">
-                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#tYtCd">
-                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                          <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="HI2yD" isRequired="true" name="h" type="pivot:PrimitiveType &_3;#tYtCd">
+                      <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd">
+                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                            type="pivot:BooleanType &_3;#XEMMs">
+                          <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                          <ownedSource xsi:type="pivot:VariableExp" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                         </ownedCondition>
-                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                        <ownedThen xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G" type="pivot:PrimitiveType &_3;#tYtCd">
-                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                        <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G" type="pivot:PrimitiveType &_3;#tYtCd">
+                          <ownedSource xsi:type="pivot:VariableExp" name="hopt" referredVariable="#Rwrm0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                         </ownedThen>
                       </ownedInit>
                     </ownedVariable>
                   </ownedIn>
-                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="dJ,jM" isRequired="false" name="vopt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                    <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                        <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="dJ,jM" name="vopt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                    <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                      <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                        <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
                       </ownedSource>
                     </ownedInit>
                   </ownedVariable>
                 </ownedIn>
-                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="rTd02" isRequired="false" name="sopt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                      <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="rTd02" name="sopt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                  <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                      <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
                     </ownedSource>
                   </ownedInit>
                 </ownedVariable>
               </ownedIn>
-              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Rwrm0" isRequired="false" name="hopt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                    <ownedSource xsi:type="pivot:VariableExp" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
+              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Rwrm0" name="hopt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsv" referredVariable="#vG0X7" type="#4nGDi"/>
                   </ownedSource>
                 </ownedInit>
               </ownedVariable>
             </ownedIn>
-            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="vG0X7" name="hsv" type="#4nGDi">
-              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="&_3;#wLSrH" type="#4nGDi">
-                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#nJUTI" type="pivot:DataType &_0;#HhgZ,"/>
+            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="vG0X7" isRequired="true" name="hsv" type="#4nGDi">
+              <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="tokenize" referredOperation="&_3;#wLSrH" type="#4nGDi">
+                <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="color" referredVariable="#Ugr8H" type="pivot:DataType &_0;#HhgZ,"/>
               </ownedInit>
             </ownedVariable>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#nJUTI" type="pivot:DataType &_0;#HhgZ,"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" isRequired="true" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" isRequired="true" name="color" representedParameter="#Ugr8H" type="pivot:DataType &_0;#HhgZ,"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="nJUTI" name="color" type="pivot:DataType &_0;#HhgZ,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="Ugr8H" isRequired="true" name="color" type="pivot:DataType &_0;#HhgZ,"/>
       </ownedOperations>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="AH5Tc" name="rgb2hsl" type="pivot:DataType &_1;#bFKYN">
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="AH5Tc" isRequired="true" name="rgb2hsl" type="pivot:DataType &_1;#bFKYN">
         <bodyExpression xsi:type="qvtb:FunctionBody">
           <ownedBody xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
             <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
@@ -372,39 +429,49 @@
                                 <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
                                   <ownedIn xsi:type="pivot:LetExp" type="pivot:DataType &_1;#bFKYN">
                                     <ownedIn xsi:type="pivot:ShadowExp" type="pivot:DataType &_1;#bFKYN">
-                                      <ownedParts xmi:id=",IyqG" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                        <ownedInit xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
+                                      <ownedParts xmi:id=",IyqG" isRequired="true" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
+                                        <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
+                                            type="pivot:PrimitiveType &_3;#AlwVZ">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="toString" referredOperation="&_3;#aIlbs"
                                               type="pivot:PrimitiveType &_3;#AlwVZ">
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G"
+                                            <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
                                                 type="pivot:PrimitiveType &_3;#tYtCd">
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#Ec0h," type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="l" referredVariable="#Ec0h,"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
                                               </ownedSource>
                                             </ownedSource>
                                           </ownedArguments>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                            <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
+                                          <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
+                                              type="pivot:PrimitiveType &_3;#AlwVZ">
+                                            <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
+                                                type="pivot:PrimitiveType &_3;#AlwVZ">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="toString" referredOperation="&_3;#aIlbs"
                                                   type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G"
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
                                                     type="pivot:PrimitiveType &_3;#tYtCd">
-                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV"
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
                                                       type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#m5zx+" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                    <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                    <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="s" referredVariable="#m5zx+"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="100" isRequired="true"
+                                                        type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                   </ownedSource>
                                                 </ownedSource>
                                               </ownedArguments>
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#pK7dJ" type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="toString" referredOperation="&_3;#aIlbs"
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#pK7dJ"
+                                                  type="pivot:PrimitiveType &_3;#AlwVZ">
+                                                <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="toString" referredOperation="&_3;#aIlbs"
                                                     type="pivot:PrimitiveType &_3;#AlwVZ">
-                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="round" referredOperation="&_3;#cNx+G"
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="round" referredOperation="&_3;#cNx+G"
                                                       type="pivot:PrimitiveType &_3;#tYtCd">
-                                                    <ownedSource xsi:type="pivot:VariableExp" name="h" referredVariable="#ozgCx" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="h" referredVariable="#ozgCx"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedSource>
                                                 </ownedSource>
                                               </ownedSource>
@@ -413,311 +480,367 @@
                                         </ownedInit>
                                       </ownedParts>
                                     </ownedIn>
-                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="m5zx+" name="s" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#dKEtV" type="pivot:BooleanType &_3;#XEMMs">
-                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="m5zx+" isRequired="true" name="s" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                      <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#dKEtV"
+                                            type="pivot:BooleanType &_3;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                         </ownedCondition>
-                                        <ownedElse xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="abs" referredOperation="&_3;#ApdgA"
+                                        <ownedElse xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
+                                            type="pivot:PrimitiveType &_3;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="abs" referredOperation="&_3;#ApdgA"
                                                 type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV"
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
                                                     type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedArguments xsi:type="pivot:VariableExp" name="l" referredVariable="#Ec0h," type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="l" referredVariable="#Ec0h,"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true"
+                                                      type="pivot:PrimitiveType &_3;#tYtCd"/>
                                                 </ownedSource>
                                               </ownedSource>
                                             </ownedArguments>
-                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                           </ownedArguments>
-                                          <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                          <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                         </ownedElse>
-                                        <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                        <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                       </ownedInit>
                                     </ownedVariable>
                                   </ownedIn>
-                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="ozgCx" name="h" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                      <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#dKEtV" type="pivot:BooleanType &_3;#XEMMs">
-                                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                        <ownedSource xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="ozgCx" isRequired="true" name="h" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                      <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#dKEtV"
+                                          type="pivot:BooleanType &_3;#XEMMs">
+                                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                        <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
+                                            type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                       </ownedCondition>
-                                      <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="&_3;#FufYU"
-                                            type="pivot:BooleanType &_3;#XEMMs">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name=">=" referredOperation="&_3;#6crvY" type="pivot:BooleanType &_3;#XEMMs">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                      <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                        <ownedCondition xsi:type="pivot:OperationCallExp" name="and" referredOperation="&_3;#FufYU" type="pivot:BooleanType &_3;#XEMMs">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name=">=" referredOperation="&_3;#6crvY"
+                                              type="pivot:BooleanType &_3;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                           </ownedArguments>
-                                          <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#dKEtV" type="pivot:BooleanType &_3;#XEMMs">
-                                            <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                            <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                          <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#dKEtV"
+                                              type="pivot:BooleanType &_3;#XEMMs">
+                                            <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="cMax" referredVariable="#A9V+w"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                           </ownedSource>
                                         </ownedCondition>
-                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                          <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" name="and" referredOperation="&_3;#FufYU"
+                                        <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                          <ownedCondition xsi:type="pivot:OperationCallExp" name="and" referredOperation="&_3;#FufYU"
                                               type="pivot:BooleanType &_3;#XEMMs">
-                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="&lt;" referredOperation="&_3;#3+qvY"
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;" referredOperation="&_3;#3+qvY"
                                                 type="pivot:BooleanType &_3;#XEMMs">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedArguments>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#dKEtV" type="pivot:BooleanType &_3;#XEMMs">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#dKEtV"
+                                                type="pivot:BooleanType &_3;#XEMMs">
+                                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="cMax" referredVariable="#A9V+w"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedSource>
                                           </ownedCondition>
-                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedCondition xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#dKEtV"
+                                          <ownedElse xsi:type="pivot:IfExp" isElseIf="true" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#dKEtV"
                                                 type="pivot:BooleanType &_3;#XEMMs">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="cMax" referredVariable="#A9V+w"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                             </ownedCondition>
-                                            <ownedElse xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                            <ownedElse xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                   type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="4" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV"
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="4" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
                                                     type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI"
+                                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
                                                       type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV"
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
                                                       type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                    <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedSource>
                                                 </ownedSource>
                                               </ownedArguments>
-                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                             </ownedElse>
-                                            <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                            <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                   type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV"
+                                                <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true"
+                                                    type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
                                                     type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI"
+                                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
                                                       type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                  <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV"
+                                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
                                                       type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                    <ownedArguments xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                    <ownedSource xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH"
+                                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                   </ownedSource>
                                                 </ownedSource>
                                               </ownedArguments>
-                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                             </ownedThen>
                                           </ownedElse>
-                                          <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV"
+                                          <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
                                                 type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="6" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV"
+                                              <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="6" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
                                                     type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                  <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                  <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                      type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                                 </ownedSource>
                                               </ownedSource>
                                             </ownedArguments>
-                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                           </ownedThen>
                                         </ownedElse>
-                                        <ownedThen xsi:type="pivot:OperationCallExp" name="*" referredOperation="&_3;#BJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                          <ownedArguments xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                            <ownedSource xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                              <ownedArguments xsi:type="pivot:VariableExp" name="delta" referredVariable="#SAAOI" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                              <ownedSource xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                                <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                                <ownedSource xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                        <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="*" referredOperation="&_3;#BJEtV"
+                                            type="pivot:PrimitiveType &_3;#Nr4QF">
+                                          <ownedArguments xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
+                                              type="pivot:PrimitiveType &_3;#Nr4QF">
+                                            <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                            <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
+                                                type="pivot:PrimitiveType &_3;#Nr4QF">
+                                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="delta" referredVariable="#SAAOI"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY"
+                                                    type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                               </ownedSource>
                                             </ownedSource>
                                           </ownedArguments>
-                                          <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                          <ownedSource xsi:type="pivot:IntegerLiteralExp" integerSymbol="60" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                         </ownedThen>
                                       </ownedElse>
-                                      <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                      <ownedThen xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
                                     </ownedInit>
                                   </ownedVariable>
                                 </ownedIn>
-                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="SAAOI" name="delta" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                  <ownedInit xsi:type="pivot:OperationCallExp" name="-" referredOperation="&_3;#EJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#edqQ8" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="SAAOI" isRequired="true" name="delta" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="-" referredOperation="&_3;#EJEtV"
+                                      type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="cMin" referredVariable="#edqQ8"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="cMax" referredVariable="#A9V+w"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                   </ownedInit>
                                 </ownedVariable>
                               </ownedIn>
-                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Ec0h," name="l" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                <ownedInit xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="&_3;#CJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                    <ownedArguments xsi:type="pivot:VariableExp" name="cMin" referredVariable="#edqQ8" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                    <ownedSource xsi:type="pivot:VariableExp" name="cMax" referredVariable="#A9V+w" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Ec0h," isRequired="true" name="l" type="pivot:PrimitiveType &_3;#Nr4QF">
+                                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV"
+                                    type="pivot:PrimitiveType &_3;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="+" referredOperation="&_3;#CJEtV"
+                                      type="pivot:PrimitiveType &_3;#Nr4QF">
+                                    <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="cMin" referredVariable="#edqQ8"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="cMax" referredVariable="#A9V+w"
+                                        type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                   </ownedSource>
                                 </ownedInit>
                               </ownedVariable>
                             </ownedIn>
-                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="edqQ8" name="cMin" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedInit xsi:type="pivot:OperationCallExp" name="min" referredOperation="&_3;#phetV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                <ownedSource xsi:type="pivot:OperationCallExp" name="min" referredOperation="&_3;#phetV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                  <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                  <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="edqQ8" isRequired="true" name="cMin" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="min" referredOperation="&_3;#phetV"
+                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="min" referredOperation="&_3;#phetV"
+                                    type="pivot:PrimitiveType &_3;#Nr4QF">
+                                  <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                                 </ownedSource>
                               </ownedInit>
                             </ownedVariable>
                           </ownedIn>
-                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="A9V+w" name="cMax" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedInit xsi:type="pivot:OperationCallExp" name="max" referredOperation="&_3;#7detV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedArguments xsi:type="pivot:VariableExp" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:OperationCallExp" name="max" referredOperation="&_3;#7detV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                                <ownedArguments xsi:type="pivot:VariableExp" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                                <ownedSource xsi:type="pivot:VariableExp" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                          <ownedVariable xsi:type="pivot:LetVariable" xmi:id="A9V+w" isRequired="true" name="cMax" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="max" referredOperation="&_3;#7detV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="b" referredVariable="#K9yJH" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="max" referredOperation="&_3;#7detV"
+                                  type="pivot:PrimitiveType &_3;#Nr4QF">
+                                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="g" referredVariable="#cyaaY" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="r" referredVariable="#WrnZO" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                               </ownedSource>
                             </ownedInit>
                           </ownedVariable>
                         </ownedIn>
-                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="K9yJH" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
-                          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                              <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                        <ownedVariable xsi:type="pivot:LetVariable" xmi:id="K9yJH" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF">
+                          <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                                type="pivot:BooleanType &_3;#XEMMs">
+                              <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                              <ownedSource xsi:type="pivot:VariableExp" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                             </ownedCondition>
-                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                            <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                              <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                            <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                            <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                              <ownedArguments xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                              <ownedSource xsi:type="pivot:VariableExp" name="bopt" referredVariable="#Y4o1R" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                             </ownedThen>
                           </ownedInit>
                         </ownedVariable>
                       </ownedIn>
-                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="cyaaY" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
-                        <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                          <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                      <ownedVariable xsi:type="pivot:LetVariable" xmi:id="cyaaY" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF">
+                        <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                          <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                              type="pivot:BooleanType &_3;#XEMMs">
+                            <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                            <ownedSource xsi:type="pivot:VariableExp" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                           </ownedCondition>
-                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                          <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                            <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                          <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                          <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                            <ownedArguments xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                            <ownedSource xsi:type="pivot:VariableExp" name="gopt" referredVariable="#CURZ5" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                           </ownedThen>
                         </ownedInit>
                       </ownedVariable>
                     </ownedIn>
-                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="WrnZO" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
-                      <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType &_3;#Nr4QF">
-                        <ownedCondition xsi:type="pivot:OperationCallExp" name="&lt;>" referredOperation="&_3;#inEtV" type="pivot:BooleanType &_3;#XEMMs">
-                          <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                    <ownedVariable xsi:type="pivot:LetVariable" xmi:id="WrnZO" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF">
+                      <ownedInit xsi:type="pivot:IfExp" isRequired="true" type="pivot:PrimitiveType &_3;#Nr4QF">
+                        <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="true" name="&lt;>" referredOperation="&_3;#inEtV"
+                            type="pivot:BooleanType &_3;#XEMMs">
+                          <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                          <ownedSource xsi:type="pivot:VariableExp" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                         </ownedCondition>
-                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                        <ownedThen xsi:type="pivot:OperationCallExp" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
-                          <ownedArguments xsi:type="pivot:RealLiteralExp" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-                          <ownedSource xsi:type="pivot:VariableExp" isRequired="false" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                        <ownedElse xsi:type="pivot:IntegerLiteralExp" integerSymbol="0" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                        <ownedThen xsi:type="pivot:OperationCallExp" isRequired="true" name="/" referredOperation="&_3;#GJEtV" type="pivot:PrimitiveType &_3;#Nr4QF">
+                          <ownedArguments xsi:type="pivot:RealLiteralExp" isRequired="true" realSymbol="255.0" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+                          <ownedSource xsi:type="pivot:VariableExp" name="ropt" referredVariable="#0qS,2" type="pivot:PrimitiveType &_3;#Nr4QF"/>
                         </ownedThen>
                       </ownedInit>
                     </ownedVariable>
                   </ownedIn>
-                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Y4o1R" isRequired="false" name="bopt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                    <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                      <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                        <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
+                  <ownedVariable xsi:type="pivot:LetVariable" xmi:id="Y4o1R" name="bopt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                    <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                      <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                        <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="3" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                        <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                       </ownedSource>
                     </ownedInit>
                   </ownedVariable>
                 </ownedIn>
-                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="CURZ5" isRequired="false" name="gopt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                  <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                    <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                      <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
+                <ownedVariable xsi:type="pivot:LetVariable" xmi:id="CURZ5" name="gopt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                  <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                      <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="2" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                      <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                     </ownedSource>
                   </ownedInit>
                 </ownedVariable>
               </ownedIn>
-              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="0qS,2" isRequired="false" name="ropt" type="pivot:PrimitiveType &_3;#Nr4QF">
-                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
-                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" type="pivot:PrimitiveType &_3;#tYtCd"/>
-                    <ownedSource xsi:type="pivot:VariableExp" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
+              <ownedVariable xsi:type="pivot:LetVariable" xmi:id="0qS,2" name="ropt" type="pivot:PrimitiveType &_3;#Nr4QF">
+                <ownedInit xsi:type="pivot:OperationCallExp" name="toReal" referredOperation="&_3;#ukNde" type="pivot:PrimitiveType &_3;#Nr4QF">
+                  <ownedSource xsi:type="pivot:OperationCallExp" isRequired="true" name="at" referredOperation="&_3;#ArMlL" type="pivot:PrimitiveType &_3;#AlwVZ">
+                    <ownedArguments xsi:type="pivot:IntegerLiteralExp" integerSymbol="1" isRequired="true" type="pivot:PrimitiveType &_3;#tYtCd"/>
+                    <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="rgb" referredVariable="#OD,JG" type="#4nGDi"/>
                   </ownedSource>
                 </ownedInit>
               </ownedVariable>
             </ownedIn>
-            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="OD,JG" name="rgb" type="#4nGDi">
-              <ownedInit xsi:type="pivot:OperationCallExp" name="tokenize" referredOperation="&_3;#wLSrH" type="#4nGDi">
-                <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
-                <ownedSource xsi:type="pivot:VariableExp" name="color" referredVariable="#Optl4" type="pivot:DataType &_2;#23CR,"/>
+            <ownedVariable xsi:type="pivot:LetVariable" xmi:id="OD,JG" isRequired="true" name="rgb" type="#4nGDi">
+              <ownedInit xsi:type="pivot:OperationCallExp" isRequired="true" name="tokenize" referredOperation="&_3;#wLSrH" type="#4nGDi">
+                <ownedArguments xsi:type="pivot:StringLiteralExp" isRequired="true" stringSymbol="," type="pivot:PrimitiveType &_3;#AlwVZ"/>
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="color" referredVariable="#gAhFq" type="pivot:DataType &_2;#23CR,"/>
               </ownedInit>
             </ownedVariable>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#Optl4" type="pivot:DataType &_2;#23CR,"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" isRequired="true" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" isRequired="true" name="color" representedParameter="#gAhFq" type="pivot:DataType &_2;#23CR,"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="Optl4" name="color" type="pivot:DataType &_2;#23CR,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="gAhFq" isRequired="true" name="color" type="pivot:DataType &_2;#23CR,"/>
       </ownedOperations>
-      <ownedOperations xsi:type="qvtb:Function" xmi:id="KH5Tc" name="rgb2hsv" type="pivot:DataType &_0;#HhgZ,">
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="TI5Tc" isRequired="true" name="rgb2hsv" type="pivot:DataType &_0;#HhgZ,">
         <bodyExpression xsi:type="qvtb:FunctionBody">
           <ownedBody xsi:type="pivot:ShadowExp" type="pivot:DataType &_0;#HhgZ,">
-            <ownedParts xmi:id="Tga48" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedInit xsi:type="pivot:VariableExp" name="color" referredVariable="#wIwl4" type="pivot:DataType &_2;#23CR,"/>
+            <ownedParts xmi:id="gxG8T" isRequired="true" name="value" referredProperty="&_4;#qDlX6" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedInit xsi:type="pivot:VariableExp" name="color" referredVariable="#ns1Fq" type="pivot:DataType &_2;#23CR,"/>
             </ownedParts>
           </ownedBody>
-          <ownedContext xsi:type="pivot:ParameterVariable" name="this" representedParameter="#feaPR" type="#xreyG"/>
-          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#wIwl4" type="pivot:DataType &_2;#23CR,"/>
+          <ownedContext xsi:type="pivot:ParameterVariable" isRequired="true" name="this" representedParameter="#feaPR" type="#xreyG"/>
+          <ownedParameters xsi:type="pivot:ParameterVariable" name="color" representedParameter="#ns1Fq" type="pivot:DataType &_2;#23CR,"/>
         </bodyExpression>
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="wIwl4" name="color" type="pivot:DataType &_2;#23CR,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="ns1Fq" name="color" type="pivot:DataType &_2;#23CR,"/>
       </ownedOperations>
       <rule xsi:type="qvtc:Mapping" xmi:id="1xML0" name="HSV2HSLRoot">
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#iBkzG">
-            <slotExpression xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
-            <value xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
-              <ownedArguments xsi:type="pivot:PropertyCallExp" name="rgb" referredProperty="&_2;#wcJUi" type="pivot:DataType &_2;#23CR,">
-                <ownedSource xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
+            <value xsi:type="pivot:OperationCallExp" isRequired="true" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
+              <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="true" name="rgb" referredProperty="&_2;#wcJUi" type="pivot:DataType &_2;#23CR,">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
               </ownedArguments>
-              <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="this" referredVariable="#feaPR" type="#xreyG"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#kMHUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:VariableExp" isRequired="true" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#uMHUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:VariableExp" isRequired="true" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#sYCAH">
-            <slotExpression xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
-            <value xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_2;#ujlgi" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedSource xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
+            <value xsi:type="pivot:PropertyCallExp" isRequired="true" name="name" referredProperty="&_2;#ujlgi" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#ujlgi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_0;#oBOk4" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:PropertyCallExp" isRequired="true" name="name" referredProperty="&_0;#oBOk4" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#Nce+m">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#wcJUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
-              <ownedArguments xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_0;#oqvX4" type="pivot:DataType &_0;#HhgZ,">
-                <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleRoot" referredVariable="#7SYJ7" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:OperationCallExp" isRequired="true" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
+              <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="true" name="hsv" referredProperty="&_0;#oqvX4" type="pivot:DataType &_0;#HhgZ,">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
               </ownedArguments>
-              <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="this" referredVariable="#feaPR" type="#xreyG"/>
             </value>
           </assignment>
           <realizedVariable xmi:id="7SYJ7" name="middleRoot" type="pivot:Class &_2;#ndQkv"/>
@@ -725,8 +848,8 @@
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" name="hsl" typedModel="#uh0Qn">
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#LR7dL">
-              <slotExpression xsi:type="pivot:VariableExp" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
-              <value xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
+              <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslRoot" referredVariable="#wawUg" type="pivot:Class &_1;#9roFA"/>
+              <value xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
             </assignment>
             <realizedVariable xmi:id="wawUg" name="hslRoot" type="pivot:Class &_1;#9roFA"/>
           </bottomPattern>
@@ -735,12 +858,12 @@
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" name="hsv" typedModel="#4h0Qn">
           <bottomPattern/>
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="iGbAW" name="hsvRoot" type="pivot:Class &_0;#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="iGbAW" isRequired="true" name="hsvRoot" type="pivot:Class &_0;#pzNqy"/>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
-                <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType &_3;#7u3MH"/>
-                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" name="parent" referredProperty="&_0;#H6GC9" type="pivot:Class &_0;#pzNqy">
-                  <ownedSource xsi:type="pivot:VariableExp" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
+              <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
+                <ownedArguments xsi:type="pivot:NullLiteralExp" type="pivot:VoidType &_3;#7u3MH"/>
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="parent" referredProperty="&_0;#H6GC9" type="pivot:Class &_0;#pzNqy">
+                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvRoot" referredVariable="#iGbAW" type="pivot:Class &_0;#pzNqy"/>
                 </ownedSource>
               </conditionExpression>
             </predicate>
@@ -751,45 +874,45 @@
       <rule xsi:type="qvtc:Mapping" xmi:id="BBWdQ" name="HSV2HSLRecursion">
         <bottomPattern>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#iBkzG">
-            <slotExpression xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
-            <value xsi:type="pivot:OperationCallExp" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
-              <ownedArguments xsi:type="pivot:PropertyCallExp" name="rgb" referredProperty="&_2;#wcJUi" type="pivot:DataType &_2;#23CR,">
-                <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
+            <value xsi:type="pivot:OperationCallExp" isRequired="true" name="rgb2hsl" referredOperation="#AH5Tc" type="pivot:DataType &_1;#bFKYN">
+              <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="true" name="rgb" referredProperty="&_2;#wcJUi" type="pivot:DataType &_2;#23CR,">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
               </ownedArguments>
-              <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="this" referredVariable="#feaPR" type="#xreyG"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#kMHUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:VariableExp" isRequired="true" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#uMHUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:VariableExp" isRequired="true" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#sYCAH">
-            <slotExpression xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
-            <value xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_2;#ujlgi" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedSource xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
+            <value xsi:type="pivot:PropertyCallExp" isRequired="true" name="name" referredProperty="&_2;#ujlgi" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#ujlgi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:PropertyCallExp" name="name" referredProperty="&_0;#oBOk4" type="pivot:PrimitiveType &_3;#AlwVZ">
-              <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:PropertyCallExp" isRequired="true" name="name" referredProperty="&_0;#oBOk4" type="pivot:PrimitiveType &_3;#AlwVZ">
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
             </value>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#Nce+m">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:VariableExp" isRequired="true" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
           </assignment>
           <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_2;#wcJUi">
-            <slotExpression xsi:type="pivot:VariableExp" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
-            <value xsi:type="pivot:OperationCallExp" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
-              <ownedArguments xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_0;#oqvX4" type="pivot:DataType &_0;#HhgZ,">
-                <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
+            <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="middleNode" referredVariable="#HQclo" type="pivot:Class &_2;#ndQkv"/>
+            <value xsi:type="pivot:OperationCallExp" isRequired="true" name="hsv2rgb" referredOperation="#Nsy3r" type="pivot:DataType &_2;#23CR,">
+              <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="true" name="hsv" referredProperty="&_0;#oqvX4" type="pivot:DataType &_0;#HhgZ,">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
               </ownedArguments>
-              <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#feaPR" type="#xreyG"/>
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="this" referredVariable="#feaPR" type="#xreyG"/>
             </value>
           </assignment>
           <realizedVariable xmi:id="HQclo" name="middleNode" type="pivot:Class &_2;#ndQkv"/>
@@ -797,46 +920,46 @@
         <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" name="hsl" typedModel="#uh0Qn">
           <bottomPattern>
             <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" isPartial="false" targetProperty="&_1;#LR7dL">
-              <slotExpression xsi:type="pivot:VariableExp" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
-              <value xsi:type="pivot:VariableExp" name="hslParent" referredVariable="#CNyDS" type="pivot:Class &_1;#9roFA"/>
+              <slotExpression xsi:type="pivot:VariableExp" isRequired="true" name="hslNode" referredVariable="#M16Qg" type="pivot:Class &_1;#9roFA"/>
+              <value xsi:type="pivot:VariableExp" isRequired="true" name="hslParent" referredVariable="#CNyDS" type="pivot:Class &_1;#9roFA"/>
             </assignment>
             <realizedVariable xmi:id="M16Qg" name="hslNode" type="pivot:Class &_1;#9roFA"/>
           </bottomPattern>
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="CNyDS" name="hslParent" type="pivot:Class &_1;#9roFA"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="CNyDS" isRequired="true" name="hslParent" type="pivot:Class &_1;#9roFA"/>
           </guardPattern>
         </domain>
         <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" name="hsv" typedModel="#4h0Qn">
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
-                <ownedArguments xsi:type="pivot:VariableExp" name="hsvParent" referredVariable="#mQIrj" type="pivot:Class &_0;#pzNqy"/>
+              <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
+                <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="hsvParent" referredVariable="#mQIrj" type="pivot:Class &_0;#pzNqy"/>
                 <ownedSource xsi:type="pivot:PropertyCallExp" name="parent" referredProperty="&_0;#H6GC9" type="pivot:Class &_0;#pzNqy">
-                  <ownedSource xsi:type="pivot:VariableExp" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
+                  <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="hsvNode" referredVariable="#+gl8V" type="pivot:Class &_0;#pzNqy"/>
                 </ownedSource>
               </conditionExpression>
             </predicate>
           </bottomPattern>
           <guardPattern>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="+gl8V" name="hsvNode" type="pivot:Class &_0;#pzNqy"/>
-            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="mQIrj" name="hsvParent" type="pivot:Class &_0;#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="+gl8V" isRequired="true" name="hsvNode" type="pivot:Class &_0;#pzNqy"/>
+            <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="mQIrj" isRequired="true" name="hsvParent" type="pivot:Class &_0;#pzNqy"/>
           </guardPattern>
         </domain>
         <guardPattern>
-          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="9Tdn9" name="middleParent" type="pivot:Class &_2;#ndQkv"/>
+          <ownedVariables xsi:type="qvtc:GuardVariable" xmi:id="9Tdn9" isRequired="true" name="middleParent" type="pivot:Class &_2;#ndQkv"/>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
-              <ownedArguments xsi:type="pivot:VariableExp" name="hslParent" referredVariable="#CNyDS" type="pivot:Class &_1;#9roFA"/>
-              <ownedSource xsi:type="pivot:PropertyCallExp" name="hsl" referredProperty="&_2;#kMHUi" type="pivot:Class &_1;#9roFA">
-                <ownedSource xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
+              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="hslParent" referredVariable="#CNyDS" type="pivot:Class &_1;#9roFA"/>
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="true" name="hsl" referredProperty="&_2;#kMHUi" type="pivot:Class &_1;#9roFA">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
-              <ownedArguments xsi:type="pivot:VariableExp" name="hsvParent" referredVariable="#mQIrj" type="pivot:Class &_0;#pzNqy"/>
-              <ownedSource xsi:type="pivot:PropertyCallExp" name="hsv" referredProperty="&_2;#uMHUi" type="pivot:Class &_0;#pzNqy">
-                <ownedSource xsi:type="pivot:VariableExp" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="true" name="=" referredOperation="&_3;#bZOvl" type="pivot:BooleanType &_3;#XEMMs">
+              <ownedArguments xsi:type="pivot:VariableExp" isRequired="true" name="hsvParent" referredVariable="#mQIrj" type="pivot:Class &_0;#pzNqy"/>
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="true" name="hsv" referredProperty="&_2;#uMHUi" type="pivot:Class &_0;#pzNqy">
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="true" name="middleParent" referredVariable="#9Tdn9" type="pivot:Class &_2;#ndQkv"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
@@ -844,26 +967,23 @@
       </rule>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="QkRyc" name="Collection" superClasses="&_3;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType &_3;#AlwVZ" formal="&_3;#qs59R"/>
-      </ownedBindings>
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="VjRyc" generic="pivot:CollectionType &_3;#IgEJU" isNullFree="true" name="Collection"
+        superClasses="&_3;#jbMkR">
+      <ownedTemplateArguments actual="pivot:PrimitiveType &_3;#AlwVZ"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="d0GJT" name="OrderedCollection" superClasses="#QkRyc">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType &_3;#AlwVZ" formal="&_3;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="izGJT" generic="pivot:CollectionType &_3;#Vw5fK" isNullFree="true" name="OrderedCollection"
+        superClasses="#VjRyc">
+      <ownedTemplateArguments actual="pivot:PrimitiveType &_3;#AlwVZ"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" xmi:id="4nGDi" isNullFree="true" name="Sequence" superClasses="#d0GJT">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType &_3;#AlwVZ" formal="&_3;#l1i6D"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SequenceType" xmi:id="4nGDi" generic="pivot:SequenceType &_3;#rk5ZZ" isNullFree="true" name="Sequence"
+        superClasses="#izGJT">
+      <ownedTemplateArguments actual="pivot:PrimitiveType &_3;#AlwVZ"/>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:TupleType" xmi:id=",5eVD" name="Tuple" superClasses="&_3;#,qHxF">
-      <ownedProperties xmi:id="9lIn6" name="b" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-      <ownedProperties xmi:id="CmIn6" name="g" type="pivot:PrimitiveType &_3;#Nr4QF"/>
-      <ownedProperties xmi:id="NmIn6" name="r" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+      <ownedProperties xmi:id="9lIn6" isRequired="true" name="b" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+      <ownedProperties xmi:id="CmIn6" isRequired="true" name="g" type="pivot:PrimitiveType &_3;#Nr4QF"/>
+      <ownedProperties xmi:id="NmIn6" isRequired="true" name="r" type="pivot:PrimitiveType &_3;#Nr4QF"/>
     </ownedClasses>
   </ownedPackages>
 </qvtc:CoreModel>

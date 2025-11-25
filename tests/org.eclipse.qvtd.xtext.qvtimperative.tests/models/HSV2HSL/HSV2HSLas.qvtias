@@ -16,16 +16,16 @@
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="xreyG" name="hsv2hsl" superClasses="&_3;#zfDWR">
       <ownedOperations xsi:type="qvtb:Function" xmi:id="IHekz" name="hsl2rgb" type="pivot:DataType &_2;#23CR,">
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="2oAE8" name="color" type="pivot:DataType &_1;#bFKYN"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id=",s3cT" name="color" type="pivot:DataType &_1;#bFKYN"/>
       </ownedOperations>
       <ownedOperations xsi:type="qvtb:Function" xmi:id="Wty3r" name="hsv2rgb" type="pivot:DataType &_2;#23CR,">
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="MWmTI" name="color" type="pivot:DataType &_0;#HhgZ,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="5s98H" name="color" type="pivot:DataType &_0;#HhgZ,"/>
       </ownedOperations>
       <ownedOperations xsi:type="qvtb:Function" xmi:id="JI5Tc" name="rgb2hsl" type="pivot:DataType &_1;#bFKYN">
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="z1,l4" name="color" type="pivot:DataType &_2;#23CR,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="FNzFq" name="color" type="pivot:DataType &_2;#23CR,"/>
       </ownedOperations>
       <ownedOperations xsi:type="qvtb:Function" xmi:id="TI5Tc" name="rgb2hsv" type="pivot:DataType &_0;#HhgZ,">
-        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="VVCm4" name="color" type="pivot:DataType &_2;#23CR,"/>
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="ns1Fq" name="color" type="pivot:DataType &_2;#23CR,"/>
       </ownedOperations>
       <modelParameter xmi:id="4h0Qn" name="hsv" usedPackage="&_0;#jRMJ8">
         <ownedContext xmi:id="Ks6RV" name="hsv" isRequired="true" type="pivot:Class &_4;#qeoBC"/>
@@ -166,46 +166,30 @@
       <ownedContext xmi:id="feaPR" name="this" isRequired="true" type="#xreyG"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="R76Oq" name="Collection" superClasses="&_3;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#pzNqy" formal="&_3;#qs59R"/>
-      </ownedBindings>
+  <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="R76Oq" name="Collection" generic="pivot:CollectionType &_3;#IgEJU" superClasses="&_3;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="fSn8W" name="Collection" superClasses="&_3;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_2;#ndQkv" formal="&_3;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="fSn8W" name="Collection" generic="pivot:CollectionType &_3;#IgEJU" superClasses="&_3;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_2;#ndQkv"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="eLwlg" name="OrderedCollection" superClasses="#R76Oq">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#pzNqy" formal="&_3;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="eLwlg" name="OrderedCollection" generic="pivot:CollectionType &_3;#Vw5fK" superClasses="#R76Oq">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="sicTN" name="OrderedCollection" superClasses="#fSn8W">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_2;#ndQkv" formal="&_3;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="sicTN" name="OrderedCollection" generic="pivot:CollectionType &_3;#Vw5fK" superClasses="#fSn8W">
+      <ownedTemplateArguments actual="pivot:Class &_2;#ndQkv"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="ojNa," name="OrderedSet" superClasses="#eLwlg #C2qKa">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#pzNqy" formal="&_3;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="ojNa," name="OrderedSet" generic="pivot:OrderedSetType &_3;#fIXUp" superClasses="#eLwlg #C2qKa">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="265Hs" name="OrderedSet" superClasses="#sicTN #QNX4G">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_2;#ndQkv" formal="&_3;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="265Hs" name="OrderedSet" generic="pivot:OrderedSetType &_3;#fIXUp" superClasses="#sicTN #QNX4G">
+      <ownedTemplateArguments actual="pivot:Class &_2;#ndQkv"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="C2qKa" name="UniqueCollection" superClasses="#R76Oq">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#pzNqy" formal="&_3;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="C2qKa" name="UniqueCollection" generic="pivot:CollectionType &_3;#5a0EE" superClasses="#R76Oq">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="QNX4G" name="UniqueCollection" superClasses="#fSn8W">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_2;#ndQkv" formal="&_3;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="QNX4G" name="UniqueCollection" generic="pivot:CollectionType &_3;#5a0EE" superClasses="#fSn8W">
+      <ownedTemplateArguments actual="pivot:Class &_2;#ndQkv"/>
     </ownedClasses>
   </ownedPackages>
 </qvti:ImperativeModel>

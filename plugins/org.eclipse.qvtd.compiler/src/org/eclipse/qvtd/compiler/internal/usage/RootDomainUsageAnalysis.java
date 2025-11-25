@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TemplateParameter;
-import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -400,9 +399,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	} */
 
 	private void analyzeTemplateSignature(@NonNull TemplateableElement asTemplateableElement, @NonNull DomainUsageConstant newUsage) {
-		TemplateSignature asSignature = asTemplateableElement.getOwnedSignature();
-		if (asSignature !=  null) {
-			for (@NonNull TemplateParameter asTemplateParameter : PivotUtil.getOwnedParameters(asSignature)) {
+		Iterable<@NonNull TemplateParameter> asTemplateParameters = asTemplateableElement.basicGetOwnedTemplateParameters();
+		if (asTemplateParameters != null) {
+			for (@NonNull TemplateParameter asTemplateParameter : asTemplateParameters) {
 				type2usage.put(asTemplateParameter, newUsage);
 			}
 		}

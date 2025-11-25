@@ -153,225 +153,143 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
-    <ownedClasses xsi:type="pivot:BagType" xmi:id="9+o+H" name="Bag" superClasses="#TaRAX">
-      <ownedBindings>
-        <ownedSubstitutions actual="#7pR2u" formal="&_1;#k2OA6"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="9+o+H" generic="pivot:BagType &_1;#yEcHF" name="Bag" superClasses="#TaRAX">
+      <ownedTemplateArguments actual="#7pR2u"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" xmi:id="xW5qz" name="Bag" superClasses="#HyhsC">
-      <ownedBindings>
-        <ownedSubstitutions actual="#PGjqK" formal="&_1;#k2OA6"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="xW5qz" generic="pivot:BagType &_1;#yEcHF" name="Bag" superClasses="#HyhsC">
+      <ownedTemplateArguments actual="#PGjqK"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" xmi:id="pJjNZ" name="Bag" superClasses="#,kLPo">
-      <ownedBindings>
-        <ownedSubstitutions actual="#H0dko" formal="&_1;#k2OA6"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="pJjNZ" generic="pivot:BagType &_1;#yEcHF" name="Bag" superClasses="#,kLPo">
+      <ownedTemplateArguments actual="#H0dko"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" xmi:id="KmD9S" name="Bag" superClasses="#gBs+h">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#k2OA6"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="KmD9S" generic="pivot:BagType &_1;#yEcHF" name="Bag" superClasses="#gBs+h">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" xmi:id="gkhFp" name="Bag" superClasses="#2,JH4">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#k2OA6"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:BagType" xmi:id="gkhFp" generic="pivot:BagType &_1;#yEcHF" name="Bag" superClasses="#2,JH4">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="w2smd" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#g7Mr0" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="w2smd" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#g7Mr0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="vxHON" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#3ONqN" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="vxHON" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#3ONqN"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="19n95" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t4j6T" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="19n95" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t4j6T"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="TaRAX" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#7pR2u" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="TaRAX" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#7pR2u"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="HyhsC" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#PGjqK" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="HyhsC" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#PGjqK"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",kLPo" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#H0dko" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",kLPo" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#H0dko"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="OzBxl" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#uMSmb" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="OzBxl" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#uMSmb"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LQOub" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zS2p0" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LQOub" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#zS2p0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gBs+h" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gBs+h" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="aDs+h" lower="2" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="aDs+h" generic="pivot:CollectionType &_1;#IgEJU" lower="2" name="Collection"
+        superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YnZMR" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#Id7YJ" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YnZMR" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#Id7YJ"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="cucdl" lower="2" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#imhVK" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="cucdl" generic="pivot:CollectionType &_1;#IgEJU" lower="2" name="Collection"
+        superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#imhVK"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="2,JH4" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="2,JH4" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gqGXN" name="OrderedCollection" superClasses="#TaRAX">
-      <ownedBindings>
-        <ownedSubstitutions actual="#7pR2u" formal="&_1;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gqGXN" generic="pivot:CollectionType &_1;#Vw5fK" name="OrderedCollection" superClasses="#TaRAX">
+      <ownedTemplateArguments actual="#7pR2u"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YgDFS" name="OrderedCollection" superClasses="#LQOub">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zS2p0" formal="&_1;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="YgDFS" generic="pivot:CollectionType &_1;#Vw5fK" name="OrderedCollection" superClasses="#LQOub">
+      <ownedTemplateArguments actual="#zS2p0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="nThVY" lower="2" name="OrderedCollection" superClasses="#aDs+h">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="nThVY" generic="pivot:CollectionType &_1;#Vw5fK" lower="2" name="OrderedCollection"
+        superClasses="#aDs+h">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="DQ,du" name="OrderedCollection" superClasses="#2,JH4">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="DQ,du" generic="pivot:CollectionType &_1;#Vw5fK" name="OrderedCollection" superClasses="#2,JH4">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="qCkLs" name="OrderedSet" superClasses="#gqGXN #EVB8G">
-      <ownedBindings>
-        <ownedSubstitutions actual="#7pR2u" formal="&_1;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="qCkLs" generic="pivot:OrderedSetType &_1;#fIXUp" name="OrderedSet" superClasses="#gqGXN #EVB8G">
+      <ownedTemplateArguments actual="#7pR2u"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="i4g5w" name="OrderedSet" superClasses="#YgDFS #8K+pL">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zS2p0" formal="&_1;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="i4g5w" generic="pivot:OrderedSetType &_1;#fIXUp" name="OrderedSet" superClasses="#YgDFS #8K+pL">
+      <ownedTemplateArguments actual="#zS2p0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="xr+J3" lower="2" name="OrderedSet" superClasses="#nThVY #L+b6R">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="xr+J3" generic="pivot:OrderedSetType &_1;#fIXUp" lower="2" name="OrderedSet"
+        superClasses="#nThVY #L+b6R">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="NocSN" name="OrderedSet" superClasses="#DQ,du #n65Co">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="NocSN" generic="pivot:OrderedSetType &_1;#fIXUp" name="OrderedSet" superClasses="#DQ,du #n65Co">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="0cIlO" name="Set" superClasses="#hxciN">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#g7Mr0" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="0cIlO" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#hxciN">
+      <ownedTemplateArguments actual="pivot:Class &_0;#g7Mr0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="zXjM+" name="Set" superClasses="#gs3J9">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#3ONqN" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="zXjM+" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#gs3J9">
+      <ownedTemplateArguments actual="pivot:Class &_0;#3ONqN"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="5jD8q" name="Set" superClasses="#m4X5p">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t4j6T" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="5jD8q" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#m4X5p">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t4j6T"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="SZdvW" name="Set" superClasses="#,txsV">
-      <ownedBindings>
-        <ownedSubstitutions actual="#uMSmb" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="SZdvW" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#,txsV">
+      <ownedTemplateArguments actual="#uMSmb"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="P2psM" name="Set" superClasses="#8K+pL">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zS2p0" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="P2psM" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#8K+pL">
+      <ownedTemplateArguments actual="#zS2p0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="cN1KC" name="Set" superClasses="#JiJIB">
-      <ownedBindings>
-        <ownedSubstitutions actual="#Id7YJ" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="cN1KC" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#JiJIB">
+      <ownedTemplateArguments actual="#Id7YJ"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="gU4bW" lower="2" name="Set" superClasses="#NpMZV">
-      <ownedBindings>
-        <ownedSubstitutions actual="#imhVK" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="gU4bW" generic="pivot:SetType &_1;#MGgHF" lower="2" name="Set" superClasses="#NpMZV">
+      <ownedTemplateArguments actual="#imhVK"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="6llFp" name="Set" superClasses="#n65Co">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="6llFp" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#n65Co">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="hxciN" name="UniqueCollection" superClasses="#w2smd">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#g7Mr0" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="hxciN" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#w2smd">
+      <ownedTemplateArguments actual="pivot:Class &_0;#g7Mr0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gs3J9" name="UniqueCollection" superClasses="#vxHON">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#3ONqN" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="gs3J9" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#vxHON">
+      <ownedTemplateArguments actual="pivot:Class &_0;#3ONqN"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="m4X5p" name="UniqueCollection" superClasses="#19n95">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#t4j6T" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="m4X5p" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#19n95">
+      <ownedTemplateArguments actual="pivot:Class &_0;#t4j6T"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="EVB8G" name="UniqueCollection" superClasses="#TaRAX">
-      <ownedBindings>
-        <ownedSubstitutions actual="#7pR2u" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="EVB8G" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#TaRAX">
+      <ownedTemplateArguments actual="#7pR2u"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",txsV" name="UniqueCollection" superClasses="#OzBxl">
-      <ownedBindings>
-        <ownedSubstitutions actual="#uMSmb" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id=",txsV" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#OzBxl">
+      <ownedTemplateArguments actual="#uMSmb"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8K+pL" name="UniqueCollection" superClasses="#LQOub">
-      <ownedBindings>
-        <ownedSubstitutions actual="#zS2p0" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8K+pL" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#LQOub">
+      <ownedTemplateArguments actual="#zS2p0"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="L+b6R" lower="2" name="UniqueCollection" superClasses="#aDs+h">
-      <ownedBindings>
-        <ownedSubstitutions actual="#QE4nl" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="L+b6R" generic="pivot:CollectionType &_1;#5a0EE" lower="2" name="UniqueCollection"
+        superClasses="#aDs+h">
+      <ownedTemplateArguments actual="#QE4nl"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="JiJIB" name="UniqueCollection" superClasses="#YnZMR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#Id7YJ" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="JiJIB" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#YnZMR">
+      <ownedTemplateArguments actual="#Id7YJ"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="NpMZV" lower="2" name="UniqueCollection" superClasses="#cucdl">
-      <ownedBindings>
-        <ownedSubstitutions actual="#imhVK" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="NpMZV" generic="pivot:CollectionType &_1;#5a0EE" lower="2" name="UniqueCollection"
+        superClasses="#cucdl">
+      <ownedTemplateArguments actual="#imhVK"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="n65Co" name="UniqueCollection" superClasses="#2,JH4">
-      <ownedBindings>
-        <ownedSubstitutions actual="#WqJYx" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="n65Co" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#2,JH4">
+      <ownedTemplateArguments actual="#WqJYx"/>
     </ownedClasses>
     <ownedPackages xmi:id="OP49s" URI="http://www.eclipse.org/ocl/2015/Pivot" name="pivot" nsPrefix="pivot">
       <ownedClasses xmi:id="qSCDS" name="Annotation">

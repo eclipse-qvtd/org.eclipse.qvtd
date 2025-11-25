@@ -250,7 +250,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			installOperations();
 			installProperties();
 			installInvariants();
-			installTemplateBindings();
+			installTemplateArguments();
 			installComments();
 		}
 
@@ -1051,7 +1051,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedInvariants.add(constraint = iv_TypedModel_ExclusivePrimitiveThisTrace);
 		}
 
-		private void installTemplateBindings() {
+		private void installTemplateArguments() {
 			addBinding(_Bag_Domain_F, _Domain);
 			addBinding(_Bag_Function_F, _Function);
 			addBinding(_Bag_Pattern_F, _Pattern);

@@ -13,18 +13,14 @@
       <ownedOperations xmi:id="qtNKG" implementationClass="org.eclipse.qvtd.runtime.library.model.AllObjectsOperation" isRequired="true"
           name="allObjects" type="#P7ALG"/>
       <ownedOperations xmi:id="gw2Iz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation" isRequired="true"
-          name="objectsOfKind" type="#ZIkED">
-        <ownedParameters xmi:id="FsCF+" isTypeof="true" name="type" type="#NxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="uoaD," name="TT"/>
-        </ownedSignature>
+          name="objectsOfKind" type="#sbjGH">
+        <ownedParameters xmi:id="FsCF+" isTypeof="true" name="type" type="#YVcXo"/>
+        <ownedTemplateParameters xmi:id="NXDta" name="TT"/>
       </ownedOperations>
       <ownedOperations xmi:id="G,7Jz" implementationClass="org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation" isRequired="true"
-          name="objectsOfType" type="#ZIkED">
-        <ownedParameters xmi:id="TgcVP" isTypeof="true" name="type" type="#NxGT6"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="EsQvR" name="TT"/>
-        </ownedSignature>
+          name="objectsOfType" type="#sbjGH">
+        <ownedParameters xmi:id="TgcVP" isTypeof="true" name="type" type="#YVcXo"/>
+        <ownedTemplateParameters xmi:id="bLd9r" name="TT"/>
       </ownedOperations>
       <ownedOperations xmi:id="Jk12r" implementationClass="org.eclipse.qvtd.runtime.library.model.RootObjectsOperation" isRequired="true"
           name="rootObjects" type="#P7ALG"/>
@@ -32,40 +28,26 @@
     <ownedClasses xmi:id="KvVQe" name="Transformation" superClasses="&_1;#zfDWR"/>
   </ownedPackages>
   <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ViIGS" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="o1HIW" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" name="Collection" superClasses="&_1;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="LVlMV" generic="pivot:CollectionType &_1;#IgEJU" name="Collection" superClasses="&_1;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="ZIkED" name="Set" superClasses="#Gd4BC">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="sbjGH" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#Zw3DG">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="P7ALG" name="Set" superClasses="#8PVIF">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="P7ALG" generic="pivot:SetType &_1;#MGgHF" name="Set" superClasses="#8PVIF">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Gd4BC" name="UniqueCollection" superClasses="#ViIGS">
-      <ownedBindings>
-        <ownedSubstitutions actual="#NxGT6" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Zw3DG" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#o1HIW">
+      <ownedTemplateArguments actual="#YVcXo"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" name="UniqueCollection" superClasses="#LVlMV">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#zfDWR" formal="&_1;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="8PVIF" generic="pivot:CollectionType &_1;#5a0EE" name="UniqueCollection" superClasses="#LVlMV">
+      <ownedTemplateArguments actual="pivot:Class &_1;#zfDWR"/>
     </ownedClasses>
     <ownedClasses xmi:id="Xt1f+" name="$$">
-      <ownedSignature>
-        <ownedParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="NxGT6" name="$$0"/>
-      </ownedSignature>
+      <ownedTemplateParameters xsi:type="pivot:NormalizedTemplateParameter" xmi:id="YVcXo" name="$$0"/>
     </ownedClasses>
   </ownedPackages>
 </pivot:Model>

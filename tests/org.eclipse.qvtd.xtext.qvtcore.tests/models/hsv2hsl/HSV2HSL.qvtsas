@@ -1,186 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qvts:ScheduleModel [
+<!ENTITY _0 "HSVTree.ecore.oclas">
+<!ENTITY _1 "HSV2HSL.qvtm.qvtcas">
+<!ENTITY _2 "HSV2HSL.ecore.oclas">
+<!ENTITY _3 "HSLTree.ecore.oclas">
+<!ENTITY _4 "http://www.eclipse.org/ocl/2015/Library.oclas">
+<!ENTITY _5 "HSV2HSL.qvtcas">
+]>
 <qvts:ScheduleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
     xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore" xmlns:qvts="http://www.eclipse.org/qvt/2017/QVTschedule" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/2017/QVTschedule java://org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage"
-    xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTcCompilerTests__testQVTcCompiler_HSVToHSL_CG/HSV2HSL.qvtsas"
-    name="HSV2HSL.qvtsas" xmiidVersion="1">
-  <ownedClassDatums xmi:id="AFlEp" name="HSVNode" referredClass="HSVTree.ecore.oclas#pzNqy"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn">
-    <ownedPropertyDatums xmi:id="AOoj4" name="parent" opposite="#VjdzW"/>
-    <ownedPropertyDatums xmi:id="VjdzW" name="children" opposite="#AOoj4"/>
+    xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTcCompilerTests__testQVTcCompiler_HSVToHSL/HSV2HSL" name="HSV2HSL"
+    xmiidVersion="1">
+  <ownedClassDatums xmi:id="XpsjI" name="HSVNode" referredClass="&_0;#pzNqy" referredTypedModel="&_1;#4h0Qn">
+    <ownedPropertyDatums xmi:id="p7HEu" name="parent" opposite="#xlyy3"/>
+    <ownedPropertyDatums xmi:id="xlyy3" name="children" opposite="#p7HEu"/>
     <ownedPropertyDatums name="hsv"/>
     <ownedPropertyDatums name="name"/>
-    <ownedPropertyDatums xmi:id="rRl2z" name="middle" opposite="#ukdal"/>
+    <ownedPropertyDatums xmi:id="Kl,TD" name="middle" opposite="#zNZOV"/>
   </ownedClassDatums>
-  <ownedClassDatums xmi:id="RoHHm" name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn">
-    <ownedPropertyDatums xmi:id="N00Eq" name="parent" opposite="#iJqUI"/>
-    <ownedPropertyDatums xmi:id="iJqUI" name="children" opposite="#N00Eq"/>
+  <ownedClassDatums xmi:id="M+ixC" name="HSVNode2HSLNode" referredClass="&_2;#ndQkv" referredTypedModel="&_1;#C1IOn">
+    <ownedPropertyDatums name="parent" opposite="#jjJCc"/>
+    <ownedPropertyDatums xmi:id="jjJCc" name="children" opposite="#17EJ7"/>
     <ownedPropertyDatums name="hsv"/>
     <ownedPropertyDatums name="hsl"/>
     <ownedPropertyDatums name="rgb"/>
     <ownedPropertyDatums name="name"/>
+    <ownedPropertyDatums xmi:id="17EJ7" name="parent" opposite="#jjJCc" targetClassDatum="#CbY8K"/>
   </ownedClassDatums>
-  <ownedClassDatums xmi:id="2YWho" name="HSLNode" referredClass="HSLTree.ecore.oclas#9roFA"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn">
-    <ownedPropertyDatums xmi:id="eyRiG" name="parent" opposite="#zHHyk"/>
-    <ownedPropertyDatums xmi:id="zHHyk" name="children" opposite="#eyRiG"/>
+  <ownedClassDatums xmi:id="nVuIv" name="HSLNode" referredClass="&_3;#9roFA" referredTypedModel="&_1;#uh0Qn">
+    <ownedPropertyDatums name="parent" opposite="#Nn3JD"/>
+    <ownedPropertyDatums xmi:id="Nn3JD" name="children" opposite="#f,yQi"/>
     <ownedPropertyDatums name="hsl"/>
     <ownedPropertyDatums name="name"/>
-    <ownedPropertyDatums xmi:id="J2O1B" name="middle" opposite="#kkdal"/>
+    <ownedPropertyDatums xmi:id="81CrO" name="middle" opposite="#T0CKV"/>
+    <ownedPropertyDatums xmi:id="f,yQi" name="parent" opposite="#Nn3JD" targetClassDatum="#CbY8K"/>
   </ownedClassDatums>
-  <ownedClassDatums xmi:id="fKS53" name="OclVoid" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums xmi:id="fKS53A" name="OclVoid" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-  <ownedClassDatums xmi:id="kALCK" name="String" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums xmi:id="fKS53B" name="OclVoid" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-  <ownedClassDatums xmi:id="ey3z1" name="HSV" referredClass="HSVTree.ecore.oclas#HhgZ,"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums xmi:id="gC6z1" name="RGB" referredClass="HSV2HSL.ecore.oclas#23CR,"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums xmi:id="Uy3z1" name="HSL" referredClass="HSLTree.ecore.oclas#bFKYN"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums name="HSVNode" referredClass="HSVTree.ecore.oclas#pzNqy" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-  <ownedClassDatums name="HSLNode" referredClass="HSLTree.ecore.oclas#9roFA" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-  <ownedClassDatums name="OclAny" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-  <ownedClassDatums name="OclElement" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" referredTypedModel="HSV2HSL.qvtm.qvtcas#C1IOn"/>
-  <ownedClassDatums name="OclAny" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-  <ownedClassDatums name="OclElement" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn"/>
-  <ownedClassDatums name="OclAny" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-  <ownedClassDatums name="OclElement" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-  <ownedClassDatums name="OclAny" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums name="OclSummable" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#D4eXY" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums name="OclComparable" referredClass="http://www.eclipse.org/ocl/2015/Library.oclas#BEwMu" referredTypedModel="HSV2HSL.qvtm.qvtcas#ubWKZ"/>
-  <ownedClassDatums name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#uh0Qn">
-    <ownedPropertyDatums xmi:id="kkdal" name="hsl" opposite="#J2O1B"/>
+  <ownedClassDatums xmi:id="CbY8K" name="OclVoid" referredClass="&_4;#7u3MH" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums xmi:id="KTwYp" name="String" referredClass="&_4;#AlwVZ" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums xmi:id="V0mMl" name="HSV" referredClass="&_0;#HhgZ," referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums xmi:id="Aq7kX" name="RGB" referredClass="&_2;#23CR," referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums xmi:id="vuJHL" name="hsv2hsl" referredClass="&_5;#xreyG" referredTypedModel="&_1;#P96Qr"/>
+  <ownedClassDatums xmi:id="XQgBF" name="HSL" referredClass="&_3;#bFKYN" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums name="HSVNode" referredClass="&_0;#pzNqy" referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="HSLNode" referredClass="&_3;#9roFA" referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="OclAny" referredClass="&_4;#jbMkR" referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="OclElement" referredClass="&_4;#zfDWR" referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="OclAny" referredClass="&_4;#jbMkR" referredTypedModel="&_1;#uh0Qn"/>
+  <ownedClassDatums name="OclElement" referredClass="&_4;#zfDWR" referredTypedModel="&_1;#uh0Qn"/>
+  <ownedClassDatums name="OclAny" referredClass="&_4;#jbMkR" referredTypedModel="&_1;#4h0Qn"/>
+  <ownedClassDatums name="OclElement" referredClass="&_4;#zfDWR" referredTypedModel="&_1;#4h0Qn"/>
+  <ownedClassDatums name="OclAny" referredClass="&_4;#jbMkR" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums name="OclComparable" referredClass="&_4;#BEwMu" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums name="OclSummable" referredClass="&_4;#D4eXY" referredTypedModel="&_1;#ubWKZ"/>
+  <ownedClassDatums name="HSVNode2HSLNode" referredClass="&_2;#ndQkv" referredTypedModel="&_1;#uh0Qn">
+    <ownedPropertyDatums xmi:id="T0CKV" name="hsl" opposite="#81CrO"/>
   </ownedClassDatums>
-  <ownedClassDatums name="HSVNode2HSLNode" referredClass="HSV2HSL.ecore.oclas#ndQkv"
-      referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn">
-    <ownedPropertyDatums xmi:id="ukdal" name="hsv" opposite="#rRl2z"/>
+  <ownedClassDatums name="HSVNode2HSLNode" referredClass="&_2;#ndQkv" referredTypedModel="&_1;#4h0Qn">
+    <ownedPropertyDatums xmi:id="zNZOV" name="hsv" opposite="#Kl,TD"/>
   </ownedClassDatums>
-  <ownedClassDatums xsi:type="qvts:CollectionClassDatum" xmi:id="1g6z1" name="Set" referredClass="#agWNb" referredTypedModel="HSV2HSL.qvtm.qvtcas#4h0Qn"/>
-  <ownedMappingRegions xsi:type="qvts:RuleRegion" xmi:id="Kkhlu" headNodes="#egCj2" mappingPartitions="#r9Swk" name="HSV2HSLRoot" referredRule="qvtc:Mapping HSV2HSL.qvtm.qvtcas#1xML0">
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="X5T+z" edgeRole="LOADED" name="parent" sourceNode="#egCj2" targetNode="#hgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="Y5T+z" edgeRole="REALIZED" name="parent" sourceNode="#ggCj2" targetNode="#igCj2"/>
+  <ownedClassDatums name="String" referredClass="&_4;#AlwVZ" referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="RGB" referredClass="&_2;#23CR," referredTypedModel="&_1;#C1IOn"/>
+  <ownedClassDatums name="HSL" referredClass="&_3;#bFKYN" referredTypedModel="&_1;#uh0Qn"/>
+  <ownedClassDatums name="String" referredClass="&_4;#AlwVZ" referredTypedModel="&_1;#uh0Qn"/>
+  <ownedClassDatums xsi:type="qvts:CollectionClassDatum" xmi:id="DIC2l" name="Set" referredClass="#agWNb" referredTypedModel="&_1;#4h0Qn"/>
+  <ownedMappingRegions xsi:type="qvts:RuleRegion" xmi:id="Kkhlu" headNodes="#egCj2" mappingPartitions="#r9Swk" name="HSV2HSLRoot" referredRule="qvtc:Mapping &_1;#1xML0">
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="X5T+z" edgeRole="LOADED" name="parent" sourceNode="#egCj2" targetNode="#hgCj2"
+        utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="Y5T+z" edgeRole="REALIZED" name="parent" sourceNode="#ggCj2" targetNode="#igCj2"
+        utility="NULLABLE_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="Z5T+z" edgeRole="REALIZED" name="hsl" oppositeEdge="#a5T+z" sourceNode="#fgCj2"
-        targetNode="#ggCj2"/>
+        targetNode="#ggCj2" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="a5T+z" edgeRole="REALIZED" name="middle" oppositeEdge="#Z5T+z" secondary="true"
-        sourceNode="#ggCj2" targetNode="#fgCj2"/>
+        sourceNode="#ggCj2" targetNode="#fgCj2" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="b5T+z" edgeRole="REALIZED" name="hsv" oppositeEdge="#c5T+z" sourceNode="#fgCj2"
-        targetNode="#egCj2"/>
+        targetNode="#egCj2" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="c5T+z" edgeRole="REALIZED" name="middle" oppositeEdge="#b5T+z" secondary="true"
-        sourceNode="#egCj2" targetNode="#fgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="d5T+z" edgeRole="LOADED" name="name" sourceNode="#egCj2" targetNode="#jgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="e5T+z" edgeRole="REALIZED" name="name" sourceNode="#fgCj2" targetNode="#jgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="f5T+z" edgeRole="REALIZED" name="parent" sourceNode="#fgCj2" targetNode="#kgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="g5T+z" edgeRole="LOADED" name="hsv" sourceNode="#egCj2" targetNode="#lgCj2"/>
-    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="h5T+z" edgeRole="LOADED" name="«color»" referredParameter="HSV2HSL.qvtm.qvtcas#nJUTI"
-        sourceNode="#lgCj2" targetNode="#mgCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="i5T+z" edgeRole="REALIZED" name="rgb" sourceNode="#fgCj2" targetNode="#mgCj2"/>
-    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="j5T+z" edgeRole="LOADED" name="«color»" referredParameter="HSV2HSL.qvtm.qvtcas#Optl4"
-        sourceNode="#mgCj2" targetNode="#ngCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="k5T+z" edgeRole="REALIZED" name="hsl" sourceNode="#ggCj2" targetNode="#ngCj2"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="l5T+z" edgeRole="REALIZED" name="name" sourceNode="#ggCj2" targetNode="#jgCj2"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="egCj2" classDatum="#AFlEp" incomingConnection="#66KzN" incomingEdges="#b5T+z"
-        utility="NON_NULL_MATCHED" name="hsvRoot" nodeRole="LOADED" outgoingEdges="#X5T+z #c5T+z #d5T+z #g5T+z"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="fgCj2" classDatum="#RoHHm" incomingEdges="#a5T+z #c5T+z" utility="NON_NULL_MATCHED" name="middleRoot"
-        nodeRole="REALIZED" outgoingEdges="#Z5T+z #b5T+z #e5T+z #f5T+z #i5T+z"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="ggCj2" classDatum="#2YWho" incomingEdges="#Z5T+z" utility="NON_NULL_MATCHED" name="hslRoot"
-        nodeRole="REALIZED" outgoingEdges="#Y5T+z #a5T+z #k5T+z #l5T+z"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="hgCj2" classDatum="#fKS53" incomingEdges="#X5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="igCj2" classDatum="#fKS53A" incomingEdges="#Y5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="jgCj2" classDatum="#kALCK" incomingEdges="#d5T+z #e5T+z #l5T+z" utility="NON_NULL_MATCHED"
-        name="name" nodeRole="LOADED"/>
-    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="kgCj2" classDatum="#fKS53B" incomingEdges="#f5T+z" utility="NON_NULL_MATCHED" name="«null»"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="lgCj2" classDatum="#ey3z1" incomingEdges="#g5T+z" utility="NON_NULL_MATCHED" name="hsv" nodeRole="LOADED"
-        outgoingEdges="#h5T+z"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="mgCj2" classDatum="#gC6z1" incomingEdges="#h5T+z #i5T+z" utility="NON_NULL_MATCHED" name="hsv2rgb"
-        nodeRole="LOADED" outgoingEdges="#j5T+z"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="ngCj2" classDatum="#Uy3z1" incomingEdges="#j5T+z #k5T+z" utility="NON_NULL_MATCHED" name="rgb2hsl"
-        nodeRole="LOADED"/>
+        sourceNode="#egCj2" targetNode="#fgCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="d5T+z" edgeRole="LOADED" name="name" sourceNode="#egCj2" targetNode="#jgCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="e5T+z" edgeRole="REALIZED" name="name" sourceNode="#fgCj2" targetNode="#jgCj2"
+        utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="f5T+z" edgeRole="REALIZED" name="parent" sourceNode="#fgCj2" targetNode="#kgCj2"
+        utility="NULLABLE_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="g5T+z" edgeRole="LOADED" name="hsv" sourceNode="#egCj2" targetNode="#lgCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="h5T+z" edgeRole="LOADED" name="«color»" referredParameter="&_1;#Ugr8H"
+        sourceNode="#lgCj2" targetNode="#mgCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="i5T+z" edgeRole="REALIZED" name="rgb" sourceNode="#fgCj2" targetNode="#mgCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="j5T+z" edgeRole="LOADED" name="«color»" referredParameter="&_1;#gAhFq"
+        sourceNode="#mgCj2" targetNode="#ngCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="k5T+z" edgeRole="REALIZED" name="hsl" sourceNode="#ggCj2" targetNode="#ngCj2" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="l5T+z" edgeRole="REALIZED" name="name" sourceNode="#ggCj2" targetNode="#jgCj2"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="egCj2" classDatum="#XpsjI" incomingConnection="#66KzN" incomingEdges="#b5T+z"
+        name="hsvRoot" nodeRole="LOADED" outgoingEdges="#X5T+z #c5T+z #d5T+z #g5T+z" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="fgCj2" classDatum="#M+ixC" incomingEdges="#a5T+z #c5T+z" name="middleRoot"
+        nodeRole="REALIZED" outgoingEdges="#Z5T+z #b5T+z #e5T+z #f5T+z #i5T+z" utility="TRACE"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="ggCj2" classDatum="#nVuIv" incomingEdges="#Z5T+z" name="hslRoot" nodeRole="REALIZED"
+        outgoingEdges="#Y5T+z #a5T+z #k5T+z #l5T+z" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="hgCj2" classDatum="#CbY8K" incomingEdges="#X5T+z" name="«null»" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="igCj2" classDatum="#CbY8K" incomingEdges="#Y5T+z" name="«null»" utility="NULLABLE_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="jgCj2" classDatum="#KTwYp" incomingEdges="#d5T+z #e5T+z #l5T+z" name="name" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:NullLiteralNode" xmi:id="kgCj2" classDatum="#CbY8K" incomingEdges="#f5T+z" name="«null»" utility="NULLABLE_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="lgCj2" classDatum="#V0mMl" incomingEdges="#g5T+z" name="hsv" nodeRole="LOADED"
+        outgoingEdges="#h5T+z" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="mgCj2" classDatum="#Aq7kX" incomingEdges="#h5T+z #i5T+z" name="hsv2rgb" nodeRole="LOADED"
+        outgoingEdges="#j5T+z" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="ngCj2" classDatum="#XQgBF" incomingEdges="#j5T+z #k5T+z" name="rgb2hsl" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
   </ownedMappingRegions>
   <ownedMappingRegions xsi:type="qvts:RuleRegion" xmi:id="Wzq3K" headNodes="#8yZAE" mappingPartitions="#CUllQ #kWYUh #DBNYy #H47eO" name="HSV2HSLRecursion"
-      referredRule="qvtc:Mapping HSV2HSL.qvtm.qvtcas#BBWdQ">
+      referredRule="qvtc:Mapping &_1;#BBWdQ">
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="zLrbB" edgeRole="PREDICATED" name="hsl" oppositeEdge="#0LrbB" sourceNode="#6yZAE"
-        targetNode="#7yZAE"/>
+        targetNode="#7yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="0LrbB" edgeRole="PREDICATED" name="middle" oppositeEdge="#zLrbB" secondary="true"
-        sourceNode="#7yZAE" targetNode="#6yZAE"/>
+        sourceNode="#7yZAE" targetNode="#6yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="1LrbB" edgeRole="PREDICATED" name="hsv" oppositeEdge="#2LrbB" sourceNode="#6yZAE"
-        targetNode="#9yZAE"/>
+        targetNode="#9yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="2LrbB" edgeRole="PREDICATED" name="middle" oppositeEdge="#1LrbB" secondary="true"
-        sourceNode="#9yZAE" targetNode="#6yZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="3LrbB" edgeRole="LOADED" name="parent" sourceNode="#8yZAE" targetNode="#9yZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="4LrbB" edgeRole="REALIZED" name="parent" sourceNode="#,yZAE" targetNode="#7yZAE"/>
+        sourceNode="#9yZAE" targetNode="#6yZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="3LrbB" edgeRole="LOADED" name="parent" sourceNode="#8yZAE" targetNode="#9yZAE"
+        utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="4LrbB" edgeRole="REALIZED" name="parent" sourceNode="#,yZAE" targetNode="#7yZAE"
+        utility="NULLABLE_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="5LrbB" edgeRole="REALIZED" name="hsl" oppositeEdge="#6LrbB" sourceNode="#+yZAE"
-        targetNode="#,yZAE"/>
+        targetNode="#,yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="6LrbB" edgeRole="REALIZED" name="middle" oppositeEdge="#5LrbB" secondary="true"
-        sourceNode="#,yZAE" targetNode="#+yZAE"/>
+        sourceNode="#,yZAE" targetNode="#+yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="7LrbB" edgeRole="REALIZED" name="hsv" oppositeEdge="#8LrbB" sourceNode="#+yZAE"
-        targetNode="#8yZAE"/>
+        targetNode="#8yZAE" utility="NON_NULL_MATCHED"/>
     <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="8LrbB" edgeRole="REALIZED" name="middle" oppositeEdge="#7LrbB" secondary="true"
-        sourceNode="#8yZAE" targetNode="#+yZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="9LrbB" edgeRole="LOADED" name="name" sourceNode="#8yZAE" targetNode="#AzZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="+LrbB" edgeRole="REALIZED" name="name" sourceNode="#+yZAE" targetNode="#AzZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id=",LrbB" edgeRole="REALIZED" name="parent" sourceNode="#+yZAE" targetNode="#6yZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="AMrbB" edgeRole="LOADED" name="hsv" sourceNode="#8yZAE" targetNode="#BzZAE"/>
-    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="BMrbB" edgeRole="LOADED" name="«color»" referredParameter="HSV2HSL.qvtm.qvtcas#nJUTI"
-        sourceNode="#BzZAE" targetNode="#CzZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="CMrbB" edgeRole="REALIZED" name="rgb" sourceNode="#+yZAE" targetNode="#CzZAE"/>
-    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="DMrbB" edgeRole="LOADED" name="«color»" referredParameter="HSV2HSL.qvtm.qvtcas#Optl4"
-        sourceNode="#CzZAE" targetNode="#DzZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="EMrbB" edgeRole="REALIZED" name="hsl" sourceNode="#,yZAE" targetNode="#DzZAE"/>
-    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="FMrbB" edgeRole="REALIZED" name="name" sourceNode="#,yZAE" targetNode="#AzZAE"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="6yZAE" classDatum="#RoHHm" incomingEdges="#0LrbB #2LrbB #,LrbB" utility="NON_NULL_MATCHED"
-        name="middleParent" nodeRole="PREDICATED" outgoingEdges="#zLrbB #1LrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="7yZAE" classDatum="#2YWho" incomingEdges="#zLrbB #4LrbB" utility="NON_NULL_MATCHED" name="hslParent"
-        nodeRole="PREDICATED" outgoingEdges="#0LrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="8yZAE" classDatum="#AFlEp" incomingConnection="#66KzN" incomingEdges="#7LrbB"
-        utility="NON_NULL_MATCHED" name="hsvNode" nodeRole="LOADED" outgoingEdges="#3LrbB #8LrbB #9LrbB #AMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="9yZAE" classDatum="#AFlEp" incomingEdges="#1LrbB #3LrbB" utility="NON_NULL_MATCHED" name="hsvParent"
-        nodeRole="LOADED" outgoingEdges="#2LrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="+yZAE" classDatum="#RoHHm" incomingConnection="#76KzN" incomingEdges="#6LrbB #8LrbB"
-        utility="NON_NULL_MATCHED" name="middleNode" nodeRole="REALIZED" outgoingConnections="#76KzN" outgoingEdges="#5LrbB #7LrbB #+LrbB #,LrbB #CMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id=",yZAE" classDatum="#2YWho" incomingEdges="#5LrbB" utility="NON_NULL_MATCHED" name="hslNode"
-        nodeRole="REALIZED" outgoingEdges="#4LrbB #6LrbB #EMrbB #FMrbB"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="AzZAE" classDatum="#kALCK" incomingEdges="#9LrbB #+LrbB #FMrbB" utility="NON_NULL_MATCHED"
-        name="name" nodeRole="LOADED"/>
-    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="BzZAE" classDatum="#ey3z1" incomingEdges="#AMrbB" utility="NON_NULL_MATCHED" name="hsv" nodeRole="LOADED"
-        outgoingEdges="#BMrbB"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="CzZAE" classDatum="#gC6z1" incomingEdges="#BMrbB #CMrbB" utility="NON_NULL_MATCHED" name="hsv2rgb"
-        nodeRole="LOADED" outgoingEdges="#DMrbB"/>
-    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="DzZAE" classDatum="#Uy3z1" incomingEdges="#DMrbB #EMrbB" utility="NON_NULL_MATCHED" name="rgb2hsl"
-        nodeRole="LOADED"/>
+        sourceNode="#8yZAE" targetNode="#+yZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="9LrbB" edgeRole="LOADED" name="name" sourceNode="#8yZAE" targetNode="#AzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="+LrbB" edgeRole="REALIZED" name="name" sourceNode="#+yZAE" targetNode="#AzZAE"
+        utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id=",LrbB" edgeRole="REALIZED" name="parent" sourceNode="#+yZAE" targetNode="#6yZAE"
+        utility="NULLABLE_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="AMrbB" edgeRole="LOADED" name="hsv" sourceNode="#8yZAE" targetNode="#BzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="BMrbB" edgeRole="LOADED" name="«color»" referredParameter="&_1;#Ugr8H"
+        sourceNode="#BzZAE" targetNode="#CzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="CMrbB" edgeRole="REALIZED" name="rgb" sourceNode="#+yZAE" targetNode="#CzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:OperationParameterEdge" xmi:id="DMrbB" edgeRole="LOADED" name="«color»" referredParameter="&_1;#gAhFq"
+        sourceNode="#CzZAE" targetNode="#DzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="EMrbB" edgeRole="REALIZED" name="hsl" sourceNode="#,yZAE" targetNode="#DzZAE" utility="NON_NULL_MATCHED"/>
+    <ownedEdges xsi:type="qvts:NavigationEdge" xmi:id="FMrbB" edgeRole="REALIZED" name="name" sourceNode="#,yZAE" targetNode="#AzZAE"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="6yZAE" classDatum="#M+ixC" incomingEdges="#0LrbB #2LrbB #,LrbB" name="middleParent"
+        nodeRole="PREDICATED" outgoingEdges="#zLrbB #1LrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="7yZAE" classDatum="#nVuIv" incomingEdges="#zLrbB #4LrbB" name="hslParent"
+        nodeRole="PREDICATED" outgoingEdges="#0LrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="8yZAE" classDatum="#XpsjI" incomingConnection="#66KzN" incomingEdges="#7LrbB"
+        name="hsvNode" nodeRole="LOADED" outgoingEdges="#3LrbB #8LrbB #9LrbB #AMrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="9yZAE" classDatum="#XpsjI" incomingEdges="#1LrbB #3LrbB" name="hsvParent"
+        nodeRole="LOADED" outgoingEdges="#2LrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id="+yZAE" classDatum="#M+ixC" incomingConnection="#76KzN" incomingEdges="#6LrbB #8LrbB"
+        name="middleNode" nodeRole="REALIZED" outgoingConnections="#76KzN" outgoingEdges="#5LrbB #7LrbB #+LrbB #,LrbB #CMrbB" utility="TRACE"/>
+    <ownedNodes xsi:type="qvts:PatternVariableNode" xmi:id=",yZAE" classDatum="#nVuIv" incomingEdges="#5LrbB" name="hslNode" nodeRole="REALIZED"
+        outgoingEdges="#4LrbB #6LrbB #EMrbB #FMrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="AzZAE" classDatum="#KTwYp" incomingEdges="#9LrbB #+LrbB #FMrbB" name="name" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="BzZAE" classDatum="#V0mMl" incomingEdges="#AMrbB" name="hsv" nodeRole="LOADED"
+        outgoingEdges="#BMrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="CzZAE" classDatum="#Aq7kX" incomingEdges="#BMrbB #CMrbB" name="hsv2rgb" nodeRole="LOADED"
+        outgoingEdges="#DMrbB" utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:OperationCallNode" xmi:id="DzZAE" classDatum="#XQgBF" incomingEdges="#DMrbB #EMrbB" name="rgb2hsl" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
   </ownedMappingRegions>
-  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="R76Oq" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#pzNqy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
-      </ownedBindings>
+  <ownedOperationRegions headNodes="#6Qw2+ #8Qw2+" name="hsv2rgb($this$!::«blank»::hsv2hsl,$primitive$!HSVTree::HSVTree::HSV)" referredOperation="&_1;#Nsy3r"
+      resultNode="#7Qw2+">
+    <ownedEdges xsi:type="qvts:PredicateEdge" xmi:id="zpBS8" edgeRole="PREDICATED" name="«equals»" sourceNode="#6Qw2+" targetNode="#7Qw2+"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="6Qw2+" classDatum="#vuJHL" name="this" nodeRole="PREDICATED" outgoingEdges="#zpBS8"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="7Qw2+" classDatum="#Aq7kX" incomingEdges="#zpBS8" name="result" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="8Qw2+" classDatum="#V0mMl" name="color" nodeRole="PREDICATED" utility="NON_NULL_MATCHED"/>
+  </ownedOperationRegions>
+  <ownedOperationRegions headNodes="#CvK6V #EvK6V" name="rgb2hsl($this$!::«blank»::hsv2hsl,$primitive$!HSV2HSL::HSV2HSL::RGB)" referredOperation="&_1;#AH5Tc"
+      resultNode="#DvK6V">
+    <ownedEdges xsi:type="qvts:PredicateEdge" xmi:id="7HcVT" edgeRole="PREDICATED" name="«equals»" sourceNode="#CvK6V" targetNode="#DvK6V"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="CvK6V" classDatum="#vuJHL" name="this" nodeRole="PREDICATED" outgoingEdges="#7HcVT"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="DvK6V" classDatum="#XQgBF" incomingEdges="#7HcVT" name="result" nodeRole="LOADED"
+        utility="NON_NULL_MATCHED"/>
+    <ownedNodes xsi:type="qvts:PatternTypedNode" xmi:id="EvK6V" classDatum="#Aq7kX" name="color" nodeRole="PREDICATED" utility="NON_NULL_MATCHED"/>
+  </ownedOperationRegions>
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="W66Oq" generic="pivot:CollectionType &_4;#IgEJU" isNullFree="true" name="Collection"
+        superClasses="&_4;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="agWNb" isNullFree="true" name="Set" superClasses="#C2qKa">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#pzNqy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="agWNb" generic="pivot:SetType &_4;#MGgHF" isNullFree="true" name="Set" superClasses="#H1qKa">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="C2qKa" name="UniqueCollection" superClasses="#R76Oq">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class HSVTree.ecore.oclas#pzNqy" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="H1qKa" generic="pivot:CollectionType &_4;#5a0EE" isNullFree="true" name="UniqueCollection"
+        superClasses="#W66Oq">
+      <ownedTemplateArguments actual="pivot:Class &_0;#pzNqy"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedRootRegions name="hsv2hsl" referredTransformation="HSV2HSL.qvtm.qvtcas#xreyG">
-    <ownedConnections xsi:type="qvts:NodeConnection" xmi:id="66KzN" classDatum="#AFlEp" commonPartition="#zadGT" connectionRole="PASSED"
+  <ownedRootRegions name="hsv2hsl" referredTransformation="&_1;#xreyG">
+    <ownedConnections xsi:type="qvts:NodeConnection" xmi:id="66KzN" classDatum="#XpsjI" commonPartition="#zadGT" connectionRole="PASSED"
         name="ji_HSVNode" passedTargetNodes="#8yZAE #egCj2" sourceEnds="#Z6ux3"/>
-    <ownedConnections xsi:type="qvts:NodeConnection" xmi:id="76KzN" classDatum="#RoHHm" commonPartition="#zadGT" connectionRole="PASSED"
+    <ownedConnections xsi:type="qvts:NodeConnection" xmi:id="76KzN" classDatum="#M+ixC" commonPartition="#zadGT" connectionRole="PASSED"
         intermediatePartitions="#CUllQ" name="jm_HSVNode2HSLNode" passedTargetNodes="#+yZAE" sourceEnds="#+yZAE"/>
     <ownedLoadingRegion xmi:id="hrkGJ" loadingPartition="#zadGT" name="HSV2HSL«load»">
-      <ownedNodes xsi:type="qvts:ComposedNode" xmi:id="Z6ux3" classDatum="#1g6z1" name="«HSVNode»" nodeRole="LOADED" outgoingConnections="#66KzN"/>
+      <ownedNodes xsi:type="qvts:ComposedNode" xmi:id="Z6ux3" classDatum="#DIC2l" name="«HSVNode»" nodeRole="LOADED" outgoingConnections="#66KzN"
+          utility="COMPOSED"/>
     </ownedLoadingRegion>
     <ownedRootPartition name="«root»">
       <ownedMappingPartitions xsi:type="qvts:LoadingPartition" xmi:id="zadGT" name="HSV2HSL«load»" referredLoadingRegion="#hrkGJ" rootConnections="#66KzN #76KzN">
         <passes>0</passes>
       </ownedMappingPartitions>
       <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="CUllQ" explicitSuccessors="#kWYUh" headNodes="#8yZAE" intermediateConnections="#76KzN"
-          loadedEdges="#3LrbB #9LrbB #AMrbB" loadedNodes="#9yZAE #8yZAE #AzZAE #BzZAE" name="HSV2HSLRecursion«local»" realizedEdges="#7LrbB #8LrbB #+LrbB"
+          loadedEdges="#9LrbB #3LrbB #AMrbB" loadedNodes="#8yZAE #AzZAE #9yZAE #BzZAE" name="HSV2HSLRecursion«local»" realizedEdges="#7LrbB #8LrbB #+LrbB"
           referedMappingRegion="#Wzq3K" speculationNodes="#+yZAE">
         <passes>1</passes>
       </ownedMappingPartitions>
@@ -188,16 +220,16 @@
         <passes>1</passes>
       </ownedMappingPartitions>
       <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="kWYUh" explicitPredecessors="#CUllQ" explicitSuccessors="#DBNYy"
-          headNodes="#+yZAE" loadedEdges="#3LrbB" loadedNodes="#9yZAE #8yZAE" name="HSV2HSLRecursion«global»" predicatedEdges="#1LrbB #2LrbB #7LrbB #8LrbB"
+          headNodes="#+yZAE" loadedEdges="#3LrbB" loadedNodes="#8yZAE #9yZAE" name="HSV2HSLRecursion«global»" predicatedEdges="#7LrbB #8LrbB #2LrbB #1LrbB"
           predicatedNodes="#6yZAE" realizedEdges="#,LrbB" referedMappingRegion="#Wzq3K" speculatedNodes="#+yZAE">
         <passes>2</passes>
       </ownedMappingPartitions>
-      <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="DBNYy" explicitPredecessors="#kWYUh" headNodes="#+yZAE" loadedEdges="#DMrbB #AMrbB #BMrbB"
-          loadedNodes="#CzZAE #DzZAE #AzZAE #8yZAE #BzZAE" name="HSV2HSLRecursion«speculated»" predicatedEdges="#7LrbB #8LrbB #+LrbB"
-          predicatedNodes="#+yZAE" realizedEdges="#EMrbB #CMrbB #5LrbB #6LrbB #FMrbB" realizedNodes="#,yZAE" referedMappingRegion="#Wzq3K">
+      <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="DBNYy" explicitPredecessors="#kWYUh" headNodes="#+yZAE" loadedEdges="#AMrbB #BMrbB #DMrbB"
+          loadedNodes="#DzZAE #AzZAE #CzZAE #8yZAE #BzZAE" name="HSV2HSLRecursion«speculated»" predicatedEdges="#7LrbB #8LrbB #+LrbB"
+          predicatedNodes="#+yZAE" realizedEdges="#5LrbB #6LrbB #CMrbB #EMrbB #FMrbB" realizedNodes="#,yZAE" referedMappingRegion="#Wzq3K">
         <passes>3</passes>
       </ownedMappingPartitions>
-      <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="H47eO" headNodes="#+yZAE" name="HSV2HSLRecursion«edge4-parent»" predicatedEdges="#5LrbB #6LrbB #,LrbB #zLrbB #0LrbB"
+      <ownedMappingPartitions xsi:type="qvts:BasicPartition" xmi:id="H47eO" headNodes="#+yZAE" name="HSV2HSLRecursion«edge4-parent»" predicatedEdges="#zLrbB #0LrbB #5LrbB #6LrbB #,LrbB"
           predicatedNodes="#+yZAE #,yZAE #7yZAE #6yZAE" realizedEdges="#4LrbB" referedMappingRegion="#Wzq3K">
         <passes>4</passes>
       </ownedMappingPartitions>

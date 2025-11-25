@@ -1309,6 +1309,7 @@ public class QVTrelationTables extends AbstractTables
 			PivotTables.Properties._Element__annotatingComments,
 			PivotTables.Properties._Class__extenders,
 			QVTbaseTables.Properties._Transformation__extends,
+			PivotTables.Properties._TemplateableElement__generic,
 			PivotTables.Properties._Class__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isActive,
@@ -1319,7 +1320,6 @@ public class QVTrelationTables extends AbstractTables
 			OCLstdlibTables.Properties._OclElement__oclContents,
 			PivotTables.Properties._Element__ownedAnnotations,
 			PivotTables.Properties._Class__ownedBehaviors,
-			PivotTables.Properties._TemplateableElement__ownedBindings,
 			PivotTables.Properties._Element__ownedComments,
 			PivotTables.Properties._Namespace__ownedConstraints,
 			QVTbaseTables.Properties._Transformation__ownedContext,
@@ -1328,13 +1328,13 @@ public class QVTrelationTables extends AbstractTables
 			Properties._RelationalTransformation__ownedKeys,
 			PivotTables.Properties._Class__ownedOperations,
 			PivotTables.Properties._Class__ownedProperties,
-			PivotTables.Properties._TemplateableElement__ownedSignature,
 			QVTbaseTables.Properties._Transformation__ownedTag,
 			QVTbaseTables.Properties._Transformation__ownedTargets,
+			PivotTables.Properties._TemplateableElement__ownedTemplateArguments,
+			PivotTables.Properties._TemplateableElement__ownedTemplateParameters,
 			PivotTables.Properties._Class__owningPackage,
 			QVTbaseTables.Properties._Transformation__rule,
-			PivotTables.Properties._Class__superClasses,
-			PivotTables.Properties._TemplateableElement__unspecializedElement
+			PivotTables.Properties._Class__superClasses
 		};
 
 		private static final @NonNull Property @NonNull [] _SharedVariable = {

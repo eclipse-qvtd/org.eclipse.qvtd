@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.runtime.model.QVTruntimeLibrary;
@@ -26,9 +26,9 @@ public class QVTrEnvironmentFactory extends QVTbaseEnvironmentFactory
 	private static class QVTrCreateStrategy extends CreateStrategy
 	{
 		@Override
-		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+		public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-			return new QVTrelationTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+			return new QVTrelationTemplateArgumentVisitor(environmentFactory, selfType, selfTypeValue);
 		}
 	}
 

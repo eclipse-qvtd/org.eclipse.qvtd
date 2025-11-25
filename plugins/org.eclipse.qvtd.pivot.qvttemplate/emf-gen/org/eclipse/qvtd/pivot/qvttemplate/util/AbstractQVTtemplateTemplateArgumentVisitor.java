@@ -24,17 +24,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseTemplateArgumentVisitor;
 
 /**
- * An AbstractQVTtemplateTemplateParameterSubstitutionVisitor provides a default implementation for each
+ * An AbstractQVTtemplateTemplateArgumentVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractQVTtemplateTemplateParameterSubstitutionVisitor
-	extends QVTbaseTemplateParameterSubstitutionVisitor
+public abstract class AbstractQVTtemplateTemplateArgumentVisitor
+	extends QVTbaseTemplateArgumentVisitor
 	implements QVTtemplateVisitor<Object>
 {
 	/**
@@ -42,7 +42,7 @@ public abstract class AbstractQVTtemplateTemplateParameterSubstitutionVisitor
 	 *
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTtemplateTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+	protected AbstractQVTtemplateTemplateArgumentVisitor(@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		super(environmentFactory, selfType, selfTypeValue);
 	}
 

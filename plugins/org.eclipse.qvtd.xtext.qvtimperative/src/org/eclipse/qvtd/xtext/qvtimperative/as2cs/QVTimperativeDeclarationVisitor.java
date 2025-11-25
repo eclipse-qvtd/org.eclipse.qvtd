@@ -468,7 +468,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitLoopVariable(@NonNull LoopVariable asVariable) {
 		VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
 		Type type = asVariable.getType();
-		if ((type instanceof CollectionType) && (((CollectionType)type).getUnspecializedElement() != context.getStandardLibrary().getCollectionType())) {
+		if ((type instanceof CollectionType) && (((CollectionType)type).getGeneric() != context.getStandardLibrary().getCollectionType())) {
 			PivotUtil.debugWellContainedness(type);
 			type = ((CollectionType)type).getElementType();
 		}

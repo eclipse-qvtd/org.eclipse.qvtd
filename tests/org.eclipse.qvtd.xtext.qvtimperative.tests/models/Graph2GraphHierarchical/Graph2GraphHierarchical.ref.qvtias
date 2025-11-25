@@ -15,13 +15,13 @@
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="QcwSO" name="CopyGraph" superClasses="&_2;#zfDWR">
       <modelParameter xmi:id="ck2rw" name="upperGraph" usedPackage="&_0;#WB+u0">
-        <ownedContext xmi:id="ekdhp" name="upperGraph" type="pivot:Class &_3;#qeoBC"/>
+        <ownedContext xmi:id="ekdhp" name="upperGraph" isRequired="true" type="pivot:Class &_3;#qeoBC"/>
       </modelParameter>
       <modelParameter xmi:id="doj,c" name="lowerGraph" usedPackage="&_0;#WB+u0">
-        <ownedContext xmi:id="boW3f" name="lowerGraph" type="pivot:Class &_3;#qeoBC"/>
+        <ownedContext xmi:id="boW3f" name="lowerGraph" isRequired="true" type="pivot:Class &_3;#qeoBC"/>
       </modelParameter>
       <modelParameter xmi:id="lTbJV" name="middle" usedPackage="&_1;#yu1tv">
-        <ownedContext xmi:id="DnhUV" name="middle" type="pivot:Class &_3;#qeoBC"/>
+        <ownedContext xmi:id="DnhUV" name="middle" isRequired="true" type="pivot:Class &_3;#qeoBC"/>
       </modelParameter>
       <rule xsi:type="qvti:EntryPoint" name="__root__" firstPass="0" lastPass="0" inputTypedModels="#ck2rw" outputTypedModels="#doj,c">
         <ownedStatements xsi:type="qvti:MappingLoop">
@@ -29,21 +29,21 @@
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#1UZ9x">
             <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#K8F0O" value="#x9rho"/>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="allInstances" type="#ibWOU" referredOperation="&_2;#dD,7n">
-            <ownedSource xsi:type="pivot:TypeExp" name="Graph" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_0;#xjTL2"/>
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="allInstances" isRequired="true" type="#ibWOU" referredOperation="&_2;#dD,7n">
+            <ownedSource xsi:type="pivot:TypeExp" name="Graph" isRequired="true" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_0;#xjTL2"/>
           </ownedExpression>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="1UZ9x" name="Graph2Middle">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="K8F0O" name="g1" type="pivot:Class &_0;#xjTL2" referredTypedModel="#ck2rw"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="VahbY" name="middleG2G" isRequired="false" type="pivot:Class &_1;#Zyjl6"
-            referredTypedModel="#lTbJV"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="VahbY" name="middleG2G" type="pivot:Class &_1;#Zyjl6" referredTypedModel="#lTbJV"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#VahbY" targetProperty="&_1;#w92SM">
           <ownedExpression xsi:type="pivot:VariableExp" name="g1" type="pivot:Class &_0;#xjTL2" referredVariable="#K8F0O"/>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#VahbY" targetProperty="&_1;#YF4RW">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="toLowerCase" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#LAZcO">
-            <ownedSource xsi:type="pivot:PropertyCallExp" name="name" isRequired="false" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#Qx+c,">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="toLowerCase" isRequired="true" type="pivot:PrimitiveType &_2;#AlwVZ"
+              referredOperation="&_2;#LAZcO">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#Qx+c,">
               <ownedSource xsi:type="pivot:VariableExp" name="g1" type="pivot:Class &_0;#xjTL2" referredVariable="#K8F0O"/>
             </ownedSource>
           </ownedExpression>
@@ -53,30 +53,30 @@
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#BnwsQ">
             <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#,Ijao" value="#p3D8T"/>
             <ownedMappingParameterBindings xsi:type="qvti:SimpleParameterBinding" boundVariable="#b9qKY">
-              <value xsi:type="pivot:VariableExp" name="middleG2G" isRequired="false" type="pivot:Class &_1;#Zyjl6" referredVariable="#VahbY"/>
+              <value xsi:type="pivot:VariableExp" name="middleG2G" type="pivot:Class &_1;#Zyjl6" referredVariable="#VahbY"/>
             </ownedMappingParameterBindings>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#zDbsT" referredIteration="&_2;#+ly8V">
-            <ownedSource xsi:type="pivot:PropertyCallExp" name="element" type="#zDbsT" referredProperty="&_0;#BD5Ic">
+          <ownedExpression xsi:type="pivot:IteratorExp" name="select" isRequired="true" type="#uEbsT" referredIteration="&_2;#+ly8V">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="element" isRequired="true" type="#uEbsT" referredProperty="&_0;#BD5Ic">
               <ownedSource xsi:type="pivot:VariableExp" name="g1" type="pivot:Class &_0;#xjTL2" referredVariable="#K8F0O"/>
             </ownedSource>
             <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="L,,KT" name="e" type="pivot:Class &_0;#f6xKy" representedParameter="&_2;#Ps0ux"/>
-            <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
+            <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
               <ownedSource xsi:type="pivot:VariableExp" name="e" type="pivot:Class &_0;#f6xKy" referredVariable="#L,,KT"/>
-              <ownedArguments xsi:type="pivot:TypeExp" name="Node" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_0;#lnINy"/>
+              <ownedArguments xsi:type="pivot:TypeExp" name="Node" isRequired="true" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_0;#lnINy"/>
             </ownedBody>
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#tfyMH">
           <ownedMappingParameterBindings xsi:type="qvti:SimpleParameterBinding" boundVariable="#J,yti">
-            <value xsi:type="pivot:VariableExp" name="middleG2G" isRequired="false" type="pivot:Class &_1;#Zyjl6" referredVariable="#VahbY"/>
+            <value xsi:type="pivot:VariableExp" name="middleG2G" type="pivot:Class &_1;#Zyjl6" referredVariable="#VahbY"/>
           </ownedMappingParameterBindings>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="BnwsQ" name="Node2Middle">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id=",Ijao" name="n1" type="pivot:Class &_0;#lnINy" referredTypedModel="#ck2rw"/>
         <ownedMappingParameters xsi:type="qvti:SimpleParameter" xmi:id="b9qKY" name="middleParent" type="pivot:Class &_1;#Zyjl6" referredTypedModel="#lTbJV"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="0kj1a" name="n2n" isRequired="false" type="pivot:Class &_1;#hIQt," referredTypedModel="#lTbJV"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="0kj1a" name="n2n" type="pivot:Class &_1;#hIQt," referredTypedModel="#lTbJV"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#0kj1a" targetProperty="&_1;#s5iQL">
           <ownedExpression xsi:type="pivot:VariableExp" name="middleParent" type="pivot:Class &_1;#Zyjl6" referredVariable="#b9qKY"/>
         </ownedStatements>
@@ -84,8 +84,9 @@
           <ownedExpression xsi:type="pivot:VariableExp" name="n1" type="pivot:Class &_0;#lnINy" referredVariable="#,Ijao"/>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#0kj1a" targetProperty="&_1;#pUV7H">
-          <ownedExpression xsi:type="pivot:OperationCallExp" name="toLowerCase" type="pivot:PrimitiveType &_2;#AlwVZ" referredOperation="&_2;#LAZcO">
-            <ownedSource xsi:type="pivot:PropertyCallExp" name="label" isRequired="false" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#d3cju">
+          <ownedExpression xsi:type="pivot:OperationCallExp" name="toLowerCase" isRequired="true" type="pivot:PrimitiveType &_2;#AlwVZ"
+              referredOperation="&_2;#LAZcO">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_0;#d3cju">
               <ownedSource xsi:type="pivot:VariableExp" name="n1" type="pivot:Class &_0;#lnINy" referredVariable="#,Ijao"/>
             </ownedSource>
           </ownedExpression>
@@ -93,12 +94,12 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="tfyMH" name="Middle2Graph">
         <ownedMappingParameters xsi:type="qvti:SimpleParameter" xmi:id="J,yti" name="g2Gmiddle" type="pivot:Class &_1;#Zyjl6" referredTypedModel="#lTbJV"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="xfPz3" name="g2" isRequired="false" type="pivot:Class &_0;#xjTL2" referredTypedModel="#doj,c"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="xfPz3" name="g2" type="pivot:Class &_0;#xjTL2" referredTypedModel="#doj,c"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#J,yti" targetProperty="&_1;#x92SM">
-          <ownedExpression xsi:type="pivot:VariableExp" name="g2" isRequired="false" type="pivot:Class &_0;#xjTL2" referredVariable="#xfPz3"/>
+          <ownedExpression xsi:type="pivot:VariableExp" name="g2" type="pivot:Class &_0;#xjTL2" referredVariable="#xfPz3"/>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#xfPz3" targetProperty="&_0;#Qx+c,">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" isRequired="false" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#YF4RW">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="name" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#YF4RW">
             <ownedSource xsi:type="pivot:VariableExp" name="g2Gmiddle" type="pivot:Class &_1;#Zyjl6" referredVariable="#J,yti"/>
           </ownedExpression>
         </ownedStatements>
@@ -107,95 +108,75 @@
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#7pVQ8">
             <ownedMappingParameterBindings xsi:type="qvti:LoopParameterBinding" boundVariable="#437Af" value="#hZS24"/>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:IteratorExp" name="select" type="#ZrEOf" referredIteration="&_2;#+ly8V">
-            <ownedSource xsi:type="pivot:PropertyCallExp" name="element2Element" type="#ZrEOf" referredProperty="&_1;#zQObi">
+          <ownedExpression xsi:type="pivot:IteratorExp" name="select" isRequired="true" type="#UsEOf" referredIteration="&_2;#+ly8V">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="element2Element" isRequired="true" type="#UsEOf" referredProperty="&_1;#zQObi">
               <ownedSource xsi:type="pivot:VariableExp" name="g2Gmiddle" type="pivot:Class &_1;#Zyjl6" referredVariable="#J,yti"/>
             </ownedSource>
             <ownedIterators xsi:type="pivot:IteratorVariable" xmi:id="WeKFI" name="e2e" type="pivot:Class &_1;#1rf9," representedParameter="&_2;#Ps0ux"/>
-            <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
+            <ownedBody xsi:type="pivot:OperationCallExp" name="oclIsTypeOf" isRequired="true" type="pivot:BooleanType &_2;#XEMMs" referredOperation="&_2;#y2TQz">
               <ownedSource xsi:type="pivot:VariableExp" name="e2e" type="pivot:Class &_1;#1rf9," referredVariable="#WeKFI"/>
-              <ownedArguments xsi:type="pivot:TypeExp" name="Node2Node" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_1;#hIQt,"/>
+              <ownedArguments xsi:type="pivot:TypeExp" name="Node2Node" isRequired="true" type="pivot:Class &_4;#pDcbe" referredType="pivot:Class &_1;#hIQt,"/>
             </ownedBody>
           </ownedExpression>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="7pVQ8" name="Middle2Node">
         <ownedMappingParameters xsi:type="qvti:GuardParameter" xmi:id="437Af" name="n2n" type="pivot:Class &_1;#hIQt," referredTypedModel="#lTbJV"/>
-        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="gkJbR" name="n2" isRequired="false" type="pivot:Class &_0;#lnINy" referredTypedModel="#doj,c"/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="gkJbR" name="n2" type="pivot:Class &_0;#lnINy" referredTypedModel="#doj,c"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#437Af" targetProperty="&_1;#li+DI">
-          <ownedExpression xsi:type="pivot:VariableExp" name="n2" isRequired="false" type="pivot:Class &_0;#lnINy" referredVariable="#gkJbR"/>
+          <ownedExpression xsi:type="pivot:VariableExp" name="n2" type="pivot:Class &_0;#lnINy" referredVariable="#gkJbR"/>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#gkJbR" targetProperty="&_0;#JojvI">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="graph2" isRequired="false" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#x92SM">
-            <ownedSource xsi:type="pivot:PropertyCallExp" name="owner" isRequired="false" type="pivot:Class &_1;#Zyjl6" referredProperty="&_1;#s5iQL">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="graph2" type="pivot:Class &_0;#xjTL2" referredProperty="&_1;#x92SM">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="owner" type="pivot:Class &_1;#Zyjl6" referredProperty="&_1;#s5iQL">
               <ownedSource xsi:type="pivot:VariableExp" name="n2n" type="pivot:Class &_1;#hIQt," referredVariable="#437Af"/>
             </ownedSource>
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#gkJbR" targetProperty="&_0;#d3cju">
-          <ownedExpression xsi:type="pivot:PropertyCallExp" name="label" isRequired="false" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#pUV7H">
+          <ownedExpression xsi:type="pivot:PropertyCallExp" name="label" type="pivot:PrimitiveType &_2;#AlwVZ" referredProperty="&_1;#pUV7H">
             <ownedSource xsi:type="pivot:VariableExp" name="n2n" type="pivot:Class &_1;#hIQt," referredVariable="#437Af"/>
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <ownedContext xmi:id="C9sK," name="this" type="#QcwSO"/>
+      <ownedContext xmi:id="C9sK," name="this" isRequired="true" type="#QcwSO"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XcIh+" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#qs59R"/>
-      </ownedBindings>
+  <ownedPackages name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XcIh+" name="Collection" generic="pivot:CollectionType &_2;#IgEJU" superClasses="&_2;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_0;#f6xKy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="Z26Pj" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="e16Pj" name="Collection" generic="pivot:CollectionType &_2;#IgEJU" superClasses="&_2;#jbMkR"
+        isNullFree="true">
+      <ownedTemplateArguments actual="pivot:Class &_0;#xjTL2"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="9DyCK" name="Collection" superClasses="&_2;#jbMkR">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#qs59R"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="9DyCK" name="Collection" generic="pivot:CollectionType &_2;#IgEJU" superClasses="&_2;#jbMkR">
+      <ownedTemplateArguments actual="pivot:Class &_1;#1rf9,"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ks930" name="OrderedCollection" superClasses="#XcIh+">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="ks930" name="OrderedCollection" generic="pivot:CollectionType &_2;#Vw5fK" superClasses="#XcIh+">
+      <ownedTemplateArguments actual="pivot:Class &_0;#f6xKy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KUnZA" name="OrderedCollection" superClasses="#9DyCK">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#feFHs"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KUnZA" name="OrderedCollection" generic="pivot:CollectionType &_2;#Vw5fK" superClasses="#9DyCK">
+      <ownedTemplateArguments actual="pivot:Class &_1;#1rf9,"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="zDbsT" name="OrderedSet" superClasses="#ks930 #IX4cu" isNullFree="true">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="uEbsT" name="OrderedSet" generic="pivot:OrderedSetType &_2;#fIXUp" superClasses="#ks930 #IX4cu">
+      <ownedTemplateArguments actual="pivot:Class &_0;#f6xKy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="ZrEOf" name="OrderedSet" superClasses="#KUnZA #u+h+5" isNullFree="true">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#53+C2"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:OrderedSetType" xmi:id="UsEOf" name="OrderedSet" generic="pivot:OrderedSetType &_2;#fIXUp" superClasses="#KUnZA #u+h+5">
+      <ownedTemplateArguments actual="pivot:Class &_1;#1rf9,"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" xmi:id="ibWOU" name="Set" superClasses="#KxqLT" isNullFree="true">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#ODsm5"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="ibWOU" name="Set" generic="pivot:SetType &_2;#MGgHF" superClasses="#PwqLT" isNullFree="true">
+      <ownedTemplateArguments actual="pivot:Class &_0;#xjTL2"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="IX4cu" name="UniqueCollection" superClasses="#XcIh+">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#f6xKy" formal="&_2;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="IX4cu" name="UniqueCollection" generic="pivot:CollectionType &_2;#5a0EE" superClasses="#XcIh+">
+      <ownedTemplateArguments actual="pivot:Class &_0;#f6xKy"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="KxqLT" name="UniqueCollection" superClasses="#Z26Pj">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_0;#xjTL2" formal="&_2;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="PwqLT" name="UniqueCollection" generic="pivot:CollectionType &_2;#5a0EE" superClasses="#e16Pj"
+        isNullFree="true">
+      <ownedTemplateArguments actual="pivot:Class &_0;#xjTL2"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="u+h+5" name="UniqueCollection" superClasses="#9DyCK">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class &_1;#1rf9," formal="&_2;#jdfjE"/>
-      </ownedBindings>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="u+h+5" name="UniqueCollection" generic="pivot:CollectionType &_2;#5a0EE" superClasses="#9DyCK">
+      <ownedTemplateArguments actual="pivot:Class &_1;#1rf9,"/>
     </ownedClasses>
   </ownedPackages>
 </qvti:ImperativeModel>

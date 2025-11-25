@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -27,7 +27,7 @@ public abstract class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 {
 	public static abstract class CreateStrategy
 	{
-		public abstract @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+		public abstract @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue);
 	}
 
@@ -41,13 +41,13 @@ public abstract class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 	}
 
 	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+	public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 			@Nullable Type selfType, @Nullable Type selfTypeValue) {
 		if (createStrategy != null) {
-			return createStrategy.createTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
+			return createStrategy.createTemplateArgumentVisitor(this, selfType, selfTypeValue);
 		}
 		else {
-			return super.createTemplateParameterSubstitutionVisitor(selfType, selfTypeValue);
+			return super.createTemplateArgumentVisitor(selfType, selfTypeValue);
 		}
 	}
 

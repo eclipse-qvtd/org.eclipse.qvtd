@@ -29,15 +29,27 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.AssociativityKind;
+import org.eclipse.ocl.pivot.BagType;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.LambdaType;
+import org.eclipse.ocl.pivot.Library;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OrderedSetType;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Precedence;
+import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.SelfType;
+import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
@@ -50,6 +62,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.qvtd.runtime.qvtruntimelibrary.QVTruntimeLibraryPackage;
 
@@ -268,7 +281,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 	private QVTruntimeLibrary(@NonNull String asURI, @NonNull Model libraryModel) {
 		super(ClassUtil.requireNonNull(URI.createURI(asURI)), OCLASResourceFactory.getInstance());
 		assert PivotUtil.isASURI(uri);
-		getContents().add(libraryModel);
+		getContents().add(libraryModel);				// and invoke setLoaded()
 	}
 
 	private static class AbstractLibraryContents extends AbstractContents
@@ -306,7 +319,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			installCollectionTypes();
 			installOperations();
 			installProperties();
-			installTemplateBindings();
+			installTemplateArguments();
 			installComments();
 		}
 
@@ -596,7 +609,7 @@ public class QVTruntimeLibrary extends ASResourceImpl
 			property.setOpposite(pr_Extent_elements);
 		}
 
-		private void installTemplateBindings() {
+		private void installTemplateArguments() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_CollectionItem_F, _CollectionItem);
 			addBinding(_Collection_Element_F, _Element);

@@ -280,7 +280,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	private QVTimperativeLibrary(@NonNull String asURI, @NonNull Model libraryModel) {
 		super(ClassUtil.requireNonNull(URI.createURI(asURI)), OCLASResourceFactory.getInstance());
 		assert PivotUtil.isASURI(uri);
-		getContents().add(libraryModel);
+		getContents().add(libraryModel);				// and invoke setLoaded()
 	}
 
 	private static class AbstractLibraryContents extends AbstractContents
@@ -315,7 +315,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			installClassTypes();
 			installCollectionTypes();
 			installOperations();
-			installTemplateBindings();
+			installTemplateArguments();
 			installComments();
 		}
 
@@ -427,7 +427,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			operation.setIsRequired(true);
 		}
 
-		private void installTemplateBindings() {
+		private void installTemplateArguments() {
 			addBinding(_Collection_$$0_F, $$0);
 			addBinding(_Collection_OclElement_F, _OclElement);
 			addBinding(_Set_$$0_F, $$0);

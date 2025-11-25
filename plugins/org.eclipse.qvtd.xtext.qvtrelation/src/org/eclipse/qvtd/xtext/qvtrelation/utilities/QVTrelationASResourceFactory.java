@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.manager.TemplateArgumentVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationAS2MonikerVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASSaverNormalizeVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationPrettyPrintVisitor;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationTemplateArgumentVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
@@ -153,9 +153,9 @@ public class QVTrelationASResourceFactory extends ResourceSetAwareASResourceFact
 	}
 
 	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+	public @NonNull TemplateArgumentVisitor createTemplateArgumentVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTrelationTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		return new QVTrelationTemplateArgumentVisitor(environmentFactory, selfType, selfTypeValue);
 	}
 
 	@Override
