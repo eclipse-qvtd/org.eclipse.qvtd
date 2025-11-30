@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  * 
  *******************************************************************************/
-module GenerateTestModels
+module GenerateQVTdTestModels
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.ocl.build.utilities.*

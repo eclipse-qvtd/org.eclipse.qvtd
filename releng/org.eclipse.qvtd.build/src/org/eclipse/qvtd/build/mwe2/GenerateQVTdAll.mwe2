@@ -33,5 +33,5 @@ Workflow {
   component = @GenerateExample3Models {}
   component = @GenerateExample4Models {}
   component = @GenerateExample5Models {}
-  component = @GenerateTestModels {}
+  component = @GenerateQVTdTestModels {}
 }

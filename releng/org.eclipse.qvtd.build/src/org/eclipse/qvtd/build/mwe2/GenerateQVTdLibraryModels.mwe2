@@ -35,7 +35,7 @@ Workflow {
     	modelFile = "model/QVTruntimeLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2019/QVTruntimeLibrary"
     	ecoreFile = "/org.eclipse.qvtd.runtime/model-gen/QVTruntimeLibrary.ecore"
-    	javaFolder = "/org.eclipse.qvtd.runtime/emf-gen"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.runtime/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.runtime.model"
     	javaClassName = "QVTruntimeLibrary"
     	generatedClassNameMap = {
@@ -76,7 +76,7 @@ Workflow {
     	modelFile = "model/QVTimperativeLibrary.oclstdlib"
     	uri = "http://www.eclipse.org/qvt/2016/QVTimperativeLibrary"
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtimperative/model-gen/QVTimperativeLibrary.ecore"
-    	javaFolder = "/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
+    	javaFolder = "/../plugins/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtimperative.model"
     	javaClassName = "QVTimperativeLibrary"
     	generatedClassNameMap = {
