@@ -178,6 +178,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		public BasicContinuation<?> execute() {
 			PropertyTemplateItem pivotElement = PivotUtil.basicGetPivot(PropertyTemplateItem.class, csElement);
 			if (pivotElement != null) {
+				if (csElement.toString().startsWith("extent")) {
+					getClass();			// XXX
+				}
 				Property propertyId = csElement.getPropertyId();
 				if (propertyId != null) {
 					boolean isOpposite = propertyId.isIsImplicit();
