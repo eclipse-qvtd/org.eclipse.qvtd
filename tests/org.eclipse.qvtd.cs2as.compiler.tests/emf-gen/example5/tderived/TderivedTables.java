@@ -226,7 +226,7 @@ public class TderivedTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final Property _A2__ownsD = LIBRARY.createProperty(Types._A2, TderivedPackage.Literals.A2__OWNS_D, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TderivedPackage.Literals.D)), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final Property _A2__ownsD = LIBRARY.createProperty(Types._A2, TderivedPackage.Literals.A2__OWNS_D, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, getASClass(TderivedPackage.Literals.D), false), 0 | IsComposite | IsRequired | IsResolveProxies);
 
 		public static final Property _B2__anotherName = LIBRARY.createProperty(Types._B2, TderivedPackage.Literals.B2__ANOTHER_NAME, OCLstdlibTables.Types._String, 0 | IsResolveProxies);
 

@@ -203,7 +203,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _Extent__elements = LIBRARY.createProperty(Types._Extent, QVTruntimeLibraryPackage.Literals.EXTENT__ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, OCLstdlibTables.Types._OclElement, false), 0 | IsRequired | IsResolveProxies);
 
 		static {
 			LIBRARY.createOpposite("extent", _Extent__elements);

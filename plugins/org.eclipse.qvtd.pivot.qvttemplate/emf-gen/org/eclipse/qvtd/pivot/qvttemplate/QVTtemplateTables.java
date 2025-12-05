@@ -276,11 +276,11 @@ public class QVTtemplateTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _CollectionTemplateExp__member = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__MEMBER, MODEL.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._OCLExpression), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _CollectionTemplateExp__member = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__MEMBER, MODEL.getCollectionType(OCLstdlibTables.Types._Set, PivotTables.Types._OCLExpression, false), 0 | IsComposite | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _CollectionTemplateExp__referredCollectionType = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE, PivotTables.Types._CollectionType, 1 | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _CollectionTemplateExp__rest = LIBRARY.createProperty(Types._CollectionTemplateExp, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP__REST, PivotTables.Types._Variable, 2 | IsResolveProxies);
 
-		public static final @NonNull Property _ObjectTemplateExp__part = LIBRARY.createProperty(Types._ObjectTemplateExp, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__PART, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._PropertyTemplateItem), 0 | IsComposite | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _ObjectTemplateExp__part = LIBRARY.createProperty(Types._ObjectTemplateExp, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__PART, MODEL.getCollectionType(OCLstdlibTables.Types._Set, Types._PropertyTemplateItem, false), 0 | IsComposite | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _ObjectTemplateExp__referredClass = LIBRARY.createProperty(Types._ObjectTemplateExp, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, PivotTables.Types._Class, 1 | IsRequired | IsResolveProxies);
 
 		public static final @NonNull Property _PropertyTemplateItem__isOpposite = LIBRARY.createProperty(Types._PropertyTemplateItem, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, OCLstdlibTables.Types._Boolean, 0 | IsRequired | IsResolveProxies);

@@ -726,6 +726,29 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	protected final @NonNull CACHE_ExpressionInOCL__unqualified_env_Variable INST_ExpressionInOCL__unqualified_env_Variable = new CACHE_ExpressionInOCL__unqualified_env_Variable();
 
 	/**
+	 * ocl::OclElement::_unqualified_env_Variable(child : OclElement[?]) : lookup::LookupEnvironment[1]
+	 *
+	 * parentEnv_Variable()
+	 */
+	public class CACHE_OclElement__unqualified_env_Variable extends AbstractEvaluationOperation
+	{
+		@Override
+		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull Object self_6 = (/*@NonInvalid*/ @NonNull Object)sourceAndArgumentValues[0];
+			final /*@NonInvalid*/ @Nullable Object child_0 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
+			final /*@NonInvalid*/ @NonNull LookupEnvironment parentEnv_Variable = INSTANCE_OclElement_parentEnv_Variable.evaluate(self_6);
+			return parentEnv_Variable;
+		}
+
+		@SuppressWarnings("null")
+		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_6, final /*@NonInvalid*/ @Nullable Object child_0) {
+			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_6, child_0});
+		}
+	}
+
+	protected final @NonNull CACHE_OclElement__unqualified_env_Variable INST_OclElement__unqualified_env_Variable = new CACHE_OclElement__unqualified_env_Variable();
+
+	/**
 	 * miniocl::Operation::_unqualified_env_Variable(child : OclElement[?]) : lookup::LookupEnvironment[?]
 	 *
 	 * parentEnv_Variable().nestedEnv().addElements(ownedParameters)
@@ -755,29 +778,6 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	}
 
 	protected final @NonNull CACHE_Operation__unqualified_env_Variable INST_Operation__unqualified_env_Variable = new CACHE_Operation__unqualified_env_Variable();
-
-	/**
-	 * ocl::OclElement::_unqualified_env_Variable(child : OclElement[?]) : lookup::LookupEnvironment[1]
-	 *
-	 * parentEnv_Variable()
-	 */
-	public class CACHE_OclElement__unqualified_env_Variable extends AbstractEvaluationOperation
-	{
-		@Override
-		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
-			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull Object self_6 = (/*@NonInvalid*/ @NonNull Object)sourceAndArgumentValues[0];
-			final /*@NonInvalid*/ @Nullable Object child_0 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
-			final /*@NonInvalid*/ @NonNull LookupEnvironment parentEnv_Variable = INSTANCE_OclElement_parentEnv_Variable.evaluate(self_6);
-			return parentEnv_Variable;
-		}
-
-		@SuppressWarnings("null")
-		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_6, final /*@NonInvalid*/ @Nullable Object child_0) {
-			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_6, child_0});
-		}
-	}
-
-	protected final @NonNull CACHE_OclElement__unqualified_env_Variable INST_OclElement__unqualified_env_Variable = new CACHE_OclElement__unqualified_env_Variable();
 
 	/**
 	 * ocl::OclElement::unqualified_env_Variable() : lookup::LookupEnvironment[1]
@@ -1053,37 +1053,6 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	protected final @NonNull CACHE_OclElement_parentEnv_Class INSTANCE_OclElement_parentEnv_Class = new CACHE_OclElement_parentEnv_Class();
 
 	/**
-	 * miniocl::Package::_unqualified_env_Class(child : OclElement[?]) : lookup::LookupEnvironment[?]
-	 *
-	 * parentEnv_Class().nestedEnv().addElements(ownedClasses)
-	 */
-	public class CACHE_Package__unqualified_env_Class extends AbstractEvaluationOperation
-	{
-		@Override
-		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
-			@SuppressWarnings("null") final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package self_10 = (/*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package)sourceAndArgumentValues[0];
-			final /*@NonInvalid*/ @Nullable Object child_2 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
-			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull LookupEnvironment self_22 = INSTANCE_OclElement_parentEnv_Class.evaluate(self_10);
-			final /*@NonInvalid*/ @NonNull Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(CLSSid_LookupEnvironment, null);
-			final /*@NonInvalid*/ @NonNull LookupEnvironment symbol_0 = (@NonNull LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
-			CTORid_parentEnv.initValue(symbol_0, self_22);
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ownedClasses = self_10.getOwnedClasses();
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull LookupEnvironment addElements = symbol_0.addElements(ownedClasses);
-			return addElements;
-		}
-
-		public LookupEnvironment evaluate(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package self_10, final /*@NonInvalid*/ @Nullable Object child_2) {
-			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_10, child_2});
-		}
-	}
-
-	protected final @NonNull CACHE_Package__unqualified_env_Class INST_Package__unqualified_env_Class = new CACHE_Package__unqualified_env_Class();
-
-	/**
 	 * ocl::OclElement::_unqualified_env_Class(child : OclElement[?]) : lookup::LookupEnvironment[1]
 	 *
 	 * parentEnv_Class()
@@ -1092,19 +1061,50 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	{
 		@Override
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
-			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull Object self_12 = (/*@NonInvalid*/ @NonNull Object)sourceAndArgumentValues[0];
-			final /*@NonInvalid*/ @Nullable Object child_3 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
-			final /*@NonInvalid*/ @NonNull LookupEnvironment parentEnv_Class = INSTANCE_OclElement_parentEnv_Class.evaluate(self_12);
+			@SuppressWarnings("null") final /*@NonInvalid*/ @NonNull Object self_10 = (/*@NonInvalid*/ @NonNull Object)sourceAndArgumentValues[0];
+			final /*@NonInvalid*/ @Nullable Object child_2 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
+			final /*@NonInvalid*/ @NonNull LookupEnvironment parentEnv_Class = INSTANCE_OclElement_parentEnv_Class.evaluate(self_10);
 			return parentEnv_Class;
 		}
 
 		@SuppressWarnings("null")
-		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_12, final /*@NonInvalid*/ @Nullable Object child_3) {
-			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_12, child_3});
+		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_10, final /*@NonInvalid*/ @Nullable Object child_2) {
+			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_10, child_2});
 		}
 	}
 
 	protected final @NonNull CACHE_OclElement__unqualified_env_Class INST_OclElement__unqualified_env_Class = new CACHE_OclElement__unqualified_env_Class();
+
+	/**
+	 * miniocl::Package::_unqualified_env_Class(child : OclElement[?]) : lookup::LookupEnvironment[?]
+	 *
+	 * parentEnv_Class().nestedEnv().addElements(ownedClasses)
+	 */
+	public class CACHE_Package__unqualified_env_Class extends AbstractEvaluationOperation
+	{
+		@Override
+		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+			@SuppressWarnings("null") final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package self_12 = (/*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package)sourceAndArgumentValues[0];
+			final /*@NonInvalid*/ @Nullable Object child_3 = (/*@NonInvalid*/ @Nullable Object)sourceAndArgumentValues[1];
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull LookupEnvironment self_22 = INSTANCE_OclElement_parentEnv_Class.evaluate(self_12);
+			final /*@NonInvalid*/ @NonNull Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(CLSSid_LookupEnvironment, null);
+			final /*@NonInvalid*/ @NonNull LookupEnvironment symbol_0 = (@NonNull LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
+			CTORid_parentEnv.initValue(symbol_0, self_22);
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ @NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ownedClasses = self_12.getOwnedClasses();
+			@SuppressWarnings("null")
+			final /*@NonInvalid*/ @NonNull LookupEnvironment addElements = symbol_0.addElements(ownedClasses);
+			return addElements;
+		}
+
+		public LookupEnvironment evaluate(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@NonNull Package self_12, final /*@NonInvalid*/ @Nullable Object child_3) {
+			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_12, child_3});
+		}
+	}
+
+	protected final @NonNull CACHE_Package__unqualified_env_Class INST_Package__unqualified_env_Class = new CACHE_Package__unqualified_env_Class();
 
 	/**
 	 * ocl::OclElement::unqualified_env_Class() : lookup::LookupEnvironment[1]
@@ -1747,8 +1747,8 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	{
 		private VCACHE_OclElement__unqualified_env_Variable() {
 			install(ExpressionInOCL.class, INST_ExpressionInOCL__unqualified_env_Variable);
-			install(Operation.class, INST_Operation__unqualified_env_Variable);
 			install(Object.class, INST_OclElement__unqualified_env_Variable);
+			install(Operation.class, INST_Operation__unqualified_env_Variable);
 		}
 
 		@SuppressWarnings("null")
@@ -1762,13 +1762,13 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	protected class VCACHE_OclElement__unqualified_env_Class extends AbstractDispatchOperation
 	{
 		private VCACHE_OclElement__unqualified_env_Class() {
-			install(org.eclipse.qvtd.doc.miniocl.Package.class, INST_Package__unqualified_env_Class);
 			install(Object.class, INST_OclElement__unqualified_env_Class);
+			install(org.eclipse.qvtd.doc.miniocl.Package.class, INST_Package__unqualified_env_Class);
 		}
 
 		@SuppressWarnings("null")
-		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_12, final /*@NonInvalid*/ @Nullable Object child_3) {
-			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_12, child_3});
+		public @NonNull LookupEnvironment evaluate(final /*@NonInvalid*/ @NonNull Object self_10, final /*@NonInvalid*/ @Nullable Object child_2) {
+			return (@NonNull LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{self_10, child_2});
 		}
 	}
 
@@ -5275,13 +5275,13 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	 * check isPropCallExpWithImplicitSource;
 	 * var ownedSource : miniocl::OCLExpression[1] := ast?.ownedSource;
 	 * observe miniocl::TypedElement::type var type : miniocl::Class[1] := ownedSource.type;
-	 * var isPropCallExpWithExplicitSource : Boolean[?] := lNameExpCS.isPropCallExpWithExplicitSource()
-	 *   ;
-	 * var _'not' : Boolean[?] := not isPropCallExpWithExplicitSource;
-	 * check _'not';
 	 * var isVariableExp : Boolean[?] := lNameExpCS.isVariableExp()
 	 *   ;
-	 * var not1 : Boolean[?] := not isVariableExp;
+	 * var _'not' : Boolean[?] := not isVariableExp;
+	 * check _'not';
+	 * var isPropCallExpWithExplicitSource : Boolean[?] := lNameExpCS.isPropCallExpWithExplicitSource()
+	 *   ;
+	 * var not1 : Boolean[?] := not isPropCallExpWithExplicitSource;
 	 * check not1;
 	 * var expName : minioclcs::PathNameCS[?] := lNameExpCS.expName;
 	 * var lookupPropertyFrom : miniocl::Property[?] := ast.lookupPropertyFrom(type, expName);
@@ -5395,211 +5395,211 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 						objectManager.getting(safe_ownedSource_source, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, false);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@NonNull Class type = safe_ownedSource_source.getType();
-						/*@Caught*/ @Nullable Object CAUGHT_and_0;
+						/*@Caught*/ @Nullable Object CAUGHT_and_2;
 						try {
-							final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_6.getRoundedBrackets();
-							final /*@NonInvalid*/ boolean eq_2 = roundedBrackets_0 == null;
-							final /*@Thrown*/ @Nullable Boolean and_0;
-							if (!eq_2) {
-								and_0 = ValueUtil.FALSE_VALUE;
-							}
-							else {
-								/*@Caught*/ @NonNull Object CAUGHT_IF_eq_3;
+							/*@Caught*/ @Nullable Object CAUGHT_and_1;
+							try {
+								/*@Caught*/ @Nullable Object CAUGHT_and_0;
 								try {
-									final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_0 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_6);
-									final /*@NonInvalid*/ boolean eq_3 = parentCallExpCS_0 == null;
-									/*@Thrown*/ boolean IF_eq_3;
-									if (eq_3) {
-										IF_eq_3 = false;
+									final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_6.getRoundedBrackets();
+									final /*@NonInvalid*/ boolean eq_2 = roundedBrackets_0 == null;
+									final /*@Thrown*/ @Nullable Boolean and_0;
+									if (!eq_2) {
+										and_0 = ValueUtil.FALSE_VALUE;
 									}
 									else {
-										if (parentCallExpCS_0 == null) {
-											throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
-										}
-										final /*@Thrown*/ @Nullable NavigationExpCS navExp_0 = parentCallExpCS_0.getNavExp();
-										final /*@Thrown*/ boolean eq_4 = lNameExpCS_6.equals(navExp_0);
-										IF_eq_3 = eq_4;
-									}
-									CAUGHT_IF_eq_3 = IF_eq_3;
-								}
-								catch (Exception e) {
-									CAUGHT_IF_eq_3 = ValueUtil.createInvalidValue(e);
-								}
-								if (CAUGHT_IF_eq_3 == ValueUtil.FALSE_VALUE) {
-									and_0 = ValueUtil.FALSE_VALUE;
-								}
-								else {
-									if (CAUGHT_IF_eq_3 instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_IF_eq_3;
-									}
-									and_0 = ValueUtil.TRUE_VALUE;
-								}
-							}
-							CAUGHT_and_0 = and_0;
-						}
-						catch (Exception e) {
-							CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
-						}
-						if (CAUGHT_and_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_and_0;
-						}
-						final /*@Thrown*/ @Nullable Boolean not_0;
-						if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
-							not_0 = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							if (CAUGHT_and_0 == ValueUtil.TRUE_VALUE) {
-								not_0 = ValueUtil.FALSE_VALUE;
-							}
-							else {
-								not_0 = null;
-							}
-						}
-						if (not_0 == null) {
-							throw throwNull(lNameExpCS_6, "Null if condition");
-						}
-						/*@Thrown*/ @Nullable Boolean IF_not_0;
-						if (not_0) {
-							/*@Caught*/ @Nullable Object CAUGHT_and_3;
-							try {
-								/*@Caught*/ @Nullable Object CAUGHT_and_2;
-								try {
-									/*@Caught*/ @Nullable Object CAUGHT_and_1;
-									try {
-										final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_6.getRoundedBrackets();
-										final /*@NonInvalid*/ boolean eq_5 = roundedBrackets_1 == null;
-										final /*@Thrown*/ @Nullable Boolean and_1;
-										if (!eq_5) {
-											and_1 = ValueUtil.FALSE_VALUE;
-										}
-										else {
-											/*@Caught*/ @Nullable Object CAUGHT_not_1;
+										/*@Caught*/ @Nullable Object CAUGHT_not_0;
+										try {
+											/*@Caught*/ @NonNull Object CAUGHT_IF_eq_3;
 											try {
-												/*@Caught*/ @NonNull Object CAUGHT_IF_eq_6;
-												try {
-													final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_1 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_6);
-													final /*@NonInvalid*/ boolean eq_6 = parentCallExpCS_1 == null;
-													/*@Thrown*/ boolean IF_eq_6;
-													if (eq_6) {
-														IF_eq_6 = false;
-													}
-													else {
-														if (parentCallExpCS_1 == null) {
-															throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
-														}
-														final /*@Thrown*/ @Nullable NavigationExpCS navExp_1 = parentCallExpCS_1.getNavExp();
-														final /*@Thrown*/ boolean eq_7 = lNameExpCS_6.equals(navExp_1);
-														IF_eq_6 = eq_7;
-													}
-													CAUGHT_IF_eq_6 = IF_eq_6;
-												}
-												catch (Exception e) {
-													CAUGHT_IF_eq_6 = ValueUtil.createInvalidValue(e);
-												}
-												if (CAUGHT_IF_eq_6 instanceof InvalidValueException) {
-													throw (InvalidValueException)CAUGHT_IF_eq_6;
-												}
-												final /*@Thrown*/ @Nullable Boolean not_1;
-												if (CAUGHT_IF_eq_6 == ValueUtil.FALSE_VALUE) {
-													not_1 = ValueUtil.TRUE_VALUE;
+												final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_0 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_6);
+												final /*@NonInvalid*/ boolean eq_3 = parentCallExpCS_0 == null;
+												/*@Thrown*/ boolean IF_eq_3;
+												if (eq_3) {
+													IF_eq_3 = false;
 												}
 												else {
-													if (CAUGHT_IF_eq_6 == ValueUtil.TRUE_VALUE) {
-														not_1 = ValueUtil.FALSE_VALUE;
+													if (parentCallExpCS_0 == null) {
+														throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
 													}
-													else {
-														not_1 = null;
-													}
+													final /*@Thrown*/ @Nullable NavigationExpCS navExp_0 = parentCallExpCS_0.getNavExp();
+													final /*@Thrown*/ boolean eq_4 = lNameExpCS_6.equals(navExp_0);
+													IF_eq_3 = eq_4;
 												}
-												CAUGHT_not_1 = not_1;
+												CAUGHT_IF_eq_3 = IF_eq_3;
 											}
 											catch (Exception e) {
-												CAUGHT_not_1 = ValueUtil.createInvalidValue(e);
+												CAUGHT_IF_eq_3 = ValueUtil.createInvalidValue(e);
 											}
-											if (CAUGHT_not_1 == ValueUtil.FALSE_VALUE) {
-												and_1 = ValueUtil.FALSE_VALUE;
+											if (CAUGHT_IF_eq_3 instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_IF_eq_3;
+											}
+											final /*@Thrown*/ @Nullable Boolean not_0;
+											if (CAUGHT_IF_eq_3 == ValueUtil.FALSE_VALUE) {
+												not_0 = ValueUtil.TRUE_VALUE;
 											}
 											else {
-												if (CAUGHT_not_1 instanceof InvalidValueException) {
-													throw (InvalidValueException)CAUGHT_not_1;
-												}
-												if (CAUGHT_not_1 == null) {
-													and_1 = null;
+												if (CAUGHT_IF_eq_3 == ValueUtil.TRUE_VALUE) {
+													not_0 = ValueUtil.FALSE_VALUE;
 												}
 												else {
-													and_1 = ValueUtil.TRUE_VALUE;
+													not_0 = null;
 												}
 											}
-										}
-										CAUGHT_and_1 = and_1;
-									}
-									catch (Exception e) {
-										CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
-									}
-									final /*@Thrown*/ @Nullable Boolean and_2;
-									if (CAUGHT_and_1 == ValueUtil.FALSE_VALUE) {
-										and_2 = ValueUtil.FALSE_VALUE;
-									}
-									else {
-										/*@Caught*/ @NonNull Object CAUGHT_eq_8;
-										try {
-											final /*@NonInvalid*/ @Nullable PathNameCS expName = lNameExpCS_6.getExpName();
-											if (expName == null) {
-												throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
-											}
-											@SuppressWarnings("null")
-											final /*@Thrown*/ @NonNull List<PathElementCS> pathElements = expName.getPathElements();
-											final /*@Thrown*/ @NonNull OrderedSetValue BOXED_pathElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathElements);
-											final /*@Thrown*/ @NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathElements);
-											final /*@Thrown*/ boolean eq_8 = size.equals(INT_1);
-											CAUGHT_eq_8 = eq_8;
+											CAUGHT_not_0 = not_0;
 										}
 										catch (Exception e) {
-											CAUGHT_eq_8 = ValueUtil.createInvalidValue(e);
+											CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
 										}
-										if (CAUGHT_eq_8 == ValueUtil.FALSE_VALUE) {
-											and_2 = ValueUtil.FALSE_VALUE;
+										if (CAUGHT_not_0 == ValueUtil.FALSE_VALUE) {
+											and_0 = ValueUtil.FALSE_VALUE;
 										}
 										else {
-											if (CAUGHT_and_1 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_and_1;
+											if (CAUGHT_not_0 instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_not_0;
 											}
-											if (CAUGHT_eq_8 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_eq_8;
-											}
-											if (CAUGHT_and_1 == null) {
-												and_2 = null;
+											if (CAUGHT_not_0 == null) {
+												and_0 = null;
 											}
 											else {
-												and_2 = ValueUtil.TRUE_VALUE;
+												and_0 = ValueUtil.TRUE_VALUE;
 											}
 										}
 									}
-									CAUGHT_and_2 = and_2;
+									CAUGHT_and_0 = and_0;
 								}
 								catch (Exception e) {
-									CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+									CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 								}
+								final /*@Thrown*/ @Nullable Boolean and_1;
+								if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+									and_1 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									/*@Caught*/ @NonNull Object CAUGHT_eq_5;
+									try {
+										final /*@NonInvalid*/ @Nullable PathNameCS expName = lNameExpCS_6.getExpName();
+										if (expName == null) {
+											throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
+										}
+										@SuppressWarnings("null")
+										final /*@Thrown*/ @NonNull List<PathElementCS> pathElements = expName.getPathElements();
+										final /*@Thrown*/ @NonNull OrderedSetValue BOXED_pathElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathElements);
+										final /*@Thrown*/ @NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathElements);
+										final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
+										CAUGHT_eq_5 = eq_5;
+									}
+									catch (Exception e) {
+										CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+									}
+									if (CAUGHT_eq_5 == ValueUtil.FALSE_VALUE) {
+										and_1 = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										if (CAUGHT_and_0 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_and_0;
+										}
+										if (CAUGHT_eq_5 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_eq_5;
+										}
+										if (CAUGHT_and_0 == null) {
+											and_1 = null;
+										}
+										else {
+											and_1 = ValueUtil.TRUE_VALUE;
+										}
+									}
+								}
+								CAUGHT_and_1 = and_1;
+							}
+							catch (Exception e) {
+								CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
+							}
+							final /*@Thrown*/ @Nullable Boolean and_2;
+							if (CAUGHT_and_1 == ValueUtil.FALSE_VALUE) {
+								and_2 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								final /*@NonInvalid*/ @Nullable Variable lookupVariableToDisambiguate = INSTANCE_NameExpCS_lookupVariableToDisambiguate.evaluate(lNameExpCS_6);
+								final /*@NonInvalid*/ boolean ne = lookupVariableToDisambiguate != null;
+								if (!ne) {
+									and_2 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									if (CAUGHT_and_1 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_and_1;
+									}
+									if (CAUGHT_and_1 == null) {
+										and_2 = null;
+									}
+									else {
+										and_2 = ValueUtil.TRUE_VALUE;
+									}
+								}
+							}
+							CAUGHT_and_2 = and_2;
+						}
+						catch (Exception e) {
+							CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_and_2 instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_and_2;
+						}
+						final /*@Thrown*/ @Nullable Boolean not_1;
+						if (CAUGHT_and_2 == ValueUtil.FALSE_VALUE) {
+							not_1 = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_2 == ValueUtil.TRUE_VALUE) {
+								not_1 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								not_1 = null;
+							}
+						}
+						if (not_1 == null) {
+							throw throwNull(lNameExpCS_6, "Null if condition");
+						}
+						/*@Thrown*/ @Nullable Boolean IF_not_1;
+						if (not_1) {
+							/*@Caught*/ @Nullable Object CAUGHT_and_3;
+							try {
+								final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_6.getRoundedBrackets();
+								final /*@NonInvalid*/ boolean eq_6 = roundedBrackets_1 == null;
 								final /*@Thrown*/ @Nullable Boolean and_3;
-								if (CAUGHT_and_2 == ValueUtil.FALSE_VALUE) {
+								if (!eq_6) {
 									and_3 = ValueUtil.FALSE_VALUE;
 								}
 								else {
-									final /*@NonInvalid*/ @Nullable Variable lookupVariableToDisambiguate = INSTANCE_NameExpCS_lookupVariableToDisambiguate.evaluate(lNameExpCS_6);
-									final /*@NonInvalid*/ boolean ne = lookupVariableToDisambiguate != null;
-									if (!ne) {
+									/*@Caught*/ @NonNull Object CAUGHT_IF_eq_7;
+									try {
+										final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_1 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_6);
+										final /*@NonInvalid*/ boolean eq_7 = parentCallExpCS_1 == null;
+										/*@Thrown*/ boolean IF_eq_7;
+										if (eq_7) {
+											IF_eq_7 = false;
+										}
+										else {
+											if (parentCallExpCS_1 == null) {
+												throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
+											}
+											final /*@Thrown*/ @Nullable NavigationExpCS navExp_1 = parentCallExpCS_1.getNavExp();
+											final /*@Thrown*/ boolean eq_8 = lNameExpCS_6.equals(navExp_1);
+											IF_eq_7 = eq_8;
+										}
+										CAUGHT_IF_eq_7 = IF_eq_7;
+									}
+									catch (Exception e) {
+										CAUGHT_IF_eq_7 = ValueUtil.createInvalidValue(e);
+									}
+									if (CAUGHT_IF_eq_7 == ValueUtil.FALSE_VALUE) {
 										and_3 = ValueUtil.FALSE_VALUE;
 									}
 									else {
-										if (CAUGHT_and_2 instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_and_2;
+										if (CAUGHT_IF_eq_7 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_IF_eq_7;
 										}
-										if (CAUGHT_and_2 == null) {
-											and_3 = null;
-										}
-										else {
-											and_3 = ValueUtil.TRUE_VALUE;
-										}
+										and_3 = ValueUtil.TRUE_VALUE;
 									}
 								}
 								CAUGHT_and_3 = and_3;
@@ -5788,12 +5788,12 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 							else {
 								IF_not_2 = ValueUtil.FALSE_VALUE;
 							}
-							IF_not_0 = IF_not_2;
+							IF_not_1 = IF_not_2;
 						}
 						else {
-							IF_not_0 = ValueUtil.FALSE_VALUE;
+							IF_not_1 = ValueUtil.FALSE_VALUE;
 						}
-						raw_ownedSource = IF_not_0;
+						raw_ownedSource = IF_not_1;
 					}
 					else {
 						raw_ownedSource = ValueUtil.FALSE_VALUE;
@@ -5827,12 +5827,12 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 	 * var isPropCallExpWithImplicitSource : Boolean[?] := lNameExpCS.isPropCallExpWithImplicitSource()
 	 *   ;
 	 * check isPropCallExpWithImplicitSource;
-	 * var isPropCallExpWithExplicitSource : Boolean[?] := lNameExpCS.isPropCallExpWithExplicitSource()
+	 * var isVariableExp : Boolean[?] := lNameExpCS.isVariableExp()
 	 *   ;
-	 * var _'not' : Boolean[?] := not isPropCallExpWithExplicitSource;
+	 * var _'not' : Boolean[?] := not isVariableExp;
 	 * check _'not';
-	 * var isVariableExp : Boolean[?] := lNameExpCS.isVariableExp();
-	 * var not1 : Boolean[?] := not isVariableExp;
+	 * var isPropCallExpWithExplicitSource : Boolean[?] := lNameExpCS.isPropCallExpWithExplicitSource();
+	 * var not1 : Boolean[?] := not isPropCallExpWithExplicitSource;
 	 * check not1;
 	 * var _'=' : Boolean[1] := unsafe =
 	 *   null;
@@ -5948,211 +5948,211 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 					}
 					/*@Thrown*/ @Nullable Boolean IF_and;
 					if (and) {
-						/*@Caught*/ @Nullable Object CAUGHT_and_0;
+						/*@Caught*/ @Nullable Object CAUGHT_and_2;
 						try {
-							final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_7.getRoundedBrackets();
-							final /*@NonInvalid*/ boolean eq_2 = roundedBrackets_0 == null;
-							final /*@Thrown*/ @Nullable Boolean and_0;
-							if (!eq_2) {
-								and_0 = ValueUtil.FALSE_VALUE;
-							}
-							else {
-								/*@Caught*/ @NonNull Object CAUGHT_IF_eq_3;
+							/*@Caught*/ @Nullable Object CAUGHT_and_1;
+							try {
+								/*@Caught*/ @Nullable Object CAUGHT_and_0;
 								try {
-									final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_0 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_7);
-									final /*@NonInvalid*/ boolean eq_3 = parentCallExpCS_0 == null;
-									/*@Thrown*/ boolean IF_eq_3;
-									if (eq_3) {
-										IF_eq_3 = false;
+									final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_7.getRoundedBrackets();
+									final /*@NonInvalid*/ boolean eq_2 = roundedBrackets_0 == null;
+									final /*@Thrown*/ @Nullable Boolean and_0;
+									if (!eq_2) {
+										and_0 = ValueUtil.FALSE_VALUE;
 									}
 									else {
-										if (parentCallExpCS_0 == null) {
-											throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
-										}
-										final /*@Thrown*/ @Nullable NavigationExpCS navExp_0 = parentCallExpCS_0.getNavExp();
-										final /*@Thrown*/ boolean eq_4 = lNameExpCS_7.equals(navExp_0);
-										IF_eq_3 = eq_4;
-									}
-									CAUGHT_IF_eq_3 = IF_eq_3;
-								}
-								catch (Exception e) {
-									CAUGHT_IF_eq_3 = ValueUtil.createInvalidValue(e);
-								}
-								if (CAUGHT_IF_eq_3 == ValueUtil.FALSE_VALUE) {
-									and_0 = ValueUtil.FALSE_VALUE;
-								}
-								else {
-									if (CAUGHT_IF_eq_3 instanceof InvalidValueException) {
-										throw (InvalidValueException)CAUGHT_IF_eq_3;
-									}
-									and_0 = ValueUtil.TRUE_VALUE;
-								}
-							}
-							CAUGHT_and_0 = and_0;
-						}
-						catch (Exception e) {
-							CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
-						}
-						if (CAUGHT_and_0 instanceof InvalidValueException) {
-							throw (InvalidValueException)CAUGHT_and_0;
-						}
-						final /*@Thrown*/ @Nullable Boolean not_0;
-						if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
-							not_0 = ValueUtil.TRUE_VALUE;
-						}
-						else {
-							if (CAUGHT_and_0 == ValueUtil.TRUE_VALUE) {
-								not_0 = ValueUtil.FALSE_VALUE;
-							}
-							else {
-								not_0 = null;
-							}
-						}
-						if (not_0 == null) {
-							throw throwNull(lNameExpCS_7, "Null if condition");
-						}
-						/*@Thrown*/ @Nullable Boolean IF_not_0;
-						if (not_0) {
-							/*@Caught*/ @Nullable Object CAUGHT_and_3;
-							try {
-								/*@Caught*/ @Nullable Object CAUGHT_and_2;
-								try {
-									/*@Caught*/ @Nullable Object CAUGHT_and_1;
-									try {
-										final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_7.getRoundedBrackets();
-										final /*@NonInvalid*/ boolean eq_5 = roundedBrackets_1 == null;
-										final /*@Thrown*/ @Nullable Boolean and_1;
-										if (!eq_5) {
-											and_1 = ValueUtil.FALSE_VALUE;
-										}
-										else {
-											/*@Caught*/ @Nullable Object CAUGHT_not_1;
+										/*@Caught*/ @Nullable Object CAUGHT_not_0;
+										try {
+											/*@Caught*/ @NonNull Object CAUGHT_IF_eq_3;
 											try {
-												/*@Caught*/ @NonNull Object CAUGHT_IF_eq_6;
-												try {
-													final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_1 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_7);
-													final /*@NonInvalid*/ boolean eq_6 = parentCallExpCS_1 == null;
-													/*@Thrown*/ boolean IF_eq_6;
-													if (eq_6) {
-														IF_eq_6 = false;
-													}
-													else {
-														if (parentCallExpCS_1 == null) {
-															throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
-														}
-														final /*@Thrown*/ @Nullable NavigationExpCS navExp_1 = parentCallExpCS_1.getNavExp();
-														final /*@Thrown*/ boolean eq_7 = lNameExpCS_7.equals(navExp_1);
-														IF_eq_6 = eq_7;
-													}
-													CAUGHT_IF_eq_6 = IF_eq_6;
-												}
-												catch (Exception e) {
-													CAUGHT_IF_eq_6 = ValueUtil.createInvalidValue(e);
-												}
-												if (CAUGHT_IF_eq_6 instanceof InvalidValueException) {
-													throw (InvalidValueException)CAUGHT_IF_eq_6;
-												}
-												final /*@Thrown*/ @Nullable Boolean not_1;
-												if (CAUGHT_IF_eq_6 == ValueUtil.FALSE_VALUE) {
-													not_1 = ValueUtil.TRUE_VALUE;
+												final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_0 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_7);
+												final /*@NonInvalid*/ boolean eq_3 = parentCallExpCS_0 == null;
+												/*@Thrown*/ boolean IF_eq_3;
+												if (eq_3) {
+													IF_eq_3 = false;
 												}
 												else {
-													if (CAUGHT_IF_eq_6 == ValueUtil.TRUE_VALUE) {
-														not_1 = ValueUtil.FALSE_VALUE;
+													if (parentCallExpCS_0 == null) {
+														throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
 													}
-													else {
-														not_1 = null;
-													}
+													final /*@Thrown*/ @Nullable NavigationExpCS navExp_0 = parentCallExpCS_0.getNavExp();
+													final /*@Thrown*/ boolean eq_4 = lNameExpCS_7.equals(navExp_0);
+													IF_eq_3 = eq_4;
 												}
-												CAUGHT_not_1 = not_1;
+												CAUGHT_IF_eq_3 = IF_eq_3;
 											}
 											catch (Exception e) {
-												CAUGHT_not_1 = ValueUtil.createInvalidValue(e);
+												CAUGHT_IF_eq_3 = ValueUtil.createInvalidValue(e);
 											}
-											if (CAUGHT_not_1 == ValueUtil.FALSE_VALUE) {
-												and_1 = ValueUtil.FALSE_VALUE;
+											if (CAUGHT_IF_eq_3 instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_IF_eq_3;
+											}
+											final /*@Thrown*/ @Nullable Boolean not_0;
+											if (CAUGHT_IF_eq_3 == ValueUtil.FALSE_VALUE) {
+												not_0 = ValueUtil.TRUE_VALUE;
 											}
 											else {
-												if (CAUGHT_not_1 instanceof InvalidValueException) {
-													throw (InvalidValueException)CAUGHT_not_1;
-												}
-												if (CAUGHT_not_1 == null) {
-													and_1 = null;
+												if (CAUGHT_IF_eq_3 == ValueUtil.TRUE_VALUE) {
+													not_0 = ValueUtil.FALSE_VALUE;
 												}
 												else {
-													and_1 = ValueUtil.TRUE_VALUE;
+													not_0 = null;
 												}
 											}
-										}
-										CAUGHT_and_1 = and_1;
-									}
-									catch (Exception e) {
-										CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
-									}
-									final /*@Thrown*/ @Nullable Boolean and_2;
-									if (CAUGHT_and_1 == ValueUtil.FALSE_VALUE) {
-										and_2 = ValueUtil.FALSE_VALUE;
-									}
-									else {
-										/*@Caught*/ @NonNull Object CAUGHT_eq_8;
-										try {
-											final /*@NonInvalid*/ @Nullable PathNameCS expName = lNameExpCS_7.getExpName();
-											if (expName == null) {
-												throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
-											}
-											@SuppressWarnings("null")
-											final /*@Thrown*/ @NonNull List<PathElementCS> pathElements = expName.getPathElements();
-											final /*@Thrown*/ @NonNull OrderedSetValue BOXED_pathElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathElements);
-											final /*@Thrown*/ @NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathElements);
-											final /*@Thrown*/ boolean eq_8 = size.equals(INT_1);
-											CAUGHT_eq_8 = eq_8;
+											CAUGHT_not_0 = not_0;
 										}
 										catch (Exception e) {
-											CAUGHT_eq_8 = ValueUtil.createInvalidValue(e);
+											CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
 										}
-										if (CAUGHT_eq_8 == ValueUtil.FALSE_VALUE) {
-											and_2 = ValueUtil.FALSE_VALUE;
+										if (CAUGHT_not_0 == ValueUtil.FALSE_VALUE) {
+											and_0 = ValueUtil.FALSE_VALUE;
 										}
 										else {
-											if (CAUGHT_and_1 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_and_1;
+											if (CAUGHT_not_0 instanceof InvalidValueException) {
+												throw (InvalidValueException)CAUGHT_not_0;
 											}
-											if (CAUGHT_eq_8 instanceof InvalidValueException) {
-												throw (InvalidValueException)CAUGHT_eq_8;
-											}
-											if (CAUGHT_and_1 == null) {
-												and_2 = null;
+											if (CAUGHT_not_0 == null) {
+												and_0 = null;
 											}
 											else {
-												and_2 = ValueUtil.TRUE_VALUE;
+												and_0 = ValueUtil.TRUE_VALUE;
 											}
 										}
 									}
-									CAUGHT_and_2 = and_2;
+									CAUGHT_and_0 = and_0;
 								}
 								catch (Exception e) {
-									CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+									CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
 								}
+								final /*@Thrown*/ @Nullable Boolean and_1;
+								if (CAUGHT_and_0 == ValueUtil.FALSE_VALUE) {
+									and_1 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									/*@Caught*/ @NonNull Object CAUGHT_eq_5;
+									try {
+										final /*@NonInvalid*/ @Nullable PathNameCS expName = lNameExpCS_7.getExpName();
+										if (expName == null) {
+											throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
+										}
+										@SuppressWarnings("null")
+										final /*@Thrown*/ @NonNull List<PathElementCS> pathElements = expName.getPathElements();
+										final /*@Thrown*/ @NonNull OrderedSetValue BOXED_pathElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathElements);
+										final /*@Thrown*/ @NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathElements);
+										final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
+										CAUGHT_eq_5 = eq_5;
+									}
+									catch (Exception e) {
+										CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+									}
+									if (CAUGHT_eq_5 == ValueUtil.FALSE_VALUE) {
+										and_1 = ValueUtil.FALSE_VALUE;
+									}
+									else {
+										if (CAUGHT_and_0 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_and_0;
+										}
+										if (CAUGHT_eq_5 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_eq_5;
+										}
+										if (CAUGHT_and_0 == null) {
+											and_1 = null;
+										}
+										else {
+											and_1 = ValueUtil.TRUE_VALUE;
+										}
+									}
+								}
+								CAUGHT_and_1 = and_1;
+							}
+							catch (Exception e) {
+								CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
+							}
+							final /*@Thrown*/ @Nullable Boolean and_2;
+							if (CAUGHT_and_1 == ValueUtil.FALSE_VALUE) {
+								and_2 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								final /*@NonInvalid*/ @Nullable Variable lookupVariableToDisambiguate = INSTANCE_NameExpCS_lookupVariableToDisambiguate.evaluate(lNameExpCS_7);
+								final /*@NonInvalid*/ boolean ne = lookupVariableToDisambiguate != null;
+								if (!ne) {
+									and_2 = ValueUtil.FALSE_VALUE;
+								}
+								else {
+									if (CAUGHT_and_1 instanceof InvalidValueException) {
+										throw (InvalidValueException)CAUGHT_and_1;
+									}
+									if (CAUGHT_and_1 == null) {
+										and_2 = null;
+									}
+									else {
+										and_2 = ValueUtil.TRUE_VALUE;
+									}
+								}
+							}
+							CAUGHT_and_2 = and_2;
+						}
+						catch (Exception e) {
+							CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+						}
+						if (CAUGHT_and_2 instanceof InvalidValueException) {
+							throw (InvalidValueException)CAUGHT_and_2;
+						}
+						final /*@Thrown*/ @Nullable Boolean not_1;
+						if (CAUGHT_and_2 == ValueUtil.FALSE_VALUE) {
+							not_1 = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							if (CAUGHT_and_2 == ValueUtil.TRUE_VALUE) {
+								not_1 = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								not_1 = null;
+							}
+						}
+						if (not_1 == null) {
+							throw throwNull(lNameExpCS_7, "Null if condition");
+						}
+						/*@Thrown*/ @Nullable Boolean IF_not_1;
+						if (not_1) {
+							/*@Caught*/ @Nullable Object CAUGHT_and_3;
+							try {
+								final /*@NonInvalid*/ @Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_7.getRoundedBrackets();
+								final /*@NonInvalid*/ boolean eq_6 = roundedBrackets_1 == null;
 								final /*@Thrown*/ @Nullable Boolean and_3;
-								if (CAUGHT_and_2 == ValueUtil.FALSE_VALUE) {
+								if (!eq_6) {
 									and_3 = ValueUtil.FALSE_VALUE;
 								}
 								else {
-									final /*@NonInvalid*/ @Nullable Variable lookupVariableToDisambiguate = INSTANCE_NameExpCS_lookupVariableToDisambiguate.evaluate(lNameExpCS_7);
-									final /*@NonInvalid*/ boolean ne = lookupVariableToDisambiguate != null;
-									if (!ne) {
+									/*@Caught*/ @NonNull Object CAUGHT_IF_eq_7;
+									try {
+										final /*@NonInvalid*/ @Nullable CallExpCS parentCallExpCS_1 = INSTANCE_NameExpCS_parentAsCallExpCS.evaluate(lNameExpCS_7);
+										final /*@NonInvalid*/ boolean eq_7 = parentCallExpCS_1 == null;
+										/*@Thrown*/ boolean IF_eq_7;
+										if (eq_7) {
+											IF_eq_7 = false;
+										}
+										else {
+											if (parentCallExpCS_1 == null) {
+												throw throwNull(lNameExpCS_7, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::navExp\'");
+											}
+											final /*@Thrown*/ @Nullable NavigationExpCS navExp_1 = parentCallExpCS_1.getNavExp();
+											final /*@Thrown*/ boolean eq_8 = lNameExpCS_7.equals(navExp_1);
+											IF_eq_7 = eq_8;
+										}
+										CAUGHT_IF_eq_7 = IF_eq_7;
+									}
+									catch (Exception e) {
+										CAUGHT_IF_eq_7 = ValueUtil.createInvalidValue(e);
+									}
+									if (CAUGHT_IF_eq_7 == ValueUtil.FALSE_VALUE) {
 										and_3 = ValueUtil.FALSE_VALUE;
 									}
 									else {
-										if (CAUGHT_and_2 instanceof InvalidValueException) {
-											throw (InvalidValueException)CAUGHT_and_2;
+										if (CAUGHT_IF_eq_7 instanceof InvalidValueException) {
+											throw (InvalidValueException)CAUGHT_IF_eq_7;
 										}
-										if (CAUGHT_and_2 == null) {
-											and_3 = null;
-										}
-										else {
-											and_3 = ValueUtil.TRUE_VALUE;
-										}
+										and_3 = ValueUtil.TRUE_VALUE;
 									}
 								}
 								CAUGHT_and_3 = and_3;
@@ -6202,12 +6202,12 @@ public class MiniOCLCS2AS_qvtm_qvtcas extends AbstractCS2ASTransformer
 							else {
 								IF_not_2 = ValueUtil.FALSE_VALUE;
 							}
-							IF_not_0 = IF_not_2;
+							IF_not_1 = IF_not_2;
 						}
 						else {
-							IF_not_0 = ValueUtil.FALSE_VALUE;
+							IF_not_1 = ValueUtil.FALSE_VALUE;
 						}
-						IF_and = IF_not_0;
+						IF_and = IF_not_1;
 					}
 					else {
 						IF_and = ValueUtil.FALSE_VALUE;

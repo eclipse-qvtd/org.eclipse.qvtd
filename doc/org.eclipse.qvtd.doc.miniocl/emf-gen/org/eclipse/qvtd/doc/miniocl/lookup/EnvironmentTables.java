@@ -13,6 +13,7 @@ package org.eclipse.qvtd.doc.miniocl.lookup;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.NormalizedTemplateParameter;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -94,7 +95,9 @@ public class EnvironmentTables extends AbstractTables
 			EnvironmentTables.init();
 		}
 
-		public static final @NonNull TemplateParameter $$0 = LIBRARY.createTemplateParameter(0, "$$0");
+		public static final @NonNull NormalizedTemplateParameter $$0 = LIBRARY.createNormalizedTemplateParameter(0, "$$0");
+
+		private static final @NonNull TemplateParameter _0_LookupEnvironment_addElements_NE = LIBRARY.createTemplateParameter("NE");
 
 		static {
 			Init.initEnd();
@@ -129,7 +132,7 @@ public class EnvironmentTables extends AbstractTables
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, types, TypeParameters.$$0);
 			Init.initEnd();
 		}
 
@@ -184,7 +187,6 @@ public class EnvironmentTables extends AbstractTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__NE__ = new ParameterTypes(MODEL.getCollectionType(OCLstdlibTables.Types._Collection, TypeParameters.$$0));
 		public static final @NonNull ParameterTypes _NamedElement = new ParameterTypes(MiniOCLTables.Types._NamedElement);
 
 		static {
@@ -215,10 +217,18 @@ public class EnvironmentTables extends AbstractTables
 		public static final @NonNull Operation _Env4CG__hasFinalResult = LIBRARY.createOperation(Types._Env4CG, "hasFinalResult", ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
 			1 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _LookupEnvironment__0_addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", Parameters._Collection__NE__, Types._LookupEnvironment,
-			0 | IsRequired, new TemplateParameters(TypeParameters.$$0), null);
+		public static final @NonNull Operation _LookupEnvironment__0_addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", null, Types._LookupEnvironment,
+			0 | IsRequired, new TemplateParameters(TypeParameters._0_LookupEnvironment_addElements_NE), null);
 		public static final @NonNull Operation _LookupEnvironment__1_addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", Parameters._NamedElement, Types._LookupEnvironment,
 			1 | IsRequired, TemplateParameters.EMPTY_LIST, null);
+
+		/*
+		 * Deferred initialization for operations with a return type involving a nested specialization
+		 * or a parameter whose type references an Operation TemplateParameter.
+		 */
+		public static void postInit() {
+			LIBRARY.setParameters(_LookupEnvironment__0_addElements, MODEL.getCollectionType(OCLstdlibTables.Types._Collection, LIBRARY.getTemplateParameter(_LookupEnvironment__0_addElements, TypeParameters.$$0), false));
+		}
 
 		static {
 			Init.initEnd();
@@ -243,9 +253,9 @@ public class EnvironmentTables extends AbstractTables
 			Operations.init();
 		}
 
-		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, MiniOCLTables.Types._NamedElement), 0 | IsRequired | IsResolveProxies);
+		public static final @NonNull Property _LookupEnvironment__namedElements = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS, MODEL.getCollectionType(OCLstdlibTables.Types._OrderedSet, MiniOCLTables.Types._NamedElement, false), 0 | IsRequired | IsResolveProxies);
 		public static final @NonNull Property _LookupEnvironment__parentEnv = LIBRARY.createProperty(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV, Types._LookupEnvironment, 1 | IsResolveProxies);
-		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
+		public static final @NonNull Property _LookupEnvironment__LookupEnvironment__parentEnv = LIBRARY.createOppositeProperty(Types._LookupEnvironment, "LookupEnvironment", MODEL.getCollectionType(OCLstdlibTables.Types._Bag, Types._LookupEnvironment, false), 2 | IsImplicit | IsRequired | IsResolveProxies, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT__PARENT_ENV);
 
 		static {
 			LIBRARY.createOpposite("LookupEnvironment", _LookupEnvironment__namedElements);
@@ -550,6 +560,7 @@ public class EnvironmentTables extends AbstractTables
 				if (--initCount == 0) {
 					initCount = -1;
 					EnumerationLiterals.init();
+					Operations.postInit();
 					LIBRARY.freeze(RESOURCE);
 				}
 			}
