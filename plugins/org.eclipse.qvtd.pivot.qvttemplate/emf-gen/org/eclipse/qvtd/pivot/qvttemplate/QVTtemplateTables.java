@@ -343,7 +343,7 @@ public class QVTtemplateTables extends AbstractTables
 				Fragments._CollectionTemplateExp__TemplateExp /* 7 */,
 				Fragments._CollectionTemplateExp__CollectionTemplateExp /* 8 */
 			};
-		private static final int @NonNull [] __CollectionTemplateExp = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionTemplateExp = { 0,1,2,4,5,6,7,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ObjectTemplateExp =
 			{
@@ -358,7 +358,7 @@ public class QVTtemplateTables extends AbstractTables
 				Fragments._ObjectTemplateExp__TemplateExp /* 7 */,
 				Fragments._ObjectTemplateExp__ObjectTemplateExp /* 8 */
 			};
-		private static final int @NonNull [] __ObjectTemplateExp = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ObjectTemplateExp = { 0,1,2,4,5,6,7,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PropertyTemplateItem =
 			{
@@ -368,7 +368,7 @@ public class QVTtemplateTables extends AbstractTables
 				Fragments._PropertyTemplateItem__ReferringElement /* 2 */,
 				Fragments._PropertyTemplateItem__PropertyTemplateItem /* 3 */
 			};
-		private static final int @NonNull [] __PropertyTemplateItem = { 1,1,2,1 };
+		private static final int @NonNull [] __PropertyTemplateItem = { 0,1,2,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TemplateExp =
 			{
@@ -382,7 +382,7 @@ public class QVTtemplateTables extends AbstractTables
 				Fragments._TemplateExp__LiteralExp /* 6 */,
 				Fragments._TemplateExp__TemplateExp /* 7 */
 			};
-		private static final int @NonNull [] __TemplateExp = { 1,1,2,1,1,1,1,1 };
+		private static final int @NonNull [] __TemplateExp = { 0,1,2,4,5,6,7,8 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -391,7 +391,7 @@ public class QVTtemplateTables extends AbstractTables
 			Types._CollectionTemplateExp.initFragments(_CollectionTemplateExp, __CollectionTemplateExp);
 			Types._ObjectTemplateExp.initFragments(_ObjectTemplateExp, __ObjectTemplateExp);
 			Types._PropertyTemplateItem.initFragments(_PropertyTemplateItem, __PropertyTemplateItem);
-			Types._TemplateExp.initFragments(_TemplateExp, __TemplateExp);
+			Types._TemplateExp.initFragments(_TemplateExp, __TemplateExp, PivotTables.Types._ReferringElement);
 
 			Init.initEnd();
 		}

@@ -805,7 +805,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._AddStatement__ObservableStatement /* 5 */,
 				Fragments._AddStatement__AddStatement /* 6 */
 			};
-		private static final int @NonNull [] __AddStatement = { 1,1,1,1,1,2,1 };
+		private static final int @NonNull [] __AddStatement = { 0,1,2,3,4,5,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _AppendParameter =
 			{
@@ -819,7 +819,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._AppendParameter__MappingParameter /* 6 */,
 				Fragments._AppendParameter__AppendParameter /* 7 */
 			};
-		private static final int @NonNull [] __AppendParameter = { 1,1,1,1,1,1,2,1 };
+		private static final int @NonNull [] __AppendParameter = { 0,1,2,3,4,5,6,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _AppendParameterBinding =
 			{
@@ -829,7 +829,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._AppendParameterBinding__MappingParameterBinding /* 3 */,
 				Fragments._AppendParameterBinding__AppendParameterBinding /* 4 */
 			};
-		private static final int @NonNull [] __AppendParameterBinding = { 1,1,1,1,1 };
+		private static final int @NonNull [] __AppendParameterBinding = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _BufferStatement =
 			{
@@ -845,7 +845,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._BufferStatement__VariableStatement /* 6 */,
 				Fragments._BufferStatement__BufferStatement /* 7 */
 			};
-		private static final int @NonNull [] __BufferStatement = { 1,1,1,1,2,2,2,1 };
+		private static final int @NonNull [] __BufferStatement = { 0,1,2,3,4,6,8,10 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CheckStatement =
 			{
@@ -857,7 +857,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._CheckStatement__ObservableStatement /* 5 */,
 				Fragments._CheckStatement__CheckStatement /* 6 */
 			};
-		private static final int @NonNull [] __CheckStatement = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CheckStatement = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ConnectionVariable =
 			{
@@ -869,7 +869,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._ConnectionVariable__VariableDeclaration /* 5 */,
 				Fragments._ConnectionVariable__ConnectionVariable /* 6 */
 			};
-		private static final int @NonNull [] __ConnectionVariable = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ConnectionVariable = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _DeclareStatement =
 			{
@@ -884,7 +884,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._DeclareStatement__VariableStatement /* 6 */,
 				Fragments._DeclareStatement__DeclareStatement /* 7 */
 			};
-		private static final int @NonNull [] __DeclareStatement = { 1,1,1,1,2,2,1,1 };
+		private static final int @NonNull [] __DeclareStatement = { 0,1,2,3,4,6,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _EntryPoint =
 			{
@@ -896,7 +896,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._EntryPoint__Mapping /* 5 */,
 				Fragments._EntryPoint__EntryPoint /* 6 */
 			};
-		private static final int @NonNull [] __EntryPoint = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __EntryPoint = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _GuardParameter =
 			{
@@ -909,7 +909,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._GuardParameter__MappingParameter /* 6 */,
 				Fragments._GuardParameter__GuardParameter /* 7 */
 			};
-		private static final int @NonNull [] __GuardParameter = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __GuardParameter = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _GuardParameterBinding =
 			{
@@ -919,7 +919,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._GuardParameterBinding__MappingParameterBinding /* 3 */,
 				Fragments._GuardParameterBinding__GuardParameterBinding /* 4 */
 			};
-		private static final int @NonNull [] __GuardParameterBinding = { 1,1,1,1,1 };
+		private static final int @NonNull [] __GuardParameterBinding = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ImperativeModel =
 			{
@@ -932,7 +932,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._ImperativeModel__BaseModel /* 6 */,
 				Fragments._ImperativeModel__ImperativeModel /* 7 */
 			};
-		private static final int @NonNull [] __ImperativeModel = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ImperativeModel = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ImperativeTransformation =
 			{
@@ -948,7 +948,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._ImperativeTransformation__Transformation /* 6 */,
 				Fragments._ImperativeTransformation__ImperativeTransformation /* 7 */
 			};
-		private static final int @NonNull [] __ImperativeTransformation = { 1,1,2,2,2,1,1,1 };
+		private static final int @NonNull [] __ImperativeTransformation = { 0,1,2,4,6,8,9,10 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LoopParameterBinding =
 			{
@@ -958,7 +958,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._LoopParameterBinding__MappingParameterBinding /* 3 */,
 				Fragments._LoopParameterBinding__LoopParameterBinding /* 4 */
 			};
-		private static final int @NonNull [] __LoopParameterBinding = { 1,1,1,1,1 };
+		private static final int @NonNull [] __LoopParameterBinding = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LoopVariable =
 			{
@@ -970,7 +970,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._LoopVariable__VariableDeclaration /* 5 */,
 				Fragments._LoopVariable__LoopVariable /* 6 */
 			};
-		private static final int @NonNull [] __LoopVariable = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __LoopVariable = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Mapping =
 			{
@@ -981,7 +981,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._Mapping__Rule /* 4 */,
 				Fragments._Mapping__Mapping /* 5 */
 			};
-		private static final int @NonNull [] __Mapping = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __Mapping = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingCall =
 			{
@@ -994,7 +994,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._MappingCall__MappingStatement /* 5 */,
 				Fragments._MappingCall__MappingCall /* 6 */
 			};
-		private static final int @NonNull [] __MappingCall = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __MappingCall = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingLoop =
 			{
@@ -1007,7 +1007,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._MappingLoop__ObservableStatement /* 5 */,
 				Fragments._MappingLoop__MappingLoop /* 6 */
 			};
-		private static final int @NonNull [] __MappingLoop = { 1,1,1,1,1,2,1 };
+		private static final int @NonNull [] __MappingLoop = { 0,1,2,3,4,5,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingParameter =
 			{
@@ -1019,7 +1019,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._MappingParameter__VariableDeclaration /* 5 */,
 				Fragments._MappingParameter__MappingParameter /* 6 */
 			};
-		private static final int @NonNull [] __MappingParameter = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __MappingParameter = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingParameterBinding =
 			{
@@ -1028,7 +1028,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._MappingParameterBinding__Element /* 2 */,
 				Fragments._MappingParameterBinding__MappingParameterBinding /* 3 */
 			};
-		private static final int @NonNull [] __MappingParameterBinding = { 1,1,1,1 };
+		private static final int @NonNull [] __MappingParameterBinding = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingStatement =
 			{
@@ -1039,7 +1039,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._MappingStatement__Statement /* 4 */,
 				Fragments._MappingStatement__MappingStatement /* 5 */
 			};
-		private static final int @NonNull [] __MappingStatement = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __MappingStatement = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NewStatement =
 			{
@@ -1054,7 +1054,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._NewStatement__VariableStatement /* 6 */,
 				Fragments._NewStatement__NewStatement /* 7 */
 			};
-		private static final int @NonNull [] __NewStatement = { 1,1,1,1,2,2,1,1 };
+		private static final int @NonNull [] __NewStatement = { 0,1,2,3,4,6,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NewStatementPart =
 			{
@@ -1064,7 +1064,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._NewStatementPart__NamedElement /* 3 */,
 				Fragments._NewStatementPart__NewStatementPart /* 4 */
 			};
-		private static final int @NonNull [] __NewStatementPart = { 1,1,1,1,1 };
+		private static final int @NonNull [] __NewStatementPart = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ObservableStatement =
 			{
@@ -1075,7 +1075,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._ObservableStatement__Statement /* 4 */,
 				Fragments._ObservableStatement__ObservableStatement /* 5 */
 			};
-		private static final int @NonNull [] __ObservableStatement = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __ObservableStatement = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SetStatement =
 			{
@@ -1087,7 +1087,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._SetStatement__ObservableStatement /* 5 */,
 				Fragments._SetStatement__SetStatement /* 6 */
 			};
-		private static final int @NonNull [] __SetStatement = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __SetStatement = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SimpleParameter =
 			{
@@ -1100,7 +1100,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._SimpleParameter__MappingParameter /* 6 */,
 				Fragments._SimpleParameter__SimpleParameter /* 7 */
 			};
-		private static final int @NonNull [] __SimpleParameter = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __SimpleParameter = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SimpleParameterBinding =
 			{
@@ -1110,7 +1110,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._SimpleParameterBinding__MappingParameterBinding /* 3 */,
 				Fragments._SimpleParameterBinding__SimpleParameterBinding /* 4 */
 			};
-		private static final int @NonNull [] __SimpleParameterBinding = { 1,1,1,1,1 };
+		private static final int @NonNull [] __SimpleParameterBinding = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SpeculateStatement =
 			{
@@ -1121,7 +1121,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._SpeculateStatement__Statement /* 4 */,
 				Fragments._SpeculateStatement__SpeculateStatement /* 5 */
 			};
-		private static final int @NonNull [] __SpeculateStatement = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __SpeculateStatement = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Statement =
 			{
@@ -1131,7 +1131,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._Statement__NamedElement /* 3 */,
 				Fragments._Statement__Statement /* 4 */
 			};
-		private static final int @NonNull [] __Statement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Statement = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _VariableStatement =
 			{
@@ -1144,7 +1144,7 @@ public class QVTimperativeTables extends AbstractTables
 				Fragments._VariableStatement__VariableDeclaration /* 5 */,
 				Fragments._VariableStatement__VariableStatement /* 6 */
 			};
-		private static final int @NonNull [] __VariableStatement = { 1,1,1,1,2,1,1 };
+		private static final int @NonNull [] __VariableStatement = { 0,1,2,3,4,6,7 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -1153,10 +1153,10 @@ public class QVTimperativeTables extends AbstractTables
 			Types._AddStatement.initFragments(_AddStatement, __AddStatement);
 			Types._AppendParameter.initFragments(_AppendParameter, __AppendParameter);
 			Types._AppendParameterBinding.initFragments(_AppendParameterBinding, __AppendParameterBinding);
-			Types._BufferStatement.initFragments(_BufferStatement, __BufferStatement);
+			Types._BufferStatement.initFragments(_BufferStatement, __BufferStatement, Types._ObservableStatement);
 			Types._CheckStatement.initFragments(_CheckStatement, __CheckStatement);
 			Types._ConnectionVariable.initFragments(_ConnectionVariable, __ConnectionVariable);
-			Types._DeclareStatement.initFragments(_DeclareStatement, __DeclareStatement);
+			Types._DeclareStatement.initFragments(_DeclareStatement, __DeclareStatement, Types._ObservableStatement);
 			Types._EntryPoint.initFragments(_EntryPoint, __EntryPoint);
 			Types._GuardParameter.initFragments(_GuardParameter, __GuardParameter);
 			Types._GuardParameterBinding.initFragments(_GuardParameterBinding, __GuardParameterBinding);
@@ -1165,12 +1165,12 @@ public class QVTimperativeTables extends AbstractTables
 			Types._LoopParameterBinding.initFragments(_LoopParameterBinding, __LoopParameterBinding);
 			Types._LoopVariable.initFragments(_LoopVariable, __LoopVariable);
 			Types._Mapping.initFragments(_Mapping, __Mapping);
-			Types._MappingCall.initFragments(_MappingCall, __MappingCall);
+			Types._MappingCall.initFragments(_MappingCall, __MappingCall, PivotTables.Types._ReferringElement);
 			Types._MappingLoop.initFragments(_MappingLoop, __MappingLoop);
 			Types._MappingParameter.initFragments(_MappingParameter, __MappingParameter);
 			Types._MappingParameterBinding.initFragments(_MappingParameterBinding, __MappingParameterBinding);
 			Types._MappingStatement.initFragments(_MappingStatement, __MappingStatement);
-			Types._NewStatement.initFragments(_NewStatement, __NewStatement);
+			Types._NewStatement.initFragments(_NewStatement, __NewStatement, Types._ObservableStatement);
 			Types._NewStatementPart.initFragments(_NewStatementPart, __NewStatementPart);
 			Types._ObservableStatement.initFragments(_ObservableStatement, __ObservableStatement);
 			Types._SetStatement.initFragments(_SetStatement, __SetStatement);
@@ -1178,7 +1178,7 @@ public class QVTimperativeTables extends AbstractTables
 			Types._SimpleParameterBinding.initFragments(_SimpleParameterBinding, __SimpleParameterBinding);
 			Types._SpeculateStatement.initFragments(_SpeculateStatement, __SpeculateStatement);
 			Types._Statement.initFragments(_Statement, __Statement);
-			Types._VariableStatement.initFragments(_VariableStatement, __VariableStatement);
+			Types._VariableStatement.initFragments(_VariableStatement, __VariableStatement, Types._Statement);
 
 			Init.initEnd();
 		}

@@ -235,7 +235,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 				Fragments._Extent__OclElement /* 1 */,
 				Fragments._Extent__Extent /* 2 */
 			};
-		private static final int @NonNull [] __Extent = { 1,1,1 };
+		private static final int @NonNull [] __Extent = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Model =
 			{
@@ -243,7 +243,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 				Fragments._Model__OclElement /* 1 */,
 				Fragments._Model__Model /* 2 */
 			};
-		private static final int @NonNull [] __Model = { 1,1,1 };
+		private static final int @NonNull [] __Model = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Transformation =
 			{
@@ -251,7 +251,7 @@ public class QVTruntimeLibraryTables extends AbstractTables
 				Fragments._Transformation__OclElement /* 1 */,
 				Fragments._Transformation__Transformation /* 2 */
 			};
-		private static final int @NonNull [] __Transformation = { 1,1,1 };
+		private static final int @NonNull [] __Transformation = { 0,1,2 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

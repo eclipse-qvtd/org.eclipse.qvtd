@@ -297,7 +297,7 @@ public class EnvironmentTables extends AbstractTables
 				Fragments._Env4CG__OclElement /* 1 */,
 				Fragments._Env4CG__Env4CG /* 2 */
 			};
-		private static final int @NonNull [] __Env4CG = { 1,1,1 };
+		private static final int @NonNull [] __Env4CG = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Executor =
 			{
@@ -305,7 +305,7 @@ public class EnvironmentTables extends AbstractTables
 				Fragments._Executor__OclElement /* 1 */,
 				Fragments._Executor__Executor /* 2 */
 			};
-		private static final int @NonNull [] __Executor = { 1,1,1 };
+		private static final int @NonNull [] __Executor = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LookupEnvironment =
 			{
@@ -314,7 +314,7 @@ public class EnvironmentTables extends AbstractTables
 				Fragments._LookupEnvironment__Env4CG /* 2 */,
 				Fragments._LookupEnvironment__LookupEnvironment /* 3 */
 			};
-		private static final int @NonNull [] __LookupEnvironment = { 1,1,1,1 };
+		private static final int @NonNull [] __LookupEnvironment = { 0,1,2,3 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

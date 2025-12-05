@@ -540,7 +540,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._BaseModel__Model /* 5 */,
 				Fragments._BaseModel__BaseModel /* 6 */
 			};
-		private static final int @NonNull [] __BaseModel = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BaseModel = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CompoundTargetElement =
 			{
@@ -550,7 +550,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._CompoundTargetElement__TargetElement /* 3 */,
 				Fragments._CompoundTargetElement__CompoundTargetElement /* 4 */
 			};
-		private static final int @NonNull [] __CompoundTargetElement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __CompoundTargetElement = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Domain =
 			{
@@ -561,7 +561,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Domain__NamedElement /* 3 */,
 				Fragments._Domain__Domain /* 4 */
 			};
-		private static final int @NonNull [] __Domain = { 1,1,2,1,1 };
+		private static final int @NonNull [] __Domain = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Function =
 			{
@@ -576,7 +576,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Function__Operation /* 6 */,
 				Fragments._Function__Function /* 7 */
 			};
-		private static final int @NonNull [] __Function = { 1,1,1,2,2,1,1,1 };
+		private static final int @NonNull [] __Function = { 0,1,2,3,5,7,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _FunctionBody =
 			{
@@ -590,7 +590,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._FunctionBody__ExpressionInOCL /* 7 */,
 				Fragments._FunctionBody__FunctionBody /* 8 */
 			};
-		private static final int @NonNull [] __FunctionBody = { 1,1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __FunctionBody = { 0,1,2,3,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _FunctionParameter =
 			{
@@ -603,7 +603,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._FunctionParameter__Parameter /* 6 */,
 				Fragments._FunctionParameter__FunctionParameter /* 7 */
 			};
-		private static final int @NonNull [] __FunctionParameter = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __FunctionParameter = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Pattern =
 			{
@@ -612,7 +612,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Pattern__Element /* 2 */,
 				Fragments._Pattern__Pattern /* 3 */
 			};
-		private static final int @NonNull [] __Pattern = { 1,1,1,1 };
+		private static final int @NonNull [] __Pattern = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Predicate =
 			{
@@ -621,7 +621,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Predicate__Element /* 2 */,
 				Fragments._Predicate__Predicate /* 3 */
 			};
-		private static final int @NonNull [] __Predicate = { 1,1,1,1 };
+		private static final int @NonNull [] __Predicate = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Rule =
 			{
@@ -631,7 +631,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Rule__NamedElement /* 3 */,
 				Fragments._Rule__Rule /* 4 */
 			};
-		private static final int @NonNull [] __Rule = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Rule = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SimpleTargetElement =
 			{
@@ -641,7 +641,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._SimpleTargetElement__TargetElement /* 3 */,
 				Fragments._SimpleTargetElement__SimpleTargetElement /* 4 */
 			};
-		private static final int @NonNull [] __SimpleTargetElement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __SimpleTargetElement = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Target =
 			{
@@ -651,7 +651,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Target__NamedElement /* 3 */,
 				Fragments._Target__Target /* 4 */
 			};
-		private static final int @NonNull [] __Target = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Target = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TargetElement =
 			{
@@ -660,7 +660,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._TargetElement__Element /* 2 */,
 				Fragments._TargetElement__TargetElement /* 3 */
 			};
-		private static final int @NonNull [] __TargetElement = { 1,1,1,1 };
+		private static final int @NonNull [] __TargetElement = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TargetElementKind =
 			{
@@ -670,7 +670,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._TargetElementKind__OclEnumeration /* 3 */,
 				Fragments._TargetElementKind__TargetElementKind /* 4 */
 			};
-		private static final int @NonNull [] __TargetElementKind = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TargetElementKind = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Transformation =
 			{
@@ -685,7 +685,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._Transformation__Class /* 5 */,
 				Fragments._Transformation__Transformation /* 6 */
 			};
-		private static final int @NonNull [] __Transformation = { 1,1,2,2,2,1,1 };
+		private static final int @NonNull [] __Transformation = { 0,1,2,4,6,8,9 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TypedModel =
 			{
@@ -695,7 +695,7 @@ public class QVTbaseTables extends AbstractTables
 				Fragments._TypedModel__NamedElement /* 3 */,
 				Fragments._TypedModel__TypedModel /* 4 */
 			};
-		private static final int @NonNull [] __TypedModel = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TypedModel = { 0,1,2,3,4 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -703,7 +703,7 @@ public class QVTbaseTables extends AbstractTables
 		static {
 			Types._BaseModel.initFragments(_BaseModel, __BaseModel);
 			Types._CompoundTargetElement.initFragments(_CompoundTargetElement, __CompoundTargetElement);
-			Types._Domain.initFragments(_Domain, __Domain);
+			Types._Domain.initFragments(_Domain, __Domain, PivotTables.Types._ReferringElement);
 			Types._Function.initFragments(_Function, __Function);
 			Types._FunctionBody.initFragments(_FunctionBody, __FunctionBody);
 			Types._FunctionParameter.initFragments(_FunctionParameter, __FunctionParameter);

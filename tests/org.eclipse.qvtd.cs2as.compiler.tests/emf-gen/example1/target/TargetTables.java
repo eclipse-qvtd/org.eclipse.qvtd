@@ -384,7 +384,7 @@ public class TargetTables extends AbstractTables
 				Fragments._A__Namespace /* 4 */,
 				Fragments._A__A /* 5 */
 			};
-		private static final int @NonNull [] __A = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __A = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _A1 =
 			{
@@ -396,7 +396,7 @@ public class TargetTables extends AbstractTables
 				Fragments._A1__A /* 5 */,
 				Fragments._A1__A1 /* 6 */
 			};
-		private static final int @NonNull [] __A1 = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A1 = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _A2 =
 			{
@@ -408,7 +408,7 @@ public class TargetTables extends AbstractTables
 				Fragments._A2__A /* 5 */,
 				Fragments._A2__A2 /* 6 */
 			};
-		private static final int @NonNull [] __A2 = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A2 = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _A3 =
 			{
@@ -421,7 +421,7 @@ public class TargetTables extends AbstractTables
 				Fragments._A3__A2 /* 6 */,
 				Fragments._A3__A3 /* 7 */
 			};
-		private static final int @NonNull [] __A3 = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A3 = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _B =
 			{
@@ -432,7 +432,7 @@ public class TargetTables extends AbstractTables
 				Fragments._B__Namespace /* 4 */,
 				Fragments._B__B /* 5 */
 			};
-		private static final int @NonNull [] __B = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __B = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _C =
 			{
@@ -443,7 +443,7 @@ public class TargetTables extends AbstractTables
 				Fragments._C__Namespace /* 4 */,
 				Fragments._C__C /* 5 */
 			};
-		private static final int @NonNull [] __C = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __C = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _D =
 			{
@@ -453,7 +453,7 @@ public class TargetTables extends AbstractTables
 				Fragments._D__NamedElement /* 3 */,
 				Fragments._D__D /* 4 */
 			};
-		private static final int @NonNull [] __D = { 1,1,1,1,1 };
+		private static final int @NonNull [] __D = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NamedElement =
 			{
@@ -462,7 +462,7 @@ public class TargetTables extends AbstractTables
 				Fragments._NamedElement__Visitable /* 2 */,
 				Fragments._NamedElement__NamedElement /* 3 */
 			};
-		private static final int @NonNull [] __NamedElement = { 1,1,1,1 };
+		private static final int @NonNull [] __NamedElement = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Namespace =
 			{
@@ -472,7 +472,7 @@ public class TargetTables extends AbstractTables
 				Fragments._Namespace__NamedElement /* 3 */,
 				Fragments._Namespace__Namespace /* 4 */
 			};
-		private static final int @NonNull [] __Namespace = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Namespace = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TRoot =
 			{
@@ -481,7 +481,7 @@ public class TargetTables extends AbstractTables
 				Fragments._TRoot__Visitable /* 2 */,
 				Fragments._TRoot__TRoot /* 3 */
 			};
-		private static final int @NonNull [] __TRoot = { 1,1,1,1 };
+		private static final int @NonNull [] __TRoot = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Visitable =
 			{
@@ -489,7 +489,7 @@ public class TargetTables extends AbstractTables
 				Fragments._Visitable__OclElement /* 1 */,
 				Fragments._Visitable__Visitable /* 2 */
 			};
-		private static final int @NonNull [] __Visitable = { 1,1,1 };
+		private static final int @NonNull [] __Visitable = { 0,1,2 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

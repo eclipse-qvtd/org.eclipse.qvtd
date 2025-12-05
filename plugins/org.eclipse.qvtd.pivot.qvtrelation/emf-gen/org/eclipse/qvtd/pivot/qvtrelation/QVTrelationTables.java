@@ -483,7 +483,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._DomainPattern__Pattern /* 3 */,
 				Fragments._DomainPattern__DomainPattern /* 4 */
 			};
-		private static final int @NonNull [] __DomainPattern = { 1,1,1,1,1 };
+		private static final int @NonNull [] __DomainPattern = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Key =
 			{
@@ -492,7 +492,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._Key__Element /* 2 */,
 				Fragments._Key__Key /* 3 */
 			};
-		private static final int @NonNull [] __Key = { 1,1,1,1 };
+		private static final int @NonNull [] __Key = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Relation =
 			{
@@ -503,7 +503,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._Relation__Rule /* 4 */,
 				Fragments._Relation__Relation /* 5 */
 			};
-		private static final int @NonNull [] __Relation = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __Relation = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationCallExp =
 			{
@@ -515,7 +515,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationCallExp__OCLExpression /* 5 */,
 				Fragments._RelationCallExp__RelationCallExp /* 6 */
 			};
-		private static final int @NonNull [] __RelationCallExp = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __RelationCallExp = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationDomain =
 			{
@@ -527,7 +527,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationDomain__Domain /* 4 */,
 				Fragments._RelationDomain__RelationDomain /* 5 */
 			};
-		private static final int @NonNull [] __RelationDomain = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __RelationDomain = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationDomainAssignment =
 			{
@@ -536,7 +536,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationDomainAssignment__Element /* 2 */,
 				Fragments._RelationDomainAssignment__RelationDomainAssignment /* 3 */
 			};
-		private static final int @NonNull [] __RelationDomainAssignment = { 1,1,1,1 };
+		private static final int @NonNull [] __RelationDomainAssignment = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationImplementation =
 			{
@@ -545,7 +545,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationImplementation__Element /* 2 */,
 				Fragments._RelationImplementation__RelationImplementation /* 3 */
 			};
-		private static final int @NonNull [] __RelationImplementation = { 1,1,1,1 };
+		private static final int @NonNull [] __RelationImplementation = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationModel =
 			{
@@ -558,7 +558,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationModel__BaseModel /* 6 */,
 				Fragments._RelationModel__RelationModel /* 7 */
 			};
-		private static final int @NonNull [] __RelationModel = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __RelationModel = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelationalTransformation =
 			{
@@ -574,7 +574,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._RelationalTransformation__Transformation /* 6 */,
 				Fragments._RelationalTransformation__RelationalTransformation /* 7 */
 			};
-		private static final int @NonNull [] __RelationalTransformation = { 1,1,2,2,2,1,1,1 };
+		private static final int @NonNull [] __RelationalTransformation = { 0,1,2,4,6,8,9,10 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SharedVariable =
 			{
@@ -587,7 +587,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._SharedVariable__Variable /* 6 */,
 				Fragments._SharedVariable__SharedVariable /* 7 */
 			};
-		private static final int @NonNull [] __SharedVariable = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __SharedVariable = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TemplateVariable =
 			{
@@ -600,7 +600,7 @@ public class QVTrelationTables extends AbstractTables
 				Fragments._TemplateVariable__Variable /* 6 */,
 				Fragments._TemplateVariable__TemplateVariable /* 7 */
 			};
-		private static final int @NonNull [] __TemplateVariable = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __TemplateVariable = { 0,1,2,3,4,5,6,7 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

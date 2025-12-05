@@ -268,7 +268,7 @@ public class TderivedTables extends AbstractTables
 				Fragments._A2__A /* 4 */,
 				Fragments._A2__A2 /* 5 */
 			};
-		private static final int /*@NonNull*/ [] __A2 = { 1,1,1,1,1,1 };
+		private static final int /*@NonNull*/ [] __A2 = { 0,1,2,3,4,5 };
 
 		private static final FlatFragment /*@NonNull*/ [] _B2 =
 			{
@@ -279,7 +279,7 @@ public class TderivedTables extends AbstractTables
 				Fragments._B2__B /* 4 */,
 				Fragments._B2__B2 /* 5 */
 			};
-		private static final int /*@NonNull*/ [] __B2 = { 1,1,1,1,1,1 };
+		private static final int /*@NonNull*/ [] __B2 = { 0,1,2,3,4,5 };
 
 		private static final FlatFragment /*@NonNull*/ [] _D =
 			{
@@ -288,7 +288,7 @@ public class TderivedTables extends AbstractTables
 				Fragments._D__Element /* 2 */,
 				Fragments._D__D /* 3 */
 			};
-		private static final int /*@NonNull*/ [] __D = { 1,1,1,1 };
+		private static final int /*@NonNull*/ [] __D = { 0,1,2,3 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

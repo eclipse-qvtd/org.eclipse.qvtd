@@ -1558,7 +1558,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._AbstractDatum__NamedElement /* 3 */,
 				Fragments._AbstractDatum__AbstractDatum /* 4 */
 			};
-		private static final int @NonNull [] __AbstractDatum = { 1,1,1,1,1 };
+		private static final int @NonNull [] __AbstractDatum = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ArgumentEdge =
 			{
@@ -1569,7 +1569,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ArgumentEdge__ExpressionEdge /* 4 */,
 				Fragments._ArgumentEdge__ArgumentEdge /* 5 */
 			};
-		private static final int @NonNull [] __ArgumentEdge = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __ArgumentEdge = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _BasicPartition =
 			{
@@ -1581,7 +1581,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._BasicPartition__MappingPartition /* 5 */,
 				Fragments._BasicPartition__BasicPartition /* 6 */
 			};
-		private static final int @NonNull [] __BasicPartition = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BasicPartition = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _BooleanLiteralNode =
 			{
@@ -1594,7 +1594,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._BooleanLiteralNode__OperationNode /* 5 */,
 				Fragments._BooleanLiteralNode__BooleanLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __BooleanLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __BooleanLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CastEdge =
 			{
@@ -1604,7 +1604,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CastEdge__Edge /* 3 */,
 				Fragments._CastEdge__CastEdge /* 4 */
 			};
-		private static final int @NonNull [] __CastEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __CastEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ClassDatum =
 			{
@@ -1615,7 +1615,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ClassDatum__AbstractDatum /* 4 */,
 				Fragments._ClassDatum__ClassDatum /* 5 */
 			};
-		private static final int @NonNull [] __ClassDatum = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __ClassDatum = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Cluster =
 			{
@@ -1626,7 +1626,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Cluster__NamedElement /* 3 */,
 				Fragments._Cluster__Cluster /* 4 */
 			};
-		private static final int @NonNull [] __Cluster = { 1,1,2,1,1 };
+		private static final int @NonNull [] __Cluster = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionClassDatum =
 			{
@@ -1638,7 +1638,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CollectionClassDatum__ClassDatum /* 5 */,
 				Fragments._CollectionClassDatum__CollectionClassDatum /* 6 */
 			};
-		private static final int @NonNull [] __CollectionClassDatum = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionClassDatum = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionLiteralNode =
 			{
@@ -1651,7 +1651,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CollectionLiteralNode__OperationNode /* 5 */,
 				Fragments._CollectionLiteralNode__CollectionLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __CollectionLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __CollectionLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionPartEdge =
 			{
@@ -1663,7 +1663,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CollectionPartEdge__ArgumentEdge /* 5 */,
 				Fragments._CollectionPartEdge__CollectionPartEdge /* 6 */
 			};
-		private static final int @NonNull [] __CollectionPartEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionPartEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionRangeNode =
 			{
@@ -1676,7 +1676,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CollectionRangeNode__OperationNode /* 5 */,
 				Fragments._CollectionRangeNode__CollectionRangeNode /* 6 */
 			};
-		private static final int @NonNull [] __CollectionRangeNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __CollectionRangeNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ComposedNode =
 			{
@@ -1687,7 +1687,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ComposedNode__Node /* 3 */,
 				Fragments._ComposedNode__ComposedNode /* 4 */
 			};
-		private static final int @NonNull [] __ComposedNode = { 1,1,2,1,1 };
+		private static final int @NonNull [] __ComposedNode = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CompositePartition =
 			{
@@ -1698,7 +1698,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CompositePartition__Partition /* 4 */,
 				Fragments._CompositePartition__CompositePartition /* 5 */
 			};
-		private static final int @NonNull [] __CompositePartition = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __CompositePartition = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Connection =
 			{
@@ -1708,7 +1708,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Connection__Symbolable /* 2 */,
 				Fragments._Connection__Connection /* 3 */
 			};
-		private static final int @NonNull [] __Connection = { 1,1,2,1 };
+		private static final int @NonNull [] __Connection = { 0,1,2,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ConnectionEnd =
 			{
@@ -1716,7 +1716,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ConnectionEnd__OclElement /* 1 */,
 				Fragments._ConnectionEnd__ConnectionEnd /* 2 */
 			};
-		private static final int @NonNull [] __ConnectionEnd = { 1,1,1 };
+		private static final int @NonNull [] __ConnectionEnd = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ConnectionRole =
 			{
@@ -1726,7 +1726,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ConnectionRole__OclEnumeration /* 3 */,
 				Fragments._ConnectionRole__ConnectionRole /* 4 */
 			};
-		private static final int @NonNull [] __ConnectionRole = { 1,1,1,1,1 };
+		private static final int @NonNull [] __ConnectionRole = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CyclicMappingRegion =
 			{
@@ -1739,7 +1739,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CyclicMappingRegion__MappingRegion /* 5 */,
 				Fragments._CyclicMappingRegion__CyclicMappingRegion /* 6 */
 			};
-		private static final int @NonNull [] __CyclicMappingRegion = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __CyclicMappingRegion = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CyclicPartition =
 			{
@@ -1752,7 +1752,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._CyclicPartition__MappingPartition /* 5 */,
 				Fragments._CyclicPartition__CyclicPartition /* 6 */
 			};
-		private static final int @NonNull [] __CyclicPartition = { 1,1,1,1,1,2,1 };
+		private static final int @NonNull [] __CyclicPartition = { 0,1,2,3,4,5,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _DependencyEdge =
 			{
@@ -1762,7 +1762,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._DependencyEdge__Edge /* 3 */,
 				Fragments._DependencyEdge__DependencyEdge /* 4 */
 			};
-		private static final int @NonNull [] __DependencyEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __DependencyEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _DependencyNode =
 			{
@@ -1773,7 +1773,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._DependencyNode__Node /* 3 */,
 				Fragments._DependencyNode__DependencyNode /* 4 */
 			};
-		private static final int @NonNull [] __DependencyNode = { 1,1,2,1,1 };
+		private static final int @NonNull [] __DependencyNode = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _DispatchRegion =
 			{
@@ -1787,7 +1787,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._DispatchRegion__RuleRegion /* 6 */,
 				Fragments._DispatchRegion__DispatchRegion /* 7 */
 			};
-		private static final int @NonNull [] __DispatchRegion = { 1,1,2,1,1,1,1,1 };
+		private static final int @NonNull [] __DispatchRegion = { 0,1,2,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Edge =
 			{
@@ -1796,7 +1796,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Edge__Element /* 2 */,
 				Fragments._Edge__Edge /* 3 */
 			};
-		private static final int @NonNull [] __Edge = { 1,1,1,1 };
+		private static final int @NonNull [] __Edge = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _EdgeConnection =
 			{
@@ -1807,7 +1807,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._EdgeConnection__Connection /* 3 */,
 				Fragments._EdgeConnection__EdgeConnection /* 4 */
 			};
-		private static final int @NonNull [] __EdgeConnection = { 1,1,2,1,1 };
+		private static final int @NonNull [] __EdgeConnection = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _EnumLiteralNode =
 			{
@@ -1820,7 +1820,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._EnumLiteralNode__OperationNode /* 5 */,
 				Fragments._EnumLiteralNode__EnumLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __EnumLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __EnumLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ErrorNode =
 			{
@@ -1832,7 +1832,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ErrorNode__MappingNode /* 4 */,
 				Fragments._ErrorNode__ErrorNode /* 5 */
 			};
-		private static final int @NonNull [] __ErrorNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __ErrorNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ExpressionEdge =
 			{
@@ -1842,7 +1842,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ExpressionEdge__Edge /* 3 */,
 				Fragments._ExpressionEdge__ExpressionEdge /* 4 */
 			};
-		private static final int @NonNull [] __ExpressionEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __ExpressionEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IfNode =
 			{
@@ -1855,7 +1855,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._IfNode__OperationNode /* 5 */,
 				Fragments._IfNode__IfNode /* 6 */
 			};
-		private static final int @NonNull [] __IfNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __IfNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IncludesEdge =
 			{
@@ -1866,7 +1866,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._IncludesEdge__ExpressionEdge /* 4 */,
 				Fragments._IncludesEdge__IncludesEdge /* 5 */
 			};
-		private static final int @NonNull [] __IncludesEdge = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __IncludesEdge = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _InputNode =
 			{
@@ -1877,7 +1877,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._InputNode__Node /* 3 */,
 				Fragments._InputNode__InputNode /* 4 */
 			};
-		private static final int @NonNull [] __InputNode = { 1,1,2,1,1 };
+		private static final int @NonNull [] __InputNode = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IteratedEdge =
 			{
@@ -1887,7 +1887,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._IteratedEdge__Edge /* 3 */,
 				Fragments._IteratedEdge__IteratedEdge /* 4 */
 			};
-		private static final int @NonNull [] __IteratedEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __IteratedEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IteratorNode =
 			{
@@ -1900,7 +1900,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._IteratorNode__VariableNode /* 5 */,
 				Fragments._IteratorNode__IteratorNode /* 6 */
 			};
-		private static final int @NonNull [] __IteratorNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __IteratorNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _KeyPartEdge =
 			{
@@ -1913,7 +1913,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._KeyPartEdge__NavigationEdge /* 5 */,
 				Fragments._KeyPartEdge__KeyPartEdge /* 6 */
 			};
-		private static final int @NonNull [] __KeyPartEdge = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __KeyPartEdge = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _KeyedValueNode =
 			{
@@ -1926,7 +1926,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._KeyedValueNode__OperationNode /* 5 */,
 				Fragments._KeyedValueNode__KeyedValueNode /* 6 */
 			};
-		private static final int @NonNull [] __KeyedValueNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __KeyedValueNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LoadingPartition =
 			{
@@ -1938,7 +1938,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._LoadingPartition__MappingPartition /* 5 */,
 				Fragments._LoadingPartition__LoadingPartition /* 6 */
 			};
-		private static final int @NonNull [] __LoadingPartition = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __LoadingPartition = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LoadingRegion =
 			{
@@ -1950,7 +1950,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._LoadingRegion__Region /* 4 */,
 				Fragments._LoadingRegion__LoadingRegion /* 5 */
 			};
-		private static final int @NonNull [] __LoadingRegion = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __LoadingRegion = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MapLiteralNode =
 			{
@@ -1963,7 +1963,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MapLiteralNode__OperationNode /* 5 */,
 				Fragments._MapLiteralNode__MapLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __MapLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __MapLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MapPartEdge =
 			{
@@ -1975,7 +1975,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MapPartEdge__ArgumentEdge /* 5 */,
 				Fragments._MapPartEdge__MapPartEdge /* 6 */
 			};
-		private static final int @NonNull [] __MapPartEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __MapPartEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MapPartNode =
 			{
@@ -1988,7 +1988,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MapPartNode__OperationNode /* 5 */,
 				Fragments._MapPartNode__MapPartNode /* 6 */
 			};
-		private static final int @NonNull [] __MapPartNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __MapPartNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingNode =
 			{
@@ -1999,7 +1999,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MappingNode__Node /* 3 */,
 				Fragments._MappingNode__MappingNode /* 4 */
 			};
-		private static final int @NonNull [] __MappingNode = { 1,1,2,1,1 };
+		private static final int @NonNull [] __MappingNode = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingPartition =
 			{
@@ -2010,7 +2010,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MappingPartition__Partition /* 4 */,
 				Fragments._MappingPartition__MappingPartition /* 5 */
 			};
-		private static final int @NonNull [] __MappingPartition = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __MappingPartition = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MappingRegion =
 			{
@@ -2022,7 +2022,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MappingRegion__Region /* 4 */,
 				Fragments._MappingRegion__MappingRegion /* 5 */
 			};
-		private static final int @NonNull [] __MappingRegion = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __MappingRegion = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _MergedPartition =
 			{
@@ -2035,7 +2035,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._MergedPartition__BasicPartition /* 6 */,
 				Fragments._MergedPartition__MergedPartition /* 7 */
 			};
-		private static final int @NonNull [] __MergedPartition = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __MergedPartition = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NavigableEdge =
 			{
@@ -2046,7 +2046,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NavigableEdge__Edge /* 3 */,
 				Fragments._NavigableEdge__NavigableEdge /* 4 */
 			};
-		private static final int @NonNull [] __NavigableEdge = { 1,1,2,1,1 };
+		private static final int @NonNull [] __NavigableEdge = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NavigationEdge =
 			{
@@ -2058,7 +2058,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NavigationEdge__NavigableEdge /* 4 */,
 				Fragments._NavigationEdge__NavigationEdge /* 5 */
 			};
-		private static final int @NonNull [] __NavigationEdge = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __NavigationEdge = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Node =
 			{
@@ -2068,7 +2068,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Node__Element /* 2 */,
 				Fragments._Node__Node /* 3 */
 			};
-		private static final int @NonNull [] __Node = { 1,1,2,1 };
+		private static final int @NonNull [] __Node = { 0,1,2,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NodeConnection =
 			{
@@ -2079,7 +2079,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NodeConnection__Connection /* 3 */,
 				Fragments._NodeConnection__NodeConnection /* 4 */
 			};
-		private static final int @NonNull [] __NodeConnection = { 1,1,2,1,1 };
+		private static final int @NonNull [] __NodeConnection = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NonPartition =
 			{
@@ -2091,7 +2091,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NonPartition__MappingPartition /* 5 */,
 				Fragments._NonPartition__NonPartition /* 6 */
 			};
-		private static final int @NonNull [] __NonPartition = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __NonPartition = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NullLiteralNode =
 			{
@@ -2104,14 +2104,14 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NullLiteralNode__OperationNode /* 5 */,
 				Fragments._NullLiteralNode__NullLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __NullLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __NullLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Number =
 			{
 				Fragments._Number__OclAny /* 0 */,
 				Fragments._Number__Number /* 1 */
 			};
-		private static final int @NonNull [] __Number = { 1,1 };
+		private static final int @NonNull [] __Number = { 0,1 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NumericLiteralNode =
 			{
@@ -2124,7 +2124,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._NumericLiteralNode__OperationNode /* 5 */,
 				Fragments._NumericLiteralNode__NumericLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __NumericLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __NumericLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationCallNode =
 			{
@@ -2137,7 +2137,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._OperationCallNode__OperationNode /* 5 */,
 				Fragments._OperationCallNode__OperationCallNode /* 6 */
 			};
-		private static final int @NonNull [] __OperationCallNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __OperationCallNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationNode =
 			{
@@ -2149,7 +2149,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._OperationNode__MappingNode /* 4 */,
 				Fragments._OperationNode__OperationNode /* 5 */
 			};
-		private static final int @NonNull [] __OperationNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __OperationNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationParameterEdge =
 			{
@@ -2161,7 +2161,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._OperationParameterEdge__ArgumentEdge /* 5 */,
 				Fragments._OperationParameterEdge__OperationParameterEdge /* 6 */
 			};
-		private static final int @NonNull [] __OperationParameterEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __OperationParameterEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationRegion =
 			{
@@ -2173,7 +2173,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._OperationRegion__Region /* 4 */,
 				Fragments._OperationRegion__OperationRegion /* 5 */
 			};
-		private static final int @NonNull [] __OperationRegion = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __OperationRegion = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationSelfEdge =
 			{
@@ -2185,7 +2185,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._OperationSelfEdge__ArgumentEdge /* 5 */,
 				Fragments._OperationSelfEdge__OperationSelfEdge /* 6 */
 			};
-		private static final int @NonNull [] __OperationSelfEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __OperationSelfEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Partition =
 			{
@@ -2195,7 +2195,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Partition__NamedElement /* 3 */,
 				Fragments._Partition__Partition /* 4 */
 			};
-		private static final int @NonNull [] __Partition = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Partition = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PatternTypedNode =
 			{
@@ -2207,7 +2207,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._PatternTypedNode__MappingNode /* 4 */,
 				Fragments._PatternTypedNode__PatternTypedNode /* 5 */
 			};
-		private static final int @NonNull [] __PatternTypedNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __PatternTypedNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PatternVariableNode =
 			{
@@ -2220,7 +2220,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._PatternVariableNode__VariableNode /* 5 */,
 				Fragments._PatternVariableNode__PatternVariableNode /* 6 */
 			};
-		private static final int @NonNull [] __PatternVariableNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __PatternVariableNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PredicateEdge =
 			{
@@ -2230,7 +2230,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._PredicateEdge__Edge /* 3 */,
 				Fragments._PredicateEdge__PredicateEdge /* 4 */
 			};
-		private static final int @NonNull [] __PredicateEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __PredicateEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PropertyDatum =
 			{
@@ -2241,7 +2241,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._PropertyDatum__AbstractDatum /* 4 */,
 				Fragments._PropertyDatum__PropertyDatum /* 5 */
 			};
-		private static final int @NonNull [] __PropertyDatum = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __PropertyDatum = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RecursionEdge =
 			{
@@ -2251,7 +2251,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._RecursionEdge__Edge /* 3 */,
 				Fragments._RecursionEdge__RecursionEdge /* 4 */
 			};
-		private static final int @NonNull [] __RecursionEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RecursionEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Region =
 			{
@@ -2262,7 +2262,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Region__NamedElement /* 3 */,
 				Fragments._Region__Region /* 4 */
 			};
-		private static final int @NonNull [] __Region = { 1,1,2,1,1 };
+		private static final int @NonNull [] __Region = { 0,1,2,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Role =
 			{
@@ -2272,7 +2272,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Role__OclEnumeration /* 3 */,
 				Fragments._Role__Role /* 4 */
 			};
-		private static final int @NonNull [] __Role = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Role = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RootPartition =
 			{
@@ -2284,7 +2284,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._RootPartition__CompositePartition /* 5 */,
 				Fragments._RootPartition__RootPartition /* 6 */
 			};
-		private static final int @NonNull [] __RootPartition = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __RootPartition = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RootRegion =
 			{
@@ -2296,7 +2296,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._RootRegion__Region /* 4 */,
 				Fragments._RootRegion__RootRegion /* 5 */
 			};
-		private static final int @NonNull [] __RootRegion = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __RootRegion = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RuleRegion =
 			{
@@ -2309,7 +2309,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._RuleRegion__MappingRegion /* 5 */,
 				Fragments._RuleRegion__RuleRegion /* 6 */
 			};
-		private static final int @NonNull [] __RuleRegion = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __RuleRegion = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ScheduleModel =
 			{
@@ -2321,7 +2321,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ScheduleModel__Model /* 5 */,
 				Fragments._ScheduleModel__ScheduleModel /* 6 */
 			};
-		private static final int @NonNull [] __ScheduleModel = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ScheduleModel = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ShadowNode =
 			{
@@ -2334,7 +2334,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ShadowNode__OperationNode /* 5 */,
 				Fragments._ShadowNode__ShadowNode /* 6 */
 			};
-		private static final int @NonNull [] __ShadowNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __ShadowNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ShadowPartEdge =
 			{
@@ -2346,7 +2346,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._ShadowPartEdge__ArgumentEdge /* 5 */,
 				Fragments._ShadowPartEdge__ShadowPartEdge /* 6 */
 			};
-		private static final int @NonNull [] __ShadowPartEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ShadowPartEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _StringLiteralNode =
 			{
@@ -2359,7 +2359,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._StringLiteralNode__OperationNode /* 5 */,
 				Fragments._StringLiteralNode__StringLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __StringLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __StringLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SuccessEdge =
 			{
@@ -2372,7 +2372,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._SuccessEdge__NavigationEdge /* 5 */,
 				Fragments._SuccessEdge__SuccessEdge /* 6 */
 			};
-		private static final int @NonNull [] __SuccessEdge = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __SuccessEdge = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _SuccessNode =
 			{
@@ -2384,7 +2384,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._SuccessNode__MappingNode /* 4 */,
 				Fragments._SuccessNode__SuccessNode /* 5 */
 			};
-		private static final int @NonNull [] __SuccessNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __SuccessNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Symbolable =
 			{
@@ -2392,7 +2392,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Symbolable__OclElement /* 1 */,
 				Fragments._Symbolable__Symbolable /* 2 */
 			};
-		private static final int @NonNull [] __Symbolable = { 1,1,1 };
+		private static final int @NonNull [] __Symbolable = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TupleLiteralNode =
 			{
@@ -2405,7 +2405,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._TupleLiteralNode__OperationNode /* 5 */,
 				Fragments._TupleLiteralNode__TupleLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __TupleLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __TupleLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TuplePartEdge =
 			{
@@ -2417,7 +2417,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._TuplePartEdge__ArgumentEdge /* 5 */,
 				Fragments._TuplePartEdge__TuplePartEdge /* 6 */
 			};
-		private static final int @NonNull [] __TuplePartEdge = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __TuplePartEdge = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TypeLiteralNode =
 			{
@@ -2430,7 +2430,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._TypeLiteralNode__OperationNode /* 5 */,
 				Fragments._TypeLiteralNode__TypeLiteralNode /* 6 */
 			};
-		private static final int @NonNull [] __TypeLiteralNode = { 1,1,2,1,1,1,1 };
+		private static final int @NonNull [] __TypeLiteralNode = { 0,1,2,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _UnknownNode =
 			{
@@ -2442,7 +2442,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._UnknownNode__MappingNode /* 4 */,
 				Fragments._UnknownNode__UnknownNode /* 5 */
 			};
-		private static final int @NonNull [] __UnknownNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __UnknownNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Utility =
 			{
@@ -2452,7 +2452,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._Utility__OclEnumeration /* 3 */,
 				Fragments._Utility__Utility /* 4 */
 			};
-		private static final int @NonNull [] __Utility = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Utility = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _VariableNode =
 			{
@@ -2464,7 +2464,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._VariableNode__MappingNode /* 4 */,
 				Fragments._VariableNode__VariableNode /* 5 */
 			};
-		private static final int @NonNull [] __VariableNode = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __VariableNode = { 0,1,2,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _VerdictRegion =
 			{
@@ -2478,7 +2478,7 @@ public class QVTscheduleTables extends AbstractTables
 				Fragments._VerdictRegion__RuleRegion /* 6 */,
 				Fragments._VerdictRegion__VerdictRegion /* 7 */
 			};
-		private static final int @NonNull [] __VerdictRegion = { 1,1,2,1,1,1,1,1 };
+		private static final int @NonNull [] __VerdictRegion = { 0,1,2,4,5,6,7,8 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -2490,7 +2490,7 @@ public class QVTscheduleTables extends AbstractTables
 			Types._BooleanLiteralNode.initFragments(_BooleanLiteralNode, __BooleanLiteralNode);
 			Types._CastEdge.initFragments(_CastEdge, __CastEdge);
 			Types._ClassDatum.initFragments(_ClassDatum, __ClassDatum);
-			Types._Cluster.initFragments(_Cluster, __Cluster);
+			Types._Cluster.initFragments(_Cluster, __Cluster, Types._Symbolable);
 			Types._CollectionClassDatum.initFragments(_CollectionClassDatum, __CollectionClassDatum);
 			Types._CollectionLiteralNode.initFragments(_CollectionLiteralNode, __CollectionLiteralNode);
 			Types._CollectionPartEdge.initFragments(_CollectionPartEdge, __CollectionPartEdge);
@@ -2526,7 +2526,7 @@ public class QVTscheduleTables extends AbstractTables
 			Types._MappingPartition.initFragments(_MappingPartition, __MappingPartition);
 			Types._MappingRegion.initFragments(_MappingRegion, __MappingRegion);
 			Types._MergedPartition.initFragments(_MergedPartition, __MergedPartition);
-			Types._NavigableEdge.initFragments(_NavigableEdge, __NavigableEdge);
+			Types._NavigableEdge.initFragments(_NavigableEdge, __NavigableEdge, Types._ConnectionEnd);
 			Types._NavigationEdge.initFragments(_NavigationEdge, __NavigationEdge);
 			Types._Node.initFragments(_Node, __Node);
 			Types._NodeConnection.initFragments(_NodeConnection, __NodeConnection);
@@ -2545,7 +2545,7 @@ public class QVTscheduleTables extends AbstractTables
 			Types._PredicateEdge.initFragments(_PredicateEdge, __PredicateEdge);
 			Types._PropertyDatum.initFragments(_PropertyDatum, __PropertyDatum);
 			Types._RecursionEdge.initFragments(_RecursionEdge, __RecursionEdge);
-			Types._Region.initFragments(_Region, __Region);
+			Types._Region.initFragments(_Region, __Region, Types._Symbolable);
 			Types._Role.initFragments(_Role, __Role);
 			Types._RootPartition.initFragments(_RootPartition, __RootPartition);
 			Types._RootRegion.initFragments(_RootRegion, __RootRegion);

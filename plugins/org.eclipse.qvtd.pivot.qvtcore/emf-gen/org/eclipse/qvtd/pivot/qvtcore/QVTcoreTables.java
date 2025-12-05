@@ -515,7 +515,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._Area__Element /* 2 */,
 				Fragments._Area__Area /* 3 */
 			};
-		private static final int @NonNull [] __Area = { 1,1,1,1 };
+		private static final int @NonNull [] __Area = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Assignment =
 			{
@@ -524,7 +524,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._Assignment__Element /* 2 */,
 				Fragments._Assignment__Assignment /* 3 */
 			};
-		private static final int @NonNull [] __Assignment = { 1,1,1,1 };
+		private static final int @NonNull [] __Assignment = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _BottomPattern =
 			{
@@ -535,7 +535,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._BottomPattern__CorePattern /* 4 */,
 				Fragments._BottomPattern__BottomPattern /* 5 */
 			};
-		private static final int @NonNull [] __BottomPattern = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __BottomPattern = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _BottomVariable =
 			{
@@ -548,7 +548,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._BottomVariable__Variable /* 6 */,
 				Fragments._BottomVariable__BottomVariable /* 7 */
 			};
-		private static final int @NonNull [] __BottomVariable = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BottomVariable = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CoreDomain =
 			{
@@ -561,7 +561,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._CoreDomain__Domain /* 4 */,
 				Fragments._CoreDomain__CoreDomain /* 5 */
 			};
-		private static final int @NonNull [] __CoreDomain = { 1,1,2,2,1,1 };
+		private static final int @NonNull [] __CoreDomain = { 0,1,2,4,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CoreModel =
 			{
@@ -574,7 +574,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._CoreModel__BaseModel /* 6 */,
 				Fragments._CoreModel__CoreModel /* 7 */
 			};
-		private static final int @NonNull [] __CoreModel = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CoreModel = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CorePattern =
 			{
@@ -584,7 +584,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._CorePattern__Pattern /* 3 */,
 				Fragments._CorePattern__CorePattern /* 4 */
 			};
-		private static final int @NonNull [] __CorePattern = { 1,1,1,1,1 };
+		private static final int @NonNull [] __CorePattern = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _EnforcementMode =
 			{
@@ -594,7 +594,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._EnforcementMode__OclEnumeration /* 3 */,
 				Fragments._EnforcementMode__EnforcementMode /* 4 */
 			};
-		private static final int @NonNull [] __EnforcementMode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __EnforcementMode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _EnforcementOperation =
 			{
@@ -603,7 +603,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._EnforcementOperation__Element /* 2 */,
 				Fragments._EnforcementOperation__EnforcementOperation /* 3 */
 			};
-		private static final int @NonNull [] __EnforcementOperation = { 1,1,1,1 };
+		private static final int @NonNull [] __EnforcementOperation = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _GuardPattern =
 			{
@@ -614,7 +614,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._GuardPattern__CorePattern /* 4 */,
 				Fragments._GuardPattern__GuardPattern /* 5 */
 			};
-		private static final int @NonNull [] __GuardPattern = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __GuardPattern = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _GuardVariable =
 			{
@@ -627,7 +627,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._GuardVariable__Variable /* 6 */,
 				Fragments._GuardVariable__GuardVariable /* 7 */
 			};
-		private static final int @NonNull [] __GuardVariable = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __GuardVariable = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Mapping =
 			{
@@ -639,7 +639,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._Mapping__Rule /* 4 */,
 				Fragments._Mapping__Mapping /* 5 */
 			};
-		private static final int @NonNull [] __Mapping = { 1,1,1,2,1,1 };
+		private static final int @NonNull [] __Mapping = { 0,1,2,3,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NavigationAssignment =
 			{
@@ -649,7 +649,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._NavigationAssignment__Assignment /* 3 */,
 				Fragments._NavigationAssignment__NavigationAssignment /* 4 */
 			};
-		private static final int @NonNull [] __NavigationAssignment = { 1,1,1,1,1 };
+		private static final int @NonNull [] __NavigationAssignment = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OppositePropertyAssignment =
 			{
@@ -660,7 +660,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._OppositePropertyAssignment__NavigationAssignment /* 4 */,
 				Fragments._OppositePropertyAssignment__OppositePropertyAssignment /* 5 */
 			};
-		private static final int @NonNull [] __OppositePropertyAssignment = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __OppositePropertyAssignment = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PropertyAssignment =
 			{
@@ -671,7 +671,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._PropertyAssignment__NavigationAssignment /* 4 */,
 				Fragments._PropertyAssignment__PropertyAssignment /* 5 */
 			};
-		private static final int @NonNull [] __PropertyAssignment = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __PropertyAssignment = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RealizedVariable =
 			{
@@ -684,7 +684,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._RealizedVariable__Variable /* 6 */,
 				Fragments._RealizedVariable__RealizedVariable /* 7 */
 			};
-		private static final int @NonNull [] __RealizedVariable = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __RealizedVariable = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _VariableAssignment =
 			{
@@ -694,7 +694,7 @@ public class QVTcoreTables extends AbstractTables
 				Fragments._VariableAssignment__Assignment /* 3 */,
 				Fragments._VariableAssignment__VariableAssignment /* 4 */
 			};
-		private static final int @NonNull [] __VariableAssignment = { 1,1,1,1,1 };
+		private static final int @NonNull [] __VariableAssignment = { 0,1,2,3,4 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -704,14 +704,14 @@ public class QVTcoreTables extends AbstractTables
 			Types._Assignment.initFragments(_Assignment, __Assignment);
 			Types._BottomPattern.initFragments(_BottomPattern, __BottomPattern);
 			Types._BottomVariable.initFragments(_BottomVariable, __BottomVariable);
-			Types._CoreDomain.initFragments(_CoreDomain, __CoreDomain);
+			Types._CoreDomain.initFragments(_CoreDomain, __CoreDomain, Types._Area);
 			Types._CoreModel.initFragments(_CoreModel, __CoreModel);
 			Types._CorePattern.initFragments(_CorePattern, __CorePattern);
 			Types._EnforcementMode.initFragments(_EnforcementMode, __EnforcementMode);
 			Types._EnforcementOperation.initFragments(_EnforcementOperation, __EnforcementOperation);
 			Types._GuardPattern.initFragments(_GuardPattern, __GuardPattern);
 			Types._GuardVariable.initFragments(_GuardVariable, __GuardVariable);
-			Types._Mapping.initFragments(_Mapping, __Mapping);
+			Types._Mapping.initFragments(_Mapping, __Mapping, Types._Area);
 			Types._NavigationAssignment.initFragments(_NavigationAssignment, __NavigationAssignment);
 			Types._OppositePropertyAssignment.initFragments(_OppositePropertyAssignment, __OppositePropertyAssignment);
 			Types._PropertyAssignment.initFragments(_PropertyAssignment, __PropertyAssignment);

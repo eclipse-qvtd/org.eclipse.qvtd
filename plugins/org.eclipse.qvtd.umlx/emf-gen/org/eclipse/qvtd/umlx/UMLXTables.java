@@ -633,7 +633,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelDiagram__UMLXNamedElement /* 3 */,
 				Fragments._RelDiagram__RelDiagram /* 4 */
 			};
-		private static final int @NonNull [] __RelDiagram = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RelDiagram = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelDomainNode =
 			{
@@ -643,7 +643,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelDomainNode__RelNode /* 3 */,
 				Fragments._RelDomainNode__RelDomainNode /* 4 */
 			};
-		private static final int @NonNull [] __RelDomainNode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RelDomainNode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelEdge =
 			{
@@ -652,7 +652,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelEdge__UMLXElement /* 2 */,
 				Fragments._RelEdge__RelEdge /* 3 */
 			};
-		private static final int @NonNull [] __RelEdge = { 1,1,1,1 };
+		private static final int @NonNull [] __RelEdge = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelInvocationEdge =
 			{
@@ -662,7 +662,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelInvocationEdge__RelEdge /* 3 */,
 				Fragments._RelInvocationEdge__RelInvocationEdge /* 4 */
 			};
-		private static final int @NonNull [] __RelInvocationEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RelInvocationEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelInvocationNode =
 			{
@@ -672,7 +672,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelInvocationNode__RelNode /* 3 */,
 				Fragments._RelInvocationNode__RelInvocationNode /* 4 */
 			};
-		private static final int @NonNull [] __RelInvocationNode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RelInvocationNode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelNode =
 			{
@@ -681,7 +681,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelNode__UMLXElement /* 2 */,
 				Fragments._RelNode__RelNode /* 3 */
 			};
-		private static final int @NonNull [] __RelNode = { 1,1,1,1 };
+		private static final int @NonNull [] __RelNode = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelPatternEdge =
 			{
@@ -691,7 +691,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelPatternEdge__RelEdge /* 3 */,
 				Fragments._RelPatternEdge__RelPatternEdge /* 4 */
 			};
-		private static final int @NonNull [] __RelPatternEdge = { 1,1,1,1,1 };
+		private static final int @NonNull [] __RelPatternEdge = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _RelPatternNode =
 			{
@@ -703,7 +703,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._RelPatternNode__UMLXTypedElement /* 4 */,
 				Fragments._RelPatternNode__RelPatternNode /* 5 */
 			};
-		private static final int @NonNull [] __RelPatternNode = { 1,1,1,2,1,1 };
+		private static final int @NonNull [] __RelPatternNode = { 0,1,2,3,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxDiagram =
 			{
@@ -713,7 +713,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxDiagram__UMLXNamedElement /* 3 */,
 				Fragments._TxDiagram__TxDiagram /* 4 */
 			};
-		private static final int @NonNull [] __TxDiagram = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TxDiagram = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxKeyNode =
 			{
@@ -723,7 +723,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxKeyNode__TxNode /* 3 */,
 				Fragments._TxKeyNode__TxKeyNode /* 4 */
 			};
-		private static final int @NonNull [] __TxKeyNode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TxKeyNode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxNode =
 			{
@@ -732,7 +732,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxNode__UMLXElement /* 2 */,
 				Fragments._TxNode__TxNode /* 3 */
 			};
-		private static final int @NonNull [] __TxNode = { 1,1,1,1 };
+		private static final int @NonNull [] __TxNode = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxPackageNode =
 			{
@@ -742,7 +742,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxPackageNode__TxNode /* 3 */,
 				Fragments._TxPackageNode__TxPackageNode /* 4 */
 			};
-		private static final int @NonNull [] __TxPackageNode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TxPackageNode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxParameterNode =
 			{
@@ -754,7 +754,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxParameterNode__UMLXTypedElement /* 4 */,
 				Fragments._TxParameterNode__TxParameterNode /* 5 */
 			};
-		private static final int @NonNull [] __TxParameterNode = { 1,1,1,2,1,1 };
+		private static final int @NonNull [] __TxParameterNode = { 0,1,2,3,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxPartNode =
 			{
@@ -764,7 +764,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxPartNode__TxNode /* 3 */,
 				Fragments._TxPartNode__TxPartNode /* 4 */
 			};
-		private static final int @NonNull [] __TxPartNode = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TxPartNode = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxQueryNode =
 			{
@@ -776,7 +776,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxQueryNode__UMLXTypedElement /* 4 */,
 				Fragments._TxQueryNode__TxQueryNode /* 5 */
 			};
-		private static final int @NonNull [] __TxQueryNode = { 1,1,1,2,1,1 };
+		private static final int @NonNull [] __TxQueryNode = { 0,1,2,3,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TxTypedModelNode =
 			{
@@ -787,7 +787,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._TxTypedModelNode__UMLXNamedElement /* 3 */,
 				Fragments._TxTypedModelNode__TxTypedModelNode /* 4 */
 			};
-		private static final int @NonNull [] __TxTypedModelNode = { 1,1,1,2,1 };
+		private static final int @NonNull [] __TxTypedModelNode = { 0,1,2,3,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _UMLXElement =
 			{
@@ -795,7 +795,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._UMLXElement__OclElement /* 1 */,
 				Fragments._UMLXElement__UMLXElement /* 2 */
 			};
-		private static final int @NonNull [] __UMLXElement = { 1,1,1 };
+		private static final int @NonNull [] __UMLXElement = { 0,1,2 };
 
 		private static final @NonNull FlatFragment @NonNull [] _UMLXModel =
 			{
@@ -804,7 +804,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._UMLXModel__UMLXElement /* 2 */,
 				Fragments._UMLXModel__UMLXModel /* 3 */
 			};
-		private static final int @NonNull [] __UMLXModel = { 1,1,1,1 };
+		private static final int @NonNull [] __UMLXModel = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _UMLXNamedElement =
 			{
@@ -813,7 +813,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._UMLXNamedElement__UMLXElement /* 2 */,
 				Fragments._UMLXNamedElement__UMLXNamedElement /* 3 */
 			};
-		private static final int @NonNull [] __UMLXNamedElement = { 1,1,1,1 };
+		private static final int @NonNull [] __UMLXNamedElement = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _UMLXTypedElement =
 			{
@@ -823,7 +823,7 @@ public class UMLXTables extends AbstractTables
 				Fragments._UMLXTypedElement__UMLXNamedElement /* 3 */,
 				Fragments._UMLXTypedElement__UMLXTypedElement /* 4 */
 			};
-		private static final int @NonNull [] __UMLXTypedElement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __UMLXTypedElement = { 0,1,2,3,4 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -836,14 +836,14 @@ public class UMLXTables extends AbstractTables
 			Types._RelInvocationNode.initFragments(_RelInvocationNode, __RelInvocationNode);
 			Types._RelNode.initFragments(_RelNode, __RelNode);
 			Types._RelPatternEdge.initFragments(_RelPatternEdge, __RelPatternEdge);
-			Types._RelPatternNode.initFragments(_RelPatternNode, __RelPatternNode);
+			Types._RelPatternNode.initFragments(_RelPatternNode, __RelPatternNode, Types._RelNode);
 			Types._TxDiagram.initFragments(_TxDiagram, __TxDiagram);
 			Types._TxKeyNode.initFragments(_TxKeyNode, __TxKeyNode);
 			Types._TxNode.initFragments(_TxNode, __TxNode);
 			Types._TxPackageNode.initFragments(_TxPackageNode, __TxPackageNode);
-			Types._TxParameterNode.initFragments(_TxParameterNode, __TxParameterNode);
+			Types._TxParameterNode.initFragments(_TxParameterNode, __TxParameterNode, Types._TxNode);
 			Types._TxPartNode.initFragments(_TxPartNode, __TxPartNode);
-			Types._TxQueryNode.initFragments(_TxQueryNode, __TxQueryNode);
+			Types._TxQueryNode.initFragments(_TxQueryNode, __TxQueryNode, Types._TxNode);
 			Types._TxTypedModelNode.initFragments(_TxTypedModelNode, __TxTypedModelNode);
 			Types._UMLXElement.initFragments(_UMLXElement, __UMLXElement);
 			Types._UMLXModel.initFragments(_UMLXModel, __UMLXModel);

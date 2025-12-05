@@ -300,7 +300,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._A__NamedElement /* 3 */,
 				Fragments._A__A /* 4 */
 			};
-		private static final int /*@NonNull*/ [] __A = { 1,1,1,1,1 };
+		private static final int /*@NonNull*/ [] __A = { 0,1,2,3,4 };
 
 		private static final FlatFragment /*@NonNull*/ [] _B =
 			{
@@ -310,7 +310,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._B__NamedElement /* 3 */,
 				Fragments._B__B /* 4 */
 			};
-		private static final int /*@NonNull*/ [] __B = { 1,1,1,1,1 };
+		private static final int /*@NonNull*/ [] __B = { 0,1,2,3,4 };
 
 		private static final FlatFragment /*@NonNull*/ [] _C =
 			{
@@ -319,7 +319,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._C__Element /* 2 */,
 				Fragments._C__C /* 3 */
 			};
-		private static final int /*@NonNull*/ [] __C = { 1,1,1,1 };
+		private static final int /*@NonNull*/ [] __C = { 0,1,2,3 };
 
 		private static final FlatFragment /*@NonNull*/ [] _Element =
 			{
@@ -327,7 +327,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._Element__OclElement /* 1 */,
 				Fragments._Element__Element /* 2 */
 			};
-		private static final int /*@NonNull*/ [] __Element = { 1,1,1 };
+		private static final int /*@NonNull*/ [] __Element = { 0,1,2 };
 
 		private static final FlatFragment /*@NonNull*/ [] _NamedElement =
 			{
@@ -336,7 +336,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._NamedElement__Element /* 2 */,
 				Fragments._NamedElement__NamedElement /* 3 */
 			};
-		private static final int /*@NonNull*/ [] __NamedElement = { 1,1,1,1 };
+		private static final int /*@NonNull*/ [] __NamedElement = { 0,1,2,3 };
 
 		private static final FlatFragment /*@NonNull*/ [] _TRoot =
 			{
@@ -345,7 +345,7 @@ public class TbaseTables extends AbstractTables
 				Fragments._TRoot__Element /* 2 */,
 				Fragments._TRoot__TRoot /* 3 */
 			};
-		private static final int /*@NonNull*/ [] __TRoot = { 1,1,1,1 };
+		private static final int /*@NonNull*/ [] __TRoot = { 0,1,2,3 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.

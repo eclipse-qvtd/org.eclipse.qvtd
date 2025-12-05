@@ -810,7 +810,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._BooleanLiteralExp__PrimitiveLiteralExp /* 7 */,
 				Fragments._BooleanLiteralExp__BooleanLiteralExp /* 8 */
 			};
-		private static final int @NonNull [] __BooleanLiteralExp = { 1,1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BooleanLiteralExp = { 0,1,2,3,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CallExp =
 			{
@@ -822,7 +822,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CallExp__OCLExpression /* 5 */,
 				Fragments._CallExp__CallExp /* 6 */
 			};
-		private static final int @NonNull [] __CallExp = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CallExp = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Class =
 			{
@@ -834,7 +834,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Class__Namespace /* 5 */,
 				Fragments._Class__Class /* 6 */
 			};
-		private static final int @NonNull [] __Class = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __Class = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionItem =
 			{
@@ -846,7 +846,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CollectionItem__CollectionLiteralPart /* 5 */,
 				Fragments._CollectionItem__CollectionItem /* 6 */
 			};
-		private static final int @NonNull [] __CollectionItem = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionItem = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionKind =
 			{
@@ -856,7 +856,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CollectionKind__OclEnumeration /* 3 */,
 				Fragments._CollectionKind__CollectionKind /* 4 */
 			};
-		private static final int @NonNull [] __CollectionKind = { 1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionKind = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionLiteralExp =
 			{
@@ -869,7 +869,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CollectionLiteralExp__LiteralExp /* 6 */,
 				Fragments._CollectionLiteralExp__CollectionLiteralExp /* 7 */
 			};
-		private static final int @NonNull [] __CollectionLiteralExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionLiteralExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionLiteralPart =
 			{
@@ -880,7 +880,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CollectionLiteralPart__TypedElement /* 4 */,
 				Fragments._CollectionLiteralPart__CollectionLiteralPart /* 5 */
 			};
-		private static final int @NonNull [] __CollectionLiteralPart = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionLiteralPart = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _CollectionRange =
 			{
@@ -892,7 +892,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._CollectionRange__CollectionLiteralPart /* 5 */,
 				Fragments._CollectionRange__CollectionRange /* 6 */
 			};
-		private static final int @NonNull [] __CollectionRange = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionRange = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Constraint =
 			{
@@ -903,7 +903,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Constraint__NamedElement /* 4 */,
 				Fragments._Constraint__Constraint /* 5 */
 			};
-		private static final int @NonNull [] __Constraint = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __Constraint = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Element =
 			{
@@ -912,7 +912,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Element__Visitable /* 2 */,
 				Fragments._Element__Element /* 3 */
 			};
-		private static final int @NonNull [] __Element = { 1,1,1,1 };
+		private static final int @NonNull [] __Element = { 0,1,2,3 };
 
 		private static final @NonNull FlatFragment @NonNull [] _ExpressionInOCL =
 			{
@@ -924,7 +924,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._ExpressionInOCL__OpaqueExpression /* 5 */,
 				Fragments._ExpressionInOCL__ExpressionInOCL /* 6 */
 			};
-		private static final int @NonNull [] __ExpressionInOCL = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ExpressionInOCL = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Feature =
 			{
@@ -936,7 +936,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Feature__TypedElement /* 4 */,
 				Fragments._Feature__Feature /* 5 */
 			};
-		private static final int @NonNull [] __Feature = { 1,1,1,1,2,1 };
+		private static final int @NonNull [] __Feature = { 0,1,2,3,4,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Import =
 			{
@@ -946,7 +946,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Import__Element /* 3 */,
 				Fragments._Import__Import /* 4 */
 			};
-		private static final int @NonNull [] __Import = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Import = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IntegerLiteralExp =
 			{
@@ -960,7 +960,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._IntegerLiteralExp__PrimitiveLiteralExp /* 7 */,
 				Fragments._IntegerLiteralExp__IntegerLiteralExp /* 8 */
 			};
-		private static final int @NonNull [] __IntegerLiteralExp = { 1,1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __IntegerLiteralExp = { 0,1,2,3,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IterateExp =
 			{
@@ -974,7 +974,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._IterateExp__LoopExp /* 7 */,
 				Fragments._IterateExp__IterateExp /* 8 */
 			};
-		private static final int @NonNull [] __IterateExp = { 1,1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __IterateExp = { 0,1,2,3,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _IteratorExp =
 			{
@@ -988,7 +988,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._IteratorExp__LoopExp /* 7 */,
 				Fragments._IteratorExp__IteratorExp /* 8 */
 			};
-		private static final int @NonNull [] __IteratorExp = { 1,1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __IteratorExp = { 0,1,2,3,4,5,6,7,8 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LetExp =
 			{
@@ -1000,7 +1000,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._LetExp__OCLExpression /* 5 */,
 				Fragments._LetExp__LetExp /* 6 */
 			};
-		private static final int @NonNull [] __LetExp = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __LetExp = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LiteralExp =
 			{
@@ -1012,7 +1012,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._LiteralExp__OCLExpression /* 5 */,
 				Fragments._LiteralExp__LiteralExp /* 6 */
 			};
-		private static final int @NonNull [] __LiteralExp = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __LiteralExp = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _LoopExp =
 			{
@@ -1025,7 +1025,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._LoopExp__CallExp /* 6 */,
 				Fragments._LoopExp__LoopExp /* 7 */
 			};
-		private static final int @NonNull [] __LoopExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __LoopExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NamedElement =
 			{
@@ -1035,7 +1035,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._NamedElement__Element /* 3 */,
 				Fragments._NamedElement__NamedElement /* 4 */
 			};
-		private static final int @NonNull [] __NamedElement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __NamedElement = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Namespace =
 			{
@@ -1046,7 +1046,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Namespace__NamedElement /* 4 */,
 				Fragments._Namespace__Namespace /* 5 */
 			};
-		private static final int @NonNull [] __Namespace = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __Namespace = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _NullLiteralExp =
 			{
@@ -1059,7 +1059,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._NullLiteralExp__LiteralExp /* 6 */,
 				Fragments._NullLiteralExp__NullLiteralExp /* 7 */
 			};
-		private static final int @NonNull [] __NullLiteralExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __NullLiteralExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OCLExpression =
 			{
@@ -1070,7 +1070,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._OCLExpression__TypedElement /* 4 */,
 				Fragments._OCLExpression__OCLExpression /* 5 */
 			};
-		private static final int @NonNull [] __OCLExpression = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __OCLExpression = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OpaqueExpression =
 			{
@@ -1081,7 +1081,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._OpaqueExpression__TypedElement /* 4 */,
 				Fragments._OpaqueExpression__OpaqueExpression /* 5 */
 			};
-		private static final int @NonNull [] __OpaqueExpression = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __OpaqueExpression = { 0,1,2,3,4,5 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Operation =
 			{
@@ -1094,7 +1094,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Operation__Feature /* 5 */,
 				Fragments._Operation__Operation /* 6 */
 			};
-		private static final int @NonNull [] __Operation = { 1,1,1,1,2,1,1 };
+		private static final int @NonNull [] __Operation = { 0,1,2,3,4,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _OperationCallExp =
 			{
@@ -1107,7 +1107,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._OperationCallExp__CallExp /* 6 */,
 				Fragments._OperationCallExp__OperationCallExp /* 7 */
 			};
-		private static final int @NonNull [] __OperationCallExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __OperationCallExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Package =
 			{
@@ -1119,7 +1119,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Package__Namespace /* 5 */,
 				Fragments._Package__Package /* 6 */
 			};
-		private static final int @NonNull [] __Package = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __Package = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Parameter =
 			{
@@ -1132,7 +1132,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Parameter__Variable /* 5 */,
 				Fragments._Parameter__Parameter /* 6 */
 			};
-		private static final int @NonNull [] __Parameter = { 1,1,1,1,2,1,1 };
+		private static final int @NonNull [] __Parameter = { 0,1,2,3,4,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PrimitiveLiteralExp =
 			{
@@ -1145,7 +1145,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._PrimitiveLiteralExp__LiteralExp /* 6 */,
 				Fragments._PrimitiveLiteralExp__PrimitiveLiteralExp /* 7 */
 			};
-		private static final int @NonNull [] __PrimitiveLiteralExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __PrimitiveLiteralExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Property =
 			{
@@ -1158,7 +1158,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Property__Feature /* 5 */,
 				Fragments._Property__Property /* 6 */
 			};
-		private static final int @NonNull [] __Property = { 1,1,1,1,2,1,1 };
+		private static final int @NonNull [] __Property = { 0,1,2,3,4,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _PropertyCallExp =
 			{
@@ -1171,7 +1171,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._PropertyCallExp__CallExp /* 6 */,
 				Fragments._PropertyCallExp__PropertyCallExp /* 7 */
 			};
-		private static final int @NonNull [] __PropertyCallExp = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __PropertyCallExp = { 0,1,2,3,4,5,6,7 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Root =
 			{
@@ -1181,7 +1181,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Root__Element /* 3 */,
 				Fragments._Root__Root /* 4 */
 			};
-		private static final int @NonNull [] __Root = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Root = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _TypedElement =
 			{
@@ -1191,7 +1191,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._TypedElement__Element /* 3 */,
 				Fragments._TypedElement__TypedElement /* 4 */
 			};
-		private static final int @NonNull [] __TypedElement = { 1,1,1,1,1 };
+		private static final int @NonNull [] __TypedElement = { 0,1,2,3,4 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Variable =
 			{
@@ -1203,7 +1203,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Variable__TypedElement /* 4 */,
 				Fragments._Variable__Variable /* 5 */
 			};
-		private static final int @NonNull [] __Variable = { 1,1,1,1,2,1 };
+		private static final int @NonNull [] __Variable = { 0,1,2,3,4,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _VariableExp =
 			{
@@ -1215,7 +1215,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._VariableExp__OCLExpression /* 5 */,
 				Fragments._VariableExp__VariableExp /* 6 */
 			};
-		private static final int @NonNull [] __VariableExp = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __VariableExp = { 0,1,2,3,4,5,6 };
 
 		private static final @NonNull FlatFragment @NonNull [] _Visitable =
 			{
@@ -1223,7 +1223,7 @@ public class MiniOCLTables extends AbstractTables
 				Fragments._Visitable__OclElement /* 1 */,
 				Fragments._Visitable__Visitable /* 2 */
 			};
-		private static final int @NonNull [] __Visitable = { 1,1,1 };
+		private static final int @NonNull [] __Visitable = { 0,1,2 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
