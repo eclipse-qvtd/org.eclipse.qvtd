@@ -282,7 +282,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			EPackage ePackage = eClass.getEPackage();
 			String javaClass;
 			if (ePackage != null) {
-				Class<?> factoryClass = genModelHelper.getEcoreFactoryClass(ePackage);
+				Class<?> factoryClass = genModelHelper.basicGetEcoreFactoryClass(ePackage);
 				if (factoryClass != null) {
 					javaClass = factoryClass.getName();
 					Method factoryMethod = context.getLeastDerivedMethod(factoryClass, createMethodName);
@@ -293,7 +293,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					}
 				}
 				else {
-					javaClass = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
+					javaClass = genModelHelper.basicGetQualifiedFactoryInterfaceName(ePackage);
 				}
 			}
 			else {
@@ -526,9 +526,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	protected void appendQualifiedLiteralName(@NonNull EStructuralFeature eStructuralFeature) {
 		EClass eContainingClass = ClassUtil.requireNonNull(eStructuralFeature.getEContainingClass());
 		EPackage ePackage = ClassUtil.requireNonNull(eContainingClass.getEPackage());
-		js.appendClassReference(null, genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+		js.appendClassReference(null, genModelHelper.basicGetQualifiedPackageInterfaceName(ePackage));
 		js.append(".Literals.");
-		js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+		js.append(genModelHelper.basicGetEcoreLiteralName(eStructuralFeature));
 	}
 
 	protected void appendThis(@NonNull CGElement cgElement) {
@@ -948,7 +948,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		EPackage ePackage = eClass.getEPackage();
 		String javaClass;
 		if (ePackage != null) {
-			Class<?> factoryClass = genModelHelper.getEcoreFactoryClass(ePackage);
+			Class<?> factoryClass = genModelHelper.basicGetEcoreFactoryClass(ePackage);
 			if (factoryClass != null) {
 				javaClass = factoryClass.getName();
 				Method factoryMethod = context.getLeastDerivedMethod(factoryClass, createMethodName);
@@ -959,7 +959,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 			else {
-				javaClass = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
+				javaClass = genModelHelper.basicGetQualifiedFactoryInterfaceName(ePackage);
 			}
 		}
 		else {
@@ -2605,8 +2605,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				String createMethodName = "create" + eClass.getName();
 				EPackage ePackage = eClass.getEPackage();
 				assert ePackage != null;
-				String javaFactory = genModelHelper.getQualifiedFactoryInterfaceName(ePackage);
-				String javaClass = genModelHelper.getEcoreInterfaceClassifierName(eClass);
+				String javaFactory = genModelHelper.basicGetQualifiedFactoryInterfaceName(ePackage);
+				String javaClass = genModelHelper.basicGetEcoreInterfaceClassifierName(eClass);
 				js.append("private ");
 				js.appendClassReference(false, javaClass);
 				js.append(" " + QVTiGlobalContext.TRANSFORMATION_EXECUTION_NAME + " = null;\n");
