@@ -3,7 +3,7 @@ The Tycho build minimises the need for shell activity by auto-registering in P2 
 
 The qvtd.aggrcon file is in the ssh://'committer-name'@git.eclipse.org:29418/simrel/org.eclipse.simrel.build.git repo.
 
-The updates can be checked by looking for the new entry on https://www.eclipse.org/mmt/downloads/?project=qvtd
+The updates can be checked by looking for the new entry on https://download.eclipse.org/mmt/qvtd/builds/
 or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.20.0/S201408191819
 or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/releases/0.20.0
 
