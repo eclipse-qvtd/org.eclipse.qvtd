@@ -197,25 +197,28 @@ public class QVTrelationTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _SharedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.SHARED_VARIABLE, null, 0);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, null, 0);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_DomainPattern,
-			_Key,
-			_Relation,
-			_RelationCallExp,
-			_RelationDomain,
-			_RelationDomainAssignment,
-			_RelationImplementation,
-			_RelationModel,
-			_RelationalTransformation,
-			_SharedVariable,
-			_TemplateVariable
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _DomainPattern,
+			/* 1 */ _Key,
+			/* 2 */ _Relation,
+			/* 3 */ _RelationCallExp,
+			/* 4 */ _RelationDomain,
+			/* 5 */ _RelationDomainAssignment,
+			/* 6 */ _RelationImplementation,
+			/* 7 */ _RelationModel,
+			/* 8 */ _RelationalTransformation,
+			/* 9 */ _SharedVariable,
+			/* 10 */ _TemplateVariable
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

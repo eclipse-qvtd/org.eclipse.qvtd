@@ -126,25 +126,28 @@ public class TargetTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _TRoot = LIBRARY.createClass(PivotPackage.Literals.CLASS, TargetPackage.Literals.TROOT, null, 0);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _Visitable = LIBRARY.createClass(PivotPackage.Literals.CLASS, TargetPackage.Literals.VISITABLE, null, 0 | FlatClass.ABSTRACT);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_A,
-			_A1,
-			_A2,
-			_A3,
-			_B,
-			_C,
-			_D,
-			_NamedElement,
-			_Namespace,
-			_TRoot,
-			_Visitable
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _A,
+			/* 1 */ _A1,
+			/* 2 */ _A2,
+			/* 3 */ _A3,
+			/* 4 */ _B,
+			/* 5 */ _C,
+			/* 6 */ _D,
+			/* 7 */ _TRoot,
+			/* 8 */ _NamedElement,
+			/* 9 */ _Namespace,
+			/* 10 */ _Visitable
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

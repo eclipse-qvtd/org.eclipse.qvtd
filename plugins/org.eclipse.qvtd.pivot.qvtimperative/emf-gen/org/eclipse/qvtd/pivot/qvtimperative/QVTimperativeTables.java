@@ -232,43 +232,46 @@ public class QVTimperativeTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _Statement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTimperativePackage.Literals.STATEMENT, null, 0 | FlatClass.ABSTRACT);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _VariableStatement = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTimperativePackage.Literals.VARIABLE_STATEMENT, null, 0 | FlatClass.ABSTRACT);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_AddStatement,
-			_AppendParameter,
-			_AppendParameterBinding,
-			_BufferStatement,
-			_CheckStatement,
-			_ConnectionVariable,
-			_DeclareStatement,
-			_EntryPoint,
-			_GuardParameter,
-			_GuardParameterBinding,
-			_ImperativeModel,
-			_ImperativeTransformation,
-			_LoopParameterBinding,
-			_LoopVariable,
-			_Mapping,
-			_MappingCall,
-			_MappingLoop,
-			_MappingParameter,
-			_MappingParameterBinding,
-			_MappingStatement,
-			_NewStatement,
-			_NewStatementPart,
-			_ObservableStatement,
-			_SetStatement,
-			_SimpleParameter,
-			_SimpleParameterBinding,
-			_SpeculateStatement,
-			_Statement,
-			_VariableStatement
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _AddStatement,
+			/* 1 */ _AppendParameter,
+			/* 2 */ _AppendParameterBinding,
+			/* 3 */ _BufferStatement,
+			/* 4 */ _CheckStatement,
+			/* 5 */ _ConnectionVariable,
+			/* 6 */ _DeclareStatement,
+			/* 7 */ _EntryPoint,
+			/* 8 */ _GuardParameter,
+			/* 9 */ _GuardParameterBinding,
+			/* 10 */ _ImperativeModel,
+			/* 11 */ _ImperativeTransformation,
+			/* 12 */ _LoopParameterBinding,
+			/* 13 */ _LoopVariable,
+			/* 14 */ _Mapping,
+			/* 15 */ _MappingCall,
+			/* 16 */ _MappingLoop,
+			/* 17 */ _MappingParameter,
+			/* 18 */ _MappingParameterBinding,
+			/* 19 */ _MappingStatement,
+			/* 20 */ _NewStatement,
+			/* 21 */ _NewStatementPart,
+			/* 22 */ _ObservableStatement,
+			/* 23 */ _SetStatement,
+			/* 24 */ _SimpleParameter,
+			/* 25 */ _SimpleParameterBinding,
+			/* 26 */ _SpeculateStatement,
+			/* 27 */ _Statement,
+			/* 28 */ _VariableStatement
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 
@@ -571,7 +574,7 @@ public class QVTimperativeTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _Statement__joinNames = LIBRARY.createOperation(Types._Statement, "joinNames", Parameters._OrderedSet__String__, OCLstdlibTables.Types._String,
+		public static final @NonNull Operation _Statement__joinNames = LIBRARY.createOperation(Types._Statement, QVTimperativePackage.Literals.STATEMENT___JOIN_NAMES__ELIST, Parameters._OrderedSet__String__, OCLstdlibTables.Types._String,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
 		static {

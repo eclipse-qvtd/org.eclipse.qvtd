@@ -141,29 +141,32 @@ public class ClassesTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.TYPED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _Visitable = LIBRARY.createClass(PivotPackage.Literals.CLASS, ClassesPackage.Literals.VISITABLE, null, 0 | FlatClass.ABSTRACT);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_Argument,
-			_CallExp,
-			_Class,
-			_Element,
-			_NamedElement,
-			_Namespace,
-			_Operation,
-			_OperationCallExp,
-			_Package,
-			_Parameter,
-			_Property,
-			_PropertyCallExp,
-			_Root,
-			_TypedElement,
-			_Visitable
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _Element,
+			/* 1 */ _NamedElement,
+			/* 2 */ _Namespace,
+			/* 3 */ _TypedElement,
+			/* 4 */ _CallExp,
+			/* 5 */ _Root,
+			/* 6 */ _Package,
+			/* 7 */ _Class,
+			/* 8 */ _Property,
+			/* 9 */ _Operation,
+			/* 10 */ _Parameter,
+			/* 11 */ _PropertyCallExp,
+			/* 12 */ _OperationCallExp,
+			/* 13 */ _Argument,
+			/* 14 */ _Visitable
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

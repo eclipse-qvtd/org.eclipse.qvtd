@@ -109,17 +109,20 @@ public class TderivedTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.Class _B2 = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.B2, null, 0);
 		public static final org.eclipse.ocl.pivot.Class _D = LIBRARY.createClass(PivotPackage.Literals.CLASS, TderivedPackage.Literals.D, null, 0);
 
-		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] types = {
-			_A2,
-			_B2,
-			_D
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] eClassifierID2asClass = {
+			/* 0 */ _A2,
+			/* 1 */ _B2,
+			/* 2 */ _D
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

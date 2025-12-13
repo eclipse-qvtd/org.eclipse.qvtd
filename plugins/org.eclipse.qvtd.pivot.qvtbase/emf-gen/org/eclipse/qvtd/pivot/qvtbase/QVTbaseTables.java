@@ -179,29 +179,32 @@ public class QVTbaseTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _Transformation = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TRANSFORMATION, null, 0);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _TypedModel = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTbasePackage.Literals.TYPED_MODEL, null, 0);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_BaseModel,
-			_CompoundTargetElement,
-			_Domain,
-			_Function,
-			_FunctionBody,
-			_FunctionParameter,
-			_Pattern,
-			_Predicate,
-			_Rule,
-			_SimpleTargetElement,
-			_Target,
-			_TargetElement,
-			_TargetElementKind,
-			_Transformation,
-			_TypedModel
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _BaseModel,
+			/* 1 */ _CompoundTargetElement,
+			/* 2 */ _Domain,
+			/* 3 */ _Function,
+			/* 4 */ _FunctionBody,
+			/* 5 */ _FunctionParameter,
+			/* 6 */ _Pattern,
+			/* 7 */ _Predicate,
+			/* 8 */ _Rule,
+			/* 9 */ _SimpleTargetElement,
+			/* 10 */ _Target,
+			/* 11 */ _TargetElement,
+			/* 12 */ _Transformation,
+			/* 13 */ _TypedModel,
+			/* 14 */ _TargetElementKind
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 
@@ -375,9 +378,9 @@ public class QVTbaseTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _Transformation__getFunction = LIBRARY.createOperation(Types._Transformation, "getFunction", Parameters._String, Types._Function,
+		public static final @NonNull Operation _Transformation__getFunction = LIBRARY.createOperation(Types._Transformation, QVTbasePackage.Literals.TRANSFORMATION___GET_FUNCTION__STRING, Parameters._String, Types._Function,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull Operation _Transformation__getModelParameter = LIBRARY.createOperation(Types._Transformation, "getModelParameter", Parameters._String, Types._TypedModel,
+		public static final @NonNull Operation _Transformation__getModelParameter = LIBRARY.createOperation(Types._Transformation, QVTbasePackage.Literals.TRANSFORMATION___GET_MODEL_PARAMETER__STRING, Parameters._String, Types._TypedModel,
 			1 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
 		static {

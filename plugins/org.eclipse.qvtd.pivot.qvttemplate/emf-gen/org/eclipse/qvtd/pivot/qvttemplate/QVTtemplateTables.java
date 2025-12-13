@@ -139,18 +139,21 @@ public class QVTtemplateTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _PropertyTemplateItem = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, null, 0);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _TemplateExp = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTtemplatePackage.Literals.TEMPLATE_EXP, null, 0 | FlatClass.ABSTRACT);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_CollectionTemplateExp,
-			_ObjectTemplateExp,
-			_PropertyTemplateItem,
-			_TemplateExp
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _CollectionTemplateExp,
+			/* 1 */ _ObjectTemplateExp,
+			/* 2 */ _PropertyTemplateItem,
+			/* 3 */ _TemplateExp
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

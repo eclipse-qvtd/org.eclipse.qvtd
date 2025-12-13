@@ -180,31 +180,34 @@ public class QVTcoreTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _RealizedVariable = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.REALIZED_VARIABLE, null, 0);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _VariableAssignment = LIBRARY.createClass(PivotPackage.Literals.CLASS, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, null, 0);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_Area,
-			_Assignment,
-			_BottomPattern,
-			_BottomVariable,
-			_CoreDomain,
-			_CoreModel,
-			_CorePattern,
-			_EnforcementMode,
-			_EnforcementOperation,
-			_GuardPattern,
-			_GuardVariable,
-			_Mapping,
-			_NavigationAssignment,
-			_OppositePropertyAssignment,
-			_PropertyAssignment,
-			_RealizedVariable,
-			_VariableAssignment
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _Area,
+			/* 1 */ _Assignment,
+			/* 2 */ _BottomPattern,
+			/* 3 */ _BottomVariable,
+			/* 4 */ _CoreDomain,
+			/* 5 */ _CoreModel,
+			/* 6 */ _CorePattern,
+			/* 7 */ _EnforcementOperation,
+			/* 8 */ _GuardPattern,
+			/* 9 */ _GuardVariable,
+			/* 10 */ _Mapping,
+			/* 11 */ _NavigationAssignment,
+			/* 12 */ _OppositePropertyAssignment,
+			/* 13 */ _PropertyAssignment,
+			/* 14 */ _RealizedVariable,
+			/* 15 */ _VariableAssignment,
+			/* 16 */ _EnforcementMode
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 
@@ -389,13 +392,13 @@ public class QVTcoreTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _CorePattern__getArea = LIBRARY.createOperation(Types._CorePattern, "getArea", ParameterTypes.EMPTY_LIST, Types._Area,
+		public static final @NonNull Operation _CorePattern__getArea = LIBRARY.createOperation(Types._CorePattern, QVTcorePackage.Literals.CORE_PATTERN___GET_AREA, ParameterTypes.EMPTY_LIST, Types._Area,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _OppositePropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._OppositePropertyAssignment, "getReferredTargetProperty", ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
+		public static final @NonNull Operation _OppositePropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._OppositePropertyAssignment, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY, ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _PropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._PropertyAssignment, "getReferredTargetProperty", ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
+		public static final @NonNull Operation _PropertyAssignment__getReferredTargetProperty = LIBRARY.createOperation(Types._PropertyAssignment, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY, ParameterTypes.EMPTY_LIST, PivotTables.Types._Property,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
 		static {

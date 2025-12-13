@@ -130,17 +130,20 @@ public class EnvironmentTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _Executor = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.EXECUTOR, null, 0 | FlatClass.ABSTRACT);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _LookupEnvironment = LIBRARY.createClass(PivotPackage.Literals.CLASS, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT, null, 0);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_Env4CG,
-			_Executor,
-			_LookupEnvironment
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _LookupEnvironment,
+			/* 1 */ _Env4CG,
+			/* 2 */ _Executor
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types, TypeParameters.$$0);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass, TypeParameters.$$0);
 			Init.initEnd();
 		}
 
@@ -220,14 +223,14 @@ public class EnvironmentTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _Env4CG__getExecutor = LIBRARY.createOperation(Types._Env4CG, "getExecutor", ParameterTypes.EMPTY_LIST, Types._Executor,
+		public static final @NonNull Operation _Env4CG__getExecutor = LIBRARY.createOperation(Types._Env4CG, EnvironmentPackage.Literals.ENV4_CG___GET_EXECUTOR, ParameterTypes.EMPTY_LIST, Types._Executor,
 			0, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull Operation _Env4CG__hasFinalResult = LIBRARY.createOperation(Types._Env4CG, "hasFinalResult", ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
+		public static final @NonNull Operation _Env4CG__hasFinalResult = LIBRARY.createOperation(Types._Env4CG, EnvironmentPackage.Literals.ENV4_CG___HAS_FINAL_RESULT, ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
 			1 | IsRequired, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull Operation _LookupEnvironment__addElement = LIBRARY.createOperation(Types._LookupEnvironment, "addElement", Parameters._NamedElement, Types._LookupEnvironment,
+		public static final @NonNull Operation _LookupEnvironment__addElement = LIBRARY.createOperation(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT, Parameters._NamedElement, Types._LookupEnvironment,
 			0 | IsRequired, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull Operation _LookupEnvironment__addElements = LIBRARY.createOperation(Types._LookupEnvironment, "addElements", null, Types._LookupEnvironment,
+		public static final @NonNull Operation _LookupEnvironment__addElements = LIBRARY.createOperation(Types._LookupEnvironment, EnvironmentPackage.Literals.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION, null, Types._LookupEnvironment,
 			1 | IsRequired, new TemplateParameters(TypeParameters._0_LookupEnvironment_addElements_NE), null);
 
 		/*

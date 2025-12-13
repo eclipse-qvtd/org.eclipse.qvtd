@@ -115,20 +115,23 @@ public class TbaseTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.Class _NamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.NAMED_ELEMENT, null, 0);
 		public static final org.eclipse.ocl.pivot.Class _TRoot = LIBRARY.createClass(PivotPackage.Literals.CLASS, TbasePackage.Literals.TROOT, null, 0);
 
-		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] types = {
-			_A,
-			_B,
-			_C,
-			_Element,
-			_NamedElement,
-			_TRoot
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.Class /*@NonNull*/ [] eClassifierID2asClass = {
+			/* 0 */ _A,
+			/* 1 */ _B,
+			/* 2 */ _C,
+			/* 3 */ _TRoot,
+			/* 4 */ _NamedElement,
+			/* 5 */ _Element
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 

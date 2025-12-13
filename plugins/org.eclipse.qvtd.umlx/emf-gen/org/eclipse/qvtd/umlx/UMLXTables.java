@@ -198,34 +198,37 @@ public class UMLXTables extends AbstractTables
 		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXNamedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_NAMED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
 		public static final org.eclipse.ocl.pivot.@NonNull Class _UMLXTypedElement = LIBRARY.createClass(PivotPackage.Literals.CLASS, UMLXPackage.Literals.UMLX_TYPED_ELEMENT, null, 0 | FlatClass.ABSTRACT);
 
-		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] types = {
-			_RelDiagram,
-			_RelDomainNode,
-			_RelEdge,
-			_RelInvocationEdge,
-			_RelInvocationNode,
-			_RelNode,
-			_RelPatternEdge,
-			_RelPatternNode,
-			_TxDiagram,
-			_TxKeyNode,
-			_TxNode,
-			_TxPackageNode,
-			_TxParameterNode,
-			_TxPartNode,
-			_TxQueryNode,
-			_TxTypedModelNode,
-			_UMLXElement,
-			_UMLXModel,
-			_UMLXNamedElement,
-			_UMLXTypedElement
+		/*
+		 * AS Class indexed by EClassifier.getClassifierID().
+		 */
+		private static final org.eclipse.ocl.pivot.@NonNull Class @NonNull [] eClassifierID2asClass = {
+			/* 0 */ _RelDiagram,
+			/* 1 */ _RelDomainNode,
+			/* 2 */ _RelEdge,
+			/* 3 */ _RelInvocationEdge,
+			/* 4 */ _RelInvocationNode,
+			/* 5 */ _RelNode,
+			/* 6 */ _RelPatternEdge,
+			/* 7 */ _RelPatternNode,
+			/* 8 */ _TxDiagram,
+			/* 9 */ _TxKeyNode,
+			/* 10 */ _TxNode,
+			/* 11 */ _TxPackageNode,
+			/* 12 */ _TxParameterNode,
+			/* 13 */ _TxPartNode,
+			/* 14 */ _TxQueryNode,
+			/* 15 */ _TxTypedModelNode,
+			/* 16 */ _UMLXElement,
+			/* 17 */ _UMLXModel,
+			/* 18 */ _UMLXNamedElement,
+			/* 19 */ _UMLXTypedElement
 		};
 
 		/*
 		 *	Install the type descriptors in the package descriptor.
 		 */
 		static {
-			LIBRARY.initPackage(PACKAGE, types);
+			LIBRARY.initPackage(PACKAGE, eClassifierID2asClass);
 			Init.initEnd();
 		}
 
@@ -410,7 +413,7 @@ public class UMLXTables extends AbstractTables
 			Parameters.init();
 		}
 
-		public static final @NonNull Operation _RelPatternNode__isExpression = LIBRARY.createOperation(Types._RelPatternNode, "isExpression", ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
+		public static final @NonNull Operation _RelPatternNode__isExpression = LIBRARY.createOperation(Types._RelPatternNode, UMLXPackage.Literals.REL_PATTERN_NODE___IS_EXPRESSION, ParameterTypes.EMPTY_LIST, OCLstdlibTables.Types._Boolean,
 			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
