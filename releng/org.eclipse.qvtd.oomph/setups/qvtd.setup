@@ -455,7 +455,8 @@
     <configSections
         name="core">
       <properties
-          key="autocrlf"/>
+          key="autocrlf"
+          value="input"/>
     </configSections>
     <description>${scope.project.label}</description>
   </setupTask>
