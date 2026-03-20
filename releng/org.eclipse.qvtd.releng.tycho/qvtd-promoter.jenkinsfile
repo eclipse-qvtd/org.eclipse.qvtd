@@ -11,7 +11,7 @@ pipeline {
 
 	tools {
 		maven 'apache-maven-latest'
-		jdk 'openjdk-jdk17-latest'
+		jdk 'openjdk-jdk21-latest'
 	}
 	
 	parameters {
@@ -46,7 +46,7 @@ pipeline {
 
 		string(
 			name: 'BUILD_COMMIT',
-			defaultValue: '-commit https://git.eclipse.org/r/mmt/org.eclipse.qvtd.git/commit/?id=${env.GIT_COMMIT}',
+			defaultValue: '-commit https://github.com/eclipse-qvtd/org.eclipse.qvtd/commit/?id=${env.GIT_COMMIT}',
 			description: 'JustJ command line token to specify the GIT commit of the published build.'
 		)
 
@@ -73,17 +73,8 @@ pipeline {
 					env.BUILD_COMMIT = params.BUILD_COMMIT
 					env.BUILD_TIMESTAMP = params.BUILD_TIMESTAMP
 					env.BUILD_URL = params.BUILD_URL
-					def description = """
-BUILD_TYPE=${env.BUILD_TYPE}
-BUILD_PROMOTE=${env.BUILD_PROMOTE}
-BUILD_ROOT=${env.BUILD_ROOT}
-BUILD_REMOTE=${env.BUILD_REMOTE}
-BUILD_COMMIT=${env.BUILD_COMMIT}
-BUILD_TIMESTAMP=${env.BUILD_TIMESTAMP}
-BUILD_URL=${env.BUILD_URL}
-""".trim()
-					echo description
-					currentBuild.description = description.replace("\n", "<br/>")
+					echo "${env.BUILD_TYPE}"
+					currentBuild.description = "${env.BUILD_TYPE}"
 				}
 			}
 		}
@@ -91,23 +82,21 @@ BUILD_URL=${env.BUILD_URL}
 		stage('Build') {
 			steps {
 				sshagent(['projects-storage.eclipse.org-bot-ssh']) {
-					dir('.') {
-					sh '''
+					sh """
 						mvn	\
-							-f releng/org.eclipse.qvtd.releng.promote/pom.xml \
+							-f releng/org.eclipse.qvtd.releng.tycho/pomPromoter.xml \
 							--no-transfer-progress \
-							-DBUILD_TYPE=${BUILD_TYPE} \
-							-DBUILD_PROMOTE=${BUILD_PROMOTE} \
-							-DBUILD_ROOT=${BUILD_ROOT} \
-							"-DBUILD_REMOTE=${BUILD_REMOTE}" \
 							"-DBUILD_COMMIT=${BUILD_COMMIT}" \
+							-DBUILD_PROMOTE=${BUILD_PROMOTE} \
+							"-DBUILD_REMOTE=${BUILD_REMOTE}" \
+							-DBUILD_ROOT=${BUILD_ROOT} \
 							"-DBUILD_TIMESTAMP=${BUILD_TIMESTAMP}" \
+							-DBUILD_TYPE=${BUILD_TYPE} \
 							-DBUILD_URL=${BUILD_URL} \
 							--show-version \
 							clean \
 							verify
-						'''
-					}
+						"""
 				}
 			}
 		}
@@ -115,23 +104,21 @@ BUILD_URL=${env.BUILD_URL}
 
 	post {
 		failure {
-			mail to: 'ed@willink.me.uk',
-			subject: "[QVTd CI] Build Failure ${currentBuild.fullDisplayName}",
-			mimeType: 'text/html',
-			body: "Project: ${env.JOB_NAME}<br/>Build Number: ${env.BUILD_NUMBER}<br/>Build URL: ${env.BUILD_URL}<br/>Console: ${env.BUILD_URL}/console"
+			mail to: 'ed@willink.me.uk', subject: "[QVTd CI] Build Failure ${currentBuild.fullDisplayName}", mimeType: 'text/html',
+body: "Project: ${env.JOB_NAME} \n\
+Build Number: ${env.BUILD_NUMBER} \n\
+Build URL: <${env.BUILD_URL}> \n\
+Console: <${env.BUILD_URL}console>"
 			archiveArtifacts allowEmptyArchive: true, artifacts: '**'
 		}
 
 		fixed {
-			mail to: 'ed@willink.me.uk',
-			subject: "[QVTd CI] Back to normal ${currentBuild.fullDisplayName}",
-			mimeType: 'text/html',
-			body: "Project: ${env.JOB_NAME}<br/>Build Number: ${env.BUILD_NUMBER}<br/>Build URL: ${env.BUILD_URL}<br/>Console: ${env.BUILD_URL}/console"
+			mail to: 'ed@willink.me.uk', subject: "[QVTd CI] Back to normal ${currentBuild.fullDisplayName}", mimeType: 'text/html',
+body: "Project: ${env.JOB_NAME} \n\
+Build Number: ${env.BUILD_NUMBER} \n\
+Build URL: <${env.BUILD_URL}> \n\
+Console: <${env.BUILD_URL}console>"
 		}
-
-//		always {
-//			junit '**/target/surefire-reports/TEST-*.xml'
-//		}
 
 //		cleanup {
 //			deleteDir()
