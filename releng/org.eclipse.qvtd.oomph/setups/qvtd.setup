@@ -16,11 +16,19 @@
     label="QVTd">
   <setupTask
       xsi:type="jdt:JRETask"
+      version="JavaSE-11"
+      location="${jre.location-11}"
+      name="JRE for JavaSE-11"/>
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-17"
+      location="${jre.location-17}"
+      name="JRE for JavaSE-17"/>
+  <setupTask
+      xsi:type="jdt:JRETask"
       version="JavaSE-21"
       location="${jre.location-21}"
-      name="JRE for JavaSE-21">
-    <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
-  </setupTask>
+      name="JRE for JavaSE-21"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
@@ -56,7 +64,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2024-12"
+      defaultValue="2026-03"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
@@ -139,6 +147,72 @@
         </repository>
       </repositoryList>
       <repositoryList
+          name="2026-06">
+        <repository
+            url="https://download.eclipse.org/releases/2026-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2026-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2026-03">
+        <repository
+            url="https://download.eclipse.org/releases/2026-03"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2026-03"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2025-12">
+        <repository
+            url="https://download.eclipse.org/releases/2025-12"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-12"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2025-09">
+        <repository
+            url="https://download.eclipse.org/releases/2025-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2025-06">
+        <repository
+            url="https://download.eclipse.org/releases/2025-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-06"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
+          name="2025-03">
+        <repository
+            url="https://download.eclipse.org/releases/2025-03"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-03"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
+      </repositoryList>
+      <repositoryList
           name="2024-12">
         <repository
             url="https://download.eclipse.org/releases/2024-12"/>
@@ -174,7 +248,7 @@
       <repositoryList
           name="2024-03">
         <repository
-            url="https://download.eclipse.org/releases/latest"/>
+            url="https://download.eclipse.org/releases/2024-03"/>
         <repository
             url="http://download.eclipse.org/cbi/updates/license"/>
         <repository
@@ -728,11 +802,19 @@
     </setupTask>
     <stream
         name="master"
-        label="Master">
+        label="Master (Latest)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.34.0"
+        label="0.34.0 (2026-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.23.0"/>
     </stream>
     <stream
         name="0.33.0"
@@ -1033,11 +1115,19 @@
     </setupTask>
     <stream
         name="master"
-        label="Master">
+        label="Master (Latest)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.34.0"
+        label="0.34.0 (2026-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.23.0"/>
     </stream>
     <stream
         name="0.33.0"
@@ -1359,11 +1449,19 @@
     </setupTask>
     <stream
         name="master"
-        label="Master">
+        label="Master {Latest)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.34.0"
+        label="0.34.0 (2026-03)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.23.0"/>
     </stream>
     <stream
         name="0.33.0"
