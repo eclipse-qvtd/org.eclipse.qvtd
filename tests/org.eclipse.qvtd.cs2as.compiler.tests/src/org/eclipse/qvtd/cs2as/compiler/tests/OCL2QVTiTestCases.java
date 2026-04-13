@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestCaseAppender;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -294,7 +295,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	@Test
 	public void testOCL2QVTi_Source2Target_Interpreted() throws Exception {
-		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		TestCaseAppender.INSTANCE.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = createQVT("Source2Target", getModelsURI("Source2Target/Source2Target.ocl"), "samples");
 		try {
 			myQVT.loadGenModels(getModelsURI("Source2Target/SourceMM1.genmodel"), getModelsURI("Source2Target/TargetMM1.genmodel"));
@@ -381,7 +382,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		OperationDependencyAnalysis.REFINING.setState(true);
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
-		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		TestCaseAppender.INSTANCE.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = createQVT("SimpleClasses", getModelsURI("SimpleClasses/classescs2as.ocl"), "samples");
 		myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));
 
@@ -466,7 +467,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		OperationDependencyAnalysis.REFINING.setState(true);
 		//		OperationDependencyAnalysis.RETURN.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
-		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		TestCaseAppender.INSTANCE.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = createQVT("StructuredClasses", getModelsURI("StructuredClasses/classescs2asV2.ocl"), "samples");
 		try {
 			myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));

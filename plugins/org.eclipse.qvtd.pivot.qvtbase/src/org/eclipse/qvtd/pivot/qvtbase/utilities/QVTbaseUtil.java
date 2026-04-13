@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -761,7 +762,8 @@ public class QVTbaseUtil extends PivotUtil
 				if (!(xtextResource instanceof CSResource)) {
 					throw new IOException("Failed to load '" + transformationURI + "' as a CS representation of a QVTd transformation AS");
 				}
-				String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+				@SuppressWarnings("null") List</*@NonNull*/ Diagnostic> errors = xtextResource.getErrors();
+				String csMessage = PivotUtil.formatResourceDiagnostics(errors, "Failed to load '" + transformationURI + "'", "\n");
 				if (csMessage != null) {
 					throw new IOException(csMessage);
 				}

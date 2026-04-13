@@ -15,12 +15,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
-import org.apache.log4j.spi.LoggingEvent;
-import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestCaseAppender;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
@@ -63,41 +58,6 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 
 public class XtextTestCase extends PivotTestCase
 {
-	public static final class TestCaseAppender extends ConsoleAppender
-	{
-		private static Logger rootLogger = Logger.getRootLogger();
-
-		private boolean installed = false;
-
-		public TestCaseAppender() {
-			super(new SimpleLayout(), SYSTEM_OUT);
-			setName("TestHarness");
-		}
-
-		@Override
-		public void append(LoggingEvent event) {
-			if (event.getLevel().isGreaterOrEqual(Level.INFO)) {
-				String renderedMessage = event.getRenderedMessage();
-				ThrowableInformation throwableInformation = event.getThrowableInformation();
-				Throwable throwable = throwableInformation != null ? throwableInformation.getThrowable() : null;
-				throw new Error(renderedMessage, throwable);
-			}
-			//			super.append(event);
-		}
-
-		public void install() {
-			if (!installed) {
-				rootLogger.addAppender(this);
-				installed = true;
-			}
-		}
-
-		public void uninstall() {
-			rootLogger.removeAppender(this);
-			installed = false;
-		}
-	}
-
 	public static class TestProblemHandler implements ProblemHandler
 	{
 		@Override
@@ -111,8 +71,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 
 	}
-
-	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
@@ -435,7 +393,7 @@ public class XtextTestCase extends PivotTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testCaseAppender.install();
+		TestCaseAppender.INSTANCE.install();
 		//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 		//    		OCL.initialize(null);
 		//    	}
@@ -460,6 +418,9 @@ public class XtextTestCase extends PivotTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
+		if ((testProject != null) && EMFPlugin.IS_ECLIPSE_RUNNING) {
+			testProject.getIProject().close(null);
+		}
 		super.tearDown();
 	}
 }
