@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -165,12 +164,12 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 			for (@NonNull AbstractTransformationCS csTransformation : csTransformations) {
 				installTransformation(null, csTransformation);
 			}
-			PivotUtilInternal.refreshList(asModel.getOwnedPackages(), asRootPackages);
+			PivotUtil.refreshList(asModel.getOwnedPackages(), true, asRootPackages);
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : package2ownedPackages.keySet()) {
-				PivotUtilInternal.refreshList(asPackage.getOwnedPackages(), package2ownedPackages.get(asPackage));
+				PivotUtil.refreshList(asPackage.getOwnedPackages(), true, package2ownedPackages.get(asPackage));
 			}
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : package2ownedClasses.keySet()) {
-				PivotUtilInternal.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
+				PivotUtil.refreshList(asPackage.getOwnedClasses(), true, package2ownedClasses.get(asPackage));
 			}
 		}
 
@@ -258,7 +257,7 @@ public class QVTbaseCSContainmentVisitor extends AbstractQVTbaseCSContainmentVis
 			SimpleTargetElement asSimpleTargetElement = PivotUtil.getPivot(SimpleTargetElement.class, csElement);
 			if (asSimpleTargetElement != null) {
 				asSimpleTargetElement.setTypedModel(csElement.getTypedModel());
-				PivotUtilInternal.refreshList(asSimpleTargetElement.getIterates(), csElement.getIterates());
+				PivotUtil.refreshList(asSimpleTargetElement.getIterates(), false, csElement.getIterates());
 			}
 			return null;
 		}

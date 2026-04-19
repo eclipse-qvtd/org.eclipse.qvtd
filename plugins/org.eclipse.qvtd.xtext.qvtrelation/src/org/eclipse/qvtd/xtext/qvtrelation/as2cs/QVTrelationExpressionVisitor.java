@@ -82,7 +82,7 @@ public class QVTrelationExpressionVisitor extends EssentialOCLExpressionVisitor
 					}
 				}
 			}
-			context.refreshList(csTemplateBinding.getOwnedSubstitutions(), csParameterSubstitutions);
+			PivotUtil.refreshList(csTemplateBinding.getOwnedSubstitutions(), true, csParameterSubstitutions);
 		}
 		//		if (scopePackage == objectPackage) {
 		return csRef;

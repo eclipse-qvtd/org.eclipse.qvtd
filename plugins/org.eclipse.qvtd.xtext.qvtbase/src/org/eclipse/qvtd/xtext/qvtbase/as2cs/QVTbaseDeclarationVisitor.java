@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.TemplateSignature;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
@@ -103,7 +103,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitCompoundTargetElement(@NonNull CompoundTargetElement asCompoundTargetElement) {
 		CompoundTargetElementCS csCompoundTargetElement = context.refreshElement(CompoundTargetElementCS.class, QVTbaseCSPackage.Literals.COMPOUND_TARGET_ELEMENT_CS, asCompoundTargetElement);
-		context.refreshList(csCompoundTargetElement.getOwnedTargetElements(), context.visitDeclarations(SimpleTargetElementCS.class, asCompoundTargetElement.getOwnedTargetElements(), null));
+		PivotUtil.refreshList(csCompoundTargetElement.getOwnedTargetElements(), true, context.visitDeclarations(SimpleTargetElementCS.class, asCompoundTargetElement.getOwnedTargetElements(), null));
 		return csCompoundTargetElement;
 	}
 
@@ -132,13 +132,13 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 		OperationCS csElement = refreshTypedElement(OperationCS.class, BaseCSPackage.Literals.OPERATION_CS, object);
 		TemplateSignature ownedTemplateSignature = object.getOwnedSignature();
 		csElement.setOwnedSignature(context.visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
-		context.refreshList(csElement.getOwnedParameters(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameters(), null));
-		context.refreshList(csElement.getOwnedExceptions(), context.visitReferences(TypedRefCS.class, object.getRaisedExceptions(), null));
+		PivotUtil.refreshList(csElement.getOwnedParameters(), true, context.visitDeclarations(ParameterCS.class, object.getOwnedParameters(), null));
+		PivotUtil.refreshList(csElement.getOwnedExceptions(), true, context.visitReferences(TypedRefCS.class, object.getRaisedExceptions(), null));
 		//
-		context.refreshList(csElement.getOwnedPreconditions(), context.visitDeclarations(ConstraintCS.class, object.getOwnedPreconditions(), null));
+		PivotUtil.refreshList(csElement.getOwnedPreconditions(), true, context.visitDeclarations(ConstraintCS.class, object.getOwnedPreconditions(), null));
 		List<LanguageExpression> bodyExpressions = object.getBodyExpression() != null ? Collections.singletonList(object.getBodyExpression()) : Collections.<LanguageExpression>emptyList();
-		context.refreshList(csElement.getOwnedBodyExpressions(), context.visitDeclarations(SpecificationCS.class, bodyExpressions, null));
-		context.refreshList(csElement.getOwnedPostconditions(), context.visitDeclarations(ConstraintCS.class, object.getOwnedPostconditions(), null));
+		PivotUtil.refreshList(csElement.getOwnedBodyExpressions(), true, context.visitDeclarations(SpecificationCS.class, bodyExpressions, null));
+		PivotUtil.refreshList(csElement.getOwnedPostconditions(), true, context.visitDeclarations(ConstraintCS.class, object.getOwnedPostconditions(), null));
 		return csElement;
 	}
 
@@ -166,7 +166,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitSimpleTargetElement(@NonNull SimpleTargetElement asSimpleTargetElement) {
 		SimpleTargetElementCS csSimpleTargetElement = context.refreshElement(SimpleTargetElementCS.class, QVTbaseCSPackage.Literals.SIMPLE_TARGET_ELEMENT_CS, asSimpleTargetElement);
-		PivotUtilInternal.refreshList(csSimpleTargetElement.getIterates(), asSimpleTargetElement.getIterates());
+		PivotUtil.refreshList(csSimpleTargetElement.getIterates(), false, asSimpleTargetElement.getIterates());
 		csSimpleTargetElement.setTypedModel(asSimpleTargetElement.getTypedModel());
 		switch (asSimpleTargetElement.getKind()) {
 			case INPUT: csSimpleTargetElement.setInput(true); break;
@@ -179,7 +179,7 @@ public abstract class QVTbaseDeclarationVisitor extends EssentialOCLDeclarationV
 	@Override
 	public ElementCS visitTarget(@NonNull Target asTarget) {
 		TargetCS csTarget = context.refreshNamedElement(TargetCS.class, QVTbaseCSPackage.Literals.TARGET_CS, asTarget, null);
-		context.refreshList(csTarget.getOwnedTargetElements(), context.visitDeclarations(TargetElementCS.class, asTarget.getOwnedTargetElements(), null));
+		PivotUtil.refreshList(csTarget.getOwnedTargetElements(), true, context.visitDeclarations(TargetElementCS.class, asTarget.getOwnedTargetElements(), null));
 		return csTarget;
 	}
 

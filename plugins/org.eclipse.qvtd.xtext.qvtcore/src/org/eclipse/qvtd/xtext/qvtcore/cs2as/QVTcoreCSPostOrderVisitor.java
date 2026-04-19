@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -137,8 +136,8 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 					}
 				}
 			}
-			PivotUtilInternal.refreshList(pBottomPattern.getAssignment(), pAssignments);
-			PivotUtilInternal.refreshList(pBottomPattern.getPredicate(), pPredicates);
+			PivotUtil.refreshList(pBottomPattern.getAssignment(), true, pAssignments);
+			PivotUtil.refreshList(pBottomPattern.getPredicate(), true, pPredicates);
 		}
 		return null;
 	}
@@ -167,7 +166,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (asGuardPattern != null) {
-			context.refreshList(Predicate.class, QVTbaseUtil.Internal.getPredicatesList(asGuardPattern), csElement.getOwnedPredicates());
+			context.refreshList(Predicate.class, QVTbaseUtil.Internal.getPredicatesList(asGuardPattern), true, csElement.getOwnedPredicates());
 		}
 		return null;
 	}
@@ -240,7 +239,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 		if (asTransformation != null) {
 			TypedModel thisTypedModel = QVTbaseUtil.basicGetThisTypedModel(asTransformation);
 			if (thisTypedModel != null) {
-				context.refreshList(thisTypedModel.getUsedPackage(), Collections.singletonList(asTransformation.getOwningPackage()));
+				PivotUtil.refreshList(thisTypedModel.getUsedPackage(), false, Collections.singletonList(asTransformation.getOwningPackage()));
 			}
 		}
 		return null;

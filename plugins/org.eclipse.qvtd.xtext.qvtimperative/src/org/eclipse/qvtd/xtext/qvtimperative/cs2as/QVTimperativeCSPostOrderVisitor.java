@@ -227,8 +227,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	public @Nullable Continuation<?> visitEntryPointCS(@NonNull EntryPointCS csElement) {
 		EntryPoint asEntryPoint = PivotUtil.getPivot(EntryPoint.class, csElement);
 		if (asEntryPoint != null) {
-			context.refreshList(asEntryPoint.getInputTypedModels(), csElement.getInputTypedModels());
-			context.refreshList(asEntryPoint.getOutputTypedModels(), csElement.getOutputTypedModels());
+			PivotUtil.refreshList(asEntryPoint.getInputTypedModels(), false, csElement.getInputTypedModels());
+			PivotUtil.refreshList(asEntryPoint.getOutputTypedModels(), false, csElement.getOutputTypedModels());
 		}
 		return null;
 	}
@@ -373,7 +373,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					asExpressions.add(asExpression);
 				}
 			}
-			context.refreshList(asSpeculateStatement.getOwnedExpressions(), asExpressions);
+			PivotUtil.refreshList(asSpeculateStatement.getOwnedExpressions(), true, asExpressions);
 		}
 		return null;
 	}

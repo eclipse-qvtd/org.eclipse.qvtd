@@ -40,7 +40,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
@@ -341,7 +340,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 				csTemplateVariables.add(csTemplateVariable);
 			}
 		}
-		context.refreshList(csCollectionTemplate.getOwnedMemberIdentifiers(), csTemplateVariables);
+		PivotUtil.refreshList(csCollectionTemplate.getOwnedMemberIdentifiers(), true, csTemplateVariables);
 		//
 		Variable asRest = asCollectionTemplateExp.getRest();
 		if (asRest instanceof SharedVariable) {
@@ -377,7 +376,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	@Override
 	public ElementCS visitFunction(@NonNull Function asFunction) {
 		QueryCS csQuery = refreshTypedElement(QueryCS.class, QVTrelationCSPackage.Literals.QUERY_CS, asFunction);
-		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
+		PivotUtil.refreshList(csQuery.getOwnedParameters(), true, context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		csQuery.setIsTransient(asFunction.isIsTransient());
 		JavaClassCS csJavaClass = null;
@@ -437,7 +436,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 		csKey.setOwnedPathName(csPathName);
 		context.refreshPathName(csPathName, asNamedElement, null);
-		context.refreshList(csKey.getPropertyIds(), asKey.getPart());
+		PivotUtil.refreshList(csKey.getPropertyIds(), false, asKey.getPart());
 		return csKey;
 	}
 
@@ -474,7 +473,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			}
 		}
 		csObjectTemplate.setOwnedType(csTypeRef);
-		context.refreshList(csObjectTemplate.getOwnedPropertyTemplates(), context.visitDeclarations(PropertyTemplateCS.class, asObjectTemplateExp.getPart(), null));
+		PivotUtil.refreshList(csObjectTemplate.getOwnedPropertyTemplates(), true, context.visitDeclarations(PropertyTemplateCS.class, asObjectTemplateExp.getPart(), null));
 		csObjectTemplate.setOwnedGuardExpression(context.visitDeclaration(ExpCS.class, asObjectTemplateExp.getWhere()));
 		return csObjectTemplate;
 	}
@@ -486,18 +485,18 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		//		if (needsQualifiedPackageCS(asPackage)) {
 		//			assert needsQualifiedPackageCS(asPackage);
 		QualifiedPackageCS csPackage = context.refreshNamedElement(QualifiedPackageCS.class, QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS, asPackage);
-		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+		//			PivotUtil.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
 		csPackage.setNsPrefix(asPackage.getNsPrefix());
 		csPackage.setNsURI(asPackage.getURI());
-		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
+		//			PivotUtil.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
 		return csPackage;
 		//		}
 		//		else {
 		//			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, asPackage);
-		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+		//			PivotUtil.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
 		//			csPackage.setNsPrefix(asPackage.getNsPrefix());
 		//			csPackage.setNsURI(asPackage.getURI());
-		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
+		//			PivotUtil.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
 		//			return csPackage;
 		//		}
 	}
@@ -506,7 +505,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	public ElementCS visitPattern(@NonNull Pattern asPattern) {
 		PatternCS csPattern = context.refreshElement(PatternCS.class, QVTrelationCSPackage.Literals.PATTERN_CS, asPattern);
 		csPattern.setPivot(asPattern);
-		context.refreshList(csPattern.getOwnedPredicates(), context.visitDeclarations(PredicateCS.class, asPattern.getPredicate(), null));
+		PivotUtil.refreshList(csPattern.getOwnedPredicates(), true, context.visitDeclarations(PredicateCS.class, asPattern.getPredicate(), null));
 		return csPattern;
 	}
 
@@ -544,14 +543,14 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		csRelation.setIsAbstract(asRelation.isIsAbstract());
 		csRelation.setIsTop(asRelation.isIsTopLevel());
 		csRelation.setOverridden(QVTrelationUtil.basicGetOverridden(asRelation));
-		context.refreshList(csRelation.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asRelation.getDomain(), null));
+		PivotUtil.refreshList(csRelation.getOwnedDomains(), true, context.visitDeclarations(DomainCS.class, asRelation.getDomain(), null));
 		List<@NonNull Variable> asSharedVariables = new ArrayList<>();
 		for (Variable asVariable : asRelation.getVariable()) {
 			if ((asVariable instanceof SharedVariable) && !asVariable.isIsImplicit()) {
 				asSharedVariables.add(asVariable);
 			}
 		}
-		context.refreshList(csRelation.getOwnedVarDeclarations(), context.visitDeclarations(VarDeclarationCS.class, asSharedVariables, null));
+		PivotUtil.refreshList(csRelation.getOwnedVarDeclarations(), true, context.visitDeclarations(VarDeclarationCS.class, asSharedVariables, null));
 		Pattern asWhere = asRelation.getWhere();
 		if (asWhere != null) {
 			csRelation.setOwnedWhere(context.visitDeclaration(PatternCS.class, asWhere));
@@ -583,7 +582,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if ((asTypedModel == null) || asTypedModel.isIsPrimitive()) {
 			PrimitiveTypeDomainCS csDomain = context.refreshElement(PrimitiveTypeDomainCS.class, QVTrelationCSPackage.Literals.PRIMITIVE_TYPE_DOMAIN_CS, asRelationDomain);
 			csDomain.setPivot(asRelationDomain);
-			context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(PrimitiveTypeDomainPatternCS.class, asRelationDomain.getPattern(), null));
+			PivotUtil.refreshList(csDomain.getOwnedPatterns(), true, context.visitDeclarations(PrimitiveTypeDomainPatternCS.class, asRelationDomain.getPattern(), null));
 			return csDomain;
 		}
 		else {
@@ -594,9 +593,9 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			boolean isEnforceable = asRelationDomain.isIsEnforceable();
 			csDomain.setIsCheckonly(isCheckable && !isEnforceable);		// Avoid two bits being set; only one allowed in CST
 			csDomain.setIsEnforce(isEnforceable);
-			context.refreshList(csDomain.getOwnedPatterns(), context.visitDeclarations(DomainPatternCS.class, asRelationDomain.getPattern(), null));
-			context.refreshList(csDomain.getOwnedDefaultValues(), context.visitDeclarations(DefaultValueCS.class, asRelationDomain.getDefaultAssignment(), null));
-			//		context.refreshList(csDomain.getOwnedImplementedBy(), context.visitDeclarations(ExpCS.class, asRelationDomain.getImplementedBy(), null));
+			PivotUtil.refreshList(csDomain.getOwnedPatterns(), true, context.visitDeclarations(DomainPatternCS.class, asRelationDomain.getPattern(), null));
+			PivotUtil.refreshList(csDomain.getOwnedDefaultValues(), true, context.visitDeclarations(DefaultValueCS.class, asRelationDomain.getDefaultAssignment(), null));
+			//		PivotUtil.refreshList(csDomain.getOwnedImplementedBy(), true, context.visitDeclarations(ExpCS.class, asRelationDomain.getImplementedBy(), null));
 			return csDomain;
 		}
 	}
@@ -620,13 +619,13 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTrelationCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
+		PivotUtil.refreshList(csDocument.getOwnedImports(), true, context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 
 		buildModel(csDocument, asModel);
 
 		//		List<Transformation> asTransformations = new ArrayList<>();
 		//		gatherTransformations(asTransformations, asModel.getOwnedPackages());
-		//		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
+		//		PivotUtil.refreshList(csDocument.getOwnedTransformations(), true, context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		return csDocument;
 	}
 
@@ -640,12 +639,12 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if (traceTypedModel != null) {
 			modelParameters.remove(traceTypedModel);
 		}
-		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
-		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
-		context.refreshList(csTransformation.getOwnedProperties(), context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
-		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
-		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));
-		context.refreshList(csTransformation.getOwnedTargets(), context.visitDeclarations(TargetCS.class, asTransformation.getOwnedTargets(), null));
+		PivotUtil.refreshList(csTransformation.getOwnedModelDecls(), true, context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
+		PivotUtil.refreshList(csTransformation.getOwnedKeyDecls(), true, context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
+		PivotUtil.refreshList(csTransformation.getOwnedProperties(), true, context.visitDeclarations(StructuralFeatureCS.class, asTransformation.getOwnedProperties(), null));
+		PivotUtil.refreshList(csTransformation.getOwnedQueries(), true, context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
+		PivotUtil.refreshList(csTransformation.getOwnedRelations(), true, context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));
+		PivotUtil.refreshList(csTransformation.getOwnedTargets(), true, context.visitDeclarations(TargetCS.class, asTransformation.getOwnedTargets(), null));
 		return csTransformation;
 	}
 
@@ -684,9 +683,9 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
 		}
-		PivotUtilInternal.refreshList(csDirection.getMetamodelIds(), asTypedModel.getUsedPackage());
-		PivotUtilInternal.refreshList(csDirection.getDependsOn(), asTypedModel.getDependsOn());
-		PivotUtilInternal.refreshList(csDirection.getIterates(), asTypedModel.getIterates());
+		PivotUtil.refreshList(csDirection.getMetamodelIds(), false, asTypedModel.getUsedPackage());
+		PivotUtil.refreshList(csDirection.getDependsOn(), false, asTypedModel.getDependsOn());
+		PivotUtil.refreshList(csDirection.getIterates(), false, asTypedModel.getIterates());
 		return csDirection;
 	}
 }

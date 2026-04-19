@@ -80,6 +80,7 @@ import com.google.common.collect.Iterables;
 
 public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVisitor
 {
+
 	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
 	{
 		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
@@ -110,8 +111,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
-				PivotUtilInternal.refreshList(pTypedModel.getDependsOn(), csElement.getUses());
+				PivotUtil.refreshList(pTypedModel.getUsedPackage(), false, csElement.getImports());
+				PivotUtil.refreshList(pTypedModel.getDependsOn(), false, csElement.getUses());
 				//	PivotUtilInternal.refreshList(pTypedModel.getIterates(), csElement.getUses());
 			}
 			return null;
@@ -172,7 +173,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 			List<Rule> asRules = asTransformation.getRule();
 			if (asMappings != null) {
-				PivotUtilInternal.refreshList(asRules, asMappings);
+				PivotUtil.refreshList(asRules, true, asMappings);
 			}
 			else {
 				asRules.clear();
@@ -200,7 +201,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
 			List<Operation> asOperations = asTransformation.getOwnedOperations();
 			if (asQueries != null) {
-				PivotUtilInternal.refreshList(asOperations, asQueries);
+				PivotUtil.refreshList(asOperations, true, asQueries);
 			}
 			else {
 				asOperations.clear();
@@ -379,11 +380,11 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		@SuppressWarnings("null") @NonNull EClass eClass = QVTbasePackage.Literals.TRANSFORMATION;
 		Transformation asTransformation = refreshNamedElement(Transformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
-		List<TypedModel> newModelParameters = new ArrayList<>();
+		List<TypedModel> newModelParameters = new PivotUtilInternal.ContainmentArrayList<>();
 		context.refreshPivotList(TypedModel.class, newModelParameters, csElement.getOwnedDirections());
 		newModelParameters.add(0, getHelper().createPrimitiveTypedModel());
 		newModelParameters.add(1, getHelper().createThisTypedModel());
-		PivotUtilInternal.refreshList(asTransformation.getModelParameter(), newModelParameters);
+		PivotUtil.refreshList(asTransformation.getModelParameter(), true, newModelParameters);
 		context.refreshPivotList(Property.class, asTransformation.getOwnedProperties(), csElement.getOwnedProperties());
 		context.refreshPivotList(Target.class, asTransformation.getOwnedTargets(), csElement.getOwnedTargets());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
