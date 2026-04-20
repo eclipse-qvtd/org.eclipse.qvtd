@@ -21,11 +21,12 @@ pipeline {
 	parameters {
 		choice(
 			name: 'BUILD_TYPE',
-			choices: ['nightly', 'milestone'],
+			choices: ['nightly', 'milestone', 'unstable'],
 			description: '''
 <ul>
 <li> N - Nightly build
 <li> S - Stable / Milestone build
+<li> U - Unstable build -  uses ocl-branch/lastSuccessfulBuild
 </ul>				'''
 		)
 		
@@ -44,8 +45,8 @@ pipeline {
 			steps {
 				script {
 					env.BUILD_TYPE = params.BUILD_TYPE
-					echo "${params.BUILD_TYPE} ${params.JAVADOC} ${params.SIGNING}"
-					currentBuild.description = "${params.BUILD_TYPE} ${params.JAVADOC} ${params.SIGNING}"
+					echo "${params.BUILD_TYPE}"
+					currentBuild.description = "${params.BUILD_TYPE}"
 				}
 			}
 		}
