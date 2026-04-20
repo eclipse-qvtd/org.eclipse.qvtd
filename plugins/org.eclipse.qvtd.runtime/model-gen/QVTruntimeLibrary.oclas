@@ -15,21 +15,21 @@
     <ownedClasses xmi:id="qeoBC" name="Model" superClasses="&_1;#zfDWR"/>
     <ownedClasses xmi:id="LEev+" name="PseudoOperations" superClasses="&_1;#zfDWR">
       <ownedOperations xmi:id="k8wX0" isStatic="true" name="collection" type="pivot:Class &_0;#dfRul">
-        <ownedComments body="The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id=",pKtu" name="items" type="#GqeYl"/>
         <ownedSignature>
           <ownedParameters xmi:id="msfHj" name="T"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="XilWQ" isStatic="true" name="error" type="pivot:VoidType &_1;#7u3MH">
-        <ownedComments body="The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="dN3aB" name="elements" type="#58MeC"/>
         <ownedSignature>
           <ownedParameters xmi:id="xgMQn" name="T"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="3Zma9" isRequired="false" isStatic="true" name="if" type="#RUEhZ">
-        <ownedComments body="The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="hX3mH" isRequired="false" name="condition" type="#RUEhZ"/>
         <ownedParameters xmi:id="jbFK7" isRequired="false" name="then" type="#RUEhZ"/>
         <ownedParameters xmi:id=",XZI7" isRequired="false" name="else" type="#RUEhZ"/>
@@ -38,7 +38,7 @@
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="8ZTic" isRequired="false" isStatic="true" name="loop" type="pivot:AnyType &_1;#jbMkR">
-        <ownedComments body="The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="SThZj" name="source" type="pivot:Class &_0;#BFtK4"/>
         <ownedParameters xmi:id="8Jr2h" name="iterators" type="#rC8CB"/>
         <ownedParameters xmi:id="ZZ+AZ" name="body" type="pivot:Class &_0;#BFtK4"/>
@@ -47,14 +47,14 @@
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="OZOC6" isStatic="true" name="map" type="pivot:Class &_0;#bTDI1">
-        <ownedComments body="The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="hAgbF" name="parts" type="#qrSV7"/>
         <ownedSignature>
           <ownedParameters xmi:id="gupic" name="T"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="oh8Rv" isStatic="true" name="mapPart" type="pivot:Class &_0;#33CoS">
-        <ownedComments body="The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="SV04a" isRequired="false" name="key" type="#B6hL4"/>
         <ownedParameters xmi:id="khjjh" isRequired="false" name="value" type="#M6hL4"/>
         <ownedSignature>
@@ -63,7 +63,7 @@
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="0Fp3D" isStatic="true" name="range" type="pivot:Class &_0;#wy8kd">
-        <ownedComments body="The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id=",5EE+" isRequired="false" name="first" type="#2,gYf"/>
         <ownedParameters xmi:id="l5Ad4" isRequired="false" name="last" type="#2,gYf"/>
         <ownedSignature>
@@ -71,21 +71,21 @@
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="So7KE" isStatic="true" name="shadow" type="pivot:Class &_0;#Oxaac">
-        <ownedComments body="The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="VTJVy" name="parts" type="#qrSV7"/>
         <ownedSignature>
           <ownedParameters xmi:id="E2aKw" name="T"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="BCxpG" isStatic="true" name="tuple" type="pivot:Class &_0;#HhIN2">
-        <ownedComments body="The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="I2EPY" name="parts" type="#nc6Pa"/>
         <ownedSignature>
           <ownedParameters xmi:id="r9UVd" name="T"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="vaOo9" isStatic="true" name="type" type="pivot:Class &_0;#0,h6K">
-        <ownedComments body="The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated&#xA;as an Operation within QVTs."/>
+        <ownedComments body="*&#xA;The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated&#xA;as an Operation within QVTs.&#xA;"/>
         <ownedParameters xmi:id="YdfhU" isRequired="false" name="type" type="#LcY6C"/>
         <ownedSignature>
           <ownedParameters xmi:id="LcY6C" name="V"/>

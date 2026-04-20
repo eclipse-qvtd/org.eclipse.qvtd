@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Willink Transformations and others.
+ * Copyright (c) 2011, 2026 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.ui.internal;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationRuntimeModule;
@@ -38,7 +38,7 @@ public class QVTrelationActivator extends AbstractUIPlugin {
 
 	private static QVTrelationActivator INSTANCE;
 
-	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
+	private Map<String, Injector> injectors = Collections.synchronizedMap(new HashMap<>(2));
 
 	@Override
 	public void start(BundleContext context) throws Exception {
