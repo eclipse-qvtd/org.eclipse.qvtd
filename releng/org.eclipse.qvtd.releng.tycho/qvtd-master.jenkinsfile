@@ -101,7 +101,7 @@ Replay a Stable / Milestone qvtd-promoter build to promote a Release.
 					def List job_params = [
 						string(name: 'BUILD_COMMIT', value: '-commit https://github.com/eclipse-qvtd/org.eclipse.qvtd/commit/' + env.GIT_COMMIT),
 						string(name: 'BUILD_PROMOTE', value: env.BUILD_URL + 'artifact/releng/org.eclipse.qvtd.releng.build-site/target/repository'),
-						string(name: 'BUILD_REMOTE', value: '-remote genie.qvtd@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/modeling/mdt/qvtd'),
+						string(name: 'BUILD_REMOTE', value: '-remote genie.qvtd@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/mmt/qvtd'),
 						string(name: 'BUILD_ROOT', value: '/home/jenkins/agent/workspace/justj-promoter/justj-sync'),
 						string(name: 'BUILD_TIMESTAMP', value: '-timestamp ' + env.BUILD_TIMESTAMP),
 						string(name: 'BUILD_TYPE', value: env.BUILD_TYPE),
