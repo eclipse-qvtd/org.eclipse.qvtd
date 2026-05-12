@@ -69,10 +69,31 @@ pipeline {
 							verify \
 							-P${BUILD_TYPE} \
 							 --global-toolchains toolchains.xml
+						cd releng/org.eclipse.qvtd.releng.build-site/target/repository
+						zip -r ../../../../p2repo.zip .
 						"""
 				}
-				archiveArtifacts allowEmptyArchive: true, artifacts: 'releng/org.eclipse.qvtd.releng.build-site/target/repository/**/*'
 				archiveArtifacts allowEmptyArchive: true, artifacts: 'tests/*/target/**/surefire-reports/**/TEST-*.xml'
+				archiveArtifacts allowEmptyArchive: true, artifacts: 'p2repo.zip'
+			}
+		}
+		stage('Publish') {
+			when {
+				expression { return params.BUILD_TYPE != 'reload' && currentBuild.getPreviousBuild() != null }
+			}
+			steps {
+				sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+					sh '''
+						set -e
+						set -x
+						LOGIN="genie.qvtd@projects-storage.eclipse.org"
+						BUILDS="/home/data/httpd/download.eclipse.org/mmt/qvtd/builds"
+						ssh $LOGIN "cd $BUILDS; rm -rf archive/qvtd-branch/next; mkdir -p archive/qvtd-branch/next"
+						scp -r p2repo.zip $LOGIN:$BUILDS/archive/qvtd-branch/next/
+						ssh $LOGIN "cd $BUILDS/archive/qvtd-branch/next; unzip -ou p2repo.zip -d ."
+						ssh $LOGIN "cd $BUILDS/archive/qvtd-branch; mv latest prev; mv next latest; rm -rf prev latest/p2repo.zip"
+					'''
+				}
 			}
 		}
 	}

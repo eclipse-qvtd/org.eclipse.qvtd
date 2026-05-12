@@ -13,7 +13,7 @@
     <repository location="https://download.eclipse.org/releases/latest"/>
     <repository location="https://download.eclipse.org/mmt/atl/updates/releases/latest"/>
     <repository location="https://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
-    <repository location="https://ci.eclipse.org/ocl/job/ocl-branch/lastSuccessfulBuild/artifact/repository"/>
+    <repository location="https://download.eclipse.org/modeling/mdt/ocl/builds/archive/ocl-branch/latest"/>
     <repository location="https://download.eclipse.org/mmt/qvto/updates/milestones"/>
     <!--repository location="https://download.eclipse.org/modeling/mdt/uml2/updates/milestones"/-->
   </location>
