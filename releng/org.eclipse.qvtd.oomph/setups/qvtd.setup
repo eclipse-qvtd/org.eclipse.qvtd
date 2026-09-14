@@ -28,7 +28,14 @@
       xsi:type="jdt:JRETask"
       version="JavaSE-21"
       location="${jre.location-21}"
-      name="JRE for JavaSE-21"/>
+      name="JRE for JavaSE-21">
+    <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-25"
+      location="${jre.location-25}"
+      name="JRE for JavaSE-25"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
@@ -64,7 +71,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2026-03"
+      defaultValue="2026-09"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
@@ -145,6 +152,17 @@
             </detail>
           </annotation>
         </repository>
+      </repositoryList>
+      <repositoryList
+          name="2026-09">
+        <repository
+            url="https://download.eclipse.org/releases/2026-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2026-09"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+        <repository
+            url="https://download.eclipse.org/epsilon/updates/2.1"/>
       </repositoryList>
       <repositoryList
           name="2026-06">
@@ -809,6 +827,14 @@
           value="master"/>
     </stream>
     <stream
+        name="0.35.0"
+        label="0.35.0 (2026-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.24.0"/>
+    </stream>
+    <stream
         name="0.34.0"
         label="0.34.0 (2026-03)">
       <setupTask
@@ -1120,6 +1146,14 @@
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.35.0"
+        label="0.35.0 (2026-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.24.0"/>
     </stream>
     <stream
         name="0.34.0"
@@ -1449,11 +1483,19 @@
     </setupTask>
     <stream
         name="master"
-        label="Master {Latest)">
+        label="Master (Latest)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="ocl.branch"
           value="master"/>
+    </stream>
+    <stream
+        name="0.35.0"
+        label="0.35.0 (2026-06)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="ocl.branch"
+          value="6.24.0"/>
     </stream>
     <stream
         name="0.34.0"
